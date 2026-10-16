@@ -1,0 +1,843 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Naval's Harsh Truths, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a listening guide. Same shell as the book explainers (chapter rail + station per chapter),
+   plus a gold "nugget" treatment: pull-quote cards in each chapter and a vault collecting them all.
+   Dark-first late-night studio plum with gold; light is warm paper. */
+:root{
+  color-scheme: dark;
+  --ink:#110E15;
+  --panel:#19151F;
+  --panel-2:#221C2A;
+  --line:#332A3D;
+  --text:#EFEAF3;
+  --muted:#ABA2B6;
+  --faint:#766C82;
+  --glow:#E9C46A;          /* nugget gold: the one accent */
+  --glow-soft:rgba(233,196,106,.12);
+  --glow-line:rgba(233,196,106,.32);
+  --cool:#A99BFF;          /* studio lavender: second series */
+  --cool-soft:rgba(169,155,255,.13);
+  --good:#9BD99B;
+  --bad:#FF8F80;
+  --soft:#D5CEDD;
+  --deep:#151119;
+  --toc-bg:rgba(25,21,31,.74);
+  --on-glow:#1E1606;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F2EA;--panel:#FFFFFF;--panel-2:#EEE8DD;--line:#DDD4C5;--text:#1E1824;--muted:#584F62;--faint:#857B8E;
+  --glow:#8A6410;--glow-soft:rgba(138,100,16,.09);--glow-line:rgba(138,100,16,.3);--cool:#5B4BC4;--cool-soft:rgba(91,75,196,.09);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#342C3C;--deep:#FBF8F3;--toc-bg:rgba(255,255,255,.84);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F2EA;--panel:#FFFFFF;--panel-2:#EEE8DD;--line:#DDD4C5;--text:#1E1824;--muted:#584F62;--faint:#857B8E;
+  --glow:#8A6410;--glow-soft:rgba(138,100,16,.09);--glow-line:rgba(138,100,16,.3);--cool:#5B4BC4;--cool-soft:rgba(91,75,196,.09);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#342C3C;--deep:#FBF8F3;--toc-bg:rgba(255,255,255,.84);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* hero */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:40px 40px}
+#wave{position:absolute;inset:auto 0 0;width:100%;height:220px;pointer-events:none;opacity:.9}
+.hero-inner{position:relative;display:grid;gap:22px}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:64ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
+.toc a{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:baseline;text-decoration:none;color:var(--text);
+  padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s, background .2s}
+.toc a:hover{border-color:var(--glow);transform:translateY(-2px);background:var(--panel-2)}
+.toc .n{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.toc .q{font-family:var(--f-display);font-size:21px;line-height:1.15}
+.toc .tm{grid-column:2;font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+
+/* shell */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding-block:20px 40px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px);align-self:start;display:grid;gap:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:10px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail a{display:grid;grid-template-columns:22px 1fr 14px;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:14px;height:14px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.rail .vault-link{margin-top:10px;border:1px dashed var(--glow-line);color:var(--glow)}
+.rail .vault-link .n{color:var(--glow)}
+.chips{display:none}
+
+/* chapter */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.ch:first-child{border-top:0;padding-top:8px}
+.ch-head{display:grid;gap:14px}
+.ch-head .meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.ch-head .eyebrow span{color:var(--glow)}
+.ts{display:inline-flex;gap:6px;align-items:center;font-family:var(--f-mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 8px;transition:border-color .15s,color .15s}
+.ts:hover{border-color:var(--glow);color:var(--text)}
+.ts svg{width:12px;height:12px}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--cool-soft);border:1px solid var(--line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+
+/* nuggets */
+.nuggets{display:grid;gap:12px}
+.nug-head{display:flex;gap:10px;align-items:center}
+.nug-head svg{width:18px;height:18px;color:var(--glow)}
+.nug-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.nug{position:relative;display:grid;gap:14px;align-content:space-between;padding:20px 20px 16px;border-radius:16px;
+  background:linear-gradient(160deg,var(--glow-soft),transparent 70%),var(--panel);border:1px solid var(--glow-line);overflow:hidden;min-width:0}
+.nug::before{content:"\201C";position:absolute;right:14px;top:-18px;font-family:var(--f-display);font-size:120px;line-height:1;color:var(--glow);opacity:.18;pointer-events:none}
+.nug p{font-family:var(--f-display);font-size:23px;line-height:1.22;color:var(--text)}
+.nug .foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.nug .src{font-family:var(--f-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;text-decoration:none}
+a.src:hover{color:var(--glow)}
+.star{display:inline-flex;gap:6px;align-items:center;font:inherit;font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 10px;cursor:pointer;transition:all .15s}
+.star svg{width:14px;height:14px}
+.star:hover{border-color:var(--glow);color:var(--text)}
+.star[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.star[aria-pressed=true] svg{fill:currentColor}
+
+/* labs */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--glow);box-shadow:0 0 0 4px var(--glow-soft)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;max-width:100%}
+.lab-body{padding:18px}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;align-content:start;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* gap lab */
+.gap{display:grid;gap:14px}
+.gbar{display:grid;grid-template-columns:110px minmax(0,1fr) 48px;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+.gbar .track{height:22px;background:var(--panel-2);border-radius:6px;overflow:hidden;position:relative}
+.gbar .fill{position:absolute;inset:0 auto 0 0;border-radius:6px;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.gbar .num{font-family:var(--f-mono);color:var(--text);text-align:right}
+.meter{height:10px;border-radius:10px;background:var(--panel-2);overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--cool),var(--glow));transition:width .45s}
+
+/* players (status lab) */
+.players{display:grid;gap:8px}
+.pl{display:grid;grid-template-columns:70px minmax(0,1fr) 56px;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+.pl .track{height:20px;background:var(--panel-2);border-radius:6px;overflow:hidden;position:relative}
+.pl .fill{position:absolute;inset:0 auto 0 0;background:var(--cool);border-radius:6px;transition:width .5s cubic-bezier(.2,.8,.2,1),background .3s}
+.pl .fill.up{background:var(--good)} .pl .fill.down{background:var(--bad)}
+.pl .num{font-family:var(--f-mono);color:var(--text);text-align:right;font-variant-numeric:tabular-nums}
+
+/* stag hunt */
+.matrix{display:grid;grid-template-columns:auto 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px;max-width:520px}
+.matrix > div{background:var(--panel);padding:10px 12px}
+.matrix .h{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.matrix .cell{font-family:var(--f-mono);color:var(--text);transition:background .25s}
+.matrix .cell.hit{background:var(--glow-soft);box-shadow:inset 0 0 0 1px var(--glow)}
+.log{font-size:14px;color:var(--muted);min-height:1.6em}
+.log b{color:var(--text);font-weight:500}
+
+/* week grid */
+.week{display:grid;grid-template-columns:64px repeat(7,minmax(0,1fr));gap:6px;font-size:12px}
+.week .d{font-family:var(--f-mono);color:var(--faint);text-align:center}
+.week .p{font-family:var(--f-mono);color:var(--faint);align-self:center}
+.slot{font:inherit;font-size:11px;line-height:1.2;min-height:52px;padding:6px 4px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);color:var(--soft);cursor:pointer;transition:all .2s;overflow:hidden;overflow-wrap:anywhere}
+.slot:hover{border-color:var(--glow)}
+.slot.free{background:transparent;border-style:dashed;border-color:var(--glow-line);color:var(--glow)}
+
+/* secretary */
+.cands{display:flex;align-items:flex-end;gap:3px;height:140px;padding:0 2px}
+.cand{flex:1 1 0;min-width:0;border-radius:3px 3px 0 0;background:var(--panel-2);transition:height .3s,background .3s}
+.cand.ex{background:var(--cool-soft);box-shadow:inset 0 0 0 1px var(--cool)}
+.cand.pick{background:var(--glow)}
+.cand.best{outline:2px solid var(--good);outline-offset:1px}
+
+/* bets */
+.dots{display:grid;grid-template-columns:repeat(auto-fill,minmax(22px,1fr));gap:6px}
+.dot{aspect-ratio:1;border-radius:50%;background:var(--panel-2);border:1px solid var(--line);transition:background .25s,transform .25s}
+.dot.miss{background:transparent;border-color:var(--line);opacity:.5}
+.dot.hit{background:var(--glow);border-color:var(--glow);transform:scale(1.15)}
+
+/* iceberg */
+.berg-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
+.berg-wrap svg{display:block;width:100%;height:auto}
+.berg-side{padding:18px;border-left:1px solid var(--line);display:grid;gap:12px;align-content:start;min-width:0}
+.pool{display:flex;flex-wrap:wrap;gap:6px}
+.items{display:grid;gap:8px}
+.item{display:grid;gap:6px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.item .nm{font-size:14px}
+.item .row .btn{font-size:12px;padding:4px 10px}
+
+/* sorter */
+.sorter{display:grid;gap:14px;padding:22px 18px}
+.card{padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);font-family:var(--f-display);font-size:clamp(22px,3.4vw,28px);line-height:1.25;min-height:4.2em;display:flex;align-items:center}
+.sorter .row .btn{font-size:14px;padding:9px 16px}
+.verdict{font-size:14px;color:var(--muted);min-height:1.6em}
+.verdict b{color:var(--text);font-weight:500}
+.score{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--cool-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--glow-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* vault */
+.vault{max-width:1180px;margin:0 auto;padding-block:56px 70px;border-top:1px solid var(--line);display:grid;gap:22px}
+.vault h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,76px);line-height:.95}
+.vault h2 em{color:var(--glow)}
+.vault .lede{color:var(--muted);max-width:62ch}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters .btn{font-size:12px;padding:5px 12px}
+.empty{color:var(--faint);font-size:14px;padding:20px;border:1px dashed var(--line);border-radius:12px}
+
+.fab{position:fixed;z-index:25;bottom:calc(16px + env(safe-area-inset-bottom, 0px));display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px;text-decoration:none}
+#theme{right:max(16px, env(safe-area-inset-right, 0px))}
+#vaultBtn{right:calc(max(16px, env(safe-area-inset-right, 0px)) + 104px);color:var(--glow);border-color:var(--glow-line)}
+.fab svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 80px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:10px}
+footer p{max-width:84ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .berg-wrap{grid-template-columns:minmax(0,1fr)}
+  .berg-side{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3}
+  .short p{font-size:16px}
+  .hero{padding-top:28px}
+  .week{grid-template-columns:44px repeat(3,minmax(0,1fr));gap:5px}
+  .slot{min-height:38px}
+  .nug p{font-size:21px}
+  .gbar{grid-template-columns:84px minmax(0,1fr) 40px}
+  #vaultBtn .lbl{display:none}
+  #vaultBtn{right:calc(max(16px, env(safe-area-inset-right, 0px)) + 98px)}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></symbol>
+</svg>
+
+<button class="btn fab" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<a class="btn fab" id="vaultBtn" href="#vault"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="lbl">Nuggets</span> <span id="savedCount">0</span></a>
+
+<header class="hero" id="top">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A listening guide to Naval Ravikant on Modern Wisdom with Chris Williamson</div>
+    <h1>Naval's Harsh Truths,<br><em>Explained</em></h1>
+    <p class="lede">Three hours and twenty minutes of conversation, boiled down to <b>ten chapters</b>. Each one has the core idea in plain words, a <b>hands-on exercise</b>, and its <b>golden nuggets</b>: the lines worth keeping. Star the ones that land and they gather in your vault. Every chapter links to the exact spot in the episode.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://youtu.be/KyfUysrNaco" target="_blank" rel="noopener">Watch the episode ↗</a>
+      <a class="btn" href="#vault">Jump to all nuggets</a>
+    </div>
+    <nav class="toc" aria-label="Chapters" id="toc"></nav>
+    <div class="about">
+      <span><b>Show</b> Modern Wisdom #922</span>
+      <span><b>Released</b> March 2025</span>
+      <span><b>Also titled</b> 44 Harsh Truths About The Game Of Life</span>
+      <span><b>Length</b> about 3 h 20 min</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:2px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+    <div id="chapters"></div>
+  </main>
+</div>
+
+<section class="vault" id="vault" aria-labelledby="vaultH">
+  <div class="eyebrow">The nugget vault</div>
+  <h2 id="vaultH">Every golden <em>nugget</em></h2>
+  <p class="lede">All the keepers from the episode in one place. Filter by chapter, or show only the ones you've starred. Stars are remembered on this device.</p>
+  <div class="filters" id="filters"></div>
+  <div class="nug-grid" id="vaultGrid"></div>
+</section>
+
+<footer>
+  <p>An independent listening guide to Modern Wisdom episode #922, Naval Ravikant in conversation with Chris Williamson (2025). Everything here is paraphrased in our own words; the few short phrases in quotation marks are Naval's. Chapters 1 to 7 are drawn from transcript notes. Chapters 8 to 10 cover the second half of the episode at a higher level, from its chapter list and published summaries, so check the timestamp links for the full nuance.</p>
+  <p><a href="../index.html">Back to the bookshelf</a> · <a href="https://youtu.be/KyfUysrNaco" target="_blank" rel="noopener">Watch the episode</a></p>
+</footer>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DE = document.documentElement;
+const VID = 'https://youtu.be/KyfUysrNaco';
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+                set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const fmt = s => { const h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = s%60; return (h ? h+':'+String(m).padStart(2,'0') : m) + ':' + String(x).padStart(2,'0'); };
+
+/* ---------- theme ---------- */
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(DE); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#110e15'; };
+const t0 = store.get('nv-theme', null); if (t0 === 'light' || t0 === 'dark') DE.setAttribute('data-theme', t0);
+readC();
+const themeTxt = () => { $('#themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const n = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', n); store.set('nv-theme', n); readC(); themeTxt(); drawAll(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); drawAll(); });
+
+/* ---------- content ---------- */
+const CH = [
+{ t:'Is success worth it?', s:'Success', eb:'Happiness and success', at:0,
+  short:'There are two ways to close the gap between what you have and what you want: get more, or want less. Naval took the first road and found the second waiting underneath it. Happiness, he argues, doesn\'t cost you your ambition. It often makes you better at it.',
+  ideas:[
+   ['Wanting less is a kind of having.','Socrates walked through a market full of luxuries and was delighted by how many things he didn\'t need. Diogenes, living in a barrel, asked Alexander the Great only to stop blocking his sunlight.'],
+   ['Win the game so you can leave it.','Naval chose material success before anything else rather than renouncing the world. Once you\'ve won a game you can walk away, or keep playing purely for the joy of it.'],
+   ['Most pain is mental.','Physical pain is real. But most of what we call suffering at work is simply not wanting to do the task in front of us.'],
+   ['The journey is nearly all of it.','Desire runs in a loop: bored, wanting, striving, getting, bored again. Since most of life happens in the middle of that loop, that\'s where you have to learn to enjoy it.'],
+   ['Money solves money problems.','Earned money also brings a pride that a windfall doesn\'t. Studies suggest lottery winners drift back to their old level of happiness, though Naval flags that these may not replicate.'],
+   ['Fame is best as a side effect.','It opens doors but costs you privacy and pins you to everything you\'ve ever said. Chased for its own sake, it\'s hollow and fragile.'],
+   ['Being wrong isn\'t lying.','Changing your mind is just learning. Lying to look good is different: it traps you in "a hall of mirrors" of past statements you have to keep defending.']],
+  nugs:['You can close the gap by getting what you want, or by no longer wanting it. Both count.',
+        'Naval\'s past-selves test: he\'d make the same moves again, only with far less anger and inner suffering.',
+        'Win the game so you\'re free to stop playing it.',
+        'Changing your mind is learning. Lying to stay consistent is the real hypocrisy.'],
+  plain:'Two people both feel the gap between their wallet and a jacket they want. One works an extra shift. The other realises they don\'t really need the jacket. Both stop feeling the gap. Naval\'s point is that most of us only ever try the first fix.',
+  lab:'gap',
+  quiz:{q:'According to Naval, what usually happens to a happy person\'s ambition?',o:['It disappears','It points at work that suits them better','It turns into status-seeking'],a:1,w:'Happiness gives you energy and focus. Happy people still build things; they just choose work that fits them.'} },
+
+{ t:'Status games vs wealth games', s:'Status', eb:'Zero-sum and positive-sum', at:875,
+  short:'Status is a ladder: when one person climbs, someone else has to step down. Wealth is a pie that can grow for everyone. We\'re wired for the first game, Naval says, but the second one is far better to play.',
+  ideas:[
+   ['Status is zero-sum.','A ranking has a fixed number of places, so status games turn people into rivals and leave everyone a bit on edge.'],
+   ['Wealth is positive-sum.','A good product can serve millions of people without anyone having to lose.'],
+   ['The wiring is ancient.','In a hunter-gatherer tribe you couldn\'t store wealth, so rank decided who ate and who found a mate. Status was the only game in town.'],
+   ['The rich often drift back to status.','Once they have money, many spend it buying rank: elite conferences, film festivals, fashionable causes.'],
+   ['Trajectory feels better than position.','Chris raises comedian Jimmy Carr\'s idea that rising matters more than where you are. Naval links it to loss aversion: slipping hurts more than climbing pleases.'],
+   ['Want respect from a few.','Earn the respect of the small group of people you admire, not the crowd.']],
+  nugs:['Status is a fight over a fixed ladder. Wealth is building a bigger house for everyone.',
+        'Your pull toward status is ancient wiring, not a law. Notice it and pick the better game.',
+        'Earn respect from the handful of people you admire. Ignore the leaderboard.'],
+  plain:'Think musical chairs versus a potluck. In musical chairs, every round someone must lose a seat. At a potluck, every dish someone brings makes the table bigger. Status is musical chairs. Creating wealth is the potluck.',
+  lab:'status',
+  quiz:{q:'Why does Naval call status games "zero-sum"?',o:['Because they don\'t pay money','Because one person\'s rise needs another\'s fall','Because nobody enjoys them'],a:1,w:'A ranking has fixed places. Wealth creation, by contrast, can leave everyone better off.'} },
+
+{ t:'Self-esteem, virtue and pride', s:'Self-esteem', eb:'Your reputation with yourself', at:1262,
+  short:'Self-esteem is your reputation with yourself. You earn it the way you earn anyone\'s respect: by keeping your own code when it\'s hard, and by doing things for people you love. Pride works the other way. It protects your image and blocks learning.',
+  ideas:[
+   ['Self-esteem is self-reputation.','You know every promise you\'ve broken to yourself. Live by your own moral code and that reputation rises.'],
+   ['Doing for others builds pride.','Naval\'s proudest moments weren\'t wins but times he gave something up for people he loved. Chris reframes sacrifice as trading a smaller want for a bigger one.'],
+   ['Virtue is long-term self-interest.','When everyone is honest, life gets cheaper and easier. High-trust groups can go after bigger prizes together, which is the "stag hunt" from game theory.'],
+   ['You attract what you are.','Be ethical and ethical people find you. Be a shark and you\'ll be swimming with sharks.'],
+   ['Doubt your plans, not your worth.','Naval often doubts what to do next but never his value, which he credits to being loved unconditionally as a child.'],
+   ['Being in love beats being loved.','Giving love feels expansive; receiving it can feel smothering. And you can create the feeling of loving someone at any time.'],
+   ['Pride is the enemy of learning.','Proud people won\'t admit mistakes, so they get stuck on small hills. Great builders keep going back to zero, the way Elon Musk put his PayPal money straight back at risk in SpaceX and Tesla.']],
+  nugs:['Self-esteem is your reputation with yourself. Every kept promise is a deposit.',
+        '"Pride is the enemy of learning."',
+        'If you\'re a shark, you\'ll end up surrounded by sharks.',
+        'Doubt what you should do next. Never doubt what you\'re worth.'],
+  plain:'Think of the colleague who always does what they said they\'d do. You trust them without even thinking about it. Self-esteem is that same trust, pointed inward. You build it the unglamorous way: small promises to yourself, kept.',
+  lab:'stag',
+  quiz:{q:'In Naval\'s framing, how do you raise your self-esteem?',o:['Collect more praise from others','Live by your own code, especially when it costs you','Avoid anything you might fail at'],a:1,w:'It\'s your reputation with yourself, so only your own conduct can change it.'} },
+
+{ t:'Choose happiness, guard your time', s:'Your time', eb:'Selfishness, freedom and inspiration', at:1939,
+  short:'Naval treats happiness partly as a decision you make first and figure out later. Then he protects it hard: he calls himself wholly selfish with his time, keeps almost no calendar, and acts on inspiration while it\'s fresh.',
+  ideas:[
+   ['Happiness can be a choice.','Naval tells of a friend who simply decided to become the happiest person they knew, and then worked out how.'],
+   ['Happiness doesn\'t kill ambition.','Happy people still build things. We often sacrifice happiness now for a happiness later that never arrives.'],
+   ['Everyone puts themselves first.','Naval just says it out loud. Most people pretend otherwise and end up at dinners and weddings they never wanted to attend.'],
+   ['No calendar, default no.','He deleted his calendar, uses an auto-reply to decline requests, and avoids committing his future self. That leaves room for serendipity.'],
+   ['"Inspiration is perishable."','When curiosity strikes, act on it now. Hard thinking goes in the morning, lighter work later in the day.'],
+   ['Procrastination is information.','It usually means some part of you would rather be doing something else right now.']],
+  nugs:['"Inspiration is perishable." Act on it while it\'s fresh.',
+        'Don\'t sign your future self up for things your present self wouldn\'t choose today.',
+        'We trade today\'s happiness for a future happiness that rarely shows up.'],
+  plain:'Your week is a jar. Fill it with obligations you agreed to months ago and there\'s no room for the thing that excites you today. Naval keeps the jar mostly empty on purpose.',
+  lab:'week',
+  quiz:{q:'Why does Naval avoid scheduling his future?',o:['He dislikes other people','So he can act on inspiration and curiosity when they arrive','Calendars don\'t work for him technically'],a:1,w:'Inspiration and curiosity don\'t keep. An empty calendar lets him follow them the moment they appear.'} },
+
+{ t:'Productize yourself', s:'Your game', eb:'Finding the game only you can win', at:2662,
+  short:'Find the thing that feels like play to you and looks like work to others, then turn it into something that scales. Explore widely before you commit, kill what isn\'t working quickly, and count iterations rather than hours.',
+  ideas:[
+   ['Play that looks like work.','If you enjoy something that others find a chore, nobody can out-compete you at it.'],
+   ['Productize yourself.','Turn what\'s uniquely you into a product, service or piece of media that serves many people at once. Being authentic is how you escape competition.'],
+   ['Explore, then commit.','The biggest mistake with careers, cities and partners is committing too early. Search widely first.'],
+   ['Kill failing things fast.','Sunk costs are sunk. Leave the bad project, path or relationship early.'],
+   ['Count iterations, not hours.','Mastery is error correction: try, get feedback, adjust, repeat. Ten thousand iterations beat ten thousand hours.'],
+   ['Three choices shape a life.','Who you\'re with, what you do and where you live. People often spend more time choosing a phone than a city.'],
+   ['Intelligence means getting what you want.','And wanting the right things. Watch for desires you\'ve copied from the people around you.']],
+  nugs:['Find work that feels like play to you and looks like work to everyone else.',
+        'Nobody can compete with you at being you.',
+        'Count iterations, not hours. Mastery is error correction.',
+        'Who, what and where: the three decisions that shape a life, and the ones we think about least.'],
+  plain:'Dating is the clearest example. Lots of first dates that go nowhere isn\'t failure; it\'s the search. The mistakes are settling on the first one because you were tired of looking, or staying long after you knew.',
+  lab:'secretary',
+  quiz:{q:'What does the "secretary problem" suggest about big choices?',o:['Take the very first good option','Explore about a third of your options, then take the next one that beats them all','Never commit to anything'],a:1,w:'Explore first to learn what "good" looks like, then commit when something beats everything you\'ve seen.'} },
+
+{ t:'Optimism, contentment and the ego', s:'Contentment', eb:'What happiness actually is', at:3640,
+  short:'Be optimistic in general and skeptical in particular: most single bets fail, but take enough of them and something works. Happiness is less a high than a quiet okay-ness with the present, and the main thing that steals it is thinking about yourself too much.',
+  ideas:[
+   ['Pessimism is old wiring.','In a tribe, one mistake could get you killed. Modern life forgives failure and offers almost unlimited upside.'],
+   ['Optimistic in general, skeptical in particular.','Expect each venture to fail; expect something to work out across many.'],
+   ['Labels lock you in.','"I\'m an introvert", "I\'m a pessimist", or identifying with a trauma can keep you stuck. Adapting to reality is what intelligence looks like.'],
+   ['Happiness is contentment.','It\'s not needing the world to be any different right now.'],
+   ['Nobody really wants the bliss machine.','Offered endless pleasure, most of us decline. We want surprise, challenge and meaning, and over-scheduling squeezes out surprise.'],
+   ['Self-focus feeds unhappiness.','Ruminating over your identity and grievances feeds an ego that\'s never satisfied. Solve the problem, then move on.'],
+   ['Pick something bigger than you.','To a wealthy founder who didn\'t know what to do next, the advice was: God, kids or a mission, ideally all three.'],
+   ['Desire, not discipline, drives change.','You change when you genuinely want to, like a smoker who quits after a health scare.']],
+  nugs:['Be optimistic in general and skeptical in particular.',
+        'Happiness is not needing this moment to be any different.',
+        'The more you think about yourself, the less happy you tend to be.',
+        'If you don\'t lie awake thinking about it, you may not want it enough.'],
+  plain:'A venture investor expects most startups to fail and still invests cheerfully, because one winner pays for the rest. Naval suggests running your own life the same way: lots of small, survivable bets, and quiet faith in the total.',
+  lab:'bets',
+  quiz:{q:'What does "optimistic in general, skeptical in particular" mean?',o:['Believe every idea will work','Expect most single bets to fail, but many bets to produce a win','Avoid taking bets at all'],a:1,w:'Each bet is a long shot; a portfolio of them almost surely isn\'t.'} },
+
+{ t:'Stress, anxiety and quality of life', s:'Anxiety', eb:'Untangling what weighs on you', at:4884,
+  short:'Stress is two desires pulling you in opposite directions. Anxiety is a pile of those conflicts you haven\'t resolved, mostly hidden below the surface. You shrink it by naming each one and then deciding, letting go, or parking it on purpose.',
+  ideas:[
+   ['Stress is a beam bent two ways.','Wanting to be liked and wanting something selfish at the same time, for example. Notice the conflict and choose.'],
+   ['Anxiety is an iceberg.','The vague feeling is just the tip. Below it sit many small problems you haven\'t resolved.'],
+   ['Name the pieces.','Ask what exactly you\'re anxious about and list it. Journaling, walks, meditation, friends or a therapist all help, as long as the aim is solving rather than soothing.'],
+   ['Remember you\'ll die.','Keeping mortality in view shrinks most worries. You can\'t take anything with you.'],
+   ['Take the short-term pain.','Your brain overweights pain now, so the option that hurts today is often the one that brings peace later.'],
+   ['Trust your gut, then check it.','Intuition is compressed experience. Reason is how you verify it.']],
+  nugs:['Stress is two desires pulling against each other. Pick one.',
+        'Anxiety is many unresolved problems pretending to be one feeling.',
+        'When in doubt, take the path that hurts in the short term and brings peace in the long term.'],
+  plain:'Picture an inbox where nothing ever gets archived. No single email is frightening, but the unread count makes your stomach drop. Anxiety works like that. Opening each message and deciding what to do is how the number comes down.',
+  lab:'berg',
+  quiz:{q:'What\'s Naval\'s model of anxiety?',o:['A fixed personality trait','A build-up of unresolved conflicts and decisions','A sign you should work harder'],a:1,w:'The feeling is the tip; underneath are many open loops. Close them one by one.'} },
+
+{ t:'Other people, and lightness', s:'Others', eb:'Relationships, identity and change', at:5556,
+  short:'You can\'t change other people, so stop making your happiness depend on it. Choose people whose core values match yours, cut losses early, hold your identity loosely, and accept that some lessons only arrive through experience.',
+  ideas:[
+   ['You can\'t change others.','Happiness comes from within. Trying to fix someone else so that you feel better rarely works.'],
+   ['Shared values beat shared interests.','Hobbies are pleasant. What lasts is agreeing on the hard things, the ones that show up in difficult decisions.'],
+   ['Genes matter more than we admit.','Naval argues behaviour is more inherited than we usually credit, so choosing a partner is partly choosing your children\'s starting point.'],
+   ['Loss aversion keeps us stuck.','Successful people restart again and again: careers, cities, relationships.'],
+   ['Don\'t take yourself too seriously.','Fame and other people\'s expectations can shrink your curiosity. Keep the inner child.'],
+   ['Some lessons can\'t be taught.','That money and fame won\'t make you happy is something most people only believe after getting them.'],
+   ['Watching your own mind lets you change.','Observing your thoughts, as in meditation, gives you a more objective view of yourself.']],
+  nugs:['You can\'t change other people. You can only choose whether to stay.',
+        'Look for shared values, not shared hobbies.',
+        'Hold your identity loosely enough to drop it when reality disagrees.',
+        'Some truths only land after you\'ve lived them.'],
+  plain:'Two friends both love hiking, but one thinks small lies are fine and the other doesn\'t. The hiking won\'t hold them together. The disagreement about honesty will eventually pull them apart.',
+  lab:'sortChange',
+  quiz:{q:'According to Naval, what makes relationships last?',o:['Lots of hobbies in common','Shared core values that show up in hard decisions','Compromising on everything'],a:1,w:'Interests are surface; values decide what happens when things get hard.'} },
+
+{ t:'Wealth, AI and the body', s:'Wealth & tech', eb:'Money, technology and medicine', at:7223,
+  short:'The real point of wealth is freedom: to choose, to follow curiosity and to take risks. Naval also shares recent views: large language models are a powerful new kind of tool rather than a superintelligence, modern medicine over-intervenes, and GLP-1 drugs may be the biggest medical advance since penicillin.',
+  ideas:[
+   ['Wealth buys freedom.','The best uses of money buy time, health and choice. The worst buy status, which never stays bought.'],
+   ['Attention is the real currency.','It\'s more basic than time, and the information firehose is built to steal it.'],
+   ['Advice needs context.','Broad wisdom only helps once you apply it to your own situation. Beware anyone selling a universal formula; life is the testing ground.'],
+   ['LLMs are a breakthrough, not a god.','Naval sees them as a major leap in computing and a different kind of intelligence, but not AGI.'],
+   ['Medicine over-intervenes.','He criticises much of it for intervening too much on weak theory.'],
+   ['GLP-1s are a very big deal.','He calls them possibly the most important medical advance since penicillin.']],
+  nugs:['Money\'s real gift is freedom: to choose, to be curious, to take risks.',
+        'Attention, not time, is your scarcest resource.',
+        'Advice without context is noise. Your own life is the test.'],
+  plain:'Two people each get a raise. One upgrades their car to impress the neighbours. The other pays someone to do the chores they hate and spends the freed hours on what they\'re curious about. Only the second bought what Naval would call wealth.',
+  lab:'sortSpend',
+  quiz:{q:'For Naval, the most valuable thing wealth buys is…',o:['Status','Freedom','Luxury'],a:1,w:'Freedom to choose, to follow curiosity and to take risks. Status is a treadmill.'} },
+
+{ t:'Kids, culture and what\'s next', s:'Kids & culture', eb:'Parenting, the news and agency', at:9050,
+  short:'The last hour turns outward: falling birth rates, raising children, the culture wars and the news. The thread through all of it is agency. Love kids unconditionally and let them learn by doing, teach thinking rather than facts, and spend your attention where you can actually act.',
+  ideas:[
+   ['Birth rates are choices.','Naval sees falling fertility as the sum of individual decisions and economics, not something to force.'],
+   ['A parent\'s first job is unconditional love.','That\'s the root of a child\'s self-esteem, which ties back to chapter 3.'],
+   ['Let kids take initiative.','Over-controlling robs children of the chance to learn from their own mistakes. Trust your instincts as a parent.'],
+   ['Teach thinking, not facts.','Reasoning from first principles outlasts memorised answers. Once you truly understand something, you can\'t unsee it.'],
+   ['Cooperation is precious.','Culture and religion help large groups coordinate, which is part of why the culture wars matter.'],
+   ['Ignore most news.','Things you can\'t affect deserve calm indifference. Fix your own house first.']],
+  nugs:['The first job of a parent is unconditional love. Everything else builds on it.',
+        'Understand, don\'t memorise. Once you truly see something, you can\'t unsee it.',
+        'Fix your own house before trying to fix the world.'],
+  plain:'A child allowed to climb the small tree and fall learns more about balance than one who is lectured about it. Naval\'s view of parenting, learning and even the news follows the same line: understanding comes from doing, and your energy belongs where you can act.',
+  lab:'sortNews',
+  quiz:{q:'Naval\'s main advice for parents is to…',o:['Control choices to prevent mistakes','Love unconditionally and let kids take initiative','Start memorising facts early'],a:1,w:'Unconditional love builds self-esteem; initiative builds judgement.'} }
+];
+const N = CH.length;
+
+/* ---------- lab markup ---------- */
+const sorterHTML = (id, title, hint, a, b) => `
+  <figure class="lab"><div class="lab-top"><div class="t">${title}</div><div class="hint">${hint}</div></div>
+  <div class="sorter" id="${id}"><div class="row" style="justify-content:space-between"><span class="sub">Sort it</span><span class="score"></span></div>
+  <div class="card" aria-live="polite"></div>
+  <div class="row"><button class="btn" data-pick="0">${a}</button><button class="btn" data-pick="1">${b}</button><button class="btn nx" hidden>Next card →</button></div>
+  <p class="verdict"></p></div></figure>`;
+const LAB = {
+gap:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: close the gap two ways</div><div class="hint">Earn more, or want less</div></div>
+  <div class="lab-body gap">
+    <div class="gbar"><span>What you want</span><div class="track"><i class="fill" id="gW" style="background:var(--cool)"></i></div><span class="num" id="gWn"></span></div>
+    <div class="gbar"><span>What you have</span><div class="track"><i class="fill" id="gH" style="background:var(--glow)"></i></div><span class="num" id="gHn"></span></div>
+    <div class="gbar"><span>Contentment</span><div class="meter"><i id="gM"></i></div><span class="num" id="gMn"></span></div>
+  </div>
+  <div class="lab-ctl"><div class="row"><button class="btn primary" id="gEarn">Earn more (+10)</button><button class="btn" id="gLess">Want less (−10)</button><button class="btn" id="gNew">New desire (+20)</button><button class="btn" id="gReset">Reset</button></div></div>
+  <div class="stats"><div class="stat"><span class="k">The gap you feel</span><span class="v glow" id="gGap"></span></div><div class="stat"><span class="k">Earn moves taken</span><span class="v" id="gE"></span></div><div class="stat"><span class="k">Want-less moves taken</span><span class="v" id="gL"></span></div></div>
+  <div class="callout">Try earning your way to 100% and then press <b>New desire</b>. The want bar keeps moving, which is the treadmill Naval describes. Wanting less closes the gap without waiting.</div></figure>`,
+status:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: two games, five players</div><div class="hint">Play a few rounds of each</div></div>
+  <div class="lab-body"><div class="players" id="players"></div></div>
+  <div class="lab-ctl"><div class="row"><button class="btn" id="sStatus">Play a status round</button><button class="btn primary" id="sWealth">Play a wealth round</button><button class="btn" id="sReset">Reset</button></div></div>
+  <div class="stats"><div class="stat"><span class="k">Total in the game</span><span class="v glow" id="sTot"></span></div><div class="stat"><span class="k">Players who lost last round</span><span class="v" id="sLost"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="sMsg"></span></div></div>
+  <div class="callout">A toy model. In the status game the total never moves, so <b>every gain is someone's loss</b>. In the wealth game the pie grows and almost everyone ends up ahead.</div></figure>`,
+stag:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: the stag hunt</div><div class="hint">Hunt together for the big prize, or play safe alone</div></div>
+  <div class="lab-body" style="display:grid;gap:16px">
+    <div class="matrix" id="mx"><div class="h"></div><div class="h">Partner: stag</div><div class="h">Partner: hare</div>
+      <div class="h">You: stag</div><div class="cell" data-c="ss">You 4 · Them 4</div><div class="cell" data-c="sh">You 0 · Them 2</div>
+      <div class="h">You: hare</div><div class="cell" data-c="hs">You 2 · Them 0</div><div class="cell" data-c="hh">You 2 · Them 2</div></div>
+    <div class="ctl"><label for="trust">How much your group trusts each other <output id="trustO"></output></label><input type="range" id="trust" min="0" max="100" value="70"></div>
+    <p class="log" id="stagLog">Choose what to hunt.</p>
+  </div>
+  <div class="lab-ctl"><div class="row"><button class="btn primary" id="hStag">Hunt the stag</button><button class="btn" id="hHare">Catch a hare</button><button class="btn" id="hReset">Reset score</button></div></div>
+  <div class="stats"><div class="stat"><span class="k">Your score</span><span class="v glow" id="hScore"></span></div><div class="stat"><span class="k">Expected value of stag</span><span class="v" id="evS"></span></div><div class="stat"><span class="k">Expected value of hare</span><span class="v">2.0</span></div><div class="stat"><span class="k">Best move at this trust</span><span class="s" id="hBest"></span></div></div>
+  <div class="callout">The stag only pays if your partner shows up. Above <b>50% trust</b>, cooperating wins. That's Naval's case for virtue: honest groups get to hunt bigger game.</div></figure>`,
+week:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: empty the jar</div><div class="hint">Tap a commitment to say no to it</div></div>
+  <div class="lab-body"><div class="week" id="week"></div></div>
+  <div class="stats"><div class="stat"><span class="k">Open blocks this week</span><span class="v glow" id="wFree"></span></div><div class="stat"><span class="k">Room for inspiration</span><span class="s" id="wMsg"></span></div></div>
+  <div class="callout">Open blocks aren't wasted. They're where you can act on an idea <b>the day it arrives</b>, before it goes stale.</div></figure>`,
+secretary:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: how long should you explore?</div><div class="hint">20 options arrive one at a time; you can't go back</div></div>
+  <canvas id="secC"></canvas>
+  <div class="lab-ctl">
+    <div class="ctl"><label for="secS">Options you look at before committing <output id="secO"></output></label><input type="range" id="secS" min="0" max="19" value="3"></div>
+    <div class="cands" id="cands" aria-hidden="true"></div>
+    <div class="row"><button class="btn primary" id="secRun">Run one life</button><span class="log" id="secLog"></span></div>
+  </div>
+  <div class="stats"><div class="stat"><span class="k">Chance you pick the very best</span><span class="v glow" id="secP"></span></div><div class="stat"><span class="k">Best possible strategy</span><span class="v" id="secB"></span></div><div class="stat"><span class="k">Diagnosis</span><span class="s" id="secD"></span></div></div>
+  <div class="callout">Rule: look at the first few without committing, then take the first one better than all of those. Commit too early and you never learned what good looks like; explore too long and the best has already passed. The sweet spot is <b>about 37%</b>.</div></figure>`,
+bets:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: many small bets</div><div class="hint">Each dot is one venture, project or attempt</div></div>
+  <div class="lab-body"><div class="dots" id="dots"></div></div>
+  <div class="lab-ctl"><div class="row">
+    <div class="ctl"><label for="bP">Chance any single bet works <output id="bPo"></output></label><input type="range" id="bP" min="1" max="40" value="8"></div>
+    <div class="ctl"><label for="bN">How many bets you take <output id="bNo"></output></label><input type="range" id="bN" min="1" max="60" value="20"></div></div>
+    <div class="row"><button class="btn primary" id="bRoll">Roll the dice</button><span class="log" id="bLog"></span></div></div>
+  <div class="stats"><div class="stat"><span class="k">Be skeptical: one bet works</span><span class="v" id="bOne"></span></div><div class="stat"><span class="k">Be optimistic: at least one works</span><span class="v glow" id="bAny"></span></div></div>
+  <div class="callout">Each bet is a long shot, and that's fine. What matters is that each failure is <b>survivable</b> so you can keep taking bets.</div></figure>`,
+berg:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: the anxiety iceberg</div><div class="hint">Add what's on your mind, then deal with each piece</div></div>
+  <div class="berg-wrap"><svg id="berg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMin meet" role="img" aria-label="Iceberg that grows with unresolved worries"></svg>
+    <div class="berg-side"><span class="sub">Tap to add a worry</span><div class="pool" id="pool"></div><div class="items" id="items"></div></div></div>
+  <div class="stats"><div class="stat"><span class="k">Unresolved below the surface</span><span class="v glow" id="bgN"></span></div><div class="stat"><span class="k">What it feels like</span><span class="s" id="bgF"></span></div></div>
+  <div class="callout">Each worry has three exits: <b>decide</b> it, <b>let it go</b>, or <b>park it</b> on purpose with a time to revisit. Any exit beats leaving it under water.</div></figure>`,
+sortChange: sorterHTML('sortChange','Exercise: yours to change?','Sort what you can and can\'t change','Yours to change','Not yours'),
+sortSpend: sorterHTML('sortSpend','Exercise: freedom or status?','How would Naval file this purchase?','Buys freedom','Buys status'),
+sortNews: sorterHTML('sortNews','Exercise: act on it or let it go?','Triage your attention','Act on it','Let it go')
+};
+
+/* ---------- render chapters ---------- */
+const NUGS = []; CH.forEach((c,i) => c.nugs.forEach((q,j) => NUGS.push({id:`${i+1}-${j}`, ch:i+1, q})));
+let saved = new Set(store.get('nv-saved', []));
+const starBtn = id => `<button class="star" data-star="${id}" aria-pressed="${saved.has(id)}"><svg aria-hidden="true"><use href="#i-star"/></svg><span>${saved.has(id)?'Saved':'Save'}</span></button>`;
+const nugCard = (n, showSrc) => `<div class="nug"><p>${esc(n.q)}</p><div class="foot">${showSrc ? `<a class="src" href="#ch${n.ch}">Ch ${n.ch} · ${esc(CH[n.ch-1].s)}</a>` : `<span class="src">Golden nugget</span>`}${starBtn(n.id)}</div></div>`;
+const playIco = '<svg aria-hidden="true"><use href="#i-play"/></svg>';
+$('#chapters').innerHTML = CH.map((c,i) => {
+  const n = i+1, end = i < N-1 ? CH[i+1].at : 11980;
+  return `<section class="ch" id="ch${n}" data-n="${n}">
+    <div class="ch-head">
+      <div class="meta"><div class="eyebrow"><span>Chapter ${n}</span> · ${c.eb}</div><a class="ts" href="${VID}?t=${c.at}" target="_blank" rel="noopener" aria-label="Play this chapter from ${fmt(c.at)}">${playIco}${fmt(c.at)} – ${fmt(end)}</a></div>
+      <h2>${c.t}</h2>
+      <div class="short"><span class="lbl">In short</span><p>${c.short}</p></div>
+    </div>
+    <div class="ideas"><h3 class="sub">What they talk about</h3><ul>${c.ideas.map(([b,t]) => `<li><span><b>${b}</b> ${t}</span></li>`).join('')}</ul></div>
+    <div class="nuggets"><div class="nug-head"><svg aria-hidden="true"><use href="#i-star"/></svg><h3 class="sub" style="color:var(--glow)">Golden nuggets</h3></div>
+      <div class="nug-grid">${NUGS.filter(x => x.ch === n).map(x => nugCard(x, false)).join('')}</div></div>
+    ${LAB[c.lab]}
+    <div class="plain"><span class="lbl">In plain words</span><p>${c.plain}</p></div>
+    <div class="quiz" data-q="${n}"></div>
+    <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="${n}"> I understand this chapter</label><a class="next" href="${n < N ? '#ch'+(n+1) : '#vault'}">${n < N ? 'Next: '+CH[n].t+' →' : 'Open the nugget vault →'}</a></div>
+  </section>`; }).join('');
+
+$('#toc').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="q">${c.t}</span><span class="tm">${fmt(c.at)}</span></a>`).join('');
+$('#railLinks').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${c.t}</span><span class="tick" aria-hidden="true"></span></a>`).join('')
+  + `<a href="#vault" class="vault-link"><span class="n">★</span><span>Nugget vault</span><span></span></a>`;
+$('#chips').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${c.s}</a>`).join('') + `<a href="#vault">★ Nuggets</a>`;
+
+/* ---------- progress ---------- */
+let done = new Set(store.get('nv-done', []));
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a[data-n], #chips a[data-n]').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${N} understood`;
+  $('#progBar').style.width = (done.size/N*100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); store.set('nv-done', [...done]); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = CH[box.dataset.q-1].quiz;
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); store.set('nv-done', [...done]); renderProgress(); }
+  }));
+});
+
+/* ---------- nuggets + vault ---------- */
+let filter = 'all';
+function renderVault(){
+  $('#savedCount').textContent = saved.size;
+  $('#filters').innerHTML = [['all','All '+NUGS.length],['saved','★ Saved '+saved.size]].concat(CH.map((c,i) => [String(i+1), (i+1)+'. '+c.s]))
+    .map(([k,l]) => `<button class="btn" data-f="${k}" aria-pressed="${filter===k}">${l}</button>`).join('');
+  const list = NUGS.filter(n => filter === 'all' || (filter === 'saved' ? saved.has(n.id) : String(n.ch) === filter));
+  $('#vaultGrid').innerHTML = list.length ? list.map(n => nugCard(n, true)).join('') : `<p class="empty">No starred nuggets yet. Tap <b>Save</b> on any nugget in a chapter and it will show up here.</p>`;
+}
+document.addEventListener('click', e => {
+  const s = e.target.closest('[data-star]');
+  if (s){ const id = s.dataset.star; saved.has(id) ? saved.delete(id) : saved.add(id); store.set('nv-saved', [...saved]);
+    $$(`[data-star="${id}"]`).forEach(b => { b.setAttribute('aria-pressed', saved.has(id)); b.querySelector('span').textContent = saved.has(id) ? 'Saved' : 'Save'; });
+    if (s.closest('#vaultGrid') && filter !== 'saved') { $('#savedCount').textContent = saved.size; $('#filters [data-f="saved"]').textContent = '★ Saved ' + saved.size; } else renderVault();
+    return; }
+  const f = e.target.closest('[data-f]'); if (f){ filter = f.dataset.f; renderVault(); }
+});
+renderVault();
+
+/* ---------- canvas helpers ---------- */
+function stage(cv){ const ctx = cv.getContext('2d'); return () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio||1);
+  const w = Math.max(1, r.width), h = Math.max(1, r.height); if (cv.width !== Math.round(w*d) || cv.height !== Math.round(h*d)){ cv.width = Math.round(w*d); cv.height = Math.round(h*d); }
+  ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; }; }
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const draws = []; function drawAll(){ draws.forEach(f => f()); }
+addEventListener('resize', drawAll);
+
+/* hero waveform */
+{ const cv = $('#wave'), get = stage(cv); const bars = Array.from({length:140}, (_,i) => ({a:Math.random(), f:.6+Math.random()*1.6, p:Math.random()*6.28}));
+  let vis = true; new IntersectionObserver(es => vis = es[0].isIntersecting).observe(cv);
+  const draw = t => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); const n = Math.min(bars.length, Math.floor(w/7)), bw = w/n;
+    for (let i=0;i<n;i++){ const b = bars[i], env = Math.sin(Math.PI*i/n)*.85+.15;
+      const amp = (RM ? .5 : (.35 + .65*Math.abs(Math.sin(t*b.f + b.p)))) * (.25 + .75*b.a) * env;
+      const bh = Math.max(2, amp*h*.8), x = i*bw + bw*.2;
+      ctx.fillStyle = A(i/n < .62 ? C.glow : C.cool, LIGHT ? .22 : .28); ctx.fillRect(x, h - bh, bw*.6, bh); } };
+  draws.push(() => draw(performance.now()/1000));
+  const loop = t => { if (vis && !RM) draw(t/1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); draw(0); }
+
+/* ch1: gap */
+{ let want = 80, have = 30, e = 0, l = 0;
+  const r = () => { const mx = Math.max(100, want, have); $('#gW').style.width = want/mx*100+'%'; $('#gH').style.width = have/mx*100+'%';
+    $('#gWn').textContent = want; $('#gHn').textContent = have; const c = Math.min(1, have/Math.max(1,want));
+    $('#gM').style.width = c*100+'%'; $('#gMn').textContent = Math.round(c*100)+'%';
+    const gap = Math.max(0, want-have); $('#gGap').textContent = gap ? gap + ' units short' : 'None. Content.'; $('#gE').textContent = e; $('#gL').textContent = l; };
+  $('#gEarn').onclick = () => { have = Math.min(200, have+10); e++; r(); };
+  $('#gLess').onclick = () => { want = Math.max(10, want-10); l++; r(); };
+  $('#gNew').onclick = () => { want = Math.min(200, want+20); r(); };
+  $('#gReset').onclick = () => { want = 80; have = 30; e = l = 0; r(); };
+  r(); }
+
+/* ch2: status vs wealth */
+{ const names = ['Ana','Ben','Cleo','Dev','Eli']; let v, prev;
+  const reset = () => { v = [26,22,20,17,15]; prev = v.slice(); $('#sMsg').textContent = 'Pick a game to play.'; $('#sLost').textContent = '0'; };
+  const r = () => { const mx = Math.max(60, ...v); $('#players').innerHTML = v.map((x,i) => `<div class="pl"><span>${names[i]}</span><div class="track"><i class="fill ${x>prev[i]+.01?'up':x<prev[i]-.01?'down':''}" style="width:${x/mx*100}%"></i></div><span class="num">${x.toFixed(0)}</span></div>`).join('');
+    $('#sTot').textContent = v.reduce((a,b)=>a+b,0).toFixed(0); };
+  $('#sStatus').onclick = () => { prev = v.slice(); const a = Math.floor(Math.random()*5); let b = Math.floor(Math.random()*4); if (b >= a) b++;
+    const amt = Math.min(v[b]-1, 4 + Math.round(Math.random()*6)); v[a] += amt; v[b] -= amt;
+    $('#sLost').textContent = '1'; $('#sMsg').textContent = `${names[a]} climbed ${amt}; ${names[b]} fell ${amt}. The total didn't move.`; r(); };
+  $('#sWealth').onclick = () => { prev = v.slice(); let lost = 0; v = v.map(x => { const g = x * (Math.random() < .12 ? -.04 : .06 + Math.random()*.14); if (g < 0) lost++; return x + g; });
+    $('#sLost').textContent = lost; $('#sMsg').textContent = lost ? 'The pie grew. One player had a bad round, but the total rose.' : 'The pie grew and every player came out ahead.'; r(); };
+  $('#sReset').onclick = () => { reset(); r(); };
+  reset(); r(); }
+
+/* ch3: stag hunt */
+{ let score = 0, rounds = 0; const p = () => +$('#trust').value/100;
+  const r = () => { $('#trustO').textContent = $('#trust').value+'%'; $('#evS').textContent = (4*p()).toFixed(1);
+    $('#hBest').textContent = p() > .5 ? 'Hunt the stag. Trust makes cooperation pay.' : p() < .5 ? 'Catch a hare. Without trust, playing safe wins.' : 'A coin flip. Exactly the tipping point.';
+    $('#hScore').textContent = rounds ? `${score} in ${rounds} rounds` : '0'; };
+  const play = me => { const them = Math.random() < p() ? 's' : 'h'; const k = me + them;
+    const pay = {ss:4, sh:0, hs:2, hh:2}[k]; score += pay; rounds++;
+    $$('#mx .cell').forEach(c => c.classList.toggle('hit', c.dataset.c === k));
+    $('#stagLog').innerHTML = `You hunted the <b>${me==='s'?'stag':'hare'}</b>; your partner went for the <b>${them==='s'?'stag':'hare'}</b>. You scored <b>${pay}</b>.` + (k==='sh' ? ' They didn\'t show up.' : k==='ss' ? ' Teamwork paid off.' : ''); r(); };
+  $('#hStag').onclick = () => play('s'); $('#hHare').onclick = () => play('h');
+  $('#hReset').onclick = () => { score = rounds = 0; $$('#mx .cell').forEach(c => c.classList.remove('hit')); $('#stagLog').textContent = 'Choose what to hunt.'; r(); };
+  $('#trust').oninput = r; r(); }
+
+/* ch4: week */
+{ const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], parts = ['AM','PM','Eve'];
+  const fill = ['Status call','Team sync','Review','Coffee chat','Panel talk','Brunch','Family','Webinar','1:1s','Networking','Planning','Pitch prep','Errands','Dinner party','Inbox','Weekly report','Offsite prep','Podcast guest','Group chat plans','Recurring sync','Wedding','Workshop','Board deck'];
+  const keep = new Set(['Family']); let i = 0;
+  const slots = parts.map(p => days.map(d => ({label: fill[(i++) % fill.length], free:false})));
+  const narrow = matchMedia('(max-width: 560px)');
+  const btn = (pi,di) => { const s = slots[pi][di]; return `<button class="slot ${s.free?'free':''}" data-p="${pi}" data-d="${di}" aria-pressed="${s.free}">${s.free ? 'Open' : s.label}</button>`; };
+  const r = () => { const g = $('#week');
+    g.innerHTML = narrow.matches
+      ? '<span></span>' + parts.map(p => `<span class="d">${p}</span>`).join('') + days.map((d,di) => `<span class="p">${d}</span>` + parts.map((_,pi) => btn(pi,di)).join('')).join('')
+      : '<span></span>' + days.map(d => `<span class="d">${d}</span>`).join('') + parts.map((p,pi) => `<span class="p">${p}</span>` + days.map((_,di) => btn(pi,di)).join('')).join('');
+    const free = slots.flat().filter(s => s.free).length; $('#wFree').textContent = `${free} of 21`;
+    $('#wMsg').textContent = free === 0 ? 'None. Any new idea has to wait weeks.' : free < 5 ? 'A little. Ideas can wait a few days.' : free < 12 ? 'Plenty. You can follow curiosity most days.' : 'Wide open, close to Naval\'s no-calendar life.';
+    g.querySelectorAll('.slot').forEach(b => b.onclick = () => { const s = slots[b.dataset.p][b.dataset.d]; s.free = !s.free; r(); }); };
+  narrow.addEventListener('change', r); r(); }
+
+/* ch5: secretary */
+{ const n = 20, cv = $('#secC'), get = stage(cv);
+  const P = k => k === 0 ? 1/n : (k/n) * Array.from({length:n-k}, (_,j) => 1/(k+j)).reduce((a,b)=>a+b,0);
+  const curve = Array.from({length:n}, (_,k) => P(k)); const best = curve.indexOf(Math.max(...curve));
+  const draw = () => { const {ctx,w,h} = get(), k = +$('#secS').value, pad = {l:40,r:16,t:20,b:30}, W = w-pad.l-pad.r, H = h-pad.t-pad.b;
+    ctx.clearRect(0,0,w,h); ctx.font = '11px "Geist Mono", monospace'; ctx.fillStyle = C.faint; ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+    [0,.2,.4].forEach(y => { const yy = pad.t + H - y/.45*H; ctx.beginPath(); ctx.moveTo(pad.l,yy); ctx.lineTo(w-pad.r,yy); ctx.stroke(); ctx.fillText(Math.round(y*100)+'%', 4, yy+4); });
+    const X = i => pad.l + i/(n-1)*W, Y = v => pad.t + H - v/.45*H;
+    ctx.fillText('explore 0', pad.l, h-8); ctx.textAlign = 'right'; ctx.fillText('explore 19 of 20', w-pad.r, h-8); ctx.textAlign = 'left';
+    ctx.beginPath(); curve.forEach((v,i) => i ? ctx.lineTo(X(i),Y(v)) : ctx.moveTo(X(i),Y(v))); ctx.strokeStyle = C.cool; ctx.lineWidth = 2; ctx.stroke();
+    ctx.lineTo(X(n-1), Y(0)); ctx.lineTo(X(0), Y(0)); ctx.fillStyle = A(C.cool, .1); ctx.fill();
+    ctx.setLineDash([3,4]); ctx.strokeStyle = C.faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(X(best),pad.t); ctx.lineTo(X(best),pad.t+H); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.faint; ctx.fillText('sweet spot', X(best)+6, pad.t+10);
+    ctx.beginPath(); ctx.arc(X(k), Y(curve[k]), 7, 0, 7); ctx.fillStyle = C.glow; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke(); };
+  const vals = Array.from({length:n}, () => Math.random());
+  const bars = (seq, k, pick) => { const mx = Math.max(...seq), bi = seq.indexOf(mx);
+    $('#cands').innerHTML = seq.map((v,i) => `<i class="cand ${i<k?'ex':''} ${i===pick?'pick':''} ${i===bi?'best':''}" style="height:${12+v*88}%"></i>`).join(''); };
+  const r = () => { const k = +$('#secS').value; $('#secO').textContent = `${k} of ${n} (${Math.round(k/n*100)}%)`;
+    $('#secP').textContent = Math.round(curve[k]*100)+'%'; $('#secB').textContent = `explore ${best} (${Math.round(curve[best]*100)}%)`;
+    $('#secD').textContent = k < best - 2 ? 'Premature commitment. You haven\'t seen enough to know what good looks like.' : k > best + 3 ? 'Over-exploring. The best one probably went by while you were still looking.' : 'Close to the sweet spot.';
+    draw(); bars(vals, k, -1); };
+  $('#secRun').onclick = () => { const k = +$('#secS').value, seq = Array.from({length:n}, () => Math.random()); const bar = k ? Math.max(...seq.slice(0,k)) : -1;
+    let pick = seq.findIndex((v,i) => i >= k && v > bar); if (pick < 0) pick = n-1; const bi = seq.indexOf(Math.max(...seq)); bars(seq, k, pick);
+    $('#secLog').innerHTML = pick === bi ? '<b>You got the best one.</b>' : pick === n-1 && seq[pick] < bar ? 'Nothing beat your early options, so you settled for the last.' : `You committed to #${pick+1}. The best was #${bi+1}.`; };
+  $('#secS').oninput = r; draws.push(draw); r(); }
+
+/* ch6: bets */
+{ let hits = null;
+  const r = () => { const p = +$('#bP').value/100, n = +$('#bN').value; $('#bPo').textContent = Math.round(p*100)+'%'; $('#bNo').textContent = n;
+    $('#bOne').textContent = Math.round(p*100)+'%'; $('#bAny').textContent = (100*(1-Math.pow(1-p,n))).toFixed(0)+'%';
+    $('#dots').innerHTML = Array.from({length:n}, (_,i) => `<i class="dot ${hits ? (hits[i] ? 'hit' : 'miss') : ''}"></i>`).join(''); };
+  $('#bRoll').onclick = () => { const p = +$('#bP').value/100, n = +$('#bN').value; hits = Array.from({length:n}, () => Math.random() < p);
+    const k = hits.filter(Boolean).length; $('#bLog').innerHTML = k ? `<b>${k}</b> of ${n} worked. ${n-k} failed, and that's fine.` : 'Nothing hit this time. Take more bets, or roll again.'; r(); };
+  const clear = () => { hits = null; $('#bLog').textContent = ''; r(); };
+  $('#bP').oninput = clear; $('#bN').oninput = clear; r(); }
+
+/* ch7: iceberg */
+{ const WORRIES = ['Should I take the job?','Unanswered email to my manager','Money for next month','The argument with a friend','Health check I keep postponing','Am I in the right city?','Things I said in a meeting','Is my partner happy?','A deadline I haven\'t started'];
+  let open = [], gone = new Set(); const EXIT = {d:'Decided', l:'Let go', p:'Parked'};
+  const svg = () => { const n = open.length, s = Math.min(1, n/7), tipH = 18 + s*70, bodyH = 60 + s*120, cx = 200, wl = 120, tw = 40 + s*70, bw = 240 + s*120;
+    const ice = LIGHT ? '#D7E3EE' : '#C9D7E6';
+    $('#berg').innerHTML = `<rect x="0" y="${wl}" width="400" height="${320-wl}" fill="${A(C.cool, LIGHT ? .12 : .1)}"/>
+      <path d="M${cx-bw/2} ${wl} L${cx-bw*.42} ${wl+bodyH*.6} L${cx-bw*.25} ${wl+bodyH} L${cx+bw*.3} ${wl+bodyH*.92} L${cx+bw/2} ${wl+bodyH*.35} Z" fill="${A(C.cool, .25)}" stroke="${C.cool}" stroke-width="1.5"/>
+      <path d="M${cx-tw/2} ${wl} L${cx-tw*.1} ${wl-tipH} L${cx+tw*.15} ${wl-tipH*.75} L${cx+tw/2} ${wl} Z" fill="${ice}" stroke="${C.text}" stroke-opacity=".3"/>
+      <line x1="0" y1="${wl}" x2="400" y2="${wl}" stroke="${C.cool}" stroke-dasharray="4 5"/>
+      <text x="12" y="${wl-8}" fill="${C.muted}" font-family="Geist Mono, monospace" font-size="11">WHAT YOU FEEL</text>
+      <text x="12" y="${wl+18}" fill="${C.muted}" font-family="Geist Mono, monospace" font-size="11">WHAT'S UNDERNEATH</text>
+      ${open.slice(0,6).map((w,i) => `<text x="${cx}" y="${wl+28+i*Math.min(20,(bodyH-20)/6)}" text-anchor="middle" fill="${C.text}" font-family="Geist, sans-serif" font-size="11.5">${esc(w.length > 30 ? w.slice(0,29)+'…' : w)}</text>`).join('')}
+      ${n === 0 ? `<text x="${cx}" y="${wl-tipH-10}" text-anchor="middle" fill="${C.faint}" font-family="Geist, sans-serif" font-size="12">Calm water</text>` : ''}`; };
+  const r = () => { $('#pool').innerHTML = WORRIES.filter(w => !open.includes(w) && !gone.has(w)).map(w => `<button class="btn" data-w="${esc(w)}">+ ${esc(w)}</button>`).join('') || '<span class="score">All worries handled. Reset by reloading.</span>';
+    $('#items').innerHTML = open.map((w,i) => `<div class="item"><span class="nm">${esc(w)}</span><div class="row">${Object.entries(EXIT).map(([k,l]) => `<button class="btn" data-x="${k}" data-i="${i}">${l}</button>`).join('')}</div></div>`).join('');
+    const n = open.length; $('#bgN').textContent = n;
+    $('#bgF').textContent = n === 0 ? 'Calm. Nothing pending.' : n < 3 ? 'A little tense.' : n < 5 ? 'Restless, hard to focus.' : 'Vague, heavy dread. Classic anxiety.';
+    $('#pool').querySelectorAll('[data-w]').forEach(b => b.onclick = () => { open.push(b.dataset.w); r(); });
+    $('#items').querySelectorAll('[data-x]').forEach(b => b.onclick = () => { gone.add(open[+b.dataset.i]); open.splice(+b.dataset.i, 1); r(); });
+    svg(); };
+  open = WORRIES.slice(0,3); draws.push(svg); r(); }
+
+/* sorters */
+function sorter(id, cards){ const box = $('#'+id); let i = 0, right = 0, seen = 0;
+  const card = box.querySelector('.card'), v = box.querySelector('.verdict'), sc = box.querySelector('.score'), nx = box.querySelector('.nx'), picks = box.querySelectorAll('[data-pick]');
+  const show = () => { const c = cards[i % cards.length]; card.textContent = c[0]; v.textContent = ''; nx.hidden = true; picks.forEach(b => { b.disabled = false; b.setAttribute('aria-pressed','false'); }); sc.textContent = seen ? `${right} of ${seen} matched Naval` : `${cards.length} cards`; };
+  picks.forEach(b => b.onclick = () => { const c = cards[i % cards.length], ok = +b.dataset.pick === c[1]; seen++; if (ok) right++;
+    picks.forEach(x => x.disabled = true); b.setAttribute('aria-pressed','true');
+    v.innerHTML = `<b>${ok ? 'Matches Naval.' : 'Naval would file it the other way.'}</b> ${c[2]}`; sc.textContent = `${right} of ${seen} matched Naval`; nx.hidden = false; });
+  nx.onclick = () => { i++; show(); }; show(); }
+sorter('sortChange', [
+  ['Your partner\'s core values', 1, 'Values run deep. You choose who you\'re with, not who they are.'],
+  ['How you react when a friend is late again', 0, 'Your reaction is always yours to work on.'],
+  ['Whether you stay in a relationship that isn\'t working', 0, 'Cutting losses early is a choice you can make.'],
+  ['Your parent\'s political opinions', 1, 'You can share your view, but changing theirs isn\'t in your hands.'],
+  ['Who you spend your evenings with', 0, 'Naval\'s "who" decision. It\'s one of the biggest levers you have.'],
+  ['Your boss\'s personality', 1, 'You can change jobs, not your boss.'],
+  ['How seriously you take a stranger\'s criticism', 0, 'Don\'t take yourself too seriously, and don\'t take them too seriously either.']]);
+sorter('sortSpend', [
+  ['Paying someone to do chores you hate', 0, 'It buys back hours for what you care about.'],
+  ['A watch people will notice', 1, 'Its value is in who sees it. That\'s status.'],
+  ['Six months of savings so you can say no', 0, 'Freedom in its purest form: the ability to walk away.'],
+  ['A table at the exclusive event', 1, 'Buying rank, the game the rich often drift back to.'],
+  ['Better sleep, food and health', 0, 'Health underwrites every other freedom.'],
+  ['A bigger house than your friends\'', 1, '"Bigger than theirs" is a ladder, so it\'s zero-sum.'],
+  ['A year off to follow a curiosity', 0, 'Wealth used to follow curiosity is exactly what Naval says it\'s for.']]);
+sorter('sortNews', [
+  ['A political scandal in another country', 1, 'Interesting, perhaps, but nothing you can act on.'],
+  ['Your child struggling with reading', 0, 'Close to home and within reach. This deserves your attention.'],
+  ['Viral outrage about a celebrity', 1, 'A borrowed worry that will be forgotten next week.'],
+  ['Your own sleep and exercise habits', 0, 'Fix your own house first.'],
+  ['A gloomy forecast you can\'t influence', 1, 'Calm indifference is a valid response to what you can\'t change.'],
+  ['Your neighbourhood needing volunteers', 0, 'Local, concrete and something you can actually help with.']]);
+})();
+</script>
+</body></html>

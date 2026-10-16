@@ -1,0 +1,1115 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Brief Answers, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an observatory notebook. Sticky chapter rail on the left, each chapter a "lab bench" of
+   idea list + live instrument + quick check. Dark-first (night sky) with a cool daylight variant. */
+:root{
+  color-scheme: dark;
+  --ink:#090B16;          /* page: deep night */
+  --panel:#10142A;        /* instrument panels */
+  --panel-2:#161B36;
+  --line:#262D52;
+  --text:#ECE9F4;
+  --muted:#A2A6C4;
+  --faint:#6A7096;
+  --glow:#F4B860;         /* Hawking radiation amber: the one accent */
+  --glow-soft:rgba(244,184,96,.14);
+  --cool:#8CB8FF;         /* second data series: starlight blue */
+  --cool-soft:rgba(140,184,255,.14);
+  --good:#7FD6A4;
+  --bad:#FF8A7A;
+  --soft:#CFCDE0;         /* body copy inside ideas */
+  --deep:#0C1022;         /* lab footers */
+  --toc-bg:rgba(16,20,42,.7);
+  --glow-line:rgba(244,184,96,.3);
+  --on-glow:#1B1206;      /* text on amber buttons */
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F2F3F9;--panel:#FFFFFF;--panel-2:#E9ECF7;--line:#D3D8EA;--text:#14172E;--muted:#4C5273;--faint:#767C9C;
+  --glow:#B5670B;--glow-soft:rgba(181,103,11,.09);--cool:#2B5FC4;--cool-soft:rgba(43,95,196,.1);--good:#1C8350;--bad:#C4412C;
+  --soft:#2D3150;--deep:#F7F8FC;--toc-bg:rgba(255,255,255,.8);--glow-line:rgba(181,103,11,.35);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F2F3F9;--panel:#FFFFFF;--panel-2:#E9ECF7;--line:#D3D8EA;--text:#14172E;--muted:#4C5273;--faint:#767C9C;
+  --glow:#B5670B;--glow-soft:rgba(181,103,11,.09);--cool:#2B5FC4;--cool-soft:rgba(43,95,196,.1);--good:#1C8350;--bad:#C4412C;
+  --soft:#2D3150;--deep:#F7F8FC;--toc-bg:rgba(255,255,255,.8);--glow-line:rgba(181,103,11,.35);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+#sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.9}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
+.toc a{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;text-decoration:none;color:var(--text);
+  padding:14px 14px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);
+  transition:border-color .2s, transform .2s, background .2s}
+.toc a:hover{border-color:var(--glow);transform:translateY(-2px);background:var(--panel-2)}
+.toc .n{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.toc .q{font-family:var(--f-display);font-size:21px;line-height:1.15}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px);align-self:start;display:grid;gap:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:10px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail a{display:grid;grid-template-columns:22px 1fr 14px;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:14px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:14px;height:14px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.ch:first-child{border-top:0;padding-top:8px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px;box-shadow:0 0 10px var(--cool)}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/8;max-width:100%;touch-action:pan-y}
+.lab .stage{position:relative}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:12px;color:var(--muted)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ch10 constellation */
+.const-wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:0}
+.const-wrap svg{display:block;width:100%;height:auto;max-width:100%}
+.star-btn{cursor:pointer}
+.star-btn:focus{outline:none}
+.star-btn:focus-visible circle.halo{stroke:var(--glow);stroke-width:2}
+.msg{padding:22px;border-left:1px solid var(--line);display:grid;align-content:center;gap:10px;min-width:0}
+.msg .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.msg h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.05}
+.msg p{color:var(--soft);font-size:15px}
+
+/* threats */
+.threats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.threat{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);display:grid;gap:6px;align-content:start}
+.threat b{font-weight:600}
+.threat p{font-size:14px;color:var(--muted)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:rgba(127,214,164,.1)}
+.opt.wrong{border-color:var(--bad);background:rgba(255,138,122,.08)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .const-wrap{grid-template-columns:minmax(0,1fr)}
+  .msg{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3.4}
+  .lab canvas.tall{aspect-ratio:1/1}
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+}
+</style>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Stephen Hawking's last book</div>
+    <h1>Brief Answers,<br><em>Explained</em></h1>
+    <p class="lede">Ten big questions. Hawking's answer to each, in plain language, with a <b>live instrument</b> you can play with to see the idea working. Drag the sliders, press the buttons, and check yourself at the end of every chapter.</p>
+    <nav class="toc" aria-label="Chapters" id="toc"></nav>
+    <div class="about">
+      <span><b>Published</b> October 2018, seven months after Hawking died</span>
+      <span><b>Drawn from</b> his essays, lectures and answers to the questions people asked him most</span>
+      <span><b>Read time</b> about 10 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:2px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Religion and the laws of nature</div>
+        <h2>Is there a God?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>He thought not. The laws of physics can explain how the universe started, and time itself began at the Big Bang. With no "before", there was no moment in which a creator could have made it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Science keeps finding the rules.</b> People once credited gods for storms, eclipses and disease. Each time science found the law behind a mystery, the need for a supernatural cause shrank. Hawking argued that the laws of nature are never broken, so there is no room for miracles.</span></li>
+          <li><span><b>A universe can cost nothing.</b> Matter carries positive energy. Gravity, which pulls matter together, carries an equal amount of negative energy. Add the two and the total for the whole universe can be zero, so no outside supply of energy is needed to make one.</span></li>
+          <li><span><b>Tiny things appear without a cause.</b> In the quantum world, particles pop into existence on their own all the time. At the start the universe was smaller than a proton, so it could appear the same way.</span></li>
+          <li><span><b>No time, no maker.</b> At the Big Bang, time itself began, much like time stops at the centre of a black hole. Asking what happened before is like asking what lies south of the South Pole.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Instrument: the cosmic energy ledger</div>
+          <div class="tabs" role="tablist"><button class="btn" role="tab" aria-pressed="true" data-tab="ledger" id="t1a">Energy ledger</button><button class="btn" role="tab" aria-pressed="false" data-tab="pole" id="t1b">South of the South Pole</button></div></div>
+        <div class="stage"><canvas id="c1"></canvas></div>
+        <div class="lab-ctl" id="ctl1a">
+          <div class="ctl"><label for="s1">Matter you create <output id="o1">40%</output></label><input type="range" id="s1" min="0" max="100" value="40"></div>
+        </div>
+        <div class="lab-ctl" id="ctl1b" hidden>
+          <div class="ctl"><label for="s1b">Travel back toward the start of time <output id="o1b">13.8 billion yrs after</output></label><input type="range" id="s1b" min="0" max="100" value="10"></div>
+        </div>
+        <div class="stats" id="st1"></div>
+        <div class="callout" id="cl1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Imagine building a hill on flat ground. The soil has to come from somewhere, so you dig a hole of exactly the same size. The hill is the matter in the universe; the hole is gravity. Together they add up to flat ground: nothing. Hawking described himself as an atheist in the sense that he did not believe in a personal God, and thought that this one life is our chance to appreciate how the universe works.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1" id="d1"> I understand this chapter</label><a class="next" href="#ch2">Next: How did it all begin? →</a></div>
+    </section>
+
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · The Big Bang and the no-boundary idea</div>
+        <h2>How did it all begin?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>With a hot, dense Big Bang about 13.8 billion years ago. With Jim Hartle he proposed that, near the start, time behaves like a direction in space. The universe then has no sharp edge in time, and no "before".</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The universe is stretching.</b> In 1929 Edwin Hubble saw that distant galaxies are rushing away from us, and the farther away they are, the faster they go. Run that film backwards and everything crowds into one hot, dense point.</span></li>
+          <li><span><b>Hawking proved there was a start.</b> With Roger Penrose he showed in the 1960s that if Einstein's general relativity is right, the universe must have begun at a "singularity": a point of infinite density where the known laws stop working.</span></li>
+          <li><span><b>Quantum theory takes over at the start.</b> Relativity breaks down at the singularity, so Hawking turned to quantum physics. His "no-boundary" proposal says the universe is finite but has no edge in time, the way Earth's surface is finite but has no edge.</span></li>
+          <li><span><b>We can still see the afterglow.</b> About 380,000 years after the start, the universe cooled enough for light to travel freely. That light still fills the sky as faint microwaves at 2.7 degrees above absolute zero. Its tiny ripples, from quantum jitters in the first instant, are the seeds that grew into galaxies.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Instrument: rewind the universe</div><div class="row"><button class="btn primary" id="play2">Play the history</button></div></div>
+        <div class="stage"><canvas id="c2"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s2">Time since the Big Bang <output id="o2"></output></label><input type="range" id="s2" min="0" max="1000" value="1000"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Temperature</span><span class="v glow" id="v2t"></span></div>
+          <div class="stat"><span class="k">Size compared with today</span><span class="v" id="v2a"></span></div>
+          <div class="stat"><span class="k">What's happening</span><span class="s" id="v2e" style="font-size:14px;color:var(--text)"></span></div>
+        </div>
+        <div class="callout">The slider is on a <b>logarithmic</b> scale: each step multiplies time, so the first second gets as much room as the last billion years. Temperatures and sizes are standard cosmology estimates.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Walk south on Earth and eventually you reach the South Pole. You can't go further south, but there's no wall or edge there either; "south" just stops meaning anything. Hawking suggested time works like that at the Big Bang. You can trace history back to the start, but asking what came before is a question with no answer, not a mystery we haven't solved yet.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2" id="d2"> I understand this chapter</label><a class="next" href="#ch3">Next: Is there other intelligent life? →</a></div>
+    </section>
+
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Life, intelligence and caution</div>
+        <h2>Is there other intelligent life in the universe?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>Simple life may well be common, because it started quickly on Earth. Intelligent life looks much rarer and may not last long. If we do find someone, we should be careful about answering.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Life started fast here.</b> Earth formed about 4.5 billion years ago and simple life appeared within its first billion years, soon after the planet cooled. That hints that simple life may arise easily where conditions allow.</span></li>
+          <li><span><b>Intelligence took ages.</b> It took billions more years to get from single cells to animals, and humans arrived only in the last few hundred thousand years. Bacteria do perfectly well without brains, so intelligence may be an unlikely detour, not evolution's goal.</span></li>
+          <li><span><b>Civilisations may not last.</b> An asteroid impact, or a society that destroys itself with its own technology, could cut the story short. That could explain why we haven't heard from anyone.</span></li>
+          <li><span><b>Be careful who you call.</b> A far more advanced civilisation might treat us the way powerful explorers have often treated the people they met. Hawking still backed Breakthrough Listen, the biggest search ever for alien signals, because looking is safe.</span></li>
+          <li><span><b>We are starting to design ourselves.</b> With gene editing, humans can now change their own DNA instead of waiting for evolution. Hawking expected this "self-designed evolution" to reshape what intelligent life on Earth even means.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Instrument: how many talking civilisations share our galaxy?</div>
+          <div class="tabs"><button class="btn" data-preset="opt">Optimist</button><button class="btn" aria-pressed="true" data-preset="rare">Rare intelligence</button><button class="btn" data-preset="pess">Pessimist</button></div></div>
+        <div class="stage"><canvas id="c3"></canvas></div>
+        <div class="lab-ctl">
+          <div class="row" id="drake"></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="k">Civilisations we could hear right now</span><span class="v glow" id="v3n"></span></div>
+          <div class="stat"><span class="k">Typical distance to the nearest</span><span class="v" id="v3d"></span></div>
+          <div class="stat"><span class="k">Could we have a conversation?</span><span class="s" id="v3c" style="font-size:14px;color:var(--text)"></span></div>
+        </div>
+        <div class="callout">This is the <b>Drake equation</b>, a 1961 recipe for the estimate. Hawking didn't use it in the book, but it shows his point: tiny uncertainties about intelligence and how long civilisations last swing the answer from "the galaxy is crowded" to "we're alone".</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of a lottery with many stages. Getting a planet like Earth may be common. Getting life on it may be common too. But getting brains, then radios, then a civilisation that survives long enough to overlap with ours is a long string of lucky draws. Lose any one of them and the galaxy goes quiet.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3" id="d3"> I understand this chapter</label><a class="next" href="#ch4">Next: Can we predict the future? →</a></div>
+    </section>
+
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Determinism, uncertainty and chaos</div>
+        <h2>Can we predict the future?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>Only partly. The laws of nature are fixed, but quantum physics lets us predict odds rather than certainties, and in complicated systems tiny errors grow until predictions fail.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Laplace's dream.</b> Around 1814 the French scientist Pierre-Simon Laplace argued that if you knew the position and speed of every particle, you could calculate the entire future. It's the dream of a clockwork universe.</span></li>
+          <li><span><b>Quantum physics breaks the clock.</b> Heisenberg's uncertainty principle says you can't measure a particle's position and speed both exactly. What quantum theory predicts is the "wave function", a map of probabilities. Hawking called this being able to predict about half of what Laplace wanted.</span></li>
+          <li><span><b>Chaos magnifies small errors.</b> Even without quantum effects, many systems are so sensitive that an unmeasurably small change at the start leads to a completely different outcome. That's why weather forecasts fade after about a week or two.</span></li>
+          <li><span><b>People are too complicated.</b> Our behaviour follows the laws of physics, but with around 10<sup>27</sup> atoms in a body, nobody can solve the equations. In practice, we have to treat each other as having free will.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Instrument: two almost-identical pendulums</div><div class="row"><button class="btn primary" id="go4">Release</button><button class="btn" id="reset4">Reset</button></div></div>
+        <div class="stage"><canvas id="c4"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s4">Difference in starting angle <output id="o4"></output></label><input type="range" id="s4" min="1" max="10" step="1" value="5"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Time since release</span><span class="v" id="v4t">0.0 s</span></div>
+          <div class="stat"><span class="k">Gap between the tips</span><span class="v glow" id="v4g">0</span></div>
+          <div class="stat"><span class="k">Verdict</span><span class="s" id="v4v" style="font-size:14px;color:var(--text)">Identical, for now</span></div>
+        </div>
+        <div class="callout">Both pendulums obey exactly the same law of motion. Make the starting difference a billionth of a degree and they still split apart. A smaller error only <b>delays</b> the moment prediction fails.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Knowing the rules of a game doesn't mean you can say who will win. Physics gives us the rules of the universe. But to predict what actually happens, you'd need to know the starting position perfectly, and quantum physics says you never can, while chaos makes sure the leftover fuzziness grows.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4" id="d4"> I understand this chapter</label><a class="next" href="#ch5">Next: What is inside a black hole? →</a></div>
+    </section>
+
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Event horizons and Hawking radiation</div>
+        <h2>What is inside a black hole?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>A region where gravity is so strong that not even light gets out. But Hawking showed black holes aren't completely black: they glow, lose mass and can eventually disappear. What happens to the information that fell in was the great puzzle he left behind.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Collapsed stars.</b> When a big star runs out of fuel, gravity can crush it until nothing can escape. The boundary of no return is the event horizon: a one-way door in space.</span></li>
+          <li><span><b>"Black holes have no hair."</b> From outside you can measure only three things: mass, spin and electric charge. Whether it swallowed stars, books or people, every other detail seems hidden.</span></li>
+          <li><span><b>Hawking radiation.</b> In 1974 Hawking found that quantum effects at the horizon make a black hole give off heat. The smaller it is, the hotter it glows. A black hole with the mass of a mountain would be smaller than an atomic nucleus and blaze hotter than the core of the Sun.</span></li>
+          <li><span><b>The information paradox.</b> If a black hole evaporates completely, is everything that fell in erased forever? That would break a basic rule of physics. Late in life, Hawking and colleagues suggested the information might be stored on the horizon as "soft hair" and leak back out.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Instrument: build a black hole</div>
+          <div class="tabs" id="bhPresets"></div></div>
+        <div class="stage"><canvas id="c5" class="tall"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s5">Mass <output id="o5"></output></label><input type="range" id="s5" min="-195" max="100" value="0"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Event horizon radius</span><span class="v" id="v5r"></span><span class="s" id="v5rc"></span></div>
+          <div class="stat"><span class="k">Hawking temperature</span><span class="v glow" id="v5t"></span><span class="s" id="v5tc"></span></div>
+          <div class="stat"><span class="k">Time to evaporate</span><span class="v" id="v5e"></span><span class="s" id="v5ec"></span></div>
+        </div>
+        <div class="callout">Light rays (blue) that pass close enough fall in (red). The picture looks the same at every mass, because everything near a black hole scales with its horizon. The <b>amber sparks</b> are Hawking radiation, drawn far brighter for small, hot black holes. Formulas: r = 2GM/c², T = ħc³/8πGMk.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A black hole is like a waterfall that's too strong for any boat to paddle against: past a certain line, everything goes over. Hawking's surprise was that the waterfall isn't perfectly silent; it gives off a faint mist that slowly drains it. He liked to end talks on this with a message of hope: if you feel you're stuck in a black hole, don't give up. There's a way out.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5" id="d5"> I understand this chapter</label><a class="next" href="#ch6">Next: Is time travel possible? →</a></div>
+    </section>
+
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Relativity, wormholes and paradoxes</div>
+        <h2>Is time travel possible?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>Travelling into the future already happens: move fast enough and time slows for you. Travelling into the past might be allowed by Einstein's equations, but Hawking suspected the laws of physics conspire to stop it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Moving clocks run slow.</b> Speed and strong gravity both slow time down. It's measurable: the clocks on GPS satellites run about 38 microseconds a day fast compared with ours, and must be corrected or your map would drift by kilometres.</span></li>
+          <li><span><b>Space-time can bend into shortcuts.</b> General relativity allows wormholes: tunnels connecting distant places, or distant times. Keeping one open would need "negative energy", which quantum physics allows only in tiny amounts.</span></li>
+          <li><span><b>Nature may protect history.</b> Hawking's "chronology protection conjecture" suggests that as a time machine starts to form, quantum effects pile up and destroy it, keeping the past safe from paradoxes.</span></li>
+          <li><span><b>The party nobody came to.</b> In 2009 Hawking threw a party for time travellers and sent out the invitations only afterwards. Nobody showed up, which he took as light-hearted evidence.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Instrument: a trip to the nearest star</div><div class="hint">Proxima Centauri, 4.24 light years away</div></div>
+        <div class="stage"><canvas id="c6"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s6">Ship speed <output id="o6"></output></label><input type="range" id="s6" min="0" max="1000" value="600"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Time-slowing factor (γ)</span><span class="v glow" id="v6g"></span></div>
+          <div class="stat"><span class="k">Trip length, by Earth's calendar</span><span class="v" id="v6e"></span></div>
+          <div class="stat"><span class="k">Trip length, for the crew</span><span class="v glow" id="v6s"></span></div>
+        </div>
+        <div class="callout">The crew doesn't feel time slow; their clocks, bodies and thoughts all run at the slower rate together. When they come home, they are younger than the twins they left behind. That's real time travel, but only one way: <b>forward</b>.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Going to the future is easy in principle: go very fast, or sit near something very heavy, and come back. Everyone else will have aged more than you. Going to the past is the hard part, because it opens the door to paradoxes like stopping your own birth. Hawking bet that the universe has a built-in safety rule against that.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6" id="d6"> I understand this chapter</label><a class="next" href="#ch7">Next: Will we survive on Earth? →</a></div>
+    </section>
+
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Threats and the long run</div>
+        <h2>Will we survive on Earth?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>Not forever if we stay put. A planet-wide disaster is unlikely in any single year, but over thousands of years it becomes close to certain. Our best hope is to look after Earth and also spread out.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The threats he named</h3>
+        <div class="threats">
+          <div class="threat"><b>Climate change</b><p>Warming could pass tipping points, like melting ice and released methane, that make it run away. At the extreme, Earth could end up like Venus.</p></div>
+          <div class="threat"><b>Nuclear war</b><p>Thousands of warheads still exist. A war, or an accident, could end civilisation within hours.</p></div>
+          <div class="threat"><b>Asteroid impact</b><p>One wiped out the dinosaurs 66 million years ago. In 2022, after the book, NASA's DART probe showed we can nudge a small asteroid.</p></div>
+          <div class="threat"><b>Pandemics</b><p>Natural or genetically engineered viruses could spread worldwide faster than we can respond.</p></div>
+          <div class="threat"><b>Growth itself</b><p>He pointed out that if population and energy use kept growing at their past rates, by around 2600 people would stand shoulder to shoulder on a red-hot planet.</p></div>
+        </div>
+      </div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Instrument: why small risks add up</div><div class="hint">Illustrative numbers, not forecasts</div></div>
+        <div class="stage"><canvas id="c7"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s7">Chance of a civilisation-ending disaster in any one year <output id="o7"></output></label><input type="range" id="s7" min="0" max="100" value="45"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Earth only: survive 100 years</span><span class="v" id="v7a"></span></div>
+          <div class="stat"><span class="k">Earth only: survive 1,000 years</span><span class="v glow" id="v7b"></span></div>
+          <div class="stat"><span class="k">Earth + a second home: 1,000 years</span><span class="v" id="v7c" style="color:var(--cool)"></span></div>
+        </div>
+        <div class="callout">The blue line adds a self-sufficient colony on another world. Humanity is lost only if <b>both</b> homes fall in the same year, so the yearly risk shrinks dramatically. This assumes the two disasters are unrelated, which is a simplification, but it's the heart of Hawking's argument for leaving Earth.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A 1-in-200 chance each year sounds safe. But play that game for a thousand years and losing at least once becomes very likely. It's like keeping all your family photos on one hard drive. Being careful helps, but the real fix is a backup in a different place.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7" id="d7"> I understand this chapter</label><a class="next" href="#ch8">Next: Should we colonise space? →</a></div>
+    </section>
+
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Moon, Mars and the stars</div>
+        <h2>Should we colonise space?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>Yes. Spreading out is both our insurance policy and our next great adventure. Start with the Moon and Mars; reaching other stars will need entirely new technology.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Insurance for the species.</b> As long as we live on one planet, one disaster can end us. A self-sustaining settlement elsewhere changes those odds.</span></li>
+          <li><span><b>Step by step.</b> A base on the Moon is within reach, then Mars. But nowhere else in the solar system is nearly as comfortable as Earth, so settlers would need to build sealed, shielded habitats.</span></li>
+          <li><span><b>The stars are very far.</b> The nearest star is over 40 trillion kilometres away. With today's rockets, the trip would take tens of thousands of years.</span></li>
+          <li><span><b>Breakthrough Starshot.</b> In 2016 Hawking helped launch a plan to send probes weighing a few grams on ultra-thin light sails, pushed by powerful lasers from Earth to a fifth of the speed of light. They could reach Alpha Centauri in about 20 years.</span></li>
+          <li><span><b>It lifts us up.</b> He remembered how the Moon landings united people and inspired a generation to study science. Space exploration can do that again.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Instrument: how long would the journey take?</div></div>
+        <div class="lab-ctl" style="border-top:0">
+          <div class="sub">Destination</div>
+          <div class="tabs" id="dest"></div>
+        </div>
+        <div class="stage"><canvas id="c8"></canvas></div>
+        <div class="callout">Straight-line distance divided by top speed, ignoring speeding up, slowing down and curved orbits, so real trips take longer. Speeds are records or typical values for each craft.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Our planets are like nearby towns: a rocket gets you there in days or months. The stars are like other continents across an ocean we haven't learned to cross. Starshot is the first serious plan for a boat, a tiny one, that could make that crossing within a human lifetime.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8" id="d8"> I understand this chapter</label><a class="next" href="#ch9">Next: Will AI outsmart us? →</a></div>
+    </section>
+
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Machines that improve themselves</div>
+        <h2>Will artificial intelligence outsmart us?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>It could. AI might be the best or the worst thing ever to happen to humanity. The danger isn't evil robots; it's very capable machines pursuing goals that don't match ours.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>No law of physics forbids it.</b> A brain is made of ordinary atoms following ordinary physics. Nothing stops a computer from matching it, and then going further.</span></li>
+          <li><span><b>An intelligence explosion.</b> Once an AI is good enough to help design better AI, each generation could arrive faster and be smarter than the last. Biology upgrades us over many thousands of years; machines could upgrade in months.</span></li>
+          <li><span><b>Competence, not malice.</b> Hawking's example: you probably don't hate ants, but if you're building a hydroelectric dam and an anthill is in the flood zone, too bad for the ants. We shouldn't put humanity in the ants' position.</span></li>
+          <li><span><b>Act now.</b> He worried about autonomous weapons and lost jobs in the near term, and loss of control in the long term. He called for serious research into making AI safe while it's still early.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Instrument: watch for the explosion</div>
+          <div class="tabs"><button class="btn" aria-pressed="true" id="self9">AI helps design the next AI</button></div></div>
+        <div class="stage"><canvas id="c9"></canvas></div>
+        <div class="lab-ctl">
+          <div class="row">
+            <div class="ctl"><label for="s9a">Improvement per generation <output id="o9a"></output></label><input type="range" id="s9a" min="1" max="40" value="10"></div>
+            <div class="ctl"><label for="s9b">Starting ability, vs. a human <output id="o9b"></output></label><input type="range" id="s9b" min="1" max="90" value="20"></div>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="k">Matches humans at generation</span><span class="v glow" id="v9a"></span></div>
+          <div class="stat"><span class="k">Ability after 40 generations</span><span class="v" id="v9b"></span></div>
+        </div>
+        <div class="callout">A toy model, not a forecast. With the button on, the rate of improvement grows with the AI's own ability, so progress curves upward. Turn it off and only human engineers make steady improvements. Note the vertical scale: <b>each line is ten times the last</b>.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Imagine a student who, every time they get smarter, also gets better at studying. They wouldn't just improve; they'd improve faster and faster. Hawking's worry wasn't that such a mind would hate us, but that it would be very good at getting what it wants, and we need to make sure what it wants is good for us.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9" id="d9"> I understand this chapter</label><a class="next" href="#ch10">Next: How do we shape the future? →</a></div>
+    </section>
+
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Hawking's closing message</div>
+        <h2>How do we shape the future?</h2>
+        <div class="short"><span class="lbl">Hawking's short answer</span><p>With curiosity, science and imagination, shared by everyone, not just experts. His last word to readers: look up at the stars and not down at your feet.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone needs some science.</b> Decisions about climate, energy, AI and medicine will shape the century. Citizens and politicians who understand basic science make better choices.</span></li>
+          <li><span><b>Education unlocks talent.</b> Brilliant minds are born everywhere. Giving every child a good education and the chance to wonder is how we find the people who'll solve our hardest problems.</span></li>
+          <li><span><b>Work as one world.</b> Our big problems cross borders, so the answers have to as well.</span></li>
+          <li><span><b>Never give up.</b> Diagnosed with motor neurone disease at 21 and given two years to live, Hawking lived to 76 and did his greatest work. His life is the argument.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Instrument: connect the constellation</div><div class="hint" id="h10">Tap each star to light up a lesson</div></div>
+        <div class="const-wrap">
+          <svg id="svg10" viewBox="0 0 600 400" role="group" aria-label="Constellation of six lessons"></svg>
+          <div class="msg" id="msg10" aria-live="polite"><span class="k">Six lessons from the book</span><h4>Start with any star.</h4><p>Each one holds a lesson Hawking returns to throughout the book. Light them all to complete the constellation.</p></div>
+        </div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Hawking wanted readers to finish the book feeling invited, not lectured. The big questions aren't only for physicists. Be curious, try to make sense of what you see, and wonder about what makes the universe exist. However hard life seems, there's always something you can do and succeed at.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10" id="d10"> I understand this chapter</label><a class="next" href="#top">Back to the top ↑</a></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Brief Answers to the Big Questions</i> by Stephen Hawking (2018). Explanations are written in our own words; short quotes are Hawking's. Physical figures are standard published values, and the risk and AI instruments are simplified models to show the shape of an argument, not predictions.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(document.documentElement); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#090b16'; };
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const DE = document.documentElement;
+try { const t = localStorage.getItem('ba-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+readC();
+const themeTxt = () => { document.getElementById('themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; document.getElementById('theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+document.getElementById('theme').addEventListener('click', () => { const next = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('ba-theme', next); } catch(e){} readC(); themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); });
+new MutationObserver(() => { readC(); themeTxt(); }).observe(DE, {attributes:true, attributeFilter:['data-theme']});
+const MONO = '12px "Geist Mono", ui-monospace, Menlo, monospace';
+const SANS = '13px Geist, system-ui, sans-serif';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+
+/* ---------- canvas + animation helpers ---------- */
+function stage(canvas){
+  const ctx = canvas.getContext('2d'); let w=0,h=0,d=0;
+  return () => { const r = canvas.getBoundingClientRect(); const dp = Math.min(2, devicePixelRatio||1);
+    if (r.width!==w || r.height!==h || dp!==d){ w=r.width; h=r.height; d=dp; canvas.width=Math.max(1,Math.round(w*d)); canvas.height=Math.max(1,Math.round(h*d)); }
+    ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; };
+}
+const loops = []; const visible = new Set();
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)), {rootMargin:'120px'});
+function loop(el, fn){ loops.push([el,fn]); io.observe(el); fn(0, 0); }
+let last = performance.now();
+function tick(t){ const dt = Math.min(0.05, (t-last)/1000); last = t;
+  for (const [el,fn] of loops) if (visible.has(el)) fn(dt, t/1000);
+  requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+addEventListener('resize', () => { for (const [,fn] of loops) fn(0, performance.now()/1000); });
+
+/* number formatting */
+const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+function sci(x, digits=2){
+  if (x === 0) return '0';
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  if (e >= -2 && e < 6) return x.toLocaleString('en-US', {maximumFractionDigits: e < 0 ? digits+1 : (e<2?1:0)});
+  const m = x / Math.pow(10, e);
+  return m.toFixed(digits-1).replace(/\.0+$/,'') + ' × 10' + String(e).split('').map(c => SUP[c]).join('');
+}
+function big(x){ // words for big numbers
+  if (x < 1e3) return x.toLocaleString('en-US',{maximumFractionDigits: x<10?1:0});
+  if (x < 1e6) return (x/1e3).toLocaleString('en-US',{maximumFractionDigits:1}) + ' thousand';
+  if (x < 1e9) return (x/1e6).toLocaleString('en-US',{maximumFractionDigits:1}) + ' million';
+  if (x < 1e12) return (x/1e9).toLocaleString('en-US',{maximumFractionDigits:1}) + ' billion';
+  if (x < 1e15) return (x/1e12).toLocaleString('en-US',{maximumFractionDigits:1}) + ' trillion';
+  return sci(x);
+}
+function years(y){
+  if (y < 1/365/24) return Math.max(1, Math.round(y*365*24*60)) + ' minutes';
+  if (y < 2/365) return (y*365*24).toFixed(y*365*24 < 10 ? 1 : 0) + ' hours';
+  if (y < 0.25) return (y*365).toFixed(y*365<10?1:0) + ' days';
+  if (y < 2) return (y*12).toFixed(1) + ' months';
+  return big(y) + ' years';
+}
+function dur(s){ // seconds → readable
+  if (s < 1e-3) return sci(s,2) + ' s';
+  if (s < 60) return s.toPrecision(2).replace(/\.?0+$/,'') + ' seconds';
+  if (s < 3600) return (s/60).toFixed(0) + ' minutes';
+  if (s < 86400) return (s/3600).toFixed(1) + ' hours';
+  const y = s / 3.156e7;
+  if (y < 1) return (s/86400).toFixed(0) + ' days';
+  return big(y) + ' years';
+}
+
+/* ---------- chapters list, nav, progress ---------- */
+const CH = ['Is there a God?','How did it all begin?','Is there other intelligent life in the universe?','Can we predict the future?','What is inside a black hole?','Is time travel possible?','Will we survive on Earth?','Should we colonise space?','Will artificial intelligence outsmart us?','How do we shape the future?'];
+const SHORT = ['God?','The beginning','Alien life','Predicting','Black holes','Time travel','Survival','Space','AI','The future'];
+document.querySelector('.hero').id = 'top';
+$('#toc').innerHTML = CH.map((q,i) => `<a href="#ch${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="q">${q}</span></a>`).join('');
+$('#railLinks').innerHTML = CH.map((q,i) => `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${q}</span><span class="tick" aria-hidden="true"></span></a>`).join('');
+$('#chips').innerHTML = SHORT.map((q,i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${q}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('ba-done') || '[]')); } catch(e){}
+function renderProgress(){
+  document.querySelectorAll('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of 10 understood`;
+  $('#progBar').style.width = (done.size*10) + '%';
+}
+document.querySelectorAll('[data-done]').forEach(cb => cb.addEventListener('change', () => {
+  cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done);
+  try { localStorage.setItem('ba-done', JSON.stringify([...done])); } catch(e){}
+  renderProgress();
+}));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') { const bar = $('#chips'); bar.scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+const QUIZ = {
+  1:{q:'Why can the total energy of the universe be zero?',o:['Energy hadn\'t been invented before the Big Bang','Matter\'s positive energy is balanced by the negative energy of gravity','Dark matter cancels out all the light in the universe'],a:1,w:'Gravity\'s pull counts as negative energy. Balance it against matter and the books close at zero, so making a universe needs no outside supply.'},
+  2:{q:'In the no-boundary proposal, asking "what came before the Big Bang?" is like asking…',o:['What is south of the South Pole','What is inside a black hole','What is the speed of darkness'],a:0,w:'Time near the start behaves like a direction in space. Just as "south" ends at the pole without any wall, "before" ends at the Big Bang.'},
+  3:{q:'What made Hawking cautious about the search for aliens?',o:['He thought alien signals would be too faint to detect','He worried that answering a far more advanced civilisation could be dangerous for us','He believed life can only exist on Earth'],a:1,w:'He supported listening, but warned that contact with a much more powerful civilisation might go badly for us, as first contact often has on Earth.'},
+  4:{q:'What does quantum theory let us predict exactly?',o:['A particle\'s precise position and speed at once','The wave function: the odds of each possible outcome','Nothing at all'],a:1,w:'The wave function evolves in a fully predictable way. But it gives probabilities, not certainties, which is roughly half of what Laplace hoped for.'},
+  5:{q:'Which black hole glows the hottest?',o:['A giant one at the centre of a galaxy','One with the mass of the Sun','A tiny one with the mass of a mountain'],a:2,w:'Hawking temperature goes up as mass goes down. Tiny black holes blaze; giant ones are colder than the leftover heat of the Big Bang.'},
+  6:{q:'What kind of time travel do we know is real?',o:['Into the future, by moving fast or sitting near strong gravity','Into the past, through wormholes','Both directions equally'],a:0,w:'Time dilation is measured every day, including in GPS satellites. Travel to the past remains unproven, and Hawking suspected nature forbids it.'},
+  7:{q:'Why does a small yearly risk become a big problem?',o:['Risks get larger every year automatically','Over many years, the chance that it happens at least once adds up','Small risks are always underestimated'],a:1,w:'Survive 1,000 years at 0.5% a year and your odds of making it are under 1%. Time turns unlikely events into likely ones.'},
+  8:{q:'What does Breakthrough Starshot plan to send to Alpha Centauri?',o:['A crewed spaceship with a nuclear engine','Probes weighing a few grams on light sails pushed by lasers','A giant radio dish'],a:1,w:'Tiny, light probes can be pushed by powerful lasers to about a fifth of the speed of light, reaching the nearest stars in about 20 years.'},
+  9:{q:'According to Hawking, what\'s the real risk of super-smart AI?',o:['Robots that hate humans','A highly capable AI whose goals don\'t match ours','AI that is too slow to be useful'],a:1,w:'His ant-and-dam example: the builder isn\'t evil, just focused on a goal. The danger is competence without shared goals.'},
+  10:{q:'What was Hawking\'s closing advice to readers?',o:['Leave science to the experts','Look up at the stars and not down at your feet','Stop asking questions that have no answers'],a:1,w:'He wanted everyone to stay curious, try to make sense of what they see, and never give up.'}
+};
+document.querySelectorAll('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i; const why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); try { localStorage.setItem('ba-done', JSON.stringify([...done])); } catch(e){} renderProgress(); }
+  }));
+});
+
+/* ---------- hero starfield ---------- */
+{ const cv = $('#sky'); const get = stage(cv);
+  const stars = Array.from({length: 220}, () => ({x:Math.random(), y:Math.random(), r:Math.random()*1.3+.2, p:Math.random()*6.28, s:.5+Math.random()*1.5}));
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    for (const s of stars){ const a = RM ? .55 : .35 + .35*Math.sin(t*s.s + s.p); ctx.globalAlpha = a; ctx.fillStyle = s.r > 1.2 ? C.glow : C.text;
+      ctx.beginPath(); ctx.arc(s.x*w, s.y*h, s.r, 0, 6.283); ctx.fill(); }
+    ctx.globalAlpha = 1; });
+}
+
+/* ================= 1: energy ledger + south pole ================= */
+{ const cv = $('#c1'), get = stage(cv); let tab = 'ledger', m = .4, lat = .1, rot = 0;
+  const st = $('#st1'), cl = $('#cl1');
+  function info(){
+    if (tab === 'ledger'){
+      const v = Math.round(m*100);
+      st.innerHTML = `<div class="stat"><span class="k">Matter (positive energy)</span><span class="v glow">+${v}</span></div><div class="stat"><span class="k">Gravity (negative energy)</span><span class="v" style="color:var(--cool)">−${v}</span></div><div class="stat"><span class="k">Total for the universe</span><span class="v" style="color:var(--good)">0</span></div>`;
+      cl.innerHTML = 'However much matter you add, gravity\'s negative energy grows to match. <b>The total never moves from zero</b>, which is why Hawking said the universe could appear from nothing without breaking any law.';
+    } else {
+      const ago = (1-lat);
+      st.innerHTML = `<div class="stat"><span class="k">Your "latitude" in time</span><span class="v glow">${Math.round(-lat*90)}°</span></div><div class="stat"><span class="k">Time since the Big Bang</span><span class="v">${lat>=.999?'0':years(13.8e9*Math.pow(ago,2.2))}</span></div><div class="stat"><span class="k">What's further "before"?</span><span class="s" style="font-size:14px;color:var(--text)">${lat>=.999?'Nothing. "Before" no longer means anything here.':'Keep going back…'}</span></div>`;
+      cl.innerHTML = 'Walk south and you reach the pole. There is no edge there, yet nothing lies further south. In Hawking\'s picture, <b>the Big Bang is the South Pole of time</b>.';
+    }
+  }
+  $('#s1').addEventListener('input', e => { m = e.target.value/100; $('#o1').textContent = e.target.value+'%'; info(); });
+  $('#s1b').addEventListener('input', e => { lat = e.target.value/100; $('#o1b').textContent = lat>=.999 ? 'the very start' : years(13.8e9*Math.pow(1-lat,2.2)) + ' after'; info(); });
+  $('#o1b').textContent = years(13.8e9*Math.pow(.9,2.2)) + ' after';
+  document.querySelectorAll('#lab1 [data-tab]').forEach(b => b.addEventListener('click', () => {
+    tab = b.dataset.tab; document.querySelectorAll('#lab1 [data-tab]').forEach(x => x.setAttribute('aria-pressed', x===b));
+    $('#ctl1a').hidden = tab!=='ledger'; $('#ctl1b').hidden = tab!=='pole'; info(); }));
+  info();
+  function ledger(ctx,w,h,t){
+    const g = h*.52, L = w*.08, R = w*.92, cx1 = w*.32, cx2 = w*.68, bw = Math.min(w*.2, 190), H = m * h*.36;
+    // soil fill below ground
+    ctx.fillStyle = A(C.cool,.06); ctx.fillRect(0, g, w, h-g);
+    // ground line with hill and hole
+    ctx.beginPath(); ctx.moveTo(L, g);
+    for (let x = L; x <= R; x += 2){
+      const b1 = Math.exp(-Math.pow((x-cx1)/(bw*.42),2)), b2 = Math.exp(-Math.pow((x-cx2)/(bw*.42),2));
+      ctx.lineTo(x, g - H*b1 + H*b2);
+    }
+    ctx.strokeStyle = C.text; ctx.lineWidth = 2; ctx.stroke();
+    // fills
+    ctx.save(); ctx.beginPath(); ctx.moveTo(cx1-bw, g);
+    for (let x = cx1-bw; x <= cx1+bw; x += 2) ctx.lineTo(x, g - H*Math.exp(-Math.pow((x-cx1)/(bw*.42),2)));
+    ctx.closePath(); const gr = ctx.createLinearGradient(0,g-H,0,g); gr.addColorStop(0,C.glow); gr.addColorStop(1,A(C.glow,.15)); ctx.fillStyle = gr; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(cx2-bw, g);
+    for (let x = cx2-bw; x <= cx2+bw; x += 2) ctx.lineTo(x, g + H*Math.exp(-Math.pow((x-cx2)/(bw*.42),2)));
+    ctx.closePath(); const gb = ctx.createLinearGradient(0,g,0,g+H); gb.addColorStop(0,A(C.cool,.15)); gb.addColorStop(1,C.cool); ctx.fillStyle = gb; ctx.globalAlpha=.7; ctx.fill(); ctx.restore();
+    // particles drifting from hole to hill
+    if (m > .02) { for (let i=0;i<14;i++){ const ph = ((t*.25 + i/14) % 1); const x = lerp(cx2, cx1, ph); const y = g - Math.sin(ph*Math.PI)*(h*.12 + H*.5);
+      ctx.globalAlpha = Math.sin(ph*Math.PI)*.8; ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(x, y, 2, 0, 6.283); ctx.fill(); } ctx.globalAlpha = 1; }
+    ctx.font = SANS; ctx.textAlign = 'center'; ctx.fillStyle = C.glow;
+    ctx.fillText('Matter: the hill', cx1, g - H - 14);
+    ctx.fillStyle = C.cool; ctx.fillText('Gravity: the hole', cx2, Math.min(h-8, g + H + 22));
+    ctx.fillStyle = C.muted; ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillText('flat ground = zero energy', L, g - 8);
+  }
+  function pole(ctx,w,h){
+    const R = Math.min(w*.32, h*.42), cx = w*.5, cy = h*.5, tilt = -.62, ct = Math.cos(tilt), stt = Math.sin(tilt);
+    const P = (la, lo) => { const x = Math.cos(la)*Math.sin(lo), y = Math.sin(la), z = Math.cos(la)*Math.cos(lo);
+      return [cx + R*x, cy - R*(y*ct - z*stt), y*stt + z*ct]; };
+    const g = ctx.createRadialGradient(cx-R*.3, cy-R*.3, R*.1, cx, cy, R); g.addColorStop(0,C['panel-2']); g.addColorStop(1,C.panel);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,R,0,6.283); ctx.fill();
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.stroke();
+    const seg = (pts) => { ctx.beginPath(); let on=false; for (const p of pts){ if (p[2] > 0){ on ? ctx.lineTo(p[0],p[1]) : ctx.moveTo(p[0],p[1]); on = true; } else on = false; } ctx.stroke(); };
+    ctx.strokeStyle = A(C.muted,.35);
+    for (let la = -75; la <= 75; la += 15){ const pts=[]; for (let lo=0; lo<=360; lo+=4) pts.push(P(la*Math.PI/180, lo*Math.PI/180)); seg(pts); }
+    for (let k = 0; k < 12; k++){ const pts=[]; for (let la=-90; la<=90; la+=4) pts.push(P(la*Math.PI/180, k*Math.PI/6 + rot)); seg(pts); }
+    ctx.strokeStyle = A(C.muted,.75); { const pts=[]; for (let lo=0; lo<=360; lo+=3) pts.push(P(0, lo*Math.PI/180)); seg(pts); }
+    // path along the front meridian
+    const lo0 = .25, laNow = -lat*Math.PI/2;
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 3; { const pts=[]; for (let la=0; la>=laNow-1e-6; la-=.02) pts.push(P(la, lo0)); pts.push(P(laNow, lo0)); seg(pts); }
+    const sp = P(-Math.PI/2, 0); ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(sp[0], sp[1], 4, 0, 6.283); ctx.fill();
+    const d = P(laNow, lo0); ctx.fillStyle = C.glow; ctx.shadowColor = C.glow; ctx.shadowBlur = 16; ctx.beginPath(); ctx.arc(d[0], d[1], 7, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+    ctx.font = MONO; ctx.fillStyle = C.muted; ctx.textAlign = 'left';
+    const e = P(0, lo0); ctx.fillText('today', e[0]+10, e[1]-6);
+    ctx.fillStyle = lat >= .999 ? C.glow : C.text; ctx.textAlign = 'center'; ctx.fillText('Big Bang = South Pole of time', sp[0], Math.min(h-10, sp[1]+24));
+  }
+  loop(cv, (dt,t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); if (!RM) rot += dt*.15; tab==='ledger' ? ledger(ctx,w,h,RM?0:t) : pole(ctx,w,h); });
+}
+
+/* ================= 2: rewind the universe ================= */
+{ const cv = $('#c2'), get = stage(cv), sl = $('#s2');
+  const T0 = 4.354e17, LMIN = -35, LMAX = Math.log10(T0);
+  const pts = Array.from({length: 260}, () => { const a = Math.random()*6.283, r = Math.sqrt(Math.random()); return {x:Math.cos(a)*r, y:Math.sin(a)*r, k:Math.random(), ang:Math.random()*3.14}; });
+  let playing = false, pv = 1000;
+  const tOf = v => Math.pow(10, lerp(LMIN, LMAX, v/1000));
+  function temp(t){ return t < 1.2e13 ? 1e10/Math.sqrt(Math.max(t,1e-40)) : 2.725/Math.pow(t/T0, 2/3); }
+  function epoch(t){
+    if (t < 1e-32) return 'Inflation: space balloons by a factor of at least 10²⁶ in a split second. Quantum jitters get stretched into the seeds of future galaxies.';
+    if (t < 1e-6) return 'A soup of quarks and light. Too hot for protons to hold together.';
+    if (t < 1) return 'Protons and neutrons form as the soup cools.';
+    if (t < 1200) return 'The first nuclei, hydrogen and helium, are forged in the first few minutes.';
+    if (t < 1.2e13) return 'A glowing fog of charged particles. Light can\'t travel far before bumping into something.';
+    if (t < 3.2e15) return 'Atoms form and the fog clears. That released light is the afterglow we still see. Then: dark ages, with no stars yet.';
+    if (t < 2.9e17) return 'Gravity pulls gas into the first stars and galaxies, which light up the universe.';
+    if (t < 4.3e17) return 'Our Sun and Earth form, about 4.6 billion years ago.';
+    return 'Today: 13.8 billion years old, the afterglow has cooled to 2.7 K, and galaxies keep moving apart.';
+  }
+  function fmtT(t){ return t < 3.156e7 ? dur(t) : years(t/3.156e7); }
+  function info(){ const t = tOf(+sl.value), T = temp(t), a = 2.725/T;
+    $('#o2').textContent = fmtT(t); $('#v2t').textContent = sci(T, 2) + ' K';
+    $('#v2a').textContent = a > .999 ? 'Today\'s size' : '1 / ' + sci(1/a, 2); $('#v2e').textContent = epoch(t); }
+  sl.addEventListener('input', info); info();
+  $('#play2').addEventListener('click', () => { if (playing){ playing=false; $('#play2').textContent='Play the history'; return; }
+    if (+sl.value >= 999) sl.value = 0; pv = +sl.value; playing = true; $('#play2').textContent = 'Pause'; });
+  loop(cv, (dt, time) => {
+    if (playing){ pv = Math.min(1000, pv + dt*90); sl.value = pv; info(); if (pv >= 1000){ playing = false; $('#play2').textContent = 'Play again'; } }
+    const {ctx,w,h} = get(); const f = +sl.value/1000, t = tOf(+sl.value), T = temp(t);
+    ctx.clearRect(0,0,w,h);
+    const lT = Math.log10(T);
+    // background heat glow
+    const heat = clamp((lT - 2)/8, 0, 1);
+    const bg = ctx.createRadialGradient(w/2,h/2,0,w/2,h/2,Math.max(w,h)*.7);
+    bg.addColorStop(0, `rgba(255,${Math.round(lerp(140,240,heat))},${Math.round(lerp(60,200,heat))},${.08 + heat*.6})`);
+    bg.addColorStop(1, `rgba(244,120,60,${heat*.25})`); ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+    const scale = lerp(.04, 1, Math.pow(f, 2.2)), R = Math.max(w,h)*.62*scale, cx = w/2, cy = h/2;
+    const galaxies = t > 3.2e15, fog = t < 1.2e13;
+    for (const p of pts){
+      const jit = RM ? 0 : (fog ? 2.2 : .4) * Math.sin(time*3 + p.k*20);
+      const x = cx + p.x*R + jit, y = cy + p.y*R*.62 + jit;
+      if (x < -10 || x > w+10 || y < -10 || y > h+10) continue;
+      if (galaxies){
+        const sz = 2 + p.k*3.5; ctx.save(); ctx.translate(x,y); ctx.rotate(p.ang);
+        const gg = ctx.createRadialGradient(0,0,0,0,0,sz*2.2); gg.addColorStop(0, p.k > .7 ? C.glow : C.text); gg.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = gg; ctx.scale(1, .45); ctx.beginPath(); ctx.arc(0,0,sz*2.2,0,6.283); ctx.fill(); ctx.restore();
+      } else {
+        ctx.fillStyle = fog ? (LIGHT ? A('#8A3B0A', .35+heat*.4) : `rgba(255,240,220,${.4+heat*.5})`) : A(C.muted,.5);
+        ctx.beginPath(); ctx.arc(x,y, fog ? 1.6 : 1.1, 0, 6.283); ctx.fill();
+      }
+    }
+    if (fog){ ctx.fillStyle = `rgba(255,190,120,${.12 + heat*.2})`; ctx.fillRect(0,0,w,h); }
+    // Earth marker in galaxy era
+    ctx.font = MONO; ctx.fillStyle = heat > .5 ? '#1B1206' : C.muted; ctx.textAlign = 'left';
+    ctx.fillText(fog ? 'opaque: light is trapped' : (galaxies ? 'galaxies drifting apart' : 'transparent, but dark'), 14, h - 14);
+  });
+}
+
+/* ================= 3: Drake ================= */
+{ const cv = $('#c3'), get = stage(cv);
+  const F = [
+    {id:'R', name:'New stars born per year', min:1, max:10, log:false, fmt:v=>v.toFixed(1)},
+    {id:'fp', name:'Stars that have planets', min:.2, max:1, log:false, fmt:v=>Math.round(v*100)+'%'},
+    {id:'ne', name:'Habitable planets per system', min:.01, max:1, log:true, fmt:v=>v<.1?v.toFixed(2):v.toFixed(1)},
+    {id:'fl', name:'Of those, where life starts', min:.001, max:1, log:true, fmt:v=>pct(v)},
+    {id:'fi', name:'Where life becomes intelligent', min:1e-5, max:1, log:true, fmt:v=>pct(v)},
+    {id:'fc', name:'Intelligent life that builds radios', min:.01, max:1, log:true, fmt:v=>pct(v)},
+    {id:'L', name:'Years a civilisation keeps broadcasting', min:100, max:1e8, log:true, fmt:v=>big(v)},
+  ];
+  function pct(v){ return v >= .1 ? Math.round(v*100)+'%' : v >= .001 ? (v*100).toFixed(v>=.01?0:1)+'%' : '1 in ' + big(Math.round(1/v)); }
+  const P = { opt:{R:3,fp:1,ne:.5,fl:1,fi:.5,fc:.5,L:1e6}, rare:{R:2,fp:1,ne:.2,fl:.5,fi:1e-4,fc:.2,L:1e4}, pess:{R:1.5,fp:.5,ne:.05,fl:.01,fi:1e-5,fc:.05,L:500} };
+  const val = {...P.rare};
+  const toS = (f,v) => f.log ? (Math.log10(v)-Math.log10(f.min))/(Math.log10(f.max)-Math.log10(f.min))*100 : (v-f.min)/(f.max-f.min)*100;
+  const fromS = (f,s) => f.log ? Math.pow(10, lerp(Math.log10(f.min), Math.log10(f.max), s/100)) : lerp(f.min, f.max, s/100);
+  $('#drake').innerHTML = F.map(f => `<div class="ctl"><label for="d_${f.id}">${f.name} <output id="do_${f.id}"></output></label><input type="range" id="d_${f.id}" min="0" max="100" step="0.5"></div>`).join('');
+  const sync = () => F.forEach(f => { $('#d_'+f.id).value = toS(f, val[f.id]); $('#do_'+f.id).textContent = f.fmt(val[f.id]); });
+  F.forEach(f => $('#d_'+f.id).addEventListener('input', e => { val[f.id] = fromS(f, +e.target.value); $('#do_'+f.id).textContent = f.fmt(val[f.id]); document.querySelectorAll('#lab3 [data-preset]').forEach(b=>b.setAttribute('aria-pressed','false')); calc(); }));
+  document.querySelectorAll('#lab3 [data-preset]').forEach(b => b.addEventListener('click', () => { Object.assign(val, P[b.dataset.preset]); document.querySelectorAll('#lab3 [data-preset]').forEach(x=>x.setAttribute('aria-pressed', x===b)); sync(); calc(); }));
+  let N = 0; const dots = [];
+  for (let i = 0; i < 1500; i++){ const arm = i%2, r = Math.pow(Math.random(), .7), th = r*7 + arm*Math.PI + (Math.random()-.5)*.9; dots.push({r, th}); }
+  const field = Array.from({length: 1400}, () => { const arm = Math.floor(Math.random()*2), r = Math.pow(Math.random(), .8), th = r*7 + arm*Math.PI + (Math.random()-.5)*1.3; return {r, th, b: Math.random()}; });
+  function calc(){ N = F.reduce((p,f) => p*val[f.id], 1);
+    $('#v3n').textContent = N < 1 ? sci(N, 2) : big(Math.round(N));
+    if (N < 1){ $('#v3d').textContent = 'None expected'; $('#v3c').textContent = 'Fewer than one: we may well be alone in the galaxy right now.'; }
+    else { const d = Math.sqrt(7.85e9 / N); $('#v3d').textContent = big(Math.round(d)) + ' light years';
+      const rt = 2*d; $('#v3c').textContent = rt > val.L ? `No. A reply would take ${big(Math.round(rt))} years, longer than they'd be listening.` : `Barely. "Hello" and a reply would take ${big(Math.round(rt))} years.`; }
+  }
+  sync(); calc();
+  let spin = 0;
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); if (!RM) spin += dt*.04;
+    const cx = w/2, cy = h/2, R = Math.min(w*.46, h*.9), sq = .5;
+    const core = ctx.createRadialGradient(cx,cy,0,cx,cy,R*.3); core.addColorStop(0,A(C.glow,LIGHT?.25:.4)); core.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle = core; ctx.fillRect(0,0,w,h);
+    for (const s of field){ const a = s.th + spin; ctx.fillStyle = A(C.muted, .15 + s.b*.35); ctx.fillRect(cx + Math.cos(a)*s.r*R, cy + Math.sin(a)*s.r*R*sq, 1.2, 1.2); }
+    const n = Math.min(dots.length, Math.round(N));
+    ctx.fillStyle = C.glow; ctx.shadowColor = C.glow; ctx.shadowBlur = 8;
+    for (let i = 0; i < n; i++){ const d = dots[i], a = d.th + spin; ctx.beginPath(); ctx.arc(cx + Math.cos(a)*d.r*R, cy + Math.sin(a)*d.r*R*sq, n > 300 ? 1.4 : 2.6, 0, 6.283); ctx.fill(); }
+    ctx.shadowBlur = 0;
+    // us
+    const ua = 2.2 + spin, ur = .55; const ux = cx + Math.cos(ua)*ur*R, uy = cy + Math.sin(ua)*ur*R*sq;
+    ctx.strokeStyle = C.cool; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(ux, uy, 6, 0, 6.283); ctx.stroke();
+    ctx.fillStyle = C.cool; ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillText('us', ux + 10, uy + 4);
+    ctx.fillStyle = C.muted; ctx.fillText('Milky Way · 100,000 light years across', 14, h - 14);
+    if (Math.round(N) > dots.length){ ctx.textAlign='right'; ctx.fillText(`showing ${dots.length} of ${big(Math.round(N))}`, w-14, h-14); }
+  });
+}
+
+/* ================= 4: double pendulum ================= */
+{ const cv = $('#c4'), get = stage(cv), sl = $('#s4');
+  const g = 9.81, L1 = 1, L2 = 1, m1 = 1, m2 = 1;
+  let A, B, running = false, time = 0, trailA = [], trailB = [];
+  const off = () => Math.pow(10, -(+sl.value)) * Math.PI/180 * 10; // degrees: 10^(1-k)
+  function fmtOff(){ const deg = Math.pow(10, 1 - +sl.value); $('#o4').textContent = (deg >= 1 ? deg.toFixed(0) : deg.toFixed(+sl.value - 1)) + '°'; }
+  function reset(){ const a0 = 2.1, b0 = 2.6; A = [a0, b0, 0, 0]; B = [a0 + off(), b0, 0, 0]; time = 0; trailA = []; trailB = []; running = false; $('#go4').textContent = 'Release'; $('#v4t').textContent = '0.0 s'; $('#v4g').textContent = '0'; $('#v4v').textContent = 'Identical, for now'; fmtOff(); }
+  function deriv(s){ const [t1,t2,w1,w2] = s, d = t1 - t2, den = 2*m1 + m2 - m2*Math.cos(2*d);
+    const a1 = (-g*(2*m1+m2)*Math.sin(t1) - m2*g*Math.sin(t1-2*t2) - 2*Math.sin(d)*m2*(w2*w2*L2 + w1*w1*L1*Math.cos(d))) / (L1*den);
+    const a2 = (2*Math.sin(d)*(w1*w1*L1*(m1+m2) + g*(m1+m2)*Math.cos(t1) + w2*w2*L2*m2*Math.cos(d))) / (L2*den);
+    return [w1, w2, a1, a2]; }
+  function rk4(s, h){ const k1 = deriv(s), k2 = deriv(s.map((v,i)=>v+h/2*k1[i])), k3 = deriv(s.map((v,i)=>v+h/2*k2[i])), k4 = deriv(s.map((v,i)=>v+h*k3[i]));
+    return s.map((v,i) => v + h/6*(k1[i]+2*k2[i]+2*k3[i]+k4[i])); }
+  const tip = s => [Math.sin(s[0])*L1 + Math.sin(s[1])*L2, Math.cos(s[0])*L1 + Math.cos(s[1])*L2];
+  sl.addEventListener('input', reset);
+  $('#reset4').addEventListener('click', reset);
+  $('#go4').addEventListener('click', () => { running = !running; $('#go4').textContent = running ? 'Pause' : 'Resume'; });
+  reset();
+  loop(cv, dt => { const {ctx,w,h} = get();
+    if (running){ const n = 20, hh = dt/n; for (let i=0;i<n;i++){ A = rk4(A, hh); B = rk4(B, hh); } time += dt;
+      const ta = tip(A), tb = tip(B); trailA.push(ta); trailB.push(tb); if (trailA.length > 220){ trailA.shift(); trailB.shift(); }
+      const gap = Math.hypot(ta[0]-tb[0], ta[1]-tb[1]);
+      $('#v4t').textContent = time.toFixed(1) + ' s'; $('#v4g').textContent = gap < 1e-3 ? sci(gap*100, 2) + ' cm' : (gap*100).toFixed(1) + ' cm';
+      $('#v4v').textContent = gap < .01 ? 'Still moving together' : gap < .3 ? 'Starting to drift apart' : 'Completely different paths'; }
+    ctx.clearRect(0,0,w,h); const s = Math.min(w, h*1.8)*.22, ox = w/2, oy = h*.48;
+    const P = (x,y) => [ox + x*s, oy + y*s];
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(ox, oy, 2*s, 0, 6.283); ctx.stroke();
+    const trail = (tr, col) => { if (tr.length < 2) return; ctx.strokeStyle = col; for (let i=1;i<tr.length;i++){ ctx.globalAlpha = i/tr.length*.8; ctx.beginPath(); const a = P(...tr[i-1]), b = P(...tr[i]); ctx.moveTo(a[0],a[1]); ctx.lineTo(b[0],b[1]); ctx.stroke(); } ctx.globalAlpha = 1; };
+    ctx.lineWidth = 2; trail(trailA, C.glow); trail(trailB, C.cool);
+    const arm = (s0, col) => { const p1 = P(Math.sin(s0[0]), Math.cos(s0[0])), p2 = P(Math.sin(s0[0]) + Math.sin(s0[1]), Math.cos(s0[0]) + Math.cos(s0[1]));
+      ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox,oy); ctx.lineTo(p1[0],p1[1]); ctx.lineTo(p2[0],p2[1]); ctx.stroke();
+      ctx.fillStyle = col; [p1,p2].forEach(p => { ctx.beginPath(); ctx.arc(p[0],p[1],7,0,6.283); ctx.fill(); }); };
+    ctx.globalAlpha = .9; arm(B, C.cool); arm(A, C.glow); ctx.globalAlpha = 1;
+    ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(ox,oy,4,0,6.283); ctx.fill();
+    ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillStyle = C.glow; ctx.fillText('● pendulum A', 14, 22); ctx.fillStyle = C.cool; ctx.fillText('● pendulum B (nudged)', 14, 40);
+  });
+}
+
+/* ================= 5: black hole ================= */
+{ const cv = $('#c5'), get = stage(cv), sl = $('#s5');
+  const MS = 1.989e30;
+  const PRE = [['Mountain', Math.log10(1e12/MS)], ['Earth', Math.log10(3.0e-6)], ['Sun', 0], ['Milky Way centre', Math.log10(4.3e6)], ['M87*', Math.log10(6.5e9)]];
+  $('#bhPresets').innerHTML = PRE.map((p,i) => `<button class="btn" data-i="${i}">${p[0]}</button>`).join('');
+  document.querySelectorAll('#bhPresets .btn').forEach(b => b.addEventListener('click', () => { sl.value = Math.round(PRE[+b.dataset.i][1]*10); info(); }));
+  // precompute light paths in units of r_s = 1
+  const paths = [];
+  for (let b = -6.5; b <= 6.51; b += .5){ if (Math.abs(b) < .01) continue;
+    let x = -12, y = b, vx = 1, vy = 0; const p = [[x,y]]; let cap = false;
+    for (let i=0;i<4000;i++){ const r2 = x*x+y*y, r = Math.sqrt(r2); if (r < 1){ cap = true; break; } if (x > 12 || Math.abs(y) > 12) break;
+      const hh = x*vy - y*vx, h2 = hh*hh, k = -1.5*h2/(r2*r2*r); const step = clamp(.02*r, .004, .08);
+      vx += k*x*step; vy += k*y*step; const vn = Math.hypot(vx,vy); vx/=vn; vy/=vn; x += vx*step; y += vy*step; p.push([x,y]); }
+    paths.push({p, cap}); }
+  let lm = 0; const sparks = [];
+  function info(){ lm = +sl.value/10; const m = Math.pow(10, lm), kg = m*MS;
+    document.querySelectorAll('#bhPresets .btn').forEach((b,i) => b.setAttribute('aria-pressed', Math.abs(PRE[i][1]-lm) < .06));
+    $('#o5').textContent = sci(kg, 2) + ' kg · ' + (m >= .01 ? sci(m,3).replace(/\.?0+$/,'') : sci(m,2)) + (Math.abs(m-1)<.01 ? ' Sun' : ' Suns');
+    const rm = 2953*m; // metres
+    $('#v5r').textContent = rm < 1 ? sci(rm,2) + ' m' : rm < 1000 ? rm.toFixed(rm<10?2:0) + ' m' : big(Math.round(rm/1000)) + ' km';
+    $('#v5rc').textContent = rm < 1e-15 ? 'smaller than a proton' : rm < 1e-10 ? 'smaller than an atom' : rm < 1e-3 ? 'smaller than a grain of sand' : rm < .05 ? 'about the size of a marble' : rm < 1e4 ? 'about the size of a town' : rm < 6.96e8 ? 'smaller than the Sun' : rm < 1.5e11 ? 'would fit inside Earth\'s orbit' : rm < 4.5e12 ? 'would fit inside Neptune\'s orbit' : 'bigger than Neptune\'s orbit';
+    const T = 6.17e-8/m; $('#v5t').textContent = sci(T,2) + ' K';
+    $('#v5tc').textContent = T > 2.725 ? 'hotter than the Big Bang afterglow: it shrinks' : 'colder than the Big Bang afterglow: for now it absorbs more than it emits';
+    const ty = 2.1e67*m*m*m; $('#v5e').textContent = ty < 1 ? dur(ty*3.156e7) : sci(ty, 2) + ' years';
+    $('#v5ec').textContent = ty < 1.38e10 ? 'less than the age of the universe' : sci(ty/1.38e10, 2) + '× the age of the universe';
+  }
+  sl.addEventListener('input', info); info();
+  let ph = 0;
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); if (!RM) ph += dt;
+    const s = Math.min(w, h)/15, cx = w/2, cy = h/2; const P = (x,y) => [cx + x*s, cy + y*s];
+    // light paths
+    for (const pa of paths){ ctx.strokeStyle = pa.cap ? A(C.bad,.6) : A(C.cool,.5); ctx.lineWidth = 1.2; ctx.beginPath();
+      pa.p.forEach((q,i) => { const [X,Y] = P(q[0],q[1]); i ? ctx.lineTo(X,Y) : ctx.moveTo(X,Y); }); ctx.stroke();
+      // moving photon
+      const n = pa.p.length, k = Math.floor(((ph*.18 + Math.abs(pa.p[0][1])*.07) % 1) * n); const q = pa.p[clamp(k,0,n-1)]; const [X,Y] = P(q[0], q[1]);
+      ctx.fillStyle = pa.cap ? C.bad : C.cool; ctx.beginPath(); ctx.arc(X,Y,2.2,0,6.283); ctx.fill(); }
+    // Hawking radiation sparks: rate grows with temperature (log)
+    const T = 6.17e-8/Math.pow(10, lm), heat = clamp((Math.log10(T) + 17)/28, 0, 1);
+    if (!RM && Math.random() < heat*1.6) for (let i = 0; i < 1 + heat*5; i++){ const a = Math.random()*6.283; sparks.push({a, r:1.05, v:1.2 + Math.random()*2, life:1}); }
+    for (let i = sparks.length - 1; i >= 0; i--){ const sp = sparks[i]; sp.r += sp.v*dt; sp.life -= dt*.6; if (sp.life <= 0){ sparks.splice(i,1); continue; }
+      const [X,Y] = P(Math.cos(sp.a)*sp.r, Math.sin(sp.a)*sp.r); ctx.globalAlpha = sp.life; ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(X,Y,1.8,0,6.283); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    // glow + horizon
+    const gl = ctx.createRadialGradient(cx,cy,s*.9,cx,cy,s*(1.6 + heat*2.5)); gl.addColorStop(0,A(C.glow,.15 + heat*.6)); gl.addColorStop(1,A(C.glow,0));
+    ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(cx,cy,s*(1.6 + heat*2.5),0,6.283); ctx.fill();
+    ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(cx,cy,s,0,6.283); ctx.fill();
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.setLineDash([3,5]); ctx.strokeStyle = A(C.glow,.5); ctx.beginPath(); ctx.arc(cx,cy,s*1.5,0,6.283); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = MONO; ctx.fillStyle = C.muted; ctx.textAlign = 'left';
+    ctx.fillText('event horizon', cx + s*1.05, cy - s*.15);
+    ctx.fillText('photon sphere: light can orbit here', cx + s*1.1, cy + s*1.55);
+  });
+}
+
+/* ================= 6: time dilation ================= */
+{ const cv = $('#c6'), get = stage(cv), sl = $('#s6'); const D = 4.24;
+  let v = 0, gam = 1, earthT = 0, shipT = 0, prog = 0;
+  function info(){ const s = +sl.value/1000; v = s === 0 ? 0 : 1 - Math.pow(10, -4.3*s); gam = 1/Math.sqrt(1 - v*v);
+    $('#o6').textContent = v === 0 ? 'standing still' : (v < .999 ? (v*100).toFixed(1) : (v*100).toFixed(4)) + '% of light speed';
+    $('#v6g').textContent = '×' + (gam < 10 ? gam.toFixed(3) : gam.toFixed(1));
+    $('#v6e').textContent = v === 0 ? 'never arrives' : years(D/v); $('#v6s').textContent = v === 0 ? 'never arrives' : years(D/v/gam); }
+  sl.addEventListener('input', () => { info(); prog = 0; earthT = 0; shipT = 0; }); info();
+  function clock(ctx, x, y, r, t, col, label, sub){
+    ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x,y,r,0,6.283); ctx.stroke();
+    for (let i=0;i<12;i++){ const a = i/12*6.283; ctx.strokeStyle = C.faint; ctx.beginPath(); ctx.moveTo(x+Math.sin(a)*r*.85, y-Math.cos(a)*r*.85); ctx.lineTo(x+Math.sin(a)*r*.95, y-Math.cos(a)*r*.95); ctx.stroke(); }
+    const a = (t % 1) * 6.283; ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x + Math.sin(a)*r*.8, y - Math.cos(a)*r*.8); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x, y, r+6, -Math.PI/2, -Math.PI/2 + a); ctx.stroke();
+    ctx.fillStyle = col; ctx.beginPath(); ctx.arc(x,y,4,0,6.283); ctx.fill();
+    ctx.font = SANS; ctx.textAlign = 'center'; ctx.fillStyle = C.text; ctx.fillText(label, x, y + r + 26);
+    ctx.font = MONO; ctx.fillStyle = col; ctx.fillText(sub, x, y + r + 44);
+  }
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    if (!RM && v > 0){ earthT += dt*.5; shipT += dt*.5/gam; prog = (prog + dt*.08) % 1; }
+    const r = Math.min(h*.2, w*.11), y = h*.38;
+    clock(ctx, w*.25, y, r, earthT, C.cool, 'Clock on Earth', '1 year per turn');
+    clock(ctx, w*.75, y, r, shipT, C.glow, 'Clock on the ship', gam > 1.0005 ? `turns ${gam < 10 ? gam.toFixed(2) : gam.toFixed(0)}× slower` : 'same speed');
+    // route
+    const ly = h*.86, x0 = w*.08, x1 = w*.92; ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.setLineDash([4,6]); ctx.beginPath(); ctx.moveTo(x0, ly); ctx.lineTo(x1, ly); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.cool; ctx.beginPath(); ctx.arc(x0, ly, 6, 0, 6.283); ctx.fill();
+    ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(x1, ly, 6, 0, 6.283); ctx.fill();
+    ctx.font = MONO; ctx.fillStyle = C.muted; ctx.textAlign = 'left'; ctx.fillText('Earth', x0 - 4, ly - 14); ctx.textAlign = 'right'; ctx.fillText('Proxima Centauri', x1 + 4, ly - 14);
+    if (v > 0){ const sx = lerp(x0, x1, prog); ctx.fillStyle = C.text; ctx.beginPath(); ctx.moveTo(sx+9, ly); ctx.lineTo(sx-6, ly-6); ctx.lineTo(sx-3, ly); ctx.lineTo(sx-6, ly+6); ctx.closePath(); ctx.fill(); }
+  });
+}
+
+/* ================= 7: compounding risk ================= */
+{ const cv = $('#c7'), get = stage(cv), sl = $('#s7'); let p = .005;
+  function info(){ p = Math.pow(10, lerp(-4, Math.log10(.02), +sl.value/100));
+    $('#o7').textContent = (p*100 < .1 ? (p*100).toFixed(3) : (p*100).toFixed(2)) + '%  (1 in ' + big(Math.round(1/p)) + ')';
+    const s = n => Math.pow(1-p, n), s2 = n => Math.pow(1-p*p, n), f = x => x > .995 ? '>99%' : x < .001 ? '<0.1%' : (x*100).toFixed(x < .1 ? 1 : 0) + '%';
+    $('#v7a').textContent = f(s(100)); $('#v7b').textContent = f(s(1000)); $('#v7c').textContent = f(s2(1000)); }
+  sl.addEventListener('input', info); info();
+  loop(cv, () => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const L = 54, R = w - 18, T = 22, B = h - 36, X = n => L + n/1000*(R-L), Y = v => B - v*(B-T);
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+    ctx.textAlign = 'right'; for (const v of [0,.25,.5,.75,1]){ ctx.beginPath(); ctx.moveTo(L, Y(v)); ctx.lineTo(R, Y(v)); ctx.stroke(); ctx.fillText(Math.round(v*100)+'%', L-8, Y(v)+4); }
+    ctx.textAlign = 'center'; for (const n of [0,250,500,750,1000]) ctx.fillText(n === 0 ? 'now' : '+'+n+' yrs', X(n), B + 20);
+    const curve = (fn, col, fill) => { ctx.beginPath(); for (let n=0;n<=1000;n+=5){ const xx = X(n), yy = Y(fn(n)); n ? ctx.lineTo(xx,yy) : ctx.moveTo(xx,yy); }
+      if (fill){ ctx.lineTo(X(1000), B); ctx.lineTo(X(0), B); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); ctx.beginPath(); for (let n=0;n<=1000;n+=5){ const xx = X(n), yy = Y(fn(n)); n ? ctx.lineTo(xx,yy) : ctx.moveTo(xx,yy); } }
+      ctx.strokeStyle = col; ctx.lineWidth = 2.5; ctx.stroke(); };
+    curve(n => Math.pow(1-p*p, n), C.cool, null);
+    curve(n => Math.pow(1-p, n), C.glow, A(C.glow,.12));
+    const e = Math.pow(1-p, 1000); ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(X(1000), Y(e), 5, 0, 6.283); ctx.fill();
+    ctx.textAlign = 'left'; ctx.fillStyle = C.glow; ctx.fillText('Earth only', L + 10, T + 14 + (e > .8 ? 36 : 0)); ctx.fillStyle = C.cool; ctx.fillText('Earth + a second home', L + 10, T + 30 + (e > .8 ? 36 : 0));
+    ctx.save(); ctx.translate(14, (T+B)/2); ctx.rotate(-Math.PI/2); ctx.textAlign = 'center'; ctx.fillStyle = C.faint; ctx.fillText('chance humanity survives', 0, 0); ctx.restore();
+  });
+}
+
+/* ================= 8: travel times ================= */
+{ const cv = $('#c8'), get = stage(cv);
+  const DEST = [['The Moon', 384400], ['Mars (average)', 2.25e8], ['Pluto', 5.9e9], ['Proxima Centauri', 4.011e13], ['TRAPPIST-1', 3.78e14]];
+  const CRAFT = [['Walking', 5], ['Jet airliner', 900], ['Apollo 10 (fastest crewed)', 39897], ['Voyager 1', 61200], ['Parker Solar Probe', 692000], ['Starshot light sail (20% of light)', 2.158e8]];
+  let di = 3;
+  $('#dest').innerHTML = DEST.map((d,i) => `<button class="btn" data-i="${i}" aria-pressed="${i===di}">${d[0]}</button>`).join('');
+  document.querySelectorAll('#dest .btn').forEach(b => b.addEventListener('click', () => { di = +b.dataset.i; document.querySelectorAll('#dest .btn').forEach(x => x.setAttribute('aria-pressed', x===b)); anim = 0; }));
+  let anim = 0;
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); anim = RM ? 1 : Math.min(1, anim + dt*1.6);
+    const km = DEST[di][1]; const yrs = CRAFT.map(c => km / c[1] / 24 / 365.25);
+    const narrow = w < 520, top = 14, rowH = (h - top - 30)/CRAFT.length, lx = narrow ? 14 : 200, rx = w - (narrow ? 14 : 150);
+    const lmin = -3, lmax = 10; const X = y => lx + (clamp(Math.log10(y), lmin, lmax) - lmin)/(lmax - lmin)*(rx - lx);
+    // grid
+    ctx.font = MONO; ctx.textAlign = 'center';
+    const ticks = [[1/365.25,'1 day'],[1,'1 yr'],[100,'100 yrs'],[1e4,'10k yrs'],[1e6,'1M yrs'],[1e8,'100M yrs'],[1e10,'10B yrs']];
+    for (const [v, lab] of ticks){ const x = X(v); ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, h - 26); ctx.stroke(); if (!narrow || [1,1e4,1e8].includes(v)){ ctx.fillStyle = C.faint; ctx.fillText(lab, x, h - 8); } }
+    // lifetime band
+    ctx.fillStyle = A(C.good,.1); ctx.fillRect(X(1/365.25), top, X(80) - X(1/365.25), h - top - 26);
+    ctx.fillStyle = C.good; ctx.textAlign = 'left'; ctx.fillText('a human lifetime', X(1/365.25) + 4, h - 32);
+    CRAFT.forEach((c, i) => { const y = top + 14 + i*rowH + rowH*.5, x = X(yrs[i]);
+      const barY = narrow ? y + 4 : y - 7, barH = narrow ? 8 : 14;
+      ctx.fillStyle = C.text; ctx.textAlign = 'left'; ctx.font = SANS;
+      if (narrow) ctx.fillText(c[0], lx, y - 6); else { ctx.textAlign = 'right'; ctx.fillText(c[0].replace(' (fastest crewed)','').replace(' (20% of light)',''), lx - 12, y + 4); }
+      const isStar = i === CRAFT.length - 1; ctx.fillStyle = isStar ? C.glow : (yrs[i] <= 80 ? C.cool : A(C.cool,.45));
+      const xe = lerp(lx, x, anim); ctx.fillRect(lx, barY, Math.max(2, xe - lx), barH);
+      ctx.font = MONO; ctx.fillStyle = isStar ? C.glow : C.text; ctx.textAlign = 'left';
+      const lab = years(yrs[i]); const tw = ctx.measureText(lab).width;
+      if (narrow) { ctx.textAlign = 'right'; ctx.fillText(lab, rx, y - 6); }
+      else ctx.fillText(lab, Math.min(xe + 8, w - tw - 6), y + 4);
+    });
+  });
+}
+
+/* ================= 9: intelligence explosion ================= */
+{ const cv = $('#c9'), get = stage(cv); let self = true;
+  const btn = $('#self9'); btn.addEventListener('click', () => { self = !self; btn.setAttribute('aria-pressed', self); info(); });
+  let series = [];
+  function info(){ const r = +$('#s9a').value/100, c0 = +$('#s9b').value/100; $('#o9a').textContent = Math.round(r*100) + '%'; $('#o9b').textContent = Math.round(c0*100) + '% of a human';
+    series = [c0]; let c = c0;
+    for (let n=1;n<=40;n++){ c = self ? c*(1 + r*Math.sqrt(c)*1.4) : c + r*c0*1.4; c = Math.min(c, 1e7); series.push(c); }
+    const k = series.findIndex(v => v >= 1); $('#v9a').textContent = k < 0 ? 'not within 40' : String(k);
+    const e = series[40]; $('#v9b').textContent = e >= 1e7 ? 'off the chart' : (e >= 100 ? big(Math.round(e)) : e.toFixed(1)) + '× human';
+  }
+  ['#s9a','#s9b'].forEach(s => $(s).addEventListener('input', info)); info();
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const L = 58, R = w - 18, T = 18, B = h - 34, lo = -2, hi = 7;
+    const X = n => L + n/40*(R-L), Y = v => B - (Math.log10(clamp(v, 1e-2, 1e7)) - lo)/(hi - lo)*(B-T);
+    ctx.font = MONO; ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.textAlign = 'right';
+    for (let e = lo; e <= hi; e++){ ctx.beginPath(); ctx.moveTo(L, Y(Math.pow(10,e))); ctx.lineTo(R, Y(Math.pow(10,e))); ctx.stroke();
+      if (e % (h < 300 ? 2 : 1) === 0){ ctx.fillStyle = C.faint; ctx.fillText(e >= 0 ? (e < 4 ? Math.pow(10,e)+'×' : '10' + String(e).split('').map(c=>SUP[c]).join('') + '×') : Math.pow(10,e)+'×', L - 8, Y(Math.pow(10,e)) + 4); } }
+    ctx.textAlign = 'center'; ctx.fillStyle = C.faint; for (let n = 0; n <= 40; n += 10) ctx.fillText('gen ' + n, X(n), B + 20);
+    // human line
+    ctx.strokeStyle = C.cool; ctx.lineWidth = 2; ctx.setLineDash([6,5]); ctx.beginPath(); ctx.moveTo(L, Y(1)); ctx.lineTo(R, Y(1)); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.cool; ctx.textAlign = 'left'; ctx.fillText('human level (biology barely moves)', L + 8, Y(1) - 8);
+    // AI curve
+    ctx.beginPath(); series.forEach((v,n) => { const x = X(n), y = Y(v); n ? ctx.lineTo(x,y) : ctx.moveTo(x,y); });
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 3; ctx.stroke();
+    ctx.lineTo(X(40), B); ctx.lineTo(X(0), B); ctx.closePath(); ctx.fillStyle = A(C.glow,.08); ctx.fill();
+    const k = series.findIndex(v => v >= 1); if (k >= 0){ const pulse = RM ? 0 : (Math.sin(t*4)+1)*3; ctx.strokeStyle = C.glow; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(X(k), Y(series[k]), 6 + pulse, 0, 6.283); ctx.stroke(); }
+    const lastV = series[40]; ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(X(40), Y(lastV), 5, 0, 6.283); ctx.fill();
+  });
+}
+
+/* ================= 10: constellation ================= */
+{ const svg = $('#svg10'), NS = 'http://www.w3.org/2000/svg';
+  const S = [
+    {x:80, y:300, t:'Look up', d:'Be curious about the universe. Wondering why things are the way they are is where all science begins.'},
+    {x:190, y:190, t:'Learn some science', d:'Climate, energy, medicine and AI will shape this century. People who understand basic science make better choices about them.'},
+    {x:300, y:250, t:'Educate everyone', d:'Talent is born everywhere. Giving every child a good education is how we find the minds that will solve our hardest problems.'},
+    {x:390, y:110, t:'Work as one world', d:'Climate change, pandemics and nuclear weapons cross every border. So must our answers.'},
+    {x:500, y:180, t:'Use technology wisely', d:'AI and genetic engineering could be our greatest triumphs or our worst mistakes. We have to plan for both now.'},
+    {x:540, y:320, t:'Never give up', d:'Told at 21 he had two years to live, Hawking worked for another 55. However hard life seems, there is always something you can do and succeed at.'}
+  ];
+  const lit = [];
+  const lines = document.createElementNS(NS, 'g'); svg.appendChild(lines);
+  // background dust
+  for (let i=0;i<60;i++){ const c = document.createElementNS(NS,'circle'); c.setAttribute('cx', Math.random()*600); c.setAttribute('cy', Math.random()*400); c.setAttribute('r', Math.random()*1.1+.3); c.style.fill = 'var(--faint)'; svg.appendChild(c); }
+  S.forEach((s, i) => {
+    const g = document.createElementNS(NS,'g'); g.setAttribute('class','star-btn'); g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label', 'Lesson ' + (i+1) + ': ' + s.t);
+    g.innerHTML = `<circle class="halo" cx="${s.x}" cy="${s.y}" r="22" fill="transparent" style="stroke:var(--line)" stroke-width="1"/><circle class="core" cx="${s.x}" cy="${s.y}" r="6" style="fill:var(--muted)"/><text x="${s.x}" y="${s.y + 40}" text-anchor="middle" style="fill:var(--faint)" font-family="Geist Mono, monospace" font-size="13">${s.t}</text>`;
+    const act = () => {
+      if (!lit.includes(i)){ if (lit.length){ const p = S[lit[lit.length-1]]; const l = document.createElementNS(NS,'line'); l.setAttribute('x1',p.x); l.setAttribute('y1',p.y); l.setAttribute('x2',s.x); l.setAttribute('y2',s.y); l.style.stroke = 'var(--glow)'; l.setAttribute('stroke-width','1.5'); l.setAttribute('stroke-opacity','.7');
+          const len = Math.hypot(s.x-p.x, s.y-p.y); l.style.strokeDasharray = len; l.style.strokeDashoffset = RM ? 0 : len; l.style.transition = 'stroke-dashoffset .6s ease'; lines.appendChild(l); requestAnimationFrame(() => requestAnimationFrame(() => l.style.strokeDashoffset = 0)); }
+        lit.push(i); }
+      const core = g.querySelector('.core'); core.style.fill = 'var(--glow)'; core.setAttribute('r', '8'); core.style.filter = 'drop-shadow(0 0 8px var(--glow))';
+      g.querySelector('text').style.fill = 'var(--text)';
+      $('#msg10').innerHTML = `<span class="k">Lesson ${i+1} of 6</span><h4>${s.t}</h4><p>${s.d}</p>`;
+      $('#h10').textContent = lit.length === 6 ? 'Constellation complete' : `${lit.length} of 6 lit`;
+      if (lit.length === 6) $('#msg10').innerHTML += `<p style="color:var(--glow)">All six lit. "Remember to look up at the stars and not down at your feet."</p>`;
+    };
+    g.addEventListener('click', act); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } });
+    svg.appendChild(g);
+  });
+}
+})();
+</script>
+
+</body></html>

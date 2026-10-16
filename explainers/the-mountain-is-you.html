@@ -1,0 +1,879 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Mountain Is You, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field guide for a climb. Same shell as the Hawking guide (chapter rail + "trail station" per chapter:
+   ideas, a live exercise, a quick check). Dark-first pre-dawn slate with an alpenglow accent; light is morning snow. */
+:root{
+  color-scheme: dark;
+  --ink:#0C1316;          /* page: pre-dawn slate */
+  --panel:#121C20;
+  --panel-2:#18252A;
+  --line:#25363C;
+  --text:#EAF0EE;
+  --muted:#9FB0AE;
+  --faint:#687B7A;
+  --glow:#F2A27E;         /* alpenglow: first light on the peak, the one accent */
+  --glow-soft:rgba(242,162,126,.13);
+  --cool:#86D0C8;         /* glacier: second series */
+  --cool-soft:rgba(134,208,200,.13);
+  --good:#9BD99B;
+  --bad:#FF8F80;
+  --soft:#CCD8D5;
+  --deep:#0F181B;
+  --toc-bg:rgba(18,28,32,.72);
+  --glow-line:rgba(242,162,126,.3);
+  --on-glow:#22110A;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F1F4F2;--panel:#FFFFFF;--panel-2:#E6ECE9;--line:#CCD8D4;--text:#132024;--muted:#47595A;--faint:#728382;
+  --glow:#B4522E;--glow-soft:rgba(180,82,46,.09);--cool:#1C746E;--cool-soft:rgba(28,116,110,.1);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#2A3A3D;--deep:#F7F9F8;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(180,82,46,.32);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F1F4F2;--panel:#FFFFFF;--panel-2:#E6ECE9;--line:#CCD8D4;--text:#132024;--muted:#47595A;--faint:#728382;
+  --glow:#B4522E;--glow-soft:rgba(180,82,46,.09);--cool:#1C746E;--cool-soft:rgba(28,116,110,.1);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#2A3A3D;--deep:#F7F9F8;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(180,82,46,.32);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:40px 40px}
+#range{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;display:grid;gap:22px}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
+.toc a{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;text-decoration:none;color:var(--text);
+  padding:14px 14px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);
+  transition:border-color .2s, transform .2s, background .2s}
+.toc a:hover{border-color:var(--glow);transform:translateY(-2px);background:var(--panel-2)}
+.toc .n{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.toc .q{font-family:var(--f-display);font-size:21px;line-height:1.15}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px);align-self:start;display:grid;gap:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:10px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail a{display:grid;grid-template-columns:22px 1fr 14px;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:14px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:14px;height:14px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.ch:first-child{border-top:0;padding-top:8px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/8;max-width:100%;touch-action:pan-y}
+.lab .stage{position:relative}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn.stone[aria-pressed=false]{background:transparent;color:var(--faint);border-style:dashed;text-decoration:line-through}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;align-content:start;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ch3 sorter */
+.sorter{display:grid;gap:14px;padding:22px 18px}
+.card{padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);font-family:var(--f-display);font-size:clamp(22px,3.4vw,28px);line-height:1.25;min-height:4.2em;display:flex;align-items:center}
+.sorter .row .btn{font-size:14px;padding:9px 16px}
+.verdict{font-size:14px;color:var(--muted);min-height:1.6em}
+.verdict b{color:var(--text);font-weight:500}
+.score{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* ch7 summit */
+.summit-wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:0}
+.summit-wrap svg{display:block;width:100%;height:auto;max-width:100%}
+.camp{cursor:pointer}
+.camp:focus{outline:none}
+.camp:focus-visible circle.halo{stroke:var(--glow);stroke-width:2}
+.msg{padding:22px;border-left:1px solid var(--line);display:grid;align-content:center;gap:10px;min-width:0}
+.msg .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.msg h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.05}
+.msg p{color:var(--soft);font-size:15px}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--cool-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--glow-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:10px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .summit-wrap{grid-template-columns:minmax(0,1fr)}
+  .msg{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3.4}
+  .lab canvas.tall{aspect-ratio:1/1}
+  .short p{font-size:16px}
+  .hero{padding-top:28px}
+}
+</style>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <canvas id="range" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Brianna Wiest's book on self-sabotage</div>
+    <h1>The Mountain Is You,<br><em>Explained</em></h1>
+    <p class="lede">Seven chapters on why we get in our own way, and how to stop. Each one has the core idea in plain language, a <b>hands-on exercise</b> to feel it working, and a quick check at the end. Mark a chapter understood and your progress is remembered on this device.</p>
+    <nav class="toc" aria-label="Chapters" id="toc"></nav>
+    <div class="about">
+      <span><b>Published</b> 2020, by Thought Catalog Books</span>
+      <span><b>Subtitle</b> Transforming Self-Sabotage Into Self-Mastery</span>
+      <span><b>Read time</b> about 8 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 7 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:2px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The obstacle is internal</div>
+        <h2>The mountain is you</h2>
+        <div class="short"><span class="lbl">In short</span><p>The biggest thing standing between you and the life you want is usually not out there. It's a set of patterns inside you. That sounds like bad news, but it means the obstacle is also something you can climb.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The mountain is a metaphor for you.</b> When you keep hitting the same wall in work, love or health, the common factor is how you respond. Facing that honestly is the start of the climb.</span></li>
+          <li><span><b>Self-sabotage is a clash of wants.</b> You consciously want one thing, and some quieter part of you is attached to the opposite: safety, familiarity, or avoiding a feeling. When the two pull against each other, you stall.</span></li>
+          <li><span><b>It hides in ordinary habits.</b> Procrastinating, chasing perfection, staying too busy to think, picking fights with people who are good for you, worrying about unlikely disasters, clinging to how things used to be. Each looks harmless alone.</span></li>
+          <li><span><b>Breakdowns often come before breakthroughs.</b> A crisis is frequently the moment an old way of coping stops working. It hurts, but it forces the change you'd been putting off.</span></li>
+          <li><span><b>The climb changes the climber.</b> The point isn't to defeat the mountain. It's to become the kind of person who can get up it, and that person is who you keep afterwards.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Exercise: where does the obstacle live?</div><div class="hint">Drag the slider and watch the fog</div></div>
+        <div class="stage"><canvas id="c1"></canvas></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s1">How much of the problem you're willing to own <output id="o1"></output></label><input type="range" id="s1" min="0" max="100" value="25"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Where the problem lives</span><span class="s" id="v1a"></span></div>
+          <div class="stat"><span class="k">What you can change</span><span class="s" id="v1b"></span></div>
+          <div class="stat"><span class="k">Can you climb it?</span><span class="v glow" id="v1c"></span></div>
+        </div>
+        <div class="callout">Owning a problem isn't the same as blaming yourself for it. Bad luck and other people are real. But <b>only the part you own is the part you can work on</b>, so the more you own, the more of the path you can see.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Imagine you keep getting lost on the same hike and blame the map every time. One day you notice you always take the same wrong turn. That's uncomfortable, but it's also the first piece of good news in years: a turn you take is a turn you can stop taking.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1" id="d1"> I understand this chapter</label><a class="next" href="#ch2">Next: No such thing as self-sabotage →</a></div>
+    </section>
+
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Every habit is meeting a need</div>
+        <h2>There is no such thing as self-sabotage</h2>
+        <div class="short"><span class="lbl">In short</span><p>The habits that hold you back aren't random or stupid. Each one is doing a job for you, usually protecting you from a feeling. Find the need underneath and you can meet it in a way that doesn't cost you your goals.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Behaviour always makes sense somewhere.</b> If you keep doing something that hurts you, it's paying off in a way you haven't noticed yet: relief, safety, control, or a familiar feeling.</span></li>
+          <li><span><b>Hidden commitments win.</b> You may want success while quietly believing success means being judged, envied or left alone. The hidden belief usually beats the stated goal.</span></li>
+          <li><span><b>Familiar feels safe, even when it isn't good.</b> Your mind prefers a known discomfort to an unknown comfort, so it steers you back towards what you're used to.</span></li>
+          <li><span><b>You can have a ceiling on feeling good.</b> When life gets better than you're used to, you may create a problem to bring things back down. Psychologist Gay Hendricks calls this the upper limit problem.</span></li>
+          <li><span><b>Don't fight the habit, replace its job.</b> Willpower against a need loses. Naming the need and finding a healthier way to meet it works.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Exercise: decode the habit</div><div class="hint">Pick one you recognise</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="tabs" id="habits"></div></div>
+        <div class="stage"><canvas id="c2"></canvas></div>
+        <div class="stats">
+          <div class="stat"><span class="k">What it's protecting you from</span><span class="s" id="v2a"></span></div>
+          <div class="stat"><span class="k">A healthier way to meet that need</span><span class="s" id="v2b"></span></div>
+        </div>
+        <div class="callout">These are common patterns, not diagnoses. Your own version may protect something different. The useful question is always the same: <b>what would I have to feel if I stopped doing this?</b></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A smoke alarm that goes off every time you make toast isn't broken. It's doing its job too eagerly. Self-sabotage is like that. Ripping the alarm off the wall doesn't help; moving it, or opening a window, does.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2" id="d2"> I understand this chapter</label><a class="next" href="#ch3">Next: Triggers as guides →</a></div>
+    </section>
+
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Reading your emotions as signals</div>
+        <h2>Your triggers are guides to your freedom</h2>
+        <div class="short"><span class="lbl">In short</span><p>When something sets you off, it's pointing at a place that still needs attention. Difficult emotions are messengers, not enemies. Listen to what they're telling you, then decide what to do, instead of letting them decide for you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A trigger is a signpost.</b> A reaction much bigger than the moment deserves usually belongs to something older. It shows you where the unhealed part is.</span></li>
+          <li><span><b>Every hard feeling carries information.</b> Anger can mark a boundary that was crossed. Envy can reveal what you want for yourself. Guilt can show where you acted against your values.</span></li>
+          <li><span><b>Feel it, don't obey it.</b> The message is useful. The urge that comes with it (to lash out, run, or shut down) usually isn't.</span></li>
+          <li><span><b>Intuition and fear sound different.</b> Intuition tends to be calm, quiet and steady, and it keeps coming back. Fear is loud and urgent, jumps to the worst case, and spirals into "what if".</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Exercise: read the signal</div>
+          <div class="tabs" role="tablist"><button class="btn" role="tab" aria-pressed="true" data-tab="compass" id="t3a">Emotion compass</button><button class="btn" role="tab" aria-pressed="false" data-tab="sort" id="t3b">Intuition or fear?</button></div></div>
+        <div id="p3a">
+          <div class="lab-ctl" style="border-top:0"><div class="tabs" id="emos"></div></div>
+          <div class="stage"><canvas id="c3" class="tall" style="aspect-ratio:16/9"></canvas></div>
+          <div class="stats">
+            <div class="stat"><span class="k">What it may be telling you</span><span class="s" id="v3a"></span></div>
+            <div class="stat"><span class="k">A question to ask yourself</span><span class="s" id="v3b"></span></div>
+          </div>
+        </div>
+        <div id="p3b" hidden>
+          <div class="sorter">
+            <div class="row" style="justify-content:space-between"><span class="sub">Which voice is this?</span><span class="score" id="score3"></span></div>
+            <div class="card" id="card3" aria-live="polite"></div>
+            <div class="row"><button class="btn" id="intu3">Sounds like intuition</button><button class="btn" id="fear3">Sounds like fear</button><button class="btn" id="next3" hidden>Next statement →</button></div>
+            <p class="verdict" id="verd3"></p>
+          </div>
+        </div>
+        <div class="callout">A rough guide, not a lie detector. The tell is usually the <b>tone</b>: intuition feels like quiet knowing; fear feels like panic that demands action right now.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A warning light on your car's dashboard isn't the problem; it's telling you about the problem. You could put tape over it, or you could open the bonnet. Emotions are the dashboard. The tape is drinking, scrolling or snapping at people. Opening the bonnet is asking what the light is about.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3" id="d3"> I understand this chapter</label><a class="next" href="#ch4">Next: Emotional intelligence →</a></div>
+    </section>
+
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · How your mind resists change</div>
+        <h2>Building emotional intelligence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Your mind is built to pull you back to what's familiar, even after a good change. That's why big overnight transformations rarely stick. Small shifts, repeated until they feel normal, do.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Psychological homeostasis.</b> Just as your body holds its temperature steady, your mind works to keep you at a familiar baseline. A sudden leap, even a positive one, can feel wrong simply because it's new.</span></li>
+          <li><span><b>Discomfort isn't a stop sign.</b> Feeling uneasy after a good change doesn't mean it's a mistake. It often means your baseline hasn't caught up yet.</span></li>
+          <li><span><b>Microshifts beat epiphanies.</b> Tiny changes slip under the radar of your inner alarm system. Repeated daily, they quietly become the new normal.</span></li>
+          <li><span><b>Feelings need to be felt.</b> Emotions you push away don't vanish; they wait. Letting yourself feel them fully, without acting on them, is how they pass.</span></li>
+          <li><span><b>Your brain looks for proof of what it believes.</b> So collect new proof on purpose. Each small kept promise is evidence for a different story about yourself.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Exercise: leap or shift?</div>
+          <div class="tabs"><button class="btn" aria-pressed="false" data-mode="leap">One giant leap</button><button class="btn" aria-pressed="true" data-mode="micro">Daily microshifts</button></div></div>
+        <div class="stage"><canvas id="c4"></canvas></div>
+        <div class="lab-ctl" id="ctl4"><div class="ctl"><label for="s4">Size of each daily shift <output id="o4"></output></label><input type="range" id="s4" min="5" max="200" step="5" value="30"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Where you are on day 90</span><span class="v glow" id="v4a"></span></div>
+          <div class="stat"><span class="k">Your new normal (baseline)</span><span class="v" id="v4b" style="color:var(--cool)"></span></div>
+          <div class="stat"><span class="k">What happened</span><span class="s" id="v4c"></span></div>
+        </div>
+        <div class="callout">A toy model, not a measurement. The shaded band is your <b>comfort zone</b> around the baseline. Stay inside it and the baseline follows you up. Jump far outside it and you get pulled back, and keep that up for a week and you burn out.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A rubber band stretched too far snaps back. Stretch it a little, hold it there, and over time it takes a new shape. Your sense of "normal" works the same way. That's why "I'll change everything on Monday" so often ends by Thursday.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4" id="d4"> I understand this chapter</label><a class="next" href="#ch5">Next: Releasing the past →</a></div>
+    </section>
+
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Grief, forgiveness and letting go</div>
+        <h2>Releasing the past</h2>
+        <div class="short"><span class="lbl">In short</span><p>You can't climb well carrying everything that ever happened to you. Letting go is something you do, not a feeling you wait for. Keep the lessons, set down the weight.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Letting go is a choice you repeat.</b> You rarely wake up one day free of something. You decide, again and again, to stop feeding it.</span></li>
+          <li><span><b>Grieve the life you expected.</b> Often what hurts most isn't what happened but the future you'd pictured that won't arrive. That loss deserves grief too.</span></li>
+          <li><span><b>Forgiveness is for your freedom.</b> It doesn't excuse what happened, and it doesn't require letting anyone back in. It means the past stops steering you.</span></li>
+          <li><span><b>Mattering isn't the same as staying.</b> Something can have been important and still not belong in your future.</span></li>
+          <li><span><b>Closure is often self-made.</b> Waiting for an apology or an explanation keeps someone else holding the key. You can turn it yourself.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Exercise: lighten the pack</div><div class="hint">Tap a stone to set it down</div></div>
+        <div class="stage"><canvas id="c5"></canvas></div>
+        <div class="lab-ctl"><div class="tabs" id="stones"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Weight you're carrying</span><span class="v glow" id="v5a"></span></div>
+          <div class="stat"><span class="k">Climbing pace</span><span class="v" id="v5b"></span></div>
+          <div class="stat"><span class="k">What setting it down means</span><span class="s" id="v5c"></span></div>
+        </div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Every stone in the pack was picked up for a reason. Maybe it was useful once, or proof that something mattered. But you're on a different part of the mountain now. You can thank a stone for what it taught you and still leave it on the path.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5" id="d5"> I understand this chapter</label><a class="next" href="#ch6">Next: Building a new future →</a></div>
+    </section>
+
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Becoming your future self</div>
+        <h2>Building a new future</h2>
+        <div class="short"><span class="lbl">In short</span><p>Picture the person you want to become in real detail, then start living a little like them today. Your identity follows your actions, and your life is mostly made of ordinary days.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Meet your future self.</b> Imagine them clearly: how they spend a Tuesday, how they talk to themselves, how they handle a bad day. Vague goals give vague results.</span></li>
+          <li><span><b>Act before you feel ready.</b> You don't wait to become that person before acting like them. Acting like them is how you become them.</span></li>
+          <li><span><b>Days add up to a life.</b> The big moments get attention, but your future is built in small, repeated choices on unremarkable days.</span></li>
+          <li><span><b>Purpose is found by doing.</b> It tends to show up where what you're good at, what you care about and what other people need overlap, and you find that overlap by trying things.</span></li>
+          <li><span><b>Growth can feel like loss.</b> Becoming someone new means leaving an old version behind, and that can be sad even when it's right.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Exercise: show up as your future self</div><div class="hint">Each square is one day of the next year</div></div>
+        <div class="stage"><canvas id="c6"></canvas></div>
+        <div class="lab-ctl">
+          <div class="row">
+            <div class="ctl"><label for="s6a">Days a week you show up <output id="o6a"></output></label><input type="range" id="s6a" min="0" max="7" value="4"></div>
+            <div class="ctl"><label for="s6b">Minutes each time <output id="o6b"></output></label><input type="range" id="s6b" min="5" max="60" step="5" value="20"></div>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat"><span class="k">Days you acted like them</span><span class="v glow" id="v6a"></span></div>
+          <div class="stat"><span class="k">Hours invested in a year</span><span class="v" id="v6b"></span></div>
+          <div class="stat"><span class="k">Compared with one big weekend push</span><span class="s" id="v6c"></span></div>
+        </div>
+        <div class="callout">A big weekend of effort is about 16 hours, once. The squares show something it can't: <b>how many times you proved to yourself</b> that you're becoming this person.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Nobody becomes a runner on the day they buy shoes. They become one somewhere around the fortieth short run, when lacing up stops feeling like a big decision. Your future self is built the same way: one ordinary day at a time.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6" id="d6"> I understand this chapter</label><a class="next" href="#ch7">Next: Self-mastery →</a></div>
+    </section>
+
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Reaching the summit</div>
+        <h2>From self-sabotage to self-mastery</h2>
+        <div class="short"><span class="lbl">In short</span><p>Self-mastery means running your inner world well enough that circumstances stop running you. The goal isn't constant happiness. It's steady inner peace, and the freedom to choose your response.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Master the pause.</b> Between something happening and your reaction there's a gap. Widening it, even by a breath, is where your choices come from.</span></li>
+          <li><span><b>Peace over highs.</b> Chasing constant happiness keeps you on a rollercoaster. Aiming for calm, steady contentment is more realistic and lasts longer.</span></li>
+          <li><span><b>Discipline is self-respect.</b> Keeping the small promises you make to yourself builds trust with yourself, and that trust makes the bigger changes possible.</span></li>
+          <li><span><b>Your climb becomes your gift.</b> What you work through often becomes what you can help others with. The mountain turns into your story.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Exercise: climb to the summit</div><div class="hint" id="h7">Tap each camp to review a lesson</div></div>
+        <div class="summit-wrap">
+          <svg id="svg7" viewBox="0 0 600 420" role="group" aria-label="Mountain trail with seven camps, one per chapter"></svg>
+          <div class="msg" id="msg7" aria-live="polite"><span class="k">Seven camps, seven chapters</span><h4>Start at base camp.</h4><p>Each camp holds the main lesson of one chapter. Visit all seven to reach the summit.</p></div>
+        </div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Someone who has mastered themselves still feels anger, fear and doubt. The difference is that those feelings arrive like weather passing over a mountain: noticed, respected, and then allowed to move on. The mountain stays where it is.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7" id="d7"> I understand this chapter</label><a class="next" href="#top">Back to the top ↑</a></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Mountain Is You: Transforming Self-Sabotage Into Self-Mastery</i> by Brianna Wiest (2020). The explanations are summaries written in our own words, not quotations, and the exercises are simplified illustrations of the book's ideas. This guide isn't therapy; if you're struggling, a qualified professional can help.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(document.documentElement); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad','soft'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#0c1316'; };
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const DE = document.documentElement;
+try { const t = localStorage.getItem('mt-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+readC();
+const themeTxt = () => { $('#themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('mt-theme', next); } catch(e){} readC(); themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); });
+new MutationObserver(() => { readC(); themeTxt(); }).observe(DE, {attributes:true, attributeFilter:['data-theme']});
+const MONO = '12px "Geist Mono", ui-monospace, Menlo, monospace';
+const SANS = '13px Geist, system-ui, sans-serif';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+let seed = 7; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+
+function stage(canvas){
+  const ctx = canvas.getContext('2d'); let w=0,h=0,d=0;
+  return () => { const r = canvas.getBoundingClientRect(); const dp = Math.min(2, devicePixelRatio||1);
+    if (r.width!==w || r.height!==h || dp!==d){ w=r.width; h=r.height; d=dp; canvas.width=Math.max(1,Math.round(w*d)); canvas.height=Math.max(1,Math.round(h*d)); }
+    ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; };
+}
+const loops = []; const visible = new Set();
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)), {rootMargin:'120px'});
+function loop(el, fn){ loops.push([el,fn]); io.observe(el); fn(0, 0); }
+let last = performance.now();
+function tick(t){ const dt = Math.min(0.05, (t-last)/1000); last = t;
+  for (const [el,fn] of loops) if (visible.has(el)) fn(dt, t/1000);
+  requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+addEventListener('resize', () => { for (const [,fn] of loops) fn(0, performance.now()/1000); });
+function wrap(ctx, text, maxW){ const words = text.split(' '), lines = []; let cur = '';
+  for (const w of words){ const t = cur ? cur + ' ' + w : w; if (ctx.measureText(t).width > maxW && cur){ lines.push(cur); cur = w; } else cur = t; }
+  if (cur) lines.push(cur); return lines; }
+// a ridge line: array of [x 0..1, y 0..1]
+function ridge(n, peakX, peakY, baseY, rough){ const pts = [];
+  for (let i=0;i<=n;i++){ const x = i/n, d = Math.abs(x - peakX)/(x < peakX ? peakX : 1-peakX);
+    pts.push([x, lerp(peakY, baseY, Math.pow(d, .9)) + (rnd()-.5)*rough*(1-d*.3)]); } return pts; }
+
+/* ---------- chapters list, nav, progress ---------- */
+const CH = ['The mountain is you','There is no such thing as self-sabotage','Your triggers are guides to your freedom','Building emotional intelligence','Releasing the past','Building a new future','From self-sabotage to self-mastery'];
+const SHORT = ['The mountain','No sabotage','Triggers','Emotional IQ','The past','The future','Mastery'];
+$('#toc').innerHTML = CH.map((q,i) => `<a href="#ch${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="q">${q}</span></a>`).join('');
+$('#railLinks').innerHTML = CH.map((q,i) => `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${q}</span><span class="tick" aria-hidden="true"></span></a>`).join('');
+$('#chips').innerHTML = SHORT.map((q,i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${q}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('mt-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('mt-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  document.querySelectorAll('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of 7 understood`;
+  $('#progBar').style.width = (done.size/7*100) + '%';
+}
+document.querySelectorAll('[data-done]').forEach(cb => cb.addEventListener('change', () => {
+  cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+const QUIZ = {
+  1:{q:'What does the title "The Mountain Is You" mean?',o:['Hard times are like climbing a real mountain, so be patient','The biggest obstacle is often your own patterns, which also means you can climb it','Other people are the mountains that block your way'],a:1,w:'The obstacle is internal. That is uncomfortable, but it puts the solution within your reach.'},
+  2:{q:'Why does the book say there is "no such thing" as self-sabotage?',o:['Because people never actually harm their own goals','Because every self-defeating habit is quietly meeting some need','Because setbacks are always caused by bad luck'],a:1,w:'The habit is doing a job, usually protecting you from a feeling. Find that need and you can meet it another way.'},
+  3:{q:'Read as a messenger, envy most often points to…',o:['Something you want for yourself','A flaw in the person you envy','A sign you should give up'],a:0,w:'Envy can be a map of your own desires. The useful move is to ask what exactly you want, then work towards it.'},
+  4:{q:'Why do big overnight changes so often snap back?',o:['Positive changes are never real','Your mind pulls you back towards a familiar baseline','You chose the wrong goal'],a:1,w:'Psychological homeostasis keeps you near what feels normal. Small shifts move the baseline; giant leaps tend to rebound.'},
+  5:{q:'In this chapter, letting go of the past means…',o:['Pretending it never happened','Waiting until it no longer hurts at all','Keeping the lesson while it stops steering your choices'],a:2,w:'You keep what you learned and stop carrying the weight. It is a choice you make repeatedly, not a feeling you wait for.'},
+  6:{q:'What is the most reliable way to become your future self?',o:['Wait until you feel motivated','Act a little like them now, on ordinary days','Plan every detail before starting'],a:1,w:'Identity follows action. Small, repeated choices are the evidence that you are becoming that person.'},
+  7:{q:'Self-mastery, as the book describes it, is mostly about…',o:['Never feeling negative emotions','Getting other people to behave as you want','Managing your inner responses so circumstances don\'t run you'],a:2,w:'You still feel everything. The difference is the pause, and the choice that comes from it.'}
+};
+document.querySelectorAll('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i; const why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- hero: layered ranges + drifting mist ---------- */
+{ const cv = $('#range'), get = stage(cv);
+  const layers = [ridge(70, .78, .30, .62, .05), ridge(60, .30, .45, .78, .05), ridge(50, .62, .62, .92, .04)];
+  const stars = Array.from({length: 120}, () => ({x:rnd(), y:rnd()*.5, r:rnd()*1.1+.2, p:rnd()*6.28}));
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    if (!LIGHT) for (const s of stars){ ctx.globalAlpha = RM ? .5 : .3 + .3*Math.sin(t*.8 + s.p); ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(s.x*w, s.y*h, s.r, 0, 6.283); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    // first light behind the highest peak
+    const sx = w*.78, sy = h*.32, sg = ctx.createRadialGradient(sx, sy, 0, sx, sy, Math.max(w,h)*.45);
+    sg.addColorStop(0, A(C.glow, LIGHT ? .22 : .28)); sg.addColorStop(1, A(C.glow, 0)); ctx.fillStyle = sg; ctx.fillRect(0,0,w,h);
+    layers.forEach((L, li) => { ctx.beginPath(); ctx.moveTo(0, h);
+      L.forEach(([x,y]) => ctx.lineTo(x*w, y*h)); ctx.lineTo(w, h); ctx.closePath();
+      ctx.fillStyle = A(LIGHT ? C.cool : C['panel-2'], LIGHT ? .07 + li*.05 : .55 + li*.15); ctx.fill();
+      if (li === 0 && w > 700){ ctx.strokeStyle = A(C.glow, .55); ctx.lineWidth = 1.2; ctx.beginPath(); L.forEach(([x,y],i) => { if (Math.abs(x-.78) < .16) ctx.lineTo(x*w, y*h); else ctx.moveTo(x*w, y*h); }); ctx.stroke(); }
+      // mist band in front of each layer
+      const my = h*(.68 + li*.1), drift = RM ? 0 : Math.sin(t*.15 + li)*w*.04;
+      const mg = ctx.createLinearGradient(0, my - 30, 0, my + 30); mg.addColorStop(0, A(C.ink, 0)); mg.addColorStop(.5, A(C.ink, .55)); mg.addColorStop(1, A(C.ink, 0));
+      ctx.save(); ctx.translate(drift, 0); ctx.fillStyle = mg; ctx.fillRect(-w*.1, my - 30, w*1.2, 60); ctx.restore();
+    });
+    // fade into page so text stays readable
+    const fade = ctx.createLinearGradient(0, h*.55, 0, h); fade.addColorStop(0, A(C.ink, 0)); fade.addColorStop(1, A(C.ink, 1)); ctx.fillStyle = fade; ctx.fillRect(0, h*.55, w, h*.45);
+  });
+}
+
+/* ================= 1: ownership and fog ================= */
+{ const cv = $('#c1'), get = stage(cv), sl = $('#s1');
+  const R = ridge(40, .5, .12, .92, .03);
+  const PATH = [[.16,.9],[.44,.83],[.3,.73],[.55,.63],[.4,.52],[.56,.41],[.46,.3],[.53,.2],[.5,.13]];
+  const seg = []; let tot = 0; for (let i=1;i<PATH.length;i++){ const l = Math.hypot(PATH[i][0]-PATH[i-1][0], PATH[i][1]-PATH[i-1][1]); seg.push(l); tot += l; }
+  const at = f => { let d = f*tot; for (let i=0;i<seg.length;i++){ if (d <= seg[i]) { const k = d/seg[i]; return [lerp(PATH[i][0],PATH[i+1][0],k), lerp(PATH[i][1],PATH[i+1][1],k)]; } d -= seg[i]; } return PATH[PATH.length-1]; };
+  const WORDS = ['bad luck','my boss','the economy','bad timing','my parents','my ex','other people','the system'];
+  const wpos = WORDS.map((w,i) => ({w, x:.08 + (i%4)*.24 + rnd()*.06, y:.25 + Math.floor(i/4)*.35 + rnd()*.1, p:rnd()*6}));
+  let own = .25, shown = .25;
+  function info(){ own = +sl.value/100; $('#o1').textContent = sl.value + '%';
+    $('#v1a').textContent = own < .3 ? 'Out there: other people, luck, timing' : own < .7 ? 'Partly out there, partly in how I respond' : 'Mostly in my own patterns and choices';
+    $('#v1b').textContent = own < .3 ? 'Very little. You wait for things to change.' : own < .7 ? 'Some of your reactions and habits' : 'Your responses, habits and next steps';
+    $('#v1c').textContent = own < .3 ? 'Fogged in' : own < .7 ? 'A path appears' : 'Yes, step by step'; }
+  sl.addEventListener('input', info); info();
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    shown = RM ? own : lerp(shown, own, Math.min(1, dt*3));
+    const X = x => w*.08 + x*w*.84, Y = y => y*h;
+    // mountain
+    ctx.beginPath(); ctx.moveTo(X(0), Y(.95)); R.forEach(([x,y]) => ctx.lineTo(X(x), Y(y))); ctx.lineTo(X(1), Y(.95)); ctx.closePath();
+    const mg = ctx.createLinearGradient(0, Y(.1), 0, Y(.95)); mg.addColorStop(0, C['panel-2']); mg.addColorStop(1, C.panel); ctx.fillStyle = mg; ctx.fill();
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1.5; ctx.stroke();
+    // snow cap
+    ctx.save(); ctx.clip(); ctx.fillStyle = A(C.text, LIGHT ? .12 : .18); ctx.fillRect(0, 0, w, Y(.24)); ctx.restore();
+    // trail: dim full, lit to climber
+    const ptsAll = []; for (let f=0; f<=1.0001; f+=.01) ptsAll.push(at(f));
+    ctx.setLineDash([4,5]); ctx.strokeStyle = A(C.muted, .45); ctx.lineWidth = 1.5; ctx.beginPath(); ptsAll.forEach(([x,y],i) => i ? ctx.lineTo(X(x),Y(y)) : ctx.moveTo(X(x),Y(y))); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 3; ctx.beginPath(); for (let f=0; f<=shown; f+=.01){ const [x,y] = at(f); f ? ctx.lineTo(X(x),Y(y)) : ctx.moveTo(X(x),Y(y)); } ctx.stroke();
+    const [cx, cy] = at(shown); ctx.fillStyle = C.glow; ctx.shadowColor = C.glow; ctx.shadowBlur = 14; ctx.beginPath(); ctx.arc(X(cx), Y(cy), 7, 0, 6.283); ctx.fill(); ctx.shadowBlur = 0;
+    // summit flag
+    const [fx, fy] = PATH[PATH.length-1]; ctx.strokeStyle = C.text; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(X(fx), Y(fy)); ctx.lineTo(X(fx), Y(fy) - 22); ctx.stroke();
+    ctx.fillStyle = shown > .97 ? C.glow : C.muted; ctx.beginPath(); ctx.moveTo(X(fx), Y(fy) - 22); ctx.lineTo(X(fx) + 14, Y(fy) - 17); ctx.lineTo(X(fx), Y(fy) - 12); ctx.closePath(); ctx.fill();
+    // fog
+    const fog = 1 - shown;
+    if (fog > .01){ for (let i=0;i<5;i++){ const fy2 = h*(.2 + i*.17), dx = RM ? 0 : Math.sin(t*.3 + i)*30;
+        const g = ctx.createRadialGradient(w*.5 + dx, fy2, 0, w*.5 + dx, fy2, w*.6); g.addColorStop(0, A(LIGHT ? '#FFFFFF' : C.muted, fog*(LIGHT ? .8 : .35))); g.addColorStop(1, A(LIGHT ? '#FFFFFF' : C.muted, 0));
+        ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); }
+      ctx.font = 'italic 17px "Instrument Serif", Georgia, serif'; ctx.textAlign = 'center';
+      for (const p of wpos){ ctx.globalAlpha = clamp(fog*1.4 - .3, 0, 1)*(.6 + .4*Math.sin(t*.6 + p.p)); ctx.fillStyle = C.text; ctx.fillText('"' + p.w + '"', p.x*w + (RM?0:Math.sin(t*.4+p.p)*8), p.y*h); }
+      ctx.globalAlpha = 1; }
+    ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillStyle = C.muted; ctx.fillText(shown > .97 ? 'summit in view' : Math.round(shown*100) + '% of the trail visible', 14, h - 14);
+  });
+}
+
+/* ================= 2: decode the habit ================= */
+{ const cv = $('#c2'), get = stage(cv);
+  const H = [
+    {b:'Procrastinating', n:'Being judged. If you never finish, nobody can grade the result.', f:'Make a small, deliberately rough first version. Separate your worth from how it turns out.'},
+    {b:'Perfectionism', n:'Feeling not good enough. Flawless work feels like the only safe work.', f:'Decide what "good enough" looks like before you start, then stop there.'},
+    {b:'Staying constantly busy', n:'Uncomfortable feelings that show up in quiet moments.', f:'Give yourself ten still minutes a day and notice what arrives, without fixing it.'},
+    {b:'Pushing people away', n:'Rejection. Leaving first means never being left.', f:'Let one trusted person a little closer, and tell them what you\'re afraid of.'},
+    {b:'Worrying about everything', n:'Feeling unprepared. Worry feels like control.', f:'Plan once for what you can control, then deliberately set the rest down.'},
+    {b:'Holding back when things go well', n:'Standing out, being envied, or losing belonging.', f:'Notice the urge to shrink. Practise letting good things be good for a little longer.'},
+    {b:'Comfort spending or scrolling', n:'Stress and emptiness. It\'s a quick, reliable reward.', f:'Find a reward that also refuels you: a walk, a call, a proper rest.'}
+  ];
+  let hi = 0, anim = 1;
+  $('#habits').innerHTML = H.map((x,i) => `<button class="btn" data-i="${i}" aria-pressed="${i===0}">${x.b}</button>`).join('');
+  const set = i => { hi = i; anim = RM ? 1 : 0; document.querySelectorAll('#habits .btn').forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === i)); $('#v2a').textContent = H[i].n; $('#v2b').textContent = H[i].f; };
+  document.querySelectorAll('#habits .btn').forEach(b => b.addEventListener('click', () => set(+b.dataset.i)));
+  set(0); anim = 1;
+  const rock = Array.from({length: 26}, (_, i) => [i/25, rnd()]);
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); anim = Math.min(1, anim + dt*1.8);
+    const g = h*.36, cx = w*.5, half = Math.min(w*.42, 380);
+    // ground line
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 1; ctx.setLineDash([2,6]); ctx.beginPath(); ctx.moveTo(14, g); ctx.lineTo(w-14, g); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillStyle = C.faint; ctx.fillText('what you see', 14, g - 8); ctx.fillText('what it\'s doing for you', 14, g + 18);
+    // small peak above
+    const ph = (g - 30) * (.55 + .45*anim);
+    ctx.beginPath(); ctx.moveTo(cx - half*.3, g); ctx.lineTo(cx - 6, g - ph); ctx.lineTo(cx + 8, g - ph + 6); ctx.lineTo(cx + half*.3, g); ctx.closePath();
+    ctx.fillStyle = A(C.glow, .22); ctx.fill(); ctx.strokeStyle = C.glow; ctx.lineWidth = 1.5; ctx.stroke();
+    // big root mass below
+    const depth = (h - g - 14) * (.4 + .6*anim);
+    ctx.beginPath(); ctx.moveTo(cx - half*.3, g);
+    rock.forEach(([f, r]) => { const a = f*Math.PI; ctx.lineTo(cx - Math.cos(a)*half*(.95 + r*.08), g + Math.sin(a)*depth*(.92 + r*.08)); });
+    ctx.lineTo(cx + half*.3, g); ctx.closePath(); ctx.fillStyle = A(C.cool, .14); ctx.fill(); ctx.strokeStyle = A(C.cool, .7); ctx.stroke();
+    // labels
+    ctx.textAlign = 'center'; ctx.fillStyle = C.text; ctx.font = 'italic 22px "Instrument Serif", Georgia, serif';
+    ctx.fillText(H[hi].b, cx, Math.max(22, g - ph - 10));
+    ctx.globalAlpha = anim; ctx.font = SANS; ctx.fillStyle = C.text;
+    const lines = wrap(ctx, H[hi].n, half*1.1); lines.forEach((l, i) => ctx.fillText(l, cx, g + depth*.42 + i*18 - (lines.length-1)*9));
+    ctx.globalAlpha = 1;
+  });
+}
+
+/* ================= 3: emotion compass + sorter ================= */
+{ const cv = $('#c3'), get = stage(cv);
+  const E = [
+    {e:'Anger', m:'A boundary was crossed, or something you value was ignored.', q:'What line was crossed, and how can I protect it calmly?'},
+    {e:'Envy', m:'You want something for yourself that someone else has.', q:'What exactly do I want here, and what is one step towards it?'},
+    {e:'Guilt', m:'You may have acted against your own values, or someone else\'s expectations.', q:'Is this my value, or a rule I was handed? Is there something to repair?'},
+    {e:'Sadness', m:'Something mattered to you, and it\'s changed or gone.', q:'What am I grieving, and have I let myself feel it?'},
+    {e:'Resentment', m:'You said yes when you meant no, or didn\'t speak up.', q:'Where do I need to ask for something or say no?'},
+    {e:'Anxiety', m:'Something needs attention, or a feeling is being avoided.', q:'Is there an action to take, or a feeling I\'m running from?'},
+    {e:'Embarrassment', m:'You care how you\'re seen, and touched an old fear of not belonging.', q:'Whose approval am I chasing, and do I still need it?'},
+    {e:'Regret', m:'You can now see what you would do differently.', q:'What is the lesson, and where can I use it next time?'}
+  ];
+  let ei = 0, ang = 0, target = 0;
+  $('#emos').innerHTML = E.map((x,i) => `<button class="btn" data-i="${i}" aria-pressed="${i===0}">${x.e}</button>`).join('');
+  const set = i => { ei = i; target = i/E.length*Math.PI*2; document.querySelectorAll('#emos .btn').forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === i)); $('#v3a').textContent = E[i].m; $('#v3b').textContent = E[i].q; };
+  document.querySelectorAll('#emos .btn').forEach(b => b.addEventListener('click', () => set(+b.dataset.i)));
+  set(0);
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    let d = target - ang; while (d > Math.PI) d -= 2*Math.PI; while (d < -Math.PI) d += 2*Math.PI;
+    ang += RM ? d : d*Math.min(1, dt*5) + (RM ? 0 : Math.sin(t*2.2)*.002);
+    const cx = w/2, cy = h/2, R = Math.min(w*.3, h*.36);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; [1, .72].forEach(k => { ctx.beginPath(); ctx.arc(cx,cy,R*k,0,6.283); ctx.stroke(); });
+    for (let i=0;i<64;i++){ const a = i/64*6.283 - Math.PI/2, l = i%8===0 ? 10 : 4; ctx.strokeStyle = i%8===0 ? C.muted : C.line; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a)*R, cy + Math.sin(a)*R); ctx.lineTo(cx + Math.cos(a)*(R-l), cy + Math.sin(a)*(R-l)); ctx.stroke(); }
+    ctx.font = SANS; E.forEach((x,i) => { const a = i/E.length*6.283 - Math.PI/2, lx = cx + Math.cos(a)*(R+22), ly = cy + Math.sin(a)*(R+22);
+      ctx.textAlign = Math.abs(Math.cos(a)) < .2 ? 'center' : Math.cos(a) > 0 ? 'left' : 'right'; ctx.fillStyle = i === ei ? C.glow : C.muted; ctx.fillText(x.e, lx, ly + 4); });
+    // needle
+    const a = ang - Math.PI/2, nx = Math.cos(a), ny = Math.sin(a), px = -ny, py = nx;
+    ctx.fillStyle = C.glow; ctx.beginPath(); ctx.moveTo(cx + nx*R*.86, cy + ny*R*.86); ctx.lineTo(cx + px*7, cy + py*7); ctx.lineTo(cx - px*7, cy - py*7); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.faint; ctx.beginPath(); ctx.moveTo(cx - nx*R*.5, cy - ny*R*.5); ctx.lineTo(cx + px*7, cy + py*7); ctx.lineTo(cx - px*7, cy - py*7); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(cx, cy, 5, 0, 6.283); ctx.fill();
+  });
+  // tabs
+  document.querySelectorAll('#lab3 [data-tab]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#lab3 [data-tab]').forEach(x => x.setAttribute('aria-pressed', x===b));
+    $('#p3a').hidden = b.dataset.tab !== 'compass'; $('#p3b').hidden = b.dataset.tab !== 'sort'; }));
+  // sorter
+  const S = [
+    ['Something about this offer feels off. I can\'t fully explain it, but I feel calm about saying no.', 'i', 'Calm, steady, and no panic attached: the signature of intuition.'],
+    ['If I say the wrong thing at dinner, everyone will think I\'m an idiot and I\'ll lose all my friends.', 'f', 'It leaps to the worst case and spirals. That\'s fear talking.'],
+    ['I keep coming back to the idea of studying design. It feels quietly right.', 'i', 'It recurs over time and feels settled rather than urgent: intuition.'],
+    ['I have to decide right now or I\'ll miss everything forever.', 'f', 'Urgency and "forever" thinking are classic fear.'],
+    ['They haven\'t replied in an hour, so they must be furious with me.', 'f', 'Mind-reading plus catastrophising. Fear fills gaps with the worst story.'],
+    ['This relationship stopped feeling like home a while ago, and I\'ve known it for months.', 'i', 'A slow, persistent knowing, even though it\'s sad: intuition.'],
+    ['What if I get sick there? What if the flight is delayed? What if it all goes wrong?', 'f', 'A chain of "what ifs" with no new information is fear on a loop.'],
+    ['I\'d really like to rest this weekend instead of going out.', 'i', 'A simple, calm preference from your body. Worth listening to.']
+  ];
+  let si = 0, right = 0, answered = 0;
+  const show = () => { $('#card3').textContent = '"' + S[si][0] + '"'; $('#verd3').textContent = ''; $('#intu3').hidden = $('#fear3').hidden = false; $('#next3').hidden = true; $('#score3').textContent = `${right} of ${answered} right · statement ${si+1} of ${S.length}`; };
+  const pick = v => { answered++; const ok = v === S[si][1]; if (ok) right++;
+    $('#verd3').innerHTML = `<b>${ok ? 'Yes.' : 'Not quite.'}</b> ${S[si][2]}`; $('#intu3').hidden = $('#fear3').hidden = true; $('#next3').hidden = false;
+    $('#next3').textContent = si === S.length - 1 ? 'Start again' : 'Next statement →';
+    $('#score3').textContent = `${right} of ${answered} right · statement ${si+1} of ${S.length}`; };
+  $('#intu3').addEventListener('click', () => pick('i'));
+  $('#fear3').addEventListener('click', () => pick('f'));
+  $('#next3').addEventListener('click', () => { if (si === S.length - 1){ si = 0; right = 0; answered = 0; } else si++; show(); $('#intu3').focus(); });
+  show();
+}
+
+/* ================= 4: homeostasis ================= */
+{ const cv = $('#c4'), get = stage(cv), sl = $('#s4'); const TOL = 3, DAYS = 90, YMAX = 30;
+  let mode = 'micro', X = [], B = [], quit = -1, reveal = 0;
+  function sim(){ const s = +sl.value/100; let x = 0, b = 0, over = 0; X = []; B = []; quit = -1;
+    for (let d = 0; d <= DAYS; d++){ const push = mode === 'leap' ? (d === 3 ? 20 : 0) : (d >= 3 && quit < 0 ? s : 0); x += push;
+      let g = x - b; x -= g > TOL ? .22*(g - TOL) + .03*g : .03*g; g = x - b; b += g <= TOL ? .12*g : .01*g;
+      over = g > TOL ? over + 1 : 0; if (mode === 'micro' && over >= 6 && quit < 0) quit = d; X.push(x); B.push(b); }
+    $('#o4').textContent = (s < 1 ? s.toFixed(2) : s.toFixed(1)) + ' steps a day';
+    $('#v4a').textContent = X[DAYS].toFixed(1) + ' steps up'; $('#v4b').textContent = B[DAYS].toFixed(1) + ' steps up';
+    $('#v4c').textContent = mode === 'leap' ? 'A huge jump, then a slow slide back. The baseline barely moved.' : quit >= 0 ? `Too big: you lived outside your comfort zone, burned out on day ${quit} and drifted back.` : B[DAYS] > 15 ? 'Steady shifts the baseline could keep up with. The new level feels normal.' : 'Safe and sustainable, but slow. You could push a little harder.';
+    reveal = RM ? 1 : 0; }
+  document.querySelectorAll('#lab4 [data-mode]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.mode; document.querySelectorAll('#lab4 [data-mode]').forEach(x => x.setAttribute('aria-pressed', x===b)); $('#ctl4').hidden = mode !== 'micro'; sim(); }));
+  sl.addEventListener('input', sim); sim(); reveal = 1;
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); reveal = Math.min(1, reveal + dt*.7);
+    const L = 44, R = w - 16, T = 16, Bt = h - 32, Xp = d => L + d/DAYS*(R-L), Yp = v => Bt - clamp(v, -1, YMAX)/YMAX*(Bt-T);
+    ctx.font = MONO; ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.textAlign = 'right'; ctx.fillStyle = C.faint;
+    for (const v of [0,10,20,30]){ ctx.beginPath(); ctx.moveTo(L, Yp(v)); ctx.lineTo(R, Yp(v)); ctx.stroke(); ctx.fillText(v, L - 8, Yp(v) + 4); }
+    ctx.textAlign = 'center'; for (const d of [0,30,60,90]) ctx.fillText(d === 0 ? 'day 0' : 'day ' + d, Xp(d), Bt + 20);
+    const n = Math.max(2, Math.round(reveal*DAYS));
+    // comfort band
+    ctx.beginPath(); for (let d=0; d<=n; d++) ctx.lineTo(Xp(d), Yp(B[d] + TOL)); for (let d=n; d>=0; d--) ctx.lineTo(Xp(d), Yp(B[d])); ctx.closePath(); ctx.fillStyle = A(C.cool, .14); ctx.fill();
+    ctx.setLineDash([6,5]); ctx.strokeStyle = C.cool; ctx.lineWidth = 2; ctx.beginPath(); for (let d=0; d<=n; d++) d ? ctx.lineTo(Xp(d), Yp(B[d])) : ctx.moveTo(Xp(d), Yp(B[d])); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 3; ctx.beginPath(); for (let d=0; d<=n; d++) d ? ctx.lineTo(Xp(d), Yp(X[d])) : ctx.moveTo(Xp(d), Yp(X[d])); ctx.stroke();
+    ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(Xp(n), Yp(X[n]), 5, 0, 6.283); ctx.fill();
+    if (quit >= 0 && n >= quit){ ctx.strokeStyle = C.bad; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(Xp(quit), Yp(X[quit]), 8, 0, 6.283); ctx.stroke(); ctx.fillStyle = C.bad; ctx.textAlign = 'left'; ctx.fillText('burnout', Xp(quit) + 12, Yp(X[quit]) - 8); }
+    ctx.textAlign = 'left'; ctx.fillStyle = C.glow; ctx.fillText('where you are', L + 10, T + 14); ctx.fillStyle = C.cool; ctx.fillText('your baseline + comfort zone', L + 10, T + 30);
+  });
+}
+
+/* ================= 5: lighten the pack ================= */
+{ const cv = $('#c5'), get = stage(cv);
+  const ST = [
+    {s:'An old grudge', w:8, m:'Forgiving is for your own freedom. It doesn\'t excuse what happened or mean letting them back in.'},
+    {s:'Who I used to be', w:6, m:'You can honour the person who got you here without needing to stay them.'},
+    {s:'The life I expected', w:9, m:'Grieve the future you imagined. Naming that loss is often what finally frees you.'},
+    {s:'A past mistake', w:7, m:'Keep the lesson, put down the shame. You are allowed to be someone who learned.'},
+    {s:'Other people\'s opinions', w:5, m:'Their view of you is built from their own story. It doesn\'t have to steer yours.'},
+    {s:'Waiting for an apology', w:6, m:'Closure is something you can give yourself. You don\'t need their permission to move on.'}
+  ];
+  const carry = ST.map(() => true); let pos = 0, packS = 1, lastMsg = 'Tap a stone below to set it down. Tap again to pick it back up.';
+  $('#stones').innerHTML = ST.map((x,i) => `<button class="btn stone" data-i="${i}" aria-pressed="true">${x.s} · ${x.w} kg</button>`).join('');
+  const weight = () => ST.reduce((s,x,i) => s + (carry[i] ? x.w : 0), 0);
+  const pace = () => 1/(1 + weight()/10);
+  function info(){ const wt = weight(); $('#v5a').textContent = wt + ' kg'; $('#v5b').textContent = Math.round(pace()*100) + '% of full speed'; $('#v5c').textContent = lastMsg; }
+  document.querySelectorAll('#stones .btn').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; carry[i] = !carry[i]; b.setAttribute('aria-pressed', carry[i]);
+    lastMsg = carry[i] ? `Picked "${ST[i].s.toLowerCase()}" back up. It happens; letting go is often a choice you make more than once.` : ST[i].m; info(); }));
+  info();
+  const dropped = [];
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const x0 = w*.06, y0 = h*.9, x1 = w*.9, y1 = h*.16;
+    // slope
+    ctx.beginPath(); ctx.moveTo(x0 - 20, h); ctx.lineTo(x0, y0); ctx.lineTo(x1, y1); ctx.lineTo(x1 + 30, y1 + 8); ctx.lineTo(w, h); ctx.closePath();
+    const g = ctx.createLinearGradient(0, y1, 0, h); g.addColorStop(0, C['panel-2']); g.addColorStop(1, C.panel); ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+    // flag
+    ctx.strokeStyle = C.text; ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x1, y1 - 26); ctx.stroke(); ctx.fillStyle = C.glow; ctx.beginPath(); ctx.moveTo(x1, y1 - 26); ctx.lineTo(x1 + 16, y1 - 20); ctx.lineTo(x1, y1 - 14); ctx.closePath(); ctx.fill();
+    // stones left behind along path
+    ST.forEach((s, i) => { if (carry[i]) return; const f = .1 + i*.13, sx = lerp(x0, x1, f), sy = lerp(y0, y1, f); ctx.fillStyle = A(C.muted, .5); ctx.beginPath(); ctx.ellipse(sx, sy - 4, 4 + s.w*.6, 3 + s.w*.35, 0, 0, 6.283); ctx.fill(); });
+    if (!RM) pos = (pos + dt*.09*pace()) % 1; else pos = .45;
+    const cx = lerp(x0, x1, pos), cy = lerp(y0, y1, pos), wt = weight();
+    packS = lerp(packS, wt/41, Math.min(1, dt*4) || 1);
+    const step = RM ? 0 : Math.sin(t*9*pace());
+    const lean = .35 + packS*.25, s = Math.min(h*.09, 26);
+    ctx.save(); ctx.translate(cx, cy); ctx.rotate(lean);
+    // legs
+    ctx.strokeStyle = C.text; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(0, -s*1.1); ctx.lineTo(-s*.35*step, 0); ctx.moveTo(0, -s*1.1); ctx.lineTo(s*.35*step, 0); ctx.stroke();
+    // body
+    ctx.beginPath(); ctx.moveTo(0, -s*1.1); ctx.lineTo(0, -s*2.1); ctx.stroke();
+    ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(0, -s*2.45, s*.3, 0, 6.283); ctx.fill();
+    // pack
+    if (wt > 0){ const pw = s*(.35 + packS*.75), ph = s*(.5 + packS*1.1); ctx.fillStyle = C.glow; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(-pw - 3, -s*2.05, pw, ph, 5) : ctx.rect(-pw - 3, -s*2.05, pw, ph); ctx.fill(); }
+    // stick
+    ctx.strokeStyle = C.muted; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(s*.2, -s*1.7); ctx.lineTo(s*.55, 0); ctx.stroke();
+    ctx.restore(); ctx.lineCap = 'butt';
+    ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillStyle = C.muted; ctx.fillText(wt === 0 ? 'travelling light' : wt + ' kg on your back', 14, 22);
+  });
+}
+
+/* ================= 6: a year of showing up ================= */
+{ const cv = $('#c6'), get = stage(cv); let dpw = 4, mins = 20, sweep = 0;
+  const ORDER = [0,3,5,1,4,6,2]; // spread days through the week
+  function info(){ dpw = +$('#s6a').value; mins = +$('#s6b').value; $('#o6a').textContent = dpw === 7 ? 'every day' : dpw + (dpw === 1 ? ' day' : ' days');
+    $('#o6b').textContent = mins + ' min'; const days = dpw*52, hrs = days*mins/60;
+    $('#v6a').textContent = days + ' of 364'; $('#v6b').textContent = hrs.toFixed(hrs < 10 ? 1 : 0) + ' hours';
+    $('#v6c').textContent = days === 0 ? 'Nothing yet. Even one day a week changes the picture.' : `${(hrs/16).toFixed(1)}× the hours, and ${days} times you acted like your future self instead of once.`;
+    sweep = RM ? 1 : 0; }
+  ['#s6a','#s6b'].forEach(s => $(s).addEventListener('input', info)); info(); sweep = 1;
+  loop(cv, dt => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h); sweep = Math.min(1, sweep + dt*.8);
+    const narrow = w < 560, cols = narrow ? 26 : 52, rows = narrow ? 14 : 7, gap = 3;
+    const gw = w - 28 - (narrow ? 0 : 90), cell = Math.min((gw - gap*(cols-1))/cols, (h - 60 - gap*(rows-1))/rows);
+    const ox = 14, oy = (h - (cell+gap)*rows)/2 + 6, active = new Set(ORDER.slice(0, dpw));
+    const intensity = .35 + mins/60*.65;
+    let count = 0;
+    for (let i = 0; i < 364; i++){ const wk = Math.floor(i/7), dow = i%7;
+      const c = narrow ? (wk % 26) : wk, r = narrow ? dow + (wk >= 26 ? 7 : 0) : dow;
+      const x = ox + c*(cell+gap), y = oy + r*(cell+gap), on = active.has(dow) && wk/52 <= sweep;
+      if (on) count++;
+      ctx.fillStyle = on ? A(C.glow, intensity) : A(C.muted, .12); ctx.fillRect(x, y, cell, cell); }
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.textAlign = 'left'; ctx.fillText(narrow ? 'weeks 1–26, then 27–52 below' : 'week 1', ox, oy - 8);
+    if (!narrow){ ctx.textAlign = 'right'; ctx.fillText('week 52', ox + 52*(cell+gap) - gap, oy - 8); }
+    if (!narrow){ // altitude bar
+      const bx = w - 60, bh = (cell+gap)*rows - gap, fill = count/364;
+      ctx.fillStyle = A(C.muted, .12); ctx.fillRect(bx, oy, 18, bh);
+      ctx.fillStyle = C.glow; ctx.fillRect(bx, oy + bh*(1 - fill), 18, bh*fill);
+      ctx.fillStyle = C.faint; ctx.textAlign = 'center'; ctx.fillText('climb', bx + 9, oy + bh + 18); }
+  });
+}
+
+/* ================= 7: summit trail ================= */
+{ const svg = $('#svg7'), NS = 'http://www.w3.org/2000/svg';
+  const S = [
+    {x:70, y:380, t:'Own the mountain', d:'The obstacle lives mostly in your own patterns. That is what makes it climbable.'},
+    {x:250, y:345, t:'Find the need', d:'Every self-defeating habit is doing a job. Meet that need another way and the habit loosens.'},
+    {x:200, y:290, t:'Read the signal', d:'Triggers point to what needs healing. Feel the emotion, take its message, then choose.'},
+    {x:330, y:240, t:'Shift in small steps', d:'Your mind pulls you back to the familiar. Small daily changes move your baseline; giant leaps rebound.'},
+    {x:258, y:185, t:'Set the weight down', d:'Letting go is an action you repeat. Keep the lessons from the past and leave the weight.'},
+    {x:350, y:125, t:'Meet your future self', d:'Picture who you are becoming, then act a little like them today. Identity follows action.'},
+    {x:300, y:62, t:'Master the pause', d:'Between what happens and how you respond there is a gap. Self-mastery lives there.'}
+  ];
+  const lit = new Set();
+  // mountain body
+  const pts = [[0,420],[90,330],[150,350],[300,40],[390,170],[450,130],[600,420]];
+  svg.innerHTML = `<path d="M${pts.map(p => p.join(' ')).join(' L')} Z" style="fill:var(--panel-2);stroke:var(--line)" stroke-width="1.5"/>
+    <path d="M300 40 L262 112 L285 100 L300 118 L318 98 L338 110 Z" style="fill:var(--text)" fill-opacity=".14"/>
+    <polyline points="${S.map(s => s.x + ',' + s.y).join(' ')}" fill="none" style="stroke:var(--muted)" stroke-opacity=".5" stroke-width="1.5" stroke-dasharray="4 6"/>`;
+  const trail = document.createElementNS(NS, 'g'); svg.appendChild(trail);
+  const flag = document.createElementNS(NS, 'g'); flag.innerHTML = `<line x1="300" y1="40" x2="300" y2="8" style="stroke:var(--text)" stroke-width="1.5"/><path d="M300 8 L322 15 L300 22 Z" style="fill:var(--faint)"/>`; svg.appendChild(flag);
+  S.forEach((s, i) => {
+    const g = document.createElementNS(NS,'g'); g.setAttribute('class','camp'); g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label', 'Camp ' + (i+1) + ': ' + s.t);
+    const right = s.x < 300;
+    g.innerHTML = `<circle class="halo" cx="${s.x}" cy="${s.y}" r="18" fill="transparent" style="stroke:var(--line)" stroke-width="1"/><path class="core" d="M${s.x-7} ${s.y+5} L${s.x} ${s.y-7} L${s.x+7} ${s.y+5} Z" style="fill:var(--muted)"/><text x="${right ? s.x + 24 : s.x - 24}" y="${s.y + 4}" text-anchor="${right ? 'start' : 'end'}" style="fill:var(--faint)" font-family="Geist Mono, monospace" font-size="12">${i+1}. ${s.t}</text>`;
+    const act = () => {
+      lit.add(i);
+      g.querySelector('.core').style.fill = 'var(--glow)'; g.querySelector('.halo').style.stroke = 'var(--glow)'; g.querySelector('text').style.fill = 'var(--text)';
+      trail.innerHTML = ''; for (let k = 1; k < S.length; k++) if (lit.has(k) && lit.has(k-1)){ const l = document.createElementNS(NS,'line'); l.setAttribute('x1',S[k-1].x); l.setAttribute('y1',S[k-1].y); l.setAttribute('x2',S[k].x); l.setAttribute('y2',S[k].y); l.style.stroke = 'var(--glow)'; l.setAttribute('stroke-width','2.5'); trail.appendChild(l); }
+      $('#msg7').innerHTML = `<span class="k">Camp ${i+1} of 7 · Chapter ${i+1}</span><h4>${s.t}</h4><p>${s.d}</p>`;
+      $('#h7').textContent = lit.size === 7 ? 'Summit reached' : `${lit.size} of 7 camps visited`;
+      if (lit.size === 7){ flag.querySelector('path').style.fill = 'var(--glow)'; $('#msg7').innerHTML += `<p style="color:var(--glow)">Summit. You've climbed the whole book. The climb itself is what turned you into someone who could finish it.</p>`; }
+    };
+    g.addEventListener('click', act); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } });
+    svg.appendChild(g);
+  });
+}
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,224 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Book Explainer Shelf</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single lit bookshelf. Spines stand on one plank; hovering or focusing a spine
+   pulls it forward and fills the reading card below. Same tokens and type as the explainers. */
+:root{
+  color-scheme: dark;
+  --ink:#0B0D17;
+  --panel:#12152A;
+  --panel-2:#181C36;
+  --line:#272D50;
+  --text:#ECE9F4;
+  --muted:#A2A6C4;
+  --faint:#6A7096;
+  --glow:#F4B860;         /* reading-lamp amber: the one accent */
+  --glow-soft:rgba(244,184,96,.12);
+  --wall:#0F1224;         /* back of the shelf */
+  --plank-hi:#5A4632;     /* the wooden plank */
+  --plank-lo:#2E2318;
+  --shadow:rgba(0,0,0,.55);
+  --on-glow:#1B1206;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F2EE;--panel:#FFFFFF;--panel-2:#ECEAE3;--line:#D8D4C8;--text:#1A1A24;--muted:#555566;--faint:#80808E;
+  --glow:#A8600C;--glow-soft:rgba(168,96,12,.09);--wall:#E7E3D8;--plank-hi:#B48A5E;--plank-lo:#7E5D3C;--shadow:rgba(60,40,20,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F2EE;--panel:#FFFFFF;--panel-2:#ECEAE3;--line:#D8D4C8;--text:#1A1A24;--muted:#555566;--faint:#80808E;
+  --glow:#A8600C;--glow-soft:rgba(168,96,12,.09);--wall:#E7E3D8;--plank-hi:#B48A5E;--plank-lo:#7E5D3C;--shadow:rgba(60,40,20,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));-webkit-font-smoothing:antialiased}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2{margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-block:48px 80px;display:grid;gap:40px}
+.wrap > *{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:18px}
+header h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,112px);line-height:.92;letter-spacing:-.01em}
+header h1 em{color:var(--glow)}
+header .lede{max-width:58ch;color:var(--muted);font-size:18px}
+.counts{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+.counts b{color:var(--text);font-weight:500}
+
+/* ---------- the shelf ---------- */
+.case{position:relative;border-radius:16px 16px 6px 6px;background:radial-gradient(120% 90% at 50% -10%, var(--glow-soft), transparent 60%), var(--wall);
+  border:1px solid var(--line);padding:56px 28px 0;overflow:hidden}
+.case::before{content:"";position:absolute;left:50%;top:-40px;width:220px;height:80px;transform:translateX(-50%);
+  background:radial-gradient(closest-side, var(--glow-soft), transparent);pointer-events:none}
+.books{position:relative;display:flex;align-items:flex-end;gap:6px;min-height:340px;overflow-x:auto;padding-bottom:0;scrollbar-width:thin;padding-inline:4px}
+.plank{height:22px;margin-inline:-28px;background:linear-gradient(180deg,var(--plank-hi),var(--plank-lo));box-shadow:0 10px 24px var(--shadow);position:relative;z-index:2}
+.plank::after{content:"";position:absolute;inset:0 0 auto;height:2px;background:rgba(255,255,255,.18)}
+.spine{--c:#333;--k:#eee;position:relative;flex:0 0 auto;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:10px;
+  width:var(--w);height:var(--h);padding:14px 0 12px;border-radius:4px 4px 2px 2px;text-decoration:none;color:var(--k);
+  background:linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.07) 18%, rgba(0,0,0,0) 40%, rgba(0,0,0,.22)), var(--c);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), 4px 0 10px var(--shadow);
+  transform-origin:bottom center;transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s}
+.spine::before,.spine::after{content:"";position:absolute;left:8px;right:8px;height:2px;background:var(--k);opacity:.55}
+.spine::before{top:44px}
+.spine::after{bottom:62px}
+.spine:hover,.spine:focus-visible,.spine.sel{transform:translateY(-18px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1), 0 18px 30px var(--shadow)}
+.spine:focus-visible{outline-offset:4px}
+.spine svg{width:22px;height:22px}
+.spine .ttl{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--f-display);font-size:25px;line-height:1;white-space:nowrap;align-self:center;letter-spacing:.01em}
+.spine .au{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);opacity:.8;height:44px;overflow:hidden}
+.ghost{flex:0 0 auto;width:58px;border:1.5px dashed var(--line);border-bottom:0;border-radius:4px 4px 0 0;display:grid;place-items:center;color:var(--faint);
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.ghost span{writing-mode:vertical-rl;transform:rotate(180deg)}
+.ghost.lean{transform:rotate(-6deg);transform-origin:bottom left;margin-left:10px}
+.bookend{flex:0 0 auto;width:14px;height:120px;background:linear-gradient(90deg,var(--plank-lo),var(--plank-hi));border-radius:3px 3px 0 0;margin-left:auto}
+
+/* ---------- reading card ---------- */
+.card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.cover{width:132px;aspect-ratio:2/3;max-width:100%;border-radius:4px 8px 8px 4px;padding:16px 14px;display:grid;align-content:space-between;color:var(--k);
+  background:linear-gradient(90deg, rgba(0,0,0,.35) 0 6px, rgba(255,255,255,.08) 6px 9px, transparent 9px), var(--c);box-shadow:0 14px 28px var(--shadow);transition:background .3s}
+.cover .ct{font-family:var(--f-display);font-size:20px;line-height:1.05}
+.cover .ca{font-family:var(--f-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.cover svg{width:26px;height:26px}
+.info{display:grid;gap:12px;min-width:0}
+.info .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.info h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(32px,5vw,48px);line-height:1}
+.info .by{color:var(--muted);font-size:15px}
+.info p.blurb{color:var(--text);max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+.meta b{color:var(--muted);font-weight:500}
+.open{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:14px;text-decoration:none;color:var(--on-glow);background:var(--glow);padding:10px 18px;border-radius:999px;transition:transform .15s}
+.open:hover{transform:translateX(3px)}
+.hint{font-size:13px;color:var(--faint)}
+
+/* ---------- list ---------- */
+.list{display:grid;gap:10px}
+.list h3{margin:0;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.rowlink{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text);background:var(--panel);transition:border-color .15s}
+.rowlink:hover{border-color:var(--glow)}
+.rowlink i{width:10px;height:36px;border-radius:2px;background:var(--c)}
+.rowlink .t{font-family:var(--f-display);font-size:21px;line-height:1.1}
+.rowlink .a{font-size:13px;color:var(--muted)}
+.rowlink .n{font-family:var(--f-mono);font-size:12px;color:var(--faint);white-space:nowrap}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;font:inherit;font-size:13px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+#theme:hover{border-color:var(--glow)}
+#theme svg{width:16px;height:16px}
+footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);padding-top:24px;max-width:80ch}
+
+@media (max-width: 640px){
+  .wrap{padding-top:32px;gap:32px}
+  .case{padding:40px 16px 0}
+  .plank{margin-inline:-16px}
+  .books{min-height:290px}
+  .card{grid-template-columns:minmax(0,1fr);padding:20px}
+  .cover{width:110px}
+  header .lede{font-size:16px}
+}
+@media (prefers-reduced-motion: reduce){ .spine,.cover,.open{transition:none} }
+</style>
+
+<button id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Interactive guides to books, one chapter at a time</div>
+    <h1>The Explainer<br><em>Shelf</em></h1>
+    <p class="lede">Pick a book (or podcast) off the shelf. Each explainer walks through it chapter by chapter in plain language, with something to play with in every chapter and a quick check at the end.</p>
+    <div class="counts" id="counts"></div>
+  </header>
+
+  <section aria-label="Bookshelf">
+    <div class="case">
+      <div class="books" id="books"></div>
+      <div class="plank" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="card" id="card" aria-live="polite">
+    <div class="cover" id="cover"></div>
+    <div class="info">
+      <span class="tag" id="cTag"></span>
+      <h2 id="cTitle"></h2>
+      <span class="by" id="cBy"></span>
+      <p class="blurb" id="cBlurb"></p>
+      <div class="meta" id="cMeta"></div>
+      <a class="open" id="cOpen" href="#">Open the explainer <span aria-hidden="true">→</span></a>
+      <span class="hint">Tap a spine to open it, or hover one to see what's inside.</span>
+    </div>
+  </section>
+
+  <section class="list">
+    <h3>All explainers</h3>
+    <div class="rows" id="rows"></div>
+  </section>
+
+  <footer>Independent study guides written in our own words. Each explainer remembers which chapters you've marked as understood, on this device.</footer>
+</div>
+
+<script>
+(() => {
+/* To add a book: append one entry. c = spine colour, k = spine text colour, h/w = spine size in px. */
+const BOOKS = [
+  { title:'Brief Answers to the Big Questions', spine:'Brief Answers', author:'Stephen Hawking', year:2018, chapters:10,
+    tag:'Physics · Cosmology', url:'explainers/brief-answers.html',
+    blurb:'Hawking\'s last book takes on ten big questions, from whether there is a God to whether AI will outsmart us. The explainer gives his answer to each, with a live instrument you can play with: build a black hole, race to the nearest star, rewind the Big Bang.',
+    extras:'Live physics instruments', c:'#1B2352', k:'#F4B860', h:318, w:76, mark:'star' },
+  { title:'The Mountain Is You', spine:'The Mountain Is You', author:'Brianna Wiest', year:2020, chapters:7,
+    tag:'Psychology · Self-help', url:'explainers/the-mountain-is-you.html',
+    blurb:'A book about self-sabotage: why we get in our own way and how to turn that into self-mastery. The explainer covers all seven chapters, with hands-on exercises like decoding a habit, reading your emotions, and seeing why small daily shifts beat giant leaps.',
+    extras:'Hands-on exercises', c:'#1E3A3E', k:'#F2A27E', h:286, w:68, mark:'peak' },
+  { title:'Naval\'s Harsh Truths', spine:'Naval × Chris', author:'Naval Ravikant', by:'Naval Ravikant with Chris Williamson · Modern Wisdom · 2025', year:2025, chapters:10,
+    tag:'Podcast · Philosophy', url:'explainers/naval-harsh-truths.html',
+    blurb:'A podcast, not a book: Naval Ravikant\'s three-hour conversation with Chris Williamson on happiness, status, self-esteem, anxiety and what wealth is really for. The explainer splits it into ten chapters with timestamp links, and pulls out the golden nuggets so you can star and collect the ones that land.',
+    extras:'Golden nuggets + timestamps', c:'#2A1F33', k:'#E9C46A', h:300, w:72, mark:'mic' }
+];
+const MARK = {
+  star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>',
+  mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3" fill="currentColor" fill-opacity=".3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
+  peak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 20 9 7l4 6 2.5-3.5L22 20Z" fill="currentColor" fill-opacity=".25"/><path d="M9 7l-1.6 3h3.3Z" fill="currentColor"/></svg>'
+};
+const $ = s => document.querySelector(s);
+const DE = document.documentElement;
+
+/* theme */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0b0d17';
+try { const t = localStorage.getItem('shelf-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('shelf-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* counts */
+const totalCh = BOOKS.reduce((s,b) => s + b.chapters, 0);
+$('#counts').innerHTML = `<span><b>${BOOKS.length}</b> on the shelf</span><span><b>${totalCh}</b> chapters explained</span><span>Newest: <b>${BOOKS[BOOKS.length-1].title}</b></span>`;
+
+/* shelf */
+const books = $('#books');
+books.innerHTML = BOOKS.map((b,i) => `<a class="spine" data-i="${i}" href="${b.url}" style="--c:${b.c};--k:${b.k};--w:${b.w}px;--h:${b.h}px" aria-label="${b.title} by ${b.author}, open the explainer">${MARK[b.mark] || ''}<span class="ttl">${b.spine}</span><span class="au">${b.author.split(' ').slice(-1)[0]}</span></a>`).join('')
+  + `<div class="ghost" style="height:250px" aria-hidden="true"><span>Next book</span></div><div class="ghost lean" style="height:230px" aria-hidden="true"><span>Coming soon</span></div><div class="bookend" aria-hidden="true"></div>`;
+
+/* card */
+function show(i){ const b = BOOKS[i];
+  document.querySelectorAll('.spine').forEach(s => s.classList.toggle('sel', +s.dataset.i === i));
+  const cv = $('#cover'); cv.style.setProperty('--c', b.c); cv.style.setProperty('--k', b.k);
+  cv.innerHTML = `${MARK[b.mark] || ''}<span class="ct">${b.title}</span><span class="ca">${b.author}</span>`;
+  $('#cTag').textContent = b.tag; $('#cTitle').textContent = b.title; $('#cBy').textContent = b.by || `by ${b.author} · ${b.year}`;
+  $('#cBlurb').textContent = b.blurb;
+  $('#cMeta').innerHTML = `<span><b>${b.chapters}</b> chapters</span><span>${b.extras}</span><span>Progress saved per chapter</span>`;
+  $('#cOpen').href = b.url;
+}
+document.querySelectorAll('.spine').forEach(s => { const i = +s.dataset.i;
+  s.addEventListener('mouseenter', () => show(i)); s.addEventListener('focus', () => show(i)); });
+show(BOOKS.length - 1);
+
+/* list */
+$('#rows').innerHTML = BOOKS.map(b => `<a class="rowlink" href="${b.url}" style="--c:${b.c}"><i aria-hidden="true"></i><span><span class="t">${b.title}</span><br><span class="a">${b.author} · ${b.year}</span></span><span class="n">${b.chapters} ch →</span></a>`).join('');
+})();
+</script>
+</body></html>
