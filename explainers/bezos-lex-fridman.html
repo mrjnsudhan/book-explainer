@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Bezos on Lex Fridman, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a listening guide, same shell as the other explainers (chapter rail + station per chapter),
+   with the golden-nugget cards and vault from the Naval guide.
+   Dark-first night-sky navy with rocket-flame orange; light is warm paper with burnt orange. */
+:root{
+  color-scheme: dark;
+  --ink:#0A0E17;
+  --panel:#121827;
+  --panel-2:#1A2234;
+  --line:#29334A;
+  --text:#EAF0FA;
+  --muted:#A3AEC4;
+  --faint:#76819A;
+  --glow:#FFA94D;          /* flame orange: the one accent */
+  --glow-soft:rgba(255,169,77,.12);
+  --glow-line:rgba(255,169,77,.32);
+  --cool:#7CC4FF;          /* sky blue: second series */
+  --cool-soft:rgba(124,196,255,.12);
+  --good:#8EDB9E;
+  --bad:#FF8A7A;
+  --soft:#CFD7E6;
+  --deep:#0D121D;
+  --toc-bg:rgba(18,24,39,.74);
+  --on-glow:#1F1204;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F4F1EA;--panel:#FFFFFF;--panel-2:#E9E5DC;--line:#D8D2C4;--text:#141A26;--muted:#4E5768;--faint:#7A8292;
+  --glow:#A8500A;--glow-soft:rgba(168,80,10,.08);--glow-line:rgba(168,80,10,.3);--cool:#1F5FAE;--cool-soft:rgba(31,95,174,.08);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#2C3444;--deep:#FAF8F3;--toc-bg:rgba(255,255,255,.84);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F4F1EA;--panel:#FFFFFF;--panel-2:#E9E5DC;--line:#D8D2C4;--text:#141A26;--muted:#4E5768;--faint:#7A8292;
+  --glow:#A8500A;--glow-soft:rgba(168,80,10,.08);--glow-line:rgba(168,80,10,.3);--cool:#1F5FAE;--cool-soft:rgba(31,95,174,.08);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#2C3444;--deep:#FAF8F3;--toc-bg:rgba(255,255,255,.84);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* hero */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:40px 40px}
+#sky{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.95}
+.hero-inner{position:relative;display:grid;gap:22px}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:64ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:14px}
+.toc a{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:baseline;text-decoration:none;color:var(--text);
+  padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s, background .2s}
+.toc a:hover{border-color:var(--glow);transform:translateY(-2px);background:var(--panel-2)}
+.toc .n{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.toc .q{font-family:var(--f-display);font-size:21px;line-height:1.15}
+.toc .tm{grid-column:2;font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+
+/* shell */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:230px minmax(0,1fr);gap:48px;padding-block:20px 40px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 24px);align-self:start;display:grid;gap:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:10px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail a{display:grid;grid-template-columns:22px 1fr 14px;gap:8px;align-items:center;padding:7px 10px;border-radius:9px;color:var(--muted);text-decoration:none;font-size:14px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:14px;height:14px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.rail .vault-link{margin-top:10px;border:1px dashed var(--glow-line);color:var(--glow)}
+.rail .vault-link .n{color:var(--glow)}
+.chips{display:none}
+
+/* chapter */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.ch:first-child{border-top:0;padding-top:8px}
+.ch-head{display:grid;gap:14px}
+.ch-head .meta{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}
+.ch-head .eyebrow span{color:var(--glow)}
+.ts{display:inline-flex;gap:6px;align-items:center;font-family:var(--f-mono);font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px 3px 8px;transition:border-color .15s,color .15s}
+.ts:hover{border-color:var(--glow);color:var(--text)}
+.ts svg{width:12px;height:12px}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--cool-soft);border:1px solid var(--line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;transform:rotate(45deg);background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+
+/* nuggets */
+.nuggets{display:grid;gap:12px}
+.nug-head{display:flex;gap:10px;align-items:center}
+.nug-head svg{width:18px;height:18px;color:var(--glow)}
+.nug-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.nug{position:relative;display:grid;gap:14px;align-content:space-between;padding:20px 20px 16px;border-radius:16px;
+  background:linear-gradient(160deg,var(--glow-soft),transparent 70%),var(--panel);border:1px solid var(--glow-line);overflow:hidden;min-width:0}
+.nug::before{content:"\201C";position:absolute;right:14px;top:-18px;font-family:var(--f-display);font-size:120px;line-height:1;color:var(--glow);opacity:.18;pointer-events:none}
+.nug p{font-family:var(--f-display);font-size:23px;line-height:1.22;color:var(--text)}
+.nug .foot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.nug .src{font-family:var(--f-mono);font-size:11px;color:var(--faint);letter-spacing:.06em;text-decoration:none}
+a.src:hover{color:var(--glow)}
+.star{display:inline-flex;gap:6px;align-items:center;font:inherit;font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 10px;cursor:pointer;transition:all .15s}
+.star svg{width:14px;height:14px}
+.star:hover{border-color:var(--glow);color:var(--text)}
+.star[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.star[aria-pressed=true] svg{fill:currentColor}
+
+/* labs */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--glow);box-shadow:0 0 0 4px var(--glow-soft)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;max-width:100%}
+.lab-body{padding:18px}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;align-content:start;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+.log{font-size:14px;color:var(--muted);min-height:1.6em}
+.log b{color:var(--text);font-weight:500}
+
+/* sequence (dozer) */
+.seq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.seq .col{display:grid;gap:8px;align-content:start;min-width:0}
+.seq .pool .btn{text-align:left;border-radius:10px;padding:10px 12px;font-size:14px}
+.seq .pool .btn.shake{border-color:var(--bad);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion: reduce){.seq .pool .btn.shake{animation:none}}
+.step{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:10px 12px;border:1px solid var(--glow-line);border-radius:10px;background:var(--glow-soft);font-size:14px}
+.step .k{font-family:var(--f-mono);color:var(--glow)}
+.step small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.slot0{padding:10px 12px;border:1px dashed var(--line);border-radius:10px;color:var(--faint);font-size:13px}
+
+/* idea kernels */
+.kern{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:8px}
+.kd{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--cool-soft);border:1px solid var(--cool);transition:all .3s}
+.kd i{display:block;border-radius:50%;background:var(--cool);transition:all .3s}
+.kd.dead{background:transparent;border-color:var(--line);opacity:.4}
+.kd.dead i{background:var(--faint)}
+.kd.great{box-shadow:0 0 0 2px var(--glow)}
+.kd.great i{background:var(--glow)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12px;color:var(--faint)}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* phone call */
+.call{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.dash{display:grid;gap:10px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.dash .big{font-family:var(--f-mono);font-size:34px;line-height:1;color:var(--good)}
+.dash .big.bad{color:var(--bad)}
+.quotes{display:grid;gap:8px}
+.quotes p{font-size:14px;color:var(--soft);padding:8px 12px;border-left:2px solid var(--cool);background:var(--cool-soft);border-radius:0 8px 8px 0}
+
+/* paper cuts */
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow .st{display:inline-flex;gap:6px;align-items:center;font:inherit;font-size:13px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--text)}
+.flow button.st{cursor:pointer;border-style:dashed;border-color:var(--bad)}
+.flow button.st:hover{background:var(--glow-soft)}
+.flow button.st::after{content:"✕";color:var(--bad);font-size:11px}
+.flow .st.keep{border-color:var(--cool)}
+.flow .st.oneclick{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.flow .arr{color:var(--faint);font-size:12px}
+.meter{height:10px;border-radius:10px;background:var(--panel-2);overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--cool),var(--glow));transition:width .45s}
+
+/* isru */
+.stack{display:grid;gap:10px}
+.sbar{display:grid;grid-template-columns:130px minmax(0,1fr) 70px;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+.sbar .track{height:22px;background:var(--panel-2);border-radius:6px;overflow:hidden;display:flex}
+.sbar .track i{display:block;height:100%;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.sbar .num{font-family:var(--f-mono);color:var(--text);text-align:right}
+
+/* meeting builder */
+.choices{display:grid;gap:14px}
+.choice{display:grid;gap:6px}
+.choice .q{font-size:13px;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+
+/* sorter */
+.sorter{display:grid;gap:14px;padding:22px 18px}
+.card{padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);font-family:var(--f-display);font-size:clamp(22px,3.4vw,28px);line-height:1.25;min-height:4.2em;display:flex;align-items:center}
+.sorter .row .btn{font-size:14px;padding:9px 16px}
+.verdict{font-size:14px;color:var(--muted);min-height:1.6em}
+.verdict b{color:var(--text);font-weight:500}
+.score{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--cool-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--glow-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* vault */
+.vault{max-width:1180px;margin:0 auto;padding-block:56px 70px;border-top:1px solid var(--line);display:grid;gap:22px}
+.vault h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,76px);line-height:.95}
+.vault h2 em{color:var(--glow)}
+.vault .lede{color:var(--muted);max-width:62ch}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filters .btn{font-size:12px;padding:5px 12px}
+.empty{color:var(--faint);font-size:14px;padding:20px;border:1px dashed var(--line);border-radius:12px}
+
+.fab{position:fixed;z-index:25;bottom:calc(16px + env(safe-area-inset-bottom, 0px));display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px;text-decoration:none}
+#theme{right:max(16px, env(safe-area-inset-right, 0px))}
+#vaultBtn{right:calc(max(16px, env(safe-area-inset-right, 0px)) + 104px);color:var(--glow);border-color:var(--glow-line)}
+.fab svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 80px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:10px}
+footer p{max-width:84ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+}
+@media (max-width: 680px){
+  .seq,.call{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3}
+  .short p{font-size:16px}
+  .hero{padding-top:28px}
+  .nug p{font-size:21px}
+  .sbar{grid-template-columns:96px minmax(0,1fr) 58px}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+  #vaultBtn .lbl{display:none}
+  #vaultBtn{right:calc(max(16px, env(safe-area-inset-right, 0px)) + 98px)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="currentColor"/></symbol>
+</svg>
+
+<button class="btn fab" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<a class="btn fab" id="vaultBtn" href="#vault"><svg aria-hidden="true"><use href="#i-star"/></svg><span class="lbl">Nuggets</span> <span id="savedCount">0</span></a>
+
+<header class="hero" id="top">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A listening guide to Jeff Bezos on the Lex Fridman Podcast</div>
+    <h1>Bezos on Rockets<br>and Day One, <em>Explained</em></h1>
+    <p class="lede">Two hours and twenty minutes with Jeff Bezos, from a Texas ranch to the Moon, boiled down to <b>ten chapters</b>. Each one has the core idea in plain words, a <b>hands-on exercise</b>, and its <b>golden nuggets</b>: the lines worth keeping. Star the ones that land and they gather in your vault. Every chapter links to the exact spot in the episode.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://www.youtube.com/watch?v=DcWqzZ3I2cY" target="_blank" rel="noopener">Watch the episode ↗</a>
+      <a class="btn" href="#vault">Jump to all nuggets</a>
+    </div>
+    <nav class="toc" aria-label="Chapters" id="toc"></nav>
+    <div class="about">
+      <span><b>Show</b> Lex Fridman Podcast #405</span>
+      <span><b>Released</b> 14 December 2023</span>
+      <span><b>Episode title</b> Jeff Bezos: Amazon and Blue Origin</span>
+      <span><b>Length</b> about 2 h 20 min</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:2px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+    <div id="chapters"></div>
+  </main>
+</div>
+
+<section class="vault" id="vault" aria-labelledby="vaultH">
+  <div class="eyebrow">The nugget vault</div>
+  <h2 id="vaultH">Every golden <em>nugget</em></h2>
+  <p class="lede">All the keepers from the episode in one place. Filter by chapter, or show only the ones you've starred. Stars are remembered on this device.</p>
+  <div class="filters" id="filters"></div>
+  <div class="nug-grid" id="vaultGrid"></div>
+</section>
+
+<footer>
+  <p>An independent listening guide to Lex Fridman Podcast #405, Jeff Bezos in conversation with Lex Fridman (December 2023). Everything here is paraphrased in our own words; the few short phrases in quotation marks are Bezos's. Chapters 1 to 9 are drawn from notes on an automated transcript of the episode. That transcript stopped at about the two-hour mark, so chapter 10 (productivity and the closing segment on mortality and the long view) is based on the episode's chapter list, published summaries and press coverage, and is covered at a higher level. The start times for chapters 5 and 9 come from transcript markers rather than the official chapter list, so they are approximate. The numbers in the exercises are illustrative, not Blue Origin's or Amazon's. Check the timestamp links for the full nuance.</p>
+  <p><a href="../index.html">Back to the bookshelf</a> · <a href="https://www.youtube.com/watch?v=DcWqzZ3I2cY" target="_blank" rel="noopener">Watch the episode</a></p>
+</footer>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const DE = document.documentElement;
+const VID = 'https://youtu.be/DcWqzZ3I2cY';
+const END = 8409;
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } },
+                set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const fmt = s => { const h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = s%60; return (h ? h+':'+String(m).padStart(2,'0') : m) + ':' + String(x).padStart(2,'0'); };
+const money = v => v >= 1e9 ? '$'+(v/1e9).toFixed(1)+'B' : v >= 1e6 ? '$'+(v/1e6).toFixed(v >= 1e8 ? 0 : 1)+'M' : v >= 1e3 ? '$'+Math.round(v/1e3)+'k' : '$'+Math.round(v);
+
+/* ---------- theme ---------- */
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(DE); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#0a0e17'; };
+const t0 = store.get('jb-theme', null); if (t0 === 'light' || t0 === 'dark') DE.setAttribute('data-theme', t0);
+readC();
+const themeTxt = () => { $('#themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const n = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', n); store.set('jb-theme', n); readC(); themeTxt(); drawAll(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); drawAll(); });
+
+/* ---------- content ---------- */
+const CH = [
+{ t:`Grandfather's ranch`, s:`Ranch`, eb:`Childhood and self-reliance`, at:533,
+  short:`From age four to sixteen, Bezos spent his summers working on his grandfather's ranch in South Texas. His grandfather fixed nearly everything himself, and that habit of solving your own problems, slowly and stubbornly, became one of the defining lessons of his life.`,
+  ideas:[
+   [`Summers of real work.`,`Fixing windmills, laying fences and pipe, vaccinating cattle. A kid was treated as a working hand, not a guest.`],
+   [`A grandfather who improvised.`,`He made some of his own veterinary tools and treated each breakdown as a puzzle to solve rather than a call to make.`],
+   [`The bulldozer summer.`,`They bought a wrecked 1955 Caterpillar D6 for about $5,000 and rebuilt it themselves, ordering huge gears by mail and building a small crane just to lift them.`],
+   [`Resourcefulness is learned.`,`Watching an adult calmly take on problems that looked too big taught Bezos that they usually aren't.`],
+   [`Patience is part of the method.`,`Many fixes took days. You keep going back until it works.`],
+   [`Small rituals.`,`Around lunchtime they'd stop work and watch a soap opera together every day.`]],
+  nugs:[`When something breaks, the first question is how you fix it, not who you call.`,
+        `Resourcefulness isn't a talent. It's a habit you catch from someone who practises it.`,
+        `If the fix needs a crane you don't have, build the crane first.`],
+  plain:`Most of us, faced with a broken washing machine, look up a repair service. Bezos's grandfather would have taken the back panel off. Sometimes that's slower, but each fix makes you a bit more capable and a bit less afraid of the next broken thing.`,
+  lab:'dozer',
+  quiz:{q:`What was the main lesson Bezos took from his grandfather?`,o:[`Always hire the best expert`,`Self-reliance: try to solve problems yourself`,`Stay away from machinery`],a:1,w:`His grandfather fixed almost everything himself, and Bezos credits that with teaching him resourcefulness.`} },
+
+{ t:`Why go to space`, s:`Space`, eb:`Space exploration and the long view`, at:751,
+  short:`Bezos's case for space isn't about escaping Earth. It's about saving it. A rising quality of life has always meant using more energy, and a finite planet can't supply that forever. Moving heavy industry, and eventually a trillion people, into space lets civilisation keep growing while Earth stays beautiful.`,
+  ideas:[
+   [`Apollo was pulled forward in time.`,`The Cold War made a Moon landing happen decades earlier than it otherwise would have, at a cost of a few percent of US GDP. He ranks it alongside the pyramids.`],
+   [`Early spaceflight took real nerve.`,`The first crewed flights went ahead with odds of success that would be unthinkable now. New Glenn is named after John Glenn.`],
+   [`Energy per person is the key number.`,`Every rise in living standards has come with more energy use per person.`],
+   [`Earth has a ceiling.`,`Keep growing energy use and, within a few centuries, you'd need more power than the planet can give.`],
+   [`A trillion people in the solar system.`,`Huge habitats built from space materials, with Earth treated more like a national park that people visit.`],
+   [`Move heavy industry off-planet.`,`Energy-hungry, polluting work belongs in space, so Earth can recover.`],
+   [`Blue Ring, a platform in space.`,`A spacecraft that gives payloads power, communications and computing in deep space, the way Amazon Web Services gives software servers.`]],
+  nugs:[`Go to space to save the Earth, not to escape it.`,
+        `A rising quality of life has always meant rising energy use. A finite planet puts a ceiling on that.`,
+        `One day Earth might be the place you visit on holiday, like a national park.`,
+        `Apollo happened early because geopolitics pulled it forward in time.`],
+  plain:`Imagine your town could only ever use the energy that falls on it as sunlight. For a while, growth is easy. But if everyone keeps wanting a bit more each year, you eventually hit the ceiling. You can ration, or you can build somewhere new. Bezos wants to build.`,
+  lab:'energy',
+  quiz:{q:`Why does Bezos think humanity needs to go to space?`,o:[`Earth will soon be uninhabitable`,`To keep growing energy use without wrecking Earth`,`Because rockets are a good business`],a:1,w:`His argument is about energy and growth: space lets civilisation keep expanding while Earth is protected.`} },
+
+{ t:`From physicist to inventor`, s:`Inventor`, eb:`Physics, smarts and invention`, at:1505,
+  short:`Bezos went to Princeton to become a theoretical physicist, then met classmates who were simply on another level and realised he'd only be a mediocre one. He didn't treat it as a defeat. There are many ways to be smart, and his is inventing: wandering, trying things, and protecting fragile early ideas.`,
+  ideas:[
+   [`The cosine moment.`,`Stuck on a hard problem, Bezos and a friend asked a classmate, who looked at it and answered "cosine" almost instantly, then showed the working. Bezos saw a gap he couldn't close.`],
+   [`Know where you're great.`,`Being honest about where you'd only be average frees you to find where you could be exceptional.`],
+   [`Many ways to be smart.`,`Raw speed at maths is one. Invention, persistence and taste are others.`],
+   [`Inventing means wandering.`,`Good ideas don't arrive on a schedule; you need time to explore without a fixed agenda.`],
+   [`Ideas start as kernels.`,`Early on, an idea is small and full of holes. He warns teams to expect lots of objections, and to protect the kernel while it grows.`],
+   [`Builders love the building.`,`The best inventors enjoy the process of making something, not only the result.`]],
+  nugs:[`"There are a thousand ways to be smart."`,
+        `Learning you'd be mediocre at one thing is how you find the thing you could be great at.`,
+        `A new idea is a kernel. Expect objections, and protect it while it grows.`],
+  plain:`The first draft of almost anything looks bad: the sketch of an app, the opening of a novel, a new recipe. Judge it like a finished product and you throw it away. Bezos's habit is to ask what it could become, let it grow, and only then test it hard.`,
+  lab:'kernel',
+  quiz:{q:`What did Bezos conclude after the "cosine" moment?`,o:[`He just needed to study harder`,`He'd be a mediocre physicist, so he should find where he could be great`,`Theoretical physics was pointless`],a:1,w:`Seeing classmates who were naturally far better at it pushed him toward invention and building instead.`} },
+
+{ t:`New Glenn and the cost of orbit`, s:`New Glenn`, eb:`Building big, reusable rockets`, at:2079,
+  short:`New Glenn is Blue Origin's heavy rocket: about 45 tonnes to low Earth orbit, with seven BE-4 engines on a reusable first stage. Bezos walks through the engineering with obvious joy, but his real point is economic. The whole game is making it radically cheaper to reach orbit, and the hard part isn't designing one rocket. It's building them at rate.`,
+  ideas:[
+   [`A very big rocket.`,`About 45 tonnes to low Earth orbit and roughly 3.9 million pounds of thrust at liftoff, around half a Saturn V.`],
+   [`The right fuel for each stage.`,`Liquefied natural gas and oxygen for the booster. Hydrogen, efficient but very bulky, for the upper stage, where a big tank costs less.`],
+   [`Bigger helps, then hurts.`,`Size makes the physics easier, since pumps and structures work better at scale, but it makes manufacturing very hard.`],
+   [`Hard-won manufacturing tricks.`,`Friction stir welding keeps aluminium-lithium joints nearly as strong as the metal itself, and machines lay up the carbon-fibre fairings.`],
+   [`Reuse is the point.`,`The first stage lands on a ship at sea. Whether to reuse the upper stage, or make it cheap enough to throw away, is still an open question.`],
+   [`Rate is the real challenge.`,`Twenty-four launches a year means building roughly one engine a week.`],
+   [`He flew it himself.`,`Bezos rode New Shepard with his brother and felt calm, because the escape system had been a top engineering priority. He won't fly anyone on a vehicle he wouldn't ride.`],
+   [`Infrastructure for a dorm room.`,`Amazon didn't have to build the postal service or payment networks. He wants heavy space infrastructure to exist so the next space company can start in a dorm room.`]],
+  nugs:[`The central problem of space is cost. Bring it down and everything else opens up.`,
+        `Designing one rocket is hard. Building one every few weeks is harder.`,
+        `Amazon got roads and the postal service for free. Build the space version, so the next founder can start in a dorm room.`,
+        `Never fly anyone on a vehicle you wouldn't fly on yourself.`],
+  plain:`Imagine if every passenger jet were scrapped after one flight. A ticket would cost as much as the plane. That's roughly where rockets started. Landing and reusing the expensive part is how a moonshot slowly turns into a bus route.`,
+  lab:'reuse',
+  quiz:{q:`According to Bezos, what is the hardest part of New Glenn now?`,o:[`Designing the engines`,`Manufacturing at rate: building rockets and engines quickly and repeatedly`,`Finding customers`],a:1,w:`He says rate production, about an engine a week for 24 launches a year, is the main challenge.`} },
+
+{ t:`One-way and two-way doors`, s:`Decisions`, eb:`Decisiveness and disagreement`, at:3943,
+  short:`Bezos stepped back from running Amazon partly to make Blue Origin faster. He wants it to be the world's most decisive company. The trick is sorting decisions: most are reversible and should be made quickly by small teams, while a few are one-way doors that deserve slow, careful thought. And when people disagree, escalate early rather than grind each other down.`,
+  ideas:[
+   [`The world's most decisive company.`,`Speed of decision-making is a competitive advantage, and he wants Blue Origin to have it.`],
+   [`Two-way doors.`,`If you can walk back through it, decide fast, and let people lower down make the call.`],
+   [`One-way doors.`,`If it can't be undone, slow down. For these he calls himself the "chief slow down officer".`],
+   [`The common failure.`,`Big organisations treat every decision as a one-way door, so everything gets slow and heavy.`],
+   [`Disagree and commit.`,`Say clearly that you disagree, then back the decision fully, without dragging your feet.`],
+   [`Don't compromise, don't wear people down.`,`Splitting the difference or winning by exhaustion are poor ways to find the truth. If two people can't agree, escalate quickly to someone who can decide.`]],
+  nugs:[`Most decisions are two-way doors. Make them fast.`,
+        `For the irreversible ones, be the "chief slow down officer".`,
+        `Disagree and commit: say your piece, then back the call fully.`,
+        `Winning an argument by exhausting the other side doesn't make you right.`],
+  plain:`Picking a restaurant for tonight is a two-way door: if it's bad, you try somewhere else next week. Buying a house is much closer to a one-way door. Most people agonise too long over restaurants and not long enough over houses. Bezos wants the opposite.`,
+  lab:'sortDoors',
+  quiz:{q:`What should you do with a "two-way door" decision?`,o:[`Escalate it to the CEO`,`Decide quickly, because it can be reversed`,`Wait until you have complete data`],a:1,w:`Reversible decisions should be made fast, often by small teams, because mistakes are cheap to undo.`} },
+
+{ t:`Living off the land on the Moon`, s:`Moon`, eb:`The lunar program`, at:4648,
+  short:`Blue Origin is building two Moon landers: an uncrewed cargo lander, and a reusable crewed lander for NASA's Artemis program. The bigger idea is living off the land. Make oxygen, solar cells and perhaps water from lunar material, and the Moon becomes a place to work, not just to visit.`,
+  ideas:[
+   [`Mark 1, the cargo lander.`,`Expendable, carrying about three tonnes to the surface, fuelled by hydrogen.`],
+   [`Mark 2, the crewed lander.`,`Reusable, built for NASA's sustained Artemis missions.`],
+   [`Keeping hydrogen cold.`,`Solar-powered cryocoolers could stop hydrogen boiling away, so it can be used on long missions.`],
+   [`Solar cells from Moon dust.`,`Blue Origin has made working solar cells from simulated lunar soil, at around 7% efficiency.`],
+   [`Oxygen from rock.`,`Lunar soil is rich in oxygen that can be extracted, for breathing and for rocket propellant.`],
+   [`Ice at the poles.`,`If polar ice is reachable, it could supply water and hydrogen too.`],
+   [`Not his trip to make.`,`Bezos doesn't expect to go to the Moon or Mars himself. Professional astronauts will.`],
+   [`Room for many winners.`,`Space is like the early internet, with space for lots of companies, SpaceX included.`]],
+  nugs:[`The Moon becomes useful once you can live off the land.`,
+        `Every kilogram you make on the Moon is a kilogram you didn't have to launch.`,
+        `Space, like the internet, has room for many winners.`],
+  plain:`Hiking with everything on your back limits how far you can go. Being able to refill your water at streams changes the whole trip. Making oxygen and power on the Moon is the same kind of shift for space travel.`,
+  lab:'isru',
+  quiz:{q:`Why does making oxygen on the Moon matter so much?`,o:[`It's mainly a scientific curiosity`,`Every kilogram made there doesn't have to be launched from Earth`,`Oxygen is running out on Earth`],a:1,w:`Launching mass is the expensive part. Lunar oxygen for air and propellant cuts what you must haul up.`} },
+
+{ t:`Day One and seeking truth`, s:`Day One`, eb:`Amazon, proxies and uncomfortable truths`, at:5244,
+  short:`When he raised money for Amazon, Bezos told investors there was roughly a 70% chance they'd lose it. The company survived by acting like a startup for good, which he calls Day One: obsess over customers, distrust proxies, decide fast, and build a culture that rewards uncomfortable truths, even when the dashboard says everything is fine.`,
+  ideas:[
+   [`He expected to fail.`,`He told early investors he put Amazon's odds of success at about 30%.`],
+   [`Day One versus Day Two.`,`Day Two is stasis, then irrelevance, then decline. Day One means treating every day as the start, and dropping a habit when someone shows a better way.`],
+   [`Customer obsession.`,`Start from the customer and work backwards, rather than from competitors or your own technology.`],
+   [`Beware of proxies.`,`Metrics and processes stand in for what you actually want, then quietly replace it. Keep asking whether the number still tracks the customer.`],
+   [`Truth-telling is unnatural.`,`People are social and want to fit in, so a company has to deliberately reward those who say uncomfortable things.`],
+   [`The boss speaks last.`,`He goes last in meetings so his view doesn't sway the room, and a junior person with data should be able to overrule a senior one.`],
+   [`The phone call.`,`A weekly review said customers waited under a minute for phone support, but customers kept complaining. In the meeting, Bezos dialled the number. The room sat in silence for over ten minutes.`],
+   [`Anecdotes versus data.`,`When they disagree, the anecdotes are usually right. Usually the data isn't wrong; you're just measuring the wrong thing.`]],
+  nugs:[`Day Two is stasis. Then irrelevance. Then decline. Stay in Day One.`,
+        `A metric is a proxy. Keep checking that it still points at the customer.`,
+        `"When the data and the anecdotes disagree, the anecdotes are usually right."`,
+        `We're social animals, so truth-telling has to be designed in on purpose.`,
+        `The most senior person in the room should speak last.`],
+  plain:`A café starts tracking "orders served in under three minutes". Soon the baristas rush and the coffee gets worse, while the number looks great. That's a proxy replacing the goal. A Day One café keeps asking whether people actually like the coffee, and sometimes orders one itself.`,
+  lab:'call',
+  quiz:{q:`What is a "proxy" in Bezos's warning?`,o:[`A stand-in employee`,`A metric or process that stands in for the real goal, and can end up replacing it`,`A kind of web server`],a:1,w:`Proxies are useful, but they drift. Keep checking that they still reflect what customers want.`} },
+
+{ t:`Paper cuts and what won't change`, s:`Paper cuts`, eb:`Principles, friction and attention`, at:6285,
+  short:`Two moves sit under most of Bezos's principles. Bet on things that won't change in ten years, such as customers wanting low prices, fast delivery and big selection. And never stop fixing the small paper cuts that make an experience annoying. One-Click ordering was a paper-cut fix that became beautiful. He also worries that our tools are shrinking our attention spans.`,
+  ideas:[
+   [`Build on what won't change.`,`People ask what will change in ten years. The better question is what won't. Nobody will ever want higher prices or slower delivery.`],
+   [`Big things crowd out small ones.`,`Teams working on the big things never get to the small problems, so those need their own effort.`],
+   [`Collect the paper cuts.`,`Small flaws in the experience go on long lists, and dedicated teams work through them.`],
+   [`One-Click as craft.`,`Removing all the steps from buying something cut friction and mental load. He describes the result as genuinely beautiful, for customers and for the people who built it.`],
+   [`Hunches are hypotheses.`,`A hunch from someone you trust is worth testing rather than dismissing. And when data could be read two ways, don't jump to the happy reading.`],
+   [`Tools rewire us.`,`After playing a lot of Tetris he'd see falling blocks with his eyes shut. Phones and short clips train short attention.`],
+   [`Read long things.`,`He recommends regularly doing something that needs sustained attention, like reading books.`]],
+  nugs:[`Ask what won't change in ten years. You can build a business on that.`,
+        `Fix the paper cuts. Small frictions add up to a bad experience.`,
+        `Great invention feels good to the customer and to the team that made it.`,
+        `When the data allows a happy and an unhappy reading, assume the unhappy one until you know better.`,
+        `Guard your attention span. Read long things.`],
+  plain:`Nobody remembers a website for its third confirmation screen, but everybody feels it. Take away one annoying step and nothing seems to change. Take away ten and the whole thing feels effortless. That's the paper-cut strategy, and it compounds.`,
+  lab:'cuts',
+  quiz:{q:`Which question does Bezos suggest building strategy around?`,o:[`What will change in the next ten years?`,`What won't change in the next ten years?`,`What are competitors doing this year?`],a:1,w:`Things like low prices and fast delivery will always matter, so effort spent on them keeps paying off.`} },
+
+{ t:`AI: discovered, not invented`, s:`AI`, eb:`Large language models and the future`, at:6819,
+  short:`Bezos thinks large language models are closer to discoveries than inventions: we built them, but we keep being surprised by what they can do. He's very optimistic that powerful tools will save us more than they harm us, while noting that the human brain still learns far more from far less data and energy.`,
+  ideas:[
+   [`Discovered, not invented.`,`A telescope is an invention; spotting Jupiter's moons through it was a discovery. LLMs feel more like the moons.`],
+   [`Engineered things don't surprise you.`,`A Boeing 787 does what it was designed to do. LLMs keep surprising the people who built them.`],
+   [`Specialised AI can be dangerous.`,`Intelligent weapons are a real near-term risk.`],
+   [`But mostly a lifesaver.`,`He thinks powerful tools are much more likely to help us, including against extinction risks we create ourselves.`],
+   [`Are we mature enough?`,`The pettiness of the bureaucrat in the film Oppenheimer shows how unready humans can be for world-changing technology.`],
+   [`The brain is still remarkable.`,`It runs on about 20 watts. A teenager learns to drive in a few dozen hours, while self-driving systems have needed billions of miles.`],
+   [`More tricks to find.`,`Scaling pays huge dividends, but he suspects important new ideas are still waiting to be discovered.`]],
+  nugs:[`LLMs are more like discoveries than inventions. They keep surprising the people who made them.`,
+        `Powerful tools are much more likely to save us than to destroy us.`,
+        `The human brain runs on about 20 watts. Machines are nowhere near that efficient yet.`],
+  plain:`You design a kettle and it boils water: no surprises. An LLM is more like pointing a new kind of telescope at the sky and finding moons nobody expected. You built the instrument, but you're still exploring what it shows you.`,
+  lab:'sortDisc',
+  quiz:{q:`Why does Bezos call LLMs "discoveries"?`,o:[`They were found in nature`,`Their abilities keep surprising even the people who built them`,`They aren't useful yet`],a:1,w:`Unlike an engineered airliner, their capabilities weren't all designed in. People keep finding new ones.`} },
+
+{ t:`Memos, meetings and the long view`, s:`Long view`, eb:`Productivity, mortality and the 10,000-year clock`, at:7405,
+  short:`Bezos's ideal meeting starts with a crisp six-page memo read in silence, followed by a messy, open-ended discussion. He'd rather run late than cut off a good conversation. He keeps unhurried mornings and steady exercise. And looking far ahead, he fears death less than he used to, values a full life over a merely long one, and has backed a clock built to tick for ten thousand years.`,
+  ideas:[
+   [`A crisp memo, a messy meeting.`,`Narrative six-page memos instead of slides, which can hide sloppy thinking in bullet points.`],
+   [`Read in silence first.`,`Everyone reads the memo together at the start, so nobody has to pretend they did the reading.`],
+   [`Writing forces clarity.`,`A memo makes the author commit to complete, joined-up reasoning.`],
+   [`Junior first, senior last.`,`So the most senior person doesn't anchor everyone else.`],
+   [`Let good meetings run long.`,`Routine meetings can be tightly structured. Meetings about hard problems should be allowed to wander.`],
+   [`Calm mornings, regular exercise.`,`An unhurried start and a steady fitness routine keep his energy up, even on days he doesn't feel like it.`],
+   [`Less fear of death.`,`It has faded with age. A full life matters more to him than simply a longer one.`],
+   [`The 10,000 Year Clock.`,`Being built inside a mountain in West Texas, as a reminder to think in centuries.`]],
+  nugs:[`A crisp document and a messy meeting.`,
+        `Slides can hide sloppy thinking in bullet points. Full sentences can't.`,
+        `Read the memo together, in silence. Then nobody has to pretend.`,
+        `Build things that make people think in centuries, not quarters.`],
+  plain:`Think of a book club where nobody has done the reading. Everyone bluffs, and the loudest person sets the opinion. Now imagine everyone reads the same chapter together for half an hour and then talks. The conversation is messier, but far more honest. That's the Bezos meeting.`,
+  lab:'meeting',
+  quiz:{q:`Why does Bezos open meetings with silent reading of a memo?`,o:[`To fill time while people arrive`,`So everyone actually has the same full picture before discussing it`,`Because slides are hard to make`],a:1,w:`Reading together means nobody bluffs, and a narrative memo can't hide gaps in reasoning the way bullet points can.`} }
+];
+const N = CH.length;
+
+/* ---------- lab markup ---------- */
+const sorterHTML = (id, title, hint, a, b) => `
+  <figure class="lab"><div class="lab-top"><div class="t">${title}</div><div class="hint">${hint}</div></div>
+  <div class="sorter" id="${id}"><div class="row" style="justify-content:space-between"><span class="sub">Sort it</span><span class="score"></span></div>
+  <div class="card" aria-live="polite"></div>
+  <div class="row"><button class="btn" data-pick="0">${a}</button><button class="btn" data-pick="1">${b}</button><button class="btn nx" hidden>Next card →</button></div>
+  <p class="verdict"></p></div></figure>`;
+const LAB = {
+dozer:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: rebuild the bulldozer</div><div class="hint">Tap the steps in the order you'd do them</div></div>
+  <div class="lab-body seq"><div class="col pool" id="dzPool"><span class="sub">The job</span></div><div class="col" id="dzDone"><span class="sub">Your plan</span></div></div>
+  <div class="lab-ctl"><div class="row"><button class="btn" id="dzReset">Shuffle and start again</button><span class="log" id="dzLog" aria-live="polite"></span></div></div>
+  <div class="stats"><div class="stat"><span class="k">Steps in place</span><span class="v glow" id="dzN"></span></div><div class="stat"><span class="k">False starts</span><span class="v" id="dzF"></span></div><div class="stat"><span class="k">Status</span><span class="s" id="dzS"></span></div></div>
+  <div class="callout">A rough reconstruction of the D6 project. The real lesson is the shape of it: <b>diagnose, get what you need, build the tool you lack</b>, then keep at it.</div></figure>`,
+energy:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: when does Earth run out of room?</div><div class="hint">Grow energy use and watch for the ceiling</div></div>
+  <canvas id="enC"></canvas>
+  <div class="lab-ctl">
+    <div class="ctl"><label for="enG">Yearly growth in world energy use <output id="enGo"></output></label><input type="range" id="enG" min="5" max="50" value="30"></div>
+    <div class="row"><button class="btn" id="enSpace" aria-pressed="false">Add the rest of the solar system</button></div>
+  </div>
+  <div class="stats"><div class="stat"><span class="k">Years until we'd need all the sunlight that reaches Earth</span><span class="v glow" id="enY"></span></div><div class="stat"><span class="k">Years if we can draw on the whole Sun</span><span class="v" id="enS"></span></div><div class="stat"><span class="k">What that means</span><span class="s" id="enM"></span></div></div>
+  <div class="callout">Rough figures: humanity uses about 19 terawatts today; all the sunlight reaching Earth is about 170,000 terawatts; the Sun puts out over a billion times more again. Growth, not today's use, is what <b>runs into the ceiling</b>.</div></figure>`,
+kernel:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: protect the kernel</div><div class="hint">40 early ideas. Each dot's size is its hidden potential</div></div>
+  <div class="lab-body" style="display:grid;gap:14px"><div class="kern" id="kern" aria-hidden="true"></div>
+    <div class="legend"><span><i style="background:var(--glow)"></i>One of the 5 best ideas</span><span><i style="background:var(--cool)"></i>Survived the first review</span><span><i style="background:var(--faint);opacity:.5"></i>Killed early</span></div></div>
+  <div class="lab-ctl">
+    <div class="ctl"><label for="kT">How polished an idea must look to survive its first review <output id="kTo"></output></label><input type="range" id="kT" min="0" max="90" value="60"></div>
+    <div class="row"><button class="btn" id="kNew">New batch of ideas</button></div>
+  </div>
+  <div class="stats"><div class="stat"><span class="k">Ideas kept</span><span class="v" id="kKept"></span></div><div class="stat"><span class="k">Best ideas killed</span><span class="v glow" id="kKill"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="kV"></span></div></div>
+  <div class="callout">Early polish only loosely predicts real potential. Judge kernels like finished products and you <b>kill the great ones before they grow</b>.</div></figure>`,
+reuse:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: the price of a launch</div><div class="hint">Reuse the booster and watch the cost fall</div></div>
+  <canvas id="ruC"></canvas>
+  <div class="lab-ctl"><div class="row">
+    <div class="ctl"><label for="ruN">Flights per booster <output id="ruNo"></output></label><input type="range" id="ruN" min="1" max="50" value="1"></div>
+    <div class="ctl"><label for="ruR">Refurbishment per flight, as share of booster cost <output id="ruRo"></output></label><input type="range" id="ruR" min="2" max="30" value="10"></div></div>
+    <div class="row"><button class="btn" id="ruU" aria-pressed="false">Reuse the upper stage too</button></div></div>
+  <div class="stats"><div class="stat"><span class="k">Cost per launch</span><span class="v glow" id="ruCost"></span></div><div class="stat"><span class="k">Cost per kg to orbit (45 t)</span><span class="v" id="ruKg"></span></div><div class="stat"><span class="k">Versus throwing it all away</span><span class="s" id="ruVs"></span></div></div>
+  <div class="callout">Illustrative numbers: booster $150M, upper stage $30M, $10M of fixed costs per flight. Reuse helps until <b>refurbishment and the thrown-away parts</b> dominate, which is why the upper stage question matters.</div></figure>`,
+sortDoors: sorterHTML('sortDoors','Exercise: which kind of door?','Sort each decision','Two-way: decide fast','One-way: slow down'),
+isru:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: live off the land</div><div class="hint">Refuel a lander for its trip home</div></div>
+  <div class="lab-body stack">
+    <div class="sbar"><span>Launched from Earth</span><div class="track"><i id="isE" style="background:var(--glow)"></i></div><span class="num" id="isEn"></span></div>
+    <div class="sbar"><span>Made on the Moon</span><div class="track"><i id="isM" style="background:var(--cool)"></i></div><span class="num" id="isMn"></span></div>
+  </div>
+  <div class="lab-ctl"><div class="row">
+    <div class="ctl"><label for="isP">Propellant needed for the return trip <output id="isPo"></output></label><input type="range" id="isP" min="5" max="40" value="20"></div>
+    <div class="ctl"><label for="isO">Share of the oxygen made from lunar soil <output id="isOo"></output></label><input type="range" id="isO" min="0" max="100" value="0" step="5"></div></div></div>
+  <div class="stats"><div class="stat"><span class="k">Delivery cost per kg to the Moon (illustrative)</span><span class="v">$100k</span></div><div class="stat"><span class="k">Cost of hauling the propellant</span><span class="v glow" id="isC"></span></div><div class="stat"><span class="k">Saved by living off the land</span><span class="v" id="isS"></span></div></div>
+  <div class="callout">In a hydrogen-and-oxygen engine, roughly <b>six kilograms of every seven</b> burned are oxygen. Make the oxygen locally and most of the propellant never has to leave Earth.</div></figure>`,
+call:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: call the 1-800 number</div><div class="hint">The dashboard and the customers disagree</div></div>
+  <div class="lab-body call">
+    <div class="dash"><span class="sub">Weekly business review</span><span class="k" style="font-size:13px;color:var(--muted)">Average phone wait</span><span class="big" id="clBig">0:58 ✓</span><span style="font-size:13px;color:var(--faint)">Target: under 1:00</span></div>
+    <div class="col" style="display:grid;gap:8px"><span class="sub">Meanwhile, customers say</span><div class="quotes"><p>I was on hold forever.</p><p>Gave up after ten minutes.</p><p>Is anyone actually answering these?</p></div></div>
+  </div>
+  <div class="lab-ctl"><div class="row"><button class="btn primary" id="clGo">Call it, right here in the meeting</button><button class="btn" id="clReset">Reset</button><span class="log" id="clLog" aria-live="polite"></span></div></div>
+  <div class="stats"><div class="stat"><span class="k">Dashboard says</span><span class="v">0:58</span></div><div class="stat"><span class="k">You actually waited</span><span class="v glow" id="clT">–</span></div><div class="stat"><span class="k">Lesson</span><span class="s" id="clL">Trust the anecdotes enough to check.</span></div></div>
+  <div class="callout">Sped up roughly 150 times. The data wasn't faked; it was <b>measuring the wrong thing</b>. Calling the number is what exposed it.</div></figure>`,
+cuts:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: fix the paper cuts</div><div class="hint">Tap the dashed steps to remove them</div></div>
+  <div class="lab-body" style="display:grid;gap:14px"><div class="flow" id="flow"></div><div class="meter"><i id="cutM"></i></div></div>
+  <div class="lab-ctl"><div class="row"><button class="btn primary" id="cut1">Invent One-Click</button><button class="btn" id="cutReset">Reset</button></div></div>
+  <div class="stats"><div class="stat"><span class="k">Steps to buy</span><span class="v glow" id="cutN"></span></div><div class="stat"><span class="k">Paper cuts fixed</span><span class="v" id="cutF"></span></div><div class="stat"><span class="k">How it feels</span><span class="s" id="cutS"></span></div></div>
+  <div class="callout">No single cut matters much. Together they decide whether buying feels <b>effortless or exhausting</b>.</div></figure>`,
+sortDisc: sorterHTML('sortDisc','Exercise: invention or discovery?','How would Bezos file it?','Invention','Discovery'),
+meeting:`<figure class="lab"><div class="lab-top"><div class="t">Exercise: design the meeting</div><div class="hint">Make four choices and see what surfaces</div></div>
+  <div class="lab-body choices" id="mtg"></div>
+  <div class="stats"><div class="stat"><span class="k">Honest signal in the room</span><span class="v glow" id="mtH"></span></div><div class="stat"><span class="k">Shared understanding</span><span class="v" id="mtU"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="mtW"></span></div></div>
+  <div class="callout">A toy score, but the four levers are the ones Bezos describes: <b>a narrative memo, silent reading, the boss speaking last</b>, and room for the discussion to wander.</div></figure>`
+};
+
+/* ---------- render chapters ---------- */
+const NUGS = []; CH.forEach((c,i) => c.nugs.forEach((q,j) => NUGS.push({id:`${i+1}-${j}`, ch:i+1, q})));
+let saved = new Set(store.get('jb-saved', []));
+const starBtn = id => `<button class="star" data-star="${id}" aria-pressed="${saved.has(id)}"><svg aria-hidden="true"><use href="#i-star"/></svg><span>${saved.has(id)?'Saved':'Save'}</span></button>`;
+const nugCard = (n, showSrc) => `<div class="nug"><p>${esc(n.q)}</p><div class="foot">${showSrc ? `<a class="src" href="#ch${n.ch}">Ch ${n.ch} · ${esc(CH[n.ch-1].s)}</a>` : `<span class="src">Golden nugget</span>`}${starBtn(n.id)}</div></div>`;
+const playIco = '<svg aria-hidden="true"><use href="#i-play"/></svg>';
+$('#chapters').innerHTML = CH.map((c,i) => {
+  const n = i+1, end = i < N-1 ? CH[i+1].at : END;
+  return `<section class="ch" id="ch${n}" data-n="${n}">
+    <div class="ch-head">
+      <div class="meta"><div class="eyebrow"><span>Chapter ${n}</span> · ${c.eb}</div><a class="ts" href="${VID}?t=${c.at}" target="_blank" rel="noopener" aria-label="Play this chapter from ${fmt(c.at)}">${playIco}${fmt(c.at)} – ${fmt(end)}</a></div>
+      <h2>${c.t}</h2>
+      <div class="short"><span class="lbl">In short</span><p>${c.short}</p></div>
+    </div>
+    <div class="ideas"><h3 class="sub">What they talk about</h3><ul>${c.ideas.map(([b,t]) => `<li><span><b>${b}</b> ${t}</span></li>`).join('')}</ul></div>
+    <div class="nuggets"><div class="nug-head"><svg aria-hidden="true"><use href="#i-star"/></svg><h3 class="sub" style="color:var(--glow)">Golden nuggets</h3></div>
+      <div class="nug-grid">${NUGS.filter(x => x.ch === n).map(x => nugCard(x, false)).join('')}</div></div>
+    ${LAB[c.lab]}
+    <div class="plain"><span class="lbl">In plain words</span><p>${c.plain}</p></div>
+    <div class="quiz" data-q="${n}"></div>
+    <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="${n}"> I understand this chapter</label><a class="next" href="${n < N ? '#ch'+(n+1) : '#vault'}">${n < N ? 'Next: '+CH[n].t+' →' : 'Open the nugget vault →'}</a></div>
+  </section>`; }).join('');
+
+$('#toc').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span class="q">${c.t}</span><span class="tm">${fmt(c.at)}</span></a>`).join('');
+$('#railLinks').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${c.t}</span><span class="tick" aria-hidden="true"></span></a>`).join('')
+  + `<a href="#vault" class="vault-link"><span class="n">★</span><span>Nugget vault</span><span></span></a>`;
+$('#chips').innerHTML = CH.map((c,i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${c.s}</a>`).join('') + `<a href="#vault">★ Nuggets</a>`;
+
+/* ---------- progress ---------- */
+let done = new Set(store.get('jb-done', []));
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a[data-n], #chips a[data-n]').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${N} understood`;
+  $('#progBar').style.width = (done.size/N*100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); store.set('jb-done', [...done]); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = CH[box.dataset.q-1].quiz;
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); store.set('jb-done', [...done]); renderProgress(); }
+  }));
+});
+
+/* ---------- nuggets + vault ---------- */
+let filter = 'all';
+function renderVault(){
+  $('#savedCount').textContent = saved.size;
+  $('#filters').innerHTML = [['all','All '+NUGS.length],['saved','★ Saved '+saved.size]].concat(CH.map((c,i) => [String(i+1), (i+1)+'. '+c.s]))
+    .map(([k,l]) => `<button class="btn" data-f="${k}" aria-pressed="${filter===k}">${l}</button>`).join('');
+  const list = NUGS.filter(n => filter === 'all' || (filter === 'saved' ? saved.has(n.id) : String(n.ch) === filter));
+  $('#vaultGrid').innerHTML = list.length ? list.map(n => nugCard(n, true)).join('') : `<p class="empty">No starred nuggets yet. Tap <b>Save</b> on any nugget in a chapter and it will show up here.</p>`;
+}
+document.addEventListener('click', e => {
+  const s = e.target.closest('[data-star]');
+  if (s){ const id = s.dataset.star; saved.has(id) ? saved.delete(id) : saved.add(id); store.set('jb-saved', [...saved]);
+    $$(`[data-star="${id}"]`).forEach(b => { b.setAttribute('aria-pressed', saved.has(id)); b.querySelector('span').textContent = saved.has(id) ? 'Saved' : 'Save'; });
+    if (s.closest('#vaultGrid') && filter !== 'saved') { $('#savedCount').textContent = saved.size; $('#filters [data-f="saved"]').textContent = '★ Saved ' + saved.size; } else renderVault();
+    return; }
+  const f = e.target.closest('[data-f]'); if (f){ filter = f.dataset.f; renderVault(); }
+});
+renderVault();
+
+/* ---------- canvas helpers ---------- */
+function stage(cv){ const ctx = cv.getContext('2d'); return () => { const r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio||1);
+  const w = Math.max(1, r.width), h = Math.max(1, r.height); if (cv.width !== Math.round(w*d) || cv.height !== Math.round(h*d)){ cv.width = Math.round(w*d); cv.height = Math.round(h*d); }
+  ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; }; }
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const draws = []; function drawAll(){ draws.forEach(f => f()); }
+addEventListener('resize', drawAll);
+
+/* hero sky: stars, an Earth limb, and a rising trail */
+{ const cv = $('#sky'), get = stage(cv); const stars = Array.from({length:160}, () => ({x:Math.random(), y:Math.random()*.8, r:Math.random()*1.3+.3, p:Math.random()*6.28, f:.5+Math.random()*1.5}));
+  let vis = true; new IntersectionObserver(es => vis = es[0].isIntersecting).observe(cv);
+  const draw = t => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    stars.forEach(s => { const a = (RM ? .6 : .35 + .5*Math.abs(Math.sin(t*s.f + s.p))) * (LIGHT ? .45 : .9);
+      ctx.fillStyle = A(LIGHT ? C.faint : C.text, a); ctx.beginPath(); ctx.arc(s.x*w, s.y*h, s.r, 0, 7); ctx.fill(); });
+    const R = Math.max(w, 900) * 1.1, cx = w*.72, cy = h + R - 70;
+    const g = ctx.createRadialGradient(cx, cy, R-8, cx, cy, R+60); g.addColorStop(0, A(C.cool, LIGHT ? .25 : .35)); g.addColorStop(1, A(C.cool, 0));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R+60, 0, 7); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+    ctx.strokeStyle = A(C.cool, .6); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI*1.2, Math.PI*1.8); ctx.stroke();
+    const k = RM ? .6 : (t*.06) % 1, x0 = w*.86, y0 = h - 60, x1 = w*.97, y1 = h*.08;
+    const px = x0 + (x1-x0)*k, py = y0 + (y1-y0)*Math.pow(k,.8);
+    const tg = ctx.createLinearGradient(x0, y0, px, py); tg.addColorStop(0, A(C.glow, 0)); tg.addColorStop(1, A(C.glow, LIGHT ? .55 : .8));
+    ctx.strokeStyle = tg; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x0, y0);
+    for (let i = 1; i <= 20; i++){ const q = k*i/20; ctx.lineTo(x0 + (x1-x0)*q, y0 + (y1-y0)*Math.pow(q,.8)); } ctx.stroke();
+    ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(px, py, 2.6, 0, 7); ctx.fill(); };
+  draws.push(() => draw(performance.now()/1000));
+  const loop = t => { if (vis && !RM) draw(t/1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); draw(0); }
+
+/* ch1: dozer sequence */
+{ const STEPS = [
+    ['Figure out exactly what’s broken','Everything starts with a diagnosis. Guessing would waste the summer.'],
+    ['Order the giant replacement gears by mail','No shop nearby stocked parts that size, so they came by post.'],
+    ['Build a crane strong enough to lift them','The parts were too heavy to move by hand, so they built the tool first.'],
+    ['Fit the new gears and rebuild the transmission','The slow, patient middle of every repair.'],
+    ['Fire it up and test it','Then fix whatever the test turns up, and go again.']];
+  let order, next, falseStarts;
+  const r = () => {
+    $('#dzPool').innerHTML = '<span class="sub">The job</span>' + order.filter(i => i >= next).map(i => `<button class="btn" data-s="${i}">${STEPS[i][0]}</button>`).join('') + (next === STEPS.length ? '<span class="slot0">Nothing left. The dozer runs.</span>' : '');
+    $('#dzDone').innerHTML = '<span class="sub">Your plan</span>' + STEPS.slice(0,next).map((s,i) => `<div class="step"><span class="k">${i+1}</span><span>${s[0]}<small>${s[1]}</small></span></div>`).join('') + (next < STEPS.length ? `<span class="slot0">Step ${next+1}: what comes next?</span>` : '');
+    $('#dzN').textContent = `${next} of ${STEPS.length}`; $('#dzF').textContent = falseStarts;
+    $('#dzS').textContent = next === STEPS.length ? (falseStarts ? 'Running, after a few detours. Very ranch.' : 'Running, first try. Grandpa approves.') : next ? 'Making progress.' : 'A broken bulldozer and a long summer.';
+    $('#dzPool').querySelectorAll('[data-s]').forEach(b => b.onclick = () => { const i = +b.dataset.s;
+      if (i === next){ next++; $('#dzLog').textContent = ''; r(); }
+      else { falseStarts++; $('#dzF').textContent = falseStarts; b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+        $('#dzLog').innerHTML = `<b>Not yet.</b> Something has to happen before that.`; } }); };
+  const reset = () => { order = [0,1,2,3,4].sort(() => Math.random() - .5); if (order.join() === '0,1,2,3,4') order.reverse(); next = 0; falseStarts = 0; $('#dzLog').textContent = ''; r(); };
+  $('#dzReset').onclick = reset; reset(); }
+
+/* ch2: energy ceiling */
+{ const cv = $('#enC'), get = stage(cv), NOW = 1.9e13, EARTH = 1.7e17, SUN = 3.8e26; let space = false;
+  const yrs = (g, cap) => Math.log(cap/NOW) / Math.log(1+g);
+  const draw = () => { const {ctx,w,h} = get(), g = +$('#enG').value/1000, pad = {l:52,r:16,t:18,b:30}, W = w-pad.l-pad.r, H = h-pad.t-pad.b;
+    const ye = yrs(g, EARTH), ys = yrs(g, SUN), X1 = space ? Math.min(6000, ys*1.15) : Math.min(3000, ye*1.6);
+    const lo = 13, hi = space ? 27.5 : 18;
+    const X = t => pad.l + t/X1*W, Y = lg => pad.t + H - (lg-lo)/(hi-lo)*H;
+    ctx.clearRect(0,0,w,h); ctx.font = '11px "Geist Mono", monospace'; ctx.lineWidth = 1;
+    for (let e = Math.ceil(lo); e <= hi; e += space ? 2 : 1){ const yy = Y(e); ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(pad.l,yy); ctx.lineTo(w-pad.r,yy); ctx.stroke(); ctx.fillStyle = C.faint; ctx.fillText('10^'+e+' W', 2, yy+4); }
+    ctx.fillStyle = C.faint; ctx.fillText('today', pad.l, h-8); ctx.textAlign = 'right'; ctx.fillText('+'+Math.round(X1)+' years', w-pad.r, h-8); ctx.textAlign = 'left';
+    const ceil = (v, label, col) => { const yy = Y(Math.log10(v)); ctx.setLineDash([4,4]); ctx.strokeStyle = col; ctx.beginPath(); ctx.moveTo(pad.l,yy); ctx.lineTo(w-pad.r,yy); ctx.stroke(); ctx.setLineDash([]); ctx.fillStyle = col; ctx.fillText(label, pad.l+6, yy-6); };
+    ceil(EARTH, 'all the sunlight reaching Earth', C.bad); if (space) ceil(SUN, 'the whole Sun', C.good);
+    ctx.save(); ctx.beginPath(); ctx.rect(pad.l, pad.t, W, H); ctx.clip();
+    ctx.beginPath(); for (let i = 0; i <= 120; i++){ const t = X1*i/120, lg = Math.log10(NOW) + t*Math.log10(1+g); const x = X(t), y = Y(lg); i ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 2.2; ctx.stroke(); ctx.restore();
+    if (ye < X1){ ctx.beginPath(); ctx.arc(X(ye), Y(Math.log10(EARTH)), 5, 0, 7); ctx.fillStyle = C.bad; ctx.fill(); } };
+  const r = () => { const g = +$('#enG').value/1000; $('#enGo').textContent = (g*100).toFixed(1)+'%';
+    const ye = yrs(g, EARTH), ys = yrs(g, SUN); $('#enY').textContent = '~'+Math.round(ye)+' years'; $('#enS').textContent = '~'+Math.round(ys).toLocaleString()+' years';
+    $('#enM').textContent = space ? `The ceiling rises about two billion times: roughly ${Math.round(ys/100)*100} years of growth instead of ${Math.round(ye/10)*10}, and Earth gets to be the protected garden.` : ye < 400 ? 'A few centuries. On Earth alone, growth hits a hard limit.' : 'Slower growth buys time, but the ceiling is still there.';
+    $('#enSpace').setAttribute('aria-pressed', space); draw(); };
+  $('#enG').oninput = r; $('#enSpace').onclick = () => { space = !space; r(); }; draws.push(draw); r(); }
+
+/* ch3: idea kernels */
+{ let ideas;
+  const batch = () => { ideas = Array.from({length:40}, () => { const p = Math.random(); return {p, polish: Math.min(1, .3*p + .7*Math.random())}; });
+    const top = [...ideas].sort((a,b) => b.p - a.p).slice(0,5); top.forEach(x => x.great = true); };
+  const r = () => { const t = +$('#kT').value/100; $('#kTo').textContent = Math.round(t*100)+'%';
+    $('#kern').innerHTML = ideas.map(x => { const dead = x.polish < t, s = 30 + x.p*65; return `<span class="kd ${dead?'dead':''} ${x.great?'great':''}"><i style="width:${s}%;height:${s}%"></i></span>`; }).join('');
+    const kept = ideas.filter(x => x.polish >= t).length, killed = ideas.filter(x => x.great && x.polish < t).length;
+    $('#kKept').textContent = `${kept} of 40`; $('#kKill').textContent = `${killed} of 5`;
+    $('#kV').textContent = killed >= 3 ? 'Too harsh, too early. Most of the future winners are gone.' : killed >= 1 ? 'Some great kernels didn’t make it. Lower the bar for first drafts.' : kept > 30 ? 'Every great idea survived. Now test them hard as they grow.' : 'All five great ideas survived this round.'; };
+  $('#kT').oninput = r; $('#kNew').onclick = () => { batch(); r(); }; batch(); r(); }
+
+/* ch4: reuse economics */
+{ const cv = $('#ruC'), get = stage(cv), B = 150e6, U = 30e6, OPS = 10e6, PAY = 45000; let upper = false;
+  const cost = (n, ref) => B/n + (n > 1 ? B*ref : 0) + (upper ? U/n + (n > 1 ? U*.15 : 0) : U) + OPS;
+  const draw = () => { const {ctx,w,h} = get(), n = +$('#ruN').value, ref = +$('#ruR').value/100, pad = {l:52,r:16,t:18,b:30}, W = w-pad.l-pad.r, H = h-pad.t-pad.b, MX = 200e6;
+    const X = k => pad.l + (k-1)/49*W, Y = v => pad.t + H - Math.min(1, v/MX)*H;
+    ctx.clearRect(0,0,w,h); ctx.font = '11px "Geist Mono", monospace'; ctx.lineWidth = 1;
+    [0,50e6,100e6,150e6,200e6].forEach(v => { const yy = Y(v); ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(pad.l,yy); ctx.lineTo(w-pad.r,yy); ctx.stroke(); ctx.fillStyle = C.faint; ctx.fillText(money(v), 4, yy+4); });
+    ctx.fillText('1 flight', pad.l, h-8); ctx.textAlign = 'right'; ctx.fillText('50 flights per booster', w-pad.r, h-8); ctx.textAlign = 'left';
+    ctx.beginPath(); for (let k = 1; k <= 50; k++){ const x = X(k), y = Y(cost(k, ref)); k > 1 ? ctx.lineTo(x,y) : ctx.moveTo(x,y); }
+    ctx.strokeStyle = C.cool; ctx.lineWidth = 2; ctx.stroke();
+    const floor = (upper ? 0 : U) + OPS; ctx.setLineDash([3,4]); ctx.strokeStyle = C.faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(pad.l, Y(floor)); ctx.lineTo(w-pad.r, Y(floor)); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.faint; ctx.fillText(upper ? 'fixed costs' : 'thrown-away upper stage + fixed costs', pad.l+6, Y(floor)-6);
+    ctx.beginPath(); ctx.arc(X(n), Y(cost(n, ref)), 7, 0, 7); ctx.fillStyle = C.glow; ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke(); };
+  const r = () => { const n = +$('#ruN').value, ref = +$('#ruR').value/100, c = cost(n, ref), full = B + U + OPS;
+    $('#ruNo').textContent = n === 1 ? '1 (thrown away)' : n; $('#ruRo').textContent = Math.round(ref*100)+'%';
+    $('#ruCost').textContent = money(c); $('#ruKg').textContent = '$'+Math.round(c/PAY).toLocaleString();
+    $('#ruVs').textContent = n === 1 && !upper ? 'This is throwing it all away.' : `${(full/c).toFixed(1)}× cheaper than a fully expendable launch.`;
+    $('#ruU').setAttribute('aria-pressed', upper); draw(); };
+  $('#ruN').oninput = r; $('#ruR').oninput = r; $('#ruU').onclick = () => { upper = !upper; r(); }; draws.push(draw); r(); }
+
+/* ch6: ISRU */
+{ const r = () => { const p = +$('#isP').value, o = +$('#isO').value/100, ox = p*6/7, moon = ox*o, earth = p - moon, mx = 40;
+    $('#isPo').textContent = p+' t'; $('#isOo').textContent = Math.round(o*100)+'%';
+    $('#isE').style.width = earth/mx*100+'%'; $('#isM').style.width = moon/mx*100+'%';
+    $('#isEn').textContent = earth.toFixed(1)+' t'; $('#isMn').textContent = moon.toFixed(1)+' t';
+    $('#isC').textContent = money(earth*1000*1e5); $('#isS').textContent = moon ? money(moon*1000*1e5) : 'Nothing yet'; };
+  $('#isP').oninput = r; $('#isO').oninput = r; r(); }
+
+/* ch7: the phone call */
+{ let timer = null, sec = 0; const TARGET = 640;
+  const show = () => { $('#clBig').textContent = fmt(sec); $('#clBig').classList.toggle('bad', sec > 60); $('#clT').textContent = fmt(sec); };
+  const msg = s => s < 60 ? 'Ringing. The room is quiet.' : s < 180 ? 'Past a minute. The dashboard says you’d be through by now.' : s < 360 ? 'Nobody in the room says a word.' : s < TARGET ? 'Still on hold. Very still.' : '';
+  const finish = () => { clearInterval(timer); timer = null; sec = TARGET; show();
+    $('#clLog').innerHTML = '<b>Someone finally answers.</b> More than ten minutes.'; $('#clL').textContent = 'The metric measured the wrong thing. Fix the measurement, then the wait.';
+    $('#clGo').disabled = true; };
+  $('#clGo').onclick = () => { if (timer) return; sec = 0; $('#clGo').disabled = true;
+    if (RM){ finish(); return; }
+    timer = setInterval(() => { sec += 6; if (sec >= TARGET) return finish(); show(); $('#clLog').textContent = msg(sec); }, 40); };
+  $('#clReset').onclick = () => { clearInterval(timer); timer = null; sec = 0; $('#clBig').textContent = '0:58 ✓'; $('#clBig').classList.remove('bad'); $('#clT').textContent = '–';
+    $('#clLog').textContent = ''; $('#clL').textContent = 'Trust the anecdotes enough to check.'; $('#clGo').disabled = false; }; }
+
+/* ch8: paper cuts */
+{ const FLOW = [['Find the item',0],['Add to basket',0],['Open the basket',1],['Log in again',1],['Retype your address',1],['Choose delivery speed',1],['Re-enter your card number',1],['Confirm the security code',1],['Review the order',1],['Accept the terms again',1],['Place order',0]];
+  const CUTS = FLOW.filter(f => f[1]).length; let gone, one;
+  const r = () => { const live = one ? [['Find the item',0],['Buy now with 1-Click',2]] : FLOW.filter((f,i) => !gone.has(i));
+    $('#flow').innerHTML = live.map(([t,c]) => { const i = FLOW.findIndex(f => f[0] === t);
+      return c === 1 ? `<button class="st" data-c="${i}" aria-label="Remove step: ${t}">${t}</button>` : `<span class="st ${c===2?'oneclick':'keep'}">${t}</span>`; }).join('<span class="arr">→</span>');
+    const steps = live.length, fixed = one ? CUTS : gone.size;
+    $('#cutN').textContent = steps; $('#cutF').textContent = `${fixed} of ${CUTS}`; $('#cutM').style.width = (steps-2)/(FLOW.length-2)*100+'%';
+    $('#cutS').textContent = one ? 'Effortless. You barely notice you bought something.' : fixed === 0 ? 'Exhausting. Plenty of people give up halfway.' : fixed < 5 ? 'Still a chore, but less of one.' : fixed < CUTS ? 'Smooth. Most of the friction is gone.' : 'Clean. Now one bold idea could finish the job.';
+    $('#cut1').disabled = one;
+    $('#flow').querySelectorAll('[data-c]').forEach(b => b.onclick = () => { gone.add(+b.dataset.c); r(); }); };
+  $('#cut1').onclick = () => { one = true; r(); };
+  $('#cutReset').onclick = () => { gone = new Set(); one = false; r(); };
+  gone = new Set(); one = false; r(); }
+
+/* ch10: meeting builder */
+{ const Q = [
+    ['What goes on the table?', ['A slide deck','A six-page narrative memo'], 1],
+    ['How do people get the content?', ['Assume they read it beforehand','Silent reading at the start'], 1],
+    ['Who speaks first?', ['The most senior person','Junior first, the boss last'], 1],
+    ['When the talk gets interesting…', ['Stop on time regardless','Let it run long'], 1]];
+  const pick = Q.map(() => 0);
+  const r = () => { $('#mtg').innerHTML = Q.map(([q,o],qi) => `<div class="choice"><span class="q">${q}</span><div class="seg">${o.map((x,oi) => `<button class="btn" data-q="${qi}" data-o="${oi}" aria-pressed="${pick[qi]===oi}">${x}</button>`).join('')}</div></div>`).join('');
+    const hon = 15 + (pick[0]?20:0) + (pick[1]?15:0) + (pick[2]?35:0) + (pick[3]?15:0), und = 10 + (pick[0]?35:0) + (pick[1]?35:0) + (pick[3]?20:0);
+    $('#mtH').textContent = hon+'%'; $('#mtU').textContent = und+'%';
+    const all = pick.every(Boolean);
+    $('#mtW').textContent = all ? 'A crisp document and a messy meeting. Exactly the Bezos version.' : !pick[2] ? 'The boss speaks first and the room quietly agrees.' : !pick[1] ? 'Half the room is bluffing about the reading.' : !pick[0] ? 'The bullet points look tidy and hide the weak spots.' : 'Good, but the best part of the conversation gets cut off.';
+    $('#mtg').querySelectorAll('[data-q]').forEach(b => b.onclick = () => { pick[+b.dataset.q] = +b.dataset.o; r(); }); };
+  r(); }
+
+/* sorters */
+function sorter(id, cards){ const box = $('#'+id); let i = 0, right = 0, seen = 0;
+  const card = box.querySelector('.card'), v = box.querySelector('.verdict'), sc = box.querySelector('.score'), nx = box.querySelector('.nx'), picks = box.querySelectorAll('[data-pick]');
+  const show = () => { const c = cards[i % cards.length]; card.textContent = c[0]; v.textContent = ''; nx.hidden = true; picks.forEach(b => { b.disabled = false; b.setAttribute('aria-pressed','false'); }); sc.textContent = seen ? `${right} of ${seen} matched Bezos` : `${cards.length} cards`; };
+  picks.forEach(b => b.onclick = () => { const c = cards[i % cards.length], ok = +b.dataset.pick === c[1]; seen++; if (ok) right++;
+    picks.forEach(x => x.disabled = true); b.setAttribute('aria-pressed','true');
+    v.innerHTML = `<b>${ok ? 'Matches Bezos.' : 'Bezos would file it the other way.'}</b> ${c[2]}`; sc.textContent = `${right} of ${seen} matched Bezos`; nx.hidden = false; });
+  nx.onclick = () => { i++; show(); }; show(); }
+sorter('sortDoors', [
+  ['Changing the colour of a checkout button', 0, 'Easy to test and easy to undo.'],
+  ['Choosing which fuel a new rocket engine will burn', 1, 'That choice shapes the whole vehicle for years.'],
+  ['Trying a new format for the weekly meeting', 0, 'If it doesn’t work, switch back next week.'],
+  ['Selling off a core part of the company', 1, 'Very hard to reverse once it’s gone.'],
+  ['Launching a small pilot in one city', 0, 'Pilots are designed to be reversible.'],
+  ['Putting a crew on a new rocket for the first time', 1, 'With lives at stake, this deserves the slowest, most careful process.'],
+  ['Hiring a contractor for one month', 0, 'Short, cheap and easy to end.']]);
+sorter('sortDisc', [
+  ['The telescope', 0, 'Designed and built for a purpose: an invention.'],
+  ['Jupiter has moons', 1, 'Nobody made them. Seen through the telescope: a discovery.'],
+  ['A Boeing 787', 0, 'Engineered to a spec. It does what it was designed to do.'],
+  ['A language model turning out to be good at writing code', 1, 'Not designed in directly; its makers found it. That’s Bezos’s point.'],
+  ['The printing press', 0, 'A deliberate machine for a deliberate job.'],
+  ['Penicillin killing bacteria', 1, 'Fleming noticed it on a contaminated dish.'],
+  ['The jet engine', 0, 'Designed, iterated and engineered.']]);
+})();
+</script>
+</body>
+</html>

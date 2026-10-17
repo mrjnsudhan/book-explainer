@@ -10,6 +10,7 @@ Interactive, chapter-by-chapter explainers for books and podcasts, plus a booksh
 | `explainers/brief-answers.html` | *Brief Answers to the Big Questions*, Stephen Hawking (10 chapters) |
 | `explainers/the-mountain-is-you.html` | *The Mountain Is You*, Brianna Wiest (7 chapters) |
 | `explainers/naval-harsh-truths.html` | Naval Ravikant on Modern Wisdom with Chris Williamson, episode #922 (10 chapters, golden nuggets, timestamp links) |
+| `explainers/bezos-lex-fridman.html` | Jeff Bezos on the Lex Fridman Podcast, episode #405 (10 chapters, golden nuggets, timestamp links) |
 
 Each explainer has plain-language chapter summaries, an interactive exercise per chapter, a quick quiz, a light/dark toggle, and "I understand this chapter" progress saved in the browser's localStorage.
 
