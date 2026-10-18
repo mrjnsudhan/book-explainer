@@ -163,7 +163,7 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
 
 <script>
 (() => {
-/* To add a book: append one entry. c = spine colour, k = spine text colour, h/w = spine size in px. */
+/* To add a book: append one entry. c = spine colour, k = spine text colour, h/w = spine size in px, au = optional short name for the spine. */
 const BOOKS = [
   { title:'Brief Answers to the Big Questions', spine:'Brief Answers', author:'Stephen Hawking', year:2018, chapters:10,
     tag:'Physics · Cosmology', url:'explainers/brief-answers.html',
@@ -184,9 +184,14 @@ const BOOKS = [
   { title:'The 48 Laws of Power', spine:'48 Laws of Power', author:'Robert Greene', year:1998, chapters:48,
     tag:'Strategy · History', url:'explainers/48-laws-of-power.html',
     blurb:'Robert Greene\'s handbook of power, drawn from three thousand years of courts, wars and cons. The explainer gives every one of the 48 laws its own illustration, the history behind it, the reversal, and how to spot it being used on you, with six workshops like timing a wave, rewriting a rigged menu of choices and naming the law in modern situations.',
-    extras:'An illustration for every law', c:'#2A1512', k:'#E2B75E', h:322, w:86, mark:'crown' }
+    extras:'An illustration for every law', c:'#2A1512', k:'#E2B75E', h:322, w:86, mark:'crown' },
+  { title:'The Transformer Model', spine:'Transformers', author:'Vaswani et al.', au:'Vaswani', by:'A topic, not a book · based on "Attention Is All You Need" (Vaswani et al., 2017)', year:2017, chapters:10,
+    tag:'Topic · AI · Machine learning', url:'explainers/transformers.html',
+    blurb:'A topic rather than a book: the Transformer, the neural network from the 2017 paper "Attention Is All You Need" that sits under ChatGPT, Claude and Gemini. Ten short chapters follow one sentence through the machine, each with something to poke: chop text into tokens, do arithmetic on a meaning map, drag a query arrow, watch attention heads light up, translate word by word and turn the temperature dial.',
+    extras:'A hands-on lab in every chapter', c:'#0E2A2E', k:'#5CE1C6', h:310, w:78, mark:'nodes' }
 ];
 const MARK = {
+  nodes:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 18 12 6l7 12H5M5 18l7-5 7 5M12 6v7" stroke-opacity=".6"/><circle cx="12" cy="6" r="2.4" fill="currentColor"/><circle cx="5" cy="18" r="2.4" fill="currentColor"/><circle cx="19" cy="18" r="2.4" fill="currentColor"/><circle cx="12" cy="13" r="1.8" fill="currentColor" fill-opacity=".5"/></svg>',
   star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>',
   mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3" fill="currentColor" fill-opacity=".3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
   crown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 18 3.5 7l5 5L12 5l3.5 7 5-5 .5 11Z" fill="currentColor" fill-opacity=".25"/><path d="M3 21h18"/></svg>',
@@ -209,7 +214,7 @@ $('#counts').innerHTML = `<span><b>${BOOKS.length}</b> on the shelf</span><span>
 
 /* shelf */
 const books = $('#books');
-books.innerHTML = BOOKS.map((b,i) => `<a class="spine" data-i="${i}" href="${b.url}" style="--c:${b.c};--k:${b.k};--w:${b.w}px;--h:${b.h}px" aria-label="${b.title} by ${b.author}, open the explainer">${MARK[b.mark] || ''}<span class="ttl">${b.spine}</span><span class="au">${b.author.split(' ').slice(-1)[0]}</span></a>`).join('')
+books.innerHTML = BOOKS.map((b,i) => `<a class="spine" data-i="${i}" href="${b.url}" style="--c:${b.c};--k:${b.k};--w:${b.w}px;--h:${b.h}px" aria-label="${b.title} by ${b.author}, open the explainer">${MARK[b.mark] || ''}<span class="ttl">${b.spine}</span><span class="au">${b.au || b.author.split(' ').slice(-1)[0]}</span></a>`).join('')
   + `<div class="ghost" style="height:250px" aria-hidden="true"><span>Next book</span></div><div class="ghost lean" style="height:230px" aria-hidden="true"><span>Coming soon</span></div><div class="bookend" aria-hidden="true"></div>`;
 
 /* card */
