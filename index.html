@@ -185,6 +185,10 @@ const BOOKS = [
     tag:'Strategy · History', url:'explainers/48-laws-of-power.html',
     blurb:'Robert Greene\'s handbook of power, drawn from three thousand years of courts, wars and cons. The explainer gives every one of the 48 laws its own illustration, the history behind it, the reversal, and how to spot it being used on you, with six workshops like timing a wave, rewriting a rigged menu of choices and naming the law in modern situations.',
     extras:'An illustration for every law', c:'#2A1512', k:'#E2B75E', h:322, w:86, mark:'crown' },
+  { title:'The Art of War', spine:'The Art of War', author:'Sun Tzu', year:-500, when:'c. 5th century BC', chapters:13,
+    tag:'Strategy · Classics', url:'explainers/art-of-war.html',
+    blurb:'Sun Tzu\'s 2,500-year-old book on strategy, still read by generals, coaches and founders. The explainer gives each of the 13 chapters its own illustration, its key principles, a story from history where it was followed or ignored, and its limits, with five workshops like the temple count, striking where the enemy is thin, reading the signs and pricing your spies.',
+    extras:'An illustration for every chapter', c:'#22302D', k:'#EC6A4C', h:296, w:74, mark:'sword' },
   { title:'The Transformer Model', spine:'Transformers', author:'Vaswani et al.', au:'Vaswani', by:'A topic, not a book · based on "Attention Is All You Need" (Vaswani et al., 2017)', year:2017, chapters:10,
     tag:'Topic · AI · Machine learning', url:'explainers/transformers.html',
     blurb:'A topic rather than a book: the Transformer, the neural network from the 2017 paper "Attention Is All You Need" that sits under ChatGPT, Claude and Gemini. Ten short chapters follow one sentence through the machine, each with something to poke: chop text into tokens, do arithmetic on a meaning map, drag a query arrow, watch attention heads light up, translate word by word and turn the temperature dial.',
@@ -195,6 +199,7 @@ const MARK = {
   star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>',
   mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11" rx="3" fill="currentColor" fill-opacity=".3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
   crown:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 18 3.5 7l5 5L12 5l3.5 7 5-5 .5 11Z" fill="currentColor" fill-opacity=".25"/><path d="M3 21h18"/></svg>',
+  sword:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M19.5 3.5 20.5 3.5 20.5 4.5 9 16 8 15Z" fill="currentColor" fill-opacity=".3"/><path d="M5.5 12.5l6 6M7 17l-3.5 3.5"/></svg>',
   peak:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2 20 9 7l4 6 2.5-3.5L22 20Z" fill="currentColor" fill-opacity=".25"/><path d="M9 7l-1.6 3h3.3Z" fill="currentColor"/></svg>'
 };
 const $ = s => document.querySelector(s);
@@ -222,7 +227,7 @@ function show(i){ const b = BOOKS[i];
   document.querySelectorAll('.spine').forEach(s => s.classList.toggle('sel', +s.dataset.i === i));
   const cv = $('#cover'); cv.style.setProperty('--c', b.c); cv.style.setProperty('--k', b.k);
   cv.innerHTML = `${MARK[b.mark] || ''}<span class="ct">${b.title}</span><span class="ca">${b.author}</span>`;
-  $('#cTag').textContent = b.tag; $('#cTitle').textContent = b.title; $('#cBy').textContent = b.by || `by ${b.author} · ${b.year}`;
+  $('#cTag').textContent = b.tag; $('#cTitle').textContent = b.title; $('#cBy').textContent = b.by || `by ${b.author} · ${b.when || b.year}`;
   $('#cBlurb').textContent = b.blurb;
   $('#cMeta').innerHTML = `<span><b>${b.chapters}</b> chapters</span><span>${b.extras}</span><span>Progress saved per chapter</span>`;
   $('#cOpen').href = b.url;
@@ -232,7 +237,7 @@ document.querySelectorAll('.spine').forEach(s => { const i = +s.dataset.i;
 show(BOOKS.length - 1);
 
 /* list */
-$('#rows').innerHTML = BOOKS.map(b => `<a class="rowlink" href="${b.url}" style="--c:${b.c}"><i aria-hidden="true"></i><span><span class="t">${b.title}</span><br><span class="a">${b.author} · ${b.year}</span></span><span class="n">${b.chapters} ch →</span></a>`).join('');
+$('#rows').innerHTML = BOOKS.map(b => `<a class="rowlink" href="${b.url}" style="--c:${b.c}"><i aria-hidden="true"></i><span><span class="t">${b.title}</span><br><span class="a">${b.author} · ${b.when || b.year}</span></span><span class="n">${b.chapters} ch →</span></a>`).join('');
 })();
 </script>
 </body></html>

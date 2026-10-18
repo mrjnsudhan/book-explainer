@@ -1,0 +1,1009 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Art of War, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap&text=%E5%AD%AB%E5%AD%90%E5%85%B5%E6%B3%95%E8%A8%88%E4%BD%9C%E6%88%B0%E8%AC%80%E6%94%BB%E5%BD%A2%E5%8B%A2%E8%99%9B%E5%AF%A6%E8%BB%8D%E7%88%AD%E4%B9%9D%E8%AE%8A%E8%A1%8C%E5%9C%B0%E7%81%AB%E7%94%A8%E9%96%93">
+<style>
+/* Layout: an ink-wash field manual. Same shell as the other guides (chapter rail + one "station" per chapter: an illustration,
+   the chapter in short, its key principles, the history, the limits, how to use it today), with a workshop after each part.
+   Dark-first: sumi ink with a cinnabar seal accent and a slate-blue second series for the other side; light is rice paper. */
+:root{
+  color-scheme: dark;
+  --ink:#0E1112;          /* page: sumi ink */
+  --panel:#161A1B;
+  --panel-2:#1F2526;
+  --line:#323A3B;
+  --text:#EEEAE0;
+  --muted:#AEB3AC;
+  --faint:#76807C;
+  --glow:#EC6A4C;         /* cinnabar seal: the one accent, your side */
+  --glow-soft:rgba(236,106,76,.12);
+  --cool:#7DB3CC;         /* slate blue: second series, the other side */
+  --cool-soft:rgba(125,179,204,.12);
+  --good:#9BD99B;
+  --bad:#F0B058;
+  --soft:#D6D8D0;
+  --deep:#0B0D0E;
+  --toc-bg:rgba(22,26,27,.74);
+  --glow-line:rgba(236,106,76,.34);
+  --on-glow:#1A0905;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --f-han:"Noto Serif TC", "Songti TC", "Noto Serif CJK TC", "PMingLiU", serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F2EEE3;--panel:#FCFAF4;--panel-2:#E7E1D2;--line:#D3CBB8;--text:#1A1D1C;--muted:#4E5551;--faint:#838A84;
+  --glow:#B23A1F;--glow-soft:rgba(178,58,31,.08);--cool:#2E6C88;--cool-soft:rgba(46,108,136,.09);--good:#2A7F3A;--bad:#A86410;
+  --soft:#2C302E;--deep:#F9F6EE;--toc-bg:rgba(252,250,244,.86);--glow-line:rgba(178,58,31,.3);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F2EEE3;--panel:#FCFAF4;--panel-2:#E7E1D2;--line:#D3CBB8;--text:#1A1D1C;--muted:#4E5551;--faint:#838A84;
+  --glow:#B23A1F;--glow-soft:rgba(178,58,31,.08);--cool:#2E6C88;--cool-soft:rgba(46,108,136,.09);--good:#2A7F3A;--bad:#A86410;
+  --soft:#2C302E;--deep:#F9F6EE;--toc-bg:rgba(252,250,244,.86);--glow-line:rgba(178,58,31,.3);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:40px 36px}
+#board{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:64ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint)}
+.about span b{color:var(--muted);font-weight:500}
+.lens{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;max-width:900px}
+.lens div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);font-size:14px;color:var(--soft)}
+.lens b{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.lens .use b{color:var(--glow)} .lens .def b{color:var(--cool)}
+
+/* the 48 at a glance */
+.glance-head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:6px}
+.glance-head h3{font-family:var(--f-display);font-weight:400;font-size:30px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.glance{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tile{display:grid;grid-template-rows:auto auto;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);
+  overflow:hidden;transition:border-color .2s, transform .2s, opacity .25s}
+.tile:hover{border-color:var(--glow);transform:translateY(-2px)}
+.tile svg{display:block;width:100%;height:auto;background:var(--deep);border-bottom:1px solid var(--line)}
+.tile .cap{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;padding:8px 10px 10px}
+.tile .n{font-family:var(--f-mono);font-size:11px;color:var(--glow)}
+.tile .q{font-size:13px;line-height:1.25}
+.tile.dim{opacity:.22}
+.tile.done .n::after{content:" ✓";color:var(--good)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);grid-template-rows:auto minmax(0,1fr)}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+#railLinks{overflow-y:auto;display:grid;gap:1px;align-content:start;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.rail .act{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:4px 10px;border-radius:8px;
+  color:var(--muted);text-decoration:none;font-size:13px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.rail a.ws-link{color:var(--glow)}
+.rail a.ws-link .tick{border-radius:2px;transform:rotate(45deg) scale(.8)}
+.chips{display:none}
+
+/* ---------- acts ---------- */
+.act-head{display:grid;gap:10px;padding-block:56px 6px;border-top:1px solid var(--line)}
+.act-head:first-child{border-top:0;padding-top:8px}
+.act-head .eyebrow span{color:var(--glow)}
+.act-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,6.5vw,72px);line-height:1}
+.act-head p{max-width:66ch;color:var(--muted)}
+
+/* ---------- a law ---------- */
+.law{display:grid;gap:22px;padding-block:48px;border-top:1px solid var(--line)}
+.act-head + .law{border-top:0;padding-top:30px}
+.law-head{display:grid;gap:10px}
+.law-head .eyebrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.law-head .eyebrow span.no{color:var(--glow)}
+.tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.law h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(34px,5.2vw,56px);line-height:1.02}
+.law-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start}
+.ill{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%, var(--panel-2), var(--deep))}
+.ill svg{display:block;width:100%;height:auto}
+.ill figcaption{display:flex;gap:10px;align-items:baseline;padding:11px 16px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.ill figcaption b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow);font-weight:500;white-space:nowrap}
+.side{display:grid;gap:14px}
+.short{display:grid;gap:6px;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl, .note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:17.5px;line-height:1.5}
+.note{display:grid;align-content:start;gap:6px;padding:14px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+.note p{color:var(--soft);font-size:15px}
+.note.trans .lbl{color:var(--cool)}
+.note.obs .lbl{color:var(--glow)}
+.note.rev .lbl{color:var(--muted)}
+.note.def{border-left:3px solid var(--cool)}
+.note.def .lbl{color:var(--cool)}
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.law-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* illustration palette: strokes first, fills after so a fill class wins when both are set */
+.ill svg, .tile svg{stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+.tile text{display:none}
+.k-tx{stroke:var(--text);fill:none}
+.k-au{stroke:var(--glow);fill:none}
+.k-cr{stroke:var(--cool);fill:none}
+.k-mu{stroke:var(--muted);fill:none}
+.k-fa{stroke:var(--faint);fill:none}
+.k-ln{stroke:var(--line);fill:none}
+.k-ink{stroke:var(--deep);fill:none}
+.f-tx{fill:var(--text)}
+.f-au{fill:var(--glow)}
+.f-cr{fill:var(--cool)}
+.f-mu{fill:var(--muted)}
+.f-fa{fill:var(--faint)}
+.f-pn{fill:var(--panel-2)}
+.f-ln{fill:var(--line)}
+.f-ink{fill:var(--deep)}
+.f-ausoft{fill:var(--glow);opacity:.16}
+.f-crsoft{fill:var(--cool);opacity:.16}
+.ill text, .tile text{font-family:var(--f-mono);font-size:9px;fill:var(--faint);stroke:none}
+.ill text.big, .tile text.big{font-size:12px}
+@media (prefers-reduced-motion: no-preference){
+  .ill .bob{animation:bob 3.2s ease-in-out infinite;transform-box:fill-box}
+  .ill .glint{animation:glint 2.6s ease-in-out infinite}
+  .ill .sway{animation:sway 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+  .ill .drift{animation:drift 6s ease-in-out infinite;transform-box:fill-box}
+  .ill .spin{animation:spin 14s linear infinite;transform-box:fill-box;transform-origin:center}
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glint{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- workshops ---------- */
+.ws{display:grid;gap:24px;padding-block:52px;border-top:1px solid var(--line)}
+.ws-head{display:grid;gap:12px}
+.ws-head .eyebrow span{color:var(--glow)}
+.ws h2{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1.02}
+.ws-head p{max-width:66ch;color:var(--muted)}
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:9px;height:9px;transform:rotate(45deg);background:var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;max-width:100%;touch-action:pan-y}
+.lab .stage{position:relative}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;align-content:start;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+/* sorter */
+.sorter{display:grid;gap:14px;padding:22px 18px}
+.card{padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);font-family:var(--f-display);font-size:clamp(21px,3.2vw,27px);line-height:1.25;min-height:4.4em;display:flex;align-items:center}
+.sorter .row .btn{font-size:14px;padding:9px 16px}
+.verdict{font-size:14px;color:var(--muted);min-height:1.6em}
+.verdict b{color:var(--text);font-weight:500}
+.score{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+/* options game */
+.deal{display:grid;gap:16px;padding:20px 18px}
+.offer{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.choice{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;display:grid;gap:6px;transition:border-color .15s,transform .15s}
+.choice:hover:not(:disabled){border-color:var(--glow);transform:translateY(-2px)}
+.choice:disabled{cursor:default}
+.choice .h{font-family:var(--f-display);font-size:22px;line-height:1.1}
+.choice .d{font-size:13px;color:var(--muted)}
+.choice .m{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.choice.hidden-opt{border-style:dashed;border-color:var(--cool)}
+.choice.hidden-opt .m{color:var(--cool)}
+.quiz{display:grid;gap:12px;max-width:72ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--glow)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--glow-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--cool-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.quizzes{display:grid;gap:12px}
+.qscore{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:10px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .law-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3}
+  .short p{font-size:16px}
+  .hero{padding-top:28px}
+  .glance{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+
+/* ---------- additions for this book ---------- */
+.hero .seal{position:absolute;right:0;top:34px;font-family:var(--f-han);font-weight:500;font-size:clamp(54px,9vw,112px);line-height:1;writing-mode:vertical-rl;
+  color:var(--glow);opacity:.18;letter-spacing:.06em;pointer-events:none;user-select:none}
+.intro{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;max-width:900px;padding:16px 18px;border:1px solid var(--glow-line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px)}
+.intro .stamp{grid-row:span 2;width:40px;height:40px;border-radius:6px;background:var(--glow);color:var(--on-glow);display:grid;place-items:center;font-family:var(--f-han);font-size:21px;line-height:1}
+.intro b{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--glow)}
+.intro p{font-size:14.5px;color:var(--soft)}
+.han{font-family:var(--f-han);font-weight:500;letter-spacing:.04em;color:var(--glow)}
+.law-head .eyebrow .han{font-size:15px;letter-spacing:.08em}
+.law-head .alt{font-size:14px;color:var(--faint)}
+.law-head .alt i{color:var(--muted)}
+.keys{display:grid;gap:0;padding:6px 0;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+.keys .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow);padding:10px 18px 4px}
+.keys ol{list-style:none;margin:0;padding:0;counter-reset:k}
+.keys li{counter-increment:k;display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;padding:9px 18px;border-top:1px solid var(--line);font-size:15px;color:var(--soft)}
+.keys li:first-child{border-top:0}
+.keys li::before{content:counter(k);font-family:var(--f-mono);font-size:11px;color:var(--glow);padding-top:4px}
+.keys li b{color:var(--text);font-weight:500}
+.note.use{border-left:3px solid var(--glow)}
+.note.use .lbl{color:var(--glow)}
+.note.miss .lbl{color:var(--cool)}
+.note.kept .lbl{color:var(--glow)}
+.tile .cap .han{font-size:11px;opacity:.8;grid-column:2;margin-top:-2px}
+/* temple count */
+.factors{display:grid;gap:8px;padding:16px 18px 4px}
+.factor{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center}
+.factor .nm{font-size:14px;color:var(--text)}
+.factor .nm small{display:block;font-size:12.5px;color:var(--faint)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--panel-2)}
+.seg button{font:inherit;font-size:12.5px;color:var(--muted);background:transparent;border:0;padding:6px 11px;cursor:pointer}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--glow);color:var(--on-glow)}
+.seg button[aria-pressed=true][data-v="-1"]{background:var(--cool);color:var(--ink)}
+.seg button[aria-pressed=true][data-v="0"]{background:var(--muted);color:var(--ink)}
+.toggle{display:inline-flex;gap:8px;align-items:center;font-size:13.5px;color:var(--muted);cursor:pointer}
+.toggle input{accent-color:var(--glow);width:16px;height:16px}
+@media (max-width: 560px){
+  .factor{grid-template-columns:minmax(0,1fr)}
+  .hero .seal{opacity:.12}
+}
+</style>
+</head>
+<body>
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <canvas id="board" aria-hidden="true"></canvas>
+  <div class="seal" aria-hidden="true">孫子兵法</div>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter illustrated guide to Sun Tzu's book on strategy</div>
+    <h1>The Art of War,<br><em>Explained</em></h1>
+    <p class="lede">Thirteen short chapters, written in China about 2,500 years ago, that are still read by generals, coaches, founders and negotiators. Each chapter here gets <b>its own illustration</b>, the idea in plain language, its key principles, a story from history where it was followed or ignored, and its limits. After each part there's a <b>workshop</b> with a hands-on exercise and a quick quiz. Mark a chapter understood and your progress is remembered on this device.</p>
+    <div class="lens">
+      <div class="use"><b>Read it as strategy</b>How to size up a contest, choose your ground, use surprise and momentum, and win at the lowest cost.</div>
+      <div class="def"><b>Read it as restraint</b>Sun Tzu's real hero is the general who wins without a fight, never acts in anger, and knows when not to attack.</div>
+    </div>
+    <div class="intro"><span class="stamp" aria-hidden="true">孫</span><b>The test at the Wu court</b>
+      <p>The old story goes that King Helü of Wu, having read the thirteen chapters, asked Sun Tzu to prove them by drilling 180 palace women. Sun Tzu split them into two companies under the king's two favourite concubines and explained the commands. When the women laughed, he said unclear orders were the general's fault, and explained again. When they laughed a second time, he said clear orders not obeyed were the officers' fault, and had both captains executed despite the king's protests. After that the companies drilled in perfect silence, and the king made him a general.</p></div>
+    <div class="glance-head">
+      <h3>The 13 chapters at a glance</h3>
+      <div class="filters" id="filters"></div>
+    </div>
+    <nav class="glance" id="glance" aria-label="All 13 chapters"></nav>
+    <div class="row"><button class="btn primary" id="draw" type="button">Draw a principle</button><span class="score" id="drawTxt"></span></div>
+    <div class="about">
+      <span><b>Written</b> around the 5th century BC; traditionally credited to Sun Wu, a general of the state of Wu</span>
+      <span><b>Length</b> 13 chapters, about 6,000 Chinese characters</span>
+      <span><b>Read time</b> about 3 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 13 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks"></div>
+  </aside>
+  <main id="main">
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+    <div id="laws"></div>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Art of War</i>, attributed to Sun Tzu. The explanations and illustrations are original, written and drawn in our own words; chapter titles follow Lionel Giles's 1910 English translation, the historical stories are retold briefly, and the exercises are simplified models of the book's ideas, not measurements. Sun Tzu wrote about real war; the modern "use it today" notes are about competition and conflict in everyday life.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+<script>
+/* ---------- the 13 chapters: content (original summaries) ---------- */
+const CATS = {plan:'Planning', force:'Force and timing', ground:'Ground and movement', know:'Knowledge and deception'};
+const LAWS = [
+{ t:'Laying Plans', han:'計', alt:'Calculations', s:'Laying plans', c:'plan',
+  short:'War is a matter of life and death for a state, so it must be studied before it is fought. Compare both sides on five fundamentals, and remember that all warfare rests on deception: look weak when strong, far when near, and attack where the enemy is unprepared.',
+  cap:'Before any army moves, the general counts in the temple. The side with more rods usually wins.',
+  keys:['<b>Five fundamentals.</b> The Way (whether the people are united with their leader), Heaven (weather and timing), Earth (terrain and distance), the Commander (wisdom, trustworthiness, care, courage, firmness) and Method (organisation, supply, discipline).',
+        '<b>All warfare is deception.</b> When able, seem unable; when active, seem idle; when near, seem far away. Bait the greedy, unsettle the angry, tire the rested.',
+        '<b>Win in the temple first.</b> The side that makes more calculations before the battle usually wins it. The one that makes few, or none, usually loses.'],
+  kept:'In 342 BC the strategist Sun Bin (said to be Sun Tzu\'s descendant) was retreating before the army of Wei. Each day he ordered fewer cooking fires lit in camp. The Wei general Pang Juan counted the fires, decided Sun Bin\'s troops were deserting, and raced ahead with light forces into a narrow valley at Maling, where crossbowmen were waiting. His army was destroyed.',
+  miss:'Pang Juan is the warning: he trusted a sign the other side was making for him to see. He measured the fires, but not who lit them.',
+  rev:'Deception spends trust. Used on rivals it can win a contest; used on allies, customers or your own team it eventually costs more than it gains.',
+  use:'Before any big contest (a launch, a pitch, a negotiation) score yourself and the other side honestly on the five factors. Where you guessed instead of knew, that\'s your homework.' },
+{ t:'Waging War', han:'作戰', alt:'Doing battle', s:'Waging war', c:'plan',
+  short:'War is ruinously expensive: every day in the field burns silver, wears out soldiers and empties the treasury. So aim for a quick, decisive result, feed your army from the enemy\'s supplies rather than your own, and treat captured soldiers well so they add to your strength.',
+  cap:'Every day on the road costs silver. The longer the road, the heavier the cart.',
+  keys:['<b>Speed over cleverness.</b> A war won quickly, even clumsily, beats a brilliant one that drags on. No country has ever profited from a long war.',
+        '<b>Feed on the enemy.</b> One cartload of the enemy\'s grain is worth twenty of your own, which you would have to haul across the country.',
+        '<b>Make captives an asset.</b> Reward the soldiers who take enemy supplies, and treat prisoners kindly, so each victory leaves you stronger.'],
+  miss:'In 1812 Napoleon invaded Russia with more than half a million men. The Russians retreated and burned the crops and towns behind them, so the army couldn\'t feed itself from the land. The campaign dragged into winter, and only a small fraction of the army came back.',
+  miss2:'King Pyrrhus of Epirus beat Rome at Asculum in 279 BC but lost so many of his best men that he is said to have remarked one more such victory would ruin him. A "Pyrrhic victory" still means a win that costs too much.',
+  rev:'Speed is the rule for the side far from home. The defender can do the opposite on purpose: Rome\'s Fabius Maximus avoided battle with Hannibal and let a long war wear him down, which is why patient delay is still called a Fabian strategy.',
+  use:'Count the running cost of every conflict you\'re in (a dispute, a project gone wrong, a rivalry). If it is open-ended, either find a way to end it fast or find a way out.' },
+{ t:'Attack by Stratagem', han:'謀攻', alt:'Planning the attack', s:'Attack by stratagem', c:'plan',
+  short:'The best victory is the one won without fighting. Take the enemy whole rather than destroying it: first defeat their plans, then break their alliances, only then fight their army, and attack walled cities only as a last resort. Know the enemy and know yourself, and you need not fear a hundred battles.',
+  cap:'The army stands still. A letter does the work.',
+  keys:['<b>The order of attack.</b> Best is to defeat the enemy\'s strategy; next, their alliances; next, their army. Worst of all is besieging a walled city.',
+        '<b>Numbers decide the move.</b> Ten to one, surround them. Five to one, attack. Two to one, divide them. Even, fight if you can. Fewer, slip away. Much weaker, avoid them.',
+        '<b>Don\'t let the ruler hobble the army.</b> A ruler who gives battlefield orders from the palace, without understanding the field, throws away victory.',
+        '<b>Know them, know yourself.</b> Know both and you won\'t be in danger in a hundred battles. Know only yourself and you\'ll win one and lose one. Know neither and you\'ll lose every time.'],
+  kept:'In 204 BC, fresh from his victory at Jingxing (Chapter 11), the Han general Han Xin wanted to march on the state of Yan next. An adviser told him his troops were exhausted, and that a letter would do more than a siege. Han Xin sent an envoy describing his victory and his strength, and Yan submitted without a battle.',
+  miss:'At Changping in 260 BC, the veteran general Lian Po held Zhao\'s army in strong defences against Qin. The impatient king of Zhao replaced him with Zhao Kuo, a young man who had read every military book but never commanded. Zhao Kuo attacked at once, was cut off and surrounded, and Zhao\'s army was annihilated. (How Qin got the king to make that swap is in Chapter 13.)',
+  rev:'Winning without fighting only works when you can clearly fight and win. A threat nobody believes is a bluff, and bluffs get called.',
+  use:'Before you confront someone, ask whether you can change their plan instead: offer them a better option, remove their reason to fight, or make the outcome obvious so they concede.' },
+{ t:'Tactical Dispositions', han:'形', alt:'Positioning', s:'Make yourself unbeatable', c:'force',
+  short:'Good fighters first make themselves impossible to defeat, then wait for the enemy to become possible to defeat. Being unbeatable is in your own hands; the chance to win is given to you by the enemy\'s mistakes. Winners win first and then fight; losers fight first and then look for a way to win.',
+  cap:'Behind the wall, the defenders wait. In the enemy line, a gap is opening.',
+  keys:['<b>Defence is in your hands; victory is in theirs.</b> You can always make yourself secure. You can\'t force the enemy to make a mistake, only be ready when they do.',
+        '<b>Win, then fight.</b> The winning army has already secured its victory before battle begins. The battle is just collecting it.',
+        '<b>Easy victories look unimpressive.</b> The truly skilled general wins battles that seem easy, so earns no fame for courage or cleverness. The hard part was done before anyone noticed.',
+        '<b>Pent-up water.</b> A well-prepared army hits like water released from a deep gorge.'],
+  kept:'In 1809–10 Wellington had a chain of forts, walls and flooded valleys built in secret across the hills north of Lisbon: the Lines of Torres Vedras. When the French under Masséna arrived, they found a position they couldn\'t attack. They camped outside through the winter, starving, and finally retreated with heavy losses.',
+  miss:'On the third day at Gettysburg in 1863, Robert E. Lee sent some 12,500 men across nearly a mile of open field against the Union army on Cemetery Ridge. Pickett\'s Charge was fighting first and hoping for victory; about half the attackers were killed, wounded or captured.',
+  rev:'A strong position can become a trap. At Dien Bien Phu in 1954 the French built a fortified base and dared the Viet Minh to attack; the Viet Minh hauled artillery up the surrounding hills and the "unbeatable" base fell.',
+  use:'Make the part you control solid first: your finances, your skills, your reputation, your product\'s basics. Then watch for the opening a competitor gives you.' },
+{ t:'Energy', han:'勢', alt:'Momentum', s:'Momentum', c:'force',
+  short:'Victory comes from momentum, the energy of a well-placed force, more than from the strength of individual soldiers. Mix the expected (direct) with the unexpected (indirect) in endless combinations, build up force like a drawn crossbow, and release it in one short, sharp moment.',
+  cap:'A round stone on a steep slope. The push is small; the slope does the work.',
+  keys:['<b>Direct and indirect.</b> Engage with the ordinary force, win with the extraordinary one. Just as five notes make endless melodies, these two combine in endless ways.',
+        '<b>Stored energy, sudden release.</b> Momentum is like a drawn crossbow; timing is like pulling the trigger. A falcon\'s strike breaks its prey because it is perfectly timed and very short.',
+        '<b>Use the slope.</b> Logs and stones lie still on flat ground but roll on a slope. Good generals put their troops where the situation itself carries them, instead of demanding more from each person.'],
+  kept:'At Cannae in 216 BC Hannibal faced a much larger Roman army. He let his centre bend back under the Roman push (the direct force), while his African infantry and cavalry swung around both flanks and the rear (the indirect one). The Romans, crowded into the pocket, were almost wiped out.',
+  rev:'Once released, momentum can\'t be called back: a fired crossbow needs time to reload. Commit your stored energy only when the moment is right, or you\'ll be empty when the real chance arrives.',
+  use:'Don\'t rely on everyone trying harder. Set up the situation (deadlines, incentives, a launch timed to a trend) so that it carries people forward, and pair your obvious move with a surprise.' },
+{ t:'Weak Points and Strong', han:'虛實', alt:'Empty and full', s:'Weak points and strong', c:'force',
+  short:'Arrive first and make the enemy come to you. Strike where they are empty and avoid where they are full. Keep your own plans hidden while you make the enemy reveal theirs: then you can concentrate everything while they must spread out to guard every place you might attack.',
+  cap:'They guard five places, so each one is thin. You strike one with everything.',
+  keys:['<b>Make them come to you.</b> Whoever reaches the field first is fresh; whoever hurries to catch up is tired. Lure the enemy with advantage, or block them with harm.',
+        '<b>Prepared everywhere, weak everywhere.</b> If the enemy doesn\'t know where you\'ll strike, they must guard everything, and every guard is thin. You, meanwhile, are concentrated.',
+        '<b>Be like water.</b> Water avoids high ground and flows into low places. An army should avoid strength and strike weakness, and change its shape to fit the ground. No situation stays the same.'],
+  kept:'In 354 BC Wei besieged Handan, the capital of Zhao. Instead of marching to Handan, Sun Bin attacked toward Wei\'s own capital, which was nearly undefended. The Wei general Pang Juan had to abandon the siege and rush home, and Sun Bin ambushed his tired army on the road at Guiling. The trick is still called "besiege Wei to rescue Zhao."',
+  kept2:'In 1940 France\'s best troops faced Belgium and the fortified Maginot Line. Germany sent its tanks through the hilly Ardennes forest, which was thinly held because it was thought impassable, and broke through to the Channel in under two weeks.',
+  rev:'A weak point that looks too inviting may be bait. Before you pour everything into the gap, ask why it\'s open (see Chapter 7: don\'t chase an enemy pretending to flee).',
+  use:'Don\'t take on a strong competitor where they are strongest. Find the customer, market or problem they can\'t cover, and concentrate there.' },
+{ t:'Maneuvering', han:'軍爭', alt:'The armed contest', s:'Maneuvering', c:'ground',
+  short:'The hardest part of war is getting to the right place first. Sometimes the long way round is the fastest: take a winding path, distract the enemy, and arrive before them. But forced marches and racing ahead leave your army scattered, so move as one, use local guides, and know the ground.',
+  cap:'Wind, forest, fire, mountain. And the winding road reaches the flag before the straight one.',
+  keys:['<b>Make the crooked straight.</b> Take an indirect route and lure the enemy off with bait, so that you set out after them and still arrive first.',
+        '<b>Wind, forest, fire, mountain.</b> Be swift as the wind, quiet as a forest, raid like fire, stand still as a mountain, be as hard to read as darkness, and strike like thunder.',
+        '<b>Manage spirit.</b> Soldiers are keen in the morning, flag by midday and think of home by evening. Avoid the enemy when they\'re keen; strike when they\'re sluggish.',
+        '<b>Rules of engagement.</b> Don\'t attack uphill, don\'t chase an enemy who flees too easily, don\'t block an army heading home, and leave a surrounded enemy a way out.'],
+  kept:'In 218 BC Hannibal led his army, with war elephants, over the Alps into Italy, a route the Romans thought impossible. He arrived where no one was ready for him. The cost was brutal, though: he may have lost close to half his men on the march, the danger Sun Tzu warns about.',
+  kept2:'The Japanese warlord Takeda Shingen (1521–73) carried the words "swift as wind, quiet as forest, fierce as fire, immovable as mountain" from this chapter on his battle banner. The motto is still known in Japan as fūrinkazan.',
+  rev:'Leaving a surrounded enemy a way out is good tactics, not mercy: a cornered enemy fights to the death. But sometimes you want that desperation for your own troops, which is the twist in Chapter 11.',
+  use:'When competitors all race down the obvious route, look for the indirect one. And when you corner someone in an argument or deal, leave them a face-saving way out.' },
+{ t:'Variation in Tactics', han:'九變', alt:'The nine variations', s:'Variation in tactics', c:'ground',
+  short:'A general must know when to break the rules. There are roads not to take, armies not to attack, cities not to besiege, ground not to contest, and even orders from the ruler not to obey. Weigh gains and dangers together, and beware the five faults of character that destroy commanders.',
+  cap:'Not every road should be taken, and not every order should be followed.',
+  keys:['<b>Rules have exceptions.</b> Knowing the standard moves isn\'t enough; a general who can\'t adapt them to the situation can\'t use the ground or his troops well.',
+        '<b>Mix gain with danger.</b> A wise leader always considers both. Count the risk in every advantage and the opportunity in every danger.',
+        '<b>Rely on readiness.</b> Don\'t count on the enemy not coming; count on being ready when they do.',
+        '<b>The five faults.</b> Recklessness gets a general killed; cowardice gets him captured; a hot temper can be provoked; touchy pride can be shamed; too much worry for his men can be exploited.'],
+  kept:'At Copenhagen in 1801 Horatio Nelson\'s superior signalled him to break off the attack. Nelson reportedly raised his telescope to his blind eye and said he couldn\'t see the signal. He pressed on and won.',
+  kept2:'In 234 AD Zhuge Liang wanted Sima Yi to come out and fight, so he sent him a woman\'s headdress and clothes to call him a coward. Sima Yi refused to take the bait, stayed in his defences, and outlasted the invasion. He knew his temper and pride were targets.',
+  miss:'In 1876 George Custer split his regiment and attacked a huge Lakota and Cheyenne camp at the Little Bighorn without knowing its size. Recklessness: he and every man with him were killed.',
+  rev:'"Some orders shouldn\'t be obeyed" is a dangerous licence. In Korea in 1951 Douglas MacArthur publicly challenged his president\'s policy and was dismissed. The exception is for clear battlefield judgment, not personal disagreement.',
+  use:'Know your own fault from the five. If you\'re easy to provoke or quick to take offence, someone will eventually use it; decide in advance how you\'ll respond.' },
+{ t:'The Army on the March', han:'行軍', alt:'Moving the army', s:'Reading the signs', c:'know',
+  short:'How to camp, cross rivers and move through mountains and marshes, and above all how to read the enemy from small signs: birds, dust, voices, behaviour. Treat your soldiers with kindness, but keep them in line with firm discipline.',
+  cap:'Birds burst from the trees: an ambush. Dust tall and narrow: chariots. Low and wide: foot soldiers.',
+  keys:['<b>Choose good ground.</b> Camp high and in the sun, with water and supplies close. After crossing a river, move away from it quickly.',
+        '<b>Strike when they\'re half across.</b> Don\'t meet an enemy at the water\'s edge; let half of them cross, then attack.',
+        '<b>Read the signs.</b> Humble words while preparations increase mean they\'re about to advance. Fierce talk and a show of attack may cover a retreat. Soldiers leaning on their spears are hungry. Birds settling on a camp mean it\'s empty.',
+        '<b>Kindness and discipline.</b> Punish soldiers before they\'re loyal and they\'ll resent you; fail to punish once they are loyal and they\'ll become useless. Win them with care, control them with rules.'],
+  kept:'During his campaign against the state of Qi, Han Xin faced an enemy army across the Wei River. At night he had the river upstream dammed with sandbags, waded across, attacked and then pretended to flee. The enemy general Long Ju chased him into the riverbed. Han Xin\'s men broke the dam; the water cut the enemy army in two, and Long Ju was killed.',
+  miss:'At the Hong River in 638 BC, Duke Xiang of Song was urged to attack the Chu army while it was crossing, and again before it formed up. He refused, saying a gentleman doesn\'t strike an unready enemy. Song was badly beaten and the Duke wounded, and his "chivalry" became a byword in China for foolishness.',
+  rev:'Signs can be faked. Pang Juan read Sun Bin\'s shrinking campfires exactly as Sun Bin intended (Chapter 1). Read signs, but ask who might want you to see them.',
+  use:'In meetings and negotiations, watch behaviour over words: a sudden softening while activity increases, or loud threats from a side that\'s quietly packing up, both tell you something.' },
+{ t:'Terrain', han:'地形', alt:'The shape of the ground', s:'Terrain', c:'ground',
+  short:'The ground is the soldier\'s best ally. Sun Tzu names six kinds of terrain, each with its own rule, and six kinds of disaster that are always the general\'s fault, never Heaven\'s. A commander who cares for his soldiers like his own children will be followed anywhere, but one who only indulges them ends up with spoiled children.',
+  cap:'In a narrow pass, numbers stop counting. Get there first and hold it.',
+  keys:['<b>Six kinds of ground.</b> Open ground (take the high, sunny side), entangling (easy to enter, hard to leave), stalemate (neither side gains by moving), narrow passes (occupy them first), steep heights (hold them first), and great distances (don\'t start a fight far from home on even terms).',
+        '<b>Six disasters.</b> An army that flees, breaks discipline, collapses, falls apart, falls into chaos or is routed failed because of its general, not bad luck.',
+        '<b>Care, with firmness.</b> Look on your soldiers as your children and they\'ll stand by you to the death. But kindness without command produces a useless army.',
+        '<b>Know the ground too.</b> Know the enemy and yourself and your victory is safe; know the weather and the ground as well and your victory is complete.'],
+  kept:'At Thermopylae in 480 BC a few thousand Greeks under the Spartan king Leonidas held a narrow pass for days against the huge Persian army, whose numbers counted for nothing in the gap. They were only beaten when a local man, Ephialtes, showed the Persians a mountain path around the pass.',
+  kept2:'At Agincourt in 1415 an outnumbered English army stood between two woods on a narrow, freshly ploughed and rain-soaked field. The French knights had to advance through deep mud into a funnel of arrows, and their numbers only made the crush worse.',
+  rev:'Any terrain advantage lasts only until someone finds a way around it. Thermopylae shows both sides: the pass held until the goat path was found.',
+  use:'Pick where the contest happens. A small team in a narrow niche can beat a giant on its home turf; a giant in a narrow niche can\'t bring its size to bear.' },
+{ t:'The Nine Situations', han:'九地', alt:'The nine grounds', s:'The nine situations', c:'ground',
+  short:'Every campaign passes through nine kinds of situation, from fighting on your own soil, where soldiers are tempted to go home, to "death ground," where the only way out is to fight. The deeper an army goes into enemy country, the more united it becomes. Move fast, seize what the enemy values most, and make your army work as one body.',
+  cap:'Pots smashed, boats sunk, a river behind: no way back but forward.',
+  keys:['<b>Nine situations.</b> Among them: home ground (don\'t fight there), contested ground (whoever takes it gains, so don\'t attack it once held), ground at a crossroads (join with allies), deep ground (live off the land), and death ground (fight, or die).',
+        '<b>Seize what they love.</b> To make a large, orderly enemy follow your lead, take something they value. Then they will move to your rhythm.',
+        '<b>Death ground.</b> Soldiers who have no way out stop being afraid. Put them where there is no escape and they will fight harder than they knew they could.',
+        '<b>Move like the snake of Mount Chang.</b> Strike its head and the tail attacks; strike its tail and the head attacks; strike the middle and both do. People who hate each other will still help one another in the same boat in a storm.',
+        '<b>Coy, then quick.</b> At first be shy as a young woman until the enemy opens the door; then move like a running hare, too fast to stop.'],
+  kept:'Before the battle of Julu in 207 BC, the rebel general Xiang Yu took his army across a river, then had the boats sunk, the cooking pots smashed and only three days\' food handed out. With no way home, his outnumbered troops beat the Qin army. "Break the pots and sink the boats" still means going all in.',
+  kept2:'At Jingxing in 204 BC Han Xin drew up his army with its back to a river, which other generals thought absurd. The enemy came out of its fortified camp to finish him; his trapped men fought desperately while a hidden cavalry force seized the empty camp. Afterwards he told his officers it was straight from the military classics: put men on death ground and they will live.',
+  rev:'Death ground works on soldiers who trust their commander. Used on a team that doesn\'t, burning the boats just produces panic or mutiny.',
+  use:'Commitment changes behaviour: people work differently on a project with no fallback. Use it sparingly and only when the bet is sound, and unite rivals by naming the storm they share.' },
+{ t:'The Attack by Fire', han:'火攻', alt:'Fire attack', s:'Fire, and anger', c:'force',
+  short:'There are five ways to attack with fire (burning troops, supplies, baggage, arsenals and lines), and each needs the right weather, the right wind and an army ready to follow it up. The chapter ends with the book\'s sternest warning: never go to war out of anger, because anger fades but the dead don\'t return.',
+  cap:'With the wind at their backs, the fire ships run into the chained fleet.',
+  keys:['<b>Fire needs conditions.</b> Dry weather, a rising wind, materials ready. Attack from upwind, never from downwind, and be ready to exploit the confusion it causes.',
+        '<b>Water divides, fire destroys.</b> Flooding can cut an enemy off; fire can take everything from them.',
+        '<b>Finish what you win.</b> Winning battles without securing what they were for is a waste of time and money.',
+        '<b>Never act from anger.</b> A ruler shouldn\'t start a war out of rage, nor a general fight out of resentment. Anger can turn to gladness, but a ruined state can\'t be rebuilt and the dead can\'t be brought back.'],
+  kept:'At the Red Cliffs in 208 AD, Cao Cao\'s huge fleet was moored on the Yangtze, the ships reportedly chained together. The allied commander Huang Gai sent a message offering to defect, then sailed in with ships packed with oil-soaked brush, set them alight and let the wind drive them into the fleet. Cao Cao\'s campaign to conquer the south collapsed.',
+  miss:'In 221 AD, after his sworn brother Guan Yu was killed by the state of Wu, Liu Bei led a huge army against Wu in a rage, against his advisers\' warnings. At Yiling the young Wu commander Lu Xun waited until summer, then set fire to Liu Bei\'s long line of wooden camps. The army was routed; Liu Bei died the next year.',
+  rev:'Fire doesn\'t pick sides, and it destroys what you might have taken whole (Chapter 3). Scorched earth often leaves the winner ruling ruins.',
+  use:'Never send the email, make the move or start the fight while angry. Wait a day; the anger will pass, the consequences won\'t.' },
+{ t:'The Use of Spies', han:'用間', alt:'Using intelligence', s:'The use of spies', c:'know',
+  short:'Armies cost a fortune every day they\'re in the field, so being too stingy to pay for information is the worst kind of false economy. Foreknowledge can\'t come from spirits, from guesswork or from calculation; it comes only from people who know the enemy. Sun Tzu names five kinds of spy, and the double agent is the key to all the rest.',
+  cap:'Five kinds of spy at work at once, and only the general sees the whole net.',
+  keys:['<b>Information is cheap; war is not.</b> Spending years and fortunes on a war, but grudging a hundred ounces of silver for intelligence, is the height of folly.',
+        '<b>Five kinds of spy.</b> Local spies (people from the area), inside spies (the enemy\'s own officials), double agents (enemy spies turned), doomed spies (fed false information to pass on) and returning spies (who bring back news).',
+        '<b>The double agent matters most.</b> Through a turned spy you can recruit local and inside spies, plant false stories and keep your own spies alive, so reward double agents most generously.',
+        '<b>Closest, best paid, most secret.</b> No one in the army should be closer to the general, better rewarded, or more secret than the spies.'],
+  kept:'Before D-Day in 1944 the Allies ran a network of German spies who had been caught and turned. The most famous, Juan Pujol García (codename Garbo), convinced Berlin that Normandy was a feint and the real invasion would come at Calais. German divisions waited at Calais for weeks after the landings.',
+  kept2:'The other half of the Changping story (Chapter 3): Qin\'s agents spread word in Zhao that the only general Qin feared was young Zhao Kuo, and that old Lian Po was about to surrender. The king of Zhao believed it and made the swap that cost him his army.',
+  rev:'Intelligence is only as good as the person reading it. In 1941 Stalin received repeated warnings, including from his own spy Richard Sorge, that Germany was about to invade, and dismissed them. Information you won\'t believe is worth nothing.',
+  use:'Before a big decision, talk to people who actually know: customers, former employees, the other side\'s partners. And be suspicious of information that conveniently tells you what you hoped.' }
+];
+</script>
+<script>
+/* ---------- illustrations: one small scene per chapter, drawn on a 240×150 stage ---------- */
+const ILL = (() => {
+const r1 = v => Math.round(v*10)/10;
+// a robed figure standing with feet at (x,y), h tall
+const P = (x, y, h, c = 'f-tx', extra = '') => { const r = h*.13, top = y - h*.70, sw = h*.19, bw = h*.27;
+  return `<circle class="${c}" ${extra} cx="${r1(x)}" cy="${r1(y-h+r)}" r="${r1(r)}"/><path class="${c}" ${extra} d="M${r1(x-sw)} ${r1(top+h*.09)} Q${r1(x-sw)} ${r1(top)} ${r1(x)} ${r1(top)} Q${r1(x+sw)} ${r1(top)} ${r1(x+sw)} ${r1(top+h*.09)} L${r1(x+bw)} ${r1(y)} L${r1(x-bw)} ${r1(y)} Z"/>`; };
+// an arm from the figure's shoulder to (ex,ey); side -1 left, 1 right
+const ARM = (x, y, h, side, ex, ey, c = 'k-tx') => `<line class="${c}" x1="${r1(x+side*h*.16)}" y1="${r1(y-h*.62)}" x2="${ex}" y2="${ey}" stroke-width="${r1(h*.075)}"/>`;
+const L = (x1, y1, x2, y2, c = 'k-tx', w, extra = '') => `<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${w ? ` stroke-width="${w}"` : ''} ${extra}/>`;
+const G = (y = 132) => `<line class="k-ln" x1="10" y1="${y}" x2="230" y2="${y}"/>`;
+const T = (x, y, txt, cls = '', anchor = 'middle') => `<text x="${x}" y="${y}" text-anchor="${anchor}" class="${cls}">${txt}</text>`;
+const cloud = (cx, cy, s, c) => `<path class="${c}" d="M${r1(cx-s*1.6)} ${r1(cy+s*.5)} Q${r1(cx-s*2)} ${r1(cy-s*.3)} ${r1(cx-s*1.1)} ${r1(cy-s*.4)} Q${r1(cx-s*.9)} ${r1(cy-s*1.3)} ${r1(cx)} ${r1(cy-s*1.1)} Q${r1(cx+s*.9)} ${r1(cy-s*1.5)} ${r1(cx+s*1.2)} ${r1(cy-s*.5)} Q${r1(cx+s*2)} ${r1(cy-s*.3)} ${r1(cx+s*1.7)} ${r1(cy+s*.5)} Z"/>`;
+const coin = (cx, cy, r) => `<circle class="f-au" cx="${cx}" cy="${cy}" r="${r}"/><circle class="k-ink" cx="${cx}" cy="${cy}" r="${r1(r*.62)}" stroke-width="1"/>`;
+// a banner on a pole, pole foot at (x,y)
+const flag = (x, y, h, c = 'f-au', dir = 1, cls = '') => `${L(x, y, x, r1(y-h), 'k-mu', 1.6)}<path class="${c} ${cls}" d="M${x} ${r1(y-h)} L${r1(x+dir*h*.5)} ${r1(y-h+h*.12)} L${r1(x+dir*h*.42)} ${r1(y-h+h*.22)} L${r1(x+dir*h*.5)} ${r1(y-h+h*.34)} L${x} ${r1(y-h+h*.34)} Z"/>`;
+const flame = (cx, cy, s, c = 'f-au', cls = '') => `<path class="${c} ${cls}" d="M${cx} ${r1(cy-s*1.6)} Q${r1(cx+s*.25)} ${r1(cy-s*.8)} ${r1(cx+s*.8)} ${r1(cy-s*.5)} Q${r1(cx+s)} ${r1(cy+s*.6)} ${cx} ${r1(cy+s*.7)} Q${r1(cx-s)} ${r1(cy+s*.6)} ${r1(cx-s*.8)} ${r1(cy-s*.3)} Q${r1(cx-s*.45)} ${r1(cy-s*.6)} ${cx} ${r1(cy-s*1.6)} Z"/>`;
+const tree = (x, y, s, c = 'f-mu') => `${L(x, y, x, r1(y-s*.5), 'k-mu', r1(s*.12))}<path class="${c}" d="M${x} ${r1(y-s*1.5)} L${r1(x+s*.4)} ${r1(y-s*.85)} L${r1(x+s*.22)} ${r1(y-s*.85)} L${r1(x+s*.5)} ${r1(y-s*.4)} L${r1(x-s*.5)} ${r1(y-s*.4)} L${r1(x-s*.22)} ${r1(y-s*.85)} L${r1(x-s*.4)} ${r1(y-s*.85)} Z"/>`;
+const cart = (x, y, s, c = 'f-pn k-tx') => `<path class="f-mu" d="M${r1(x-12*s)} ${r1(y-17*s)} q${r1(5*s)} ${r1(-8*s)} ${r1(10*s)} 0 q${r1(5*s)} ${r1(-9*s)} ${r1(11*s)} 0 q${r1(4*s)} ${r1(-6*s)} ${r1(8*s)} 0 Z"/><rect class="${c}" x="${r1(x-15*s)}" y="${r1(y-18*s)}" width="${r1(30*s)}" height="${r1(9*s)}" rx="1"/>
+  <circle class="f-ink k-tx" cx="${r1(x-8*s)}" cy="${r1(y-5*s)}" r="${r1(5*s)}" stroke-width="${r1(1.6*s)}"/><circle class="f-ink k-tx" cx="${r1(x+8*s)}" cy="${r1(y-5*s)}" r="${r1(5*s)}" stroke-width="${r1(1.6*s)}"/>${L(r1(x+15*s), r1(y-13*s), r1(x+27*s), r1(y-11*s), 'k-tx', r1(1.6*s))}`;
+const ship = (cx, cy, s, c = 'f-cr', sail = 'f-pn k-cr') => `<path class="${c}" d="M${r1(cx-14*s)} ${cy} H${r1(cx+14*s)} L${r1(cx+9*s)} ${r1(cy+7*s)} H${r1(cx-9*s)} Z"/>${L(cx, cy, cx, r1(cy-20*s), 'k-mu', r1(1.5*s))}<path class="${sail}" stroke-width="${r1(1.2*s)}" d="M${r1(cx+1.5*s)} ${r1(cy-19*s)} L${r1(cx+11*s)} ${r1(cy-4*s)} H${r1(cx+1.5*s)} Z"/>`;
+const bird = (x, y, s, c = 'k-au') => `<path class="${c}" stroke-width="1.6" d="M${r1(x-s)} ${r1(y-s*.4)} Q${r1(x-s*.45)} ${r1(y-s*.7)} ${x} ${y} Q${r1(x+s*.45)} ${r1(y-s*.7)} ${r1(x+s)} ${r1(y-s*.4)}"/>`;
+const waves = (x0, x1, y, c = 'k-cr', w = 1.5, cls = '') => { let d = `M${x0} ${y}`; for (let x = x0; x < x1; x += 12) d += ` q3 -4 6 0 t6 0`; return `<path class="${c} ${cls}" stroke-width="${w}" d="${d}"/>`; };
+const xmark = (cx, cy, s, c = 'k-au') => `${L(cx-s, cy-s, cx+s, cy+s, c, 2.6)}${L(cx+s, cy-s, cx-s, cy+s, c, 2.6)}`;
+const crenel = (x0, x1, y, step = 12, c = 'f-pn k-tx') => { let s = ''; for (let x = x0; x + 7 <= x1; x += step) s += `<rect class="${c}" x="${x}" y="${y-7}" width="7" height="7"/>`; return s; };
+
+const S = [];
+/* 1 laying plans: counting in the temple */
+S[1] = () => { const us = [3,2,3,2,3], th = [2,2,1,2,1], nm = ['the way','heaven','earth','general','method'];
+  let rows = ''; nm.forEach((n, i) => { const y = 34 + i*20; rows += T(124, y + 3, n, '', 'start') + L(166, y + 7, 228, y + 7, 'k-ln', 1);
+    for (let k = 0; k < us[i]; k++) rows += L(170 + k*6, y - 5, 170 + k*6, y + 5, 'k-au', 2.4);
+    for (let k = 0; k < th[i]; k++) rows += L(204 + k*6, y - 5, 204 + k*6, y + 5, 'k-cr', 2.4); });
+  return `${G()}<path class="f-pn k-tx" d="M8 52 Q38 46 62 26 Q86 46 116 52 Q98 50 92 56 H32 Q26 50 8 52 Z"/><rect class="f-au" x="56" y="20" width="12" height="6" rx="1"/>
+  <rect class="f-pn k-tx" x="32" y="56" width="5" height="70"/><rect class="f-pn k-tx" x="87" y="56" width="5" height="70"/><rect class="f-pn k-tx" x="22" y="126" width="80" height="6"/>
+  ${P(62,112,34)}<rect class="f-pn k-tx" x="42" y="104" width="40" height="5"/>${L(46,110,46,126,'k-tx',2)}${L(78,110,78,126,'k-tx',2)}
+  <g class="glint">${L(50,102,58,98,'k-au',2)}${L(56,103,64,99,'k-au',2)}${L(66,102,74,98,'k-cr',2)}</g>
+  ${T(176,18,'us')}${T(210,18,'them')}${rows}${T(62,146,'the temple')}${T(178,146,'13 rods to 8')}`; };
+/* 2 waging war: the long road */
+S[2] = () => { let drip = ''; [[60,138],[52,142],[128,110],[122,113],[176,90]].forEach(([x,y], i) => drip += coin(x, y, i > 3 ? 1.6 : 2.4));
+  return `<path class="f-ln" d="M18 150 H112 L214 66 H206 Z"/>${L(10,66,230,66,'k-ln',1)}<path class="k-fa" stroke-dasharray="3 5" d="M66 150 L210 66"/>
+  ${cart(80,140,1)}${cart(146,108,.7)}${cart(188,84,.45)}<g class="glint">${drip}</g>
+  <path class="f-pn k-tx" d="M22 18 H48 L38 34 L48 50 H22 L32 34 Z"/><path class="f-au" d="M27 21 H43 L35 31 Z"/><path class="f-au" d="M29 48 Q35 41 41 48 Z"/>${L(35,31,35,46,'k-au',1)}
+  ${T(62,24,'day 1 … day 100 … day 1,000','','start')}${T(62,38,'each day: silver out','','start')}${T(232,146,'all hauled from home','','end')}`; };
+/* 3 attack by stratagem: the letter */
+S[3] = () => { let army = ''; [18,36,54].forEach((x, i) => army += P(x, 132, 34 + (i%2)*3) + flag(x + 8, 132, 52 + (i%2)*6, 'f-au', 1));
+  return `${G()}${army}<rect class="f-pn k-tx" x="150" y="70" width="80" height="62"/>${crenel(150,230,70)}<path class="f-ink k-tx" d="M178 132 V112 A12 12 0 0 1 202 112 V132 Z"/>
+  ${flag(190,63,26,'f-tx',1,'sway')}<path class="k-fa" stroke-dasharray="3 4" d="M70 128 Q100 120 128 128"/>
+  <g class="bob">${P(118,132,32,'f-mu')}${ARM(118,132,32,1,134,108,'k-mu')}<rect class="f-au" x="132" y="100" width="9" height="13" rx="1.5"/>${L(132,103,141,103,'k-ink',1)}</g>
+  ${T(42,146,'the army waits')}${T(122,146,'a letter')}${T(190,146,'the gates open')}`; };
+/* 4 dispositions: unbeatable, then the gap */
+S[4] = () => { let line = ''; [138,152,166,208,222].forEach(x => line += P(x, 132, 26, 'f-cr') + `<rect class="f-cr" x="${x-6}" y="114" width="5" height="11" rx="1"/>`);
+  return `${G()}${line}<path class="f-pn k-mu" d="M6 132 L30 84 H100 L124 132 Z"/><rect class="f-pn k-tx" x="34" y="62" width="62" height="22"/>${crenel(34,96,62)}
+  ${P(50,62,16,'f-au')}${P(66,62,16,'f-au')}${P(82,62,16,'f-au')}<rect class="f-ausoft glint" x="176" y="96" width="24" height="36" rx="3"/>
+  <path class="k-au" stroke-dasharray="4 4" d="M100 74 Q150 60 188 98"/><path class="f-au" d="M188 100 L182 92 L192 92 Z"/>
+  ${T(65,146,'unbeatable first')}${T(188,146,'the gap they give')}`; };
+/* 5 energy: the slope */
+S[5] = () => `${G()}<path class="f-pn k-mu" d="M10 132 V36 Q20 30 34 36 L206 132 Z"/>
+  <g class="bob"><circle class="f-mu k-tx" cx="44" cy="30" r="8"/></g><circle class="f-au" cx="118" cy="70" r="12"/><path class="k-ink" d="M110 66 q8 -6 14 2" stroke-width="1.6"/>
+  ${L(92,52,74,42,'k-au',1.6)}${L(88,60,70,50,'k-au',1.6)}${L(84,68,66,58,'k-au',1.6)}<circle class="f-mu" cx="180" cy="122" r="6"/>
+  <path class="k-tx" stroke-dasharray="3 4" d="M220 18 Q214 54 186 82"/><path class="f-tx" d="M222 14 L232 10 L226 20 Z M222 14 L212 8 L218 18 Z"/><path class="f-tx" d="M186 82 L180 74 L192 76 Z"/>
+  ${T(140,30,'the falcon: short, exact')}${T(110,146,'small push, steep slope')}`;
+/* 6 weak and strong: five thin posts, one strike */
+S[6] = () => { let posts = ''; [28,74,120,166,212].forEach((x, i) => { posts += `<rect class="f-pn k-cr" x="${x-11}" y="40" width="22" height="20"/>${crenel(x-11, x+11, 40, 8, 'f-pn k-cr')}${P(x-5,76,14,'f-cr')}${P(x+5,76,14,'f-cr')}`; if (i === 2) posts += `<circle class="f-ausoft glint" cx="${x}" cy="56" r="26"/>`; });
+  let army = ''; for (let r = 0; r < 2; r++) for (let k = 0; k < 6; k++) army += P(90 + k*12, 132 - r*8 + (r ? 0 : 0), 20 - r*2, r ? 'f-au' : 'f-au');
+  return `${G()}${posts}${army}${L(120,100,120,84,'k-au',4)}<path class="f-au" d="M112 86 L120 76 L128 86 Z"/>
+  ${T(28,22,'thin')}${T(74,22,'thin')}${T(120,22,'thin')}${T(166,22,'thin')}${T(212,22,'thin')}${T(120,146,'all of you, at one point')}`; };
+/* 7 maneuvering: the winding road, and wind-forest-fire-mountain */
+S[7] = () => `${G()}<path class="k-mu" stroke-width="6" stroke-opacity=".35" d="M22 128 C80 128 40 92 100 92 S150 128 170 98 S170 60 206 54"/><path class="k-au" stroke-dasharray="2 5" d="M22 128 C80 128 40 92 100 92 S150 128 170 98 S170 60 206 54"/>
+  <path class="k-cr" stroke-dasharray="5 4" d="M30 120 L200 56"/><circle class="f-cr" cx="96" cy="95" r="5"/>${coin(124,84,4)}
+  <circle class="f-au" cx="186" cy="62" r="5"/>${flag(210,60,30,'f-au',1,'sway')}
+  <g>${L(16,22,30,22,'k-mu',1.6)}${L(12,28,32,28,'k-mu',1.6)}${L(18,34,28,34,'k-mu',1.6)}</g>${tree(48,38,18)}${flame(72,30,7,'f-au','glint')}<path class="f-mu" d="M86 38 L98 18 L110 38 Z"/>
+  ${T(10,54,'wind · forest · fire · mountain','','start')}${T(70,146,'the long way')}${T(170,146,'arrives first')}`;
+/* 8 variation: roads not to take */
+S[8] = () => `${G()}<path class="f-ln" d="M104 150 L112 104 L46 40 L58 38 L118 98 L118 30 L126 30 L126 98 L186 38 L198 40 L132 104 L140 150 Z"/>
+  ${L(122,132,122,82,'k-tx',3)}<path class="f-pn k-tx" d="M122 84 L96 84 L90 90 L96 96 L122 96 Z"/><path class="f-pn k-tx" d="M122 70 L148 70 L154 76 L148 82 L122 82 Z"/>
+  ${xmark(56,52,8)}${xmark(188,52,8)}
+  <rect class="f-pn k-mu" x="186" y="100" width="34" height="24" rx="2"/><path class="k-fa" d="M192 108 H214 M192 114 H210" stroke-width="1.4"/>${xmark(203,112,6)}${P(84,132,30)}
+  ${T(10,74,'not this','','start')}${T(230,74,'nor this','','end')}${T(232,146,'nor every order','','end')}${T(84,146,'the general chooses')}`;
+/* 9 the army on the march: reading signs */
+S[9] = () => { let birds = ''; [[24,34,6],[40,22,7],[56,38,5],[34,10,5],[60,16,6]].forEach(([x,y,s]) => birds += bird(x, y, s));
+  return `${G()}${tree(18,132,46)}${tree(46,132,58)}${tree(74,132,44)}<g class="drift">${birds}</g>
+  <g class="drift">${cloud(136,104,9,'f-fa')}${cloud(138,84,8,'f-fa')}${cloud(136,64,7,'f-fa')}${cloud(138,46,6,'f-fa')}</g>${cloud(200,120,16,'f-fa')}
+  ${T(46,146,'ambush')}${T(137,146,'chariots')}${T(202,146,'infantry')}`; };
+/* 10 terrain: the narrow pass (from above) */
+S[10] = () => { let horde = ''; for (let i = 0; i < 26; i++){ const x = 160 + (i*37)%70, y = 34 + (i*53)%84; horde += `<circle class="f-cr" cx="${x}" cy="${y}" r="3.4"/>`; }
+  let held = ''; for (let i = 0; i < 4; i++) held += `<circle class="f-au" cx="${112 + (i%2)*8}" cy="${66 + i*6}" r="3.6"/>`;
+  return `<path class="f-pn k-mu" d="M0 0 H240 V8 H150 Q138 30 130 58 Q118 62 102 58 Q92 30 60 22 Q30 16 0 22 Z"/><path class="f-pn k-mu" d="M0 150 H240 V142 H150 Q138 120 130 92 Q118 88 102 92 Q92 120 60 128 Q30 134 0 128 Z"/>
+  <path class="k-fa" stroke-dasharray="2 4" d="M80 14 Q120 -2 172 8"/>${held}${horde}<path class="k-cr" stroke-dasharray="3 4" d="M156 76 H134"/>
+  ${T(40,78,'the pass','big')}${T(116,110,'a few')}${T(196,138,'numbers wasted')}${T(124,24,'goat path')}`; };
+/* 11 the nine situations: death ground */
+S[11] = () => { let army = ''; [122,142,162,182].forEach((x, i) => army += P(x, 132, 36 + (i%2)*4, 'f-au'));
+  return `${G()}<rect class="f-crsoft" x="0" y="76" width="70" height="74"/>${waves(0,66,90)}${waves(0,66,108)}${waves(0,66,126)}
+  <g transform="rotate(-24 34 106)">${ship(34,106,1,'f-cr','f-pn k-cr')}</g><path class="f-mu" d="M78 132 Q74 116 84 112 H92 Q102 116 98 132 Z"/><path class="k-ink" d="M86 112 L90 120 L85 126 L90 132" stroke-width="1.6"/>
+  ${army}${flag(200,132,58,'f-au',1,'sway')}${L(206,112,226,112,'k-au',3)}<path class="f-au" d="M226 106 L236 112 L226 118 Z"/>
+  ${T(28,146,'boats sunk')}${T(98,146,'pots broken')}${T(170,146,'only forward')}`; };
+/* 12 fire: the wind and the chained fleet */
+S[12] = () => { let fleet = ''; [150,178,206].forEach((x, i) => fleet += ship(x, 104 - i*2, .9, 'f-cr', 'f-pn k-cr'));
+  return `<rect class="f-crsoft" x="0" y="104" width="240" height="46"/>${waves(0,240,116,'k-cr',1.2,'drift')}
+  ${fleet}${L(162,106,166,106,'k-mu',2)}${L(190,104,194,104,'k-mu',2)}${flame(158,92,7,'f-au','glint')}${flame(186,88,6,'f-au','glint')}
+  <g class="drift">${ship(80,106,.9,'f-au','f-pn k-au')}${flame(80,90,9,'f-au','glint')}${flame(88,94,6,'f-au')}</g>
+  ${L(10,34,50,34,'k-mu',1.6)}${L(18,46,64,46,'k-mu',1.6)}${L(8,58,44,58,'k-mu',1.6)}<path class="k-mu" d="M50 34 q8 0 8 -6 q0 -5 -5 -5" stroke-width="1.6"/>
+  ${T(30,24,'wind')}${T(80,138,'fire ships')}${T(180,138,'the chained fleet')}`; };
+/* 13 spies: the net of five */
+S[13] = () => { const sp = [[26,132,'local','f-mu'],[50,82,'inside','f-cr'],[120,52,'double','f-au k-cr'],[190,82,'doomed','f-fa'],[214,132,'returning','f-au']];
+  let s = ''; sp.forEach(([x,y,n,c]) => { s += `<path class="k-fa" stroke-dasharray="2 4" d="M${x} ${y-12} L120 98"/>${L(x-12, y, x+12, y, 'k-ln', 1)}${P(x, y, 24, c)}${T(x, y + 10, n)}`; });
+  return `${G()}${s}<path class="f-pn k-tx" d="M88 132 L120 96 L152 132 Z"/><path class="f-ink k-tx" d="M112 132 L120 118 L128 132 Z"/>${L(120,96,120,88,'k-tx',1.6)}${flag(120,96,14,'f-au',1)}`; };
+
+return (n) => `<svg viewBox="0 0 240 150" role="img" aria-label="Illustration for chapter ${n}">${S[n]()}</svg>`;
+})();
+</script>
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(document.documentElement); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad','soft','deep'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#0e1112'; };
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const DE = document.documentElement;
+try { const t = localStorage.getItem('aw-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+readC();
+const themeTxt = () => { $('#themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('aw-theme', next); } catch(e){} readC(); themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); });
+new MutationObserver(() => { readC(); themeTxt(); }).observe(DE, {attributes:true, attributeFilter:['data-theme']});
+const MONO = '12px "Geist Mono", ui-monospace, Menlo, monospace';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+const pad = n => String(n).padStart(2,'0');
+const fmt = n => Math.round(n).toLocaleString('en-US');
+let seed = 13; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+const ROMAN = ['I','II','III','IV','V'];
+
+function stage(canvas){
+  const ctx = canvas.getContext('2d'); let w=0,h=0,d=0;
+  return () => { const r = canvas.getBoundingClientRect(); const dp = Math.min(2, devicePixelRatio||1);
+    if (r.width!==w || r.height!==h || dp!==d){ w=r.width; h=r.height; d=dp; canvas.width=Math.max(1,Math.round(w*d)); canvas.height=Math.max(1,Math.round(h*d)); }
+    ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; };
+}
+const loops = []; const visible = new Set();
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)), {rootMargin:'120px'});
+function loop(el, fn){ loops.push([el,fn]); io.observe(el); fn(0, 0); }
+let last = performance.now();
+function tick(t){ const dt = Math.min(0.05, (t-last)/1000); last = t;
+  for (const [el,fn] of loops) if (visible.has(el)) fn(dt, t/1000);
+  requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+addEventListener('resize', () => { for (const [,fn] of loops) fn(0, performance.now()/1000); });
+
+/* ---------- parts, workshops, quizzes ---------- */
+const ACTS = [
+  {t:'Before the battle', from:1, to:4, ws:[1], p:'The first four chapters are about everything that happens before a single blow: sizing up both sides, counting the cost, winning without a fight if you can, and making yourself unbeatable.'},
+  {t:'The shape of force', from:5, to:7, ws:[2], p:'How force actually works: momentum, surprise, concentration against weakness, and the race to get to the right place first.'},
+  {t:'Ground and change', from:8, to:11, ws:[3], p:'Adapting to circumstances: when to break the rules, how to read the enemy and the land, and how situations change the way people fight.'},
+  {t:'Fire and spies', from:12, to:13, ws:[4,5], p:'The last two chapters cover the most destructive weapon of the age and the cheapest one: fire, and information. Then a final field test across the whole book.'}
+];
+const WS = [
+  {t:'The temple count', ch:1, hint:'Set the five factors', p:'Chapters 1 and 3 in one exercise. Decide who has the edge on each of the five fundamentals, then switch off what you really know and see what Sun Tzu predicts.'},
+  {t:'Strike where they\'re thin', ch:6, hint:'Drag the slider', p:'Chapter 6: they have 20,000 soldiers, you have 10,000. Threaten more places and watch their guard thin out where you actually strike. Then see what happens when they learn your target.'},
+  {t:'Read the signs', ch:9, hint:'Choose a meaning', p:'Chapter 9 is a field guide to reading the enemy from small clues. Here are ten of the signs Sun Tzu describes. What does each one mean?'},
+  {t:'The price of knowing', ch:13, hint:'Drag the slider', p:'Chapter 13 opens with a sum: an army of 100,000 costs a thousand ounces of silver a day, for years. So what is information worth? Spend on spies and watch the total cost of the war.'},
+  {t:'Field test', ch:0, hint:'Name the chapter', p:'Eleven modern situations, each one a chapter of the book at work in business, sport or everyday life. Name the chapter, then read why.'}
+];
+const QUIZ = [
+  [ {q:'What does Chapter 1 say a general should do before the battle?',o:['Count and compare both sides on the fundamentals','Look for good omens','Trust in the courage of the troops'],a:0,w:'The side that makes more calculations in the temple before the battle usually wins it.'},
+    {q:'According to Chapter 3, the best way to win is to…',o:['Besiege the enemy\'s cities','Defeat their army in the field','Defeat their plans, so no battle is needed'],a:2,w:'Attacking strategy comes first, alliances second, armies third, and walled cities last of all.'},
+    {q:'Why did Napoleon\'s 1812 campaign break Chapter 2\'s rules?',o:['It dragged on far from home, and the army couldn\'t feed off the land','He attacked in summer','He brought too few soldiers'],a:0,w:'A long war, a long supply line and scorched earth: exactly the combination Sun Tzu warns ruins armies.'} ],
+  [ {q:'At Cannae, Hannibal\'s bending centre and encircling wings are a classic case of…',o:['Direct and indirect forces working together','Death ground','Feeding on the enemy'],a:0,w:'The centre held the Romans\' attention (direct); the wings and cavalry won the battle (indirect).'},
+    {q:'Why does an enemy who "prepares everywhere" end up weak?',o:['Their forces are spread thin at every point','They are tired from building walls','Their soldiers lose interest'],a:0,w:'Guarding everything means being strong nowhere. You can concentrate where they are thinnest.'},
+    {q:'What does "besiege Wei to rescue Zhao" mean?',o:['Attack something the enemy must defend, to pull them away','Surround the enemy completely','Send spies into the enemy\'s capital'],a:0,w:'Sun Bin threatened Wei\'s capital, so the Wei army had to abandon its siege and hurry home into an ambush.'} ],
+  [ {q:'Duke Xiang of Song refused to attack the Chu army while it was crossing a river. What happened?',o:['Song was beaten and the Duke wounded','Chu surrendered out of respect','The two sides made peace'],a:0,w:'Chapter 9 says to strike when the enemy is half across. His chivalry became a byword for foolishness.'},
+    {q:'Why did Xiang Yu sink his boats and smash the cooking pots before Julu?',o:['To leave his army no way out but victory','To lighten the army for a fast march','To make the enemy think he had fled'],a:0,w:'Chapter 11\'s death ground: soldiers with no escape fight harder than they knew they could.'},
+    {q:'Which of these is NOT one of Chapter 8\'s five dangerous faults of a general?',o:['Recklessness','Too much worry for his men','Care in choosing his battles'],a:2,w:'The five are recklessness, cowardice, a hot temper, touchy pride and over-concern for the troops. Choosing battles carefully is the whole point of the book.'} ],
+  [ {q:'What does Chapter 12 say about anger?',o:['Never go to war out of anger: anger passes, but the dead don\'t return','Anger is useful if it\'s channelled','Only a ruler may act in anger'],a:0,w:'Liu Bei\'s campaign of revenge after Guan Yu\'s death ended in fire and rout at Yiling.'},
+    {q:'Which kind of spy does Sun Tzu value most?',o:['The double agent','The local spy','The doomed spy'],a:0,w:'Through a turned spy you can recruit the others, plant false stories and keep your own agents alive.'},
+    {q:'Garbo convincing Germany that Normandy was a feint is an example of…',o:['A turned spy feeding false information','A returning spy','A fire attack'],a:0,w:'Garbo was a German agent in name, working for the Allies in fact: Sun Tzu\'s double agent and doomed-spy tricks at once.'} ],
+  [ {q:'Sun Tzu\'s ideal victory is one that…',o:['Destroys the enemy completely','Is won without fighting, or at the lowest possible cost','Makes the general famous'],a:1,w:'Take the enemy whole. Chapter 4 even says the best generals\' victories look so easy they earn no fame.'},
+    {q:'"Know the enemy and know yourself, and…"',o:['you need not fear a hundred battles','you will win every battle easily','you can skip the planning'],a:0,w:'Know only yourself and you\'ll win one, lose one. Know neither and you\'ll lose every time.'},
+    {q:'What image does Sun Tzu use for an army that adapts to the enemy?',o:['Water, which shapes itself to the ground','A mountain, which never moves','A tree, which grows slowly'],a:0,w:'Water has no constant shape. An army that changes with the enemy and wins is called divine (Chapter 6).'} ]
+];
+const actOf = n => ACTS.findIndex(a => n >= a.from && n <= a.to);
+
+/* ---------- build the page ---------- */
+const lawHTML = (L, n) => {
+  const a = ACTS[actOf(n)];
+  const next = n === a.to ? [`#ws${a.ws[0]}`, `Workshop: ${WS[a.ws[0]-1].t}`] : [`#law${n+1}`, `Chapter ${n+1}, ${LAWS[n].t}`];
+  return `<section class="law" id="law${n}" data-n="${n}">
+    <div class="law-head"><div class="eyebrow"><span class="no">Chapter ${pad(n)}</span><span class="han" lang="zh-Hant">${L.han}</span><span class="tag">${CATS[L.c]}</span></div><h2>${L.t}</h2><p class="alt">Also translated as <i>${L.alt}</i></p></div>
+    <div class="law-grid">
+      <figure class="ill">${ILL(n)}<figcaption><b>Fig. ${n}</b><span>${L.cap}</span></figcaption></figure>
+      <div class="side">
+        <div class="short"><span class="lbl">The chapter in short</span><p>${L.short}</p></div>
+        <div class="note use"><span class="lbl">Use it today</span><p>${L.use}</p></div>
+      </div>
+    </div>
+    <div class="keys"><span class="lbl">Key principles</span><ol>${L.keys.map(k => `<li><span>${k}</span></li>`).join('')}</ol></div>
+    <div class="stories">
+      ${L.kept ? `<div class="note kept"><span class="lbl">When it was followed</span><p>${L.kept}</p></div>` : ''}
+      ${L.kept2 ? `<div class="note kept"><span class="lbl">When it was followed</span><p>${L.kept2}</p></div>` : ''}
+      ${L.miss ? `<div class="note miss"><span class="lbl">When it was ignored</span><p>${L.miss}</p></div>` : ''}
+      ${L.miss2 ? `<div class="note miss"><span class="lbl">When it was ignored</span><p>${L.miss2}</p></div>` : ''}
+      ${L.rev ? `<div class="note rev"><span class="lbl">The limits</span><p>${L.rev}</p></div>` : ''}
+    </div>
+    <div class="law-foot"><label class="done-toggle"><input type="checkbox" data-done="${n}"> I understand this chapter</label><a class="next" href="${next[0]}">Next: ${next[1]} →</a></div>
+  </section>`; };
+const LABS = [
+  /* 1 temple count */ `<div class="factors" id="factors1"></div>
+    <div class="lab-ctl" style="border-top:0;padding-top:6px"><div class="row"><label class="toggle"><input type="checkbox" id="kSelf" checked> We really know ourselves</label><label class="toggle"><input type="checkbox" id="kEnemy" checked> We really know the enemy</label></div></div>
+    <div class="stage"><canvas id="c1"></canvas></div>
+    <div class="stats"><div class="stat"><span class="k">Rods counted</span><span class="v glow" id="v1a"></span></div><div class="stat"><span class="k">Sun Tzu's call</span><span class="s" id="v1b"></span></div></div>
+    <div class="callout">Each fundamental gives two rods: both to whoever has the edge, or one each if it's even. <b>The scale only means something if both pans are real</b>: guess about either side and the count becomes a coin toss.</div>`,
+  /* 2 strike where thin */ `<div class="stage"><canvas id="c2"></canvas></div>
+    <div class="lab-ctl"><div class="ctl"><label for="s2">Places you threaten, so they must guard <output id="o2"></output></label><input type="range" id="s2" min="1" max="10" step="1" value="5"></div>
+      <div class="row"><label class="toggle"><input type="checkbox" id="secret2" checked> Keep your real target secret</label></div></div>
+    <div class="stats"><div class="stat"><span class="k">Their troops where you strike</span><span class="v" id="v2a" style="color:var(--cool)"></span></div><div class="stat"><span class="k">Odds at that point</span><span class="v glow" id="v2b"></span></div><div class="stat"><span class="k">Chapter 3's rule for those odds</span><span class="s" id="v2c"></span></div></div>
+    <div class="callout">A toy model, not a battle simulator. You're outnumbered two to one overall, but <b>battles are won by the odds at the point of contact</b>, and those are set by what the enemy doesn't know.</div>`,
+  /* 3 signs */ `<div class="sorter"><div class="row" style="justify-content:space-between"><span class="score" id="pos3"></span><span class="score" id="score3"></span></div>
+    <div class="card" id="card3" aria-live="polite"></div><div class="row" id="opts3"></div><p class="verdict" id="verd3"></p><div class="row"><button class="btn" id="next3" hidden>Next sign →</button></div></div>
+    <div class="callout">Sun Tzu lists more than thirty signs in Chapter 9. Remember Pang Juan, though: <b>a sign can be staged for you</b> (Chapter 1).</div>`,
+  /* 4 price of knowing */ `<div class="stage"><canvas id="c4"></canvas></div>
+    <div class="lab-ctl"><div class="ctl"><label for="s4">Silver spent on spies <output id="o4"></output></label><input type="range" id="s4" min="0" max="20000" step="100" value="0"></div>
+      <div class="row"><label class="toggle"><input type="checkbox" id="trust4" checked> The general believes what the spies report</label></div></div>
+    <div class="stats"><div class="stat"><span class="k">Length of the war</span><span class="v" id="v4a"></span></div><div class="stat"><span class="k">Total silver</span><span class="v glow" id="v4b"></span></div><div class="stat"><span class="k">What it means</span><span class="s" id="v4c"></span></div></div>
+    <div class="callout">The cost of the army (1,000 ounces a day) is Sun Tzu's own figure; how much information shortens a war is our illustration. <b>Even the best-spent silver on spies is a rounding error next to a single extra month in the field.</b></div>`,
+  /* 5 field test */ `<div class="sorter"><div class="row" style="justify-content:space-between"><span class="score" id="pos5"></span><span class="score" id="score5"></span></div>
+    <div class="card" id="card5" aria-live="polite"></div><div class="row" id="opts5"></div><p class="verdict" id="verd5"></p><div class="row"><button class="btn" id="next5" hidden>Next situation →</button></div></div>
+    <div class="callout">Real situations often draw on several chapters at once. The answer is the one that does the <b>main</b> work.</div>`
+];
+const wsHTML = k => { const W = WS[k-1], ai = ACTS.findIndex(a => a.ws.includes(k)), a = ACTS[ai];
+  const nextWs = a.ws[a.ws.indexOf(k) + 1];
+  const next = nextWs ? [`#ws${nextWs}`, `Workshop: ${WS[nextWs-1].t}`] : ai < ACTS.length - 1 ? [`#law${ACTS[ai+1].from}`, `Part ${ROMAN[ai+1]}, Chapter ${ACTS[ai+1].from}`] : ['#top', 'Back to the 13 at a glance ↑'];
+  return `<section class="ws" id="ws${k}" data-n="w${k}">
+    <div class="ws-head"><div class="eyebrow"><span>Workshop ${k} of ${WS.length}</span> · ${k === 5 ? 'The whole book' : `Part ${ROMAN[ai]}, chapters ${a.from}–${a.to}`}</div><h2>${W.t}</h2><p>${W.p}</p></div>
+    <figure class="lab" id="lab${k}"><div class="lab-top"><div class="t">Exercise${W.ch ? ` · Chapter ${W.ch}` : ''}</div><div class="hint">${W.hint}</div></div>${LABS[k-1]}</figure>
+    <div class="quiz-wrap"><div class="row" style="justify-content:space-between;margin-bottom:10px"><span class="sub" style="font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Quick check · ${k === 5 ? 'The whole book' : 'Part ' + ROMAN[ai]}</span><span class="qscore" id="qs${k}">0 of 3</span></div><div class="quizzes">${QUIZ[k-1].map((_, i) => `<div class="quiz" data-w="${k}" data-i="${i}"></div>`).join('')}</div></div>
+    <div class="law-foot"><span></span><a class="next" href="${next[0]}">${next[0] === '#top' ? next[1] : `Next: ${next[1]} →`}</a></div>
+  </section>`; };
+let html = '';
+LAWS.forEach((L, i) => { const n = i + 1, ai = actOf(n), a = ACTS[ai];
+  if (n === a.from) html += `<div class="act-head" id="act${ai+1}"><div class="eyebrow"><span>Part ${ROMAN[ai]}</span> · Chapters ${a.from}–${a.to}</div><h2>${a.t}</h2><p>${a.p}</p></div>`;
+  html += lawHTML(L, n);
+  if (n === a.to) a.ws.forEach(k => html += wsHTML(k));
+});
+$('#laws').innerHTML = html;
+
+/* glance grid + filters */
+$('#glance').innerHTML = LAWS.map((L, i) => `<a class="tile" href="#law${i+1}" data-n="${i+1}" data-c="${L.c}">${ILL(i+1)}<span class="cap"><span class="n">${pad(i+1)}</span><span class="q">${L.t}</span><span class="han" lang="zh-Hant">${L.han}</span></span></a>`).join('');
+$('#glance').querySelectorAll('svg').forEach(s => s.setAttribute('aria-hidden', 'true'));
+$('#filters').innerHTML = `<button class="btn" aria-pressed="true" data-f="all">All 13</button>` + Object.entries(CATS).map(([k,v]) => `<button class="btn" aria-pressed="false" data-f="${k}">${v} · ${LAWS.filter(L => L.c === k).length}</button>`).join('');
+$('#filters').querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => {
+  $('#filters').querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.querySelectorAll('.tile').forEach(t => t.classList.toggle('dim', b.dataset.f !== 'all' && t.dataset.c !== b.dataset.f));
+}));
+
+/* rail + chips */
+let rail = '', chips = '';
+LAWS.forEach((L, i) => { const n = i + 1, ai = actOf(n), a = ACTS[ai];
+  if (n === a.from) rail += `<div class="act">Part ${ROMAN[ai]} · ${a.t}</div>`;
+  rail += `<a href="#law${n}" data-n="${n}"><span class="n">${pad(n)}</span><span>${L.s}</span><span class="tick" aria-hidden="true"></span></a>`;
+  chips += `<a href="#law${n}" data-n="${n}">${n}. ${L.s}</a>`;
+  if (n === a.to) a.ws.forEach(k => { rail += `<a href="#ws${k}" data-n="w${k}" class="ws-link"><span class="n">◆</span><span>${WS[k-1].t}</span><span class="tick" aria-hidden="true"></span></a>`; chips += `<a href="#ws${k}" data-n="w${k}">◆ ${WS[k-1].t}</a>`; });
+});
+$('#railLinks').innerHTML = rail;
+$('#chips').innerHTML = chips;
+
+/* progress */
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('aw-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('aw-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  document.querySelectorAll('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  document.querySelectorAll('#railLinks a, #chips a, .tile').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of 13 understood`;
+  $('#progBar').style.width = (done.size/13*100) + '%';
+}
+document.querySelectorAll('[data-done]').forEach(cb => cb.addEventListener('change', () => {
+  cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const link = document.querySelector(`#railLinks a[data-n="${n}"]`), box = $('#railLinks');
+  if (link && getComputedStyle($('.rail')).display !== 'none'){ const top = link.offsetTop - box.offsetTop; if (top < box.scrollTop + 30 || top > box.scrollTop + box.clientHeight - 60) box.scrollTo({top: top - box.clientHeight/3, behavior: RM?'auto':'smooth'}); }
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.law, .ws').forEach(s => secIO.observe(s));
+
+/* draw a principle */
+const PRIN = LAWS.flatMap((L, i) => L.keys.map(k => ({n: i + 1, h: k.match(/<b>(.*?)<\/b>/)[1].replace(/\.$/, ''), b: k.replace(/<b>.*?<\/b>\s*/, '')})));
+let lastDraw = -1;
+$('#draw').addEventListener('click', () => {
+  let i; do { i = Math.floor(Math.random()*PRIN.length); } while (i === lastDraw && PRIN.length > 1); lastDraw = i;
+  const p = PRIN[i];
+  $('#drawTxt').innerHTML = `<b style="color:var(--text);font-weight:500">${p.h}.</b> ${p.b} <a href="#law${p.n}">Chapter ${p.n} →</a>`;
+});
+
+/* quizzes */
+const qscore = {};
+document.querySelectorAll('.quiz').forEach(box => {
+  const k = +box.dataset.w, d = QUIZ[k-1][+box.dataset.i];
+  box.innerHTML = `<p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i; const why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ qscore[k] = (qscore[k] || 0) + 1; }
+    $('#qs' + k).textContent = `${qscore[k] || 0} of 3`;
+  }));
+});
+
+/* ---------- hero: ink-wash ridges in mist, a cinnabar sun ---------- */
+{ const cv = $('#board'), get = stage(cv);
+  const ridge = (x, k) => Math.sin(x*1.7 + k*2.1)*.5 + Math.sin(x*4.3 + k*1.3)*.25 + Math.sin(x*9.1 + k*.7)*.12 + Math.sin(x*19 + k)*.05;
+  const birds = Array.from({length: 5}, (_, i) => ({x: .52 + i*.035 + rnd()*.02, y: .2 + rnd()*.08, p: rnd()*6}));
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const sx = w*.74, sy = h*.24, sr = Math.max(26, Math.min(w, h)*.075);
+    ctx.fillStyle = A(C.glow, LIGHT ? .55 : .5); ctx.beginPath(); ctx.arc(sx, sy, sr, 0, 6.283); ctx.fill();
+    const layers = 4;
+    for (let k = 0; k < layers; k++){ const base = h*(.34 + k*.12), amp = h*(.16 - k*.02), drift = RM ? 0 : t*.006*(k+1);
+      ctx.beginPath(); ctx.moveTo(0, h);
+      for (let x = 0; x <= w + 6; x += 6){ const u = x/w*1.6 + drift + k*.37; ctx.lineTo(x, base - Math.max(0, ridge(u, k) + .45)*amp); }
+      ctx.lineTo(w, h); ctx.closePath();
+      ctx.fillStyle = LIGHT ? A(C.text, [.05,.08,.11,.15][k]) : A(C.muted, [.14,.1,.07,.05][k]); ctx.fill();
+      const mist = ctx.createLinearGradient(0, base - amp*.2, 0, base + h*.08); mist.addColorStop(0, A(C.ink, 0)); mist.addColorStop(1, A(C.ink, .55));
+      ctx.fillStyle = mist; ctx.fillRect(0, base - amp*.2, w, h*.08 + amp*.2); }
+    ctx.strokeStyle = A(C.text, LIGHT ? .45 : .5); ctx.lineWidth = 1.4;
+    for (const b of birds){ if (!RM) b.x += dt*.006; if (b.x > 1.05) b.x = -.05; const bx = b.x*w, by = b.y*h + Math.sin(t*.8 + b.p)*3, s = 5, f = RM ? .5 : Math.sin(t*5 + b.p)*.5 + .5;
+      ctx.beginPath(); ctx.moveTo(bx - s, by - s*.3*f); ctx.quadraticCurveTo(bx - s*.4, by - s*.6*f, bx, by); ctx.quadraticCurveTo(bx + s*.4, by - s*.6*f, bx + s, by - s*.3*f); ctx.stroke(); }
+    const fade = ctx.createLinearGradient(0, 0, 0, h); fade.addColorStop(0, A(C.ink, .3)); fade.addColorStop(.35, A(C.ink, .5)); fade.addColorStop(1, A(C.ink, .94)); ctx.fillStyle = fade; ctx.fillRect(0,0,w,h);
+  });
+}
+
+/* ================= W1: the temple count ================= */
+{ const F = [['The Way','Are the people united behind their leader?',1],['Heaven','Weather, season, timing',0],['Earth','Terrain, distance, safety',-1],['The Commander','Wise, trusted, caring, brave, firm',1],['Method','Organisation, supply, discipline',0]];
+  const val = F.map(f => f[2]);
+  $('#factors1').innerHTML = F.map((f, i) => `<div class="factor"><span class="nm">${f[0]}<small>${f[1]}</small></span><span class="seg" role="group" aria-label="${f[0]}: who has the edge">${[[1,'Us'],[0,'Even'],[-1,'Them']].map(([v,l]) => `<button type="button" data-f="${i}" data-v="${v}" aria-pressed="${val[i] === v}">${l}</button>`).join('')}</span></div>`).join('');
+  let ang = 0; const get1 = stage($('#c1'));
+  const score = () => { let us = 0, th = 0; val.forEach(v => { if (v === 1) us += 2; else if (v === -1) th += 2; else { us++; th++; } }); return [us, th]; };
+  function info(){ const [us, th] = score(), ks = $('#kSelf').checked, ke = $('#kEnemy').checked, d = us - th;
+    $('#v1a').textContent = `${ks ? us : '?'} to ${ke ? th : '?'}`;
+    let m;
+    if (!ks && !ke) m = 'You know neither side. Sun Tzu: you will lose every battle.';
+    else if (!ks || !ke) m = `You know only ${ks ? 'yourself' : 'the enemy'}. Sun Tzu: for every victory you will also suffer a defeat.`;
+    else if (d >= 4) m = 'Victory is won before the battle starts. Go, and go quickly (Chapter 2).';
+    else if (d >= 2) m = 'A real edge. Fight, but on ground and at a time you choose.';
+    else if (d === 0) m = 'Evenly matched. You can fight, but it will be costly. Better to change a factor first.';
+    else if (d > -4) m = 'They have the edge. Don\'t fight their army: go after their plans and alliances (Chapter 3).';
+    else m = 'Heavily outmatched. Avoid battle entirely, and wait.';
+    $('#v1b').textContent = m; }
+  $('#factors1').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.f; val[i] = +b.dataset.v;
+    $('#factors1').querySelectorAll(`button[data-f="${i}"]`).forEach(x => x.setAttribute('aria-pressed', x === b)); info(); }));
+  ['#kSelf','#kEnemy'].forEach(s => $(s).addEventListener('change', info)); info();
+  loop($('#c1'), (dt, t) => { const {ctx,w,h} = get1(); ctx.clearRect(0,0,w,h);
+    const [us, th] = score(), ks = $('#kSelf').checked, ke = $('#kEnemy').checked, sure = ks && ke;
+    const target = sure ? clamp(us - th, -8, 8)*.035 : Math.sin(t*1.6)*.16;
+    ang += (target - ang)*Math.min(1, (RM ? 1 : dt*5) || 1);
+    if (!sure && RM) ang = .08;
+    const cx = w/2, py = h*.26, bl = Math.min(w*.36, 260), hang = h*.36;
+    ctx.fillStyle = C['panel-2']; ctx.strokeStyle = C.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(cx, py); ctx.lineTo(cx - 26, h - 14); ctx.lineTo(cx + 26, h - 14); ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = C.line; ctx.beginPath(); ctx.moveTo(cx - 70, h - 14); ctx.lineTo(cx + 70, h - 14); ctx.stroke();
+    const ex = Math.cos(ang)*bl, ey = Math.sin(ang)*bl;
+    ctx.strokeStyle = C.text; ctx.lineWidth = 4; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx - ex, py - ey); ctx.lineTo(cx + ex, py + ey); ctx.stroke(); ctx.lineCap = 'butt';
+    ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(cx, py, 6, 0, 6.283); ctx.fill();
+    const pan = (px, py0, n, col, known, label) => { const pw = Math.min(110, w*.2), y = py0 + hang;
+      ctx.strokeStyle = C.faint; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(px, py0); ctx.lineTo(px - pw/2, y); ctx.moveTo(px, py0); ctx.lineTo(px + pw/2, y); ctx.stroke();
+      ctx.fillStyle = C['panel-2']; ctx.strokeStyle = known ? C.muted : C.faint; ctx.lineWidth = 2; if (!known) ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(px - pw/2, y); ctx.quadraticCurveTo(px, y + 24, px + pw/2, y); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+      if (known){ ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.lineCap = 'round'; const sp = Math.min(9, (pw - 20)/Math.max(1, n));
+        for (let k = 0; k < n; k++){ const x = px - (n - 1)*sp/2 + k*sp; ctx.beginPath(); ctx.moveTo(x, y - 2); ctx.lineTo(x, y - 22); ctx.stroke(); } ctx.lineCap = 'butt'; }
+      else { ctx.fillStyle = C.faint; ctx.font = '600 22px Geist, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('?', px, y - 6); }
+      ctx.font = MONO; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(label, px, y + 30); };
+    pan(cx - ex, py - ey, us, C.glow, ks, 'us'); pan(cx + ex, py + ey, th, C.cool, ke, 'them');
+  });
+}
+
+/* ================= W2: strike where they're thin ================= */
+{ const cv = $('#c2'), get = stage(cv), sl = $('#s2'), sec = $('#secret2');
+  const ENEMY = 20000, US = 10000, PER = 500;
+  const atTarget = () => { const n = +sl.value; return sec.checked || n === 1 ? ENEMY/n : ENEMY*(.6 + .4/n); };
+  const call = r => r >= 10 ? 'Ten to one: surround them.' : r >= 5 ? 'Five to one: attack.' : r >= 2 ? 'Double their strength: engage and split them up.' : r >= 1 ? 'Evenly matched: you can fight, but it will cost you.' : r >= .5 ? 'Outnumbered where it counts: slip away.' : 'Badly outnumbered here: avoid them entirely.';
+  function info(){ const n = +sl.value, e = atTarget(), r = US/e;
+    $('#o2').textContent = n === 1 ? '1 (they know exactly where)' : n + ' places';
+    $('#v2a').textContent = fmt(e); $('#v2b').textContent = (r >= 1 ? r.toFixed(1) + ' to 1' : '1 to ' + (1/r).toFixed(1));
+    $('#v2c').textContent = !sec.checked && n > 1 ? call(r) + ' They knew your target, so most of them were waiting there.' : call(r); }
+  sl.addEventListener('input', info); sec.addEventListener('change', info); info();
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const n = +sl.value, tg = Math.floor((n - 1)/2), e = atTarget(), other = n > 1 ? (ENEMY - e)/(n - 1) : 0;
+    const sp = clamp(Math.min(w/70, h/24), 6, 13), dr = sp*.36, gap = sp*1.4, pw = Math.min(sp*14, (w - 32 - gap*(n - 1))/n), x0 = (w - (pw*n + gap*(n - 1)))/2, top = h*.1, cols = Math.max(2, Math.floor((pw - sp)/sp));
+    for (let i = 0; i < n; i++){ const x = x0 + i*(pw + gap), str = i === tg ? e : other, dots = Math.round(str/PER), rows = Math.ceil(dots/cols), bh = Math.max(22, rows*sp + sp*.6);
+      if (i === tg){ ctx.fillStyle = A(C.glow, .1 + (RM ? 0 : .05*Math.sin(t*3))); ctx.fillRect(x - 4, top - 4, pw + 8, bh + 8); }
+      ctx.strokeStyle = i === tg ? C.glow : C.line; ctx.lineWidth = i === tg ? 2 : 1; ctx.strokeRect(x, top, pw, bh);
+      ctx.fillStyle = C.cool; for (let k = 0; k < dots; k++){ ctx.beginPath(); ctx.arc(x + sp*.8 + (k%cols)*sp, top + sp*.8 + Math.floor(k/cols)*sp, dr, 0, 6.283); ctx.fill(); } }
+    // your army, concentrated
+    const ucols = 10, ux = w/2 - (ucols - 1)*sp/2, uy = h - 28 - sp, tx = x0 + tg*(pw + gap) + pw/2;
+    ctx.fillStyle = C.glow; for (let k = 0; k < US/PER; k++){ ctx.beginPath(); ctx.arc(ux + (k%ucols)*sp, uy + Math.floor(k/ucols)*sp, dr + .4, 0, 6.283); ctx.fill(); }
+    const tb = top + Math.max(22, Math.ceil(Math.round(e/PER)/cols)*sp + 10) + 12, sy = uy - 10, ph = RM ? 1 : (t*.6) % 1;
+    ctx.strokeStyle = A(C.glow, .7); ctx.lineWidth = 2; ctx.setLineDash([5,5]); ctx.lineDashOffset = -ph*20; ctx.beginPath(); ctx.moveTo(w/2, sy); ctx.quadraticCurveTo(w/2, (sy + tb)/2, tx, tb + 6); ctx.stroke(); ctx.setLineDash([]); ctx.lineDashOffset = 0;
+    ctx.fillStyle = C.glow; ctx.beginPath(); ctx.moveTo(tx, tb); ctx.lineTo(tx - 6, tb + 10); ctx.lineTo(tx + 6, tb + 10); ctx.closePath(); ctx.fill();
+    ctx.font = MONO; ctx.textAlign = 'left'; ctx.fillStyle = C.faint; ctx.fillText('each dot = 500 soldiers', 12, h - 8);
+    ctx.textAlign = 'right'; ctx.fillStyle = C.glow; ctx.fillText('you: 10,000', w - 12, h - 8);
+  });
+}
+
+/* ================= W3: read the signs ================= */
+{ const SG = [
+    {s:'The enemy\'s envoys arrive with humble, conciliatory words, while their camp works harder than ever.', o:['They are about to advance','They genuinely want peace','They are about to retreat'], a:0, w:'Humble words plus growing preparations mean an attack is coming. The politeness buys time.'},
+    {s:'Their messengers make fierce threats, and their front line pushes forward as if to attack.', o:['An attack is coming','They are about to retreat','They are confident of winning'], a:1, w:'Loud threats and a show of advance often cover a withdrawal. Real attackers rarely announce it.'},
+    {s:'Ahead on the road, birds suddenly burst up out of the trees.', o:['Soldiers are hidden there: an ambush','A storm is coming','The enemy has left the area'], a:0, w:'Something disturbed them. Birds rising means men lying in wait.'},
+    {s:'Birds are gathering and settling on the enemy\'s camp.', o:['The camp is empty','There\'s food lying around','The soldiers are asleep'], a:0, w:'Birds don\'t settle where people are moving. The camp has been abandoned, perhaps with fires left burning to fool you.'},
+    {s:'Their soldiers stand leaning on their spears.', o:['They are hungry and weak','They are relaxed and confident','They are waiting for orders'], a:0, w:'Sun Tzu reads it as faintness from hunger: their supplies are failing.'},
+    {s:'The men sent to fetch water drink before they carry it back.', o:['The whole army is thirsty','The water is poisoned','Discipline is excellent'], a:0, w:'If even the water carriers can\'t wait, the army is suffering from thirst.'},
+    {s:'Dust rises high, in tall narrow columns.', o:['Chariots are coming','Foot soldiers are coming','They are building a camp'], a:0, w:'Tall, narrow dust means chariots. Low dust spread wide means infantry; scattered thin streaks mean wood-gatherers.'},
+    {s:'Their general keeps handing out rewards, again and again.', o:['He is running out of ways to keep them going','They have just won a great victory','He is simply generous'], a:0, w:'Too many rewards signal a commander at the end of his resources. Too many punishments signal desperation.'},
+    {s:'There\'s shouting and clamour in their camp at night.', o:['They are frightened','They are celebrating','They are about to attack'], a:0, w:'Noise at night betrays nervousness. A confident camp is a quiet one.'},
+    {s:'Out of nowhere they offer peace, with no sworn agreement behind it.', o:['They are plotting something','They have given up','They want to trade'], a:0, w:'A sudden peace offer without commitments is a sign of a scheme, not a change of heart.'}
+  ];
+  const order = SG.map((_, i) => [0,1,2].map(k => (k + i*2) % 3));
+  let i = 0, score = 0, answered = false;
+  function show(){ const d = SG[i], ord = order[i]; answered = false;
+    $('#pos3').textContent = `Sign ${i+1} of ${SG.length}`; $('#score3').textContent = `${score} right`;
+    $('#card3').textContent = d.s; $('#verd3').innerHTML = ''; $('#next3').hidden = true;
+    $('#opts3').innerHTML = ord.map(k => `<button class="btn" data-k="${k}">${d.o[k]}</button>`).join('');
+    $('#opts3').querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => { if (answered) return; answered = true; const k = +b.dataset.k, ok = k === d.a;
+      if (ok) score++; $('#score3').textContent = `${score} right`;
+      $('#opts3').querySelectorAll('.btn').forEach(x => { x.disabled = true; if (+x.dataset.k === d.a) x.setAttribute('aria-pressed', 'true'); });
+      $('#verd3').innerHTML = `<b>${ok ? 'Yes.' : 'Not quite: ' + d.o[d.a].charAt(0).toLowerCase() + d.o[d.a].slice(1) + '.'}</b> ${d.w}`;
+      $('#next3').hidden = false; $('#next3').textContent = i === SG.length - 1 ? `Done: ${score} of ${SG.length}. Play again` : 'Next sign →'; })); }
+  $('#next3').addEventListener('click', () => { i++; if (i >= SG.length){ i = 0; score = 0; } show(); });
+  show();
+}
+
+/* ================= W4: the price of knowing ================= */
+{ const cv = $('#c4'), get = stage(cv), sl = $('#s4'), tr = $('#trust4');
+  const DAY = 1000, MAX = 20000;
+  const days = s => tr.checked ? 100 + 900*Math.exp(-s/1500) : 1000;
+  const total = (s, trust = tr.checked) => (trust ? 100 + 900*Math.exp(-s/1500) : 1000)*DAY + s;
+  function info(){ const s = +sl.value, d = days(s), tot = total(s);
+    $('#o4').textContent = fmt(s) + ' oz';
+    $('#v4a').textContent = d >= 365 ? (d/365).toFixed(1) + ' years' : Math.round(d) + ' days';
+    $('#v4b').textContent = fmt(tot) + ' oz';
+    $('#v4c').textContent = !tr.checked ? (s ? 'You paid for the reports and ignored them, like Stalin in 1941. The war is as long as if you knew nothing.' : 'No spies, and no trust in them anyway. You fight blind for years.')
+      : s === 0 ? 'No spies: you fight blind for years. Sun Tzu calls this the height of inhumanity.'
+      : s < 1500 ? 'A little information is already cutting months off the war.'
+      : s < 6000 ? 'The war is now a fraction of its blind length.'
+      : s <= 12000 ? 'Near the cheapest war possible. The spies cost almost nothing next to the army.'
+      : 'Diminishing returns: you already know enough. The extra silver buys little.'; }
+  sl.addEventListener('input', info); tr.addEventListener('change', info); info();
+  loop(cv, () => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const L0 = 58, R0 = w - 18, T0 = 22, B0 = h - 34, YM = 1050000, X = s => lerp(L0, R0, s/MAX), Y = v => lerp(B0, T0, v/YM);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L0, T0); ctx.lineTo(L0, B0); ctx.lineTo(R0, B0); ctx.stroke();
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.textAlign = 'right';
+    [0, 500000, 1000000].forEach(v => { ctx.fillText(v === 1000000 ? '1M' : v ? (v/1000) + 'k' : '0', L0 - 6, Y(v) + 4); ctx.strokeStyle = A(C.line, .6); ctx.beginPath(); ctx.moveTo(L0, Y(v)); ctx.lineTo(R0, Y(v)); ctx.stroke(); });
+    ctx.textAlign = 'center'; [0, 5000, 10000, 15000, 20000].forEach(s => ctx.fillText(s ? (s/1000) + 'k' : '0', X(s), B0 + 16));
+    ctx.textAlign = 'right'; ctx.fillText('silver on spies (oz)', R0, B0 + 30 > h - 2 ? h - 2 : B0 + 30);
+    ctx.textAlign = 'left'; ctx.fillText('total cost of the war (oz)', L0 + 6, T0 - 6);
+    // ignoring the reports: flat and high
+    ctx.strokeStyle = A(C.cool, .8); ctx.lineWidth = 1.6; ctx.setLineDash([5,4]); ctx.beginPath(); ctx.moveTo(X(0), Y(total(0, false))); ctx.lineTo(X(MAX), Y(total(MAX, false))); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = C.cool; ctx.textAlign = 'right'; ctx.fillText('if the general won\'t believe them', R0, Y(total(MAX, false)) + 16);
+    // believing them
+    ctx.beginPath(); for (let i = 0; i <= 200; i++){ const s = i/200*MAX; ctx[i ? 'lineTo' : 'moveTo'](X(s), Y(total(s, true))); } ctx.lineTo(X(MAX), B0); ctx.lineTo(X(0), B0); ctx.closePath(); ctx.fillStyle = A(C.glow, .1); ctx.fill();
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 2.5; ctx.beginPath(); for (let i = 0; i <= 200; i++){ const s = i/200*MAX; ctx[i ? 'lineTo' : 'moveTo'](X(s), Y(total(s, true))); } ctx.stroke();
+    const best = 1500*Math.log(900*DAY/1500); ctx.fillStyle = C.glow; ctx.textAlign = 'center'; ctx.fillText('cheapest', X(best), Y(total(best, true)) - 10);
+    const s = +sl.value; ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(X(s), Y(total(s)), 6, 0, 6.283); ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke();
+  });
+}
+
+/* ================= W5: field test ================= */
+{ const SC = [
+    {s:'A startup doesn\'t fight a giant on price. It serves a small group of customers the giant can\'t be bothered with, and wins them all.', o:[6,4,12], a:6, w:'Chapter 6: avoid strength, strike emptiness. The giant can\'t guard every market at once.'},
+    {s:'Before bidding for a big contract, a firm scores itself and its two rivals on price, team, timing, relationships and track record.', o:[13,1,8], a:1, w:'Chapter 1: the calculations in the temple. Compare both sides on the fundamentals before you commit.'},
+    {s:'A company settles a lawsuit early, because each month in court was costing more than the case was worth.', o:[11,5,2], a:2, w:'Chapter 2: no one profits from a long war. Count the daily cost.'},
+    {s:'In a tense negotiation, a manager gives the other side a face-saving way to back down instead of forcing a public defeat.', o:[3,7,10], a:7, w:'Chapter 7: leave a surrounded enemy a way out. People with no exit fight to the end. (It also serves Chapter 3\'s goal of winning without a fight.)'},
+    {s:'A coach runs the same plain play all game, then calls a trick play once the defence is set to stop it.', o:[5,9,8], a:5, w:'Chapter 5: engage with the direct force, win with the indirect one. The ordinary play sets up the surprise.'},
+    {s:'Furious at a rival team, a manager fires off a sharp email at midnight, and regrets it by morning.', o:[12,8,4], a:12, w:'Chapter 12: never act from anger; it passes, the consequences don\'t. (Chapter 8\'s hot-tempered general is the same weakness.)'},
+    {s:'A small local brewery competes only in its home town, where its local knowledge and loyal regulars count for more than a big brand\'s budget.', o:[10,6,9], a:10, w:'Chapter 10: choose the ground where your opponent\'s size can\'t be brought to bear, like a narrow pass.'},
+    {s:'Before entering a new market, a company interviews customers, distributors and former employees of its rivals.', o:[13,1,9], a:13, w:'Chapter 13: foreknowledge comes from people who know, not from guesswork. Cheap next to a failed launch.'},
+    {s:'A founder quits her job and puts her savings into the company. The team notices she has no plan B, and works differently.', o:[11,2,7], a:11, w:'Chapter 11: death ground. With no way back, people find strength they didn\'t know they had.'},
+    {s:'A company builds up cash and a loyal customer base, then waits until a competitor stumbles before making its move.', o:[4,6,5], a:4, w:'Chapter 4: make yourself unbeatable first, then take the opening the enemy gives you.'},
+    {s:'Midway through talks, the other side suddenly turns warm and conciliatory, while quietly hiring more lawyers.', o:[9,1,13], a:9, w:'Chapter 9: humble words while preparations increase mean they\'re about to advance.'}
+  ];
+  let i = 0, score = 0, answered = false;
+  function show(){ const d = SC[i]; answered = false;
+    $('#pos5').textContent = `Situation ${i+1} of ${SC.length}`; $('#score5').textContent = `${score} right`;
+    $('#card5').textContent = d.s; $('#verd5').innerHTML = ''; $('#next5').hidden = true;
+    $('#opts5').innerHTML = d.o.map(n => `<button class="btn" data-l="${n}">Ch. ${n}: ${LAWS[n-1].t}</button>`).join('');
+    $('#opts5').querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => { if (answered) return; answered = true; const n = +b.dataset.l, ok = n === d.a;
+      if (ok) score++; $('#score5').textContent = `${score} right`;
+      $('#opts5').querySelectorAll('.btn').forEach(x => { x.disabled = true; if (+x.dataset.l === d.a) x.setAttribute('aria-pressed', 'true'); });
+      $('#verd5').innerHTML = `<b>${ok ? 'Yes.' : 'Not quite: it\'s Chapter ' + d.a + '.'}</b> ${d.w}`;
+      $('#next5').hidden = false; $('#next5').textContent = i === SC.length - 1 ? `Done: ${score} of ${SC.length}. Play again` : 'Next situation →'; })); }
+  $('#next5').addEventListener('click', () => { i++; if (i >= SC.length){ i = 0; score = 0; } show(); });
+  show();
+}
+})();
+</script>
+</body>
+</html>
