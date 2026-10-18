@@ -11,6 +11,7 @@ Interactive, chapter-by-chapter explainers for books and podcasts, plus a booksh
 | `explainers/the-mountain-is-you.html` | *The Mountain Is You*, Brianna Wiest (7 chapters) |
 | `explainers/naval-harsh-truths.html` | Naval Ravikant on Modern Wisdom with Chris Williamson, episode #922 (10 chapters, golden nuggets, timestamp links) |
 | `explainers/bezos-lex-fridman.html` | Jeff Bezos on the Lex Fridman Podcast, episode #405 (10 chapters, golden nuggets, timestamp links) |
+| `explainers/48-laws-of-power.html` | *The 48 Laws of Power*, Robert Greene (all 48 laws, each with its own illustration, plus six workshops) |
 
 Each explainer has plain-language chapter summaries, an interactive exercise per chapter, a quick quiz, a light/dark toggle, and "I understand this chapter" progress saved in the browser's localStorage.
 
@@ -28,6 +29,6 @@ To host it, turn on GitHub Pages for this repository (Settings → Pages → dep
 ## Adding a new explainer
 
 1. Add the page as `explainers/<slug>.html`, using the same shell as the others (Instrument Serif, Geist and Geist Mono; chapter rail; light/dark toggle; a "Back to the bookshelf" link to `../index.html`).
-2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (title, spine, author, optional `by` line, year, chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, and a `mark` icon: `star`, `peak` or `mic`).
+2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (title, spine, author, optional `by` line, year, chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, and a `mark` icon: `star`, `peak`, `mic` or `crown`).
 
 All explanations are written in original wording. They summarise the source material and are not affiliated with its authors.

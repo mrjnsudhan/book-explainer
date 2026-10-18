@@ -1,0 +1,1284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The 48 Laws of Power, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a candlelit court. Same shell as the other guides (law rail + one "station" per law: an illustration,
+   the idea, the history, the reversal, how to spot it), with a workshop after every eight laws.
+   Dark-first: lacquer black with a gilt accent and an oxblood second series; light is parchment. */
+:root{
+  color-scheme: dark;
+  --ink:#110D0C;          /* page: lacquer black */
+  --panel:#1A1412;
+  --panel-2:#241C19;
+  --line:#3A2D28;
+  --text:#F3EBE2;
+  --muted:#BCAA9B;
+  --faint:#806F63;
+  --glow:#E2B75E;         /* gilt: the one accent */
+  --glow-soft:rgba(226,183,94,.12);
+  --cool:#E0695F;         /* oxblood: second series, transgressions */
+  --cool-soft:rgba(224,105,95,.12);
+  --good:#9BD99B;
+  --bad:#FF8F80;
+  --soft:#D9CCBF;
+  --deep:#140F0E;
+  --toc-bg:rgba(26,20,18,.74);
+  --glow-line:rgba(226,183,94,.32);
+  --on-glow:#221608;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F4EEE3;--panel:#FFFCF6;--panel-2:#EBE2D2;--line:#D8CAB3;--text:#21160F;--muted:#5A4A3D;--faint:#8A7867;
+  --glow:#94640E;--glow-soft:rgba(148,100,14,.09);--cool:#A8322B;--cool-soft:rgba(168,50,43,.08);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#3A2D24;--deep:#FAF6EE;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(148,100,14,.32);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F4EEE3;--panel:#FFFCF6;--panel-2:#EBE2D2;--line:#D8CAB3;--text:#21160F;--muted:#5A4A3D;--faint:#8A7867;
+  --glow:#94640E;--glow-soft:rgba(148,100,14,.09);--cool:#A8322B;--cool-soft:rgba(168,50,43,.08);--good:#2A7F3A;--bad:#C23B2A;
+  --soft:#3A2D24;--deep:#FAF6EE;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(148,100,14,.32);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:40px 36px}
+#board{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:22px}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.95;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:64ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint)}
+.about span b{color:var(--muted);font-weight:500}
+.lens{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px;max-width:900px}
+.lens div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);font-size:14px;color:var(--soft)}
+.lens b{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-bottom:4px}
+.lens .use b{color:var(--glow)} .lens .def b{color:var(--cool)}
+
+/* the 48 at a glance */
+.glance-head{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:6px}
+.glance-head h3{font-family:var(--f-display);font-weight:400;font-size:30px}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.glance{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tile{display:grid;grid-template-rows:auto auto;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);
+  overflow:hidden;transition:border-color .2s, transform .2s, opacity .25s}
+.tile:hover{border-color:var(--glow);transform:translateY(-2px)}
+.tile svg{display:block;width:100%;height:auto;background:var(--deep);border-bottom:1px solid var(--line)}
+.tile .cap{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline;padding:8px 10px 10px}
+.tile .n{font-family:var(--f-mono);font-size:11px;color:var(--glow)}
+.tile .q{font-size:13px;line-height:1.25}
+.tile.dim{opacity:.22}
+.tile.done .n::after{content:" ✓";color:var(--good)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);grid-template-rows:auto minmax(0,1fr)}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+#railLinks{overflow-y:auto;display:grid;gap:1px;align-content:start;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.rail .act{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:4px 10px;border-radius:8px;
+  color:var(--muted);text-decoration:none;font-size:13px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.rail a.ws-link{color:var(--glow)}
+.rail a.ws-link .tick{border-radius:2px;transform:rotate(45deg) scale(.8)}
+.chips{display:none}
+
+/* ---------- acts ---------- */
+.act-head{display:grid;gap:10px;padding-block:56px 6px;border-top:1px solid var(--line)}
+.act-head:first-child{border-top:0;padding-top:8px}
+.act-head .eyebrow span{color:var(--glow)}
+.act-head h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,6.5vw,72px);line-height:1}
+.act-head p{max-width:66ch;color:var(--muted)}
+
+/* ---------- a law ---------- */
+.law{display:grid;gap:22px;padding-block:48px;border-top:1px solid var(--line)}
+.act-head + .law{border-top:0;padding-top:30px}
+.law-head{display:grid;gap:10px}
+.law-head .eyebrow{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.law-head .eyebrow span.no{color:var(--glow)}
+.tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.law h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(34px,5.2vw,56px);line-height:1.02}
+.law-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:22px;align-items:start}
+.ill{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  background:radial-gradient(120% 90% at 50% 0%, var(--panel-2), var(--deep))}
+.ill svg{display:block;width:100%;height:auto}
+.ill figcaption{display:flex;gap:10px;align-items:baseline;padding:11px 16px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.ill figcaption b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow);font-weight:500;white-space:nowrap}
+.side{display:grid;gap:14px}
+.short{display:grid;gap:6px;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl, .note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:17.5px;line-height:1.5}
+.note{display:grid;align-content:start;gap:6px;padding:14px 18px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+.note p{color:var(--soft);font-size:15px}
+.note.trans .lbl{color:var(--cool)}
+.note.obs .lbl{color:var(--glow)}
+.note.rev .lbl{color:var(--muted)}
+.note.def{border-left:3px solid var(--cool)}
+.note.def .lbl{color:var(--cool)}
+.stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.law-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* illustration palette: strokes first, fills after so a fill class wins when both are set */
+.ill svg, .tile svg{stroke-linecap:round;stroke-linejoin:round;stroke-width:2}
+.tile text{display:none}
+.k-tx{stroke:var(--text);fill:none}
+.k-au{stroke:var(--glow);fill:none}
+.k-cr{stroke:var(--cool);fill:none}
+.k-mu{stroke:var(--muted);fill:none}
+.k-fa{stroke:var(--faint);fill:none}
+.k-ln{stroke:var(--line);fill:none}
+.k-ink{stroke:var(--deep);fill:none}
+.f-tx{fill:var(--text)}
+.f-au{fill:var(--glow)}
+.f-cr{fill:var(--cool)}
+.f-mu{fill:var(--muted)}
+.f-fa{fill:var(--faint)}
+.f-pn{fill:var(--panel-2)}
+.f-ln{fill:var(--line)}
+.f-ink{fill:var(--deep)}
+.f-ausoft{fill:var(--glow);opacity:.16}
+.f-crsoft{fill:var(--cool);opacity:.16}
+.ill text, .tile text{font-family:var(--f-mono);font-size:9px;fill:var(--faint);stroke:none}
+.ill text.big, .tile text.big{font-size:12px}
+@media (prefers-reduced-motion: no-preference){
+  .ill .bob{animation:bob 3.2s ease-in-out infinite;transform-box:fill-box}
+  .ill .glint{animation:glint 2.6s ease-in-out infinite}
+  .ill .sway{animation:sway 3.6s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+  .ill .drift{animation:drift 6s ease-in-out infinite;transform-box:fill-box}
+  .ill .spin{animation:spin 14s linear infinite;transform-box:fill-box;transform-origin:center}
+}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glint{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(5deg)}}
+@keyframes drift{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- workshops ---------- */
+.ws{display:grid;gap:24px;padding-block:52px;border-top:1px solid var(--line)}
+.ws-head{display:grid;gap:12px}
+.ws-head .eyebrow span{color:var(--glow)}
+.ws h2{font-family:var(--f-display);font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1.02}
+.ws-head p{max-width:66ch;color:var(--muted)}
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";width:9px;height:9px;transform:rotate(45deg);background:var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.lab canvas{display:block;width:100%;height:auto;aspect-ratio:16/7;max-width:100%;touch-action:pan-y}
+.lab .stage{position:relative}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;align-content:start;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+/* sorter */
+.sorter{display:grid;gap:14px;padding:22px 18px}
+.card{padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);font-family:var(--f-display);font-size:clamp(21px,3.2vw,27px);line-height:1.25;min-height:4.4em;display:flex;align-items:center}
+.sorter .row .btn{font-size:14px;padding:9px 16px}
+.verdict{font-size:14px;color:var(--muted);min-height:1.6em}
+.verdict b{color:var(--text);font-weight:500}
+.score{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+/* options game */
+.deal{display:grid;gap:16px;padding:20px 18px}
+.offer{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.choice{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;display:grid;gap:6px;transition:border-color .15s,transform .15s}
+.choice:hover:not(:disabled){border-color:var(--glow);transform:translateY(-2px)}
+.choice:disabled{cursor:default}
+.choice .h{font-family:var(--f-display);font-size:22px;line-height:1.1}
+.choice .d{font-size:13px;color:var(--muted)}
+.choice .m{font-family:var(--f-mono);font-size:12px;color:var(--glow)}
+.choice.hidden-opt{border-style:dashed;border-color:var(--cool)}
+.choice.hidden-opt .m{color:var(--cool)}
+.quiz{display:grid;gap:12px;max-width:72ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--glow)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--glow-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--cool-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.quizzes{display:grid;gap:12px}
+.qscore{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:10px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .law-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 560px){
+  .lab canvas{aspect-ratio:4/3}
+  .short p{font-size:16px}
+  .hero{padding-top:28px}
+  .glance{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+</style>
+</head>
+<body>
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <canvas id="board" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A law-by-law illustrated guide to Robert Greene's book on power</div>
+    <h1>The 48 Laws of Power,<br><em>Explained</em></h1>
+    <p class="lede">Forty-eight rules drawn from three thousand years of courts, wars and cons. Each law here gets <b>its own illustration</b>, the idea in plain language, the history Greene uses to prove it, and the reversal, when breaking the law works better. After every eight laws there's a <b>workshop</b> with a hands-on exercise and a quick quiz. Mark a law understood and your progress is remembered on this device.</p>
+    <div class="lens">
+      <div class="use"><b>Read it as a move</b>How people have gained, kept and lost power, and why the same patterns keep repeating.</div>
+      <div class="def"><b>Read it as a warning</b>Every law is also a move someone may be making on you. Each one ends with how to spot it and what to do.</div>
+    </div>
+    <div class="glance-head">
+      <h3>The 48 at a glance</h3>
+      <div class="filters" id="filters"></div>
+    </div>
+    <nav class="glance" id="glance" aria-label="All 48 laws"></nav>
+    <div class="row"><button class="btn primary" id="draw" type="button">Draw a random law</button><span class="score" id="drawTxt"></span></div>
+    <div class="about">
+      <span><b>Published</b> 1998, by Viking</span>
+      <span><b>Author</b> Robert Greene, with Joost Elffers</span>
+      <span><b>Read time</b> about 2 minutes per law here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Law navigation">
+    <div class="prog"><span id="progTxt">0 of 48 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks"></div>
+  </aside>
+  <main id="main">
+    <nav class="chips" id="chips" aria-label="Laws"></nav>
+    <div id="laws"></div>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The 48 Laws of Power</i> by Robert Greene (1998). The explanations and illustrations are original, written and drawn in our own words; the historical stories are retold briefly from the examples the book uses, and the exercises are simplified models of its ideas. The book describes how power has been played, not how anyone should treat people, so this guide gives every law a defence as well as a move.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+<script>
+/* ---------- the 48 laws: content (original summaries) ---------- */
+const CATS = {ppl:'People', img:'Image', hide:'Concealment', str:'Strategy', self:'Self-mastery'};
+const LAWS = [
+{ t:'Never outshine the master', s:'Never outshine', c:'ppl',
+  short:'The people above you want to feel superior. If you make them look small, even by accident, you turn a patron into an enemy. Let them take the light, and make your talents look like a reflection of theirs.',
+  cap:'The master stands in the light. You present it to them, and keep your own star dim.',
+  tr:'Nicolas Fouquet, Louis XIV\'s finance minister, threw a dazzling party at his new château of Vaux-le-Vicomte in 1661 to win the young king\'s favour. It worked the other way: the king felt upstaged, and within weeks Fouquet was arrested. He spent the rest of his life in prison.',
+  ob:'Galileo, short of money, named the moons of Jupiter he discovered after the Medici family and presented the find as a cosmic tribute to them. Cosimo II made him court mathematician.',
+  rev:'If your superior is already a falling star, fading and unpopular, you don\'t need to tiptoe. Outshining a weak master can be how you replace them.',
+  def:'If you\'re the boss, notice when you feel stung by someone\'s brilliance. That sting is the law at work in you; reward the talent instead of punishing it.' },
+{ t:'Never put too much trust in friends, learn how to use enemies', s:'Friends and enemies', c:'ppl',
+  short:'Friends can be dangerous precisely because you trust them: they feel entitled, envy you up close, and you can\'t see them clearly. A former enemy you win over has more to prove and will work harder for you.',
+  cap:'The friend at your side hides a blade. The rival you won over carries your shield.',
+  tr:'The Byzantine emperor Michael III raised his friend Basil from stable hand to co-emperor. Basil had him murdered in 867 and took the throne.',
+  ob:'Zhao Kuangyin, founder of China\'s Song dynasty, feared the generals who had helped him to power. Over wine he persuaded them to retire with rich estates, and he later made loyal officials of defeated rivals instead of executing them.',
+  rev:'Working with friends is fine when the job is something they\'re genuinely good at and the roles are clear. The danger is hiring for affection instead of ability.',
+  def:'Before giving a friend power over something important, ask whether you\'d give it to a stranger with the same skills.' },
+{ t:'Conceal your intentions', s:'Conceal intentions', c:'hide',
+  short:'If people can see what you\'re aiming for, they can prepare, resist or get in the way. Keep them off balance by hiding your real goal, or by pointing them at a convincing false one, a red herring.',
+  cap:'The signpost points to the red herring. The footsteps go somewhere else entirely.',
+  tr:'The French courtesan Ninon de Lenclos coached the Marquis de Sévigné on how to win a countess: stay cool, keep her guessing. He couldn\'t help declaring his feelings, and she lost interest.',
+  ob:'In 1850 Otto von Bismarck, a known hawk, gave a speech praising peace with Austria. It was the opposite of what he believed, but it made the peace party see him as an ally, and it put him on the path to becoming Prussia\'s minister.',
+  rev:'If your reputation for honesty is your power, a single exposed deception can cost more than it gains. Sometimes being open about your aims disarms people who expected a trick.',
+  def:'When someone loudly announces one goal, watch where their effort and resources actually go.' },
+{ t:'Always say less than necessary', s:'Say less', c:'hide',
+  short:'The more you talk, the more ordinary you sound and the more likely you are to say something foolish. Short, vague answers make people lean in and fill the silence for you.',
+  cap:'One figure fills the air and sinks. The other says almost nothing and holds the room.',
+  tr:'Coriolanus, a Roman war hero, was about to be elected consul. Then he kept making speeches: boasting, insulting the common people. The voters turned on him and he was banished.',
+  ob:'Louis XIV answered most requests with "I shall see." Courtiers spent hours decoding his silences, which kept them anxious and attentive.',
+  rev:'Silence can look like coldness or guilt. Sometimes talking a lot is a smokescreen, and a well-placed joke can disarm better than a pause.',
+  def:'When you feel the urge to fill a silence in a negotiation, don\'t. Notice how often the other side does it instead.' },
+{ t:'So much depends on reputation, guard it with your life', s:'Guard your reputation', c:'img',
+  short:'Your reputation walks into the room before you do. A strong one intimidates and wins battles without a fight; a damaged one makes you an easy target. Protect it, and know that attacking a rival\'s reputation is a powerful weapon.',
+  cap:'The gates stand open. The man on the wall plays his lute. The army outside doesn\'t dare come in.',
+  ob:'In China\'s Three Kingdoms era, the strategist Zhuge Liang was caught with almost no troops as a huge army approached. He opened the city gates and sat on the wall playing a lute. His reputation for cunning was so strong that the enemy general suspected a trap and retreated.',
+  ob2:'P.T. Barnum used the other side of this law: he ran a press campaign mocking the respectability of a rival museum until its reputation, and its business, collapsed.',
+  rev:'There\'s no real reversal. Reputation is the foundation; the only question is what you build it on.',
+  def:'Pay attention to whispers about you early. A small rumour corrected quickly costs far less than a big one left to grow.' },
+{ t:'Court attention at all costs', s:'Court attention', c:'img',
+  short:'Being unnoticed is the real danger. Stand out, become a story people tell. Mystery, controversy and spectacle all draw eyes; even scandal is better than being invisible.',
+  cap:'The spotlight finds one figure, and every head in the crowd turns toward it.',
+  ob:'P.T. Barnum made his name with stunts. He would let rumours and debates about his own exhibits run wild because every argument sold more tickets.',
+  rev:'Once you\'re established, constant attention-seeking looks desperate. Know when to become scarce (Law 16), and never steal the spotlight from someone above you (Law 1).',
+  def:'Ask what a loud claim is really selling. Outrage is often the marketing budget.' },
+{ t:'Get others to do the work for you, but always take the credit', s:'Take the credit', c:'ppl',
+  short:'Your time and energy are limited. Use other people\'s skill and labour to multiply what you can do, and be the name people remember at the end.',
+  cap:'Three figures carry the stone. One holds up the trophy.',
+  tr:'Nikola Tesla worked for Thomas Edison and solved hard problems on a promise of a large bonus that never came. Later, Marconi got much of the public credit for radio. Tesla died poor.',
+  ob:'Edison ran a laboratory full of talented workers, and the inventions it produced went out under his name.',
+  rev:'If you depend on a team, hogging credit breeds resentment and defections. Sometimes sharing credit generously wins more loyalty than it costs.',
+  def:'If you\'re doing the work, get your name on it in writing, early: emails, commit logs, a short memo to the right people.' },
+{ t:'Make other people come to you, use bait if necessary', s:'Make them come to you', c:'str',
+  short:'Whoever acts first, on the other side\'s ground, usually loses control. Stay put, lure your opponent in with something they want, and fight on your terms.',
+  cap:'The angler sits still on the bank. The fish swims to the bait.',
+  ob:'After Napoleon was exiled to Elba, Greene argues, his old minister Talleyrand quietly made sure his guards were lax and his escape was tempting. Napoleon took the bait, rushed back into power, and was then decisively defeated at Waterloo, finished for good.',
+  rev:'Sometimes speed and surprise are everything; waiting lets the other side prepare. A sudden attack can be the right move (Law 28).',
+  def:'When a deal or offer seems to land in your lap, ask who arranged it to be there and what ground you\'re being drawn onto.' },
+{ t:'Win through your actions, never through argument', s:'Actions, not arguments', c:'str',
+  short:'Winning an argument makes the loser resent you and rarely changes their mind. Show, don\'t tell: a demonstration persuades without insulting anyone.',
+  cap:'The patron asked for a smaller nose. The sculptor taps, lets dust fall, and changes nothing.',
+  tr:'A Roman consul demanded the longer of two ship\'s masts. His engineer argued the shorter one was better and used it. He was right, and he was flogged for it.',
+  ob:'When Florence\'s Piero Soderini said David\'s nose was too big, Michelangelo climbed up, pretended to chisel and let marble dust fall. Soderini declared it much improved. The statue was untouched.',
+  rev:'When you have nothing to lose, or you\'re writing for an audience that values debate, argument can be the action. Words also cover a retreat well.',
+  def:'If someone keeps arguing instead of showing results, ask for a demonstration.' },
+{ t:'Infection: avoid the unhappy and unlucky', s:'Avoid the unlucky', c:'ppl',
+  short:'Some people carry chaos with them. Their misery, drama or bad luck spreads to whoever gets close. Recognise them early and keep your distance; seek out people who are steady and fortunate instead.',
+  cap:'The storm cloud follows one figure and reaches for the next.',
+  tr:'Lola Montez left a trail of scandal through Europe\'s capitals. King Ludwig I of Bavaria fell for her, she meddled in politics, riots followed, and in 1848 he lost his throne.',
+  rev:'There\'s none, Greene says. But in life, compassion matters: the point is to avoid being dragged down by chronic chaos, not to abandon people having a hard time.',
+  def:'Notice who always seems to be in a crisis that is someone else\'s fault. Help if you choose to, but don\'t tie your fortunes to theirs.' },
+{ t:'Learn to keep people dependent on you', s:'Keep them dependent', c:'ppl',
+  short:'If people need you, they can\'t easily discard you. Make yourself the keystone: hold the skill, the knowledge or the relationships that are hard to replace.',
+  cap:'Take out the gilded keystone and the whole arch falls.',
+  ob:'Otto von Bismarck served two weak Prussian kings and made himself indispensable, threatening to resign whenever he was crossed. William I came to depend on him completely.',
+  tr:'Renaissance mercenary captains often won great victories and were then imprisoned or killed. Their success made them a threat, and soldiers were easy to replace.',
+  rev:'Too much dependence can backfire: people resent whoever they can\'t do without. And if you depend on no one at all you\'re isolated, which is its own danger (Law 18).',
+  def:'If a whole team depends on one person who won\'t document or share, that\'s a risk to fix, not a hero to celebrate.' },
+{ t:'Use selective honesty and generosity to disarm your victim', s:'Selective honesty', c:'hide',
+  short:'One sincere, generous act lowers people\'s guard for a long time. A con works best when it starts with a gift or a moment of disarming honesty.',
+  cap:'A gift, freely given. Look closer at the ribbon: it ends in a hook.',
+  ob:'The con man Victor Lustig borrowed $50,000 from Al Capone, did nothing with it, and returned it two months later, saying his scheme had failed. Capone was so struck by his honesty that he handed Lustig $5,000, which was the plan all along.',
+  rev:'If you have a history of deceit, sudden honesty only makes people more suspicious. Then it\'s better to be openly a rogue.',
+  def:'Be most careful right after someone surprises you with generosity. Gratitude is when you check contracts least.' },
+{ t:'When asking for help, appeal to self-interest, never to mercy or gratitude', s:'Appeal to self-interest', c:'ppl',
+  short:'People help when they see what\'s in it for them. Reminding them of past favours or begging for mercy makes them feel guilty or bored. Show them how helping you helps them.',
+  cap:'On the scale, a heart weighs almost nothing next to a pile of gold.',
+  ob:'In 433 BC Corcyra and Corinth both sent envoys to Athens asking for support. Corinth appealed to gratitude and old obligations. Corcyra pointed out its navy and how useful an alliance would be. Athens sided with Corcyra.',
+  rev:'Some people are proud and want to look generous. With them, appealing to their mercy lets them feel powerful. Know which kind of person you\'re asking.',
+  def:'When someone asks you for something, separate the benefit to you from the guilt they\'re applying.' },
+{ t:'Pose as a friend, work as a spy', s:'Friend and spy', c:'hide',
+  short:'Information is power. Friendly conversation, dinners and casual questions get people to reveal their plans and weaknesses. Probe gently and let them talk.',
+  cap:'A smiling mask, and an eye behind it that never stops watching.',
+  ob:'The art dealer Joseph Duveen quietly paid Andrew Mellon\'s servants for news of his tastes and movements, arranged "chance" meetings, and shaped his gallery to suit. Mellon became his richest client.',
+  rev:'Spies can be turned. In 1944 Britain captured German agents and used them to feed Germany false targets, so the V-1 bombs fell short. Information gathered this way can be planted.',
+  def:'Notice who asks lots of friendly questions but shares little in return. Give them something harmless and see where it travels.' },
+{ t:'Crush your enemy totally', s:'Crush totally', c:'str',
+  short:'An enemy left half-beaten will recover and come back for revenge. If you must fight, finish it: leave no embers that can reignite.',
+  cap:'The tree was cut down, but a green shoot is already rising from the stump.',
+  tr:'In 206 BC the warlord Xiang Yu had his rival Liu Bang in his power at a banquet and let him go. Liu Bang regrouped, defeated Xiang Yu, and founded the Han dynasty.',
+  ob:'Empress Wu Zetian of China methodically removed every rival who could threaten her, and became the only woman to rule China in her own name.',
+  rev:'Sometimes it\'s wiser to let an enemy destroy themselves, or to leave them with a way out so they don\'t fight to the death. A cornered enemy is dangerous.',
+  def:'In modern life, "crushing" usually backfires. The useful lesson is to resolve conflicts fully instead of leaving them to simmer.' },
+{ t:'Use absence to increase respect and honour', s:'Use absence', c:'self',
+  short:'Too much presence makes you ordinary. Once you\'re established, pulling back makes people notice you more and value you more. Scarcity raises worth.',
+  cap:'The throne is empty, yet the crowd stares at the outline glowing where the ruler should be.',
+  ob:'The ancient historian Herodotus tells of Deioces, a judge in Media, who became so trusted that he suddenly withdrew. The disputes and chaos that followed made people beg him to return, and they made him king.',
+  rev:'Absence only works after you have built presence. If no one knows you yet, disappearing just means being forgotten.',
+  def:'Watch for people who ration their attention to make you chase. Decide what their time is actually worth to you.' },
+{ t:'Keep others in suspended terror: cultivate an air of unpredictability', s:'Be unpredictable', c:'str',
+  short:'Predictable people are easy to read and manage. Doing the unexpected keeps others guessing and on the defensive; they spend their energy trying to work out your next move.',
+  cap:'The knight jumps where no one expects. The die is already rolling.',
+  ob:'Before the 1972 World Chess Championship, Bobby Fischer complained, delayed and threatened to quit. Boris Spassky, used to orderly preparation, was rattled, and Fischer won the title.',
+  rev:'Too much unpredictability looks unstable. In a team, people need to trust you; save surprise for opponents.',
+  def:'When someone keeps you off balance with erratic behaviour, slow down. Don\'t react on their schedule.' },
+{ t:'Do not build fortresses to protect yourself, isolation is dangerous', s:'Avoid isolation', c:'self',
+  short:'Hiding away feels safe but cuts you off from information, allies and early warnings. Power depends on being connected, in the middle of things.',
+  cap:'Safe in the tower, cut off by the moat, and the walls have started to crack.',
+  tr:'China\'s first emperor, Qin Shi Huang, grew so afraid of assassins that he hid in his palaces and moved between them in secret. Cut off from reality, he died on a journey, and his officials concealed it while they plotted.',
+  ob:'Louis XIV built Versailles to keep the nobles near him, where he could see them, and lived in the middle of court life.',
+  rev:'Some solitude is useful for thinking and planning. The danger is staying in the tower too long.',
+  def:'If you notice you\'re only hearing from people who agree with you, open a window.' },
+{ t:'Know who you\'re dealing with, do not offend the wrong person', s:'Know your opponent', c:'ppl',
+  short:'People aren\'t all the same. Some are proud, some vengeful, some far more dangerous than they look. Study a person before you act against them.',
+  cap:'A small figure pokes a sleeping lion with a stick.',
+  tr:'Early in the 1200s, the Shah of Khwarezm treated Genghis Khan\'s envoys with contempt and had a trade caravan killed. Genghis Khan responded by destroying his empire.',
+  rev:'There\'s none, says Greene: you can never know too much about people.',
+  def:'Before you escalate a dispute, ask what the other person can do to you, and how long they\'re willing to keep at it.' },
+{ t:'Do not commit to anyone', s:'Stay uncommitted', c:'ppl',
+  short:'The moment you take a side, you lose the attention of everyone else. Stay above the fray and let others court you; your independence is what makes you valuable.',
+  cap:'Suitors reach up with rings. The queen on the hill keeps her hands to herself.',
+  ob:'Queen Elizabeth I kept foreign princes and English nobles hoping to marry her for decades. Each hoped to win her, so each stayed useful, and she never handed her power to a husband.',
+  rev:'Staying neutral for too long can leave you with no friends when it matters. At some point, committing to the winning side is the move.',
+  def:'If people are competing for your support, notice it. Your hesitation is worth something, so don\'t give it away cheaply.' },
+{ t:'Play a sucker to catch a sucker, seem dumber than your mark', s:'Seem dumber', c:'hide',
+  short:'Nobody likes feeling less intelligent than you. If you seem a little naive, people relax, underestimate you and drop their guard.',
+  cap:'One shrugs and looks confused. The other signs without reading the fine print.',
+  ob:'At a card game during negotiations, Bismarck played recklessly and seemed foolish. The Austrian envoy, Count Blome, decided he was dealing with a careless man and signed a treaty that favoured Prussia.',
+  rev:'In a moment that calls for leadership, playing dumb looks weak. Then it\'s better to show your intelligence clearly.',
+  def:'Be most careful when you feel smarter than the person across the table. That feeling may be the trap.' },
+{ t:'Use the surrender tactic: transform weakness into power', s:'Surrender tactic', c:'str',
+  short:'When you\'re weaker, don\'t fight a hopeless battle. Give way, bend, appear to comply, and use the time to rebuild. Surrender takes away your opponent\'s reason to crush you.',
+  cap:'The wind snaps the proud oak. The reed bends low, and stands back up.',
+  tr:'In 416 BC the island of Melos refused to submit to Athens and appealed to justice. Athens besieged it, killed the men and enslaved the women and children.',
+  ob:'Called before the House Un-American Activities Committee in 1947, Bertolt Brecht was polite and cooperative, gave vague answers, and was dismissed. He left the US soon after and kept working.',
+  rev:'If surrender becomes a habit, you just look weak. It\'s a tactic for when you\'re outmatched, not a way of life.',
+  def:'When an opponent suddenly gives in easily, don\'t assume the game is over.' },
+{ t:'Concentrate your forces', s:'Concentrate forces', c:'str',
+  short:'Scattered effort gets you nowhere. Focus your energy, money and attention on a single target, or a single strong patron, and you\'ll go further than by spreading thin.',
+  cap:'A lens gathers the sunlight into one point, and the point catches fire.',
+  ob:'The Rothschild banking family kept control within the family, with brothers in different capitals working as one, so their wealth grew while other dynasties split apart.',
+  rev:'Too much concentration makes you a single target. Guerrilla fighters, for example, win by spreading out (Law 48).',
+  def:'If you feel busy but nothing moves, count how many things you\'re working on. Cut the list.' },
+{ t:'Play the perfect courtier', s:'The perfect courtier', c:'img',
+  short:'Every workplace has a court. Flatter subtly, never show off, never bring bad news without softening it, and make your efforts look graceful.',
+  cap:'The courtier bows over his plans, which contain one small flaw left for the king to find.',
+  ob:'The architect Mansart deliberately left small flaws in his plans for Louis XIV, let the king spot them, and praised his eye. He won the commission for work at Versailles.',
+  tr:'Beau Brummell, Regency London\'s great dandy, mocked the Prince of Wales\'s weight. He fell from favour and died poor in exile.',
+  rev:'Greene gives no reversal. But in flatter, modern organisations, too much polish can read as fake. Grace without groveling is the goal.',
+  def:'Notice who agrees with everything the boss says. Their words are information about the boss, not about the plan.' },
+{ t:'Re-create yourself', s:'Re-create yourself', c:'img',
+  short:'Don\'t accept the role life hands you. Design your own character and image, and make it memorable. You can be the author of who people think you are.',
+  cap:'At the easel, a figure paints a bolder, brighter version of itself.',
+  ob:'Aurore Dupin, a woman in 1830s Paris, adopted the name George Sand, wore men\'s clothes, and built a public persona that let her move through literary circles closed to women.',
+  rev:'Your new image has to be something you can live up to. If it\'s too far from the real you, people will spot the seams.',
+  def:'Remember that a public persona is a costume. Judge people by their track record, not their story about themselves.' },
+{ t:'Keep your hands clean', s:'Keep hands clean', c:'hide',
+  short:'Unpleasant actions should be done through others: scapegoats, go-betweens, a "cat\'s paw" who pulls chestnuts from the fire for you. Your reputation stays spotless.',
+  cap:'White gloves work the strings. The puppet reaches into the fire.',
+  ob:'Cesare Borgia had his lieutenant Remirro de Orco impose a brutal order on Romagna. When people grew angry, Borgia had Remirro executed and displayed in the square, and took credit for ending the cruelty.',
+  rev:'If everyone can see you pulling the strings, using a cat\'s paw makes you look cowardly. Sometimes doing your own dirty work openly earns respect.',
+  def:'When someone is always the hero and someone else is always the villain, look at who gave the villain their orders.' },
+{ t:'Play on people\'s need to believe to create a cultlike following', s:'Create a following', c:'img',
+  short:'People want something to believe in. Offer a vague but grand promise, ritual and a sense of belonging, and followers will defend your cause on their own.',
+  cap:'A glowing orb on a stage; below it, a crowd with arms raised.',
+  ob:'In 1780s Paris, Franz Mesmer drew crowds with his theory of "animal magnetism," dim rooms, music and group sessions. Followers felt cured, and his movement spread across Europe.',
+  rev:'Greene gives none, but cults have a way of turning on their leaders when promises fail. Mesmer himself was discredited by a royal commission in 1784.',
+  def:'Be wary of any group where questions are treated as betrayal and the promise is always just out of reach.' },
+{ t:'Enter action with boldness', s:'Act boldly', c:'str',
+  short:'Hesitation shows doubt, and doubt invites attack. A bold move, made fully, hides mistakes and gives others confidence in you. Timidity is a trait, not a strategy.',
+  cap:'One figure leaps the gap. Another waits at the edge.',
+  ob:'Pietro Aretino, a servant with literary dreams, wrote a cheeky satire about the pope\'s pet elephant that mocked cardinals in Rome. Everyone wanted to know the author, and the pope gave him a place at court.',
+  tr:'Lola Montez\'s boldness turned to recklessness in Bavaria; when she meddled openly in government, the public rose up and the king had to expel her.',
+  rev:'Boldness without judgment is just recklessness. Use it at the moment you\'ve decided to act, not as a substitute for thinking.',
+  def:'A bold claim made with total confidence is not more likely to be true. Ask for the evidence anyway.' },
+{ t:'Plan all the way to the end', s:'Plan to the end', c:'str',
+  short:'The ending is everything. Think through every step, every obstacle and the moment you\'ll stop, before you begin. Don\'t get swept up by early wins.',
+  cap:'The route through the maze is drawn backwards: from the flag at the goal to the start.',
+  tr:'In 415 BC Athens sent a huge fleet to conquer Sicily without a clear plan for what would happen next. The expedition was destroyed, and Athens never fully recovered.',
+  ob:'Otto von Bismarck pursued a clear goal: a united Germany under Prussia. He fought three short wars to get there, then refused his generals\' push for more conquest.',
+  rev:'Too rigid a plan can blind you to opportunities. Plan the ending, but stay flexible along the way.',
+  def:'When someone pitches a plan, ask how it ends. "We\'ll figure it out" is the warning sign.' },
+{ t:'Make your accomplishments seem effortless', s:'Seem effortless', c:'img',
+  short:'Visible sweat breaks the spell. Hide your practice and preparation so your results look natural and effortless, and people will be impressed instead of feeling sorry for you.',
+  cap:'Above the water the swan glides. Below, its feet paddle furiously.',
+  ob:'Harry Houdini made his escapes look like magic. Behind them were years of training, lock study and physical conditioning that he never showed.',
+  rev:'Sometimes showing your effort builds respect, and some audiences love seeing how the trick is done. Barnum let people in on some of his tricks and they liked him more.',
+  def:'Don\'t compare your behind-the-scenes to someone else\'s highlight reel.' },
+{ t:'Control the options: get others to play with the cards you deal', s:'Control the options', c:'str',
+  short:'Give people choices, but make sure every option benefits you. They feel free and in charge, while you\'ve already decided the outcome.',
+  cap:'Two roads branch away from the traveller. Both curve back to the same castle.',
+  ob:'In 1564 Ivan the Terrible abruptly left Moscow and announced he was abdicating. Faced with a choice between chaos and begging him back, the people chose to beg, and he returned with greater powers than before.',
+  rev:'If people realise the choices are rigged, they\'ll resent you. Very narrow choices also mean you have to be right about what\'s best.',
+  def:'When offered option A or option B, ask whether there\'s an option C, and who wrote the menu.' },
+{ t:'Play to people\'s fantasies', s:'Play to fantasies', c:'img',
+  short:'The truth is often dull or unpleasant. Promise people the dream they want, whether wealth, romance or salvation, and they\'ll follow you.',
+  cap:'A flask glows gold. Above it, a castle in the clouds.',
+  ob:'In 1589 an alchemist called Bragadino arrived in Venice claiming he could make gold. The city, short of money and dreaming of glory, welcomed and funded him for months before the fraud became obvious.',
+  rev:'Fantasy runs out. If you never deliver anything, the backlash is total; Bragadino was eventually executed.',
+  def:'The more a pitch matches exactly what you were hoping to hear, the harder you should check it.' },
+{ t:'Discover each man\'s thumbscrew', s:'Find the thumbscrew', c:'ppl',
+  short:'Everyone has a weakness, an insecurity, a need or a desire. Find it and you have a lever that can move them.',
+  cap:'Every lock has its key. Find it, and the door opens.',
+  ob:'Bismarck read King William I\'s deep insecurity about seeming weak, and pushed him toward the military build-up he wanted by appealing to his courage.',
+  rev:'Pressing a weakness can backfire if the person realises they\'re being manipulated, or if it unlocks something you can\'t control.',
+  def:'Know your own thumbscrew. Whoever knows it better than you can steer you.' },
+{ t:'Be royal in your own fashion: act like a king to be treated like one', s:'Act like royalty', c:'img',
+  short:'How you carry yourself teaches people how to treat you. Act with dignity and confidence, ask for a lot, and people will often accept your own valuation.',
+  cap:'A small figure stands tall, and its long shadow wears a crown.',
+  ob:'Christopher Columbus, a man of modest background, asked Spain\'s monarchs not only to fund his voyage but to make him Admiral of the Ocean and governor of any lands he found. They agreed.',
+  rev:'Royal bearing without substance becomes arrogance. Overplay it and people will want to bring you down.',
+  def:'Confidence is not competence. Separate how someone carries themselves from what they have actually done.' },
+{ t:'Master the art of timing', s:'Master timing', c:'self',
+  short:'Know when to wait and when to strike. Patience lets the moment ripen; then you move fast. Haste and panic are signs of weakness.',
+  cap:'Rush and you fall off the wave. Wait too long and it\'s gone. Ride the crest.',
+  ob:'Joseph Fouché served the French Revolution, Napoleon and the restored king in turn, each time sensing a regime\'s fall early and shifting just in time.',
+  rev:'Greene gives none. Timing is the hidden variable in every other law.',
+  def:'People who rush you are often trying to stop you from timing your own move. "Let me think about it" is a complete answer.' },
+{ t:'Disdain things you cannot have: ignoring them is the best revenge', s:'Disdain what you can\'t have', c:'self',
+  short:'Attacking a small irritation gives it importance. Ignore it, act as though it doesn\'t matter, and it often withers. Contempt is more powerful than rage.',
+  cap:'The fox turns its nose up at the grapes it cannot reach.',
+  tr:'In 1916 the US sent an army into Mexico to catch Pancho Villa after his raid on New Mexico. He evaded them for months, becoming a folk hero, and the troops went home empty-handed.',
+  rev:'Some problems do need attention. A small threat ignored can grow. Use judgment about which to starve and which to stamp out.',
+  def:'When someone baits you online or at work, the most powerful response is often none at all.' },
+{ t:'Create compelling spectacles', s:'Create spectacles', c:'img',
+  short:'Images and symbols persuade faster than words. Stage big gestures, use striking visuals, and people will remember the feeling rather than the argument.',
+  cap:'The curtain opens on a sun, and every face in the audience lights up.',
+  ob:'Louis XIV took the sun as his emblem and staged his whole life as theatre, from rising ceremonies to the gardens of Versailles. Diane de Poitiers wove her and Henry II\'s initials into her château and linked herself to the goddess Diana.',
+  rev:'Greene gives none. But a spectacle with nothing behind it gets mocked, and the backlash can be worse than silence.',
+  def:'When a moment feels staged, look at what the staging is distracting you from.' },
+{ t:'Think as you like but behave like others', s:'Behave like others', c:'hide',
+  short:'Flaunting unconventional views makes people feel insulted and threatened. Keep your radical ideas for trusted friends, and blend in on the outside.',
+  cap:'A row of identical figures. One glows inside, but you\'d never know from the outside.',
+  tr:'The friar Tommaso Campanella kept voicing views that the Inquisition considered heresy, and was imprisoned and tortured. He survived by feigning madness, and he later spread his ideas in disguise, inside books that seemed orthodox.',
+  rev:'Once you\'re very powerful or very established, standing out can become part of your appeal. But it\'s a privilege of power, not a route to it.',
+  def:'Most people around you are holding thoughts they don\'t say. Don\'t mistake silence for agreement.' },
+{ t:'Stir up waters to catch fish', s:'Stir up waters', c:'str',
+  short:'Anger and emotion are weaknesses. Stay calm yourself, and provoke your opponents into losing their heads; people who are furious make mistakes.',
+  cap:'Stir the pond until it\'s muddy, and the confused fish swim into the net.',
+  ob:'Haile Selassie of Ethiopia knew a rival chieftain, Gugsa Wale, was plotting against him. He provoked Gugsa into rebelling early, after quietly winning over many of Gugsa\'s soldiers, and defeated him easily.',
+  tr:'Napoleon once raged at his minister Talleyrand in front of the court. Talleyrand stayed calm, and the outburst made Napoleon look out of control.',
+  rev:'Sometimes a show of anger, deliberately used, can scare people. But it has to be a choice, not a loss of control.',
+  def:'When someone seems to be trying to make you angry, that\'s the moment to slow down.' },
+{ t:'Despise the free lunch', s:'Despise the free lunch', c:'self',
+  short:'What is offered free usually has a hidden cost: an obligation, a trick, or a trap. Pay your own way, and use money generously and strategically.',
+  cap:'A mousetrap baited with gold cheese, and a sign that says FREE.',
+  tr:'Spain\'s obsession with the easy gold of the Americas drained it; chasing El Dorado and bullion, the country neglected real industry and slid toward bankruptcy.',
+  ob:'In 1820s Paris the banker James Rothschild threw famously lavish dinners. The generosity won him a place in a society that had looked down on him.',
+  rev:'Sometimes accepting a gift gracefully is the polite and smart move. The point is to know what you\'re trading.',
+  def:'Before accepting a favour, ask what you\'ll owe and when it might be called in.' },
+{ t:'Avoid stepping into a great man\'s shoes', s:'Leave the great man\'s shoes', c:'self',
+  short:'Following a great predecessor means being compared to them forever. Make a clear break and set your own style, so you\'re seen for yourself.',
+  cap:'Huge footprints lead one way. A smaller, gilded trail turns off in a new direction.',
+  ob:'Alexander the Great inherited a powerful kingdom from his father Philip of Macedon, but deliberately chose a bolder path: conquering Persia and marching as far as India.',
+  rev:'If your predecessor was weak, comparisons help you. And sometimes using the old leader\'s legacy can give you legitimacy.',
+  def:'If you\'re stepping into a role after a legend, say early and clearly what you\'ll do differently.' },
+{ t:'Strike the shepherd and the sheep will scatter', s:'Strike the shepherd', c:'str',
+  short:'Trouble in a group often comes from one person who stirs it up. Remove or isolate that individual and the group often settles down.',
+  cap:'The shepherd\'s crook lies on the ground; the flock scatters in every direction.',
+  ob:'Ancient Athens held an annual vote of ostracism to exile one citizen for ten years. Even the general Themistocles, hero of Salamis, was sent away when his arrogance divided the city.',
+  rev:'Greene gives none, but making a martyr of a leader can unite the followers more strongly than before.',
+  def:'In a team conflict, look for the one person whose influence shapes everyone\'s mood. Solve that, and much of the rest follows.' },
+{ t:'Work on the hearts and minds of others', s:'Hearts and minds', c:'ppl',
+  short:'Force breeds resistance. Seduce instead: appeal to people\'s emotions, their sense of self and what they care about, and they\'ll follow willingly.',
+  cap:'A speaker reaches the crowd, and one by one their hearts light up.',
+  tr:'Marie Antoinette lived in luxury, showed little interest in ordinary French people and never tried to win them over. When the Revolution came, she had no support, and she was executed in 1793.',
+  ob:'Mao Zedong spoke simply, drew on the culture of the peasants and connected with their emotions, building a movement on their loyalty.',
+  rev:'Greene gives none. Even when you have power, working on hearts makes it last.',
+  def:'When an argument stirs a strong feeling in you, ask what it would say if it had to rely on facts alone.' },
+{ t:'Disarm and infuriate with the mirror effect', s:'The mirror effect', c:'hide',
+  short:'Reflect people back at themselves. Mimicking someone\'s moves confuses them; reflecting their tastes and ideals seduces them. Either way, they can\'t see you behind the mirror.',
+  cap:'Two figures face each other through a mirror: one of them is only a reflection.',
+  ob:'Young Marie Mancini won the heart of the future Louis XIV by studying his tastes and treating him as the heroic king he dreamed of being. She reflected his ideal self back to him, and he adored her.',
+  rev:'Mirrors can backfire: copying someone too closely can make them feel mocked, or trapped by the comparison.',
+  def:'If someone seems to agree with everything you value, instantly, notice that. Real allies have their own edges.' },
+{ t:'Preach the need for change, but never reform too much at once', s:'Reform slowly', c:'str',
+  short:'People say they want change, but too much at once frightens them. Wrap new ideas in familiar forms, and move step by step.',
+  cap:'A gentle staircase climbs upward. Next to it, a sheer wall where someone tried to leap.',
+  tr:'Thomas Cromwell drove Henry VIII\'s reformation hard: dissolving monasteries and seizing their wealth. The backlash fed rebellion, and in 1540 Cromwell was executed.',
+  ob:'When Rome replaced its kings with a republic, it kept familiar rituals and even a "king of sacrifices" for ceremonies, so the change felt like continuity.',
+  rev:'In a deep crisis, people may welcome radical change. But even then, connect it to something they know.',
+  def:'When you lead change, show what stays the same. When someone sells change to you, ask what\'s really being taken away.' },
+{ t:'Never appear too perfect', s:'Don\'t be too perfect', c:'img',
+  short:'Looking flawless breeds envy, and envy builds quiet enemies. Show a harmless flaw now and then, and downplay your luck and talent.',
+  cap:'The perfect gem on its pedestal, ringed by envious eyes.',
+  tr:'Sir Walter Raleigh, explorer, poet and courtier, made no effort to hide how brilliant he was. Envy piled up, and he was eventually executed in 1618.',
+  ob:'The painter J.M.W. Turner noticed other artists didn\'t want his vivid canvases hung near theirs. He sometimes toned his colours down with a wash of soot to ease the envy.',
+  rev:'Greene gives none. But false modesty that\'s too obvious creates its own resentment.',
+  def:'If you notice envy in yourself, ask what it says you want. Then work toward that instead of resenting the other person.' },
+{ t:'Do not go past the mark you aimed for: in victory, learn when to stop', s:'Know when to stop', c:'self',
+  short:'Victory makes you arrogant. Winning one battle tempts you to fight another and another until you overreach. Know your target and stop when you hit it.',
+  cap:'The first arrow strikes the centre of the target. The second flies wildly past.',
+  tr:'Cyrus the Great, after conquering much of the known world, invaded the land of the Massagetae, led by Queen Tomyris. He was killed in battle in 530 BC.',
+  rev:'If you stop too soon, a defeated rival may recover (Law 15). Know the difference between finishing a job and getting greedy.',
+  def:'Set your exit before you start, while you\'re calm: the price you\'ll sell at, the point you\'ll walk away.' },
+{ t:'Assume formlessness', s:'Assume formlessness', c:'self',
+  short:'Rigid things break. Be like water: adapt to circumstances, take whatever shape the moment needs, and give your opponents nothing to grab.',
+  cap:'The rigid rock cracks under pressure. The water flows around it.',
+  tr:'Sparta built a society around its army. After defeating Athens it couldn\'t adapt to ruling an empire; its governors grew corrupt, and in 371 BC Thebes broke its power.',
+  ob:'In World War I, T.E. Lawrence and Arab fighters waged a guerrilla war across the desert, striking and vanishing. The Ottoman army, built for set battles, wasted itself chasing them.',
+  rev:'Greene gives none. But even water needs a direction; formlessness is flexibility in method, not in purpose.',
+  def:'If your plan only works when things go exactly to script, it\'s too rigid. Build in at least one fallback.' }
+];
+</script>
+<script>
+/* ---------- illustrations: one small scene per law, drawn on a 240×150 stage ---------- */
+const ILL = (() => {
+const r1 = v => Math.round(v*10)/10;
+// a robed figure standing with feet at (x,y), h tall
+const P = (x, y, h, c = 'f-tx', extra = '') => { const r = h*.13, top = y - h*.70, sw = h*.19, bw = h*.27;
+  return `<circle class="${c}" ${extra} cx="${r1(x)}" cy="${r1(y-h+r)}" r="${r1(r)}"/><path class="${c}" ${extra} d="M${r1(x-sw)} ${r1(top+h*.09)} Q${r1(x-sw)} ${r1(top)} ${r1(x)} ${r1(top)} Q${r1(x+sw)} ${r1(top)} ${r1(x+sw)} ${r1(top+h*.09)} L${r1(x+bw)} ${r1(y)} L${r1(x-bw)} ${r1(y)} Z"/>`; };
+// an arm from the figure's shoulder to (ex,ey); side -1 left, 1 right
+const ARM = (x, y, h, side, ex, ey, c = 'k-tx') => `<line class="${c}" x1="${r1(x+side*h*.16)}" y1="${r1(y-h*.62)}" x2="${ex}" y2="${ey}" stroke-width="${r1(h*.075)}"/>`;
+const L = (x1, y1, x2, y2, c = 'k-tx', w, extra = '') => `<line class="${c}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${w ? ` stroke-width="${w}"` : ''} ${extra}/>`;
+const G = (y = 132) => `<line class="k-ln" x1="10" y1="${y}" x2="230" y2="${y}"/>`;
+const crown = (x, y, w, c = 'f-au') => { const h = w*.62; return `<path class="${c}" d="M${r1(x-w/2)} ${y} L${r1(x-w/2)} ${r1(y-h)} L${r1(x-w/4)} ${r1(y-h*.45)} L${x} ${r1(y-h)} L${r1(x+w/4)} ${r1(y-h*.45)} L${r1(x+w/2)} ${r1(y-h)} L${r1(x+w/2)} ${y} Z"/>`; };
+const rays = (cx, cy, a, b, n, c = 'k-au', cls = '') => { let s = `<g class="${cls}">`; for (let i = 0; i < n; i++){ const t = i/n*Math.PI*2; s += L(r1(cx+Math.cos(t)*a), r1(cy+Math.sin(t)*a), r1(cx+Math.cos(t)*b), r1(cy+Math.sin(t)*b), c, 1.6); } return s + '</g>'; };
+const star = (cx, cy, r, c = 'f-au') => { let d = ''; for (let i = 0; i < 10; i++){ const t = -Math.PI/2 + i*Math.PI/5, rr = i % 2 ? r*.45 : r; d += (i ? 'L' : 'M') + r1(cx+Math.cos(t)*rr) + ' ' + r1(cy+Math.sin(t)*rr); } return `<path class="${c}" d="${d}Z"/>`; };
+const heart = (cx, cy, s, c = 'f-cr', cls = '') => `<path class="${c} ${cls}" d="M${cx} ${r1(cy+s*.9)} C${r1(cx-s*1.4)} ${r1(cy)} ${r1(cx-s*.8)} ${r1(cy-s*1.1)} ${cx} ${r1(cy-s*.35)} C${r1(cx+s*.8)} ${r1(cy-s*1.1)} ${r1(cx+s*1.4)} ${r1(cy)} ${cx} ${r1(cy+s*.9)} Z"/>`;
+const eye = (cx, cy, s, c = 'k-cr', pc = 'f-cr') => `<path class="${c}" d="M${r1(cx-s)} ${cy} Q${cx} ${r1(cy-s*.8)} ${r1(cx+s)} ${cy} Q${cx} ${r1(cy+s*.8)} ${r1(cx-s)} ${cy} Z"/><circle class="${pc}" cx="${cx}" cy="${cy}" r="${r1(s*.32)}"/>`;
+const fish = (cx, cy, s, c = 'f-cr', dir = 1) => `<g transform="translate(${cx} ${cy}) scale(${dir*s} ${s})"><path class="${c}" d="M-12 0 Q-2 -8 9 0 Q-2 8 -12 0 Z M9 0 L16 -6 L16 6 Z"/><circle class="f-ink" cx="-7" cy="-1" r="1.3"/></g>`;
+const coin = (cx, cy, r) => `<circle class="f-au" cx="${cx}" cy="${cy}" r="${r}"/><circle class="k-ink" cx="${cx}" cy="${cy}" r="${r1(r*.62)}" stroke-width="1"/>`;
+const sheep = (cx, cy, dir = 1) => `<g transform="translate(${cx} ${cy}) scale(${dir} 1)"><path class="f-pn k-tx" stroke-width="1.5" d="M-12 2 Q-14 -6 -7 -8 Q-4 -13 2 -10 Q9 -12 11 -5 Q15 2 9 7 H-8 Q-14 7 -12 2 Z"/><ellipse class="f-mu" cx="13" cy="-2" rx="5" ry="4"/>${L(-6,7,-6,13,'k-mu',2)}${L(6,7,6,13,'k-mu',2)}</g>`;
+const cloud = (cx, cy, s, c) => `<path class="${c}" d="M${r1(cx-s*1.6)} ${r1(cy+s*.5)} Q${r1(cx-s*2)} ${r1(cy-s*.3)} ${r1(cx-s*1.1)} ${r1(cy-s*.4)} Q${r1(cx-s*.9)} ${r1(cy-s*1.3)} ${r1(cx)} ${r1(cy-s*1.1)} Q${r1(cx+s*.9)} ${r1(cy-s*1.5)} ${r1(cx+s*1.2)} ${r1(cy-s*.5)} Q${r1(cx+s*2)} ${r1(cy-s*.3)} ${r1(cx+s*1.7)} ${r1(cy+s*.5)} Z"/>`;
+const T = (x, y, txt, cls = '', anchor = 'middle') => `<text x="${x}" y="${y}" text-anchor="${anchor}" class="${cls}">${txt}</text>`;
+
+const S = [];
+/* 1 never outshine the master */
+S[1] = () => `${G()}<circle class="f-ausoft" cx="80" cy="54" r="34"/>${rays(80,54,30,48,14,'k-au','glint')}
+  <rect class="f-pn k-tx" x="54" y="108" width="52" height="24" rx="2"/>${P(80,108,62)}${crown(80,47,20)}
+  ${P(172,132,44,'f-mu')}${ARM(172,132,44,-1,146,90,'k-mu')}${star(182,58,9,'k-fa')}${T(80,146,'the master')}${T(172,146,'you')}`;
+/* 2 friends and enemies */
+S[2] = () => `${G()}${P(120,132,52)}${P(68,132,52,'f-mu')}${ARM(68,132,52,1,106,96,'k-mu')}${ARM(68,132,52,-1,46,112,'k-mu')}
+  <path class="f-cr glint" d="M47 110 L41 104 L38 107 L44 113 Z M44 112 L30 132 L34 133 L47 115 Z"/>
+  ${P(176,132,52,'f-fa')}${ARM(176,132,52,-1,156,104,'k-fa')}<path class="f-au" d="M140 92 H162 V106 Q162 120 151 126 Q140 120 140 106 Z"/>${star(151,106,5,'f-ink')}
+  ${T(62,146,'the friend')}${T(176,146,'the former rival')}`;
+/* 3 conceal your intentions */
+S[3] = () => { let fp = ''; for (let i = 0; i < 7; i++){ const x = 96 + i*16, y = i % 2 ? 128 : 123; fp += `<ellipse class="${i > 4 ? 'f-au' : 'f-fa'}" cx="${x}" cy="${y}" rx="4.5" ry="2.4"/>`; }
+  return `${G()}${L(70,132,70,58,'k-tx',3)}<path class="f-pn k-tx" d="M44 60 H100 V80 H44 L32 70 Z"/>${T(70,74,'THIS WAY','big')}
+  ${L(52,80,52,92,'k-fa',1.5)}<g class="sway">${fish(54,102,1.1,'f-cr',1)}</g>${fp}
+  <circle class="f-ausoft" cx="212" cy="104" r="20"/>${crown(212,112,24)}${P(160,132,40)}${T(54,128,'red herring')}${T(212,146,'the real goal')}`; };
+/* 4 say less */
+S[4] = () => { let sc = ''; for (let i = 0; i < 5; i++) sc += `<path class="k-cr" stroke-width="1.5" d="M${24} ${26+i*9} q8 -5 16 0 t16 0 t16 0 t16 0 t16 0"/>`;
+  return `${G()}<rect class="f-pn k-cr" x="12" y="14" width="112" height="58" rx="14"/><path class="f-pn k-cr" d="M54 71 L60 84 L68 71"/><rect class="f-pn" x="55" y="68" width="12" height="5"/>${sc}
+  ${P(62,132,46,'f-mu')}${P(182,132,50)}<rect class="f-pn k-au" x="176" y="44" width="42" height="24" rx="10"/><path class="f-pn k-au" d="M186 67 L184 76 L194 67"/><rect class="f-pn" x="185" y="64" width="10" height="5"/>
+  <g class="glint">${[188,197,206].map(x => `<circle class="f-au" cx="${x}" cy="56" r="2.4"/>`).join('')}</g>${T(62,146,'says everything')}${T(182,146,'says almost nothing')}`; };
+/* 5 reputation: the empty fort */
+S[5] = () => { let cren = ''; for (let x = 92; x < 230; x += 16) cren += `<rect class="f-pn k-tx" x="${x}" y="64" width="9" height="8"/>`;
+  let army = ''; [18,38,58,78].forEach((x, i) => { army += P(x, 132, 24 + (i%2)*3, 'f-cr') + L(x+6, 132, x+6, 98, 'k-cr', 1.5); });
+  return `${G()}<circle class="f-au glint" cx="34" cy="28" r="9"/>${cren}<rect class="f-pn k-tx" x="90" y="72" width="140" height="60"/>
+  <path class="f-ink k-tx" d="M146 132 V104 A14 14 0 0 1 174 104 V132 Z"/>${P(160,64,30)}<ellipse class="f-au" cx="170" cy="53" rx="5" ry="7" transform="rotate(30 170 53)"/>${L(172,49,180,40,'k-au',1.5)}
+  ${army}<text x="48" y="88" text-anchor="middle" class="big" style="fill:var(--cool)">?</text>${T(160,146,'open gates, a lute, a reputation')}`; };
+/* 6 court attention */
+S[6] = () => { let crowd = ''; [16,42,68,172,198,224].forEach(x => crowd += P(x, 164, 44, 'f-fa'));
+  return `${G()}<path class="f-ausoft" d="M112 0 H128 L160 132 H80 Z"/><ellipse class="f-ausoft" cx="120" cy="132" rx="40" ry="6"/>${P(120,132,58)}${ARM(120,132,58,1,150,72)}${ARM(120,132,58,-1,90,72)}${crowd}
+  ${star(150,66,5,'f-au glint')}`; };
+/* 7 others do the work, you take the credit */
+S[7] = () => { let w = ''; [30,58,86].forEach(x => { w += P(x, 132, 34, 'f-fa') + ARM(x, 132, 34, -1, x-5, 104, 'k-fa') + ARM(x, 132, 34, 1, x+5, 104, 'k-fa'); });
+  return `${G()}<rect class="f-pn k-tx" x="14" y="80" width="90" height="24" rx="2"/>${L(30,92,46,88,'k-fa',1)}${L(70,96,84,90,'k-fa',1)}${w}
+  ${P(172,132,58)}${ARM(172,132,58,1,196,62)}<g class="bob"><path class="f-au" d="M184 38 H210 Q210 56 197 60 Q184 56 184 38 Z"/><rect class="f-au" x="194" y="59" width="6" height="7"/><rect class="f-au" x="188" y="65" width="18" height="4" rx="1"/>${star(197,47,5,'f-ink')}</g>
+  ${T(58,146,'who did the work')}${T(172,146,'who gets remembered')}`; };
+/* 8 make them come to you */
+S[8] = () => `<rect class="f-ausoft" x="0" y="92" width="240" height="58"/><path class="k-au" d="M0 92 q10 -4 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0"/>
+  <path class="f-ln" d="M0 66 H64 L82 92 H0 Z"/>${P(36,66,34)}${L(44,44,156,18,'k-mu',2)}${L(156,18,156,108,'k-fa',1)}<path class="k-mu" d="M156 108 q0 6 -5 6 q-4 0 -4 -4" stroke-width="1.5"/>
+  <g class="glint">${coin(152,118,5)}</g><g class="drift">${fish(198,120,1.2,'f-cr',1)}${L(214,114,226,114,'k-fa',1)}${L(216,126,228,126,'k-fa',1)}</g>${T(36,146,'patient angler')}`;
+/* 9 win through actions */
+S[9] = () => { let dust = ''; for (let i = 0; i < 9; i++) dust += `<circle class="f-mu" cx="${104 + (i*7)%13}" cy="${86 + i*5}" r="${1 + (i%3)*.5}"/>`;
+  return `${G()}<rect class="f-pn k-tx" x="58" y="108" width="64" height="24" rx="2"/><path class="f-mu" d="M70 108 Q72 92 82 90 L98 90 Q108 92 110 108 Z"/>
+  <circle class="f-mu" cx="90" cy="70" r="18"/><path class="f-mu" d="M107 66 L115 74 L106 76 Z"/><path class="k-ink" d="M78 60 q8 -8 18 -4" stroke-width="2"/>
+  <g class="glint">${dust}</g><rect class="f-pn k-tx" x="134" y="110" width="30" height="22"/>${P(150,110,44)}${ARM(150,110,44,-1,118,72)}${L(118,72,110,74,'k-au',3)}
+  ${P(208,132,40,'f-cr')}${T(208,82,'much better!','big')}${T(90,146,'nothing was changed')}`; };
+/* 10 infection */
+S[10] = () => { let rain = ''; for (let i = 0; i < 8; i++) rain += L(36 + i*7, 54 + (i%2)*6, 32 + i*7, 70 + (i%2)*6, 'k-fa', 1.5);
+  return `${G()}${cloud(62,38,18,'f-mu')}${rain}<path class="k-cr" stroke-dasharray="4 5" d="M92 34 Q130 20 150 46"/>${P(62,132,50,'f-mu')}
+  ${P(182,132,50)}${ARM(182,132,50,1,206,104)}<circle class="f-au" cx="214" cy="28" r="10"/>${rays(214,28,14,20,10,'k-au','glint')}${T(62,146,'chaos carrier')}${T(182,146,'stepping out of range')}`; };
+/* 11 keep them dependent: the keystone */
+S[11] = () => { let s = ''; const cx = 120, cy = 132, ri = 50, ro = 80, n = 9;
+  for (let i = 0; i < n; i++){ const a0 = Math.PI - i*Math.PI/n, a1 = Math.PI - (i+1)*Math.PI/n, g = .012;
+    const p = [[ri,a0-g],[ro,a0-g],[ro,a1+g],[ri,a1+g]].map(([r,a]) => r1(cx+Math.cos(a)*r)+' '+r1(cy-Math.sin(a)*r));
+    s += `<path class="${i === 4 ? 'f-au' : 'f-pn k-tx'}" d="M${p[0]} L${p[1]} L${p[2]} L${p[3]} Z"/>`; }
+  return `${G()}${s}<circle class="f-ausoft glint" cx="120" cy="60" r="20"/>${P(120,132,34,'f-fa')}${T(120,40,'the keystone','big')}${T(200,146,'pull it, the arch falls')}`; };
+/* 12 selective honesty and generosity */
+S[12] = () => `${G()}${P(62,132,52)}${ARM(62,132,52,1,98,98)}<rect class="f-au" x="96" y="84" width="28" height="22" rx="2"/>${L(110,84,110,106,'k-ink',2.5)}${L(96,95,124,95,'k-ink',2.5)}
+  <path class="k-ink" d="M110 84 q-8 -10 -12 -2 q6 4 12 2 q8 -10 12 -2 q-6 4 -12 2" stroke-width="2"/>
+  <path class="k-cr" d="M124 104 q14 6 10 18 q-3 8 -10 4" stroke-width="2"/><path class="k-cr" d="M124 126 l-3 -6" stroke-width="2"/>
+  ${P(176,132,52,'f-mu')}${ARM(176,132,52,-1,148,104,'k-mu')}${T(110,146,'look at the ribbon')}`;
+/* 13 appeal to self-interest */
+S[13] = () => `${G()}<path class="f-pn k-tx" d="M100 132 L120 118 L140 132 Z"/>${L(120,118,120,40,'k-tx',3)}<circle class="f-tx" cx="120" cy="40" r="4"/>
+  ${L(56,30,184,52,'k-tx',3)}${L(58,30,44,70,'k-fa',1)}${L(58,30,72,70,'k-fa',1)}${L(182,52,168,94,'k-fa',1)}${L(182,52,196,94,'k-fa',1)}
+  <path class="f-pn k-tx" d="M38 70 H78 Q72 80 58 80 Q44 80 38 70 Z"/><path class="f-pn k-tx" d="M162 94 H202 Q196 104 182 104 Q168 104 162 94 Z"/>
+  ${heart(58,62,7)}<g>${coin(176,88,6)}${coin(188,88,6)}${coin(182,79,6)}${coin(182,70,5)}</g>${T(58,96,'gratitude')}${T(182,120,'self-interest')}`;
+/* 14 pose as a friend, work as a spy */
+S[14] = () => `<path class="f-pn k-tx" d="M76 30 Q120 12 164 30 Q172 70 150 104 Q120 128 90 104 Q68 70 76 30 Z"/>
+  <path class="f-ink" d="M88 54 Q100 44 112 54 Q100 62 88 54 Z"/><path class="f-ink" d="M128 54 Q140 44 152 54 Q140 62 128 54 Z"/><g class="glint">${eye(140,54,9,'k-au','f-au')}</g>
+  <path class="k-tx" d="M96 82 Q120 102 144 82" stroke-width="2.5"/><path class="k-tx" d="M86 44 q14 -8 26 -2 M128 42 q12 -6 26 2" stroke-width="1.5"/>
+  ${L(146,108,184,146,'k-mu',4)}<path class="k-fa" d="M30 120 v-14 q8 -2 12 0 v14 M30 120 h12 M36 120 v10 M30 132 h12"/><path class="k-fa" d="M198 120 v-14 q8 -2 12 0 v14 M198 120 h12 M204 120 v10 M198 132 h12"/>`;
+/* 15 crush your enemy totally */
+S[15] = () => `${G()}<path class="f-pn k-tx" d="M88 132 Q92 116 92 100 H148 Q148 116 152 132 Z"/><ellipse class="f-mu k-tx" cx="120" cy="100" rx="28" ry="7"/>
+  <ellipse class="k-ink" cx="120" cy="100" rx="17" ry="4" stroke-width="1"/><ellipse class="k-ink" cx="120" cy="100" rx="8" ry="2" stroke-width="1"/>
+  <path class="k-tx" d="M88 132 Q80 128 72 132 M152 132 Q162 128 170 132" stroke-width="2"/>
+  <g class="sway"><path class="k-au" d="M124 99 Q126 80 132 58" stroke-width="2.5"/><ellipse class="f-au" cx="140" cy="70" rx="8" ry="4" transform="rotate(-30 140 70)"/><ellipse class="f-au" cx="124" cy="78" rx="7" ry="3.5" transform="rotate(30 124 78)"/><ellipse class="f-au" cx="134" cy="56" rx="6" ry="3" transform="rotate(-50 134 56)"/></g>
+  ${L(180,130,214,108,'k-mu',4)}<path class="f-cr" d="M206 102 L222 98 L224 112 L212 116 Z"/>${T(120,146,'the half-finished job grows back')}`;
+/* 16 use absence */
+S[16] = () => { let crowd = ''; [24,48,192,216].forEach(x => crowd += P(x, 132, 30, 'f-fa'));
+  return `${G()}<circle class="f-ausoft glint" cx="120" cy="72" r="44"/><path class="f-pn k-tx" d="M96 132 V102 H90 V30 Q120 16 150 30 V102 H144 V132 Z"/><rect class="f-ink" x="98" y="40" width="44" height="58" rx="4"/>
+  ${P(120,104,58,'k-au','stroke-dasharray="3 4" style="fill:none"')}${crowd}${T(120,146,'missed, and therefore valued')}`; };
+/* 17 be unpredictable */
+S[17] = () => `${G()}<path class="f-tx" d="M58 132 H122 V122 H114 L110 110 Q122 96 120 72 Q117 46 92 38 L88 26 L80 38 Q58 46 48 70 L42 82 Q46 92 58 88 L70 80 Q76 88 66 98 L58 110 L54 122 H58 Z"/><circle class="f-ink" cx="84" cy="54" r="3"/>
+  <path class="k-au" stroke-dasharray="4 5" d="M124 60 Q160 20 176 80"/><path class="f-au" d="M170 76 L178 84 L182 72 Z"/>
+  <g class="bob"><rect class="f-pn k-tx" x="160" y="88" width="40" height="40" rx="6" transform="rotate(12 180 108)"/>${[[170,98],[190,100],[180,108],[168,116],[188,120]].map(([x,y]) => `<circle class="f-tx" cx="${x}" cy="${y}" r="3" transform="rotate(12 180 108)"/>`).join('')}</g>
+  <text x="212" y="44" class="big" style="fill:var(--glow);font-size:22px">?</text><text x="140" y="30" class="big" style="fill:var(--faint);font-size:16px">?</text>`;
+/* 18 do not build fortresses */
+S[18] = () => { let cren = ''; for (let x = 100; x < 140; x += 10) cren += `<rect class="f-pn k-tx" x="${x}" y="22" width="6" height="8"/>`;
+  return `<ellipse class="f-ausoft" cx="120" cy="134" rx="110" ry="14"/><path class="k-au" d="M20 134 q8 -3 16 0 t16 0 M184 134 q8 -3 16 0 t16 0" stroke-width="1.2"/><ellipse class="f-ln" cx="120" cy="132" rx="34" ry="6"/>
+  ${cren}<rect class="f-pn k-tx" x="98" y="30" width="44" height="100"/><rect class="f-au" x="114" y="50" width="12" height="16" rx="6"/>
+  <path class="k-cr" d="M134 70 L128 82 L136 90 L126 104 L130 116" stroke-width="2"/>
+  ${P(22,112,20,'f-fa')}${P(44,108,20,'f-fa')}${P(198,108,20,'f-fa')}${P(218,112,20,'f-fa')}${L(26,98,40,96,'k-fa',1)}${L(202,96,214,98,'k-fa',1)}${T(120,148,'safe, and cut off')}`; };
+/* 19 do not offend the wrong person */
+S[19] = () => `${G()}<path class="k-au" d="M206 106 q20 -4 20 -26" stroke-width="3"/>
+  <ellipse class="f-au" cx="164" cy="114" rx="48" ry="18"/><circle class="f-mu" cx="114" cy="104" r="24"/><circle class="f-au" cx="110" cy="108" r="15"/>
+  <path class="k-ink" d="M102 106 q4 3 8 0" stroke-width="2"/><ellipse class="f-ink" cx="103" cy="114" rx="3" ry="2"/>
+  ${L(140,128,140,132,'k-au',5)}${L(186,128,186,132,'k-au',5)}<text x="128" y="70" class="big" style="fill:var(--faint)">z</text><text x="140" y="58" class="big" style="fill:var(--faint);font-size:15px">z</text>
+  ${P(30,132,40)}${ARM(30,132,40,1,92,106)}${L(46,106,94,104,'k-mu',2)}${T(30,146,'who is this?')}`;
+/* 20 do not commit to anyone */
+S[20] = () => { const ring = (x,y) => `<circle class="k-au" cx="${x}" cy="${y}" r="4" stroke-width="1.8"/>`;
+  return `${G()}<path class="f-pn k-ln" d="M50 132 Q120 76 190 132 Z"/>${P(120,104,44)}${crown(120,61,16)}
+  ${P(42,132,34,'f-mu')}${ARM(42,132,34,1,66,92,'k-mu')}${ring(68,88)}${P(80,132,30,'f-mu')}${ARM(80,132,30,1,96,98,'k-mu')}${ring(98,94)}
+  ${P(198,132,34,'f-mu')}${ARM(198,132,34,-1,174,92,'k-mu')}${ring(172,88)}${T(120,146,'courted by all, bound to none')}`; };
+/* 21 seem dumber than your mark */
+S[21] = () => { let lines = ''; for (let i = 0; i < 5; i++) lines += L(112, 74 + i*6, 150, 74 + i*6, 'k-fa', 1);
+  return `${G()}<rect class="f-ln" x="70" y="104" width="110" height="6"/>${L(80,110,80,132,'k-ln',3)}${L(170,110,170,132,'k-ln',3)}
+  <path class="f-pn k-tx" d="M106 64 H156 V104 H106 Z"/>${lines}${L(112,100,150,100,'k-au',1.5)}${L(112,97,140,97,'k-au',1)}
+  ${P(40,132,52)}<path class="k-tx" d="M26 100 L18 88 L22 80 M54 100 L62 88 L58 80" stroke-width="3.5"/><text x="40" y="58" text-anchor="middle" class="big" style="fill:var(--glow);font-size:18px">?</text>
+  ${P(204,132,52,'f-mu')}${ARM(204,132,52,-1,152,96,'k-mu')}${L(152,96,144,102,'k-tx',2)}${T(131,58,'the fine print')}`; };
+/* 22 the surrender tactic */
+S[22] = () => `${G()}<g class="drift">${L(10,44,48,44,'k-fa',1.5)}${L(20,58,62,58,'k-fa',1.5)}${L(6,72,40,72,'k-fa',1.5)}</g>
+  <path class="f-mu" d="M60 132 V92 L64 86 L67 94 L71 84 L74 92 L78 88 V132 Z"/>
+  <g transform="rotate(14 108 120)">${cloud(112,116,14,'f-crsoft')}${cloud(112,116,14,'k-cr')}${L(84,124,96,122,'k-cr',4)}</g>
+  <g class="sway"><path class="k-au" d="M168 132 Q170 84 204 60" stroke-width="3"/><ellipse class="f-au" cx="206" cy="58" rx="4" ry="9" transform="rotate(50 206 58)"/><path class="k-au" d="M170 104 Q186 96 196 100" stroke-width="2"/></g>
+  <g class="sway" style="animation-delay:-1s"><path class="k-au" d="M184 132 Q186 98 214 82" stroke-width="2.5"/></g>${T(80,146,'the proud oak, snapped')}${T(190,146,'the reed, bent')}`;
+/* 23 concentrate your forces */
+S[23] = () => `${G()}<circle class="f-au" cx="34" cy="34" r="14"/>${rays(34,34,18,24,10,'k-au')}
+  ${[48,62,76,90].map((y,i) => L(52, y-6, 112, y, 'k-au', 1.2, 'opacity=".6"')).join('')}<ellipse class="f-ausoft k-tx" cx="118" cy="70" rx="8" ry="30"/>${L(118,100,128,124,'k-mu',4)}
+  ${[48,62,76,90].map(y => L(122, y, 188, 118, 'k-au', 1.2, 'opacity=".7"')).join('')}
+  <g class="glint"><path class="f-cr" d="M188 118 Q178 104 188 92 Q190 104 198 100 Q200 112 188 118 Z"/><path class="f-au" d="M188 118 Q183 110 188 103 Q191 110 194 108 Q195 114 188 118 Z"/></g>${T(188,146,'one point')}`;
+/* 24 play the perfect courtier */
+S[24] = () => `${G()}<path class="f-pn k-tx" d="M168 132 V76 Q190 66 212 76 V132 Z"/>${P(190,124,52)}${crown(190,79,16)}${ARM(190,124,52,-1,150,98)}
+  <g transform="rotate(28 70 132)">${P(70,132,58,'f-mu')}<path class="f-au" d="M60 76 Q70 62 84 70 Q76 70 70 76 Z"/></g>
+  <rect class="f-pn k-tx" x="104" y="96" width="44" height="28" transform="rotate(-8 126 110)"/><path class="k-fa" d="M110 104 h30 M110 112 h22 M120 104 v16" stroke-width="1" transform="rotate(-8 126 110)"/><circle class="k-cr glint" cx="138" cy="114" r="5" stroke-width="2"/>${T(80,146,'a flaw left on purpose')}`;
+/* 25 re-create yourself */
+S[25] = () => `${G()}${L(150,112,134,132,'k-mu',3)}${L(186,112,202,132,'k-mu',3)}${L(168,112,168,132,'k-mu',3)}<rect class="f-pn k-tx" x="128" y="24" width="80" height="90" rx="2"/>
+  <circle class="f-ausoft" cx="168" cy="62" r="30"/>${P(168,106,70,'f-au')}${crown(168,37,16,'f-au')}${rays(168,62,34,40,12,'k-au','glint')}
+  ${P(70,132,48,'f-mu')}${ARM(70,132,48,1,120,82,'k-mu')}${L(120,82,132,74,'k-au',2.5)}${T(70,146,'who you were')}${T(168,146,'who you decide to be')}`;
+/* 26 keep your hands clean */
+S[26] = () => `<path class="f-pn k-tx" d="M96 30 V16 Q96 10 101 10 Q106 10 106 16 V8 Q106 3 111 3 Q116 3 116 8 V6 Q116 1 121 1 Q126 1 126 6 V10 Q126 5 131 5 Q136 5 136 10 V30 Q136 40 116 40 Q96 40 96 30 Z"/>
+  ${L(100,38,104,72,'k-fa',1)}${L(116,40,120,64,'k-fa',1)}${L(132,38,146,82,'k-fa',1)}${G()}${P(120,132,52,'f-cr')}${ARM(120,132,52,1,152,100,'k-cr')}
+  <g class="glint"><path class="f-cr" d="M170 132 Q156 112 168 96 Q172 112 180 104 Q188 118 182 132 Z"/><path class="f-au" d="M172 132 Q166 120 172 110 Q176 120 180 116 Q182 126 178 132 Z"/></g>
+  <circle class="f-mu" cx="158" cy="100" r="4"/><circle class="f-mu" cx="186" cy="128" r="4"/>${T(60,40,'clean gloves')}${T(120,146,'someone else\'s hands')}`;
+/* 27 create a cultlike following */
+S[27] = () => { let crowd = ''; [16,42,68,172,198,224].forEach(x => { crowd += P(x, 160, 44, 'f-fa') + ARM(x, 160, 44, -1, x-10, 108, 'k-fa') + ARM(x, 160, 44, 1, x+10, 108, 'k-fa'); });
+  return `<rect class="f-pn k-tx" x="92" y="84" width="56" height="66"/><circle class="f-ausoft" cx="120" cy="52" r="36"/>${rays(120,52,22,34,16,'k-au','spin')}<circle class="f-au glint" cx="120" cy="52" r="16"/>${crowd}`; };
+/* 28 enter action with boldness */
+S[28] = () => `<path class="f-pn k-tx" d="M0 92 H92 L98 150 H0 Z"/><path class="f-pn k-tx" d="M152 92 H240 V150 H146 Z"/>
+  <path class="k-au" stroke-dasharray="4 5" d="M84 90 Q122 20 168 88"/><g transform="rotate(-18 124 70)">${P(124,74,40,'f-au')}${ARM(124,74,40,1,146,40,'k-au')}${ARM(124,74,40,-1,104,42,'k-au')}</g>
+  ${P(40,92,34,'f-fa')}${T(40,108,'hesitates')}${T(196,108,'lands')}`;
+/* 29 plan all the way to the end */
+S[29] = () => `<path class="k-tx" d="M60 130 H200 V22 H40 V130" stroke-width="2.5"/><path class="k-tx" d="M160 42 H60 V110 H180 V42" stroke-width="2.5"/><path class="k-tx" d="M80 66 V62 H160 V90 H80 V86" stroke-width="2.5"/>
+  <path class="k-au" stroke-dasharray="5 4" d="M120 76 H70 V100 H170 V32 H50 V140" stroke-width="2.5"/>
+  ${L(120,76,120,58,'k-tx',2)}<path class="f-au" d="M120 58 L134 63 L120 68 Z"/><circle class="f-au glint" cx="120" cy="76" r="4"/>
+  ${T(222,32,'1. end')}${T(24,146,'2. start','','start')}`;
+/* 30 make it seem effortless */
+S[30] = () => `<rect class="f-ausoft" x="0" y="84" width="240" height="66"/><path class="k-au" d="M0 84 q12 -3 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0"/>
+  <path class="f-tx" d="M86 82 Q90 64 118 66 Q140 66 150 80 Q154 86 146 86 H92 Q84 86 86 82 Z"/><path class="k-tx" d="M140 72 Q156 40 142 30 Q132 24 128 34" stroke-width="5"/><path class="f-au" d="M128 32 L116 38 L127 40 Z"/><circle class="f-ink" cx="134" cy="32" r="1.6"/>
+  <g class="glint">${L(110,88,102,108,'k-tx',2)}${L(102,108,92,110,'k-tx',3)}${L(126,88,134,110,'k-tx',2)}${L(134,110,146,108,'k-tx',3)}
+  <path class="k-cr" d="M84 102 q-6 4 0 8 M80 96 q-8 6 0 14 M156 102 q6 4 0 8 M160 96 q8 6 0 14" stroke-width="1.5"/></g>${T(200,70,'what they see')}${T(200,128,'what it takes')}`;
+/* 31 control the options */
+S[31] = () => `<path class="k-mu" stroke-width="10" d="M120 150 Q120 120 70 100 Q30 80 80 50 Q100 38 116 40"/><path class="k-mu" stroke-width="10" d="M120 150 Q120 120 170 100 Q210 80 160 50 Q140 38 124 40"/>
+  <path class="k-ink" stroke-width="1.5" stroke-dasharray="4 4" d="M120 150 Q120 120 70 100 Q30 80 80 50 Q100 38 116 40 M120 150 Q120 120 170 100 Q210 80 160 50 Q140 38 124 40"/>
+  <rect class="f-au" x="104" y="20" width="32" height="22"/>${[104,114,124,132].map(x => `<rect class="f-au" x="${x}" y="14" width="5" height="7"/>`).join('')}<path class="f-ink" d="M116 42 V34 A4 4 0 0 1 124 34 V42 Z"/>
+  ${P(120,148,26)}<text x="54" y="112" class="big" style="fill:var(--glow);font-size:16px">A</text><text x="180" y="112" class="big" style="fill:var(--glow);font-size:16px">B</text>${T(120,10,'same castle')}`;
+/* 32 play to people's fantasies */
+S[32] = () => `${G()}<path class="f-ausoft k-tx" d="M70 70 V88 Q48 96 48 114 Q48 132 80 132 Q112 132 112 114 Q112 96 90 88 V70 Z"/><path class="f-au" d="M52 114 Q52 128 80 128 Q108 128 108 114 Q80 106 52 114 Z"/>${L(66,70,94,70,'k-tx',3)}
+  <g class="bob"><circle class="k-au" cx="78" cy="104" r="3"/><circle class="k-au" cx="88" cy="92" r="2"/><circle class="k-au" cx="74" cy="60" r="3"/><circle class="k-au" cx="84" cy="48" r="2"/></g>
+  <g class="drift">${cloud(172,52,22,'f-pn k-fa')}<path class="k-au" d="M150 48 V30 H156 V36 H162 V24 H170 V18 H176 V24 H184 V36 H190 V30 H196 V48" stroke-width="1.8"/></g>${P(208,132,38,'f-mu')}${T(80,146,'lead into gold?')}`;
+/* 33 discover each man's thumbscrew */
+S[33] = () => `<path class="k-tx" d="M98 66 V46 Q98 24 120 24 Q142 24 142 46 V66" stroke-width="7"/><rect class="f-pn k-tx" x="86" y="64" width="68" height="58" rx="8"/>
+  <circle class="f-ink" cx="120" cy="86" r="7"/><path class="f-ink" d="M116 88 H124 L127 106 H113 Z"/>
+  <g class="drift"><circle class="k-au" cx="206" cy="92" r="11" stroke-width="5"/>${L(195,92,150,92,'k-au',5)}<path class="f-au" d="M156 92 V102 H162 V92 M166 92 V99 H171 V92"/></g>${T(120,140,'everyone has a keyhole')}`;
+/* 34 act like a king */
+S[34] = () => `<rect class="f-pn" x="134" y="8" width="96" height="124"/>${G()}<circle class="f-au glint" cx="20" cy="40" r="9"/>${rays(20,40,12,18,10,'k-au')}
+  <path class="f-ausoft" d="M20 40 L230 8 L230 132 L20 40 Z"/>${P(184,132,104,'','style="fill:#000;opacity:.42"')}${crown(184,30,26,'k-au')}${P(76,132,44)}${T(76,146,'how you stand')}${T(184,146,'how they see you')}`;
+/* 35 master timing */
+S[35] = () => `<path class="f-ausoft k-au" d="M0 132 C50 132 70 120 96 92 C120 66 140 40 170 46 C196 52 192 76 176 84 C166 90 168 104 186 110 C206 118 222 120 240 120 V150 H0 Z"/>
+  <g class="bob">${L(140,48,178,40,'k-tx',3)}${P(160,44,30)}</g><text x="200" y="34" class="big" style="fill:var(--glow)">now</text>
+  <path class="f-pn k-tx" d="M28 28 H60 L44 54 L60 80 H28 L44 54 Z"/><path class="f-au" d="M36 74 H52 L44 64 Z"/><path class="f-au" d="M37 32 H51 L44 44 Z"/>${L(44,50,44,66,'k-au',1)}${T(44,96,'wait')}`;
+/* 36 disdain what you cannot have */
+S[36] = () => `<path class="k-mu" d="M0 14 Q40 22 80 12 T160 14" stroke-width="2.5"/>${L(44,18,44,30,'k-mu',1.5)}
+  ${[[40,36],[48,36],[36,44],[44,44],[52,44],[40,52],[48,52],[44,60]].map(([x,y]) => `<circle class="f-cr" cx="${x}" cy="${y}" r="4.5"/>`).join('')}<ellipse class="f-mu" cx="54" cy="26" rx="8" ry="4" transform="rotate(-20 54 26)"/>
+  ${G()}<path class="f-au" d="M96 104 Q80 80 104 86 Q120 90 124 104 Q112 112 96 104 Z"/><ellipse class="f-au" cx="152" cy="106" rx="32" ry="13"/><circle class="f-au" cx="186" cy="92" r="11"/>
+  <path class="f-au" d="M190 84 L210 74 L194 98 Z"/><path class="f-au" d="M180 84 L178 70 L188 80 Z"/><circle class="f-ink" cx="190" cy="88" r="1.6"/>
+  ${L(132,116,128,132,'k-au',3)}${L(144,118,146,132,'k-au',3)}${L(162,118,160,132,'k-au',3)}${L(174,114,178,132,'k-au',3)}${T(120,146,'"they were sour anyway"')}`;
+/* 37 create compelling spectacles */
+S[37] = () => { let heads = ''; for (let x = 18; x < 240; x += 26) heads += `<circle class="f-fa" cx="${x}" cy="138" r="9"/><path class="f-fa" d="M${x-14} 150 Q${x} 140 ${x+14} 150 Z"/>`;
+  return `<rect class="f-ln" x="0" y="110" width="240" height="6"/><path class="f-cr" d="M0 0 H64 Q50 50 66 110 H0 Z"/><path class="f-cr" d="M240 0 H176 Q190 50 174 110 H240 Z"/><rect class="f-cr" x="0" y="0" width="240" height="12"/>
+  <circle class="f-ausoft" cx="120" cy="62" r="40"/>${rays(120,62,22,36,16,'k-au','spin')}<circle class="f-au" cx="120" cy="62" r="18"/><circle class="f-ink" cx="114" cy="58" r="2"/><circle class="f-ink" cx="126" cy="58" r="2"/><path class="k-ink" d="M113 67 Q120 72 127 67" stroke-width="2"/>${heads}`; };
+/* 38 think as you like, behave like others */
+S[38] = () => `${G()}${[40,80,160,200].map(x => P(x,132,50,'f-mu')).join('')}${P(120,132,50,'f-mu')}<circle class="f-au glint" cx="120" cy="104" r="7"/>
+  <circle class="f-pn k-au" cx="132" cy="64" r="3"/><circle class="f-pn k-au" cx="140" cy="54" r="4.5"/>${cloud(170,36,14,'f-pn k-au')}${star(170,32,7,'f-au')}${T(120,146,'same on the outside')}`;
+/* 39 stir up waters */
+S[39] = () => `<ellipse class="f-pn k-ln" cx="138" cy="112" rx="98" ry="30"/><path class="k-mu" d="M138 112 m-30 0 a30 12 0 1 0 60 0 a22 9 0 1 0 -44 0 a14 6 0 1 0 28 0" stroke-width="1.5"/>
+  <path class="f-ln" d="M0 92 H46 L60 110 H0 Z"/>${P(28,92,36)}${L(38,64,134,112,'k-mu',2.5)}
+  <path class="k-fa" d="M198 86 Q228 96 222 132 M198 86 Q190 110 204 136 M204 92 L222 96 M200 102 L224 106 M200 114 L224 118 M202 126 L222 128" stroke-width="1"/>
+  ${fish(110,124,.9,'f-cr',-1)}${fish(176,108,.9,'f-cr',1)}${fish(164,128,.8,'f-cr',1)}${T(28,146,'calm')}${T(138,148,'muddy, confused')}`;
+/* 40 despise the free lunch */
+S[40] = () => `${G()}<rect class="f-pn k-tx" x="56" y="110" width="120" height="20" rx="2"/><path class="k-mu" d="M70 110 Q70 70 120 70 Q170 70 170 110" stroke-width="3"/>${L(100,110,100,104,'k-mu',2)}
+  <circle class="k-mu" cx="120" cy="110" r="5"/><path class="f-au glint" d="M128 110 L150 96 L156 110 Z"/>${L(200,132,200,72,'k-tx',3)}<rect class="f-pn k-au" x="176" y="52" width="48" height="22" rx="2"/><text x="200" y="67" text-anchor="middle" class="big" style="fill:var(--glow)">FREE</text>${T(110,146,'nothing is free')}`;
+/* 41 avoid a great man's shoes */
+S[41] = () => { let big = '', small = ''; for (let i = 0; i < 5; i++){ const x = 30 + i*28, y = 140 - i*27; big += `<ellipse class="f-ln" cx="${x + (i%2)*12}" cy="${y}" rx="9" ry="16" transform="rotate(45 ${x + (i%2)*12} ${y})"/>`; }
+  for (let i = 0; i < 7; i++){ const t = i/6, x = 98 + t*120, y = 88 + Math.sin(t*Math.PI)*-10 + t*30; small += `<ellipse class="f-au" cx="${r1(x)}" cy="${r1(y + (i%2)*5)}" rx="3.5" ry="6" transform="rotate(80 ${r1(x)} ${r1(y + (i%2)*5)})"/>`; }
+  return `${big}${small}${P(216,112,30,'f-au')}${T(70,28,'his path')}${T(200,140,'your own')}`; };
+/* 42 strike the shepherd */
+S[42] = () => `${G()}<path class="k-mu" d="M84 130 L156 120 Q166 118 166 110 Q166 102 158 104" stroke-width="3.5"/><ellipse class="f-mu" cx="120" cy="104" rx="14" ry="4"/>
+  ${sheep(40,60,-1)}${sheep(200,58,1)}${sheep(30,110,-1)}${sheep(210,110,1)}${sheep(120,36,1)}
+  <g class="k-fa">${L(56,66,72,74,'k-fa',1.2)}${L(184,64,168,74,'k-fa',1.2)}${L(48,112,68,112,'k-fa',1.2)}${L(192,112,172,112,'k-fa',1.2)}${L(120,50,120,64,'k-fa',1.2)}</g>${T(120,146,'without the shepherd')}`;
+/* 43 hearts and minds */
+S[43] = () => `${G()}${P(40,132,54,'f-au')}${ARM(40,132,54,1,70,92,'k-au')}<g class="glint"><path class="k-au" d="M74 78 q8 10 0 20 M84 72 q12 16 0 32 M94 66 q16 22 0 44" stroke-width="1.8"/></g>
+  ${[130,166,202].map((x,i) => P(x,132,38,'f-mu') + heart(x, 76, 6, i < 2 ? 'f-au' : 'k-au', i === 1 ? 'glint' : '')).join('')}${T(160,146,'won, not forced')}`;
+/* 44 the mirror effect */
+S[44] = () => `${G()}<rect class="f-au" x="114" y="16" width="12" height="116" rx="3"/><rect class="f-ink" x="117" y="20" width="6" height="108"/>
+  ${P(70,132,58)}${ARM(70,132,58,1,96,62)}${ARM(70,132,58,-1,48,108)}
+  <g opacity=".55">${P(170,132,58,'f-fa')}${ARM(170,132,58,-1,144,62,'k-fa')}${ARM(170,132,58,1,192,108,'k-fa')}</g>${T(70,146,'them')}${T(170,146,'what you show them')}`;
+/* 45 reform slowly */
+S[45] = () => `${G()}<path class="f-pn k-au" d="M14 132 V118 H34 V104 H54 V90 H74 V76 H94 V62 H114 V48 H134 V132 Z"/>${P(84,76,30,'f-tx')}${crown(124,44,14)}
+  <rect class="f-pn k-tx" x="170" y="40" width="44" height="92"/>${L(154,132,168,82,'k-cr',2.5)}${L(162,132,176,82,'k-cr',2.5)}${L(157,120,165,120,'k-cr',2)}${L(160,108,168,108,'k-cr',2)}${L(166,92,174,90,'k-cr',2)}
+  ${L(170,64,180,74,'k-cr',2.5)}${L(180,64,170,74,'k-cr',2.5)}${T(70,146,'step by step')}${T(192,146,'all at once')}`;
+/* 46 never appear too perfect */
+S[46] = () => `${G()}<rect class="f-pn k-tx" x="98" y="104" width="44" height="28"/><circle class="f-ausoft" cx="120" cy="80" r="30"/>
+  <path class="f-au" d="M104 74 L112 64 H128 L136 74 L120 98 Z"/><path class="k-ink" d="M104 74 H136 M112 64 L116 74 L120 98 L124 74 L128 64" stroke-width="1"/>${star(144,60,5,'f-tx glint')}
+  ${eye(36,40,12)}${eye(204,40,12)}${eye(26,96,10)}${eye(214,96,10)}${eye(120,22,10)}${T(120,146,'flawless draws fire')}`;
+/* 47 know when to stop */
+S[47] = () => `${G()}<circle class="f-pn k-tx" cx="88" cy="80" r="42"/><circle class="k-tx" cx="88" cy="80" r="29"/><circle class="k-tx" cx="88" cy="80" r="16"/><circle class="f-au" cx="88" cy="80" r="6"/>${L(88,122,88,132,'k-tx',3)}
+  ${L(24,40,86,78,'k-tx',2.5)}<path class="k-tx" d="M24 40 l-6 -2 M24 40 l-2 -6 M30 44 l-6 -2 M30 44 l-2 -6" stroke-width="1.5"/>
+  <g class="drift">${L(150,70,214,30,'k-cr',2.5)}<path class="f-cr" d="M214 30 L204 30 L209 38 Z"/><path class="k-cr" d="M150 70 l-2 -7 M150 70 l-7 -1" stroke-width="1.5"/></g><path class="k-fa" stroke-dasharray="3 4" d="M100 82 Q126 80 148 72"/>${T(88,146,'the mark')}${T(200,60,'too far')}`;
+/* 48 assume formlessness */
+S[48] = () => `${G()}<g class="glint">${L(46,18,46,46,'k-cr',2)}<path class="f-cr" d="M40 42 L46 52 L52 42 Z"/>${L(84,18,84,46,'k-cr',2)}<path class="f-cr" d="M78 42 L84 52 L90 42 Z"/></g>
+  <path class="f-mu" d="M30 132 V68 H100 V132 Z"/><path class="k-ink" d="M62 68 L56 86 L68 98 L58 116 L64 132" stroke-width="2.5"/>
+  <ellipse class="f-mu" cx="176" cy="108" rx="22" ry="16"/><g class="drift"><path class="k-au" d="M120 104 Q150 72 176 86 Q200 98 232 76" stroke-width="2.5"/><path class="k-au" d="M120 112 Q150 140 176 126 Q202 116 232 132" stroke-width="2.5"/><path class="k-au" d="M120 96 Q150 60 180 74 Q204 84 232 64" stroke-width="1.5" opacity=".6"/></g>
+  ${T(65,146,'rigid: it cracks')}${T(178,146,'fluid: it flows')}`;
+
+return (n, mini) => `<svg viewBox="0 0 240 150" role="img" aria-label="Illustration for law ${n}">${S[n]()}</svg>`;
+})();
+</script>
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const C = {}; let LIGHT = false;
+const readC = () => { const r = getComputedStyle(document.documentElement); ['ink','panel','panel-2','line','text','muted','faint','glow','cool','good','bad','soft','deep'].forEach(k => C[k] = r.getPropertyValue('--'+k).trim()); LIGHT = C.ink.toLowerCase() !== '#110d0c'; };
+const A = (hex, a) => { const h = hex.replace('#',''); return `rgba(${parseInt(h.slice(0,2),16)},${parseInt(h.slice(2,4),16)},${parseInt(h.slice(4,6),16)},${a})`; };
+const DE = document.documentElement;
+try { const t = localStorage.getItem('lp-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+readC();
+const themeTxt = () => { $('#themeTxt').textContent = LIGHT ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', LIGHT ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = LIGHT ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('lp-theme', next); } catch(e){} readC(); themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => { readC(); themeTxt(); });
+new MutationObserver(() => { readC(); themeTxt(); }).observe(DE, {attributes:true, attributeFilter:['data-theme']});
+const MONO = '12px "Geist Mono", ui-monospace, Menlo, monospace';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+const pad = n => String(n).padStart(2,'0');
+let seed = 11; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+
+function stage(canvas){
+  const ctx = canvas.getContext('2d'); let w=0,h=0,d=0;
+  return () => { const r = canvas.getBoundingClientRect(); const dp = Math.min(2, devicePixelRatio||1);
+    if (r.width!==w || r.height!==h || dp!==d){ w=r.width; h=r.height; d=dp; canvas.width=Math.max(1,Math.round(w*d)); canvas.height=Math.max(1,Math.round(h*d)); }
+    ctx.setTransform(d,0,0,d,0,0); return {ctx,w,h}; };
+}
+const loops = []; const visible = new Set();
+const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)), {rootMargin:'120px'});
+function loop(el, fn){ loops.push([el,fn]); io.observe(el); fn(0, 0); }
+let last = performance.now();
+function tick(t){ const dt = Math.min(0.05, (t-last)/1000); last = t;
+  for (const [el,fn] of loops) if (visible.has(el)) fn(dt, t/1000);
+  requestAnimationFrame(tick); }
+requestAnimationFrame(tick);
+addEventListener('resize', () => { for (const [,fn] of loops) fn(0, performance.now()/1000); });
+
+/* ---------- acts, workshops, quizzes ---------- */
+const ACTS = [
+  {t:'The court and its dangers', p:'The opening laws are about surviving the people above and around you: masters, friends, rivals, and your own mouth.'},
+  {t:'Reputation and leverage', p:'How to make yourself valuable, protected and hard to replace, and why winning arguments and staying around too long both cost you.'},
+  {t:'Keeping others off balance', p:'Unpredictability, independence, strategic weakness and focus: the laws for when you can\'t simply overpower people.'},
+  {t:'Image, belief and choice', p:'Power through performance: who you appear to be, what people want to believe, and which options they think they have.'},
+  {t:'Reading people and timing', p:'Find what moves people, carry yourself well, wait for the moment, and refuse the bait.'},
+  {t:'Endings and change', p:'The last eight laws are about legacy, groups, persuasion and adaptation, and knowing when to stop.'}
+];
+const WS = [
+  {t:'The talk meter', law:4, p:'Law 4 in a negotiation. Drag the slider to decide how much you say, and watch leverage and risk trade places.'},
+  {t:'The absence curve', law:16, p:'Law 16 says scarcity raises value, but only once people know you. Find the sweet spot, then see how it moves if you\'re new.'},
+  {t:'Which law is this?', law:0, p:'Eight modern situations, each one a law from this act in action. Name the law, then read why.'},
+  {t:'Who wrote the menu?', law:31, p:'Law 31: you\'re offered two choices. Pick one, then check whose interests each option served, and whether there was a third.'},
+  {t:'Ride the wave', law:35, p:'Law 35 is about timing. Press "Act" when the moment peaks. Too early and you look hasty; too late and it\'s gone.'},
+  {t:'Rock or water', law:48, p:'Law 48: rigid things break under pressure, fluid ones flow around it. Turn up the pressure and compare.'}
+];
+const QUIZ = [
+  [ {q:'Why did Fouquet\'s spectacular party at Vaux-le-Vicomte ruin him?',o:['It cost more than he could pay','It made the young king feel outshone','The guests were bored'],a:1,w:'Louis XIV felt upstaged by his own minister. Law 1: never outshine the master.'},
+    {q:'In a negotiation, Law 4 suggests you should usually…',o:['Explain every reason behind your position','Say less and let silence do the work','Keep the mood light with jokes'],a:1,w:'The less you say, the more weight each word has, and the less you give away.'},
+    {q:'Talleyrand letting Napoleon escape Elba, then watching him lose at Waterloo, illustrates…',o:['Law 8: make others come to you, using bait','Law 2: trust your friends','Law 6: court attention'],a:0,w:'Napoleon took the bait and came back onto ground where he could be finished.'} ],
+  [ {q:'What does Michelangelo\'s "fix" to David\'s nose show?',o:['A demonstration persuades without insulting anyone','Reputation is everything','Absence makes the heart grow fonder'],a:0,w:'He changed nothing, let dust fall, and Soderini was satisfied. Law 9: win through actions, not argument.'},
+    {q:'Why did Victor Lustig return Al Capone\'s $50,000?',o:['He was too frightened to keep it','A show of honesty would make Capone trust him, and pay him','His scheme genuinely failed'],a:1,w:'Selective honesty (Law 12) lowered Capone\'s guard, and he rewarded Lustig with $5,000.'},
+    {q:'Using absence to raise your value only works if…',o:['You\'re already established and missed','You\'re the boss','You leave for good'],a:0,w:'If nobody knows you yet, absence just means being forgotten.'} ],
+  [ {q:'Bobby Fischer\'s delays and complaints before the 1972 championship are an example of…',o:['Law 17: cultivate unpredictability','Law 21: seem dumber than your mark','Law 24: play the perfect courtier'],a:0,w:'Spassky couldn\'t read him and lost his composure.'},
+    {q:'Bertolt Brecht\'s polite, vague answers to the House committee were…',o:['The surrender tactic: bend now, keep working later','An attempt to crush his enemies','A way of courting attention'],a:0,w:'He gave them nothing to fight, was dismissed, and left the country to keep writing.'},
+    {q:'Why did Mansart leave small flaws in his plans for Louis XIV?',o:['So the king could feel clever spotting them','To save time on drawings','He didn\'t; they were mistakes'],a:0,w:'Letting the master correct you is courtier\'s flattery: subtle, and very effective.'} ],
+  [ {q:'Cesare Borgia executing his enforcer Remirro de Orco is the classic case of…',o:['Keeping your hands clean with a cat\'s paw','Entering action with boldness','Playing to people\'s fantasies'],a:0,w:'Remirro did the cruel work, took the blame, and Borgia took credit for ending it.'},
+    {q:'Offered "option A or option B", Law 31 suggests asking…',o:['Which one is cheaper','Whether there\'s an option C, and who wrote the menu','For more time'],a:1,w:'Whoever frames the choices often decides the outcome before you choose.'},
+    {q:'The swan illustration for Law 30 means…',o:['Hide the effort behind the result','Work less and rely on talent','Appearance matters more than skill'],a:0,w:'Calm above the water, furious paddling below. Visible sweat breaks the spell.'} ],
+  [ {q:'Why did the US hunt for Pancho Villa backfire?',o:['It turned a minor enemy into a folk hero','The army was too small','Villa surrendered and was pardoned'],a:0,w:'Law 36: attention gives small threats importance. Ignoring them can be the best revenge.'},
+    {q:'According to Law 39, an opponent who has lost their temper is…',o:['More dangerous and harder to beat','More likely to make mistakes','About to give up'],a:1,w:'Stay calm and let their emotion work against them.'},
+    {q:'Law 40 warns that a "free lunch" usually…',o:['Is a genuine gift','Carries a hidden obligation or trap','Is the best deal available'],a:1,w:'Free things often come with strings. Paying your own way keeps you independent.'} ],
+  [ {q:'Cyrus the Great\'s death in his campaign against Queen Tomyris illustrates…',o:['Law 47: in victory, learn when to stop','Law 42: strike the shepherd','Law 44: the mirror effect'],a:0,w:'After conquering so much, he pushed one campaign too far.'},
+    {q:'Rome keeping a "king of sacrifices" after abolishing its kings is an example of…',o:['Wrapping change in familiar forms','A compelling spectacle','The mirror effect'],a:0,w:'Law 45: people accept reform more easily when it looks like continuity.'},
+    {q:'What does "assume formlessness" really ask of you?',o:['Adapt your methods while keeping your goal','Have no goals at all','Avoid every conflict'],a:0,w:'Water still flows somewhere. Flexibility in method, not in purpose.'} ]
+];
+
+/* ---------- build the page ---------- */
+const lawHTML = (L, n) => {
+  const next = n % 8 === 0 ? [`#ws${n/8}`, `Workshop: ${WS[n/8-1].t}`] : [`#law${n+1}`, LAWS[n].s];
+  return `<section class="law" id="law${n}" data-n="${n}">
+    <div class="law-head"><div class="eyebrow"><span class="no">Law ${pad(n)}</span><span class="tag">${CATS[L.c]}</span></div><h2>${L.t}</h2></div>
+    <div class="law-grid">
+      <figure class="ill">${ILL(n)}<figcaption><b>Fig. ${n}</b><span>${L.cap}</span></figcaption></figure>
+      <div class="side">
+        <div class="short"><span class="lbl">The law in short</span><p>${L.short}</p></div>
+        <div class="note def"><span class="lbl">Spot it, defend against it</span><p>${L.def}</p></div>
+      </div>
+    </div>
+    <div class="stories">
+      ${L.tr ? `<div class="note trans"><span class="lbl">When it was broken</span><p>${L.tr}</p></div>` : ''}
+      ${L.ob ? `<div class="note obs"><span class="lbl">When it was kept</span><p>${L.ob}</p></div>` : ''}
+      ${L.ob2 ? `<div class="note obs"><span class="lbl">When it was kept</span><p>${L.ob2}</p></div>` : ''}
+      ${L.rev ? `<div class="note rev"><span class="lbl">The reversal</span><p>${L.rev}</p></div>` : ''}
+    </div>
+    <div class="law-foot"><label class="done-toggle"><input type="checkbox" data-done="${n}"> I understand this law</label><a class="next" href="${next[0]}">Next: ${next[1]} →</a></div>
+  </section>`; };
+const LABS = [
+  /* 1 talk meter */ `<div class="stage"><canvas id="c1"></canvas></div>
+    <div class="lab-ctl"><div class="ctl"><label for="s1">How much you say while negotiating a raise <output id="o1"></output></label><input type="range" id="s1" min="0" max="100" value="70"></div></div>
+    <div class="stats"><div class="stat"><span class="k">Leverage left</span><span class="v glow" id="v1a"></span></div><div class="stat"><span class="k">Chance of a slip</span><span class="v" id="v1b" style="color:var(--cool)"></span></div><div class="stat"><span class="k">How it lands</span><span class="s" id="v1c"></span></div></div>
+    <div class="callout">A toy model, not a measurement. Leverage drains with every reason you volunteer, and the risk of saying something you regret climbs. <b>Saying nothing at all isn't the answer either</b>: a little clear speech, then silence, usually beats both extremes.</div>`,
+  /* 2 absence */ `<div class="lab-ctl" style="border-top:0"><div class="row"><span class="score">You are</span><button class="btn" aria-pressed="true" data-est="1">established and known</button><button class="btn" aria-pressed="false" data-est="0">new and unknown</button></div></div>
+    <div class="stage"><canvas id="c2"></canvas></div>
+    <div class="lab-ctl"><div class="ctl"><label for="s2">How often you\'re around <output id="o2"></output></label><input type="range" id="s2" min="0" max="7" step="0.5" value="6.5"></div></div>
+    <div class="stats"><div class="stat"><span class="k">How much you\'re valued</span><span class="v glow" id="v2a"></span></div><div class="stat"><span class="k">What people think</span><span class="s" id="v2b"></span></div></div>
+    <div class="callout">The curve is an illustration of the idea, not data. Notice how the peak <b>moves right when you\'re new</b>: you have to build presence before absence can work for you.</div>`,
+  /* 3 sorter */ `<div class="sorter"><div class="row" style="justify-content:space-between"><span class="score" id="pos3"></span><span class="score" id="score3"></span></div>
+    <div class="card" id="card3" aria-live="polite"></div><div class="row" id="opts3"></div><p class="verdict" id="verd3"></p><div class="row"><button class="btn" id="next3" hidden>Next situation →</button></div></div>
+    <div class="callout">Real situations often involve several laws at once. The answer is the one that does the <b>main</b> work.</div>`,
+  /* 4 options */ `<div class="deal"><div class="row" style="justify-content:space-between"><span class="score" id="pos4"></span><span class="score" id="who4"></span></div>
+    <div class="card" id="card4" aria-live="polite" style="min-height:3.2em"></div><div class="offer" id="offer4"></div><p class="verdict" id="verd4"></p>
+    <div class="row"><button class="btn" id="c4btn" hidden>Was there an option C?</button><button class="btn" id="next4" hidden>Next offer →</button></div></div>
+    <div class="callout">Framing choices isn\'t always sinister: the bedtime round is Law 31 used kindly. The point is to <b>notice when the menu was written for you</b>.</div>`,
+  /* 5 timing */ `<div class="stage"><canvas id="c5"></canvas></div>
+    <div class="lab-ctl"><div class="row"><button class="btn primary" id="act5" type="button">Act now</button><button class="btn" id="reset5" type="button">Start over</button><span class="score" id="tries5"></span></div></div>
+    <div class="stats"><div class="stat"><span class="k">Last move</span><span class="s" id="v5a">Wait for the crest…</span></div><div class="stat"><span class="k">Best timing (of 5 tries)</span><span class="v glow" id="v5b">–</span></div></div>
+    <div class="callout">You can press the button any time, but you can\'t make the wave come faster. <b>That\'s Law 35</b>: patience while it builds, then speed at the moment it peaks.</div>`,
+  /* 6 rock or water */ `<div class="stage"><canvas id="c6"></canvas></div>
+    <div class="lab-ctl"><div class="ctl"><label for="s6">Pressure from events <output id="o6"></output></label><input type="range" id="s6" min="0" max="100" value="30"></div></div>
+    <div class="stats"><div class="stat"><span class="k">The rigid fortress</span><span class="s" id="v6a"></span></div><div class="stat"><span class="k">The flowing stream</span><span class="s" id="v6b"></span></div></div>
+    <div class="callout">Sparta was the rock: magnificent, until conditions changed. <b>Formlessness means changing your methods</b>, not your goals.</div>`
+];
+const wsHTML = k => { const W = WS[k-1];
+  return `<section class="ws" id="ws${k}" data-n="w${k}">
+    <div class="ws-head"><div class="eyebrow"><span>Workshop ${k} of 6</span> · Laws ${k*8-7}–${k*8}</div><h2>${W.t}</h2><p>${W.p}</p></div>
+    <figure class="lab" id="lab${k}"><div class="lab-top"><div class="t">Exercise${W.law ? ` · Law ${W.law}` : ''}</div><div class="hint">${['Drag the slider','Pick a situation, drag the slider','Choose the law','Pick an option','Press at the crest','Raise the pressure'][k-1]}</div></div>${LABS[k-1]}</figure>
+    <div class="quiz-wrap"><div class="row" style="justify-content:space-between;margin-bottom:10px"><span class="sub" style="font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)">Quick check · Act ${['I','II','III','IV','V','VI'][k-1]}</span><span class="qscore" id="qs${k}">0 of 3</span></div><div class="quizzes">${QUIZ[k-1].map((_, i) => `<div class="quiz" data-w="${k}" data-i="${i}"></div>`).join('')}</div></div>
+    <div class="law-foot"><span></span>${k < 6 ? `<a class="next" href="#law${k*8+1}">Next: Act ${['II','III','IV','V','VI'][k-1]}, Law ${k*8+1} →</a>` : `<a class="next" href="#top">Back to the 48 at a glance ↑</a>`}</div>
+  </section>`; };
+let html = '';
+LAWS.forEach((L, i) => { const n = i + 1;
+  if (i % 8 === 0){ const a = i/8; html += `<div class="act-head" id="act${a+1}"><div class="eyebrow"><span>Act ${['I','II','III','IV','V','VI'][a]}</span> · Laws ${n}–${n+7}</div><h2>${ACTS[a].t}</h2><p>${ACTS[a].p}</p></div>`; }
+  html += lawHTML(L, n);
+  if (n % 8 === 0) html += wsHTML(n/8);
+});
+$('#laws').innerHTML = html;
+
+/* glance grid + filters */
+$('#glance').innerHTML = LAWS.map((L, i) => `<a class="tile" href="#law${i+1}" data-n="${i+1}" data-c="${L.c}">${ILL(i+1)}<span class="cap"><span class="n">${pad(i+1)}</span><span class="q">${L.s}</span></span></a>`).join('');
+$('#glance').querySelectorAll('svg').forEach(s => s.setAttribute('aria-hidden', 'true'));
+$('#filters').innerHTML = `<button class="btn" aria-pressed="true" data-f="all">All 48</button>` + Object.entries(CATS).map(([k,v]) => `<button class="btn" aria-pressed="false" data-f="${k}">${v} · ${LAWS.filter(L => L.c === k).length}</button>`).join('');
+$('#filters').querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => {
+  $('#filters').querySelectorAll('.btn').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.querySelectorAll('.tile').forEach(t => t.classList.toggle('dim', b.dataset.f !== 'all' && t.dataset.c !== b.dataset.f));
+}));
+
+/* rail + chips */
+let rail = '';
+LAWS.forEach((L, i) => { const n = i + 1;
+  if (i % 8 === 0) rail += `<div class="act">Act ${['I','II','III','IV','V','VI'][i/8]} · ${ACTS[i/8].t}</div>`;
+  rail += `<a href="#law${n}" data-n="${n}"><span class="n">${pad(n)}</span><span>${L.s}</span><span class="tick" aria-hidden="true"></span></a>`;
+  if (n % 8 === 0) rail += `<a href="#ws${n/8}" data-n="w${n/8}" class="ws-link"><span class="n">◆</span><span>${WS[n/8-1].t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = rail;
+let chips = '';
+LAWS.forEach((L, i) => { const n = i + 1; chips += `<a href="#law${n}" data-n="${n}">${n}. ${L.s}</a>`; if (n % 8 === 0) chips += `<a href="#ws${n/8}" data-n="w${n/8}">◆ ${WS[n/8-1].t}</a>`; });
+$('#chips').innerHTML = chips;
+
+/* progress */
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('lp-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('lp-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  document.querySelectorAll('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  document.querySelectorAll('#railLinks a, #chips a, .tile').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of 48 understood`;
+  $('#progBar').style.width = (done.size/48*100) + '%';
+}
+document.querySelectorAll('[data-done]').forEach(cb => cb.addEventListener('change', () => {
+  cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  document.querySelectorAll('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const link = document.querySelector(`#railLinks a[data-n="${n}"]`), box = $('#railLinks');
+  if (link && getComputedStyle($('.rail')).display !== 'none'){ const top = link.offsetTop - box.offsetTop; if (top < box.scrollTop + 30 || top > box.scrollTop + box.clientHeight - 60) box.scrollTo({top: top - box.clientHeight/3, behavior: RM?'auto':'smooth'}); }
+  const chip = document.querySelector(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM?'auto':'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('.law, .ws').forEach(s => secIO.observe(s));
+
+/* random law */
+$('#draw').addEventListener('click', () => {
+  const pool = LAWS.map((_, i) => i + 1).filter(n => !done.has(String(n)));
+  const list = pool.length ? pool : LAWS.map((_, i) => i + 1);
+  const n = list[Math.floor(Math.random()*list.length)];
+  $('#drawTxt').textContent = `Law ${n}: ${LAWS[n-1].t}`;
+  setTimeout(() => document.getElementById('law' + n).scrollIntoView({behavior: RM ? 'auto' : 'smooth'}), 350);
+});
+
+/* quizzes */
+const qscore = {};
+document.querySelectorAll('.quiz').forEach(box => {
+  const k = +box.dataset.w, d = QUIZ[k-1][+box.dataset.i];
+  box.innerHTML = `<p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i; const why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ qscore[k] = (qscore[k] || 0) + 1; }
+    $('#qs' + k).textContent = `${qscore[k] || 0} of 3`;
+  }));
+});
+
+/* ---------- hero: a gilded board in perspective, motes of dust ---------- */
+{ const cv = $('#board'), get = stage(cv);
+  const motes = Array.from({length: 60}, () => ({x:rnd(), y:rnd(), s:rnd()*1.4+.4, v:rnd()*.02+.006, p:rnd()*6.28}));
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const hy = h*.42, vx = w*.72, rows = 10, cols = 16;
+    const yAt = z => hy + (h*1.15 - hy) * Math.pow(z, 2.2); // z: 0 far → 1 near
+    for (let r = 0; r < rows; r++){ const z0 = r/rows, z1 = (r+1)/rows, y0 = yAt(z0), y1 = yAt(z1);
+      for (let c = -cols; c < cols; c++){ if ((r + c) & 1) continue;
+        const sp0 = (w*.09) * (.15 + z0*2.2), sp1 = (w*.09) * (.15 + z1*2.2);
+        ctx.beginPath(); ctx.moveTo(vx + c*sp0, y0); ctx.lineTo(vx + (c+1)*sp0, y0); ctx.lineTo(vx + (c+1)*sp1, y1); ctx.lineTo(vx + c*sp1, y1); ctx.closePath();
+        ctx.fillStyle = A(C.glow, LIGHT ? .05 + z0*.05 : .035 + z0*.06); ctx.fill(); } }
+    const sg = ctx.createRadialGradient(vx, hy, 0, vx, hy, Math.max(w,h)*.5); sg.addColorStop(0, A(C.glow, LIGHT ? .16 : .2)); sg.addColorStop(1, A(C.glow, 0)); ctx.fillStyle = sg; ctx.fillRect(0,0,w,h);
+    for (const m of motes){ if (!RM) m.y -= m.v*dt; if (m.y < -.02) m.y = 1.02;
+      ctx.globalAlpha = (RM ? .5 : .3 + .35*Math.sin(t*1.2 + m.p)) * (LIGHT ? .7 : 1); ctx.fillStyle = C.glow; ctx.beginPath(); ctx.arc(m.x*w, m.y*h, m.s, 0, 6.283); ctx.fill(); }
+    ctx.globalAlpha = 1;
+    const fade = ctx.createLinearGradient(0, 0, 0, h); fade.addColorStop(0, A(C.ink, .35)); fade.addColorStop(.35, A(C.ink, .55)); fade.addColorStop(1, A(C.ink, .92)); ctx.fillStyle = fade; ctx.fillRect(0,0,w,h);
+  });
+}
+
+/* ================= W1: the talk meter ================= */
+{ const cv = $('#c1'), get = stage(cv), sl = $('#s1');
+  const lev = x => Math.exp(-x/38);                 // leverage drains with every word
+  const risk = x => 1/(1 + Math.exp(-(x-62)/9));    // slips become likely once you ramble
+  const land = x => clamp(lev(x)*.95 + (1 - Math.exp(-x/7))*.55 - risk(x)*.6 - .15, 0, 1); // too silent reads cold
+  function info(){ const x = +sl.value;
+    $('#o1').textContent = x < 8 ? 'nothing at all' : x < 30 ? 'a few clear sentences' : x < 60 ? 'a full explanation' : x < 85 ? 'every reason you can think of' : 'non-stop';
+    $('#v1a').textContent = Math.round(lev(x)*100) + '%'; $('#v1b').textContent = Math.round(risk(x)*100) + '%';
+    $('#v1c').textContent = x < 8 ? 'Cold and hard to read. They may assume you\'re unprepared.' : x < 30 ? 'Calm and confident. They lean in and fill the silence for you.' : x < 60 ? 'Reasonable, but you\'ve shown most of your cards.' : x < 85 ? 'Sounds like you\'re trying to convince yourself.' : 'You just gave away your walk-away number.'; }
+  sl.addEventListener('input', info); info();
+  loop(cv, () => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const L0 = 46, R0 = w - 20, T0 = 26, B0 = h - 34, X = v => lerp(L0, R0, v/100), Y = v => lerp(B0, T0, v);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L0, T0); ctx.lineTo(L0, B0); ctx.lineTo(R0, B0); ctx.stroke();
+    const curve = (f, col, wd) => { ctx.strokeStyle = col; ctx.lineWidth = wd; ctx.beginPath(); for (let v = 0; v <= 100; v++) ctx[v ? 'lineTo' : 'moveTo'](X(v), Y(f(v))); ctx.stroke(); };
+    // the sweet spot
+    ctx.fillStyle = A(C.glow, .08); ctx.fillRect(X(10), T0, X(30) - X(10), B0 - T0);
+    curve(lev, C.glow, 2); curve(risk, C.cool, 2); curve(land, C.text, 2.5);
+    const x = +sl.value; ctx.strokeStyle = A(C.muted, .6); ctx.setLineDash([3,4]); ctx.beginPath(); ctx.moveTo(X(x), T0); ctx.lineTo(X(x), B0); ctx.stroke(); ctx.setLineDash([]);
+    [[lev, C.glow],[risk, C.cool],[land, C.text]].forEach(([f, col]) => { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(X(x), Y(f(x)), 5, 0, 6.283); ctx.fill(); });
+    ctx.font = MONO; ctx.textAlign = 'left';
+    const narrow = w < 520;
+    ctx.fillStyle = C.glow; ctx.fillText('leverage', L0 + 8, Y(lev(4)) - 8);
+    ctx.fillStyle = C.cool; ctx.fillText('risk of a slip', narrow ? X(64) : X(72), Y(risk(narrow ? 92 : 88)) - 8);
+    ctx.fillStyle = C.text; ctx.fillText('how it lands', X(narrow ? 30 : 22), Y(land(22)) - 12);
+    ctx.fillStyle = C.faint; ctx.fillText('silent', L0, B0 + 20); ctx.textAlign = 'right'; ctx.fillText('says everything', R0, B0 + 20);
+    ctx.textAlign = 'center'; ctx.fillStyle = C.glow; ctx.fillText('sweet spot', X(20), T0 - 8);
+  });
+}
+
+/* ================= W2: the absence curve ================= */
+{ const cv = $('#c2'), get = stage(cv), sl = $('#s2'); let est = true;
+  // value of being around d days a week; peak sits lower when established (people already know you)
+  const val = d => { const pk = est ? 2.5 : 5.2, wd = est ? 2.4 : 2.0; const base = Math.exp(-Math.pow((d-pk)/wd, 2)); return clamp(est ? base*.95 + .05 : base*.85 - (d < 1.5 ? .1 : 0), 0, 1); };
+  function info(){ const d = +sl.value, v = val(d);
+    $('#o2').textContent = d === 0 ? 'never' : d === 7 ? 'every single day' : d + ' days a week';
+    $('#v2a').textContent = Math.round(v*100) + ' / 100';
+    let m;
+    if (est) m = d < 1 ? 'Out of sight, out of mind. Absence went on too long.' : d <= 4 ? 'Seen enough to be valued, rare enough to be missed.' : d < 6 ? 'Reliable, a little taken for granted.' : 'Always there. Familiar, and so a bit ordinary.';
+    else m = d < 2.5 ? 'Who? Nobody misses someone they don\'t know yet.' : d < 4.5 ? 'Starting to be noticed. Keep showing up.' : 'Building presence. Absence can work later, not yet.';
+    $('#v2b').textContent = m; }
+  sl.addEventListener('input', info);
+  document.querySelectorAll('[data-est]').forEach(b => b.addEventListener('click', () => { est = b.dataset.est === '1'; document.querySelectorAll('[data-est]').forEach(x => x.setAttribute('aria-pressed', x === b)); info(); }));
+  info();
+  loop(cv, () => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const L0 = 40, R0 = w - 20, T0 = 24, B0 = h - 34, X = d => lerp(L0, R0, d/7), Y = v => lerp(B0, T0, v);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(L0, T0); ctx.lineTo(L0, B0); ctx.lineTo(R0, B0); ctx.stroke();
+    ctx.beginPath(); for (let i = 0; i <= 140; i++){ const d = i/20; ctx[i ? 'lineTo' : 'moveTo'](X(d), Y(val(d))); } ctx.lineTo(X(7), B0); ctx.lineTo(X(0), B0); ctx.closePath(); ctx.fillStyle = A(C.glow, .1); ctx.fill();
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 2.5; ctx.beginPath(); for (let i = 0; i <= 140; i++){ const d = i/20; ctx[i ? 'lineTo' : 'moveTo'](X(d), Y(val(d))); } ctx.stroke();
+    const d = +sl.value; ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(X(d), Y(val(d)), 6, 0, 6.283); ctx.fill(); ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.stroke();
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.textAlign = 'center';
+    for (let k = 0; k <= 7; k++) ctx.fillText(k, X(k), B0 + 18);
+    ctx.textAlign = 'left'; ctx.fillText('value', 6, T0 + 4); ctx.textAlign = 'right'; ctx.fillText('days around per week', R0, B0 + 30 > h - 2 ? h - 2 : B0 + 30);
+  });
+}
+
+/* ================= W3: which law is this? ================= */
+{ const SC = [
+    {s:'A new manager keeps changing meeting times and his tone without warning. The team spends the whole week guessing his mood.', o:[17,4,20], a:17, w:'Unpredictability keeps people on edge and focused on you. Fair enough with rivals, corrosive with your own team.'},
+    {s:'A founder moves her team to a remote cabin, stops taking calls, and misses that a competitor has launched the same product.', o:[16,18,23], a:18, w:'Law 18: isolation cuts you off from the information you need. This is the tower, not strategic absence.'},
+    {s:'A junior employee mocks a quiet VP in a meeting, not realising he decides promotions.', o:[1,19,9], a:19, w:'Law 19: know who you\'re dealing with. The quiet ones are not always the harmless ones.'},
+    {s:'A sought-after consultant won\'t sign an exclusive deal. Three firms keep raising their offers.', o:[20,11,16], a:20, w:'Law 20: by refusing to commit, she keeps everyone courting her.'},
+    {s:'A buyer seems confused about how the product works. The seller over-explains, gets flustered and drops the price to close.', o:[4,21,12], a:21, w:'Law 21: seeming naive made the seller relax, talk too much and give ground.'},
+    {s:'Outmatched by a much larger rival, a small company accepts its terms, then quietly builds a better product for two years.', o:[22,15,8], a:22, w:'Law 22: surrender now, take away the reason to crush you, and use the time to grow.'},
+    {s:'An author drops her five freelance columns and puts every working hour into a single book.', o:[16,23,28], a:23, w:'Law 23: concentrate your forces. Scattered effort rarely adds up to one big result.'},
+    {s:'An analyst leaves an obvious typo on slide 2, so the boss can catch it and feel sharp before approving the plan.', o:[24,21,46], a:24, w:'Law 24: the Mansart move. A tiny flaw for the master to find. (It also brushes Law 46, never appear too perfect.)'}
+  ];
+  let i = 0, score = 0, answered = false;
+  function show(){ const d = SC[i]; answered = false;
+    $('#pos3').textContent = `Situation ${i+1} of ${SC.length}`; $('#score3').textContent = `${score} right`;
+    $('#card3').textContent = d.s; $('#verd3').innerHTML = ''; $('#next3').hidden = true;
+    $('#opts3').innerHTML = d.o.map(n => `<button class="btn" data-l="${n}">Law ${n}: ${LAWS[n-1].s}</button>`).join('');
+    $('#opts3').querySelectorAll('.btn').forEach(b => b.addEventListener('click', () => { if (answered) return; answered = true; const n = +b.dataset.l, ok = n === d.a;
+      if (ok) score++; $('#score3').textContent = `${score} right`;
+      $('#opts3').querySelectorAll('.btn').forEach(x => { x.disabled = true; if (+x.dataset.l === d.a) x.setAttribute('aria-pressed', 'true'); });
+      $('#verd3').innerHTML = `<b>${ok ? 'Yes.' : 'Not quite: it\'s Law ' + d.a + '.'}</b> ${d.w}`;
+      $('#next3').hidden = false; $('#next3').textContent = i === SC.length - 1 ? 'Play again' : 'Next situation →'; })); }
+  $('#next3').addEventListener('click', () => { i++; if (i >= SC.length){ i = 0; score = 0; } show(); });
+  show();
+}
+
+/* ================= W4: who wrote the menu? ================= */
+{ const R = [
+    {who:'A car dealer, as you sign', s:'"Great choice. Would you like the Premium package or the Sport package with that?"',
+     o:[{h:'Premium package', d:'Leather, heated seats, upgraded audio.', m:'+$2,400 to you · dealer earns about $1,100'}, {h:'Sport package', d:'Bigger wheels, tinted windows, spoiler.', m:'+$2,900 to you · dealer earns about $1,300'}],
+     c:{h:'Neither', d:'The car you came in for, at the price you agreed.', m:'+$0 to you · the option nobody mentioned'}, v:'Either answer was a sale. The question was built so that "no" wasn\'t on the menu.'},
+    {who:'A parent, at bedtime', s:'"Do you want to brush your teeth first, or put your pyjamas on first?"',
+     o:[{h:'Teeth first', d:'Then pyjamas, then bed.', m:'Ends in bed'}, {h:'Pyjamas first', d:'Then teeth, then bed.', m:'Ends in bed'}],
+     c:{h:'Stay up late', d:'The option the child actually wanted.', m:'Not offered, on purpose'}, v:'Both roads end in bed, and the child feels in charge. Law 31 used kindly: real choice inside a frame someone else set.'},
+    {who:'A recruiter, closing an offer', s:'"We can do a higher base salary, or a bigger signing bonus. Which matters more to you?"',
+     o:[{h:'Higher salary', d:'+$6,000 a year.', m:'Total cost to them: within budget'}, {h:'Bigger bonus', d:'+$10,000 once.', m:'Total cost to them: within budget'}],
+     c:{h:'Ask for both, or for something else', d:'More equity, extra leave, a title, a review in six months.', m:'Often available if you ask'}, v:'Both options were already approved. The frame quietly sets a ceiling: you pick one, and stop negotiating.'}
+  ];
+  let i = 0;
+  function show(){ const d = R[i];
+    $('#pos4').textContent = `Offer ${i+1} of ${R.length}`; $('#who4').textContent = d.who; $('#card4').textContent = d.s; $('#verd4').innerHTML = '';
+    $('#c4btn').hidden = true; $('#next4').hidden = true;
+    $('#offer4').innerHTML = d.o.map((o, k) => `<button class="choice" data-k="${k}"><span class="h">${o.h}</span><span class="d">${o.d}</span><span class="m" hidden>${o.m}</span></button>`).join('');
+    $('#offer4').querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => {
+      $('#offer4').querySelectorAll('.choice').forEach(x => { x.disabled = true; x.querySelector('.m').hidden = false; if (x !== b) x.style.opacity = .7; });
+      $('#verd4').innerHTML = `<b>You chose "${d.o[+b.dataset.k].h}".</b> Now look at what each option meant for the person asking.`;
+      $('#c4btn').hidden = false; })); }
+  $('#c4btn').addEventListener('click', () => { const d = R[i];
+    $('#offer4').insertAdjacentHTML('beforeend', `<div class="choice hidden-opt" role="note"><span class="h">${d.c.h}</span><span class="d">${d.c.d}</span><span class="m">${d.c.m}</span></div>`);
+    $('#verd4').innerHTML = `<b>Option C.</b> ${d.v}`; $('#c4btn').hidden = true; $('#next4').hidden = false; $('#next4').textContent = i === R.length - 1 ? 'Start over' : 'Next offer →'; });
+  $('#next4').addEventListener('click', () => { i = (i + 1) % R.length; show(); });
+  show();
+}
+
+/* ================= W5: ride the wave ================= */
+{ const cv = $('#c5'), get = stage(cv); let ph = .1, frozen = 0, tries = [], lastScore = null;
+  const PERIOD = RM ? 6 : 4.2;
+  // opportunity: a swell that peaks once per cycle
+  const opp = p => Math.pow(Math.sin(Math.PI*p), 6);
+  function act(){ if (frozen > 0 || tries.length >= 5) return; const v = opp(ph), s = Math.round(v*100); lastScore = s; tries.push(s); frozen = 1.1;
+    $('#v5a').textContent = s >= 85 ? `Perfect timing: ${s}/100. You caught the crest.` : ph < .5 ? `Too early: ${s}/100. The wave hadn't built yet.` : `Too late: ${s}/100. The moment had passed.`;
+    $('#v5b').textContent = Math.max(...tries) + ' / 100'; $('#tries5').textContent = `${tries.length} of 5 tries`;
+    if (tries.length >= 5){ $('#act5').disabled = true; $('#tries5').textContent = 'Done. Press start over to try again.'; } }
+  $('#act5').addEventListener('click', act);
+  $('#reset5').addEventListener('click', () => { tries = []; lastScore = null; $('#act5').disabled = false; $('#v5a').textContent = 'Wait for the crest…'; $('#v5b').textContent = '–'; $('#tries5').textContent = '0 of 5 tries'; });
+  $('#tries5').textContent = '0 of 5 tries';
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    if (frozen > 0) frozen -= dt; else ph = (ph + dt/PERIOD) % 1;
+    const v = opp(ph), base = h*.78, cx = w*.5;
+    // sea
+    ctx.beginPath(); ctx.moveTo(0, h);
+    for (let x = 0; x <= w; x += 4){ const d = (x - cx)/(w*.22); const swell = v*h*.5*Math.exp(-d*d); ctx.lineTo(x, base - swell - Math.sin(x*.04 + t*2)*3); }
+    ctx.lineTo(w, h); ctx.closePath(); const g = ctx.createLinearGradient(0, base - h*.5, 0, h); g.addColorStop(0, A(C.glow, .35)); g.addColorStop(1, A(C.glow, .04)); ctx.fillStyle = g; ctx.fill();
+    ctx.strokeStyle = C.glow; ctx.lineWidth = 2; ctx.beginPath();
+    for (let x = 0; x <= w; x += 4){ const d = (x - cx)/(w*.22); const swell = v*h*.5*Math.exp(-d*d); ctx[x ? 'lineTo' : 'moveTo'](x, base - swell - Math.sin(x*.04 + t*2)*3); } ctx.stroke();
+    // surfer at the centre
+    const sy = base - v*h*.5 - 4;
+    ctx.strokeStyle = C.text; ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(cx - 18, sy); ctx.lineTo(cx + 18, sy - 3); ctx.stroke();
+    ctx.fillStyle = C.text; ctx.beginPath(); ctx.arc(cx, sy - 26, 5, 0, 6.283); ctx.fill(); ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(cx, sy - 21); ctx.lineTo(cx, sy - 9); ctx.lineTo(cx - 6, sy - 2); ctx.moveTo(cx, sy - 9); ctx.lineTo(cx + 6, sy - 2); ctx.moveTo(cx - 9, sy - 16); ctx.lineTo(cx + 9, sy - 18); ctx.stroke(); ctx.lineCap = 'butt';
+    // opportunity meter
+    const mx = 18, my = 18, mw = Math.min(200, w*.4);
+    ctx.fillStyle = A(C.muted, .18); ctx.fillRect(mx, my, mw, 8); ctx.fillStyle = v > .85 ? C.glow : A(C.glow, .6); ctx.fillRect(mx, my, mw*v, 8);
+    ctx.strokeStyle = C.good; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(mx + mw*.85, my - 3); ctx.lineTo(mx + mw*.85, my + 11); ctx.stroke();
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.textAlign = 'left'; ctx.fillText('the moment', mx, my + 24);
+    if (frozen > 0 && lastScore !== null){ ctx.textAlign = 'center'; ctx.font = '600 15px Geist, system-ui, sans-serif'; ctx.fillStyle = lastScore >= 85 ? C.glow : C.cool; ctx.fillText(lastScore >= 85 ? 'Now!' : ph < .5 ? 'Too early' : 'Too late', cx, sy - 44); }
+  });
+  addEventListener('keydown', e => { if (e.key === ' ' && document.activeElement === $('#act5')) return; });
+}
+
+/* ================= W6: rock or water ================= */
+{ const cv = $('#c6'), get = stage(cv), sl = $('#s6');
+  const cracks = Array.from({length: 14}, () => { const pts = [[rnd(), 0]]; let x = pts[0][0]; for (let k = 1; k <= 6; k++){ x = clamp(x + (rnd() - .5)*.35, 0, 1); pts.push([x, k/6]); } return {pts, th: rnd()}; });
+  const rocks = [[.25,.32],[.5,.65],[.72,.38],[.4,.48],[.85,.7]];
+  function info(){ const p = +sl.value; $('#o6').textContent = p < 25 ? 'calm' : p < 55 ? 'rising' : p < 85 ? 'severe' : 'overwhelming';
+    $('#v6a').textContent = p < 25 ? 'Holding firm. Rigid works fine in calm conditions.' : p < 55 ? 'Hairline cracks. It can\'t bend, so it absorbs every hit.' : p < 85 ? 'Cracking badly. The strength that made it impressive is now the problem.' : 'Shattered. Like Sparta after Leuctra.';
+    $('#v6b').textContent = p < 25 ? 'Flowing gently.' : p < 55 ? 'Faster, curving around more obstacles.' : p < 85 ? 'Rushing around every rock. Nothing to strike.' : 'At full force, still flowing. The pressure became momentum.'; }
+  sl.addEventListener('input', info); info();
+  const drops = Array.from({length: 90}, () => ({x: rnd(), y: rnd(), o: rnd()}));
+  loop(cv, (dt, t) => { const {ctx,w,h} = get(); ctx.clearRect(0,0,w,h);
+    const p = +sl.value/100, half = w/2;
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(half, 14); ctx.lineTo(half, h - 14); ctx.stroke();
+    // incoming pressure arrows, both sides
+    const n = Math.round(2 + p*8);
+    ctx.strokeStyle = A(C.cool, .55); ctx.lineWidth = 1.5;
+    for (let k = 0; k < n; k++){ const y = 24 + (k+.5)*(h - 48)/n, off = RM ? 0 : ((t*60*(.4 + p) + k*37) % 40);
+      [[8, half*.18], [half + 8, half + half*.18]].forEach(([x0, x1]) => { ctx.beginPath(); ctx.moveTo(x0 + off*.3, y); ctx.lineTo(x1 + off*.3, y); ctx.lineTo(x1 + off*.3 - 5, y - 4); ctx.moveTo(x1 + off*.3, y); ctx.lineTo(x1 + off*.3 - 5, y + 4); ctx.stroke(); }); }
+    // the rock / fortress
+    const bx = half*.32, by = h*.18, bw = half*.5, bh = h*.64, shat = p > .85;
+    if (!shat){ ctx.fillStyle = C['panel-2']; ctx.strokeStyle = C.muted; ctx.lineWidth = 2; ctx.fillRect(bx, by, bw, bh); ctx.strokeRect(bx, by, bw, bh);
+      for (let k = 0; k < 4; k++){ ctx.fillStyle = C['panel-2']; ctx.fillRect(bx + k*bw/4 + 4, by - 10, bw/4 - 8, 10); ctx.strokeRect(bx + k*bw/4 + 4, by - 10, bw/4 - 8, 10); }
+      ctx.strokeStyle = C.cool; ctx.lineWidth = 1.6;
+      cracks.forEach(c => { const g = (p*1.3 - .2 - c.th*.9)*1.6; if (g <= 0) return; ctx.beginPath(); c.pts.forEach(([x, y], k) => ctx[k ? 'lineTo' : 'moveTo'](bx + x*bw, by + y*bh*Math.min(1, g))); ctx.stroke(); });
+    } else { for (let k = 0; k < 16; k++){ const sx = bx + (k%4)*bw/4 + Math.sin(k*3.1)*10, sy = by + bh*.6 + Math.floor(k/4)*bh*.1 + Math.cos(k*1.7)*6;
+      ctx.save(); ctx.translate(sx, sy); ctx.rotate(k*.7); ctx.fillStyle = C['panel-2']; ctx.strokeStyle = C.muted; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-10, -6); ctx.lineTo(9, -8); ctx.lineTo(12, 5); ctx.lineTo(-6, 8); ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.restore(); } }
+    // the stream
+    const L0 = half + half*.22, R0 = w - 12, sp = .05 + p*.5;
+    rocks.forEach(([rx, ry]) => { ctx.fillStyle = C.muted; ctx.beginPath(); ctx.ellipse(lerp(L0, R0, rx), lerp(24, h - 24, ry), 14, 10, 0, 0, 6.283); ctx.fill(); });
+    for (const d of drops){ if (!RM) d.x += sp*dt*(.6 + d.o*.6); if (d.x > 1){ d.x = 0; d.y = rnd(); }
+      let x = lerp(L0, R0, d.x), y = lerp(24, h - 24, d.y);
+      rocks.forEach(([rx, ry]) => { const ox = lerp(L0, R0, rx), oy = lerp(24, h - 24, ry), dx = x - ox, dy = y - oy, dd = Math.hypot(dx/1.4, dy); if (dd < 26){ y += (dy >= 0 ? 1 : -1)*(26 - dd)*.9; } });
+      ctx.fillStyle = A(C.glow, .35 + d.o*.5); ctx.beginPath(); ctx.ellipse(x, y, 2 + p*4, 1.6, 0, 0, 6.283); ctx.fill(); }
+    ctx.font = MONO; ctx.fillStyle = C.faint; ctx.textAlign = 'center'; ctx.fillText('rigid', half*.57, h - 6); ctx.fillText('formless', half + half*.61, h - 6);
+  });
+}
+})();
+</script>
+</body>
+</html>
