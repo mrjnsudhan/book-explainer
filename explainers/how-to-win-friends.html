@@ -1,0 +1,1724 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How to Win Friends, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field guide to people. Same shell as the other guides (chapter rail, one station per principle:
+   short answer, big ideas, a story from the book, how it sounds, a lab, plain words, quick check), grouped into the book's four parts.
+   Dark-first: warm midnight with a coral "smile" accent for the principles, and a sky-blue second series for the other person. */
+:root{
+  color-scheme: dark;
+  --ink:#14121C;
+  --panel:#1C1A27;
+  --panel-2:#252233;
+  --line:#37334A;
+  --text:#F4F1F8;
+  --muted:#B4AEC4;
+  --faint:#817A94;
+  --glow:#FF8A65;
+  --glow-soft:rgba(255,138,101,.12);
+  --hl:rgba(255,138,101,.24);
+  --cool:#8CC8FF;
+  --cool-soft:rgba(140,200,255,.12);
+  --good:#8FD694;
+  --good-soft:rgba(143,214,148,.1);
+  --bad:#FF7A85;
+  --bad-soft:rgba(255,122,133,.09);
+  --soft:#DAD5E5;
+  --deep:#0F0D16;
+  --toc-bg:rgba(28,26,39,.74);
+  --glow-line:rgba(255,138,101,.34);
+  --cool-line:rgba(140,200,255,.3);
+  --on-glow:#2A0F05;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F8F4EE;--panel:#FFFFFF;--panel-2:#F0EAE2;--line:#DED5CA;--text:#1B1621;--muted:#585063;--faint:#857C90;
+  --glow:#B9441E;--glow-soft:rgba(185,68,30,.07);--hl:#FFD8C8;--cool:#1E5EA6;--cool-soft:rgba(30,94,166,.07);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B42E3C;--bad-soft:rgba(180,46,60,.07);
+  --soft:#2D2735;--deep:#FCFAF7;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(185,68,30,.3);--cool-line:rgba(30,94,166,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F8F4EE;--panel:#FFFFFF;--panel-2:#F0EAE2;--line:#DED5CA;--text:#1B1621;--muted:#585063;--faint:#857C90;
+  --glow:#B9441E;--glow-soft:rgba(185,68,30,.07);--hl:#FFD8C8;--cool:#1E5EA6;--cool-soft:rgba(30,94,166,.07);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B42E3C;--bad-soft:rgba(180,46,60,.07);
+  --soft:#2D2735;--deep:#FCFAF7;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(185,68,30,.3);--cool-line:rgba(30,94,166,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+/* hero: overheard conversation + phrase deck */
+.overheard{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.overheard .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.overheard .top .t{font-weight:500}
+.overheard .verdict{padding:12px 18px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--muted)}
+.overheard .verdict b{color:var(--text);font-weight:500}
+.chat{display:grid;gap:10px;padding:18px}
+.bub{display:grid;gap:2px;max-width:min(560px,88%);padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.bub .who{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.bub.them{justify-self:start;background:var(--cool-soft);border:1px solid var(--cool-line);border-bottom-left-radius:4px}
+.bub.you{justify-self:end;background:var(--panel-2);border:1px solid var(--line);border-bottom-right-radius:4px}
+.deck{display:flex;flex-wrap:wrap;gap:6px}
+.deck a{display:inline-flex;gap:8px;align-items:baseline;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;color:var(--text);text-decoration:none;background:var(--toc-bg);transition:border-color .15s}
+.deck a:hover{border-color:var(--glow)}
+.deck .n{font-family:var(--f-mono);font-size:10.5px;color:var(--glow)}
+
+/* per-chapter conversation */
+.convo{display:grid;gap:8px;max-width:70ch}
+.convo .chat{padding:0}
+
+/* horizontal bars */
+.hbars{display:grid;gap:12px;padding:18px}
+.hb{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 72px;gap:12px;align-items:center;font-size:14px}
+.hb .l{color:var(--muted);line-height:1.3}
+.hb .tr{height:16px;border-radius:999px;background:var(--panel-2);overflow:hidden}
+.hb .tr i{display:block;height:100%;border-radius:999px;background:var(--cool);transition:width .35s}
+.hb.g .tr i{background:var(--glow)}
+.hb.ok .tr i{background:var(--good)}
+.hb.no .tr i{background:var(--bad)}
+.hb .v{font-family:var(--f-mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+/* swaps */
+.swaps{display:grid;gap:8px;padding:18px 0 0}
+.swap{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 18px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;transition:border-color .15s}
+.swap:hover{border-color:var(--glow)}
+.swap .from{color:var(--muted);font-size:16px}
+.swap .to{font-family:var(--f-display);font-size:22px;line-height:1.2}
+.swap .why{grid-column:1;font-size:13px;color:var(--muted)}
+.swap .cue{grid-row:1;grid-column:2;font-family:var(--f-mono);font-size:11px;color:var(--faint);white-space:nowrap}
+.swap[aria-pressed=true]{border-color:var(--glow-line);background:var(--glow-soft)}
+
+/* script book */
+.book{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.book-item{display:grid;gap:8px;align-content:start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.book-item .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.book-item .bt{font-size:15px}
+.book .empty{color:var(--muted);font-size:15px;max-width:60ch}
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+@media (max-width: 560px){
+  .hb{grid-template-columns:minmax(0,1fr) 64px;gap:4px 10px}
+  .hb .l{grid-column:1/-1}
+  .hbars{padding:14px}
+  .swap{margin:0 14px;grid-template-columns:minmax(0,1fr)}
+  .swap .cue{grid-row:auto;grid-column:1}
+  .fields,.out{padding:14px}
+  .bub{max-width:94%}
+}
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* smile lab */
+.face .stage svg{max-width:340px;margin:0 auto}
+/* name trainer */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:0 18px 4px}
+.person{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.person b{display:block;font-family:var(--f-display);font-size:24px;font-weight:400;line-height:1.1}
+.person span{display:block;font-size:14px;color:var(--muted)}
+.person em{display:block;font-style:normal;font-size:13px;color:var(--glow);margin-top:4px}
+.ava{font-style:normal;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb, var(--c) 22%, transparent);border:1px solid var(--c);color:var(--c);font-family:var(--f-display);font-size:24px}
+/* talk-time bar */
+.talkbar{display:flex;height:14px;margin:0 18px 4px;border-radius:999px;overflow:hidden;background:var(--line)}
+.talkbar i{display:block;height:100%;transition:width .3s}
+.talkbar i:first-child{background:var(--glow)}
+.talkbar i:last-child{background:var(--cool)}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 560px){ .people{padding:0 14px 4px} .story{padding:14px} .talkbar{margin:0 14px 4px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A principle-by-principle guide to Dale Carnegie's classic</div>
+    <h1>How to Win <em>Friends</em>,<br>Explained</h1>
+    <p class="lede">Dale Carnegie's 1936 book is one of the best-selling self-help books ever written, and it is mostly common sense that almost nobody practises. It boils down to <b>30 principles</b> in four parts: how to handle people, how to make them like you, how to win them to your way of thinking, and how to lead without causing resentment. This guide takes them one at a time, with the story Carnegie uses, how it sounds in a real conversation, and a lab where you try it.</p>
+    <figure class="overheard" style="margin:0">
+      <div class="top"><div class="t">The dishes, again</div>
+        <div class="row"><button class="btn" data-chat="blunt" aria-pressed="true">The blunt way</button><button class="btn" data-chat="warm" aria-pressed="false">The Carnegie way</button></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="verdict">How it ends: <b id="chatV"></b></div>
+    </figure>
+    <nav class="parts" aria-label="The four parts">
+      <a href="#part1"><span class="n">Part 1 · Principles 1 to 3</span><span class="q">Handling People</span><span class="d">Three habits that sit underneath everything else</span></a>
+      <a href="#part2"><span class="n">Part 2 · Principles 4 to 9</span><span class="q">Make People Like You</span><span class="d">Warmth you can practise: interest, smiles, names, listening</span></a>
+      <a href="#part3"><span class="n">Part 3 · Principles 10 to 21</span><span class="q">Win People Over</span><span class="d">Change minds without winning arguments</span></a>
+      <a href="#part4"><span class="n">Part 4 · Principles 22 to 30</span><span class="q">Be a Leader</span><span class="d">Correct people and change behaviour without resentment</span></a>
+    </nav>
+    <div class="deck" id="deck" aria-label="All 30 principles"></div>
+    <div class="about">
+      <span><b>Published</b> in 1936, revised in 1981</span>
+      <span><b>Author</b> Dale Carnegie, an American teacher of public speaking</span>
+      <span><b>Read time</b> about 3 minutes per principle here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Principle navigation">
+    <div class="prog"><span id="progTxt">0 of 30 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Principles"></nav>
+
+    <!-- ===================== PART 1 ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · principles 1 to 3</span>
+      <h2>Fundamental Techniques in Handling People</h2>
+      <p>Carnegie opens with the foundations. Before any technique for persuading or leading, he asks you to change how you treat people in general: stop attacking them, start noticing what they do well, and learn to see your requests from their side.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Nobody thinks of themselves as the villain. If you want people to change, criticism makes them defend themselves; appreciation and their own wants are what move them.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 1</span> · Why criticism backfires</div>
+        <h2>Don't Criticise, Condemn or Complain</h2>
+        <div class="short"><span class="lbl">In short</span><p>Criticism makes people defensive and resentful, and it rarely changes what they do. Try to understand why they acted as they did instead.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone justifies themselves.</b> Even people who have done real harm usually see themselves as decent and misunderstood. If they don't blame themselves, your blame just bounces off.</span></li>
+          <li><span><b>Criticism wounds pride.</b> It puts people on the defensive and sets them looking for reasons why they were right. The resentment can last for years after the issue is forgotten.</span></li>
+          <li><span><b>Understanding is harder and better.</b> Any fool can criticise. It takes character to ask what pressures, fears or information led someone to act that way, and that question is what opens the door to change.</span></li>
+          <li><span><b>Start with yourself.</b> If you want to reform someone, Carnegie suggests, begin with your own habits first. It is more useful and a lot less dangerous.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Abraham Lincoln once wrote a furious letter to General Meade, who had let the defeated Confederate army escape after Gettysburg. Lincoln never sent it. It was found among his papers after his death. He had learned, Carnegie says, that sharp criticism gains nothing, and that a commander under fire might have acted no differently in Meade's place.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>The report was late again. <mark>I'm guessing something got in the way this week</mark>. What happened?</p></div><div class="bub them"><span class="who">Them</span><p>Honestly, I was waiting on numbers from finance. I should have flagged it.</p></div></div></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: replace the criticism</div><div class="hint">Tap a line to see a version that invites change</div></div>
+        <div class="swaps" id="sw1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're annoyed, your first impulse is to tell the person what they did wrong. Carnegie's advice is to hold that back. People who feel attacked fight back or shut down; people who feel understood are far more willing to fix things.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this principle</label><a class="next" href="#ch2">Next: Sincere appreciation →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 2</span> · The hunger to feel valued</div>
+        <h2>Give Honest, Sincere Appreciation</h2>
+        <div class="short"><span class="lbl">In short</span><p>One of the deepest human desires is to feel important and appreciated. Notice what people genuinely do well and tell them, and they will give you their best.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The desire to be important.</b> Carnegie borrows the idea from the philosopher John Dewey: beneath food, sleep and safety, people crave a feeling of significance. Much of what we do is driven by it.</span></li>
+          <li><span><b>Appreciation is not flattery.</b> Flattery is cheap, insincere and about you: it says what people want to hear to get something. Appreciation is specific, true and about them. People can usually tell the difference.</span></li>
+          <li><span><b>It costs almost nothing.</b> We feed bodies daily but can go weeks without a kind word for the people around us. A sincere thank-you is one of the rarest and most valuable things you can give.</span></li>
+          <li><span><b>Look for it on purpose.</b> Stop thinking about your own achievements for a moment and pay attention to other people's good points. You will find something real to praise.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Charles Schwab, one of the first people in America to earn a million-dollar salary, said his greatest asset was not knowing steel but knowing how to bring out the best in people. His method was to be generous with praise and slow to find fault. He said he had never met anyone who did better work under criticism than under approval.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>The way you rewrote the welcome email: <mark>it was clear and warm</mark>, and three customers replied to say thanks. That's rare.</p></div><div class="bub them"><span class="who">Them</span><p>Oh, that's great to hear. I wasn't sure anyone read those.</p></div></div></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: appreciation or flattery?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Flattery is a counterfeit coin: it may pass once, but people catch on. Real appreciation is noticing something true and specific that a person did, and saying so. It makes people feel seen, and it is free.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this principle</label><a class="next" href="#ch3">Next: An eager want →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 3</span> · Talk about what they want</div>
+        <h2>Arouse in the Other Person an Eager Want</h2>
+        <div class="short"><span class="lbl">In short</span><p>The only way to get someone to do something is to make them want to do it. Start from what they care about, not from what you want.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Fish like worms.</b> You may love strawberries and cream, but when you go fishing you bait the hook with what the fish wants. People are the same: your wants interest only you.</span></li>
+          <li><span><b>See it from their side.</b> Before you ask, think: why would this person want to do this? Henry Ford said success lies in understanding the other person's point of view as well as your own.</span></li>
+          <li><span><b>Create desire, not pressure.</b> You can make people act out of fear or obligation for a while. They act gladly, and keep acting, when they see what is in it for them.</span></li>
+          <li><span><b>It is not manipulation if both win.</b> The point is to find where your goal and theirs overlap, and present your request in those terms. If there is no real benefit to them, the technique won't save it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ralph Waldo Emerson and his son once tried to push a calf into a barn. The son pulled and Emerson pushed, and the calf dug in its heels, because they were thinking only of what they wanted. A housemaid who had grown up on a farm put her finger in the calf's mouth to suck on and gently led it inside. She thought about what the calf wanted.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>You said you want to get better at presenting. <mark>Would leading the client demo on Thursday help with that?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Actually, yes. I'd be up for it if you'll review my slides.</p></div></div></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: turn your request into their want</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"I need you to do this" makes the request about you. "Here's how this helps you get what you want" makes it about them. People are always tuned to their own station; to be heard, talk on it.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this principle</label><a class="next" href="#ch4">Next: Be interested →</a></div>
+    </section>
+    <!-- ===================== PART 2 ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · principles 4 to 9</span>
+      <h2>Six Ways to Make People Like You</h2>
+      <p>The second part is the one most people remember. It is a practical list for being good company: be curious about others, look pleased to see them, use their names, listen properly, talk about what they care about, and let them feel they matter.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You make more friends in two months by being interested in other people than in two years of trying to get them interested in you.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 4</span> · Curiosity makes friends</div>
+        <h2>Become Genuinely Interested in Other People</h2>
+        <div class="short"><span class="lbl">In short</span><p>People are interested in themselves. Be honestly curious about their lives and they will warm to you far faster than if you try to impress them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The dog's secret.</b> A dog greets you with delight every time and asks nothing back. It makes friends without trying to be interesting, just by being interested.</span></li>
+          <li><span><b>Impressing pushes people away.</b> When you try to show how clever or successful you are, people may admire you but they rarely like you more. Interest in them does the reverse.</span></li>
+          <li><span><b>Interest takes effort.</b> Learn about what people do, ask follow-up questions, remember what they told you last time, mark their birthdays. Small attention adds up.</span></li>
+          <li><span><b>It has to be real.</b> Fake interest is easy to spot. Carnegie means real curiosity: people are fascinating if you look, and interest that is genuine pays you back as well.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Theodore Roosevelt was adored even by his staff and servants. He knew the names of the people who worked for him, asked after their families, and once walked over to greet old White House staff by name long after he had left office. One of the staff said it was the happiest day they had had in nearly two years.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I spent the weekend repairing an old radio.</p></div><div class="bub you"><span class="who">You</span><p><mark>No way. How did you get into that?</mark> Was it hard to find the parts?</p></div></div></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: which reply shows real interest?</div><div class="tally" id="tally4" aria-label="Score"></div></div>
+        <div class="sorter" id="sort4"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Want to be interesting? Be interested. Ask about the other person, listen to the answer, and ask a follow-up. Most people rarely get that kind of attention, so they remember the person who gives it.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this principle</label><a class="next" href="#ch5">Next: Smile →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 5</span> · The first message you send</div>
+        <h2>Smile</h2>
+        <div class="short"><span class="lbl">In short</span><p>A warm, genuine smile tells people you are glad to see them before you say a word. It is the cheapest way to start on the right foot.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Actions speak first.</b> Your face announces your attitude before you open your mouth. A real smile says "I like you, you make me happy, I'm glad to see you".</span></li>
+          <li><span><b>Real smiles reach the eyes.</b> A smile that is only in the mouth looks forced. The warm kind lifts the cheeks and crinkles the eyes, because it comes from actually feeling pleased.</span></li>
+          <li><span><b>You can hear a smile.</b> Carnegie recommends smiling on the phone. It changes your tone of voice, and the listener picks it up.</span></li>
+          <li><span><b>Act happy to feel happy.</b> If you don't feel like smiling, Carnegie suggests behaving as if you were cheerful anyway. Feelings often follow actions.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie tells of a stockbroker who rarely smiled at his wife in eighteen years of marriage. He set himself the challenge of smiling at her over breakfast, greeting the doorman with a smile and smiling at the cashier. Within two months, he said, his home was happier and his work easier than in years, and people actually sought him out.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>(smiling) <mark>Morning! Good to see you.</mark> How was the trip?</p></div><div class="bub them"><span class="who">Them</span><p>(smiling back) Long, but good. Thanks for asking.</p></div></div></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: read the smile</div><div class="hint">Move the sliders and watch what the face says</div></div>
+        <div class="face" id="face5"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>People decide how they feel about you in seconds, and your face carries most of that message. A real smile is a signal of welcome. It is contagious, it is free, and it makes the next sentence easier for everyone.</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Carnegie's "act cheerful and you'll feel cheerful" echoes an old idea called the facial feedback hypothesis. Later research found the effect on mood is real but small, and a famous 1988 pen-in-the-mouth study did not replicate well. The social effect of smiling at others is much better supported than the effect on your own mood.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this principle</label><a class="next" href="#ch6">Next: Remember names →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 6</span> · Remember names, and use them</div>
+        <h2>A Person's Name Is the Sweetest Sound</h2>
+        <div class="short"><span class="lbl">In short</span><p>A person's name is, to them, the most important sound in any language. Remembering it shows respect; forgetting it says they didn't matter.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Names carry identity.</b> Hearing your own name tells you that someone noticed you as an individual, not as one of the crowd. It is a small, powerful compliment.</span></li>
+          <li><span><b>Forgetting costs more than you think.</b> Getting a name wrong or forgetting it puts people at a quiet disadvantage, and they notice. It suggests you weren't paying attention.</span></li>
+          <li><span><b>Make the effort.</b> Most people say they are bad with names. Usually they just never tried: they didn't listen, didn't repeat it, and didn't link it to anything.</span></li>
+          <li><span><b>The method.</b> Hear it clearly, ask how it's spelled if unsure, repeat it in conversation, and link it to something about the person. Write it down afterwards if it matters.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>James Farley, who ran Franklin Roosevelt's presidential campaign, was said to know around fifty thousand people by first name. When he met someone he learned their full name, family and work, and the next time he saw them, even a year later, he would greet them by name and ask after their family.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>Hi, I'm Mireille.</p></div><div class="bub you"><span class="who">You</span><p><mark>Mireille</mark>, lovely to meet you. Is that French? <mark>Mireille</mark>, how do you know Sam?</p></div></div></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the name trainer</div><div class="hint">Study five people, then see how many you remember</div></div>
+        <div class="names" id="names6"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Remembering a name is one of the simplest ways to show that someone matters. It isn't a talent; it is attention plus a little technique. Say it back, use it once or twice, and connect it to something about them.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this principle</label><a class="next" href="#ch7">Next: Be a good listener →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 7</span> · Let them talk about themselves</div>
+        <h2>Be a Good Listener</h2>
+        <div class="short"><span class="lbl">In short</span><p>To be thought a great conversationalist, talk less and listen more. Encourage people to talk about themselves, and really pay attention.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Listening is a compliment.</b> Exclusive attention to what someone is saying is one of the highest forms of respect you can pay them, and it is rare.</span></li>
+          <li><span><b>Ask questions they enjoy answering.</b> People love to talk about their work, their plans, their trips and their troubles. Give them the opening.</span></li>
+          <li><span><b>Don't wait for your turn.</b> Many people "listen" while planning what to say next, then jump in. Real listening means following their thread, not steering back to yours.</span></li>
+          <li><span><b>Angry people need to be heard.</b> Carnegie notes that even furious complainers often calm down once someone listens patiently and fully to the whole complaint.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At a dinner party, Carnegie met a botanist and spent hours asking him about plants and gardens, hardly saying anything about himself. At the end of the evening the botanist told the host that Carnegie was a most stimulating companion and a wonderful conversationalist. All Carnegie had done was listen with real interest.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>We finally moved house last month.</p></div><div class="bub you"><span class="who">You</span><p><mark>How's it going so far?</mark> What made you choose that area?</p></div></div></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: listen, or hijack?</div><div class="tally" id="tally7" aria-label="Score"></div></div>
+        <div class="sorter" id="sort7"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most people would rather talk than listen, so a good listener is precious. Ask, follow up, and resist turning the story into one about you. You will be remembered as excellent company while having said very little.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this principle</label><a class="next" href="#ch8">Next: Their interests →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 8</span> · Find what lights them up</div>
+        <h2>Talk in Terms of the Other Person's Interests</h2>
+        <div class="short"><span class="lbl">In short</span><p>The road to someone's heart is to talk about the things they treasure most. Find out what they care about and start there.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone has a favourite subject.</b> For one person it is sailing, for another their kids, their football club or their garden. On that subject they open up.</span></li>
+          <li><span><b>Do some homework.</b> Before meeting someone important, learn a little about what they care about. It shows respect and gives you somewhere to start.</span></li>
+          <li><span><b>It pays both ways.</b> Carnegie notes that people who do this find that they learn a great deal and widen their own lives, not just win friends.</span></li>
+          <li><span><b>Your agenda can wait.</b> Leading with your interests puts people off. Leading with theirs creates goodwill, and your topic often comes up naturally later.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Visitors to Theodore Roosevelt were amazed at how much he knew about their field, whether they were cowboys, politicians or diplomats. Carnegie explains why: whenever Roosevelt expected a visitor, he stayed up the night before reading about the subject he knew they cared most about.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>I saw your team won the regional robotics prize. <mark>What did the robot have to do?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Oh, it's a great story. Have you got five minutes?</p></div></div></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: count the "I"s</div><div class="hint">Edit the message and watch the balance shift</div></div>
+        <div class="iyou" id="iy8"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you talk about what you want, find out what the other person cares about. People listen happily to anything connected to their own interests, and switch off quickly when the subject is only you.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this principle</label><a class="next" href="#ch9">Next: Feel important →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 9</span> · The golden rule, applied</div>
+        <h2>Make the Other Person Feel Important, Sincerely</h2>
+        <div class="short"><span class="lbl">In short</span><p>Almost everyone you meet feels superior to you in some way. Find that way, honour it sincerely, and you will win them over.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Treat people as you'd like to be treated.</b> Carnegie calls this the most important law of human conduct: always make the other person feel important.</span></li>
+          <li><span><b>Everyone knows something you don't.</b> Each person you meet is your superior in some area. Recognising that, genuinely, is the key to their respect.</span></li>
+          <li><span><b>Use the small courtesies.</b> "I'm sorry to trouble you", "Would you mind?", "Thank you". These little phrases tell people that they matter.</span></li>
+          <li><span><b>Sincerely, or not at all.</b> The rule only works if you mean it. Hollow praise is noticed and resented.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waiting in a long post office queue, Carnegie watched a bored clerk weighing letters and set himself a challenge: find something about this man he could honestly admire. He noticed the clerk's fine head of hair and told him so. The clerk lit up, and Carnegie walked away knowing he had made someone's day without wanting anything in return.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>You always know the shortcut in this software. <mark>Could you show me how you do the report so fast?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Sure, it took me ages to figure out. Pull up a chair.</p></div></div></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: specific, sincere praise</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b9"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>People blossom when they feel valued. Look for what a person truly does well and recognise it, with no strings attached. It is the simplest way to make someone glad they met you.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this principle</label><a class="next" href="#ch10">Next: Avoid arguments →</a></div>
+    </section>
+    <!-- ===================== PART 3 ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · principles 10 to 21</span>
+      <h2>How to Win People to Your Way of Thinking</h2>
+      <p>The longest part is about disagreement. Carnegie argues that you almost never change a mind by proving it wrong. Instead you keep the conversation friendly, find what you agree on, let the other person talk, and help them reach the idea themselves.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A person convinced against their will is of the same opinion still. Your job is to make agreeing feel like their own choice.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 10</span> · You can't win an argument</div>
+        <h2>The Only Way to Win an Argument Is to Avoid It</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you lose an argument, you lose. If you win it, you still lose: the other person feels humiliated and holds their view tighter. Avoid them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Winning creates resentment.</b> Prove someone wrong in public and you have hurt their pride. They may go quiet, but they won't agree with you, and they won't like you.</span></li>
+          <li><span><b>Welcome the disagreement.</b> A different view might be telling you something you missed. Thank people for raising it.</span></li>
+          <li><span><b>Control your first reaction.</b> Our natural response to being contradicted is to defend. Pause, listen first, and look for points where you agree.</span></li>
+          <li><span><b>Promise to think about it.</b> Be honest about where you might be wrong, and genuinely agree to consider their ideas. It takes the heat out of the room.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At a dinner, a guest attributed a famous line to the Bible. Carnegie knew it was Shakespeare and said so, rather smugly. His friend, a Shakespeare scholar, kicked him under the table and said the guest was right. On the way home he explained: the guest hadn't asked for a correction, so why prove him wrong and make him dislike you? Always avoid the acute angle.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>Electric cars are a total scam.</p></div><div class="bub you"><span class="who">You</span><p><mark>I can see why some people feel that way.</mark> What's put you off them?</p></div></div></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: win the argument, lose the person</div><div class="hint">Push harder and see what you get</div></div>
+        <div id="arg10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Arguments are rarely about facts; they are about pride. Once someone has dug in, every new fact you throw is taken as an attack. Step back from the fight and you leave room for them to change their mind later, on their own terms.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this principle</label><a class="next" href="#ch11">Next: Never "you're wrong" →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 11</span> · Disagree without attacking</div>
+        <h2>Show Respect for Their Opinions. Never Say "You're Wrong"</h2>
+        <div class="short"><span class="lbl">In short</span><p>Telling someone flatly that they're wrong is a challenge to their intelligence. They will fight back, not reconsider. Show respect and soften your language.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"You're wrong" starts a fight.</b> It insults their judgement and pride, and you have made it nearly impossible for them to change their mind without losing face.</span></li>
+          <li><span><b>Leave room for your own mistakes.</b> Saying "I may be wrong, I frequently am, let's look at the facts" is disarming. Nobody will object to it.</span></li>
+          <li><span><b>Drop the absolute words.</b> Benjamin Franklin trained himself to avoid "certainly" and "undoubtedly" and to say "I imagine" or "it appears to me". He found people far readier to agree.</span></li>
+          <li><span><b>Teach without seeming to teach.</b> Present new ideas as things the other person may have forgotten, not as corrections.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>As a young man, Benjamin Franklin was blunt and argumentative, until an old Quaker friend told him that his habit of contradicting everyone had made him unbearable company. Franklin took it to heart. He banned himself from flat contradictions, and later credited that change with much of his influence in public life.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>The meeting is definitely on Tuesday.</p></div><div class="bub you"><span class="who">You</span><p><mark>I might have this wrong</mark>, but I thought the email said Wednesday. Shall we check it?</p></div></div></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: soften the contradiction</div><div class="hint">Tap a line to see the Carnegie version</div></div>
+        <div class="swaps" id="sw11"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You can disagree without telling someone they are wrong. Leave room for your own error, ask to look at the facts together, and avoid words like "obviously". People are more willing to change a view they haven't been forced to defend.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this principle</label><a class="next" href="#ch12">Next: Admit it quickly →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 12</span> · Beat them to the criticism</div>
+        <h2>If You Are Wrong, Admit It Quickly and Emphatically</h2>
+        <div class="short"><span class="lbl">In short</span><p>When you have made a mistake, own it before anyone else points it out. Say it frankly and fully. It disarms criticism and earns respect.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Say what they were going to say.</b> If you criticise yourself first, there's nothing left for the other person to attack. Very often they respond by going easy on you.</span></li>
+          <li><span><b>It feels better.</b> Admitting a mistake clears the air. Defending an error drains energy and keeps the conflict going.</span></li>
+          <li><span><b>Any fool can defend a mistake.</b> Most people do. Admitting one gives you a sense of dignity and sets you apart.</span></li>
+          <li><span><b>Be quick, and be clear.</b> A half-apology wrapped in excuses doesn't work. Name the mistake, its effect, and what you'll do about it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie often walked his small dog, Rex, unleashed and unmuzzled in a park, until a mounted policeman warned him it was illegal. The next time he was caught, Carnegie spoke first: he said he was guilty, had no excuse, and deserved a fine. The policeman softened at once, said a little dog could do no harm, and suggested he simply walk Rex over the hill where nobody would see.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>I got this wrong, and it's on me.</mark> I sent the old price list. I've already emailed the right one and called the two clients.</p></div><div class="bub them"><span class="who">Them</span><p>Thanks for jumping on it. These things happen.</p></div></div></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: own it in three lines</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b12"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you are in the wrong, the fastest way out is straight through: admit it, fully and quickly, before you are accused. It costs a little pride and saves a great deal of conflict.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this principle</label><a class="next" href="#ch13">Next: Begin friendly →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 13</span> · A drop of honey</div>
+        <h2>Begin in a Friendly Way</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you start a conversation angry or hostile, people dig in. Start friendly, and they are far more likely to come round to your view.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Honey catches more flies.</b> Lincoln used the old saying: a drop of honey catches more flies than a gallon of gall. Win someone over as a friend first.</span></li>
+          <li><span><b>Hostility closes doors.</b> An angry opening may feel satisfying, but it puts the other person on the defensive before the real topic comes up.</span></li>
+          <li><span><b>Gentleness is strength.</b> A calm, friendly approach in a tense situation shows confidence and self-control, not weakness.</span></li>
+          <li><span><b>Say what you share.</b> Opening with what you have in common, or with appreciation, changes the tone of everything that follows.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In Aesop's fable, the sun and the wind argue about which is stronger, and test it on a man in a coat. The wind blows hard, and the man only wraps his coat tighter. Then the sun shines gently and warmly, and soon the man takes his coat off. Carnegie uses the fable to make his point: kindness persuades where force fails.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>Thanks for meeting me. I know you've had a busy month.</mark> I'd like to sort out the noise issue in a way that works for both of us.</p></div><div class="bub them"><span class="who">Them</span><p>Sure. Honestly I didn't realise it was carrying that far.</p></div></div></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: which opening keeps the door open?</div><div class="tally" id="tally13" aria-label="Score"></div></div>
+        <div class="sorter" id="sort13"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Start conversations, especially difficult ones, the way you would want them started with you: warmly, with respect. Once people feel attacked, they stop listening and start defending.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this principle</label><a class="next" href="#ch14">Next: Yes, yes →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 14</span> · Build momentum with agreement</div>
+        <h2>Get the Other Person Saying "Yes, Yes" Immediately</h2>
+        <div class="short"><span class="lbl">In short</span><p>Begin by stressing the things you agree on, and get the other person saying "yes" early. Once they have said "no", their pride makes them stick to it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A "no" is hard to take back.</b> Once someone has said no, they feel they must defend it. Avoid giving them reason to say it early on.</span></li>
+          <li><span><b>Agreement builds momentum.</b> Each "yes" puts the listener in an open, cooperative frame of mind and makes the next one easier.</span></li>
+          <li><span><b>Start with shared goals.</b> Point out that you both want the same end result. The disagreement is usually only about the method.</span></li>
+          <li><span><b>Socrates did it first.</b> He asked questions his opponents had to agree with, one after another, until they found themselves accepting a conclusion they would have rejected at the start.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie describes a bank teller faced with a customer who refused to fill in parts of an account form. Instead of insisting, she asked whether he would want the bank to be able to reach his next of kin if something happened to him. He said yes. Would he like his money to go to them? Yes. By the end he gladly completed the whole form.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>We both want the launch to go well, right? <mark>And neither of us wants a weekend crunch?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Definitely not.</p></div><div class="bub you"><span class="who">You</span><p>So would freezing new features on Friday help us get there?</p></div></div></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: build a yes ladder</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b14"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't lead with the point of disagreement. Start where you agree, and get a few honest yeses. People who have been agreeing with you are already in the habit, and the decision feels like the next step, not a reversal.</p></div>
+      <div class="note"><span class="lbl">Use it well</span><p>The questions must be honest, things the person really does agree with. A string of leading questions designed to trap someone feels like a sales trick, and it is.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this principle</label><a class="next" href="#ch15">Next: Let them talk →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 15</span> · Talk less, learn more</div>
+        <h2>Let the Other Person Do a Great Deal of the Talking</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most people trying to persuade talk too much. Let the other person talk it out: they know more about their needs than you do, and they want to be heard.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>They know their problems.</b> Ask questions and let them explain. You will learn what matters to them, which is exactly what you need to persuade them.</span></li>
+          <li><span><b>Don't interrupt.</b> It's tempting to jump in when you disagree. Don't. They won't hear you while they still have things to say.</span></li>
+          <li><span><b>Let them shine.</b> Even friends would rather talk about their own achievements than hear about yours. Be modest; let them enjoy telling their story.</span></li>
+          <li><span><b>Listen generously.</b> Encourage them to express their ideas fully, and be patient. Being heard is often what someone needs before they can agree.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie tells of a salesman pitching car upholstery to a large manufacturer. He had laryngitis and could barely whisper, so the company president did the talking for him, praising the samples to his colleagues. The salesman won the contract, and realised how much he had been losing by talking too much.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>We've tried three agencies and none of them got our brand.</p></div><div class="bub you"><span class="who">You</span><p><mark>What did they get wrong?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Where do I start…</p></div></div></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: who does the talking?</div><div class="hint">Change your share of the conversation</div></div>
+        <div id="talk15"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The more someone talks, the more you learn about what they want, and the more ownership they feel. Ask good questions and leave pauses. The conversation will usually lead them to your point.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this principle</label><a class="next" href="#ch16">Next: Their idea →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 16</span> · Plant a seed, let it grow</div>
+        <h2>Let the Other Person Feel the Idea Is Theirs</h2>
+        <div class="short"><span class="lbl">In short</span><p>People trust ideas they discover themselves far more than ideas handed to them. Suggest, ask, and let them reach the conclusion.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Nobody likes to be sold to.</b> People prefer to feel they are buying, not being sold, and acting on their own ideas, not following orders.</span></li>
+          <li><span><b>Ask for their input.</b> Asking what someone thinks, or how they would solve a problem, often leads them to the same answer you had in mind.</span></li>
+          <li><span><b>Give up the credit.</b> Letting someone else own the idea means it actually gets done. The credit matters less than the outcome.</span></li>
+          <li><span><b>Make suggestions, not demands.</b> Offer hints and options, and let people think them through.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie tells of an X-ray equipment salesman who couldn't get a hospital to look at his machine. A rival company changed tactic: it wrote to the head of radiology saying its new equipment wasn't perfect yet and asking his expert opinion on how to improve it. Flattered, the doctor came to inspect it, and soon decided by himself that the hospital should buy it.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Customers keep getting lost at checkout. <mark>What do you think we should try?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Maybe we cut it down to one page?</p></div><div class="bub you"><span class="who">You</span><p>That could really work. Want to sketch it?</p></div></div></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: from your plan to their idea</div><div class="hint">Tap a line to see the Carnegie version</div></div>
+        <div class="swaps" id="sw16"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Rather than presenting a finished plan and asking for approval, describe the problem and ask for ideas. When people get there themselves, they will defend the idea and carry it out far better than if you had insisted.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this principle</label><a class="next" href="#ch17">Next: Their point of view →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 17</span> · There's a reason they think that</div>
+        <h2>Try Honestly to See Things From the Other Person's Point of View</h2>
+        <div class="short"><span class="lbl">In short</span><p>People who seem wrong usually have reasons that make sense to them. Find those reasons, and you have the key to their behaviour.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Don't condemn; understand.</b> Fools condemn. The wise try to understand, and only the tolerant and patient even bother.</span></li>
+          <li><span><b>Ask: how would I feel?</b> Put yourself in their shoes. If you were them, with their information and worries, how would you see this?</span></li>
+          <li><span><b>It saves time and irritation.</b> Once you understand the cause, you stop being annoyed at the effect, and you can solve the actual problem.</span></li>
+          <li><span><b>Prepare before you ask.</b> Carnegie quotes a business-school dean who would rather walk outside an office for two hours than go into an interview without a clear idea of what the other person would say and why.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie liked to walk in a park near his home, and was upset that boys kept lighting fires there. At first he warned them sternly, threatening the police, and they sulked and went back as soon as he left. Later he tried a different approach: he said he used to love campfires as a boy too, but asked them to rake the leaves away and put the fire out properly. They agreed happily.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>If I were in your position, I'd probably be worried about the cost too.</mark> What would make this feel safe for you?</p></div><div class="bub them"><span class="who">Them</span><p>Honestly, a trial month would help.</p></div></div></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: swap seats</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b17"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before trying to change someone's mind, figure out why they hold their view. Their reasons, not yours, are what your argument needs to address. Often, once you see them, you'll find a better solution too.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this principle</label><a class="next" href="#ch18">Next: Be sympathetic →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 18</span> · "I don't blame you for feeling that way"</div>
+        <h2>Be Sympathetic With the Other Person's Ideas and Desires</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most people are hungry for sympathy. Tell them you understand why they feel as they do, and arguments melt away.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A magic phrase.</b> Carnegie offers a line along the lines of: "I don't blame you for feeling that way. If I were you, I'd feel the same." It calms almost anyone.</span></li>
+          <li><span><b>It is honestly true.</b> If you had their background, experience and worries, you would likely feel as they do. Saying so isn't a trick; it is accurate.</span></li>
+          <li><span><b>Sympathy stops escalation.</b> An angry person expects a fight. Real sympathy takes the fight out of their sails.</span></li>
+          <li><span><b>It works with complaints.</b> People who complain often just want someone to understand how frustrating the experience was before they discuss a fix.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>On a radio broadcast, Carnegie made a mistake about where the author Louisa May Alcott had lived. He was flooded with angry letters, one especially furious from a woman in Philadelphia. He was tempted to write back telling her what he thought, but instead he called her, thanked her, admitted the error, and told her she was quite right to feel as she did. By the end she was apologising to him.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>This is the third time my delivery has been late. It's ridiculous.</p></div><div class="bub you"><span class="who">You</span><p><mark>I don't blame you for being fed up. I would be too.</mark> Let's get it sorted for good.</p></div></div></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: say it with sympathy</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b18"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone is upset, the most useful first move is to agree with their feelings, even if not with their facts. Once people feel understood, they become reasonable remarkably quickly.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this principle</label><a class="next" href="#ch19">Next: Nobler motives →</a></div>
+    </section>
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 19</span> · People like to be seen as good</div>
+        <h2>Appeal to the Nobler Motives</h2>
+        <div class="short"><span class="lbl">In short</span><p>People usually have two reasons for doing something: one that sounds good, and the real one. Appeal to the good one, and they will often live up to it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone wants to be honest and fair.</b> Most people see themselves as decent, reliable and fair. Assume they are, and treat them that way.</span></li>
+          <li><span><b>Appeal to fairness, honour, care.</b> Ask people to act in a way that fits the best version of themselves, and many will.</span></li>
+          <li><span><b>Assume the best in them.</b> Treat a customer as honest and they usually prove you right. Treat them as a cheat and they feel justified in behaving like one.</span></li>
+          <li><span><b>It doesn't work on everyone.</b> Carnegie admits that some people won't respond, but argues it works far more often than suspicion does.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When a newspaper printed a photograph that Lord Northcliffe, the British press baron, didn't want published, he didn't threaten anyone. He wrote to the editor: please don't publish that picture any more, my mother doesn't like it. He appealed to a feeling everyone shares, respect for one's mother, and the request was honoured.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>I know you're someone who cares about doing things properly. <mark>Would you be willing to double-check the figures before Friday?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Of course. I'd hate to send it with errors.</p></div></div></div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: which motive do you appeal to?</div><div class="tally" id="tally19" aria-label="Score"></div></div>
+        <div class="sorter" id="sort19"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Rather than threatening or bargaining, appeal to someone's sense of fairness, honesty or kindness. People like to be the good person in the story, and usually step up when you assume they are.</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this principle</label><a class="next" href="#ch20">Next: Dramatise →</a></div>
+    </section>
+    <!-- ===================== 20 ===================== -->
+    <section class="ch" id="ch20" data-n="20">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 20</span> · The truth, with showmanship</div>
+        <h2>Dramatise Your Ideas</h2>
+        <div class="short"><span class="lbl">In short</span><p>Simply stating facts often isn't enough. Make your idea vivid, interesting and visual, the way films, adverts and shop windows do.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Facts alone are forgettable.</b> People hear dozens of claims a day. To be noticed and remembered, an idea needs to be seen or felt, not just heard.</span></li>
+          <li><span><b>Show, don't tell.</b> A demonstration, a striking image, an object put on the table: these do more than a page of statistics.</span></li>
+          <li><span><b>Make it concrete.</b> Translate numbers into something people can picture, like a stack of coins, a full stadium, or hours of their own week.</span></li>
+          <li><span><b>It must still be true.</b> Showmanship is in the presentation, not in exaggerating the facts.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie gives the example of a shop that wanted to sell rat poison. It set up a window display with two live rats. People stopped to stare, and sales jumped. The poison hadn't changed; the way it was shown had.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Instead of saying we lose time in meetings: <mark>last month we spent 412 hours in them. That's ten full working weeks.</mark></p></div><div class="bub them"><span class="who">Them</span><p>Wait, really? Okay, let's look at that.</p></div></div></div>
+      <figure class="lab" id="lab20">
+        <div class="lab-top"><div class="t">Lab: from dull to vivid</div><div class="hint">Tap a fact to dramatise it</div></div>
+        <div class="swaps" id="sw20"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your idea competes with everything else for attention. Present it in a way that people can see, picture or experience. A small, honest bit of theatre can make the difference between nodding along and acting.</p></div>
+      <div class="quiz" data-q="20"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="20"> I understand this principle</label><a class="next" href="#ch21">Next: Throw down a challenge →</a></div>
+    </section>
+    <!-- ===================== 21 ===================== -->
+    <section class="ch" id="ch21" data-n="21">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 21</span> · The desire to excel</div>
+        <h2>Throw Down a Challenge</h2>
+        <div class="short"><span class="lbl">In short</span><p>When nothing else works, appeal to people's competitive spirit. Most people want to prove themselves and to excel; a fair challenge brings that out.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>People like to win.</b> The desire to excel, to prove your worth, is a strong motivator, often stronger than money.</span></li>
+          <li><span><b>Make it about the game.</b> Frame a task as a contest or a test of skill, and people bring energy that orders never produce.</span></li>
+          <li><span><b>Challenge, not pressure.</b> A challenge is an invitation: "I wonder if it can be done." Pressure is a threat. The first motivates; the second creates fear.</span></li>
+          <li><span><b>Make it meaningful.</b> The best challenges are worth meeting: a chance to show what you can do in work you care about.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Charles Schwab had a steel mill that never hit its targets. One evening he asked the day shift how many heats they had poured that day. They told him six, so he chalked a big "6" on the floor and left. The night shift saw it, asked what it meant, and poured seven, rubbing out his number and chalking their own. By morning the day shift had beaten them. Soon that mill was among the most productive in the company.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>The record for clearing the support queue is two days. <mark>I'm not sure it can be beaten, but if any team can do it, it's this one.</mark></p></div><div class="bub them"><span class="who">Them</span><p>Two days? We'll do it in one and a half.</p></div></div></div>
+      <figure class="lab" id="lab21">
+        <div class="lab-top"><div class="t">Lab: write a fair challenge</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b21"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Sometimes the best motivator is not reward or approval but a chance to prove what you can do. Set a meaningful, achievable challenge, and people will often push themselves further than any instruction could.</p></div>
+      <div class="quiz" data-q="21"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="21"> I understand this principle</label><a class="next" href="#ch22">Next: Begin with praise →</a></div>
+    </section>
+    <!-- ===================== PART 4 ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · principles 22 to 30</span>
+      <h2>Be a Leader</h2>
+      <p>The last part is for anyone who has to give feedback: managers, parents, teachers, team captains. Carnegie's nine rules show how to point out a problem so that people want to fix it, rather than resent you for mentioning it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Feedback lands when the person keeps their dignity. Start warm, be indirect about the fault, and make improving feel easy and worthwhile.</p></div>
+    </section>
+    <!-- ===================== 22 ===================== -->
+    <section class="ch" id="ch22" data-n="22">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 22</span> · Lather before you shave</div>
+        <h2>Begin With Praise and Honest Appreciation</h2>
+        <div class="short"><span class="lbl">In short</span><p>It is much easier to hear about a problem after hearing about what you did well. Start feedback with honest praise.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The barber's method.</b> A barber puts lather on before shaving. Praise first makes the hard part easier to take.</span></li>
+          <li><span><b>It must be honest.</b> Praise that is invented to soften the blow will be seen through, and makes your feedback seem manipulative.</span></li>
+          <li><span><b>It lowers the guard.</b> People who feel recognised are more open to hearing what could be better.</span></li>
+          <li><span><b>Then be clear.</b> Starting with praise isn't a way to dodge the problem. Once you have shown goodwill, say what needs to change.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Calvin Coolidge once told his secretary that she was wearing a pretty dress and that she was a charming young woman. She was so surprised she blushed. Then he added that he was sure she could be just as careful with punctuation in her letters from now on. His method was blunt, Carnegie says, but the psychology was sound.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Your research on this is really thorough, <mark>and the charts are so clear</mark>. The next step is cutting it to ten slides for the board.</p></div><div class="bub them"><span class="who">Them</span><p>Got it. I'll trim it today.</p></div></div></div>
+      <figure class="lab" id="lab22">
+        <div class="lab-top"><div class="t">Lab: praise, then the ask</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b22"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before discussing what needs to change, recognise what is going well, honestly. People who feel valued can take criticism without feeling attacked, and are far more likely to act on it.</p></div>
+      <div class="quiz" data-q="22"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="22"> I understand this principle</label><a class="next" href="#ch23">Next: Mistakes indirectly →</a></div>
+    </section>
+    <!-- ===================== 23 ===================== -->
+    <section class="ch" id="ch23" data-n="23">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 23</span> · Watch out for "but"</div>
+        <h2>Call Attention to People's Mistakes Indirectly</h2>
+        <div class="short"><span class="lbl">In short</span><p>Pointing at a mistake head-on stings. Point to it indirectly, and swap "but" for "and" so your praise isn't cancelled out.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"But" erases what came before.</b> "You did really well, but…" makes people hear the praise as a set-up. They brace for the real message.</span></li>
+          <li><span><b>Use "and" instead.</b> "You did really well, and if you keep working on X, it'll be even better" keeps the praise sincere and makes the change feel like progress.</span></li>
+          <li><span><b>Indirect can be stronger.</b> Setting an example, asking a question, or making a gentle hint lets people correct themselves without being shamed.</span></li>
+          <li><span><b>Especially for sensitive people.</b> People who resent direct criticism often respond well to an indirect approach.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Charles Schwab once walked through one of his steel mills at noon and saw a group of men smoking right under a sign that said No Smoking. He didn't point at the sign. He handed each of them a cigar and said he'd appreciate it if they smoked these outside. They knew they had broken the rule, and they admired him for not making a scene.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>The design is great, <mark>and</mark> if the button were bigger, people would find it even faster.</p></div><div class="bub them"><span class="who">Them</span><p>Good point. I'll bump it up.</p></div></div></div>
+      <figure class="lab" id="lab23">
+        <div class="lab-top"><div class="t">Lab: the "but" detector</div><div class="hint">Type your feedback and see what changes</div></div>
+        <div class="builder" id="but23"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most feedback is made of praise and a correction, glued together with "but". The word tells people to ignore the first part. Join them with "and", or simply point to the improvement indirectly, and both halves land.</p></div>
+      <div class="quiz" data-q="23"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="23"> I understand this principle</label><a class="next" href="#ch24">Next: Your mistakes first →</a></div>
+    </section>
+    <!-- ===================== 24 ===================== -->
+    <section class="ch" id="ch24" data-n="24">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 24</span> · I've been there too</div>
+        <h2>Talk About Your Own Mistakes First</h2>
+        <div class="short"><span class="lbl">In short</span><p>Admitting your own past mistakes before pointing out someone else's makes criticism easier to accept. It shows you're on their side.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Humility opens ears.</b> People accept correction more easily from someone who admits to having struggled with the same thing.</span></li>
+          <li><span><b>It isn't "us vs them".</b> Sharing your own mistakes turns feedback into advice from someone who has been there, not a judgement from above.</span></li>
+          <li><span><b>It shows growth is possible.</b> Your own example proves that the mistake is normal and fixable.</span></li>
+          <li><span><b>Keep it real.</b> Don't invent mistakes. Use real ones, and keep the story short so the focus returns to them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie hired his young niece Josephine as his secretary. She made the mistakes any nineteen-year-old new to the job would make, and he was tempted to criticise her. Then he reminded himself that he had made far worse mistakes at her age. So he began his corrections by saying that he had done the same kind of thing, and only then suggested a better way. She improved quickly.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>When I started, I used to send drafts to clients without a second read. Cost me a big account once.</mark> It might be worth a quick check before this one goes out.</p></div><div class="bub them"><span class="who">Them</span><p>Oof. Okay, I'll do a final pass.</p></div></div></div>
+      <figure class="lab" id="lab24">
+        <div class="lab-top"><div class="t">Lab: lead with your mistake</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b24"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"I made the same mistake" is one of the gentlest ways to correct someone. It shows that you are not judging them and that the fix is possible. People find it far easier to accept advice from a fellow traveller.</p></div>
+      <div class="quiz" data-q="24"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="24"> I understand this principle</label><a class="next" href="#ch25">Next: Ask, don't order →</a></div>
+    </section>
+    <!-- ===================== 25 ===================== -->
+    <section class="ch" id="ch25" data-n="25">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 25</span> · Suggestions, not commands</div>
+        <h2>Ask Questions Instead of Giving Direct Orders</h2>
+        <div class="short"><span class="lbl">In short</span><p>Nobody likes taking orders. Ask questions and make suggestions instead, and people will cooperate more willingly and bring their own ideas.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Orders create resentment.</b> Even when the instruction is reasonable, being ordered around makes people feel small.</span></li>
+          <li><span><b>Questions invite thinking.</b> "What do you think of this?" or "Do you think this would work?" give people room to improve the idea.</span></li>
+          <li><span><b>People own what they help create.</b> Asking draws out ideas and commitment, and people take more care over a decision they shaped.</span></li>
+          <li><span><b>It saves face, too.</b> A question lets someone correct a mistake without feeling caught out.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie writes of a businessman, Owen D. Young, who was said never to give anyone a direct order. He would say things like "You might consider this" or "Do you think this would work?" After dictating a letter, he would ask his assistant what she thought of it. He let people do things themselves and learn from their mistakes.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>What do you think about sending the update before lunch?</mark> That would give the client the afternoon to reply.</p></div><div class="bub them"><span class="who">Them</span><p>Makes sense. I'll get it out by eleven.</p></div></div></div>
+      <figure class="lab" id="lab25">
+        <div class="lab-top"><div class="t">Lab: turn the order into a question</div><div class="hint">Tap a line to see the Carnegie version</div></div>
+        <div class="swaps" id="sw25"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Swap commands for questions: "Could we…?", "What if…?", "How would you…?" People do better work, with more care, when they feel they chose to do it.</p></div>
+      <div class="quiz" data-q="25"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="25"> I understand this principle</label><a class="next" href="#ch26">Next: Let them save face →</a></div>
+    </section>
+    <!-- ===================== 26 ===================== -->
+    <section class="ch" id="ch26" data-n="26">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 26</span> · Protect their dignity</div>
+        <h2>Let the Other Person Save Face</h2>
+        <div class="short"><span class="lbl">In short</span><p>Even when you are completely right, humiliating someone helps no one. Give people a way out that protects their dignity.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Being right isn't the point.</b> Crushing someone in front of others leaves wounds that last, and you lose their goodwill even if you win the point.</span></li>
+          <li><span><b>Correct in private.</b> Praise in public, criticise in private. A few minutes alone keeps respect intact.</span></li>
+          <li><span><b>Give them a reason.</b> Point out what was understandable about their mistake, such as missing information, pressure or bad instructions.</span></li>
+          <li><span><b>Let them retreat gracefully.</b> If someone has to back down, make it easy, so they don't feel they lost.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>General Electric once had to move Charles Steinmetz, a brilliant but sensitive engineer, out of a department head role he wasn't suited for. Instead of demoting him, the company gave him a new title, Consulting Engineer, which matched the work he was genuinely great at, and quietly let someone else run the department. He was happy, and nobody lost face.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>The data you had was from last quarter, <mark>so anyone would have reached the same conclusion</mark>. Let's rerun it with the new numbers.</p></div><div class="bub them"><span class="who">Them</span><p>Ah, that explains it. Thanks.</p></div></div></div>
+      <figure class="lab" id="lab26">
+        <div class="lab-top"><div class="t">Lab: protect their pride</div><div class="tally" id="tally26" aria-label="Score"></div></div>
+        <div class="sorter" id="sort26"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone is wrong, the goal is to fix the problem, not to make them feel small. A few kind words, a private conversation or a good reason for the mistake lets people correct course without resenting you.</p></div>
+      <div class="quiz" data-q="26"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="26"> I understand this principle</label><a class="next" href="#ch27">Next: Praise every step →</a></div>
+    </section>
+    <!-- ===================== 27 ===================== -->
+    <section class="ch" id="ch27" data-n="27">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 27</span> · Hearty approval, lavish praise</div>
+        <h2>Praise the Slightest Improvement, and Every Improvement</h2>
+        <div class="short"><span class="lbl">In short</span><p>Praise every small step forward, sincerely and generously. People repeat what gets noticed, so notice the progress.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Reward the behaviour you want.</b> Animal trainers know it: reward a small step in the right direction and it gets repeated. People work the same way.</span></li>
+          <li><span><b>Don't wait for perfection.</b> If you only praise the finished result, you will rarely praise, and people may give up before they get there.</span></li>
+          <li><span><b>Be specific.</b> General praise ("good job") is pleasant but empty. Saying exactly what improved shows you were paying attention.</span></li>
+          <li><span><b>Praise inspires.</b> Many people can trace a turning point to a single word of encouragement at the right moment.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie describes an old friend, Pete Barlow, who trained dogs and ponies for a travelling show. Every time an animal made even the smallest progress, Pete patted it, praised it and gave it a treat. Carnegie wondered why we don't use the same common sense with people, praising small improvements instead of only criticising mistakes.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Your last two invoices went out on time. <mark>That's a real improvement, and it makes the end of month so much easier.</mark></p></div><div class="bub them"><span class="who">Them</span><p>Thanks! I set up a reminder; it seems to be working.</p></div></div></div>
+      <figure class="lab" id="lab27">
+        <div class="lab-top"><div class="t">Lab: what gets praised gets repeated</div><div class="hint">Choose a feedback style and watch ten weeks</div></div>
+        <div id="praise27"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Small steps add up to big changes, but only if people keep taking them. Catch someone doing a little better and say so, specifically. It makes the next step more likely.</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Later research on praise refines Carnegie's point. Praise works best when it is specific and tied to effort or a strategy ("you planned this out step by step") rather than fixed traits ("you're so clever"). Praise for traits can make people avoid challenges in case they fail.</p></div>
+      <div class="quiz" data-q="27"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="27"> I understand this principle</label><a class="next" href="#ch28">Next: A fine reputation →</a></div>
+    </section>
+    <!-- ===================== 28 ===================== -->
+    <section class="ch" id="ch28" data-n="28">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 28</span> · People rise to expectations</div>
+        <h2>Give the Other Person a Fine Reputation to Live Up To</h2>
+        <div class="short"><span class="lbl">In short</span><p>Treat someone as if they already have the quality you want them to develop. Most people will work hard not to disappoint that belief.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Assume a virtue.</b> If you want someone to improve, act as if they already have that trait. "I know you're someone who…" sets a standard to live up to.</span></li>
+          <li><span><b>People rise to your expectations.</b> Tell someone they are careless and they may give up trying. Tell them you know they take pride in their work and they often begin to.</span></li>
+          <li><span><b>Make it public and positive.</b> A good reputation, spoken in front of others, becomes something a person wants to protect.</span></li>
+          <li><span><b>Believe it a little.</b> This only works if you can sincerely see the trait in them, even partly.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie tells of a mechanic whose work had slipped. Instead of scolding him, his manager called him in and told him he had been a fine mechanic for years, the kind other people looked up to, and that he was sure he could get back to that standard. The mechanic didn't want to lose that reputation. His work quickly improved.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>You're always the one who catches the details others miss.</mark> Could you be the last pair of eyes on this before it goes out?</p></div><div class="bub them"><span class="who">Them</span><p>Of course. I'll go through it properly.</p></div></div></div>
+      <figure class="lab" id="lab28">
+        <div class="lab-top"><div class="t">Lab: give them a reputation</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b28"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want someone to be more reliable, treat them as reliable. People tend to become what they believe others expect of them, especially when the expectation is kind and sincere.</p></div>
+      <div class="quiz" data-q="28"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="28"> I understand this principle</label><a class="next" href="#ch29">Next: Make it easy →</a></div>
+    </section>
+    <!-- ===================== 29 ===================== -->
+    <section class="ch" id="ch29" data-n="29">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 29</span> · Small fixes, big confidence</div>
+        <h2>Use Encouragement. Make the Fault Seem Easy to Correct</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you tell someone they have no talent for something, they stop trying. Make the problem sound easy to fix, and show you believe they can do it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Discouragement kills effort.</b> Telling someone they are hopeless at something gives them every reason to give up.</span></li>
+          <li><span><b>Make it sound simple.</b> Present the mistake as one small, specific thing to change, not a fundamental flaw.</span></li>
+          <li><span><b>Show your faith.</b> Express confidence that they can do it, and point to what they already do well.</span></li>
+          <li><span><b>Break it into steps.</b> One easy improvement at a time is much less daunting than a list of everything wrong.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Carnegie recounts a friend who, at forty, was learning to dance and had been told by one teacher that everything he did was wrong. He lost all interest. A second teacher told him he had a natural sense of rhythm and that his mistakes were small and easy to fix. He knew she might be flattering him a little, but he danced better because of it, and kept going.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Your talk was really strong. <mark>The only fix is slowing down in the first minute, and that's an easy one.</mark></p></div><div class="bub them"><span class="who">Them</span><p>Okay, I can do that. Maybe I'll pause after the opening line.</p></div></div></div>
+      <figure class="lab" id="lab29">
+        <div class="lab-top"><div class="t">Lab: make the fix sound easy</div><div class="hint">Tap a line to see the Carnegie version</div></div>
+        <div class="swaps" id="sw29"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>How you describe a problem shapes whether people try to fix it. "You're terrible at this" stops them. "You're nearly there; just change this one thing" keeps them going.</p></div>
+      <div class="quiz" data-q="29"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="29"> I understand this principle</label><a class="next" href="#ch30">Next: Happy to do it →</a></div>
+    </section>
+    <!-- ===================== 30 ===================== -->
+    <section class="ch" id="ch30" data-n="30">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Principle 30</span> · A request they're glad to say yes to</div>
+        <h2>Make the Other Person Happy About Doing What You Suggest</h2>
+        <div class="short"><span class="lbl">In short</span><p>Frame your request so the other person sees what's in it for them and feels good about doing it, not merely obliged.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Be sincere.</b> Don't promise anything you can't deliver. Focus on real benefits, not invented ones.</span></li>
+          <li><span><b>Know exactly what you want.</b> Be clear about what you are asking before you ask. Vague requests are easy to resent.</span></li>
+          <li><span><b>Think about their wants.</b> Ask what the other person really wants, and what benefit they will get from doing what you suggest.</span></li>
+          <li><span><b>Match the two.</b> When you make the request, phrase it so they see how it connects to what they want. Titles, recognition and responsibility can mean a lot.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Napoleon created the Legion of Honour and handed out thousands of crosses to his soldiers, made generals "marshals", and called his army the "Grand Army". When he was criticised for giving "toys" to battle-hardened veterans, he replied that people are ruled by such toys. Carnegie notes that recognition and titles still work, when they are sincere.</p></div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>You know the system better than anyone. <mark>Would you lead the training for the new starters?</mark> It would put you in front of the whole leadership team.</p></div><div class="bub them"><span class="who">Them</span><p>I'd like that, actually.</p></div></div></div>
+      <figure class="lab" id="lab30">
+        <div class="lab-top"><div class="t">Lab: build a request they're glad to accept</div><div class="hint">Tick the guidelines you've followed</div></div>
+        <div id="happy30"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The best requests leave people feeling good about saying yes. Be honest, know what you are asking, and connect the request to something the other person genuinely wants.</p></div>
+      <div class="quiz" data-q="30"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="30"> I understand this principle</label><a class="next" href="#after">Next: your phrasebook →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Your phrasebook · <span id="bookN"></span></span>
+      <h2>Practise One at a Time</h2>
+      <p>Carnegie insisted this was a book for doing, not reading. He told readers to go back over it every month, pick one principle to try that week, and keep a note of how it went. Everything you saved from the labs is below, kept in this browser, ready to copy.</p>
+      <div class="book" id="book"></div>
+      <div class="recap">
+        <div><span class="n">Part 1</span><b>Handling People</b><span>Nobody thinks of themselves as the villain.</span></div>
+        <div><span class="n">Part 2</span><b>Make People Like You</b><span>You make more friends in two months by being interested in other people than in two years of trying to get them interested in you..</span></div>
+        <div><span class="n">Part 3</span><b>Win People Over</b><span>A person convinced against their will is of the same opinion still.</span></div>
+        <div><span class="n">Part 4</span><b>Be a Leader</b><span>Feedback lands when the person keeps their dignity.</span></div>
+      </div>
+      <p class="big">None of this works as a trick. Carnegie's whole point is that people can tell when you mean it, so the principles only pay off when the interest, the appreciation and the respect are real.</p>
+      <div class="note"><span class="lbl">About the editions</span><p>The original 1936 book had two extra parts, on writing letters that get results and on making home life happier. The 1981 revision, the one most people read now, dropped them and updated the examples. This guide follows the 30 principles in the revised edition.</p></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>How to Win Friends and Influence People</i> by Dale Carnegie (1936, revised 1981). The explanations, retold stories, example conversations and labs are written in our own words; the short names of the principles are the book's. Labs that show percentages are illustrative models, not research data.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Fundamental Techniques in Handling People", "Six Ways to Make People Like You", "How to Win People to Your Way of Thinking", "Be a Leader"];
+const CH = [["Don't Criticise, Condemn or Complain", "Don't criticise", 0], ["Give Honest, Sincere Appreciation", "Sincere appreciation", 0], ["Arouse in the Other Person an Eager Want", "An eager want", 0], ["Become Genuinely Interested in Other People", "Be interested", 1], ["Smile", "Smile", 1], ["A Person's Name Is the Sweetest Sound", "Remember names", 1], ["Be a Good Listener", "Be a good listener", 1], ["Talk in Terms of the Other Person's Interests", "Their interests", 1], ["Make the Other Person Feel Important, Sincerely", "Feel important", 1], ["The Only Way to Win an Argument Is to Avoid It", "Avoid arguments", 2], ["Show Respect for Their Opinions. Never Say \"You're Wrong\"", "Never \"you're wrong\"", 2], ["If You Are Wrong, Admit It Quickly and Emphatically", "Admit it quickly", 2], ["Begin in a Friendly Way", "Begin friendly", 2], ["Get the Other Person Saying \"Yes, Yes\" Immediately", "Yes, yes", 2], ["Let the Other Person Do a Great Deal of the Talking", "Let them talk", 2], ["Let the Other Person Feel the Idea Is Theirs", "Their idea", 2], ["Try Honestly to See Things From the Other Person's Point of View", "Their point of view", 2], ["Be Sympathetic With the Other Person's Ideas and Desires", "Be sympathetic", 2], ["Appeal to the Nobler Motives", "Nobler motives", 2], ["Dramatise Your Ideas", "Dramatise", 2], ["Throw Down a Challenge", "Throw down a challenge", 2], ["Begin With Praise and Honest Appreciation", "Begin with praise", 3], ["Call Attention to People's Mistakes Indirectly", "Mistakes indirectly", 3], ["Talk About Your Own Mistakes First", "Your mistakes first", 3], ["Ask Questions Instead of Giving Direct Orders", "Ask, don't order", 3], ["Let the Other Person Save Face", "Let them save face", 3], ["Praise the Slightest Improvement, and Every Improvement", "Praise every step", 3], ["Give the Other Person a Fine Reputation to Live Up To", "A fine reputation", 3], ["Use Encouragement. Make the Fault Seem Easy to Correct", "Make it easy", 3], ["Make the Other Person Happy About Doing What You Suggest", "Happy to do it", 3]];
+const QUIZ = {
+  1:{q:"Why does Carnegie say criticism rarely works?",o:["People usually see themselves as in the right, so criticism makes them defend themselves", "People don't care what others think", "It only works in writing"],a:0,w:"Even people who have done real harm tend to justify themselves. Criticism wounds pride and puts them on the defensive."},
+  2:{q:"What separates appreciation from flattery?",o:["Appreciation is louder", "Appreciation is specific, true and asks for nothing; flattery is vague and self-serving", "There is no real difference"],a:1,w:"Flattery says what people want to hear to get something. Appreciation notices something real they did."},
+  3:{q:"What's the lesson of Emerson and the calf?",o:["Push harder and you'll win", "Think about what the other side wants, and lead with that", "Animals are stubborn"],a:1,w:"The maid gave the calf what it wanted and it followed her. People work the same way."},
+  4:{q:"According to Carnegie, what's the fastest way to make friends?",o:["Get people interested in you", "Become genuinely interested in them", "Be the funniest person in the room"],a:1,w:"Interest in others wins friends far faster than trying to impress them."},
+  5:{q:"What makes a smile read as genuine?",o:["It's wide and shows teeth", "It reaches the eyes and comes from real pleasure", "It's held for a long time"],a:1,w:"A mouth-only smile looks polite at best. The warm kind lifts the cheeks and crinkles the eyes."},
+  6:{q:"Why does remembering names matter so much?",o:["A person's name is, to them, the sweetest sound: it shows they were noticed", "It's a memory exercise", "It only matters in business"],a:0,w:"Using someone's name signals respect and attention. Forgetting it signals the opposite."},
+  7:{q:"Why did the botanist call Carnegie a great conversationalist?",o:["Carnegie told brilliant stories", "Carnegie mostly listened, with real interest", "Carnegie knew more about plants"],a:1,w:"He barely spoke about himself. Being listened to felt wonderful to the botanist."},
+  8:{q:"What did Theodore Roosevelt do before meeting a visitor?",o:["He prepared a speech about himself", "He read up on the subject the visitor cared about most", "He asked them to send questions in advance"],a:1,w:"Talking about what someone treasures is the quickest way to their goodwill."},
+  9:{q:"What's the key condition for making people feel important?",o:["Do it only when you need something", "Do it sincerely, finding something you genuinely admire", "Do it loudly in public"],a:1,w:"Insincere praise is noticed and resented. The rule works only when you mean it."},
+  10:{q:"Why can't you 'win' an argument, according to Carnegie?",o:["Even if you win, the other person feels beaten and keeps their view", "Arguments are always a draw", "Other people are usually right"],a:0,w:"You prove your point and lose their goodwill. A person convinced against their will keeps their opinion."},
+  11:{q:"Which phrase follows the spirit of this principle?",o:["\"You're wrong, and here's why.\"", "\"I may be wrong, I often am. Let's look at the facts.\"", "\"Obviously that's not true.\""],a:1,w:"Leaving room for your own error lets the other person reconsider without losing face."},
+  12:{q:"Why admit your mistake before anyone points it out?",o:["It takes away the other person's reason to attack, and they often go easy on you", "It avoids responsibility", "It's required by law"],a:0,w:"Saying the critical things yourself leaves nothing for them to say, so they tend to soften."},
+  13:{q:"What does the fable of the sun and the wind illustrate?",o:["Force is the quickest way to persuade", "Warmth and kindness persuade where force fails", "Weather is unpredictable"],a:1,w:"The wind made the man clutch his coat; the sun made him take it off."},
+  14:{q:"Why is an early 'no' so hard to overcome?",o:["People feel they must stay consistent with what they said", "People forget what they said", "It isn't hard at all"],a:0,w:"Pride makes us defend positions once we've stated them. Start with honest yeses instead."},
+  15:{q:"What happened to the salesman with laryngitis?",o:["He lost the sale", "The client did the talking for him, and he won the contract", "He had to come back the next week"],a:1,w:"Letting the customer talk worked better than any pitch."},
+  16:{q:"Why let someone feel an idea is theirs?",o:["People believe in and act on ideas they reached themselves", "It saves you from doing the work", "To avoid blame if it fails"],a:0,w:"Nobody likes being sold to. An idea they own is one they'll carry out."},
+  17:{q:"What's the first step when someone's behaviour seems unreasonable?",o:["Tell them they're being unreasonable", "Try honestly to see why it makes sense to them", "Ignore it"],a:1,w:"There's usually a reason that makes sense from their side. Find it, and you'll know what to address."},
+  18:{q:"What does Carnegie's 'magic phrase' do?",o:["Admits every fact they claim", "Tells them you understand why they feel that way, which calms things down", "Ends the conversation"],a:1,w:"Sympathy with the feeling takes the fight out of the conversation."},
+  19:{q:"Lord Northcliffe wanted a photo withdrawn. What did he do?",o:["Threatened to sue", "Said his mother didn't like it", "Paid the editor"],a:1,w:"He appealed to a motive everyone respects instead of using force."},
+  20:{q:"What does 'dramatise your ideas' mean?",o:["Exaggerate the facts", "Present true facts in a vivid, visual way that people notice", "Raise your voice"],a:1,w:"Showmanship is in the presentation, never in distorting the truth."},
+  21:{q:"What did Charles Schwab chalk on the mill floor?",o:["A warning", "The number of heats the day shift had poured", "His own name"],a:1,w:"The night shift saw the 6 and set out to beat it. A challenge did what orders hadn't."},
+  22:{q:"Why begin feedback with praise?",o:["To hide the criticism", "People hear criticism more easily after honest recognition", "Because it's polite to stall"],a:1,w:"Like a barber lathering before shaving, honest praise makes the hard part easier to accept."},
+  23:{q:"Why swap 'but' for 'and' in feedback?",o:["'But' makes people discount the praise that came before it", "'And' is shorter", "It's more grammatical"],a:0,w:"With 'but', people hear the praise as a set-up. With 'and', both parts land."},
+  24:{q:"Why talk about your own mistakes first?",o:["To change the subject", "It shows you've been there, so correction feels like help, not judgement", "To get sympathy"],a:1,w:"Admitting you made the same error makes the correction far easier to accept."},
+  25:{q:"What's the advantage of asking instead of ordering?",o:["People cooperate more willingly and contribute their own ideas", "It's slower", "It avoids making decisions"],a:0,w:"Orders breed resentment. Questions invite thinking and ownership."},
+  26:{q:"What does 'letting someone save face' mean?",o:["Never correcting anyone", "Correcting the problem while protecting the person's dignity", "Pretending the mistake didn't happen"],a:1,w:"The aim is to fix the problem without humiliating anyone. Private conversations and a reasonable explanation help."},
+  27:{q:"What's the lesson from Pete Barlow, the animal trainer?",o:["Punish every mistake", "Reward even small improvements, and they get repeated", "Only reward perfection"],a:1,w:"Praise for small progress encourages the next step."},
+  28:{q:"How does giving someone a fine reputation work?",o:["They try to live up to the good view you have of them", "They feel pressured and quit", "It makes them complacent"],a:0,w:"People tend to rise to sincere expectations, especially kind ones."},
+  29:{q:"Why make a fault seem easy to correct?",o:["So people feel capable and keep trying", "So you don't need to explain it", "Because faults don't matter"],a:0,w:"Discouragement kills effort. A fix that sounds small, plus faith in them, keeps people going."},
+  30:{q:"Which is one of Carnegie's guidelines for making people happy to do what you ask?",o:["Promise anything to get a yes", "Be sincere, and match what you ask to what they want", "Keep the request vague"],a:1,w:"Be honest, know what you want, and show how it benefits them."}
+};
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const hbars = (sel, rows) => { $(sel).innerHTML = rows.map(r => `<div class="hb ${r.c || ''}"><span class="l">${r.l}</span><span class="tr"><i style="width:${clamp(r.w, 0, 100)}%"></i></span><span class="v">${r.v}</span></div>`).join(''); };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#14121c';
+try { const t = localStorage.getItem('hwf-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('hwf-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${p+1} · ${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('hwf-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('hwf-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game (one set of bins for every item) ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the traps the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); show(); }); return; }
+    const it = items[order[i]], bs = it.bins || bins;
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite: ' + bs.find(b => b.id === it.a).label + '.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- builders: fill in your situation, get your own script ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const M = t => `<mark>${t}</mark>`;
+const plainText = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent.replace(/\s+/g, ' ').trim(); };
+let BOOK = [];
+try { BOOK = JSON.parse(localStorage.getItem('hwf-book') || '[]'); } catch(e){}
+const saveBook = () => { try { localStorage.setItem('hwf-book', JSON.stringify(BOOK)); } catch(e){} renderBook(); };
+async function copyText(text, btn){
+  try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+  catch(e){ btn.textContent = 'Select and copy'; const sel = getSelection(), r = document.createRange(); const t = btn.closest('.builder, .book-item')?.querySelector('.say-out, .bt'); if (t){ r.selectNodeContents(t); sel.removeAllRanges(); sel.addRange(r); } }
+  setTimeout(() => btn.textContent = btn.dataset.lbl, 1600);
+}
+function builder(n, cfg){
+  const box = $('#b' + n);
+  box.innerHTML = `<div class="fields">${cfg.fields.map(([id, label, def]) => `<div class="field"><label for="f${n}${id}">${label}</label><input id="f${n}${id}" type="text" value="${esc(def)}" autocomplete="off"></div>`).join('')}</div>
+    <div class="out">${cfg.weak ? `<div class="weak"><span class="k">Instead of</span><p id="w${n}"></p></div>` : ''}<div class="strong"><span class="k">Say</span><p class="say-out" id="s${n}"></p></div>
+    <p class="tip" id="t${n}" ${cfg.tip ? '' : 'hidden'}></p>
+    <div class="row"><button class="btn" data-copy="${n}" data-lbl="Copy">Copy</button><button class="btn primary" data-keep="${n}" data-lbl="Save to my phrasebook">Save to my phrasebook</button></div></div>`;
+  const vals = () => Object.fromEntries(cfg.fields.map(([id]) => [id, esc($(`#f${n}${id}`).value.trim() || '…')]));
+  function draw(){ const v = vals(); $('#s' + n).innerHTML = cfg.make(v); if (cfg.weak) $('#w' + n).textContent = plainText(cfg.weak(v)); if (cfg.tip) $('#t' + n).innerHTML = cfg.tip(v); }
+  box.querySelectorAll('input').forEach(i => i.addEventListener('input', draw));
+  box.querySelector('[data-copy]').addEventListener('click', e => copyText(plainText($('#s' + n).innerHTML), e.currentTarget));
+  box.querySelector('[data-keep]').addEventListener('click', e => { const t = plainText($('#s' + n).innerHTML);
+    if (!BOOK.some(b => b.t === t)) BOOK.push({n, t}); saveBook(); e.currentTarget.textContent = 'Saved'; setTimeout(() => e.currentTarget.textContent = e.currentTarget.dataset.lbl, 1600); });
+  draw();
+}
+function renderBook(){
+  const box = $('#book'); if (!box) return;
+  $('#bookN').textContent = BOOK.length ? `${BOOK.length} saved` : 'Empty';
+  box.innerHTML = BOOK.length ? BOOK.map((b, i) => `<div class="book-item"><span class="k">Principle ${b.n} · ${CH[b.n - 1][1]}</span><p class="bt">${esc(b.t)}</p><div class="row"><button class="btn" data-bc="${i}" data-lbl="Copy">Copy</button><button class="btn" data-bx="${i}">Remove</button></div></div>`).join('')
+    : `<p class="empty">Nothing saved yet. Every "write your own" lab has a <b>Save to my phrasebook</b> button; your lines collect here, in this browser, ready to copy.</p>`;
+  box.querySelectorAll('[data-bc]').forEach(b => b.addEventListener('click', e => copyText(BOOK[+b.dataset.bc].t, e.currentTarget)));
+  box.querySelectorAll('[data-bx]').forEach(b => b.addEventListener('click', () => { BOOK.splice(+b.dataset.bx, 1); saveBook(); }));
+}
+
+/* ---------- swaps: weak line → magic words ---------- */
+function swaps(n, rows){
+  const box = $('#sw' + n);
+  box.innerHTML = rows.map((r, i) => `<button class="swap" data-i="${i}" aria-pressed="false"><span class="from">${r[0]}</span><span class="to" hidden>${r[1]}</span><span class="why" hidden>${r[2]}</span><span class="cue">Swap →</span></button>`).join('')
+    + `<div class="row" style="padding:0 18px 16px"><button class="btn" id="all${n}">Swap them all</button></div>`;
+  const flip = (b, on) => { b.setAttribute('aria-pressed', on); b.querySelector('.from').hidden = on; b.querySelector('.to').hidden = !on; b.querySelector('.why').hidden = !on; b.querySelector('.cue').textContent = on ? '← Back' : 'Swap →'; };
+  box.querySelectorAll('.swap').forEach(b => b.addEventListener('click', () => flip(b, b.getAttribute('aria-pressed') !== 'true')));
+  $('#all' + n).addEventListener('click', () => box.querySelectorAll('.swap').forEach(b => flip(b, true)));
+}
+
+
+/* ---------- hero: the dishes ---------- */
+{ const LINES = [
+    ['you', `You left the dishes <i>again</i>. Honestly, it's so inconsiderate.`, `Thanks for doing the big shop yesterday, it saved me a trip. ${M('I\'m guessing this week has been mad')}, the sink's full again.`],
+    ['them', `Wow. You never take the bins out either.`, `Ugh, yeah. It really has. Sorry.`],
+    ['you', `That's not the point. Why can't you just be normal about it?`, `${M('I did exactly the same thing in March')}, so no judgement. ${M('What do you think would work')}, each of us doing our own plates the same night?`],
+    ['them', `Fine. I'll do them when I do them.`, `That's fair. Let me do them now, and yes, same-night works.`] ];
+  let on = false;
+  function draw(){ $('#chat').innerHTML = LINES.map(([who, a, b]) => `<div class="bub ${who}"><span class="who">${who === 'you' ? 'You' : 'Your flatmate'}</span><p>${on ? b : a}</p></div>`).join('');
+    $('#chatV').textContent = on ? 'The dishes get done, and you\'re still friends.' : 'The dishes stay in the sink, and now you\'re arguing about the bins.'; }
+  $$('[data-chat]').forEach(b => b.addEventListener('click', () => { on = b.dataset.chat === 'warm'; press($$('[data-chat]'), b); draw(); }));
+  draw();
+  $('#deck').innerHTML = CH.map(([t], i) => `<a href="#ch${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span>${t}</a>`).join('');
+}
+
+/* ================= chapter labs ================= */
+swaps(1, [
+  [`You always leave everything to the last minute.`, `${M('This one came in close to the wire.')} What made it tricky this time?`, 'A question about the cause instead of a verdict on the person.'],
+  [`Why didn't you call me back? So rude.`, `${M('I guess yesterday got away from you.')} Is now a better time?`, 'Assumes a reasonable explanation and moves on to the next step.'],
+  [`This code is a mess.`, `${M('Talk me through how this part works?')} I want to understand it before we change it.`, 'Curiosity first. Often there was a reason, and if not, they\'ll spot it themselves.'],
+  [`You never listen to me.`, `${M('I don\'t think I explained that well.')} Can I try again?`, 'Takes the blame off them and keeps the conversation open.'],
+  [`That restaurant you picked was awful.`, `${M('Not our best find!')} Want to try the Thai place next time?`, 'No complaint, no guilt, just a way forward.'] ]);
+
+sorter('#sort2', '#tally2', [{id:'a', label:'Sincere appreciation', d:'Specific, true, about them'}, {id:'f', label:'Flattery', d:'Vague, inflated, about getting something'}], [
+  {t:'"You\'re the smartest person I\'ve ever met. Can you cover my shift?"', a:'f', w:'Over the top, and the request gives it away. It\'s about what the speaker wants.'},
+  {t:'"The way you calmed that customer down earlier was impressive. I learned something."', a:'a', w:'Specific, true, and it asks for nothing.'},
+  {t:'"Thanks for staying late on Tuesday. We\'d have missed the deadline without you."', a:'a', w:'It names the action and its effect.'},
+  {t:'"Everything you do is amazing, as always."', a:'f', w:'Too general to mean anything. People can tell nobody was really paying attention.'},
+  {t:'"Your notes from the meeting were so clear I didn\'t need to ask anyone what we agreed."', a:'a', w:'Specific and useful. That\'s appreciation.'},
+  {t:'"Great job, boss! You\'re a genius!" (said right before asking for a raise)', a:'f', w:'Flattery timed to a request is easy to spot.'} ]);
+
+builder(3, { fields:[['you', 'What you want them to do', 'help me move flat on Saturday'], ['them', 'What they want or care about', 'get to know the new neighbourhood'], ['give', 'What they get out of it', 'lunch at the market and a tour of the area']],
+  weak: v => `Can you ${v.you}? I really need the help.`, make: v => `You said you wanted to ${v.them}. ${M('How about this:')} ${v.you}, and I\'ll treat you to ${v.give}.`,
+  tip: () => 'Start with their want, then your request, then what they get. If you can\'t fill in the second box honestly, the request needs rethinking.' });
+
+sorter('#sort4', '#tally4', null, [
+  {t:'Your colleague mentions they just got back from Portugal.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"Nice. I was in Spain last year, it was amazing."'},{id:'b',label:'"Oh, what was the highlight?"'},{id:'c',label:'"Cool."'}], a:'b', w:'An open question about their trip. The Spain story can wait, possibly forever.'},
+  {t:'A new neighbour says they\'re a nurse.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"That must be stressful. I could never do it."'},{id:'b',label:'"Which ward do you work on? What drew you to it?"'},{id:'c',label:'"My cousin\'s a nurse."'}], a:'b', w:'Curious questions about them. The other answers either end the topic or switch to you.'},
+  {t:'Someone at a party says they\'re learning to bake bread.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"What\'s been harder than you expected?"'},{id:'b',label:'"I just buy mine."'},{id:'c',label:'"Bread is so bad for you, though."'}], a:'a', w:'This question invites a story, and shows you want to hear it.'} ], false);
+
+/* 5: smile */
+{ const box = $('#face5');
+  box.innerHTML = `<div class="stage"><svg id="fsvg" viewBox="0 0 320 200" role="img" aria-label="A face whose smile changes with the sliders"></svg></div>
+    <div class="lab-ctl"><div class="row"><div class="ctl"><label for="fm"><span>Mouth</span><output id="ofm"></output></label><input type="range" id="fm" min="-100" max="100" value="40"></div>
+    <div class="ctl"><label for="fe"><span>Eyes (does it reach them?)</span><output id="ofe"></output></label><input type="range" id="fe" min="0" max="100" value="0"></div></div></div>
+    <div class="stats"><div class="stat"><span class="k">It reads as</span><span class="s" id="fr"></span></div><div class="stat"><span class="k">How people feel about you</span><span class="s" id="ff"></span></div></div>
+    <div class="callout">A real smile lifts the cheeks and crinkles the corners of the eyes. A mouth-only smile is the polite, "for the photo" kind, and people sense the difference.</div>`;
+  function draw(){ const m = +$('#fm').value / 100, e = +$('#fe').value / 100;
+    out('fm', m > .15 ? 'smiling' : m < -.15 ? 'frowning' : 'neutral'); out('fe', e > .5 ? 'crinkled' : e > .15 ? 'a little' : 'flat');
+    const cx = 160, cy = 100, my = 136, mw = 52 + Math.max(0, m) * 14, curve = m * 26;
+    const lid = e * 7, cheek = e * 6;
+    const eye = x => `<ellipse cx="${x}" cy="${84 - cheek * .4}" rx="10" ry="${Math.max(3, 9 - e * 5)}" ${F('text')}/>`
+      + `<path d="M${x - 15} ${94 - cheek} Q ${x} ${94 - cheek - lid * 1.6} ${x + 15} ${94 - cheek}" ${S('panel', 6, ';stroke-linecap:round')}/>`
+      + (e > .3 ? `<path d="M${x + (x < cx ? -16 : 16)} ${80} l ${x < cx ? -9 : 9} -4 M${x + (x < cx ? -16 : 16)} ${86} l ${x < cx ? -10 : 10} 1" ${S('muted', 2, ';stroke-linecap:round;opacity:' + (e - .3) * 1.4)}/>` : '');
+    $('#fsvg').innerHTML = `<circle cx="${cx}" cy="${cy}" r="84" ${FS('glow-soft', 'glow', 2)}/><circle cx="${cx}" cy="${cy}" r="84" ${F('panel', .85)}/><circle cx="${cx}" cy="${cy}" r="84" ${S('glow', 2)}/>`
+      + (e > .2 ? `<ellipse cx="${cx - 48}" cy="${116 - cheek}" rx="14" ry="8" ${F('glow', e * .35)}/><ellipse cx="${cx + 48}" cy="${116 - cheek}" rx="14" ry="8" ${F('glow', e * .35)}/>` : '')
+      + eye(cx - 32) + eye(cx + 32)
+      + `<path d="M${cx - 24} ${68 - e * 4} q 10 ${-4 - e * 3} 20 0 M${cx + 4} ${68 - e * 4} q 10 ${-4 - e * 3} 20 0" ${S('muted', 3, ';stroke-linecap:round')}/>`
+      + `<path d="M${cx - mw / 2} ${my - curve * .3} Q ${cx} ${my + curve} ${cx + mw / 2} ${my - curve * .3}" ${S('text', 4, ';stroke-linecap:round')}/>`;
+    let r, f;
+    if (m < -.15){ r = 'Unhappy, or annoyed with you'; f = 'Wary. They\'ll wonder what they did wrong.'; }
+    else if (m <= .15){ r = e > .4 ? 'Warm eyes, but a closed mouth: friendly and reserved' : 'Neutral, hard to read'; f = e > .4 ? 'Mostly at ease.' : 'Unsure. A blank face often gets read as cold.'; }
+    else if (e < .35){ r = 'A polite smile, mouth only'; f = 'Fine, but it can look forced if it\'s held too long.'; }
+    else { r = 'A real smile: it reaches the eyes'; f = 'Welcome. They feel you\'re glad to see them, and smile back.'; }
+    $('#fr').textContent = r; $('#ff').textContent = f; }
+  $('#fm').addEventListener('input', draw); $('#fe').addEventListener('input', draw); draw();
+}
+
+/* 6: name trainer */
+{ const PEOPLE = [
+    {n:'Tomasz', d:'keeps bees on his roof', h:'Tomasz, buzzing on the tower top', c:'glow'},
+    {n:'Aisha', d:'just started as a paediatric nurse', h:'Aisha helps the kids say "aah"', c:'cool'},
+    {n:'Ravi', d:'is training for his first marathon', h:'Ravi on the run, rain or shine', c:'good'},
+    {n:'Ingrid', d:'restores old bicycles', h:'Ingrid in the garage with the grease', c:'bad'},
+    {n:'Kofi', d:'runs a small coffee roastery', h:'Kofi, coffee: they even sound alike', c:'glow'} ];
+  const ALL = ['Tomasz', 'Aisha', 'Ravi', 'Ingrid', 'Kofi', 'Tobias', 'Asha', 'Raj', 'Inga', 'Kwame'];
+  const box = $('#names6'); let mode = 'study', hooks = true, q = 0, order = [], score = [];
+  const ava = p => `<i class="ava" style="--c:var(--${p.c})">${p.n[0]}</i>`;
+  function study(){
+    box.innerHTML = `<div class="lab-ctl"><div class="row"><button class="btn" data-hk="1" aria-pressed="${hooks}">Use Carnegie's tricks</button><button class="btn" data-hk="0" aria-pressed="${!hooks}">Just glance at them</button></div></div>
+      <div class="people">${PEOPLE.map(p => `<div class="person">${ava(p)}<div><b>${p.n}</b><span>${p.d}</span>${hooks ? `<em>Say it back: "${p.n}". Link it: ${p.h}.</em>` : ''}</div></div>`).join('')}</div>
+      <div class="lab-ctl"><div class="row"><button class="btn primary" id="nGo">I'm ready: test me</button><span class="tip">${hooks ? 'Read each one, say the name out loud, and picture the link.' : 'Give them one quick look each, the way most of us do at a party.'}</span></div></div>`;
+    box.querySelectorAll('[data-hk]').forEach(b => b.addEventListener('click', () => { hooks = b.dataset.hk === '1'; study(); }));
+    $('#nGo').addEventListener('click', () => { order = PEOPLE.map((_, i) => i).sort(() => Math.random() - .5); q = 0; score = []; test(); });
+  }
+  function test(){
+    if (q >= order.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sorter"><div class="sort-card"><span class="k">Result</span><span class="item">${n} of 5 names</span><span class="fb">${n === 5 ? 'Every one. That\'s the method working: attention, repetition and a link.' : hooks ? 'Close. The ones you missed are the ones to say out loud next time.' : 'Now try again with Carnegie\'s tricks switched on and compare.'}</span></div><div class="row"><button class="btn primary" id="nAgain">Study again</button></div></div>`;
+      $('#nAgain').addEventListener('click', study); return; }
+    const p = PEOPLE[order[q]], wrong = ALL.filter(x => x !== p.n).sort(() => Math.random() - .5).slice(0, 3), opts = [p.n, ...wrong].sort(() => Math.random() - .5);
+    box.innerHTML = `<div class="sorter"><div class="sort-card" aria-live="polite"><span class="k">Person ${q + 1} of 5</span><span class="item q">You bump into the person who ${p.d}. Their name is…</span><span class="fb" hidden></span></div>
+      <div class="bins">${opts.map(o => `<button class="bin" data-o="${o}"><b>${o}</b></button>`).join('')}</div><div class="row"><button class="btn primary" data-next hidden>Next →</button></div></div>`;
+    box.querySelectorAll('.bin').forEach(b => b.addEventListener('click', () => { const ok = b.dataset.o === p.n; score.push(ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.o === p.n) x.style.borderColor = 'var(--good)'; }); if (!ok) b.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false; fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Yes.' : 'It was ' + p.n + '.'}</b> ${hooks ? 'The link: ' + p.h + '.' : ''}`;
+      const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true}); nx.addEventListener('click', () => { q++; test(); }); }));
+  }
+  study();
+}
+
+sorter('#sort7', '#tally7', null, [
+  {t:'"I\'ve just started learning the piano."', ctx:'Which reply is listening?', stack:1,
+   bins:[{id:'a',label:'"I played for ten years, you should try Bach first."'},{id:'b',label:'"What made you pick it up now?"'},{id:'c',label:'"Isn\'t it a bit late to start?"'}], a:'b', w:'The first reply turns it into your story. The second asks for theirs.'},
+  {t:'"Work\'s been really stressful lately."', ctx:'Which reply is listening?', stack:1,
+   bins:[{id:'a',label:'"Tell me about it, mine\'s worse."'},{id:'b',label:'"You should just quit."'},{id:'c',label:'"That sounds hard. What\'s been the worst part?"'}], a:'c', w:'Acknowledge, then ask. Advice and competing stories can wait.'},
+  {t:'They finish a long story about a delayed flight.', ctx:'What\'s the best next move?', stack:1,
+   bins:[{id:'a',label:'"So did you make the wedding in the end?"'},{id:'b',label:'"That reminds me of when I got stuck in Dubai…"'},{id:'c',label:'(Check your phone)'}], a:'a', w:'Following their thread shows you were actually listening.'} ], false);
+
+/* 8: I vs you */
+{ const box = $('#iy8');
+  box.innerHTML = `<div class="fields" style="grid-template-columns:1fr"><div class="field"><label for="iyt">Your message (edit it)</label><textarea id="iyt" rows="4">I wanted to tell you about my new app. I built it because I think it's really useful, and I'm hoping to get my first hundred users. I'd love it if you tried it.</textarea></div>
+    <div class="row"><button class="btn" id="iyA">Show a "you" version</button><button class="btn" id="iyB">Back to the "I" version</button></div></div>
+    <div class="hbars" id="iyb"></div><div class="stats"><div class="stat"><span class="k">Verdict</span><span class="s" id="iyv"></span></div></div>`;
+  const A = $('#iyt').value, B = `You mentioned you're always losing track of your spending. This app shows you where your money went each week in about ten seconds. Would you like to see what yours looks like?`;
+  function draw(){ const t = $('#iyt').value.toLowerCase(), me = (t.match(/\b(i|i'm|i'd|i've|i'll|me|my|mine|we|our|us)\b/g) || []).length, yu = (t.match(/\b(you|you're|you'd|you've|you'll|your|yours)\b/g) || []).length, tot = Math.max(1, me + yu);
+    hbars('#iyb', [{l:'About you (I, me, my, we)', w: me / tot * 100, v: me, c:'no'}, {l:'About them (you, your)', w: yu / tot * 100, v: yu, c:'g'}]);
+    $('#iyv').textContent = me + yu === 0 ? 'Write something to see the balance.' : yu >= me * 1.5 ? 'Talking in their terms. This is the version people keep reading.' : yu >= me ? 'Balanced. Try opening with what they care about.' : 'Mostly about you. Your listener is waiting to hear what\'s in it for them.'; }
+  $('#iyt').addEventListener('input', draw);
+  $('#iyA').addEventListener('click', () => { $('#iyt').value = B; draw(); }); $('#iyB').addEventListener('click', () => { $('#iyt').value = A; draw(); });
+  draw();
+}
+
+builder(9, { fields:[['what', 'What they did (be specific)', 'reorganised the shared drive'], ['effect', 'The difference it made', 'I found the contract in thirty seconds instead of half an hour']],
+  weak: () => 'Thanks, great job.', make: v => `${M('I noticed you')} ${v.what}. ${M('It made a real difference:')} ${v.effect}. Thank you.`,
+  tip: () => 'Name the action and its effect. Ask for nothing in the same breath, or it becomes flattery.' });
+
+/* 10: argument model */
+{ const box = $('#arg10');
+  box.innerHTML = `<div class="lab-ctl"><div class="ctl"><label for="ap"><span>How hard you push to win the argument</span><output id="oap"></output></label><input type="range" id="ap" min="0" max="10" value="7"></div></div>
+    <div class="hbars" id="ab"></div><div class="stats"><div class="stat"><span class="k">What happens</span><span class="s" id="aw"></span></div></div>
+    <div class="callout">An illustrative model of Carnegie's claim, not research data: past a gentle level, pushing harder proves your point but makes the other person less likely to change their mind.</div>`;
+  const L = ['Just listen', 'Gently share your view', 'Gently share your view', 'State your case', 'State your case', 'Press the point', 'Press the point', 'Argue hard', 'Argue hard', 'Prove them wrong', 'Crush them in public'];
+  function draw(){ const p = +$('#ap').value / 10; out('ap', L[+$('#ap').value]);
+    const proven = 20 + p * 80, change = Math.max(3, 45 * Math.exp(-Math.pow((p - .25) / .28, 2)) + 5 - p * 4), good = 95 - p * p * 85;
+    hbars('#ab', [{l:'Your point proven', w: proven, v: Math.round(proven) + '%'}, {l:'They actually change their mind', w: change, v: Math.round(change) + '%', c:'g'}, {l:'Goodwill left between you', w: good, v: Math.round(good) + '%', c: good < 40 ? 'no' : 'ok'}]);
+    $('#aw').textContent = p <= .1 ? 'They feel heard, but they may not know your view at all.' : p <= .4 ? 'The sweet spot: they hear your view without needing to defend their pride.' : p <= .7 ? 'You\'re winning on points, and they\'re digging in.' : 'You won. They\'ll agree with you to end it, and believe what they believed before.'; }
+  $('#ap').addEventListener('input', draw); draw();
+}
+
+swaps(11, [
+  [`You're wrong, it was 2019.`, `${M('I may be wrong,')} but I remember it as 2019. Shall we check?`, 'Leaves room for your own mistake, and makes checking a shared job.'],
+  [`Obviously that won't work.`, `${M('It seems to me')} there might be a problem with the cost. What do you think?`, 'Franklin\'s trick: a tentative phrase instead of an absolute one.'],
+  [`That's not how you do it.`, `${M('Another way I\'ve seen it done')} is to save first, then export.`, 'Offers an option instead of a correction.'],
+  [`No, the data says the opposite.`, `${M('That\'s interesting, I read it differently.')} Can we look at the numbers together?`, 'Shows respect for their view while still raising yours.'] ]);
+
+builder(12, { fields:[['err', 'Your mistake', 'I booked the room for the wrong day'], ['eff', 'The effect it had', 'half the team turned up to an empty room'], ['fix', 'What you\'ve done or will do', 'I\'ve rebooked for Thursday and sent a new invite']],
+  weak: v => `Well, the system was confusing, so…`, make: v => `${M('That was my mistake, and I\'m sorry.')} ${v.err[0].toUpperCase() + v.err.slice(1)}, and ${v.eff}. ${v.fix[0].toUpperCase() + v.fix.slice(1)}.`,
+  tip: () => 'No "but", no excuses, no waiting to be found out. Say it first and say it fully.' });
+
+sorter('#sort13', '#tally13', null, [
+  {t:'Your landlord hasn\'t fixed the heating after two weeks.', ctx:'Which opening is best?', stack:1,
+   bins:[{id:'a',label:'"This is unacceptable. I\'m going to report you."'},{id:'b',label:'"Thanks for getting back to me. I know you\'ve got a lot of properties. Can we find a date for the heating?"'},{id:'c',label:'"Again, the heating. Seriously?"'}], a:'b', w:'Firm about what you need, friendly in how you ask. Threats can come later if they\'re ever needed.'},
+  {t:'You\'re emailing a colleague who missed a handover.', ctx:'Which opening is best?', stack:1,
+   bins:[{id:'a',label:'"Hope your week\'s going well! Quick one about the handover…"'},{id:'b',label:'"As per my last email…"'},{id:'c',label:'"I\'m disappointed you didn\'t…"'}], a:'a', w:'A warm first line sets the tone for the rest. "As per my last email" is the written equivalent of a sigh.'},
+  {t:'You want a better price from a supplier.', ctx:'Which opening is best?', stack:1,
+   bins:[{id:'a',label:'"Your prices are a rip-off."'},{id:'b',label:'"We\'ve really valued working with you this year. I\'d like to talk about how we can keep doing that within our new budget."'},{id:'c',label:'"Give me a discount or we walk."'}], a:'b', w:'Goodwill first, then the problem as something you solve together.'} ], false);
+
+builder(14, { fields:[['y1', 'Something they\'ll agree with', 'we both want the kids to get more sleep'], ['y2', 'A second easy yes', 'and screens at bedtime keep them up'], ['ask', 'Your suggestion', 'try phones charging in the kitchen from nine']],
+  make: v => `${M('We both agree')} ${v.y1}, right? ${M('And')} ${v.y2}. So how would you feel if we ${v.ask}?`,
+  tip: v => { const n = ['y1', 'y2'].filter(k => v[k] !== '…').length; return `<span class="meter"><i style="width:${n * 40 + 20}%"></i></span> ${n} easy yes${n === 1 ? '' : 'es'} before the ask. Keep each one honest.`; } });
+
+/* 15: talk time */
+{ const box = $('#talk15');
+  box.innerHTML = `<div class="lab-ctl"><div class="ctl"><label for="tk"><span>Your share of the talking</span><output id="otk"></output></label><input type="range" id="tk" min="10" max="90" step="5" value="75"></div></div>
+    <div class="talkbar" aria-hidden="true"><i id="tkY"></i><i id="tkT"></i></div>
+    <div class="hbars" id="tb"></div><div class="stats"><div class="stat"><span class="k">How they\'d describe the meeting</span><span class="s" id="tw"></span></div></div>
+    <div class="callout">An illustrative model, not data. The idea: the more they talk, the more you learn about what they want, and the more they feel the outcome is theirs.</div>`;
+  function draw(){ const y = +$('#tk').value / 100; out('tk', Math.round(y * 100) + '% you, ' + Math.round((1 - y) * 100) + '% them');
+    $('#tkY').style.width = y * 100 + '%'; $('#tkT').style.width = (1 - y) * 100 + '%';
+    const learn = (1 - y) * 100, heard = clamp(110 - y * 120, 5, 100), own = clamp(100 - Math.abs(y - .3) * 160, 5, 95);
+    hbars('#tb', [{l:'What you learn about their needs', w: learn, v: Math.round(learn) + '%'}, {l:'How heard they feel', w: heard, v: Math.round(heard) + '%', c:'g'}, {l:'How much the decision feels like theirs', w: own, v: Math.round(own) + '%', c:'ok'}]);
+    $('#tw').textContent = y >= .7 ? '"A sales pitch. I could barely get a word in."' : y >= .45 ? '"Fine. They told me a lot."' : y >= .2 ? '"Great conversation. They really got what we need."' : '"Nice chat, but I\'m not sure what they were offering."'; }
+  $('#tk').addEventListener('input', draw); draw();
+}
+
+swaps(16, [
+  [`Here's the plan: we're moving the meeting to Mondays.`, `${M('What do you think about')} the Friday meeting? It always seems to clash with the deadline.`, 'Describe the problem, then let them propose the fix.'],
+  [`You need to start running in the mornings.`, `${M('When do you feel most energetic?')} Could that be a good time to run?`, 'If they choose the time, they\'re far more likely to stick to it.'],
+  [`I've decided we're going to Lisbon.`, `${M('I found two places that could be fun,')} Lisbon and Seville. Which do you prefer?`, 'Two good options, their choice.'],
+  [`Use this template from now on.`, `${M('Would a template help here?')} What should it include?`, 'Their input turns your template into theirs.'] ]);
+
+builder(17, { fields:[['ask', 'What you want from them', 'to let me work from home two days a week'], ['worry', 'What they might be worried about', 'that the team will lose touch'], ['answer', 'How you\'d address it', 'keeping the stand-up in person on Mondays and Thursdays']],
+  make: v => `${M('If I were in your shoes,')} I\'d probably worry ${v.worry}. ${M('So here\'s what I\'d suggest:')} ${v.ask}, while ${v.answer}. Does that cover it?`,
+  tip: () => 'If the middle box is hard to fill, you\'re not ready to ask yet. Imagine their concerns first.' });
+
+builder(18, { fields:[['feel', 'What they\'re upset about', 'waiting three weeks for a refund']],
+  weak: () => 'Calm down, it\'s our policy.', make: v => `${M('I don\'t blame you one bit for feeling frustrated.')} ${v.feel[0].toUpperCase() + v.feel.slice(1)} would annoy me too. Let me see what I can do.`,
+  tip: () => 'You\'re agreeing with the feeling, not admitting every fact. That\'s usually what calms people down.' });
+
+sorter('#sort19', '#tally19', [{id:'n', label:'Nobler motive', d:'Fairness, honesty, care'}, {id:'l', label:'Threat or bribe', d:'Fear, pressure, a pay-off'}], [
+  {t:'"I know you\'re someone who keeps their word, so I\'m sure the deposit will be back by Friday."', a:'n', w:'Appeals to their sense of integrity.'},
+  {t:'"Return the deposit or I\'ll leave you a one-star review."', a:'l', w:'It might work, but they\'ll resent it.'},
+  {t:'"Please could you keep the noise down after ten? The baby next door is having a hard time."', a:'n', w:'Most people want to be considerate. This lets them.'},
+  {t:'"Turn it down or I\'m calling the council."', a:'l', w:'A threat puts people on the defensive straight away.'},
+  {t:'"You\'ve always been fair with us, so I wanted to raise the invoice with you directly."', a:'n', w:'Treating someone as fair invites them to be fair.'} ]);
+
+swaps(20, [
+  [`The new process saves 15 minutes per order.`, `${M('Across a year, that\'s 500 hours: three months of someone\'s working life, back.')}`, 'Turn a small number into one people can picture.'],
+  [`Our coffee is ethically sourced.`, `${M('Put a photo of the grower on the bag,')} with her name and her farm.`, 'A face makes a claim real.'],
+  [`The app is very fast.`, `${M('Start the demo, then ask them to count.')} It loads before they reach three.`, 'Let them experience it instead of hearing it.'],
+  [`We get a lot of support emails.`, `${M('Print one day\'s emails and put the stack on the table.')}`, 'A physical object is hard to ignore.'] ], 'Tap a fact to dramatise it');
+
+builder(21, { fields:[['goal', 'The goal', 'read twelve books this year'], ['record', 'A benchmark to beat', 'Last year I managed seven']],
+  weak: () => 'You should really read more.', make: v => `${v.record}. ${M('I wonder if anyone in this house can')} ${v.goal}. ${M('Fancy a race?')}`,
+  tip: () => 'A good challenge is meaningful and achievable. Make it a game, not a threat.' });
+
+builder(22, { fields:[['praise', 'Something they did well (true)', 'your report was thorough and well argued'], ['change', 'What needs to change', 'cutting it to two pages for the board']],
+  weak: v => `This is too long.`, make: v => `${M('Honestly,')} ${v.praise}. ${M('The next step is')} ${v.change}.`,
+  tip: () => 'Real praise first. Notice there\'s no "but" between them: that\'s the next principle.' });
+
+/* 23: but detector */
+{ const box = $('#but23');
+  box.innerHTML = `<div class="fields" style="grid-template-columns:1fr"><div class="field"><label for="bt">Your feedback (edit it)</label><textarea id="bt" rows="3">Great presentation, but you went over time, but the slides were good, however the ending was rushed.</textarea></div></div>
+    <div class="out"><div class="weak"><span class="k">What they hear</span><p id="bw" style="text-decoration:none;color:var(--muted)"></p></div>
+    <div class="strong"><span class="k">With "and"</span><p class="say-out" id="s23"></p></div><p class="tip" id="bm"></p>
+    <div class="row"><button class="btn" data-lbl="Copy" id="bc">Copy</button><button class="btn primary" data-lbl="Save to my phrasebook" id="bk">Save to my phrasebook</button></div></div>`;
+  const RX = /\b(but|however|although|yet)\b/gi;
+  function draw(){ const raw = $('#bt').value, t = esc(raw), n = (raw.match(RX) || []).length;
+    $('#bw').innerHTML = t.replace(RX, w => `<b style="color:var(--bad)">${w.toUpperCase()}</b>`);
+    $('#s23').innerHTML = t.replace(/,?\s*\b(but|however|although|yet)\b,?/gi, () => ` ${M('and')}`).replace(/\s+/g, ' ').trim();
+    $('#bm').textContent = n ? `${n} "but"${n > 1 ? 's' : ''} found. Each one tells the listener to discount the praise before it. Now read the "and" version and tweak it so it sounds natural.` : 'No "but"s. Nice: the praise and the suggestion can both land.'; }
+  $('#bt').addEventListener('input', draw);
+  $('#bc').addEventListener('click', e => copyText(plainText($('#s23').innerHTML), e.currentTarget));
+  $('#bk').addEventListener('click', e => { const t = plainText($('#s23').innerHTML); if (t && !BOOK.some(b => b.t === t)) BOOK.push({n:23, t}); saveBook(); e.currentTarget.textContent = 'Saved'; setTimeout(() => e.currentTarget.textContent = e.currentTarget.dataset.lbl, 1600); });
+  draw();
+}
+
+builder(24, { fields:[['mine', 'A mistake you once made', 'I used to promise deadlines before checking with the team'], ['theirs', 'What you\'d like them to change', 'check capacity before agreeing a date']],
+  make: v => `${M('I\'ll be honest, I\'ve been there.')} ${v.mine[0].toUpperCase() + v.mine.slice(1)}. ${M('What helped me was')} learning to ${v.theirs}. Might be worth a try?`,
+  tip: () => 'Keep your story short and true, and bring the focus back to them quickly.' });
+
+swaps(25, [
+  [`Send me the report by five.`, `${M('Could you get the report to me by five?')} I want to read it before tomorrow\'s call.`, 'A question plus the reason. Same deadline, less resentment.'],
+  [`Tidy your room.`, `${M('What do you think needs doing before your friends come over?')}`, 'They spot the mess themselves.'],
+  [`Change the colour scheme.`, `${M('Do you think a lighter palette might work better here?')}`, 'Invites their judgement, and maybe a better idea.'],
+  [`Do it this way.`, `${M('What if we tried it this way?')} Do you see any problems?`, 'A suggestion they can improve, not a command.'] ]);
+
+sorter('#sort26', '#tally26', null, [
+  {t:'A new hire gives a wrong figure in a team meeting.', ctx:'What do you do?', stack:1,
+   bins:[{id:'a',label:'Correct them in front of everyone.'},{id:'b',label:'Say "good point, let\'s check the latest numbers after", then mention it privately.'},{id:'c',label:'Say nothing, ever.'}], a:'b', w:'The record gets fixed and nobody is embarrassed.'},
+  {t:'Your friend confidently gives directions and gets you lost.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"These roads all look the same. Let\'s check the map together."'},{id:'b',label:'"Great navigating, genius."'},{id:'c',label:'"I knew we should have gone left."'}], a:'a', w:'Gives them a reason the mistake was understandable.'},
+  {t:'You have to tell someone their project has been cancelled.', ctx:'What do you lead with?', stack:1,
+   bins:[{id:'a',label:'"Your project failed."'},{id:'b',label:'"The priorities have changed. What you built taught us a lot, and I want you on what\'s next."'}], a:'b', w:'Honest about the decision, and their dignity stays intact.'} ], false);
+
+/* 27: praise model */
+{ const box = $('#praise27');
+  box.innerHTML = `<div class="lab-ctl"><div class="row"><button class="btn" data-pm="every" aria-pressed="true">Praise every improvement</button><button class="btn" data-pm="perfect" aria-pressed="false">Praise only perfection</button><button class="btn" data-pm="none" aria-pressed="false">Point out mistakes only</button></div></div>
+    <div class="stage"><svg id="psvg" role="img" aria-label="Skill over ten weeks for three feedback styles"></svg></div>
+    <div class="stats"><div class="stat"><span class="k">Skill after 10 weeks</span><span class="v glow" id="pk"></span></div><div class="stat"><span class="k">Motivation after 10 weeks</span><span class="v" id="pm"></span></div><div class="stat"><span class="k">Times they were praised</span><span class="v" id="pp"></span></div></div>
+    <div class="callout">An illustrative model, not data: motivation rises a little each time progress is noticed and fades when it isn't, and skill grows with effort. The shape is the point, not the numbers.</div>`;
+  const sim = mode => { let skill = .2, mot = .7, praised = 0; const pts = [skill];
+    for (let w = 0; w < 10; w++){ const gain = mot * .14 * (1 - skill); skill += gain;
+      const got = mode === 'every' ? gain > .01 : mode === 'perfect' ? skill > .9 : false;
+      if (got) praised++; mot = clamp(mot + (got ? .06 : mode === 'none' ? -.09 : -.06), .05, 1); pts.push(skill); }
+    return {pts, skill, mot, praised}; };
+  const R = {every: sim('every'), perfect: sim('perfect'), none: sim('none')}, COL = {every:'glow', perfect:'cool', none:'bad'}, NAME = {every:'Every improvement', perfect:'Only perfection', none:'Mistakes only'};
+  let mode = 'every';
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 270 : 250, L = 44, Rt = nw ? 16 : 150, T = nw ? 34 : 16, B = 40, el = $('#psvg'); vb(el, W, H);
+    const x = i => L + i / 10 * (W - L - Rt), y = v => T + (1 - v) * (H - T - B);
+    let g = [0, .25, .5, .75, 1].map(v => `<line x1="${L}" x2="${W - Rt}" y1="${y(v)}" y2="${y(v)}" ${S('line')}/>` + TX(L - 8, y(v) + 4, Math.round(v * 100), 'faint', 12, 'end')).join('');
+    g += [0, 2, 4, 6, 8, 10].map(i => TX(x(i), H - B + 18, i, 'faint', 12, 'middle')).join('') + TX((L + W - Rt) / 2, H - 4, 'Week', 'muted', 12, 'middle');
+    Object.keys(R).forEach(k => { const on = k === mode; g += `<polyline points="${R[k].pts.map((v, i) => x(i) + ',' + y(v)).join(' ')}" ${S(COL[k], on ? 3.5 : 1.8, ';stroke-linejoin:round;opacity:' + (on ? 1 : .45))}/>`;
+      if (!nw) g += TX(W - Rt + 10, y(R[k].skill) + 4, NAME[k], on ? COL[k] : 'faint', 12); });
+    if (nw) g += Object.keys(R).map((k, i) => `<rect x="${L + i * 104}" y="6" width="10" height="10" rx="2" ${F(COL[k])}/>` + TX(L + 14 + i * 104, 15, NAME[k].replace('Every improvement', 'Every step'), k === mode ? 'text' : 'faint', 11)).join('');
+    el.innerHTML = g;
+    const r = R[mode]; $('#pk').textContent = Math.round(r.skill * 100) + ' / 100'; $('#pm').textContent = Math.round(r.mot * 100) + '%'; $('#pp').textContent = r.praised; });
+  box.querySelectorAll('[data-pm]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.pm; press([...box.querySelectorAll('[data-pm]')], b); draw(); }));
+  draw();
+}
+
+builder(28, { fields:[['trait', 'The quality you want to see', 'reliable with deadlines'], ['ask', 'What you\'re asking for', 'own the timeline for the launch']],
+  make: v => `${M('You\'re one of the most')} ${v.trait} ${M('people on this team,')} so I\'d love you to ${v.ask}.`,
+  tip: () => 'You need to believe it at least a little. A reputation nobody believes sounds like sarcasm.' });
+
+swaps(29, [
+  [`Your essay is a mess.`, `${M('The ideas are strong. The only fix is')} a clear opening line for each paragraph.`, 'One specific thing, framed as small.'],
+  [`You'll never be good at maths.`, `${M('You\'ve already got the hard part, the method.')} It\'s just the arithmetic slips. Let\'s check those together.`, 'The fault is narrow; the talent is real.'],
+  [`You're hopeless at parking.`, `${M('You\'re nearly there.')} Start turning half a second later and you\'ll nail it.`, 'Confidence, and a tiny adjustment.'],
+  [`This needs to be rewritten.`, `${M('Two small changes and this is ready:')} shorten the intro, and add the price.`, 'A list of two is easy. A rewrite is daunting.'] ]);
+
+/* 30: happy to do it */
+{ const box = $('#happy30');
+  const G = [['sincere', 'I\'m being sincere, and promising only what I can deliver'], ['clear', 'I know exactly what I want them to do'], ['empathy', 'I\'ve asked myself what they really want'], ['benefit', 'I\'ve worked out what they get from doing it'], ['match', 'I\'ve matched that benefit to their wants'], ['phrase', 'I\'ve phrased the request so they see the benefit']];
+  box.innerHTML = `<div class="sorter" style="padding-bottom:0"><div class="sort-card"><span class="k">The situation</span><span class="item q">You want a quiet colleague to present the team\'s results at the all-hands.</span></div></div>
+    <div class="lab-ctl"><div class="toggles">${G.map(([k, l]) => `<label class="tg"><input type="checkbox" data-g="${k}"><span>${l}</span></label>`).join('')}</div></div>
+    <div class="out"><div class="strong"><span class="k">What you say</span><p class="say-out" id="hs"></p></div><p class="tip" id="ht"></p></div>`;
+  function draw(){ const on = new Set([...box.querySelectorAll('[data-g]:checked')].map(c => c.dataset.g)), n = on.size;
+    const parts = [];
+    if (on.has('empathy') && on.has('match')) parts.push(`You told me you wanted more visibility with leadership.`);
+    else if (on.has('empathy')) parts.push(`I know you\'d rather not be in the spotlight.`);
+    parts.push(on.has('clear') ? `Would you present our Q3 results, ten minutes, at Thursday\'s all-hands?` : `Could you maybe help out with the all-hands thing at some point?`);
+    if (on.has('benefit') || on.has('phrase')) parts.push(on.has('phrase') ? `${M('It\'s the work you led,')} so the credit should be yours, and the whole leadership team will see it.` : `It would be good exposure.`);
+    parts.push(on.has('sincere') ? `I\'ll do a dry run with you on Wednesday.` : `It\'ll be easy, honestly, nothing to it.`);
+    $('#hs').innerHTML = parts.join(' ');
+    $('#ht').innerHTML = `<span class="meter"><i style="width:${Math.round(n / 6 * 100)}%"></i></span> ${n} of 6 guidelines. ` + (n === 6 ? 'This is a request they can be glad to say yes to.' : n >= 3 ? 'Getting there. Which box is still unticked?' : 'Right now it\'s an order with a "could you" on the front.'); }
+  box.querySelectorAll('[data-g]').forEach(c => c.addEventListener('change', draw)); draw();
+}
+
+renderBook();
+})();
+</script>
+</body>
+</html>
