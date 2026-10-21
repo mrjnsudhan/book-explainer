@@ -18,6 +18,7 @@ Interactive, chapter-by-chapter explainers for books, podcasts and topics, plus 
 | `explainers/sapiens.html` | *Sapiens: A Brief History of Humankind*, Yuval Noah Harari (all 20 chapters across the four revolutions, a 13.8-billion-year timeline, and a lab in each chapter such as a species timeline, the wheat trap, a cuneiform number writer, the imperial cycle, Lind's scurvy trial, a credit multiplier and a happiness thermostat) |
 | `explainers/thinking-fast-and-slow.html` | *Thinking, Fast and Slow*, Daniel Kahneman (all 38 chapters across the five parts, with a lab in each such as the Add-1 game, a rigged anchoring wheel, the cab problem, a regression-to-the-mean golf tournament, a loss-aversion curve, decision weights and a peak-end pain builder) |
 | `explainers/exactly-what-to-say.html` | *Exactly What to Say*, Phil M. Jones (all 23 sets of magic words in five stages of a conversation, each with a sample exchange, a lab to write or test your own version, a quick check, and a personal script book that keeps the lines you save) |
+| `explainers/influence.html` | *Influence: The Psychology of Persuasion*, Robert B. Cialdini (all nine chapters of the new and expanded edition, the seven principles including unity, the classic experiment behind each one as a lab you can rerun, such as Langer's copier queue, the restaurant mint, the crowd on the pavement, Milgram's shock board and the billboard on the lawn, plus how to say no and a seven-question defence kit) |
 
 Each explainer has plain-language chapter summaries, an interactive exercise per chapter, a quick quiz, a light/dark toggle, and "I understand this chapter" progress saved in the browser's localStorage.
 
@@ -35,6 +36,6 @@ To host it, turn on GitHub Pages for this repository (Settings → Pages → dep
 ## Adding a new explainer
 
 1. Add the page as `explainers/<slug>.html`, using the same shell as the others (Instrument Serif, Geist and Geist Mono; chapter rail; light/dark toggle; a "Back to the bookshelf" link to `../index.html`).
-2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (title, spine, author, optional `by` line, year, optional display date `when` such as "c. 5th century BC", chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, an optional short spine name `au`, and a `mark` icon: `star`, `peak`, `mic`, `crown`, `sword`, `nodes`, `layers`, `hand`, `pencil` or `speech`).
+2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (title, spine, author, optional `by` line, year, optional display date `when` such as "c. 5th century BC", chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, an optional short spine name `au`, and a `mark` icon: `star`, `peak`, `mic`, `crown`, `sword`, `nodes`, `layers`, `hand`, `pencil`, `speech` or `magnet`).
 
 All explanations are written in original wording. They summarise the source material and are not affiliated with its authors.

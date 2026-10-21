@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Influence, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field guide to the levers. Same shell as the other guides (chapter rail, one "station" per chapter:
+   short answer, big ideas, the study behind it, a lab, plain words, how to say no, quick check), grouped into five parts.
+   Dark-first: deep plum with an apricot accent that marks every lever being pulled, and a periwinkle second series. */
+:root{
+  color-scheme: dark;
+  --ink:#14101A;
+  --panel:#1C1724;
+  --panel-2:#261F31;
+  --line:#372D44;
+  --text:#F4EFF6;
+  --muted:#B5AABF;
+  --faint:#82778D;
+  --glow:#FFA26B;         /* apricot: the lever being pulled */
+  --glow-soft:rgba(255,162,107,.12);
+  --hl:rgba(255,162,107,.24);
+  --cool:#A9B6FF;         /* periwinkle: second series, the person on the receiving end */
+  --cool-soft:rgba(169,182,255,.12);
+  --good:#8FD694;
+  --good-soft:rgba(143,214,148,.1);
+  --bad:#FF5F86;
+  --bad-soft:rgba(255,95,134,.09);
+  --soft:#DAD2E0;
+  --deep:#0E0B13;
+  --toc-bg:rgba(28,23,36,.74);
+  --glow-line:rgba(255,162,107,.34);
+  --cool-line:rgba(169,182,255,.3);
+  --on-glow:#2A1306;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F3F5;--panel:#FFFFFF;--panel-2:#EFE8EE;--line:#DDD3DC;--text:#1B1421;--muted:#5B5064;--faint:#857A8E;
+  --glow:#B14A17;--glow-soft:rgba(177,74,23,.08);--hl:#FFD9BF;--cool:#3D4FB8;--cool-soft:rgba(61,79,184,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B21F4B;--bad-soft:rgba(178,31,75,.08);
+  --soft:#2C2433;--deep:#FBF9FA;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(177,74,23,.3);--cool-line:rgba(61,79,184,.3);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F3F5;--panel:#FFFFFF;--panel-2:#EFE8EE;--line:#DDD3DC;--text:#1B1421;--muted:#5B5064;--faint:#857A8E;
+  --glow:#B14A17;--glow-soft:rgba(177,74,23,.08);--hl:#FFD9BF;--cool:#3D4FB8;--cool-soft:rgba(61,79,184,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B21F4B;--bad-soft:rgba(178,31,75,.08);
+  --soft:#2C2433;--deep:#FBF9FA;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(177,74,23,.3);--cool-line:rgba(61,79,184,.3);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch > *{min-width:0}
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+/* the study behind each chapter */
+.study{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--cool-line);background:var(--cool-soft)}
+.study .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.study h4{margin:0;font-size:16px;font-weight:600}
+.study p{color:var(--soft);font-size:15px}
+.study .num{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums}
+/* how to say no */
+.defend{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);background:var(--deep);border:1px solid var(--line);border-left:3px solid var(--good)}
+.defend .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--good)}
+.defend p{color:var(--soft);font-size:15px}
+.defend .ask{font-family:var(--f-display);font-size:22px;line-height:1.2;color:var(--text)}
+
+/* horizontal bars */
+.hbars{display:grid;gap:12px;padding:18px}
+.hb{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 64px;gap:12px;align-items:center;font-size:14px}
+.hb .l{color:var(--muted);line-height:1.3}
+.hb.g .l{color:var(--text)}
+.hb .tr{height:16px;border-radius:999px;background:var(--panel-2);overflow:hidden}
+.hb .tr i{display:block;height:100%;border-radius:999px;background:var(--cool);opacity:.55;transition:width .35s}
+.hb.g .tr i{background:var(--glow);opacity:1}
+.hb .v{font-family:var(--f-mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* request bubble used in labs */
+.ask-line{margin:18px 18px 0;padding:12px 16px;border-radius:16px 16px 16px 4px;background:var(--cool-soft);border:1px solid var(--cool-line);font-size:16px;max-width:620px}
+.ask-line .who{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.split{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:8px;align-items:center}
+.split .stage{padding:16px 18px}
+.split .stage svg{max-width:300px;margin:0 auto}
+.lab-ctl .grp-l{font-size:12px;color:var(--faint);font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;width:100%}
+
+/* hero: the pitch */
+.pitch{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.pitch .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pitch .top .t{font-weight:500}
+.pitch .page{display:grid;gap:10px;padding:20px 18px}
+.pitch .brand{font-family:var(--f-display);font-size:34px;line-height:1}
+.pitch .page p{font-size:15.5px;color:var(--soft);padding:6px 10px;margin:0 -10px;border-radius:10px;border:1px solid transparent;transition:background .2s,border-color .2s,color .2s;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.pitch .page p .ptag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--glow);display:none}
+.pitch .page p.lit{background:var(--glow-soft);border-color:var(--glow-line);color:var(--text)}
+.pitch .page p.lit .ptag{display:inline}
+.pitch .page .cta{justify-self:start;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;background:var(--text);color:var(--ink);margin-top:4px}
+.pitch .levers{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px;border-top:1px solid var(--line)}
+.pitch .verdict{padding:12px 18px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--muted);min-height:48px}
+.pitch .verdict b{color:var(--text);font-weight:500}
+.deck{display:flex;flex-wrap:wrap;gap:6px}
+.deck a{display:inline-flex;gap:8px;align-items:baseline;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;color:var(--text);text-decoration:none;background:var(--toc-bg);transition:border-color .15s}
+.deck a:hover{border-color:var(--glow)}
+.deck .n{font-family:var(--f-mono);font-size:10.5px;color:var(--glow)}
+
+/* defence kit */
+.kit{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.kit div{display:grid;gap:8px;align-content:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
+.kit .n{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.kit h3{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.05}
+.kit p{font-size:14px;color:var(--muted)}
+.kit p b{color:var(--text);font-weight:500}
+.kit .q{font-family:var(--f-display);font-size:19px;line-height:1.25;color:var(--text);padding-top:8px;border-top:1px solid var(--line)}
+
+@media (max-width: 720px){
+  .split{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 560px){
+  .hb{grid-template-columns:minmax(0,1fr) 64px;gap:4px 10px}
+  .hb .l{grid-column:1/-1}
+  .hbars{padding:14px}
+  .ask-line{margin:14px 14px 0}
+  .pitch .brand{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Robert Cialdini's classic on why people say yes</div>
+    <h1><em>Influence</em>,<br>Explained</h1>
+    <p class="lede">Robert Cialdini spent three years undercover in sales teams, fundraisers and ad agencies to learn how professionals get a yes. He found that nearly all of it rests on <b>seven mental shortcuts</b>: reciprocation, liking, social proof, authority, scarcity, commitment and unity. This guide covers every chapter of the new and expanded edition, with the experiment behind each shortcut, a lab where you can rerun it, and how to say no when the shortcut is being faked.</p>
+    <figure class="pitch" style="margin:0">
+      <div class="top"><div class="t">An ordinary sign-up page</div><div class="hint" style="font-size:13px;color:var(--faint)">Tap a lever to see where it's pulled</div></div>
+      <div class="page" id="pitch"></div>
+      <div class="levers" id="levers"></div>
+      <div class="verdict" id="pitchV" aria-live="polite">Seven short lines, seven different levers. Most people read a page like this in ten seconds and never notice any of them.</div>
+    </figure>
+    <nav class="parts" aria-label="The five parts">
+      <a href="#part1"><span class="n">Part 1 · Chapter 1</span><span class="q">The Autopilot</span><span class="d">Why we answer on shortcuts, and why that's usually fine</span></a>
+      <a href="#part2"><span class="n">Part 2 · Chapters 2 and 3</span><span class="q">Give and Connect</span><span class="d">We repay what we're given, and say yes to people we like</span></a>
+      <a href="#part3"><span class="n">Part 3 · Chapters 4 to 6</span><span class="q">Follow the Signals</span><span class="d">Crowds, experts and the fear of missing out</span></a>
+      <a href="#part4"><span class="n">Part 4 · Chapters 7 and 8</span><span class="q">Bind and Belong</span><span class="d">Staying true to what we said, and to who we are</span></a>
+      <a href="#part5"><span class="n">Part 5 · Chapter 9</span><span class="q">Keeping Your Head</span><span class="d">When to trust the shortcut, and how to spot a fake one</span></a>
+    </nav>
+    <div class="deck" id="deck" aria-label="All nine chapters"></div>
+    <div class="about">
+      <span><b>First published</b> in 1984; new and expanded edition 2021</span>
+      <span><b>Author</b> Robert B. Cialdini, social psychologist, Arizona State University</span>
+      <span><b>Read time</b> about 6 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 9 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== PART 1 ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · chapter 1</span>
+      <h2>The Autopilot</h2>
+      <p>Before the seven principles, Cialdini explains why they work at all. Nobody has time to think every decision through, so we lean on rules of thumb that are right most of the time. That habit is sensible. It is also exactly what makes us easy to steer, because anyone who knows the trigger can set it off on purpose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A shortcut is a tool. The danger isn't using it, it's not noticing when somebody else is holding the handle.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Click, run</div>
+        <h2>Levers of Influence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Much of what we do runs on fixed, automatic patterns: one cue switches on a whole routine. The patterns save effort and usually serve us well, but a persuader who copies the cue can trigger the routine when it doesn't fit.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Animals run on triggers, and so do we.</b> Mother turkeys care for any chick that makes the right "cheep" sound, and ignore a real chick that is silent. Researchers got one to mother a stuffed polecat, its natural enemy, by hiding a recording of the sound inside it. The cue, not the whole picture, runs the behaviour.</span></li>
+          <li><span><b>Our cues are words, prices and labels.</b> A shop owner who couldn't shift some turquoise jewellery left a note to halve the price; the assistant misread it and doubled it, and it sold out. Holiday shoppers were using "expensive means good", a rule that is usually right and was wrong that day.</span></li>
+          <li><span><b>"Because" works almost on its own.</b> Giving a reason makes people far more likely to agree, even when the reason says nothing new. We hear the shape of a justification and stop checking its content.</span></li>
+          <li><span><b>The contrast principle.</b> We judge things against whatever came just before. A sweater seems cheap after a suit; an ordinary house looks good after an estate agent shows you two run-down ones first.</span></li>
+          <li><span><b>Shortcuts are necessary, not stupid.</b> The modern world sends us more choices than we can analyse. Running on rules of thumb is the only way to cope, which is why the people who exploit those rules are such a problem.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>The photocopier queue (Langer, Blank and Chanowitz, 1978)</h4><p>A researcher asked people already using a library copier to let her go first. With no reason, <span class="num">60%</span> agreed. Adding "because I'm in a rush" took it to <span class="num">94%</span>. Adding "because I have to make copies", which is not a reason at all, still got <span class="num">93%</span>. Only when the favour grew to twenty pages did people start listening to what the reason actually said.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: cut into the copier queue</div><div class="hint">Change the favour and the reason</div></div>
+        <div class="ask-line" id="ask1"><span class="who">You</span><span></span></div>
+        <div class="split"><div class="stage"><svg id="dots1" viewBox="0 0 300 300" role="img" aria-label="100 people, coloured by whether they let you go first"></svg></div><div class="hbars" id="bars1"></div></div>
+        <div class="lab-ctl">
+          <div class="row"><span class="grp-l">How many pages</span><button class="btn" data-pg="5" aria-pressed="true">5 pages</button><button class="btn" data-pg="20" aria-pressed="false">20 pages</button></div>
+          <div class="row"><span class="grp-l">Your reason</span><button class="btn" data-rs="0" aria-pressed="false">No reason</button><button class="btn" data-rs="1" aria-pressed="true">"Because I have to make copies"</button><button class="btn" data-rs="2" aria-pressed="false">"Because I'm in a rush"</button></div>
+        </div>
+        <div class="callout" id="call1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your brain keeps a drawer of quick rules: experts know best, popular is safe, expensive is better, a reason means it's fair. Most days they save you time. A good persuader doesn't argue with you; they just open the right drawer.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>You can't turn the shortcuts off, and you shouldn't. The defence is noticing when one fires on a decision that matters, and taking a second look.</p><p class="ask">"Would I still say yes if they hadn't given me that cue?"</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>The copier study was small and has been debated since; later work suggests a hollow reason helps most when people are distracted or the stakes are low, which fits Cialdini's point that the autopilot takes over when we aren't paying attention.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="quiz" data-q="1b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Reciprocation →</a></div>
+    </section>
+
+    <!-- ===================== PART 2 ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · chapters 2 and 3</span>
+      <h2>Give and Connect</h2>
+      <p>The first two levers are social glue. Every human society teaches that you repay what you're given, and all of us are more willing to help people we like. Both rules make cooperation possible. Both can be pulled by someone who gives you a small gift or a warm smile on purpose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Notice who started the exchange, and whether the warmth is about you or about the sale.</p></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · The old give and take</div>
+        <h2>Reciprocation</h2>
+        <div class="short"><span class="lbl">In short</span><p>We feel obliged to repay what others give us, whether it's a gift, a favour or a concession. The feeling is so strong that an uninvited gift can earn a much bigger yes than it cost.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Every culture has the rule.</b> Owing and repaying let early humans share food, skills and help across time. People who take without giving back get a bad name everywhere, so we work hard to avoid owing.</span></li>
+          <li><span><b>The gift doesn't have to be wanted.</b> Charity mailings that include free address labels roughly double their response rate. You never asked for the labels, but you still feel the debt.</span></li>
+          <li><span><b>Small gifts buy large favours.</b> In one study, a stranger who bought people a soft drink later sold them twice as many raffle tickets as one who didn't, and it didn't matter much whether they liked him.</span></li>
+          <li><span><b>Concessions count too.</b> If someone asks for something big, you refuse, and they "retreat" to something smaller, the retreat feels like a gift and you want to meet them halfway. Negotiators call it the door in the face.</span></li>
+          <li><span><b>What makes a gift work.</b> It should be meaningful, unexpected and personal. A gift that seems tailored to you creates far more obligation than one handed to everybody.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>The zoo trip (Cialdini and colleagues, 1975)</h4><p>Students asked strangers to chaperone young offenders on a two-hour zoo trip. Asked directly, <span class="num">17%</span> agreed. Asked first to be a counsellor two hours a week for two years (everyone said no) and then asked about the zoo, <span class="num">50%</span> agreed. The second request was identical; only the retreat before it changed.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the restaurant mint</div><div class="hint">Choose how the bill arrives</div></div>
+        <div class="ask-line" id="ask2"><span class="who">Your server</span><span></span></div>
+        <div class="hbars" id="bars2"></div>
+        <div class="lab-ctl"><div class="row" id="btn2"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Extra in tips vs. no mint</span><span class="v glow" id="tip2"></span></div><div class="stat"><span class="k">What made the difference</span><span class="s" id="why2"></span></div></div>
+        <div class="callout">From a 2002 restaurant field study by Strohmetz and colleagues. The mints cost almost nothing. What raised tips was how the gift felt: bigger, more personal, and seemingly unplanned.</div>
+      </figure>
+      <figure class="lab" id="lab2b">
+        <div class="lab-top"><div class="t">Lab: ask big, then retreat</div><div class="hint">Try both ways of asking</div></div>
+        <div class="ask-line" id="ask2b"><span class="who">You</span><span></span></div>
+        <div class="hbars" id="bars2b"></div>
+        <div class="lab-ctl"><div class="row"><button class="btn" data-dif="0" aria-pressed="true">Ask for the zoo trip straight away</button><button class="btn" data-dif="1" aria-pressed="false">Ask for two years first, then retreat</button></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The free sample at the supermarket isn't really about the taste. Once you've eaten the cheese, walking away without buying feels slightly rude, and that slight discomfort is what's being sold.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>You don't have to refuse every gift; that would make you a worse friend. Accept honest favours gratefully. But if a "gift" turns out to be a sales tool, redefine it in your head as a tactic. You owe nothing to a tactic.</p><p class="ask">"Was this a gift, or the first step of a pitch?"</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Later reviews find the door-in-the-face effect is real but smaller and less reliable than the early studies suggested. It works best when the same person makes both requests, close together, for a good cause.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="quiz" data-q="2b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Liking →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · The friendly thief</div>
+        <h2>Liking</h2>
+        <div class="short"><span class="lbl">In short</span><p>We say yes more easily to people we like, and a few predictable things make us like someone: good looks, similarity, compliments, working together, and being linked to things we already feel good about.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The party plan.</b> Home sales parties work because the person asking you to buy isn't a stranger, it's the friend who invited you. The product is almost secondary to not letting the host down.</span></li>
+          <li><span><b>Attractive people get a halo.</b> We tend to assume good-looking people are also kinder, smarter and more honest. Voters, juries and interviewers all show the effect, and nearly all of them deny it.</span></li>
+          <li><span><b>Similarity.</b> We like people who share our opinions, background, style or even our name. Salespeople are trained to look for, or invent, something in common.</span></li>
+          <li><span><b>Compliments work even when we suspect them.</b> One record-breaking car salesman mailed every past customer a card each month that simply said he liked them. People knew why. It worked anyway.</span></li>
+          <li><span><b>Contact, cooperation and association.</b> Familiarity helps, but working toward a shared goal helps far more. And we transfer feelings from one thing to another: celebrities sell drinks, while bearers of bad news, like weather forecasters, get blamed for it.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>Who gets the vote (Efran and Patterson, 1974)</h4><p>In a Canadian federal election, attractive candidates won more than <span class="num">2.5 times</span> as many votes as unattractive ones. Yet when voters were asked, <span class="num">73%</span> said appearance had played no part in their choice. The bias was strong, and almost invisible to the people who had it.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: which liking lever is this?</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of the last time a salesperson said "Oh, I've got the same one at home!" Maybe they did. But the line is there to make them feel like a friend, and friends are hard to say no to.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Don't try to spot each liking tactic; there are too many. Instead, notice the feeling: if you like this person more than you'd expect after ten minutes, pause and separate them from the deal.</p><p class="ask">"Would I want this if someone I didn't like were selling it?"</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="quiz" data-q="3b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Social Proof →</a></div>
+    </section>
+
+    <!-- ===================== PART 3 ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · chapters 4 to 6</span>
+      <h2>Follow the Signals</h2>
+      <p>The next three levers are about uncertainty. When we don't know what to do, we look outward: at what other people are doing, at what someone with credentials says, and at what seems to be running out. Each signal is often a good guide, and each one is easy to fake.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A signal is evidence, not proof. Check that it's real, and that it applies to you.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Truths are us</div>
+        <h2>Social Proof</h2>
+        <div class="short"><span class="lbl">In short</span><p>When we're unsure, we decide what's right by watching what other people do, especially people like us. Usually that's a smart bet. But if everyone is watching everyone else, a whole crowd can be wrong together.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Many people can't all be wrong (usually).</b> Following the crowd is a cheap way to find the good restaurant or the safe path. That's why bartenders seed the tip jar and comedies use canned laughter, which people dislike but still laugh more with.</span></li>
+          <li><span><b>Uncertainty makes it stronger.</b> The less sure we are, the more we copy. In a new city, a new job or an emergency, other people's behaviour becomes our main source of information.</span></li>
+          <li><span><b>The bystander problem.</b> In an emergency, each witness looks at the others for a clue, sees calm faces, and concludes nothing is wrong. Alone, people help fast. In a group, everyone waits.</span></li>
+          <li><span><b>Similarity sharpens it.</b> We copy people we see as like us most of all. A message about "guests in this room" beats one about "guests" in general.</span></li>
+          <li><span><b>Beware the wrong message.</b> Campaigns that say "so many people litter" or "too many people skip their vote" quietly announce that most people do the bad thing, and can make it worse.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>Look up (Milgram, Bickman and Berkowitz, 1969)</h4><p>On a busy New York pavement, researchers had people stop and stare up at a sixth-floor window, where there was nothing to see. With one person staring, <span class="num">42%</span> of passers-by looked up and <span class="num">4%</span> stopped. With fifteen people staring, <span class="num">86%</span> looked up and <span class="num">40%</span> stopped to join them.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the crowd on the pavement</div><div class="hint">Grow the crowd and watch the passers-by</div></div>
+        <div class="stage"><svg id="svg4" viewBox="0 0 720 300" role="img" aria-label="A crowd staring at a window and twenty passers-by"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="r4"><span>People staring up</span><output id="o4"></output></label><input type="range" id="r4" min="1" max="15" value="1"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Passers-by who look up</span><span class="v" id="l4"></span></div><div class="stat"><span class="k">Who stop and join in</span><span class="v glow" id="s4"></span></div></div>
+        <div class="callout">The study measured crowds of 1, 2, 3, 5, 10 and 15. The endpoints here are the published figures; the values in between are a smooth curve through them.</div>
+      </figure>
+      <figure class="lab" id="lab4b">
+        <div class="lab-top"><div class="t">Lab: the hotel towel card</div><div class="hint">Pick the card for the bathroom</div></div>
+        <div class="ask-line" id="ask4b"><span class="who">The card says</span><span></span></div>
+        <div class="hbars" id="bars4b"></div>
+        <div class="lab-ctl"><div class="row" id="btn4b"></div></div>
+        <div class="callout">Reuse rates from a 2008 field study by Goldstein, Cialdini and Griskevicius in a US hotel. Same request, same hotel; the only change was who the card said was already doing it.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"Bestseller", "most popular", "9 out of 10 people choose this": all of these work because copying is usually a decent strategy. They stop being useful when the crowd is fake, or when the crowd doesn't know any more than you do.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Watch for counterfeit crowds: invented reviews, staged "real customer" interviews, a queue created on purpose. And in a real emergency, don't wait for others to react. Pick one person and give them a clear job: "You in the blue coat, call an ambulance."</p><p class="ask">"Is this crowd real, and do they know more than I do?"</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Cialdini opens his discussion of bystanders with the 1964 murder of Kitty Genovese and the "38 witnesses" who did nothing. Later investigations found that account was badly exaggerated: far fewer people saw the attack, and some did call for help. The bystander effect itself has held up in many lab studies.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="quiz" data-q="4b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Authority →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Directed deference</div>
+        <h2>Authority</h2>
+        <div class="short"><span class="lbl">In short</span><p>We are trained from childhood to follow people in charge, and most of the time that's sensible. But the habit is so deep that we often obey the mere symbols of authority, such as a title, a uniform or an expensive car, without checking the person behind them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Obedience runs deep.</b> In Milgram's experiments, ordinary people kept giving what they believed were painful shocks because a calm man in a lab coat told them to. Most were distressed. Most continued anyway.</span></li>
+          <li><span><b>Titles.</b> A "Dr" or "Professor" makes people listen, agree and even see the speaker as taller. In one hospital study, nurses got ready to give a dangerous drug dose because an unknown voice on the phone said he was a doctor.</span></li>
+          <li><span><b>Clothes.</b> People follow a jaywalker in a suit far more often than one in work clothes, and obey a stranger in a guard's uniform when asked to pick up litter or move along.</span></li>
+          <li><span><b>Trappings.</b> Expensive cars, jewellery and offices all signal status. Drivers wait longer before honking at a luxury car stuck at a green light.</span></li>
+          <li><span><b>Trust the honest expert.</b> Persuaders build credibility by admitting a small weakness before stating their main strength: "It's not the cheapest, but it's the one that lasts." The admission makes the claim more believable.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>The shock generator (Stanley Milgram, 1963)</h4><p>Forty men were told they were testing how punishment affects learning. Each time a "learner" in the next room got an answer wrong, they were to press a switch on a board from 15 to 450 volts. The learner was an actor and felt nothing. Every one of the forty went to at least <span class="num">300 volts</span>, and <span class="num">26 of 40 (65%)</span> went all the way to the last switch, marked only "XXX".</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the shock board</div><div class="hint">Move up the board, then change the setup</div></div>
+        <div class="stage"><svg id="svg5" viewBox="0 0 720 222" role="img" aria-label="Milgram's switch board and the forty teachers"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="r5"><span>Switch reached</span><output id="o5"></output></label><input type="range" id="r5" min="15" max="450" step="15" value="150"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Teachers still pressing</span><span class="v glow" id="n5"></span></div><div class="stat"><span class="k">Meanwhile, the learner</span><span class="s" id="w5"></span></div></div>
+        <div class="hbars" id="bars5" style="border-top:1px solid var(--line)"></div>
+        <div class="lab-ctl"><span class="grp-l">Later versions: who went all the way to 450 volts</span><div class="row" id="btn5"></div></div>
+        <div class="callout" id="call5"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>An advert where an actor in a white coat recommends a toothpaste isn't lying, exactly. It's borrowing your trust in dentists and handing it to someone who has never been one.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Two questions take most of the danger out of authority. The first checks the credentials; the second checks the motive.</p><p class="ask">"Is this person really an expert on this? And how truthful can I expect them to be here?"</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Milgram's work has been criticised: archive research shows the experimenter sometimes went beyond his script, and some participants doubted the shocks were real. Still, a careful 2009 partial replication by Jerry Burger found about <b>70%</b> of people were willing to continue past 150 volts, close to Milgram's original rate at that point.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="quiz" data-q="5b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Scarcity →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · The rule of the few</div>
+        <h2>Scarcity</h2>
+        <div class="short"><span class="lbl">In short</span><p>Things seem more valuable when they're rare or about to disappear. Losing a chance feels worse than never having had it, and when our freedom to choose is threatened, we want the threatened option even more.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Rare usually means good.</b> In nature and in markets, the best things often are scarce, so "hard to get" works as a quick guide to quality. Persuaders borrow it with "only three left" and "today only".</span></li>
+          <li><span><b>Loss beats gain.</b> We work harder to avoid losing something than to gain the same thing. "You'll lose £200 a year" moves people more than "you'll save £200 a year".</span></li>
+          <li><span><b>Reactance.</b> When a choice is taken away, we fight to get it back. Two-year-olds want the toy behind the barrier; teenagers want the partner their parents forbid; voters want the banned book.</span></li>
+          <li><span><b>Newly scarce is strongest.</b> Something that was plentiful and suddenly runs short feels more precious than something that was always rare. Rivalry makes it stronger still: the other bidder, the queue, the "someone else is looking at this room".</span></li>
+          <li><span><b>Exclusive information.</b> News feels more important when only you have it. Telling a buyer about a coming shortage works; telling them the information is confidential works far better.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>The cookie jar (Worchel, Lee and Adewole, 1975)</h4><p>People tasted a cookie from a jar holding ten, or from a jar holding two. The identical cookie was rated more desirable when it came from the near-empty jar. It was rated highest of all when the jar had just gone from ten to two, especially when people were told the others had been taken because other tasters wanted them.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the beef importer's phone call</div><div class="hint">Choose what you tell the buyer</div></div>
+        <div class="ask-line" id="ask6"><span class="who">Your sales call</span><span></span></div>
+        <div class="stage"><svg id="svg6" viewBox="0 0 720 190" role="img" aria-label="Crates of beef ordered"></svg></div>
+        <div class="lab-ctl"><div class="row" id="btn6"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Orders, compared with the usual pitch</span><span class="v glow" id="x6"></span></div><div class="stat"><span class="k">Why</span><span class="s" id="w6"></span></div></div>
+        <div class="callout">A real company test described in the book, run by one of Cialdini's students at his family's beef importing business when an overseas shortage was coming. Crates here are illustrative; the multipliers are the reported results.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The countdown timer on a booking site isn't telling you the room is better. It's telling you that you might lose it, and your brain treats losing a thing you've barely considered as if it were losing something you own.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Scarcity works by making us excited, and excitement crowds out thinking. When you feel the rush, treat it as a signal to slow down. Then remember that a thing doesn't taste or work better because it's rare.</p><p class="ask">"Do I want to use this, or do I just want to have it?"</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="quiz" data-q="6b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Commitment and Consistency →</a></div>
+    </section>
+
+    <!-- ===================== PART 4 ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · chapters 7 and 8</span>
+      <h2>Bind and Belong</h2>
+      <p>The last two levers work from the inside. Once we've taken a stand, we want to act in line with it. And when someone counts as "one of us", we treat their interests as partly our own. These are the strongest levers in the book, because the persuader barely has to push: we do it ourselves.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Small steps and shared identities can carry you a long way. Make sure it's somewhere you'd choose to go.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Hobgoblins of the mind</div>
+        <h2>Commitment and Consistency</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once we've made a choice or taken a stand, we feel pressure, from inside and outside, to behave consistently with it. Get someone to agree to something small and they'll often agree to something much bigger that fits.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Consistency is usually a virtue.</b> People who change their minds every day are hard to trust. So we value being consistent, and often use it to stop thinking: once decided, we stop re-checking.</span></li>
+          <li><span><b>The foot in the door.</b> A small first request changes how people see themselves ("I'm the kind of person who supports this"), and they then act to fit that picture.</span></li>
+          <li><span><b>Active, public and effortful commitments stick.</b> Writing something down, saying it in front of others, or working hard to get something all bind us more tightly. That's why sales firms have customers fill in the order form themselves, and why tough initiations make members loyal.</span></li>
+          <li><span><b>Make it feel like your choice.</b> Commitments stick when we feel we chose freely. Big rewards or threats backfire, because we credit the pressure rather than ourselves. In Korean War prison camps, captors used tiny prizes for written statements, so prisoners came to own the words.</span></li>
+          <li><span><b>The low-ball.</b> A car dealer offers a great price, you decide to buy, and then the deal "has to change". By then you've found your own reasons for wanting the car, and they hold up the decision even after the original reason is gone.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>The ugly sign (Freedman and Fraser, 1966)</h4><p>A researcher asked Californian homeowners to let him put a huge, badly lettered "Drive Carefully" billboard on their front lawn. Asked cold, only about <span class="num">17%</span> agreed. Homeowners who two weeks earlier had agreed to put a three-inch "Be a safe driver" sticker in their window said yes <span class="num">76%</span> of the time.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: the billboard on the lawn</div><div class="hint">Choose what happened two weeks earlier</div></div>
+        <div class="ask-line" id="ask7"><span class="who">Two weeks earlier</span><span></span></div>
+        <div class="stage"><svg id="svg7" viewBox="0 0 720 220" role="img" aria-label="Twenty houses, some with a billboard"></svg></div>
+        <div class="lab-ctl"><div class="row" id="btn7"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Homeowners who say yes to the billboard</span><span class="v glow" id="p7"></span></div><div class="stat"><span class="k">What changed</span><span class="s" id="w7"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A free app trial that asks you to set a goal on day one is doing more than onboarding. Once you've typed "I want to run 5k", cancelling feels like going back on yourself.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Cialdini suggests two warning signals. One is in your stomach: the tight feeling that you're being pushed into something you know you don't want. The other is deeper: asking whether, knowing what you know now, you would make the same choice again.</p><p class="ask">"If I could go back in time, would I make this commitment again?"</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Meta-analyses find the foot-in-the-door effect is reliable but usually modest; the giant jump in the billboard study is near the top of the range. It works best when the first step is something people do freely and actively, not when it's paid or pushed.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="quiz" data-q="7b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Unity →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · The we of shared identity</div>
+        <h2>Unity</h2>
+        <div class="short"><span class="lbl">In short</span><p>The principle added in the 2021 edition: we say yes to people we see as part of "us". It isn't the same as liking someone who resembles us; it's sharing an identity with them, through family, place, or having acted together.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"Like us" versus "of us".</b> Liking comes from similarity: we both enjoy jazz. Unity comes from identity: we're family, we're from the same town, we fought the same fight. People in a "we" treat each other's wins and losses almost as their own.</span></li>
+          <li><span><b>Family is the strongest "we".</b> Cues of kinship, such as family words, shared names or "as a parent myself", tap into it. Small businesses that present themselves as family firms borrow some of the feeling.</span></li>
+          <li><span><b>Place makes a "we".</b> Home, neighbourhood, region and country all create groups whose members get special trust and help, sometimes across huge distances.</span></li>
+          <li><span><b>Acting together makes a "we".</b> Singing, marching, dancing or even tapping in time makes people feel more alike and more willing to help each other. So does building something together.</span></li>
+          <li><span><b>Ask for advice, not an opinion.</b> Asking someone for their opinion puts them outside, as a critic. Asking for their advice puts them alongside you, as a partner, and they end up feeling more positive about the result.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The study</span><h4>Tapping in time (Valdesolo and DeSteno, 2011)</h4><p>Pairs of strangers tapped along to beats through headphones, either in sync with each other or out of sync. Afterwards one of them saw the other stuck with a long, dull task. Of those who had tapped in sync, <span class="num">49%</span> stayed to help; of those out of sync, <span class="num">18%</span> did. Moving together for a few minutes was enough to make a "we".</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: like me, or one of us?</div><div class="tally" id="tally8" aria-label="Score"></div></div>
+        <div class="sorter" id="sort8"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"Our customers" is a list. "Our community" is a "we". Brands that make you feel you belong to a tribe, rather than buy from a company, are pulling the unity lever.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>Real shared identity is precious, and it's fine to give your own people the benefit of the doubt. The risk is a manufactured "we": a company, cause or stranger who uses tribe language only when they want something.</p><p class="ask">"Are they really one of us, or just talking like it?"</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="quiz" data-q="8b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Instant Influence →</a></div>
+    </section>
+
+    <!-- ===================== PART 5 ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Part five · chapter 9</span>
+      <h2>Keeping Your Head</h2>
+      <p>The book ends by stepping back. The pace of modern life means we'll rely on shortcuts more, not less. That's fine as long as the signals are honest, which is why Cialdini argues the real enemy is the person who fakes them.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Trust the shortcut when the signal is real. Push back, hard, when it's counterfeit.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Primitive consent for an automatic age</div>
+        <h2>Instant Influence</h2>
+        <div class="short"><span class="lbl">In short</span><p>The more information and choice we face, the more we must decide on a single good cue. Shortcuts aren't the problem; counterfeit cues are. Accept honest signals, and treat people who fake them as cheats.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>We are drowning in decisions.</b> Every day brings more products, news and choices than anyone can analyse. Even people who love thinking things through have to rely on one or two cues most of the time.</span></li>
+          <li><span><b>Each principle is usually a good guide.</b> Popular things often are good, experts often are right, scarce things often are valuable. Abandoning the shortcuts would leave us frozen.</span></li>
+          <li><span><b>Faking a signal breaks the system.</b> Invented reviews, fake deadlines and actors dressed as doctors don't just trick one buyer. They make the honest version of each signal less trustworthy for everyone.</span></li>
+          <li><span><b>Fight back.</b> Cialdini argues for active resistance: refuse to buy from companies caught faking social proof or authority, and tell them why. The shortcuts are a shared resource worth protecting.</span></li>
+        </ul>
+      </div>
+      <div class="study"><span class="lbl">The example</span><h4>The infomercial line that changed</h4><p>One famous TV shopping script changed a single line, from "Operators are waiting, please call now" to "If operators are busy, please call again", and sales jumped. The new line paints a picture of lots of other people calling, and that picture does the persuading.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: name the lever</div><div class="tally" id="tally9" aria-label="Score"></div></div>
+        <div class="sorter" id="sort9"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't need to check every review before buying a toaster. You do need to notice when the "reviews" are all five stars, posted on the same day, in the same voice.</p></div>
+      <div class="defend"><span class="lbl">How to say no</span><p>A simple rule: the bigger the decision, the more you should ask whether the cue you're relying on is real. For a coffee, follow the crowd. For a mortgage, check the crowd exists.</p><p class="ask">"Is this signal honest, and is this decision small enough to trust it?"</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="quiz" data-q="9b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#after">Next: your defence kit →</a></div>
+    </section>
+
+    <!-- ===================== DEFENCE KIT ===================== -->
+    <section class="after" id="after">
+      <span class="eyebrow">Your defence kit</span>
+      <h2>Seven Levers, Seven Questions</h2>
+      <p>Each principle is a shortcut that's usually right. For each one, here's what the honest version looks like, what the fake looks like, and the one question that tells them apart.</p>
+      <div class="kit" id="kit"></div>
+      <p class="big">The aim isn't to become impossible to persuade. It's to say yes because the signal was real, not because somebody built a copy of it.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Influence: The Psychology of Persuasion</i> by Robert B. Cialdini (first published 1984; new and expanded edition 2021). The explanations, examples and labs are written in our own words and are not affiliated with the author or publisher. Study figures are as published; where a lab fills in values between measured points, it says so.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The Autopilot", "Give and Connect", "Follow the Signals", "Bind and Belong", "Keeping Your Head"];
+const CH = [["Levers of Influence", "Levers", 0], ["Reciprocation", "Reciprocation", 1], ["Liking", "Liking", 1], ["Social Proof", "Social proof", 2], ["Authority", "Authority", 2], ["Scarcity", "Scarcity", 2], ["Commitment and Consistency", "Commitment", 3], ["Unity", "Unity", 3], ["Instant Influence", "Instant influence", 4]];
+const QUIZ = {
+  1:{q:`In the copier study, why did "because I have to make copies" work almost as well as a real reason?`,o:[`People felt sorry for the researcher`,`The word "because" triggered an automatic yes, without anyone checking the reason`,`Making copies is a genuinely urgent need`],a:1,w:`Everyone in the queue had to make copies. The shape of a reason was enough, as long as the favour was small.`},
+  '1b':{q:`What is the contrast principle?`,o:[`We like things that are different from us`,`We judge something by comparing it with what we saw just before`,`Opposites attract`],a:1,w:`A sweater feels cheap after a suit, and an average house looks good after two bad ones. The first item sets the yardstick.`},
+  2:{q:`Why do charities put free address labels in their mailings?`,o:[`To save donors time`,`An unrequested gift still creates a feeling of owing, which raises donations`,`Because labels are cheaper than stamps`],a:1,w:`The rule of reciprocation doesn't care whether we asked for the gift. Response roughly doubled.`},
+  '2b':{q:`In the "door in the face", why does retreating to a smaller request work?`,o:[`The smaller request feels like a concession, and we want to concede back`,`People forget the first request`,`It makes the asker look desperate`],a:0,w:`A concession is a kind of gift. Saying yes to the smaller request is our way of meeting them halfway.`},
+  3:{q:`What did the record-breaking car salesman send customers every month?`,o:[`A discount voucher`,`A card saying he liked them`,`A newsletter about new models`],a:1,w:`Compliments raise liking even when we can see the motive behind them.`},
+  '3b':{q:`What's the best defence against liking tactics, according to Cialdini?`,o:[`Learn every tactic by heart`,`Notice when you like someone unusually fast, and separate them from the deal`,`Never buy from friends`],a:1,w:`Tactics are endless; the feeling they produce is not. React to the feeling, then judge the offer alone.`},
+  4:{q:`Why do bystanders often fail to help in an emergency?`,o:[`They don't care`,`Each looks to the others, sees calm, and concludes nothing is wrong`,`They are afraid of being sued`],a:1,w:`In uncertainty, we copy others; in a group everyone is copying everyone, and nobody moves. Singling out one person breaks the spell.`},
+  '4b':{q:`Which towel card got the most guests to reuse their towels?`,o:[`"Help save the environment"`,`"Most guests at this hotel reuse their towels"`,`"Most guests who stayed in this room reuse their towels"`],a:2,w:`The closer the crowd is to us, the stronger its pull. "This room" beat "this hotel", and both beat the environmental appeal.`},
+  5:{q:`In Milgram's first study, how many of the 40 people went all the way to 450 volts?`,o:[`About 1 in 100`,`26 of 40 (65%)`,`All 40`],a:1,w:`Everyone reached 300 volts, and nearly two-thirds pressed the last switch, because a calm authority told them to.`},
+  '5b':{q:`Which of these is a symbol of authority Cialdini warns about?`,o:[`A genuine qualification in the right field`,`A uniform, a title or an expensive car`,`Years of relevant experience`],a:1,w:`The danger is responding to the symbol without checking the substance. Real expertise in the relevant field is worth listening to.`},
+  6:{q:`In the beef study, what produced the biggest jump in orders?`,o:[`A lower price`,`News of a shortage, presented as exclusive information`,`A free sample`],a:1,w:`The shortage alone doubled orders. Saying the news itself was restricted made it about six times the usual.`},
+  '6b':{q:`Which cookies were rated as most desirable?`,o:[`Ones from a full jar of ten`,`Ones from a jar that had always held two`,`Ones from a jar that had just gone from ten to two because others wanted them`],a:2,w:`Newly scarce beats always scarce, and competition for the scarce thing makes it more attractive still.`},
+  7:{q:`Why did a tiny window sticker make people far more likely to accept a huge billboard?`,o:[`They felt guilty about the sticker`,`It changed how they saw themselves: as people who care about safe driving`,`The billboard was offered for free`],a:1,w:`A small, freely chosen step reshapes self-image, and people then act to stay consistent with it.`},
+  '7b':{q:`Which commitments stick best?`,o:[`Private, easy and well paid`,`Active, public, effortful and freely chosen`,`Spoken quickly and forgotten`],a:1,w:`Writing it down, saying it in front of others and working for it all bind us, as long as we feel the choice was ours.`},
+  8:{q:`How does unity differ from liking?`,o:[`It doesn't; it's a new name for the same thing`,`Liking comes from being similar; unity comes from sharing an identity, being "one of us"`,`Unity only applies to sports teams`],a:1,w:`Two jazz fans like each other. Two siblings, or two people from the same small town, share a "we".`},
+  '8b':{q:`Why does asking for advice work better than asking for an opinion?`,o:[`Advice is cheaper`,`It puts the other person alongside you as a partner, not outside as a critic`,`People enjoy criticising`],a:1,w:`An opinion steps back to judge. Advice leans in to help, and people warm to what they helped create.`},
+  9:{q:`According to Cialdini, who is the real problem?`,o:[`Anyone who uses the principles at all`,`People who fake the signals, such as invented reviews or false deadlines`,`Customers who rely on shortcuts`],a:1,w:`Honest signals are fine to use and to follow. Counterfeits poison the shortcuts we all depend on.`},
+  '9b':{q:`"If operators are busy, please call again" beat "Operators are waiting". Which lever did it pull?`,o:[`Authority`,`Social proof`,`Reciprocation`],a:1,w:`It makes you picture crowds of other callers, so calling feels like what people do.`}
+};
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const hbars = (sel, rows) => { $(sel).innerHTML = rows.map(r => `<div class="hb ${r.c || ''}"><span class="l">${r.l}</span><span class="tr"><i style="width:${clamp(r.w, 0, 100)}%"></i></span><span class="v">${r.v}</span></div>`).join(''); };
+/* a row of option buttons; the chosen one gets aria-pressed */
+function choices(rowSel, labels, start, onPick){
+  const row = $(rowSel);
+  row.innerHTML = labels.map((l, i) => `<button class="btn" data-i="${i}" aria-pressed="${i === start}">${l}</button>`).join('');
+  const bs = [...row.querySelectorAll('button')];
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); onPick(+b.dataset.i); }));
+  onPick(start);
+}
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#14101a';
+try { const t = localStorage.getItem('inf-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('inf-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${p+1} · ${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+$('#deck').innerHTML = CH.map(([t], i) => `<a href="#ch${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span>${t}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('inf-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('inf-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes: two per chapter; getting both right marks the chapter understood ---------- */
+const right = {};
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q], ch = String(parseInt(box.dataset.q, 10));
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ right[ch] = (right[ch] || 0) + 1; if (right[ch] >= 2){ done.add(ch); save(); renderProgress(); } }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'d spot these in the wild.' : 'The ones you missed are worth a second look: the levers often travel together.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); show(); }); return; }
+    const it = items[order[i]], bs = it.bins || bins;
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Case ' + (i + 1) + ' of ' + items.length}</span><span class="item q">${it.t}</span><span class="fb" hidden></span></div>
+      <div class="bins">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Yes.' : 'Not quite: ' + bs.find(b => b.id === it.a).label + '.'}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- hero: the sign-up page ---------- */
+{ const LEV = [
+    ['uni', 'Unity', 'Night owls aren\'t just similar to each other here, they\'re a tribe. The page speaks as "us", which makes signing up feel like joining your own people.'],
+    ['lik', 'Liking', 'A friendly face with a story just like yours. Similarity makes you like Sam, and people we like are hard to turn down.'],
+    ['rec', 'Reciprocation', 'A real, useful gift before anything is asked. It\'s generous, and it also leaves you feeling slightly in debt.'],
+    ['aut', 'Authority', 'A credential you can\'t check in ten seconds. It borrows trust from science; worth asking what the researcher actually did.'],
+    ['soc', 'Social proof', 'A huge crowd that already chose this. If 2.4 million people do it, it must be fine, so long as the number is real.'],
+    ['com', 'Commitment', 'A tiny, active first step. Once you\'ve typed your own bedtime goal, quitting feels like breaking a promise to yourself.'],
+    ['sca', 'Scarcity', 'A deadline and a limited number. The fear of losing the price pushes you to decide now, before you\'ve thought it through.'] ];
+  const LINES = [
+    ['uni', 'Made by night owls, for night owls. Welcome home.'],
+    ['lik', 'Hi, I\'m Sam. Three years ago I was lying awake at 3am too, scrolling, just like you.'],
+    ['rec', 'Before anything else: here\'s our 40-page sleep guide. Free, no email needed, yours to keep.'],
+    ['aut', 'Every plan is designed with a sleep scientist who ran a university sleep lab for 20 years.'],
+    ['soc', '2.4 million people already fall asleep with Drift. Nine in ten are still with us after a month.'],
+    ['com', 'Start with one small step: what time do you want to be asleep tonight? Type it in and we\'ll help you keep to it.'],
+    ['sca', 'Founder price for the next 14 sign-ups only. The offer ends at midnight.'] ];
+  $('#pitch').innerHTML = `<span class="brand">Drift</span>` + LINES.map(([k, t]) => `<p data-p="${k}"><span>${t}</span><span class="ptag">${LEV.find(l => l[0] === k)[1]}</span></p>`).join('') + `<span class="cta">Start sleeping better</span>`;
+  $('#levers').innerHTML = LEV.map(([k, n]) => `<button class="btn" data-lv="${k}" aria-pressed="false">${n}</button>`).join('') + `<button class="btn" data-lv="all" aria-pressed="false">Show all seven</button>`;
+  const bs = $$('[data-lv]');
+  bs.forEach(b => b.addEventListener('click', () => { const k = b.dataset.lv; press(bs, b);
+    $$('#pitch p').forEach(p => p.classList.toggle('lit', k === 'all' || p.dataset.p === k));
+    if (k === 'all') $('#pitchV').innerHTML = '<b>All seven at once.</b> None of these lines is a lie, and each one is a lever. That\'s Cialdini\'s point: persuasion mostly works by switching on shortcuts we already use.';
+    else { const l = LEV.find(x => x[0] === k); $('#pitchV').innerHTML = `<b>${l[1]}.</b> ${l[2]}`; } }));
+}
+
+/* ================= chapter labs ================= */
+
+/* 1: copier queue (Langer, Blank and Chanowitz 1978) */
+{ const DATA = {5:[60, 93, 94], 20:[24, 24, 42]}, RS = ['', ' because I have to make copies', ' because I\'m in a rush'], LAB = ['No reason', '"…because I have to make copies"', '"…because I\'m in a rush"'];
+  let pg = 5, rs = 1;
+  function draw(){
+    const p = DATA[pg][rs];
+    $('#ask1 span:last-child').innerHTML = `Excuse me, I have ${pg} pages. May I use the copier<mark>${RS[rs]}</mark>?`;
+    let s = '';
+    for (let k = 0; k < 100; k++){ const x = 15 + (k % 10) * 30, y = 15 + Math.floor(k / 10) * 30, yes = k < p;
+      s += `<circle cx="${x}" cy="${y}" r="10" ${yes ? F('glow') : FS('panel-2', 'line', 1.5)}/>`; }
+    $('#dots1').innerHTML = s;
+    hbars('#bars1', DATA[pg].map((v, i) => ({l: LAB[i], w: v, v: v + '%', c: i === rs ? 'g' : ''})));
+    $('#call1').innerHTML = pg === 5
+      ? `<b>${p} of every 100 people let you go first.</b> For a small favour, a reason with no content works as well as a real one: people hear "because" and stop listening.`
+      : `<b>${p} of every 100 people let you go first.</b> With a bigger favour, people switch off the autopilot. Now the empty reason does nothing, and only a real one helps.`;
+  }
+  const pgB = $$('[data-pg]'), rsB = $$('[data-rs]');
+  pgB.forEach(b => b.addEventListener('click', () => { pg = +b.dataset.pg; press(pgB, b); draw(); }));
+  rsB.forEach(b => b.addEventListener('click', () => { rs = +b.dataset.rs; press(rsB, b); draw(); }));
+  draw();
+}
+
+/* 2: restaurant mints (Strohmetz, Rind, Fisher and Lynn 2002) */
+{ const C = [
+    ['No mint', 0, 'Here\'s your bill. Thanks for coming in.', 'The baseline: no gift, no change.'],
+    ['One mint with the bill', 3.3, 'Here\'s your bill. <mark>Have a mint.</mark>', 'A small gift, given to everyone. A small bump.'],
+    ['Two mints with the bill', 14.1, 'Here\'s your bill. <mark>Have a couple of mints.</mark>', 'Doubling the gift more than quadrupled the effect: it feels more significant.'],
+    ['One mint, then turn back with a second', 23, 'Here\'s your bill, have a mint. … <mark>Actually, for you nice people, here\'s an extra one.</mark>', 'Significant, unexpected and personal all at once: the biggest jump.'] ];
+  choices('#btn2', C.map(c => c[0]), 3, i => {
+    $('#ask2 span:last-child').innerHTML = C[i][2];
+    hbars('#bars2', C.map((c, k) => ({l: c[0], w: c[1] / 25 * 100, v: '+' + c[1] + '%', c: k === i ? 'g' : ''})));
+    $('#tip2').textContent = '+' + C[i][1] + '%'; $('#why2').textContent = C[i][3];
+  });
+  const DF = [['Would you chaperone a group of young people from a juvenile centre on a two-hour zoo trip?', 17], ['Would you volunteer as a counsellor at a juvenile centre, two hours a week, for two years? … <i>No?</i> I understand. <mark>Would you chaperone them on a two-hour zoo trip instead?</mark>', 50]];
+  const difB = $$('[data-dif]');
+  function drawDif(k){ $('#ask2b span:last-child').innerHTML = DF[k][0];
+    hbars('#bars2b', [{l:'Straight to the zoo trip', w:17, v:'17%', c: k === 0 ? 'g' : ''}, {l:'Two years first, then retreat', w:50, v:'50%', c: k === 1 ? 'g' : ''}]); }
+  difB.forEach(b => b.addEventListener('click', () => { press(difB, b); drawDif(+b.dataset.dif); }));
+  drawDif(0);
+}
+
+/* 3: liking sorter */
+sorter('#sort3', '#tally3', [
+  {id:'att', label:'Attractiveness'}, {id:'sim', label:'Similarity'}, {id:'com', label:'Compliments'}, {id:'coo', label:'Cooperation'}, {id:'ass', label:'Association'} ], [
+  {t:'A car salesman mails every past customer a monthly card that just says "I like you".', a:'com', w:'Praise raises liking even when we know exactly why it was sent.'},
+  {t:'Petitioners dressed like the students they approached got far more signatures than those dressed differently.', a:'sim', w:'We help people who seem to be our kind of person, and clothes are a quick clue.'},
+  {t:'Good-looking candidates win more votes, while voters insist looks played no part.', a:'att', w:'The halo effect: we assume attractive people are also more capable and honest.'},
+  {t:'A detective who seems to be on your side against his angry partner gets the confession.', a:'coo', w:'"Good cop" presents himself as working with you toward a shared goal.'},
+  {t:'Television weather presenters get abuse from viewers when storms ruin their plans.', a:'ass', w:'We link messengers with their message, even when they had nothing to do with it.'},
+  {t:'In a "jigsaw" classroom, each pupil holds one piece of the lesson and the group needs all of them. Rival groups become friends.', a:'coo', w:'Depending on each other to reach a shared goal turns rivals into allies.'},
+  {t:'A sports drink advert is built around a famous champion holding the bottle.', a:'ass', w:'The champion\'s glow rubs off on the product sitting next to them.'}
+]);
+
+/* 4a: crowd on the pavement */
+{ const svg = $('#svg4'), r = $('#r4');
+  const look = n => 42 + 44 * Math.log(n) / Math.log(15), stop = n => 4 + 36 * Math.log(n) / Math.log(15);
+  const person = (x, y, c, up, s = 1) => `<g transform="translate(${x},${y}) scale(${s})"><circle cx="0" cy="-34" r="7" ${F(c)}/><path d="M0 -26v18M0 -8l-6 14M0 -8l6 14M-8 -20l8 4 8 -4" ${S(c, 2.4, ';stroke-linecap:round;stroke-linejoin:round')}/>${up ? `<path d="M0 -46v-10M-3 -52l3 -4 3 4" ${S(c, 1.6, ';stroke-linecap:round')}/>` : ''}</g>`;
+  const draw = onLayout(() => {
+    const n = +r.value, L = look(n), St = stop(n), nar = NARROW();
+    const nStop = Math.round(20 * St / 100), nLook = Math.round(20 * L / 100);
+    $('#o4').textContent = n === 1 ? '1 person' : n + ' people';
+    $('#l4').textContent = Math.round(L) + '%'; $('#s4').textContent = Math.round(St) + '%';
+    const W = nar ? 360 : 720, H = nar ? 470 : 300; vb(svg, W, H);
+    let s = '';
+    // building with the empty window
+    const bx = 16, bw = nar ? 120 : 150;
+    s += `<rect x="${bx}" y="14" width="${bw}" height="${nar ? 210 : 250}" rx="4" ${FS('panel-2', 'line', 1.5)}/>`;
+    for (let k = 0; k < 3; k++) for (let j = 0; j < 4; j++){ const lit = k === 1 && j === 0;
+      s += `<rect x="${bx + 14 + k * (bw - 28) / 3}" y="${28 + j * 40}" width="${(bw - 28) / 3 - 8}" height="24" rx="2" ${lit ? FS('deep', 'glow', 2) : FS('deep', 'line', 1)}/>`; }
+    s += TX(bx + bw / 2, nar ? 244 : 286, 'the 6th-floor window', 'faint', 12, 'middle');
+    // the crowd staring up
+    const cx0 = bx + bw + 24, cw = nar ? W - cx0 - 16 : 200;
+    s += TX(cx0, 30, 'Staring up', 'muted', 12);
+    for (let k = 0; k < n; k++){ const col = k % 5, row = Math.floor(k / 5);
+      s += person(cx0 + 14 + col * (cw - 20) / 5, 96 + row * 56, 'glow', true, nar ? .8 : .9); }
+    // passers-by
+    const px0 = nar ? 16 : 420, py0 = nar ? 290 : 70, cols = nar ? 10 : 5, gx = nar ? 33 : 60, gy = nar ? 74 : 50;
+    s += TX(px0, py0 - 22, '20 passers-by', 'muted', 12);
+    for (let k = 0; k < 20; k++){ const st = k < nStop ? 'glow' : k < nLook ? 'cool' : 'faint';
+      s += person(px0 + 14 + (k % cols) * gx, py0 + 44 + Math.floor(k / cols) * gy, st, k < nLook, nar ? .72 : .8); }
+    const ly = nar ? H - 14 : 292;
+    s += `<circle cx="${px0 + 4}" cy="${ly - 4}" r="5" ${F('glow')}/>` + TX(px0 + 14, ly, 'stop', 'muted', 12)
+       + `<circle cx="${px0 + 60}" cy="${ly - 4}" r="5" ${F('cool')}/>` + TX(px0 + 70, ly, 'look up', 'muted', 12)
+       + `<circle cx="${px0 + 140}" cy="${ly - 4}" r="5" ${F('faint')}/>` + TX(px0 + 150, ly, 'walk on', 'muted', 12);
+    svg.innerHTML = s;
+  });
+  r.addEventListener('input', draw); draw();
+}
+
+/* 4b: hotel towels (Goldstein, Cialdini and Griskevicius 2008) */
+{ const C = [
+    ['Save the environment', 35.1, 'HELP SAVE THE ENVIRONMENT. You can show your respect for nature by reusing your towels during your stay.'],
+    ['Join your fellow guests', 44.1, 'JOIN YOUR FELLOW GUESTS IN HELPING TO SAVE THE ENVIRONMENT. <mark>Almost 75% of guests</mark> who are asked to take part reuse their towels at least once.'],
+    ['Guests in this room', 49.3, 'JOIN YOUR FELLOW GUESTS. <mark>Almost 75% of guests who stayed in this room</mark> reused their towels at least once.'] ];
+  choices('#btn4b', C.map(c => c[0]), 0, i => {
+    $('#ask4b span:last-child').innerHTML = C[i][2];
+    hbars('#bars4b', C.map((c, k) => ({l: c[0], w: c[1] / 60 * 100, v: c[1] + '%', c: k === i ? 'g' : ''})));
+  });
+}
+
+/* 5: Milgram's shock board */
+{ const svg = $('#svg5'), r = $('#r5');
+  const BANDS = ['Slight', 'Moderate', 'Strong', 'Very strong', 'Intense', 'Extreme', 'Danger: severe', 'XXX'];
+  const still = v => v <= 300 ? 40 : v <= 315 ? 35 : v <= 330 ? 31 : v <= 345 ? 29 : v <= 360 ? 28 : v <= 375 ? 27 : 26;
+  const learner = v => v < 300 ? 'Silent in the next room. In this first version he can\'t be heard at all.' : v === 300 ? 'Pounds on the wall and stops answering.' : v === 315 ? 'Pounds on the wall once more.' : 'Silence. The experimenter says to treat no answer as a wrong answer, and go on.';
+  const draw = onLayout(() => {
+    const v = +r.value, n = still(v), nar = NARROW();
+    $('#o5').textContent = v + ' volts'; $('#n5').textContent = n + ' of 40'; $('#w5').textContent = learner(v);
+    const W = nar ? 360 : 720, H = nar ? 330 : 222; vb(svg, W, H);
+    const per = nar ? 15 : 30, sw = (W - 32) / per;
+    let s = `<rect x="8" y="8" width="${W - 16}" height="${nar ? 196 : 92}" rx="10" ${FS('panel-2', 'line', 1.5)}/>`;
+    for (let k = 0; k < 30; k++){ const volts = 15 * (k + 1), row = Math.floor(k / per), x = 16 + (k % per) * sw, y = 30 + row * 86, on = volts <= v;
+      if (k % 4 === 0) s += TX(x + 2, y - 6, BANDS[k / 4], volts > 300 ? 'bad' : 'faint', nar ? 10 : 10.5);
+      s += `<rect x="${x + 2}" y="${y}" width="${sw - 5}" height="30" rx="3" ${on ? F(volts > 300 ? 'bad' : 'glow') : FS('deep', 'line', 1)}/>`;
+      if (k % (nar ? 3 : 2) === 0 || k === 29) s += TX(x + sw / 2, y + 48, volts, on ? 'text' : 'faint', 10, 'middle', 'font-family="var(--f-mono)"'); }
+    // the forty teachers
+    const ty = nar ? 222 : 124, cols = nar ? 10 : 20, gx = (W - 32) / cols;
+    s += TX(16, ty + 6, 'The 40 teachers', 'muted', 12);
+    for (let k = 0; k < 40; k++){ const x = 16 + gx / 2 + (k % cols) * gx, y = ty + 26 + Math.floor(k / cols) * 24, go = k < n;
+      s += `<circle cx="${x}" cy="${y}" r="8" ${go ? F('glow') : FS('deep', 'faint', 1.5)}/>`; }
+    svg.innerHTML = s;
+  });
+  r.addEventListener('input', draw); draw();
+  const V = [
+    ['First study (learner unheard)', 65, 'The original 1963 result: 26 of 40.'],
+    ['Learner heard through the wall', 62.5, 'Hearing protests and screams barely changed it: 25 of 40.'],
+    ['Learner in the same room', 40, 'Seeing the victim cut obedience to 16 of 40.'],
+    ['Teacher must press his hand down', 30, 'Even forcing the learner\'s hand onto a shock plate, 12 of 40 went all the way.'],
+    ['Run-down office, not Yale', 47.5, 'Away from the university\'s prestige, in a shabby office in Bridgeport: 19 of 40. Less, but still many.'],
+    ['Orders given by phone', 22.5, 'With the authority out of the room, obedience fell to 9 of 40, and several quietly gave lower shocks than ordered.'],
+    ['Orders from an ordinary man', 20, 'When someone with no lab coat or title gave the orders, only 4 of 20 obeyed fully.'],
+    ['Two fellow teachers refuse', 10, 'Seeing peers defy the experimenter freed people to refuse: only 4 of 40 continued.'] ];
+  choices('#btn5', V.map(c => c[0]), 0, i => {
+    hbars('#bars5', V.map((c, k) => ({l: c[0], w: c[1], v: c[1] + '%', c: k === i ? 'g' : ''})));
+    $('#call5').innerHTML = `<b>${V[i][0]}.</b> ${V[i][2]} Authority was strongest when it was close, official-looking, and unchallenged.`;
+  });
+}
+
+/* 6: the beef importer */
+{ const svg = $('#svg6');
+  const C = [
+    ['The usual pitch', 1, 'Good afternoon. I\'d like to take your order for imported beef this month.', 'The baseline order.'],
+    ['Mention a coming shortage', 2, 'Weather abroad means <mark>imported beef will be in short supply</mark> over the next few months.', 'Scarcity alone: buyers ordered more than twice as much.'],
+    ['Say the news is exclusive', 6, 'Weather abroad means <mark>beef will be in short supply</mark>. <mark>This comes from our own contacts and isn\'t public yet.</mark>', 'Scarce goods plus scarce information: about six times the usual order.'] ];
+  let cur = 0;
+  const draw = onLayout(() => {
+    const nar = NARROW(), n = C[cur][1] * 4, W = nar ? 360 : 720, cols = nar ? 8 : 16, cw = (W - 32) / cols, ch = cw * .62, rows = Math.ceil(24 / cols), H = 30 + rows * (ch + 8) + 10;
+    vb(svg, W, H);
+    let s = '';
+    for (let k = 0; k < 24; k++){ const x = 16 + (k % cols) * cw, y = 20 + Math.floor(k / cols) * (ch + 8), on = k < n;
+      s += `<rect x="${x + 2}" y="${y}" width="${cw - 6}" height="${ch}" rx="4" ${on ? FS('glow', 'glow', 1, .85) : FS('deep', 'line', 1, 1)}/>`;
+      if (on) s += `<path d="M${x + 6} ${y + ch / 2}h${cw - 14}" ${S('on-glow', 1.5, ';stroke-opacity:.5')}/>`; }
+    svg.innerHTML = s;
+  });
+  choices('#btn6', C.map(c => c[0]), 0, i => { cur = i;
+    $('#ask6 span:last-child').innerHTML = C[i][2]; $('#x6').textContent = C[i][1] === 1 ? '1×' : C[i][1] === 2 ? 'more than 2×' : 'about 6×'; $('#w6').textContent = C[i][3]; draw(); });
+}
+
+/* 7: the billboard on the lawn (Freedman and Fraser 1966) */
+{ const svg = $('#svg7');
+  const C = [
+    ['Nothing (asked cold)', 17, 'No earlier visit. A stranger turns up and asks to put a huge "Drive Carefully" sign on your lawn.', 'Almost nobody wants a giant ugly sign from a stranger.'],
+    ['Agreed to a tiny "Be a safe driver" sticker', 76, 'A volunteer asked you to put a three-inch <mark>"Be a safe driver"</mark> sticker in your window. You said yes.', 'Same cause, small step. They now see themselves as people who back safe driving.'],
+    ['Signed a "Keep California beautiful" petition', 47, 'A volunteer asked you to sign a petition to <mark>"Keep California beautiful"</mark>. You said yes.', 'A different cause, yet nearly half agreed: they had come to see themselves as civic-minded people who act on good causes.'] ];
+  let cur = 0;
+  const house = (x, y, w, sign) => {
+    let s = `<path d="M${x} ${y + w * .45}L${x + w / 2} ${y + w * .1}L${x + w} ${y + w * .45}Z" ${FS('panel-2', 'line', 1.5)}/><rect x="${x + w * .1}" y="${y + w * .45}" width="${w * .8}" height="${w * .5}" ${FS('panel-2', 'line', 1.5)}/><rect x="${x + w * .42}" y="${y + w * .65}" width="${w * .16}" height="${w * .3}" ${F('line')}/>`;
+    if (sign) s += `<rect x="${x - w * .05}" y="${y + w * .55}" width="${w * 1.1}" height="${w * .34}" rx="2" ${FS('glow', 'glow', 1)}/>` + TX(x + w / 2, y + w * .78, 'DRIVE CAREFULLY', 'on-glow', w * .13, 'middle', 'font-weight="700"');
+    return s;
+  };
+  const draw = onLayout(() => {
+    const nar = NARROW(), yes = Math.round(20 * C[cur][1] / 100), cols = nar ? 5 : 10, W = nar ? 360 : 720, gw = (W - 32) / cols, w = gw * .74, rows = 20 / cols, H = 16 + rows * (w * 1.05) + 6;
+    vb(svg, W, H);
+    let s = '';
+    // spread the yeses through the street rather than bunching them
+    const pick = new Set(); for (let k = 0; k < yes; k++) pick.add(Math.floor((k + .5) * 20 / yes));
+    for (let k = 0; k < 20; k++) s += house(16 + (k % cols) * gw + (gw - w) / 2, 10 + Math.floor(k / cols) * w * 1.05, w, pick.has(k));
+    svg.innerHTML = s;
+  });
+  choices('#btn7', C.map(c => c[0]), 0, i => { cur = i;
+    $('#ask7 span:last-child').innerHTML = C[i][2]; $('#p7').textContent = (i === 0 ? 'about ' : i === 2 ? 'nearly ' : '') + C[i][1] + '%'; $('#w7').textContent = C[i][3]; draw(); });
+}
+
+/* 8: like me or one of us */
+sorter('#sort8', '#tally8', [{id:'lik', label:'Liking', d:'"You\'re like me"'}, {id:'uni', label:'Unity', d:'"You\'re one of us"'}], [
+  {t:'"You love hiking too? Same!"', a:'lik', w:'A shared taste is similarity. Pleasant, but it doesn\'t make you family.'},
+  {t:'"As a fellow parent, I\'m sure you\'d want to know this."', a:'uni', w:'"Fellow parent" invokes a shared identity, a group you both belong to.'},
+  {t:'A local bakery\'s sign: "Baking for our neighbours since 1962".', a:'uni', w:'Place creates a "we". Neighbours aren\'t just similar; they\'re part of the same community.'},
+  {t:'"I love your jacket. Great taste."', a:'lik', w:'A compliment raises liking. No shared identity involved.'},
+  {t:'People who just sang in the same choir are more willing to help each other afterwards.', a:'uni', w:'Acting together in time is one of the oldest ways humans create a "we".'},
+  {t:'A manager says "I\'d really value your advice on this plan" instead of "What\'s your opinion?"', a:'uni', w:'Advice puts them on your side of the table, as a partner in the plan.'},
+  {t:'A salesperson mentions they also went to university in your city.', a:'lik', w:'Close call, and that\'s the point. A shared background is similarity; it becomes unity only if it\'s a real identity you both feel part of.'}
+]);
+
+/* 9: name the lever */
+const P7 = [{id:'rec', label:'Reciprocation'}, {id:'lik', label:'Liking'}, {id:'soc', label:'Social proof'}, {id:'aut', label:'Authority'}, {id:'sca', label:'Scarcity'}, {id:'com', label:'Commitment'}, {id:'uni', label:'Unity'}];
+sorter('#sort9', '#tally9', P7, [
+  {t:'"Only 2 rooms left at this price, and 6 people are looking right now."', a:'sca', w:'Limited number plus rivals: the strongest form of scarcity. (The "6 people looking" adds a dash of social proof.)'},
+  {t:'A gym hands you a free personalised training plan before mentioning membership.', a:'rec', w:'A useful, tailored gift creates a feeling of owing.'},
+  {t:'"Join the 50,000 teachers who already use this in class."', a:'soc', w:'Many people like you have chosen it already.'},
+  {t:'An advert features an actor in scrubs saying "As a health professional…"', a:'aut', w:'The costume borrows medical authority, without any.'},
+  {t:'A charity asks you to wear a small badge this week, then asks you to volunteer next month.', a:'com', w:'A small public step first, so the bigger one feels consistent.'},
+  {t:'A salesperson spots your football shirt and says they support the same team.', a:'lik', w:'Similarity, quickly found. It makes them feel like a friend.'},
+  {t:'"For generations, families like ours have trusted this farm." On a dairy carton.', a:'uni', w:'Family and heritage language creates a "we".'},
+  {t:'A shop tells you the price is valid today only, then the same offer runs all month.', a:'sca', w:'A fake deadline: counterfeit scarcity, exactly what Cialdini says to push back against.'}
+]);
+
+/* defence kit */
+$('#kit').innerHTML = [
+  ['Reciprocation', 2, 'A real favour or a fair concession.', 'A "gift" that is really the first step of a sales pitch.', 'Was this a gift, or a tactic?'],
+  ['Liking', 3, 'A friend, or someone you have genuinely got to know.', 'Instant rapport, flattery and invented common ground.', 'Would I want this from someone I didn\'t like?'],
+  ['Social proof', 4, 'Many independent people, similar to you, choosing freely.', 'Fake reviews, staged testimonials, a queue made on purpose.', 'Is this crowd real, and does it know more than I do?'],
+  ['Authority', 5, 'A real expert in the relevant field, with nothing to gain.', 'A uniform, a title or a stage set, or an expert speaking outside their field.', 'Are they really an expert here, and how honest are they being?'],
+  ['Scarcity', 6, 'A genuine limit on supply.', 'Countdown timers that reset, "limited editions" with no limit.', 'Do I want to use it, or just to have it?'],
+  ['Commitment', 7, 'A promise you still believe in.', 'A small step engineered to lead somewhere you never chose.', 'Knowing what I know now, would I commit again?'],
+  ['Unity', 8, 'A real shared family, place or experience.', 'Tribe language from a stranger or brand that only appears when they want something.', 'Are they really one of us, or just talking like it?']
+].map(([n, c, real, fake, q]) => `<div><span class="n">Chapter ${c}</span><h3>${n}</h3><p><b>Honest:</b> ${real}</p><p><b>Counterfeit:</b> ${fake}</p><p class="q">${q}</p></div>`).join('');
+})();
+</script>
+</body>
+</html>
