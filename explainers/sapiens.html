@@ -1,0 +1,1774 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sapiens, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a cave-wall field guide to 70,000 years. Same shell as the other guides (chapter rail, one "station" per chapter:
+   short answer, big ideas, a hands-on lab, plain words, quick check), grouped into the book's four revolutions.
+   Dark-first: cave charcoal with an ochre accent (the hand-print pigment) and a lapis second series; light is limestone. */
+:root{
+  color-scheme: dark;
+  --ink:#13110F;          /* page: cave charcoal */
+  --panel:#1B1815;
+  --panel-2:#24201C;
+  --line:#3A332C;
+  --text:#F1EBE1;
+  --muted:#B5AA9B;
+  --faint:#7D7366;
+  --glow:#E6A847;         /* ochre: the one accent */
+  --glow-soft:rgba(230,168,71,.13);
+  --cool:#86ADE3;         /* lapis: second series */
+  --cool-soft:rgba(134,173,227,.13);
+  --good:#93D29A;
+  --bad:#F08A6E;
+  --soft:#DCD3C6;
+  --deep:#100E0C;
+  --toc-bg:rgba(27,24,21,.74);
+  --glow-line:rgba(230,168,71,.34);
+  --on-glow:#1C1205;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F5F0E6;--panel:#FFFDF8;--panel-2:#EDE6D8;--line:#D9CFBE;--text:#1F1A14;--muted:#5C5245;--faint:#857A6B;
+  --glow:#A2620F;--glow-soft:rgba(162,98,15,.09);--cool:#2F5E9E;--cool-soft:rgba(47,94,158,.1);--good:#2A7A3A;--bad:#B8432A;
+  --soft:#3A3228;--deep:#FAF6EE;--toc-bg:rgba(255,253,248,.82);--glow-line:rgba(162,98,15,.35);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F5F0E6;--panel:#FFFDF8;--panel-2:#EDE6D8;--line:#D9CFBE;--text:#1F1A14;--muted:#5C5245;--faint:#857A6B;
+  --glow:#A2620F;--glow-soft:rgba(162,98,15,.09);--cool:#2F5E9E;--cool-soft:rgba(47,94,158,.1);--good:#2A7A3A;--bad:#B8432A;
+  --soft:#3A3228;--deep:#FAF6EE;--toc-bg:rgba(255,253,248,.82);--glow-line:rgba(162,98,15,.35);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hands{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+/* the 13.8-billion-year ruler */
+.ruler{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.ruler-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.ruler-top .t{font-weight:500;display:flex;gap:10px;align-items:center}
+.ruler-top .t::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+#rulerSvg{display:block;width:100%;height:auto}
+.ev{cursor:pointer}
+.ev:focus{outline:none}
+.ev:focus-visible circle{stroke:var(--text);stroke-width:2}
+.ruler-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:76px;align-items:baseline}
+.ruler-card .when{font-family:var(--f-mono);font-size:13px;color:var(--glow);white-space:nowrap}
+.ruler-card .what{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.ruler-card p{grid-column:2;color:var(--muted);font-size:14px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter (chapters 6, 12, 20) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* stepper (chapters 8, 11) */
+.steps{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.steps svg{display:block;width:100%;height:auto}
+.step-txt{padding:22px;border-left:1px solid var(--line);display:grid;align-content:center;gap:10px;min-width:0}
+.step-txt .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.step-txt h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.08}
+.step-txt p{color:var(--soft);font-size:15px}
+
+/* flip grid (chapter 18) */
+.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:8px;padding:18px}
+.flip{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;display:grid;gap:6px;transition:border-color .2s, background .2s}
+.flip:hover{border-color:var(--glow)}
+.flip .need{font-weight:600;font-size:14px}
+.flip .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.flip .how{font-size:13px;color:var(--muted)}
+.flip.old .who{color:var(--cool)}
+.flip.new{border-color:var(--glow-line);background:var(--glow-soft)}
+.flip.new .who{color:var(--glow)}
+
+/* toggles list (chapter 17) */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:rgba(147,210,154,.1)}
+.opt.wrong{border-color:var(--bad);background:rgba(240,138,110,.08)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .step-txt{border-left:0;border-top:1px solid var(--line)}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .ruler-card{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+  .flips{padding:14px}
+  .ruler-card p{grid-column:1}
+}
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <svg class="hands" id="hands" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Yuval Noah Harari's history of humankind</div>
+    <h1>Sapiens,<br><em>Explained</em></h1>
+    <p class="lede">How did an unremarkable African ape end up running the planet? Harari's answer is that we are the only animal that can <b>believe in things that exist only in our shared imagination</b>: gods, money, nations, companies, human rights. This guide walks through all 20 chapters and the four revolutions that shaped us, with something to play with in every chapter.</p>
+    <figure class="ruler" style="margin:0">
+      <div class="ruler-top"><div class="t">The timeline of history</div>
+        <div class="row"><button class="btn" aria-pressed="true" data-scale="log" id="sLog">Everything (13.8 billion years)</button><button class="btn" aria-pressed="false" data-scale="lin" id="sLin">Only Sapiens (300,000 years)</button></div></div>
+      <svg id="rulerSvg" viewBox="0 0 1000 170" role="group" aria-label="Timeline of key events. Use Tab to move between events."></svg>
+      <div class="ruler-card" id="rulerCard" aria-live="polite"></div>
+    </figure>
+    <nav class="parts" aria-label="The four parts">
+      <a href="#part1"><span class="n">Part 1 · 70,000 years ago</span><span class="q">The Cognitive Revolution</span><span class="d">Chapters 1 to 4: we learn to tell stories</span></a>
+      <a href="#part2"><span class="n">Part 2 · 12,000 years ago</span><span class="q">The Agricultural Revolution</span><span class="d">Chapters 5 to 8: we settle, and get trapped</span></a>
+      <a href="#part3"><span class="n">Part 3 · the last 3,000 years</span><span class="q">The Unification of Humankind</span><span class="d">Chapters 9 to 13: money, empires, religions</span></a>
+      <a href="#part4"><span class="n">Part 4 · 500 years ago</span><span class="q">The Scientific Revolution</span><span class="d">Chapters 14 to 20: knowledge becomes power</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in Hebrew in 2011, in English in 2014</span>
+      <span><b>Grew out of</b> an introductory world history course Harari taught at the Hebrew University of Jerusalem</span>
+      <span><b>Read time</b> about 6 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 20 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== PART 1 ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · about 70,000 to 12,000 years ago</span>
+      <h2>The Cognitive Revolution</h2>
+      <p>For most of their history, humans were a minor animal. Then, around 70,000 years ago, Sapiens started behaving in new ways: making art, boats and better tools, trading over long distances, and spreading across the globe. Part one asks what changed in our heads, how foragers actually lived, and what happened to everything else when we arrived.</p>
+      <div class="claim"><span class="lbl">Harari's big claim</span><p>What made us special wasn't strength or even raw intelligence. It was a new kind of language that let us talk about things that don't exist, and so let huge numbers of strangers cooperate.</p></div>
+    </section>
+
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Our many human cousins</div>
+        <h2>An Animal of No Significance</h2>
+        <div class="short"><span class="lbl">In short</span><p>For two million years, several human species walked the Earth at once, and none of them mattered much. Sapiens was just one more middling ape, until it was the only one left.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"Human" used to mean many species.</b> The genus <i>Homo</i> appeared in East Africa about 2.5 million years ago. Its members spread into Europe and Asia and split into different species: stocky Neanderthals in icy Europe, <i>Homo erectus</i> in East Asia, the metre-tall <i>Homo floresiensis</i> on an Indonesian island, and others. Imagine lions, tigers and leopards: different big cats, all alive together.</span></li>
+          <li><span><b>Big brains are expensive.</b> A human brain is about 2 to 3% of body weight but burns around a quarter of our energy at rest. Early humans paid for it with weaker muscles and more time spent finding food. For a long time it didn't pay off: they mostly scavenged, cracking bones for the marrow other predators left behind.</span></li>
+          <li><span><b>Walking upright had a cost too.</b> Standing up freed the hands, but narrowed the hips. Babies had to be born early, while their heads were still small, so they arrived helpless. Raising them took a group, which pushed humans toward strong social bonds.</span></li>
+          <li><span><b>Fire changed the menu.</b> By about 300,000 years ago humans used fire every day. Cooking made food easier to digest, so guts could shrink and brains could grow. It was the first big power that didn't come from the body.</span></li>
+          <li><span><b>Then the cousins vanished.</b> Sapiens left Africa and, within tens of thousands of years, every other human species was gone. Did we interbreed with them or replace them? DNA says a bit of both: many people today carry a few percent of Neanderthal or Denisovan DNA, but not much more.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: who was alive when?</div><div class="hint">Drag the slider back in time</div></div>
+        <div class="stage"><svg id="svg1" viewBox="0 0 800 330"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s1">Years ago <output id="o1"></output></label><input type="range" id="s1" min="0" max="1000" value="548"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Human species alive</span><span class="v glow" id="v1n"></span></div>
+          <div class="stat"><span class="k">Who's around</span><span class="s" id="v1w"></span></div>
+        </div>
+        <div class="callout">Dates are approximate and many are still argued over; new fossils keep moving them. The book (2011) puts our own species at about 200,000 years old; fossils from Morocco published since then push it back to about <b>300,000</b>.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>We tend to picture evolution as a single line from ape to modern human, as if each stage replaced the last. Harari says that's wrong. It was a crowded family tree with many branches alive at once. The odd thing about today isn't that other humans existed. It's that we're alone.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The Tree of Knowledge →</a></div>
+    </section>
+
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Language, gossip and fiction</div>
+        <h2>The Tree of Knowledge</h2>
+        <div class="short"><span class="lbl">In short</span><p>Around 70,000 years ago Sapiens got a new way of thinking and talking. The key wasn't describing lions; it was inventing stories about things that don't exist. Shared stories let thousands of strangers work together, and that's how we beat everyone else.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The Cognitive Revolution.</b> Between about 70,000 and 30,000 years ago, Sapiens invented boats, oil lamps, bows and arrows, and needles for sewing warm clothes. We also find the first clear art and jewellery, like the ivory "lion-man" figure from Germany. Harari's guess: chance mutations rewired our brains, though nobody knows exactly how.</span></li>
+          <li><span><b>Language for gossip.</b> Many animals can warn "Lion!". Our language is flexible enough to share a huge amount about other people: who is trustworthy, who is sleeping with whom, who cheats. Gossip let bands grow bigger and tighter, because you could know about people without meeting them.</span></li>
+          <li><span><b>The 150 limit.</b> Gossip only stretches so far. Research suggests the natural size of a group held together by personal knowledge is about 150 people. Past that, there are simply too many relationships to track.</span></li>
+          <li><span><b>Fiction breaks the limit.</b> Our unique trick is talking about things that don't physically exist: spirits, tribes, nations, laws, companies. Two strangers who believe in the same god or the same money can cooperate instantly. Harari calls these shared beliefs <i>imagined realities</i>.</span></li>
+          <li><span><b>Peugeot isn't a thing.</b> Destroy every Peugeot factory and car and fire every worker: the company still exists, because it's a legal fiction that lawyers and courts agree on. Most of the powerful things in our world are like this.</span></li>
+          <li><span><b>Culture outruns genes.</b> Ants cooperate in huge numbers, but rigidly, by instinct. Chimps cooperate flexibly, but only in small groups. Sapiens could do both, and could change how it cooperated by changing its stories, without waiting for evolution. From this point, Harari says, history replaces biology as the main way to explain us.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: how big can a group get on gossip alone?</div><div class="row"><button class="btn" aria-pressed="false" id="myth2">Add a shared story</button></div></div>
+        <div class="stage"><svg id="svg2" viewBox="0 0 800 340"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s2">People in the group <output id="o2"></output></label><input type="range" id="s2" min="5" max="1000" value="341"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Relationships to keep track of</span><span class="v glow" id="v2r"></span></div>
+          <div class="stat"><span class="k">What holds the group together</span><span class="s" id="v2h"></span></div>
+        </div>
+        <div class="callout">Every pair of people is one relationship, so the count is <b>n × (n − 1) ÷ 2</b>. It grows much faster than the group: 10 people have 45 pairs, 150 have 11,175, and 1,000 have nearly half a million.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You can't personally know a million people. But you'll happily accept money from a stranger, obey a law written by people you've never met, or cheer for a country of 50 million. That works only because everyone involved believes the same story. A dollar bill is paper; it's valuable because we all agree it is.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: A Day in the Life of Adam and Eve →</a></div>
+    </section>
+
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · How foragers lived</div>
+        <h2>A Day in the Life of Adam and Eve</h2>
+        <div class="short"><span class="lbl">In short</span><p>For nearly all of our history we were hunter-gatherers, and our minds were shaped for that life. Foragers worked fewer hours, ate a more varied diet and suffered less disease than the farmers who came after them, though their lives were far from paradise.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Our brains are still foragers.</b> Why do we gorge on sweet, fatty food? For a forager, finding a tree full of ripe fruit was rare, so eating as much as possible right away made sense. Many of our instincts were tuned to a world of small bands and scarce calories, not to supermarkets and cities.</span></li>
+          <li><span><b>We know very little.</b> Foragers left behind stones and bones, not their beliefs, love lives or politics. Harari stresses this "curtain of silence": anyone who tells you exactly how ancient foragers lived, as peaceful hippies or brutal savages, is guessing.</span></li>
+          <li><span><b>The original affluent society.</b> Studies of modern foragers, like the !Kung of the Kalahari, found they spent around 35 to 45 hours a week getting food, often less. They ate dozens of plants and animals, so a bad year for one crop wasn't a famine.</span></li>
+          <li><span><b>Individually, they were smarter.</b> To survive, each forager needed to know a huge amount about plants, animals, weather, tools and their own body. Today most of us survive by knowing one narrow skill and relying on everyone else. On average, forager brains were even slightly larger than ours.</span></li>
+          <li><span><b>Fewer germs.</b> Most infectious diseases (smallpox, measles, flu) came from farm animals and crowded towns. Small, moving bands didn't give epidemics a chance to spread.</span></li>
+          <li><span><b>Not a paradise.</b> Child mortality was high, accidents could be fatal, and some groups abandoned the old or sick when food ran short. Violence ranged widely, from peaceful bands to massacres such as the 13,000-year-old cemetery at Jebel Sahaba in Sudan, where many of the dead had been killed by arrows.</span></li>
+          <li><span><b>Animism.</b> Many foragers likely believed that places, animals, plants and natural forces had awareness and feelings, and could be spoken to. It was less a religion of gods above than a web of relationships with everything around them.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: forager or farmer, whose life would you take?</div>
+          <div class="row"><button class="btn" aria-pressed="true" data-life="f">Forager</button><button class="btn" aria-pressed="false" data-life="a">Early farmer</button><button class="btn" aria-pressed="false" data-life="b">Side by side</button></div></div>
+        <div class="stage"><svg id="svg3" viewBox="0 0 800 340"></svg></div>
+        <div class="callout" id="cl3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you could pick your life without knowing where you'd be born, a random forager 15,000 years ago might well have had a better deal than a random farmer 5,000 years ago: more free time, more interesting work, a richer diet. That flips the usual story of steady progress on its head, and sets up the argument of the next part.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The Flood →</a></div>
+    </section>
+
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · The first wave of extinction</div>
+        <h2>The Flood</h2>
+        <div class="short"><span class="lbl">In short</span><p>Wherever Sapiens arrived, the giant animals soon disappeared. Long before cities or factories, foragers had already wiped out about half of the planet's big land mammals. We are, Harari says, the deadliest species in the history of life.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Crossing the sea to Australia.</b> About 45,000 years ago Sapiens reached Australia, a journey that needed boats and skilled sailors. It was one of the most important events in history, as big as Columbus reaching America.</span></li>
+          <li><span><b>A continent of giants, emptied.</b> Australia had 2.5-tonne wombat-like diprotodons, marsupial lions and two-metre kangaroos. Within a few thousand years of our arrival, 23 of its 24 animal species weighing 50 kg or more were extinct.</span></li>
+          <li><span><b>Why it happened so fast.</b> Big animals breed slowly, so even light hunting can push them over the edge. They had never seen humans and didn't know to fear them. And foragers burned huge areas of forest to clear the land, changing whole ecosystems.</span></li>
+          <li><span><b>It wasn't just the climate.</b> The climate did shift around then, but these animals had survived many earlier climate swings. What was new each time was us. The same pattern repeats on every landmass, at different dates, always following human arrival.</span></li>
+          <li><span><b>The Americas, then the islands.</b> Sapiens reached America about 16,000 years ago. Mammoths, mastodons, giant ground sloths, horses and camels went extinct; North America lost 34 of its 47 genera of large mammals and South America 50 of 60. Much later, Madagascar lost its giant lemurs and elephant birds, and New Zealand its moa, soon after people arrived.</span></li>
+          <li><span><b>Three waves.</b> The forager wave was the first. Farmers caused the second, and industry is causing the third, today. Harari's warning: we like to think our ancestors lived in harmony with nature. They didn't.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: follow the footprints</div><div class="row" id="reg4"></div></div>
+        <div class="stage"><svg id="svg4" viewBox="0 0 800 330"></svg></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Humans arrive</span><span class="v glow" id="v4a"></span></div>
+          <div class="stat"><span class="k">Large animals lost</span><span class="v" id="v4l"></span></div>
+          <div class="stat"><span class="k">Who disappeared</span><span class="s" id="v4w"></span></div>
+        </div>
+        <div class="callout">Figures are the ones Harari uses. Africa is the exception: there, people and big animals evolved side by side for millions of years, and most big animals learned to keep away from us.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Picture a continent full of giant animals that have never seen a human, so they don't run. A band of hunters arrives. Each hunter takes only a little, but a huge animal that has one baby every two years can't keep up. A few thousand years later, the giants are gone, and the stories about them are all that's left.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#part2">Next: Part 2, The Agricultural Revolution →</a></div>
+    </section>
+
+    <!-- ===================== PART 2 ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · about 12,000 to 3,000 years ago</span>
+      <h2>The Agricultural Revolution</h2>
+      <p>About 12,000 years ago, people in a few places started planting crops and herding animals. It's usually told as a great leap forward. Harari tells it as a trap: more food, but harder lives, and the start of kings, taxes, writing and rigid hierarchies, all held together by new shared stories.</p>
+      <div class="claim"><span class="lbl">Harari's big claim</span><p>Farming made the species more successful but most individuals worse off. Once people were locked in, they needed "imagined orders" (laws, gods, castes) to cooperate in big numbers, and writing to keep track of it all.</p></div>
+    </section>
+
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Farming and its hidden costs</div>
+        <h2>History's Biggest Fraud</h2>
+        <div class="short"><span class="lbl">In short</span><p>We didn't domesticate wheat; wheat domesticated us. Farming produced more food in total, but that food turned into more people, not better lives. The average farmer worked harder and ate worse than a forager, and there was no way back.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It started in several places.</b> Around 9500 to 8500 BC, people in the hills of south-eastern Turkey, western Iran and the Levant began growing wheat and peas and herding goats. Rice, millet, maize, potatoes and other crops were domesticated separately in China, Central America, the Andes and elsewhere.</span></li>
+          <li><span><b>Wheat won.</b> Ten thousand years ago wheat was a wild grass in a small corner of the Middle East. Today it covers millions of square kilometres. It got there by getting a clever ape to clear land, carry water, pull weeds and fight its pests. Our backs, knees and teeth were not built for that work, and skeletons show it.</span></li>
+          <li><span><b>The luxury trap.</b> Each small step made sense: plant a few seeds to get a bit more food. More food meant more children, more children meant more fields were needed, and soon there were too many people to go back to foraging. Nobody planned it. Each generation just made the next one more dependent.</span></li>
+          <li><span><b>Success for the species, misery for individuals.</b> Measured in DNA copies, farming was a huge win: a few million foragers became hundreds of millions of farmers. But a farmer's diet was narrow, a failed harvest meant famine, and villages gave disease and war a place to grow.</span></li>
+          <li><span><b>The temple came first?</b> At Göbekli Tepe in Turkey, foragers built huge carved stone pillars around 9500 BC, before farming. Nearby, wheat was soon domesticated. Maybe people started farming to feed the crowds who came to build temples, not the other way round.</span></li>
+          <li><span><b>The animals paid most.</b> Chickens, cows, pigs and sheep are now among the most widespread large animals on Earth. As a species, they're a triumph. As individuals, many live short, cramped lives built around our needs.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: fall into the wheat trap</div><div class="row"><button class="btn primary" id="go5">Plant wheat (next generation)</button><button class="btn" id="back5">Try to go back to foraging</button><button class="btn" id="reset5">Reset</button></div></div>
+        <div class="stage"><svg id="svg5" viewBox="0 0 800 320"></svg></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Generation</span><span class="v" id="v5g"></span></div>
+          <div class="stat"><span class="k">Village size</span><span class="v glow" id="v5p"></span></div>
+          <div class="stat"><span class="k">Food per person</span><span class="v" id="v5f"></span></div>
+          <div class="stat"><span class="k">Work per week</span><span class="v" id="v5w"></span></div>
+        </div>
+        <div class="callout" id="cl5">Each click is one generation, about 25 years. Watch the totals and the per-person numbers separately.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's like a promotion that pays more but takes over your life. You take it because you'll have more money. Then you buy a bigger house and have more kids, and now you need the job. You can't go back to the old salary, even though you had more free time and were probably happier.</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Some historians and archaeologists think Harari overstates the case: forager life varied hugely, and farmers gained security and stored food. But the core finding, that early farmers were often shorter and less healthy than the foragers before them, is widely accepted.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Building Pyramids →</a></div>
+    </section>
+
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Imagined orders</div>
+        <h2>Building Pyramids</h2>
+        <div class="short"><span class="lbl">In short</span><p>Big societies need millions of strangers to cooperate. They do it through "imagined orders": shared beliefs about how society should work, like Hammurabi's code or human rights. These aren't lies, and they aren't natural laws. They exist because we all believe in them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Farmers worried about the future.</b> Foragers lived day to day. Farmers had to plan for next season and next year, and store surplus food. That surplus fed kings, soldiers, priests and artists, and built cities and pyramids.</span></li>
+          <li><span><b>Two codes, 3,500 years apart.</b> Hammurabi's code (about 1776 BC) said society was a fixed ladder of superiors, commoners and slaves, set by the gods. The US Declaration of Independence (1776 AD) said all men are created equal, with rights from their Creator. Both claim to describe universal truth. Harari argues both are imagined: biology doesn't contain "equality" or "superior people", just organisms that evolved differently.</span></li>
+          <li><span><b>Imagined doesn't mean fake.</b> Believing in human rights is extremely useful; it helps millions live together safely. Harari's point is only that such orders survive because people keep believing in them, not because they're written into nature.</span></li>
+          <li><span><b>How the belief is kept alive.</b> You never say "this is our story". You say it's natural, or God's will. You build it into the world (houses with private bedrooms teach individualism). And it shapes what we want: an ancient Egyptian aristocrat dreamed of a pyramid; a modern professional dreams of a holiday abroad. Both desires come from the culture around them.</span></li>
+          <li><span><b>Three kinds of real.</b> <i>Objective</i> things exist whatever anyone thinks (gravity, radioactivity). <i>Subjective</i> things exist in one mind (your imaginary friend, your headache). <i>Intersubjective</i> things exist in the communication network linking many minds (money, laws, nations, companies). If one person stops believing in the dollar, nothing happens. If billions stop, it's worth nothing.</span></li>
+          <li><span><b>No exit.</b> You can't step outside every imagined order. To escape one prison, you need to believe in another story, and that just takes you into a bigger prison yard.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: what kind of real is it?</div><div class="tally" id="tally6" aria-label="Score"></div></div>
+        <div class="sorter" id="sort6"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A football match only works because both teams and the referee believe in the same rules. The rules aren't in the grass or the ball. Nobody thinks "offside" is a law of physics, yet the whole stadium acts as if it's real. Societies run on much bigger versions of the same thing.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Memory Overload →</a></div>
+    </section>
+
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · The invention of writing</div>
+        <h2>Memory Overload</h2>
+        <div class="short"><span class="lbl">In short</span><p>Human brains evolved to remember faces and fruit trees, not tax records for a kingdom. Writing was invented to store numbers, and with it came bureaucracy: a new way of thinking in lists, forms and categories that runs the world today.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Kingdoms run on data.</b> A king needs to know who owns which fields, who has paid tax, how much barley is in the warehouses. Thousands of people times dozens of numbers is far more than any memory can hold. Without a way to store it, big states could not exist.</span></li>
+          <li><span><b>The Sumerians solved it.</b> Between about 3500 and 3000 BC in southern Mesopotamia, people began pressing marks into clay tablets. The first script was "partial": it recorded numbers and a few signs for people, animals, goods, dates and places. You couldn't write a poem with it, but you could write a receipt.</span></li>
+          <li><span><b>The first name we know.</b> One early tablet reads, roughly, "29,086 measures of barley, 37 months, Kushim". Kushim may be an official or a title. Either way, the first name in history probably belonged to an accountant, not a king or prophet.</span></li>
+          <li><span><b>Base 60.</b> Sumerian maths mixed counting in 6s and 10s into a base-60 system. It survives every time you look at a clock (60 minutes, 60 seconds) or measure a circle (360 degrees).</span></li>
+          <li><span><b>Other solutions.</b> The Inca empire in the Andes kept its records in quipus: cords with knots of different colours and positions, holding numbers about taxes and property.</span></li>
+          <li><span><b>Writing changed how we think.</b> Full scripts came later, by about 3000 to 2500 BC. But the deeper change was bureaucracy: filing systems, catalogues and forms. Over time, numbers took over, from Indian numerals (which we call Arabic) to the binary code of computers. Increasingly, Harari says, writing is something machines do with each other.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: write a number like a Sumerian scribe</div><div class="row"><button class="btn" data-n7="29086">Kushim's barley</button><button class="btn" data-n7="60">60</button><button class="btn" data-n7="3600">One hour in seconds</button><button class="btn" data-n7="365">Days in a year</button></div></div>
+        <div class="stage"><svg id="svg7" viewBox="0 0 800 260"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s7">Your number <output id="o7"></output></label><input type="range" id="s7" min="1" max="40000" value="29086"></div></div>
+        <div class="callout" id="cl7"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Writing wasn't invented for stories or love letters. It was invented for spreadsheets. Next time you fill in a form with neat boxes for your name, date of birth and ID number, you're doing something that started with Sumerian clerks keeping track of barley.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: There Is No Justice in History →</a></div>
+    </section>
+
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Hierarchies and how they stick</div>
+        <h2>There Is No Justice in History</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every large society has ranked people into groups: free and slave, high caste and low, white and Black, men and women. These rankings usually start as historical accidents and are then kept going by myths that make them seem natural.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Hierarchies are useful, and unfair.</b> They let strangers know how to treat each other without meeting first. But they're rarely based on real differences in ability. Most people simply inherit their place.</span></li>
+          <li><span><b>The vicious circle.</b> A chance event puts one group on top. Laws and stories then explain why that's right. The group below is kept poor and uneducated, which then looks like proof that it deserved its place. The circle can run for centuries.</span></li>
+          <li><span><b>Race in America.</b> Europeans brought enslaved Africans to the Americas for practical reasons: Africa was close, there was already a slave market there, and many Africans had some immunity to malaria and yellow fever. Racist myths came later, to justify it. After slavery ended, poverty and segregation kept the circle turning.</span></li>
+          <li><span><b>Caste in India.</b> The Hindu caste system may have started with invaders ranking local people. It was turned into religious law, with ideas of purity and pollution making it feel like part of the cosmic order.</span></li>
+          <li><span><b>Biology enables, culture forbids.</b> Biology allows a huge range of behaviours. It's culture that labels some "unnatural". The idea that body parts have a "natural" purpose (and that using them otherwise is wrong) comes from theology, not from evolution.</span></li>
+          <li><span><b>The puzzle of patriarchy.</b> Almost every farming society ranked men above women. Why? Muscle power doesn't explain it (the top jobs rarely need muscle). Aggression doesn't either (generals and kings aren't chosen for it). Harari admits there's no good answer yet, and notes how fast this hierarchy has been changing in the last century.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: watch the vicious circle turn</div>
+          <div class="row"><button class="btn" aria-pressed="true" data-c8="race">Race in America</button><button class="btn" aria-pressed="false" data-c8="caste">Caste in India</button></div></div>
+        <div class="steps"><svg id="svg8" viewBox="0 0 420 380"></svg><div class="step-txt" id="txt8" aria-live="polite"></div></div>
+        <div class="lab-ctl"><div class="row"><button class="btn" id="prev8">← Back</button><button class="btn primary" id="next8">Turn the circle →</button></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Imagine a school where, by pure luck, one class gets the good classrooms and the best teachers. A few years later that class gets the best grades, and people say "see, they're just smarter". The luck becomes invisible, and the gap starts to look natural. That's the trap Harari describes.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#part3">Next: Part 3, The Unification of Humankind →</a></div>
+    </section>
+
+    <!-- ===================== PART 3 ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · roughly the last 3,000 years</span>
+      <h2>The Unification of Humankind</h2>
+      <p>For most of history, humanity was split into thousands of separate little worlds. Today almost everyone lives inside one global system. Part three asks how that happened, and names three forces that pulled us together: money, empires and universal religions.</p>
+      <div class="claim"><span class="lbl">Harari's big claim</span><p>History has a direction: toward unity. Three "universal orders" made it possible for anyone, anywhere, to be a potential customer, subject or believer.</p></div>
+    </section>
+
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · From many worlds to one</div>
+        <h2>The Arrow of History</h2>
+        <div class="short"><span class="lbl">In short</span><p>Cultures are always changing, partly because every culture is full of contradictions it tries to resolve. Seen from far away, the changes add up to one long trend: thousands of small, separate societies merging into fewer, bigger ones, and finally into a single global world.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>No culture is frozen.</b> There's no "authentic" unchanging tradition. Every culture keeps shifting, pushed by its own environment, its neighbours and its inner tensions.</span></li>
+          <li><span><b>Contradictions drive change.</b> Medieval knights were supposed to be both devout Christians and fearless warriors. Modern societies prize both liberty and equality, which often clash. Living with these tensions, Harari says, is uncomfortable, but it's what makes cultures creative.</span></li>
+          <li><span><b>Zoom out and there's a direction.</b> Around 10,000 BC there were thousands of separate human worlds. By 2000 BC there were hundreds at most. By 1450 more than 90% of people lived in one giant Afro-Asian world, with a few others (Mesoamerica, the Andes, Australia, Oceania) cut off from it. Today there's just one.</span></li>
+          <li><span><b>Thinking "us" bigger.</b> In the first millennium BC, three ideas appeared that could, in principle, include all of humanity: money (everyone is a possible trading partner), empire (everyone is a possible subject) and universal religion (everyone is a possible believer). Merchants, conquerors and prophets were the first to imagine one world.</span></li>
+          <li><span><b>Even our "local" things are global.</b> Italian food relies on tomatoes, which came from Mexico. Indian curry relies on chillies, also from the Americas. What feels like ancient tradition is often the result of global mixing in the last few centuries.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: count the worlds</div><div class="hint">Drag through 12,000 years</div></div>
+        <div class="stage"><svg id="svg9" viewBox="0 0 800 330"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s9">Year <output id="o9"></output></label><input type="range" id="s9" min="0" max="4" step="0.01" value="0"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Separate human worlds</span><span class="v glow" id="v9n"></span></div>
+          <div class="stat"><span class="k">People in the largest world</span><span class="v" id="v9b"></span></div>
+          <div class="stat"><span class="k">What's happening</span><span class="s" id="v9e"></span></div>
+        </div>
+        <div class="callout">Each dot is a world that had no meaningful contact with the others. Counts are Harari's rough estimates, drawn to show the trend, not a census.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Imagine a map covered in thousands of tiny ponds. Over time, streams connect them into lakes, the lakes join into seas, and finally there's one ocean. Some ponds fought being joined, and plenty of fish suffered along the way, but the direction of the water never really reversed.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The Scent of Money →</a></div>
+    </section>
+
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Money as trust</div>
+        <h2>The Scent of Money</h2>
+        <div class="short"><span class="lbl">In short</span><p>Money isn't coins or paper. It's the most universal and efficient system of mutual trust ever invented. People who agree on nothing else, not gods, not kings, not language, will still accept the same money.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Gold fever.</b> When Hernán Cortés reached Mexico in 1519, the Aztecs were puzzled by the Spaniards' obsession with gold, which to them was a pretty metal for jewellery. Within a generation, the whole world was trading in the same coins.</span></li>
+          <li><span><b>Barter doesn't scale.</b> If you only swap goods, you need to know how many apples equal one pair of shoes, how many shoes equal a goat, and so on, for every pair of goods. With 100 goods that's 4,950 exchange rates. With money, you need just 100 prices.</span></li>
+          <li><span><b>Anything can be money.</b> Barley in Sumer, cowry shells across Africa and Asia for thousands of years, cigarettes in prison camps. What matters is that everyone accepts it. The first coins were struck in Lydia, in today's western Turkey, around 640 BC, stamped to guarantee their weight and purity.</span></li>
+          <li><span><b>Trust in what others trust.</b> A peasant accepts a coin because she believes the merchant will, the merchant because the tax collector will, and so on. Roman denarii were used far beyond the empire's borders, even in India, because people trusted that others trusted Rome.</span></li>
+          <li><span><b>Most money doesn't exist physically.</b> More than 90% of the world's money is just numbers on computer servers. Coins and notes are a small fraction.</span></li>
+          <li><span><b>The dark side.</b> Money makes everything convertible, so it can also turn things that used to depend on loyalty and family (care, honour, friendship) into transactions. It builds trust between strangers while eating away at trust within communities.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: run a market with and without money</div><div class="row"><button class="btn" aria-pressed="true" data-m10="barter">Barter</button><button class="btn" aria-pressed="false" data-m10="money">With money</button></div></div>
+        <div class="stage"><svg id="svg10" viewBox="0 0 800 340"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s10">Kinds of goods in the market <output id="o10"></output></label><input type="range" id="s10" min="3" max="1000" value="172"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Exchange rates with barter</span><span class="v" id="v10a"></span></div>
+          <div class="stat"><span class="k">Prices with money</span><span class="v glow" id="v10b"></span></div>
+          <div class="stat"><span class="k">Money saves you</span><span class="s" id="v10c"></span></div>
+        </div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Hand a hungry stranger a $20 bill and they'll give you a sandwich, even though they've never met you and the bill is just printed paper. That small miracle, repeated billions of times a day, is what money really is: a story about trust that almost everyone believes.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Imperial Visions →</a></div>
+    </section>
+
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Empires</div>
+        <h2>Imperial Visions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Empires were the most common form of government for the last 2,500 years. They were often brutal, but they also mixed peoples and cultures into larger wholes, and much of what we call our own culture is an imperial inheritance.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What makes an empire.</b> Two things: it rules many different peoples, each with its own identity, and its borders are flexible, so it can keep swallowing more without changing its basic structure. Size, origin and form of government don't matter.</span></li>
+          <li><span><b>The irony of Numantia.</b> In 134 BC the Romans besieged Numantia, a Celtic town in Spain whose people chose death over surrender. Centuries later Spaniards made Numantia a symbol of national courage, telling its story in Spanish, a language descended from Latin, as Catholics, a faith spread by Rome. The conquered had become Roman.</span></li>
+          <li><span><b>"For the good of all".</b> Cyrus the Great of Persia, around 550 BC, was among the first to claim he ruled for the benefit of all his subjects, not just his own people. Chinese thinkers spoke of <i>Tianxia</i>, "all under heaven", one order for the whole world. These ideas made empires feel inclusive.</span></li>
+          <li><span><b>The imperial cycle.</b> A small group builds an empire. An imperial culture forms. Subjects adopt it, then demand equal status. The founders lose their special position, but the culture lives on. Rome, the Islamic caliphates and the British Empire all went round this loop.</span></li>
+          <li><span><b>Good or bad?</b> Empires killed and enslaved millions. They also spread law, languages, roads, science and art. Harari's point is that we can't simply cancel the legacy: the languages we speak and the ideas of justice we use to criticise empires often came from empires.</span></li>
+          <li><span><b>The global empire to come.</b> Since about 200 BC most humans have lived in empires. Harari suggests a new kind of global empire is forming now, run not by one country but by a multi-ethnic elite bound together by a shared culture and interests.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: go round the imperial cycle</div>
+          <div class="row"><button class="btn" aria-pressed="true" data-e11="rome">Rome</button><button class="btn" aria-pressed="false" data-e11="islam">Islam</button><button class="btn" aria-pressed="false" data-e11="brit">Britain</button></div></div>
+        <div class="steps"><svg id="svg11" viewBox="0 0 420 380"></svg><div class="step-txt" id="txt11" aria-live="polite"></div></div>
+        <div class="lab-ctl"><div class="row"><button class="btn" id="prev11">← Back</button><button class="btn primary" id="next11">Next stage →</button></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>An Indian activist demanding independence from Britain in fluent English, quoting British ideas about liberty and self-rule, is the imperial cycle in action. The empire's culture became the tool its subjects used to end it.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: The Law of Religion →</a></div>
+    </section>
+
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · From spirits to humanism</div>
+        <h2>The Law of Religion</h2>
+        <div class="short"><span class="lbl">In short</span><p>Religion is the third great unifier. Harari defines it as a system of human norms and values founded on belief in a superhuman order. By that definition, modern ideologies like liberalism and communism are religions too, and so are some that don't mention gods at all.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>From local to universal.</b> Animist beliefs were tied to one valley or forest. Only with farming and empires did religions appear that claimed to be true for everyone, everywhere, and wanted to spread.</span></li>
+          <li><span><b>Polytheism was tolerant.</b> Belief in many gods usually came with one supreme, impersonal force (like Fate) above them. Polytheists could easily add other people's gods. In 300 years, Rome killed a few thousand Christians; in a single night of 1572, the St Bartholomew's Day massacre, French Catholics killed thousands of fellow-Christian Protestants.</span></li>
+          <li><span><b>Monotheism was missionary.</b> Belief in one all-powerful god who cares about humans made a religion exclusive, and often eager to convert. Christianity and Islam spread over huge areas this way, while quietly keeping saints and angels that look a lot like the old gods.</span></li>
+          <li><span><b>Dualism and the problem of evil.</b> Religions like Zoroastrianism explained suffering as a war between good and evil powers. Monotheism never fully solved "why does a good God allow evil?", and many believers mix ideas from all these systems.</span></li>
+          <li><span><b>Religions of natural law.</b> Buddhism, Jainism, Daoism and Stoicism focus on laws of nature, not gods. The Buddha taught that suffering comes from craving, and that we can be free by letting go of it.</span></li>
+          <li><span><b>Worshipping humanity.</b> In the last few centuries, new "humanist religions" put humans at the centre. <i>Liberal humanism</i> holds each individual sacred. <i>Socialist humanism</i> holds humanity as a collective sacred, and values equality. <i>Evolutionary humanism</i>, whose most notorious version was Nazism, wanted to protect and improve the species. Each rests on beliefs about humans that biology can't prove.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: which humanist religion said it?</div><div class="tally" id="tally12" aria-label="Score"></div></div>
+        <div class="sorter" id="sort12"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Harari's test for a religion isn't "does it have a god?" but "does it tell you how to live, based on an order you can't vote on?" "Follow your heart" and "each human life is sacred" are, in that sense, articles of faith, just as much as a commandment from a mountain.</p></div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Calling liberalism or communism a "religion" is one of the book's most argued-over moves. Many readers see it as a useful lens, not a literal claim: it highlights that every political system rests on values that facts alone can't prove.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: The Secret of Success →</a></div>
+    </section>
+
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Why history can't be predicted</div>
+        <h2>The Secret of Success</h2>
+        <div class="short"><span class="lbl">In short</span><p>Looking back, it seems obvious that history went the way it did. It wasn't. History can't be predicted, and it isn't steered toward human happiness. Ideas spread because they're good at spreading, not because they're good for us.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The hindsight fallacy.</b> In 300 AD, Christianity was one of several eastern cults in the Roman Empire. Had you predicted it would become the state religion within a century, people would have laughed. The better you know a period, the harder it is to explain why things went one way and not another.</span></li>
+          <li><span><b>Level-two chaos.</b> Weather is "level one" chaos: it doesn't react to forecasts. Markets and politics are "level two": they react to predictions about them. If everyone believes oil will be expensive tomorrow, they buy today, and the price jumps today. So a perfect prediction can destroy itself.</span></li>
+          <li><span><b>Why study history, then?</b> Not to predict the future, but to free ourselves from the past. Seeing that our world is one of many possible outcomes shows that other choices were possible, and still are.</span></li>
+          <li><span><b>Mental parasites.</b> Cultures may behave like viruses. Ideas (scholars call them memes) spread whether or not they help their hosts. A belief that drives people to sacrifice themselves can still spread very successfully.</span></li>
+          <li><span><b>History doesn't care about us.</b> There's no evidence that the cultures that won were the ones that made people happiest. Success in history just means "spread widely". The next part asks how one culture, Europe's, came to spread across the globe.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: re-run the Roman Empire</div><div class="row"><button class="btn primary" id="go13">Roll history once</button><button class="btn" id="many13">Roll 1,000 times</button><button class="btn" id="reset13">Reset</button></div></div>
+        <div class="stage"><svg id="svg13" viewBox="0 0 800 300"></svg></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Histories rolled</span><span class="v" id="v13n">0</span></div>
+          <div class="stat"><span class="k">Last result</span><span class="s" id="v13l">Start in the year 300 and see which faith ends up on top by 500.</span></div>
+        </div>
+        <div class="callout">The odds here are invented to make a point, not a historical estimate. Harari's argument is that from the year 300 you genuinely couldn't have known which way it would go; the one history we got was <b>one roll of the dice</b>, not destiny.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>After a football match ends, every pundit can explain why the winner won. Before kick-off, none of them could tell you the score. History is the same, except there's no rematch to check whether the explanation was right.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#part4">Next: Part 4, The Scientific Revolution →</a></div>
+    </section>
+
+    <!-- ===================== PART 4 ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · about 1500 AD to today</span>
+      <h2>The Scientific Revolution</h2>
+      <p>In 1500 there were about 500 million humans. Today there are more than 8 billion, producing and consuming far more each than anyone did then. Part four explains the engine behind that explosion, a feedback loop of science, empire and capitalism, then asks whether any of it made us happier, and what comes after Sapiens.</p>
+      <div class="claim"><span class="lbl">Harari's big claim</span><p>The real revolution was admitting ignorance. Once Europeans accepted they didn't know everything, they went looking, and found that new knowledge gave new power, which paid for more knowledge.</p></div>
+    </section>
+
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Science and progress</div>
+        <h2>The Discovery of Ignorance</h2>
+        <div class="short"><span class="lbl">In short</span><p>Older traditions assumed everything important was already known, in scripture or ancient wisdom. Modern science starts from "we don't know". That humble admission, joined to the belief that new knowledge brings new power, launched the idea of progress.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three new habits.</b> Modern science is willing to admit ignorance, puts observation and mathematics at the centre, and aims to gain new powers, not just to understand.</span></li>
+          <li><span><b>Empty maps.</b> Medieval maps filled unknown lands with monsters or guesswork. From the 1500s, European mapmakers began leaving blank spaces. A blank space was an invitation: go and find out what's there.</span></li>
+          <li><span><b>The idea of progress.</b> If you can learn new things, you can solve problems that once seemed permanent. Poverty, disease and famine stopped being "God's will" and became technical problems. Benjamin Franklin's lightning rod is Harari's example: science disarming the wrath of the gods.</span></li>
+          <li><span><b>The Gilgamesh Project.</b> In the ancient epic, Gilgamesh searches for immortality and fails. Modern science treats death itself as a technical problem to be solved, one disease at a time.</span></li>
+          <li><span><b>Science needs money.</b> Research is expensive, and scientists rarely choose their own priorities. Governments and businesses fund what helps them gain power or profit. That's why science grew up alongside empire and capitalism.</span></li>
+          <li><span><b>Children didn't use to survive.</b> Even royalty couldn't protect their children before modern medicine. King Edward I of England and Queen Eleanor had sixteen children in the 13th century, with every advantage money could buy. Ten died in childhood.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: the royal nursery</div><div class="row"><button class="btn" aria-pressed="true" data-t14="then">1255 to 1284</button><button class="btn" aria-pressed="false" data-t14="now">With today's medicine</button></div></div>
+        <div class="stage"><svg id="svg14" viewBox="0 0 800 290"></svg></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Children who reached adulthood</span><span class="v glow" id="v14a"></span></div>
+          <div class="stat"><span class="k">Died in childhood</span><span class="v" id="v14d"></span></div>
+          <div class="stat"><span class="k">Why it matters</span><span class="s" id="v14w"></span></div>
+        </div>
+        <div class="callout">Tap a cradle to see what happened to each child. "Today" uses an approximate modern rate for wealthy countries, where well under 1 in 100 children dies before 18.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A medieval scholar asked something they didn't know would look it up in the Bible or Aristotle; if it wasn't there, it wasn't important. A modern scientist says "nobody knows yet, let's find out". That one change in attitude turned out to be the most powerful idea in history.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The Marriage of Science and Empire →</a></div>
+    </section>
+
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Why Europe?</div>
+        <h2>The Marriage of Science and Empire</h2>
+        <div class="short"><span class="lbl">In short</span><p>Europe wasn't richer or more advanced than China or the Ottomans in 1500. What set it apart was a mindset that joined science and conquest: explorers sailed with scientists, and empires funded research because knowledge helped them rule.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Ships full of scientists.</b> When James Cook sailed for the Pacific in 1768, his ship carried astronomers, botanists and artists as well as marines. The voyage brought back huge amounts of knowledge, and laid the ground for Britain to take Australia and New Zealand.</span></li>
+          <li><span><b>Scurvy, solved by experiment.</b> For centuries scurvy killed huge numbers of sailors on long voyages. In 1747 the Scottish naval doctor James Lind tested six remedies on sick sailors and found that citrus fruit worked. Cook made his crews eat fruit and sauerkraut and lost almost no one to the disease.</span></li>
+          <li><span><b>Conquest for knowledge.</b> Napoleon took around 165 scholars when he invaded Egypt in 1798; they founded modern Egyptology. British officers decoded cuneiform and mapped India. Studying the conquered made ruling them easier, and sometimes it also preserved knowledge the locals had lost.</span></li>
+          <li><span><b>Empires that wanted new things.</b> The Chinese admiral Zheng He's fleets in the early 1400s were far bigger than Columbus's, but China lost interest in going further. Europeans went to conquer the unknown. Their maps had blank spaces they wanted to fill.</span></li>
+          <li><span><b>Science served racism too.</b> The same scientific confidence was used to justify empire, ranking peoples as "advanced" or "primitive". Harari is clear that science gave Europeans power, not moral authority.</span></li>
+          <li><span><b>Why not elsewhere?</b> Europe's early advantage wasn't technology, but the values, myths and institutions (science, capitalism, imperial ambition) that let it use new technology once it appeared. By 1850 it dominated the world.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: run Dr Lind's scurvy trial (1747)</div><div class="row"><button class="btn primary" id="go15">Treat for 6 days</button><button class="btn" id="reset15">Reset</button></div></div>
+        <div class="stage"><svg id="svg15" viewBox="0 0 800 300"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s15">Day of the trial <output id="o15">Day 0</output></label><input type="range" id="s15" min="0" max="6" step="0.02" value="0"></div></div>
+        <div class="callout" id="cl15">Twelve sailors with scurvy, paired up, each pair given a different remedy that doctors of the time believed in. Guess which works before you press the button.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of a company that hires researchers not out of love for knowledge but because the research makes the products better. European empires treated science that way. The research was real, and some of it helped the whole world, but it was paid for because it helped win.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: The Capitalist Creed →</a></div>
+    </section>
+
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Credit and capitalism</div>
+        <h2>The Capitalist Creed</h2>
+        <div class="short"><span class="lbl">In short</span><p>The modern economy runs on trust in the future. Credit lets us spend tomorrow's money today, on the belief that the pie will keep growing. Capitalism turned that belief into a creed, with enormous benefits and some terrible costs.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The pie grows.</b> For most of history people assumed the economy was a fixed pie: if I got more, you got less. Credit only works if you believe the future will be richer than the present. Once people believed it, it became true.</span></li>
+          <li><span><b>Money from trust.</b> Banks lend out most of what's deposited with them, and that loan gets deposited somewhere else and lent again. One real dollar can support many dollars of credit. That sounds like a scam, Harari says, but it's simply trust in the future.</span></li>
+          <li><span><b>Adam Smith's twist.</b> In 1776 Smith argued that when a business owner pursues profit and reinvests it, everyone benefits: more workers hired, more goods made. Greed, reinvested, became a public good. Profits should be ploughed back into production, not wasted.</span></li>
+          <li><span><b>Capital and empire.</b> The Dutch East India Company (1602) was a joint-stock company that raised money from investors and ran wars and colonies. The British fought the Opium War (1840 to 1842) partly to protect drug dealers' profits in China.</span></li>
+          <li><span><b>When trust breaks.</b> John Law's Mississippi Company in France sold shares in imaginary riches; the bubble burst in 1720 and helped bankrupt the French state. Trust in the future can be built, but it can also be faked.</span></li>
+          <li><span><b>The cost.</b> The free market, left to itself, did not protect people. The Atlantic slave trade moved around 10 million Africans to the Americas as a business. Harari's verdict: capitalism produced huge wealth, but blind faith in it overlooks the people it crushed.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: how $1 million becomes many</div></div>
+        <div class="stage"><svg id="svg16" viewBox="0 0 800 300"></svg></div>
+        <div class="lab-ctl"><div class="ctl"><label for="s16">Share of each deposit the bank keeps in the vault <output id="o16"></output></label><input type="range" id="s16" min="5" max="100" value="10"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Real cash deposited</span><span class="v">$1,000,000</span></div>
+          <div class="stat"><span class="k">Total in everyone's accounts</span><span class="v glow" id="v16t"></span></div>
+          <div class="stat"><span class="k">Rounds of lending shown</span><span class="v" id="v16r"></span></div>
+        </div>
+        <div class="callout">Each bar is a deposit that came from the last loan. A builder deposits $1M; the bank lends most of it to a baker, who pays a contractor, who deposits it again. Total money tends toward <b>$1M ÷ the reserve share</b>. This is a simplified model; real banking has more rules, but the idea is the same.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you believe your friend's bakery will be a hit, you'll lend her money to start it. She hires people and buys ovens, those people spend their wages, and the bakery really does succeed. Your belief in the future helped create the future. Multiply that by millions and you get the modern economy.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: The Wheels of Industry →</a></div>
+    </section>
+
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · Energy and consumerism</div>
+        <h2>The Wheels of Industry</h2>
+        <div class="short"><span class="lbl">In short</span><p>The Industrial Revolution was a revolution in energy. Learning to turn heat into motion freed us from the limits of muscle and firewood. With energy and raw materials no longer scarce, the economy's new problem became who would buy all the stuff, so consumerism was born.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Heat into motion.</b> For all of history, nearly all work was done by muscle: human or animal. In the early 1700s, British engineers built steam engines to pump water from coal mines. Soon the same idea drove looms, trains and ships. Then came oil, electricity and the internal combustion engine.</span></li>
+          <li><span><b>Energy isn't really scarce.</b> The sun delivers about as much energy to Earth in an hour or two as all of humanity uses in a year. The limit was never the supply of energy, only our knowledge of how to capture it.</span></li>
+          <li><span><b>Raw materials too.</b> Aluminium was once so hard to make that Napoleon III gave his most honoured guests aluminium cutlery, while the rest got gold. Once chemists found a cheap process, it became foil. The same story repeated with many materials.</span></li>
+          <li><span><b>Animals became machines.</b> Industrial farming treats chickens, pigs and cows as production units. Harari calls the suffering of farm animals one of the worst crimes in history.</span></li>
+          <li><span><b>The new ethic: buy.</b> For most of history, thrift was a virtue. Industry produces so much that it needs us to keep buying. Consumerism makes buying a pleasure and a duty. The rich follow the capitalist ethic (invest), and the rest of us follow the consumerist one (spend).</span></li>
+          <li><span><b>Clock time.</b> Farming followed the sun and seasons. Factories and railways needed everyone on the same clock. Train timetables pushed Britain to standardise time across the country in the 1800s.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: how many invisible servants do you have?</div><div class="row"><button class="btn" data-p17="world">Around the world average</button><button class="btn" data-p17="us">High-energy life</button><button class="btn" data-p17="low">Low-energy life</button></div></div>
+        <div class="stage"><svg id="svg17" viewBox="0 0 800 220"></svg></div>
+        <div class="lab-ctl"><div class="toggles" id="tg17"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Energy you use per day</span><span class="v" id="v17e"></span></div>
+          <div class="stat"><span class="k">People working by hand to match it</span><span class="v glow" id="v17s"></span></div>
+          <div class="stat"><span class="k">In other words</span><span class="s" id="v17w"></span></div>
+        </div>
+        <div class="callout">A fit person doing hard physical work all day produces roughly <b>0.6 kWh</b> of useful energy (about 75 watts for 8 hours). Activity figures are rough averages, including the hidden energy used to make your food and goods.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A Roman emperor had hundreds of slaves to carry him, cook, fan him and bring water. A modern middle-class person has the equivalent in machines: an engine, a fridge, a heater, a washing machine. The Industrial Revolution gave ordinary people the energy budget of ancient kings.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: A Permanent Revolution →</a></div>
+    </section>
+
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Family, state and peace</div>
+        <h2>A Permanent Revolution</h2>
+        <div class="short"><span class="lbl">In short</span><p>The biggest social change of the last 200 years was the collapse of the family and local community, and their replacement by the state and the market. It made us free individuals, and lonelier ones. It also came with the most peaceful era in human history.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Family used to be everything.</b> For thousands of years your family and village were your welfare system, bank, police, school, employer and health service. If you fell out with them, you were in deep trouble.</span></li>
+          <li><span><b>The state and the market moved in.</b> They offered people a deal: "Become individuals. Marry whoever you want, work wherever you like. We'll provide food, jobs, education, health care, pensions and protection." It was liberating, but it also left many people dependent on faceless systems instead of people who know them.</span></li>
+          <li><span><b>New imagined communities.</b> As real communities faded, we filled the gap with imagined ones: nations of millions of strangers who feel like kin, and consumer tribes of fans and brand loyalists.</span></li>
+          <li><span><b>Change is now normal.</b> For most of history, society was stable and change was a shock. Now change is constant. Harari calls it a permanent revolution.</span></li>
+          <li><span><b>The most peaceful age.</b> In the early 2000s, far fewer people died from war and crime than from suicide or diabetes. Harari puts it bluntly: sugar is now more dangerous than gunpowder. Nuclear weapons made great-power war suicidal, and wealth now comes from knowledge, which can't be looted like gold mines.</span></li>
+          <li><span><b>But not guaranteed.</b> Peace rests on fragile beliefs and institutions. Harari wrote this before more recent wars, which show how quickly it can be tested.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: who looks after you?</div><div class="row"><button class="btn" aria-pressed="true" data-t18="care">Then and now</button><button class="btn" aria-pressed="false" data-t18="death">What kills us (2012)</button></div></div>
+        <div id="care18"><div class="flips" id="flips18"></div><div class="callout" id="cl18">Tap each card to move from <b>1750</b> to <b>today</b>.</div></div>
+        <div id="death18" hidden><div class="stage"><svg id="svg18" viewBox="0 0 800 280"></svg></div><div class="callout">Approximate worldwide deaths in 2012, the figures Harari cites. About 56 million people died that year; human violence of all kinds caused about 1 in 90 of those deaths.</div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your great-great-grandparents probably married someone their families approved of, worked the family land and were cared for by their children in old age. Today you likely chose your partner, your job and your city yourself, and when you're old, a pension and a care home may matter more than your kids. That's freedom, and it's also a huge experiment.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#ch19">Next: And They Lived Happily Ever After →</a></div>
+    </section>
+
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 19</span> · Are we any happier?</div>
+        <h2>And They Lived Happily Ever After</h2>
+        <div class="short"><span class="lbl">In short</span><p>We have far more power and wealth than our ancestors, but it's not clear we're happier. Happiness depends less on circumstances than on expectations, biochemistry and meaning, and those haven't improved nearly as fast as our tools.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Historians ignored happiness.</b> Books of history tell us about kings, wars and inventions, but almost never ask whether people felt better or worse. Harari calls this the biggest gap in our understanding of history.</span></li>
+          <li><span><b>Money helps, up to a point.</b> Surveys of well-being find that money matters a lot when you're poor and much less once basic needs are met. Family and community matter more than wealth. Health matters, but people adapt surprisingly well, except to chronic pain.</span></li>
+          <li><span><b>Expectations eat gains.</b> When things improve, expectations rise to match. A lottery winner or someone who gets the promotion they dreamed of feels a rush, and then, within months, returns to roughly where they were.</span></li>
+          <li><span><b>The biochemical thermostat.</b> Biologists argue that happiness is set by hormones like serotonin and dopamine, which evolved to keep us striving, not satisfied. Each person has a range: one might swing between 6 and 10 on a scale of 10, settling around 8; another between 3 and 7, settling around 5.</span></li>
+          <li><span><b>Meaning matters.</b> Raising children involves a lot of moment-to-moment unpleasantness, yet parents often call it the most meaningful thing they do. A life that feels meaningful can be satisfying even when it's hard. Harari suggests that meaning may itself be a kind of shared delusion, but a useful one.</span></li>
+          <li><span><b>The Buddhist view.</b> Buddhism says the chase for pleasant feelings is the problem. Happiness comes from seeing your feelings as fleeting and no longer craving them. On this view, true happiness depends on knowing yourself.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: the happiness thermostat</div>
+          <div class="row"><button class="btn" aria-pressed="true" data-p19="a">Person A (range 6 to 10)</button><button class="btn" aria-pressed="false" data-p19="b">Person B (range 3 to 7)</button></div></div>
+        <div class="stage"><svg id="svg19" viewBox="0 0 800 300"></svg></div>
+        <div class="lab-ctl"><div class="row" id="ev19"></div></div>
+        <div class="stats">
+          <div class="stat"><span class="k">Mood right now</span><span class="v glow" id="v19m"></span></div>
+          <div class="stat"><span class="k">What just happened</span><span class="s" id="v19e">Nothing yet. Life goes on.</span></div>
+        </div>
+        <div class="callout">A simplified picture of the "hedonic set point" idea Harari describes: events push mood up or down, but it drifts back toward a personal baseline. The numbers are illustrative.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Remember wanting a phone so badly you thought about it every day? After a month of owning it, it was just your phone. Harari's question is whether all of history works like that: we keep upgrading our world, and our minds keep resetting to "normal".</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this chapter</label><a class="next" href="#ch20">Next: The End of Homo Sapiens →</a></div>
+    </section>
+
+    <!-- ===================== 20 ===================== -->
+    <section class="ch" id="ch20" data-n="20">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 20</span> · Designing what comes next</div>
+        <h2>The End of Homo Sapiens</h2>
+        <div class="short"><span class="lbl">In short</span><p>For four billion years, life evolved by natural selection. Now we're starting to replace it with intelligent design, our own. Through biology, cyborg technology and artificial intelligence, Sapiens may soon upgrade itself into something that is no longer Sapiens at all.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Biological engineering.</b> Scientists already reshape living things deliberately. In 2000 an artist commissioned Alba, a rabbit with a jellyfish gene that made it glow green under blue light. Researchers grew ear-shaped cartilage on the back of a mouse. Changing human genes is the obvious next step.</span></li>
+          <li><span><b>Cyborg engineering.</b> Joining bodies with machines: bionic arms controlled by thought, cochlear implants that let deaf people hear, and experiments linking brains directly to computers. If brains can be networked, what happens to the idea of a separate self?</span></li>
+          <li><span><b>Inorganic life.</b> Computer programs that can learn and evolve on their own, independent of biology. Harari pointed to computer viruses and early brain-simulation projects. Today's AI systems make the question feel much less hypothetical.</span></li>
+          <li><span><b>The Singularity.</b> Physicists call the point where known laws stop working a singularity. Harari suggests history may be approaching one: a point after which the future is run by beings so different from us that our ideas of "I", "you", "men" and "women" may no longer apply.</span></li>
+          <li><span><b>The real question.</b> The technology is coming, and it's hard to stop. So the important question isn't "what do we want to become?" but "what do we want to want?" Harari ends by saying that those who aren't troubled by that question probably haven't thought about it enough.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab20">
+        <div class="lab-top"><div class="t">Lab: which road beyond Sapiens?</div><div class="tally" id="tally20" aria-label="Score"></div></div>
+        <div class="sorter" id="sort20"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A Neanderthal would struggle to understand a world of smartphones and stock markets. Harari asks whether we might be the Neanderthals of the future: if our descendants edit their genes and merge with computers, they may find us as hard to relate to as we would find them.</p></div>
+      <div class="quiz" data-q="20"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="20"> I understand this chapter</label><a class="next" href="#after">Next: Afterword →</a></div>
+    </section>
+
+    <!-- ===================== AFTERWORD ===================== -->
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>The Animal That Became a God</h2>
+      <p>Seventy thousand years ago, Sapiens was an unimportant animal minding its own business in a corner of Africa. Since then, it has spread across the planet, wiped out countless species, built global networks of trade and belief, walked on the Moon and split the atom. It's on the verge of becoming a god, able to design life itself.</p>
+      <p class="big">Yet we seem no more content than before, and we're still not sure what we want. Harari's closing question: is there anything more dangerous than dissatisfied and irresponsible gods who don't know what they want?</p>
+      <div class="recap">
+        <div><span class="n">70,000 years ago</span><b>Cognitive Revolution</b><span>Shared fictions let strangers cooperate. History begins.</span></div>
+        <div><span class="n">12,000 years ago</span><b>Agricultural Revolution</b><span>More food, more people, harder lives. Imagined orders hold it together.</span></div>
+        <div><span class="n">The last 3,000 years</span><b>Unification</b><span>Money, empires and religions pull humanity into one world.</span></div>
+        <div><span class="n">500 years ago</span><b>Scientific Revolution</b><span>Admitting ignorance unlocks power. Next stop: redesigning ourselves.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Sapiens: A Brief History of Humankind</i> by Yuval Noah Harari (2011; English edition 2014). Explanations are written in our own words and summarise Harari's arguments, which are themselves debated by historians, archaeologists and anthropologists. Figures follow the book unless noted; the labs are simplified models to show the shape of an idea, not precise data.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#13110f';
+try { const t = localStorage.getItem('sp-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('sp-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const PARTS = ['The Cognitive Revolution','The Agricultural Revolution','The Unification of Humankind','The Scientific Revolution'];
+const CH = [
+  ['An Animal of No Significance','Our cousins',0],['The Tree of Knowledge','Fiction',0],['A Day in the Life of Adam and Eve','Foragers',0],['The Flood','Extinctions',0],
+  ['History\'s Biggest Fraud','Wheat trap',1],['Building Pyramids','Imagined orders',1],['Memory Overload','Writing',1],['There Is No Justice in History','Hierarchies',1],
+  ['The Arrow of History','One world',2],['The Scent of Money','Money',2],['Imperial Visions','Empires',2],['The Law of Religion','Religion',2],['The Secret of Success','Hindsight',2],
+  ['The Discovery of Ignorance','Ignorance',3],['The Marriage of Science and Empire','Science + empire',3],['The Capitalist Creed','Credit',3],['The Wheels of Industry','Industry',3],
+  ['A Permanent Revolution','Family + state',3],['And They Lived Happily Ever After','Happiness',3],['The End of Homo Sapiens','What\'s next',3]
+];
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${p+1} · ${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('sp-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('sp-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of 20 understood`;
+  $('#progBar').style.width = (done.size * 5) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+const QUIZ = {
+  1:{q:`What was unusual about the world 100,000 years ago, compared with today?`,o:[`Humans hadn't learned to use fire yet`,`Several different human species were alive at the same time`,`Sapiens already lived on every continent`],a:1,w:`Neanderthals, Homo erectus, Denisovans, the little Flores humans and Sapiens all shared the planet. Being the only human species is the strange part.`},
+  2:{q:`According to Harari, what let Sapiens cooperate in groups far larger than 150?`,o:[`Bigger muscles and better weapons`,`Shared myths and stories about things that don't physically exist`,`A gene for obedience`],a:1,w:`Gossip tops out around 150 people. Shared fictions (gods, nations, money, companies) let total strangers trust each other.`},
+  3:{q:`Compared with early farmers, foragers typically…`,o:[`Worked longer hours for less food`,`Ate a more varied diet and suffered fewer infectious diseases`,`Lived in large, crowded towns`],a:1,w:`Many plants and animals meant no single crop failure was a disaster, and small moving bands gave epidemics little chance.`},
+  4:{q:`What happened to Australia's giant animals after humans arrived about 45,000 years ago?`,o:[`They adapted and still live there`,`Almost all of the large species went extinct within a few thousand years`,`They were all domesticated as farm animals`],a:1,w:`23 of the 24 species weighing over 50 kg disappeared. The same pattern repeated in the Americas, Madagascar and New Zealand.`},
+  5:{q:`Why does Harari call the Agricultural Revolution "history's biggest fraud"?`,o:[`Farming produced less food than foraging`,`More food meant more people, not better lives, and there was no going back`,`Farmers were tricked by kings into planting wheat`],a:1,w:`Total food rose, but it turned into more mouths. Individuals worked harder, ate a narrower diet and faced famine and disease: the luxury trap.`},
+  6:{q:`Which of these is "intersubjective": real because many people believe in it?`,o:[`Radioactivity`,`Your headache`,`The euro`],a:2,w:`Radioactivity exists regardless of belief; a headache exists in one mind. Money exists in the network of many minds that agree to trust it.`},
+  7:{q:`What was writing first invented to record?`,o:[`Poems and myths about the gods`,`Numbers: taxes, goods, debts and property`,`The laws of the king`],a:1,w:`The earliest Sumerian script was a "partial" script for accounts. The first name we know, Kushim, appears on a barley receipt.`},
+  8:{q:`In Harari's "vicious circle", what keeps a hierarchy going?`,o:[`Real, inborn differences in ability`,`A historical accident, justified by myths, which then create the poverty that seems to prove them`,`Simple random chance each generation`],a:1,w:`The result of discrimination (poverty, less education) gets mistaken for proof that the myth was true, which justifies more discrimination.`},
+  9:{q:`Which three "universal orders" first imagined all humans as one group?`,o:[`Money, empire and universal religion`,`Writing, farming and the wheel`,`Science, industry and democracy`],a:0,w:`Merchants saw everyone as a possible customer, conquerors as a possible subject, and prophets as a possible believer.`},
+  10:{q:`What is money, at bottom, according to Harari?`,o:[`Gold and silver`,`Whatever the government prints`,`A system of mutual trust`],a:2,w:`Coins, shells and digital numbers all work only because each person trusts that everyone else will accept them.`},
+  11:{q:`What usually happens in the "imperial cycle"?`,o:[`The empire's culture dies with it`,`Subjects adopt the imperial culture and eventually demand, and win, equal status`,`The founding people stay on top forever`],a:1,w:`Rome, the caliphates and Britain all saw conquered peoples adopt the imperial culture and then use it to claim equal rights.`},
+  12:{q:`Which humanist religion holds each individual's freedom as sacred?`,o:[`Liberal humanism`,`Socialist humanism`,`Evolutionary humanism`],a:0,w:`Socialist humanism focuses on equality of humanity as a whole; evolutionary humanism on improving the species. Liberalism sanctifies the inner individual.`},
+  13:{q:`What is "level two" chaos?`,o:[`Chaos that is twice as hard to predict as the weather`,`A system that reacts to predictions about it, like a market`,`Chaos that only happens in wartime`],a:1,w:`The weather doesn't care about forecasts. Markets and politics do: a forecast changes behaviour, which changes the outcome.`},
+  14:{q:`What was new about modern science, according to Harari?`,o:[`It was the first time people studied nature`,`It started by admitting ignorance, and aimed at gaining new powers`,`It rejected mathematics`],a:1,w:`Earlier traditions assumed the important things were already known. Science says "we don't know", then looks, and uses what it finds.`},
+  15:{q:`What did James Lind discover in his 1747 trial?`,o:[`That seawater cures scurvy`,`That citrus fruit cures scurvy`,`That scurvy is caused by bad air`],a:1,w:`Of six remedies, only the oranges and lemons worked. Cook later kept his crews eating fresh food and almost none died of scurvy.`},
+  16:{q:`What does the modern credit economy fundamentally depend on?`,o:[`Gold reserves in bank vaults`,`Trust that the future will be richer than the present`,`Fixed prices set by the government`],a:1,w:`Lending only makes sense if the pie will grow. Belief in growth lets money be created, and that money helps the growth happen.`},
+  17:{q:`What was the core breakthrough of the Industrial Revolution?`,o:[`Converting one form of energy into another, like heat into motion`,`The discovery of gold in California`,`Better hand tools`],a:0,w:`Steam engines turned the heat of burning coal into movement, freeing work from the limits of muscle.`},
+  18:{q:`What replaced the family and local community as the centre of most people's lives?`,o:[`The church`,`The state and the market`,`The army`],a:1,w:`States and markets now handle jobs, care, education, money and protection, turning people into individuals and weakening old bonds.`},
+  19:{q:`Why don't big improvements in life reliably make us happier?`,o:[`Expectations rise and our biochemistry pulls us back toward a set point`,`People never notice improvements`,`Happiness is completely random`],a:0,w:`Gains feel great for a while, then expectations catch up and our mood drifts back toward its usual range.`},
+  20:{q:`What does Harari say is the most important question about our future?`,o:[`How fast computers will become`,`What do we want to want?`,`Which country will rule the world?`],a:1,w:`We may soon be able to redesign our own desires. Deciding what we want to want is the question behind every other one.`}
+};
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- hero: hand stencils ---------- */
+{ const svg = $('#hands'); svg.setAttribute('viewBox', '0 0 1200 700');
+  const hand = (x, y, s, r, id) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">
+    <circle r="120" fill="url(#spray)"/>
+    <g ${F('ink')}><rect x="-38" y="-10" width="76" height="80" rx="30"/>
+    <rect x="-36" y="-82" width="16" height="78" rx="8" transform="rotate(-8)"/><rect x="-16" y="-98" width="16" height="92" rx="8" transform="rotate(-2)"/>
+    <rect x="4" y="-94" width="16" height="88" rx="8" transform="rotate(4)"/><rect x="22" y="-76" width="15" height="72" rx="7.5" transform="rotate(10)"/>
+    <rect x="30" y="-2" width="16" height="62" rx="8" transform="rotate(-48 38 20)"/><rect x="-28" y="60" width="56" height="60" rx="12"/></g></g>`;
+  svg.innerHTML = `<defs><radialGradient id="spray"><stop offset="0" style="stop-color:var(--glow);stop-opacity:.55"/><stop offset=".55" style="stop-color:var(--glow);stop-opacity:.22"/><stop offset="1" style="stop-color:var(--glow);stop-opacity:0"/></radialGradient></defs>`
+    + hand(1020, 150, 1, 14) + hand(880, 330, .72, -18) + hand(1110, 470, .85, 32);
+}
+
+/* ---------- hero: the timeline ---------- */
+{ const EV = [
+    {ya:13.8e9, when:'13.8 billion years ago', what:'The Big Bang', d:'Matter, energy, time and space appear. The story of physics begins.'},
+    {ya:4.5e9, when:'4.5 billion years ago', what:'Earth forms', d:'Our planet takes shape around a young sun.'},
+    {ya:3.8e9, when:'3.8 billion years ago', what:'Life appears', d:'The first organisms. The story of biology begins.'},
+    {ya:6e6, when:'6 million years ago', what:'Our last common grandmother', d:'The last shared ancestor of humans and chimpanzees.'},
+    {ya:2.5e6, when:'2.5 million years ago', what:'The genus Homo', d:'The first humans evolve in Africa and make the first stone tools.'},
+    {ya:5e5, when:'500,000 years ago', what:'Neanderthals', d:'Neanderthals evolve in Europe and the Middle East.'},
+    {ya:3e5, when:'300,000 years ago', what:'Fire, and Homo sapiens', d:'Daily use of fire. Our own species appears in Africa (the book says about 200,000 years ago; newer fossils push it back).', ch:1},
+    {ya:7e4, when:'70,000 years ago', what:'The Cognitive Revolution', d:'Fictional language appears. History begins, and Sapiens spreads out of Africa.', rev:1, ch:'part1'},
+    {ya:4.5e4, when:'45,000 years ago', what:'Sapiens reaches Australia', d:'Australia\'s giant animals go extinct soon after.', ch:4},
+    {ya:3e4, when:'30,000 to 40,000 years ago', what:'Neanderthals disappear', d:'The last of our closest cousins vanish.'},
+    {ya:1.6e4, when:'16,000 years ago', what:'Sapiens reaches America', d:'Mammoths, giant sloths and many other big animals disappear.', ch:4},
+    {ya:1.2e4, when:'12,000 years ago', what:'The Agricultural Revolution', d:'Plants and animals are domesticated. Permanent villages appear.', rev:1, ch:'part2'},
+    {ya:5e3, when:'about 3000 BC', what:'Kingdoms, writing, money', d:'The first kingdoms, scripts and money in Sumer and Egypt. Polytheistic religions.', ch:7},
+    {ya:4.25e3, when:'about 2250 BC', what:'The first empire', d:'Sargon of Akkad rules the first known empire.', ch:11},
+    {ya:2.5e3, when:'about 500 BC', what:'The great unifiers', d:'Coins. The Persian Empire, "for the benefit of all". Buddhism in India.', rev:1, ch:'part3'},
+    {ya:2e3, when:'about the year 0', what:'Han China, Rome, Christianity', d:'Two vast empires; a new universal religion.', ch:12},
+    {ya:1.4e3, when:'about AD 600', what:'Islam', d:'Another universal, missionary religion spreads fast.', ch:12},
+    {ya:500, when:'about 1500', what:'The Scientific Revolution', d:'Humans admit ignorance and start gaining unprecedented power. Europeans conquer America and the oceans.', rev:1, ch:'part4'},
+    {ya:200, when:'about 1800', what:'The Industrial Revolution', d:'Family and community are replaced by state and market. Mass extinction of plants and animals.', ch:17},
+    {ya:60, when:'Today', what:'Now', d:'Humans go beyond Earth. Nuclear weapons threaten survival. Organisms are increasingly shaped by intelligent design, not natural selection.', ch:20},
+  ];
+  const svg = $('#rulerSvg'), card = $('#rulerCard'); let scale = 'log', sel = 7;
+  let L = 30, R = 970, W = 1000; const Y = 92;
+  const xOf = ya => scale === 'log'
+    ? L + (Math.log10(13.8e9) - Math.log10(ya)) / (Math.log10(13.8e9) - Math.log10(60)) * (R - L)
+    : L + (3e5 - Math.min(ya, 3e5)) / 3e5 * (R - L);
+  function draw(){
+    const nw = NARROW(); W = nw ? 460 : 1000; L = nw ? 20 : 30; R = W - L; vb(svg, W, 170);
+    const fs = nw ? 14 : 12, maxC = nw ? 15 : 20, gapX = nw ? 120 : 118, tf = nw ? 13 : 11;
+    const vis = EV.map((e,i) => ({...e, i})).filter(e => scale === 'log' || e.ya <= 3e5);
+    let s = `<line x1="${L}" y1="${Y}" x2="${R}" y2="${Y}" ${S('line',2)}/>`;
+    if (scale === 'log'){
+      [[1e9,'1 billion'],[1e6,'1 million'],[1e3,'1,000'],[1e2,'100']].forEach(([v,t]) => { const x = xOf(v); s += `<line x1="${x}" y1="${Y-5}" x2="${x}" y2="${Y+5}" ${S('faint')}/>` + TX(x, Y + 72, t + (nw ? '' : ' yrs ago'), 'faint', tf, 'middle'); });
+    } else {
+      [3e5,2e5,1e5,0].forEach(v => { const x = xOf(Math.max(v,1)); s += `<line x1="${x}" y1="${Y-5}" x2="${x}" y2="${Y+5}" ${S('faint')}/>` + TX(x, Y + 72, v ? fmt(v) + (nw ? '' : ' yrs ago') : 'today', 'faint', tf, 'middle'); });
+      const x0 = xOf(1.2e4); s += `<rect x="${x0}" y="${Y-14}" width="${R - x0}" height="28" ${F('glow', .14)}/>` + TX(R, Y - 22, nw ? 'farming to today →' : 'farming to smartphones fits in here →', 'glow', tf, 'end');
+    }
+    // labels: four rows, skip if crowded
+    const rows = [[],[],[],[]], rowY = [28, 50, 134, 156];
+    vis.forEach((e, k) => { e.x = xOf(e.ya); let placed = -1;
+      const order = k % 2 ? [2,3,0,1] : [0,1,2,3];
+      for (const r of order){ const lastX = rows[r].length ? rows[r][rows[r].length - 1] : -1e9; if (e.x - lastX > gapX){ placed = r; rows[r].push(e.x); break; } }
+      e.row = placed; });
+    vis.forEach(e => {
+      const on = e.i === sel, big = e.rev;
+      if (e.row >= 0){ const ly = rowY[e.row]; const lab = e.what.length > maxC ? e.what.slice(0, maxC - 1) + '…' : e.what;
+        s += `<line x1="${e.x}" y1="${Y}" x2="${e.x}" y2="${ly + (e.row < 2 ? 4 : -12)}" ${S(on ? 'glow' : 'line')}/>`
+          + TX(clamp(e.x, nw ? 60 : 50, W - (nw ? 60 : 50)), ly, lab, on ? 'text' : (big ? 'glow' : 'muted'), fs, 'middle'); }
+      s += `<g class="ev" tabindex="0" role="button" data-i="${e.i}" aria-label="${e.when}: ${e.what}"><circle cx="${e.x}" cy="${Y}" r="14" fill="transparent"/><circle cx="${e.x}" cy="${Y}" r="${big ? 7 : 5}" ${F(on || big ? 'glow' : 'muted')} ${on ? 'stroke-width="3" style="fill:var(--glow);stroke:var(--text)"' : ''}/></g>`;
+    });
+    svg.innerHTML = s;
+    svg.querySelectorAll('.ev').forEach(g => { const act = () => { sel = +g.dataset.i; draw(); }; g.addEventListener('click', act); g.addEventListener('mouseenter', act); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } }); g.addEventListener('focus', act); });
+    const e = EV[sel];
+    card.innerHTML = `<span class="when">${e.when}</span><span class="what">${e.what}</span><p>${e.d}${e.ch ? ` <a href="#${typeof e.ch === 'number' ? 'ch' + e.ch : e.ch}">Read more →</a>` : ''}</p>`;
+  }
+  $$('[data-scale]').forEach(b => b.addEventListener('click', () => { scale = b.dataset.scale; press($$('[data-scale]'), b); if (scale === 'lin' && EV[sel].ya > 3e5) sel = 7; draw(); }));
+  onLayout(draw)();
+}
+
+/* ---------- shared: sorter game (chapters 6, 12, 20) ---------- */
+function sorter(boxSel, tallySel, bins, items){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The tricky ones are worth a second look.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); show(); }); return; }
+    const it = items[order[i]];
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">Item ${i + 1} of ${items.length}</span><span class="item">${it.t}</span><span class="fb" hidden></span></div>
+      <div class="bins">${bins.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b><span>${b.d}</span></button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Yes.' : 'Not quite: ' + bins.find(b => b.id === it.a).label + '.'}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- shared: stepper around a circle (chapters 8, 11) ---------- */
+function stepper(svgSel, txtSel, prevSel, nextSel, tabSel, tabKey, sets, labels, centre){
+  const svg = $(svgSel), txt = $(txtSel); let set = Object.keys(sets)[0], k = 0;
+  function draw(){
+    const nw = NARROW(), fz = nw ? 18 : 12; svg.setAttribute('viewBox', nw ? '-85 0 590 390' : '-50 0 520 380');
+    const n = labels.length, cx = 210, cy = 190, R = 130; let s = '';
+    s += `<circle cx="${cx}" cy="${cy}" r="${R}" ${S('line', 2)}/>`;
+    for (let j = 0; j < n; j++){ // arrows
+      const a0 = -Math.PI/2 + (j + .22) / n * 2 * Math.PI, a1 = -Math.PI/2 + (j + .78) / n * 2 * Math.PI;
+      const x0 = cx + R*Math.cos(a0), y0 = cy + R*Math.sin(a0), x1 = cx + R*Math.cos(a1), y1 = cy + R*Math.sin(a1);
+      const lit = j < k; s += `<path d="M${x0} ${y0} A${R} ${R} 0 0 1 ${x1} ${y1}" ${S(lit ? 'glow' : 'line', lit ? 3 : 2)}/>`;
+      const ah = a1 + .02, tx = -Math.sin(ah), ty = Math.cos(ah), px = cx + R*Math.cos(ah), py = cy + R*Math.sin(ah);
+      s += `<path d="M${px + tx*9} ${py + ty*9} L${px - ty*6 - tx*0} ${py + tx*6} M${px + tx*9} ${py + ty*9} L${px + ty*6} ${py - tx*6}" ${S(lit ? 'glow' : 'line', 2)}/>`;
+    }
+    for (let j = 0; j < n; j++){
+      const a = -Math.PI/2 + j / n * 2 * Math.PI, x = cx + R*Math.cos(a), y = cy + R*Math.sin(a), on = j === k, past = j < k;
+      s += `<circle cx="${x}" cy="${y}" r="${on ? 24 : 19}" ${on ? F('glow') : past ? 'style="fill:var(--glow-soft);stroke:var(--glow);stroke-width:1.5"' : 'style="fill:var(--panel-2);stroke:var(--line);stroke-width:1.5"'}/>`
+        + TX(x, y + 5, j + 1, on ? 'on-glow' : past ? 'glow' : 'muted', 15, 'middle', 'font-weight="600"');
+      const lx = cx + (R + 48) * Math.cos(a), ly = cy + (R + 40) * Math.sin(a) + 4;
+      const words = labels[j].split(' '); let l1 = '', l2 = ''; words.forEach(w => { if ((l1 + ' ' + w).trim().length <= (nw ? 10 : 14) && !l2) l1 = (l1 + ' ' + w).trim(); else l2 = (l2 + ' ' + w).trim(); });
+      const anchor = Math.cos(a) > .3 ? 'start' : Math.cos(a) < -.3 ? 'end' : 'middle';
+      const ax = anchor === 'start' ? cx + (R + 32) * Math.cos(a) : anchor === 'end' ? cx + (R + 32) * Math.cos(a) : lx;
+      s += TX(ax, ly - (l2 ? fz / 2 : 0), l1, on ? 'text' : 'faint', fz, anchor) + (l2 ? TX(ax, ly + fz * .8, l2, on ? 'text' : 'faint', fz, anchor) : '');
+    }
+    s += TX(cx, cy - 4, centre[0], 'muted', fz + 1, 'middle') + TX(cx, cy + 16, centre[1], 'muted', fz + 1, 'middle');
+    svg.innerHTML = s;
+    const st = sets[set][k];
+    txt.innerHTML = `<span class="k">Step ${k + 1} of ${labels.length} · ${labels[k]}</span><h4>${st[0]}</h4><p>${st[1]}</p>`;
+    $(prevSel).disabled = k === 0; $(nextSel).textContent = k === labels.length - 1 ? 'Start again ↺' : $(nextSel).dataset.lbl;
+  }
+  $(nextSel).dataset.lbl = $(nextSel).textContent;
+  $(prevSel).addEventListener('click', () => { k = Math.max(0, k - 1); draw(); });
+  $(nextSel).addEventListener('click', () => { k = (k + 1) % labels.length; draw(); });
+  $$(tabSel).forEach(b => b.addEventListener('click', () => { set = b.dataset[tabKey]; k = 0; press($$(tabSel), b); draw(); }));
+  onLayout(draw)();
+}
+
+/* ================= 1: who was alive when ================= */
+{ const SP = [
+    {n:'Homo rudolfensis', r:'East Africa', a:2.0e6, b:1.8e6},
+    {n:'Homo ergaster', r:'East Africa', a:1.9e6, b:1.4e6},
+    {n:'Homo erectus', r:'East Asia', a:1.9e6, b:1.4e5},
+    {n:'Neanderthals', r:'Europe and West Asia', a:4.0e5, b:4.0e4},
+    {n:'Denisovans', r:'Siberia and East Asia', a:2.0e5, b:5.0e4},
+    {n:'Homo soloensis', r:'Java', a:1.2e5, b:1.08e5},
+    {n:'Homo floresiensis', r:'Flores, Indonesia', a:1.0e5, b:5.0e4},
+    {n:'Homo sapiens', r:'Africa, then everywhere', a:3.0e5, b:0, us:1}
+  ];
+  let L = 170, R = 780; const top = 26, rh = 32;
+  const T0 = Math.log10(2.0e6 + 1e4), T1 = 4;
+  const xOf = ya => L + (T0 - Math.log10(ya + 1e4)) / (T0 - T1) * (R - L);
+  const yaOf = v => Math.pow(10, T1 + (1000 - v) / 1000 * (T0 - T1)) - 1e4;
+  const label = ya => ya < 500 ? 'today' : ya >= 1e6 ? (ya/1e6).toFixed(2).replace(/0$/,'') + ' million years ago' : fmt(Math.round(ya / (ya > 1e5 ? 1e4 : 1e3)) * (ya > 1e5 ? 1e4 : 1e3)) + ' years ago';
+  function draw(){
+    const nw = NARROW(), fs = nw ? 14 : 13; L = nw ? 136 : 170; R = nw ? 410 : 780; vb($('#svg1'), nw ? 420 : 800, 330);
+    const v = +$('#s1').value, ya = Math.max(0, yaOf(v)), cx = xOf(ya);
+    let s = '';
+    (nw ? [[2e6,'2M'],[5e5,'500k'],[1e5,'100k'],[2e4,'20k'],[0,'now']] : [[2e6,'2M'],[1e6,'1M'],[5e5,'500k'],[2e5,'200k'],[1e5,'100k'],[5e4,'50k'],[2e4,'20k'],[0,'now']]).forEach(([t,l]) => { const x = xOf(t);
+      s += `<line x1="${x}" y1="${top - 8}" x2="${x}" y2="${top + SP.length * rh}" ${S('line', 1, ';stroke-dasharray:2 4')}/>` + TX(x, top + SP.length * rh + 18, l, 'faint', nw ? 13 : 11, 'middle'); });
+    const alive = [];
+    SP.forEach((p, i) => { const y = top + i * rh, x0 = xOf(p.a), x1 = Math.max(xOf(p.b), x0 + 6), on = ya <= p.a && ya >= p.b; if (on) alive.push(p);
+      s += TX(L - 10, y + 17, nw ? p.n.replace('Homo ', 'H. ') : p.n, on ? 'text' : 'faint', fs, 'end', p.us ? 'font-weight="600"' : '');
+      s += `<rect x="${x0}" y="${y + 5}" width="${x1 - x0}" height="16" rx="8" ${F(p.us ? 'glow' : 'cool', on ? .9 : .28)}/>`; });
+    s += `<line x1="${cx}" y1="${top - 14}" x2="${cx}" y2="${top + SP.length * rh}" ${S('text', 2)}/><circle cx="${cx}" cy="${top - 14}" r="4" ${F('text')}/>`;
+    $('#svg1').innerHTML = s;
+    $('#o1').textContent = label(ya);
+    $('#v1n').textContent = alive.length;
+    $('#v1w').textContent = alive.length === 1 && alive[0].us ? 'Just us. Every other human species is gone.' : alive.length ? alive.map(p => `${p.n} (${p.r})`).join(', ') : 'A gap in the record';
+  }
+  $('#s1').addEventListener('input', draw); onLayout(draw)();
+}
+
+/* ================= 2: gossip vs fiction ================= */
+{ let myth = false;
+  const nOf = v => Math.round(5 * Math.pow(200, (v - 5) / 995));
+  function draw(){
+    const nw = NARROW(), W = nw ? 420 : 800, H = 340, cx = W / 2, cy = 170; vb($('#svg2'), W, H);
+    const n = nOf(+$('#s2').value), pairs = n * (n - 1) / 2;
+    const groups = Math.ceil(n / 150), shownG = Math.min(groups, 7);
+    let s = ''; const rand = rng(n * 7 + 3);
+    const centres = shownG === 1 ? [[cx, cy]] : Array.from({length: shownG}, (_, g) => { const a = -Math.PI/2 + g / shownG * 2 * Math.PI; return [cx + (nw ? 135 : 230) * Math.cos(a), cy + (nw ? 108 : 115) * Math.sin(a)]; });
+    if (myth && n > 1){
+      s += `<ellipse cx="${cx}" cy="${cy}" rx="${shownG > 1 ? (nw ? 200 : 330) : 150}" ry="${shownG > 1 ? 160 : 150}" ${S('glow', 2, ';stroke-dasharray:6 6')}/>`;
+    }
+    centres.forEach(([gx, gy], g) => {
+      const size = g < groups - 1 ? 150 : n - 150 * (groups - 1), dots = Math.min(size, shownG > 1 ? 34 : 70), rad = shownG > 1 ? (nw ? 38 : 48) : Math.min(140, 30 + Math.sqrt(dots) * 13);
+      const pts = [];
+      if (shownG === 1 && dots <= 40){ for (let k = 0; k < dots; k++){ const a = k / dots * 2 * Math.PI; pts.push([gx + rad * Math.cos(a), gy + rad * Math.sin(a)]); } }
+      else for (let k = 0; k < dots; k++){ const a = rand() * 2 * Math.PI, r = Math.sqrt(rand()) * rad; pts.push([gx + r * Math.cos(a), gy + r * Math.sin(a)]); }
+      if (myth) pts.forEach(([x, y]) => { s += `<line x1="${x}" y1="${y}" x2="${cx}" y2="${cy}" ${S('glow', .6, ';stroke-opacity:.35')}/>`; });
+      const allPairs = dots <= 40;
+      for (let a = 0; a < pts.length; a++) for (let b = a + 1; b < pts.length; b++){
+        if (!allPairs && (b - a) > 3) continue;
+        s += `<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" ${S('cool', .7, ';stroke-opacity:' + (allPairs ? .35 : .5))}/>`; }
+      pts.forEach(([x, y]) => { s += `<circle cx="${x}" cy="${y}" r="${shownG > 1 ? 3 : 4}" ${F('text')}/>`; });
+      if (shownG > 1) s += TX(gx, gy + rad + 16, fmt(size) + ' people', 'muted', 11, 'middle');
+    });
+    if (groups > shownG) s += TX(cx, H - 6, `+ ${groups - shownG} more bands of about 150`, 'faint', 12, 'middle');
+    if (myth && n > 1) s += `<circle cx="${cx}" cy="${cy}" r="26" ${F('glow')}/>` + TX(cx, cy + 4, 'story', 'on-glow', 12, 'middle', 'font-weight="600"');
+    if (!myth && groups > 1) s += TX(cx, 22, nw ? 'Past ~150, the band splits' : 'Past about 150, gossip can\'t hold everyone: the band splits', 'bad', nw ? 15 : 13, 'middle');
+    $('#svg2').innerHTML = s;
+    $('#o2').textContent = fmt(n);
+    $('#v2r').textContent = fmt(pairs);
+    $('#v2h').textContent = n <= 50 ? 'Gossip. Like a chimp troop, everyone knows everyone.' : n <= 150 ? 'Gossip, just about. You can know about everyone, if not well.' : myth ? 'A shared story: the same ancestors, spirits or gods. Strangers can now trust each other.' : 'Nothing. Too many people to know; the group splits into rival bands.';
+  }
+  $('#s2').addEventListener('input', draw);
+  $('#myth2').addEventListener('click', e => { myth = !myth; e.currentTarget.setAttribute('aria-pressed', myth); e.currentTarget.textContent = myth ? 'Remove the shared story' : 'Add a shared story'; draw(); });
+  onLayout(draw)();
+}
+
+/* ================= 3: forager vs farmer ================= */
+{ const D = [
+    ['Hours a week getting food', 4, 'about 35 to 45', 7, 'dawn to dusk in season'],
+    ['Variety in the diet', 9, 'dozens of plants and animals', 3, 'a few staple crops'],
+    ['Risk of famine', 3, 'lower: many back-ups', 8, 'higher: one crop fails, all fail'],
+    ['Infectious disease', 2, 'rare in small, moving bands', 8, 'from animals and crowding'],
+    ['Average height and health', 8, 'taller', 5, 'shorter, worse teeth and backs'],
+    ['Skills each person needs', 9, 'expert in their whole world', 5, 'narrower, repetitive work'],
+    ['Stored food and shelter', 3, 'little stored, mostly on the move', 7, 'granaries and houses'],
+    ['Size of community', 2, 'tens of people', 7, 'villages, later cities'],
+  ];
+  let mode = 'f';
+  function draw(){
+    const nw = NARROW(), L = nw ? 10 : 220, R = nw ? 410 : 770, rh = nw ? (mode === 'b' ? 66 : 58) : 40, off = nw ? 22 : 0, fs = nw ? 14 : 12; let s = '';
+    D.forEach(([k, f, ft, a, at], i) => { let y = 14 + i * rh;
+      if (nw){ s += TX(L, y + 14, k, 'text', 15); y += off; }
+      else s += TX(L - 14, y + (mode === 'b' ? 20 : 16), k, 'text', 13, 'end');
+      s += `<rect x="${L}" y="${y + 2}" width="${R - L}" height="${mode === 'b' ? 30 : 22}" rx="6" ${F('panel-2')}/>`;
+      const bar = (v, c, yy, hh, t) => { const bw = (R - L) * v / 10, inside = v >= 6;
+        return `<rect x="${L}" y="${yy}" width="${bw}" height="${hh}" rx="5" ${F(c, .85)}/>` + TX(inside ? L + bw - 8 : L + bw + 8, yy + hh / 2 + fs * .36, t, inside ? 'on-glow' : 'muted', fs, inside ? 'end' : 'start'); };
+      if (mode === 'f') s += bar(f, 'glow', y + 2, 22, ft);
+      else if (mode === 'a') s += bar(a, 'cool', y + 2, 22, at);
+      else s += bar(f, 'glow', y + 2, 14, ft) + bar(a, 'cool', y + 18, 14, at);
+    });
+    const LH = 14 + D.length * rh + (mode === 'b' ? 24 : 4); vb($('#svg3'), nw ? 420 : 800, LH);
+    if (mode === 'b') s += `<rect x="${L}" y="${14 + D.length * rh + 2}" width="12" height="12" rx="3" ${F('glow')}/>` + TX(L + 18, 14 + D.length * rh + 12, 'Forager', 'muted', 12) + `<rect x="${L + 100}" y="${14 + D.length * rh + 2}" width="12" height="12" rx="3" ${F('cool')}/>` + TX(L + 118, 14 + D.length * rh + 12, 'Early farmer', 'muted', 12);
+    $('#svg3').innerHTML = s;
+    $('#cl3').innerHTML = mode === 'f' ? 'A forager\'s life: <b>varied work, varied food, few germs</b>, but little security and high child mortality. Bars are rough comparisons, not measurements.'
+      : mode === 'a' ? 'An early farmer\'s life: <b>more total food and stored grain</b>, but long hours of repetitive labour, a narrow diet and new diseases.'
+      : 'Side by side, farming wins on <b>security and numbers</b>; foraging wins on <b>quality of life</b> for the individual. That\'s the trade Harari thinks we didn\'t realise we were making.';
+  }
+  $$('[data-life]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.life; press($$('[data-life]'), b); draw(); }));
+  onLayout(draw)();
+}
+
+/* ================= 4: follow the footprints ================= */
+{ const RG = [
+    {k:'af', n:'Africa', ya:3e5, arr:'Home: ~300,000 yrs ago', lost:'Relatively few', w:'Animals evolved alongside humans for millions of years and learned to fear us.', tot:0},
+    {k:'au', n:'Australia', ya:4.5e4, arr:'~45,000 yrs ago', lost:'23 of 24 species', w:'Diprotodons, marsupial lions, giant kangaroos and giant lizards.', tot:24, gone:23},
+    {k:'na', n:'North America', ya:1.6e4, arr:'~16,000 yrs ago', lost:'34 of 47 genera', w:'Mammoths, mastodons, horses, camels, giant beavers, sabre-toothed cats.', tot:47, gone:34},
+    {k:'sa', n:'South America', ya:1.4e4, arr:'~14,000 yrs ago', lost:'50 of 60 genera', w:'Giant ground sloths, armadillo-like glyptodonts, and more.', tot:60, gone:50},
+    {k:'mg', n:'Madagascar', ya:1500, arr:'~1,500 yrs ago (per the book)', lost:'Nearly all large animals', w:'Elephant birds three metres tall, and giant lemurs.', tot:0},
+    {k:'nz', n:'New Zealand', ya:800, arr:'~800 yrs ago', lost:'All nine moa species', w:'Moa birds up to 3.6 m tall, and the giant Haast\'s eagle that hunted them. Around 60% of bird species vanished.', tot:9, gone:9},
+  ];
+  let sel = 1, L = 150, R = 770;
+  const xOf = ya => L + (Math.log10(3e5) - Math.log10(ya)) / (Math.log10(3e5) - Math.log10(500)) * (R - L);
+  $('#reg4').innerHTML = RG.map((r, i) => `<button class="btn" aria-pressed="${i === sel}" data-r4="${i}">${r.n}</button>`).join('');
+  function draw(){
+    const nw = NARROW(), W = nw ? 420 : 800, fs = nw ? 14 : 13; L = nw ? 118 : 150; R = W - (nw ? 14 : 30);
+    let s = ''; const r0 = RG[sel];
+    (nw ? [[3e5,'300k'],[3e4,'30k'],[3e3,'3k'],[1e3,'1k']] : [[3e5,'300k'],[1e5,'100k'],[3e4,'30k'],[1e4,'10k'],[3e3,'3k'],[1e3,'1k']]).forEach(([t,l]) => { const x = xOf(t); s += `<line x1="${x}" y1="10" x2="${x}" y2="${10 + RG.length * 24}" ${S('line', 1, ';stroke-dasharray:2 4')}/>` + TX(x, 26 + RG.length * 24, l + (nw ? '' : ' yrs ago'), 'faint', nw ? 13 : 11, 'middle'); });
+    RG.forEach((r, i) => { const y = 10 + i * 24, x = xOf(r.ya), on = i === sel;
+      s += TX(L - 12, y + 15, nw ? r.n.replace('North', 'N.').replace('South', 'S.') : r.n, on ? 'text' : 'faint', fs, 'end');
+      s += `<line x1="${x}" y1="${y + 11}" x2="${R}" y2="${y + 11}" ${S(on ? 'glow' : 'line', on ? 3 : 2)}/><circle cx="${x}" cy="${y + 11}" r="${on ? 7 : 5}" ${F(on ? 'glow' : 'muted')}/>`; });
+    // animals grid
+    const gy = 200; let H = 260;
+    if (r0.tot){ const maxC = nw ? 12 : 24, cols = Math.min(maxC, r0.tot), size = 22, gap = 6, w = cols * (size + gap), x0 = W / 2 - w / 2;
+      H = gy + Math.ceil(r0.tot / cols) * (size + gap) + 10;
+      for (let k = 0; k < r0.tot; k++){ const c = k % cols, row = Math.floor(k / cols), x = x0 + c * (size + gap), y = gy + row * (size + gap), dead = k < r0.gone;
+        s += `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="5" ${dead ? 'style="fill:var(--panel-2);stroke:var(--bad);stroke-width:1.2"' : F('good', .85)}/>`;
+        if (dead) s += `<path d="M${x + 5} ${y + 5} L${x + size - 5} ${y + size - 5} M${x + size - 5} ${y + 5} L${x + 5} ${y + size - 5}" ${S('bad', 1.5)}/>`; }
+      s += TX(W / 2, gy - 10, r0.k === 'au' ? (nw ? 'One square = one species over 50 kg' : 'Each square is one species of animal over 50 kg') : r0.k === 'nz' ? 'Each square is one moa species' : (nw ? 'One square = one genus of big mammal' : 'Each square is one genus of large mammal'), 'faint', nw ? 13 : 12, 'middle');
+    } else { const t = r0.k === 'af' ? ['Africa kept most of its giants:', 'elephants, rhinos, hippos, giraffes.'] : ['No neat count here, but almost every large', 'species was gone within centuries.'];
+      s += nw ? TX(W / 2, gy + 20, t[0], 'muted', 14, 'middle') + TX(W / 2, gy + 40, t[1], 'muted', 14, 'middle') : TX(W / 2, gy + 30, t.join(' '), 'muted', 14, 'middle'); }
+    vb($('#svg4'), W, H);
+    $('#svg4').innerHTML = s;
+    $('#v4a').textContent = r0.arr; $('#v4l').textContent = r0.lost; $('#v4w').textContent = r0.w;
+  }
+  $$('[data-r4]').forEach(b => b.addEventListener('click', () => { sel = +b.dataset.r4; press($$('[data-r4]'), b); draw(); }));
+  onLayout(draw)();
+}
+
+/* ================= 5: the wheat trap ================= */
+{ const POP = [30, 50, 90, 160, 280, 480, 800, 1300, 2000], HRS = [40, 46, 52, 57, 61, 63, 65, 66, 66], FOOD = [100, 115, 104, 95, 90, 88, 86, 85, 85];
+  let g = 0, msg = '';
+  function panel(x, y0, title, arr, max, c, unit, nw){
+    const w = nw ? 390 : 230, h = nw ? 100 : 170, y = y0 + 40, bw = w / 9 - 6, fs = nw ? 14 : 13; let s = TX(x, y0 + 24, title, 'text', fs);
+    s += `<line x1="${x}" y1="${y + h}" x2="${x + w}" y2="${y + h}" ${S('line')}/>`;
+    arr.forEach((v, i) => { const bh = v / max * h, bx = x + i * (bw + 6);
+      if (i <= g) s += `<rect x="${bx}" y="${y + h - bh}" width="${bw}" height="${bh}" rx="3" ${F(c, i === g ? 1 : .45)}/>`;
+      else s += `<rect x="${bx}" y="${y + h - 3}" width="${bw}" height="3" ${F('line')}/>`;
+      s += TX(bx + bw / 2, y + h + 16, i, 'faint', nw ? 12 : 10, 'middle'); });
+    s += nw ? TX(x + w, y0 + 24, `Now: ${fmt(arr[g])}${unit}`, c, fs, 'end') : TX(x + w, y + h + 34, 'generation →', 'faint', 10, 'end') + TX(x, y + h + 56, `Now: ${fmt(arr[g])}${unit}`, c, fs);
+    return s;
+  }
+  function draw(){
+    const nw = NARROW(); let s;
+    if (nw){ s = panel(15, 0, 'Village size', POP, 2000, 'glow', ' people', 1) + panel(15, 170, 'Food per person', FOOD, 130, 'cool', '', 1) + panel(15, 340, 'Work hours a week', HRS, 80, 'text', ' h', 1);
+      s += `<line x1="15" y1="${170 + 40 + 100 - 100 / 130 * 100}" x2="405" y2="${170 + 40 + 100 - 100 / 130 * 100}" ${S('cool', 1, ';stroke-dasharray:4 4')}/>`; vb($('#svg5'), 420, 510); }
+    else { s = panel(20, 0, 'Village size', POP, 2000, 'glow', ' people') + panel(285, 0, 'Food per person (forager = 100)', FOOD, 130, 'cool', '') + panel(550, 0, 'Hours of work per week', HRS, 80, 'text', ' h');
+      s += `<line x1="285" y1="${40 + 170 - 100 / 130 * 170}" x2="515" y2="${40 + 170 - 100 / 130 * 170}" ${S('cool', 1, ';stroke-dasharray:4 4')}/>`; vb($('#svg5'), 800, 300); }
+    $('#svg5').innerHTML = s;
+    $('#v5g').textContent = g ? `${g} (~${g * 25} years)` : '0 (foragers)';
+    $('#v5p').textContent = fmt(POP[g]); $('#v5f').textContent = FOOD[g] + (g ? (FOOD[g] < 100 ? ' (worse)' : ' (better, for now)') : '');
+    $('#v5w').textContent = HRS[g] + ' h';
+    $('#cl5').innerHTML = msg || (g === 0 ? 'Each click is one generation, about 25 years. Watch the totals and the per-person numbers separately.'
+      : g === 1 ? 'The first harvest is a win: <b>more food per person</b>. So families have more children…'
+      : g < 4 ? 'More children, more fields, more work. The extra food is now being eaten by <b>extra people</b>.'
+      : g < 8 ? 'The village is many times bigger and very successful as a whole. But each person works longer for <b>less food</b> and a narrower diet than their forager great-grandparents.'
+      : 'Two thousand people where thirty foragers used to live. A triumph for wheat, and for the species. <b>A worse deal for almost every individual.</b>');
+    $('#go5').disabled = g >= POP.length - 1; msg = '';
+  }
+  $('#go5').addEventListener('click', () => { g = Math.min(POP.length - 1, g + 1); draw(); });
+  $('#reset5').addEventListener('click', () => { g = 0; draw(); });
+  $('#back5').addEventListener('click', () => {
+    if (POP[g] <= 50){ msg = g === 0 ? 'You\'re already foragers. Nothing to go back to.' : 'With only ' + POP[g] + ' people, the land can still feed you by foraging. <b>You go back.</b> The trap hasn\'t closed yet.'; if (g) g = 0; }
+    else msg = `The land around the village can feed about <b>40 foragers</b>. Going back now would mean about <b>${fmt(POP[g] - 40)} people starving</b>. Nobody would choose that. The trap has closed.`;
+    draw(); });
+  onLayout(draw)();
+}
+
+/* ================= 6: three kinds of real ================= */
+sorter('#sort6', '#tally6',
+  [{id:'o', label:'Objective', d:'Exists whatever anyone believes'}, {id:'s', label:'Subjective', d:'Exists in one person\'s mind'}, {id:'i', label:'Intersubjective', d:'Exists because many people believe in it'}],
+  [ {t:'Gravity', a:'o', w:'Apples fall whether or not anyone believes in Newton.'},
+    {t:'The US dollar', a:'i', w:'Paper and numbers that are valuable only because billions of people trust them.'},
+    {t:'The headache you have right now', a:'s', w:'Real to you, and to no one else.'},
+    {t:'Peugeot, the car company', a:'i', w:'A legal fiction. Burn every factory and it still exists, as long as the courts and shareholders agree it does.'},
+    {t:'Radioactivity', a:'o', w:'It harmed people long before anyone knew it existed.'},
+    {t:'A child\'s imaginary friend', a:'s', w:'It exists in one mind only. When the child stops believing, it\'s gone.'},
+    {t:'Human rights', a:'i', w:'Powerful and important, but they live in laws and shared belief, not in our biology.'},
+    {t:'The border between France and Spain', a:'i', w:'The mountains are objective; the line on the map exists because states and people agree it does.'},
+    {t:'Your favourite colour', a:'s', w:'A preference that lives in your head.'},
+    {t:'The rules of chess', a:'i', w:'No law of nature says a bishop moves diagonally. Players agree, and so it does.'} ]);
+
+/* ================= 7: cuneiform numbers ================= */
+{ const one = (x, y) => `<path d="M${x - 7} ${y} L${x + 7} ${y} L${x} ${y + 9} Z M${x - 1.6} ${y + 6} L${x + 1.6} ${y + 6} L${x + 1} ${y + 34} L${x - 1} ${y + 34} Z" ${F('glow')}/>`;
+  const ten = (x, y) => `<path d="M${x + 12} ${y - 12} L${x} ${y} L${x + 12} ${y + 12} M${x + 1} ${y} L${x + 20} ${y - 9} M${x + 1} ${y} L${x + 20} ${y + 9}" ${S('glow', 3.4, ';stroke-linecap:round;stroke-linejoin:round')}/><path d="M${x - 2} ${y} L${x + 9} ${y - 7} L${x + 9} ${y + 7} Z" ${F('glow')}/>`;
+  function draw(n){
+    const digits = []; let m = n; do { digits.unshift(m % 60); m = Math.floor(m / 60); } while (m > 0);
+    const place = ['× 1', '× 60', '× 3,600', '× 216,000'];
+    const nw = NARROW(), W = nw ? 420 : 800, colW = nw ? 138 : 170, total = digits.length * colW, x0 = W / 2 - total / 2; let s = ''; vb($('#svg7'), W, 240);
+    digits.forEach((d, i) => { const cx = x0 + i * colW, p = digits.length - 1 - i, tens = Math.floor(d / 10), ones = d % 10;
+      s += `<rect x="${cx + 8}" y="20" width="${colW - 16}" height="150" rx="12" ${F('panel-2')}/>`;
+      if (d === 0) s += TX(cx + colW / 2, 100, '(left empty)', 'faint', 12, 'middle');
+      const tw = tens ? (tens > 3 ? 3 : tens) * 24 : 0, ow = ones ? Math.min(ones, 3) * 16 : 0, gap = tens && ones ? 10 : 0, start = cx + colW / 2 - (tw + gap + ow) / 2;
+      for (let t = 0; t < tens; t++){ const r = t < 3 ? 0 : 1, c = t < 3 ? t : t - 3; s += ten(start + c * 24 + 2, 70 + r * 44); }
+      for (let o = 0; o < ones; o++){ const r = Math.floor(o / 3), c = o % 3; s += one(start + tw + gap + c * 16 + 7, 44 + r * 40 - (ones > 6 ? 14 : ones > 3 ? 6 : -14)); }
+      s += TX(cx + colW / 2, 196, `${d} ${place[p]}`, 'text', 14, 'middle', 'font-family="Geist Mono, monospace"');
+      s += TX(cx + colW / 2, 216, `= ${fmt(d * Math.pow(60, p))}`, 'faint', 12, 'middle', 'font-family="Geist Mono, monospace"');
+    });
+    $('#svg7').innerHTML = s;
+    $('#o7').textContent = fmt(n);
+    $('#cl7').innerHTML = `<b>${fmt(n)} = ${digits.map((d, i) => `${d} × ${fmt(Math.pow(60, digits.length - 1 - i))}`).join(' + ')}</b>. A vertical wedge means 1 and a corner wedge means 10; each column is worth 60 times the one to its right. Kushim's tablet used older barley-counting signs; neat place-value numbers like these came a few centuries later, but the idea is the same: a few marks in clay can hold any number.`;
+  }
+  $('#s7').addEventListener('input', e => draw(+e.target.value));
+  $$('[data-n7]').forEach(b => b.addEventListener('click', () => { $('#s7').value = b.dataset.n7; draw(+b.dataset.n7); }));
+  onLayout(() => draw(+$('#s7').value))();
+}
+
+/* ================= 8: the vicious circle ================= */
+stepper('#svg8', '#txt8', '#prev8', '#next8', '[data-c8]', 'c8', {
+  race: [
+    ['A historical accident', 'From the 1500s, European colonists in the Americas wanted cheap labour for mines and plantations. Africa was relatively close, already had slave markets, and many West Africans had some resistance to malaria and yellow fever. Enslaving Africans was a business decision, not a judgement about ability.'],
+    ['A myth to justify it', 'Christian and later democratic societies needed to explain why enslaving people was acceptable. Religious and pseudo-scientific myths followed: that Africans were cursed, less intelligent, or "naturally" suited to servitude.'],
+    ['Laws that discriminate', 'Myths became rules. Even after slavery was abolished in 1865, laws in much of the United States kept Black Americans out of good schools, many jobs and neighbourhoods, and the vote.'],
+    ['Poverty and exclusion', 'Shut out of education and well-paid work, many Black families stayed poorer than white families, generation after generation.'],
+    ['"Proof" of the myth', 'People looked at the poverty and said "see, they\'re less capable", mistaking the result of discrimination for its cause.'],
+    ['Prejudice deepens', 'The "evidence" strengthened the myth, which justified more discrimination, and the circle turned again. Its effects are still measurable today.']],
+  caste: [
+    ['A historical accident', 'On Harari\'s account, around 3,000 years ago migrating Indo-Aryans came to dominate local people in the Indian subcontinent and set up a ranked society, with themselves near the top.'],
+    ['A myth to justify it', 'Religious texts described society as made of four varnas (priests, warriors, traders, labourers), each created from a different part of a cosmic being. Inequality became part of the order of the universe.'],
+    ['Rules of purity', 'Ideas of purity and pollution decided who you could eat with, marry or touch. People outside the system, the "untouchables", were given the work considered polluting.'],
+    ['Locked in by birth', 'Your caste set your job, your partner and your neighbours. Moving up was almost impossible, so the gaps between groups grew.'],
+    ['"Proof" of the myth', 'Lower castes were poorer, less educated and did "dirty" work, so the system seemed to confirm that they really were impure.'],
+    ['Prejudice deepens', 'The circle turned for millennia. India\'s constitution banned caste discrimination in 1950, but caste still shapes lives and marriages today.']]
+}, ['Accident', 'Myth', 'Laws and rules', 'Poverty', 'Seeming proof', 'Prejudice'], ['The vicious', 'circle']);
+
+/* ================= 9: count the worlds ================= */
+{ const KF = [
+    {y:-10000, n:2000, share:.002, e:'Thousands of isolated bands and tribes. Each is its own little world.'},
+    {y:-2000, n:300, share:.2, e:'Kingdoms and trade routes join valleys into regions. Hundreds of worlds at most.'},
+    {y:1450, n:5, share:.9, e:'Over 90% of people live in one Afro-Asian world. Mesoamerica, the Andes, Australia and Oceania are still cut off.'},
+    {y:1750, n:3, share:.98, e:'After Columbus, the Americas are swallowed by the Afro-Asian world, with catastrophic losses for their peoples.'},
+    {y:2000, n:1, share:1, e:'One world: the same states, money, science and much of the same culture, everywhere.'}];
+  const yr = y => y < 0 ? fmt(-y) + ' BC' : 'AD ' + y;
+  function draw(){
+    const v = +$('#s9').value, i = Math.min(3, Math.floor(v)), t = v - i, a = KF[i], b = KF[i + 1];
+    const y = Math.round(lerp(a.y, b.y, t) / 10) * 10, n = Math.max(1, Math.round(Math.exp(lerp(Math.log(a.n), Math.log(b.n), t)))), share = lerp(a.share, b.share, t);
+    const nw = NARROW(), W = nw ? 420 : 800, H = 330, rand = rng(11); let s = ''; vb($('#svg9'), W, H);
+    const bigR = 12 + Math.sqrt(share) * (nw ? 120 : 140), bx = W / 2, by = 165;
+    const shown = Math.min(n - 1, nw ? 400 : 700);
+    let placed = 0, tries = 0;
+    while (placed < shown && tries < 20000){ tries++; const x = 14 + rand() * (W - 28), yy = 14 + rand() * (H - 28);
+      if (Math.hypot(x - bx, yy - by) < bigR + 8) continue; placed++;
+      s += `<circle cx="${x}" cy="${yy}" r="${n > 400 ? 2.4 : n > 50 ? 3.5 : 6}" ${F('cool', .8)}/>`; }
+    s += `<circle cx="${bx}" cy="${by}" r="${bigR}" ${F('glow', .85)}/>`;
+    if (bigR > 50) s += TX(bx, by + 5, 'the largest world', 'on-glow', nw ? 15 : 13, 'middle', 'font-weight="600"');
+    $('#svg9').innerHTML = s;
+    $('#o9').textContent = yr(y);
+    $('#v9n').textContent = n >= 1000 ? 'thousands' : n >= 100 ? 'hundreds' : String(n);
+    $('#v9b').textContent = share < .01 ? 'a tiny fraction' : Math.round(share * 100) + '%';
+    $('#v9e').textContent = (t < .5 ? a : b).e;
+  }
+  $('#s9').addEventListener('input', draw); onLayout(draw)();
+}
+
+/* ================= 10: barter vs money ================= */
+{ let mode = 'barter';
+  const nOf = v => Math.max(3, Math.round(3 * Math.pow(1000 / 3, (v - 3) / 997)));
+  const GOODS = ['apples','shoes','goats','salt','cloth','pots','wheat','fish','oil','wine','wool','rope','honey','eggs','knives','beads'];
+  function draw(){
+    const nw = NARROW(), W = nw ? 420 : 800, fs = nw ? 14 : 12; vb($('#svg10'), W, 340);
+    const n = nOf(+$('#s10').value), rates = n * (n - 1) / 2, cx = W / 2, cy = 180, R = nw ? 120 : 135, shown = Math.min(n, nw ? 30 : 40); let s = '';
+    const pts = Array.from({length: shown}, (_, k) => { const a = -Math.PI/2 + k / shown * 2 * Math.PI; return [cx + R * Math.cos(a), cy + R * Math.sin(a)]; });
+    if (mode === 'barter'){ for (let a = 0; a < shown; a++) for (let b = a + 1; b < shown; b++) s += `<line x1="${pts[a][0]}" y1="${pts[a][1]}" x2="${pts[b][0]}" y2="${pts[b][1]}" ${S('cool', .8, ';stroke-opacity:' + (shown > 20 ? .25 : .5))}/>`; }
+    else { pts.forEach(([x, y]) => { s += `<line x1="${x}" y1="${y}" x2="${cx}" y2="${cy}" ${S('glow', 1.2, ';stroke-opacity:.7')}/>`; }); s += `<circle cx="${cx}" cy="${cy}" r="24" ${F('glow')}/>` + TX(cx, cy + 6, '$', 'on-glow', 20, 'middle', 'font-weight="700"'); }
+    pts.forEach(([x, y], k) => { s += `<circle cx="${x}" cy="${y}" r="${shown > 20 ? 4 : 6}" ${F('text')}/>`;
+      if (shown <= 16){ const a = -Math.PI/2 + k / shown * 2 * Math.PI; s += TX(cx + (R + 16) * Math.cos(a), cy + (R + 16) * Math.sin(a) + 4, GOODS[k], 'muted', fs, Math.cos(a) > .2 ? 'start' : Math.cos(a) < -.2 ? 'end' : 'middle'); } });
+    if (n > shown) s += TX(cx, 334, `showing ${shown} of ${fmt(n)} goods`, 'faint', fs, 'middle');
+    s += TX(nw ? 10 : 20, 26, mode === 'barter' ? `${fmt(rates)} exchange rates to know` : `${fmt(n)} prices to know`, mode === 'barter' ? 'cool' : 'glow', nw ? 17 : 16, 'start', 'font-weight="600"');
+    $('#svg10').innerHTML = s;
+    $('#o10').textContent = fmt(n);
+    $('#v10a').textContent = fmt(rates); $('#v10b').textContent = fmt(n);
+    $('#v10c').textContent = n <= 3 ? 'Nothing yet: with 3 goods, barter is as easy.' : `${fmt(rates - n)} numbers you don't have to remember (${(rates / n).toFixed(rates / n < 10 ? 1 : 0)}× fewer)`;
+  }
+  $('#s10').addEventListener('input', draw);
+  $$('[data-m10]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.m10; press($$('[data-m10]'), b); draw(); }));
+  onLayout(draw)();
+}
+
+/* ================= 11: the imperial cycle ================= */
+stepper('#svg11', '#txt11', '#prev11', '#next11', '[data-e11]', 'e11', {
+  rome: [
+    ['Rome conquers', 'From the 300s BC, the city of Rome conquers Italy, then the whole Mediterranean, ruling dozens of peoples with their own languages and gods.'],
+    ['A Roman culture forms', 'Out of Greek and local traditions comes an imperial culture: Latin, Roman law, roads, cities, baths and a shared set of gods.'],
+    ['Subjects adopt it', 'Gauls, Iberians, North Africans and Syrians learn Latin, wear togas, build forums and take Roman names.'],
+    ['Subjects demand equality', 'Provincials want the rights of Roman citizens. In 212 AD Emperor Caracalla grants citizenship to all free men of the empire.'],
+    ['The founders lose their edge', 'Emperors now come from Spain, North Africa and Arabia. Septimius Severus was born in Libya; Philip "the Arab" in Syria. Being from Rome itself means little.'],
+    ['The culture outlives the empire', 'Long after the western empire falls, Latin, Roman law and Roman Christianity shape Europe, and through Europe much of the world.']],
+  islam: [
+    ['Arab armies conquer', 'In the 600s and 700s AD, Arab armies build an empire from Spain to Central Asia.'],
+    ['An Islamic culture forms', 'A new imperial culture mixes Arab, Persian, Greek and Egyptian traditions around Islam and the Arabic language.'],
+    ['Subjects adopt it', 'Egyptians, Syrians, Persians and Berbers convert to Islam and adopt Arabic.'],
+    ['Subjects demand equality', 'Non-Arab Muslims resent being treated as second-class believers by the Arab elite.'],
+    ['The founders lose their edge', 'In 750 the Abbasid revolution, backed by Persian converts, ends Arab dominance. Later, Persians, Turks and others rule in the name of Islam.'],
+    ['The culture outlives the empire', 'Islam and Arabic spread far beyond the original conquerors and outlast every caliphate.']],
+  brit: [
+    ['Britain conquers', 'From the 1600s, Britain builds an empire across India, Africa, the Americas and the Pacific.'],
+    ['A British culture forms', 'English, British law, Protestant values, railways, cricket and liberal ideas about rights and self-government.'],
+    ['Subjects adopt it', 'Colonial elites learn English, study at British universities, practise British law and read British philosophers.'],
+    ['Subjects demand equality', 'They use those very ideas (liberty, self-determination, equality) to demand self-rule, in perfect English.'],
+    ['The founders lose their edge', 'After 1945 the empire falls apart. India becomes independent in 1947, and most colonies follow within a generation.'],
+    ['The culture outlives the empire', 'English, parliamentary democracy, the common law and cricket live on across former colonies, now owned by them.']]
+}, ['Conquest', 'Imperial culture', 'Adoption', 'Demand equality', 'Founders fade', 'Culture lives on'], ['The imperial', 'cycle']);
+
+/* ================= 12: humanist religions ================= */
+sorter('#sort12', '#tally12',
+  [{id:'l', label:'Liberal humanism', d:'The free individual is sacred'}, {id:'s', label:'Socialist humanism', d:'Humanity as a whole, and equality, are sacred'}, {id:'e', label:'Evolutionary humanism', d:'Protect and upgrade the species'}],
+  [ {t:'"Each person\'s inner voice is the final authority on what is right for them."', a:'l', w:'The liberal belief in the sacred inner self, behind free choice in voting, shopping and love.'},
+    {t:'"Inequality is the worst blasphemy against humanity."', a:'s', w:'Socialist humanism cares about the collective, and treats inequality as the core evil.'},
+    {t:'"Humankind can evolve into something greater, so we must protect it from degeneration."', a:'e', w:'This was the core of evolutionary humanism. The Nazis took it to murderous extremes.'},
+    {t:'"Freedom of speech and conscience must be protected, even for unpopular views."', a:'l', w:'Protecting individual liberty is the heart of liberal humanism.'},
+    {t:'"What matters is not my feelings but the welfare of the working class as a whole."', a:'s', w:'Socialists see individual feelings as shaped by class and society.'},
+    {t:'"Science should be used to make future humans stronger and smarter."', a:'e', w:'The upgrade project. Harari notes its modern biotech version is back on the table.'},
+    {t:'"Human rights belong to every individual simply because they are human."', a:'l', w:'Grounded in the belief that each person has a unique, sacred nature.'},
+    {t:'"The state should own the factories so their wealth is shared equally."', a:'s', w:'Equality for humanity as a collective, through shared ownership.'} ]);
+
+/* ================= 13: re-run history ================= */
+{ const OUT = [
+    ['Christianity', .3, 'Constantine converts, as in our world. Churches rise across the empire.'],
+    ['Manichaeism', .14, 'A Persian prophet\'s dualist faith of light versus darkness wins the court. Europe\'s cathedrals honour Mani.'],
+    ['Mithraism', .14, 'The soldiers\' god Mithras becomes the empire\'s god. Sunday stays a holy day, for the sun.'],
+    ['Cult of Isis', .1, 'The Egyptian mother goddess wins converts across the Mediterranean and becomes the state faith.'],
+    ['The old Roman gods', .2, 'A revived traditional religion holds on. Jupiter keeps his temple on the Capitol.'],
+    ['Something else', .12, 'A faith we\'ve never heard of, because in our history it vanished.']];
+  let counts = OUT.map(() => 0), total = 0, last = -1;
+  const roll = () => { let r = Math.random(), k = 0; while (k < OUT.length - 1 && r > OUT[k][1]){ r -= OUT[k][1]; k++; } return k; };
+  function draw(){
+    const nw = NARROW(), L = nw ? 10 : 170, R = nw ? 410 : 760, rh = nw ? 56 : 40, max = Math.max(1, ...counts); let s = '';
+    OUT.forEach(([n], i) => { let y = 16 + i * rh; const w = (R - L) * counts[i] / max;
+      if (nw){ s += TX(L, y + 12, n, i === last ? 'text' : 'muted', 15, 'start', i === 0 ? 'font-weight="600"' : ''); y += 20; }
+      else s += TX(L - 12, y + 18, n, i === last ? 'text' : 'muted', 13, 'end', i === 0 ? 'font-weight="600"' : '');
+      s += `<rect x="${L}" y="${y}" width="${R - L}" height="26" rx="6" ${F('panel-2')}/><rect x="${L}" y="${y}" width="${w}" height="26" rx="6" ${F(i === 0 ? 'glow' : 'cool', i === last ? 1 : .7)}/>`;
+      if (counts[i]) s += TX(L + w + 8 > R - 60 ? L + w - 8 : L + w + 8, y + 18, total ? Math.round(counts[i] / total * 100) + '%' : '', L + w + 8 > R - 60 ? 'on-glow' : 'muted', 12, L + w + 8 > R - 60 ? 'end' : 'start'); });
+    s += TX(L, 16 + OUT.length * rh + 14, nw ? 'Ochre: the winner in our actual history' : 'Ochre bar: the faith that won in the one history we actually got', 'faint', nw ? 14 : 12);
+    vb($('#svg13'), nw ? 420 : 800, 16 + OUT.length * rh + 26);
+    $('#svg13').innerHTML = s; $('#v13n').textContent = fmt(total);
+  }
+  $('#go13').addEventListener('click', () => { last = roll(); counts[last]++; total++; $('#v13l').textContent = `${OUT[last][0]}. ${OUT[last][2]}`; draw(); });
+  $('#many13').addEventListener('click', () => { for (let k = 0; k < 1000; k++){ counts[roll()]++; } total += 1000; last = -1;
+    $('#v13l').textContent = `Christianity won ${Math.round(counts[0] / total * 100)}% of the time. Likely enough to happen, not certain enough to predict.`; draw(); });
+  $('#reset13').addEventListener('click', () => { counts = OUT.map(() => 0); total = 0; last = -1; $('#v13l').textContent = 'Start in the year 300 and see which faith ends up on top by 500.'; draw(); });
+  onLayout(draw)();
+}
+
+/* ================= 14: the royal nursery ================= */
+{ const KIDS = [
+    ['Daughter (unnamed)', 0, 'died at birth, 1255'], ['Katherine', 2, 'died aged 1 or 3'], ['Joan', .5, 'died at 6 months'], ['John', 5, 'died aged 5'],
+    ['Henry', 6, 'died aged 6'], ['Eleanor', 29, 'lived to 29'], ['Daughter (unnamed)', .4, 'died at 5 months'], ['Joan', 35, 'lived to 35'],
+    ['Alphonso', 10, 'died aged 10, heir to the throne'], ['Margaret', 58, 'lived to 58'], ['Berengaria', 2, 'died aged 2'], ['Daughter (unnamed)', 0, 'died shortly after birth'],
+    ['Mary', 53, 'lived to 53'], ['Son (unnamed)', 0, 'died shortly after birth'], ['Elizabeth', 34, 'lived to 34'], ['Edward', 43, 'lived to 43; became King Edward II']];
+  let era = 'then', pick = -1;
+  function draw(){
+    const nw = NARROW(), W = nw ? 420 : 800, cols = nw ? 4 : 8, cw = nw ? 100 : 88, ch = 112, x0 = W / 2 - cols * cw / 2, fs = nw ? 14 : 11.5; let s = '';
+    vb($('#svg14'), W, 20 + Math.ceil(16 / cols) * (ch + 22));
+    KIDS.forEach(([n, age, d], i) => { const c = i % cols, r = Math.floor(i / cols), x = x0 + c * cw, y = 20 + r * (ch + 22), died = era === 'then' && age < 18, on = i === pick;
+      s += `<g class="ev" tabindex="0" role="button" data-k="${i}" aria-label="${n}: ${era === 'then' ? d : 'survives to adulthood'}">`;
+      s += `<rect x="${x + 6}" y="${y}" width="${cw - 12}" height="${ch}" rx="12" style="fill:var(--panel-2);stroke:var(--${on ? 'text' : died ? 'bad' : 'good'});stroke-width:${on ? 2.5 : 1.5}"/>`;
+      // cradle
+      const mx = x + cw / 2, my = y + 44;
+      s += `<path d="M${mx - 24} ${my} Q${mx} ${my + 30} ${mx + 24} ${my}" ${S(died ? 'faint' : 'good', 2.5)}/><path d="M${mx - 18} ${my + 18} L${mx - 26} ${my + 30} M${mx + 18} ${my + 18} L${mx + 26} ${my + 30}" ${S(died ? 'faint' : 'good', 2)}/>`;
+      s += died ? `<path d="M${mx} ${my - 26} L${mx} ${my - 6} M${mx - 7} ${my - 19} L${mx + 7} ${my - 19}" ${S('bad', 2.5)}/>` : `<circle cx="${mx}" cy="${my - 8}" r="9" ${F('good')}/>`;
+      s += TX(mx, y + ch - 26, n.replace(' (unnamed)', ''), died ? 'muted' : 'text', fs, 'middle');
+      s += TX(mx, y + ch - 9, era === 'then' ? (age < 1 ? (age ? Math.round(age * 12) + ' mo' : 'infant') : 'age ' + age) : 'adult', died ? 'bad' : 'good', nw ? 13 : 11, 'middle', 'font-family="Geist Mono, monospace"');
+      s += `</g>`; });
+    $('#svg14').innerHTML = s;
+    const dead = era === 'then' ? KIDS.filter(k => k[1] < 18).length : 0;
+    $('#v14a').textContent = `${16 - dead} of 16`; $('#v14d').textContent = era === 'then' ? '10 (62%)' : 'about 0.1 expected, so most likely none';
+    $('#v14w').textContent = pick >= 0 ? `${KIDS[pick][0]}: ${era === 'then' ? KIDS[pick][2] : 'with modern medicine, almost certainly survives'}.` : era === 'then' ? 'These were the richest, best-cared-for children in England. Money couldn\'t buy what didn\'t exist yet.' : 'Vaccines, antibiotics, clean water and safer childbirth: all products of the Scientific Revolution.';
+    $('#svg14').querySelectorAll('.ev').forEach(g => { const act = () => { pick = +g.dataset.k; draw(); $(`#svg14 [data-k="${pick}"]`).focus({preventScroll:true}); }; g.addEventListener('click', act); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } }); });
+  }
+  $$('[data-t14]').forEach(b => b.addEventListener('click', () => { era = b.dataset.t14; press($$('[data-t14]'), b); draw(); }));
+  onLayout(draw)();
+}
+
+/* ================= 15: Lind's scurvy trial ================= */
+{ const P = [
+    ['Cider', 'a quart a day', .25], ['Elixir of vitriol', 'diluted sulphuric acid', 0], ['Vinegar', 'two spoonfuls, three times a day', 0],
+    ['Seawater', 'half a pint a day', -.04], ['Oranges and lemons', 'two oranges and a lemon a day', .75], ['Spicy paste', 'garlic, mustard seed, radish, gum', 0]];
+  let day = 0, raf = 0;
+  function draw(){
+    const t = day / 6, nw = NARROW(), W = nw ? 420 : 800, cols = nw ? 3 : 6, cw = nw ? 136 : 128, x0 = W / 2 - cols / 2 * cw, fs = nw ? 14 : 13, fs2 = nw ? 12.5 : 11; let s = '';
+    vb($('#svg15'), W, nw ? 570 : 290);
+    P.forEach(([n, d, gain], i) => { const x = x0 + (i % cols) * cw, oy = Math.floor(i / cols) * 280, h = clamp(.18 + gain * t, .05, 1);
+      s += `<g transform="translate(0 ${oy})">`;
+      s += `<rect x="${x + 6}" y="14" width="${cw - 12}" height="262" rx="12" ${F('panel-2')}/>`;
+      for (let k = 0; k < 2; k++){ const sx = x + cw / 2 + (k ? 22 : -22), sy = 84, hh = clamp(h + (k ? -.06 * t * (gain > .5 ? 1 : 0) : 0), .05, 1), c = hh > .6 ? 'good' : hh > .3 ? 'glow' : 'bad', lean = (1 - hh) * 14;
+        s += `<circle cx="${sx + lean * .6}" cy="${sy - 18 + lean * .5}" r="9" ${F(c)}/><path d="M${sx + lean * .6} ${sy - 8 + lean * .5} L${sx} ${sy + 26} M${sx} ${sy + 26} L${sx - 9} ${sy + 50} M${sx} ${sy + 26} L${sx + 9} ${sy + 50} M${sx + lean * .3} ${sy + 4} L${sx - 12} ${sy + 18 + lean} M${sx + lean * .3} ${sy + 4} L${sx + 12} ${sy + 18 + lean}" ${S(c, 3, ';stroke-linecap:round')}/>`;
+        s += `<rect x="${sx - 16}" y="150" width="32" height="6" rx="3" ${F('line')}/><rect x="${sx - 16}" y="150" width="${32 * hh}" height="6" rx="3" ${F(c)}/>`; }
+      const nm = n.split(' '), nmid = n.length > 14 && nw ? Math.ceil(nm.length / 2) : nm.length;
+      s += TX(x + cw / 2, 186, nm.slice(0, nmid).join(' '), 'text', fs, 'middle', 'font-weight="600"') + (nmid < nm.length ? TX(x + cw / 2, 202, nm.slice(nmid).join(' '), 'text', fs, 'middle', 'font-weight="600"') : '');
+      const words = d.split(' '), mid = Math.ceil(words.length / 2), dy = nmid < nm.length ? 14 : 0;
+      s += TX(x + cw / 2, 208 + dy, words.slice(0, mid).join(' '), 'faint', fs2, 'middle') + TX(x + cw / 2, 223 + dy, words.slice(mid).join(' '), 'faint', fs2, 'middle');
+      s += TX(x + cw / 2, 258, t < .05 ? 'sick' : h > .8 ? 'fit for duty' : h > .35 ? 'a little better' : h < .16 ? 'worse' : 'no change', h > .8 ? 'good' : h > .35 ? 'glow' : 'muted', fs2 + 1, 'middle', 'font-family="Geist Mono, monospace"');
+      s += `</g>`;
+    });
+    $('#svg15').innerHTML = s; $('#o15').textContent = 'Day ' + Math.round(day);
+    $('#cl15').innerHTML = day < 5.9 ? 'Twelve sailors with scurvy, paired up, each pair given a different remedy that doctors of the time believed in. Guess which works before you press the button.'
+      : 'Only the <b>citrus pair</b> recovered; one was back on duty within a week. Cider helped a little. The others did nothing. Lind himself muddled the lesson, and the Royal Navy only began issuing lemon juice to all sailors in 1795, but this was one of the first controlled trials in medicine.';
+  }
+  $('#s15').addEventListener('input', e => { cancelAnimationFrame(raf); day = +e.target.value; draw(); });
+  $('#go15').addEventListener('click', () => { cancelAnimationFrame(raf); if (RM){ day = 6; $('#s15').value = 6; draw(); return; }
+    const t0 = performance.now(), d0 = day >= 6 ? 0 : day; const step = now => { day = Math.min(6, d0 + (now - t0) / 3000 * 6); $('#s15').value = day; draw(); if (day < 6) raf = requestAnimationFrame(step); }; raf = requestAnimationFrame(step); });
+  $('#reset15').addEventListener('click', () => { cancelAnimationFrame(raf); day = 0; $('#s15').value = 0; draw(); });
+  onLayout(draw)();
+}
+
+/* ================= 16: credit multiplier ================= */
+{ function draw(){
+    const r = +$('#s16').value / 100, deps = []; let d = 1e6;
+    while (deps.length < 30 && d >= 1e6 * .02){ deps.push(d); d *= (1 - r); if (r >= 1) break; }
+    const nw = NARROW(), W = nw ? 420 : 800; vb($('#svg16'), W, 280);
+    const total = deps.reduce((a, b) => a + b, 0), L = nw ? 12 : 40, R = W - (nw ? 12 : 20), B = 250, T = nw ? 46 : 30, bw = Math.min(40, (R - L) / deps.length - (nw ? 2 : 4)); let s = '';
+    s += `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" ${S('line')}/>`;
+    deps.forEach((v, i) => { const x = L + i * (bw + (nw ? 2 : 4)), h = v / 1e6 * (B - T), kept = h * r;
+      s += `<rect x="${x}" y="${B - h}" width="${bw}" height="${h - kept}" rx="2" ${F('glow', .85)}/><rect x="${x}" y="${B - kept}" width="${bw}" height="${kept}" ${F('cool')}/>`;
+      if (bw > 22 && i < 9) s += TX(x + bw / 2, B + 16, '#' + (i + 1), 'faint', 10, 'middle'); });
+    const lx = nw ? L : R - 250, ly = nw ? 14 : T - 4, fs = nw ? 14 : 12;
+    s += `<rect x="${lx}" y="${ly}" width="12" height="12" rx="3" ${F('glow')}/>` + TX(lx + 18, ly + 11, 'lent out again', 'muted', fs) + `<rect x="${lx + (nw ? 140 : 120)}" y="${ly}" width="12" height="12" rx="3" ${F('cool')}/>` + TX(lx + (nw ? 158 : 138), ly + 11, 'kept in vault', 'muted', fs);
+    $('#svg16').innerHTML = s;
+    $('#o16').textContent = Math.round(r * 100) + '%';
+    $('#v16t').textContent = '$' + (total / 1e6).toFixed(1) + 'M' + (r < 1 ? ` (limit $${(1 / r).toFixed(1)}M)` : '');
+    $('#v16r').textContent = deps.length + (deps.length >= 30 ? '+' : '');
+  }
+  $('#s16').addEventListener('input', draw); onLayout(draw)();
+}
+
+/* ================= 17: energy servants ================= */
+{ const ACT = [
+    ['drive', 'Driving 40 km a day', 27], ['heat', 'Heating or cooling a home', 35], ['shower', 'A hot shower', 3], ['cook', 'Cooking', 2],
+    ['fridge', 'Fridge and freezer', 1.5], ['elec', 'Lights, phone, laptop, TV', 2], ['wash', 'Washing machine', 2],
+    ['food', 'Growing and shipping your food', 15], ['stuff', 'Making your clothes and gadgets', 30], ['fly', 'One long-haul return flight a year', 10], ['public', 'Your share of shops, offices, roads', 30]];
+  const PRE = {world:['shower','cook','fridge','elec','wash','food','stuff'], us:ACT.map(a => a[0]), low:['cook','elec','food']};
+  $('#tg17').innerHTML = ACT.map(([k, n, e]) => `<label class="tg"><input type="checkbox" data-a17="${k}"><span>${n}</span><em>${e} kWh</em></label>`).join('');
+  function set(p){ $$('[data-a17]').forEach(cb => cb.checked = PRE[p].includes(cb.dataset.a17)); $$('[data-p17]').forEach(b => b.setAttribute('aria-pressed', b.dataset.p17 === p)); draw(); }
+  function draw(){
+    const e = ACT.filter(a => $(`[data-a17="${a[0]}"]`).checked).reduce((s, a) => s + a[2], 0), n = Math.round(e / .6);
+    const nw = NARROW(), W = nw ? 420 : 800, per = nw ? 30 : 60, size = 13; let s = '';
+    const shown = Math.min(n, per * 6), rows = Math.max(2, Math.ceil(shown / per)); vb($('#svg17'), W, 20 + rows * 34 + (n > shown ? 20 : 0));
+    for (let k = 0; k < shown; k++){ const c = k % per, r = Math.floor(k / per), x = 14 + c * size, y = 14 + r * 34;
+      s += `<circle cx="${x}" cy="${y}" r="3.2" ${F('glow')}/><path d="M${x} ${y + 4} L${x} ${y + 14} M${x - 4} ${y + 22} L${x} ${y + 14} L${x + 4} ${y + 22} M${x - 4} ${y + 8} L${x + 4} ${y + 8}" ${S('glow', 1.6, ';stroke-linecap:round')}/>`; }
+    if (n > shown) s += TX(W - 14, 20 + rows * 34 + 10, `+ ${fmt(n - shown)} more`, 'muted', nw ? 14 : 12, 'end');
+    if (!n) s += TX(W / 2, 50, 'Tick some activities below', 'faint', 14, 'middle');
+    $('#svg17').innerHTML = s;
+    $('#v17e').textContent = e.toFixed(e % 1 ? 1 : 0) + ' kWh';
+    $('#v17s').textContent = fmt(n);
+    $('#v17w').textContent = n ? `Like ${fmt(n)} people doing hard physical work for 8 hours, for you, every single day. A Roman senator would be impressed.` : 'Living on your own muscles, like nearly everyone before 1800.';
+  }
+  $$('[data-a17]').forEach(cb => cb.addEventListener('change', () => { $$('[data-p17]').forEach(b => b.setAttribute('aria-pressed', 'false')); draw(); }));
+  $$('[data-p17]').forEach(b => b.addEventListener('click', () => set(b.dataset.p17)));
+  set('world'); onLayout(draw);
+}
+
+/* ================= 18: family vs state and market ================= */
+{ const N = [
+    ['Finding a partner', 'Parents and matchmakers arrange it, often for land or alliances.', 'You choose: school, work, friends, apps.'],
+    ['Getting a job', 'You work the family farm or learn your father\'s trade.', 'You apply to strangers in a labour market.'],
+    ['Falling ill', 'Relatives nurse you; the village healer helps.', 'Hospitals, paid by insurance or the state.'],
+    ['Growing old', 'Your children look after you.', 'Pensions, savings and care homes.'],
+    ['Learning', 'At home and in the fields, from your elders.', 'Compulsory state schools.'],
+    ['Borrowing money', 'Relatives or neighbours lend, with strings attached.', 'Banks and credit scores.'],
+    ['Staying safe', 'Your clan or village defends and avenges you.', 'Police and courts.'],
+    ['A place to live', 'With your extended family, in the family house.', 'Rent or a mortgage, from strangers.']];
+  const st = N.map(() => false);
+  function draw(){
+    $('#flips18').innerHTML = N.map(([n, o, w], i) => `<button class="flip ${st[i] ? 'new' : 'old'}" data-f="${i}" aria-pressed="${st[i]}"><span class="need">${n}</span><span class="who">${st[i] ? 'Today · state and market' : '1750 · family and community'}</span><span class="how">${st[i] ? w : o}</span></button>`).join('');
+    $$('#flips18 .flip').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.f; st[i] = !st[i]; draw(); $(`#flips18 [data-f="${i}"]`).focus(); }));
+    const k = st.filter(Boolean).length;
+    $('#cl18').innerHTML = k === 0 ? 'Tap each card to move it from <b>1750</b> to <b>today</b>.' : k < N.length ? `<b>${k} of ${N.length}</b> moved to today.` : 'Every one of these used to depend on people who <b>knew you</b>. Now strangers and institutions handle them. That\'s freedom, and Harari notes it can also be lonely.';
+  }
+  draw();
+  const D = [['Diabetes', 1.5e6, 'bad'], ['Suicide', 8e5, 'glow'], ['Violent crime', 5e5, 'cool'], ['War', 1.2e5, 'cool']];
+  onLayout(() => { const nw = NARROW(), L = nw ? 120 : 150, R = nw ? 330 : 700; let s = ''; vb($('#svg18'), nw ? 420 : 800, 260);
+    D.forEach(([n, v, c], i) => { const y = 20 + i * 60, w = (R - L) * v / 1.5e6;
+      s += TX(L - 12, y + 25, n, 'text', nw ? 15 : 14, 'end') + `<rect x="${L}" y="${y}" width="${w}" height="38" rx="6" ${F(c, .85)}/>` + TX(L + w + 8, y + 25, fmt(v), 'muted', nw ? 14 : 13, 'start', 'font-family="Geist Mono, monospace"'); });
+    $('#svg18').innerHTML = s; })();
+  $$('[data-t18]').forEach(b => b.addEventListener('click', () => { press($$('[data-t18]'), b); $('#care18').hidden = b.dataset.t18 !== 'care'; $('#death18').hidden = b.dataset.t18 !== 'death'; }));
+}
+
+/* ================= 19: the happiness thermostat ================= */
+{ const PP = {a:{lo:6, hi:10, base:8}, b:{lo:3, hi:7, base:5}};
+  const EVN = [['Win the lottery', 1, 1], ['Get your dream job', 1, .8], ['Fall in love', 1, .9], ['Lose your job', -1, .8], ['A painful break-up', -1, .9], ['A bad injury', -1, 1]];
+  let p = 'a', mood = 8, hist = Array(240).fill(8), marks = [], visible = false, last = performance.now();
+  $('#ev19').innerHTML = EVN.map(([n, dir], i) => `<button class="btn" data-ev="${i}">${dir > 0 ? '↑' : '↓'} ${n}</button>`).join('');
+  function draw(){
+    const nw = NARROW(), W = nw ? 420 : 800, fs = nw ? 13 : 11; vb($('#svg19'), W, 290);
+    const P0 = PP[p], L = nw ? 28 : 40, R = W - 16, T = 16, B = 270, Y = v => B - v / 10 * (B - T), X = i => L + i / (hist.length - 1) * (R - L); let s = '';
+    s += `<rect x="${L}" y="${Y(P0.hi)}" width="${R - L}" height="${Y(P0.lo) - Y(P0.hi)}" ${F('glow', .08)}/>`;
+    for (let v = 0; v <= 10; v += 2) s += `<line x1="${L}" y1="${Y(v)}" x2="${R}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 8, Y(v) + 4, v, 'faint', fs, 'end');
+    s += `<line x1="${L}" y1="${Y(P0.base)}" x2="${R}" y2="${Y(P0.base)}" ${S('glow', 1.2, ';stroke-dasharray:5 5')}/>` + TX(R, Y(P0.base) - 6, 'set point', 'glow', fs, 'end');
+    s += TX(L + 6, Y(P0.hi) + 15, `this person's range: ${P0.lo} to ${P0.hi}`, 'faint', fs);
+    marks.forEach(m => { const x = X(m.i); if (x < L) return; s += `<line x1="${x}" y1="${T}" x2="${x}" y2="${B}" ${S(m.d > 0 ? 'good' : 'bad', 1, ';stroke-dasharray:2 3')}/>` + TX(x + 4, T + 12 + (m.k % 2) * 15, m.n, m.d > 0 ? 'good' : 'bad', fs); });
+    s += `<path d="${hist.map((v, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ')}" ${S('text', 2.5, ';stroke-linejoin:round')}/><circle cx="${X(hist.length - 1)}" cy="${Y(mood)}" r="5" ${F('glow')}/>`;
+    $('#svg19').innerHTML = s; $('#v19m').textContent = mood.toFixed(1) + ' / 10';
+  }
+  let acc = 0, mk = 0;
+  function tick(now){ const dt = Math.min(.1, (now - last) / 1000); last = now;
+    if (visible){ const P0 = PP[p]; mood += (P0.base - mood) * (1 - Math.exp(-dt * .22)); acc += dt;
+      if (acc >= .1){ acc = 0; hist.push(mood); hist.shift(); marks.forEach(m => m.i--); marks = marks.filter(m => m.i > -1); }
+      draw(); }
+    requestAnimationFrame(tick); }
+  new IntersectionObserver(es => es.forEach(e => visible = e.isIntersecting)).observe($('#svg19'));
+  $$('[data-ev]').forEach(b => b.addEventListener('click', () => { const [n, d, k] = EVN[+b.dataset.ev], P0 = PP[p];
+    mood = d > 0 ? lerp(mood, P0.hi, k * .95) : lerp(mood, P0.lo, k * .95); marks.push({i: hist.length - 1, n, d, k: mk++});
+    $('#v19e').textContent = `${n}. ${d > 0 ? 'A big high, and then, over time, back toward the usual.' : 'A real low, but even this fades back toward the set point.'}` + (p === 'b' && d > 0 ? ' Notice Person B\'s best day is still below Person A\'s ordinary one.' : '');
+    if (RM){ hist.push(mood); hist.shift(); } draw(); }));
+  $$('[data-p19]').forEach(b => b.addEventListener('click', () => { p = b.dataset.p19; press($$('[data-p19]'), b); mood = PP[p].base; hist = Array(240).fill(mood); marks = []; $('#v19e').textContent = 'Nothing yet. Life goes on.'; draw(); }));
+  onLayout(draw)();
+  if (!RM) requestAnimationFrame(tick);
+  else setInterval(() => { if (!visible) return; mood += (PP[p].base - mood) * .1; hist.push(mood); hist.shift(); marks.forEach(m => m.i--); marks = marks.filter(m => m.i > -1); draw(); }, 500);
+}
+
+/* ================= 20: roads beyond Sapiens ================= */
+sorter('#sort20', '#tally20',
+  [{id:'b', label:'Biological engineering', d:'Rewriting living things'}, {id:'c', label:'Cyborg engineering', d:'Merging bodies with machines'}, {id:'i', label:'Inorganic life', d:'Minds and life made of code'}],
+  [ {t:'Alba, a rabbit given a jellyfish gene so it glows green', a:'b', w:'A deliberate change to an animal\'s DNA, one of Harari\'s examples.'},
+    {t:'A mouse growing ear-shaped cartilage on its back', a:'b', w:'Living tissue shaped by design, not by evolution.'},
+    {t:'A bionic arm moved by the wearer\'s thoughts', a:'c', w:'Nerve signals drive a machine: body and device become one system.'},
+    {t:'Cochlear implants that turn sound into nerve signals', a:'c', w:'Hundreds of thousands of people already hear through a computer chip.'},
+    {t:'A computer program that learns and rewrites its own strategy', a:'i', w:'Software that improves without a human writing each step, a step toward life made of code.'},
+    {t:'Editing the genes of human embryos', a:'b', w:'Already technically possible, and deeply controversial.'},
+    {t:'A brain implant that lets a paralysed person move a cursor', a:'c', w:'Thought, read directly by a machine.'},
+    {t:'A computer virus that mutates as it spreads', a:'i', w:'Harari\'s early example of code that replicates and evolves on its own.'},
+    {t:'Simulating a complete human brain inside a computer', a:'i', w:'If a mind can run on silicon, is it still Sapiens?'},
+    {t:'Bringing back a Neanderthal from ancient DNA', a:'b', w:'Harari raises it as a real possibility once the Neanderthal genome was decoded.'} ]);
+})();
+</script>
+</body>
+</html>
