@@ -1,0 +1,1338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Exactly What to Say, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a phrasebook with a highlighter. Same shell as the other guides (chapter rail, one "station" per chapter:
+   short answer, big ideas, the words in a real conversation, a lab, plain words, quick check), grouped into five stages of a conversation.
+   Dark-first: deep bottle green with a highlighter-mustard accent that marks every set of magic words, and a mint second series. */
+:root{
+  color-scheme: dark;
+  --ink:#101716;
+  --panel:#172120;
+  --panel-2:#1E2B29;
+  --line:#2E3D3A;
+  --text:#EEF2EF;
+  --muted:#A8B6B1;
+  --faint:#75857F;
+  --glow:#F2C14E;         /* highlighter mustard: the one accent */
+  --glow-soft:rgba(242,193,78,.12);
+  --hl:rgba(242,193,78,.24);   /* the highlighter stroke behind magic words */
+  --cool:#7ED6C1;         /* mint: second series, "them" in conversations */
+  --cool-soft:rgba(126,214,193,.12);
+  --good:#8FD694;
+  --good-soft:rgba(143,214,148,.1);
+  --bad:#FF8A6B;
+  --bad-soft:rgba(255,138,107,.09);
+  --soft:#D4DDD9;
+  --deep:#0B1110;
+  --toc-bg:rgba(23,33,32,.74);
+  --glow-line:rgba(242,193,78,.34);
+  --cool-line:rgba(126,214,193,.3);
+  --on-glow:#231A02;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F5F2;--panel:#FFFFFF;--panel-2:#E9EDE8;--line:#D3DAD4;--text:#141A19;--muted:#4E5A56;--faint:#77837F;
+  --glow:#8A6200;--glow-soft:rgba(138,98,0,.08);--hl:#FBE38E;--cool:#1F7A68;--cool-soft:rgba(31,122,104,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B5481F;--bad-soft:rgba(181,72,31,.08);
+  --soft:#2A3230;--deep:#FAFBF9;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(138,98,0,.3);--cool-line:rgba(31,122,104,.3);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F5F2;--panel:#FFFFFF;--panel-2:#E9EDE8;--line:#D3DAD4;--text:#141A19;--muted:#4E5A56;--faint:#77837F;
+  --glow:#8A6200;--glow-soft:rgba(138,98,0,.08);--hl:#FBE38E;--cool:#1F7A68;--cool-soft:rgba(31,122,104,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B5481F;--bad-soft:rgba(181,72,31,.08);
+  --soft:#2A3230;--deep:#FAFBF9;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(138,98,0,.3);--cool-line:rgba(31,122,104,.3);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+/* hero: overheard conversation + phrase deck */
+.overheard{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.overheard .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.overheard .top .t{font-weight:500}
+.overheard .verdict{padding:12px 18px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--muted)}
+.overheard .verdict b{color:var(--text);font-weight:500}
+.chat{display:grid;gap:10px;padding:18px}
+.bub{display:grid;gap:2px;max-width:min(560px,88%);padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.bub .who{font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.bub.them{justify-self:start;background:var(--cool-soft);border:1px solid var(--cool-line);border-bottom-left-radius:4px}
+.bub.you{justify-self:end;background:var(--panel-2);border:1px solid var(--line);border-bottom-right-radius:4px}
+.deck{display:flex;flex-wrap:wrap;gap:6px}
+.deck a{display:inline-flex;gap:8px;align-items:baseline;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;color:var(--text);text-decoration:none;background:var(--toc-bg);transition:border-color .15s}
+.deck a:hover{border-color:var(--glow)}
+.deck .n{font-family:var(--f-mono);font-size:10.5px;color:var(--glow)}
+
+/* per-chapter conversation */
+.convo{display:grid;gap:8px;max-width:70ch}
+.convo .chat{padding:0}
+
+/* horizontal bars */
+.hbars{display:grid;gap:12px;padding:18px}
+.hb{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) 72px;gap:12px;align-items:center;font-size:14px}
+.hb .l{color:var(--muted);line-height:1.3}
+.hb .tr{height:16px;border-radius:999px;background:var(--panel-2);overflow:hidden}
+.hb .tr i{display:block;height:100%;border-radius:999px;background:var(--cool);transition:width .35s}
+.hb.g .tr i{background:var(--glow)}
+.hb.ok .tr i{background:var(--good)}
+.hb.no .tr i{background:var(--bad)}
+.hb .v{font-family:var(--f-mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+/* swaps */
+.swaps{display:grid;gap:8px;padding:18px 0 0}
+.swap{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:0 18px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;transition:border-color .15s}
+.swap:hover{border-color:var(--glow)}
+.swap .from{color:var(--muted);font-size:16px}
+.swap .to{font-family:var(--f-display);font-size:22px;line-height:1.2}
+.swap .why{grid-column:1;font-size:13px;color:var(--muted)}
+.swap .cue{grid-row:1;grid-column:2;font-family:var(--f-mono);font-size:11px;color:var(--faint);white-space:nowrap}
+.swap[aria-pressed=true]{border-color:var(--glow-line);background:var(--glow-soft)}
+
+/* script book */
+.book{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.book-item{display:grid;gap:8px;align-content:start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.book-item .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.book-item .bt{font-size:15px}
+.book .empty{color:var(--muted);font-size:15px;max-width:60ch}
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+@media (max-width: 560px){
+  .hb{grid-template-columns:minmax(0,1fr) 64px;gap:4px 10px}
+  .hb .l{grid-column:1/-1}
+  .hbars{padding:14px}
+  .swap{margin:0 14px;grid-template-columns:minmax(0,1fr)}
+  .swap .cue{grid-row:auto;grid-column:1}
+  .fields,.out{padding:14px}
+  .bub{max-width:94%}
+}
+.book .empty{grid-column:1/-1}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Phil M. Jones's book of magic words</div>
+    <h1>Exactly What<br>to <em>Say</em>, Explained</h1>
+    <p class="lede">Phil M. Jones's short book collects <b>23 sets of "magic words"</b>: phrases that make people more likely to listen, decide and say yes, whether you're selling, leading a team or asking a friend for help. This guide takes them one at a time, with how each one sounds in a real conversation and a lab where you write your own version.</p>
+    <figure class="overheard" style="margin:0">
+      <div class="top"><div class="t">Overheard at a market stall</div>
+        <div class="row"><button class="btn" data-chat="plain" aria-pressed="true">Without magic words</button><button class="btn" data-chat="magic" aria-pressed="false">With magic words</button></div></div>
+      <div class="chat" id="chat" aria-live="polite"></div>
+      <div class="verdict">How it ends: <b id="chatV"></b></div>
+    </figure>
+    <nav class="parts" aria-label="The five stages">
+      <a href="#part1"><span class="n">Stage 1 · Chapters 1 to 5</span><span class="q">Open the Door</span><span class="d">Get a fair hearing for an idea, without pressure</span></a>
+      <a href="#part2"><span class="n">Stage 2 · Chapters 6 to 8</span><span class="q">Make It Happen</span><span class="d">Turn interest into a time, a task or a next step</span></a>
+      <a href="#part3"><span class="n">Stage 3 · Chapters 9 to 14</span><span class="q">Guide the Decision</span><span class="d">Help people choose, and choose well</span></a>
+      <a href="#part4"><span class="n">Stage 4 · Chapters 15 to 18</span><span class="q">Close With Confidence</span><span class="d">Handle objections and finish the conversation</span></a>
+      <a href="#part5"><span class="n">Stage 5 · Chapters 19 to 23</span><span class="q">Ask for More</span><span class="d">Negotiate, upgrade, ask favours and get real answers</span></a>
+    </nav>
+    <div class="deck" id="deck" aria-label="All 23 magic words"></div>
+    <div class="about">
+      <span><b>Published</b> in 2017</span>
+      <span><b>Author</b> Phil M. Jones, a British-born sales trainer and speaker</span>
+      <span><b>Read time</b> about 3 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 23 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== STAGE 1 ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Stage one · chapters 1 to 5</span>
+      <h2>Open the Door</h2>
+      <p>The first five sets of magic words are about getting an idea considered at all. People are busy, sceptical and used to being sold to. These phrases lower their guard, make them curious, and let them picture what you are offering before they decide.</p>
+      <div class="claim"><span class="lbl">The idea behind this stage</span><p>People decide whether to listen in the first few words. Start in a way that makes saying "tell me more" the easy answer.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Introduce an idea without pressure</div>
+        <h2>I'm Not Sure If It's for You, But</h2>
+        <div class="short"><span class="lbl">In short</span><p>Opening with "I'm not sure if it's for you, but…" takes the pressure off. It tells people they are free to say no, which makes them far more willing to hear you out.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It removes the threat.</b> When someone senses a sales pitch coming, their guard goes up. Saying up front that it may not be for them signals that you aren't going to push, so they relax.</span></li>
+          <li><span><b>It triggers curiosity.</b> Being told something might not be for you makes you want to know what it is. The brain hears a gentle challenge and wants to decide for itself.</span></li>
+          <li><span><b>The worst case is "no".</b> The listener can only reply that it isn't for them, which is exactly what you said might happen. You lose nothing, and you keep the relationship.</span></li>
+          <li><span><b>Use it anywhere.</b> It works for a product, a job opening, a charity event, a new idea for your manager, or a suggestion to a friend about a weekend plan.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>I'm not sure if it's for you, but</mark> we're starting a small Tuesday running group. Would you like to know more?</p></div><div class="bub them"><span class="who">Them</span><p>Maybe. What kind of pace?</p></div></div></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: write your opener</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Instead of "You should really try this", which makes people defend their right to say no, you hand them that right at the start. People who feel free to choose are much more willing to listen.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Open-Minded →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Ask people to consider something new</div>
+        <h2>Open-Minded</h2>
+        <div class="short"><span class="lbl">In short</span><p>Asking "How open-minded are you about…?" makes nearly everyone say "quite open-minded", because almost nobody wants to see themselves as closed-minded. Then you have their attention.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>People want to be seen as open.</b> Being open-minded is something almost everyone values in themselves. Ask the question and the answer is nearly always yes.</span></li>
+          <li><span><b>It works on the most sceptical.</b> The person who looks least likely to agree is often the one who most wants to prove they are open. The question gives them a chance.</span></li>
+          <li><span><b>Pair it with a gentle idea.</b> "Would you be open-minded about trying a different supplier for one order?" asks for a small, low-risk step, not a big leap.</span></li>
+          <li><span><b>It sets the tone.</b> Once someone has said they are open-minded, they will tend to stay consistent with that description for the rest of the conversation.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>How open-minded</mark> would you be about a four-day week trial for the team?</p></div><div class="bub them"><span class="who">Them</span><p>Fairly open-minded. What would it involve?</p></div></div></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: which opener gets a fair hearing?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you ask "Would you consider this?", you invite a quick no. If you ask how open-minded someone is, you invite them to describe themselves in a good light, and most people choose to.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: What Do You Know? →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Gently challenge a fixed opinion</div>
+        <h2>What Do You Know?</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone has dismissed something they haven't really looked at, asking "What do you know about…?" invites them to admit, to themselves, that they don't know much yet.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Opinions often rest on very little.</b> People turn down ideas based on an old experience, a headline, or a friend's complaint. The question shows the gap without you having to point it out.</span></li>
+          <li><span><b>They answer honestly.</b> Most people will say "not much, really". That is the moment they become open to hearing more.</span></li>
+          <li><span><b>It avoids an argument.</b> Telling someone they are wrong makes them dig in. Asking what they know lets them change their mind on their own terms.</span></li>
+          <li><span><b>Follow up with an offer.</b> "Would it make sense to see the latest figures before you decide?" turns the gap into a next step.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>Electric cars? No, the batteries don't last.</p></div><div class="bub you"><span class="who">You</span><p><mark>What do you know about</mark> the newer batteries?</p></div><div class="bub them"><span class="who">Them</span><p>Honestly, not much.</p></div></div></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: question a fixed view</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's the difference between "You're wrong about that" and "What have you heard about it?" The first starts a fight. The second starts a conversation.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: How Would You Feel If? →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Move people with a future feeling</div>
+        <h2>How Would You Feel If?</h2>
+        <div class="short"><span class="lbl">In short</span><p>"How would you feel if…?" asks people to step into the future and feel the result of a decision. Feelings, more than facts, are what make people act.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Decisions are emotional.</b> Facts help people justify a choice, but emotion is what moves them. This question connects your idea to a feeling the listener can sense right now.</span></li>
+          <li><span><b>Use it in two directions.</b> Paint the good outcome ("How would you feel if the project shipped a month early?") or the cost of doing nothing ("How would you feel if the same thing happened next year?").</span></li>
+          <li><span><b>They do the persuading.</b> You aren't claiming anything. They imagine the feeling and describe it in their own words, which is far more convincing to them than anything you could say.</span></li>
+          <li><span><b>Make it specific.</b> A vague future ("feel better") does little. A concrete one ("walk into the meeting knowing every number") lands.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>How would you feel if</mark> you finished this course and could finally fix your own website?</p></div><div class="bub them"><span class="who">Them</span><p>Honestly? Pretty proud.</p></div></div></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: paint a future feeling</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b4"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>People don't buy a gym membership, they buy how they'll feel in their clothes in six months. Asking them to feel it now is more powerful than describing the membership.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Just Imagine →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Let them see it before it happens</div>
+        <h2>Just Imagine</h2>
+        <div class="short"><span class="lbl">In short</span><p>"Just imagine…" invites people to picture a scene. Once they have seen it in their mind, it starts to feel real and possible, and they want it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Imagining is half-way to believing.</b> When we picture something clearly, the brain treats it a little like a memory. The future becomes familiar, so it feels achievable.</span></li>
+          <li><span><b>It bypasses resistance.</b> Nobody argues with an invitation to imagine. There's nothing to disagree with, just a picture to look at.</span></li>
+          <li><span><b>Use the senses.</b> Describe what they'll see, hear and feel. "Just imagine stepping off the plane into warm air, with a week of nothing planned" beats "Just imagine a holiday".</span></li>
+          <li><span><b>Put them in the picture.</b> Make the listener the main character, doing something they care about, at a specific time and place.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>Just imagine</mark> next Christmas with the kitchen finished and the whole family round the new table.</p></div><div class="bub them"><span class="who">Them</span><p>That would be something.</p></div></div></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: paint the picture</div><div class="hint">Add details and watch how vivid it gets</div></div>
+        <div class="builder" id="b5"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A travel brochure doesn't list flight numbers; it shows you on the beach. "Just imagine" does the same thing with words.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: When Would Be a Good Time? →</a></div>
+    </section>
+    <!-- ===================== STAGE 2 ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Stage two · chapters 6 to 8</span>
+      <h2>Make It Happen</h2>
+      <p>Interest that never becomes action is wasted. These chapters deal with the two most common stalls, "I don't have time" and "I haven't got round to it", and with small word swaps that turn a yes-or-no question into one that moves things forward.</p>
+      <div class="claim"><span class="lbl">The idea behind this stage</span><p>Questions that assume the good outcome are far more likely to get it than questions that offer an easy no.</p></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Get past "I'm too busy"</div>
+        <h2>When Would Be a Good Time?</h2>
+        <div class="short"><span class="lbl">In short</span><p>"I don't have time" is often a polite no. Asking "When would be a good time to…?" assumes a good time exists, and gets people to name one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The question assumes yes.</b> You're no longer asking whether they'll do it, only when. Most people find it awkward to answer "never".</span></li>
+          <li><span><b>It respects their time.</b> You aren't pushing for now. You're letting them pick the moment, which feels considerate.</span></li>
+          <li><span><b>It creates a commitment.</b> Once someone has named a time, they've made a small promise. Small promises are kept far more often than vague intentions.</span></li>
+          <li><span><b>Pin it down.</b> Follow up with the specific: "Thursday at ten, then? I'll send an invite." A time in the diary beats "sometime next week".</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I'd love to, but I'm flat out this week.</p></div><div class="bub you"><span class="who">You</span><p>No problem. <mark>When would be a good time</mark> to look at it properly?</p></div><div class="bub them"><span class="who">Them</span><p>Maybe Thursday morning?</p></div></div></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: which question gets a time in the diary?</div><div class="tally" id="tally6" aria-label="Score"></div></div>
+        <div class="sorter" id="sort6"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask "Do you have time to talk?" and "No" is an easy answer. Ask "When would be a good time to talk?" and the easy answer is a day of the week.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: I'm Guessing You Haven't Got Around To →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Follow up without making people feel bad</div>
+        <h2>I'm Guessing You Haven't Got Around To</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone hasn't done what they promised, "I'm guessing you haven't got around to… yet?" gives them a face-saving way to admit it, or the pleasure of saying they have.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It removes the shame.</b> You've already assumed they're behind, kindly. There's nothing to hide or defend, so they tell you the truth.</span></li>
+          <li><span><b>It wins either way.</b> If they haven't done it, they agree easily and you agree the next step. If they have, they get to correct you with pride and tell you about it.</span></li>
+          <li><span><b>No chasing tone.</b> "Did you do the thing yet?" sounds like a teacher. This sounds like a friend who understands people are busy.</span></li>
+          <li><span><b>Use it everywhere.</b> Unpaid invoices, unread proposals, homework, an un-booked doctor's appointment: any follow-up that usually feels awkward.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>I'm guessing you haven't got around to</mark> reading the proposal yet?</p></div><div class="bub them"><span class="who">Them</span><p>Ha, no, sorry. It's been mad.</p></div><div class="bub you"><span class="who">You</span><p>Totally understand. When would be a good time to go through it together?</p></div></div></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: write a kind follow-up</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b7"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's the opposite of a nag. You take the awkwardness out by saying the likely truth first, so the other person can simply agree and move on.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Simple Swaps →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Small changes to everyday questions</div>
+        <h2>Simple Swaps</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some everyday questions quietly invite the wrong answer. Swapping a few words, such as "What questions do you have?" for "Do you have any questions?", changes what people say.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"Do you have any questions?" invites "No".</b> People say no to avoid looking slow. "What questions do you have for me?" assumes there are some, and gives permission to ask.</span></li>
+          <li><span><b>"Can I get your number?" invites hesitation.</b> "What's the best number to reach you on?" assumes you'll be calling and only asks which number.</span></li>
+          <li><span><b>"Did you like it?" invites a yes or a no.</b> "What did you like about it?" makes people search for positives, and they remember what they say.</span></li>
+          <li><span><b>Swap "if" for "when".</b> "If you go ahead" keeps the decision open. "When you go ahead" helps people picture it already happening.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>So that's the plan. <mark>What questions do you have</mark> for me?</p></div><div class="bub them"><span class="who">Them</span><p>Actually, yes, how does billing work?</p></div></div></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: swap the words</div><div class="hint">Tap a line to swap in the magic words</div></div>
+        <div class="swaps" id="sw8"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>These questions are like doors that open one way. The usual wording opens toward "no"; the swap opens toward a real answer.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: You Have Three Options →</a></div>
+    </section>
+    <!-- ===================== STAGE 3 ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Stage three · chapters 9 to 14</span>
+      <h2>Guide the Decision</h2>
+      <p>Most people struggle with decisions, and many would rather be guided than left alone with a pile of options. These magic words simplify the choice, make your recommendation easy to agree with, and calm the worry that stops people saying yes.</p>
+      <div class="claim"><span class="lbl">The idea behind this stage</span><p>Confusion leads to "no". A clear, simple frame helps people decide, and most of them are grateful for it.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Make a choice simple</div>
+        <h2>You Have Three Options</h2>
+        <div class="short"><span class="lbl">In short</span><p>When people are stuck, laying out "As I see it, you have three options" makes the decision manageable, and lets you place your recommendation where it looks best.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Too much choice freezes people.</b> With many options, people often choose nothing. Three is enough to feel free and few enough to compare.</span></li>
+          <li><span><b>Use a clear structure.</b> Option one: do nothing and keep the problem. Option two: an alternative that's hard or costly. Option three: the solution you recommend, which looks sensible next to the first two.</span></li>
+          <li><span><b>It shows you understand.</b> Summing up their situation fairly, including the option of doing nothing, shows you've listened and aren't hiding anything.</span></li>
+          <li><span><b>Then ask which is easiest.</b> End with "Which of these is easiest for you?" Most people pick the one you've made obviously best.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>As I see it, you have three options</mark>. Keep the old laptop and live with it crashing. Spend a weekend rebuilding it yourself. Or swap it for the new one today. Which is easiest for you?</p></div><div class="bub them"><span class="who">Them</span><p>Honestly, the new one.</p></div></div></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: set out the three options</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b9"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A doctor who says "We can wait and see, try physiotherapy, or operate" helps you decide. One who lists twenty treatments leaves you more confused than when you walked in.</p></div>
+      <div class="note"><span class="lbl">Use it well</span><p>Lay out real options honestly. The frame works because it helps people decide; stacking it with a fake "bad" option or hiding a real alternative is manipulation, and people notice.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: There Are Two Types of People →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Let them choose who to be</div>
+        <h2>There Are Two Types of People</h2>
+        <div class="short"><span class="lbl">In short</span><p>"There are two types of people: those who… and those who…" offers a choice of identity. Most people pick the one that sounds better, and then act like it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>We act to fit our self-image.</b> People want their actions to match the kind of person they believe they are. Give them two descriptions and they'll choose one to live up to.</span></li>
+          <li><span><b>Make one side clearly better.</b> "There are two types of people: those who wait for the right moment, and those who make it." Few people want to be the first type.</span></li>
+          <li><span><b>It feels like their choice.</b> You haven't told them what to do. They've chosen which side of the line they stand on.</span></li>
+          <li><span><b>Use it with care.</b> It works best when both descriptions are fair. If one side is a cartoon, people feel pushed and resist.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>There are two types of people</mark> when it comes to pensions: those who hope it works out, and those who check now while there's time to fix it.</p></div><div class="bub them"><span class="who">Them</span><p>I'd better be the second.</p></div></div></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: draw the line</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's like asking "Are you a morning person?" Once someone has a label they like, they tend to behave like it.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: I Bet You're a Bit Like Me →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Build quick common ground</div>
+        <h2>I Bet You're a Bit Like Me</h2>
+        <div class="short"><span class="lbl">In short</span><p>"I bet you're a bit like me…" followed by something almost everyone agrees with gets an easy early yes, and makes you feel like allies, not strangers.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>People like people like them.</b> Shared views create trust quickly. This phrase finds common ground in one sentence.</span></li>
+          <li><span><b>Pick something nearly universal.</b> "…you like to know exactly what you're paying for." "…you'd rather sort this once than keep coming back to it." Something easy to agree with.</span></li>
+          <li><span><b>Then lead from there.</b> Once you've agreed on what matters, your suggestion becomes the obvious way to get it.</span></li>
+          <li><span><b>It's a softer statement.</b> Telling someone what they want feels presumptuous. Saying you bet they're like you is friendly and easy to correct.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>I bet you're a bit like me</mark>, and hate being surprised by extra charges later on.</p></div><div class="bub them"><span class="who">Them</span><p>Absolutely.</p></div><div class="bub you"><span class="who">You</span><p>That's why I'd go for the fixed-price option.</p></div></div></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: find the easy agreement</div><div class="tally" id="tally11" aria-label="Score"></div></div>
+        <div class="sorter" id="sort11"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of the way a good waiter says "If you're anything like me, you'll want to save room for dessert." You nod, you feel understood, and you look at the dessert menu.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: If… Then →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Link a small step to a result they want</div>
+        <h2>If… Then</h2>
+        <div class="short"><span class="lbl">In short</span><p>"If you… then you will…" connects an action to an outcome in a way that sounds logical and is hard to argue with.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It sounds like cause and effect.</b> The structure is how we describe rules and facts, so the listener tends to accept the link without questioning it.</span></li>
+          <li><span><b>Start with something they want.</b> "If you'd like the kitchen done before summer, then we should order the units this month." The goal is theirs; the action follows naturally.</span></li>
+          <li><span><b>Keep the step small.</b> The "if" part should be easy to say yes to. Once they accept it, the "then" part feels like common sense.</span></li>
+          <li><span><b>Be truthful.</b> The link has to be real. A made-up consequence breaks trust the moment it's tested.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>If</mark> you give the free trial a go this week, <mark>then</mark> you'll know by Friday whether it saves you time.</p></div><div class="bub them"><span class="who">Them</span><p>Fair enough.</p></div></div></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: link the step to the result</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b12"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Parents use it all the time: "If you put your shoes on now, then we can stop at the park." It works because it's simple, clear and connects the step to something the child wants.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Don't Worry →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Calm people down and take charge</div>
+        <h2>Don't Worry</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone is anxious, "Don't worry" followed by what you'll take care of relaxes them and shows you're in control.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Worry blocks decisions.</b> An anxious person stalls. Removing the worry is often all it takes to get a yes.</span></li>
+          <li><span><b>It signals authority.</b> People who say "Don't worry" calmly sound like they've handled this before, because usually they have.</span></li>
+          <li><span><b>Follow it with the fix.</b> "Don't worry, I'll handle the paperwork" works. "Don't worry" on its own can sound dismissive.</span></li>
+          <li><span><b>Use it after a problem.</b> When something has gone wrong, it lowers the temperature fast and moves the conversation on to the solution.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I've never done a tax return, I'll probably mess it up.</p></div><div class="bub you"><span class="who">You</span><p><mark>Don't worry</mark>, we'll go through it line by line together this afternoon.</p></div></div></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: which reply calms them down?</div><div class="tally" id="tally13" aria-label="Score"></div></div>
+        <div class="sorter" id="sort13"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of a pilot's calm voice over the speakers during turbulence. Confidence is contagious, and so is worry. Choose which one you spread.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Most People →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Recommend without pushing</div>
+        <h2>Most People</h2>
+        <div class="short"><span class="lbl">In short</span><p>"Most people in your situation…" lets you recommend a choice by pointing to what others do. People feel safe following the crowd.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>We look to others when unsure.</b> When people don't know what to do, they copy what similar people did. "Most people" gives them that information.</span></li>
+          <li><span><b>It isn't you pushing.</b> You're not saying "you should". You're reporting what others chose, so the advice feels neutral.</span></li>
+          <li><span><b>Make it true.</b> Only use it when it's actually what most of your customers or colleagues do. If it isn't true, don't say it.</span></li>
+          <li><span><b>Add the reason.</b> "Most people go for the annual plan, because it works out two months cheaper" gives social proof and a reason together.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>Which size should I go for?</p></div><div class="bub you"><span class="who">You</span><p><mark>Most people</mark> with a family of four go for the larger one, so they're not running out mid-week.</p></div></div></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: recommend with "most people"</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b14"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Restaurants put "most popular" next to a dish for a reason. When you don't know what to order, knowing what others liked makes the choice feel safe.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The Good News →</a></div>
+    </section>
+    <!-- ===================== STAGE 4 ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Stage four · chapters 15 to 18</span>
+      <h2>Close With Confidence</h2>
+      <p>The end of a conversation is where most people go quiet, hint, or apologise. These chapters give you calm ways to share bad news, describe what happens next, understand an objection, and keep the door open when someone is about to say no.</p>
+      <div class="claim"><span class="lbl">The idea behind this stage</span><p>Most people wait for the other person to close. Take the lead, kindly, and make the next step obvious.</p></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Turn bad news into a way forward</div>
+        <h2>The Good News</h2>
+        <div class="short"><span class="lbl">In short</span><p>After any setback, "The good news is…" moves attention from the problem to what can be done, and makes you the person with the answer.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Attention follows your words.</b> Whatever you put after "the good news is" becomes the focus. Point it at the solution.</span></li>
+          <li><span><b>It works in any mood.</b> There's nearly always some good news: it's fixable, it was caught early, there's a cheaper option, or now we know.</span></li>
+          <li><span><b>It sets you apart.</b> Most people dwell on what went wrong. The person who says "the good news is" sounds like a leader.</span></li>
+          <li><span><b>Don't hide the bad.</b> Be honest about the problem first, then turn to the good news. Skipping the bad part sounds like spin.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>We missed the deadline for the grant.</p></div><div class="bub you"><span class="who">You</span><p>That's frustrating. <mark>The good news is</mark> there's another round in March, and we'll have a much stronger application by then.</p></div></div></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: find the good news</div><div class="hint">Tap a piece of bad news to reframe it</div></div>
+        <div class="swaps" id="sw15"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A mechanic who says "Your brakes are worn, but the good news is the discs are fine, so it's a cheap fix" leaves you relieved, even though you're still paying.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: What Happens Next →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Close by describing the next steps</div>
+        <h2>What Happens Next</h2>
+        <div class="short"><span class="lbl">In short</span><p>Instead of asking "Do you want to go ahead?", describe "What happens next is…". People who can see the next steps clearly tend to follow them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A question invites a pause.</b> "Shall we go ahead?" gives people a moment to hesitate. Describing the steps assumes you're already moving.</span></li>
+          <li><span><b>Clarity removes fear.</b> Much hesitation is not knowing what will happen. Laying out the steps takes away the unknown.</span></li>
+          <li><span><b>Keep it short and concrete.</b> Two or three steps with times: "I'll send the form today, you sign it by Friday, and we start Monday."</span></li>
+          <li><span><b>End with the first step.</b> Finish with something they can do now, like "So all I need from you is a start date."</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>What happens next is</mark> I'll email the plan tonight, we'll have a 15-minute call on Wednesday, and the team starts on Monday. All I need is the best email for the plan.</p></div><div class="bub them"><span class="who">Them</span><p>Sure, use my work one.</p></div></div></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: walk them through the next steps</div><div class="hint">Fill in up to three steps</div></div>
+        <div class="builder" id="b16"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A good receptionist doesn't ask whether you want to see the doctor. They say "Take a seat, the nurse will call you in about ten minutes, and then you'll see Dr Patel." You just follow along.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: What Makes You Say That? →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · Understand an objection before answering it</div>
+        <h2>What Makes You Say That?</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone pushes back, asking "What makes you say that?" gets them to explain the real concern, so you answer the right problem.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The first objection isn't always the real one.</b> "It's too expensive" might mean "I can't afford it this month", "I don't see the value", or "I need to ask my partner". Each needs a different answer.</span></li>
+          <li><span><b>It buys you time.</b> Instead of reacting defensively, you calmly ask a question while you listen and think.</span></li>
+          <li><span><b>People often answer themselves.</b> Explaining an objection out loud sometimes shows the person it isn't as big as they thought.</span></li>
+          <li><span><b>Tone is everything.</b> Ask with real curiosity. Said sharply, it sounds like a challenge.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I don't think it's the right time.</p></div><div class="bub you"><span class="who">You</span><p><mark>What makes you say that?</mark></p></div><div class="bub them"><span class="who">Them</span><p>We're hiring two people next month and I'm worried about the workload.</p></div></div></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: respond to the push-back</div><div class="tally" id="tally17" aria-label="Score"></div></div>
+        <div class="sorter" id="sort17"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A good doctor doesn't prescribe as soon as you say "my back hurts". They ask what makes you say that, where, and when. Objections deserve the same diagnosis.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: Before You Make Your Mind Up →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Keep the door open when they're leaning toward no</div>
+        <h2>Before You Make Your Mind Up</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone is about to say no, "Before you make your mind up…" asks them to pause and consider one more thing, before the no is final.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A spoken no is hard to undo.</b> Once someone has said no out loud, they tend to stick with it to stay consistent. Catch the moment before it's said.</span></li>
+          <li><span><b>It respects their decision.</b> You're not arguing. You're acknowledging they're deciding, and asking for one more fact to be part of it.</span></li>
+          <li><span><b>Offer something new.</b> Follow it with a fact, an option or a question they haven't heard yet. Repeating your pitch won't help.</span></li>
+          <li><span><b>Accept the answer.</b> If it's still no after that, leave gracefully. You'll have earned the chance to come back another time.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I think we'll leave it this year.</p></div><div class="bub you"><span class="who">You</span><p><mark>Before you make your mind up</mark>, can I show you the smaller package? It's half the price and covers the two things you mentioned.</p></div></div></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: keep the door open</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b18"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's like stopping a friend from sending an angry message: "Before you hit send, read it once more." You aren't telling them what to decide, just asking them to decide with everything in view.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#ch19">Next: If I Can, Will You? →</a></div>
+    </section>
+    <!-- ===================== STAGE 5 ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Stage five · chapters 19 to 23</span>
+      <h2>Ask for More</h2>
+      <p>The last group is about asking: for a commitment in return, for a larger amount, for one more small thing, for a favour, and for the truth behind a polite brush-off. Done well, each ask feels natural to the person hearing it.</p>
+      <div class="claim"><span class="lbl">The idea behind this stage</span><p>You rarely get what you don't ask for. Small changes to how you ask make a yes far more likely.</p></div>
+    </section>
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 19</span> · Trade a yes for a yes</div>
+        <h2>If I Can, Will You?</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone asks for something you might be able to give, reply "If I can…, will you…?" so that any concession you make comes with a commitment from them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Never give something for nothing.</b> If you agree to a discount or a deadline straight away, you get nothing back. Making it conditional turns it into a deal.</span></li>
+          <li><span><b>It tests the real objection.</b> If they say "yes, I'd sign today", you know price was the only issue. If they hesitate, there's something else to uncover.</span></li>
+          <li><span><b>Ask before you check.</b> "If I can get it delivered by Friday, will you place the order today?" Get the commitment, then make it happen.</span></li>
+          <li><span><b>Keep it fair.</b> Ask for something proportionate. A big ask in return for a small favour feels like a trap.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>Could you do it for £900 instead of £1,000?</p></div><div class="bub you"><span class="who">You</span><p><mark>If I can get it to £900, will you</mark> sign today?</p></div><div class="bub them"><span class="who">Them</span><p>Yes, I would.</p></div></div></div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: turn a request into a deal</div><div class="tally" id="tally19" aria-label="Score"></div></div>
+        <div class="sorter" id="sort19"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's how sensible negotiation works in everyday life: "If I cook, will you wash up?" Both sides give something, and everyone knows where they stand.</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this chapter</label><a class="next" href="#ch20">Next: Enough →</a></div>
+    </section>
+    <!-- ===================== 20 ===================== -->
+    <section class="ch" id="ch20" data-n="20">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 20</span> · Suggest an amount and let them round up</div>
+        <h2>Enough</h2>
+        <div class="short"><span class="lbl">In short</span><p>Asking "Would three be enough?" suggests an amount while letting the other person decide. If your suggestion is a little high, many people go with it, or adjust from there.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"Enough" feels like a ceiling.</b> People rarely want to be caught short. Asking whether something is enough makes them think about running out.</span></li>
+          <li><span><b>Your number becomes the anchor.</b> The figure you suggest is where their thinking starts. Suggest a sensible, slightly generous amount, and most people adjust from there.</span></li>
+          <li><span><b>It feels considerate.</b> You're checking they'll have what they need, not trying to sell more. That's why it rarely feels pushy.</span></li>
+          <li><span><b>It works off-sales too.</b> "Would an hour be enough for the meeting?" "Would £20 each be enough for the gift?" It sets the scale of any shared decision.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I'll take some of the printer cartridges.</p></div><div class="bub you"><span class="who">You</span><p><mark>Would six be enough</mark> to get you through to the end of the quarter?</p></div><div class="bub them"><span class="who">Them</span><p>Hmm, make it eight to be safe.</p></div></div></div>
+      <figure class="lab" id="lab20">
+        <div class="lab-top"><div class="t">Lab: would this be enough?</div><div class="hint">Change the number you suggest</div></div>
+        <div class="enough" id="en20"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A café that asks "Would you like a large?" gets fewer large coffees than one that asks "Would a regular be enough, or would you like a large?" The question makes you check whether you'd be left wanting more.</p></div>
+      <div class="note"><span class="lbl">Use it well</span><p>This works because of anchoring, the tendency to adjust from the first number you hear. Use it to suggest what people genuinely need, not to load them up with things they don't.</p></div>
+      <div class="quiz" data-q="20"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="20"> I understand this chapter</label><a class="next" href="#ch21">Next: Just One More Thing →</a></div>
+    </section>
+    <!-- ===================== 21 ===================== -->
+    <section class="ch" id="ch21" data-n="21">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 21</span> · Make a small final ask</div>
+        <h2>Just One More Thing</h2>
+        <div class="short"><span class="lbl">In short</span><p>After the main business is done and everyone has relaxed, "Just one more thing…" makes a smaller request that feels easy to agree to.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Guards are down at the end.</b> Once the main decision is made, people relax. A small extra ask at that point feels minor.</span></li>
+          <li><span><b>Ask for less than before.</b> If they said no to the big thing, ask for a smaller one: a trial, a referral, a review. After a no, people often like to give a yes.</span></li>
+          <li><span><b>It's a famous move.</b> The TV detective Columbo made it his trademark: he'd head for the door, turn round and ask the question that mattered.</span></li>
+          <li><span><b>Keep it genuinely small.</b> A review, an introduction, a date for the next chat. Anything big deserves its own conversation.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p>Thanks again, I'll get that sent over. Oh, <mark>just one more thing</mark>: would you be happy to leave a short review once it arrives?</p></div><div class="bub them"><span class="who">Them</span><p>Of course.</p></div></div></div>
+      <figure class="lab" id="lab21">
+        <div class="lab-top"><div class="t">Lab: plan your final ask</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b21"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's like asking for the salt after the meal has been served. Everyone's settled and happy; a small request at that moment hardly feels like a request at all.</p></div>
+      <div class="quiz" data-q="21"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="21"> I understand this chapter</label><a class="next" href="#ch22">Next: A Favour →</a></div>
+    </section>
+    <!-- ===================== 22 ===================== -->
+    <section class="ch" id="ch22" data-n="22">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 22</span> · Get a yes before you ask</div>
+        <h2>A Favour</h2>
+        <div class="short"><span class="lbl">In short</span><p>Starting with "Could I ask you a small favour?" gets most people to say yes before they know what it is, which makes them much more likely to help when you tell them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>People like to help.</b> Being asked for a favour makes people feel trusted and generous. Few turn down a small favour in principle.</span></li>
+          <li><span><b>The yes comes first.</b> Once someone has agreed to help, they want to stay consistent with that, so they're more likely to agree to the actual request.</span></li>
+          <li><span><b>Make it a real favour.</b> Use it for things like a referral, a review or an introduction, not for a sale disguised as a favour.</span></li>
+          <li><span><b>Say thank you.</b> Thank them properly afterwards. A favour well thanked makes the next one easier.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub you"><span class="who">You</span><p><mark>Could I ask you a small favour?</mark></p></div><div class="bub them"><span class="who">Them</span><p>Sure, what is it?</p></div><div class="bub you"><span class="who">You</span><p>Do you know anyone else on your street who's been thinking about solar panels?</p></div></div></div>
+      <figure class="lab" id="lab22">
+        <div class="lab-top"><div class="t">Lab: ask for the favour</div><div class="tally" id="tally22" aria-label="Score"></div></div>
+        <div class="sorter" id="sort22"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"Can you do me a favour?" "Sure." "Could you look after the cat on Saturday?" By the time the real request arrives, they've already decided to help.</p></div>
+      <div class="quiz" data-q="22"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="22"> I understand this chapter</label><a class="next" href="#ch23">Next: Just Out of Curiosity →</a></div>
+    </section>
+    <!-- ===================== 23 ===================== -->
+    <section class="ch" id="ch23" data-n="23">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 23</span> · Ask the direct question, softly</div>
+        <h2>Just Out of Curiosity</h2>
+        <div class="short"><span class="lbl">In short</span><p>"Just out of curiosity…" turns a blunt question into a light, friendly one, so people give you the real answer instead of a polite brush-off.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It lowers the stakes.</b> Framed as curiosity, the question feels casual. The person doesn't feel cornered, so they answer honestly.</span></li>
+          <li><span><b>Perfect for "I need to think about it".</b> "Just out of curiosity, what specifically do you need to think about?" often reveals the real hesitation.</span></li>
+          <li><span><b>Use it to learn.</b> "Just out of curiosity, what made you choose us in the end?" gives you useful feedback without sounding needy.</span></li>
+          <li><span><b>Listen to the answer.</b> The phrase only works if you really are curious. Then use what you hear.</span></li>
+        </ul>
+      </div>
+      <div class="convo"><h3 class="sub">How it sounds</h3><div class="chat"><div class="bub them"><span class="who">Them</span><p>I need to have a think about it.</p></div><div class="bub you"><span class="who">You</span><p>Of course. <mark>Just out of curiosity</mark>, what is it you'd like to think over?</p></div><div class="bub them"><span class="who">Them</span><p>Mainly whether my partner will agree with the cost.</p></div></div></div>
+      <figure class="lab" id="lab23">
+        <div class="lab-top"><div class="t">Lab: ask the real question</div><div class="hint">Fill in your own situation</div></div>
+        <div class="builder" id="b23"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>"Why haven't you replied?" sounds like an accusation. "Just out of curiosity, did my email reach you?" sounds like a friendly check, and gets a real answer.</p></div>
+      <div class="quiz" data-q="23"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="23"> I understand this chapter</label><a class="next" href="#after">Your script book →</a></div>
+    </section>
+
+    <!-- ===================== SCRIPT BOOK ===================== -->
+    <section class="after" id="after">
+      <span class="eyebrow">Your script book · <span id="bookN"></span></span>
+      <h2>Words Ready When You Need Them</h2>
+      <p>Jones's point is that the right words only help if they come out naturally under pressure. Pick the two or three phrases that fit your situations, write your own versions, and practise them until they sound like you. Everything you saved from the labs is below, kept in this browser.</p>
+      <div class="book" id="book"></div>
+      <p class="big">Magic words open doors; they don't replace a good reason to walk through. Use them to help people decide, never to push them into something that isn't right for them.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Exactly What to Say: The Magic Words for Influence and Impact</i> by Phil M. Jones (2017). The explanations, example conversations and labs are written in our own words; the short phrases themselves are the book's. Labs that show percentages are illustrative models, not research data.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Open the Door", "Make It Happen", "Guide the Decision", "Close With Confidence", "Ask for More"];
+const CH = [["I'm Not Sure If It's for You, But", "Not sure if it's for you", 0], ["Open-Minded", "Open-minded", 0], ["What Do You Know?", "What do you know", 0], ["How Would You Feel If?", "How would you feel if", 0], ["Just Imagine", "Just imagine", 0], ["When Would Be a Good Time?", "A good time", 1], ["I'm Guessing You Haven't Got Around To", "Haven't got around to", 1], ["Simple Swaps", "Simple swaps", 1], ["You Have Three Options", "Three options", 2], ["There Are Two Types of People", "Two types of people", 2], ["I Bet You're a Bit Like Me", "A bit like me", 2], ["If… Then", "If… then", 2], ["Don't Worry", "Don't worry", 2], ["Most People", "Most people", 2], ["The Good News", "The good news", 3], ["What Happens Next", "What happens next", 3], ["What Makes You Say That?", "What makes you say that", 3], ["Before You Make Your Mind Up", "Before you decide", 3], ["If I Can, Will You?", "If I can, will you", 4], ["Enough", "Enough", 4], ["Just One More Thing", "One more thing", 4], ["A Favour", "A favour", 4], ["Just Out of Curiosity", "Just out of curiosity", 4]];
+const QUIZ = {
+  1:{q:`Why does "I'm not sure if it's for you, but…" work?`,o:[`It flatters the listener`,`It removes the pressure, so people feel free to listen`,`It makes the offer sound exclusive and expensive`],a:1,w:`Telling people they may say no lowers their guard. The worst outcome is that it isn't for them, which is exactly what you said.`},
+  2:{q:`What answer do most people give to "How open-minded are you about…?"`,o:[`"Not very"`,`"Fairly open-minded"`,`"It depends on the price"`],a:1,w:`Almost nobody wants to see themselves as closed-minded, so they agree to be open, and then act consistently with it.`},
+  3:{q:`When is "What do you know about…?" most useful?`,o:[`When someone has dismissed an idea without really looking at it`,`When someone is already keen to buy`,`When you want to test their general knowledge`],a:0,w:`It lets them notice for themselves that their view rests on very little, without you having to say they're wrong.`},
+  4:{q:`What does "How would you feel if…?" appeal to?`,o:[`Logic and figures`,`Emotion: the feeling of a future outcome`,`Fear of missing a deadline only`],a:1,w:`Decisions are driven by emotion and justified by facts. The question lets people feel the result before it happens.`},
+  5:{q:`What makes a "Just imagine…" picture work best?`,o:[`Technical detail and specifications`,`A vivid scene with the listener in it, using the senses`,`Keeping it as vague as possible`],a:1,w:`What they see, hear and feel, at a real time and place, makes the future seem familiar and possible.`},
+  6:{q:`Someone says they're too busy. Which question works best?`,o:[`"Do you have five minutes?"`,`"When would be a good time to…?"`,`"Can I call you sometime?"`],a:1,w:`It assumes a good time exists and asks only when. Naming a time creates a small commitment.`},
+  7:{q:`Why does "I'm guessing you haven't got around to… yet?" work either way?`,o:[`It makes people feel guilty`,`They can admit it without shame, or proudly say they have`,`It sets a strict deadline`],a:1,w:`You've already assumed the likely truth kindly, so there's nothing to hide, and a "yes I have" gets to be a small win for them.`},
+  8:{q:`Which is the better swap for "Do you have any questions?"`,o:[`"Any questions at all?"`,`"What questions do you have for me?"`,`"I assume that's all clear?"`],a:1,w:`It assumes there are questions and gives permission to ask them, instead of inviting a quick "no".`},
+  9:{q:`In the "three options" frame, where does your recommendation usually go?`,o:[`First, so they hear it before anything else`,`Last, after "do nothing" and a harder alternative`,`It's left out, so they choose freely`],a:1,w:`Next to doing nothing and a costly alternative, the sensible option stands out. All three must be real options.`},
+  10:{q:`Why does "There are two types of people…" persuade?`,o:[`People act to fit the identity they choose`,`It's a trick question`,`It forces an immediate purchase`],a:0,w:`Offered two descriptions, people pick the one they prefer and then behave like that kind of person.`},
+  11:{q:`What should follow "I bet you're a bit like me…"?`,o:[`A controversial opinion`,`Something almost everyone agrees with`,`Your price`],a:1,w:`An easy agreement creates common ground, which makes your suggestion feel like the natural next step.`},
+  12:{q:`What makes an "If… then…" statement persuasive?`,o:[`It sounds like a logical rule linking a small step to a result they want`,`It threatens a penalty`,`It's long and detailed`],a:0,w:`The structure sounds like cause and effect. Keep the step small and make sure the link is true.`},
+  13:{q:`When does "Don't worry" work best?`,o:[`On its own, as a quick brush-off`,`Followed by exactly what you'll take care of`,`Only in writing`],a:1,w:`Alone it can sound dismissive. With the fix attached, it calms people and shows you're in control.`},
+  14:{q:`What's the rule for saying "Most people…"?`,o:[`Use it whenever you want a sale`,`Only say it when it's true`,`Use exact percentages every time`],a:1,w:`It borrows the trust of everyone who chose before. Saying it when it isn't true breaks that trust.`},
+  15:{q:`What does "The good news is…" do?`,o:[`Hides the bad news`,`Moves attention from the problem to the way forward`,`Delays the conversation`],a:1,w:`Be honest about the problem first, then point attention at what can be done.`},
+  16:{q:`What should you do instead of asking "Shall we go ahead?"`,o:[`Describe what happens next, step by step`,`Wait in silence until they decide`,`Offer a discount`],a:0,w:`Clear next steps remove the fear of the unknown and assume you're already moving forward.`},
+  17:{q:`Why ask "What makes you say that?" after an objection?`,o:[`To win the argument`,`To find the real concern before you answer`,`To make them feel uncomfortable`],a:1,w:`"Too expensive" can mean several different things. You can only solve the right problem once you know which it is.`},
+  18:{q:`When should you use "Before you make your mind up…"?`,o:[`After they've firmly said no`,`When they're leaning toward no but haven't said it yet`,`At the very start of the conversation`],a:1,w:`A spoken no is hard to reverse. Catch the moment before, and bring something new.`},
+  19:{q:`What's the point of "If I can…, will you…?"`,o:[`Never giving a concession without getting a commitment back`,`Avoiding any concession`,`Making the customer wait`],a:0,w:`It turns a request into a fair deal, and shows whether that request was the only thing in the way.`},
+  20:{q:`Why does "Would six be enough?" tend to work?`,o:[`It sets a sensible number to adjust from, and makes people think about running short`,`It forces them to buy six`,`It hides the price`],a:0,w:`Your number becomes the anchor, and "enough" invites a quick check that they won't run out.`},
+  21:{q:`When is the best moment for "Just one more thing"?`,o:[`At the very start`,`At the end, once the main business is settled`,`In the middle of a disagreement`],a:1,w:`Guards are down at the end, and a small extra request feels minor.`},
+  22:{q:`Why start with "Could I ask you a small favour?"`,o:[`People usually say yes before they know the request, then want to stay consistent`,`It makes the request sound bigger`,`It's required by etiquette`],a:0,w:`Agreeing to help in principle makes people much more likely to agree to the actual request.`},
+  23:{q:`Someone says "I need to think about it." What's a good reply?`,o:[`"Why? It's a simple decision."`,`"Just out of curiosity, what is it you'd like to think over?"`,`"OK, bye."`],a:1,w:`The light, curious framing gets the real hesitation out in the open, so you can help with it.`}
+};
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const fmt = n => Math.round(n).toLocaleString('en-US');
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const hbars = (sel, rows) => { $(sel).innerHTML = rows.map(r => `<div class="hb ${r.c || ''}"><span class="l">${r.l}</span><span class="tr"><i style="width:${clamp(r.w, 0, 100)}%"></i></span><span class="v">${r.v}</span></div>`).join(''); };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#101716';
+try { const t = localStorage.getItem('ews-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('ews-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${p+1} · ${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem('ews-done') || '[]')); } catch(e){}
+const save = () => { try { localStorage.setItem('ews-done', JSON.stringify([...done])); } catch(e){} };
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game (one set of bins for every item) ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the traps the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); show(); }); return; }
+    const it = items[order[i]], bs = it.bins || bins;
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite: ' + bs.find(b => b.id === it.a).label + '.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- builders: fill in your situation, get your own script ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const M = t => `<mark>${t}</mark>`;
+const plainText = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent.replace(/\s+/g, ' ').trim(); };
+let BOOK = [];
+try { BOOK = JSON.parse(localStorage.getItem('ews-book') || '[]'); } catch(e){}
+const saveBook = () => { try { localStorage.setItem('ews-book', JSON.stringify(BOOK)); } catch(e){} renderBook(); };
+async function copyText(text, btn){
+  try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+  catch(e){ btn.textContent = 'Select and copy'; const sel = getSelection(), r = document.createRange(); const t = btn.closest('.builder, .book-item')?.querySelector('.say-out, .bt'); if (t){ r.selectNodeContents(t); sel.removeAllRanges(); sel.addRange(r); } }
+  setTimeout(() => btn.textContent = btn.dataset.lbl, 1600);
+}
+function builder(n, cfg){
+  const box = $('#b' + n);
+  box.innerHTML = `<div class="fields">${cfg.fields.map(([id, label, def]) => `<div class="field"><label for="f${n}${id}">${label}</label><input id="f${n}${id}" type="text" value="${esc(def)}" autocomplete="off"></div>`).join('')}</div>
+    <div class="out">${cfg.weak ? `<div class="weak"><span class="k">Instead of</span><p id="w${n}"></p></div>` : ''}<div class="strong"><span class="k">Say</span><p class="say-out" id="s${n}"></p></div>
+    <p class="tip" id="t${n}" ${cfg.tip ? '' : 'hidden'}></p>
+    <div class="row"><button class="btn" data-copy="${n}" data-lbl="Copy">Copy</button><button class="btn primary" data-keep="${n}" data-lbl="Save to my script book">Save to my script book</button></div></div>`;
+  const vals = () => Object.fromEntries(cfg.fields.map(([id]) => [id, esc($(`#f${n}${id}`).value.trim() || '…')]));
+  function draw(){ const v = vals(); $('#s' + n).innerHTML = cfg.make(v); if (cfg.weak) $('#w' + n).textContent = plainText(cfg.weak(v)); if (cfg.tip) $('#t' + n).innerHTML = cfg.tip(v); }
+  box.querySelectorAll('input').forEach(i => i.addEventListener('input', draw));
+  box.querySelector('[data-copy]').addEventListener('click', e => copyText(plainText($('#s' + n).innerHTML), e.currentTarget));
+  box.querySelector('[data-keep]').addEventListener('click', e => { const t = plainText($('#s' + n).innerHTML);
+    if (!BOOK.some(b => b.t === t)) BOOK.push({n, t}); saveBook(); e.currentTarget.textContent = 'Saved'; setTimeout(() => e.currentTarget.textContent = e.currentTarget.dataset.lbl, 1600); });
+  draw();
+}
+function renderBook(){
+  const box = $('#book'); if (!box) return;
+  $('#bookN').textContent = BOOK.length ? `${BOOK.length} saved` : 'Empty';
+  box.innerHTML = BOOK.length ? BOOK.map((b, i) => `<div class="book-item"><span class="k">Chapter ${b.n} · ${CH[b.n - 1][1]}</span><p class="bt">${esc(b.t)}</p><div class="row"><button class="btn" data-bc="${i}" data-lbl="Copy">Copy</button><button class="btn" data-bx="${i}">Remove</button></div></div>`).join('')
+    : `<p class="empty">Nothing saved yet. Every "write your own" lab has a <b>Save to my script book</b> button; your lines collect here, in this browser, ready to copy.</p>`;
+  box.querySelectorAll('[data-bc]').forEach(b => b.addEventListener('click', e => copyText(BOOK[+b.dataset.bc].t, e.currentTarget)));
+  box.querySelectorAll('[data-bx]').forEach(b => b.addEventListener('click', () => { BOOK.splice(+b.dataset.bx, 1); saveBook(); }));
+}
+
+/* ---------- swaps: weak line → magic words ---------- */
+function swaps(n, rows){
+  const box = $('#sw' + n);
+  box.innerHTML = rows.map((r, i) => `<button class="swap" data-i="${i}" aria-pressed="false"><span class="from">${r[0]}</span><span class="to" hidden>${r[1]}</span><span class="why" hidden>${r[2]}</span><span class="cue">Swap →</span></button>`).join('')
+    + `<div class="row" style="padding:0 18px 16px"><button class="btn" id="all${n}">Swap them all</button></div>`;
+  const flip = (b, on) => { b.setAttribute('aria-pressed', on); b.querySelector('.from').hidden = on; b.querySelector('.to').hidden = !on; b.querySelector('.why').hidden = !on; b.querySelector('.cue').textContent = on ? '← Back' : 'Swap →'; };
+  box.querySelectorAll('.swap').forEach(b => b.addEventListener('click', () => flip(b, b.getAttribute('aria-pressed') !== 'true')));
+  $('#all' + n).addEventListener('click', () => box.querySelectorAll('.swap').forEach(b => flip(b, true)));
+}
+
+/* ---------- hero: overheard ---------- */
+{ const LINES = [
+    ['them', 'Hi, I saw your stand. What\'s this about?', 'Hi, I saw your stand. What\'s this about?'],
+    ['you', 'We do meal kits. You should really sign up, it\'s great.', `${M('I\'m not sure if it\'s for you, but')} we do meal kits for busy weeknights. ${M('How open-minded')} are you about not planning dinner?`],
+    ['them', 'Not for me. I don\'t really have time to cook.', 'Fairly open-minded. I just don\'t have much time to cook.'],
+    ['you', 'Oh, okay. Do you have any questions?', `${M('Just imagine')} getting home on a Tuesday with everything measured out and dinner on the table in twenty minutes. ${M('Most people')} start with three meals a week. ${M('What questions do you have')} for me?`],
+    ['them', 'No, I\'m fine, thanks.', 'Three sounds doable. How does delivery work?'] ];
+  let on = false;
+  function draw(){ $('#chat').innerHTML = LINES.map(([who, a, b]) => `<div class="bub ${who}"><span class="who">${who === 'you' ? 'You' : 'Them'}</span><p>${on ? b : a}</p></div>`).join('');
+    $('#chatV').textContent = on ? 'They ask how delivery works.' : 'They walk away.'; }
+  $$('[data-chat]').forEach(b => b.addEventListener('click', () => { on = b.dataset.chat === 'magic'; press($$('[data-chat]'), b); draw(); }));
+  draw();
+  $('#deck').innerHTML = CH.map(([t], i) => `<a href="#ch${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span>${t}</a>`).join('');
+}
+
+/* ================= chapter labs ================= */
+builder(1, { fields:[['idea', 'What you want to suggest', 'we\'re starting a small Tuesday running group'], ['ask', 'The gentle next step', 'would you like the details?']],
+  weak: v => `You should really join, ${v.idea}.`, make: v => `${M('I\'m not sure if it\'s for you, but')} ${v.idea}. ${v.ask[0] ? v.ask[0].toUpperCase() + v.ask.slice(1) : ''}`,
+  tip: () => 'Keep the idea to one sentence and end with an easy question. The worst they can say is that it isn\'t for them.' });
+
+sorter('#sort2', '#tally2', null, [
+  {q:1, t:'You want your manager to consider a flexible working trial.', ctx:'Which opener is most likely to get a fair hearing?', stack:1,
+   bins:[{id:'a',label:'"I think we should switch to flexible working."'},{id:'b',label:'"How open-minded would you be about a three-month flexible working trial?"'},{id:'c',label:'"You probably won\'t like this, but…"'}], a:'b', w:'Almost nobody answers "not very". Once they\'ve said they\'re open-minded, they want to act like it.'},
+  {q:1, t:'A customer has always used a rival supplier.', ctx:'Which opener is most likely to get a fair hearing?', stack:1,
+   bins:[{id:'a',label:'"How open-minded are you about trying a different supplier for one order?"'},{id:'b',label:'"Our prices are better than theirs."'},{id:'c',label:'"Would you ever switch?"'}], a:'a', w:'It asks for a small, low-risk step, and their own self-image does the persuading.'},
+  {q:1, t:'Your friend refuses to try a new restaurant.', ctx:'Which opener is most likely to get a fair hearing?', stack:1,
+   bins:[{id:'a',label:'"Come on, don\'t be boring."'},{id:'b',label:'"You\'ll love it, trust me."'},{id:'c',label:'"How open-minded are you feeling about dinner on Friday?"'}], a:'c', w:'Calling someone boring makes them defensive. Asking about open-mindedness invites them to prove they\'re not.'}
+], false);
+
+builder(3, { fields:[['topic', 'The thing they\'ve dismissed', 'the newer electric car batteries'], ['next', 'Your follow-up offer', 'see the latest range figures before you decide']],
+  weak: v => `You\'re wrong about ${v.topic}.`, make: v => `${M('What do you know about')} ${v.topic}? … Would it make sense to ${v.next}?`,
+  tip: () => 'Ask the first question, then really wait for the answer. The follow-up only works once they\'ve noticed for themselves how little they know.' });
+
+builder(4, { fields:[['good', 'A good outcome they want', 'finish this course and fix your own website'], ['bad', 'The cost of doing nothing', 'the same thing happened again next year']],
+  make: v => `${M('How would you feel if')} you could ${v.good}? … And ${M('how would you feel if')} ${v.bad}?`,
+  tip: () => 'Use one or both. Lead with the positive; use the cost of doing nothing sparingly and only when it\'s real.' });
+
+builder(5, { fields:[['scene', 'Describe the scene', 'stepping off the plane into warm air, hearing the sea, with a week of nothing planned']],
+  make: v => `${M('Just imagine')} ${v.scene}.`,
+  tip: v => { const s = plainText(v.scene).toLowerCase(), words = s.split(/\s+/).filter(Boolean).length;
+    const SENSE = ['see','hear','feel','smell','taste','warm','cold','sound','light','bright','quiet','sun','sea','smile','laugh','touch','soft','fresh','morning','evening'];
+    const hits = SENSE.filter(w => s.includes(w)).length, you = /\b(you|your)\b/.test(s), score = Math.min(100, hits * 18 + (you ? 20 : 0) + Math.min(words, 20) * 2);
+    return `<span class="meter"><i style="width:${score}%"></i></span> Vividness ${score}/100. ${hits ? `${hits} sensory word${hits > 1 ? 's' : ''}.` : 'Add something they\'d see, hear or feel.'} ${you ? '' : 'Put them in it: use "you".'}`; } });
+
+sorter('#sort6', '#tally6', null, [
+  {q:1, t:'A busy client keeps putting off a review meeting.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"Do you have time for a quick review this week?"'},{id:'b',label:'"When would be a good time for a 20-minute review?"'},{id:'c',label:'"I know you\'re busy, so no worries if not."'}], a:'b', w:'It assumes a good time exists and asks only which one.'},
+  {q:1, t:'Your partner keeps meaning to look at holiday options.', ctx:'What do you say?', stack:1,
+   bins:[{id:'a',label:'"When would be a good time to look at the holiday together?"'},{id:'b',label:'"We never get round to this, do we?"'},{id:'c',label:'"Can we do it at some point?"'}], a:'a', w:'"At some point" never comes. A time does.'},
+  {q:1, t:'They answer: "Maybe next week."', ctx:'What\'s the best next line?', stack:1,
+   bins:[{id:'a',label:'"Great, I\'ll be in touch."'},{id:'b',label:'"Which day next week suits you best, Tuesday or Thursday?"'}], a:'b', w:'Pin it down. A specific day turns a vague intention into a commitment.'}
+], false);
+
+builder(7, { fields:[['task', 'What they haven\'t done yet', 'reading the proposal'], ['next', 'Your easy next step', 'go through it together on a quick call']],
+  weak: v => `Did you get round to ${v.task} yet?`, make: v => `${M('I\'m guessing you haven\'t got around to')} ${v.task} yet? … No problem. ${M('When would be a good time to')} ${v.next}?`,
+  tip: () => 'If they have done it, they\'ll tell you proudly. If they haven\'t, they can agree without embarrassment. Both answers move things on.' });
+
+swaps(8, [
+  ['Do you have any questions?', `${M('What questions do you have')} for me?`, 'Assumes there are questions and gives permission to ask them.'],
+  ['Can I get your phone number?', `${M('What\'s the best number')} to reach you on?`, 'Assumes you\'ll be calling; only asks which number.'],
+  ['Did you like it?', `${M('What did you like')} about it?`, 'Makes them look for the positives, and say them out loud.'],
+  ['If you decide to go ahead…', `${M('When')} you go ahead…`, '"When" helps them picture it already happening.'],
+  ['Is there anything else?', `${M('What else')} can I help with?`, 'Assumes there might be more, and invites it.'],
+  ['Sorry to bother you, but…', `${M('Thanks for taking my call.')}`, 'Starts with gratitude instead of an apology for existing.'] ]);
+
+builder(9, { fields:[['one', 'Option one: do nothing and…', 'keep the old laptop and live with it crashing'], ['two', 'Option two: a harder alternative', 'spend a weekend rebuilding it yourself'], ['three', 'Option three: your recommendation', 'swap it for the new one today']],
+  make: v => `${M('As I see it, you have three options.')} You could ${v.one}. You could ${v.two}. Or you could ${v.three}. ${M('Which of those is easiest for you?')}`,
+  tip: () => 'Put your recommendation last, keep each option to one line, and make sure all three are real.' });
+
+builder(10, { fields:[['topic', 'The subject', 'pensions'], ['a', 'Type one', 'hope it all works out'], ['b', 'Type two (the one you want)', 'check now, while there\'s time to fix it']],
+  make: v => `${M('There are two types of people')} when it comes to ${v.topic}: those who ${v.a}, and those who ${v.b}.`,
+  tip: () => 'Keep both sides fair. If the first type sounds like a cartoon, people feel pushed and resist.' });
+
+sorter('#sort11', '#tally11', null, [
+  {q:1, t:'Selling a fixed-price service to a cautious customer.', ctx:'Which opener finds the easiest common ground?', stack:1,
+   bins:[{id:'a',label:'"I bet you\'re a bit like me and hate surprise charges at the end."'},{id:'b',label:'"I bet you\'re a bit like me and love spreadsheets."'},{id:'c',label:'"Most customers are careless with money."'}], a:'a', w:'Almost everyone agrees. Spreadsheets? Not so much.'},
+  {q:1, t:'Suggesting a team meeting move to the morning.', ctx:'Which opener finds the easiest common ground?', stack:1,
+   bins:[{id:'a',label:'"I bet you\'re a bit like me and do your best thinking before lunch."'},{id:'b',label:'"Afternoon meetings are pointless."'},{id:'c',label:'"I bet you\'re a bit like me and get up at 5am."'}], a:'a', w:'Easy to agree with, and it leads naturally to your suggestion. The 5am version is easy to disagree with.'}
+], false);
+
+builder(12, { fields:[['if', 'If they… (a small step)', 'give the free trial a go this week'], ['then', 'then they… (something they want)', 'know by Friday whether it saves you time']],
+  make: v => `${M('If')} you ${v.if}, ${M('then')} you\'ll ${v.then}.`, tip: () => 'Small step, real result. The link has to be true.' });
+
+sorter('#sort13', '#tally13', null, [
+  {q:1, t:'"I\'ve never done a tax return. I\'ll mess it up."', ctx:'Which reply calms them down?', stack:1,
+   bins:[{id:'a',label:'"It\'s honestly not that hard."'},{id:'b',label:'"Don\'t worry, we\'ll go through it together, line by line, this afternoon."'},{id:'c',label:'"Lots of people get it wrong."'}], a:'b', w:'"Don\'t worry" plus a concrete fix shows calm authority. "It\'s not hard" can make them feel worse for being anxious.'},
+  {q:1, t:'"The parcel didn\'t arrive and it was a birthday present."', ctx:'Which reply calms them down?', stack:1,
+   bins:[{id:'a',label:'"Don\'t worry, I\'ll send a replacement by express today, so it arrives tomorrow."'},{id:'b',label:'"That\'s the courier\'s fault, not ours."'},{id:'c',label:'"Don\'t worry."'}], a:'a', w:'"Don\'t worry" on its own sounds dismissive. Followed by the fix, it\'s reassuring.'}
+], false);
+
+builder(14, { fields:[['who', 'People in their situation', 'with a family of four'], ['choice', 'What most of them choose', 'go for the larger size'], ['why', 'Why (optional)', 'so they\'re not running out mid-week']],
+  make: v => `${M('Most people')} ${v.who} ${v.choice}${v.why !== '…' ? ', ' + v.why : ''}.`,
+  tip: () => 'Only say it if it\'s true. "Most people" borrows the trust of everyone who chose before; don\'t spend it on a guess.' });
+
+swaps(15, [
+  ['We missed the grant deadline.', `${M('The good news is')} there\'s another round in March, and we\'ll have a stronger application.`, 'Moves attention to what can be done next.'],
+  ['The part you need is out of stock.', `${M('The good news is')} we can get a compatible one by Thursday.`, 'Problem acknowledged, solution offered.'],
+  ['The test results show a problem.', `${M('The good news is')} we\'ve caught it early, when it\'s easiest to treat.`, 'Honest about the problem, focused on the hopeful part.'],
+  ['We\'re over budget.', `${M('The good news is')} we know exactly where, and two of the costs can be cut.`, 'Now we know is often the good news.'] ]);
+
+builder(16, { fields:[['s1', 'Step one (you)', 'I\'ll email the plan tonight'], ['s2', 'Step two', 'we\'ll have a 15-minute call on Wednesday'], ['s3', 'Step three', 'the team starts on Monday'], ['ask', 'The one thing you need now', 'the best email for the plan']],
+  weak: () => 'So, do you want to go ahead?', make: v => `${M('What happens next is')} ${v.s1}, ${v.s2}, and ${v.s3}. All I need from you now is ${v.ask}.`,
+  tip: () => 'Two or three steps with real times. Finish with something small they can give you right now.' });
+
+sorter('#sort17', '#tally17', null, [
+  {q:1, t:'"It\'s too expensive."', ctx:'What\'s your best first reply?', stack:1,
+   bins:[{id:'a',label:'"I can do 10% off."'},{id:'b',label:'"What makes you say that?"'},{id:'c',label:'"It\'s actually great value."'}], a:'b', w:'"Too expensive" might mean no budget this month, unclear value, or a rival quote. Find out before you cut the price.'},
+  {q:1, t:'"I don\'t think it\'s the right time."', ctx:'What\'s your best first reply?', stack:1,
+   bins:[{id:'a',label:'"What makes you say that?"'},{id:'b',label:'"There\'s never a right time!"'},{id:'c',label:'"OK, I\'ll call next year."'}], a:'a', w:'Their answer, maybe a busy month or a pending decision, tells you exactly what to solve.'},
+  {q:1, t:'"Your competitor seems better."', ctx:'What\'s your best first reply?', stack:1,
+   bins:[{id:'a',label:'"They\'re not."'},{id:'b',label:'"Out of curiosity, what makes you say that?"'},{id:'c',label:'"Fine, go with them."'}], a:'b', w:'Calm curiosity reveals what they value, and that\'s where your answer should start.'}
+], false);
+
+builder(18, { fields:[['new', 'Something they haven\'t considered', 'see the smaller package, half the price, covering the two things you mentioned']],
+  make: v => `${M('Before you make your mind up,')} can I ${v.new}?`, tip: () => 'Bring something new. Repeating your pitch at this point only confirms the no.' });
+
+sorter('#sort19', '#tally19', null, [
+  {q:1, t:'"Could you do it for £900 instead of £1,000?"', ctx:'What\'s the best reply?', stack:1,
+   bins:[{id:'a',label:'"Sure, £900 it is."'},{id:'b',label:'"If I can get it to £900, will you sign today?"'},{id:'c',label:'"No, the price is fixed."'}], a:'b', w:'A concession for a commitment. If they hesitate, price wasn\'t the real issue.'},
+  {q:1, t:'"Can you deliver by Friday?"', ctx:'What\'s the best reply?', stack:1,
+   bins:[{id:'a',label:'"If I can get it to you by Friday, will you place the order now?"'},{id:'b',label:'"I\'ll try my best."'},{id:'c',label:'"Friday is impossible."'}], a:'a', w:'Get the yes first, then make it happen.'},
+  {q:1, t:'Your teenager asks to stay out until midnight.', ctx:'What\'s the best reply?', stack:1,
+   bins:[{id:'a',label:'"Absolutely not."'},{id:'b',label:'"Fine, whatever."'},{id:'c',label:'"If I say yes, will you text me when you get there and when you leave?"'}], a:'c', w:'A fair trade. Both sides get something.'}
+], false);
+
+/* 20: enough */
+{ const box = $('#en20');
+  box.innerHTML = `<div class="lab-ctl"><div class="ctl"><label for="e20"><span>You ask: "Would <b id="eN">6</b> be enough?"</span> <output id="oe20"></output></label><input type="range" id="e20" min="1" max="12" value="6"></div></div><div class="hbars" id="eb20"></div>
+    <div class="stats"><div class="stat"><span class="k">They actually need (for a quarter)</span><span class="v">5 to 7</span></div><div class="stat"><span class="k">Typical order after your question</span><span class="v glow" id="eo"></span></div><div class="stat"><span class="k">What\'s happening</span><span class="s" id="ew"></span></div></div>
+    <div class="callout">An illustrative model of anchoring, not data: people adjust from the number they hear, and "enough" nudges them to round up so they won't run short. Suggest what they genuinely need.</div>`;
+  function draw(){ const n = +$('#e20').value; $('#eN').textContent = n; $('#oe20').textContent = n + ' cartridges';
+    const order = n <= 3 ? n + 3 : n <= 8 ? n + 1 : n - 1, shares = n <= 3 ? [70, 20, 10] : n <= 8 ? [15, 30, 55] : [55, 35, 10];
+    hbars('#eb20', [{l:'"No, I\'ll need more"', w: shares[0], v: shares[0] + '%'}, {l:'"Yes, that\'s enough"', w: shares[1], v: shares[1] + '%'}, {l:'"Make it a few more, to be safe"', w: shares[2], v: shares[2] + '%', c:'g'}]);
+    $('#eo').textContent = order;
+    $('#ew').textContent = n <= 3 ? 'Too low. They correct you upward, and you look like you didn\'t understand their needs.' : n <= 8 ? 'A sensible anchor. Many round up a little, and nobody feels sold to.' : 'Too high. It sounds like a sales push, and people pull back.'; }
+  $('#e20').addEventListener('input', draw); draw();
+}
+
+builder(21, { fields:[['ask', 'The small extra request', 'would you be happy to leave a short review once it arrives?']],
+  make: v => `Thanks again, I\'ll get that sent over. Oh, ${M('just one more thing:')} ${v.ask}`, tip: () => 'Ask it right at the end, once the main business is settled. Keep it genuinely small.' });
+
+sorter('#sort22', '#tally22', null, [
+  {q:1, t:'You want a happy client to recommend you.', ctx:'Which ask works best?', stack:1,
+   bins:[{id:'a',label:'"Could I ask you a small favour?" … "Who else do you know who might find this useful?"'},{id:'b',label:'"Give me three names of people I can call."'},{id:'c',label:'"Do you know anyone? Probably not, right?"'}], a:'a', w:'The yes to the favour comes first, and the question assumes they know someone.'},
+  {q:1, t:'You need a colleague to cover your shift.', ctx:'Which ask works best?', stack:1,
+   bins:[{id:'a',label:'"You\'re not busy Saturday, are you?"'},{id:'b',label:'"Could I ask you a favour?" … "Could you cover my Saturday shift? I\'ll take one of yours next month."'},{id:'c',label:'"Someone has to cover Saturday."'}], a:'b', w:'Agreement in principle first, then a fair request with something offered back.'}
+], false);
+
+builder(23, { fields:[['q', 'The direct question', 'what is it you\'d like to think over?']],
+  weak: () => 'Why do you need to think about it?', make: v => `Of course. ${M('Just out of curiosity,')} ${v.q}`,
+  tip: () => 'Ask lightly and mean it. The real answer is usually one sentence away.' });
+
+renderBook();
+})();
+</script>
+</body>
+</html>
