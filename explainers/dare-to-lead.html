@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dare to Lead, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an arena guide. Same shell as the other guides (chapter rail, one "station" per chapter:
+   short answer, big ideas, from the book, a lab, plain words, try it this week, quick check), grouped by the book's four skill sets.
+   Dark-first: forest black with an ember accent for courage, and a warm gold second series for the heart. */
+:root{
+  color-scheme: dark;
+  --ink:#0E1311;
+  --panel:#151C19;
+  --panel-2:#1D2622;
+  --line:#2D3934;
+  --text:#EEF3EF;
+  --muted:#A9B7AF;
+  --faint:#76867D;
+  --glow:#FF7A4D;         /* ember: courage, the brave move */
+  --glow-soft:rgba(255,122,77,.12);
+  --hl:rgba(255,122,77,.24);
+  --cool:#F2C26B;         /* gold: the heart, the other person */
+  --cool-soft:rgba(242,194,107,.11);
+  --good:#7FD39A;
+  --good-soft:rgba(127,211,154,.1);
+  --bad:#FF5F6D;
+  --bad-soft:rgba(255,95,109,.09);
+  --soft:#D4DED8;
+  --deep:#0A0E0C;
+  --toc-bg:rgba(21,28,25,.74);
+  --glow-line:rgba(255,122,77,.34);
+  --cool-line:rgba(242,194,107,.3);
+  --on-glow:#2A0E04;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F5F3EE;--panel:#FFFFFF;--panel-2:#ECE8DF;--line:#DAD4C8;--text:#18201C;--muted:#55605A;--faint:#7E8780;
+  --glow:#B8431C;--glow-soft:rgba(184,67,28,.08);--hl:#FFD8C4;--cool:#8A6100;--cool-soft:rgba(138,97,0,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B21F3B;--bad-soft:rgba(178,31,59,.08);
+  --soft:#27302B;--deep:#FBFAF7;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(184,67,28,.3);--cool-line:rgba(138,97,0,.3);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F5F3EE;--panel:#FFFFFF;--panel-2:#ECE8DF;--line:#DAD4C8;--text:#18201C;--muted:#55605A;--faint:#7E8780;
+  --glow:#B8431C;--glow-soft:rgba(184,67,28,.08);--hl:#FFD8C4;--cool:#8A6100;--cool-soft:rgba(138,97,0,.08);--good:#2A7A3A;--good-soft:rgba(42,122,58,.08);--bad:#B21F3B;--bad-soft:rgba(178,31,59,.08);
+  --soft:#27302B;--deep:#FBFAF7;--toc-bg:rgba(255,255,255,.82);--glow-line:rgba(184,67,28,.3);--cool-line:rgba(138,97,0,.3);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch > *{min-width:0}
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+/* the study behind each chapter */
+.study{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--cool-line);background:var(--cool-soft)}
+.study .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.study h4{margin:0;font-size:16px;font-weight:600}
+.study p{color:var(--soft);font-size:15px}
+.study .num{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums}
+/* how to say no */
+.defend{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);background:var(--deep);border:1px solid var(--line);border-left:3px solid var(--good)}
+.defend .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--good)}
+.defend p{color:var(--soft);font-size:15px}
+.defend .ask{font-family:var(--f-display);font-size:22px;line-height:1.2;color:var(--text)}
+
+/* horizontal bars */
+.hbars{display:grid;gap:12px;padding:18px}
+.hb{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr) 64px;gap:12px;align-items:center;font-size:14px}
+.hb .l{color:var(--muted);line-height:1.3}
+.hb.g .l{color:var(--text)}
+.hb .tr{height:16px;border-radius:999px;background:var(--panel-2);overflow:hidden}
+.hb .tr i{display:block;height:100%;border-radius:999px;background:var(--cool);opacity:.55;transition:width .35s}
+.hb.g .tr i{background:var(--glow);opacity:1}
+.hb .v{font-family:var(--f-mono);font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+
+/* request bubble used in labs */
+.ask-line{margin:18px 18px 0;padding:12px 16px;border-radius:16px 16px 16px 4px;background:var(--cool-soft);border:1px solid var(--cool-line);font-size:16px;max-width:620px}
+.ask-line .who{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+.split{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:8px;align-items:center}
+.split .stage{padding:16px 18px}
+.split .stage svg{max-width:300px;margin:0 auto}
+.lab-ctl .grp-l{font-size:12px;color:var(--faint);font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;width:100%}
+
+/* hero: the pitch */
+.pitch{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.pitch .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.pitch .top .t{font-weight:500}
+.pitch .page{display:grid;gap:10px;padding:20px 18px}
+.pitch .brand{font-family:var(--f-display);font-size:34px;line-height:1}
+.pitch .page p{font-size:15.5px;color:var(--soft);padding:6px 10px;margin:0 -10px;border-radius:10px;border:1px solid transparent;transition:background .2s,border-color .2s,color .2s;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.pitch .page p .ptag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--glow);display:none}
+.pitch .page p.lit{background:var(--glow-soft);border-color:var(--glow-line);color:var(--text)}
+.pitch .page p.lit .ptag{display:inline}
+.pitch .page .cta{justify-self:start;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;background:var(--text);color:var(--ink);margin-top:4px}
+.pitch .levers{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px;border-top:1px solid var(--line)}
+.pitch .verdict{padding:12px 18px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--muted);min-height:48px}
+.pitch .verdict b{color:var(--text);font-weight:500}
+.deck{display:flex;flex-wrap:wrap;gap:6px}
+.deck a{display:inline-flex;gap:8px;align-items:baseline;padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13.5px;color:var(--text);text-decoration:none;background:var(--toc-bg);transition:border-color .15s}
+.deck a:hover{border-color:var(--glow)}
+.deck .n{font-family:var(--f-mono);font-size:10.5px;color:var(--glow)}
+
+/* defence kit */
+.kit{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.kit div{display:grid;gap:8px;align-content:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2)}
+.kit .n{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.kit h3{font-family:var(--f-display);font-weight:400;font-size:26px;line-height:1.05}
+.kit p{font-size:14px;color:var(--muted)}
+.kit p b{color:var(--text);font-weight:500}
+.kit .q{font-family:var(--f-display);font-size:19px;line-height:1.25;color:var(--text);padding-top:8px;border-top:1px solid var(--line)}
+
+@media (max-width: 720px){
+  .split{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 560px){
+  .hb{grid-template-columns:minmax(0,1fr) 64px;gap:4px 10px}
+  .hb .l{grid-column:1/-1}
+  .hbars{padding:14px}
+  .ask-line{margin:14px 14px 0}
+  .pitch .brand{font-size:28px}
+}
+
+/* ---------- Dare to Lead additions ---------- */
+.split.wide{grid-template-columns:minmax(0,320px) minmax(0,1fr)}
+.split.wide .stage svg{max-width:320px}
+@media (max-width: 860px){ .split.wide{grid-template-columns:minmax(0,1fr)} }
+/* hero arena */
+.arena-hero{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);overflow:hidden}
+.arena-hero .stage{padding:14px}
+.arena-hero .stage svg{max-width:380px;margin:0 auto}
+.arena-hero .side{display:grid;align-content:start;gap:12px;padding:20px 20px 18px;border-left:1px solid var(--line)}
+.arena-hero .side .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.arena-hero .side h3{font-family:var(--f-display);font-weight:400;font-size:30px;line-height:1.05}
+.arena-hero .side p{font-size:15px;color:var(--soft)}
+.arena-hero .side .go{font-size:14px;text-decoration:none}
+.gate{cursor:pointer}
+.gate:focus{outline:none}
+.gate:focus-visible .gate-r{stroke:var(--text);stroke-width:2}
+/* from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);border:1px solid var(--cool-line);background:var(--cool-soft)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story h4{margin:0;font-size:16px;font-weight:600}
+.story p{color:var(--soft);font-size:15px}
+/* try it this week */
+.try{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:var(--r);background:var(--deep);border:1px solid var(--line);border-left:3px solid var(--good)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--good)}
+.try p{color:var(--soft);font-size:15px}
+.try .say{font-family:var(--f-display);font-size:22px;line-height:1.2;color:var(--text)}
+/* myth cards */
+.myths{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;max-width:900px}
+.myth{font:inherit;text-align:left;color:var(--text);display:grid;gap:8px;align-content:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel);cursor:pointer;min-height:150px;transition:border-color .15s,background .2s}
+.myth:hover{border-color:var(--glow)}
+.myth .n{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--bad)}
+.myth .m{font-family:var(--f-display);font-size:23px;line-height:1.1}
+.myth .r{font-size:14px;color:var(--soft);display:none}
+.myth .tap{font-size:12px;color:var(--faint);margin-top:auto}
+.myth[aria-expanded=true]{background:var(--good-soft);border-color:var(--good)}
+.myth[aria-expanded=true] .n{color:var(--good)}
+.myth[aria-expanded=true] .m{text-decoration:line-through;text-decoration-thickness:1px;color:var(--muted);font-size:18px}
+.myth[aria-expanded=true] .r{display:block}
+.myth[aria-expanded=true] .tap{display:none}
+/* voices (arena lab) */
+.voices{display:grid;gap:8px;padding:16px 18px}
+.voice{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.voice .num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;background:var(--panel-2);color:var(--muted)}
+.voice .who{font-size:14px;line-height:1.35}
+.voice .fb{grid-column:2/-1;font-size:13px;color:var(--muted)}
+.voice .fb b{font-weight:600}
+.voice .row{flex-wrap:nowrap}
+.voice .btn{padding:6px 11px;font-size:12.5px}
+/* square squad */
+.squad{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center;padding:16px 18px;border-top:1px solid var(--line)}
+.sq{width:132px;height:132px;border:2px solid var(--cool);border-radius:4px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:3px 6px;padding:8px;overflow:hidden;background:var(--cool-soft);position:relative}
+.sq span{font-family:var(--f-display);line-height:1.05;color:var(--text)}
+.sq em{position:absolute;right:6px;bottom:4px;font-style:normal;font-family:var(--f-mono);font-size:9px;color:var(--faint)}
+.sq-form{display:grid;gap:8px}
+.sq-form p{font-size:14px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags button{font:inherit;font-size:12.5px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer}
+.tags button:hover{border-color:var(--bad)}
+.inp{font:inherit;font-size:15px;color:var(--text);background:var(--deep);border:1px solid var(--line);border-radius:10px;padding:9px 12px;width:100%;min-width:0}
+.inp:focus{border-color:var(--glow);outline:none}
+textarea.inp{resize:vertical;min-height:64px;line-height:1.45}
+.inrow{display:flex;gap:8px}
+.inrow .inp{flex:1}
+/* armory */
+.armory{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:0}
+.armory .stage{padding:18px;border-right:1px solid var(--line);display:grid;align-content:start;gap:10px}
+.armory .stage svg{max-width:240px;margin:0 auto}
+.armory .count{text-align:center;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.armory .count b{color:var(--text)}
+.plates{display:grid;gap:6px;padding:14px;max-height:620px;overflow-y:auto;scrollbar-width:thin}
+.plate{font:inherit;text-align:left;color:var(--text);display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;transition:border-color .15s,background .15s}
+.plate:hover{border-color:var(--glow)}
+.plate .n{font-family:var(--f-mono);font-size:11px;color:var(--faint);padding-top:2px}
+.plate .a{font-size:14px;line-height:1.35}
+.plate .d{font-size:14px;line-height:1.35;color:var(--good);display:none}
+.plate .l{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:2px}
+.plate[aria-pressed=true]{background:var(--good-soft);border-color:var(--good)}
+.plate[aria-pressed=true] .a{display:none}
+.plate[aria-pressed=true] .d{display:block}
+.plate[aria-pressed=true] .l{color:var(--good)}
+.armor-p{transition:opacity .35s, transform .35s}
+/* paint done */
+.paint{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.paint .stage{padding:16px;border-right:1px solid var(--line)}
+.paint .req{display:grid;gap:10px;padding:16px 18px;align-content:start}
+.paint .req .brief{font-size:15.5px;line-height:1.5;padding:12px 14px;border-radius:12px;background:var(--deep);border:1px solid var(--line)}
+.paint .req .brief .add{color:var(--glow)}
+.pieces{display:grid;gap:6px}
+.piece{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.piece input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+.piece b{font-weight:600}
+.piece span span{color:var(--muted)}
+/* radar + jar shared */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0}
+.duo > .stage{padding:16px}
+.duo > .stage:first-child{border-right:1px solid var(--line)}
+.duo .stage svg{max-width:340px;margin:0 auto}
+.events{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.ev{font:inherit;text-align:left;color:var(--text);display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;font-size:13.5px;line-height:1.35;transition:border-color .15s}
+.ev .lt{font-family:var(--f-mono);font-size:11px;width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-weight:500}
+.ev.plus .lt{background:var(--good-soft);color:var(--good);border:1px solid var(--good)}
+.ev.minus .lt{background:var(--bad-soft);color:var(--bad);border:1px solid var(--bad)}
+.ev.plus:hover{border-color:var(--good)}
+.ev.minus:hover{border-color:var(--bad)}
+/* empathy */
+.resp{display:grid;gap:6px}
+.resp .opt{font-size:14px}
+.resp .opt[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+/* values */
+.vgrid{display:flex;flex-wrap:wrap;gap:6px;padding:16px 18px}
+.vgrid button{font:inherit;font-size:13px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;transition:border-color .15s,background .15s}
+.vgrid button:hover{border-color:var(--cool)}
+.vgrid button[aria-pressed=true]{background:var(--cool-soft);border-color:var(--cool)}
+.vgrid button.core{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.vstep{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--muted)}
+.vstep b{color:var(--text);font-weight:500}
+.vcore{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;padding:16px 18px;border-top:1px solid var(--line)}
+.vcard{display:grid;gap:8px;padding:14px;border:1px solid var(--glow-line);border-radius:12px;background:var(--glow-soft)}
+.vcard h4{margin:0;font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1}
+.vcard label{font-size:12px;color:var(--muted);font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase}
+/* checklist */
+.checks{display:grid;gap:6px;padding:16px 18px}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer}
+.checks input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+.checks.two{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+/* breathing + SFD */
+.breathe{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:0}
+.breathe .stage{padding:16px;border-right:1px solid var(--line);display:grid;gap:10px;justify-items:center;align-content:start}
+.breathe .stage svg{max-width:220px}
+.sfd{display:grid;gap:10px;padding:16px 18px;align-content:start}
+.sfd label{font-size:13px;color:var(--muted)}
+.sfd-list{display:grid;gap:8px;padding:0 18px 16px}
+.sfd-item{display:grid;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);font-size:14px}
+.sfd-item .s{font-family:var(--f-display);font-size:20px;line-height:1.2}
+.sfd-item .m{color:var(--muted)}
+.sfd-item .x{justify-self:start;font:inherit;font-size:12px;color:var(--faint);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+/* rumble starters */
+.starter{margin:0 18px 16px;padding:14px 16px;border-radius:16px 16px 4px 16px;background:var(--glow-soft);border:1px solid var(--glow-line);font-size:16px}
+.starter .who{display:block;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+/* daring card */
+.dcard{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.dcard > div{display:grid;gap:6px;align-content:start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:110px}
+.dcard .n{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.dcard .v{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.dcard .e{font-size:13px;color:var(--faint)}
+.dcard a{font-size:13px}
+
+@media (max-width: 860px){
+  .arena-hero, .armory, .paint, .duo, .breathe{grid-template-columns:minmax(0,1fr)}
+  .arena-hero .side{border-left:0;border-top:1px solid var(--line)}
+  .armory .stage, .paint .stage, .breathe .stage, .duo > .stage:first-child{border-right:0;border-bottom:1px solid var(--line)}
+  .plates{max-height:none}
+}
+@media (max-width: 560px){
+  .voice{grid-template-columns:26px minmax(0,1fr)}
+  .voice .row{grid-column:1/-1;justify-content:flex-start;flex-wrap:wrap}
+  .squad{grid-template-columns:minmax(0,1fr);justify-items:start}
+  .events{grid-template-columns:minmax(0,1fr)}
+  .vcore{padding:14px}
+  .arena-hero .side h3{font-size:26px}
+}
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Brené Brown's book on brave work, tough conversations and whole hearts</div>
+    <h1><em>Dare to Lead</em>,<br>Explained</h1>
+    <p class="lede">Brené Brown asked senior leaders around the world one question: what has to change for people to lead well in a complex, fast-moving world? The answer kept coming back the same: <b>we need braver leaders and more courageous cultures</b>. Her research found that courage isn't a personality trait. It is four sets of skills you can learn, practise and see: <b>rumbling with vulnerability, living into your values, braving trust, and learning to rise</b>. This guide covers every section of the book, with a lab in each one where you can try the skill.</p>
+    <figure class="arena-hero" style="margin:0">
+      <div class="stage"><svg id="heroArena" viewBox="0 0 380 380" role="img" aria-label="An arena seen from above, with four gates, one for each skill set of courage"></svg></div>
+      <div class="side" aria-live="polite">
+        <span class="k" id="heroK">The arena</span>
+        <h3 id="heroH">Where the real work happens</h3>
+        <p id="heroP">The book takes its image from a 1910 speech by Theodore Roosevelt: credit belongs to the person actually in the arena, face marred by dust and sweat and blood, who tries, fails and tries again. You are in the middle. The critics sit in the cheap seats. Tap a gate to see the four skill sets that get you in.</p>
+        <a class="go" id="heroGo" href="#part1" hidden></a>
+      </div>
+    </figure>
+    <nav class="parts" aria-label="The book's parts">
+      <a href="#part0"><span class="n">Introduction · Chapter 1</span><span class="q">Brave Leaders</span><span class="d">What a leader is, and the ten habits that hold teams back</span></a>
+      <a href="#part1"><span class="n">Part one · Chapters 2 to 6</span><span class="q">Rumbling with Vulnerability</span><span class="d">Myths, armour, shame, empathy, curiosity and confidence</span></a>
+      <a href="#part2"><span class="n">Part two · Chapter 7</span><span class="q">Living into Our Values</span><span class="d">Two values, named and turned into behaviour</span></a>
+      <a href="#part3"><span class="n">Part three · Chapter 8</span><span class="q">BRAVING Trust</span><span class="d">Seven elements that make trust something you can talk about</span></a>
+      <a href="#part4"><span class="n">Part four · Chapter 9</span><span class="q">Learning to Rise</span><span class="d">Getting up after a fall, and rewriting the story you tell</span></a>
+    </nav>
+    <div class="deck" id="deck" aria-label="All nine chapters"></div>
+    <div class="about">
+      <span><b>Published</b> 2018</span>
+      <span><b>Author</b> Brené Brown, research professor at the University of Houston</span>
+      <span><b>Read time</b> about 7 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 9 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== INTRO ===================== -->
+    <section class="part" id="part0">
+      <span class="eyebrow">Introduction · chapter 1</span>
+      <h2>Brave Leaders and Courage Cultures</h2>
+      <p>Before any skills, Brown sets out what the book is for. Workplaces don't mostly fail for lack of strategy or talent. They fail because people avoid the uncomfortable parts of working together: the hard conversation, the honest feedback, the risky idea, the admission that they don't know.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Who we are is how we lead. Courage at work starts as something personal, and spreads as something shared.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The introduction</div>
+        <h2>Brave Leaders and Courage Cultures</h2>
+        <div class="short"><span class="lbl">In short</span><p>A leader is anyone who takes responsibility for finding the potential in people and processes, and has the nerve to develop it. Title doesn't matter. What does matter is courage, and Brown's research shows courage can be taught, practised and measured.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Leadership isn't a job title.</b> Brown's definition covers the intern who helps a new starter as much as the chief executive. If you take responsibility for bringing out what people and systems could be, you're leading.</span></li>
+          <li><span><b>The world needs braver leaders.</b> When Brown's team interviewed around 150 senior leaders, the answers converged: in a world of fast change and tough problems, what's missing is courage, and cultures where courage is normal.</span></li>
+          <li><span><b>Ten habits hold teams back.</b> The research named the same behaviours again and again: avoiding tough conversations, managing bad behaviour instead of the fears behind it, low trust, too few smart risks, getting stuck after setbacks, too much shame and blame, dodging hard talks about inclusion, rushing to fixes, values that are slogans, and perfectionism that stops people learning.</span></li>
+          <li><span><b>Courage is four skill sets.</b> Rumbling with vulnerability, living into your values, braving trust and learning to rise. They are teachable, they can be observed, and they can be measured. The first one underpins all the others.</span></li>
+          <li><span><b>Daring leadership serves people.</b> It is about taking care of others, not about protecting your own image. Leaders who need to be the smartest person in the room or to look in control end up working against their teams.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><h4>The man in the arena</h4><p>Brown's work keeps returning to a passage from Roosevelt's 1910 speech "Citizenship in a Republic": it isn't the critic who counts, but the person actually in the arena who strives, errs and, if they fail, at least fails while daring greatly. She read it at a low point after a talk of hers went viral and drew a flood of cruel comments, and decided that she would only take feedback from people who were also in the arena, risking something.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: check your team's culture</div><div class="hint">Tick what you see where you work</div></div>
+        <div class="duo">
+          <div class="stage"><svg id="radar1" viewBox="0 0 340 320" role="img" aria-label="A four-way chart showing which skill set your team needs most"></svg></div>
+          <div class="stage" style="padding:16px 18px"><div class="checks" id="checks1" style="padding:0"></div></div>
+        </div>
+        <div class="callout" id="call1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most work problems are people dodging discomfort. Leading means walking into the awkward conversation instead of around it, and helping everyone else do the same.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick the one habit you ticked that costs your team the most. Name it out loud at your next meeting, and ask what it would take to change it.</p><p class="say">"I think we avoid hard conversations here. Can we talk about that?"</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="quiz" data-q="1b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The Moment and the Myths →</a></div>
+    </section>
+
+    <!-- ===================== PART 1 ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · chapters 2 to 6</span>
+      <h2>Rumbling with Vulnerability</h2>
+      <p>The biggest part of the book, and the foundation for the rest. Brown defines vulnerability as the emotion we feel in moments of uncertainty, risk and emotional exposure. Every brave act involves it, so you can't build courage without learning to stay in that feeling instead of running from it. A "rumble" is her word for a conversation where people commit to lean into that discomfort, stay curious and listen as hard as they talk.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>There is no courage without vulnerability. If you can't name a brave act that didn't involve risk and uncertainty, you've found the rule.</p></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Section one</div>
+        <h2>The Moment and the Myths</h2>
+        <div class="short"><span class="lbl">In short</span><p>Vulnerability is not weakness. It's the feeling that comes with every brave act. Six common myths stop people from engaging with it, and you need to know whose voices count while you're in the arena.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>No courage without vulnerability.</b> Brown has asked thousands of people, including special forces soldiers, to describe an act of courage that didn't involve uncertainty, risk or exposure. Nobody has managed one.</span></li>
+          <li><span><b>Six myths keep us armoured.</b> That vulnerability is weakness; that you can opt out of it; that you can go it alone; that systems can engineer the discomfort away; that trust has to come first; and that vulnerability means oversharing. Each is tested below.</span></li>
+          <li><span><b>Vulnerability is not disclosure.</b> Pouring out personal details to people who haven't earned them is not courage. Vulnerability without boundaries is closer to desperation, or a way to grab attention.</span></li>
+          <li><span><b>Choose whose feedback counts.</b> If someone isn't also in the arena, risking failure, their criticism doesn't get a vote. That doesn't mean ignoring all feedback: it means taking it from people who are brave alongside you.</span></li>
+          <li><span><b>Your square squad.</b> Write the names of the people whose opinions really matter to you on a one-inch square of paper. They should be people who love you because of your flaws and vulnerabilities, not in spite of them. If the list doesn't fit, it's too long.</span></li>
+        </ul>
+      </div>
+      <div class="sub">Six myths · tap one to see what's true</div>
+      <div class="myths" id="myths"></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: who gets a seat in the arena?</div><div class="hint">Place each voice, then build your square</div></div>
+        <div class="split wide"><div class="stage"><svg id="arena2" viewBox="0 0 320 320" role="img" aria-label="An arena with the voices you let in placed on the floor and the others in the stands"></svg></div><div class="voices" id="voices2"></div></div>
+        <div class="squad">
+          <div class="sq" id="sq2" aria-label="Your square squad"></div>
+          <div class="sq-form">
+            <p><b style="color:var(--text);font-weight:500">Your square squad.</b> Add the people whose opinion of you truly matters. The square stays one inch, so the writing shrinks as the list grows.</p>
+            <div class="inrow"><input class="inp" id="sqIn" maxlength="24" placeholder="A name" aria-label="Add a name"><button class="btn primary" id="sqAdd">Add</button></div>
+            <div class="tags" id="sqTags"></div>
+          </div>
+        </div>
+        <div class="callout" id="call2"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Feeling exposed when you try something hard isn't a sign you're doing it wrong. It's what bravery feels like from the inside. And not everyone who has an opinion about your effort has earned the right to shape it.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before you read the comments on something you made, decide in advance whose feedback you'll take seriously. Look at your square first.</p><p class="say">"Are they in the arena with me, or in the cheap seats?"</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="quiz" data-q="2b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: The Call to Courage →</a></div>
+    </section>
+
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Section two</div>
+        <h2>The Call to Courage</h2>
+        <div class="short"><span class="lbl">In short</span><p>The thing that blocks courage isn't fear, it's the armour we put on to avoid feeling fear. Daring leaders believe people can be brave and give them the clarity to do it. The rule of thumb: clear is kind, unclear is unkind.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Fear isn't the problem; armour is.</b> Almost every leader Brown spoke to admitted to feeling afraid. The ones who struggled were those who protected themselves from the feeling by shutting down, controlling or blaming.</span></li>
+          <li><span><b>Clear is kind. Unclear is unkind.</b> Feeding people half-truths to make them feel better, or not telling a colleague what's expected and then being annoyed when they miss it, feels nice in the moment and is unkind in the end.</span></li>
+          <li><span><b>Paint done.</b> Before handing work over, describe what finished looks like: the purpose, the result, the format, the deadline. Teams lose huge amounts of time and goodwill to work that was never clearly defined.</span></li>
+          <li><span><b>TASC.</b> When you hand off a task, check who owns it (Task), whether they are Accountable for it, whether they have the Skills, and whether they have the Capacity right now. Missing any one of them sets someone up to fail.</span></li>
+          <li><span><b>Turn and learn.</b> When estimating how long work will take, everyone writes a guess on a sticky note and turns it over at the same time. It stops junior people from simply echoing the most senior estimate.</span></li>
+          <li><span><b>Permission slips.</b> At the start of a hard meeting, each person writes what they give themselves permission to feel or do: "to ask questions", "to be confused", "to be excited about something not yet finished". Saying it out loud makes it easier.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: paint done</div><div class="hint">Add each piece and watch the picture fill in</div></div>
+        <div class="paint">
+          <div class="stage"><svg id="paint3" viewBox="0 0 360 260" role="img" aria-label="A painting that fills in as the request gets clearer"></svg></div>
+          <div class="req">
+            <div class="brief" id="brief3"></div>
+            <div class="pieces" id="pieces3"></div>
+          </div>
+        </div>
+        <div class="stats"><div class="stat"><span class="k">How clear is it?</span><span class="v glow" id="clr3">1 of 6</span></div><div class="stat"><span class="k">Chance of a redo</span><span class="v" id="redo3"></span></div><div class="stat"><span class="k">Who's guessing?</span><span class="s" id="guess3"></span></div></div>
+        <div class="callout">The redo figures are illustrative, not from the book. The point is the shape: every piece you leave out is something the other person has to guess.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Being vague to avoid an awkward moment just moves the awkwardness to later, when it's bigger. Say what you need, say what done looks like, and say it kindly.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>The next time you hand off a piece of work, ask the other person to describe back to you what finished looks like before they start.</p><p class="say">"Can you paint done for me, so I know we're picturing the same thing?"</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="quiz" data-q="3b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The Armory →</a></div>
+    </section>
+
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Section three</div>
+        <h2>The Armory</h2>
+        <div class="short"><span class="lbl">In short</span><p>We each pick up armour as children to protect ourselves from hurt, and keep wearing it into adulthood. At work it shows up in sixteen recognisable ways. For each kind of armoured leadership, Brown names the daring alternative.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Armour made sense once.</b> It was how we got through childhood hurts, school, early jobs. The trouble is that it keeps out connection and learning as well as pain, and it is heavy to carry.</span></li>
+          <li><span><b>Perfectionism is armour, not high standards.</b> Healthy striving asks "how can I improve?" Perfectionism asks "what will they think?" It is about avoiding blame and shame, and it makes people afraid to try.</span></li>
+          <li><span><b>Knowing versus learning.</b> Armoured leaders need to be right. Daring leaders want to get it right, which means asking questions, admitting what they don't know and changing their minds.</span></li>
+          <li><span><b>Power over versus power with.</b> Using power to control people through fear is armour. Daring leaders share power: power with others, power to make a difference, and power within, the confidence that doesn't need to dominate.</span></li>
+          <li><span><b>Leading from hurt or from heart.</b> When leaders haven't dealt with their own pain, they tend to pass it on. The work of taking off armour starts with knowing what you are protecting.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: take off the armour</div><div class="hint">Tap a habit to swap it for the daring version</div></div>
+        <div class="armory">
+          <div class="stage"><svg id="fig4" viewBox="0 0 240 320" role="img" aria-label="A figure wearing sixteen plates of armour, with a heart underneath"></svg><div class="count" id="cnt4"></div><div class="row" style="justify-content:center"><button class="btn" id="all4">Take it all off</button><button class="btn" id="reset4">Put it back</button></div></div>
+          <div class="plates" id="plates4"></div>
+        </div>
+        <div class="callout" id="call4"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The things we do to look strong at work, like always having the answer, staying cynical, being busy, are often ways of not being seen. The braver move is usually the more human one.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick the one piece of armour you reach for most. Notice the moment you put it on, and ask what you were protecting.</p><p class="say">"What am I afraid will happen if I take this off?"</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="quiz" data-q="4b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Shame and Empathy →</a></div>
+    </section>
+
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Section four</div>
+        <h2>Shame and Empathy</h2>
+        <div class="short"><span class="lbl">In short</span><p>Shame is the painful belief that we are flawed and so unworthy of belonging. It is everywhere at work, and it kills learning. Empathy is its antidote, and it's a skill: connecting to the feeling underneath someone's experience, not to the experience itself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Shame is "I am bad". Guilt is "I did something bad".</b> Guilt can be useful: it compares what we did with what we value, and pushes us to fix it. Shame attacks who we are, and tends to make people hide, lash out or give up.</span></li>
+          <li><span><b>Shame at work has a look.</b> Perfectionism, favouritism, gossip, back-channelling, comparison, tying worth to productivity, bullying, blaming, teasing and cover-ups are all signs of it.</span></li>
+          <li><span><b>Three shame shields.</b> When we feel shame we tend to move away (hide, go silent), move toward (people-please, appease), or move against (attack, use shame on others). Knowing your default helps you catch it.</span></li>
+          <li><span><b>Empathy is a set of skills.</b> Drawing on the nursing researcher Theresa Wiseman, Brown lists them: see the world as others see it, stay out of judgement, understand their feelings, tell them you understand, and pay attention. You don't need to have had the same experience.</span></li>
+          <li><span><b>Empathy misses.</b> Most of us mean well and still miss: we feel sorry for people from above, gasp in horror, one-up their story, look for a silver lining, rush to fix it, or show we're let down. Rarely can a response make something better; what helps is connection.</span></li>
+          <li><span><b>Self-compassion first.</b> Using Kristin Neff's research, Brown argues we need to treat ourselves with the same kindness, and remember that everyone struggles. Leaders who are brutal with themselves are rarely gentle with others.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: respond to Priya</div><div class="hint">Pick a reply and watch the distance between you</div></div>
+        <div class="ask-line"><span class="who">Priya, after her first big presentation</span>"It went really badly. I froze when they asked about the numbers, and everyone just stared at me."</div>
+        <div class="duo">
+          <div class="stage"><svg id="emp5" viewBox="0 0 340 220" role="img" aria-label="Two people, with the gap between them changing depending on your reply"></svg></div>
+          <div class="stage" style="padding:16px 18px"><div class="resp" id="resp5"></div></div>
+        </div>
+        <div class="callout" id="call5">Pick one of the replies to see what it does to the connection.</div>
+      </figure>
+      <figure class="lab">
+        <div class="lab-top"><div class="t">Quick sort: shame or guilt?</div><div class="hint">Read the inner voice and decide</div></div>
+        <div class="sorter" id="sort5"></div>
+        <div style="padding:0 18px 16px"><div class="tally" id="tally5"></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone tells you something painful, they don't need you to make it better. They need to not feel alone with it. "Me too" and "that sounds hard" do more than any advice.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>When someone tells you about a bad day, hold back the fix for one full minute. Just reflect back what you hear them feeling.</p><p class="say">"That sounds really hard. I'm glad you told me."</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="quiz" data-q="5b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Curiosity and Grounded Confidence →</a></div>
+    </section>
+
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Section five</div>
+        <h2>Curiosity and Grounded Confidence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Grounded confidence is not bravado. It is rumble skills plus curiosity plus practice: the messy, ongoing work of learning and unlearning. Curiosity is itself a brave act, because asking a question admits you don't already know.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Grounded confidence has a formula.</b> Rumble skills, plus curiosity, plus practice. It looks less like certainty and more like a person willing to stay with a hard question until they understand it.</span></li>
+          <li><span><b>Curiosity is uncomfortable.</b> It means admitting a gap and being open to what you find. Many people stop being curious as adults because school and work reward having answers, not asking questions.</span></li>
+          <li><span><b>You need a little knowledge to wonder.</b> Brown draws on George Loewenstein's information-gap idea: curiosity switches on when we notice a gap between what we know and what we want to know. Too little knowledge and there's nothing to ask; too much certainty and we stop looking.</span></li>
+          <li><span><b>Rumble starters.</b> Simple phrases open a curious conversation: "The story I'm making up is…", "Tell me more", "Help me understand", "I'm curious about", "Walk me through", "What does done look like?"</span></li>
+          <li><span><b>Fix the problem you actually have.</b> Teams under pressure jump to solutions. Daring leaders spend longer defining the problem, because the wrong problem solved well is still a waste.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: find the curiosity sweet spot</div><div class="hint">Slide how much you think you know</div></div>
+        <div class="stage"><svg id="curve6" viewBox="0 0 680 270" role="img" aria-label="A hump-shaped curve: curiosity is highest when you know a little, and low when you know nothing or think you know everything"></svg></div>
+        <div class="lab-ctl">
+          <div class="ctl"><label for="know6">How much I think I know about the problem <output id="know6o"></output></label><input type="range" id="know6" min="0" max="100" value="12"></div>
+        </div>
+        <div class="callout" id="call6"></div>
+        <div class="lab-ctl" style="border-top:1px solid var(--line)">
+          <div class="row" id="st6"><span class="grp-l">Try a rumble starter</span></div>
+        </div>
+        <div class="starter" id="say6"><span class="who">You, to a teammate whose project slipped</span><span></span></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Confidence that comes from never being questioned is brittle. Confidence that comes from having asked hard questions, been wrong and learned is the kind that holds.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>In your next disagreement, ask two genuine questions before you make your point.</p><p class="say">"Help me understand how you're seeing this."</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="quiz" data-q="6b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Living into Our Values →</a></div>
+    </section>
+
+    <!-- ===================== PART 2 ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · chapter 7</span>
+      <h2>Living into Our Values</h2>
+      <p>Values are what we believe matters most, the guide we lean on when things get hard. Most organisations have values on the wall; few teach the behaviours that go with them. Brown's point is simple and demanding: if you can't name your values and say what they look like in practice, you can't live into them.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>We have to do more than profess our values. We have to practise them, especially when it's hard.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Part two</div>
+        <h2>Living into Our Values</h2>
+        <div class="short"><span class="lbl">In short</span><p>Pick one or two core values, not ten. Turn each into three or four behaviours you can actually see, plus the "slippery" behaviours that show you've drifted. Then use them to steer hard moments like giving feedback.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>If everything is important, nothing is.</b> Brown asks people to choose just one or two core values. Most other values on a long list turn out to flow from those two.</span></li>
+          <li><span><b>From slogans to behaviours.</b> For each value, write what it looks like when you're living it, what it looks like when you're not, and an example of a time you did. "Courage" might mean "I say the hard thing in the meeting, not in the car park afterwards".</span></li>
+          <li><span><b>Values hold us in the arena.</b> When criticism or fear hits, values are the thing you check yourself against. The question becomes "did I act on what I believe?", not "did everyone approve?"</span></li>
+          <li><span><b>Know your values to know others'.</b> Brown recommends sharing your two values with colleagues and asking about theirs. It explains a lot of friction, and helps you support each other.</span></li>
+          <li><span><b>Feedback is a values test.</b> Brown's engaged feedback checklist starts with: I'm ready when I'm ready to sit next to you rather than across from you, and to put the problem in front of us rather than between us.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: narrow to two</div><div class="hint">Pick up to ten, then star two as core</div></div>
+        <div class="stage" style="padding:12px 16px 0"><svg id="fun7" viewBox="0 0 680 120" role="img" aria-label="A funnel narrowing from the full list to ten to two"></svg></div>
+        <div class="vgrid" id="vals7"></div>
+        <div class="vstep" id="step7"></div>
+        <div class="vcore" id="core7" hidden></div>
+      </figure>
+      <figure class="lab">
+        <div class="lab-top"><div class="t">Am I ready to give feedback?</div><div class="hint">Tick what's true right now</div></div>
+        <div class="checks two" id="fb7"></div>
+        <div class="callout" id="fbc7"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A value you can't describe in behaviour is a wish. Choose two things you really stand for, and decide what they look like on a Tuesday afternoon.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Tell one colleague your two values and ask for theirs. Then ask how you can support each other in living them.</p><p class="say">"What does support look like for you around that value?"</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="quiz" data-q="7b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: BRAVING Trust →</a></div>
+    </section>
+
+    <!-- ===================== PART 3 ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · chapter 8</span>
+      <h2>BRAVING Trust</h2>
+      <p>Everyone agrees trust matters, and almost nobody knows how to talk about it. Telling a colleague "I don't trust you" is so loaded that we just avoid them instead. Brown's research breaks trust into seven elements, so you can talk about the specific part that's missing.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Trust is built in small moments, not grand gestures, and it can be named, discussed and repaired.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Part three</div>
+        <h2>BRAVING Trust</h2>
+        <div class="short"><span class="lbl">In short</span><p>Trust is choosing to risk making something you value vulnerable to another person's actions. It's built like marbles going into a jar: one small moment at a time. BRAVING names its seven parts: Boundaries, Reliability, Accountability, Vault, Integrity, Nonjudgement and Generosity.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A working definition.</b> Brown borrows Charles Feltman's: trust is choosing to make something you value vulnerable to someone else's actions. Distrust is deciding that what matters to you isn't safe with that person in this situation.</span></li>
+          <li><span><b>The marble jar.</b> When Brown's daughter was hurt that friends had shared her secret, Brown described trust as a jar of marbles: people earn a marble each time they show up for you in a small way. Trust builds slowly and can be lost quickly.</span></li>
+          <li><span><b>The seven elements.</b> Boundaries: you respect mine and ask when unsure. Reliability: you do what you say, again and again. Accountability: you own mistakes and make amends. Vault: you keep what isn't yours to share. Integrity: you choose courage over comfort. Nonjudgement: we can both ask for help. Generosity: you assume the best about my words and actions.</span></li>
+          <li><span><b>The vault cuts both ways.</b> When someone shares gossip about others with you, it can feel like closeness. It's actually a sign they'll share yours. Bonding over a common enemy is counterfeit trust.</span></li>
+          <li><span><b>Asking for help builds trust.</b> Leaders tend to trust people who ask for help more than people who never do. If you never ask, they can't count on you to raise your hand when it really matters.</span></li>
+          <li><span><b>Self-trust uses the same seven.</b> After a failure, people often lose trust in themselves. Running through BRAVING on yourself shows which part to rebuild.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the marble jar</div><div class="hint">Add moments with a colleague and watch the jar</div></div>
+        <div class="duo">
+          <div class="stage"><svg id="jar8" viewBox="0 0 300 300" role="img" aria-label="A glass jar filling with marbles as trust builds"></svg></div>
+          <div class="stage"><svg id="brv8" viewBox="0 0 340 300" role="img" aria-label="Seven bars, one per BRAVING element, showing what was built and broken"></svg></div>
+        </div>
+        <div class="lab-ctl"><div class="events" id="ev8"></div><div class="row"><button class="btn" id="reset8">Empty the jar</button></div></div>
+        <div class="callout" id="call8">Tap a moment. Green ones add marbles; red ones take some out. Breaches cost more than small kindnesses earn, an illustrative weighting that mirrors Brown's point that trust is slow to build and fast to lose.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>People don't trust you because of one big gesture. They trust you because you remembered, kept quiet, owned up, turned up, and gave them the benefit of the doubt, over and over.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Think of a working relationship that feels shaky. Instead of "I don't trust you", find the specific element that's missing and talk about that.</p><p class="say">"I'd like to talk about reliability between us. Here's what I've noticed."</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="quiz" data-q="8b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Learning to Rise →</a></div>
+    </section>
+
+    <!-- ===================== PART 4 ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · chapter 9</span>
+      <h2>Learning to Rise</h2>
+      <p>If you're brave often enough, you will fall. The last skill set is about getting back up: noticing you've been knocked down, getting honest about the story you're telling yourself, and writing a better ending.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A team that knows how to get up again can afford to take risks.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Part four</div>
+        <h2>Learning to Rise</h2>
+        <div class="short"><span class="lbl">In short</span><p>Rising takes three steps. The reckoning: notice you're hooked by an emotion and get curious about it. The rumble: own the story you're making up, and check it against the facts. The revolution: write a new ending and live it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The reckoning starts with your body.</b> Hurt shows up as a racing heart, a hot face, a tight chest. Brown teaches tactical breathing, a technique used by soldiers and police: breathe in for four, hold for four, out for four, hold for four.</span></li>
+          <li><span><b>We offload hurt in predictable ways.</b> Chandeliering (keeping it in until it explodes at the wrong person), bouncing it ("I don't care anyway"), numbing it, stockpiling it, and hiding behind "I'm fine". All of them postpone the work.</span></li>
+          <li><span><b>Our brains love a story, true or not.</b> When something hurts, the brain rushes to explain it, and rewards us for any story with an ending. That first explanation is usually self-protective and often wrong.</span></li>
+          <li><span><b>Write the shitty first draft.</b> Brown's phrase, borrowed from the writer Anne Lamott. Get your first, unfiltered story on paper: "The story I'm making up is…". Then look for the conspiracies (stories built on little data) and confabulations (things we sincerely believe but made up).</span></li>
+          <li><span><b>Rumble with three questions.</b> What more do I need to learn about the situation? About the other people? About myself? The answers turn a story that protects you into one that's true.</span></li>
+          <li><span><b>The revolution.</b> Owning the story means you get to write the ending. That's the change that sticks: from a person who was hurt to a person who learned something.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: breathe, then draft</div><div class="hint">Calm the body first, then write the story</div></div>
+        <div class="breathe">
+          <div class="stage"><svg id="box9" viewBox="0 0 220 220" role="img" aria-label="A square that a dot travels around: breathe in, hold, out, hold, four seconds each"></svg><div class="row" style="justify-content:center"><button class="btn primary" id="go9">Start breathing</button></div></div>
+          <div class="sfd">
+            <label for="s9">The story I'm making up is…</label>
+            <textarea class="inp" id="s9" placeholder="e.g. My manager didn't reply because she thinks my idea is stupid."></textarea>
+            <label for="q9a">What more do I need to learn about the situation?</label>
+            <input class="inp" id="q9a" placeholder="e.g. Was she in back-to-back meetings?">
+            <label for="q9b">About the other people?</label>
+            <input class="inp" id="q9b" placeholder="e.g. What's on her plate this week?">
+            <label for="q9c">About myself?</label>
+            <input class="inp" id="q9c" placeholder="e.g. Why does silence hit me this hard?">
+            <div class="row"><button class="btn primary" id="save9">Save this draft</button><span id="msg9" style="font-size:13px;color:var(--faint)"></span></div>
+          </div>
+        </div>
+        <div class="sfd-list" id="list9"></div>
+        <div class="callout">Your drafts stay in this browser only. Nothing is sent anywhere.</div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something stings, your mind writes a story fast, and usually casts you as the victim or the fool. Write it down, then go find the parts you made up.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>When a colleague's reaction stings, start the next conversation with your first draft, said lightly.</p><p class="say">"The story I'm making up is that you were annoyed with me. Is that right?"</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="quiz" data-q="9b"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#after">Next: your daring leadership card →</a></div>
+    </section>
+
+    <!-- ===================== AFTERWORD ===================== -->
+    <section class="after" id="after">
+      <span class="eyebrow">Your daring leadership card</span>
+      <h2>Four Skills, One Arena</h2>
+      <p>Everything you've built on this page, in one place: your square, your values, the armour you've taken off and the stories you've rumbled with. It all stays in this browser.</p>
+      <div class="dcard" id="card"></div>
+      <div class="recap" id="recap"></div>
+      <p class="big">Courage isn't the absence of fear. It's showing up when you can't control the outcome, and treating the people beside you as capable of the same.</p>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Dare to Lead: Brave Work. Tough Conversations. Whole Hearts.</i> by Brené Brown (2018). The explanations, examples and labs are written in our own words and are not affiliated with the author or publisher. Numbers in the labs are illustrative unless they say otherwise.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+<script>
+(() => {
+const PARTS = ["Introduction", "Rumbling with Vulnerability", "Living into Our Values", "BRAVING Trust", "Learning to Rise"];
+const CH = [["Brave Leaders and Courage Cultures", "Brave leaders", 0], ["The Moment and the Myths", "Myths", 1], ["The Call to Courage", "Call to courage", 1], ["The Armory", "Armory", 1], ["Shame and Empathy", "Shame and empathy", 1], ["Curiosity and Grounded Confidence", "Curiosity", 1], ["Living into Our Values", "Values", 2], ["BRAVING Trust", "BRAVING", 3], ["Learning to Rise", "Rising", 4]];
+const QUIZ = {
+  1:{q:`Who counts as a leader in Brown's definition?`,o:[`Anyone with people reporting to them`,`Anyone who takes responsibility for finding the potential in people and processes, and has the courage to develop it`,`Only senior executives`],a:1,w:`Title has nothing to do with it. An intern who helps a colleague grow is leading.`},
+  '1b':{q:`What did the research say about courage?`,o:[`It's an inborn trait you either have or don't`,`It's four skill sets that can be taught, observed and measured`,`It matters less than strategy`],a:1,w:`Rumbling with vulnerability, living into values, braving trust and learning to rise. All learnable.`},
+  2:{q:`How does Brown define vulnerability?`,o:[`Being weak or easily hurt`,`Telling people everything about yourself`,`The emotion we feel during uncertainty, risk and emotional exposure`],a:2,w:`It's a feeling, not a flaw, and it comes with every act of courage.`},
+  '2b':{q:`Whose feedback does Brown say you should take seriously?`,o:[`Everyone's, equally`,`People who are also in the arena, taking risks, and who care about you`,`Nobody's`],a:1,w:`Not a rule to ignore criticism: a filter for whose criticism gets a vote.`},
+  3:{q:`What does "clear is kind, unclear is unkind" mean?`,o:[`Be blunt even if it hurts`,`Vague expectations and half-truths feel nice now but set people up to fail later`,`Always write instructions down`],a:1,w:`Avoiding an awkward moment by being fuzzy just passes a bigger problem to the other person.`},
+  '3b':{q:`What is "turn and learn" for?`,o:[`Getting honest estimates by having everyone reveal their guess at once`,`Rotating team members between projects`,`Reviewing mistakes after a project ends`],a:0,w:`Writing guesses privately and flipping them together stops people simply echoing the boss.`},
+  4:{q:`How does Brown tell perfectionism apart from healthy striving?`,o:[`Perfectionism aims higher`,`Healthy striving is self-focused ("how can I improve?"); perfectionism is other-focused ("what will they think?")`,`There's no real difference`],a:1,w:`Perfectionism is armour against blame and shame, not a higher standard.`},
+  '4b':{q:`What is the daring alternative to "being a knower and being right"?`,o:[`Being a learner and getting it right`,`Staying quiet in meetings`,`Hiring smarter people`],a:0,w:`Daring leaders care about the right answer more than about being the one who had it.`},
+  5:{q:`What's the difference between shame and guilt?`,o:[`Shame is stronger guilt`,`Guilt is "I did something bad"; shame is "I am bad"`,`Guilt is private, shame is public`],a:1,w:`Guilt can push us to repair things. Shame attacks who we are, and rarely leads anywhere good.`},
+  '5b':{q:`Which reply is empathy, not an empathy miss?`,o:[`"At least it wasn't in front of a client."`,`"That sounds really hard. I've been there, and I'm glad you told me."`,`"Here's what you should do next time."`],a:1,w:`Empathy connects to the feeling. "At least" shrinks it and the fix skips it.`},
+  6:{q:`What are the three ingredients of grounded confidence?`,o:[`Talent, charisma and experience`,`Rumble skills, curiosity and practice`,`Certainty, speed and authority`],a:1,w:`It isn't about being sure. It's about being willing to keep learning in public.`},
+  '6b':{q:`According to the information-gap idea, when are we most curious?`,o:[`When we know nothing about a topic`,`When we know a little and notice what we're missing`,`When we're already experts`],a:1,w:`You need some knowledge to see the gap, and enough humility to admit it's there.`},
+  7:{q:`How many core values does Brown ask people to choose?`,o:[`One or two`,`Around ten`,`As many as feel true`],a:0,w:`If everything is a priority, nothing is. Most other values flow from the core one or two.`},
+  '7b':{q:`What makes a value usable, in Brown's view?`,o:[`Putting it on the office wall`,`Turning it into specific behaviours, including the "slippery" ones that show you've drifted`,`Getting everyone to vote on it`],a:1,w:`A value nobody can describe in behaviour can't be taught, practised or measured.`},
+  8:{q:`What does the marble jar teach about trust?`,o:[`It's built in big, dramatic moments`,`It's built one small moment at a time, and can be lost quickly`,`Once earned, it can't be lost`],a:1,w:`Remembering, showing up, keeping a confidence: small marbles add up.`},
+  '8b':{q:`A colleague tells you juicy gossip about someone else. Which BRAVING element should worry you?`,o:[`Generosity`,`Vault`,`Boundaries`],a:1,w:`If they share others' confidences with you, they'll share yours. Bonding over gossip is counterfeit trust.`},
+  9:{q:`What are the three stages of learning to rise?`,o:[`Plan, act, review`,`The reckoning, the rumble, the revolution`,`Deny, accept, move on`],a:1,w:`Notice you're hooked, own and check your story, then write a new ending.`},
+  '9b':{q:`Why does Brown suggest writing a "shitty first draft" of the story?`,o:[`To send it to the person who hurt you`,`To get the self-protective story out where you can check it for things you made up`,`Because first drafts are usually right`],a:1,w:`Your brain rewards any story with an ending. Writing it down lets you spot the conspiracies and confabulations.`}
+};
+
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); f(); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const load = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch(e){ return d; } };
+const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} };
+const person = (x, y, s = 1, c = 'muted', extra = '') => `<g transform="translate(${x} ${y}) scale(${s})" ${extra}><circle cx="0" cy="-34" r="11" ${F(c)}/><path d="M-16 6 Q-16 -18 0 -18 Q16 -18 16 6 Z" ${F(c)}/></g>`;
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0e1311';
+try { const t = localStorage.getItem('dtl-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('dtl-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${p === 0 ? 'Start' : p + ' · ' + PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+$('#deck').innerHTML = CH.map(([t], i) => `<a href="#ch${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span>${t}</a>`).join('');
+let done = new Set(load('dtl-done', []));
+const save = () => store('dtl-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+  drawCard();
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes: two per chapter; getting both right marks the chapter understood ---------- */
+const right = {};
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q], ch = String(parseInt(box.dataset.q, 10));
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ right[ch] = (right[ch] || 0) + 1; if (right[ch] >= 2){ done.add(ch); save(); renderProgress(); } }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. Listen for "I am" versus "I did" in your own head this week.' : 'The tell is the target: shame goes after who you are, guilt after what you did.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); show(); }); return; }
+    const it = items[order[i]];
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">Voice ${i + 1} of ${items.length}</span><span class="item q">${it.t}</span><span class="fb" hidden></span></div>
+      <div class="bins">${bins.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Yes.' : 'Not quite: ' + bins.find(b => b.id === it.a).label + '.'}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- hero: the arena and its four gates ---------- */
+{ const G = [
+    {a:-90, s:'Vulnerability', k:'Part one · chapters 2 to 6', h:'Rumbling with vulnerability', p:'The foundation for everything else: staying in uncertainty, risk and exposure long enough to have the real conversation. Covers the six myths, the sixteen kinds of armour, shame and empathy, and curiosity.', href:'#part1'},
+    {a:0, s:'Values', k:'Part two · chapter 7', h:'Living into our values', p:'Naming one or two core values and turning them into behaviours you can see, so they hold you steady when the criticism starts.', href:'#part2'},
+    {a:90, s:'Trust', k:'Part three · chapter 8', h:'BRAVING trust', p:'Seven elements of trust, from boundaries to generosity, so you can talk about the specific thing that\'s missing instead of avoiding the person.', href:'#part3'},
+    {a:180, s:'Rising', k:'Part four · chapter 9', h:'Learning to rise', p:'Getting back up after a fall: noticing you\'re hooked, owning the story you\'re telling, and writing a braver ending.', href:'#part4'} ];
+  const svg = $('#heroArena'), cx = 190, cy = 190;
+  const pt = (r, a) => [cx + r * Math.cos(a * Math.PI / 180), cy + r * Math.sin(a * Math.PI / 180)];
+  let h = `<circle cx="${cx}" cy="${cy}" r="172" ${FS('panel-2', 'line', 1)}/>`;
+  for (let r = 128; r <= 166; r += 9.5) h += `<circle cx="${cx}" cy="${cy}" r="${r}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+  h += `<circle cx="${cx}" cy="${cy}" r="118" ${FS('glow-soft', 'glow-line', 1.5, 1)}/>`;
+  h += `<circle cx="${cx}" cy="${cy}" r="118" style="fill:var(--glow);fill-opacity:.06"/>`;
+  [45, 135, 225, 315].forEach(a => { const [x, y] = pt(147, a); h += TX(x, y + 4, 'cheap seats', 'faint', 10, 'middle', `transform="rotate(${a + (a > 90 && a < 270 ? -90 : 90)} ${x} ${y})" font-family="var(--f-mono)" letter-spacing="1"`); });
+  G.forEach((g, i) => {
+    const [x, y] = pt(146, g.a), [lx, ly] = pt(88, g.a);
+    const rot = g.a + 90;
+    h += `<g class="gate" data-g="${i}" tabindex="0" role="button" aria-label="${g.h}"><rect class="gate-r" x="${x - 20}" y="${y - 27}" width="40" height="54" rx="6" transform="rotate(${rot} ${x} ${y})" ${FS('ink', 'glow', 1.5)}/>
+      <path d="M${x - 9} ${y + 6} v-9 a9 9 0 0 1 18 0 v9" transform="rotate(${rot} ${x} ${y})" ${S('glow', 1.5)}/>
+      <text class="gate-t" x="${lx}" y="${ly + 4}" font-size="12.5" text-anchor="middle" ${F('muted')} font-family="var(--f-mono)" letter-spacing=".5">${g.s}</text></g>`;
+  });
+  h += person(cx, cy + 22, 1.05, 'glow');
+  h += TX(cx, cy + 46, 'you', 'text', 12, 'middle', 'font-family="var(--f-mono)"');
+  h += `<rect x="${cx + 34}" y="${cy + 34}" width="22" height="22" rx="2" ${FS('cool-soft', 'cool', 1.5, 1)}/>` + TX(cx + 45, cy + 70, 'your square', 'cool', 10.5, 'middle', 'font-family="var(--f-mono)"');
+  svg.innerHTML = h;
+  const gates = [...svg.querySelectorAll('.gate')];
+  const pick = i => {
+    gates.forEach((n, j) => { n.querySelector('.gate-r').style.fill = j === i ? 'var(--glow)' : 'var(--ink)'; n.querySelector('path').style.stroke = j === i ? 'var(--on-glow)' : 'var(--glow)'; n.querySelector('.gate-t').style.fill = j === i ? 'var(--glow)' : 'var(--muted)'; });
+    const g = G[i]; $('#heroK').textContent = g.k; $('#heroH').textContent = g.h; $('#heroP').textContent = g.p;
+    const go = $('#heroGo'); go.hidden = false; go.href = g.href; go.textContent = 'Go to ' + g.h.toLowerCase() + ' →';
+  };
+  gates.forEach((n, i) => { n.addEventListener('click', () => pick(i)); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(i); } }); });
+}
+
+/* ---------- 1. culture check: which skill set is most needed ---------- */
+{ const AX = ['Rumbling with vulnerability', 'Values', 'Braving trust', 'Rising'];
+  const AXL = ['Vulnerability', 'Values', 'Trust', 'Rising'];
+  const PART = ['#part1', '#part2', '#part3', '#part4'];
+  const ITEMS = [
+    ['We avoid tough conversations, including honest feedback', [2,1,1,0]],
+    ['We spend more time managing bad behaviour than the fear beneath it', [2,0,1,0]],
+    ['Trust is low: not enough connection or empathy', [1,0,2,0]],
+    ['Few people take smart risks or share bold ideas', [1,0,1,1]],
+    ['We get stuck after setbacks and disappointments', [0,0,0,2]],
+    ['Lots of shame and blame, not much accountability', [2,0,1,1]],
+    ['People avoid hard conversations about diversity and inclusion', [2,1,0,0]],
+    ['We rush to solutions before we\'ve defined the problem', [2,0,0,0]],
+    ['Our values are posters, not behaviours we teach', [0,2,0,0]],
+    ['Perfectionism and fear stop people learning from failure', [1,0,0,2]] ];
+  const MAX = [0,1,2,3].map(a => ITEMS.reduce((s, it) => s + it[1][a], 0));
+  $('#checks1').innerHTML = ITEMS.map(([t], i) => `<label><input type="checkbox" data-c1="${i}"><span>${t}</span></label>`).join('');
+  const svg = $('#radar1'), cx = 170, cy = 160, R = 100;
+  const P = (a, v) => { const ang = [-90, 0, 90, 180][a] * Math.PI / 180; return [cx + R * v * Math.cos(ang), cy + R * v * Math.sin(ang)]; };
+  function draw(){
+    const on = $$('[data-c1]').filter(c => c.checked).map(c => +c.dataset.c1);
+    const sc = [0,1,2,3].map(a => on.reduce((s, i) => s + ITEMS[i][1][a], 0) / MAX[a]);
+    let h = '';
+    [.25,.5,.75,1].forEach(v => h += `<polygon points="${[0,1,2,3].map(a => P(a, v).join(',')).join(' ')}" ${S('line', 1)}/>`);
+    [0,1,2,3].forEach(a => { const [x, y] = P(a, 1); h += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" ${S('line', 1)}/>`; });
+    const pts = [0,1,2,3].map(a => P(a, Math.max(.04, sc[a])).join(',')).join(' ');
+    h += `<polygon points="${pts}" ${FS('glow', 'glow', 2, .22)} style="transition:all .3s"/>`;
+    [0,1,2,3].forEach(a => { const [x, y] = P(a, Math.max(.04, sc[a])); h += `<circle cx="${x}" cy="${y}" r="4" ${F('glow')}/>`; });
+    const top = sc.indexOf(Math.max(...sc));
+    const lab = [[cx, cy - R - 16, 'middle'], [cx + R + 10, cy + 4, 'start'], [cx, cy + R + 26, 'middle'], [cx - R - 10, cy + 4, 'end']];
+    lab.forEach(([x, y, an], a) => { h += TX(x, y, AXL[a], on.length && a === top ? 'glow' : 'muted', 13, an, 'font-weight="500"'); h += TX(x, y + 15, Math.round(sc[a] * 100) + '%', 'faint', 11, an, 'font-family="var(--f-mono)"'); });
+    svg.innerHTML = h;
+    $('#call1').innerHTML = on.length ? `<b>${on.length} of 10 ticked.</b> The skill set your team needs most is <b>${AX[top].toLowerCase()}</b>. <a href="${PART[top]}">Jump to it →</a> Most problems touch several skill sets, which is why Brown treats vulnerability as the root.` : 'Tick the habits you recognise. The chart shows which of the four skill sets they point to.';
+  }
+  $$('[data-c1]').forEach(c => c.addEventListener('change', draw));
+  draw();
+}
+
+/* ---------- 2. myths, the arena and the square squad ---------- */
+{ const M = [
+    ['Vulnerability is weakness.', 'It\'s the feeling at the heart of every brave act. Nobody in Brown\'s research could name courage without it.'],
+    ['I don\'t do vulnerability.', 'Uncertainty happens to all of us. The choice is whether you notice it, or let it drive you from the shadows.'],
+    ['I can go it alone.', 'We\'re wired for connection. Brave people still need someone in their corner, which is what the square squad is for.'],
+    ['You can engineer the uncertainty out of it.', 'Systems and checklists help, but they can\'t remove the feeling of risk. Teams still have to learn to stay in it.'],
+    ['Trust comes before vulnerability.', 'They grow together. We risk a little, the other person honours it, and trust grows marble by marble.'],
+    ['Vulnerability means disclosure.', 'Oversharing isn\'t courage. Vulnerability without boundaries isn\'t vulnerability at all.'] ];
+  $('#myths').innerHTML = M.map(([m, r], i) => `<button class="myth" aria-expanded="false"><span class="n">Myth ${i + 1}</span><span class="m">${m}</span><span class="r">${r}</span><span class="tap">Tap for what's true</span></button>`).join('');
+  $$('.myth').forEach(b => b.addEventListener('click', () => b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') !== 'true')));
+
+  const V = [
+    ['A teammate who shipped the launch with you and watched it flop', 'in', 'They took the same risk. Their view of what went wrong is worth hearing.'],
+    ['An anonymous commenter under your post', 'out', 'No name, no risk, no stake. Brown gives this voice no vote.'],
+    ['Your manager, who backed the risky plan and shares the blame', 'in', 'In the arena with you, and invested in you getting better.'],
+    ['A colleague in another team who says "I\'d never have tried that"', 'out', 'Watching from the stands. Not trying is not a qualification.'],
+    ['A friend who loves you and will tell you the hard truth', 'in', 'Exactly who belongs on your square: honest because they care.'],
+    ['A pundit who has never built anything like it', 'out', 'Easy to judge from the cheap seats when you\'ve never been on the floor.'],
+    ['A peer who also pitched to the board this quarter', 'in', 'They know what it costs to stand up there. That earns a hearing.'],
+    ['Someone who mocks every new idea in the group chat', 'out', 'Cynicism is armour. Their criticism protects them, not you.'] ];
+  const pick = new Array(V.length).fill(null);
+  $('#voices2').innerHTML = V.map(([t], i) => `<div class="voice" data-v="${i}"><span class="num">${i + 1}</span><span class="who">${t}</span><div class="row"><button class="btn" data-p="in" aria-pressed="false">Let in</button><button class="btn" data-p="out" aria-pressed="false">Cheap seats</button></div><span class="fb" hidden></span></div>`).join('');
+  const svg = $('#arena2'), cx = 160, cy = 160;
+  function draw(){
+    let h = `<circle cx="${cx}" cy="${cy}" r="152" ${FS('panel-2', 'line', 1)}/>`;
+    for (let r = 112; r <= 146; r += 8.5) h += `<circle cx="${cx}" cy="${cy}" r="${r}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    h += `<circle cx="${cx}" cy="${cy}" r="102" ${FS('glow-soft', 'glow-line', 1.5, 1)}/>`;
+    h += TX(cx, 24, 'CHEAP SEATS', 'faint', 10, 'middle', 'font-family="var(--f-mono)" letter-spacing="1.5"');
+    h += TX(cx, cy - 84, 'THE ARENA', 'glow', 10, 'middle', 'font-family="var(--f-mono)" letter-spacing="1.5"');
+    h += person(cx, cy + 16, .8, 'glow') + TX(cx, cy + 34, 'you', 'text', 11, 'middle');
+    const ins = pick.map((p, i) => p === 'in' ? i : -1).filter(i => i >= 0), outs = pick.map((p, i) => p === 'out' ? i : -1).filter(i => i >= 0);
+    ins.forEach((i, k) => { const ang = (-90 + k * 360 / ins.length) * Math.PI / 180; const x = cx + 64 * Math.cos(ang), y = cy - 4 + 58 * Math.sin(ang);
+      h += `<circle cx="${x}" cy="${y}" r="12" ${FS('glow', 'glow', 1)}/>` + TX(x, y + 4, i + 1, 'on-glow', 11.5, 'middle', 'font-weight="600" font-family="var(--f-mono)"'); });
+    outs.forEach((i, k) => { const ang = (45 + k * 360 / outs.length) * Math.PI / 180; const x = cx + 129 * Math.cos(ang), y = cy + 129 * Math.sin(ang);
+      h += `<circle cx="${x}" cy="${y}" r="11" ${FS('panel', 'faint', 1)}/>` + TX(x, y + 4, i + 1, 'faint', 11, 'middle', 'font-family="var(--f-mono)"'); });
+    svg.innerHTML = h;
+    const n = pick.filter(Boolean).length, ok = pick.filter((p, i) => p === V[i][1]).length;
+    $('#call2').innerHTML = n < V.length ? `<b>${n} of ${V.length} placed.</b> Brown's filter: are they also in the arena, taking risks, and do they care about you?` : `<b>${ok} of ${V.length} match Brown's filter.</b> Four voices on the floor, four in the stands. The stands can shout; they just don't get a vote.`;
+  }
+  $$('.voice').forEach(row => { const i = +row.dataset.v, bs = [...row.querySelectorAll('button')];
+    bs.forEach(b => b.addEventListener('click', () => { press(bs, b); pick[i] = b.dataset.p; const ok = b.dataset.p === V[i][1];
+      const fb = row.querySelector('.fb'); fb.hidden = false; fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Brown would agree.' : 'Brown would place them ' + (V[i][1] === 'in' ? 'in the arena.' : 'in the cheap seats.')}</b> ${V[i][2]}`; draw(); })); });
+  draw();
+
+  let squad = load('dtl-squad', []);
+  function drawSq(){
+    const n = squad.length, fs = n ? clamp(30 - n * 2.6, 8, 26) : 0;
+    $('#sq2').innerHTML = squad.map(s => `<span style="font-size:${fs}px">${esc(s)}</span>`).join('') + '<em>1 inch</em>';
+    $('#sqTags').innerHTML = squad.map((s, i) => `<button data-x="${i}" aria-label="Remove ${esc(s)}">${esc(s)} ×</button>`).join('');
+    $$('#sqTags button').forEach(b => b.addEventListener('click', () => { squad.splice(+b.dataset.x, 1); store('dtl-squad', squad); drawSq(); }));
+    if (n > 8) $('#sqTags').insertAdjacentHTML('beforeend', `<span style="font-size:13px;color:var(--bad);width:100%">It's getting hard to read. Brown's point exactly: if they don't fit, the list is too long.</span>`);
+    drawCard();
+  }
+  const add = () => { const v = $('#sqIn').value.trim(); if (!v) return; squad.push(v); $('#sqIn').value = ''; store('dtl-squad', squad); drawSq(); };
+  $('#sqAdd').addEventListener('click', add);
+  $('#sqIn').addEventListener('keydown', e => { if (e.key === 'Enter') add(); });
+  window.__drawSq = drawSq;
+}
+
+/* ---------- 3. paint done ---------- */
+{ const P = [
+    ['Purpose', 'why it matters', ' It\'s to win approval for the new hiring plan,', 'the why'],
+    ['Picture', 'what finished looks like', ' so ten slides at most, with the budget on slide two.', 'what good looks like'],
+    ['Owner', 'who has it, and the help they get', ' You own it, and Sam will send you the finance numbers.', 'who owns it'],
+    ['Deadline', 'when it\'s due', ' I need a draft by Thursday at noon,', 'the deadline'],
+    ['Check-in', 'when you\'ll look at it together', ' and let\'s look at an outline together on Tuesday.', 'when to check in'] ];
+  const REDO = ['80%', '64%', '48%', '33%', '20%', '10%'];
+  $('#pieces3').innerHTML = P.map(([n, d], i) => `<label class="piece"><input type="checkbox" data-p3="${i}"><span><b>${n}</b> <span>· ${d}</span></span></label>`).join('');
+  const svg = $('#paint3');
+  function draw(){
+    const on = $$('[data-p3]').map(c => c.checked);
+    const k = on.filter(Boolean).length;
+    const lay = (yes, fill, fo = 1) => yes ? FS(fill, 'text', 1.2, fo) : `style="fill:none;stroke:var(--faint);stroke-width:1.2;stroke-dasharray:4 4"`;
+    let h = `<rect x="6" y="6" width="348" height="248" rx="6" ${FS('panel-2', 'line', 6)}/><rect x="18" y="18" width="324" height="224" ${F('deep')}/>`;
+    h += `<rect x="18" y="18" width="324" height="140" ${on[0] ? `style="fill:var(--cool);fill-opacity:.22"` : F('deep')}/>`;
+    h += on[3] ? `<circle cx="288" cy="58" r="22" ${F('glow')}/>` + [0,45,90,135,180,225,270,315].map(a => { const r = a * Math.PI / 180; return `<line x1="${288 + 28 * Math.cos(r)}" y1="${58 + 28 * Math.sin(r)}" x2="${288 + 36 * Math.cos(r)}" y2="${58 + 36 * Math.sin(r)}" ${S('glow', 2, ';stroke-linecap:round')}/>`; }).join('') : `<circle cx="288" cy="58" r="22" ${lay(false)}/>`;
+    h += `<path d="M18 170 Q90 120 170 158 T342 140 V242 H18 Z" ${on[0] ? `style="fill:var(--good);fill-opacity:.28;stroke:var(--good);stroke-width:1.2"` : lay(false)}/>`;
+    h += `<path d="M166 222 C150 236 130 238 110 242 L150 242 C170 236 180 230 186 222 Z" ${on[4] ? FS('cool', 'cool', 1, .55) : lay(false)}/>`;
+    h += `<rect x="130" y="140" width="96" height="82" ${lay(on[1], 'panel', 1)}/><path d="M122 142 L178 100 L234 142 Z" ${lay(on[1], 'glow', .85)}/>`;
+    h += `<rect x="168" y="186" width="20" height="36" ${lay(on[1], 'cool', .7)}/><rect x="142" y="158" width="20" height="18" ${lay(on[1], 'cool', .35)}/><rect x="194" y="158" width="20" height="18" ${lay(on[1], 'cool', .35)}/>`;
+    h += on[2] ? person(258, 222, .9, 'glow') : `<g ${`style="opacity:.8"`}><circle cx="258" cy="191" r="10" ${lay(false)}/><path d="M243 227 Q243 205 258 205 Q273 205 273 227 Z" ${lay(false)}/></g>`;
+    h += TX(30, 236, k === 0 ? 'a blank canvas' : k === 5 ? 'done, painted' : 'still sketching', 'faint', 11, 'start', 'font-family="var(--f-mono)"');
+    svg.innerHTML = h;
+    $('#brief3').innerHTML = `"Can you prepare the board deck?` + P.map((p, i) => on[i] ? `<span class="add">${p[2]}</span>` : '').join('') + `"`;
+    $('#clr3').textContent = `${k + 1} of 6`;
+    $('#redo3').textContent = REDO[k];
+    const miss = P.filter((_, i) => !on[i]).map(p => p[3]);
+    $('#guess3').textContent = miss.length ? 'They\'re guessing ' + (miss.length > 1 ? miss.slice(0, -1).join(', ') + ' and ' + miss.slice(-1) : miss[0]) + '.' : 'Nobody. Clear is kind.';
+  }
+  $$('[data-p3]').forEach(c => c.addEventListener('change', draw));
+  draw();
+}
+
+/* ---------- 4. the armory: sixteen plates ---------- */
+const ARM = [
+  ['Driving perfectionism and fostering fear of failure', 'Modelling healthy striving, empathy and self-compassion'],
+  ['Working from scarcity, never pausing to celebrate', 'Practising gratitude and celebrating milestones'],
+  ['Numbing: staying busy, scrolling, switching off', 'Setting boundaries and finding real comfort'],
+  ['Seeing it as "crush or be crushed"', 'Practising integrity and grounded confidence'],
+  ['Being a knower and being right', 'Being a learner and getting it right'],
+  ['Hiding behind cynicism', 'Modelling clarity, kindness and hope'],
+  ['Using criticism as self-protection', 'Making contributions and taking risks'],
+  ['Using power over people', 'Using power with, power to and power within'],
+  ['Hustling for your worth', 'Knowing your value'],
+  ['Leading for compliance and control', 'Cultivating commitment and shared purpose'],
+  ['Weaponising fear and uncertainty', 'Naming and normalising the fear everyone feels'],
+  ['Treating exhaustion as a status symbol', 'Modelling rest, play and recovery'],
+  ['Tolerating echo chambers and a "fit in" culture', 'Building belonging, inclusion and diverse views'],
+  ['Collecting gold stars', 'Giving gold stars'],
+  ['Zigzagging and avoiding', 'Talking straight and taking action'],
+  ['Leading from hurt', 'Leading from heart'] ];
+let armor = load('dtl-armor', []);
+{ /* plate rectangles on the figure: x, y, w, h, push-out direction */
+  const PL = [[96,22,24,30,-1],[120,22,24,30,1],[62,86,30,26,-1],[148,86,30,26,1],[82,92,38,34,-1],[120,92,38,34,1],[82,128,38,34,-1],[120,128,38,34,1],[82,164,38,30,-1],[120,164,38,30,1],[44,118,22,56,-1],[174,118,22,56,1],[84,206,30,44,-1],[126,206,30,44,1],[84,252,30,44,-1],[126,252,30,44,1]];
+  $('#plates4').innerHTML = ARM.map(([a, d], i) => `<button class="plate" data-a="${i}" aria-pressed="false"><span class="n">${String(i + 1).padStart(2, '0')}</span><span><span class="a"><span class="l">Armoured</span>${a}</span><span class="d"><span class="l">Daring</span>${d}</span></span></button>`).join('');
+  const svg = $('#fig4');
+  let h = `<circle cx="120" cy="40" r="28" ${F('panel-2')}/><rect x="70" y="80" width="100" height="122" rx="22" ${F('panel-2')}/>`;
+  h += `<rect x="42" y="86" width="26" height="96" rx="13" ${F('panel-2')}/><rect x="172" y="86" width="26" height="96" rx="13" ${F('panel-2')}/>`;
+  h += `<rect x="82" y="196" width="34" height="104" rx="14" ${F('panel-2')}/><rect x="124" y="196" width="34" height="104" rx="14" ${F('panel-2')}/>`;
+  h += `<path id="heart4" d="M120 162 C96 146 92 124 106 118 C114 114 120 120 120 126 C120 120 126 114 134 118 C148 124 144 146 120 162 Z" ${F('glow')} style="fill:var(--glow);opacity:.15;transition:opacity .4s"/>`;
+  h += PL.map(([x, y, w, ht, d], i) => `<g class="armor-p" data-pl="${i}"><rect x="${x}" y="${y}" width="${w}" height="${ht}" rx="4" style="fill:var(--muted);fill-opacity:.55;stroke:var(--faint);stroke-width:1"/><line x1="${x + 4}" y1="${y + 5}" x2="${x + w - 4}" y2="${y + 5}" style="stroke:var(--text);stroke-opacity:.35;stroke-width:1"/></g>`).join('');
+  svg.innerHTML = h;
+  const PLD = PL.map(p => p[4]);
+  function draw(){
+    const set = new Set(armor);
+    $$('.plate').forEach(b => b.setAttribute('aria-pressed', set.has(+b.dataset.a)));
+    $$('[data-pl]').forEach(g => { const i = +g.dataset.pl, off = set.has(i); g.style.opacity = off ? 0 : 1; g.style.transform = off ? `translate(${PLD[i] * 18}px, 10px)` : ''; });
+    const n = set.size;
+    $('#heart4').style.opacity = .15 + .85 * n / 16;
+    $('#cnt4').innerHTML = `<b>${n}</b> of 16 plates off`;
+    $('#call4').innerHTML = n === 0 ? 'Tap any habit you recognise in yourself. Each one is a plate of armour; the daring version takes it off.' : n === 16 ? '<b>All sixteen off.</b> Nobody manages this all the time. Brown\'s point is knowing which plate you reach for, so you can choose to set it down.' : `<b>${n} off, ${16 - n} still on.</b> Notice which ones feel hardest to swap. Those usually protect the oldest hurts.`;
+    drawCard();
+  }
+  $$('.plate').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.a; armor = armor.includes(i) ? armor.filter(x => x !== i) : [...armor, i]; store('dtl-armor', armor); draw(); }));
+  $('#all4').addEventListener('click', () => { armor = ARM.map((_, i) => i); store('dtl-armor', armor); draw(); });
+  $('#reset4').addEventListener('click', () => { armor = []; store('dtl-armor', armor); draw(); });
+  window.__drawArm = draw;
+}
+
+/* ---------- 5. empathy and the shame/guilt sort ---------- */
+{ const R = [
+    ['Sympathy', '"Oh, you poor thing. I feel so sorry for you."', 262, 44, .22, 'Sympathy looks down from a distance: "I\'m sorry for you, over there." It doesn\'t climb down next to her.'],
+    ['Gasp and awe', '"Oh no! That\'s mortifying. I\'d want the ground to swallow me."', 236, 0, .18, 'Your horror confirms her shame. Now she has to manage your reaction as well as her own.'],
+    ['The one-up', '"That\'s nothing. In my first week I spilled coffee on the CEO."', 250, 0, .14, 'The story becomes yours. She\'s left holding hers alone.'],
+    ['Empathy', '"That sounds awful. I\'ve frozen like that too, and it\'s such a lonely feeling. I\'m glad you told me."', 150, 0, 1, 'She isn\'t alone with it any more. You didn\'t fix anything, and you didn\'t need to.'],
+    ['The silver lining', '"Well, at least it was only the leadership team and not a client."', 222, 0, .3, '"At least" shrinks the feeling. Brown notes that an empathic reply rarely starts with those words.'],
+    ['The fixer', '"Here\'s what you do: make a one-page cheat sheet with all the numbers."', 238, 0, .34, 'Advice might help later. Right now it skips the feeling, and hints she should have prepared better.'],
+    ['The mighty fall', '"Really? I\'m surprised. That\'s not like you at all."', 270, 0, .1, 'Your disappointment adds to her shame: now she feels she\'s let you down too.'] ];
+  $('#resp5').innerHTML = R.map(([, t], i) => `<button class="opt" data-r="${i}" aria-pressed="false">${t}</button>`).join('');
+  const svg = $('#emp5'), bs = $$('#resp5 .opt');
+  function draw(i){
+    let h = `<line x1="20" y1="190" x2="320" y2="190" ${S('line', 1)}/>`;
+    h += person(90, 186, 1.15, 'cool') + TX(90, 210, 'Priya', 'cool', 12, 'middle', 'font-family="var(--f-mono)"');
+    if (i == null){ h += person(250, 186, 1.15, 'muted') + TX(250, 210, 'you', 'muted', 12, 'middle', 'font-family="var(--f-mono)"'); svg.innerHTML = h; return; }
+    const [lab, , x, lift, c] = R[i];
+    if (lift) h += `<rect x="${x - 30}" y="${190 - lift}" width="60" height="${lift}" ${FS('panel-2', 'line', 1)}/>`;
+    const hy = 186 - 34 * 1.15 - lift;
+    h += `<path d="M90 ${186 - 34 * 1.15} Q${(90 + x) / 2} ${Math.min(hy, 186 - 39) - 46 * c - 6} ${x} ${hy}" ${S(c > .5 ? 'good' : 'bad', 1 + 4 * c, c > .5 ? '' : ';stroke-dasharray:4 5')} style="transition:all .3s"/>`;
+    h += person(x, 186 - lift, 1.15, 'glow') + TX(x, 210 - (lift ? 0 : 0), 'you', 'glow', 12, 'middle', 'font-family="var(--f-mono)"');
+    h += TX(170, 26, lab, c > .5 ? 'good' : 'bad', 15, 'middle', 'font-weight="600"');
+    h += `<rect x="110" y="38" width="120" height="8" rx="4" ${F('panel-2')}/><rect x="110" y="38" width="${120 * c}" height="8" rx="4" ${F(c > .5 ? 'good' : 'bad')}/>` + TX(170, 62, 'connection', 'faint', 11, 'middle', 'font-family="var(--f-mono)"');
+    svg.innerHTML = h;
+    $('#call5').innerHTML = `<b>${lab}.</b> ${R[i][5]}`;
+  }
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); draw(+b.dataset.r); }));
+  draw(null);
+  sorter('#sort5', '#tally5', [{id:'shame', label:'Shame', d:'"I am bad"'}, {id:'guilt', label:'Guilt', d:'"I did something bad"'}], [
+    {t:'"I\'m such an idiot."', a:'shame', w:'It labels the whole person, not the action.'},
+    {t:'"I made a mistake in that report, and I need to fix it."', a:'guilt', w:'It names the behaviour and points toward repair.'},
+    {t:'"I always mess everything up."', a:'shame', w:'"Always" and "everything" turn one event into an identity.'},
+    {t:'"I wasn\'t fair to Tom in the meeting. I\'ll apologise."', a:'guilt', w:'Guilt compares what you did with what you value, and moves you to make it right.'},
+    {t:'"Everyone can see I don\'t belong here."', a:'shame', w:'Fear of not belonging is the core of shame.'},
+    {t:'"I missed the deadline because I didn\'t plan well enough."', a:'guilt', w:'Specific, about the behaviour, and fixable.'},
+    {t:'"I\'m a terrible manager."', a:'shame', w:'Global and about who you are. Nothing to fix, only to hide.'},
+    {t:'"Forgetting to thank the team isn\'t who I want to be."', a:'guilt', w:'It holds the action against your values without attacking yourself.'} ]);
+}
+
+/* ---------- 6. curiosity curve and rumble starters ---------- */
+{ const svg = $('#curve6'), rng = $('#know6');
+  const cur = k => { const x = k / 100; return Math.pow(x, .55) * Math.pow(1 - x, 1.25); };
+  const PEAK = Math.max(...Array.from({length: 101}, (_, k) => cur(k)));
+  const draw = onLayout(() => {
+    const n = NARROW(), W = n ? 360 : 680, H = n ? 250 : 270, L = n ? 30 : 60, Rr = W - (n ? 14 : 30), T = 30, B = H - 50;
+    vb(svg, W, H);
+    const k = +rng.value, X = v => L + (Rr - L) * v / 100, Y = v => B - (B - T) * v;
+    let h = `<rect x="${X(0)}" y="${T - 10}" width="${X(10) - X(0)}" height="${B - T + 10}" ${F('panel-2', .7)}/><rect x="${X(18)}" y="${T - 10}" width="${X(58) - X(18)}" height="${B - T + 10}" style="fill:var(--glow);fill-opacity:.07"/><rect x="${X(80)}" y="${T - 10}" width="${X(100) - X(80)}" height="${B - T + 10}" ${F('panel-2', .7)}/>`;
+    h += `<line x1="${L}" y1="${B}" x2="${Rr}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${T - 10}" x2="${L}" y2="${B}" ${S('line', 1)}/>`;
+    let d = ''; for (let v = 0; v <= 100; v++) d += (v ? 'L' : 'M') + X(v).toFixed(1) + ' ' + Y(cur(v) / PEAK * .92).toFixed(1);
+    h += `<path d="${d}" ${S('cool', 2.5)}/>`;
+    const fs = n ? 10.5 : 12;
+    h += TX((X(0) + X(10)) / 2, B + 18, n ? 'no clue' : 'no clue yet', 'faint', fs, 'middle') + TX((X(18) + X(58)) / 2, B + 18, 'the sweet spot', 'glow', fs, 'middle', 'font-weight="500"') + TX((X(80) + X(100)) / 2, B + 18, n ? 'know-it-all' : 'I already know', 'faint', fs, 'middle');
+    h += TX(L, B + 38, 'how much you think you know →', 'muted', fs) ;
+    h += TX(L + 6, T - 14, 'curiosity', 'muted', fs);
+    const cy = Y(cur(k) / PEAK * .92);
+    h += `<line x1="${X(k)}" y1="${cy}" x2="${X(k)}" y2="${B}" ${S('glow', 1, ';stroke-dasharray:3 4')}/><circle cx="${X(k)}" cy="${cy}" r="8" ${FS('glow', 'ink', 2)}/>`;
+    svg.innerHTML = h;
+    $('#know6o').textContent = k + '%';
+    $('#call6').innerHTML = k < 10 ? '<b>No clue yet.</b> With almost no knowledge there\'s no gap to notice, so there\'s nothing to wonder about. Learn a little first.' : k < 18 ? '<b>Getting warmer.</b> A bit more context and the questions start to come.' : k <= 58 ? '<b>The sweet spot.</b> You know enough to see what you\'re missing. This is when a rumble goes best: lots of real questions.' : k < 80 ? '<b>Cooling off.</b> You feel close to sure, so questions start to sound like formalities.' : '<b>Know-it-all territory.</b> Certainty closes the gap and curiosity dies. Brown\'s antidote: assume there\'s something you haven\'t been told.';
+  });
+  rng.addEventListener('input', draw);
+  const ST = [
+    ['The story I\'m making up', 'The story I\'m making up is that the deadline slipped because you didn\'t feel you could ask for help. How close is that?'],
+    ['Tell me more', 'Tell me more about what the last two weeks looked like for you.'],
+    ['Help me understand', 'Help me understand where things got stuck.'],
+    ['I\'m curious about', 'I\'m curious about what you\'d change if we started over tomorrow.'],
+    ['Walk me through', 'Walk me through how the plan changed after the review.'],
+    ['What does done look like?', 'What does done look like to you now? Has it changed since we started?'] ];
+  $('#st6').insertAdjacentHTML('beforeend', ST.map(([l], i) => `<button class="btn" data-s6="${i}" aria-pressed="${i === 0}">${l}</button>`).join(''));
+  const sb = $$('[data-s6]');
+  const say = i => { press(sb, sb[i]); $('#say6 span:last-child').textContent = '"' + ST[i][1] + '"'; };
+  sb.forEach(b => b.addEventListener('click', () => say(+b.dataset.s6)));
+  say(0);
+}
+
+/* ---------- 7. values: narrow to two ---------- */
+const VALS = ['Accountability','Achievement','Adventure','Authenticity','Balance','Belonging','Collaboration','Commitment','Community','Compassion','Courage','Creativity','Curiosity','Diversity','Efficiency','Equality','Excellence','Fairness','Faith','Family','Freedom','Friendship','Generosity','Gratitude','Growth','Health','Honesty','Hope','Humility','Humour','Independence','Integrity','Joy','Justice','Kindness','Knowledge','Learning','Love','Loyalty','Openness','Patience','Respect','Responsibility','Security','Service','Simplicity','Trust','Wisdom'];
+let vstate = load('dtl-values', {picked: [], core: [], notes: {}});
+{ const grid = $('#vals7'), fun = $('#fun7');
+  grid.innerHTML = VALS.map(v => `<button data-v="${v}" aria-pressed="false">${v}</button>`).join('');
+  const saveV = () => store('dtl-values', vstate);
+  const drawFun = onLayout(() => {
+    const n = NARROW(), W = n ? 340 : 680; vb(fun, W, 120);
+    const rows = [[VALS.length, 'values on the list'], [vstate.picked.length, 'that matter to you (max 10)'], [vstate.core.length, 'core values (max 2)']];
+    let h = '';
+    rows.forEach(([c, l], i) => { const w = Math.max(40, (W - 20) * (i === 0 ? 1 : i === 1 ? .62 : .3)); const fw = i === 0 ? w : w * Math.max(.08, c / (i === 1 ? 10 : 2)); const x = (W - w) / 2, y = 6 + i * 38;
+      h += `<rect x="${x}" y="${y}" width="${w}" height="30" rx="8" ${F('panel-2')}/><rect x="${(W - fw) / 2}" y="${y}" width="${fw}" height="30" rx="8" ${i === 2 ? F('glow') : i === 1 ? FS('cool', 'cool', 1, .35) : F('line')} style="transition:all .3s"/>`;
+      h += TX(W / 2, y + 20, `${c} ${n && i === 1 ? 'that matter' : n && i === 2 ? 'core' : l}`, i === 2 && c ? 'on-glow' : 'text', n ? 12 : 13, 'middle', 'font-weight="500"'); });
+    fun.innerHTML = h;
+  });
+  function draw(){
+    $$('#vals7 button').forEach(b => { const v = b.dataset.v; b.setAttribute('aria-pressed', vstate.picked.includes(v)); b.classList.toggle('core', vstate.core.includes(v)); });
+    const p = vstate.picked.length, c = vstate.core.length;
+    $('#step7').innerHTML = p < 3 && !c ? `<span><b>Step 1.</b> Tap every value that feels important, up to ten.</span><span>${p} of 10</span>` : c < 2 ? `<span><b>Step 2.</b> Now tap a chosen value again to make it one of your two core values. Tap a third time to drop it.</span><span>${p} chosen · ${c} of 2 core</span>` : `<span><b>Step 3.</b> Your two core values are set. Turn them into behaviours below.</span><span>${vstate.core.join(' + ')}</span>`;
+    const box = $('#core7'); box.hidden = !c;
+    box.innerHTML = vstate.core.map(v => { const nt = vstate.notes[v] || {}; return `<div class="vcard"><h4>${v}</h4><label for="vb-${v}">Looks like (what I do when I'm living it)</label><textarea class="inp" id="vb-${v}" data-vn="${v}" data-f="b" placeholder="e.g. I say the hard thing in the meeting, not afterwards">${esc(nt.b || '')}</textarea><label for="vs-${v}">Slippery behaviours (signs I've drifted)</label><textarea class="inp" id="vs-${v}" data-vn="${v}" data-f="s" placeholder="e.g. I nod along and complain later">${esc(nt.s || '')}</textarea></div>`; }).join('');
+    $$('[data-vn]').forEach(t => t.addEventListener('input', () => { const v = t.dataset.vn; vstate.notes[v] = vstate.notes[v] || {}; vstate.notes[v][t.dataset.f] = t.value; saveV(); }));
+    drawFun(); drawCard();
+  }
+  grid.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const v = b.dataset.v;
+    if (vstate.core.includes(v)){ vstate.core = vstate.core.filter(x => x !== v); vstate.picked = vstate.picked.filter(x => x !== v); }
+    else if (vstate.picked.includes(v)){ if (vstate.core.length < 2) vstate.core.push(v); else vstate.picked = vstate.picked.filter(x => x !== v); }
+    else if (vstate.picked.length < 10) vstate.picked.push(v);
+    else { $('#step7').innerHTML = '<span><b>Ten is the limit.</b> Drop one before adding another: the narrowing is the point.</span>'; return; }
+    saveV(); draw(); });
+  window.__drawVals = draw;
+
+  const FB = ['I\'m ready to sit next to you rather than across from you', 'I can put the problem in front of us, not between us', 'I\'m ready to listen, ask questions and accept I may not fully understand', 'I want to acknowledge what you do well, not just pick apart mistakes', 'I can see your strengths and how they could help here', 'I can hold you accountable without shaming or blaming', 'I\'m open to owning my part', 'I can genuinely thank you for your effort', 'I can talk about how this leads to growth', 'I can model the openness I\'m asking of you'];
+  $('#fb7').innerHTML = FB.map((t, i) => `<label><input type="checkbox" data-fb="${i}"><span>${t}</span></label>`).join('');
+  const fbc = () => { const n = $$('[data-fb]').filter(c => c.checked).length; $('#fbc7').innerHTML = n === 10 ? '<b>All ten.</b> You\'re ready to have the conversation.' : n >= 7 ? `<b>${n} of 10.</b> Nearly there. Think about the ones you can't tick yet before you start.` : `<b>${n} of 10.</b> A paraphrase of Brown's engaged feedback checklist. If most of these aren't true yet, you're more likely to wound than to help. Wait, or rumble with yourself first.`; };
+  $$('[data-fb]').forEach(c => c.addEventListener('change', fbc)); fbc();
+}
+
+/* ---------- 8. the marble jar and BRAVING ---------- */
+{ const EL = [['B', 'Boundaries'], ['R', 'Reliability'], ['A', 'Accountability'], ['V', 'Vault'], ['I', 'Integrity'], ['N', 'Nonjudgement'], ['G', 'Generosity']];
+  const EV = [
+    ['R', 1, 'Did exactly what they said they would, again'],
+    ['V', 1, 'Kept something you told them in confidence'],
+    ['B', 1, 'Asked before taking over part of your project'],
+    ['A', 1, 'Owned a mistake and fixed it without being asked'],
+    ['N', 1, 'Asked you for help, without embarrassment'],
+    ['G', 1, 'Assumed the best when your email came out wrong'],
+    ['I', 1, 'Raised a hard issue in the meeting, not afterwards'],
+    ['V', -2, 'Told you a colleague\'s private news'],
+    ['R', -3, 'Missed a promised deadline without warning you'],
+    ['A', -4, 'Blamed a junior for their own error'],
+    ['B', -3, 'Promised your client something without asking you'],
+    ['G', -2, 'Assumed you were slacking when you were off sick'] ];
+  $('#ev8').innerHTML = EV.map(([l, d, t], i) => `<button class="ev ${d > 0 ? 'plus' : 'minus'}" data-e="${i}"><span class="lt">${l}</span><span>${t}<span style="color:var(--faint);font-family:var(--f-mono);font-size:11px"> ${d > 0 ? '+1' : d}</span></span></button>`).join('');
+  let hist = [];
+  const jar = $('#jar8'), brv = $('#brv8');
+  const MAXM = 36;
+  /* marble slots, packed bottom-up inside the jar */
+  const SLOTS = []; for (let row = 0; SLOTS.length < MAXM; row++){ const off = row % 2 ? 11 : 0; for (let c = 0; c < 6 && SLOTS.length < MAXM; c++) SLOTS.push([95 + off + c * 22, 252 - row * 19]); }
+  const HUE = ['glow', 'cool', 'good', 'glow', 'cool'];
+  function draw(){
+    const n = hist.reduce((s, i) => clamp(s + EV[i][1], 0, MAXM), 0);
+    let h = `<path d="M92 40 h116 v16 q-8 6 -8 18 v6 q32 20 32 60 v120 q0 18 -18 18 h-128 q-18 0 -18 -18 v-120 q0 -40 32 -60 v-6 q0 -12 -8 -18 Z" ${FS('panel-2', 'muted', 2, .45)}/>`;
+    h += `<rect x="86" y="30" width="128" height="14" rx="4" ${FS('panel', 'muted', 1.5)}/>`;
+    for (let i = 0; i < n; i++){ const [x, y] = SLOTS[i]; h += `<circle cx="${x}" cy="${y}" r="9.5" ${FS(HUE[i % 5], 'ink', 1, .9)}/><circle cx="${x - 3}" cy="${y - 3}" r="2.5" style="fill:#fff;fill-opacity:.45"/>`; }
+    h += `<path d="M76 140 v110" ${S('text', 2, ';stroke-opacity:.12;stroke-linecap:round')}/>`;
+    h += TX(150, 292, `${n} marble${n === 1 ? '' : 's'}`, 'text', 14, 'middle', 'font-family="var(--f-mono)"');
+    jar.innerHTML = h;
+    const net = EL.map(([l]) => hist.filter(i => EV[i][0] === l).reduce((s, i) => s + EV[i][1], 0));
+    const cx = 210, u = 13;
+    let b = TX(cx, 18, 'built →', 'good', 11, 'start', 'font-family="var(--f-mono)"') + TX(cx - 6, 18, '← broken', 'bad', 11, 'end', 'font-family="var(--f-mono)"');
+    b += `<line x1="${cx}" y1="26" x2="${cx}" y2="${30 + 7 * 38}" ${S('line', 1)}/>`;
+    EL.forEach(([l, name], i) => { const y = 34 + i * 38, v = clamp(net[i], -6, 6);
+      b += TX(8, y + 17, `<tspan font-weight="600" style="fill:var(--glow)">${l}</tspan> ${name}`, 'muted', 13);
+      b += `<rect x="${cx - 6 * u}" y="${y + 4}" width="${12 * u}" height="18" rx="4" ${F('panel-2', .6)}/>`;
+      if (v) b += `<rect x="${v > 0 ? cx : cx + v * u}" y="${y + 4}" width="${Math.abs(v) * u}" height="18" rx="4" ${F(v > 0 ? 'good' : 'bad')} style="transition:all .3s"/>`;
+      if (v) b += TX(v > 0 ? cx + v * u + 4 : cx + v * u - 4, y + 17, (v > 0 ? '+' : '') + net[i], v > 0 ? 'good' : 'bad', 11, v > 0 ? 'start' : 'end', 'font-family="var(--f-mono)"'); });
+    brv.innerHTML = b;
+  }
+  $$('#ev8 .ev').forEach(btn => btn.addEventListener('click', () => { const i = +btn.dataset.e; hist.push(i); const [l, d, t] = EV[i]; const name = EL.find(e => e[0] === l)[1];
+    $('#call8').innerHTML = d > 0 ? `<b>+1 marble for ${name.toLowerCase()}.</b> Small, ordinary, easy to miss, and exactly how trust is built.` : `<b>${d} marbles: a breach of ${name.toLowerCase()}.</b> One moment undoes several good ones. ${l === 'V' ? 'If they share others\' secrets with you, they\'ll share yours.' : 'Repair starts with naming the specific element, not "I don\'t trust you".'}`;
+    draw(); }));
+  $('#reset8').addEventListener('click', () => { hist = []; draw(); $('#call8').textContent = 'Jar emptied. Tap a moment to start again.'; });
+  onLayout(draw);
+}
+
+/* ---------- 9. tactical breathing and the shitty first draft ---------- */
+{ const svg = $('#box9'), PH = ['Breathe in', 'Hold', 'Breathe out', 'Hold'];
+  const C = [[40, 180], [40, 40], [180, 40], [180, 180]];
+  let run = false, t0 = 0, raf = 0;
+  function frame(now){
+    const t = run ? (now - t0) / 1000 : 0, ph = Math.floor(t / 4) % 4, f = (t % 4) / 4;
+    const [x0, y0] = C[ph], [x1, y1] = C[(ph + 1) % 4], x = x0 + (x1 - x0) * f, y = y0 + (y1 - y0) * f;
+    const scale = ph === 0 ? .6 + .4 * f : ph === 1 ? 1 : ph === 2 ? 1 - .4 * f : .6;
+    let h = `<rect x="40" y="40" width="140" height="140" rx="6" ${S('line', 2)}/>`;
+    if (run) h += `<path d="M${C[ph][0]} ${C[ph][1]} L${x} ${y}" ${S('glow', 4, ';stroke-linecap:round')}/>`;
+    h += `<circle cx="110" cy="110" r="${40 * scale}" style="fill:var(--cool);fill-opacity:.18;stroke:var(--cool);stroke-width:1.5"/>`;
+    h += TX(110, 108, run ? PH[ph] : 'Ready', 'text', 15, 'middle', 'font-weight="500"') + TX(110, 128, run ? String(4 - Math.floor(f * 4)) : '4 · 4 · 4 · 4', 'muted', 13, 'middle', 'font-family="var(--f-mono)"');
+    h += `<circle cx="${run ? x : 40}" cy="${run ? y : 180}" r="8" ${FS('glow', 'ink', 2)}/>`;
+    h += TX(110, 30, 'hold', 'faint', 11, 'middle', 'font-family="var(--f-mono)"') + TX(110, 202, 'hold', 'faint', 11, 'middle', 'font-family="var(--f-mono)"') + TX(28, 114, 'in', 'faint', 11, 'end', 'font-family="var(--f-mono)"') + TX(192, 114, 'out', 'faint', 11, 'start', 'font-family="var(--f-mono)"');
+    svg.innerHTML = h;
+    if (run) raf = requestAnimationFrame(frame);
+  }
+  frame(0);
+  $('#go9').addEventListener('click', () => { run = !run; $('#go9').textContent = run ? 'Stop' : 'Start breathing'; if (run){ t0 = performance.now(); raf = requestAnimationFrame(frame); } else { cancelAnimationFrame(raf); frame(0); } });
+
+  let drafts = load('dtl-sfd', []);
+  function list(){
+    $('#list9').innerHTML = drafts.map((d, i) => `<div class="sfd-item"><span class="s">"The story I'm making up is ${esc(d.s)}"</span>${d.a ? `<span class="m">Situation: ${esc(d.a)}</span>` : ''}${d.b ? `<span class="m">Them: ${esc(d.b)}</span>` : ''}${d.c ? `<span class="m">Me: ${esc(d.c)}</span>` : ''}<button class="x" data-x="${i}">Delete</button></div>`).join('');
+    $$('#list9 [data-x]').forEach(b => b.addEventListener('click', () => { drafts.splice(+b.dataset.x, 1); store('dtl-sfd', drafts); list(); }));
+    drawCard();
+  }
+  $('#save9').addEventListener('click', () => {
+    const s = $('#s9').value.trim().replace(/^the story i'?m making up is\s*/i, '');
+    if (!s){ $('#msg9').textContent = 'Write the story first. It can be messy.'; return; }
+    drafts.unshift({s, a: $('#q9a').value.trim(), b: $('#q9b').value.trim(), c: $('#q9c').value.trim()}); store('dtl-sfd', drafts);
+    ['#s9', '#q9a', '#q9b', '#q9c'].forEach(id => $(id).value = ''); $('#msg9').textContent = 'Saved.'; list(); });
+  window.__listSfd = list;
+}
+
+/* ---------- afterword: your daring leadership card ---------- */
+function drawCard(){
+  const el = $('#card'); if (!el) return;
+  const sq = load('dtl-squad', []), v = load('dtl-values', {core: []}), a = load('dtl-armor', []), d = load('dtl-sfd', []);
+  el.innerHTML = `<div><span class="n">Your square squad</span><span class="v">${sq.length ? sq.map(esc).join(', ') : '—'}</span><span class="e">${sq.length ? sq.length + ' name' + (sq.length > 1 ? 's' : '') : 'Empty.'} <a href="#lab2">Edit in chapter 2</a></span></div>
+    <div><span class="n">Your core values</span><span class="v">${v.core && v.core.length ? v.core.join(' + ') : '—'}</span><span class="e"><a href="#lab7">${v.core && v.core.length ? 'Edit' : 'Choose them'} in chapter 7</a></span></div>
+    <div><span class="n">Armour off</span><span class="v">${a.length} of 16</span><span class="e"><a href="#lab4">The armory, chapter 4</a></span></div>
+    <div><span class="n">First drafts rumbled</span><span class="v">${d.length}</span><span class="e"><a href="#lab9">Write one in chapter 9</a></span></div>
+    <div><span class="n">Chapters understood</span><span class="v">${done.size} of ${NCH}</span><span class="e">Tick the box at the end of each chapter, or get both quick checks right.</span></div>`;
+}
+$('#recap').innerHTML = [
+  ['Skill 1', 'Rumbling with vulnerability', 'Stay in the discomfort long enough to have the real conversation.'],
+  ['Skill 2', 'Living into values', 'Two values, turned into behaviours you can see.'],
+  ['Skill 3', 'Braving trust', 'Seven elements, built one marble at a time.'],
+  ['Skill 4', 'Learning to rise', 'Breathe, write the first draft, find the truth, write the ending.'] ].map(([n, b, s]) => `<div><span class="n">${n}</span><b>${b}</b><span>${s}</span></div>`).join('');
+
+renderProgress();
+window.__drawSq(); window.__drawArm(); window.__drawVals(); window.__listSfd();
+addEventListener('storage', () => { done = new Set(load('dtl-done', [])); renderProgress(); });
+})();
+</script>
+</body>
+</html>
