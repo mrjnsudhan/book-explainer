@@ -5,8 +5,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a single lit bookshelf. Spines stand on one plank; hovering or focusing a spine
-   pulls it forward and fills the reading card below. Same tokens and type as the explainers. */
+/* Layout: a lit bookcase with several levels, one per category (SHELVES). Spines stand on
+   each level's plank; hovering or focusing a spine pulls it forward and fills the reading card
+   beside the case (below it on narrow screens). Same tokens and type as the explainers. */
 :root{
   color-scheme: dark;
   --ink:#0B0D17;
@@ -50,15 +51,24 @@ header .lede{max-width:58ch;color:var(--muted);font-size:18px}
 .counts b{color:var(--text);font-weight:500}
 
 /* ---------- the shelf ---------- */
-.case{position:relative;border-radius:16px 16px 6px 6px;background:radial-gradient(120% 90% at 50% -10%, var(--glow-soft), transparent 60%), var(--wall);
-  border:1px solid var(--line);padding:56px 28px 0;overflow:hidden}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+.stage > *{min-width:0}
+.case{position:relative;border-radius:16px 16px 6px 6px;background:radial-gradient(120% 40% at 50% -6%, var(--glow-soft), transparent 60%), var(--wall);
+  border:1px solid var(--line);padding:36px 0 0;overflow:hidden;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));row-gap:30px}
+.level{position:relative;min-width:0;padding-inline:24px;display:flex;flex-direction:column}
+.level .books{flex:1}
+.lvl-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding-inline:4px}
+.lvl-n{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;color:var(--glow)}
+.lvl-name{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:26px;line-height:1.1;color:var(--text)}
+.lvl-c{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--faint);font-variant-numeric:tabular-nums}
+.lvl-note{flex-basis:100%;font-size:13px;color:var(--muted)}
 .case::before{content:"";position:absolute;left:50%;top:-40px;width:220px;height:80px;transform:translateX(-50%);
   background:radial-gradient(closest-side, var(--glow-soft), transparent);pointer-events:none}
-.books{position:relative;display:flex;align-items:flex-end;gap:6px;min-height:340px;overflow-x:auto;padding-bottom:0;scrollbar-width:thin;padding-inline:4px}
-.plank{height:22px;margin-inline:-28px;background:linear-gradient(180deg,var(--plank-hi),var(--plank-lo));box-shadow:0 10px 24px var(--shadow);position:relative;z-index:2}
+.books{position:relative;display:flex;align-items:flex-end;gap:6px;overflow-x:auto;padding:30px 4px 0;scrollbar-width:thin}
+.plank{height:22px;margin-inline:-24px;background:linear-gradient(180deg,var(--plank-hi),var(--plank-lo));box-shadow:0 10px 24px var(--shadow);position:relative;z-index:2}
 .plank::after{content:"";position:absolute;inset:0 0 auto;height:2px;background:rgba(255,255,255,.18)}
 .spine{--c:#333;--k:#eee;position:relative;flex:0 0 auto;display:grid;grid-template-rows:auto 1fr auto;justify-items:center;gap:10px;
-  width:var(--w);height:var(--h);padding:14px 0 12px;border-radius:4px 4px 2px 2px;text-decoration:none;color:var(--k);
+  width:calc(var(--w) * var(--s, 1));height:var(--h);padding:14px 0 12px;border-radius:4px 4px 2px 2px;text-decoration:none;color:var(--k);
   background:linear-gradient(90deg, rgba(0,0,0,.28), rgba(255,255,255,.07) 18%, rgba(0,0,0,0) 40%, rgba(0,0,0,.22)), var(--c);
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.06), 4px 0 10px var(--shadow);
   transform-origin:bottom center;transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s}
@@ -77,7 +87,7 @@ header .lede{max-width:58ch;color:var(--muted);font-size:18px}
 .bookend{flex:0 0 auto;width:14px;height:120px;background:linear-gradient(90deg,var(--plank-lo),var(--plank-hi));border-radius:3px 3px 0 0;margin-left:auto}
 
 /* ---------- reading card ---------- */
-.card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
+.card{position:sticky;top:24px;display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}
 .cover{width:132px;aspect-ratio:2/3;max-width:100%;border-radius:4px 8px 8px 4px;padding:16px 14px;display:grid;align-content:space-between;color:var(--k);
   background:linear-gradient(90deg, rgba(0,0,0,.35) 0 6px, rgba(255,255,255,.08) 6px 9px, transparent 9px), var(--c);box-shadow:0 14px 28px var(--shadow);transition:background .3s}
 .cover .ct{font-family:var(--f-display);font-size:20px;line-height:1.05}
@@ -85,7 +95,7 @@ header .lede{max-width:58ch;color:var(--muted);font-size:18px}
 .cover svg{width:26px;height:26px}
 .info{display:grid;gap:12px;min-width:0}
 .info .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
-.info h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(32px,5vw,48px);line-height:1}
+.info h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(32px,4vw,40px);line-height:1}
 .info .by{color:var(--muted);font-size:15px}
 .info p.blurb{color:var(--text);max-width:62ch}
 .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--f-mono);font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
@@ -95,7 +105,11 @@ header .lede{max-width:58ch;color:var(--muted);font-size:18px}
 .hint{font-size:13px;color:var(--faint)}
 
 /* ---------- list ---------- */
-.list{display:grid;gap:10px}
+.list{display:grid;gap:14px}
+.groups{display:grid;gap:22px}
+.group{display:grid;gap:10px}
+.list h4{margin:0;font-family:var(--f-display);font-weight:400;font-style:italic;font-size:22px;color:var(--text)}
+.list h4 span{font-family:var(--f-mono);font-style:normal;font-size:11px;letter-spacing:.14em;color:var(--glow);margin-right:10px}
 .list h3{margin:0;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .rows{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 .rowlink{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--text);background:var(--panel);transition:border-color .15s}
@@ -111,11 +125,17 @@ header .lede{max-width:58ch;color:var(--muted);font-size:18px}
 #theme svg{width:16px;height:16px}
 footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);padding-top:24px;max-width:80ch}
 
+@media (max-width: 900px){
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .card{position:static;grid-template-columns:auto minmax(0,1fr);gap:28px}
+}
 @media (max-width: 640px){
   .wrap{padding-top:32px;gap:32px}
-  .case{padding:40px 16px 0}
+  .case{padding-top:28px}
+  .level{padding-inline:16px}
   .plank{margin-inline:-16px}
-  .books{min-height:290px}
+  .spine{--s:.82}
+  .lvl-name{font-size:23px}
   .card{grid-template-columns:minmax(0,1fr);padding:20px}
   .cover{width:110px}
   header .lede{font-size:16px}
@@ -133,11 +153,9 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
     <div class="counts" id="counts"></div>
   </header>
 
+  <div class="stage">
   <section aria-label="Bookshelf">
-    <div class="case">
-      <div class="books" id="books"></div>
-      <div class="plank" aria-hidden="true"></div>
-    </div>
+    <div class="case" id="case"></div>
   </section>
 
   <section class="card" id="card" aria-live="polite">
@@ -152,10 +170,11 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
       <span class="hint">Tap a spine to open it, or hover one to see what's inside.</span>
     </div>
   </section>
+  </div>
 
   <section class="list">
-    <h3>All explainers</h3>
-    <div class="rows" id="rows"></div>
+    <h3>All explainers, by shelf</h3>
+    <div class="groups" id="groups"></div>
   </section>
 
   <footer>Independent study guides written in our own words. Each explainer remembers which chapters you've marked as understood, on this device.</footer>
@@ -163,81 +182,91 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
 
 <script>
 (() => {
-/* To add a book: append one entry. c = spine colour, k = spine text colour, h/w = spine size in px, au = optional short name for the spine. */
+/* The levels of the bookcase, top to bottom. A book goes on the level named by its `shelf`;
+   a book with no (or an unknown) shelf lands on a "New arrivals" level at the bottom. */
+const SHELVES = [
+  { id:'mind',    name:'Mind & self',             note:'How your head works, and how to get out of its own way' },
+  { id:'people',  name:'People & persuasion',     note:'Talking, leading and getting to yes' },
+  { id:'focus',   name:'Focus & discipline',      note:'Doing the work that matters, every day' },
+  { id:'power',   name:'Strategy & power',        note:'Rules for winning, from ancient China to Bridgewater' },
+  { id:'science', name:'Science, history & tech', note:'The universe, our species and the machines we built' },
+  { id:'talks',   name:'Podcasts',                note:'Long conversations, cut into chapters' }
+];
+/* To add a book: append one entry. shelf = a SHELVES id, c = spine colour, k = spine text colour, h/w = spine size in px, au = optional short name for the spine. */
 const BOOKS = [
-  { title:'Brief Answers to the Big Questions', spine:'Brief Answers', author:'Stephen Hawking', year:2018, chapters:10,
+  { shelf:'science', title:'Brief Answers to the Big Questions', spine:'Brief Answers', author:'Stephen Hawking', year:2018, chapters:10,
     tag:'Physics · Cosmology', url:'explainers/brief-answers.html',
     blurb:'Hawking\'s last book takes on ten big questions, from whether there is a God to whether AI will outsmart us. The explainer gives his answer to each, with a live instrument you can play with: build a black hole, race to the nearest star, rewind the Big Bang.',
     extras:'Live physics instruments', c:'#1B2352', k:'#F4B860', h:318, w:76, mark:'star' },
-  { title:'The Mountain Is You', spine:'The Mountain Is You', author:'Brianna Wiest', year:2020, chapters:7,
+  { shelf:'mind', title:'The Mountain Is You', spine:'The Mountain Is You', author:'Brianna Wiest', year:2020, chapters:7,
     tag:'Psychology · Self-help', url:'explainers/the-mountain-is-you.html',
     blurb:'A book about self-sabotage: why we get in our own way and how to turn that into self-mastery. The explainer covers all seven chapters, with hands-on exercises like decoding a habit, reading your emotions, and seeing why small daily shifts beat giant leaps.',
     extras:'Hands-on exercises', c:'#1E3A3E', k:'#F2A27E', h:286, w:68, mark:'peak' },
-  { title:'Naval\'s Harsh Truths', spine:'Naval × Chris', author:'Naval Ravikant', by:'Naval Ravikant with Chris Williamson · Modern Wisdom · 2025', year:2025, chapters:10,
+  { shelf:'talks', title:'Naval\'s Harsh Truths', spine:'Naval × Chris', author:'Naval Ravikant', by:'Naval Ravikant with Chris Williamson · Modern Wisdom · 2025', year:2025, chapters:10,
     tag:'Podcast · Philosophy', url:'explainers/naval-harsh-truths.html',
     blurb:'A podcast, not a book: Naval Ravikant\'s three-hour conversation with Chris Williamson on happiness, status, self-esteem, anxiety and what wealth is really for. The explainer splits it into ten chapters with timestamp links, and pulls out the golden nuggets so you can star and collect the ones that land.',
     extras:'Golden nuggets + timestamps', c:'#2A1F33', k:'#E9C46A', h:300, w:72, mark:'mic' },
-  { title:'Bezos on Rockets and Day One', spine:'Bezos × Lex', author:'Jeff Bezos', by:'Jeff Bezos with Lex Fridman · Lex Fridman Podcast #405 · 2023', year:2023, chapters:10,
+  { shelf:'talks', title:'Bezos on Rockets and Day One', spine:'Bezos × Lex', author:'Jeff Bezos', by:'Jeff Bezos with Lex Fridman · Lex Fridman Podcast #405 · 2023', year:2023, chapters:10,
     tag:'Podcast · Space · Business', url:'explainers/bezos-lex-fridman.html',
     blurb:'Jeff Bezos\'s two-hour conversation with Lex Fridman, from his grandfather\'s Texas ranch to New Glenn, the Moon, Amazon\'s Day One culture and AI. The explainer splits it into ten chapters with timestamp links and golden nuggets, plus exercises like pricing a reusable rocket and calling the 1-800 number yourself.',
     extras:'Golden nuggets + timestamps', c:'#13203A', k:'#FFA94D', h:304, w:70, mark:'mic' },
-  { title:'The 48 Laws of Power', spine:'48 Laws of Power', author:'Robert Greene', year:1998, chapters:48,
+  { shelf:'power', title:'The 48 Laws of Power', spine:'48 Laws of Power', author:'Robert Greene', year:1998, chapters:48,
     tag:'Strategy · History', url:'explainers/48-laws-of-power.html',
     blurb:'Robert Greene\'s handbook of power, drawn from three thousand years of courts, wars and cons. The explainer gives every one of the 48 laws its own illustration, the history behind it, the reversal, and how to spot it being used on you, with six workshops like timing a wave, rewriting a rigged menu of choices and naming the law in modern situations.',
     extras:'An illustration for every law', c:'#2A1512', k:'#E2B75E', h:322, w:86, mark:'crown' },
-  { title:'The Art of War', spine:'The Art of War', author:'Sun Tzu', year:-500, when:'c. 5th century BC', chapters:13,
+  { shelf:'power', title:'The Art of War', spine:'The Art of War', author:'Sun Tzu', year:-500, when:'c. 5th century BC', chapters:13,
     tag:'Strategy · Classics', url:'explainers/art-of-war.html',
     blurb:'Sun Tzu\'s 2,500-year-old book on strategy, still read by generals, coaches and founders. The explainer gives each of the 13 chapters its own illustration, its key principles, a story from history where it was followed or ignored, and its limits, with five workshops like the temple count, striking where the enemy is thin, reading the signs and pricing your spies.',
     extras:'An illustration for every chapter', c:'#22302D', k:'#EC6A4C', h:296, w:74, mark:'sword' },
-  { title:'The Transformer Model', spine:'Transformers', author:'Vaswani et al.', au:'Vaswani', by:'A topic, not a book · based on "Attention Is All You Need" (Vaswani et al., 2017)', year:2017, chapters:10,
+  { shelf:'science', title:'The Transformer Model', spine:'Transformers', author:'Vaswani et al.', au:'Vaswani', by:'A topic, not a book · based on "Attention Is All You Need" (Vaswani et al., 2017)', year:2017, chapters:10,
     tag:'Topic · AI · Machine learning', url:'explainers/transformers.html',
     blurb:'A topic rather than a book: the Transformer, the neural network from the 2017 paper "Attention Is All You Need" that sits under ChatGPT, Claude and Gemini. Ten short chapters follow one sentence through the machine, each with something to poke: chop text into tokens, do arithmetic on a meaning map, drag a query arrow, watch attention heads light up, translate word by word and turn the temperature dial.',
     extras:'A hands-on lab in every chapter', c:'#0E2A2E', k:'#5CE1C6', h:310, w:78, mark:'nodes' },
-  { title:'AI Engineering', spine:'AI Engineering', author:'Chip Huyen', au:'Huyen', year:2025, chapters:10,
+  { shelf:'science', title:'AI Engineering', spine:'AI Engineering', author:'Chip Huyen', au:'Huyen', year:2025, chapters:10,
     tag:'AI · Engineering', url:'explainers/ai-engineering.html',
     blurb:'Chip Huyen\'s book on building real products with foundation models: evaluation, prompting, RAG and agents, finetuning, dataset work, inference optimisation and system architecture. The explainer goes chapter by chapter with worked examples in real numbers, a live lab in each (a sampling desk, a working BM25 retriever, a GPU memory calculator, a KV cache sizer, a batching simulator), questions to think over and a three-question quiz.',
     extras:'Worked examples + a lab in every chapter', c:'#1E2433', k:'#FF8A4C', h:316, w:82, mark:'layers' },
-  { title:'Sapiens', spine:'Sapiens', author:'Yuval Noah Harari', au:'Harari', by:'by Yuval Noah Harari · 2011 (English edition 2014)', year:2011, chapters:20,
+  { shelf:'science', title:'Sapiens', spine:'Sapiens', author:'Yuval Noah Harari', au:'Harari', by:'by Yuval Noah Harari · 2011 (English edition 2014)', year:2011, chapters:20,
     tag:'History · Anthropology', url:'explainers/sapiens.html',
     blurb:'Harari\'s history of humankind, from an unremarkable African ape to the edge of godhood, told through four revolutions: cognitive, agricultural, unification and scientific. The explainer covers all 20 chapters with a 13.8-billion-year timeline and a lab in each: watch human species come and go, fall into the wheat trap, write numbers in cuneiform, re-run the Roman Empire, run Dr Lind\'s scurvy trial and count your invisible energy servants.',
     extras:'A timeline + a lab in every chapter', c:'#7A3E1D', k:'#F6E3C0', h:308, w:84, mark:'hand' },
-  { title:'Thinking, Fast and Slow', spine:'Fast and Slow', author:'Daniel Kahneman', au:'Kahneman', year:2011, chapters:38,
+  { shelf:'mind', title:'Thinking, Fast and Slow', spine:'Fast and Slow', author:'Daniel Kahneman', au:'Kahneman', year:2011, chapters:38,
     tag:'Psychology · Decision making', url:'explainers/thinking-fast-and-slow.html',
     blurb:'Kahneman\'s tour of the two systems that run your mind: a fast one that jumps to conclusions and a slow one that is too lazy to check. The explainer covers all 38 chapters, from anchors and base rates to prospect theory and the two selves, with a lab in each: play the Add-1 game, spin a rigged wheel, solve the cab problem, rank lucky stock pickers, draw your own loss-aversion curve and rebuild a painful memory.',
     extras:'A lab in every chapter', c:'#F1ECE2', k:'#B4234F', h:314, w:80, mark:'pencil' },
-  { title:'Exactly What to Say', spine:'Exactly What to Say', author:'Phil M. Jones', au:'Jones', year:2017, chapters:23,
+  { shelf:'people', title:'Exactly What to Say', spine:'Exactly What to Say', author:'Phil M. Jones', au:'Jones', year:2017, chapters:23,
     tag:'Communication · Persuasion', url:'explainers/exactly-what-to-say.html',
     blurb:'Phil M. Jones\'s pocket book of "magic words": 23 short phrases that make people more likely to listen, decide and say yes, from "I\'m not sure if it\'s for you, but" to "Just out of curiosity". The explainer covers every one with how it sounds in a real conversation and a lab where you write your own version and save it to a personal script book.',
     extras:'Write-your-own scripts + a script book', c:'#F2C14E', k:'#1B2120', h:300, w:72, mark:'speech' },
-  { title:'Influence: The Psychology of Persuasion', spine:'Influence', author:'Robert B. Cialdini', au:'Cialdini', by:'by Robert B. Cialdini · 1984 (new and expanded edition 2021)', year:1984, chapters:9,
+  { shelf:'people', title:'Influence: The Psychology of Persuasion', spine:'Influence', author:'Robert B. Cialdini', au:'Cialdini', by:'by Robert B. Cialdini · 1984 (new and expanded edition 2021)', year:1984, chapters:9,
     tag:'Psychology · Persuasion', url:'explainers/influence.html',
     blurb:'Cialdini\'s classic on why people say yes, built on years spent undercover with salespeople, fundraisers and advertisers. The explainer covers all nine chapters of the new and expanded edition, from reciprocation and social proof to authority, scarcity, commitment and unity, with the real experiment behind each one to rerun yourself: cut into a copier queue, tip after a mint, grow a crowd on the pavement, climb Milgram\'s shock board and plant billboards on a street. Every chapter ends with how to say no.',
     extras:'Rerun the classic experiments + a defence kit', c:'#3B1530', k:'#FFA26B', h:306, w:78, mark:'magnet' },
-  { title:'How to Win Friends and Influence People', spine:'How to Win Friends', author:'Dale Carnegie', au:'Carnegie', by:'by Dale Carnegie · 1936 (revised 1981)', year:1936, chapters:30,
+  { shelf:'people', title:'How to Win Friends and Influence People', spine:'How to Win Friends', author:'Dale Carnegie', au:'Carnegie', by:'by Dale Carnegie · 1936 (revised 1981)', year:1936, chapters:30,
     tag:'Communication · Relationships', url:'explainers/how-to-win-friends.html',
     blurb:'Carnegie\'s classic on getting along with people: 30 principles in four parts, from "don\'t criticise, condemn or complain" to "let the other person save face". The explainer covers every one with the story Carnegie tells, how it sounds in a real conversation and a lab to try it: read a smile, train your memory for names, count the "I"s in a message, run a "but" detector and watch what praising small steps does over ten weeks.',
     extras:'A lab for every principle + a phrasebook', c:'#E8714F', k:'#1A1424', h:318, w:78, mark:'smile' },
-  { title:'Personal Power', spine:'Personal Power', author:'Tony Robbins', au:'Robbins', by:'by Tony Robbins · 1989 audio program (Personal Power II, 1993)', year:1989, chapters:20,
+  { shelf:'focus', title:'Personal Power', spine:'Personal Power', author:'Tony Robbins', au:'Robbins', by:'by Tony Robbins · 1989 audio program (Personal Power II, 1993)', year:1989, chapters:20,
     tag:'Self-development · Habits', url:'explainers/personal-power.html',
     blurb:'Robbins\'s 30-day audio program that made his name: 20 sessions across a month, from the Ultimate Success Formula and pain and pleasure to beliefs, goals, anchoring, money and fear, each with an assignment for the day. The explainer covers every session with a lab to try it: hit a target by adjusting, tip a pain and pleasure scale, carve a new habit groove, move a figure into a stronger state, knock the legs out from under a belief, time an anchor at its peak, scramble a fear movie and run the success cycle.',
     extras:'A graphic lab in every session + a 30-day tracker', c:'#C2361B', k:'#FFE3A3', h:310, w:76, mark:'bolt' },
-  { title:'Principles: Life and Work', spine:'Principles', author:'Ray Dalio', year:2017, chapters:22,
+  { shelf:'power', title:'Principles: Life and Work', spine:'Principles', author:'Ray Dalio', year:2017, chapters:22,
     tag:'Decision-making · Management', url:'explainers/principles.html',
     blurb:'Dalio\'s rulebook from building Bridgewater: the story of the bet that broke him, five life principles and sixteen work principles, all driven by one five-step loop. The explainer covers every chapter with a lab to try it: walk his career timeline, add uncorrelated bets to find the Holy Grail, watch pain plus reflection climb a spiral, rate your five steps, weigh a believability-weighted vote on a balance, drill down to a root cause, tune a machine of design and people, and wire up checks and balances.',
     extras:'A graphic lab in every chapter + your own principles', c:'#1E2A3A', k:'#F2B544', h:322, w:80, mark:'gear' },
-  { title:'Dare to Lead', spine:'Dare to Lead', author:'Brené Brown', au:'Brown', year:2018, chapters:9,
+  { shelf:'people', title:'Dare to Lead', spine:'Dare to Lead', author:'Brené Brown', au:'Brown', year:2018, chapters:9,
     tag:'Leadership · Courage', url:'explainers/dare-to-lead.html',
     blurb:'Brené Brown\'s research on what brave leaders actually do: courage is four skill sets you can learn, from rumbling with vulnerability to living into your values, braving trust and learning to rise. The explainer covers every section with a lab to try it: check your team\'s culture, choose who gets a seat in the arena, paint done, take off sixteen plates of armour, answer a friend with empathy, narrow your values to two, fill a marble jar and write the story you\'re making up.',
     extras:'A lab in every chapter + your square squad', c:'#163A2C', k:'#FF8A5B', h:300, w:74, mark:'shield' },
-  { title:'The ONE Thing', spine:'The ONE Thing', author:'Gary Keller', au:'Keller', by:'by Gary Keller with Jay Papasan', year:2013, chapters:18,
+  { shelf:'focus', title:'The ONE Thing', spine:'The ONE Thing', author:'Gary Keller', au:'Keller', by:'by Gary Keller with Jay Papasan', year:2013, chapters:18,
     tag:'Focus · Productivity', url:'explainers/the-one-thing.html',
     blurb:'Keller and Papasan\'s case for going small: find the single most important thing, do it first, and let it knock over the rest like a line of dominoes. The explainer covers all 18 chapters, from the six lies to the focusing question, time blocking and the four thieves, with a lab in each: chase two rabbits, grow a domino line to the moon, cut a to-do list down to one task, count the cost of switching, move your ONE Thing through a day of willpower, sort questions into big and specific, build a goal ladder from someday to right now and block out your week.',
     extras:'A graphic lab in every chapter + your goal ladder', c:'#F4EFE6', k:'#C42718', h:296, w:72, mark:'domino' },
-  { title:'The War of Art', spine:'The War of Art', author:'Steven Pressfield', au:'Pressfield', year:2002, chapters:15,
+  { shelf:'focus', title:'The War of Art', spine:'The War of Art', author:'Steven Pressfield', au:'Pressfield', year:2002, chapters:15,
     tag:'Creativity · Discipline', url:'explainers/war-of-art.html',
     blurb:'Pressfield\'s short, fierce book on the force that keeps us from our real work, which he calls Resistance, and how to beat it by turning pro. The explainer follows its three parts in fifteen chapters, each with a graphic lab: build the wall of Resistance, point a compass at the project you most dread, unmask its disguises, stamp a true excuse "not a reason", compare a year of waiting for inspiration with a year of showing up, pace yourself for the Iditarod, and sort your labour from its fruits.',
     extras:'A graphic lab in every chapter + a sit-down log', c:'#151111', k:'#F0524F', h:286, w:56, mark:'nib' },
-  { title:'Declutter Your Mind', spine:'Declutter Your Mind', author:'S.J. Scott and Barrie Davenport', au:'Scott · Davenport', year:2016, chapters:20,
+  { shelf:'mind', title:'Declutter Your Mind', spine:'Declutter Your Mind', author:'S.J. Scott and Barrie Davenport', au:'Scott · Davenport', year:2016, chapters:20,
     tag:'Mindfulness · Anxiety', url:'explainers/declutter-your-mind.html',
     blurb:'Scott and Davenport\'s practical book on quieting an overloaded head: four causes of mental clutter, then habits to clear it from your thoughts, your obligations, your relationships and your surroundings. The explainer covers all 20 chapters with a graphic lab in each: sort thoughts into past, present and future, fill a head with clutter, breathe with a pacer, interrupt a negative spiral, park worries in a worry window, spin a life wheel, cool an argument on a thermometer, race a ten-minute declutter and find your flow channel.',
     extras:'A graphic lab in every chapter + your declutter plan', c:'#A9CDBE', k:'#12352A', h:292, w:64, mark:'cloud' }
@@ -275,12 +304,21 @@ matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt)
 
 /* counts */
 const totalCh = BOOKS.reduce((s,b) => s + b.chapters, 0);
-$('#counts').innerHTML = `<span><b>${BOOKS.length}</b> on the shelf</span><span><b>${totalCh}</b> chapters explained</span><span>Newest: <b>${BOOKS[BOOKS.length-1].title}</b></span>`;
+const LEVELS = SHELVES.map(L => ({ ...L, items: [] }));
+const spare = { id:'new', name:'New arrivals', note:'Waiting for a level of their own', items: [] };
+BOOKS.forEach((b,i) => (LEVELS.find(L => L.id === b.shelf) || spare).items.push(i));
+if (spare.items.length) LEVELS.push(spare);
+const levels = LEVELS.filter(L => L.items.length);
+const pad = n => String(n).padStart(2, '0');
+$('#counts').innerHTML = `<span><b>${BOOKS.length}</b> on the shelf</span><span><b>${levels.length}</b> levels</span><span><b>${totalCh}</b> chapters explained</span><span>Newest: <b>${BOOKS[BOOKS.length-1].title}</b></span>`;
 
 /* shelf */
-const books = $('#books');
-books.innerHTML = BOOKS.map((b,i) => `<a class="spine" data-i="${i}" href="${b.url}" style="--c:${b.c};--k:${b.k};--w:${b.w}px;--h:${b.h}px" aria-label="${b.title} by ${b.author}, open the explainer">${MARK[b.mark] || ''}<span class="ttl">${b.spine}</span><span class="au">${b.au || b.author.split(' ').slice(-1)[0]}</span></a>`).join('')
-  + `<div class="ghost" style="height:250px" aria-hidden="true"><span>Next book</span></div><div class="ghost lean" style="height:230px" aria-hidden="true"><span>Coming soon</span></div><div class="bookend" aria-hidden="true"></div>`;
+const spine = i => { const b = BOOKS[i]; return `<a class="spine" data-i="${i}" href="${b.url}" style="--c:${b.c};--k:${b.k};--w:${b.w}px;--h:${b.h}px" aria-label="${b.title} by ${b.author}, open the explainer">${MARK[b.mark] || ''}<span class="ttl">${b.spine}</span><span class="au">${b.au || b.author.split(' ').slice(-1)[0]}</span></a>`; };
+const chOf = L => L.items.reduce((s,i) => s + BOOKS[i].chapters, 0);
+$('#case').innerHTML = levels.map((L,n) => `<div class="level" role="group" aria-labelledby="lv-${L.id}">
+  <div class="lvl-head"><span class="lvl-n">LEVEL ${pad(n+1)}</span><h2 class="lvl-name" id="lv-${L.id}">${L.name}</h2><span class="lvl-c">${L.items.length} ${L.items.length === 1 ? 'title' : 'titles'} · ${chOf(L)} ch</span><span class="lvl-note">${L.note}</span></div>
+  <div class="books">${L.items.map(spine).join('')}${n === levels.length - 1 ? '<div class="ghost" style="height:250px" aria-hidden="true"><span>Next book</span></div><div class="ghost lean" style="height:230px" aria-hidden="true"><span>Coming soon</span></div>' : ''}<div class="bookend" aria-hidden="true"></div></div>
+  <div class="plank" aria-hidden="true"></div></div>`).join('');
 
 /* card */
 function show(i){ const b = BOOKS[i];
@@ -297,7 +335,8 @@ document.querySelectorAll('.spine').forEach(s => { const i = +s.dataset.i;
 show(BOOKS.length - 1);
 
 /* list */
-$('#rows').innerHTML = BOOKS.map(b => `<a class="rowlink" href="${b.url}" style="--c:${b.c}"><i aria-hidden="true"></i><span><span class="t">${b.title}</span><br><span class="a">${b.author} · ${b.when || b.year}</span></span><span class="n">${b.chapters} ch →</span></a>`).join('');
+const row = i => { const b = BOOKS[i]; return `<a class="rowlink" href="${b.url}" style="--c:${b.c}"><i aria-hidden="true"></i><span><span class="t">${b.title}</span><br><span class="a">${b.author} · ${b.when || b.year}</span></span><span class="n">${b.chapters} ch →</span></a>`; };
+$('#groups').innerHTML = levels.map((L,n) => `<div class="group"><h4><span>${pad(n+1)}</span>${L.name}</h4><div class="rows">${L.items.map(row).join('')}</div></div>`).join('');
 })();
 </script>
 </body></html>
