@@ -1,0 +1,1475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The War of Art, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field manual for a daily battle. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas,
+   a story from the book, a graphic lab, plain words, quick check), grouped into the book's three parts.
+   Dark-first: near-black ink with a crimson "Resistance" accent and a brass second series. */
+:root{
+  color-scheme: dark;
+  --ink:#110E0E;--panel:#1A1515;--panel-2:#251E1D;--line:#3B312F;--text:#F4EDE7;--muted:#BBADA5;--faint:#877870;
+  --glow:#F0524F;--glow-soft:rgba(240,82,79,.11);--hl:rgba(240,82,79,.26);--cool:#DDB672;--cool-soft:rgba(221,182,114,.11);
+  --good:#7FD69C;--good-soft:rgba(127,214,156,.1);--bad:#FF9466;--bad-soft:rgba(255,148,102,.1);
+  --soft:#DED3CB;--deep:#0C0909;--toc-bg:rgba(26,21,21,.76);--glow-line:rgba(240,82,79,.36);--cool-line:rgba(221,182,114,.3);--on-glow:#1C0303;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F1EA;--panel:#FFFFFF;--panel-2:#F0E9E0;--line:#DDD2C6;--text:#1D1514;--muted:#5B4D47;--faint:#8A7B73;
+  --glow:#B3202A;--glow-soft:rgba(179,32,42,.07);--hl:#F6CDC8;--cool:#7E5A12;--cool-soft:rgba(126,90,18,.08);--good:#22774A;--good-soft:rgba(34,119,74,.08);--bad:#B4520F;--bad-soft:rgba(180,82,15,.08);
+  --soft:#3A2E2B;--deep:#FBF8F4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(179,32,42,.3);--cool-line:rgba(126,90,18,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F1EA;--panel:#FFFFFF;--panel-2:#F0E9E0;--line:#DDD2C6;--text:#1D1514;--muted:#5B4D47;--faint:#8A7B73;
+  --glow:#B3202A;--glow-soft:rgba(179,32,42,.07);--hl:#F6CDC8;--cool:#7E5A12;--cool-soft:rgba(126,90,18,.08);--good:#22774A;--good-soft:rgba(34,119,74,.08);--bad:#B4520F;--bad-soft:rgba(180,82,15,.08);
+  --soft:#3A2E2B;--deep:#FBF8F4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(179,32,42,.3);--cool-line:rgba(126,90,18,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.hfig{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.hfig svg{display:block;width:100%;height:auto}
+.hfig .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.hfig .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .hfig{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+
+/* ---------- War of Art additions ---------- */
+.ch h2{font-style:normal}
+.hfig figcaption{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.hfig figcaption b{color:var(--text);font-weight:500}
+.motto{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;max-width:30ch}
+.motto em{font-style:normal;color:var(--glow)}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:16px 18px}
+.trio .field input{font-size:14.5px}
+.proj{display:grid;gap:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);min-width:0}
+.proj input[type=text]{min-width:0;font:inherit;font-size:14.5px;width:100%;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.proj input[type=text]:focus{border-color:var(--glow);outline:none}
+.proj label{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
+.proj label output{font-family:var(--f-mono);color:var(--text)}
+.chips2{display:flex;flex-wrap:wrap;gap:6px;padding:0 18px 14px}
+.grid28{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:420px}
+.day{font:inherit;font-size:12px;aspect-ratio:1;border-radius:9px;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);cursor:pointer;display:grid;place-items:center;font-family:var(--f-mono);padding:0}
+.day.on{background:var(--glow);border-color:var(--glow);color:var(--on-glow);font-weight:600}
+.day.today{outline:2px solid var(--cool);outline-offset:1px}
+.day:disabled{cursor:default;opacity:.45}
+.logwrap{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:22px;align-items:start;padding:18px}
+.logwrap .stats{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:420px;font-family:var(--f-mono);font-size:10.5px;color:var(--faint);text-align:center;margin-bottom:6px}
+@media (max-width: 700px){ .logwrap{grid-template-columns:minmax(0,1fr)} }
+@media (max-width: 560px){ .trio{padding:14px} .chips2{padding:0 14px 12px} .logwrap{padding:14px} }
+.bin.right{border-color:var(--good);background:var(--good-soft)}
+.bin.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.sorter .row{justify-content:space-between}
+.jrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13.5px}
+.jrow label{display:inline-flex;gap:6px;align-items:center;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);cursor:pointer}
+.jrow input{width:16px;height:16px;accent-color:var(--cool)}
+.jrow .a input{accent-color:var(--glow)}
+.jhead{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:0 12px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.stamp{transition:opacity .35s, transform .35s}
+svg text.disp{font-family:var(--f-display)}
+svg text.mono2{font-family:var(--f-mono)}
+.proj{grid-template-columns:minmax(0,1fr)}
+.field{grid-template-columns:minmax(0,1fr)}
+.logwrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width: 700px){ .logwrap{grid-template-columns:minmax(0,1fr)} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Steven Pressfield's book on creative battle</div>
+    <h1>The <em>War</em> of Art,<br>Explained</h1>
+    <p class="lede">Steven Pressfield spent decades failing to finish things before he became a bestselling novelist. <b>The War of Art</b> is his short, punchy account of the enemy that stopped him, which he calls <b>Resistance</b>, and the habits that finally beat it. This guide follows the book's three parts in fifteen chapters, each with a lab where you can try the idea on your own work.</p>
+    <p class="motto">The hard part is not the work. <em>It's sitting down to do it.</em></p>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's stopping you today?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="hfig" style="margin:0">
+        <svg id="heroTwo" viewBox="0 0 420 300" role="img" aria-label="Two lives, the one you live and the unlived one, with a wall called Resistance between them"></svg>
+        <figcaption>Most of us have <b>two lives</b>: the one we live, and the one we could be living. Between them stands Resistance.</figcaption>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Book One · chapters 1 to 6</span><span class="q">Resistance</span><span class="d">Defining the enemy: what it is and how it disguises itself</span></a>
+      <a href="#part2"><span class="n">Book Two · chapters 7 to 11</span><span class="q">Turning Pro</span><span class="d">Combating Resistance by working like a professional</span></a>
+      <a href="#part3"><span class="n">Book Three · chapters 12 to 15</span><span class="q">The Higher Realm</span><span class="d">Beyond Resistance: the Muse, the Self and the work itself</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2002, with a foreword by Robert McKee</span>
+      <span><b>Author</b> Steven Pressfield, novelist and screenwriter</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 15 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== BOOK ONE ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Book One · defining the enemy</span>
+      <h2>Resistance</h2>
+      <p>Pressfield starts by naming the thing that stops us. It is not laziness or a lack of talent. It is a force, as steady as gravity, that pushes back whenever we try to move toward something that matters. Book One describes how it behaves and the many costumes it wears.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You can't fight an enemy you can't see. Once you recognise Resistance as a force rather than a flaw in your character, you can stop blaming yourself and start beating it.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · What stands in the way</div>
+        <h2>The Unlived Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most of us live one life and carry another inside, unlived. The force that keeps them apart is Resistance. It shows up whenever you try to do something that trades a pleasure now for growth later.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The battle is sitting down.</b> Pressfield's working day is ordinary: get up, have breakfast, do the chores, then start. What he finds hard is not the writing itself. It is the moment of sitting down to begin.</span></li>
+          <li><span><b>Two lives.</b> Anyone who owns a guitar they never play, a novel they keep meaning to start, or a business plan in a drawer knows the gap between the life they live and the one waiting inside them.</span></li>
+          <li><span><b>The enemy has a name.</b> Pressfield calls the pull away from that unlived life Resistance. Naming it matters. It turns "something is wrong with me" into "something is pushing against me", which you can fight.</span></li>
+          <li><span><b>What draws it out.</b> Creative work of any kind, starting a business, a diet or fitness plan, study, kicking a bad habit, a stand on principle, committing to a person, helping others. All of them give up comfort now for something better later.</span></li>
+          <li><span><b>What doesn't.</b> Anything that gives you a quick reward and asks nothing of you slides past without a fight. Resistance has no reason to stop you from staying where you are.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Before he starts work, Pressfield reads aloud the invocation to the Muse that opens Homer's <i>Odyssey</i>, and he keeps a few small good-luck objects close by. Then he works his session through. When he stops, he says, he usually can't tell whether the day's pages are any good. What he knows is that he showed up and fought, and that is what counts.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: what hits the wall?</div><div class="hint">Sort each activity: does it meet Resistance?</div></div>
+        <div class="stage"><svg id="wall1" role="img" aria-label="The wall of Resistance, built from the activities you sort correctly"></svg></div>
+        <div class="sorter" id="s1"></div>
+        <p class="callout">The rule of thumb: <b>if it trades comfort now for growth, health or integrity later, expect Resistance.</b> Watch out for the tricky ones that only feel like progress.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If there is something you have wanted to do for years and somehow never start, you are not broken. You are meeting a force that every serious person meets. The first step is to see it for what it is.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: How Resistance behaves →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · Know your enemy</div>
+        <h2>How Resistance Behaves</h2>
+        <div class="short"><span class="lbl">In short</span><p>Resistance is invisible, comes from inside you, never gets tired and is not personal. Its most useful trait is that it never misses: the more a piece of work matters to who you want to become, the harder it pushes. That makes it a compass.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Internal.</b> It feels like it comes from outside: the boss, the kids, the bills. In fact it starts in you, which is good news, because that's where you can deal with it.</span></li>
+          <li><span><b>Insidious.</b> It will say anything to keep you from the work. It bargains, flatters, threatens and lies, and it always sounds like a reasonable version of you.</span></li>
+          <li><span><b>Impersonal and universal.</b> It isn't out to get you in particular. Like the weather, it hits everyone who tries to create, the famous and successful included, every single day. It never sleeps.</span></li>
+          <li><span><b>Infallible, so use it as a compass.</b> The project you most dread starting is usually the one you most need to do. Pressfield's rule: the more important the call, the more Resistance you will feel.</span></li>
+          <li><span><b>Strongest at the finish line.</b> Resistance surges again just before you're done, which is why so many projects stall when they are nearly complete.</span></li>
+          <li><span><b>Only pushes one way.</b> It opposes moving up, never sliding down. Nothing tries to stop you from giving up.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield points out that as a young man Adolf Hitler wanted to be a painter and was turned down by the art academy in Vienna. His deliberately provocative point: it may have been easier for Hitler to start a world war than to face a blank canvas each morning. Resistance, he says, plays for keeps, and an unlived calling doesn't just disappear. It can turn into something much worse.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the Resistance compass</div><div class="hint">Name three things you could work on and rate how much each one matters</div></div>
+        <div class="trio" id="cmpIn"></div>
+        <div class="stage"><svg id="cmp2" role="img" aria-label="A compass whose needle points to the project that will meet the most Resistance"></svg></div>
+        <div class="stats"><div class="stat"><span class="k">Most Resistance</span><span class="v glow" id="cmpTop"></span></div><div class="stat"><span class="k">What the compass says</span><span class="s" id="cmpSay"></span></div></div>
+      </figure>
+      <figure class="lab" id="lab2b">
+        <div class="lab-top"><div class="t">Lab: the finish-line surge</div><div class="hint">Drag through a project from blank page to done</div></div>
+        <div class="stage"><svg id="fl2" role="img" aria-label="How Resistance rises at the start of a project, eases in the middle and surges just before the finish"></svg></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="flP">How far through the project you are <output id="oflP"></output></label><input type="range" id="flP" min="0" max="100" value="8"></div></div></div>
+        <div class="stats"><div class="stat"><span class="k">Resistance here</span><span class="v glow" id="flR"></span></div><div class="stat"><span class="k">What it sounds like</span><span class="s" id="flS"></span></div></div>
+        <p class="callout">An illustrative curve, not data. <b>Knowing the surge is coming makes it easier to push through it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The voice that says "not today" is not wisdom. It's a predictable force, and it is loudest exactly where it matters most. Instead of obeying the dread, read it like a map: the thing you're most scared to start is probably the thing to do first.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Resistance in disguise →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · The costumes it wears</div>
+        <h2>Resistance in Disguise</h2>
+        <div class="short"><span class="lbl">In short</span><p>Resistance almost never says "don't do your work". It shows up in costume: putting things off until tomorrow, a quick hit of pleasure, a crisis you half created, something to numb the feeling, or the role of the victim.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Procrastination is the favourite.</b> Nobody tells themselves "I will never write my book." We say "I'll start on Monday." It is the easiest disguise to excuse, and Monday keeps moving.</span></li>
+          <li><span><b>Cheap pleasures.</b> The moment we face hard work, an easy reward calls out: food, sex, a screen. Pressfield's point is not that pleasure is wrong, it's that the timing gives it away.</span></li>
+          <li><span><b>Trouble and drama.</b> Picking fights, letting things fall apart or turning life into a soap opera gets you attention without the work of earning it.</span></li>
+          <li><span><b>Self-medication.</b> Drink, drugs, shopping, endless snacks: ways to dull a restlessness that is really a signal you're not doing your work.</span></li>
+          <li><span><b>Victimhood.</b> Being ill, wronged or unlucky can become a way of life that excuses you from creating, and makes other people pay attention to you instead.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield is candid about his own years in disguise. Through his twenties and thirties he drifted: odd jobs, moving from place to place, and a novel he got almost to the end of before walking away from it, along with much else in his life. Only later did he see that the drama and the drifting had been Resistance all along.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: unmask the excuse</div><div class="hint">Which costume is Resistance wearing?</div></div>
+        <div class="stage"><svg id="mk3" role="img" aria-label="Five masks, one for each disguise, lighting up as you catch them"></svg></div>
+        <div class="sorter" id="s3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you find yourself suddenly busy, suddenly hungry, suddenly in the middle of a crisis or suddenly too unlucky to work, ask one question: did this show up right when I was about to start something that matters? If so, you have probably caught Resistance in costume.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Fear is a signpost →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · Reading your own fear</div>
+        <h2>Fear Is a Signpost</h2>
+        <div class="short"><span class="lbl">In short</span><p>The more you love a project, the more Resistance you will feel toward it, and the more scared you will be. Fear and self-doubt are not reasons to stop. They are signs that the work matters to you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Resistance tracks love.</b> Massive Resistance means there is massive love behind it. If you didn't care, it wouldn't bother to stop you.</span></li>
+          <li><span><b>Fear points the way.</b> Paralysed by fear of a project? Pressfield says that's good: the more scared you are of a piece of work, the surer you can be that you need to do it.</span></li>
+          <li><span><b>Self-doubt can be an ally.</b> Doubt shows you care about doing it well. The ones who are completely sure they're geniuses are often the fakes. The real innovators tend to be terrified.</span></li>
+          <li><span><b>The fear of success.</b> What we often fear most is not failing but succeeding: finding out we really do have the power we suspect, and having to leave our old, comfortable self and its friends behind.</span></li>
+          <li><span><b>"I'm all alone."</b> Feeling isolated is one of Resistance's lines. The work can be lonely, but Pressfield argues we're never really alone with it, and loneliness is a cost of the job, not a reason to quit.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield notes that when the call to create first gets serious, it often feels less like joy and more like dread. Answering it means stepping away from the people who knew you as you were. That, he suggests, is why so many of us stay just short of the thing we most want to do: not because we doubt we can, but because part of us fears we can.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: love and fear go up together</div><div class="hint">Slide how much a project means to you, or tap an example</div></div>
+        <div class="stage"><svg id="lv4" role="img" aria-label="A rising curve: the more a project means to you, the more Resistance and fear you feel"></svg></div>
+        <div class="chips2" id="lvEx"></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="lvL">How much this project means to who you want to be <output id="olvL"></output></label><input type="range" id="lvL" min="0" max="100" value="35"></div></div></div>
+        <div class="stats"><div class="stat"><span class="k">Resistance you can expect</span><span class="v glow" id="lvR"></span></div><div class="stat"><span class="k">How to read the fear</span><span class="s" id="lvS"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Feeling scared of your own project doesn't mean you're the wrong person for it. It usually means it's the right project. Expect the fear, name it, and do a little of the work anyway.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Criticism, support and healing →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · Resistance in other people, and in self-help</div>
+        <h2>Criticism, Support and Healing</h2>
+        <div class="short"><span class="lbl">In short</span><p>When people around us start to change, Resistance makes us want to knock them down, and makes them want to pull us back. It also hides in therapy, workshops and the idea that we need to "heal" first. The work itself is the cure.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Criticism is a mirror.</b> If you catch yourself sneering at someone, you are probably acting out of Resistance. Seeing another person go after their unlived life stings because it reminds us of ours.</span></li>
+          <li><span><b>The people close to you may push back.</b> When you start to change, friends and family can feel judged, even if you never say a word. Some will try, kindly or not, to keep you as you were.</span></li>
+          <li><span><b>"Heal first" is a trap.</b> Resistance loves the idea that you must sort yourself out before you can begin. Pressfield argues the part of you that creates doesn't need fixing first.</span></li>
+          <li><span><b>Support is not the work.</b> Groups, courses and pep talks can feel like progress and can even help. But they can't sit down for you, and they easily become a comfortable place to avoid doing so.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield is blunt about the self-improvement world. You can spend years in seminars, support groups and therapy getting ready, and never write a word. He doesn't say these things are worthless. He says that when they replace the work, they are Resistance with a friendly face, and that the deepest healing comes from doing what you were meant to do.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the critic's mirror</div><div class="hint">Pick a criticism and see what it might reflect</div></div>
+        <div class="stage"><svg id="mr5" role="img" aria-label="A mirror that shows the wish that may sit behind a criticism"></svg></div>
+        <div class="pad"><div class="cards3" id="mr5b"></div></div>
+        <p class="callout">Not every criticism is envy in disguise. But <b>when a judgment comes with a hot flash of irritation, it's worth asking what it says about you.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Two practical lessons. First, when you feel the urge to mock someone for going after something, turn the question around. Second, when people push back on your new habit, don't take it as proof you are wrong. They are meeting their own Resistance.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Rationalization →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book One</span> · The spin doctor</div>
+        <h2>Rationalization</h2>
+        <div class="short"><span class="lbl">In short</span><p>Rationalization is Resistance's spin doctor. It hands us excuses that are often perfectly true: we're tired, busy, broke, needed at home. What makes them Resistance is that they're offered as reasons not to work today. And Resistance can be beaten.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>True, and beside the point.</b> Your reasons may be completely legitimate. The question is not "Is it true?" but "Does it actually stop me doing some of the work today?"</span></li>
+          <li><span><b>It speaks in your voice.</b> Resistance's frontal attack is fear. Rationalization is the backup: it doesn't sound like an enemy, it sounds like the sensible grown-up in your head.</span></li>
+          <li><span><b>Others did it anyway.</b> Pressfield's example is Tolstoy, who had thirteen children and still wrote <i>War and Peace</i>. Big obligations are real, and people work in the gaps around them all the time.</span></li>
+          <li><span><b>Resistance can be beaten.</b> If it couldn't, there would be no symphonies, no great novels, no great bridges. Every finished work is proof that someone sat down anyway.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield closes Book One on a hopeful note. After pages describing how cunning the enemy is, he reminds us that it loses all the time. Every symphony, cathedral and novel that exists was made by someone who felt the same pull to stop, and who, on some ordinary morning, sat down and did the work.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: dissect an excuse</div><div class="hint">Pick an excuse and run it through the two questions</div></div>
+        <div class="pad" style="padding-top:16px"><div class="cards3" id="ex6b"></div></div>
+        <div class="stage"><svg id="ex6" role="img" aria-label="The excuse stamped: true, but not a reason"></svg></div>
+        <div class="detail" id="ex6d" aria-live="polite"></div>
+        <p class="callout">Apart from Pressfield himself, the people in these examples are not from the book. <b>None of them had easy conditions. They found a gap and used it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Stop arguing with your excuses about whether they're true. Most are. Instead, shrink the job until the excuse no longer covers it: fifteen minutes, one page, one sketch. Then do that.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Turning pro →</a></div>
+    </section>
+
+    <!-- ===================== BOOK TWO ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Book Two · combating Resistance</span>
+      <h2>Turning Pro</h2>
+      <p>The answer to Resistance, Pressfield says, is not more talent or more inspiration. It's a change of attitude: stop working as an amateur and start working as a professional. Book Two lists what that means in practice.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Amateurs wait to feel like it. Professionals show up anyway. Resistance can beat a mood, but it struggles against a habit.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Two</span> · Professionals and amateurs</div>
+        <h2>Turning Pro</h2>
+        <div class="short"><span class="lbl">In short</span><p>The amateur works for love, when the mood strikes. The professional works for keeps, every day. Pressfield's best news: you already know how to be a pro, because you are one at your day job.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Both love it.</b> The difference between amateur and pro isn't how much they care. It's that the amateur's commitment is part time, so on the days the feeling isn't there, Resistance wins.</span></li>
+          <li><span><b>You're already a pro somewhere.</b> At work you show up every day, stay all day, keep going when you're sick of it and accept being judged on results. Pressfield asks: why not bring that to your calling?</span></li>
+          <li><span><b>What a pro does.</b> Shows up every day, no matter what. Stays on the job all day. Is in it for the long haul. Has real stakes. Accepts being paid. Doesn't over-identify with the job. Masters technique. Keeps a sense of humour. Takes praise or blame from the real world.</span></li>
+          <li><span><b>It's a decision.</b> Turning pro isn't a credential or a talent. It's a choice to treat your work as your job, and you can make it today.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>After years of false starts, Pressfield finally finished a novel. He went to tell his mentor, the filmmaker Tom Laughlin, expecting celebration. Laughlin congratulated him and then told him to start the next one, that same day. The novel never sold. The habit of starting the next one is what made him a writer.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: you, at work and at your art</div><div class="hint">Tick what's true at your job, then at your calling</div></div>
+        <div class="stage"><svg id="rd7" role="img" aria-label="A radar chart comparing how professional you are at your job and at your art"></svg></div>
+        <div class="pad"><div class="toggles" id="rd7t" style="grid-template-columns:minmax(0,1fr)"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Pro at work</span><span class="v" id="rdJ"></span></div><div class="stat"><span class="k">Pro at your art</span><span class="v glow" id="rdA"></span></div><div class="stat"><span class="k">Where to start</span><span class="s" id="rdS"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't need to become a new kind of person. You need to transfer a set of habits you already have, turning up, staying, being judged, from the job you are paid for to the work you care about most.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Inspiration keeps office hours →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Two</span> · Showing up on schedule</div>
+        <h2>Inspiration Keeps Office Hours</h2>
+        <div class="short"><span class="lbl">In short</span><p>Amateurs wait to be inspired. Pros sit down at a set time and let inspiration find them already working. Pressfield argues that showing up every day is what brings the Muse.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Nine o'clock sharp.</b> Pressfield loves the novelist Somerset Maugham's joke that he wrote only when inspiration struck, and luckily it struck every morning at nine.</span></li>
+          <li><span><b>Routine summons help.</b> When you sit down every day, something gathers around the work. Ideas arrive and connections form, as if help turns up for people who turn up.</span></li>
+          <li><span><b>Mood is not a schedule.</b> If you wait until you feel like it, you'll mostly be waiting. Feelings follow action more often than the other way round.</span></li>
+          <li><span><b>Good days need ordinary days.</b> Most sessions produce ordinary work. The great ones only happen because you were already there on the ordinary ones.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield works the same hours each day, whether he feels like it or not. He compares the writer to a soldier or a farmer: the job doesn't ask how you feel this morning. He says that when we commit to the routine, power seems to gather around us, as if the Muse takes note of who keeps their appointments.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: a year of waiting vs a year of showing up</div><div class="hint">Set how inspired the amateur needs to feel before starting</div></div>
+        <div class="stage"><svg id="in8" role="img" aria-label="Cumulative pages over a year for someone who waits for inspiration and someone who works every day"></svg></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="inT">Mood the amateur waits for <output id="oinT"></output></label><input type="range" id="inT" min="0" max="90" value="60" step="5"></div><button class="btn" id="inR">Roll a new year</button></div></div>
+        <div class="stats"><div class="stat"><span class="k">Amateur: days worked</span><span class="v" id="inAd"></span></div><div class="stat"><span class="k">Amateur: pages</span><span class="v" id="inAp"></span></div><div class="stat"><span class="k">Pro: pages</span><span class="v glow" id="inPp"></span></div></div>
+        <p class="callout">An illustrative model. Both are the same writer with the same talent: each day's mood drifts at random, a better mood means more pages, and both get a little better with every session they put in. <b>The only difference is the rule for starting.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick a time, put it in the calendar like a meeting with your boss, and keep it. Don't judge each day's output. Judge whether you showed up.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Patience and order →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Two</span> · The long haul</div>
+        <h2>Patience, Order and Craft</h2>
+        <div class="short"><span class="lbl">In short</span><p>A pro takes the long view. They pace themselves for a marathon, keep their workspace and schedule in order, see the work as a craft rather than magic, and act even while they are afraid.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Patient.</b> Resistance loves a burst of enthusiasm that burns out in a week. The pro plans for the length of the race, not the excitement of the start.</span></li>
+          <li><span><b>Seeks order.</b> A cluttered desk and a chaotic schedule give Resistance places to hide. The pro clears both so nothing stands between them and the work.</span></li>
+          <li><span><b>Demystifies.</b> To a pro, the work is a craft with techniques that can be learned and practised, not a mysterious gift that might or might not show up today.</span></li>
+          <li><span><b>Acts in the face of fear.</b> The pro isn't fearless. Nobody is. They know fear can't be beaten for good, so they act alongside it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At the start of a project Pressfield reminds himself that it's the Iditarod, the long sled-dog race across Alaska, not a sprint. He knows a book will take many months and that he'll have bad weeks. So he sets a pace he can keep and saves his energy for the distance.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: pace yourself for the Iditarod</div><div class="hint">Choose your daily hours and see who's still going at day 180</div></div>
+        <div class="stage"><svg id="pc9" role="img" aria-label="Total hours worked over 180 days: a sprinter who burns out against a steady pace"></svg></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="pcH">Hours a day you commit to <output id="opcH"></output></label><input type="range" id="pcH" min="0.5" max="8" value="6" step="0.5"></div></div></div>
+        <div class="stats"><div class="stat"><span class="k">You quit on</span><span class="v" id="pcQ"></span></div><div class="stat"><span class="k">Your total hours</span><span class="v glow" id="pcT"></span></div><div class="stat"><span class="k">Steady 2 hours a day</span><span class="v" id="pcS"></span></div></div>
+        <p class="callout">An illustrative model: every hour past about 3 a day builds fatigue faster than you recover, and when fatigue tops out, you burn out and stop. <b>The fastest start rarely covers the most ground.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Choose a pace you could keep for a year, not one that would impress people for a week. Tidy the space, learn the craft, and expect to be nervous. None of that is a reason to stop.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Play it as it lays →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Two</span> · No excuses</div>
+        <h2>Play It as It Lays</h2>
+        <div class="short"><span class="lbl">In short</span><p>Conditions are never perfect. The pro accepts the day they're given, is prepared for setbacks, doesn't show off, keeps studying the craft and asks for help when they need it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Accepts no excuses.</b> Being tired, ill or rejected is real. The pro does what they can with it and doesn't let it become a day off.</span></li>
+          <li><span><b>Plays it as it lays.</b> A golfer can't move the ball to a nicer spot. You work with the conditions you've actually got.</span></li>
+          <li><span><b>Is prepared.</b> Setbacks will come. The pro expects them, so a bad day is a bump, not a disaster.</span></li>
+          <li><span><b>Doesn't show off.</b> Style serves the work. The pro isn't trying to make every page prove how clever they are.</span></li>
+          <li><span><b>Masters technique and asks for help.</b> The pro keeps studying for life, and has no ego about going to a teacher or a better practitioner.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Golf runs through Pressfield's thinking; his breakthrough novel, <i>The Legend of Bagger Vance</i>, is about the game. In golf you play the ball where it lands, in the rough or the sand. The pro doesn't waste energy on how unfair the lie is. They choose the best shot from where they are.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: today's lie</div><div class="hint">A condition is dealt. Pick the pro's response</div></div>
+        <div class="stage"><svg id="ch10s" role="img" aria-label="A chain of working days that grows with each pro response"></svg></div>
+        <div class="sorter" id="s10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>There will never be a day with no reason to skip. So stop waiting for one. Shrink the session if you have to, but keep the chain of days unbroken.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Don't take it personally →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Two</span> · Rejection and praise</div>
+        <h2>Don't Take It Personally</h2>
+        <div class="short"><span class="lbl">In short</span><p>The pro cares deeply about the work but doesn't confuse it with their self. Rejection and praise land on the work, not on who they are. They validate themselves, know their limits and reinvent themselves when they need to.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Distance from the instrument.</b> The pro treats their talent, voice and body as tools to look after and use, not as the whole of who they are.</span></li>
+          <li><span><b>Neither failure nor success is personal.</b> A rejection is information about the work or the market, not a verdict on your worth. Praise isn't either.</span></li>
+          <li><span><b>Endures adversity.</b> The pro expects to take hits, from critics, markets and plain bad luck, and keeps going.</span></li>
+          <li><span><b>Self-validates.</b> The pro doesn't wait for anyone's permission to call themselves a writer, painter or founder.</span></li>
+          <li><span><b>Knows their limits, and reinvents.</b> They get an agent, an accountant, a lawyer when needed. And when the market changes, they change with it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In Hollywood, Pressfield co-wrote the film <i>King Kong Lives</i> (1986). Everyone involved was sure it would be a hit. It flopped badly, and he was crushed. Then something shifted. He had finally had a real failure, in the real arena, with real money at stake. He realised that made him a professional.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: you and your work</div><div class="hint">Set how much of you lives in the work, then send it out</div></div>
+        <div class="stage"><svg id="vn11" role="img" aria-label="Two circles, you and your work; a rejection that hits the work also hits you where they overlap"></svg></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="vnO">How much of your identity is in this work <output id="ovnO"></output></label><input type="range" id="vnO" min="5" max="95" value="80" step="5"></div><button class="btn primary" id="vnGo">Send it out</button><button class="btn" id="vnR">Start over</button></div></div>
+        <div class="stats"><div class="stat"><span class="k">Responses so far</span><span class="v" id="vnN"></span></div><div class="stat"><span class="k">Your morale</span><span class="v glow" id="vnM"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="vnS"></span></div></div>
+        <p class="callout">An illustrative model: each response hits the work, and the overlap passes it on to you. Most responses are rejections. <b>Lower overlap doesn't mean caring less about the work. It means a "no" doesn't become a "no" to you.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pour yourself into the work, then let it go out into the world as a thing you made, not as a piece of you on trial. That's what lets you take the hundredth rejection and still start the next one.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: The Muse →</a></div>
+    </section>
+
+    <!-- ===================== BOOK THREE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Book Three · beyond Resistance</span>
+      <h2>The Higher Realm</h2>
+      <p>In the last part Pressfield turns from tactics to belief. If Resistance pushes us away from our calling, he argues, other forces pull us toward it. Call them the Muse, angels, the unconscious or the Self. Book Three is about how to work with them.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The work comes from somewhere deeper than our everyday, anxious mind. Do it for its own sake, and it will sustain you whatever the world says.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Three</span> · Angels in the abstract</div>
+        <h2>The Muse and the Magic of Beginning</h2>
+        <div class="short"><span class="lbl">In short</span><p>Pressfield believes that when you commit to your work, unseen forces come to help. You can call them the Muse or the unconscious. The way to call them is to start, and to keep showing up in the same way.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Forces that pull up.</b> Just as Resistance pushes us down, Pressfield believes in forces that pull us toward our calling. The name matters less than the idea.</span></li>
+          <li><span><b>The magic of a start.</b> He quotes the mountaineer W. H. Murray: the moment you truly commit, all sorts of unexpected help seems to follow, help no one could have planned.</span></li>
+          <li><span><b>Ideas arrive while you work.</b> Answers pop up in the shower or on a walk, but only once you've been doing the work, as if part of your mind kept going without you.</span></li>
+          <li><span><b>Make a ritual.</b> Same time, same place, a few words to begin, a small object for luck. A ritual tells you, and whatever is listening, that you're serious.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Murray wrote about commitment in his account of a Scottish expedition to the Himalayas, published in 1951. Until you commit, he says, there is hesitancy; once you do, events seem to line up behind you. He ends with a couplet he credits to Goethe, about boldness having genius, power and magic in it. Pressfield adopts the passage as his own creed.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: build your ritual</div><div class="hint">Set your daily session and choose what opens it. Saved in this browser</div></div>
+        <div class="stage"><svg id="ck12" role="img" aria-label="A clock face showing your daily session"></svg></div>
+        <div class="lab-ctl"><div class="row">
+          <div class="ctl"><label for="rtS">Start time <output id="ortS"></output></label><input type="range" id="rtS" min="10" max="46" value="14"></div>
+          <div class="ctl"><label for="rtL">Session length <output id="ortL"></output></label><input type="range" id="rtL" min="1" max="12" value="4"></div></div>
+          <div class="toggles" id="rt12"></div>
+        </div>
+        <div class="detail" id="rtOut" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't have to believe in a literal Muse. You only have to notice that when you show up the same way every day, the work starts to meet you halfway. A ritual makes the first step automatic, so Resistance has less to grab onto.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Ego and Self →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Three</span> · A map of the mind</div>
+        <h2>Ego and Self</h2>
+        <div class="short"><span class="lbl">In short</span><p>Borrowing from Carl Jung, Pressfield splits the mind in two. The Ego is the small, practical part that handles daily life and fears change. The Self is the larger whole, including dreams and the unconscious, where the work comes from. Resistance is the Ego defending its turf.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The Ego.</b> It believes death is final, time is short, everyone is separate and the point of life is to get ahead and stay safe. It's useful for running a life, and it hates losing control.</span></li>
+          <li><span><b>The Self.</b> It holds the parts of us the Ego can't see: dreams, intuition, the urge to make things. It believes in connection, in love and in work that matters beyond us.</span></li>
+          <li><span><b>Why creating feels risky.</b> When we create, we open a door to the Self. The Ego feels its grip loosening and fights back. That fight is what we feel as Resistance.</span></li>
+          <li><span><b>Work is a spiritual act.</b> Pressfield sees the artist as serving something larger. That's why the work feels frightening, and also why it can sustain you.</span></li>
+        </ul>
+      </div>
+      <div class="debate"><span class="lbl">Worth knowing</span><p>Pressfield says plainly that this is a metaphor, not science, and that you can use whichever language suits you: the Muse, God, the unconscious. <b>The useful part is the idea that the anxious, scorekeeping voice in your head is not the one that does your best work.</b></p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: whose voice is that?</div><div class="hint">Decide whether each thought comes from the Ego or the Self</div></div>
+        <div class="stage"><svg id="ps13" role="img" aria-label="A large circle for the Self with a small circle for the Ego inside it"></svg></div>
+        <div class="sorter" id="s13"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a thought is about what people will think, whether it's worth it or how it'll look, that's usually the Ego. When it's curious, playful or just wants to see what happens, that's the Self. Work from the second voice.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Hierarchy and territory →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Three</span> · Who you work for</div>
+        <h2>Hierarchy and Territory</h2>
+        <div class="short"><span class="lbl">In short</span><p>Animals and people orient themselves in one of two ways: by their rank in a pecking order, or by their territory. Artists who work for rank and approval are at the mercy of others. Artists who work for their territory, the work itself, are fed by it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Hierarchy.</b> In a pecking order you compete with everyone, judge yourself by your rank, act to make an impression, and let other people's opinions define you. For an artist that's exhausting, and it's a trap.</span></li>
+          <li><span><b>Territory.</b> Your territory is the place or practice that feeds you. Pressfield's examples: Arnold Schwarzenegger's territory was the gym; Stevie Wonder's is the piano.</span></li>
+          <li><span><b>How territory works.</b> It sustains you without anyone else's input. It can only be claimed alone, and only by working. And it gives back exactly what you put in.</span></li>
+          <li><span><b>The test.</b> Ask: if I were the last person on Earth, would I still do this? If the answer is yes, it's your territory.</span></li>
+          <li><span><b>The hack works for the hierarchy.</b> Guessing what will sell or impress puts you back in the pecking order. The artist works from the territory and lets the audience come.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pressfield asks how a hierarchy-minded artist reads a review: their whole sense of worth moves with it. The territorial artist reads the same review, takes what's useful, and goes back to the desk, because the desk is where their satisfaction comes from. They get the same news. Only one of them gets knocked over by it.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: who feeds you?</div><div class="hint">Set how much of your satisfaction comes from approval and see a year of it</div></div>
+        <div class="stage"><svg id="ht14" role="img" aria-label="A year of how satisfied you feel, driven by outside approval or by the work itself"></svg></div>
+        <div class="lab-ctl"><div class="row"><div class="ctl"><label for="htM">Satisfaction that comes from approval and rank <output id="ohtM"></output></label><input type="range" id="htM" min="0" max="100" value="80" step="5"></div><button class="btn" id="htR">Roll a new year</button></div></div>
+        <div class="stats"><div class="stat"><span class="k">Worst month</span><span class="v" id="htW"></span></div><div class="stat"><span class="k">Swing, best to worst</span><span class="v" id="htV"></span></div><div class="stat"><span class="k">Year-end</span><span class="v glow" id="htE"></span></div></div>
+        <p class="callout">An illustrative model: outside opinion drifts up and down at random; the work grows a little with every month you put in. <b>The more you depend on the first, the more your year looks like the stock market.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Find the thing you'd do even if nobody ever saw it, and get your satisfaction from doing it, not from how it's received. Approval is nice when it comes. Don't hand it the steering wheel.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The artist's life →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Book Three</span> · Work for its own sake</div>
+        <h2>The Artist's Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>Pressfield ends with a call. Do the work for its own sake: as the Bhagavad Gita puts it, we have a right to our labour, but not to its fruits. And your work isn't only for you. It's a gift the rest of us need.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Labour, not fruits.</b> You control the work: showing up, the hours, the honesty of it. You don't control the results: sales, reviews, being chosen. Put your heart into the first and let go of the second.</span></li>
+          <li><span><b>Serve the work.</b> The pro isn't the star of the show. They report for duty, do their part and step aside.</span></li>
+          <li><span><b>You may have been put here for this.</b> If you were born to make something and you don't, Pressfield says, you don't only hurt yourself. You rob everyone who'd have benefited.</span></li>
+          <li><span><b>Give us what you've got.</b> Creative work isn't selfish or a bid for attention. It's a gift to the world. His last words are an appeal not to hold it back.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the Bhagavad Gita, the warrior Arjuna loses his nerve on the eve of battle. His charioteer, the god Krishna, tells him to do his duty and fight, without clinging to the outcome. Pressfield reads the scene as a picture of every artist on every morning: frozen in front of the work, needing to act without a guarantee.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: labour or fruit?</div><div class="hint">Is it yours to control, or one of the results?</div></div>
+        <div class="stage"><svg id="fr15" role="img" aria-label="A tree: your labour at the roots and the results as fruit in the branches"></svg></div>
+        <div class="sorter" id="s15"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Measure your days by the part you control. Did you show up? Did you do honest work? That's the whole job. Whatever comes of it is a bonus, and it isn't yours to demand.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#after">Next: Sit down today →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Your daily battle · <span id="logN"></span></span>
+      <h2>Sit Down Today</h2>
+      <p>The whole book comes down to one act repeated: sit down and do the work. Write your commitment below, then mark each day you keep it. Nothing here leaves your browser.</p>
+      <div class="lab" style="margin:0">
+        <div class="lab-top"><div class="t">Your commitment</div><div class="hint">Saved only in this browser</div></div>
+        <div class="fields">
+          <div class="field"><label for="cmW">Every day I will work on…</label><input id="cmW" maxlength="80" placeholder="my novel"></div>
+          <div class="field"><label for="cmT">At…</label><input id="cmT" maxlength="40" placeholder="7:00 in the morning"></div>
+          <div class="field"><label for="cmM">For at least…</label><input id="cmM" maxlength="40" placeholder="one hour"></div>
+        </div>
+        <div class="out"><span class="k">Your commitment</span><p class="say-out" id="cmOut"></p><p class="tip" id="cmRit"></p></div>
+      </div>
+      <div class="lab" style="margin:0">
+        <div class="lab-top"><div class="t">The last four weeks</div><div class="hint">Tap a day you sat down and did the work</div></div>
+        <div class="logwrap">
+          <div><div class="dow" id="dow"></div><div class="grid28" id="grid28"></div></div>
+          <div class="stats" style="grid-template-columns:1fr"><div class="stat"><span class="k">Current run</span><span class="v glow" id="lgRun"></span></div><div class="stat"><span class="k">Days in the last 28</span><span class="v" id="lgTot"></span></div><div class="stat"><span class="k">Remember</span><span class="s" id="lgSay"></span></div></div>
+        </div>
+      </div>
+      <p class="big">Resistance is real, it's universal, and it can be beaten. Not once, but every day, by sitting down.</p>
+      <div class="recap">
+        <div><span class="n">Book One · Resistance</span><b>Name the enemy</b><span>It's a force, not a flaw. It points at what matters.</span></div>
+        <div><span class="n">Book Two · Turning pro</span><b>Show up for keeps</b><span>Every day, no matter what, for the long haul.</span></div>
+        <div><span class="n">Book Three · The higher realm</span><b>Work for its own sake</b><span>Labour, not fruits. Territory, not rank.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The War of Art</i> by Steven Pressfield (2002). The book is made of many short sections; this guide groups them into fifteen chapters under the book's three parts. The explanations, retold stories and labs are written in our own words, and labs that show numbers are illustrative models, not data from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Book One · Resistance", "Book Two · Turning Pro", "Book Three · The Higher Realm"];
+const CH = [["The Unlived Life", "The unlived life", 0], ["How Resistance Behaves", "How it behaves", 0], ["Resistance in Disguise", "Disguises", 0], ["Fear Is a Signpost", "Fear is a signpost", 0], ["Criticism, Support and Healing", "Criticism and healing", 0], ["Rationalization", "Rationalization", 0],
+  ["Turning Pro", "Turning pro", 1], ["Inspiration Keeps Office Hours", "Office hours", 1], ["Patience, Order and Craft", "Patience and order", 1], ["Play It as It Lays", "Play it as it lays", 1], ["Don't Take It Personally", "Not personal", 1],
+  ["The Muse and the Magic of Beginning", "The Muse", 2], ["Ego and Self", "Ego and Self", 2], ["Hierarchy and Territory", "Hierarchy and territory", 2], ["The Artist's Life", "The artist's life", 2]];
+const QUIZ = {
+  1: {q: "Which of these is most likely to stir up Resistance?", o: ["Ordering dinner in", "Starting the business you've talked about for years", "Watching a film with friends"], a: 1, w: "Resistance shows up for anything that trades comfort now for growth later. A new venture is a classic case."},
+  2: {q: "Why does Pressfield say Resistance can be used as a compass?", o: ["It always points away from danger", "The more important the work is to your growth, the more Resistance you feel", "It goes quiet when you're on the right path"], a: 1, w: "Resistance is infallible: it pushes hardest against what matters most, so the strongest pull away points at the thing to do."},
+  3: {q: "What is Resistance's favourite disguise?", o: ["Procrastination: \"I'll start tomorrow\"", "Open refusal: \"I will never do this\"", "Hard work on the wrong project"], a: 0, w: "Nobody says never. We say tomorrow, which is the easiest excuse to forgive ourselves for."},
+  4: {q: "You're terrified of starting a project you care about. What does Pressfield say that means?", o: ["It's a warning that you're not ready", "It's a sign the project matters and you should do it", "You should choose a less scary project first"], a: 1, w: "Fear and Resistance rise with love. The more scared you are of a work, the surer you can be that you need to do it."},
+  5: {q: "According to Pressfield, what does it often mean when you find yourself criticising someone who's chasing a dream?", o: ["That they deserve it", "That you're acting out of your own Resistance", "That you have good taste"], a: 1, w: "Seeing others live their unlived life reminds us of ours. The sneer is often Resistance talking."},
+  6: {q: "What makes a true excuse into Rationalization?", o: ["Telling it to other people", "Using it as a reason not to do any of the work today", "Having more than one excuse"], a: 1, w: "The excuse may be perfectly true. It becomes Resistance when it's used to justify skipping the work."},
+  7: {q: "What does Pressfield say we already know how to do?", o: ["Be professionals: we do it at our day jobs", "Write well: talent is universal", "Avoid fear"], a: 0, w: "At work we show up daily, stay all day and accept judgement. Turning pro means bringing those habits to our calling."},
+  8: {q: "What's the point of Somerset Maugham's line about inspiration striking at nine o'clock?", o: ["Mornings are the most creative time", "If you show up on schedule, inspiration tends to follow", "Only professionals get inspired"], a: 1, w: "The pro keeps a schedule and lets inspiration find them already working."},
+  9: {q: "Why does Pressfield call a project an Iditarod, not a sprint?", o: ["It needs a team of helpers", "You need a pace you can keep for the whole distance", "It should be done as fast as possible"], a: 1, w: "Patience is a pro quality. A burst of effort that burns out in a week loses to a steady pace."},
+  10: {q: "A golfer's ball lands in the sand. What does \"play it as it lays\" mean for a writer?", o: ["Wait for better conditions", "Work with the conditions you actually have", "Complain until someone helps"], a: 1, w: "Conditions are never perfect. The pro takes the best shot from where they are."},
+  11: {q: "How did Pressfield come to see the flop of King Kong Lives?", o: ["As proof he should quit screenwriting", "As a real failure in the real arena, which made him a pro", "As someone else's fault"], a: 1, w: "He'd finally been tested for real. Taking the hit without making it about his worth was the professional's move."},
+  12: {q: "According to the passage by W. H. Murray that Pressfield quotes, what happens when you truly commit?", o: ["Things get harder", "Unexpected help seems to follow", "Nothing changes until you succeed"], a: 1, w: "Murray describes a stream of unforeseen help that follows commitment. Pressfield calls this the magic of making a start."},
+  13: {q: "In Pressfield's map of the mind, what is Resistance?", o: ["The Self protecting you from failure", "The Ego fighting to keep control as you open up to the Self", "A sign of low intelligence"], a: 1, w: "Creating opens the door to the Self. The Ego feels its grip slipping and pushes back. We feel that as Resistance."},
+  14: {q: "Which question tells you whether something is your territory?", o: ["Will this make me famous?", "If I were the last person on Earth, would I still do it?", "Is anyone else doing this?"], a: 1, w: "Territory sustains you without anyone's approval. If you'd still do it alone, it's yours."},
+  15: {q: "\"We have a right to our labour, but not to its fruits.\" What does it ask of you?", o: ["Work only for money", "Do the work fully, and let go of controlling the results", "Expect nothing and do little"], a: 1, w: "Put your heart into the part you control, the work, and release the outcome. That's the Gita's advice to Arjuna, and Pressfield's to us."}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+/* wrap text into tspans of at most n characters */
+const lines = (t, n) => { const words = String(t).split(' '), ls = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ ls.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) ls.push(cur); return ls; };
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const ls = lines(t, n), y0 = y - (ls.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${ls.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+const path = pts => pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('');
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#110e0e';
+try { const t = localStorage.getItem('wa-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('wa-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('wa-done', []));
+const save = () => store.set('wa-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter (fixed bins) and trials (each item brings its own options) ---------- */
+function sorter(box, cfg){
+  const items = cfg.items, n = items.length;
+  let order, pos, score;
+  const reset = () => { order = items.map((_, i) => i); for (let k = n - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; }
+    pos = 0; score = []; if (cfg.onReset) cfg.onReset(); show(); };
+  const tally = () => `<div class="tally" aria-label="${score.filter(Boolean).length} right so far">${order.map(k => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join('')}</div>`;
+  function show(){
+    if (pos >= n){ const r = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><p class="item">${r} of ${n} right.</p><p class="fb">${cfg.end ? cfg.end(r, n) : ''}</p></div><div class="row">${tally()}<button class="btn" data-again>Shuffle and go again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', reset); return; }
+    const it = items[order[pos]], bins = it.o ? it.o.map(o => [o]) : cfg.bins;
+    box.innerHTML = `<div class="sort-card"><span class="k">${cfg.label || 'Item'} ${pos + 1} of ${n}</span><p class="item${it.o ? ' q' : ''}">${it.t}</p>${it.ctx ? `<p class="ctx">${it.ctx}</p>` : ''}<p class="fb" aria-live="polite"></p></div>
+      <div class="bins${it.o || cfg.stack ? ' stack' : ''}">${bins.map((b, i) => `<button class="bin" data-b="${i}"><b>${b[0]}</b>${b[1] ? `<span>${b[1]}</span>` : ''}</button>`).join('')}</div>
+      <div class="row">${tally()}<button class="btn" data-next hidden>${pos === n - 1 ? 'See your score' : 'Next'} →</button></div>`;
+    box.querySelectorAll('.bin').forEach(b => b.addEventListener('click', () => {
+      const i = +b.dataset.b, ok = i === it.a;
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (+x.dataset.b === it.a) x.classList.add('right'); });
+      if (!ok) b.classList.add('wrong');
+      score[order[pos]] = ok;
+      box.querySelector('.fb').innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Right.' : 'Not quite.'}</b> ${it.fb}`;
+      box.querySelector('.tally').outerHTML = tally();
+      if (cfg.onAnswer) cfg.onAnswer(order[pos], ok, i);
+      const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll: true});
+      nx.addEventListener('click', () => { pos++; show(); });
+    }));
+  }
+  reset();
+}
+
+/* ---------- hero: two lives ---------- */
+{ const el = $('#heroTwo'); let g = '';
+  g += `<path d="M18 232H190" ${S('line', 2)}/><path d="M246 112H404" ${S('cool', 2, ';stroke-dasharray:5 5')}/>`;
+  g += TX(22, 258, 'The life you live', 'muted', 13) + TX(402, 136, 'The unlived life', 'cool', 13, 'end', 'font-style="italic"');
+  for (let r = 0; r < 11; r++){ const y = 216 - r * 15, off = r % 2 ? 10 : 0;
+    for (let c = -1; c < 3; c++){ const x0 = Math.max(196, 196 + off + c * 20), x1 = Math.min(240, 196 + off + c * 20 + 20); if (x1 - x0 < 4) continue;
+      g += `<rect x="${x0 + 1}" y="${y + 1}" width="${x1 - x0 - 2}" height="13" rx="2" ${F('glow', .22 + (r % 3) * .07)}/>`; } }
+  g += `<text x="218" y="150" font-size="12" text-anchor="middle" transform="rotate(-90 218 150)" letter-spacing="3" ${F('glow')} class="mono2">RESISTANCE</text>`;
+  /* a figure on the left and a try that bounces off the wall */
+  g += `<circle cx="78" cy="196" r="7" ${F('text')}/><path d="M78 203V219M78 219l-7 12M78 219l7 12M78 208l-9 6M78 208l10-5" ${S('text', 2.2, ';stroke-linecap:round')}/>`;
+  g += `<path d="M92 196Q150 96 190 120" ${S('glow', 1.8, ';stroke-dasharray:4 4')}/>` + arrowHead(190, 120, 0.5, 'glow', 8);
+  g += `<path d="M190 132Q170 180 128 212" ${S('faint', 1.4, ';stroke-dasharray:3 4')}/>` + arrowHead(128, 212, 2.4, 'faint', 7);
+  g += `<circle cx="330" cy="86" r="7" ${S('cool', 1.6, ';stroke-dasharray:3 3')}/><path d="M330 93V108" ${S('cool', 1.6, ';stroke-dasharray:3 3')}/>`;
+  el.innerHTML = g;
+  const FIND = [["I keep putting it off", 3, "Resistance in Disguise", "Procrastination is Resistance's favourite costume. Learn to spot it, and the others it wears."],
+    ["I'm scared it won't be any good", 4, "Fear Is a Signpost", "The fear is a sign the work matters. Pressfield says the more scared you are, the surer you can be."],
+    ["I have good reasons I can't right now", 6, "Rationalization", "Your reasons may be true. The question is whether they stop you doing fifteen minutes today."],
+    ["I only work when I feel inspired", 8, "Inspiration Keeps Office Hours", "Pros keep a schedule and let inspiration find them working."],
+    ["I started strong and burned out", 9, "Patience, Order and Craft", "It's an Iditarod, not a sprint. Pick a pace you can keep."],
+    ["Rejection knocked me flat", 11, "Don't Take It Personally", "Care about the work, but don't let a no to the work become a no to you."],
+    ["I care too much what people think", 14, "Hierarchy and Territory", "Work for your territory, not your rank, and the opinion of others stops steering you."]];
+  $('#find').innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="false">${f[0]}</button>`).join('');
+  const pick = i => { const f = FIND[i]; $$('#find .btn').forEach(b => b.setAttribute('aria-pressed', +b.dataset.f === i));
+    $('#findA').innerHTML = `<span class="k">Chapter ${f[1]}</span><span class="p">${f[2]}</span><span class="d">${f[3]}</span><a href="#ch${f[1]}">Go to chapter ${f[1]} →</a>`; };
+  $$('#find .btn').forEach(b => b.addEventListener('click', () => pick(+b.dataset.f)));
+  pick(0);
+}
+
+/* ---------- 1: what hits the wall ---------- */
+{ const IT = [
+    {t: "Writing the first chapter of your novel", s: "Novel, chapter 1", a: 0, fb: "Creative work is the classic target. Resistance will find a hundred reasons for you to do something else first."},
+    {t: "Starting the side business you've planned for years", s: "Side business", a: 0, fb: "Any new venture means risk now for a payoff later, so it meets Resistance."},
+    {t: "Beginning a fitness plan", s: "Fitness plan", a: 0, fb: "Pressfield lists diets and health plans by name: comfort now traded for health later."},
+    {t: "Learning a new language", s: "New language", a: 0, fb: "Education of every kind draws Resistance. Watch how quickly the evening class becomes optional."},
+    {t: "Speaking up when something is wrong at work", s: "Speaking up", a: 0, fb: "A stand on principle is on Pressfield's list. Silence is easier today; integrity pays later."},
+    {t: "Volunteering to coach a kids' team", s: "Coaching kids", a: 0, fb: "Helping others is on the list too. Even good deeds meet the pull to stay on the sofa."},
+    {t: "Apologising first after a fight", s: "Apologising first", a: 0, fb: "Acts of the heart, like committing to someone or mending things, draw Resistance."},
+    {t: "Watching one more episode", a: 1, fb: "Instant pleasure, nothing asked of you. Resistance has no reason to stop it."},
+    {t: "Scrolling your feed", a: 1, fb: "Easy, endless and rewarding right now. It slides straight past."},
+    {t: "Buying a beautiful notebook for the novel", a: 1, fb: "A trick one. It feels like progress, but it asks nothing of you, so Resistance happily lets you shop."},
+    {t: "Reorganising your desk for the third time this week", a: 1, fb: "Busywork that looks like preparation. If it were the work, you'd feel the pushback."},
+    {t: "Ordering a takeaway", a: 1, fb: "Comfort now, no growth asked. No wall here."}];
+  const el = $('#wall1'); let placed = [], slid = [];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 270, ground = H - 40, cx = nw ? 180 : 380, ww = nw ? 132 : 170, bh = nw ? 25 : 27;
+    vb(el, W, H); let g = '';
+    g += `<path d="M14 ${ground}H${cx - ww / 2 - 6}" ${S('line', 2)}/><path d="M${cx + ww / 2 + 6} ${ground - 7 * bh - 32}H${W - 14}" ${S('cool', 2, ';stroke-dasharray:5 5')}/>`;
+    g += TX(16, ground + 22, nw ? 'Where you are' : 'The life you live', 'muted', nw ? 11.5 : 13) + TX(W - 16, ground - 7 * bh - 42, nw ? 'Unlived' : 'The unlived life', 'cool', nw ? 11.5 : 13, 'end', 'font-style="italic"');
+    for (let k = 0; k < 7; k++){ const y = ground - (k + 1) * bh, it = placed[k] != null ? IT[placed[k]] : null;
+      g += `<rect x="${cx - ww / 2}" y="${y + 1}" width="${ww}" height="${bh - 2}" rx="4" ${it ? FS('glow', 'glow', 1, .2) : S('line', 1, ';stroke-dasharray:3 3')}/>`;
+      if (it) g += TX(cx, y + bh / 2 + 4, it.s, 'text', nw ? 10.5 : 12, 'middle', 'font-weight="500"'); }
+    g += TX(cx, ground - 7 * bh - 10, placed.length ? `Resistance · ${placed.length} of 7` : 'Resistance', 'glow', 11, 'middle', 'class="mono2" letter-spacing="2"');
+    /* activities that slide past stay on the ground where you are */
+    if (nw) { if (slid.length) g += TX(16, ground - 10, `${slid.length} slid past`, 'faint', 11); }
+    else slid.forEach((k, i) => { const x = 22 + (i % 2) * 120, y = ground - 18 - Math.floor(i / 2) * 30;
+      g += `<rect x="${x}" y="${y - 13}" width="112" height="22" rx="11" ${FS('panel-2', 'line')}/>` + TX(x + 56, y + 2, IT[k].t.split(' ').slice(0, 3).join(' '), 'muted', 10.5, 'middle'); });
+    el.innerHTML = g; });
+  sorter($('#s1'), {items: IT, label: 'Activity', bins: [["Hits the wall", "Meets Resistance"], ["Slides right past", "No Resistance"]],
+    onReset: () => { placed = []; slid = []; draw(); },
+    onAnswer: (k, ok) => { if (ok){ (IT[k].a === 0 ? placed : slid).push(k); draw(); } },
+    end: r => r >= 10 ? "You can see it coming. Everything that helps you grow meets the wall; everything that keeps you comfortable slides by." : "Check the ones you missed: the tricky items look like progress but ask nothing of you."});
+  draw();
+}
+
+/* ---------- 2: the compass ---------- */
+{ const P = store.get('wa-compass', [["Write the novel", 9], ["Clean out the garage", 3], ["Learn to cook properly", 6]]);
+  $('#cmpIn').innerHTML = P.map((p, i) => `<div class="proj"><input type="text" id="cp${i}" maxlength="40" value="${esc(p[0])}" aria-label="Project ${i + 1}"><label for="cr${i}">How much it matters <output id="ocr${i}">${p[1]}</output></label><input type="range" id="cr${i}" min="0" max="10" value="${p[1]}"></div>`).join('');
+  const el = $('#cmp2');
+  const res = v => Math.round(100 * Math.pow(v / 10, 1.3));
+  const draw = onLayout(() => {
+    P.forEach((p, i) => { p[0] = $('#cp' + i).value.trim() || `Project ${i + 1}`; p[1] = +$('#cr' + i).value; out('cr' + i, p[1]); });
+    store.set('wa-compass', P);
+    const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 440 : 300, cx = nw ? 180 : 210, cy = nw ? 126 : 150, R = nw ? 100 : 112;
+    vb(el, W, H); let g = '';
+    const top = P.reduce((b, p, i) => p[1] > P[b][1] ? i : b, 0), angs = [-150, -90, -30].map(a => a * Math.PI / 180);
+    g += `<circle cx="${cx}" cy="${cy}" r="${R}" ${FS('panel-2', 'line', 1.5)}/><circle cx="${cx}" cy="${cy}" r="${R - 14}" ${S('line', 1, ';stroke-dasharray:2 5')}/>`;
+    for (let k = 0; k < 36; k++){ const a = k * Math.PI / 18, r0 = R - (k % 9 === 0 ? 12 : 6); g += `<path d="M${cx + r0 * Math.cos(a)} ${cy + r0 * Math.sin(a)}L${cx + R * Math.cos(a)} ${cy + R * Math.sin(a)}" ${S('faint', 1)}/>`; }
+    P.forEach((p, i) => { const a = angs[i], x = cx + (R - 30) * Math.cos(a), y = cy + (R - 30) * Math.sin(a), on = i === top && p[1] >= 4;
+      g += `<circle cx="${x}" cy="${y}" r="${7 + p[1] * 0.9}" ${F(on ? 'glow' : 'cool', on ? .9 : .35)}/>` + TX(x, y + 4, i + 1, on ? 'on-glow' : 'text', 11.5, 'middle', 'font-weight="600"'); });
+    const a = P[top][1] >= 4 ? angs[top] : Math.PI / 2, nx = cx + (R - 46) * Math.cos(a), ny = cy + (R - 46) * Math.sin(a), px = -Math.sin(a) * 7, py = Math.cos(a) * 7;
+    g += `<path d="M${nx} ${ny}L${cx + px} ${cy + py}L${cx - (nx - cx) * 0.35} ${cy - (ny - cy) * 0.35}L${cx - px} ${cy - py}Z" ${F(P[top][1] >= 4 ? 'glow' : 'faint')}/><circle cx="${cx}" cy="${cy}" r="5" ${F('text')}/>`;
+    g += TX(cx, cy + R + 22, 'Points toward the most Resistance', 'faint', 11.5, 'middle');
+    /* bars */
+    const bx = nw ? 20 : 420, by = nw ? 318 : 66, bw = nw ? 320 : 300;
+    g += TX(bx, by - 20, 'Resistance you can expect', 'muted', 12);
+    P.forEach((p, i) => { const y = by + i * (nw ? 38 : 64), v = res(p[1]), on = i === top && p[1] >= 4;
+      g += TX(bx, y, `${i + 1}. ${esc(p[0].length > 30 ? p[0].slice(0, 29) + '…' : p[0])}`, on ? 'text' : 'muted', 12.5, 'start', on ? 'font-weight="600"' : '');
+      g += `<rect x="${bx}" y="${y + 7}" width="${bw}" height="10" rx="5" ${F('line')}/><rect x="${bx}" y="${y + 7}" width="${Math.max(2, bw * v / 100)}" height="10" rx="5" ${F(on ? 'glow' : 'cool', on ? 1 : .6)}/>`; });
+    el.innerHTML = g;
+    $('#cmpTop').textContent = P[top][1] >= 4 ? P[top][0] : 'None yet';
+    $('#cmpSay').textContent = P[top][1] >= 4 ? `Start with "${P[top][0]}". It's the one Resistance is fighting hardest, which by Pressfield's rule makes it the one that matters most.` : "Nothing here matters much to you yet, and Resistance only bothers with things that do. Try naming what you secretly want to do.";
+  });
+  $$('#cmpIn input').forEach(i => i.addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 2b: the finish-line surge ---------- */
+{ const el = $('#fl2'), R = p => p >= 99 ? 6 : clamp(32 + 50 * Math.exp(-p / 11) + 62 * Math.exp(-((p - 90) ** 2) / 50), 0, 100);
+  const SAY = p => p < 15 ? '"Maybe this isn\'t the right idea. Do a bit more research first."' : p < 45 ? '"You\'ve started now, so there\'s no rush. Take tomorrow off."' : p < 78 ? '"It\'s going fine. You\'ve earned a break this week."' : p < 99 ? '"It isn\'t ready. Polish it again. What if people hate it?"' : 'Done. Ship it, and expect the whole cycle again on the next one.';
+  const draw = onLayout(() => { const p = +$('#flP').value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 220 : 240, x0 = 34, x1 = W - 16, y0 = 24, y1 = H - 40;
+    vb(el, W, H); const X = q => x0 + (x1 - x0) * q / 100, Y = r => y1 - (y1 - y0) * r / 100;
+    const pts = []; for (let q = 0; q <= 100; q += 0.5) pts.push([X(q), Y(R(q))]);
+    let g = `<path d="M${x0} ${y1}H${x1}M${x0} ${y0}V${y1}" ${S('line', 1)}/>`;
+    g += `<path d="${path(pts)}L${X(100)} ${y1}L${x0} ${y1}Z" ${F('glow', .1)}/><path d="${path(pts)}" ${S('glow', 2.2)}/>`;
+    const lab = nw ? [[0, 'Blank'], [50, 'Middle'], [90, 'Almost'], [100, 'Done']] : [[0, 'Blank page'], [50, 'The messy middle'], [90, 'Almost done'], [100, 'Shipped']];
+    lab.forEach(([q, t], i) => g += TX(X(q), y1 + 18, t, 'faint', 11, i === 0 ? 'start' : i === lab.length - 1 ? 'end' : 'middle'));
+    g += `<text x="14" y="${(y0 + y1) / 2}" font-size="11" text-anchor="middle" transform="rotate(-90 14 ${(y0 + y1) / 2})" ${F('faint')}>Resistance</text>`;
+    g += `<path d="M${X(p)} ${y0}V${y1}" ${S('faint', 1, ';stroke-dasharray:3 4')}/><circle cx="${X(p)}" cy="${Y(R(p))}" r="7" ${FS('glow', 'ink', 2.5)}/>`;
+    el.innerHTML = g; out('flP', p + '%'); $('#flR').textContent = Math.round(R(p)) + ' / 100'; $('#flS').textContent = SAY(p); });
+  $('#flP').addEventListener('input', draw); draw();
+}
+
+/* ---------- 3: unmask the excuse ---------- */
+{ const BINS = [["Procrastination", "I'll start later"], ["Quick pleasure", "a reward right now"], ["Trouble and drama", "a crisis you stir up"], ["Self-medication", "numbing the feeling"], ["Victimhood", "the world won't let me"]];
+  const IT = [
+    {t: '"I\'ll start properly on Monday, when my week is clear."', a: 0, fb: "The week is never clear. Monday is Resistance's favourite day."},
+    {t: '"Once the house is quiet and the kitchen is spotless, I\'ll begin."', a: 0, fb: "Waiting for perfect conditions is procrastination with a mop."},
+    {t: '"Just one more video, then I\'ll get going."', a: 1, fb: "A small, easy reward that turns up exactly when the hard work is due."},
+    {t: '"I\'ll grab a snack first. And check what\'s in the fridge."', a: 1, fb: "Sudden hunger at the start of a session is a famous tell."},
+    {t: '"I can\'t write today, I\'ve got to deal with this row I started with my sister."', a: 2, fb: "Drama you created earns you attention without the work of earning it."},
+    {t: '"My life is such a mess right now. Let me tell you all about it."', a: 2, fb: "Self-dramatising turns life into a soap opera, and the soap opera fills the hours."},
+    {t: '"A couple of drinks will loosen me up for the work."', a: 3, fb: "Dulling the restlessness rather than answering it. The restlessness was the call to work."},
+    {t: '"I\'ll just buy something nice. I need cheering up before I start."', a: 3, fb: "Shopping to soothe a feeling that is really the unlived life knocking."},
+    {t: '"With everything that\'s happened to me this year, nobody could expect me to create."', a: 4, fb: "Hard things happen. Making them the reason you can't work turns them into a role."},
+    {t: '"I always get sick right before deadlines. It\'s just my luck."', a: 4, fb: "Pressfield notes how often illness and bad luck arrive right on cue. It can be real, and it can also be Resistance."}];
+  const el = $('#mk3'), caught = [0, 0, 0, 0, 0]; let lit = -1;
+  const mask = (x, y, s, on) => `<path transform="translate(${x} ${y}) scale(${s})" d="M-30 -26Q0 -36 30 -26Q34 6 18 26Q0 38 -18 26Q-34 6 -30 -26Z" ${FS(on ? 'glow' : 'panel-2', on ? 'glow' : 'line', 1.5 / s, on ? .85 : 1)}/>
+    <ellipse cx="${x - 12 * s}" cy="${y - 8 * s}" rx="${8 * s}" ry="${5 * s}" ${F('ink')}/><ellipse cx="${x + 12 * s}" cy="${y - 8 * s}" rx="${8 * s}" ry="${5 * s}" ${F('ink')}/><path d="M${x - 10 * s} ${y + 12 * s}Q${x} ${y + 18 * s} ${x + 10 * s} ${y + 12 * s}" ${S(on ? 'ink' : 'faint', 1.5)}/>`;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 160 : 170, step = W / 5, s = nw ? .78 : 1.2;
+    vb(el, W, H); let g = '';
+    BINS.forEach((b, i) => { const x = step * (i + .5), y = nw ? 50 : 60;
+      g += mask(x, y, s, i === lit) + wrap(x, nw ? 104 : 124, b[0], nw ? 10 : 18, 13, i === lit ? 'glow' : 'text', nw ? 10.5 : 12.5, 'middle', 'font-weight="500"');
+      g += TX(x, nw ? 138 : 150, caught[i] ? `caught ×${caught[i]}` : '·', 'faint', 10.5, 'middle', 'class="mono2"'); });
+    el.innerHTML = g; });
+  sorter($('#s3'), {items: IT, label: 'Excuse', bins: BINS, onReset: () => { caught.fill(0); lit = -1; draw(); },
+    onAnswer: (k, ok) => { lit = IT[k].a; if (ok) caught[lit]++; draw(); },
+    end: r => r >= 8 ? "Sharp eyes. Next time one of these lines turns up in your own head, you'll know who's speaking." : "The costumes overlap, and that's the point: Resistance will wear whatever works on you."});
+  draw();
+}
+
+/* ---------- 4: love and fear ---------- */
+{ const EX = [["Tidy the inbox", 10], ["Learn guitar for fun", 35], ["Run a first marathon", 62], ["Write your memoir", 82], ["Quit to start your own company", 95]];
+  $('#lvEx').innerHTML = EX.map((e, i) => `<button class="btn" data-lv="${i}" aria-pressed="false">${e[0]}</button>`).join('');
+  const el = $('#lv4'), R = l => 6 + 0.9 * l;
+  const draw = onLayout(() => { const l = +$('#lvL').value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 260, x0 = 40, x1 = W - 20, y0 = 20, y1 = H - 44;
+    vb(el, W, H); const X = v => x0 + (x1 - x0) * v / 100, Y = v => y1 - (y1 - y0) * v / 100;
+    let g = `<path d="M${x0} ${y1}H${x1}M${x0} ${y0}V${y1}" ${S('line', 1)}/>`;
+    g += `<path d="M${X(0)} ${Y(R(0) - 6)}L${X(100)} ${Y(R(100) - 10)}L${X(100)} ${Y(Math.min(100, R(100) + 4))}L${X(0)} ${Y(R(0) + 6)}Z" ${F('glow', .1)}/><path d="M${X(0)} ${Y(R(0))}L${X(100)} ${Y(R(100))}" ${S('glow', 2.2)}/>`;
+    EX.forEach(e => g += `<circle cx="${X(e[1])}" cy="${Y(R(e[1]))}" r="4" ${F('cool', .8)}/>`);
+    g += TX((x0 + x1) / 2, y1 + 32, 'How much it means to you →', 'faint', 11.5, 'middle');
+    g += `<text x="14" y="${(y0 + y1) / 2}" font-size="11.5" text-anchor="middle" transform="rotate(-90 14 ${(y0 + y1) / 2})" ${F('faint')}>Resistance and fear →</text>`;
+    g += `<path d="M${X(l)} ${y1}V${Y(R(l))}H${x0}" ${S('faint', 1, ';stroke-dasharray:3 4')}/><circle cx="${X(l)}" cy="${Y(R(l))}" r="8" ${FS('glow', 'ink', 2.5)}/>`;
+    const ex = EX.find(e => e[1] === l); if (ex) g += TX(clamp(X(l), 90, W - 90), Y(R(l)) - 16, ex[0], 'text', 12, 'middle', 'font-weight="500"');
+    el.innerHTML = g; out('lvL', l + ' / 100');
+    const r = R(l); $('#lvR').textContent = (r < 30 ? 'Low' : r < 55 ? 'Moderate' : r < 80 ? 'High' : 'Very high') + ` · ${Math.round(r)}`;
+    $('#lvS').textContent = l < 25 ? "Little fear, little at stake. Fine for chores, but it isn't a calling." : l < 55 ? "Some nerves. It matters a bit; a regular slot in the week will handle it." : l < 80 ? "Real fear, and that's the signpost: this one matters. Do a small piece of it today." : "Terrified? Good. By Pressfield's rule, this is the one you have to do.";
+    $$('#lvEx .btn').forEach(b => b.setAttribute('aria-pressed', EX[+b.dataset.lv][1] === l)); });
+  $('#lvL').addEventListener('input', draw);
+  $$('#lvEx .btn').forEach(b => b.addEventListener('click', () => { $('#lvL').value = EX[+b.dataset.lv][1]; draw(); }));
+  draw();
+}
+
+/* ---------- 5: the critic's mirror ---------- */
+{ const MR = [["Show-off", "She's so full of herself, posting her paintings everywhere.", "Is there work of my own I've been too scared to show anyone?"],
+    ["Reckless", "He's naïve to quit a good job for some start-up.", "Have I been sitting on an idea I'd love to bet on?"],
+    ["Who does he think he is?", "Who does he think he is, writing a book?", "Is there a book I've been meaning to write for years?"],
+    ["Fitness bore", "She's running another marathon, just to show off.", "Have I been putting off getting fit?"],
+    ["No future in it", "They'll never make a penny from that band.", "Is there something I'd love to do even if it never paid?"],
+    ["Diet obsessed", "He won't stop going on about his new diet.", "Is there a habit I've been wanting to change?"]];
+  $('#mr5b').innerHTML = MR.map((m, i) => `<button class="card3" data-m="${i}" aria-pressed="false"><b>${m[0]}</b><span>${m[1]}</span></button>`).join('');
+  const el = $('#mr5'); let cur = 0;
+  const draw = onLayout(() => { const m = MR[cur], nw = NARROW(); let g = '';
+    if (nw){ vb(el, 360, 380);
+      g += `<path d="M20 20H340V96H90L64 116V96H20Z" ${FS('panel-2', 'line', 1.2)}/>` + wrap(180, 58, `“${m[1]}”`, 40, 17, 'text', 13.5);
+      g += `<ellipse cx="180" cy="240" rx="110" ry="116" ${FS('cool-soft', 'cool', 4)}/><ellipse cx="180" cy="240" rx="96" ry="102" ${FS('deep', 'cool', 1)}/>`;
+      g += `<path d="M120 170Q140 150 168 148" ${S('soft', 2, ';stroke-linecap:round;opacity:.35')}/>` + TX(180, 182, 'the mirror asks', 'faint', 11, 'middle', 'class="mono2"') + wrap(180, 246, m[2], 18, 24, 'glow', 21, 'middle', 'class="disp"');
+    } else { vb(el, 760, 300);
+      g += `<path d="M24 64H330V196H120L86 230V196H24Z" ${FS('panel-2', 'line', 1.2)}/>` + TX(40, 50, 'What you say', 'faint', 11.5, 'start', 'class="mono2"') + wrap(177, 130, `“${m[1]}”`, 36, 21, 'text', 16);
+      g += `<path d="M350 150H400" ${S('faint', 1.4, ';stroke-dasharray:4 4')}/>` + arrowHead(404, 150, 0, 'faint', 8);
+      g += `<ellipse cx="560" cy="150" rx="140" ry="134" ${FS('cool-soft', 'cool', 5)}/><ellipse cx="560" cy="150" rx="124" ry="118" ${FS('deep', 'cool', 1)}/>`;
+      g += `<path d="M480 76Q505 52 540 48" ${S('soft', 2.5, ';stroke-linecap:round;opacity:.35')}/>` + TX(560, 84, 'the mirror asks', 'faint', 11.5, 'middle', 'class="mono2"') + wrap(560, 158, m[2], 20, 28, 'glow', 25, 'middle', 'class="disp"'); }
+    el.innerHTML = g; $$('#mr5b .card3').forEach(b => b.setAttribute('aria-pressed', +b.dataset.m === cur)); });
+  $$('#mr5b .card3').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.m; draw(); }));
+  draw();
+}
+
+/* ---------- 6: dissect an excuse ---------- */
+{ const EXC = [["I work full time.", "Anthony Trollope", "Trollope wrote most of his 47 novels in early-morning sessions before going to his job at the Post Office, with a watch on the desk to keep his pace.", "Find the hour before the day starts, and guard it."],
+    ["I have young kids.", "Toni Morrison", "Morrison wrote her first novel, The Bluest Eye, as a single mother of two who worked full time as an editor, often writing before dawn.", "Use the small blocks you have. Thirty minutes counts."],
+    ["I'm too old to start now.", "Laura Ingalls Wilder", "Wilder published the first of her Little House books when she was 65.", "The best time to start was years ago. The second best is today."],
+    ["It doesn't pay, and I need to earn a living.", "Philip Glass", "The composer kept working as a plumber and a taxi driver into his forties while writing music.", "Keep the day job, and give the calling a fixed slot."],
+    ["I need to do more research first.", "Charles Darwin", "Darwin gathered evidence for about twenty years before publishing, and was only pushed into print when Alfred Russel Wallace reached the same idea.", "Set a limit on research, start the draft, and research only what the draft asks for."],
+    ["I'm not talented enough yet.", "Steven Pressfield", "Pressfield himself spent decades writing before his first novel came out, when he was in his fifties.", "Talent grows out of the work. It doesn't arrive before it."]];
+  $('#ex6b').innerHTML = EXC.map((e, i) => `<button class="card3" data-e="${i}" aria-pressed="false"><b>${e[0]}</b></button>`).join('');
+  const el = $('#ex6'); let cur = 0;
+  const draw = onLayout(() => { const e = EXC[cur], nw = NARROW(), W = nw ? 360 : 760, H = nw ? 230 : 210, cw = nw ? 300 : 440, cx = W / 2;
+    vb(el, W, H); let g = '';
+    g += `<rect x="${cx - cw / 2}" y="20" width="${cw}" height="${H - 40}" rx="8" ${FS('panel-2', 'line', 1.2)}/>`;
+    for (let k = 0; k < 4; k++) g += `<path d="M${cx - cw / 2 + 18} ${68 + k * 28}H${cx + cw / 2 - 18}" ${S('line', 1)}/>`;
+    g += TX(cx - cw / 2 + 18, 46, 'THE EXCUSE', 'faint', 10.5, 'start', 'class="mono2" letter-spacing="2"');
+    g += wrap(cx, nw ? 96 : 92, `“${e[0]}”`, nw ? 24 : 34, nw ? 26 : 30, 'text', nw ? 21 : 26, 'middle', 'class="disp"');
+    const st = (x, y, rot, t, c, w) => `<g class="stamp" transform="rotate(${rot} ${x} ${y})"><rect x="${x - w / 2}" y="${y - 17}" width="${w}" height="34" rx="5" ${S(c, 2.5)}/><text x="${x}" y="${y + 5}" font-size="${nw ? 12 : 14}" text-anchor="middle" font-weight="700" letter-spacing="2" style="fill:var(--${c});font-family:var(--f-mono)">${t}</text></g>`;
+    g += st(cx - cw / 2 + (nw ? 64 : 90), H - 52, -8, 'TRUE ✓', 'cool', nw ? 100 : 120);
+    g += st(cx + cw / 2 - (nw ? 92 : 130), H - 46, 6, nw ? 'NOT A REASON' : 'NOT A REASON TODAY', 'glow', nw ? 150 : 230);
+    el.innerHTML = g;
+    $('#ex6d').innerHTML = `<span class="k">Who worked through it</span><span class="h">${e[1]}</span><p>${e[2]}</p><p class="lesson"><b>The pro's move:</b> ${e[3]}</p>`;
+    $$('#ex6b .card3').forEach(b => b.setAttribute('aria-pressed', +b.dataset.e === cur)); });
+  $$('#ex6b .card3').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.e; draw(); }));
+  draw();
+}
+
+/* ---------- 7: you at work and at your art ---------- */
+{ const TR = [["I show up every day", "Every day"], ["I show up no matter what", "No matter what"], ["I stay on the job all day", "All day"], ["I'm in it for the long haul", "Long haul"], ["The stakes are high and real", "Real stakes"],
+    ["I accept being paid for it", "Gets paid"], ["I don't over-identify with it", "Not over-identified"], ["I keep working on my technique", "Masters technique"], ["I keep a sense of humour about it", "Sense of humour"], ["I take praise or blame from the real world", "Real-world feedback"]];
+  const J = store.get('wa-jobart', {j: [1,1,1,1,1,1,1,0,1,1], a: [0,0,0,0,0,0,0,1,0,0]});
+  $('#rd7t').innerHTML = `<div class="jhead"><span>A pro…</span><span>Job</span><span>Art</span></div>` + TR.map((t, i) => `<div class="jrow"><span>${t[0]}</span><label><input type="checkbox" data-jj="${i}" ${J.j[i] ? 'checked' : ''} aria-label="${t[0]}, at my job"> Job</label><label class="a"><input type="checkbox" data-ja="${i}" ${J.a[i] ? 'checked' : ''} aria-label="${t[0]}, at my art"> Art</label></div>`).join('');
+  const el = $('#rd7');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 330 : 340, cx = W / 2, cy = H / 2 + 4, R = nw ? 92 : 122, n = TR.length;
+    vb(el, W, H); let g = ''; const ang = i => -Math.PI / 2 + i * 2 * Math.PI / n, P = (i, v) => [cx + R * v * Math.cos(ang(i)), cy + R * v * Math.sin(ang(i))];
+    [.33, .66, 1].forEach(v => g += `<path d="${path(TR.map((_, i) => P(i, v)))}Z" ${S('line', 1)}/>`);
+    TR.forEach((t, i) => { const [x, y] = P(i, 1), [lx, ly] = P(i, nw ? 1.2 : 1.17), c = Math.cos(ang(i));
+      g += `<path d="M${cx} ${cy}L${x} ${y}" ${S('line', 1)}/>` + wrap(lx, ly + 4, t[1], nw ? 11 : 14, 12, 'muted', nw ? 10 : 11.5, Math.abs(c) < .3 ? 'middle' : c > 0 ? 'start' : 'end'); });
+    const poly = (arr, c, fo) => `<path d="${path(arr.map((v, i) => P(i, v ? 1 : .12)))}Z" ${FS(c, c, 2, fo)}/>`;
+    g += poly(J.j, 'cool', .14) + poly(J.a, 'glow', .22);
+    g += `<rect x="12" y="12" width="12" height="12" rx="3" ${F('cool', .7)}/>` + TX(30, 22, 'At your job', 'muted', 12) + `<rect x="12" y="32" width="12" height="12" rx="3" ${F('glow')}/>` + TX(30, 42, 'At your art', 'muted', 12);
+    el.innerHTML = g; store.set('wa-jobart', J);
+    const sj = J.j.reduce((s, v) => s + v, 0), sa = J.a.reduce((s, v) => s + v, 0);
+    $('#rdJ').textContent = `${sj} of 10`; $('#rdA').textContent = `${sa} of 10`;
+    const gap = TR.findIndex((t, i) => J.j[i] && !J.a[i]);
+    $('#rdS').textContent = sa === 10 ? "You're a pro at both. Resistance has a real fight on its hands." : gap >= 0 ? `At work, "${TR[gap][0]}" is already true. Bring that one habit to your art first.` : "Pick one pro habit and practise it at your art this week.";
+  });
+  $$('#rd7t input').forEach(c => c.addEventListener('change', () => { if (c.dataset.jj != null) J.j[+c.dataset.jj] = c.checked ? 1 : 0; else J.a[+c.dataset.ja] = c.checked ? 1 : 0; draw(); }));
+  draw();
+}
+
+/* ---------- 8: a year of waiting vs showing up ---------- */
+{ const el = $('#in8'); let seed = 7, mood = [];
+  const roll = () => { const r = rng(seed); mood = []; let m = 50; for (let d = 0; d < 365; d++){ m = clamp(0.72 * m + 0.28 * (r() * 100) + gauss(r) * 6, 0, 100); mood.push(m); } };
+  const run = T => { let pages = 0, worked = 0; const cum = []; mood.forEach(m => { if (m >= T){ pages += (1 + m / 50) * (1 + 0.5 * worked / 365); worked++; } cum.push(pages); }); return {cum, pages, worked}; };
+  const draw = onLayout(() => { const T = +$('#inT').value, am = run(T), pro = run(0), nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 270, x0 = nw ? 42 : 52, x1 = W - (nw ? 16 : 70), y0 = 18, y1 = H - 52;
+    vb(el, W, H); const top = Math.ceil(pro.pages / 100) * 100, X = d => x0 + (x1 - x0) * d / 364, Y = v => y1 - (y1 - y0) * v / top;
+    let g = '';
+    for (let k = 0; k <= 4; k++){ const v = top * k / 4; g += `<path d="M${x0} ${Y(v)}H${x1}" ${S('line', 1, k ? ';stroke-dasharray:2 4' : '')}/>` + TX(x0 - 6, Y(v) + 4, Math.round(v), 'faint', 10.5, 'end'); }
+    'JFMAMJJASOND'.split('').forEach((m, i) => g += TX(X(i * 30.4 + 15), y1 + 16, m, 'faint', 10.5, 'middle'));
+    /* mood strip: days the amateur worked */
+    mood.forEach((m, d) => { if (m >= T) g += `<rect x="${X(d)}" y="${y1 + 24}" width="${Math.max(1, (x1 - x0) / 365)}" height="8" ${F('cool', .7)}/>`; });
+    g += TX(x0, y1 + 46, nw ? 'Days the amateur felt like it' : 'Days the amateur felt inspired enough to work', 'faint', 10.5);
+    g += `<path d="${path(pro.cum.map((v, d) => [X(d), Y(v)]))}" ${S('glow', 2.4)}/><path d="${path(am.cum.map((v, d) => [X(d), Y(v)]))}" ${S('cool', 2.2)}/>`;
+    const lx = nw ? x1 - 4 : x1 + 6, la = nw ? 'end' : 'start', py = Y(pro.pages), ay = Math.max(Y(am.pages), py + 16);
+    g += TX(lx, nw ? py - 8 : py + 4, 'Pro', 'glow', 12, la, 'font-weight="600"') + TX(lx, nw ? ay - 8 : ay + 4, 'Amateur', 'cool', 12, la, 'font-weight="600"');
+    el.innerHTML = g; out('inT', T ? T + ' / 100' : 'none');
+    $('#inAd').textContent = `${am.worked} of 365`; $('#inAp').textContent = Math.round(am.pages); $('#inPp').textContent = Math.round(pro.pages);
+  });
+  $('#inT').addEventListener('input', draw); $('#inR').addEventListener('click', () => { seed = (Math.random() * 1e9) | 0; roll(); draw(); });
+  roll(); draw();
+}
+
+/* ---------- 9: pace for the Iditarod ---------- */
+{ const el = $('#pc9'), DAYS = 180, CAP = 3, LIM = 30;
+  const run = h => { let f = 0, tot = 0, quit = 0; const cum = []; for (let d = 1; d <= DAYS; d++){ if (!quit){ f = Math.max(0, f + (h - CAP)); tot += h; if (f >= LIM) quit = d; } cum.push(tot); } return {cum, tot, quit}; };
+  const draw = onLayout(() => { const h = +$('#pcH').value, me = run(h), st = run(2), nw = NARROW(), W = nw ? 360 : 760, H = nw ? 240 : 260, x0 = nw ? 42 : 52, x1 = W - (nw ? 16 : 90), y0 = 18, y1 = H - 36;
+    vb(el, W, H); const top = Math.max(600, Math.ceil(Math.max(me.tot, st.tot) / 100) * 100), X = d => x0 + (x1 - x0) * d / (DAYS - 1), Y = v => y1 - (y1 - y0) * v / top;
+    let g = '';
+    for (let k = 0; k <= 4; k++){ const v = top * k / 4; g += `<path d="M${x0} ${Y(v)}H${x1}" ${S('line', 1, k ? ';stroke-dasharray:2 4' : '')}/>` + TX(x0 - 6, Y(v) + 4, Math.round(v), 'faint', 10.5, 'end'); }
+    [0, 30, 60, 90, 120, 150, 179].forEach(d => g += TX(X(d), y1 + 16, d === 0 ? 'day 1' : d + 1, 'faint', 10.5, 'middle'));
+    g += `<path d="${path(st.cum.map((v, d) => [X(d), Y(v)]))}" ${S('cool', 2, ';stroke-dasharray:6 4')}/><path d="${path(me.cum.map((v, d) => [X(d), Y(v)]))}" ${S('glow', 2.6)}/>`;
+    if (me.quit){ const qx = X(me.quit - 1), qy = Y(me.cum[me.quit - 1]); g += `<path d="M${qx - 6} ${qy - 6}l12 12M${qx + 6} ${qy - 6}l-12 12" ${S('bad', 2.6)}/>` + TX(qx + 10, qy - 8, `burned out, day ${me.quit}`, 'bad', 11.5); }
+    const lx = nw ? x1 - 4 : x1 + 6, la = nw ? 'end' : 'start', my = Y(me.tot), sy = Y(st.tot), gap = Math.abs(my - sy) < 16 ? (my < sy ? -8 : 8) : 0;
+    g += TX(lx, (nw ? my - 8 : my + 4) + gap, `You · ${h}h`, 'glow', 12, la, 'font-weight="600"') + TX(lx, (nw ? sy - 8 : sy + 4) - gap, 'Steady 2h', 'cool', 12, la, 'font-weight="600"');
+    el.innerHTML = g; out('pcH', h + ' h');
+    $('#pcQ').textContent = me.quit ? `day ${me.quit}` : 'never, still going'; $('#pcT').textContent = Math.round(me.tot) + ' h'; $('#pcS').textContent = Math.round(st.tot) + ' h';
+  });
+  $('#pcH').addEventListener('input', draw); draw();
+}
+
+/* ---------- 10: today's lie ---------- */
+{ const IT = [
+    {t: "You slept badly and woke with a headache.", o: ["Skip today and do double tomorrow", "Do a shorter session at your usual time", "Force out eight hours to prove a point"], a: 1, fb: "Accept no excuses, but play it as it lays: a smaller session keeps the habit alive."},
+    {t: "A rejection email lands at breakfast.", o: ["Read it, file it, and start work at the usual time", "Take the day to work out what's wrong with you", "Reply to argue with the editor"], a: 0, fb: "Rejection is about the work, not you. The pro takes the hit and goes to the desk."},
+    {t: "Your usual café is closed today.", o: ["Go home; the routine is broken", "Work somewhere else, or at the kitchen table", "Spend the morning searching for the perfect new café"], a: 1, fb: "Conditions are never perfect. Work with what's in front of you."},
+    {t: "The chapter you loved yesterday looks terrible this morning.", o: ["Delete it and wait for a better idea", "Keep going and fix it in the next draft", "Rewrite the first page for the whole session"], a: 1, fb: "Every draft looks bad some mornings. The pro keeps moving and revises later."},
+    {t: "A friend invites you out during your work hours.", o: ["Go; you can always work later", "Say yes for after your session", "Feel guilty but go anyway"], a: 1, fb: "The pro protects the appointment with the work, the way they would a meeting at their job."},
+    {t: "You're stuck on a technical problem you can't solve.", o: ["Give up on this project", "Ask someone who knows more, or study how others solved it", "Pretend it isn't a problem"], a: 1, fb: "Masters technique, and doesn't hesitate to ask for help."},
+    {t: "Your first piece gets glowing praise.", o: ["Take the week off to enjoy it", "Enjoy it tonight, and be at the desk tomorrow", "Start writing only things like it"], a: 1, fb: "Success isn't personal either. The pro goes back to work the next day."}];
+  const el = $('#ch10s'); let res = [];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = 96, n = IT.length, step = (W - 40) / n, rw = Math.min(step * .68, 72), rh = nw ? 26 : 32;
+    vb(el, W, H); let g = '';
+    for (let i = 0; i < n; i++){ const x = 20 + step * (i + .5), y = 44, r = res[i];
+      g += `<rect x="${x - rw / 2}" y="${y - rh / 2}" width="${rw}" height="${rh}" rx="${rh / 2}" ${r === true ? FS('glow', 'glow', 3, .25) : r === false ? S('bad', 2.5, ';stroke-dasharray:6 5') : S('line', 2.5)}/>`;
+      if (i < n - 1 && res[i] === true && res[i + 1] === true) g += `<path d="M${x + rw / 2 - 6} ${y}H${x + step - rw / 2 + 6}" ${S('glow', 4)}/>`;
+      g += TX(x, y + rh / 2 + 18, `day ${i + 1}`, 'faint', 10.5, 'middle'); }
+    const run = res.reduce((b, r) => r ? b + 1 : 0, 0); g += TX(20, 14, res.length ? `Current chain: ${run} day${run === 1 ? '' : 's'}` : 'Each pro response adds a link', 'muted', 12);
+    el.innerHTML = g; });
+  sorter($('#s10'), {items: IT, label: 'Condition', onReset: () => { res = []; draw(); }, onAnswer: (k, ok) => { res.push(ok); draw(); },
+    end: r => r >= 6 ? "That's a pro's week. None of these days was perfect, and the chain held anyway." : "Each broken link was an amateur's day. Try again and look for the answer that keeps working with the conditions you've got."});
+  draw();
+}
+
+/* ---------- 11: you and your work ---------- */
+{ const el = $('#vn11'); let morale, hist, last;
+  const reset = () => { morale = 100; hist = []; last = null; };
+  const draw = onLayout(() => { const O = +$('#vnO').value / 100, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 280 : 300, r = nw ? 66 : 86, cy = nw ? 104 : 130, cx = W / 2, d = 2 * r * (1 - O), xa = cx - d / 2 - (nw ? 10 : 30), xb = xa + d;
+    vb(el, W, H); let g = '';
+    g += `<circle cx="${xa}" cy="${cy}" r="${r}" ${FS('cool', 'cool', 2, .12)}/><circle cx="${xb}" cy="${cy}" r="${r}" ${FS('glow', 'glow', 2, .12)}/>`;
+    g += TX(xa + 4, cy - r - 12, 'You', 'cool', nw ? 14 : 16, 'end', 'font-weight="600"') + TX(xb - 4, cy - r - 12, 'Your work', 'glow', nw ? 14 : 16, 'start', 'font-weight="600"');
+    if (last){ const hit = last.ok ? 'good' : 'bad', ax = xb + r + (nw ? 44 : 90);
+      g += `<path d="M${ax} ${cy - 50}L${xb + r * .7} ${cy - 18}" ${S(hit, 3)}/>` + arrowHead(xb + r * .7, cy - 18, Math.atan2(32, xb + r * .7 - ax), hit, 10);
+      g += TX(Math.min(ax, W - 8), cy - 58, last.ok ? 'Praise' : 'Rejection', hit, 12.5, nw ? 'end' : 'middle', 'font-weight="600"');
+      if (O > .05) g += `<circle cx="${(xa + xb) / 2}" cy="${cy}" r="${6 + 20 * O}" ${F(hit, .35)}/>`; }
+    const by = H - (nw ? 62 : 56), bx = 20, bw = W - 40;
+    g += TX(bx, by - 8, 'Morale', 'muted', 12) + `<rect x="${bx}" y="${by}" width="${bw}" height="12" rx="6" ${F('line')}/><rect x="${bx}" y="${by}" width="${bw * morale / 100}" height="12" rx="6" ${F(morale > 35 ? 'glow' : 'bad')}/>`;
+    hist.slice(-24).forEach((h, i) => g += `<circle cx="${bx + 6 + i * 14}" cy="${by + 32}" r="5" ${F(h ? 'good' : 'bad', .8)}/>`);
+    el.innerHTML = g; out('vnO', Math.round(O * 100) + '%');
+    $('#vnN').textContent = hist.length ? `${hist.length} (${hist.filter(Boolean).length} praise)` : 'none yet'; $('#vnM').textContent = Math.round(morale) + ' / 100';
+    $('#vnS').textContent = !last ? 'Press "Send it out" a few times. Then try again with less overlap.' : morale <= 0 ? 'You gave up. Every rejection landed on you, not just the work.' : last.ok ? `Praise, felt at ${Math.round(O * 100)}%. Nice, but the pro is back at work tomorrow either way.` : O > .5 ? 'A rejection, and it hit you nearly as hard as the work.' : 'A rejection. It hit the work; you noted it and kept going.';
+    $('#vnGo').disabled = morale <= 0; });
+  $('#vnGo').addEventListener('click', () => { const O = +$('#vnO').value / 100, ok = Math.random() < .2;
+    morale = clamp(morale + (ok ? 12 : -18) * O + 3, 0, 100); hist.push(ok); last = {ok}; draw(); });
+  $('#vnR').addEventListener('click', () => { reset(); draw(); });
+  $('#vnO').addEventListener('input', draw); reset(); draw();
+}
+
+/* ---------- 12: your ritual ---------- */
+const RIT = [["Same place every time", "same place"], ["Phone in another room", "phone away"], ["A few words to begin: a prayer, a line, an intention", "a few words to begin"], ["A small object for luck", "a lucky object"], ["Tidy the desk first", "a clear desk"], ["A set amount before you stop", "a set amount"], ["Stop mid-thought, so tomorrow starts easily", "stop mid-thought"]];
+const ritual = store.get('wa-ritual', {s: 14, l: 4, on: [0, 2]});
+const hhmm = v => { const m = v * 30, h = Math.floor(m / 60) % 24; return `${h}:${String(m % 60).padStart(2, '0')}`; };
+const ritualText = () => `Every day at ${hhmm(ritual.s)}, for ${ritual.l % 2 ? (ritual.l === 1 ? '30 minutes' : `${(ritual.l / 2).toFixed(1)} hours`) : ritual.l === 2 ? '1 hour' : `${ritual.l / 2} hours`}${ritual.on.length ? ', with ' + ritual.on.map(i => RIT[i][1]).join(', ') : ''}.`;
+{ $('#rtS').value = ritual.s; $('#rtL').value = ritual.l;
+  $('#rt12').innerHTML = RIT.map((r, i) => `<label class="tg"><input type="checkbox" data-rt="${i}" ${ritual.on.includes(i) ? 'checked' : ''}><span>${r[0]}</span></label>`).join('');
+  const el = $('#ck12');
+  const draw = onLayout(() => { ritual.s = +$('#rtS').value; ritual.l = +$('#rtL').value; ritual.on = $$('[data-rt]').filter(c => c.checked).map(c => +c.dataset.rt); store.set('wa-ritual', ritual);
+    const nw = NARROW(), W = nw ? 360 : 760, H = 280, cx = W / 2, cy = 140, R = 112;
+    vb(el, W, H); let g = '';
+    const A = half => -Math.PI / 2 + half / 48 * 2 * Math.PI, pt = (half, r) => [cx + r * Math.cos(A(half)), cy + r * Math.sin(A(half))];
+    g += `<circle cx="${cx}" cy="${cy}" r="${R}" ${FS('panel-2', 'line', 1.5)}/>`;
+    for (let h = 0; h < 24; h++){ const [x0, y0] = pt(h * 2, R - (h % 6 ? 6 : 12)), [x1, y1] = pt(h * 2, R); g += `<path d="M${x0} ${y0}L${x1} ${y1}" ${S('faint', 1)}/>`;
+      if (h % 3 === 0){ const [lx, ly] = pt(h * 2, R + 15); g += TX(lx, ly + 4, h, 'faint', 10.5, 'middle'); } }
+    /* night shading */
+    const arc = (a, b, r1, r2, st) => { const [x1, y1] = pt(a, r2), [x2, y2] = pt(b, r2), [x3, y3] = pt(b, r1), [x4, y4] = pt(a, r1), big = (b - a) > 24 ? 1 : 0;
+      return `<path d="M${x1} ${y1}A${r2} ${r2} 0 ${big} 1 ${x2} ${y2}L${x3} ${y3}A${r1} ${r1} 0 ${big} 0 ${x4} ${y4}Z" ${st}/>`; };
+    g += arc(44, 48 + 12, R - 54, R - 16, F('line', .5));
+    g += arc(ritual.s, ritual.s + ritual.l, R - 54, R - 16, FS('glow', 'glow', 1.5, .75));
+    g += TX(cx, cy - 6, hhmm(ritual.s), 'text', 26, 'middle', 'class="disp"') + TX(cx, cy + 16, 'to ' + hhmm(ritual.s + ritual.l), 'muted', 12.5, 'middle');
+    if (!nw){ g += TX(cx + R + 50, 70, 'Your session', 'glow', 12.5, 'start', 'font-weight="600"') + `<rect x="${cx + R + 30}" y="60" width="12" height="12" rx="3" ${F('glow', .75)}/>`;
+      g += TX(cx + R + 50, 94, 'Night (22:00 to 6:00)', 'faint', 12) + `<rect x="${cx + R + 30}" y="84" width="12" height="12" rx="3" ${F('line', .5)}/>`; }
+    el.innerHTML = g; out('rtS', hhmm(ritual.s)); out('rtL', ritual.l === 1 ? '30 min' : `${ritual.l / 2} h`);
+    $('#rtOut').innerHTML = `<span class="k">Your ritual</span><span class="h">${ritualText()}</span><p>${ritual.on.length >= 2 ? 'Good: a few small cues make starting automatic, so there is less for Resistance to argue with.' : 'Try adding a cue or two. The point of a ritual is that you stop having to decide to begin.'}</p>`;
+    if (typeof renderCommit === 'function') renderCommit(); });
+  ['#rtS', '#rtL'].forEach(s => $(s).addEventListener('input', draw)); $$('[data-rt]').forEach(c => c.addEventListener('change', draw));
+  draw();
+}
+
+/* ---------- 13: whose voice ---------- */
+{ const IT = [
+    {t: '"What will people think if it\'s bad?"', a: 0, fb: "Worry about status and how it looks is the Ego's home ground."},
+    {t: '"Is this even going to make any money?"', a: 0, fb: "The Ego measures everything by survival and getting ahead."},
+    {t: '"Someone else has surely done this better already."', a: 0, fb: "Comparison and ranking come from the Ego, and they're a classic way to stop you starting."},
+    {t: '"I\'ll start once I have the right qualifications."', a: 0, fb: "The Ego wants a guarantee. The Self doesn't need permission."},
+    {t: '"I wonder what happens if I try it this way."', a: 1, fb: "Curiosity and play are the Self's voice."},
+    {t: '"I\'d do this even if nobody ever saw it."', a: 1, fb: "Working for the work itself comes from the Self."},
+    {t: '"That dream last night gave me an idea for the next scene."', a: 1, fb: "Dreams and the unconscious are the Self's territory in Pressfield's map."},
+    {t: '"Let\'s just play with it for an hour and see what comes."', a: 1, fb: "Open, unhurried, no scorekeeping: the Self at work."}];
+  const el = $('#ps13'); let lit = -1, cnt = [0, 0];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 290, cx = W / 2, cy = H / 2 + 4, R = nw ? 128 : 132, er = nw ? 44 : 48, ey = cy - R + er + 16;
+    vb(el, W, H); let g = '';
+    g += `<circle cx="${cx}" cy="${cy}" r="${R}" ${FS('cool', 'cool', lit === 1 ? 4 : 1.5, lit === 1 ? .2 : .08)}/>`;
+    g += `<circle cx="${cx}" cy="${ey}" r="${er}" ${FS('glow', 'glow', lit === 0 ? 4 : 1.5, lit === 0 ? .35 : .14)}/>`;
+    g += TX(cx, ey - 4, 'Ego', 'glow', 16, 'middle', 'font-weight="600"') + TX(cx, ey + 14, nw ? 'status, safety' : 'status, safety, plans', 'muted', 10.5, 'middle');
+    g += TX(cx, cy + R - 26, 'Self', 'cool', 18, 'middle', 'font-weight="600"');
+    const tags = [['dreams', -0.62, .2], ['intuition', 0.6, .22], ['the urge to make', -0.5, .55], ['the Muse', 0.48, .56]];
+    tags.forEach(([t, dx, dy]) => g += TX(cx + dx * R, cy + dy * R * .9 - 10, t, 'cool', nw ? 11 : 12.5, 'middle', 'font-style="italic"'));
+    g += `<path d="M${cx} ${ey + er}V${ey + er + 30}" ${S('glow', 1.6, ';stroke-dasharray:3 3')}/>` + arrowHead(cx, ey + er + 2, -Math.PI / 2, 'glow', 7) + TX(cx + 8, ey + er + 24, 'Resistance', 'glow', 10.5, 'start', 'class="mono2"');
+    if (!nw) g += TX(16, 26, `Ego thoughts caught: ${cnt[0]}`, 'glow', 12) + TX(16, 46, `Self thoughts: ${cnt[1]}`, 'cool', 12);
+    else g += TX(12, 18, `Ego ${cnt[0]} · Self ${cnt[1]}`, 'muted', 11);
+    el.innerHTML = g; });
+  sorter($('#s13'), {items: IT, label: 'Thought', bins: [["The Ego", "status, safety, scorekeeping"], ["The Self", "curiosity, dreams, the work itself"]],
+    onReset: () => { lit = -1; cnt = [0, 0]; draw(); }, onAnswer: (k, ok) => { lit = IT[k].a; if (ok) cnt[lit]++; draw(); },
+    end: r => r >= 7 ? "You can hear the difference. Next time the scorekeeping voice starts up, you'll know it's the Ego guarding its turf." : "A hint: if the thought is about how it'll look, what it'll earn or who's better, it's usually the Ego."});
+  draw();
+}
+
+/* ---------- 14: hierarchy and territory ---------- */
+{ const el = $('#ht14'); let seed = 11, opin = [];
+  const roll = () => { const r = rng(seed); let o = 55; opin = []; for (let m = 0; m < 12; m++){ o = clamp(o + 0.35 * (55 - o) + gauss(r) * 22, 2, 98); opin.push(o); } };
+  const draw = onLayout(() => { const mix = +$('#htM').value / 100, work = opin.map((_, m) => 38 + m * 4.5), sat = opin.map((o, m) => mix * o + (1 - mix) * work[m]);
+    const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 260, x0 = nw ? 34 : 44, x1 = W - (nw ? 14 : 110), y0 = 16, y1 = H - 36, X = m => x0 + (x1 - x0) * m / 11, Y = v => y1 - (y1 - y0) * v / 100;
+    vb(el, W, H); let g = '';
+    [0, 50, 100].forEach(v => g += `<path d="M${x0} ${Y(v)}H${x1}" ${S('line', 1, v ? ';stroke-dasharray:2 4' : '')}/>` + TX(x0 - 6, Y(v) + 4, v, 'faint', 10.5, 'end'));
+    'JFMAMJJASOND'.split('').forEach((c, i) => g += TX(X(i), y1 + 16, c, 'faint', 10.5, 'middle'));
+    g += `<path d="${path(opin.map((v, m) => [X(m), Y(v)]))}" ${S('faint', 1.5, ';stroke-dasharray:4 4')}/><path d="${path(work.map((v, m) => [X(m), Y(v)]))}" ${S('cool', 1.8, ';stroke-dasharray:6 4')}/>`;
+    g += `<path d="${path(sat.map((v, m) => [X(m), Y(v)]))}" ${S('glow', 2.8)}/>` + sat.map((v, m) => `<circle cx="${X(m)}" cy="${Y(v)}" r="3.5" ${F('glow')}/>`).join('');
+    if (nw){ g += TX(x0 + 4, y0 + 10, 'opinion', 'faint', 10.5) + TX(x0 + 64, y0 + 10, 'the work', 'cool', 10.5) + TX(x0 + 130, y0 + 10, 'how you feel', 'glow', 10.5, 'start', 'font-weight="600"'); }
+    else { const lab = [[opin[11], 'Outside opinion', 'faint'], [work[11], 'The work', 'cool'], [sat[11], 'How you feel', 'glow']].sort((a, b) => b[0] - a[0]);
+      let prev = -99; lab.forEach(([v, t, c]) => { let y = Y(v) + 4; if (y - prev < 15) y = prev + 15; prev = y; g += TX(x1 + 8, y, t, c, 11.5, 'start', c === 'glow' ? 'font-weight="600"' : ''); }); }
+    el.innerHTML = g; out('htM', Math.round(mix * 100) + '%');
+    const mn = Math.min(...sat), mx = Math.max(...sat); $('#htW').textContent = Math.round(mn) + ' / 100'; $('#htV').textContent = Math.round(mx - mn) + ' points'; $('#htE').textContent = Math.round(sat[11]) + ' / 100'; });
+  $('#htM').addEventListener('input', draw); $('#htR').addEventListener('click', () => { seed = (Math.random() * 1e9) | 0; roll(); draw(); });
+  roll(); draw();
+}
+
+/* ---------- 15: labour or fruit ---------- */
+{ const IT = [
+    {t: "Showing up at your set time", s: "Showing up", a: 0, fb: "Fully in your hands: the first thing a pro controls."},
+    {t: "The hours you put in", s: "The hours", a: 0, fb: "Yours to give. The Gita's 'right to our labour'."},
+    {t: "Telling the truth in the work", s: "Honest work", a: 0, fb: "Nobody else decides whether your work is honest."},
+    {t: "Studying your craft", s: "Craft", a: 0, fb: "Mastering technique is labour you control."},
+    {t: "Asking for help when you're stuck", s: "Asking for help", a: 0, fb: "A choice you make, so it's labour."},
+    {t: "Good reviews", s: "Reviews", a: 1, fb: "Other people decide those. A fruit, not yours to demand."},
+    {t: "Sales", s: "Sales", a: 1, fb: "The market decides. Do the work and let go."},
+    {t: "Winning the prize", s: "The prize", a: 1, fb: "A judge's call, not yours."},
+    {t: "Going viral", s: "Going viral", a: 1, fb: "Pure fruit: luck and other people's attention."},
+    {t: "Your family finally approving", s: "Approval", a: 1, fb: "Approval is a fruit. Working for it puts you back in the hierarchy."}];
+  const el = $('#fr15'); let on = [];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 360 : 350, cx = W / 2, gy = nw ? 218 : 214; vb(el, W, H); let g = '';
+    /* canopy, trunk, ground, roots */
+    g += `<ellipse cx="${cx}" cy="${gy - 112}" rx="${nw ? 160 : 230}" ry="${nw ? 84 : 86}" ${FS('good', 'good', 1.2, .1)}/>`;
+    g += `<path d="M${cx - 14} ${gy}L${cx - 9} ${gy - 70}Q${cx} ${gy - 86} ${cx + 9} ${gy - 70}L${cx + 14} ${gy}Z" ${F('cool', .55)}/>`;
+    g += `<path d="M14 ${gy}H${W - 14}" ${S('line', 2)}/>`;
+    [-1, -.45, .45, 1].forEach(s => g += `<path d="M${cx} ${gy}Q${cx + s * 50} ${gy + 30} ${cx + s * (nw ? 120 : 210)} ${gy + (nw ? 66 : 80)}" ${S('cool', 2, ';opacity:.6')}/>`);
+    g += TX(nw ? 12 : 24, 22, 'The fruits: not yours to control', 'good', nw ? 10.5 : 12, 'start', 'font-weight="500"') + TX(nw ? 16 : 24, gy + 20, 'Your labour: the roots', 'cool', nw ? 10.5 : 12, 'start', 'font-weight="500"');
+    const fruitPos = nw ? [[-110, -140], [-40, -170], [40, -168], [110, -138], [0, -110]] : [[-160, -130], [-70, -166], [40, -170], [150, -132], [-10, -110]];
+    const rootPos = nw ? [[-100, 44], [100, 44], [-95, 90], [95, 90], [0, 128]] : [[-200, 60], [-90, 90], [60, 92], [190, 62], [-10, 116]];
+    let fi = 0, ri = 0;
+    on.forEach(k => { const it = IT[k], fr = it.a === 1, p = fr ? fruitPos[fi++] : rootPos[ri++]; if (!p) return; const x = cx + p[0], y = gy + p[1];
+      if (fr) g += `<circle cx="${x}" cy="${y - 4}" r="${nw ? 22 : 26}" ${FS('glow', 'glow', 1.5, .22)}/>` + wrap(x, y - 4, it.s, 9, 11, 'text', nw ? 9.5 : 10.5, 'middle', 'font-weight="500"');
+      else { const w = (nw ? 6.2 : 7) * it.s.length + 18; g += `<rect x="${x - w / 2}" y="${y - 12}" width="${w}" height="22" rx="11" ${FS('panel-2', 'cool', 1.4)}/>` + TX(x, y + 3, it.s, 'text', nw ? 10 : 11.5, 'middle', 'font-weight="500"'); } });
+    el.innerHTML = g; });
+  sorter($('#s15'), {items: IT, label: 'Item', bins: [["Labour", "yours to control"], ["Fruit", "a result you can't control"]], onReset: () => { on = []; draw(); }, onAnswer: (k, ok) => { if (ok){ on.push(k); draw(); } },
+    end: r => r >= 9 ? "Labour below, fruit above. Tend the roots and let the tree do what it does." : "When in doubt, ask: could I do this today, alone, whatever anyone else thinks? If so, it's labour."});
+  draw();
+}
+
+/* ---------- afterword: commitment and the log ---------- */
+var renderCommit;
+{ const C = store.get('wa-commit', {w: '', t: '', m: ''}), log = new Set(store.get('wa-log', []));
+  ['w', 't', 'm'].forEach(k => $('#cm' + k.toUpperCase()).value = C[k]);
+  const v = id => $('#' + id).value.trim() || $('#' + id).placeholder;
+  renderCommit = () => { $('#cmOut').textContent = `Every day I will work on ${v('cmW')}, at ${v('cmT')}, for at least ${v('cmM')}.`; $('#cmRit').textContent = 'Your ritual from chapter 12: ' + ritualText(); };
+  ['W', 'T', 'M'].forEach(k => $('#cm' + k).addEventListener('input', () => { C[k.toLowerCase()] = $('#cm' + k).value; store.set('wa-commit', C); renderCommit(); }));
+  const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const drawLog = () => { const today = new Date(); today.setHours(12, 0, 0, 0); const days = [];
+    for (let k = 27; k >= 0; k--){ const d = new Date(today); d.setDate(today.getDate() - k); days.push(d); }
+    $('#dow').innerHTML = days.slice(0, 7).map(d => `<span>${'SMTWTFS'[d.getDay()]}</span>`).join('');
+    $('#grid28').innerHTML = days.map((d, k) => { const s = iso(d); return `<button class="day${log.has(s) ? ' on' : ''}${k === 27 ? ' today' : ''}" data-d="${s}" aria-pressed="${log.has(s)}" aria-label="${d.toDateString()}${k === 27 ? ', today' : ''}">${d.getDate()}</button>`; }).join('');
+    $$('#grid28 .day').forEach(b => b.addEventListener('click', () => { const s = b.dataset.d; log.has(s) ? log.delete(s) : log.add(s); store.set('wa-log', [...log]); drawLog(); }));
+    let run = 0; const start = log.has(iso(today)) ? 0 : 1; for (let k = start; k < 400; k++){ const d = new Date(today); d.setDate(today.getDate() - k); if (log.has(iso(d))) run++; else break; }
+    const tot = days.filter(d => log.has(iso(d))).length;
+    $('#lgRun').textContent = `${run} day${run === 1 ? '' : 's'}`; $('#lgTot').textContent = `${tot} of 28`; $('#logN').textContent = tot ? `${tot} day${tot === 1 ? '' : 's'} logged` : 'nothing logged yet';
+    $('#lgSay').textContent = run === 0 ? "Today is a good day to start the chain. Sit down, then tap it." : log.has(iso(today)) ? "Done for today. Resistance will be back tomorrow, and so will you." : "Yesterday's done. Keep the chain going: sit down today."; };
+  renderCommit(); drawLog();
+}
+
+})();
+</script>
+</body>
+</html>
