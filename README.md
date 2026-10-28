@@ -6,7 +6,7 @@ Interactive, chapter-by-chapter explainers for books, podcasts and topics, plus 
 
 | Page | What it covers |
 | --- | --- |
-| `index.html` | The Explainer Shelf: the home page with every explainer as a spine on a shelf |
+| `index.html` | The Explainer Shelf: the home page, a multi-level bookcase with one labelled level per category and every explainer as a spine |
 | `explainers/brief-answers.html` | *Brief Answers to the Big Questions*, Stephen Hawking (10 chapters) |
 | `explainers/the-mountain-is-you.html` | *The Mountain Is You*, Brianna Wiest (7 chapters) |
 | `explainers/naval-harsh-truths.html` | Naval Ravikant on Modern Wisdom with Chris Williamson, episode #922 (10 chapters, golden nuggets, timestamp links) |
@@ -43,6 +43,6 @@ To host it, turn on GitHub Pages for this repository (Settings → Pages → dep
 ## Adding a new explainer
 
 1. Add the page as `explainers/<slug>.html`, using the same shell as the others (Instrument Serif, Geist and Geist Mono; chapter rail; light/dark toggle; a "Back to the bookshelf" link to `../index.html`).
-2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (title, spine, author, optional `by` line, year, optional display date `when` such as "c. 5th century BC", chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, an optional short spine name `au`, and a `mark` icon: `star`, `peak`, `mic`, `crown`, `sword`, `nodes`, `layers`, `hand`, `pencil`, `speech`, `magnet`, `smile`, `bolt`, `gear`, `shield`, `domino`, `nib` or `cloud`).
+2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (`shelf`: the level it sits on, one of `mind`, `people`, `focus`, `power`, `science` or `talks` as defined in `SHELVES`; a book without one goes on a "New arrivals" level; then title, spine, author, optional `by` line, year, optional display date `when` such as "c. 5th century BC", chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, an optional short spine name `au`, and a `mark` icon: `star`, `peak`, `mic`, `crown`, `sword`, `nodes`, `layers`, `hand`, `pencil`, `speech`, `magnet`, `smile`, `bolt`, `gear`, `shield`, `domino`, `nib` or `cloud`).
 
 All explanations are written in original wording. They summarise the source material and are not affiliated with its authors.
