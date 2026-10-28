@@ -1,0 +1,1707 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The ONE Thing, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a line of dominoes. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into the opening, the six lies, the truth and extraordinary results.
+   Dark-first: warm black with a domino-red accent and a cool blue second series; light mode is ivory paper. */
+:root{
+  color-scheme: dark;
+  --ink:#121010;--panel:#1B1817;--panel-2:#252120;--line:#3A3331;--text:#F5F0EA;--muted:#B9ADA6;--faint:#86796F;
+  --glow:#FF5B4A;--glow-soft:rgba(255,91,74,.11);--hl:rgba(255,91,74,.26);--cool:#8DB8EA;--cool-soft:rgba(141,184,234,.1);
+  --good:#7FD69C;--good-soft:rgba(127,214,156,.1);--bad:#FFB454;--bad-soft:rgba(255,180,84,.1);
+  --soft:#DED5CD;--deep:#0C0A0A;--toc-bg:rgba(27,24,23,.74);--glow-line:rgba(255,91,74,.36);--cool-line:rgba(141,184,234,.3);--on-glow:#FFFFFF;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F2E9;--panel:#FFFFFF;--panel-2:#F0EAE0;--line:#DDD3C6;--text:#1A1412;--muted:#5C504A;--faint:#8A7D73;
+  --glow:#C42718;--glow-soft:rgba(196,39,24,.06);--hl:#FAD3CC;--cool:#245C9A;--cool-soft:rgba(36,92,154,.06);--good:#22774A;--good-soft:rgba(34,119,74,.08);--bad:#A65A00;--bad-soft:rgba(166,90,0,.08);
+  --soft:#2E2522;--deep:#FCFAF5;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(196,39,24,.28);--cool-line:rgba(36,92,154,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F2E9;--panel:#FFFFFF;--panel-2:#F0EAE0;--line:#DDD3C6;--text:#1A1412;--muted:#5C504A;--faint:#8A7D73;
+  --glow:#C42718;--glow-soft:rgba(196,39,24,.06);--hl:#FAD3CC;--cool:#245C9A;--cool-soft:rgba(36,92,154,.06);--good:#22774A;--good-soft:rgba(34,119,74,.08);--bad:#A65A00;--bad-soft:rgba(166,90,0,.08);
+  --soft:#2E2522;--deep:#FCFAF5;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(196,39,24,.28);--cool-line:rgba(36,92,154,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The ONE Thing additions ---------- */
+.fq{margin:0;max-width:760px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(24px,3.4vw,34px);line-height:1.15}
+.fq em{font-style:normal;color:var(--glow)}
+.spiral .cap{display:flex;gap:12px;align-items:center;justify-content:space-between}
+.spiral .cap .btn{flex:0 0 auto}
+.lab-ctl .sub{margin-bottom:-8px}
+.grid66{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:5px;max-width:520px;margin:0 auto}
+.grid66 button{font:inherit;font-family:var(--f-mono);font-size:10.5px;aspect-ratio:1;min-width:0;padding:0;border-radius:6px;border:1px solid var(--line);background:var(--panel-2);color:var(--faint);cursor:pointer}
+.grid66 button[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.grid66 button:hover{border-color:var(--glow)}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:720px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .q{font-family:var(--f-display);font-size:clamp(22px,3vw,30px);line-height:1.2}
+.card1 .a{font-size:16px;color:var(--soft)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.ladder-ix{font-family:var(--f-mono);font-size:11px;color:var(--glow)}
+@media (max-width: 560px){ .spiral .cap{flex-direction:column;align-items:flex-start} .grid66{gap:4px} .grid66 button{font-size:9px;border-radius:5px} .fq{padding:14px 16px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Gary Keller and Jay Papasan's book</div>
+    <h1><em>The ONE Thing</em>,<br>Explained</h1>
+    <p class="lede">Gary Keller built Keller Williams into one of the biggest property firms in the world, and he says the secret was not doing more but doing less. <b>The ONE Thing</b> argues that extraordinary results come from finding the single most important thing, doing it first, and letting it knock over the rest like a line of dominoes. This guide takes all 18 chapters one at a time, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The focusing question"><span class="lbl">The focusing question</span><p>What's the <em>ONE Thing</em> I can do such that by doing it everything else will be <em>easier or unnecessary</em>?</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's getting in your way?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="spiral" style="margin:0">
+        <svg id="heroDm" viewBox="0 0 420 300" role="img" aria-label="A line of dominoes, each one bigger than the last"></svg>
+        <div class="cap"><span>Each domino can knock over one <b>half again as big</b>. Find the first one and push.</span><button class="btn primary" id="heroTip" type="button">Tip it</button></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 3</span><span class="q">The ONE Thing</span><span class="d">Going small, the domino effect, and the clues success leaves</span></a>
+      <a href="#part2"><span class="n">Part one · chapters 4 to 9</span><span class="q">The Lies</span><span class="d">Six beliefs that mislead and derail us</span></a>
+      <a href="#part3"><span class="n">Part two · chapters 10 to 12</span><span class="q">The Truth</span><span class="d">The focusing question and how to answer it</span></a>
+      <a href="#part4"><span class="n">Part three · chapters 13 to 18</span><span class="q">Extraordinary Results</span><span class="d">Purpose, priority, productivity, and what gets in the way</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2013</span>
+      <span><b>Authors</b> Gary Keller, co-founder of Keller Williams Realty, with Jay Papasan</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 18 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE ONE THING ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part zero · the idea</span>
+      <h2>The ONE Thing</h2>
+      <p>Before the lies and the method, Keller sets out the idea itself: extraordinary results come from going small, lining up one thing after another like dominoes, and the clue is everywhere you look at success.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Going small is not thinking small. It means ignoring all the things you could do so you can do the one thing you should.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Why going small wins</div>
+        <h2>The ONE Thing</h2>
+        <div class="short"><span class="lbl">In short</span><p>When you want the biggest results, you need to narrow your focus to the one thing that matters most. Everything else can wait.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Curly's secret.</b> In the 1991 film City Slickers, an old cowboy tells a stressed city man that the secret of life is one thing. Just one. You stick to that and the rest doesn't mean much. What is that one thing? That's what you have to find out.</span></li>
+          <li><span><b>Going small.</b> Most people try to do too much and end up with a pile of half-finished work. Keller argues for the opposite: work out what matters most and give it your full attention.</span></li>
+          <li><span><b>Two rabbits.</b> An old proverb says that if you chase two rabbits, you will catch neither. Split attention splits results.</span></li>
+          <li><span><b>It applies everywhere.</b> The idea is not only for work. It works for your health, your relationships and your money too, as long as you ask what matters most in each area.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller says that when he looked back over his own career, his best results always came after he narrowed his focus, and his worst came when he spread himself across too many things at once. The same pattern showed up when he coached others. The people who got ahead were not doing more. They were doing less, and doing it better.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: chase two rabbits</div><div class="hint">Change how many goals you chase at once</div></div>
+        <div class="stage"><svg id="rb1" role="img" aria-label="Progress toward several goals with a fixed amount of effort"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="rbN">Goals you chase at the same time <output id="orbN"></output></label><input type="range" id="rbN" min="1" max="6" value="3"></div></div><div class="row" id="rbM"></div></div><div class="stats"><div class="stat"><span class="k">Goals reached by year end</span><span class="v glow" id="rbDone"></span></div><div class="stat"><span class="k">Effort each one gets</span><span class="v" id="rbEach"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="rbSay"></span></div></div><p class="callout">An illustrative model: you have 100 units of effort in a year, and a goal needs 60 to cross the line. <b>Split evenly, most goals stall before the finish.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want something extraordinary, you cannot give it a fraction of your attention. Pick the one thing that matters most and protect it. The rest is not banned, it just waits its turn.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The domino effect →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Small wins add up, in order</div>
+        <h2>The Domino Effect</h2>
+        <div class="short"><span class="lbl">In short</span><p>A single domino can knock over one about half again as big. Line up the right things in order and small efforts grow into huge results.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The physics.</b> In 1983, the physicist Lorne Whitehead showed that a domino can topple another about 50 percent larger than itself. That growth compounds quickly.</span></li>
+          <li><span><b>From two inches to the moon.</b> Start with a two-inch domino. By the 10th you are at the height of a tall American football quarterback. The 18th would rival the Leaning Tower of Pisa, the 23rd would top the Eiffel Tower, the 31st would beat Mount Everest by nearly 3,000 feet, and the 57th would almost reach the moon.</span></li>
+          <li><span><b>One at a time.</b> Extraordinary success is sequential, not simultaneous. You do the right thing, then the next right thing. Each one makes the next one possible.</span></li>
+          <li><span><b>Find the lead domino.</b> The job is to find the first domino in the line, the one that sets the rest in motion, and push it over today.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller uses Whitehead's experiment because it shows something we underrate: geometric growth. One domino knocking over another of the same size gets you nowhere fast. One knocking over one a bit bigger, again and again, gets you somewhere astonishing. Skills, knowledge and savings grow the same way when you build them in order.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the domino line</div><div class="hint">Add dominoes, then tip the first one</div></div>
+        <div class="stage"><svg id="dm2" role="img" aria-label="A line of dominoes, each 50 percent bigger than the last, compared with landmarks"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="dmN">Dominoes in the line <output id="odmN"></output></label><input type="range" id="dmN" min="1" max="57" value="10"></div><button class="btn primary" id="dmTip">Tip the first one</button></div></div><div class="stats"><div class="stat"><span class="k">Height of the last domino</span><span class="v glow" id="dmH"></span></div><div class="stat"><span class="k">About as tall as</span><span class="s" id="dmL"></span></div></div><p class="callout">Each domino is 1.5 times the one before, starting at 2 inches. <b>The scale is logarithmic</b>: every gridline is ten times the one below.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't try to knock over every domino at once. Find the first one in the line and push it. When it falls, it gives you the push you need for the next, larger one.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Success leaves clues →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Look closely at anyone who wins big</div>
+        <h2>Success Leaves Clues</h2>
+        <div class="short"><span class="lbl">In short</span><p>Look at any big success, a company or a person, and you'll find a ONE Thing at its heart: one product, one skill, one person who made the difference.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Companies.</b> Coors is known for beer, KFC for the Colonel's secret recipe, Starbucks for coffee and Google for search. Each has a single product or service that made it and still carries it.</span></li>
+          <li><span><b>One at a time.</b> Even companies famous for many products tend to have one that matters most at any given moment, and their attention moves from one big hit to the next.</span></li>
+          <li><span><b>People.</b> Behind many successful people there is one passion, one skill or one person who changed everything. Bill Gates turned a teenage fascination with computers into a skill that let him co-found Microsoft.</span></li>
+          <li><span><b>Your turn.</b> If you look honestly at your own wins, you will usually find the same pattern: a time when one thing had your full attention.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller asks readers to treat other people's success as evidence. If the same pattern shows up again and again, in brands, founders, athletes and artists, it is probably not luck. The clue is that something narrow and specific sits at the centre, and everything else grew out of it.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: find the ONE Thing</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you study people and businesses that did very well, don't be dazzled by everything they do now. Look for the one thing they did first and best. That's the clue you can copy.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Everything matters equally →</a></div>
+    </section>
+    <!-- ===================== THE LIES ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part one · the six lies</span>
+      <h2>The Lies</h2>
+      <p>Six beliefs sound sensible and quietly wreck our focus: that everything matters equally, that we can multitask, that we need iron discipline, that willpower is always there, that life should be balanced, and that big is dangerous.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Each lie spreads your effort thinner. Unlearn them, and the path to a single priority clears.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 1</span> · The first lie: all tasks are equal</div>
+        <h2>Everything Matters Equally</h2>
+        <div class="short"><span class="lbl">In short</span><p>Things don't matter equally. A to-do list treats them as if they do. A success list ranks them and finds the few that matter most, and then the one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>To-do lists lie.</b> A to-do list is a list of things you could do, not a plan of what you should do. Crossing off easy items feels productive, but it often keeps you busy rather than effective.</span></li>
+          <li><span><b>The 80/20 rule.</b> In the 1890s the economist Vilfredo Pareto noticed that about 20 percent of the people in Italy owned about 80 percent of the land. Later, the quality expert Joseph Juran named the wider pattern: a small share of causes produces most of the effects.</span></li>
+          <li><span><b>Go extreme.</b> Keller says don't stop at 20 percent. Take the vital 20 percent of your list, then the vital 20 percent of that, and keep going until you are left with one thing.</span></li>
+          <li><span><b>A success list.</b> Rank by results, not by urgency. The question is not what's next, but what matters most.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller quotes Andrew Carnegie's advice: put all your eggs in one basket, and then watch that basket. His point is that busyness is not the same as progress. The person who does fewer things, chosen well, beats the person who does more things, chosen by habit.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the Pareto funnel</div><div class="hint">Keep cutting to the vital 20 percent</div></div>
+        <div class="stage"><svg id="pf4" role="img" aria-label="One hundred tasks narrowed to the vital few"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="pfCut">Keep the vital 20%</button><button class="btn" id="pfReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Tasks left</span><span class="v glow" id="pfN"></span></div><div class="stat"><span class="k">Share of results they drive</span><span class="v" id="pfR"></span></div><div class="stat"><span class="k">What it means</span><span class="s" id="pfSay"></span></div></div><p class="callout">An illustrative model of 100 tasks where results follow a power law. <b>Each cut keeps a fifth of the tasks but most of the payoff.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your list will always be longer than your day. Instead of working through it top to bottom, rank it by what actually moves results, and keep cutting until one thing is left. Do that first.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Multitasking →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 2</span> · The second lie: you can do two things at once</div>
+        <h2>Multitasking</h2>
+        <div class="short"><span class="lbl">In short</span><p>You can do two things at once, like walk and talk, but you cannot focus on two things at once. What feels like multitasking is fast switching, and every switch costs time and quality.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A computer word.</b> Multitasking was a term for computers that seemed to run several jobs at once. Even they don't: a single processor switches quickly between tasks.</span></li>
+          <li><span><b>Switching costs.</b> Each time you switch, your brain has to reorient: remember where you were, reload the rules and get back up to speed. Those small costs add up.</span></li>
+          <li><span><b>Lost time.</b> Keller cites research suggesting office workers lose more than a quarter of the workday to interruptions and the time it takes to recover from them.</span></li>
+          <li><span><b>Worse at everything.</b> A 2009 Stanford study led by Clifford Nass found that heavy multitaskers were worse at filtering out irrelevant information and at switching tasks than people who rarely multitasked.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller points out that a juggler is not juggling three balls at once. They are catching and tossing one ball at a time, very quickly. Our attention works the same way. The more balls we try to keep in the air, the less attention each one gets, and the more often one falls.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the cost of switching</div><div class="hint">Add switches between two tasks</div></div>
+        <div class="stage"><svg id="sw5" role="img" aria-label="Timeline of two tasks with refocusing time after each switch"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="swK">Times you switch between the two tasks <output id="oswK"></output></label><input type="range" id="swK" min="0" max="16" value="6"></div><div class="ctl"><label for="swC">Minutes to refocus after each switch <output id="oswC"></output></label><input type="range" id="swC" min="1" max="15" value="5"></div></div></div><div class="stats"><div class="stat"><span class="k">Time to finish both</span><span class="v glow" id="swT"></span></div><div class="stat"><span class="k">Lost to switching</span><span class="v" id="swL"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="swSay"></span></div></div><p class="callout">Two 60-minute tasks. An illustrative model: <b>the work itself doesn't change, only the time you spend getting back into it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something matters, give it your undivided attention. Close the tabs, silence the phone, and work on one thing until you reach a natural stopping point.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: A disciplined life →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 3</span> · The third lie: you must be disciplined all the time</div>
+        <h2>A Disciplined Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>You don't need to be a disciplined person. You need enough selected discipline to build the right habit. Once it's a habit, it takes far less effort to keep going.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Selected discipline.</b> Successful people aren't disciplined about everything. They use discipline on a few things, for long enough to turn them into habits.</span></li>
+          <li><span><b>Habits carry you.</b> Once a behaviour is a habit, it runs on its own. Discipline gets you started; habit keeps you going.</span></li>
+          <li><span><b>About 66 days.</b> A 2009 study at University College London led by Phillippa Lally found that new habits took 66 days on average to become automatic, with a wide range from 18 to 254 days.</span></li>
+          <li><span><b>One at a time.</b> Build one habit, then the next. Stacking them in order is the domino effect applied to your behaviour.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller gives the example of the swimmer Michael Phelps, who as a boy was restless and struggled to focus. He channelled his energy into swimming and trained relentlessly, day after day for years. His discipline was not spread across his whole life. It was aimed at one thing, until training was simply what he did.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: from effort to habit</div><div class="hint">Move through the days of a new habit</div></div>
+        <div class="stage"><svg id="hb6" role="img" aria-label="Curve of how automatic a habit feels over the days"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="hbD">Day <output id="ohbD"></output></label><input type="range" id="hbD" min="1" max="120" value="10"></div></div><div class="row" id="hbK"></div></div><div class="stats"><div class="stat"><span class="k">How automatic it feels</span><span class="v glow" id="hbA"></span></div><div class="stat"><span class="k">Discipline needed</span><span class="v" id="hbE"></span></div><div class="stat"><span class="k">Where you are</span><span class="s" id="hbSay"></span></div></div><p class="callout">Curves shaped like those in Lally's study. <b>Simple habits, like a glass of water, settle faster than hard ones, like a workout.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't have to become a different, iron-willed person. Pick one habit that matters, push yourself to do it every day for about two months, and it will start to run itself. Then pick the next one.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Willpower is always there →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 4</span> · The fourth lie: willpower is unlimited</div>
+        <h2>Willpower Is Always on Will-Call</h2>
+        <div class="short"><span class="lbl">In short</span><p>Willpower is not always there when you need it. It fades as the day goes on and as you make decisions, so do your most important work early, before it runs low.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Like a phone battery.</b> Keller describes willpower as something that starts the day charged and drains as you use it, then recharges with rest and food.</span></li>
+          <li><span><b>The brain is hungry.</b> Your brain makes up about 2 percent of your body weight but uses around a fifth of your energy. Hard thinking and self-control are tiring.</span></li>
+          <li><span><b>The marshmallow test.</b> In Walter Mischel's studies, children who could wait for a second treat used tricks such as looking away rather than sheer grit. Managing your situation beats relying on willpower.</span></li>
+          <li><span><b>Time your ONE Thing.</b> Schedule your most important task for when your willpower is highest, which for most people is the morning.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller describes an experiment by Roy Baumeister in which hungry students sat by a plate of warm cookies. Some could eat them; others had to eat radishes and resist. Afterwards, the radish eaters gave up much sooner on an impossible puzzle. Keller's point: self-control in one place can leave less of it for the next thing.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>the idea that willpower is a limited fuel that runs out, called ego depletion, has been hard to repeat. A large replication in 2016 across more than 20 labs found little or no effect. The practical advice still holds for many people, because fatigue, hunger and decision overload are real, but the battery is a metaphor, not a proven law.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: the willpower battery</div><div class="hint">Move your ONE Thing block through the day</div></div>
+        <div class="stage"><svg id="wp7" role="img" aria-label="Willpower level through the day with your ONE Thing block"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="wpT">Start your ONE Thing block at <output id="owpT"></output></label><input type="range" id="wpT" min="6" max="20" value="15"></div></div><div class="toggles" id="wpG"></div></div><div class="stats"><div class="stat"><span class="k">Willpower when you start</span><span class="v glow" id="wpV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="wpSay"></span></div></div><p class="callout">An illustrative model, not a measurement. <b>Sleep and food recharge it; small decisions and resisting temptation drain it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't save your most important work for the end of the day, when you're tired and have made a hundred little choices. Do it first, and put your day's easy tasks afterwards.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: A balanced life →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 5</span> · The fifth lie: you should balance everything</div>
+        <h2>A Balanced Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>Extraordinary results need time and focus, which means some areas of life will get less attention for a while. Don't chase balance; counterbalance, and never neglect what you can't get back.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The middle is a myth.</b> Trying to give every part of your life equal time means nothing gets enough to be extraordinary. Balance sounds healthy but it usually means mediocre.</span></li>
+          <li><span><b>Counterbalance.</b> Keller suggests thinking of a tightrope walker: you lean one way, then correct. You can go out of balance, as long as you come back.</span></li>
+          <li><span><b>Long at work.</b> At work, it's fine to go long on your ONE Thing for weeks or months, then counterbalance with time off and attention elsewhere.</span></li>
+          <li><span><b>Short at home.</b> In your personal life, keep the swings short. Family, friends, health and your own wellbeing can't be left alone for long.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller's picture is of someone balancing on a high wire. They are never perfectly still. They lean, feel the pull and lean back. The skill is not in being still but in knowing which way you're leaning and how long you can stay there before something important falls.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: counterbalance</div><div class="hint">Go long on work, then see what it costs at home</div></div>
+        <div class="stage"><svg id="cb8" role="img" aria-label="A seesaw showing work and personal life, with a warning gauge"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="cbW">Weeks heads-down on a big work push <output id="ocbW"></output></label><input type="range" id="cbW" min="0" max="16" value="6"></div><div class="ctl"><label for="cbP">Evenings a week you protect for people and health <output id="ocbP"></output></label><input type="range" id="cbP" min="0" max="7" value="2"></div></div></div><div class="stats"><div class="stat"><span class="k">Work progress</span><span class="v glow" id="cbG"></span></div><div class="stat"><span class="k">Strain at home</span><span class="v" id="cbH"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="cbSay"></span></div></div><p class="callout">An illustrative model. <b>Long swings are fine at work if you keep the personal swings short.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>It's fine to throw yourself into something for a season. Just know you're doing it, keep coming back to the people and the health you depend on, and don't let the swing go on so long that something breaks.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Big is bad →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Lie 6</span> · The sixth lie: big goals are dangerous</div>
+        <h2>Big Is Bad</h2>
+        <div class="short"><span class="lbl">In short</span><p>Thinking big is not reckless. A big goal forces you to ask better questions and find better ways, while a small goal lets you get by with what you already do.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Fear of big.</b> People avoid big goals because they fear failure, pressure or looking foolish. So they set goals they already know how to hit.</span></li>
+          <li><span><b>Big changes the question.</b> How do I get a bit more? gets you a slightly busier version of today. How could I double it? forces a whole new plan.</span></li>
+          <li><span><b>Aim past the target.</b> Keller's advice: if 10 is a good goal, aim for 20 and plan for it. You may land short of 20, but you'll likely pass 10.</span></li>
+          <li><span><b>Growth mindset.</b> Thinking big works best with the belief that your ability can grow, so setbacks are lessons rather than proof you aren't good enough.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller asks his readers to imagine the life they'd have if they set the bar higher. His argument is simple: no one ever hit a target they never aimed at. The path that a big goal demands is different from the path a small one demands, and the big path often turns out to be the better one.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: think bigger</div><div class="hint">Pick the size of your goal</div></div>
+        <div class="lab-ctl" style="border-top:0;padding-bottom:0"><div class="row" id="tbB"></div></div><div class="stage"><svg id="tb9" role="img" aria-label="Your current path compared with the goal and the path it demands"></svg></div><div class="stats"><div class="stat"><span class="k">Where today's habits get you</span><span class="v" id="tbNow"></span></div><div class="stat"><span class="k">Where the plan lands you</span><span class="v glow" id="tbLand"></span></div><div class="stat"><span class="k">What the goal demands</span><span class="s" id="tbSay"></span></div></div><p class="callout">An illustrative model: <b>you often land short of a big goal, but short of a big goal is still far past a small one.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask yourself what you'd aim for if you weren't afraid, then plan as if you meant it. A bigger goal makes you look for better ways to work, and even falling short of it can leave you far ahead.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The focusing question →</a></div>
+    </section>
+    <!-- ===================== THE TRUTH ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part two · the simple path</span>
+      <h2>The Truth</h2>
+      <p>The book's tool is one question, asked often: What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary? This part shows how to ask it, make it a habit and get great answers to it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A great question is big and specific. A great answer is found by researching what the best have done, then going one step further.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · One question to find your ONE Thing</div>
+        <h2>The Focusing Question</h2>
+        <div class="short"><span class="lbl">In short</span><p>Ask: What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary? Use it for the big picture and for right now.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The question.</b> The full wording is: What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary? Every part does work.</span></li>
+          <li><span><b>What's the ONE Thing?</b> Asks for a single action, not a list. It forces you to choose.</span></li>
+          <li><span><b>I can do.</b> Makes it about action you can take yourself, not something you hope will happen.</span></li>
+          <li><span><b>Easier or unnecessary.</b> This is the test of a lead domino: once it falls, the next steps get easier, or disappear altogether.</span></li>
+          <li><span><b>Two sizes.</b> The big-picture version is What's my ONE Thing? for your life and career. The small-focus version is What's my ONE Thing right now? for the next hour.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller calls the focusing question the most important habit in the book. It is how you find the lead domino. He suggests asking it about every area of life, from your health to your money, and about every time frame, from someday to this very moment.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: ask the focusing question</div><div class="hint">Pick an area of life and a time frame</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="sub">Area of life</div><div class="row" id="fqA"></div><div class="sub">Time frame</div><div class="row" id="fqT"></div></div><div class="stage"><svg id="fq10" role="img" aria-label="Rings of time frames from someday to right now"></svg></div><div class="out"><span class="k">Your question</span><p class="say-out" id="fqOut"></p><div class="field"><label for="fqIn">Your answer</label><input id="fqIn" maxlength="140" placeholder="Write the one action you would take"></div><div class="row"><button class="btn primary" id="fqSave">Save my answer</button><button class="btn" id="fqClr">Clear saved</button></div><div class="mine" id="fqList"></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Whenever you're unsure what to do, ask the focusing question. It turns a cloud of possible tasks into one clear next action.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: The success habit →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Make the question automatic</div>
+        <h2>The Success Habit</h2>
+        <div class="short"><span class="lbl">In short</span><p>The focusing question only works if you ask it. Make it a daily habit: ask it every morning, act on the answer, and keep it in front of you until it runs on its own.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Understand and believe it.</b> First accept that focusing on one thing really does lead to bigger results. You won't build a habit you don't believe in.</span></li>
+          <li><span><b>Use it every day.</b> Ask the question each morning, first thing, and let the answer shape your day.</span></li>
+          <li><span><b>Make it a habit.</b> Keep asking until it's automatic. Building a habit takes about 66 days, so plan for two months, not two days.</span></li>
+          <li><span><b>Leave reminders.</b> Put the question somewhere you'll see it. Keller and his team even used signs reading Until my ONE Thing is done, everything else is a distraction.</span></li>
+          <li><span><b>Recruit support.</b> Tell the people around you what you're doing. They can protect your time and hold you to it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller describes how the people around him started using the question with each other: in meetings, in check-ins and at the end of the day. Once a group asks it together, it stops being a technique and becomes part of how they work.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: your 66-day streak</div><div class="hint">Tick off each day you ask the question</div></div>
+        <div class="stage"><svg id="ring11" role="img" aria-label="A ring showing days done out of 66"></svg></div><div class="pad"><div class="grid66" id="g66" aria-label="66 days"></div></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="g66Next">Mark the next day</button><button class="btn" id="g66Clr">Start over</button></div></div><div class="stats"><div class="stat"><span class="k">Days done</span><span class="v glow" id="g66N"></span></div><div class="stat"><span class="k">Current streak</span><span class="v" id="g66S"></span></div><div class="stat"><span class="k">Where you are</span><span class="s" id="g66Say"></span></div></div><p class="callout">Saved in this browser. <b>Tap any day to tick or untick it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Knowing the question doesn't help unless you ask it. Put it where you'll see it each morning, ask it before anything else, and keep going until you don't need the reminder.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: The path to great answers →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Big and specific questions, researched answers</div>
+        <h2>The Path to Great Answers</h2>
+        <div class="short"><span class="lbl">In short</span><p>A great question is big and specific. A great answer comes from research: find what the best people have done, then go one step further.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Four kinds of question.</b> Questions can be small or big, and broad or specific. Small and broad gives you nothing to act on. Small and specific is easy but limited. Big and broad leaves too many options. Big and specific is the great question.</span></li>
+          <li><span><b>An example.</b> How can I sell more books? is small and broad. How can I double my book sales in six months? is big and specific, and it tells you what success looks like and by when.</span></li>
+          <li><span><b>Three kinds of answer.</b> A doable answer is within your reach already. A stretch answer is at the edge of your ability and needs research and practice. A possibility answer is beyond what you know and needs you to learn and innovate.</span></li>
+          <li><span><b>Benchmark and trend.</b> To find a possibility answer, study the best results anyone has achieved, look at where things are heading, and then push past that.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller argues that most people settle for doable answers because they are comfortable. But the answers that change things usually sit just outside what you already know. You find them by looking at people who've already gone furthest, and treating their best as your starting point.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: big and specific</div><div class="tally" id="tally12" aria-label="Score"></div></div>
+        <div class="sorter" id="qd12"></div><div class="stage"><svg id="qdS" role="img" aria-label="The four quadrants of a question with your placed questions"></svg></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask questions that are big enough to stretch you and specific enough to act on. Then don't stop at the first answer you can think of. Find out what the best have done and see if you can go past it.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Live with purpose →</a></div>
+    </section>
+    <!-- ===================== EXTRAORDINARY RESULTS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part three · living it</span>
+      <h2>Extraordinary Results</h2>
+      <p>Purpose sets your direction, priority turns it into a ONE Thing for right now, and productivity is the time block where you actually do it. Then come the three commitments, the four thieves to guard against, and the journey.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Purpose, priority and productivity are an iceberg: what people see is your results, but the bulk of it is underneath.</p></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Purpose sets the direction</div>
+        <h2>Live with Purpose</h2>
+        <div class="short"><span class="lbl">In short</span><p>Purpose is the reason behind your ONE Thing. Things and money give short bursts of happiness that fade. Meaning and achievement give a deeper, more lasting kind.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The iceberg.</b> Keller pictures purpose, priority and productivity as an iceberg. People see your productivity; underneath, holding it up, are your priority and, deepest of all, your purpose.</span></li>
+          <li><span><b>Happiness on the way.</b> Happiness happens on the way to fulfilment. Chasing happiness directly tends to fail; pursuing something meaningful brings it along.</span></li>
+          <li><span><b>Fleeting and lasting.</b> Keller cites the psychologist Martin Seligman: pleasure fades quickly, while engagement, relationships, meaning and achievement give a longer-lasting sense of wellbeing.</span></li>
+          <li><span><b>Find your big why.</b> Ask what you'd want your life to stand for. You don't need a perfect answer; pick a direction and refine it as you go.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller notes that people who chase money for its own sake often find that it doesn't satisfy them for long. Money and things are useful, but they are tools for living a purpose, not the purpose itself. When your work connects to something you care about, the effort starts to pay you back.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: the happiness treadmill</div><div class="hint">Buy something, or invest in meaning</div></div>
+        <div class="stage"><svg id="ht13" role="img" aria-label="Happiness over time after purchases and meaningful pursuits"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="htBuy">Buy something new</button><button class="btn" id="htMean">Do something meaningful</button><button class="btn" id="htReset">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Happiness today</span><span class="v glow" id="htNow"></span></div><div class="stat"><span class="k">Your baseline</span><span class="v" id="htBase"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="htSay"></span></div></div><p class="callout">An illustrative model of hedonic adaptation. <b>Purchases spike and fade; meaning builds slowly and stays.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Know why you're doing what you do. A clear purpose makes it much easier to pick your ONE Thing, and it turns the hard days into steps toward something rather than just effort.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Live by priority →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Goal-setting to the now</div>
+        <h2>Live by Priority</h2>
+        <div class="short"><span class="lbl">In short</span><p>Connect today to someday. Start with your biggest goal, then work down through five years, one year, a month, a week and today, to the ONE Thing you should do right now.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>One priority.</b> The word priority was singular for centuries. Only recently did people start talking about many priorities. Keller wants it singular again.</span></li>
+          <li><span><b>We discount the future.</b> People value a reward now far more than a bigger one later. A goal that's years away feels unreal, so we drift toward what's easy today.</span></li>
+          <li><span><b>Goal-setting to the now.</b> The fix is to link each level to the next: my someday goal, so my five-year goal, so my one-year goal, then this month, this week, today, and right now.</span></li>
+          <li><span><b>Write it down.</b> Keller cites research by Gail Matthews finding that people who wrote their goals down were about 40 percent more likely to achieve them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller's ladder is a chain of focusing questions. Each answer becomes the context for the next, smaller question. By the time you reach right now, the one thing on your desk is directly connected to the life you want, which makes it far easier to choose it over the distractions.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: goal-setting to the now</div><div class="hint">Fill in each step, from someday down to now</div></div>
+        <div class="builder"><div class="fields" id="glF"></div><div class="stage"><svg id="gl14" role="img" aria-label="Your goals drawn as a line of dominoes from right now to someday"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="glDemo">Fill with an example</button><button class="btn" id="glClr">Clear</button><span class="tip" id="glSaved"></span></div></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your goals for today should be small pieces of your goals for this year, which should be pieces of your someday goal. Write the chain down, and the thing in front of you will never feel random.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Live for productivity →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Time block your ONE Thing</div>
+        <h2>Live for Productivity</h2>
+        <div class="short"><span class="lbl">In short</span><p>The most productive people block time for their ONE Thing and protect it. Schedule time off first, then your ONE Thing for about four hours a day, then time to plan.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Time blocking.</b> Put an appointment in your calendar for your ONE Thing, and treat it as seriously as a meeting with your most important client.</span></li>
+          <li><span><b>Three blocks, in order.</b> Block your time off first, then your ONE Thing, then a short planning time each week to review your goals and set the next week's blocks.</span></li>
+          <li><span><b>Four hours.</b> Keller recommends about four hours a day on your ONE Thing, ideally early, before the day fills up.</span></li>
+          <li><span><b>Maker and manager.</b> Paul Graham, co-founder of Y Combinator, wrote that makers need long uninterrupted stretches, while managers live in one-hour slots. He moved his meetings to the end of the day to protect his maker time.</span></li>
+          <li><span><b>Protect the block.</b> Find a place you won't be disturbed, have what you need to hand, switch off distractions, and tell others why you're unavailable. If you have to move the block, reschedule it the same day.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller suggests making a calendar that only you can override, then defending it. When someone asks for time during your block, the honest answer is I have an appointment, and it's true. If something urgent truly can't wait, deal with it and then put the block back the same day.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: block your week</div><div class="hint">Pick a block type and tap the calendar</div></div>
+        <div class="lab-ctl" style="border-top:0;padding-bottom:0"><div class="row" id="wkTools"></div></div><div class="stage"><svg id="wk15" role="img" aria-label="A weekly calendar you can fill with time blocks"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="wkKeller">Show Keller's pattern</button><button class="btn" id="wkBusy">Show a typical week</button><button class="btn" id="wkClr">Clear</button></div></div><div class="stats"><div class="stat"><span class="k">ONE Thing hours</span><span class="v glow" id="wkO"></span></div><div class="stat"><span class="k">Longest unbroken stretch</span><span class="v" id="wkL"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="wkSay"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide in advance when you'll do your most important work, put it in the calendar, and guard it like a meeting you can't miss. Four focused hours a day is what moves the dominoes.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: The three commitments →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Mastery, a better approach, accountability</div>
+        <h2>The Three Commitments</h2>
+        <div class="short"><span class="lbl">In short</span><p>To get the most out of your time block, commit to three things: follow the path of mastery, move from your usual approach to a better one, and own your results with the accountability cycle.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The path of mastery.</b> Mastery is a lifelong path, not a finish line. Research often quoted says expert performance takes around 10,000 hours of deliberate practice, about three hours a day for ten years.</span></li>
+          <li><span><b>From E to P.</b> Keller contrasts an entrepreneurial approach, doing things the way that comes naturally, with a purposeful approach, looking for the best possible way. When you hit a ceiling, the answer is not more effort but a new method.</span></li>
+          <li><span><b>The accountability cycle.</b> Accountable people take the results they get, own them, look for solutions and act on them. Victims deny, blame others and wait.</span></li>
+          <li><span><b>Get a coach.</b> Keller argues that almost every top performer has a coach, someone who sees what you can't and holds you to the standard.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller describes how people often reach a level and stall. They've maxed out what their natural approach can do. Trying harder at the same thing only gets you a little higher. The breakthrough comes from asking what the best in the world do differently, learning it, and climbing a new curve.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: from E to P</div><div class="hint">When you hit the ceiling, choose what to do</div></div>
+        <div class="stage"><svg id="ep16" role="img" aria-label="Performance over time, with ceilings and new approaches"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="epNew">Find a better approach</button><button class="btn" id="epPush">Just push harder</button><button class="btn" id="epReset">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Performance</span><span class="v glow" id="epV"></span></div><div class="stat"><span class="k">Years</span><span class="v" id="epY"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="epSay"></span></div></div><p class="callout">An illustrative model: <b>each approach has its own S-curve and its own ceiling.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Keep getting better at your ONE Thing, change your method when it stops working rather than just working harder, and take ownership of your results, good or bad.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: The four thieves →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · What steals your productivity</div>
+        <h2>The Four Thieves</h2>
+        <div class="short"><span class="lbl">In short</span><p>Four thieves will try to steal your time block: the inability to say no, the fear of chaos, poor health habits, and an environment that doesn't support your goals.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Not saying no.</b> Every yes to something else is a no to your ONE Thing. Keller puts it this way: one yes must be defended over time by a thousand nos.</span></li>
+          <li><span><b>Fear of chaos.</b> When you focus on one thing, other things will pile up and get messy. Accept that some chaos is the price of extraordinary results.</span></li>
+          <li><span><b>Poor health habits.</b> You can't sustain focus on little sleep, bad food and no exercise. Keller suggests a routine for energy: meditate, eat well, exercise, spend time with loved ones, and get enough sleep.</span></li>
+          <li><span><b>An unsupportive environment.</b> The people around you and your physical surroundings either help or hurt. Make sure both point toward your goal.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller lists the thieves because people often blame themselves for losing focus, when the real problem is that something keeps walking off with their time. Once you can name the thief, you can lock the door: say no more often, let small fires burn, look after your body, and shape your surroundings.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: catch the thief</div><div class="tally" id="tally17" aria-label="Score"></div></div>
+        <div class="sorter" id="sort17"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Expect the four thieves, and plan for them. Practise saying no, let unimportant things stay untidy, protect your energy, and shape the people and places around you so they support your ONE Thing.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: The journey →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Living with no regrets</div>
+        <h2>The Journey</h2>
+        <div class="short"><span class="lbl">In short</span><p>The ONE Thing is a journey made of one step after another. At the end of life, people rarely regret what they did as much as what they never tried.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start now.</b> You can't do everything at once, but you can do the first thing today. Then the next one.</span></li>
+          <li><span><b>Regret.</b> Keller points to stories from palliative care nurse Bronnie Ware, whose patients most often regretted not living a life true to themselves, working too much, not expressing their feelings, losing touch with friends and not letting themselves be happier.</span></li>
+          <li><span><b>Inaction hurts longer.</b> Psychologists Thomas Gilovich and Victoria Medvec found that in the short term people regret things they did, but over a lifetime they regret the things they didn't do much more.</span></li>
+          <li><span><b>Live large.</b> Ask the focusing question about the life you want, then knock over the first domino. Keller closes with a reminder that the dominoes add up to a life.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Keller ends the book by bringing it back to the domino line. Every great life is built the same way as every great business: one thing at a time, in the right order, each one making the next possible. The only way to fail at it is to never start.</p></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: the regrets that last</div><div class="hint">Move forward in time after a choice</div></div>
+        <div class="stage"><svg id="rg18" role="img" aria-label="Regret over time for things done and things not done"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="rgY">Time since the choice <output id="orgY"></output></label><input type="range" id="rgY" min="0" max="40" value="1"></div></div></div><div class="stats"><div class="stat"><span class="k">Regret for what you did</span><span class="v" id="rgA"></span></div><div class="stat"><span class="k">Regret for what you didn't</span><span class="v glow" id="rgI"></span></div><div class="stat"><span class="k">What it means</span><span class="s" id="rgSay"></span></div></div><p class="callout">An illustrative model shaped like Gilovich and Medvec's findings, not their data. <b>Actions we regret sting early and fade; chances we didn't take grow.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't wait until you have everything figured out. Pick your ONE Thing, start today, and keep knocking over the next domino. The regret you'll feel most is for the line you never began.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#after">Next: your ONE Thing →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your ONE Thing</h2>
+      <p class="big">The whole book fits on a card: find the lead domino, block the time, and protect it until it falls.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">The lies</span><b>Unlearn six beliefs</b><span>Everything matters equally, multitasking, a disciplined life, unlimited willpower, balance, and big is bad.</span></div>
+        <div><span class="n">The truth</span><b>Ask the question</b><span>What's the ONE Thing I can do such that by doing it everything else will be easier or unnecessary?</span></div>
+        <div><span class="n">Purpose</span><b>Know your why</b><span>It points you toward the right ONE Thing and keeps you going.</span></div>
+        <div><span class="n">Priority</span><b>Goal-set to the now</b><span>Link someday to this year, this week, today and right now.</span></div>
+        <div><span class="n">Productivity</span><b>Time block it</b><span>Time off first, then about four hours for your ONE Thing, then planning.</span></div>
+        <div><span class="n">Guard it</span><b>Beat the four thieves</b><span>Say no, accept some chaos, look after your health, shape your surroundings.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The ONE Thing: The Surprisingly Simple Truth Behind Extraordinary Results</i> by Gary Keller with Jay Papasan (2013). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models, not data from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The ONE Thing", "The Lies", "The Truth", "Extraordinary Results"];
+const CH = [["The ONE Thing", "The ONE Thing", 0, "Chapter 1"], ["The Domino Effect", "The domino effect", 0, "Chapter 2"], ["Success Leaves Clues", "Success leaves clues", 0, "Chapter 3"], ["Everything Matters Equally", "Everything matters equally", 1, "Lie 1"], ["Multitasking", "Multitasking", 1, "Lie 2"], ["A Disciplined Life", "A disciplined life", 1, "Lie 3"], ["Willpower Is Always on Will-Call", "Willpower is always there", 1, "Lie 4"], ["A Balanced Life", "A balanced life", 1, "Lie 5"], ["Big Is Bad", "Big is bad", 1, "Lie 6"], ["The Focusing Question", "The focusing question", 2, "Chapter 10"], ["The Success Habit", "The success habit", 2, "Chapter 11"], ["The Path to Great Answers", "The path to great answers", 2, "Chapter 12"], ["Live with Purpose", "Live with purpose", 3, "Chapter 13"], ["Live by Priority", "Live by priority", 3, "Chapter 14"], ["Live for Productivity", "Live for productivity", 3, "Chapter 15"], ["The Three Commitments", "The three commitments", 3, "Chapter 16"], ["The Four Thieves", "The four thieves", 3, "Chapter 17"], ["The Journey", "The journey", 3, "Chapter 18"]];
+const QUIZ = {
+"1": {
+"q": "What does Keller mean by \"going small\"?",
+"o": [
+"Setting smaller goals so they are easier to hit",
+"Ignoring the things you could do so you can do the one thing you should",
+"Working on many small tasks to build momentum"
+],
+"a": 1,
+"w": "Going small is about focus, not ambition. The goal can be huge; the list of things you work on is short."
+},
+"2": {
+"q": "According to Keller, how is extraordinary success built?",
+"o": [
+"Simultaneously, by working on everything at once",
+"Sequentially, one right thing at a time",
+"Randomly, by being in the right place"
+],
+"a": 1,
+"w": "Success is sequential: each domino you knock over makes the next, bigger one possible."
+},
+"3": {
+"q": "What does the chapter say you'll find at the heart of big success?",
+"o": [
+"A large team doing many things at once",
+"One product, skill or person that drove it",
+"A lucky break that can't be repeated"
+],
+"a": 1,
+"w": "The clue is focus. One thing, done exceptionally well, sits at the centre of most extraordinary success."
+},
+"4": {
+"q": "How does Keller go further than the usual 80/20 rule?",
+"o": [
+"He says to do 80 percent of your list",
+"He applies the rule again and again until only one task remains",
+"He says the rule only works for land ownership"
+],
+"a": 1,
+"w": "Take the vital 20 percent, then the vital 20 percent of that, until you get to the ONE Thing."
+},
+"5": {
+"q": "What's really happening when we think we're multitasking?",
+"o": [
+"We focus on two things at exactly the same time",
+"We switch quickly between tasks, paying a cost each time",
+"Our brain splits into two independent halves"
+],
+"a": 1,
+"w": "It's task switching. Every switch costs time to refocus, and quality suffers."
+},
+"6": {
+"q": "On average, how long did Lally's study find it takes to form a new habit?",
+"o": [
+"21 days",
+"66 days",
+"One year"
+],
+"a": 1,
+"w": "The average was 66 days, though it ranged from 18 to 254 depending on the person and the habit."
+},
+"7": {
+"q": "Based on this chapter, when should you schedule your ONE Thing?",
+"o": [
+"Late in the day, after the urgent tasks are cleared",
+"When your willpower is highest, usually early in the day",
+"Whenever you happen to feel inspired"
+],
+"a": 1,
+"w": "Willpower is strongest early for most people, so do the hardest, most important thing first."
+},
+"8": {
+"q": "What does Keller suggest instead of balance?",
+"o": [
+"Equal time for every part of life, every day",
+"Counterbalancing: go long at work, keep personal swings short",
+"Ignoring your personal life until you succeed"
+],
+"a": 1,
+"w": "Counterbalance. Lean into work when you need to, but never stay away for long from the things you can't replace."
+},
+"9": {
+"q": "Why does Keller say thinking big is useful?",
+"o": [
+"It guarantees you'll hit the goal",
+"It forces new questions and better methods than a small goal",
+"It impresses other people"
+],
+"a": 1,
+"w": "A big goal changes the question you ask, which changes the plan, which changes the results."
+},
+"10": {
+"q": "What is the test that marks a lead domino in the focusing question?",
+"o": [
+"It is the most urgent task",
+"Doing it makes everything else easier or unnecessary",
+"It is the task your boss asked for"
+],
+"a": 1,
+"w": "The lead domino is the one that, once done, makes the rest easier or unnecessary."
+},
+"11": {
+"q": "How does Keller suggest you make the focusing question stick?",
+"o": [
+"Ask it once a year when setting goals",
+"Ask it every morning until it becomes a habit, with reminders and support",
+"Only ask it when things go wrong"
+],
+"a": 1,
+"w": "Daily use, reminders and support turn the question into a habit."
+},
+"12": {
+"q": "Which is a great question in Keller's sense?",
+"o": [
+"How can I get fitter?",
+"How can I run a marathon in under four hours by next October?",
+"What exercise should I do today?"
+],
+"a": 1,
+"w": "It's big and specific: an ambitious target, measurable, with a deadline."
+},
+"13": {
+"q": "In Keller's iceberg, what lies deepest?",
+"o": [
+"Productivity",
+"Priority",
+"Purpose"
+],
+"a": 2,
+"w": "Purpose is at the base. It sets your priority, which determines what you do in your productive time."
+},
+"14": {
+"q": "What does goal-setting to the now connect?",
+"o": [
+"Your goals with your colleagues' goals",
+"Your someday goal with what you should do right now",
+"Your work goals with your hobbies"
+],
+"a": 1,
+"w": "It links each time frame down to the present, so today's action serves the biggest goal."
+},
+"15": {
+"q": "In what order does Keller say to block your time?",
+"o": [
+"Meetings, email, then ONE Thing",
+"Time off, ONE Thing, then planning time",
+"ONE Thing, meetings, then time off if there's any left"
+],
+"a": 1,
+"w": "Time off first so you recharge, then your ONE Thing, then planning time to keep it on track."
+},
+"16": {
+"q": "What does Keller say to do when you hit a ceiling?",
+"o": [
+"Work longer hours with the same method",
+"Find a better approach by learning what the best do",
+"Accept that you've reached your limit"
+],
+"a": 1,
+"w": "Move from E to P: from your natural approach to a purposeful, better one."
+},
+"17": {
+"q": "Which is NOT one of the four thieves?",
+"o": [
+"The inability to say no",
+"Not having enough ideas",
+"Poor health habits"
+],
+"a": 1,
+"w": "The four are: the inability to say no, the fear of chaos, poor health habits, and an unsupportive environment."
+},
+"18": {
+"q": "Over a lifetime, what do people tend to regret more?",
+"o": [
+"Things they did",
+"Things they didn't do",
+"Both about the same"
+],
+"a": 1,
+"w": "In the long run, people regret inaction, the chances not taken, more than their actions."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#121010';
+try { const t = localStorage.getItem('ot-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('ot-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('ot-done', []));
+const save = () => store.set('ot-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* a domino: x, bottom y, width, height; drawn upright, pips on the face */
+const domino = (x, yb, w, h, fill = 'panel', stroke = 'glow', sw = 1.6) => { const r = Math.max(1.5, Math.min(w, h) * .12), pr = Math.max(1.2, w * .09);
+  return `<rect x="${x.toFixed(1)}" y="${(yb - h).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${r.toFixed(1)}" ${FS(fill, stroke, sw)}/>`
+    + (w > 7 ? `<line x1="${(x + w * .2).toFixed(1)}" x2="${(x + w * .8).toFixed(1)}" y1="${(yb - h / 2).toFixed(1)}" y2="${(yb - h / 2).toFixed(1)}" ${S(stroke, 1)}/><circle cx="${(x + w / 2).toFixed(1)}" cy="${(yb - h * .75).toFixed(1)}" r="${pr.toFixed(1)}" ${F(stroke)}/><circle cx="${(x + w * .3).toFixed(1)}" cy="${(yb - h * .25).toFixed(1)}" r="${pr.toFixed(1)}" ${F(stroke)}/><circle cx="${(x + w * .7).toFixed(1)}" cy="${(yb - h * .25).toFixed(1)}" r="${pr.toFixed(1)}" ${F(stroke)}/>` : ''); };
+
+/* ---------- afterword card (reads what the labs saved) ---------- */
+function renderCard(){
+  const fq = store.get('ot-fq', []), lad = store.get('ot-ladder', []), el = $('#myCard'); if (!el) return;
+  let h = '';
+  if (fq.length){ const f = fq[fq.length - 1]; h += `<span class="k">Your focusing question</span><p class="q">${esc(f.q)}</p><p class="a"><b>Your answer:</b> ${esc(f.a)}</p>`; }
+  if (lad[0] || lad[6]) h += `<span class="k">Your domino line</span>${lad[0] ? `<p class="a"><b>Someday:</b> ${esc(lad[0])}</p>` : ''}${lad[6] ? `<p class="a"><b>Right now:</b> ${esc(lad[6])}</p>` : ''}`;
+  el.innerHTML = h || '<span class="k">Nothing saved yet</span><p class="empty">Ask the focusing question in <a href="#ch10">chapter 10</a> and build your goal ladder in <a href="#ch14">chapter 14</a>. What you save shows up here, in this browser only.</p>';
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I have too much to do', 4, 'Everything does not matter equally', 'Rank your list by results, not urgency. Keep the vital fifth, then the vital fifth of that, until one thing is left. Do it first.'],
+    ['I keep getting distracted', 5, 'Multitasking is a lie', 'You can only focus on one thing at a time. Close everything else and give the one thing a protected block.'],
+    ['I can\'t stick to a new habit', 6, 'Selected discipline', 'You don\'t need discipline everywhere. Pick one habit and push for about 66 days until it runs on its own.'],
+    ['I\'m too tired by the afternoon', 7, 'Willpower runs low', 'Do your ONE Thing first, while your energy is high, and push the easy tasks to later in the day.'],
+    ['Work is taking over my life', 8, 'Counterbalance', 'It\'s fine to go long at work for a season. Just keep the swings away from family and health short.'],
+    ['I don\'t know what to focus on', 10, 'The focusing question', 'Ask what one thing would make everything else easier or unnecessary. Answer it for your life, then for right now.'],
+    ['My goals feel far away', 14, 'Goal-setting to the now', 'Link someday to five years, this year, this month, this week, today and right now. Do the right-now step.'],
+    ['I never get time for deep work', 15, 'Time block it', 'Put four hours in the calendar for your ONE Thing, early in the day, and defend them like an appointment.'],
+    ['I always say yes', 17, 'The first thief', 'Every yes is a no to your ONE Thing. One yes has to be defended by a thousand nos.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">Chapter ${n} · ${CH[n - 1][3]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the domino line ---------- */
+{ const el = $('#heroDm'), N = 7, G = 1.5, yb = 268;
+  const hs = [...Array(N)].map((_, i) => 26 * Math.pow(G, i * .78)), ws = hs.map(h => h * .36);
+  /* spacing: each one stands a bit more than half its height from the next */
+  const xs = []; let x = 0; hs.forEach((h, i) => { xs.push(x); x += ws[i] + h * .52; });
+  const total = xs[N - 1] + ws[N - 1], k = 380 / total, ox = 20;
+  let fallen = 0, timer = null;
+  function draw(){
+    let g = `<line x1="10" x2="410" y1="${yb}" y2="${yb}" ${S('line', 1.5)}/>`;
+    hs.forEach((h, i) => { const X = ox + xs[i] * k, W = ws[i] * k, H = h * k * 1.6;
+      const next = i < N - 1 ? ox + xs[i + 1] * k : null, gap = next ? next - (X + W) : 0;
+      const ang = i < fallen && next ? Math.asin(Math.min(1, (gap + W * .2) / H)) * 180 / Math.PI : 0;
+      g += `<g style="transform-box:view-box;transform-origin:${(X + W).toFixed(1)}px ${yb}px;transform:rotate(${ang.toFixed(1)}deg);transition:${RM ? 'none' : 'transform .32s cubic-bezier(.5,0,.8,.4)'}">${domino(X, yb, W, H, i < fallen ? 'glow-soft' : 'panel', i < fallen ? 'glow' : i === 0 ? 'glow' : 'faint', 1.6)}</g>`;
+    });
+    g += TX(ox, yb + 22, 'the lead domino', 'glow', 12) + TX(410, yb + 22, '×1.5 each time', 'faint', 12, 'end');
+    el.innerHTML = g;
+  }
+  $('#heroTip').addEventListener('click', e => { clearInterval(timer);
+    if (fallen >= N){ fallen = 0; draw(); e.currentTarget.textContent = 'Tip it'; return; }
+    const b = e.currentTarget; fallen = 0;
+    timer = setInterval(() => { fallen++; draw(); if (fallen >= N){ clearInterval(timer); b.textContent = 'Stand them up'; } }, RM ? 60 : 260);
+  });
+  draw();
+}
+
+/* ---------- 1: two rabbits ---------- */
+{ const el = $('#rb1'), nI = $('#rbN'), mBox = $('#rbM'), NEED = 60, TOTAL = 100; let mode = 'split';
+  mBox.innerHTML = `<button class="btn" data-m="split" aria-pressed="true">Split my effort evenly</button><button class="btn" data-m="seq" aria-pressed="false">One at a time, in order</button>`;
+  const mb = [...mBox.querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  const draw = onLayout(() => { const n = +nI.value, nw = NARROW(), W = nw ? 360 : 760, L = nw ? 66 : 96, R = W - 20, rowH = 40, T = 36, H = T + n * rowH + 34;
+    vb(el, W, H); const X = v => L + v / TOTAL * (R - L);
+    const eff = []; if (mode === 'split') for (let i = 0; i < n; i++) eff.push(TOTAL / n);
+    else { let left = TOTAL; for (let i = 0; i < n; i++){ const e = Math.min(NEED, left); eff.push(e); left -= e; } }
+    let g = `<line x1="${X(NEED)}" x2="${X(NEED)}" y1="${T - 12}" y2="${H - 26}" ${S('glow', 1.5, ';stroke-dasharray:4 4')}/>` + TX(X(NEED), T - 18, 'finish line', 'glow', 12, 'middle');
+    eff.forEach((e, i) => { const y = T + i * rowH, ok = e >= NEED;
+      g += TX(L - 10, y + 19, 'Goal ' + (i + 1), ok ? 'text' : 'muted', 13, 'end');
+      g += `<rect x="${L}" y="${y + 6}" width="${R - L}" height="18" rx="9" ${F('line', .5)}/>`;
+      if (e > 0) g += `<rect x="${L}" y="${y + 6}" width="${Math.max(18, X(e) - L).toFixed(1)}" height="18" rx="9" ${F(ok ? 'glow' : 'cool', ok ? 1 : .7)}/>`;
+      /* a rabbit glyph at the end: caught or still running */
+      const rx = ok ? X(NEED) + 14 : R - 12;
+      g += `<text x="${rx}" y="${y + 21}" font-size="13" text-anchor="middle" ${F(ok ? 'good' : 'faint')}>${ok ? '✓' : '→'}</text>`;
+    });
+    [0, 20, 40, 60, 80, 100].forEach(v => { g += TX(X(v), H - 8, v, 'faint', 11, 'middle', 'class="mono"'); });
+    el.innerHTML = g;
+    const got = eff.filter(e => e >= NEED).length; out('rbN', n);
+    $('#rbDone').textContent = got + ' of ' + n; $('#rbEach').textContent = mode === 'split' ? Math.round(TOTAL / n) + ' units' : 'all it needs, in turn';
+    $('#rbSay').textContent = n === 1 ? 'One rabbit, caught with effort to spare.' : mode === 'split' ? (got ? 'Only just enough. Add one more goal and nothing finishes.' : 'You chased them all and caught none.') : `You caught ${got} and are well on the way with the next. Sequence beats splitting.`;
+  });
+  nI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 2: the domino line ---------- */
+{ const el = $('#dm2'), nI = $('#dmN'), H0 = .0508, G = 1.5;
+  const LM = [[.3, 'a school ruler'], [1, 'a kitchen counter'], [1.95, 'a tall quarterback (6 ft 5)'], [5.5, 'a giraffe'], [12, 'a three-storey house'], [56, 'the Leaning Tower of Pisa'], [330, 'the Eiffel Tower'], [828, 'the Burj Khalifa'], [8849, 'Mount Everest'], [100000, 'the edge of space'], [408000, 'the Space Station\'s orbit'], [35786000, 'the orbit of TV satellites'], [384400000, 'the distance to the Moon']];
+  const MARKS = [[1.95, 'quarterback'], [56, 'Pisa'], [330, 'Eiffel Tower'], [8849, 'Everest'], [100000, 'space'], [384400000, 'the Moon']];
+  let lit = 0, timer = null;
+  const ht = k => H0 * Math.pow(G, k - 1);
+  const fmt = m => { const ft = m * 3.28084;
+    if (m < 1) return (m * 100).toFixed(m < .1 ? 1 : 0) + ' cm · ' + (m * 39.37).toFixed(0) + ' in';
+    if (m < 1000) return (m < 10 ? m.toFixed(2) : Math.round(m).toLocaleString()) + ' m · ' + Math.round(ft).toLocaleString() + ' ft';
+    return Math.round(m / 1000).toLocaleString() + ' km · ' + Math.round(m / 1609.34).toLocaleString() + ' miles'; };
+  const like = m => { let below = null, above = null; LM.forEach(l => { if (l[0] <= m) below = l; else if (!above) above = l; });
+    if (!below) return 'Shorter than ' + LM[0][1];
+    const r = m / below[0]; return r < 1.25 ? 'About ' + below[1] : above && above[0] / m < 1.25 ? 'Nearly ' + above[1] : 'Taller than ' + below[1]; };
+  const draw = onLayout(() => { const n = +nI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 330, L = nw ? 50 : 60, R = W - (nw ? 10 : 110), T = 18, B = H - 36;
+    vb(el, W, H); const lmin = -2, lmax = 9, Y = m => B - (Math.log10(m) - lmin) / (lmax - lmin) * (B - T), bw = (R - L) / 57;
+    let g = '';
+    for (let e = lmin; e <= lmax; e++){ g += `<line x1="${L}" x2="${R}" y1="${Y(10 ** e)}" y2="${Y(10 ** e)}" ${S('line', 1, ';stroke-opacity:.6')}/>`; if (e % (nw ? 2 : 1) === 0) g += TX(L - 6, Y(10 ** e) + 4, e < 0 ? (100 * 10 ** e) + 'cm' : e < 3 ? (10 ** e) + 'm' : ['1km', '10km', '100km', '1k km', '10k km', '100k km', '1M km'][e - 3], 'faint', 10, 'end', 'class="mono"'); }
+    for (let k = 1; k <= 57; k++){ const x = L + (k - 1) * bw + bw * .15, w = bw * .7, on = k <= n, y = Y(ht(k));
+      g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${(B - y).toFixed(1)}" rx="${Math.min(2, w / 3).toFixed(1)}" ${on ? (k <= lit ? F('glow') : FS('panel-2', 'glow', .8)) : F('line', .35)}/>`; }
+    /* landmarks go on top of the bars; on phones the label sits at the left, where the bars are still shorter than the line */
+    MARKS.forEach(([m, t]) => { const y = Y(m); g += `<line x1="${L}" x2="${R}" y1="${y}" y2="${y}" ${S('cool', 1, ';stroke-dasharray:2 4')}/>`;
+      g += nw ? TX(L + 4, y - 4, t, 'cool', 10) : TX(R + 6, y + 4, t, 'cool', 11); });
+    [1, 10, 18, 23, 31, 57].forEach(k => { g += TX(L + (k - .5) * bw, B + 16, k, k === n ? 'glow' : 'faint', 10, 'middle', 'class="mono"'); });
+    g += TX((L + R) / 2, H - 4, 'domino number', 'muted', 11, 'middle');
+    el.innerHTML = g;
+    out('dmN', n); const m = ht(n); $('#dmH').textContent = fmt(m); $('#dmL').textContent = like(m);
+  });
+  nI.addEventListener('input', () => { lit = 0; clearInterval(timer); draw(); });
+  $('#dmTip').addEventListener('click', () => { clearInterval(timer); lit = 0; const n = +nI.value;
+    if (RM){ lit = n; draw(); return; }
+    timer = setInterval(() => { lit++; draw(); if (lit >= n) clearInterval(timer); }, Math.max(25, 900 / n)); });
+  draw();
+}
+
+/* ---------- 3: success leaves clues ---------- */
+sorter('#sort3', '#tally3', null, [
+  { t: 'Google', k: 'What made it', q: true, a: 'a', bins: [{id: 'a', label: 'Search'}, {id: 'b', label: 'Phones'}, {id: 'c', label: 'Email'}], w: 'Google has many products, but search is the one that made it and still pays for most of the rest.' },
+  { t: 'KFC', k: 'What made it', q: true, a: 'a', bins: [{id: 'a', label: 'The Colonel\'s secret recipe'}, {id: 'b', label: 'Burgers'}, {id: 'c', label: 'Pizza delivery'}], w: 'One recipe of herbs and spices built the whole chain.' },
+  { t: 'Starbucks', k: 'What made it', q: true, a: 'b', bins: [{id: 'a', label: 'Pastries'}, {id: 'b', label: 'Coffee'}, {id: 'c', label: 'Music'}], w: 'It sells many things, but coffee is the reason people walk in.' },
+  { t: 'Coors', k: 'What made it', q: true, a: 'c', bins: [{id: 'a', label: 'Wine'}, {id: 'b', label: 'Soft drinks'}, {id: 'c', label: 'Beer'}], w: 'Keller lists Coors as a company built on one product: beer.' },
+  { t: 'Bill Gates, as a teenager', k: 'What made him', q: true, a: 'a', bins: [{id: 'a', label: 'A fascination with programming'}, {id: 'b', label: 'A talent for sales'}, {id: 'c', label: 'A family business'}], w: 'His one early passion, computers, became the skill that let him co-found Microsoft.' },
+  { t: 'Your best year so far', k: 'What made it', q: true, a: 'a', shuffle: false, bins: [{id: 'a', label: 'One thing had my full attention'}, {id: 'b', label: 'I juggled everything equally'}], w: 'Look back honestly and you\'ll usually find the clue in your own wins: a time when one thing came first.' },
+]);
+
+/* ---------- 4: the Pareto funnel ---------- */
+{ const el = $('#pf4'), r = rng(41), N = 100, A = 1.22;
+  const val = [...Array(N)].map((_, i) => 1 / Math.pow(i + 1, A)), tot = val.reduce((s, v) => s + v, 0);
+  const pos = [...Array(N)].map((_, i) => i); for (let k = N - 1; k > 0; k--){ const j = Math.floor(r() * (k + 1)); [pos[k], pos[j]] = [pos[j], pos[k]]; }
+  const STEPS = [100, 20, 4, 1]; let step = 0;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, cols = nw ? 10 : 20, rows = N / cols, cell = nw ? 30 : 32, ox = (W - cols * cell) / 2, H = rows * cell + 40;
+    vb(el, W, H); const keep = STEPS[step]; let g = '';
+    for (let i = 0; i < N; i++){ const p = pos[i], cx = ox + (p % cols) * cell + cell / 2, cy = 14 + Math.floor(p / cols) * cell + cell / 2, s = 4 + Math.sqrt(val[i] / val[0]) * (cell * .84), on = i < keep;
+      g += `<rect x="${(cx - s / 2).toFixed(1)}" y="${(cy - s / 2).toFixed(1)}" width="${s.toFixed(1)}" height="${s.toFixed(1)}" rx="${(s * .2).toFixed(1)}" ${on ? (keep === 1 ? F('glow') : FS('glow-soft', 'glow', 1.2)) : F('line', .5)}/>`;
+      if (keep === 1 && i === 0) g += TX(cx, cy + s / 2 + 14, 'the ONE Thing', 'glow', 12, 'middle'); }
+    g += TX(W / 2, H - 6, 'Each square is a task; its size is how much it moves your results.', 'faint', nw ? 10 : 11, 'middle');
+    el.innerHTML = g;
+    const share = val.slice(0, keep).reduce((s, v) => s + v, 0) / tot;
+    $('#pfN').textContent = keep; $('#pfR').textContent = Math.round(share * 100) + '%';
+    $('#pfSay').textContent = ['A long to-do list. Everything looks equal.', 'The vital 20%: a fifth of the work, most of the payoff.', 'Twenty percent of twenty percent. Getting close.', 'One task, far bigger than any other. Do it first.'][step];
+    $('#pfCut').disabled = step >= STEPS.length - 1;
+  });
+  $('#pfCut').addEventListener('click', () => { step = Math.min(STEPS.length - 1, step + 1); draw(); });
+  $('#pfReset').addEventListener('click', () => { step = 0; draw(); });
+  draw();
+}
+
+/* ---------- 5: the cost of switching ---------- */
+{ const el = $('#sw5'), kI = $('#swK'), cI = $('#swC');
+  const draw = onLayout(() => { const K = +kI.value, C = +cI.value, nw = NARROW(), W = nw ? 360 : 760, L = nw ? 12 : 20, R = W - (nw ? 12 : 20), H = nw ? 190 : 170, MAX = 360;
+    vb(el, W, H); const X = m => L + m / MAX * (R - L);
+    /* K interruptions -> K+2 alternating segments, A first */
+    const segs = K + 2, nA = Math.ceil(segs / 2), nB = Math.floor(segs / 2), list = [];
+    for (let i = 0; i < segs; i++){ const isA = i % 2 === 0; list.push([isA ? 'A' : 'B', 60 / (isA ? nA : nB)]); }
+    let g = '', t = 0, y1 = 40, y2 = 96;
+    /* ideal: A then B */
+    g += TX(L, 22, 'One at a time', 'muted', 12);
+    g += `<rect x="${X(0)}" y="${y1 - 12}" width="${X(60) - X(0)}" height="24" rx="5" ${F('glow', .85)}/><rect x="${X(60)}" y="${y1 - 12}" width="${X(120) - X(60)}" height="24" rx="5" ${F('cool', .8)}/>`;
+    g += TX((X(0) + X(60)) / 2, y1 + 5, 'Task A', 'on-glow', 12, 'middle') + TX((X(60) + X(120)) / 2, y1 + 5, 'Task B', 'ink', 12, 'middle');
+    g += TX(X(120) + 8, y1 + 5, '120 min', 'text', 12, 'start', 'class="mono"');
+    g += TX(L, y2 - 22, 'Switching back and forth', 'muted', 12);
+    list.forEach(([w, m], i) => { if (i > 0 && i <= K){ g += `<rect x="${X(t)}" y="${y2 - 12}" width="${Math.max(1, X(t + C) - X(t))}" height="24" style="fill:var(--bad);fill-opacity:.22;stroke:var(--bad);stroke-width:.8;stroke-dasharray:2 2"/>`; t += C; }
+      g += `<rect x="${X(t)}" y="${y2 - 12}" width="${Math.max(1, X(t + m) - X(t) - .6)}" height="24" rx="3" ${F(w === 'A' ? 'glow' : 'cool', w === 'A' ? .85 : .8)}/>`; t += m; });
+    g += TX(Math.min(X(t) + 8, R - 60), y2 + 30, Math.round(t) + ' min', 'glow', 12, 'start', 'class="mono"');
+    [0, 60, 120, 180, 240, 300, 360].forEach(m => { g += `<line x1="${X(m)}" x2="${X(m)}" y1="${H - 34}" y2="${H - 28}" ${S('faint', 1)}/>` + TX(X(m), H - 14, m, 'faint', 10, 'middle', 'class="mono"'); });
+    g += `<rect x="${L}" y="${H - 52}" width="10" height="10" style="fill:var(--bad);fill-opacity:.22;stroke:var(--bad);stroke-width:.8"/>` + TX(L + 16, H - 43, 'refocusing', 'faint', 11);
+    el.innerHTML = g;
+    out('swK', K); out('swC', C + ' min');
+    $('#swT').textContent = Math.round(t) + ' min'; $('#swL').textContent = K * C + ' min (' + Math.round(K * C / t * 100) + '%)';
+    $('#swSay').textContent = K === 0 ? 'Finish one, then the other. Nothing lost.' : K * C >= 60 ? 'You\'ve lost a whole task\'s worth of time to getting back into it.' : 'Each switch looks small. Together they add up.';
+  });
+  [kI, cI].forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 6: from effort to habit ---------- */
+{ const el = $('#hb6'), dI = $('#hbD'), kBox = $('#hbK');
+  const HB = [['A glass of water with breakfast', 20], ['Fruit with lunch', 45], ['The average habit', 66], ['Fifty sit-ups after coffee', 120], ['A run before breakfast', 200]];
+  let sel = 2;
+  kBox.innerHTML = HB.map((h, i) => `<button class="btn" data-h="${i}" aria-pressed="${i === sel}">${h[0]}</button>`).join('');
+  const kb = [...kBox.querySelectorAll('[data-h]')]; kb.forEach(b => b.addEventListener('click', () => { sel = +b.dataset.h; press(kb, b); draw(); }));
+  const auto = (d, D95) => 100 * (1 - Math.exp(-3 * d / D95));
+  dI.max = 254;
+  const draw = onLayout(() => { const d = +dI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 260 : 280, L = nw ? 36 : 50, R = W - 16, T = 20, B = H - 40, MAXD = 254;
+    vb(el, W, H); const X = v => L + v / MAXD * (R - L), Y = v => B - v / 100 * (B - T);
+    let g = '';
+    [0, 25, 50, 75, 100].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v + '%', 'faint', 10, 'end', 'class="mono"'); });
+    [0, 18, 66, 120, 254].forEach(v => { g += TX(X(v), B + 16, v, v === 66 ? 'glow' : 'faint', 10, 'middle', 'class="mono"'); });
+    g += TX((L + R) / 2, H - 6, 'days of repeating it', 'muted', 11, 'middle');
+    g += `<line x1="${X(66)}" x2="${X(66)}" y1="${T}" y2="${B}" ${S('glow', 1, ';stroke-dasharray:3 4')}/>` + TX(X(66) + 6, B - 8, 'average: 66 days', 'glow', 11);
+    HB.forEach((h, i) => { if (i === sel) return; let p = ''; for (let x = 0; x <= MAXD; x += 3) p += (x ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(auto(x, h[1])).toFixed(1); g += `<path d="${p}" ${S('faint', 1, ';stroke-opacity:.5')}/>`; });
+    const D = HB[sel][1]; let p = '', pa = '';
+    for (let x = 0; x <= MAXD; x += 2){ p += (x ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(auto(x, D)).toFixed(1); }
+    for (let x = 0; x <= d; x += 1) pa += (x ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(auto(x, D)).toFixed(1);
+    g += `<path d="${pa}L${X(d)} ${B}L${X(0)} ${B}Z" ${F('cool', .1)}/><path d="${p}" ${S('cool', 2.4)}/>`;
+    const a = auto(d, D);
+    g += `<circle cx="${X(d)}" cy="${Y(a)}" r="7" ${F('glow')}/>`;
+    g += TX(Math.min(X(d) + 12, R - 50), Y(a) + 18, 'day ' + d, 'text', 12, 'start', 'class="mono"');
+    el.innerHTML = g;
+    out('hbD', d); $('#hbA').textContent = Math.round(a) + '%'; $('#hbE').textContent = Math.round(100 - a) + '%';
+    $('#hbSay').textContent = a < 40 ? 'Early days. This is where selected discipline does the work.' : a < 85 ? 'It\'s getting easier. Keep going, don\'t stop now.' : 'It runs on its own. Time to pick the next habit.';
+  });
+  dI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 7: the willpower battery ---------- */
+{ const el = $('#wp7'), tI = $('#wpT'), gBox = $('#wpG');
+  const OPTS = [['sleep', 'Slept seven to eight hours', true], ['food', 'Ate proper meals', true], ['email', 'Answered email first thing', false], ['snack', 'Resisted snacks all afternoon', false]];
+  const on = Object.fromEntries(OPTS.map(o => [o[0], o[2]]));
+  gBox.innerHTML = OPTS.map(o => `<label class="tg"><input type="checkbox" data-w="${o[0]}" ${o[2] ? 'checked' : ''}><span>${o[1]}</span></label>`).join('');
+  gBox.querySelectorAll('[data-w]').forEach(c => c.addEventListener('change', () => { on[c.dataset.w] = c.checked; draw(); }));
+  const level = h => { let v = on.sleep ? 100 : 68; for (let t = 6; t < h; t += .25){ let drain = 1.1; if (on.email && t < 9) drain += 1.6; if (on.snack && t >= 14 && t < 17) drain += 1.5; v -= drain;
+      if (on.food && (Math.abs(t - 12.5) < .5 || Math.abs(t - 18.5) < .5)) v += 3.2; } return clamp(v, 0, 100); };
+  const hh = h => (h % 12 || 12) + (h < 12 ? 'am' : 'pm');
+  const draw = onLayout(() => { const T0 = +tI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 260, L = nw ? 34 : 46, R = W - 14, T = 22, B = H - 40;
+    vb(el, W, H); const X = h => L + (h - 6) / 16 * (R - L), Y = v => B - v / 100 * (B - T);
+    let g = `<rect x="${X(T0)}" y="${T}" width="${X(Math.min(22, T0 + 4)) - X(T0)}" height="${B - T}" rx="6" ${F('glow', .1)}/>` + TX((X(T0) + X(Math.min(22, T0 + 4))) / 2, T + 14, 'ONE Thing', 'glow', 12, 'middle');
+    [0, 50, 100].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10, 'end', 'class="mono"'); });
+    for (let h = 6; h <= 22; h += nw ? 4 : 2) g += TX(X(h), B + 16, hh(h), 'faint', 10, 'middle', 'class="mono"');
+    if (on.food) [12.5, 18.5].forEach(h => { g += TX(X(h), B - 6, 'meal', 'good', 10, 'middle'); });
+    let p = ''; for (let h = 6; h <= 22; h += .25) p += (h > 6 ? 'L' : 'M') + X(h).toFixed(1) + ' ' + Y(level(h)).toFixed(1);
+    g += `<path d="${p}L${X(22)} ${B}L${X(6)} ${B}Z" ${F('cool', .08)}/><path d="${p}" ${S('cool', 2.4)}/>`;
+    const v = level(T0); g += `<circle cx="${X(T0)}" cy="${Y(v)}" r="7" ${F('glow')}/>`;
+    g += TX(L, 14, 'willpower', 'muted', 11);
+    el.innerHTML = g;
+    out('wpT', hh(T0)); $('#wpV').textContent = Math.round(v) + '%';
+    $('#wpSay').textContent = v >= 70 ? 'A full battery. Your best thinking goes to what matters most.' : v >= 40 ? 'Half charged. You\'ll get it done, but not at your best.' : 'Running on empty. This is where the ONE Thing gets put off until tomorrow.';
+  });
+  tI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 8: counterbalance ---------- */
+{ const el = $('#cb8'), wI = $('#cbW'), pI = $('#cbP');
+  const draw = onLayout(() => { const w = +wI.value, p = +pI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 240 : 250, cx = W / 2, cy = H - 100, half = nw ? 140 : 250;
+    vb(el, W, H);
+    const work = Math.round(100 * (1 - Math.exp(-w / 5))), strain = Math.round(clamp(w * (1 - p / 4) * 7, 0, 100));
+    const ang = clamp((w / 16) * 16 - (p / 7) * 10, -14, 14), a = ang * Math.PI / 180;
+    const ex = (s) => [cx + s * half * Math.cos(a), cy + s * half * Math.sin(a)];
+    let g = `<path d="M${cx} ${cy}L${cx - 24} ${cy + 44}L${cx + 24} ${cy + 44}Z" ${F('line')}/><line x1="${cx - 60}" x2="${cx + 60}" y1="${cy + 44}" y2="${cy + 44}" ${S('faint', 1.5)}/>`;
+    const [x1, y1] = ex(-1), [x2, y2] = ex(1);
+    g += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" ${S('text', 5, ';stroke-linecap:round')}/>`;
+    /* work box on the right (heavier as you push), home box on the left */
+    const bw = nw ? 74 : 110, bwH = 34 + w * 5, bhH = 34 + p * 10;
+    const box = (x, y, h, lbl, c) => `<g transform="rotate(${ang.toFixed(2)} ${x} ${y})"><rect x="${x - bw / 2}" y="${y - h - 3}" width="${bw}" height="${h}" rx="8" ${FS(c + '-soft', c, 1.6)}/>${TX(x, y - h / 2 + 1, lbl, c, 13, 'middle')}</g>`;
+    g += box(x2 - (nw ? 40 : 60) * Math.cos(a), y2 - (nw ? 40 : 60) * Math.sin(a), bwH, 'Work', 'glow');
+    g += box(x1 + (nw ? 40 : 60) * Math.cos(a), y1 + (nw ? 40 : 60) * Math.sin(a), bhH, 'Home', 'cool');
+    /* strain gauge */
+    const gx = nw ? 20 : 40, gw = W - 2 * gx, gy = H - 12;
+    g += `<rect x="${gx}" y="${gy - 6}" width="${gw}" height="8" rx="4" ${F('line', .6)}/><rect x="${gx}" y="${gy - 6}" width="${(gw * strain / 100).toFixed(1)}" height="8" rx="4" ${F(strain >= 60 ? 'glow' : strain >= 30 ? 'bad' : 'good')}/>` + TX(gx, gy - 12, 'strain at home', 'faint', 11);
+    el.innerHTML = g;
+    out('cbW', w); out('cbP', p);
+    $('#cbG').textContent = work + '%'; $('#cbH').textContent = strain + '%';
+    $('#cbSay').textContent = w === 0 ? 'Perfectly balanced, and nothing extraordinary is happening at work.' : strain < 30 ? 'A healthy counterbalance: long at work, short swings at home.' : strain < 60 ? 'Lean back soon. Protect a few more evenings.' : 'You\'ve stayed out too long. Something at home is going to break.';
+  });
+  [wI, pI].forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 9: think bigger ---------- */
+{ const el = $('#tb9'), bBox = $('#tbB');
+  const G = [[12, 'A bit more', 1, 'Do the same things a little harder. Today\'s habits are enough.'], [20, 'Double it', .82, 'Rethink your week: drop low-value work and look for better methods.'], [100, 'Ten times', .42, 'A new model: new skills, new people, new systems. Today\'s plan can\'t get there.']];
+  let sel = 1;
+  bBox.innerHTML = G.map((g, i) => `<button class="btn" data-g="${i}" aria-pressed="${i === sel}">${g[1]} (aim for ${g[0]})</button>`).join('');
+  const bb = [...bBox.querySelectorAll('[data-g]')]; bb.forEach(b => b.addEventListener('click', () => { sel = +b.dataset.g; press(bb, b); draw(); }));
+  const draw = onLayout(() => { const [goal, , f, say] = G[sel], land = 10 + (goal - 10) * f, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 260 : 270, L = nw ? 36 : 48, R = W - (nw ? 16 : 120), T = 20, B = H - 36;
+    vb(el, W, H); const X = y => L + y / 5 * (R - L), Y = v => B - Math.log10(v / 5) / Math.log10(24) * (B - T);
+    let g = '';
+    [5, 10, 20, 50, 100].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10, 'end', 'class="mono"'); });
+    for (let y = 0; y <= 5; y++) g += TX(X(y), B + 16, y === 0 ? 'now' : 'yr ' + y, 'faint', 10, 'middle', 'class="mono"');
+    const now = t => 10 + 2 * t / 5, plan = t => 10 * Math.pow(land / 10, t / 5);
+    let p1 = '', p2 = ''; for (let t = 0; t <= 5.001; t += .1){ p1 += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(now(t)).toFixed(1); p2 += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(plan(t)).toFixed(1); }
+    g += `<line x1="${L}" x2="${R}" y1="${Y(goal)}" y2="${Y(goal)}" ${S('glow', 1.5, ';stroke-dasharray:5 4')}/>`;
+    g += nw ? TX(L + 4, Y(goal) - 6, 'goal: ' + goal, 'glow', 11) : TX(R + 8, Y(goal) + 4, 'goal: ' + goal, 'glow', 12);
+    g += `<path d="${p1}" ${S('faint', 2, ';stroke-dasharray:2 3')}/><path d="${p2}" ${S('glow', 2.6)}/>`;
+    g += `<circle cx="${X(5)}" cy="${Y(land)}" r="6" ${F('glow')}/><circle cx="${X(5)}" cy="${Y(12)}" r="5" ${F('faint')}/>`;
+    if (!nw) g += TX(R + 8, Y(12) + 4, 'today\'s habits', 'faint', 11) + (Math.abs(Y(land) - Y(goal)) > 16 ? TX(R + 8, Y(land) + 4, 'where you land', 'text', 11) : '');
+    el.innerHTML = g;
+    $('#tbNow').textContent = '12'; $('#tbLand').textContent = Math.round(land) + (land < goal ? ' (short of ' + goal + ')' : ''); $('#tbSay').textContent = say;
+  });
+  draw();
+}
+
+/* ---------- 10: the focusing question ---------- */
+{ const AREAS = [['Spiritual life', 'for my spiritual life'], ['Physical health', 'for my health'], ['Personal life', 'for my personal life'], ['Key relationships', 'for my key relationships'], ['Job', 'in my job'], ['Business', 'for my business'], ['Finances', 'for my finances']];
+  const TIMES = [['Someday', 'someday'], ['Five years', 'in the next five years'], ['This year', 'this year'], ['This month', 'this month'], ['This week', 'this week'], ['Today', 'today'], ['Right now', 'right now']];
+  let a = 1, t = 6; const el = $('#fq10');
+  $('#fqA').innerHTML = AREAS.map((x, i) => `<button class="btn" data-a="${i}" aria-pressed="${i === a}">${x[0]}</button>`).join('');
+  $('#fqT').innerHTML = TIMES.map((x, i) => `<button class="btn" data-t="${i}" aria-pressed="${i === t}">${x[0]}</button>`).join('');
+  const ab = $$('#fqA [data-a]'), tbs = $$('#fqT [data-t]');
+  const q = () => `What's the ONE Thing I can do ${AREAS[a][1]} ${TIMES[t][1]} such that by doing it everything else will be easier or unnecessary?`;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 230, cx = nw ? W / 2 : 200, cy = H / 2;
+    vb(el, W, H); let g = '';
+    for (let i = 0; i < 7; i++){ const r = 16 + (6 - i) * (nw ? 15 : 14.5), on = i === t;
+      g += `<circle cx="${cx}" cy="${cy}" r="${r}" ${on ? FS('glow-soft', 'glow', 2.2) : FS('panel', 'line', 1)}/>`; }
+    g += `<circle cx="${cx}" cy="${cy}" r="9" ${F(t === 6 ? 'glow' : 'faint')}/>`;
+    /* labels: on wide screens, a list to the right with leader lines; on phones, the chosen label under the rings */
+    if (!nw){ TIMES.forEach(([lb], i) => { const r = 16 + (6 - i) * 14.5, y = 30 + i * 28, on = i === t;
+        g += `<line x1="${cx + r * .72}" y1="${cy - r * .69}" x2="420" y2="${y - 4}" ${S(on ? 'glow' : 'line', 1)}/>` + TX(428, y, lb, on ? 'glow' : 'muted', 13); });
+      g += TX(560, 120, AREAS[a][0], 'text', 26, 'start', 'font-family="Instrument Serif"') + TX(560, 140, 'area of life', 'faint', 11); }
+    else g += TX(cx, H - 6, TIMES[t][0] + ' · ' + AREAS[a][0], 'glow', 13, 'middle');
+    el.innerHTML = g; $('#fqOut').textContent = q();
+  });
+  ab.forEach(b => b.addEventListener('click', () => { a = +b.dataset.a; press(ab, b); draw(); }));
+  tbs.forEach(b => b.addEventListener('click', () => { t = +b.dataset.t; press(tbs, b); draw(); }));
+  let SAVED = store.get('ot-fq', []);
+  const list = () => { store.set('ot-fq', SAVED); renderCard();
+    $('#fqList').innerHTML = SAVED.length ? SAVED.map((s, i) => `<div class="issue"><span class="k">Saved ${i + 1}</span><p>${esc(s.a)}</p><span class="m">${esc(s.q)}</span><div class="row"><button class="btn" data-fx="${i}">Remove</button></div></div>`).join('') : '<p class="empty">Nothing saved yet. Pick an area and a time frame, then answer the question.</p>';
+    $$('[data-fx]').forEach(b => b.addEventListener('click', () => { SAVED.splice(+b.dataset.fx, 1); list(); })); };
+  $('#fqSave').addEventListener('click', () => { const v = $('#fqIn').value.trim(); if (!v){ $('#fqIn').focus(); return; } SAVED.push({q: q(), a: v}); $('#fqIn').value = ''; list(); });
+  $('#fqClr').addEventListener('click', () => { SAVED = []; list(); });
+  draw(); list();
+}
+
+/* ---------- 11: the 66-day streak ---------- */
+{ const N = 66, el = $('#ring11'), grid = $('#g66'); let D = store.get('ot-66', []); if (!Array.isArray(D)) D = [];
+  grid.innerHTML = [...Array(N)].map((_, i) => `<button type="button" data-d="${i}" aria-label="Day ${i + 1}" aria-pressed="false">${i + 1}</button>`).join('');
+  const cells = $$('#g66 [data-d]');
+  const draw = onLayout(() => { const n = D.filter(Boolean).length, nw = NARROW(), W = nw ? 360 : 760, H = 200, cx = W / 2, cy = 100, r = 74, C = 2 * Math.PI * r;
+    vb(el, W, H);
+    let last = -1; D.forEach((v, i) => { if (v) last = i; }); let streak = 0; for (let i = last; i >= 0 && D[i]; i--) streak++;
+    let g = `<circle cx="${cx}" cy="${cy}" r="${r}" ${S('line', 14)}/><circle cx="${cx}" cy="${cy}" r="${r}" ${S('glow', 14, `;stroke-linecap:round;stroke-dasharray:${(C * n / N).toFixed(1)} ${C.toFixed(1)}`)} transform="rotate(-90 ${cx} ${cy})"/>`;
+    /* tick marks every 11 days */
+    for (let k = 0; k < 6; k++){ const ang = -Math.PI / 2 + k / 6 * 2 * Math.PI; g += `<line x1="${cx + (r - 12) * Math.cos(ang)}" y1="${cy + (r - 12) * Math.sin(ang)}" x2="${cx + (r - 20) * Math.cos(ang)}" y2="${cy + (r - 20) * Math.sin(ang)}" ${S('faint', 1)}/>`; }
+    g += TX(cx, cy + 8, n, 'text', 40, 'middle', 'font-family="Instrument Serif"') + TX(cx, cy + 30, 'of 66 days', 'muted', 12, 'middle');
+    el.innerHTML = g;
+    cells.forEach((c, i) => c.setAttribute('aria-pressed', !!D[i]));
+    $('#g66N').textContent = n; $('#g66S').textContent = streak + (streak === 1 ? ' day' : ' days');
+    $('#g66Say').textContent = n === 0 ? 'Day one starts with one question tomorrow morning.' : n < 22 ? 'The hardest stretch. Leave yourself a reminder.' : n < 50 ? 'Past the first third. It\'s starting to stick.' : n < 66 ? 'Nearly there. It\'s almost automatic.' : 'Sixty-six days. It\'s a habit now.';
+  });
+  const save66 = () => { store.set('ot-66', D); draw(); };
+  cells.forEach(c => c.addEventListener('click', () => { const i = +c.dataset.d; D[i] = !D[i]; save66(); }));
+  $('#g66Next').addEventListener('click', () => { for (let i = 0; i < N; i++) if (!D[i]){ D[i] = true; break; } save66(); });
+  $('#g66Clr').addEventListener('click', () => { D = []; save66(); });
+  draw();
+}
+
+/* ---------- 12: big and specific ---------- */
+{ const el = $('#qdS'), placed = [];
+  const QB = [{id: 'SB', label: 'Small and broad'}, {id: 'SS', label: 'Small and specific'}, {id: 'BB', label: 'Big and broad'}, {id: 'BS', label: 'Big and specific'}];
+  const WHY = { SB: 'Small and broad: a modest aim with no measure, so it gives you nothing to act on.', SS: 'Small and specific: clear and easy, but it won\'t change much.', BB: 'Big and broad: ambitious, but with no target or deadline it leaves too many options.', BS: 'Big and specific: ambitious, measurable and time-bound. That\'s a great question.' };
+  const items = [['How can I sell more?', 'SB'], ['How can I sell 5% more this year?', 'SS'], ['How can I double my sales?', 'BB'], ['How can I double my sales within six months?', 'BS'], ['How can I save some money?', 'SB'], ['How can I save $500 by June?', 'SS'], ['How can I become financially free?', 'BB'], ['How can I save a full year\'s salary in the next three years?', 'BS']]
+    .map(([t, a]) => ({ t, a, q: true, k: 'Which quadrant?', w: WHY[a] }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 280, L = nw ? 26 : 120, R = W - (nw ? 8 : 120), T = 10, B = H - 26, mx = (L + R) / 2, my = (T + B) / 2;
+    vb(el, W, H);
+    const Q = { SB: [L, my], SS: [mx, my], BB: [L, T], BS: [mx, T] }, qw = (R - L) / 2, qh = (B - T) / 2;
+    let g = '';
+    Object.entries(Q).forEach(([id, [x, y]]) => { const great = id === 'BS';
+      g += `<rect x="${x + 2}" y="${y + 2}" width="${qw - 4}" height="${qh - 4}" rx="10" ${great ? FS('glow-soft', 'glow', 1.6) : FS('panel', 'line', 1)}/>`;
+      g += TX(x + 12, y + 22, QB.find(b => b.id === id).label, great ? 'glow' : 'muted', nw ? 11 : 13);
+      if (great) g += TX(x + 12, y + 38, 'the great question', 'glow', 11); });
+    g += TX(mx, H - 6, 'broad  →  specific', 'faint', 11, 'middle');
+    g += `<text x="${L - 10}" y="${my}" font-size="11" text-anchor="middle" transform="rotate(-90 ${L - 10} ${my})" ${F('faint')}>small  →  big</text>`;
+    const counts = {};
+    placed.forEach(({it, ok}, k) => { const [x, y] = Q[it.a], c = counts[it.a] = (counts[it.a] || 0) + 1;
+      const cx = x + 22 + (c - 1) * 28, cy = y + qh - 26;
+      g += `<circle cx="${cx}" cy="${cy}" r="11" ${F(ok ? 'good' : 'bad', .9)}/>` + TX(cx, cy + 4, k + 1, 'ink', 11, 'middle', 'class="mono"'); });
+    el.innerHTML = g;
+  });
+  sorter('#qd12', '#tally12', QB, items, true, (it, ok) => { if (!it) placed.length = 0; else placed.push({it, ok}); draw(); });
+  draw();
+}
+
+/* ---------- 13: the happiness treadmill ---------- */
+{ const el = $('#ht13'), STEP = 3, MAXW = 48; let ev = [], now = 0;
+  const happy = t => { let base = 50, h = 0; ev.forEach(([w, k]) => { if (t < w) return; const dt = t - w;
+      if (k === 'buy') h += 24 * Math.exp(-dt / 2.4); else { base += 5 * (1 - Math.exp(-dt / 4)); h += 5 * Math.exp(-dt / 3); } }); return [clamp(base + h, 0, 100), base]; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 260, L = nw ? 34 : 46, R = W - 16, T = 18, B = H - 40;
+    vb(el, W, H); const X = w => L + w / MAXW * (R - L), Y = v => B - (v - 30) / 70 * (B - T);
+    let g = '';
+    [30, 50, 75, 100].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10, 'end', 'class="mono"'); });
+    for (let w = 0; w <= MAXW; w += 12) g += TX(X(w), B + 16, 'wk ' + w, 'faint', 10, 'middle', 'class="mono"');
+    let p = '', pb = ''; for (let t = 0; t <= now + .001; t += .25){ const [h, b] = happy(t); p += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(h).toFixed(1); pb += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(b).toFixed(1); }
+    if (now > 0) g += `<path d="${pb}" ${S('faint', 1.5, ';stroke-dasharray:4 4')}/><path d="${p}" ${S('cool', 2.4)}/>`;
+    ev.forEach(([w, k]) => { g += `<circle cx="${X(w)}" cy="${B - 4}" r="5" ${F(k === 'buy' ? 'cool' : 'glow')}/>`; });
+    const [h, b] = happy(now); g += `<circle cx="${X(now)}" cy="${Y(h)}" r="6" ${F('text')}/>`;
+    g += `<circle cx="${L + 8}" cy="${T + 2}" r="5" ${F('cool')}/>` + TX(L + 18, T + 6, 'bought something', 'faint', 11) + `<circle cx="${L + (nw ? 140 : 150)}" cy="${T + 2}" r="5" ${F('glow')}/>` + TX(L + (nw ? 150 : 160), T + 6, 'did something meaningful', 'faint', 11);
+    el.innerHTML = g;
+    $('#htNow').textContent = Math.round(h); $('#htBase').textContent = Math.round(b);
+    const last = ev.length ? ev[ev.length - 1][1] : null;
+    $('#htSay').textContent = !last ? 'Start the year. Buy something, or invest in meaning.' : now >= MAXW ? 'A year gone. Look at where your baseline ended up.' : last === 'buy' ? 'A quick high that fades within weeks. Your baseline hasn\'t moved.' : 'A smaller lift, but it lasts: your baseline is creeping up.';
+    $('#htBuy').disabled = $('#htMean').disabled = now >= MAXW;
+  });
+  const add = k => { if (now >= MAXW) return; ev.push([now, k]); now = Math.min(MAXW, now + STEP); draw(); };
+  $('#htBuy').addEventListener('click', () => add('buy')); $('#htMean').addEventListener('click', () => add('mean'));
+  $('#htReset').addEventListener('click', () => { ev = []; now = 0; draw(); });
+  draw();
+}
+
+/* ---------- 14: goal-setting to the now ---------- */
+{ const LV = ['Someday', 'Five years', 'This year', 'This month', 'This week', 'Today', 'Right now'];
+  const PH = ['The one big thing you want for your life or career', 'Based on that, what by five years from now?', 'Based on that, what this year?', 'Based on that, what this month?', 'Based on that, what this week?', 'Based on that, what today?', 'Based on that, what right now?'];
+  const DEMO = ['Run my own design studio', 'Have ten regular clients who come back every year', 'Land my first three paying clients', 'Finish a portfolio site with five case studies', 'Write up two case studies', 'Draft the first case study', 'Outline the story of the first case study'];
+  let V = store.get('ot-ladder', []); if (!Array.isArray(V)) V = [];
+  $('#glF').innerHTML = LV.map((l, i) => `<div class="field"><label for="gl${i}"><span class="ladder-ix">${i + 1}</span> ${l}</label><input id="gl${i}" maxlength="90" placeholder="${PH[i]}"></div>`).join('');
+  const el = $('#gl14');
+  LV.forEach((_, i) => { const inp = $('#gl' + i); inp.value = V[i] || ''; inp.addEventListener('input', () => { V[i] = inp.value; store.set('ot-ladder', V); draw(); renderCard(); $('#glSaved').textContent = 'Saved in this browser'; }); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, rowH = nw ? 66 : 50, H = 20 + 7 * rowH, tx = nw ? 74 : 150;
+    vb(el, W, H); let g = '';
+    for (let i = 0; i < 7; i++){ const k = 6 - i, y = 14 + i * rowH, h = 18 + k * (nw ? 6 : 5), w = h * .55, x = (nw ? 34 : 60) - w / 2, filled = (V[i] || '').trim();
+      g += domino(x, y + rowH - 10, w, Math.min(h, rowH - 8), filled ? (i === 6 ? 'glow' : 'glow-soft') : 'panel', filled ? 'glow' : 'faint', 1.4);
+      if (i < 6) g += `<line x1="${(nw ? 34 : 60)}" x2="${(nw ? 34 : 60)}" y1="${y + rowH - 6}" y2="${y + rowH + 2}" ${S('faint', 1)}/>`;
+      g += TX(tx - (nw ? 0 : 52), y + 18, LV[i], i === 6 ? 'glow' : 'muted', 11, nw ? 'start' : 'start', 'class="mono"');
+      const txt = filled ? esc(V[i]) : PH[i];
+      g += nw ? wrap(tx, y + 42, txt, 34, 15, filled ? 'text' : 'faint', 13.5, 'start') : wrap(tx + 60, y + 18, txt, 80, 15, filled ? 'text' : 'faint', 14, 'start');
+    }
+    el.innerHTML = g;
+  });
+  $('#glDemo').addEventListener('click', () => { V = [...DEMO]; LV.forEach((_, i) => $('#gl' + i).value = V[i]); store.set('ot-ladder', V); draw(); renderCard(); $('#glSaved').textContent = 'Example filled in'; });
+  $('#glClr').addEventListener('click', () => { V = []; LV.forEach((_, i) => $('#gl' + i).value = ''); store.set('ot-ladder', V); draw(); renderCard(); $('#glSaved').textContent = ''; });
+  draw();
+}
+
+/* ---------- 15: block your week ---------- */
+{ const el = $('#wk15'), DAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], H0 = 8, NH = 10;
+  const TOOLS = [['one', 'ONE Thing', 'glow'], ['plan', 'Planning', 'cool'], ['meet', 'Meetings and email', 'faint'], ['off', 'Time off', 'good'], ['', 'Erase', 'line']];
+  let tool = 'one', G = store.get('ot-week', null);
+  const blank = () => [...Array(7)].map(() => Array(NH).fill(''));
+  if (!Array.isArray(G) || G.length !== 7) G = blank();
+  const keller = () => { const g = blank(); for (let d = 0; d < 5; d++){ for (let h = 0; h < 4; h++) g[d][h] = 'one'; for (let h = 5; h < 9; h++) g[d][h] = 'meet'; } g[4][8] = 'plan'; g[4][9] = 'plan'; for (let d = 5; d < 7; d++) for (let h = 0; h < NH; h++) g[d][h] = 'off'; return g; };
+  const busy = () => { const g = blank(), r = rng(7); for (let d = 0; d < 7; d++) for (let h = 0; h < NH; h++){ if (d >= 5){ g[d][h] = r() < .35 ? 'meet' : ''; continue; } const x = r(); g[d][h] = x < .62 ? 'meet' : x < .78 ? 'one' : ''; } return g; };
+  $('#wkTools').innerHTML = TOOLS.map(([id, lb, c]) => `<button class="btn" data-tool="${id}" aria-pressed="${id === tool}"><span style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--${c});margin-right:6px;vertical-align:-1px"></span>${lb}</button>`).join('');
+  const tb = $$('#wkTools [data-tool]'); tb.forEach(b => b.addEventListener('click', () => { tool = b.dataset.tool; press(tb, b); }));
+  const COL = { one: ['glow', .85], plan: ['cool', .75], meet: ['faint', .4], off: ['good', .45] };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, L = nw ? 34 : 56, R = W - 8, T = 24, ch = nw ? 26 : 28, H = T + NH * ch + 8, cw = (R - L) / 7;
+    vb(el, W, H); let g = '';
+    DAYS.forEach((d, i) => { g += TX(L + i * cw + cw / 2, 16, nw ? d.slice(0, 2) : d, 'muted', 12, 'middle'); });
+    for (let h = 0; h <= NH; h += nw ? 2 : 1) g += TX(L - 6, T + h * ch + 4, ((H0 + h) % 12 || 12) + (H0 + h < 12 ? 'am' : 'pm'), 'faint', 10, 'end', 'class="mono"');
+    for (let d = 0; d < 7; d++) for (let h = 0; h < NH; h++){ const v = G[d][h], x = L + d * cw + 1.5, y = T + h * ch + 1.5;
+      g += `<rect class="svgbtn" tabindex="0" role="button" data-c="${d},${h}" aria-label="${DAYS[d]} ${H0 + h}:00 ${v ? TOOLS.find(t => t[0] === v)[1] : 'empty'}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(cw - 3).toFixed(1)}" height="${ch - 3}" rx="4" ${v ? F(COL[v][0], COL[v][1]) : FS('panel', 'line', 1)}/>`; }
+    el.innerHTML = g;
+    el.querySelectorAll('[data-c]').forEach(c => { const go = () => { const [d, h] = c.dataset.c.split(',').map(Number); G[d][h] = G[d][h] === tool ? '' : tool; store.set('ot-week', G); draw(); };
+      c.addEventListener('click', go); c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); const id = c.dataset.c; go(); el.querySelector(`[data-c="${id}"]`)?.focus(); } }); });
+    let one = 0, best = 0; G.forEach(day => { let run = 0; day.forEach(v => { if (v === 'one'){ one++; run++; best = Math.max(best, run); } else run = 0; }); });
+    const off = G.some(day => day.every(v => v === 'off')), plan = G.some(day => day.includes('plan'));
+    $('#wkO').textContent = one + ' h'; $('#wkL').textContent = best + ' h';
+    $('#wkSay').textContent = one === 0 ? 'Pick ONE Thing and tap the calendar to block it.' : one >= 18 && best >= 4 ? (off && plan ? 'Keller-grade: long blocks, time off and a planning slot.' : off ? 'Strong blocks. Add a planning slot to keep them on track.' : 'Strong blocks. Now block a full day off to recharge.') : best < 3 ? 'Scattered hours. Short fragments rarely move the big dominoes; join them up.' : 'A good start. Aim for about four hours a day, early.';
+  });
+  $('#wkKeller').addEventListener('click', () => { G = keller(); store.set('ot-week', G); draw(); });
+  $('#wkBusy').addEventListener('click', () => { G = busy(); store.set('ot-week', G); draw(); });
+  $('#wkClr').addEventListener('click', () => { G = blank(); store.set('ot-week', G); draw(); });
+  draw();
+}
+
+/* ---------- 16: from E to P ---------- */
+{ const el = $('#ep16'), MAXY = 20; let segs, year, pushes;
+  const s = x => 1 / (1 + Math.exp(-(x - 1.6) * 1.9)), s0 = s(0), sn = x => (s(x) - s0) / (1 - s0);
+  const reset = () => { segs = [{ t0: 0, a: 20, c: 60 }]; year = 3; pushes = 0; };
+  const perf = t => { let seg = segs[0]; segs.forEach(g => { if (t >= g.t0) seg = g; }); return seg.a + (seg.c - seg.a) * sn(t - seg.t0); };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 260 : 270, L = nw ? 36 : 48, R = W - 16, T = 18, B = H - 36, MAXV = Math.max(150, ...segs.map(sg => sg.c * 1.15));
+    vb(el, W, H); const X = t => L + t / MAXY * (R - L), Y = v => B - v / MAXV * (B - T);
+    let g = '';
+    [0, 100, 200, 300].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10, 'end', 'class="mono"'); });
+    for (let t = 0; t <= MAXY; t += nw ? 5 : 2) g += TX(X(t), B + 16, 'yr ' + t, 'faint', 10, 'middle', 'class="mono"');
+    /* each approach's full S-curve, faint, then the path you actually took */
+    segs.forEach((sg, i) => { let p = ''; for (let t = sg.t0; t <= Math.min(MAXY, sg.t0 + 8); t += .2) p += (t === sg.t0 ? 'M' : 'L') + X(t).toFixed(1) + ' ' + Y(sg.a + (sg.c - sg.a) * sn(t - sg.t0)).toFixed(1);
+      g += `<path d="${p}" ${S('faint', 1, ';stroke-dasharray:3 4;stroke-opacity:.6')}/>` + `<line x1="${X(sg.t0)}" x2="${X(Math.min(MAXY, sg.t0 + 8))}" y1="${Y(sg.c)}" y2="${Y(sg.c)}" ${S('bad', 1, ';stroke-opacity:.5')}/>`;
+      if (i > 0) g += `<circle cx="${X(sg.t0)}" cy="${Y(sg.a)}" r="5" ${F('glow')}/>`; });
+    let p = ''; for (let t = 0; t <= year + .001; t += .1) p += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(perf(t)).toFixed(1);
+    g += `<path d="${p}" ${S('glow', 2.6)}/><circle cx="${X(year)}" cy="${Y(perf(year))}" r="6" ${F('text')}/>`;
+    const cur = segs[segs.length - 1]; g += TX(X(Math.min(MAXY - 3, cur.t0 + 3)), Y(cur.c) - 6, 'ceiling', 'bad', 10, 'middle');
+    el.innerHTML = g;
+    const v = perf(year), atCeil = v > cur.c - 4;
+    $('#epV').textContent = Math.round(v); $('#epY').textContent = year.toFixed(0);
+    $('#epSay').textContent = year >= MAXY ? 'Twenty years. Count the new approaches it took.' : segs.length === 1 && pushes === 0 ? 'Your natural approach has carried you this far. Now it\'s flattening.' : pushes && atCeil && segs.length === 1 ? 'More effort on the same method barely moves the ceiling.' : atCeil ? 'A new ceiling. Time to look for the next better approach.' : 'A new S-curve: slower at first, then a climb past the old ceiling.';
+    $('#epNew').disabled = $('#epPush').disabled = year >= MAXY;
+  });
+  $('#epPush').addEventListener('click', () => { pushes++; const cur = segs[segs.length - 1]; cur.c += 4; year = Math.min(MAXY, year + 2); draw(); });
+  $('#epNew').addEventListener('click', () => { const a = perf(year), cur = segs[segs.length - 1]; segs.push({ t0: year, a, c: a + Math.max(40, (cur.c - cur.a) * 1.1) }); year = Math.min(MAXY, year + 3); draw(); });
+  $('#epReset').addEventListener('click', () => { reset(); draw(); });
+  reset(); draw();
+}
+
+/* ---------- 17: the four thieves ---------- */
+sorter('#sort17', '#tally17', [
+  {id: 'no', label: 'Can\'t say no', d: 'Saying yes to everything else'}, {id: 'chaos', label: 'Fear of chaos', d: 'Needing everything tidy first'},
+  {id: 'health', label: 'Poor health habits', d: 'Running on low energy'}, {id: 'env', label: 'An unsupportive environment', d: 'People and places pulling you away'} ], [
+  { t: 'A colleague asks you to join just one more committee, and you agree.', q: true, a: 'no', w: 'Each yes uses time your ONE Thing needs. A polite no protects it.' },
+  { t: 'You can\'t start your deep work until your inbox is at zero.', q: true, a: 'chaos', w: 'Some mess is the price of focus. Let the inbox wait until your block is done.' },
+  { t: 'You sleep five hours a night to fit everything in.', q: true, a: 'health', w: 'Focus runs on energy. Sleep is part of the plan, not what you cut.' },
+  { t: 'Your desk faces the busiest corridor in the office.', q: true, a: 'env', w: 'Your surroundings should support your goal. Move, or find a quiet room for your block.' },
+  { t: 'Friends tease you each time you skip a night out to work on your goal.', q: true, a: 'env', w: 'The people around you are part of your environment. Look for those who back your goal.' },
+  { t: 'You drop your ONE Thing to tidy a cupboard because the mess bothers you.', q: true, a: 'chaos', w: 'Untidy cupboards can wait. Extraordinary results mean letting small things stay messy for a while.' },
+  { t: 'You say yes to every favour because you hate letting people down.', q: true, a: 'no', w: 'One yes must be defended by a thousand nos. Saying no to some things is how you say yes to what matters.' },
+  { t: 'You skip lunch most days and run on coffee.', q: true, a: 'health', w: 'Keller\'s energy routine includes eating right. A hungry brain loses focus.' },
+]);
+
+/* ---------- 18: the regrets that last ---------- */
+{ const el = $('#rg18'), yI = $('#rgY');
+  const act = t => 10 + 64 * Math.exp(-t / 4), inact = t => 18 + 62 * (1 - Math.exp(-t / 9));
+  const draw = onLayout(() => { const y = +yI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 250 : 260, L = nw ? 34 : 46, R = W - (nw ? 14 : 130), T = 18, B = H - 36;
+    vb(el, W, H); const X = t => L + t / 40 * (R - L), Y = v => B - v / 100 * (B - T);
+    let g = '';
+    [0, 50, 100].forEach(v => { g += `<line x1="${L}" x2="${R}" y1="${Y(v)}" y2="${Y(v)}" ${S('line', 1, ';stroke-opacity:.6')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10, 'end', 'class="mono"'); });
+    [0, 10, 20, 30, 40].forEach(t => { g += TX(X(t), B + 16, t === 0 ? 'now' : t + ' yrs', 'faint', 10, 'middle', 'class="mono"'); });
+    let pa = '', pi = ''; for (let t = 0; t <= 40; t += .25){ pa += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(act(t)).toFixed(1); pi += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(inact(t)).toFixed(1); }
+    g += `<path d="${pa}" ${S('cool', 2.2)}/><path d="${pi}" ${S('glow', 2.6)}/>`;
+    g += `<line x1="${X(y)}" x2="${X(y)}" y1="${T}" y2="${B}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>`;
+    g += `<circle cx="${X(y)}" cy="${Y(act(y))}" r="6" ${F('cool')}/><circle cx="${X(y)}" cy="${Y(inact(y))}" r="6" ${F('glow')}/>`;
+    if (nw) g += TX(L + 6, T + 6, 'what you did', 'cool', 11) + TX(L + 110, T + 6, 'what you didn\'t', 'glow', 11);
+    else g += TX(R + 8, Y(act(40)) + 4, 'what you did', 'cool', 12) + TX(R + 8, Y(inact(40)) + 4, 'what you didn\'t', 'glow', 12);
+    el.innerHTML = g;
+    out('rgY', y === 0 ? 'right after' : y + (y === 1 ? ' year' : ' years'));
+    $('#rgA').textContent = Math.round(act(y)); $('#rgI').textContent = Math.round(inact(y));
+    $('#rgSay').textContent = act(y) > inact(y) ? 'Early on, the mistakes you made sting most.' : 'With time, it\'s the chances you didn\'t take that weigh heaviest.';
+  });
+  yI.addEventListener('input', draw); draw();
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
