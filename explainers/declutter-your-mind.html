@@ -1,0 +1,1880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Declutter Your Mind, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a quiet room. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a lab, plain words,
+   quick check), grouped into the book's four areas to declutter. Dark-first: deep green-black with a mint "clear air" accent
+   and a lavender second series. */
+:root{
+  color-scheme: dark;
+  --ink:#0E1513;--panel:#151F1C;--panel-2:#1D2925;--line:#2B3A35;--text:#EEF4F1;--muted:#A7B8B1;--faint:#788C84;--glow:#7FD8B4;--glow-soft:rgba(127,216,180,.11);--hl:rgba(127,216,180,.22);--cool:#B6A6F2;--cool-soft:rgba(182,166,242,.11);--good:#A6DB6E;--good-soft:rgba(166,219,110,.1);--bad:#FF8A80;--bad-soft:rgba(255,138,128,.09);--soft:#D2DDD8;--deep:#0A100E;--toc-bg:rgba(21,31,28,.74);--glow-line:rgba(127,216,180,.32);--cool-line:rgba(182,166,242,.3);--on-glow:#06231A;--warm:#F2B66D;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F6F2;--panel:#FFFFFF;--panel-2:#E8EEEA;--line:#D3DCD7;--text:#13201B;--muted:#4A5C55;--faint:#788A83;--glow:#1C7A58;--glow-soft:rgba(28,122,88,.07);--hl:#CDEFDF;--cool:#5B44C0;--cool-soft:rgba(91,68,192,.07);--good:#3D7A16;--good-soft:rgba(61,122,22,.08);--bad:#B3343A;--bad-soft:rgba(179,52,58,.07);--soft:#24332D;--deep:#FAFCFA;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(28,122,88,.3);--cool-line:rgba(91,68,192,.26);--on-glow:#FFFFFF;--warm:#A3590F;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F6F2;--panel:#FFFFFF;--panel-2:#E8EEEA;--line:#D3DCD7;--text:#13201B;--muted:#4A5C55;--faint:#788A83;--glow:#1C7A58;--glow-soft:rgba(28,122,88,.07);--hl:#CDEFDF;--cool:#5B44C0;--cool-soft:rgba(91,68,192,.07);--good:#3D7A16;--good-soft:rgba(61,122,22,.08);--bad:#B3343A;--bad-soft:rgba(179,52,58,.07);--soft:#24332D;--deep:#FAFCFA;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(28,122,88,.3);--cool-line:rgba(91,68,192,.26);--on-glow:#FFFFFF;--warm:#A3590F;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+
+/* ---------- Declutter additions ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:stretch}
+.tangle{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.tangle svg{display:block;width:100%;height:auto}
+.tangle-ctl{display:flex;gap:12px;align-items:center;padding:4px 18px 10px;font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tangle-ctl input{flex:1}
+.tangle .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.tangle .cap b{color:var(--text);font-weight:500}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:150px;align-content:start}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:110px;align-content:start}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--cool-line);background:var(--cool-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect, .svgbtn:focus-visible path{stroke:var(--glow);stroke-width:2.5}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.vchips{display:flex;flex-wrap:wrap;gap:6px}
+.vchip{font:inherit;font-size:13px;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer;transition:border-color .15s,color .15s}
+.vchip:hover{border-color:var(--glow);color:var(--text)}
+.vchip[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.vchip:disabled{opacity:.45;cursor:default}
+.lab-ctl .row + .row{margin-top:2px}
+.lab-ctl .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 20px}
+.lab-ctl .who{display:grid;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.lab-ctl .who input[type=text]{font:inherit;font-size:14px;font-weight:600;color:var(--text);background:transparent;border:0;border-bottom:1px dashed var(--line);padding:2px 0;min-width:0;width:100%}
+.lab-ctl .who input[type=text]:focus{outline:none;border-bottom-color:var(--glow)}
+.area-pick{font:inherit;font-size:12px;color:var(--muted);background:none;border:1px solid var(--line);border-radius:999px;padding:2px 9px;cursor:pointer;white-space:nowrap}
+.area-pick[aria-pressed=true]{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+.ctl label .lbl2{display:flex;gap:8px;align-items:center;min-width:0}
+.plan-out{display:grid;gap:8px}
+.plan-out p{font-family:var(--f-display);font-size:clamp(21px,2.8vw,26px);line-height:1.2}
+.plan-out p i{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow);display:block;margin-bottom:2px}
+.plan-out .empty{color:var(--muted);font-size:15px;font-family:var(--f-body)}
+.after .lab .fields{border-bottom:1px solid var(--line)}
+.sorter .item.q{font-size:22px}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .tangle{max-width:560px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} .sorter{padding:14px} }
+#planF{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+@media (max-width: 560px){ #planF{grid-template-columns:minmax(0,1fr)} }
+
+</style>
+</head>
+<body>
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to S.J. Scott and Barrie Davenport's book</div>
+    <h1><em>Declutter</em> Your Mind,<br>Explained</h1>
+    <p class="lede">Worry, overthinking and a head that never goes quiet are not personality traits. They are habits, fed by stress, choices, stuff and the brain's pull towards bad news. <b>Declutter Your Mind</b> is a practical book about clearing that noise in four places: your thoughts, your obligations, your relationships and your surroundings. This guide takes it chapter by chapter, with a hands-on lab in each one.</p>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's cluttering your mind right now?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="tangle" style="margin:0">
+        <svg id="heroT" viewBox="0 0 420 300" role="img" aria-label="A tangle of thoughts that untangles into calm lines as you slide"></svg>
+        <div class="tangle-ctl"><label for="heroS">Declutter</label><input type="range" id="heroS" min="0" max="100" value="0"></div>
+        <div class="cap">Slide to declutter. The same thoughts are still there, <b>but each one has its own space</b>.</div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Part one · chapters 1 to 2</span><span class="q">Why Your Mind Gets Cluttered</span><span class="d">Thoughts are habits, and four things feed the noise</span></a>
+      <a href="#part2"><span class="n">Declutter your thoughts · chapters 3 to 6</span><span class="q">Declutter Your Thoughts</span><span class="d">Breathing, meditation, and two ways to handle negative thoughts</span></a>
+      <a href="#part3"><span class="n">Declutter your obligations · chapters 7 to 10</span><span class="q">Declutter Your Life Obligations</span><span class="d">Values, priorities, goals and passion</span></a>
+      <a href="#part4"><span class="n">Declutter your relationships · chapters 11 to 15</span><span class="q">Declutter Your Relationships</span><span class="d">Being present, letting go of the past, and of some people</span></a>
+      <a href="#part5"><span class="n">Declutter your surroundings · chapters 16 to 20</span><span class="q">Declutter Your Surroundings</span><span class="d">Home, screens, schedule, focus and everyday actions</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2016</span>
+      <span><b>Authors</b> S.J. Scott, habits writer, and Barrie Davenport, life coach</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 20 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== WHY YOUR MIND GETS CLUTTERED ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · chapters 1 to 2</span>
+      <h2>Why Your Mind Gets Cluttered</h2>
+      <p>Before any fixes, the book explains the problem. Most of what runs through your head is automatic, much of it is about the past or the future, and four everyday forces keep piling more on top.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You are not your thoughts. You are the one who can notice them, and anything you can notice you can start to change.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why thoughts pile up</div>
+        <h2>Your Thoughts Are Habits</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most thoughts arrive on their own and repeat out of habit. Left alone they become constant background noise, much of it about the past or the future. The good news is that habits can be changed, and the first step is noticing.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Thoughts shape what you see.</b> The stories in your head colour how you read every situation. Two people can walk into the same meeting and leave with completely different days, because of what they were telling themselves.</span></li>
+          <li><span><b>They feel automatic, but they are habits.</b> Thinking patterns get worn in by repetition, like a path across a lawn. That makes them feel like part of you, but it also means a new path can be worn in the same way.</span></li>
+          <li><span><b>The trouble lives in the past and the future.</b> Replaying what went wrong and rehearsing what might go wrong are where most of the clutter comes from. The present moment is usually far more manageable than either.</span></li>
+          <li><span><b>Who the book is for.</b> Anyone who feels stuck, anxious, distracted or worn out by their own mind, and who wants a calmer, simpler head without needing therapy or a retreat.</span></li>
+          <li><span><b>The answer, in a word: mindfulness.</b> Paying attention to what is happening now, on purpose and without judging it. Every habit in the book is a different way of training that one skill.</span></li>
+        </ul>
+      </div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>This is not from the book, but it backs it up: a 2010 Harvard study that pinged thousands of people at random found their minds were wandering away from what they were doing almost half the time, and that they felt less happy when they were.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: where is your mind right now?</div><div class="hint">Sort each thought by when it lives</div></div>
+        <div class="stage"><svg id="tm1" role="img" aria-label="A timeline from past to future where your sorted thoughts land"></svg></div><div class="sorter" id="tms1"></div><p class="callout">Each dot is a thought you sorted. <b>Notice how few land on “now”.</b> That gap is what the book calls mental clutter.</p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Set three reminders on your phone for tomorrow. When each one goes off, write a few words on what you were just thinking about, and whether it was about the past, the present or the future.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your head is not a place you are stuck with. It is a set of habits, and most of them drag you out of the moment you are actually in. Learn to notice where your mind has gone, and you have already started to declutter it.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The four causes →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Four causes</span> · What fills your head</div>
+        <h2>The Four Causes of Mental Clutter</h2>
+        <div class="short"><span class="lbl">In short</span><p>Four forces fill the mind: daily stress, too many choices, too much stuff, and a built-in habit of noticing the bad more than the good. Stress is the biggest, and the other three feed it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>1. Daily stress.</b> A constant stream of demands, information and noise keeps the body's alarm system switched on. Over time that shows up as worry, poor sleep, headaches, tight muscles, even chest pain.</span></li>
+          <li><span><b>2. The paradox of choice.</b> More options feel like freedom, but past a point they make it harder to choose and less satisfying once you have. Every small decision uses up a little of your attention.</span></li>
+          <li><span><b>3. Too much stuff.</b> Possessions, unread messages and endless feeds all ask to be dealt with. When everything looks urgent, you end up feeling helpless about all of it.</span></li>
+          <li><span><b>4. The negativity bias.</b> Your brain gives bad news far more weight than good news, a leftover from when missing a threat could kill you. One criticism can outweigh ten compliments and keep you up at night.</span></li>
+          <li><span><b>What helps.</b> The rest of the book attacks each cause: calming habits for stress, clear values for choices, decluttering for stuff, and mindfulness for the negativity bias.</span></li>
+        </ul>
+      </div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>The book draws on psychologist Barry Schwartz's idea of the paradox of choice. Its most famous example, a jam stall where shoppers offered 24 flavours bought far less often than those offered 6, has not held up well in later studies: the effect seems real in some settings and absent in others.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: what is filling your head?</div><div class="hint">Move each slider to match your week</div></div>
+        <div class="stage"><svg id="cj2" role="img" aria-label="A head that fills with clutter as the four causes rise"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="cjS">Daily stress <output id="ocjS"></output></label><input type="range" id="cjS" min="0" max="10" value="6" step="1"></div><div class="ctl"><label for="cjC">Choices to make <output id="ocjC"></output></label><input type="range" id="cjC" min="0" max="10" value="4" step="1"></div></div><div class="row"><div class="ctl"><label for="cjT">Stuff and information <output id="ocjT"></output></label><input type="range" id="cjT" min="0" max="10" value="5" step="1"></div><div class="ctl"><label for="cjN">Negative events <output id="ocjN"></output></label><input type="range" id="cjN" min="0" max="10" value="3" step="1"></div></div></div><div class="stats"><div class="stat"><span class="k">Clutter level</span><span class="v glow" id="cjL"></span></div><div class="stat"><span class="k">Biggest source</span><span class="s" id="cjB"></span></div><div class="stat"><span class="k">Where to start</span><span class="s" id="cjW"></span></div></div><p class="callout">Negative events are drawn bigger on purpose. <b>Because of the negativity bias, one bad thing takes up more room than one neutral thing.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Write down the four causes and give each a score out of ten for how much it is affecting you this week. Keep the list; you will use it to decide which part of this guide to read first.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your mind is not cluttered because something is wrong with you. It is cluttered because modern life pours stress, choices, stuff and bad news into it faster than you can clear them out. Once you can name which of the four is loudest, you know where to start.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Focused deep breathing →</a></div>
+    </section>
+    <!-- ===================== DECLUTTER YOUR THOUGHTS ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Declutter your thoughts · chapters 3 to 6</span>
+      <h2>Declutter Your Thoughts</h2>
+      <p>Four habits for the inside of your head: breathe on purpose, sit with your mind every day, interrupt negative thoughts before they snowball, and teach your mind more useful ways to think.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Calm is a skill, not a mood. It gets stronger with short, daily practice, the same way a muscle does.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 1</span> · The fastest way to calm down</div>
+        <h2>Focused Deep Breathing</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most of us breathe shallowly into the chest, especially when stressed. Slow, deep breaths into the belly switch on the body's calming system, what doctors call the relaxation response. A few minutes a day is enough to feel it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Shallow breathing feeds stress.</b> Quick breaths high in the chest are part of the body's alarm response. When you breathe that way out of habit, your body stays slightly on alert all day.</span></li>
+          <li><span><b>Deep breathing flips the switch.</b> Breathing slowly and fully, so that the belly rises before the chest, signals that you are safe. Heart rate slows, muscles soften and the mind quietens.</span></li>
+          <li><span><b>Make the exhale longer.</b> Breathing out takes you towards calm, so letting the out-breath run a little longer than the in-breath helps most.</span></li>
+          <li><span><b>It is a habit, not a one-off.</b> The book suggests a short daily session, five to ten minutes, ideally right before you meditate. Attach it to something you already do, like your morning coffee.</span></li>
+          <li><span><b>Use it in the moment too.</b> Once the habit is built, a handful of deep breaths becomes a tool you can reach for before a hard conversation or when worry starts to climb.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: a breathing pacer</div><div class="hint">Pick a rhythm, press start, and breathe with the circle</div></div>
+        <div class="stage"><svg id="br3" role="img" aria-label="A circle that grows as you breathe in and shrinks as you breathe out"></svg></div><div class="lab-ctl"><div class="row" id="brP"></div><div class="row"><button class="btn primary" id="brGo">Start</button><button class="btn" id="brReset">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Breaths</span><span class="v glow" id="brN"></span></div><div class="stat"><span class="k">Time</span><span class="v" id="brT"></span></div><div class="stat"><span class="k">Breaths per minute</span><span class="v" id="brM"></span></div></div><p class="callout">At rest most adults take 12 to 20 breaths a minute. <b>Slowing to around six a minute is where most people start to feel the calm.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Lie down and put one hand on your chest and one on your belly. Breathe so that only the lower hand moves. Do ten slow breaths like that, then notice how your body feels.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Breathing is the one part of your stress response you can take over on purpose. Breathe slowly into your belly, make the out-breath longer, and your body follows. Do it for a few minutes every day so it is there when you need it.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Meditation →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 2</span> · Sit with your mind</div>
+        <h2>Meditation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Meditation is sitting quietly, resting your attention on your breath, and gently coming back each time your mind wanders. The wandering is not failure. Each return is one repetition, and the repetitions are what train focus and calm.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What it is.</b> Not emptying your mind, which nobody can do. It is watching thoughts come and go without chasing them, and returning to the breath when you notice you have drifted.</span></li>
+          <li><span><b>What it does.</b> Regular practice is linked to lower stress, better focus and a calmer response to difficult emotions. Most of all, it makes the gap between a thought and your reaction to it a little wider.</span></li>
+          <li><span><b>Start small and fixed.</b> Same time and same place each day, a quiet spot, phone away, a ten-minute timer. Sit on a cushion or a chair with a straight back and your hands resting in your lap.</span></li>
+          <li><span><b>A simple technique.</b> Close your eyes and breathe through your nose. Silently say “in” as you breathe in and “out” as you breathe out. When you notice you are thinking, let the thought go and say “in” again.</span></li>
+          <li><span><b>Notice, don't judge.</b> Sounds, itches and feelings will come up. Notice them, name them if you like, and come back. Guided apps can help when you are starting out.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the wandering mind</div><div class="hint">Press start. When a thought pulls the breath dot off course, tap to come back.</div></div>
+        <div class="stage"><svg id="md4" role="img" aria-label="A breath dot circling, with thoughts that drift in and pull it away"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="mdGo">Start a one-minute sit</button><button class="btn" id="mdBack" disabled>I noticed. Back to the breath</button></div></div><div class="stats"><div class="stat"><span class="k">Times you came back</span><span class="v glow" id="mdR"></span></div><div class="stat"><span class="k">Time on the breath</span><span class="v" id="mdOn"></span></div><div class="stat"><span class="k">What it means</span><span class="s" id="mdSay"></span></div></div><p class="callout">Every return is one rep. <b>You are not trying to stop thoughts; you are practising noticing them sooner.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Tomorrow, after your breathing practice, sit for five minutes using the in and out method. Keep a tally of how many times you noticed your mind had wandered. A high number is a good sign: it means you are noticing.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Meditation is not about a blank mind. It is about catching yourself drifting and coming back, over and over. Ten minutes a day of that is like a gym session for your attention.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Reframe negative thoughts →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 3</span> · Catch the spiral early</div>
+        <h2>Reframe Your Negative Thoughts</h2>
+        <div class="short"><span class="lbl">In short</span><p>Negative thoughts snowball: one leads to the next until you are sure everything is going wrong. The trick is to catch them early. The book gives six ways to interrupt a negative thought before it builds.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Be a watcher.</b> Step back and observe your mind as if it were someone else's. The moment you are watching a thought, you are no longer completely inside it.</span></li>
+          <li><span><b>Name that thought.</b> Label it: “That's a worry” or “That's a judgement.” A thought is an event in your head, not a fact about the world.</span></li>
+          <li><span><b>Just say no.</b> Say “stop” out loud or in your head, or picture yourself throwing the thought away. It sounds too simple, but a sharp interruption breaks the momentum.</span></li>
+          <li><span><b>The rubber band trick.</b> Wear a band on your wrist. When you catch a negative loop, move it to the other wrist, or give it a light snap. Over time you become far more aware of how often the loop runs.</span></li>
+          <li><span><b>Know your triggers.</b> Certain people, places, times of day and states, like being tired or hungry, set off the same spirals. Spot them and you can prepare, or avoid them.</span></li>
+          <li><span><b>Distract yourself.</b> Give your mind something absorbing to do: a task, a walk, a conversation. A busy mind has less room for a spiral.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: interrupt the spiral</div><div class="hint">Watch the thought snowball, then pick a way to break it</div></div>
+        <div class="stage"><svg id="sp5" role="img" aria-label="A negative thought that grows into a spiral of worse thoughts"></svg></div><div class="lab-ctl"><div class="cards3" id="spM"></div><div class="row"><button class="btn" id="spReset">Start a new spiral</button></div></div><div class="stats"><div class="stat"><span class="k">Thoughts in the spiral</span><span class="v glow" id="spN"></span></div><div class="stat"><span class="k">Interrupts tried</span><span class="v" id="spT"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="spSay"></span></div></div><p class="callout">Try stepping in at once, then try waiting. <b>The earlier you interrupt, the less there is to clear.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Pick the one negative thought you have most often. Write down when it usually shows up and what tends to set it off. Then choose one of the six interrupts to try next time it appears.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You cannot stop negative thoughts from showing up, but you can stop them gathering speed. Notice them early, see them as thoughts rather than facts, and use whichever interrupt works for you.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Teach your mind new tricks →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 4</span> · Replace, accept, act, or schedule</div>
+        <h2>Teach Your Old Mind New Tricks</h2>
+        <div class="short"><span class="lbl">In short</span><p>Interrupting a negative thought makes space. This habit fills that space with something better. Challenge the thought and replace it, accept what you cannot change, take action on what you can, and give worry a fixed slot in your day.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Challenge it.</b> Ask: is this really true? What is the evidence? What would I say to a friend who thought this? Then write a version that is fairer and more accurate.</span></li>
+          <li><span><b>Practise acceptance.</b> Some things you simply cannot change. Fighting them just adds a second layer of suffering on top of the first. Accepting them is not giving up; it is choosing where to spend your energy.</span></li>
+          <li><span><b>Take mindful action.</b> When a worry is about something you can affect, the best cure is a step forward: a decision, a phone call, a plan. Getting clear on your goals and values, the subject of the next part, helps here.</span></li>
+          <li><span><b>Use a worry timer.</b> Set aside ten to fifteen minutes a day as worry time. When a worry comes up at other times, note it and park it for later. Often by the time your slot arrives, it no longer matters much.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: sort your worries</div><div class="hint">Send each worry where it belongs, then set your worry window</div></div>
+        <div class="sorter" id="ws6"></div><div class="stage"><svg id="wt6" role="img" aria-label="A day timeline with a worry window and your parked worries"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="wtS">Worry window starts at <output id="owtS"></output></label><input type="range" id="wtS" min="8" max="20" value="17" step="0.5"></div><div class="ctl"><label for="wtL">How long <output id="owtL"></output></label><input type="range" id="wtL" min="10" max="15" value="15" step="1"></div></div></div><div class="stats"><div class="stat"><span class="k">Act on it</span><span class="v glow" id="wsA"></span></div><div class="stat"><span class="k">Accept it</span><span class="v" id="wsC"></span></div><div class="stat"><span class="k">Parked for worry time</span><span class="v" id="wsP"></span></div></div><p class="callout">Your worry window should be <b>well before bedtime</b>, so worries are dealt with and not taken to bed.</p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Pick a time for a fifteen-minute worry slot tomorrow, not right before bed. Keep a notepad handy all day and park every worry on it. When the slot comes, go through the list and see how many still need your attention.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your mind will keep producing worries, so give it something to do with them. Rewrite the unfair ones, let go of the ones you cannot change, act on the ones you can, and save the rest for a short slot in your day.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Identify your core values →</a></div>
+    </section>
+    <!-- ===================== DECLUTTER YOUR LIFE OBLIGATIONS ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Declutter your obligations · chapters 7 to 10</span>
+      <h2>Declutter Your Life Obligations</h2>
+      <p>Much of the noise in your head comes from not being sure what matters. This part helps you pick your values, rank the areas of your life, set a few goals for the next three months, and tie them to what you care about.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>When you know what matters most, a lot of decisions make themselves, and the worry that came with them goes away.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 1</span> · Know what you stand for</div>
+        <h2>Identify Your Core Values</h2>
+        <div class="short"><span class="lbl">In short</span><p>Values are the few things that matter most to you, like honesty, family or adventure. When you know them, decisions get easier and guilt about the rest fades. Pick your top five or six, then check how closely your life matches them today.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start with a long list.</b> Read through a list of value words and pick every one that resonates. The book offers hundreds of words to choose from. Do it once for your life and once for your work.</span></li>
+          <li><span><b>Narrow it down.</b> From each list, keep the five or six that feel most essential. If you had to drop all but these, which would you fight to keep?</span></li>
+          <li><span><b>Check the gaps.</b> For each value, write down how well your daily life matches it right now. Most people find at least one value they say matters but give almost no time.</span></li>
+          <li><span><b>Plan small corrections.</b> For each gap, write one small, specific action that would bring you closer. Small actions you actually take beat big plans you do not.</span></li>
+          <li><span><b>Why it clears the mind.</b> Without clear values, every choice is a fresh debate. With them, many options are ruled out at once, and you stop second-guessing.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: pick your values, then check the gaps</div><div class="hint">Choose up to five values, then rate how well your life matches each one</div></div>
+        <div class="pad" style="padding-top:16px"><div class="vchips" id="vc7"></div></div><div class="stage"><svg id="va7" role="img" aria-label="Bars showing how well your life matches each value you picked"></svg></div><div class="lab-ctl" id="vaCtl"></div><div class="stats"><div class="stat"><span class="k">Values picked</span><span class="v glow" id="vaN"></span></div><div class="stat"><span class="k">Biggest gap</span><span class="s" id="vaG"></span></div><div class="stat"><span class="k">A small step</span><span class="s" id="vaSay"></span></div></div><p class="callout">Your picks are saved in this browser and appear again in your declutter plan at the end.</p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Write your top five values on a card and keep it where you will see it. Next time you are torn about saying yes to something, check the card.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide what you stand for, and write it down. Then look honestly at where your time actually goes. The gap between the two is where most of the quiet guilt in your head comes from, and where a few small changes help the most.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Clarify your life priorities →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 2</span> · Where your time, energy and money go</div>
+        <h2>Clarify Your Life Priorities</h2>
+        <div class="short"><span class="lbl">In short</span><p>Your life has several areas competing for your time: career, family, partner, health and more. Rate how each is going, then start with the one that would improve everything else the most.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Seven areas.</b> The book splits life into career, family, marriage or partnership, spirituality and self-improvement, leisure and social life, life management (money, home, admin), and health and fitness.</span></li>
+          <li><span><b>Priorities are a choice.</b> You cannot give every area full attention at once. Deciding which ones come first this season is what stops you feeling guilty about all of them.</span></li>
+          <li><span><b>Start with the biggest lever.</b> Some areas lift the others. Better sleep and exercise can improve your work and your patience at home. Pick the area where a change would ripple furthest.</span></li>
+          <li><span><b>Let your values guide you.</b> Priorities flow from the values you picked in the last chapter. If family is a core value but gets your last hour of energy, that is a mismatch to fix.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: your life wheel</div><div class="hint">Rate each area, then tap the one that would lift the others most</div></div>
+        <div class="stage"><svg id="lw8" role="img" aria-label="A wheel of seven life areas that grows with your ratings"></svg></div><div class="lab-ctl" id="lwCtl"></div><div class="stats"><div class="stat"><span class="k">Average</span><span class="v glow" id="lwAvg"></span></div><div class="stat"><span class="k">Lowest area</span><span class="s" id="lwLow"></span></div><div class="stat"><span class="k">Start here</span><span class="s" id="lwSay"></span></div></div><p class="callout">A lopsided wheel is normal. <b>The goal is not a perfect circle but a clear first move.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Write the seven areas down and give each a score out of ten. Circle the one where a small improvement would help the most other areas, and pick one thing to do about it this week.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You cannot do everything at once, and trying to is a big source of mental clutter. Look at the main areas of your life, pick the one that would make the biggest difference, and give it attention first.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Quarterly SMART goals →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 3</span> · Plan three months at a time</div>
+        <h2>Mindful Goal Setting and Quarterly SMART Goals</h2>
+        <div class="short"><span class="lbl">In short</span><p>Set a few goals for the next three months, and make each one specific, measurable, attainable, relevant and time-bound. Three months is long enough to make real progress and short enough to stay focused, while still leaving room to enjoy life now.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Mindful goals.</b> Goals should improve your life, not take it over. Keep enough room to enjoy the present while you work towards the future.</span></li>
+          <li><span><b>SMART, letter by letter.</b> Specific (who, what, where, when, which, why), Measurable (how much or how many), Attainable (you believe you can do it), Relevant (it matters to you), and Time-bound (it has a deadline). The acronym comes from management writer George Doran in 1981.</span></li>
+          <li><span><b>Think in quarters.</b> Pick three or four areas from your priorities and set a goal for each that you can finish in about thirteen weeks.</span></li>
+          <li><span><b>Review every week.</b> Once a week, check your commitments, your goal projects and how much time you really have, then schedule the next steps.</span></li>
+          <li><span><b>Keep them in view.</b> Read your goals two or three times a day, and at the end of the quarter look again at the why behind each one before setting the next round.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: build a SMART goal</div><div class="hint">Fill in the parts and watch each letter light up</div></div>
+        <div class="fields" style="border-top:1px solid var(--line)"><div class="field"><label for="sgW">What exactly will you do?</label><input id="sgW" maxlength="70" value="Run a 5K without stopping"></div><div class="field"><label for="sgM">How will you measure it?</label><input id="sgM" maxlength="60" value="3 runs a week, logged"></div><div class="field"><label for="sgY">Why does it matter to you?</label><input id="sgY" maxlength="80" value="I want more energy for my kids"></div></div><div class="lab-ctl" style="border-top:0;padding-top:0"><div class="row"><div class="ctl"><label for="sgA">How sure are you that you can do it? <output id="osgA"></output></label><input type="range" id="sgA" min="0" max="10" value="7" step="1"></div><div class="ctl"><label for="sgT">Deadline: week of the quarter <output id="osgT"></output></label><input type="range" id="sgT" min="4" max="13" value="12" step="1"></div></div></div><div class="stage"><svg id="sg9" role="img" aria-label="Five SMART letters and a thirteen-week quarter with weekly reviews"></svg></div><div class="out"><span class="k">Your goal</span><p class="say-out" id="sgOut"></p></div><p class="callout">Weekly reviews are drawn as dots. <b>The goal gets checked thirteen times, not once at the end.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Take your fuzziest goal, like “get fit”, and rewrite it so that someone else could check whether you did it by a date three months from now.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Vague goals clutter your mind because you never know if you are on track. A few clear, three-month goals that you check every week turn a cloud of “shoulds” into a short list of next steps.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Connect goals to your passions →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 4</span> · Goals that pull you forward</div>
+        <h2>Connect Your Goals to Your Passions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Goals you are excited about are far easier to stick to than goals you merely think you should do. Link your goals to what you love, and if you do not yet know what that is, the book lays out a step-by-step way to find it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Why passion matters.</b> Doing something you care about brings energy, confidence and meaning. Work stops feeling like a drain, and the rest of life tends to improve with it.</span></li>
+          <li><span><b>Start with a vision.</b> Write a clear picture of the life you want, then compare it with the life you have. The differences point to what you care about.</span></li>
+          <li><span><b>Explore before you leap.</b> Learn about your personality, read widely about your interests, narrow the options, find a mentor and brainstorm on paper.</span></li>
+          <li><span><b>Test it small.</b> Take one small first step and try the option out before you commit, for example by volunteering or doing a side project. Ask people you trust what they see.</span></li>
+          <li><span><b>Make it safe to change.</b> Save some money, plan how you will earn while you switch, and keep doing your current job well. And when in doubt, do something: action builds motivation, not the other way round.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: does this goal light you up?</div><div class="hint">Rate each goal on how much it matters and how much it excites you</div></div>
+        <div class="stage"><svg id="pg10" role="img" aria-label="A grid of how much each goal matters against how much it excites you"></svg></div><div class="lab-ctl" id="pgCtl"></div><div class="stats"><div class="stat"><span class="k">Passion goals</span><span class="v glow" id="pgN"></span></div><div class="stat"><span class="k">Needs a spark</span><span class="s" id="pgS"></span></div><div class="stat"><span class="k">What to do</span><span class="s" id="pgSay"></span></div></div><p class="callout">Goals in the top-right corner tend to run themselves. <b>For a goal that matters but bores you, look for a way to link it to something you love.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>List three things you have lost track of time doing in the past year. For each, write one small way you could do more of it in the next month.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Willpower runs out; excitement does not. Tie your goals to things you genuinely care about, and if you are not sure what those are, explore in small, safe steps until you find out.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Why relationships matter →</a></div>
+    </section>
+    <!-- ===================== DECLUTTER YOUR RELATIONSHIPS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Declutter your relationships · chapters 11 to 15</span>
+      <h2>Declutter Your Relationships</h2>
+      <p>The people around you can calm your mind or fill it with noise. This part covers how to show up more fully for the people you care about, stop replaying old hurts, bring mindfulness into a partnership, and step back from relationships that only drain you.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Start with what you can change, which is how you show up. Other people may follow; if they never do, you will at least know where you stand.</p></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Relationships</span> · The people in your head</div>
+        <h2>How Relationships Clutter Your Mind</h2>
+        <div class="short"><span class="lbl">In short</span><p>Draining relationships take up huge space in your head long after the conversation ends. Good ones calm you. What counts is quality, not the number of people, and the place to start changing things is yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Bad relationships echo.</b> An argument or a cutting remark can replay for days. Tension with someone close is one of the biggest sources of mental noise there is.</span></li>
+          <li><span><b>Quality over quantity.</b> A few close, healthy relationships do far more for your wellbeing than a wide circle of shallow ones.</span></li>
+          <li><span><b>What healthy looks like.</b> Honest communication, handling conflict fairly, mutual respect, some shared interests, closeness, whether emotional or intellectual, and accepting each other as you are.</span></li>
+          <li><span><b>Start with yourself.</b> You cannot make someone else change. You can change how you listen, speak and react, and that often shifts the whole relationship.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: a relationship check-up</div><div class="hint">Pick a relationship and rate the six signs of a healthy one</div></div>
+        <div class="stage"><svg id="rh11" role="img" aria-label="A six-sided chart of the health of one relationship"></svg></div><div class="lab-ctl" id="rhCtl"></div><div class="stats"><div class="stat"><span class="k">Overall health</span><span class="v glow" id="rhH"></span></div><div class="stat"><span class="k">Weakest sign</span><span class="s" id="rhW"></span></div><div class="stat"><span class="k">A place to start</span><span class="s" id="rhSay"></span></div></div><p class="callout">The faint outline shows a healthy relationship. <b>Nobody scores perfectly; look for the dip that bothers you most.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Think of the relationship that takes up the most space in your head. Write down which of the six signs of a healthy relationship are strong in it and which are weak.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>People take up room in your mind, for better or worse. Notice which relationships calm you and which drain you, judge them by their quality, and start any change with your own behaviour.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Be more present →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 1</span> · Give people your full attention</div>
+        <h2>Be More Present</h2>
+        <div class="short"><span class="lbl">In short</span><p>Being fully present is the best gift you can give someone. Listen to understand rather than to reply, speak with care, put the phone away, stop comparing, and say thank you often.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Empathic listening.</b> Listen to understand how the other person feels, not to fix it or tell your own story. Reflect back what you heard before you add anything.</span></li>
+          <li><span><b>Mindful speaking.</b> Pause before you speak. Ask yourself whether it is true, kind and needed, especially when you are upset.</span></li>
+          <li><span><b>Loving-kindness.</b> A short meditation where you silently wish well to yourself, then to people you love, then to people you find hard. It softens how you see them.</span></li>
+          <li><span><b>Stop comparing.</b> Measuring yourself or your partner against others keeps your mind somewhere else. Accept yourself as you are, change what you can, and let the rest be.</span></li>
+          <li><span><b>Practise gratitude.</b> Tell people what you appreciate about them, often and specifically. It strengthens the bond and trains your mind to notice the good.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: how present are you?</div><div class="hint">Your friend is talking. Choose how you respond each time.</div></div>
+        <div class="stage"><svg id="pr12" role="img" aria-label="A friend's face and a presence meter that respond to how you listen"></svg></div><div class="sorter" id="prs12"></div><p class="callout">Advice and “me too” stories are well meant. <b>But most of the time people want to feel heard before they want to be helped.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>In your next real conversation, put your phone face down out of reach and do not offer advice unless you are asked. Afterwards, notice how the other person responded.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Presence is mostly about what you stop doing: checking your phone, planning your reply, fixing, comparing. When you stop, people feel it, and your own mind gets quieter too.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Get unstuck from the past →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 2</span> · Stop replaying old hurts</div>
+        <h2>Get Unstuck from the Past</h2>
+        <div class="short"><span class="lbl">In short</span><p>Replaying an old hurt keeps it alive and keeps you tied to it. There are three ways out: resolve it if you can, challenge the story you tell about it, or forgive and let it go.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The replay loop.</b> Each time you go over what happened, the memory gets stronger and the feelings come back as if it were new. The past is not happening now, but your mind makes it feel that way.</span></li>
+          <li><span><b>Resolve it.</b> If something can still be done, such as an apology, a conversation or a repair, do it. Unfinished business loops the loudest.</span></li>
+          <li><span><b>Challenge your story.</b> Separate what happened from what you decided it meant. “She didn't call” is a fact. “She doesn't care about me” is a story, and maybe not a true one.</span></li>
+          <li><span><b>Forgive.</b> Forgiveness is not saying it was fine. It is deciding to stop carrying it, mostly for your own sake.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: fact or story?</div><div class="hint">Sort each line from a memory. Watch the replay loop loosen.</div></div>
+        <div class="stage"><svg id="ps13" role="img" aria-label="A replay loop that thins as you separate facts from stories"></svg></div><div class="sorter" id="pss13"></div><div class="tally pad" id="pst13"></div><p class="callout">Facts are what a camera would have recorded. <b>Stories are what you added, and they are the part you can rewrite.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Write down an old hurt in two columns: on the left, only the facts a camera would have recorded; on the right, what you concluded from them. Look at the right-hand column and ask whether each part is certain.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You cannot change what happened, but you can change what you keep doing with it. Fix what can be fixed, question the meaning you gave it, and let the rest go.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Mindfulness with your partner →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 3</span> · Bring calm into a partnership</div>
+        <h2>Mindfulness with Your Partner</h2>
+        <div class="short"><span class="lbl">In short</span><p>Close relationships trigger our strongest reactions. The book lists eight practices for bringing mindfulness into a partnership, from committing to it daily to listening without getting defensive and finding the lesson in each argument.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Commit, and say so.</b> Decide to practise mindfulness every day, and tell your partner, so they understand what you are trying to do.</span></li>
+          <li><span><b>Be there emotionally.</b> Notice what you are feeling, and stay with your partner's feelings instead of drifting off or shutting down.</span></li>
+          <li><span><b>Listen without defending.</b> Hear the whole point before you respond, and reflect back what you heard so they know you got it.</span></li>
+          <li><span><b>Speak honestly.</b> Say what you actually feel and need, calmly, rather than hinting or attacking.</span></li>
+          <li><span><b>Learn from conflict.</b> Every argument shows you something about what each of you needs. Look for that lesson instead of a winner.</span></li>
+          <li><span><b>Protect time together.</b> Spend regular time with no screens and no distractions.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: the argument thermometer</div><div class="hint">Switch on practices and watch the same argument cool down</div></div>
+        <div class="stage"><svg id="at14" role="img" aria-label="The temperature of an argument over eight moments"></svg></div><div class="lab-ctl"><div class="toggles" id="atT"></div></div><div class="stats"><div class="stat"><span class="k">Hottest moment</span><span class="s" id="atPk"></span></div><div class="stat"><span class="k">Practices on</span><span class="v" id="atN"></span></div><div class="stat"><span class="k">How it ends</span><span class="s" id="atSay"></span></div></div><p class="callout">An illustrative model of one argument about chores. <b>The early practices stop it heating up; the later ones help it end well.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Next time a disagreement starts, try just one practice: before you reply, repeat back what you heard your partner say and ask if you got it right.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your partner is the person most likely to push your buttons, which makes the relationship the best place to practise. Listen fully, speak honestly, and treat each argument as information about what you both need.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Let go of certain people →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Strategy 4</span> · When a relationship only drains you</div>
+        <h2>Let Go of Certain People</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some relationships cause far more pain than they give. When you have tried to improve one and it still drains you, it may be time to let it go. The book gives six steps for doing that with care.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Picture life without them.</b> Think honestly about what would be better, and what you would lose.</span></li>
+          <li><span><b>Weigh the consequences.</b> Ending a relationship can affect family, friends, work or money. Think it through before you act.</span></li>
+          <li><span><b>Say what you intend.</b> Where it is safe, tell the person clearly and calmly. Slowly vanishing usually prolongs the pain on both sides.</span></li>
+          <li><span><b>Expect a reaction.</b> They may be angry or try to pull you back. Decide in advance how you will respond.</span></li>
+          <li><span><b>Give it time, and grieve.</b> Even a bad relationship leaves a gap. It is normal to feel sad, and it takes time to settle.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: the energy ledger</div><div class="hint">Set how much time you spend with each person and how you feel afterwards</div></div>
+        <div class="stage"><svg id="el15" role="img" aria-label="Bars showing how much energy each relationship gives or takes in a week"></svg></div><div class="lab-ctl" id="elCtl"></div><div class="stats"><div class="stat"><span class="k">Net energy this week</span><span class="v glow" id="elNet"></span></div><div class="stat"><span class="k">Biggest drain</span><span class="s" id="elD"></span></div><div class="stat"><span class="k">What to consider</span><span class="s" id="elSay"></span></div></div><p class="callout">Not every drain should be cut. <b>Family, colleagues and people in a hard patch may need boundaries rather than goodbyes.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>List the people you spend the most time with. Next to each, write how you usually feel after seeing them: lighter, the same, or heavier.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You are allowed to step back from people who consistently hurt you. Try to improve things first, then, if it is still draining, let go with care: be clear, expect a reaction, and give yourself time to grieve.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: Simplify your home →</a></div>
+    </section>
+    <!-- ===================== DECLUTTER YOUR SURROUNDINGS ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Declutter your surroundings · chapters 16 to 20</span>
+      <h2>Declutter Your Surroundings</h2>
+      <p>Your space and your schedule talk to your mind all day. A cluttered room, a buzzing phone and a calendar with no gaps all keep it busy. This part clears each of them, then shows how to bring full attention to ordinary things.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Every object, alert and commitment asks for a little of your attention. Fewer of them means more attention left for what matters.</p></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Surroundings</span> · Clear the space, clear the head</div>
+        <h2>Simplify Your Home</h2>
+        <div class="short"><span class="lbl">In short</span><p>A cluttered home keeps tugging at your attention. Declutter it in short, timed sessions, starting with the room you spend the most time in, and decide quickly about each item.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Prepare first.</b> Set up a staging area and some boxes for keep, donate, relocate and throw away. Have a timer, a notebook and a pen.</span></li>
+          <li><span><b>Work in short sessions.</b> Ten minutes at a time, on a schedule, keeps it from becoming overwhelming. Start where you spend the most time, so you feel the benefit soonest.</span></li>
+          <li><span><b>Use a system.</b> Go top to bottom or left to right, so you never wonder where you were.</span></li>
+          <li><span><b>Decide fast.</b> Indecision is the enemy. If you have not used something in a year and would not buy it again, let it go.</span></li>
+          <li><span><b>Bring people along.</b> Tell your household what you are doing, and try to enjoy it. A clear room is a reward you get every time you walk in.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: the ten-minute sprint</div><div class="hint">Pick an item, then decide where it goes. Hesitating costs time.</div></div>
+        <div class="stage"><svg id="hm16" role="img" aria-label="A cluttered room and four boxes"></svg></div><div class="lab-ctl"><div class="row" id="hmB"></div><div class="row"><button class="btn" id="hmReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Time left</span><span class="v glow" id="hmT"></span></div><div class="stat"><span class="k">Items cleared</span><span class="v" id="hmN"></span></div><div class="stat"><span class="k">Room</span><span class="s" id="hmSay"></span></div></div><p class="callout">Each quick decision takes about 20 seconds; <b>each “not sure” costs a full minute</b> and leaves the item in the room.</p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Set a timer for ten minutes and clear one surface, like a desk, a kitchen counter or a bedside table. Stop when the timer goes off.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your mind keeps track of everything around you. Fewer things means less to track. Clear your space in short, timed bursts and make quick decisions, and the calm spreads from the room to your head.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Simplify your digital life →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Surroundings</span> · Tame the screens</div>
+        <h2>Simplify Your Digital Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>Phones and feeds are built to grab attention, and every ping breaks your focus. Cut the alerts, check messages at set times, and swap some screen time for things that actually refresh you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Notice the habit.</b> Much screen use is automatic: you pick up the phone without deciding to. Noticing that moment is the first step.</span></li>
+          <li><span><b>Cut the noise.</b> Turn off notifications you do not need, unsubscribe from lists you never read, and remove apps that mostly waste your time.</span></li>
+          <li><span><b>Batch it.</b> Check email and messages at a few set times a day instead of all the time.</span></li>
+          <li><span><b>Replace, don't just remove.</b> Fill the time you win back with reading, exercise, family, a hobby, learning a skill, meditating or music.</span></li>
+          <li><span><b>Make some spaces screen-free.</b> Keep the phone out of the bedroom and off the dinner table.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: your interrupted day</div><div class="hint">Switch on each change and watch the interruptions thin out</div></div>
+        <div class="stage"><svg id="dg17" role="img" aria-label="A day from 7am to 11pm with a tick for every interruption"></svg></div><div class="lab-ctl"><div class="toggles" id="dgT"></div></div><div class="stats"><div class="stat"><span class="k">Interruptions a day</span><span class="v glow" id="dgN"></span></div><div class="stat"><span class="k">Longest calm stretch</span><span class="v" id="dgL"></span></div><div class="stat"><span class="k">Feel</span><span class="s" id="dgSay"></span></div></div><p class="callout">An illustrative day. <b>The longest calm stretch matters more than the total.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Go through your phone's notification settings tonight and switch off every alert that is not from a real person who needs you.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your phone is not neutral; it is built to pull you back in. Take control of it: silence what does not matter, check messages on your schedule, and use the time you win back for something that fills you up.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: Simplify your activities →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Surroundings</span> · Leave room in the week</div>
+        <h2>Simplify Your Activities</h2>
+        <div class="short"><span class="lbl">In short</span><p>A packed calendar leaves no room to think. Cut commitments that do not match your priorities, protect some free time, and aim for activities that absorb you completely, a state psychologists call flow.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Purge commitments.</b> Look at everything you have signed up for and drop what does not fit your values or priorities. This includes children's schedules too.</span></li>
+          <li><span><b>Three a day.</b> Pick three important things to get done each day. Anything else is a bonus.</span></li>
+          <li><span><b>Sacred time.</b> Block out regular time that belongs to nobody but you, and protect it like a meeting. Leave work on time, and take regular breaks from screens.</span></li>
+          <li><span><b>Find flow.</b> Flow happens when a task is challenging enough to stretch your skills but not so hard it overwhelms you, with a clear goal and no distractions. It takes at least fifteen minutes to get into, and leaves you refreshed rather than drained.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: purge your week</div><div class="hint">Tap the commitments you would drop</div></div>
+        <div class="stage"><svg id="wk18" role="img" aria-label="A week of commitments, with freed hours shown as open space"></svg></div><div class="lab-ctl"><div class="toggles" id="wkT"></div></div><div class="stats"><div class="stat"><span class="k">Hours committed</span><span class="v" id="wkH"></span></div><div class="stat"><span class="k">Hours freed</span><span class="v glow" id="wkF"></span></div><div class="stat"><span class="k">Feel</span><span class="s" id="wkSay"></span></div></div>
+      </figure>
+      <figure class="lab" id="lab18b">
+        <div class="lab-top"><div class="t">Lab: find your flow channel</div><div class="hint">Set how hard the task is and how skilled you are</div></div>
+        <div class="stage"><svg id="fl18" role="img" aria-label="The flow channel: anxiety above, boredom below, flow in between"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="flC">How challenging the task is <output id="oflC"></output></label><input type="range" id="flC" min="0" max="10" value="7" step="1"></div><div class="ctl"><label for="flK">How skilled you are at it <output id="oflK"></output></label><input type="range" id="flK" min="0" max="10" value="3" step="1"></div></div></div><div class="stats"><div class="stat"><span class="k">You are in</span><span class="v glow" id="flZ"></span></div><div class="stat"><span class="k">What to do</span><span class="s" id="flSay"></span></div></div><p class="callout">Based on Mihaly Csikszentmihalyi's research on flow. <b>As your skill grows, raise the challenge to stay in the channel.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Look at your week ahead and find one commitment you could cancel, delegate or decline. Put a two-hour block of free time in its place.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Busyness feels productive but clutters your head. Keep fewer commitments, give each day three clear priorities, protect some empty time, and spend more of it on things that absorb you completely.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#ch19">Next: Simplify your distractions →</a></div>
+    </section>
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Surroundings</span> · Beat procrastination</div>
+        <h2>Simplify Your Distractions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Unfinished tasks hang around in your head. The book's twelve-step routine for procrastination boils down to: plan ahead, break the task into small pieces, remove distractions, work against a timer, take breaks, and reward yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Plan and know why.</b> Decide the night before what you will work on, and remind yourself why it matters.</span></li>
+          <li><span><b>Shrink the task.</b> Break it into small sub-tasks, so the first step is easy enough to start right away. Prepare everything you need before you begin.</span></li>
+          <li><span><b>Clear the decks.</b> Close tabs, silence the phone, shut the door. Start with a minute of mindful breathing to settle in.</span></li>
+          <li><span><b>Use a timer.</b> Work in focused blocks with short breaks in between, and longer breaks after a few blocks. Reward yourself when you finish.</span></li>
+          <li><span><b>Save the mindless stuff.</b> Schedule easy tasks like email and filing for the times when your energy is low.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: plan a focus session</div><div class="hint">Set the block length, then remove distractions</div></div>
+        <div class="stage"><svg id="fs19" role="img" aria-label="A two-hour session with focus blocks, breaks and interruptions"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="fsB">Focus block length <output id="ofsB"></output></label><input type="range" id="fsB" min="15" max="50" value="25" step="5"></div><div class="ctl"><label for="fsR">Short break <output id="ofsR"></output></label><input type="range" id="fsR" min="3" max="10" value="5" step="1"></div></div><div class="toggles" id="fsT"></div></div><div class="stats"><div class="stat"><span class="k">Real focused minutes</span><span class="v glow" id="fsM"></span></div><div class="stat"><span class="k">Interruptions</span><span class="v" id="fsI"></span></div><div class="stat"><span class="k">Feel</span><span class="s" id="fsSay"></span></div></div><p class="callout">An illustrative model: <b>each interruption costs about five extra minutes of getting back into it.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Pick the task you have been putting off longest. Write down its very first step, the one that would take five minutes or less, and do only that.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Procrastination is often a task that feels too big or too vague. Make it smaller, make the space quieter, put it on a timer, and reward yourself when it is done.</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this chapter</label><a class="next" href="#ch20">Next: Simplify your actions →</a></div>
+    </section>
+    <!-- ===================== 20 ===================== -->
+    <section class="ch" id="ch20" data-n="20">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Surroundings</span> · Full attention on ordinary things</div>
+        <h2>Simplify Your Actions</h2>
+        <div class="short"><span class="lbl">In short</span><p>You do not need a cushion to be mindful. Do ordinary things, like eating, cleaning, walking, being outdoors and exercising, one at a time and with full attention, and each becomes a short break for your mind.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>One thing at a time.</b> Multitasking splits your attention and leaves everything half done. Doing one thing fully is calmer and usually faster.</span></li>
+          <li><span><b>Eat mindfully.</b> No screens. Notice colours, smells, textures and tastes, and put the fork down between bites.</span></li>
+          <li><span><b>Clean and walk mindfully.</b> Feel the warm water on your hands, or each foot touching the ground. Chores and commutes become practice.</span></li>
+          <li><span><b>Notice nature.</b> Time outdoors, really looking and listening, is one of the quickest ways to quieten a busy mind.</span></li>
+          <li><span><b>Move mindfully.</b> In exercise, pay attention to your breath and how your body feels instead of tuning out with a screen.</span></li>
+        </ul>
+      </div>
+      <figure class="lab" id="lab20">
+        <div class="lab-top"><div class="t">Lab: a five-senses check-in</div><div class="hint">Pick an everyday activity, then tap each sense</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="row" id="ssA"></div></div><div class="stage"><svg id="ss20" role="img" aria-label="Five petals, one for each sense, that fill as you notice"></svg></div><div class="detail" id="ssD" aria-live="polite"></div><p class="callout">Five senses, a few seconds each. <b>That is a complete mindfulness practice, and it fits inside the most ordinary moment.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it today</span><p>Eat the first five bites of your next meal in silence, with no phone, noticing everything you can about the food.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Mindfulness is not something extra you have to find time for. It is a way of doing the things you already do. Pick one daily activity and give it your full attention; that is where a calm mind is built.</p></div>
+      <div class="quiz" data-q="20"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="20"> I understand this chapter</label><a class="next" href="#after">Next: Your declutter plan →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Your declutter plan</span>
+      <h2>Start With One Habit</h2>
+      <p>You do not need to do everything in this guide at once. Pick one habit from each area, start with the smallest, and give it a few weeks before you add the next. Your choices are saved in this browser.</p>
+      <div class="lab" style="margin:0">
+        <div class="lab-top"><div class="t">Your plan</div><div class="hint">Pick one habit for each area</div></div>
+        <div class="fields" id="planF"></div>
+        <div class="out"><span class="k">This month I will</span><div class="plan-out" id="planOut"></div><div class="row"><button class="btn" id="planCopy">Copy my plan</button><button class="btn" id="planClear">Clear</button></div></div>
+      </div>
+      <p class="big">Notice the clutter. Clear one corner. Then breathe, and clear the next.</p>
+      <div class="recap">
+        <div><span class="n">1 · Thoughts</span><b>Breathe, sit, interrupt</b><span>Catch thoughts early and see them as thoughts.</span></div>
+        <div><span class="n">2 · Obligations</span><b>Values first</b><span>Know what matters, then set a few three-month goals.</span></div>
+        <div><span class="n">3 · Relationships</span><b>Be there fully</b><span>Listen, let go of old stories, and of people who only drain you.</span></div>
+        <div><span class="n">4 · Surroundings</span><b>Less to track</b><span>Fewer things, alerts and commitments; one task at a time.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Declutter Your Mind: How to Stop Worrying, Relieve Anxiety, and Eliminate Negative Thinking</i> by S.J. Scott and Barrie Davenport (2016). The explanations and labs are written in our own words; chapter and habit names follow the book. Labs that show numbers are illustrative models, not data from the book. This guide is not medical advice: if anxiety or low mood is affecting your daily life, please talk to a doctor or therapist.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Why Your Mind Gets Cluttered", "Declutter Your Thoughts", "Declutter Your Life Obligations", "Declutter Your Relationships", "Declutter Your Surroundings"];
+const CH = [["Your Thoughts Are Habits", "Thoughts are habits", 0, "Introduction"], ["The Four Causes of Mental Clutter", "Four causes of clutter", 0, "Four causes"], ["Focused Deep Breathing", "Deep breathing", 1, "Habit 1"], ["Meditation", "Meditation", 1, "Habit 2"], ["Reframe Your Negative Thoughts", "Reframe negative thoughts", 1, "Habit 3"], ["Teach Your Old Mind New Tricks", "New mind tricks", 1, "Habit 4"], ["Identify Your Core Values", "Core values", 2, "Strategy 1"], ["Clarify Your Life Priorities", "Life priorities", 2, "Strategy 2"], ["Mindful Goal Setting and Quarterly SMART Goals", "Quarterly SMART goals", 2, "Strategy 3"], ["Connect Your Goals to Your Passions", "Goals and passion", 2, "Strategy 4"], ["How Relationships Clutter Your Mind", "Why relationships matter", 3, "Relationships"], ["Be More Present", "Be more present", 3, "Strategy 1"], ["Get Unstuck from the Past", "Unstuck from the past", 3, "Strategy 2"], ["Mindfulness with Your Partner", "Mindful partnership", 3, "Strategy 3"], ["Let Go of Certain People", "Let go of people", 3, "Strategy 4"], ["Simplify Your Home", "Simplify your home", 4, "Surroundings"], ["Simplify Your Digital Life", "Digital life", 4, "Surroundings"], ["Simplify Your Activities", "Activities and flow", 4, "Surroundings"], ["Simplify Your Distractions", "Beat distractions", 4, "Surroundings"], ["Simplify Your Actions", "Mindful actions", 4, "Surroundings"]];
+const QUIZ = {
+"1": {
+"q": "What does the book say about your thoughts?",
+"o": [
+"They are facts about you that cannot change",
+"They are largely habits, which means they can be changed",
+"Only negative people have cluttered thoughts"
+],
+"a": 1,
+"w": "Thinking patterns are worn in by repetition. That makes them feel fixed, but like any habit they can be retrained."
+},
+"2": {
+"q": "Which of the four causes does the book call the biggest?",
+"o": [
+"Daily stress",
+"Too many possessions",
+"The negativity bias"
+],
+"a": 0,
+"w": "Stress is the leading cause, and the other three, choices, stuff and the negativity bias, all feed into it."
+},
+"3": {
+"q": "What makes deep breathing calming?",
+"o": [
+"Breathing faster to get more oxygen",
+"Slow belly breaths with a longer exhale switch on the relaxation response",
+"Holding your breath for as long as possible"
+],
+"a": 1,
+"w": "Slow, deep breaths tell your body you are safe. Lengthening the out-breath helps the most."
+},
+"4": {
+"q": "During meditation your mind wanders twenty times. What does that mean?",
+"o": [
+"You are bad at meditating",
+"You got twenty repetitions of noticing and coming back",
+"You should stop and try another day"
+],
+"a": 1,
+"w": "Wandering is normal. Each time you notice and return, you are training the skill."
+},
+"5": {
+"q": "Which is the “name that thought” strategy?",
+"o": [
+"Snapping a rubber band on your wrist",
+"Labelling it, for example “that's a worry”, to see it as a thought, not a fact",
+"Keeping yourself busy so it cannot start"
+],
+"a": 1,
+"w": "Naming creates distance: a thought becomes something you are having, not the truth about the world."
+},
+"6": {
+"q": "What is a worry timer for?",
+"o": [
+"Worrying more efficiently all day",
+"Parking worries for a short set slot, so they don't run all day",
+"Timing how long a worry lasts"
+],
+"a": 1,
+"w": "You give worry ten to fifteen minutes a day and postpone it the rest of the time. Many worries fade before their slot arrives."
+},
+"7": {
+"q": "After choosing your core values, what does the book suggest next?",
+"o": [
+"Keep them secret",
+"Check how well your life matches each, and plan small actions for the gaps",
+"Pick twenty more"
+],
+"a": 1,
+"w": "The value of a value is in the gap you find between it and how you actually live, and the small steps you take to close it."
+},
+"8": {
+"q": "Which life area should you work on first?",
+"o": [
+"The one where a change would improve the most other areas",
+"Always your career",
+"Whichever is easiest"
+],
+"a": 0,
+"w": "Start with the biggest lever: the area that would lift the rest if it improved."
+},
+"9": {
+"q": "Why three-month goals?",
+"o": [
+"Because annual goals are illegal",
+"Long enough for real progress, short enough to stay focused and adjust",
+"Three months is how long habits take to form exactly"
+],
+"a": 1,
+"w": "A quarter keeps goals concrete and gives you a natural point to review and reset."
+},
+"10": {
+"q": "A goal matters to you but bores you. What does the chapter suggest?",
+"o": [
+"Drop it immediately",
+"Link it to something you are passionate about so it pulls you forward",
+"Rely on willpower alone"
+],
+"a": 1,
+"w": "Goals tied to what you love are much easier to stick with than goals you feel you ought to do."
+},
+"11": {
+"q": "Where does the book say to start when a relationship is causing you stress?",
+"o": [
+"With your own behaviour",
+"By waiting for the other person to apologise",
+"By ending it straight away"
+],
+"a": 0,
+"w": "You cannot make someone else change, but changing how you listen and react often shifts the whole relationship."
+},
+"12": {
+"q": "Your friend tells you about a bad day. What is empathic listening?",
+"o": [
+"Telling them how to fix it",
+"Sharing a similar story of your own",
+"Reflecting back what they feel and asking more"
+],
+"a": 2,
+"w": "Empathic listening aims to understand first. Advice and your own stories can wait."
+},
+"13": {
+"q": "“He didn't reply to my message, so he must be angry with me.” Which part is the story?",
+"o": [
+"He didn't reply",
+"He must be angry with me",
+"Both are facts"
+],
+"a": 1,
+"w": "Not replying is what happened. Anger is the meaning you added, and it may not be true."
+},
+"14": {
+"q": "In an argument, what does “listen without defensiveness” mean?",
+"o": [
+"Hear their whole point and reflect it back before you respond",
+"Stay silent until they give up",
+"Agree with everything"
+],
+"a": 0,
+"w": "You can still disagree, but first show that you have understood their side."
+},
+"15": {
+"q": "Which is one of the book's steps for letting go of someone?",
+"o": [
+"Disappear without explanation",
+"Plan for a negative reaction",
+"Get mutual friends to tell them"
+],
+"a": 1,
+"w": "People often push back when a relationship ends. Deciding in advance how you will respond makes it easier to stay calm."
+},
+"16": {
+"q": "What does the book suggest for decluttering your home?",
+"o": [
+"One huge weekend clear-out",
+"Short timed sessions, starting where you spend the most time, deciding quickly",
+"Buying more storage boxes"
+],
+"a": 1,
+"w": "Ten-minute sessions on a schedule keep it manageable, and quick decisions stop you stalling."
+},
+"17": {
+"q": "What is “batching” your messages?",
+"o": [
+"Replying to everything instantly",
+"Checking messages at a few set times instead of all day",
+"Deleting all your messages"
+],
+"a": 1,
+"w": "Set times mean fewer interruptions and longer stretches of focus in between."
+},
+"18": {
+"q": "When does flow tend to happen?",
+"o": [
+"When a task is far too easy",
+"When the challenge roughly matches your skill, with a clear goal and no distractions",
+"Only when you are multitasking"
+],
+"a": 1,
+"w": "Too easy and you are bored; too hard and you are anxious. Flow sits in between."
+},
+"19": {
+"q": "What is the first move against a task you keep putting off?",
+"o": [
+"Wait until you feel motivated",
+"Break it into sub-tasks so the first step is small and easy",
+"Do it while checking messages"
+],
+"a": 1,
+"w": "A small, clear first step is much easier to start than a big, vague task."
+},
+"20": {
+"q": "What does mindful eating involve?",
+"o": [
+"Eating as fast as possible",
+"Eating in front of a show to relax",
+"No screens, noticing the food with all your senses"
+],
+"a": 2,
+"w": "Mindful eating means giving the meal your full attention, which also helps you enjoy it and notice when you are full."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0e1513';
+try { const t = localStorage.getItem('dym-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('dym-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('dym-done', []));
+const save = () => store.set('dym-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns = null){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ if (tally) tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok, btn.dataset.b, score);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const rangeH = (id, label, mn, mx, val, step = 1) => `<div class="ctl"><label for="${id}">${label} <output id="o${id}"></output></label><input type="range" id="${id}" min="${mn}" max="${mx}" value="${val}" step="${step}"></div>`;
+/* smooth path through points (Catmull-Rom to cubic Bezier) */
+const smooth = pts => { if (pts.length < 2) return ''; let d = `M${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  for (let i = 0; i < pts.length - 1; i++){ const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+    d += `C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`; }
+  return d; };
+const lines = (t, n) => { const w = t.split(' '), L = []; let cur = ''; w.forEach(x => { if ((cur + ' ' + x).trim().length > n && cur){ L.push(cur); cur = x; } else cur = (cur + ' ' + x).trim(); }); if (cur) L.push(cur); return L; };
+const svgBtn = (el, sel, fn) => el.querySelectorAll(sel).forEach(g => { g.addEventListener('click', () => fn(g)); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fn(g); } }); });
+const fmtT = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+const hh = h => { const H = Math.floor(h), M = Math.round((h - H) * 60); const ap = H >= 12 ? 'pm' : 'am', h12 = ((H + 11) % 12) + 1; return M ? `${h12}:${String(M).padStart(2, '0')}${ap}` : `${h12}${ap}`; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+  ["I can't stop worrying", 6, 'Teach Your Old Mind New Tricks', 'Give worry its own ten to fifteen minutes a day, and park it the rest of the time. Act on what you can change; accept what you cannot.'],
+  ['I feel tense all the time', 3, 'Focused Deep Breathing', 'Five minutes of slow belly breathing, with a long out-breath, switches on your body\'s calming system.'],
+  ['My thoughts spiral', 5, 'Reframe Your Negative Thoughts', 'Catch the first thought, name it as a thought, and use one of six quick interrupts before it snowballs.'],
+  ["I can't focus", 19, 'Simplify Your Distractions', 'Shrink the task, clear the decks, and work against a timer. Every interruption costs more than it seems.'],
+  ['Too many decisions', 7, 'Identify Your Core Values', 'When you know your top five values, many choices make themselves.'],
+  ['Someone is draining me', 15, 'Let Go of Certain People', 'Weigh what each relationship gives and takes. Try a boundary first; if that fails, let go with care.'],
+  ['I keep replaying the past', 13, 'Get Unstuck from the Past', 'Separate what happened from the story you told about it. Then resolve, rewrite, or forgive.'],
+  ['My home is a mess', 16, 'Simplify Your Home', 'Ten-minute sessions, starting where you spend the most time, and quick decisions.'],
+  ['My phone owns me', 17, 'Simplify Your Digital Life', 'Cut the alerts, batch your messages, and keep the phone out of the bedroom.'],
+  ['No time for myself', 18, 'Simplify Your Activities', 'Purge one commitment and protect the time it frees as sacred time.'],
+  ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="false">${f[0]}</button>`).join('');
+  const show = i => { const f = FIND[i]; press($$('#find .btn'), $$('#find .btn')[i]);
+    ans.innerHTML = `<span class="k">Start with chapter ${f[1]}</span><span class="p">${f[2]}</span><span class="d">${f[3]}</span><a href="#ch${f[1]}">Go to chapter ${f[1]} →</a>`; };
+  $$('#find .btn').forEach(b => b.addEventListener('click', () => show(+b.dataset.f)));
+  ans.innerHTML = '<span class="k">Pick one</span><span class="d">Choose what feels loudest and this will point you to the chapter that tackles it first.</span>';
+}
+
+/* ---------- hero: the tangle ---------- */
+{ const el = $('#heroT'), sl = $('#heroS');
+  const T = ['Reply to that email', 'Dentist on Friday?', 'What she said', 'Am I falling behind?', 'Groceries', 'The news', 'Did I lock the door?', 'Weekend plans'];
+  const cols = ['glow', 'cool', 'warm', 'cool', 'glow', 'bad', 'warm', 'glow'];
+  const r = rng(11);
+  const knots = T.map(() => Array.from({length: 7}, () => { const a = r() * Math.PI * 2, d = Math.sqrt(r()) * 108; return [210 + Math.cos(a) * d * 1.35, 150 + Math.sin(a) * d * .95]; }));
+  const draw = t => { const e = t * t * (3 - 2 * t); let s = '';
+    T.forEach((lab, i) => { const y = 34 + i * 32;
+      const pts = knots[i].map((p, k) => [lerp(p[0], 175 + k * 37, e), lerp(p[1], y + Math.sin(k * 1.3 + i) * 3 * (1 - e), e)]);
+      s += `<path d="${smooth(pts)}" ${S(cols[i], 2.2, ';stroke-linecap:round;stroke-opacity:' + (0.55 + 0.45 * e))}/>`;
+      s += `<g style="opacity:${e.toFixed(2)}">${TX(160, y + 4, lab, 'muted', 13, 'end')}<circle cx="${175 + 6 * 37}" cy="${y}" r="3.5" ${F(cols[i])}/></g>`; });
+    if (e < .4) s += `<g style="opacity:${(1 - e / .4).toFixed(2)}">${TX(210, 290, 'all at once, all the time', 'faint', 13, 'middle')}</g>`;
+    el.innerHTML = s; };
+  sl.addEventListener('input', () => draw(sl.value / 100)); draw(0);
+  if (!RM){ let t0 = null; const intro = ts => { if (!t0) t0 = ts; const k = clamp((ts - t0 - 600) / 1800, 0, 1); if (+sl.value === 0 || sl.dataset.auto){ sl.dataset.auto = 1; sl.value = k * 35; draw(k * .35); } if (k < 1 && sl.dataset.auto) requestAnimationFrame(intro); };
+    sl.addEventListener('pointerdown', () => delete sl.dataset.auto, {once: true}); requestAnimationFrame(intro); }
+}
+
+/* ---------- 1: where is your mind ---------- */
+{ const el = $('#tm1'); const dots = [];
+  const items = [
+    {t:'I should have said something different in that meeting.', a:'past', w:'Replaying a moment that is already over.'},
+    {t:'What if the test results come back bad?', a:'future', w:'Rehearsing something that has not happened, and may never.'},
+    {t:'The tea is warm in my hands.', a:'now', w:'A plain observation of this moment.'},
+    {t:'Why did I ever take this job?', a:'past', w:'Going back over an old decision.'},
+    {t:'I will never get all this done by Friday.', a:'future', w:'A prediction about later in the week.'},
+    {t:'My shoulders feel tight.', a:'now', w:'Noticing your body right now.'},
+    {t:'She probably thinks I was rude yesterday.', a:'past', w:'Guessing at what someone made of a past moment.'},
+    {t:'What am I going to say at the interview?', a:'future', w:'Planning, with a worried edge, for something ahead.'},
+  ];
+  const bins = [{id:'past', label:'The past', d:'Replaying'}, {id:'now', label:'Right now', d:'This moment'}, {id:'future', label:'The future', d:'Rehearsing'}];
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 190 : 170; vb(el, W, H);
+    const z = N ? {past:[16, 150], now:[150, 210], future:[210, 344]} : {past:[30, 300], now:[300, 420], future:[420, 690]};
+    const y = H - 40; let s = `<line x1="${z.past[0]}" y1="${y}" x2="${z.future[1]}" y2="${y}" ${S('line', 2)}/>${arrowHead(z.future[1] + 4, y, 0, 'line', 9)}`;
+    s += `<rect x="${z.now[0]}" y="52" width="${z.now[1] - z.now[0]}" height="${y - 52 + 6}" rx="10" ${F('glow', .1)}/>`;
+    const cnt = {past:0, now:0, future:0}; dots.forEach(d => cnt[d]++);
+    for (const k of ['past', 'now', 'future']){ const [a, b] = z[k], cx = (a + b) / 2;
+      s += TX(cx, y + 24, `${bins.find(x => x.id === k).label} · ${cnt[k]}`, k === 'now' ? 'glow' : 'muted', 13, 'middle');
+      const per = Math.max(1, Math.floor((b - a - 16) / 22));
+      dots.map((d, i) => [d, i]).filter(([d]) => d === k).forEach(([, i], j) => { const col = j % per, row = Math.floor(j / per);
+        const x = a + 8 + 11 + col * 22 + ((b - a - 16) - per * 22) / 2, yy = y - 18 - row * 22;
+        s += `<circle cx="${x}" cy="${yy}" r="8" ${F(k === 'now' ? 'glow' : k === 'past' ? 'cool' : 'warm', .9)}/>${TX(x, yy + 4, i + 1, 'deep', 10, 'middle')}`; }); }
+    if (!dots.length) s += TX(W / 2, 46, 'Your sorted thoughts will land here', 'faint', 13, 'middle');
+    else { const away = dots.filter(d => d !== 'now').length; s += TX(W / 2, 34, `${away} of ${dots.length} thoughts were somewhere other than now`, 'text', 14, 'middle'); }
+    el.innerHTML = s; });
+  sorter('#tms1', null, bins, items, true, (it) => { if (!it){ dots.length = 0; } else dots.push(it.a); draw(); });
+  draw();
+}
+
+/* ---------- 2: clutter jar ---------- */
+{ const el = $('#cj2'), ids = ['cjS', 'cjC', 'cjT', 'cjN'];
+  const NAMES = {cjS:'Daily stress', cjC:'Choices', cjT:'Stuff and information', cjN:'Negativity bias'};
+  const START = {cjS:'Start with breathing and meditation (chapters 3 and 4).', cjC:'Start with your core values (chapter 7): they make choices for you.', cjT:'Start with your home and phone (chapters 16 and 17).', cjN:'Start with reframing (chapters 5 and 6).'};
+  const head = 'M150 286 C152 252 120 232 112 196 C96 128 128 52 214 42 C292 34 344 86 346 140 C347 160 352 170 364 188 C370 197 364 203 354 205 C356 214 354 222 346 226 C352 236 346 246 334 248 C318 250 306 250 302 262 L298 286 Z';
+  const r = rng(7); const spots = Array.from({length: 160}, () => { let x, y; do { x = 130 + r() * 200; y = 60 + r() * 180; } while (((x - 228) / 102) ** 2 + ((y - 145) / 92) ** 2 > 1); return [x, y, r() * 6.28]; });
+  const shape = (k, x, y, a) => {
+    if (k === 'cjS') return `<path d="M${x - 9} ${y}l4.5 -6 4.5 6 4.5 -6 4.5 6" transform="rotate(${(a * 57).toFixed(0)} ${x} ${y})" ${S('warm', 1.8, ';stroke-linejoin:round')}/>`;
+    if (k === 'cjC') return `<g transform="rotate(${(a * 57).toFixed(0)} ${x} ${y})" ${S('cool', 1.6)}><path d="M${x - 8} ${y}h7l6 -5M${x - 1} ${y}l6 5"/></g>`;
+    if (k === 'cjT') return `<rect x="${x - 5}" y="${y - 5}" width="10" height="10" rx="2" transform="rotate(${(a * 57).toFixed(0)} ${x} ${y})" ${FS('panel-2', 'muted', 1.2)}/>`;
+    return `<circle cx="${x}" cy="${y}" r="9" ${FS('bad', 'bad', 1.5, .25)}/><path d="M${x - 4} ${y - 1}l3 3M${x + 4} ${y - 1}l-3 3" ${S('bad', 1.4)}/>`; };
+  const draw = onLayout(() => { const N = NARROW(), ox = N ? 0 : 150; vb(el, N ? 420 : 720, 300); const v = Object.fromEntries(ids.map(k => [k, +$('#' + k).value])); ids.forEach(k => out(k, v[k]));
+    const counts = {cjS: v.cjS * 4, cjC: v.cjC * 3, cjT: v.cjT * 4, cjN: v.cjN * 2};
+    let s = `<g transform="translate(${ox} 0)"><path d="${head}" ${FS('panel-2', 'line', 1.5)}/>`, j = 0;
+    const order = []; ids.forEach(k => { for (let i = 0; i < counts[k]; i++) order.push(k); });
+    const rr = rng(3); for (let i = order.length - 1; i > 0; i--){ const q = Math.floor(rr() * (i + 1)); [order[i], order[q]] = [order[q], order[i]]; }
+    order.forEach(k => { const p = spots[j++ % spots.length]; s += shape(k, p[0], p[1], p[2]); });
+    const weight = {cjS: v.cjS * 1.5, cjC: v.cjC, cjT: v.cjT, cjN: v.cjN * 2};
+    const tot = weight.cjS + weight.cjC + weight.cjT + weight.cjN, lvl = Math.round(tot / 55 * 100);
+    if (tot < 6) s += TX(228, 150, 'Quiet', 'glow', 22, 'middle', 'font-family="Instrument Serif"'); s += '</g>';
+    const leg = [['cjS', 'Stress'], ['cjC', 'Choices'], ['cjT', 'Stuff'], ['cjN', 'Negative']];
+    leg.forEach(([k, l], i) => { const x = N ? 14 : 60, y = (N ? 26 : 110) + i * (N ? 30 : 26); s += `<g transform="translate(${x + 10} ${y - 4})">${shape(k, 0, 0, 0)}</g>${TX(x + 26, y + 1, l, 'muted', N ? 15 : 13)}`; });
+    el.innerHTML = s;
+    const big = ids.reduce((a, b) => weight[b] > weight[a] ? b : a);
+    $('#cjL').textContent = lvl + '%'; $('#cjB').textContent = tot ? NAMES[big] : 'None';
+    $('#cjW').textContent = tot ? START[big] : 'A clear head. Keep the habits that got you here.'; });
+  ids.forEach(k => $('#' + k).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 3: breathing pacer ---------- */
+{ const el = $('#br3'); const PAT = [
+    ['Belly 4 · 6', [['in', 4], ['out', 6]]], ['Box 4 · 4 · 4 · 4', [['in', 4], ['hold', 4], ['out', 4], ['hold', 4]]], ['Calm 4 · 7 · 8', [['in', 4], ['hold', 7], ['out', 8]]]];
+  let pat = 0, run = false, t = 0, last = null, breaths = 0, trace = [], raf = null;
+  $('#brP').innerHTML = PAT.map((p, i) => `<button class="btn" data-p="${i}" aria-pressed="${i === 0}">${p[0]}</button>`).join('');
+  const cyc = () => PAT[pat][1].reduce((s, p) => s + p[1], 0);
+  const state = tt => { const ph = PAT[pat][1]; let x = tt % cyc(), lv = 0; let prevLv = 0;
+    for (const [k, d] of ph){ if (x < d){ const f = x / d; lv = k === 'in' ? f : k === 'out' ? 1 - f : prevLv; return {k, left: Math.ceil(d - x), lv: k === 'in' ? lv : k === 'out' ? lv : prevLv}; }
+      x -= d; prevLv = k === 'in' ? 1 : k === 'out' ? 0 : prevLv; } return {k: 'in', left: 0, lv: 0}; };
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 360 : 260; vb(el, W, H);
+    const st = state(t), ease = st.lv * st.lv * (3 - 2 * st.lv), cx = N ? 180 : 160, cy = N ? 130 : 130, R = lerp(38, 104, ease);
+    let s = `<circle cx="${cx}" cy="${cy}" r="108" ${S('line', 1, ';stroke-dasharray:3 5')}/><circle cx="${cx}" cy="${cy}" r="38" ${S('line', 1)}/>`;
+    s += `<circle cx="${cx}" cy="${cy}" r="${R.toFixed(1)}" ${FS('glow', 'glow', 2, .18)}/>`;
+    const word = !run && t === 0 ? 'Ready' : st.k === 'in' ? 'Breathe in' : st.k === 'out' ? 'Breathe out' : 'Hold';
+    s += TX(cx, cy - 2, word, 'text', 24, 'middle', 'font-family="Instrument Serif"') + (run || t ? TX(cx, cy + 24, st.left, 'glow', 16, 'middle', 'font-family="Geist Mono"') : '');
+    const x0 = N ? 24 : 320, x1 = N ? 336 : 696, y0 = N ? 262 : 60, y1 = N ? 336 : 200;
+    s += `<rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="10" ${FS('deep', 'line', 1)}/>`;
+    s += TX(x0 + 10, y0 + 18, 'Your breath over the last 40 seconds', 'faint', 12);
+    if (trace.length > 1){ const tn = trace[trace.length - 1][0]; const pts = trace.filter(p => p[0] > tn - 40).map(p => [x1 - (tn - p[0]) / 40 * (x1 - x0 - 10) - 5, y1 - 8 - p[1] * (y1 - y0 - 34)]);
+      s += `<polyline points="${pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ')}" ${S('glow', 2)}/>`; }
+    el.innerHTML = s; });
+  const update = () => { $('#brN').textContent = breaths; $('#brT').textContent = fmtT(t); $('#brM').textContent = (60 / cyc()).toFixed(1); };
+  const loop = ts => { if (!run) return; if (last != null){ const dt = Math.min(.1, (ts - last) / 1000); const before = Math.floor(t / cyc()); t += dt; if (Math.floor(t / cyc()) > before) breaths++; const st = state(t); trace.push([t, st.lv * st.lv * (3 - 2 * st.lv)]); if (trace.length > 2000) trace.splice(0, 500); }
+    last = ts; draw(); update(); raf = requestAnimationFrame(loop); };
+  $('#brGo').addEventListener('click', () => { run = !run; $('#brGo').textContent = run ? 'Pause' : 'Resume'; last = null; if (run) raf = requestAnimationFrame(loop); });
+  $('#brReset').addEventListener('click', () => { run = false; t = 0; breaths = 0; trace = []; $('#brGo').textContent = 'Start'; draw(); update(); });
+  $$('#brP .btn').forEach(b => b.addEventListener('click', () => { pat = +b.dataset.p; press($$('#brP .btn'), b); t = 0; breaths = 0; trace = []; draw(); update(); }));
+  draw(); update();
+}
+
+/* ---------- 4: the wandering mind ---------- */
+{ const el = $('#md4'), TH = ['Did I reply to that email?', 'What should I cook tonight?', 'My knee itches.', 'That song again…', 'Am I doing this right?', 'I need to call Mum.', 'What did he mean by that?', 'Is it nearly over?', 'I forgot to buy milk.', 'Is this even working?'];
+  let run = false, t = 0, last = null, on = 0, rets = 0, bubbles = [], next = 3, k = 0, dot = [0, 0];
+  const geo = () => NARROW() ? {W: 360, H: 370, cx: 180, cy: 190, r: 70} : {W: 720, H: 260, cx: 360, cy: 135, r: 78};
+  const spots = N => N ? [[92, 46], [268, 52], [88, 300], [272, 296]] : [[140, 60], [590, 70], [130, 215], [600, 210]];
+  const draw = onLayout(() => { const g = geo(), N = NARROW(); vb(el, g.W, g.H);
+    const ph = (t % 10), inn = ph < 4, a = -Math.PI / 2 + (t % 10) / 10 * Math.PI * 2;
+    const orbit = [g.cx + Math.cos(a) * g.r, g.cy + Math.sin(a) * g.r];
+    let pull = 0, target = orbit; bubbles.forEach(b => { const p = clamp((t - b.t0 - .6) / 2.4, 0, .62); if (p > pull){ pull = p; target = b.p; } });
+    dot = [lerp(orbit[0], target[0], pull), lerp(orbit[1], target[1], pull)];
+    let s = `<circle cx="${g.cx}" cy="${g.cy}" r="${g.r}" ${S('glow', 1.5, ';stroke-opacity:.5')}/>`;
+    s += TX(g.cx, g.cy + 6, run || t ? (inn ? 'in' : 'out') : 'sit', 'glow', 26, 'middle', 'font-family="Instrument Serif"');
+    bubbles.forEach(b => { const L = lines(b.txt, 16), w = Math.max(...L.map(l => l.length)) * 7.2 + 24, h = L.length * 17 + 16;
+      s += `<line x1="${b.p[0]}" y1="${b.p[1]}" x2="${dot[0].toFixed(1)}" y2="${dot[1].toFixed(1)}" ${S('cool', 1, ';stroke-dasharray:3 4')}/>`;
+      s += `<rect x="${(b.p[0] - w / 2).toFixed(1)}" y="${(b.p[1] - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h}" rx="${h / 2 > 18 ? 16 : h / 2}" ${FS('panel-2', 'cool', 1.3)}/>` + wrap(b.p[0], b.p[1] + 4, b.txt, 16, 17, 'text', 13); });
+    s += `<circle cx="${dot[0].toFixed(1)}" cy="${dot[1].toFixed(1)}" r="9" ${F(pull > .3 ? 'cool' : 'glow')}/>`;
+    if (pull > .3) s += TX(g.cx, g.H - 14, 'Your attention has drifted. Notice, and come back.', 'cool', 13, 'middle');
+    if (!run && t >= 60) s += TX(g.cx, g.H - 14, 'Time. Ring the bell.', 'glow', 13, 'middle');
+    el.innerHTML = s; });
+  const say = () => { const pct = t ? Math.round(on / t * 100) : 0; $('#mdR').textContent = rets; $('#mdOn').textContent = t ? pct + '%' : '–';
+    $('#mdSay').textContent = !t ? 'Press start and watch the dot.' : run ? 'Keep going.' : rets >= 4 ? `${rets} returns in a minute. Every one of those is the actual workout.` : 'Try again and tap sooner when a thought pulls the dot away.'; };
+  const loop = ts => { if (!run) return; if (last != null){ const dt = Math.min(.1, (ts - last) / 1000); t += dt;
+      const wander = bubbles.some(b => t - b.t0 > 1.2); if (!wander) on += dt;
+      if (t > next && bubbles.length < 2){ const sp = spots(NARROW()), used = bubbles.map(b => b.i); let i = Math.floor(Math.random() * sp.length); while (used.includes(i)) i = (i + 1) % sp.length;
+        bubbles.push({txt: TH[k++ % TH.length], p: sp[i], i, t0: t}); next = t + 4 + Math.random() * 4; $('#mdBack').disabled = false; }
+      if (t >= 60){ t = 60; run = false; $('#mdGo').textContent = 'Sit again'; $('#mdBack').disabled = true; } }
+    last = ts; draw(); say(); if (run) requestAnimationFrame(loop); };
+  $('#mdGo').addEventListener('click', () => { if (run) return; run = true; t = 0; on = 0; rets = 0; bubbles = []; next = 3; last = null; $('#mdGo').textContent = 'Sitting…'; requestAnimationFrame(loop); });
+  $('#mdBack').addEventListener('click', () => { if (!bubbles.length) return; rets++; bubbles = []; $('#mdBack').disabled = true; next = t + 3 + Math.random() * 3; draw(); say(); });
+  draw(); say();
+}
+
+/* ---------- 5: interrupt the spiral ---------- */
+{ const el = $('#sp5'), CH5 = ["My boss hasn't replied to my email.", 'Maybe she hated my work.', 'I always mess things up.', 'I could lose this job.', "Then I can't pay the rent.", "Everyone will see I'm a failure.", 'Nothing ever works out for me.'];
+  const M = [
+    ['watch', 'Be a watcher', 'Step back and observe', 'You zoomed out. The thoughts are still there, but now you are watching them instead of living inside them.'],
+    ['name', 'Name that thought', 'Label it, not believe it', 'Each one now carries a label. “I always mess things up” is a thought you are having, not a fact.'],
+    ['stop', 'Just say no', 'A firm “stop”', 'The sharp interruption broke the momentum. The spiral has nothing new to feed on.'],
+    ['band', 'Rubber band', 'Switch wrists', 'Snap. The chain between the thoughts is broken, and you have one more tally of how often this loop runs.'],
+    ['trig', 'Know your trigger', 'Find what set it off', 'The whole spiral grew from one ordinary event: an unanswered email. Next time you can spot it coming.'],
+    ['dist', 'Distract yourself', 'Give the mind a job', 'A walk round the block takes up the room the spiral needed. The thoughts drift off.']];
+  let n = 1, mode = null, tried = new Set(), timer = null, at = 0;
+  $('#spM').innerHTML = M.map(m => `<button class="card3" data-m="${m[0]}" aria-pressed="false"><b>${m[1]}</b><span>${m[2]}</span></button>`).join('');
+  const pos = N => N ? CH5.map((_, i) => [i % 2 ? 236 : 124, 46 + i * 60]) : [[360, 150], [540, 92], [560, 222], [360, 262], [160, 222], [168, 82], [360, 42]];
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 450 : 300; vb(el, W, H); const P = pos(N);
+    let s = ''; const grp = mode === 'watch' ? `transform="translate(${W / 2} ${H / 2}) scale(.62) translate(${-W / 2} ${-H / 2 + 10})"` : '';
+    if (n > 1) s += `<path d="${smooth(P.slice(0, n))}" ${S(mode === 'band' ? 'faint' : 'bad', 1.6, mode === 'band' ? ';stroke-dasharray:4 8' : ';stroke-opacity:.5')}/>`;
+    for (let i = 0; i < n; i++){ const [x, y] = P[i], fs = 12 + (N ? i * .2 : i * .5), L = lines(CH5[i], N ? 20 : 22), w = Math.max(...L.map(l => l.length)) * fs * .52 + 22, h = L.length * fs * 1.25 + 14;
+      const heat = i / 6, col = heat > .5 ? 'bad' : 'warm';
+      let op = 1; if (mode === 'stop') op = .18; else if (mode === 'name') op = .62; else if ((mode === 'trig' || mode === 'band') && i > 0) op = .3; else if (mode === 'dist') op = .12;
+      const dx = mode === 'dist' ? (x < W / 2 ? -30 : 30) : 0;
+      s += `<g style="opacity:${op};transition:opacity .4s" transform="translate(${dx} 0)"><rect x="${(x - w / 2).toFixed(1)}" y="${(y - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="12" ${FS('panel-2', col, 1 + heat * 2)}/>` + wrap(x, y + fs * .35, CH5[i], N ? 20 : 22, fs * 1.25, 'text', fs.toFixed(1)) + '</g>';
+      if (mode === 'name') s += `<rect x="${(x + w / 2 - 74).toFixed(1)}" y="${(y - h / 2 - 16).toFixed(1)}" width="78" height="18" rx="9" ${F('cool')}/>` + TX(x + w / 2 - 35, y - h / 2 - 3, 'just a thought', 'deep', 10.5, 'middle');
+      if (mode === 'trig' && i === 0) s += `<rect x="${(x - w / 2 - 6).toFixed(1)}" y="${(y - h / 2 - 6).toFixed(1)}" width="${(w + 12).toFixed(1)}" height="${(h + 12).toFixed(1)}" rx="16" ${S('glow', 2.5)}/>` + TX(x, y + h / 2 + 22, 'The trigger: waiting on a reply', 'glow', 13, 'middle'); }
+    s = `<g ${grp}>${s}</g>`;
+    if (mode === 'watch') s += `<rect x="${W * .19}" y="${H * .17}" width="${W * .62}" height="${H * .7}" rx="14" ${S('glow', 1.5, ';stroke-dasharray:6 6')}/><g transform="translate(${W / 2} ${H * .1})"><path d="M-16 0Q0 -12 16 0Q0 12 -16 0Z" ${FS('panel', 'glow', 1.6)}/><circle r="4" ${F('glow')}/></g>` + TX(W / 2, H * .1 + 28, '', 'glow', 12, 'middle') + TX(W / 2, H - 8, 'You, watching', 'glow', 13, 'middle');
+    if (mode === 'stop'){ const cx = W / 2, cy = H / 2, r = 54; const oct = Array.from({length: 8}, (_, i) => { const a = Math.PI / 8 + i * Math.PI / 4; return `${(cx + Math.cos(a) * r).toFixed(1)},${(cy + Math.sin(a) * r).toFixed(1)}`; }).join(' ');
+      s += `<polygon points="${oct}" ${FS('bad', 'bad', 2, .9)}/>` + TX(cx, cy + 9, 'STOP', 'deep', 26, 'middle', 'font-weight="700"'); }
+    if (mode === 'band'){ const cx = W / 2, cy = N ? 40 : H - 26; s += `<ellipse cx="${cx}" cy="${cy}" rx="34" ry="11" ${S('glow', 4)}/>` + TX(cx + (N ? 0 : 60), cy + (N ? 30 : 5), 'snap', 'glow', 14, N ? 'middle' : 'start', 'font-style="italic"'); }
+    if (mode === 'dist'){ const cx = W / 2, cy = H / 2; s += `<rect x="${cx - 110}" y="${cy - 34}" width="220" height="68" rx="14" ${FS('glow', 'glow', 1.5, .16)}/>` + TX(cx, cy - 4, 'Walk round the block', 'text', 18, 'middle', 'font-family="Instrument Serif"') + TX(cx, cy + 18, 'ten minutes, phone at home', 'muted', 12, 'middle'); }
+    el.innerHTML = s; });
+  const say = () => { $('#spN').textContent = n; $('#spT').textContent = `${tried.size} of 6`;
+    $('#spSay').textContent = mode ? `${M.find(m => m[0] === mode)[3]} ${at <= 2 ? 'You stepped in early, which is the easiest time.' : at >= 7 ? 'You let it run all the way first; stepping in sooner is easier.' : ''}` : n >= 7 ? 'The spiral ran all the way. Pick an interrupt, then try again sooner.' : 'The spiral is growing. Pick a way to interrupt it.'; };
+  const grow = () => { clearInterval(timer); timer = setInterval(() => { if (mode || n >= CH5.length){ clearInterval(timer); return; } n++; draw(); say(); }, RM ? 2200 : 1600); };
+  $$('#spM .card3').forEach(b => b.addEventListener('click', () => { if (!mode) at = n; mode = b.dataset.m; tried.add(mode); press($$('#spM .card3'), b); clearInterval(timer); draw(); say(); }));
+  $('#spReset').addEventListener('click', () => { n = 1; mode = null; press($$('#spM .card3'), null); draw(); say(); grow(); });
+  let started = false; new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !started){ started = true; grow(); } }), {threshold: .4}).observe(el);
+  draw(); say();
+}
+
+/* ---------- 6: worry sorter + window ---------- */
+{ const el = $('#wt6'), cnt = {act:0, acc:0, park:0}, parked = [];
+  const bins = [{id:'act', label:'I can act on it', d:'Take one small step now'}, {id:'acc', label:'Out of my hands', d:'Practise acceptance'}, {id:'park', label:'Park it', d:'Save it for worry time'}];
+  const items = [
+    {t:"I haven't booked the car in for its service.", a:'act', w:'A five-minute phone call ends this worry for good.'},
+    {t:'It might rain on the day of the barbecue.', a:'acc', w:'The weather is not yours to control. Have a plan B, then let it go.'},
+    {t:'Am I really doing enough with my life?', a:'park', w:'A big, real question, but not one to chew on while driving. Give it your worry slot.'},
+    {t:'There is a bill I keep avoiding opening.', a:'act', w:'Avoiding it keeps it loud. Open it and decide on one next step.'},
+    {t:'My flight tomorrow might be delayed.', a:'acc', w:'You can check the status, but you cannot move the weather or the airline.'},
+    {t:'Something feels off with a friend, and I cannot work out what.', a:'park', w:'Park it, and when your slot comes, decide whether to simply ask them.'},
+  ];
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 250 : 200; vb(el, W, H);
+    const S0 = +$('#wtS').value, L = +$('#wtL').value, x0 = 20, x1 = W - 20, y = H - 52, X = h => x0 + (h - 7) / 16 * (x1 - x0);
+    out('wtS', hh(S0)); out('wtL', L + ' min');
+    let s = `<rect x="${x0}" y="${y - 10}" width="${x1 - x0}" height="20" rx="10" ${F('panel-2')}/>`;
+    for (let h = 7; h <= 23; h += N ? 4 : 2) s += TX(X(h), y + 30, hh(h), 'faint', 11, 'middle');
+    s += `<rect x="${X(22.5) - 1}" y="${y - 16}" width="2" height="32" ${F('cool')}/>` + TX(X(22.5), y - 22, 'bed', 'cool', 11, 'middle');
+    const wx = X(S0), ww = Math.max(8, L / 60 / 16 * (x1 - x0));
+    s += `<rect x="${wx.toFixed(1)}" y="${y - 14}" width="${ww.toFixed(1)}" height="28" rx="5" ${FS('glow', 'glow', 1.5, .5)}/>`;
+    const late = S0 + L / 60 > 21;
+    s += TX(wx + ww / 2, y + 46, late ? 'Too close to bedtime' : 'Worry window', late ? 'bad' : 'glow', 12, 'middle');
+    parked.forEach((p, i) => { const py = 20 + i * 26, txt = p.length > (N ? 34 : 60) ? p.slice(0, N ? 32 : 58) + '…' : p, tw = txt.length * 6.4 + 20, px = clamp(wx + ww / 2 - tw / 2, 8, W - tw - 8);
+      s += `<line x1="${wx + ww / 2}" y1="${y - 14}" x2="${(px + tw / 2).toFixed(1)}" y2="${py + 10}" ${S('glow', 1, ';stroke-opacity:.4')}/><rect x="${px.toFixed(1)}" y="${py}" width="${tw.toFixed(1)}" height="20" rx="10" ${FS('panel', 'glow-line', 1)}/>` + TX(px + tw / 2, py + 14, txt, 'text', 11.5, 'middle'); });
+    if (!parked.length) s += TX(W / 2, 34, 'Worries you park will wait here', 'faint', 13, 'middle');
+    el.innerHTML = s; ['act', 'acc', 'park'].forEach(k => $({act:'#wsA', acc:'#wsC', park:'#wsP'}[k]).textContent = cnt[k]); });
+  sorter('#ws6', null, bins, items, true, (it, ok, b) => { if (!it){ cnt.act = cnt.acc = cnt.park = 0; parked.length = 0; } else { cnt[b]++; if (b === 'park') parked.push(it.t); } draw(); });
+  ['wtS', 'wtL'].forEach(id => $('#' + id).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 7: values ---------- */
+{ const VAL = ['Adventure', 'Calm', 'Compassion', 'Courage', 'Creativity', 'Curiosity', 'Excellence', 'Faith', 'Family', 'Freedom', 'Friendship', 'Fun', 'Generosity', 'Growth', 'Health', 'Honesty', 'Humour', 'Independence', 'Integrity', 'Justice', 'Kindness', 'Learning', 'Love', 'Loyalty', 'Nature', 'Order', 'Patience', 'Purpose', 'Respect', 'Security', 'Simplicity', 'Service', 'Spirituality', 'Success', 'Wealth', 'Wisdom'];
+  const STEP = {Health:'Put a 20-minute walk in tomorrow\'s diary.', Family:'Plan one phone-free family meal this week.', Calm:'Book ten minutes of quiet each morning.', Creativity:'Spend 30 minutes making something this weekend.', Friendship:'Message one friend today and set a date.', Learning:'Pick one book or course and do the first hour.', Adventure:'Plan one small new thing to try this month.', Nature:'Spend half an hour outside on Saturday.', Love:'Tell someone you love one specific thing you appreciate.', Simplicity:'Clear one drawer or one app today.', Service:'Offer an hour of help to someone this week.', Honesty:'Say one true thing you have been avoiding.', Security:'Look at your budget for fifteen minutes.', Spirituality:'Set aside ten minutes for reflection or prayer.', Growth:'Ask someone for honest feedback this week.', Freedom:'Drop one commitment that you only keep out of habit.', Fun:'Schedule something purely for fun this week.'};
+  let st = store.get('dym-values', {picked: [], score: {}});
+  const el = $('#va7'), MAX = 5;
+  const chips = () => { $('#vc7').innerHTML = VAL.map(v => { const on = st.picked.includes(v); return `<button class="vchip" data-v="${v}" aria-pressed="${on}" ${!on && st.picked.length >= MAX ? 'disabled' : ''}>${v}</button>`; }).join('');
+    $$('#vc7 .vchip').forEach(b => b.addEventListener('click', () => { const v = b.dataset.v; st.picked = st.picked.includes(v) ? st.picked.filter(x => x !== v) : [...st.picked, v]; if (st.score[v] == null) st.score[v] = 5; save(); chips(); ctl(); draw(); })); };
+  const save = () => { store.set('dym-values', st); document.dispatchEvent(new Event('dym-values')); };
+  const ctl = () => { $('#vaCtl').innerHTML = st.picked.length ? `<div class="grid2">${st.picked.map((v, i) => `<div class="ctl"><label for="va${i}">${v}: how well my life matches it <output id="ova${i}">${st.score[v]}</output></label><input type="range" id="va${i}" min="0" max="10" value="${st.score[v]}" data-v="${v}"></div>`).join('')}</div>` : '<p class="tip">Pick up to five values above to rate them.</p>';
+    $$('#vaCtl input').forEach((r, i) => r.addEventListener('input', () => { st.score[r.dataset.v] = +r.value; out('va' + i, r.value); save(); draw(); })); };
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, n = st.picked.length, rowH = N ? 50 : 42, H = Math.max(90, 24 + n * rowH); vb(el, W, H);
+    let s = ''; if (!n) s = TX(W / 2, 50, 'Your values will appear here as bars', 'faint', 13, 'middle');
+    const lx = N ? 16 : 150, x0 = N ? 16 : 170, x1 = W - (N ? 44 : 60);
+    st.picked.forEach((v, i) => { const y = 18 + i * rowH + (N ? 18 : 10), sc = st.score[v], w = (x1 - x0) * sc / 10;
+      s += N ? TX(lx, y - 8, v, 'text', 13) : TX(lx, y + 14, v, 'text', 14, 'end');
+      s += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="20" rx="6" ${FS('bad-soft', 'line', 1)}/><rect x="${x0}" y="${y}" width="${w.toFixed(1)}" height="20" rx="6" ${F(sc >= 7 ? 'glow' : sc >= 4 ? 'cool' : 'warm', .85)}/>`;
+      s += TX(x1 + 10, y + 15, sc + '/10', 'muted', 12, 'start', 'font-family="Geist Mono"'); });
+    el.innerHTML = s;
+    $('#vaN').textContent = `${n} of ${MAX}`;
+    if (n){ const g = st.picked.reduce((a, b) => st.score[b] < st.score[a] ? b : a); $('#vaG').textContent = `${g} (${st.score[g]}/10)`; $('#vaSay').textContent = STEP[g] || `Write one ten-minute action this week that honours ${g.toLowerCase()}.`; }
+    else { $('#vaG').textContent = '–'; $('#vaSay').textContent = 'Pick your values first.'; } });
+  chips(); ctl(); draw();
+}
+
+/* ---------- 8: life wheel ---------- */
+{ const A = ['Career', 'Family', 'Partner', 'Spirit and growth', 'Leisure and social', 'Life management', 'Health and fitness'];
+  const TIP = ['Clarify one thing you want from work this quarter.', 'Plan one regular family ritual.', 'Book an evening with no screens together.', 'Ten minutes of meditation or reading each morning.', 'Put one social plan in the diary.', 'Spend an hour on money or admin you are avoiding.', 'Sleep and movement lift almost every other area. Start with a bedtime.'];
+  let st = store.get('dym-wheel', {v: [6, 7, 5, 3, 4, 5, 4], lever: -1}); const el = $('#lw8');
+  $('#lwCtl').innerHTML = `<div class="grid2">${A.map((a, i) => `<div class="ctl"><label for="lw${i}"><span class="lbl2">${a}<button class="area-pick" data-l="${i}" aria-pressed="${st.lever === i}" type="button">lever</button></span><output id="olw${i}"></output></label><input type="range" id="lw${i}" min="0" max="10" value="${st.v[i]}"></div>`).join('')}</div>`;
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 360 : 340, cx = W / 2, cy = H / 2, R = N ? 84 : 128; vb(el, W, H);
+    let s = ''; for (let k = 2; k <= 10; k += 2) s += `<circle cx="${cx}" cy="${cy}" r="${R * k / 10}" ${S('line', 1, k === 10 ? '' : ';stroke-dasharray:2 4')}/>`;
+    const n = A.length, da = Math.PI * 2 / n;
+    A.forEach((a, i) => { const a0 = -Math.PI / 2 + i * da + .04, a1 = a0 + da - .08, r = R * st.v[i] / 10;
+      const p = (ang, rr) => `${(cx + Math.cos(ang) * rr).toFixed(1)} ${(cy + Math.sin(ang) * rr).toFixed(1)}`;
+      const col = st.lever === i ? 'glow' : 'cool';
+      if (r > 0) s += `<path d="M${cx} ${cy}L${p(a0, r)}A${r} ${r} 0 0 1 ${p(a1, r)}Z" ${FS(col, col, 1.5, st.lever === i ? .55 : .3)}/>`;
+      const am = (a0 + a1) / 2, lr = R + (N ? 18 : 30), lx = cx + Math.cos(am) * lr, ly = cy + Math.sin(am) * lr, anc = Math.cos(am) > .3 ? 'start' : Math.cos(am) < -.3 ? 'end' : 'middle';
+      s += wrap(lx, ly + 4, `${a} ${st.v[i]}`, N ? 9 : 14, 14, st.lever === i ? 'glow' : 'muted', N ? 11.5 : 12.5, anc); });
+    el.innerHTML = s;
+    A.forEach((_, i) => out('lw' + i, st.v[i]));
+    const avg = st.v.reduce((a, b) => a + b, 0) / n, lo = st.v.indexOf(Math.min(...st.v));
+    $('#lwAvg').textContent = avg.toFixed(1) + ' / 10'; $('#lwLow').textContent = `${A[lo]} (${st.v[lo]})`;
+    $('#lwSay').textContent = st.lever >= 0 ? `${A[st.lever]}. ${TIP[st.lever]}` : 'Tap “lever” on the area that would lift the others most.'; store.set('dym-wheel', st); });
+  A.forEach((_, i) => $('#lw' + i).addEventListener('input', e => { st.v[i] = +e.target.value; draw(); }));
+  $$('#lwCtl .area-pick').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.l; st.lever = st.lever === i ? -1 : i; $$('#lwCtl .area-pick').forEach(x => x.setAttribute('aria-pressed', +x.dataset.l === st.lever)); draw(); }));
+  draw();
+}
+
+/* ---------- 9: SMART goal ---------- */
+{ const el = $('#sg9'), VAGUE = /^(get fit|be happier|be healthy|lose weight|save money|get better|be more productive|read more|exercise more)\.?$/i;
+  const val = id => $('#' + id).value.trim();
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 250 : 220; vb(el, W, H);
+    const w = val('sgW'), m = val('sgM'), y = val('sgY'), A = +$('#sgA').value, T = +$('#sgT').value; out('sgA', A + '/10'); out('sgT', 'week ' + T);
+    const ok = [w.length >= 12 && !VAGUE.test(w), /\d/.test(m), A >= 6, y.length >= 8, true];
+    const why = [ok[0] ? 'clear action' : 'too vague', ok[1] ? 'has a number' : 'add a number', ok[2] ? 'you believe it' : 'make it smaller', ok[3] ? 'has a why' : 'add a why', 'week ' + T];
+    const L = ['S', 'M', 'A', 'R', 'T'], WD = ['Specific', 'Measurable', 'Attainable', 'Relevant', 'Time-bound'];
+    let s = ''; const gap = (W - 40) / 5;
+    L.forEach((l, i) => { const x = 20 + gap * i + gap / 2, r = N ? 22 : 28;
+      s += `<circle cx="${x}" cy="${r + 10}" r="${r}" ${FS(ok[i] ? 'glow' : 'panel-2', ok[i] ? 'glow' : 'line', 1.5, ok[i] ? .9 : 1)}/>` + TX(x, r + 10 + (N ? 8 : 10), l, ok[i] ? 'deep' : 'faint', N ? 22 : 28, 'middle', 'font-family="Instrument Serif"');
+      s += TX(x, 2 * r + 30, WD[i], 'text', N ? 10.5 : 13, 'middle') + TX(x, 2 * r + 46, why[i], ok[i] ? 'muted' : 'bad', N ? 10 : 12, 'middle'); });
+    const y0 = N ? 160 : 140, x0 = 20, cw = (W - 40) / 13;
+    s += TX(x0, y0 - 10, 'The quarter, week by week', 'faint', 12);
+    for (let k = 1; k <= 13; k++){ const x = x0 + (k - 1) * cw, inRun = k <= T;
+      s += `<rect x="${(x + 1).toFixed(1)}" y="${y0}" width="${(cw - 2).toFixed(1)}" height="30" rx="4" ${F(inRun ? 'glow' : 'panel-2', inRun ? .12 + .5 * k / T : 1)}/>`;
+      s += `<circle cx="${(x + cw / 2).toFixed(1)}" cy="${y0 + 42}" r="3" ${F('cool')}/>`;
+      if (!N || k % 2) s += TX(x + cw / 2, y0 + 62, k, 'faint', 10.5, 'middle', 'font-family="Geist Mono"'); }
+    const fx = x0 + T * cw - 2; s += `<path d="M${fx} ${y0 - 6}V${y0 + 34}M${fx} ${y0 - 6}l14 6 -14 6" ${FS('warm', 'warm', 1.6, .8)}/>`;
+    el.innerHTML = s;
+    const sc = ok.filter(Boolean).length;
+    $('#sgOut').textContent = `By the end of week ${T}, I will ${(w || 'do something specific').replace(/\.$/, '').replace(/^[A-Z](?=[a-z])/, c => c.toLowerCase())}${m ? ', measured by ' + m.replace(/\.$/, '') : ''}${y ? ', because ' + y.replace(/\.$/, '').replace(/^[A-Z](?=[a-z])/, c => c.toLowerCase()) : ''}. (${sc}/5 SMART)`; });
+  ['sgW', 'sgM', 'sgY', 'sgA', 'sgT'].forEach(id => $('#' + id).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 10: passion grid ---------- */
+{ const el = $('#pg10'), G = [{t:'Run a 5K', m:7, e:4}, {t:'Learn Spanish', m:5, e:8}, {t:'Clear out the garage', m:6, e:2}];
+  const cols = ['glow', 'cool', 'warm'];
+  $('#pgCtl').innerHTML = `<div class="grid2">${G.map((g, i) => `<div class="who"><input type="text" id="pgn${i}" value="${g.t}" maxlength="28" aria-label="Goal ${i + 1}">${rangeH('pgm' + i, 'How much it matters to me', 0, 10, g.m)}${rangeH('pge' + i, 'How much it excites me', 0, 10, g.e)}</div>`).join('')}</div>`;
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 340 : 330; vb(el, W, H);
+    const x0 = N ? 34 : 120, x1 = N ? 344 : 600, y0 = 16, y1 = H - 40, X = v => x0 + v / 10 * (x1 - x0), Y = v => y1 - v / 10 * (y1 - y0);
+    let s = `<rect x="${X(5)}" y="${y0}" width="${X(10) - X(5)}" height="${Y(5) - y0}" ${F('glow', .1)}/><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" ${S('line', 1)}/>`;
+    s += `<line x1="${X(5)}" y1="${y0}" x2="${X(5)}" y2="${y1}" ${S('line', 1, ';stroke-dasharray:3 4')}/><line x1="${x0}" y1="${Y(5)}" x2="${x1}" y2="${Y(5)}" ${S('line', 1, ';stroke-dasharray:3 4')}/>`;
+    const q = [[7.5, 9.3, 'Passion goal', 'glow'], [7.5, .8, 'Duty: add a spark', 'warm'], [2.5, 9.3, 'Fun, but a goal?', 'cool'], [2.5, .8, 'Drop it?', 'faint']];
+    q.forEach(([a, b, l, c]) => s += TX(X(a), Y(b) + 4, l, c, N ? 11.5 : 13, 'middle'));
+    s += TX((x0 + x1) / 2, H - 10, 'Matters to me →', 'muted', 12, 'middle') + `<text transform="translate(${x0 - 14} ${(y0 + y1) / 2}) rotate(-90)" font-size="12" text-anchor="middle" ${F('muted')}>Excites me →</text>`;
+    let pn = 0, sp = 0;
+    G.forEach((g, i) => { g.t = $('#pgn' + i).value || 'Goal ' + (i + 1); g.m = +$('#pgm' + i).value; g.e = +$('#pge' + i).value; out('pgm' + i, g.m); out('pge' + i, g.e);
+      if (g.m >= 5 && g.e >= 5) pn++; if (g.m >= 5 && g.e < 5) sp++;
+      const x = X(g.m), y = Y(g.e) - i * 0, right = x < x1 - 120;
+      s += `<circle cx="${x}" cy="${y}" r="9" ${FS(cols[i], cols[i], 2, .85)}/>` + TX(right ? x + 14 : x - 14, y + 4, esc(g.t.length > 20 ? g.t.slice(0, 19) + '…' : g.t), 'text', 12.5, right ? 'start' : 'end'); });
+    el.innerHTML = s;
+    $('#pgN').textContent = `${pn} of 3`; const duty = G.find(g => g.m >= 5 && g.e < 5);
+    $('#pgS').textContent = duty ? duty.t : 'None';
+    $('#pgSay').textContent = duty ? `Link “${duty.t}” to something you love: a friend to do it with, music, a reward, or a bigger dream it serves.` : pn === 3 ? 'All three pull you forward. Protect time for them.' : 'Low-matter goals may be fun, but check they earn a place on your list.'; });
+  $$('#pgCtl input').forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 11: relationship radar ---------- */
+{ const el = $('#rh11'), Q = ['Honest communication', 'Handling conflict', 'Mutual respect', 'Shared interests', 'Closeness', 'Acceptance'];
+  const TIPS = ['Try one conversation this week where you say what you actually feel.', 'Next disagreement, agree to take turns and repeat back what you heard.', 'Notice and name one thing you respect about them.', 'Find one small thing to do together that you both enjoy.', 'Ask a deeper question than usual, and listen fully.', 'List three things about them you have been trying to change, and let one go.'];
+  const v = [7, 4, 8, 5, 6, 6];
+  $('#rhCtl').innerHTML = `<div class="field" style="max-width:320px"><label for="rhWho">Who is this relationship with?</label><input id="rhWho" maxlength="30" value="A close friend"></div><div class="grid2">${Q.map((q, i) => rangeH('rh' + i, q, 0, 10, v[i])).join('')}</div>`;
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 330 : 320, cx = W / 2, cy = H / 2 + 4, R = N ? 92 : 112; vb(el, W, H);
+    Q.forEach((_, i) => { v[i] = +$('#rh' + i).value; out('rh' + i, v[i]); });
+    const P = (i, r) => { const a = -Math.PI / 2 + i * Math.PI / 3; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; };
+    let s = ''; [.25, .5, .75, 1].forEach(k => s += `<polygon points="${Q.map((_, i) => P(i, R * k).map(x => x.toFixed(1)).join(',')).join(' ')}" ${S('line', 1)}/>`);
+    Q.forEach((q, i) => { const [x, y] = P(i, R), [lx, ly] = P(i, R + (N ? 22 : 28)); s += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S('line', 1)}/>`;
+      const anc = Math.abs(lx - cx) < 5 ? 'middle' : lx > cx ? 'start' : 'end'; s += wrap(lx, ly + 4, q, N ? 11 : 14, 14, 'muted', N ? 11.5 : 12.5, anc); });
+    s += `<polygon points="${Q.map((_, i) => P(i, R * .8).map(x => x.toFixed(1)).join(',')).join(' ')}" ${S('faint', 1.2, ';stroke-dasharray:4 4')}/>`;
+    s += `<polygon points="${Q.map((_, i) => P(i, R * v[i] / 10).map(x => x.toFixed(1)).join(',')).join(' ')}" ${FS('glow', 'glow', 2, .22)}/>`;
+    Q.forEach((_, i) => { const [x, y] = P(i, R * v[i] / 10); s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" ${F('glow')}/>`; });
+    el.innerHTML = s;
+    const avg = v.reduce((a, b) => a + b, 0) / 6, lo = v.indexOf(Math.min(...v)), who = $('#rhWho').value.trim() || 'this person';
+    $('#rhH').textContent = Math.round(avg * 10) + '%'; $('#rhW').textContent = Q[lo];
+    $('#rhSay').textContent = avg < 4 ? `This relationship with ${who} may be costing you more than it gives. Chapter 15 is about what to do then.` : TIPS[lo]; });
+  $$('#rhCtl input').forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 12: presence ---------- */
+{ const el = $('#pr12'); let meter = 40, last = null;
+  const D = {ref: 18, fix: -6, me: -10, ph: -20};
+  const R = [
+    {t:'“I had the worst day. My manager picked apart my report in front of everyone.”', bins:[{id:'fix', label:'“You should take that to HR.”'}, {id:'me', label:'“Ugh, my old boss did that all the time. One time…”'}, {id:'ref', label:'“In front of everyone? That sounds humiliating. What did they say?”'}, {id:'ph', label:'“Mm-hm.” (glancing at a notification)'}], a:'ref', w:'Naming the feeling and asking more tells them you are with them.'},
+    {t:'“I just don\'t know if I\'m cut out for this job.”', bins:[{id:'fix', label:'“Update your CV and start applying.”'}, {id:'ref', label:'“It sounds like today really shook your confidence.”'}, {id:'me', label:'“Everyone feels like that. I do all the time.”'}, {id:'ph', label:'“Sorry, what? I missed that.”'}], a:'ref', w:'Reflecting back is not agreeing. It shows you heard what is underneath.'},
+    {t:'“Sorry, I\'m going on and on.”', bins:[{id:'ref', label:'“Not at all, I\'d rather hear it. What\'s the hardest part?”'}, {id:'fix', label:'“Let\'s talk about something else to cheer you up.”'}, {id:'me', label:'“No worries! So anyway, guess what happened to me…”'}, {id:'ph', label:'“Yeah, no problem.” (typing to someone else)'}], a:'ref', w:'Inviting them to go on is the clearest signal that they have your full attention.'},
+  ].map(r => ({...r, q: true, stack: true, k: 'Your friend says'}));
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 220 : 180; vb(el, W, H);
+    const fx = N ? 70 : 110, fy = N ? 74 : 90, fr = N ? 50 : 62, m = meter / 100;
+    let s = `<circle cx="${fx}" cy="${fy}" r="${fr}" ${FS('panel-2', m > .6 ? 'glow' : m < .3 ? 'bad' : 'line', 2)}/>`;
+    s += `<circle cx="${fx - fr * .35}" cy="${fy - fr * .18}" r="${fr * .07}" ${F('text')}/><circle cx="${fx + fr * .35}" cy="${fy - fr * .18}" r="${fr * .07}" ${F('text')}/>`;
+    const curve = lerp(-.25, .3, m); s += `<path d="M${fx - fr * .38} ${fy + fr * .3}Q${fx} ${(fy + fr * .3 + curve * fr).toFixed(1)} ${fx + fr * .38} ${fy + fr * .3}" ${S('text', 2.4, ';stroke-linecap:round')}/>`;
+    const feel = m > .75 ? 'Feels truly heard' : m > .5 ? 'Feels listened to' : m > .3 ? 'Not sure you are with them' : 'Feels brushed off';
+    if (N){ s += TX(fx, fy + fr + 24, feel, m > .5 ? 'glow' : 'muted', 13, 'middle'); }
+    const bx = N ? 150 : 220, bw = W - bx - 24, by = N ? 50 : 66;
+    s += TX(bx, by - 12, 'How present you are', 'faint', 12) + `<rect x="${bx}" y="${by}" width="${bw}" height="22" rx="11" ${F('panel-2')}/><rect x="${bx}" y="${by}" width="${(bw * m).toFixed(1)}" height="22" rx="11" ${F(m > .5 ? 'glow' : m > .3 ? 'warm' : 'bad')}/>`;
+    s += TX(bx + bw, by + 42, meter + ' / 100', 'muted', 12, 'end', 'font-family="Geist Mono"');
+    if (!N) s += TX(bx, by + 42, feel, m > .5 ? 'glow' : 'muted', 14);
+    if (last) s += TX(bx, by + (N ? 66 : 74), last, 'muted', 12.5);
+    el.innerHTML = s; });
+  const NOTE = {ref: 'You stayed with them.', fix: 'Advice before they felt heard.', me: 'The conversation turned to you.', ph: 'They saw you look away.'};
+  sorter('#prs12', null, [], R, false, (it, ok, b) => { if (!it){ meter = 40; last = null; } else { meter = clamp(meter + D[b], 0, 100); last = NOTE[b]; } draw(); });
+  draw();
+}
+
+/* ---------- 13: fact or story ---------- */
+{ const el = $('#ps13'); let thick = 24, done = 0;
+  const items = [
+    {t:"My sister didn't call on my birthday.", a:'fact', w:'A camera would have recorded this.'},
+    {t:"She doesn't care about me any more.", a:'story', w:'A conclusion about her feelings. You can\'t record that.'},
+    {t:'She called two days later.', a:'fact', w:'Something that actually happened.'},
+    {t:'She only called because she felt guilty.', a:'story', w:'A guess about her motive.'},
+    {t:"We haven't had a proper talk since.", a:'fact', w:'Checkable, and something you could change.'},
+    {t:"It's always like this; I'm the one who makes the effort.", a:'story', w:'“Always” is a sign of a story. It turns one event into a rule.'},
+    {t:"Mum mentioned she's been swamped at work.", a:'fact', w:'A piece of information that may change the story.'},
+  ];
+  const bins = [{id:'fact', label:'Fact', d:'A camera would have caught it'}, {id:'story', label:'Story', d:'Meaning I added'}];
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 200 : 190, cx = W / 2, cy = H / 2, r = N ? 62 : 66; vb(el, W, H);
+    const a0 = -Math.PI * .4, a1 = a0 + Math.PI * 1.8, p = a => `${(cx + Math.cos(a) * r).toFixed(1)} ${(cy + Math.sin(a) * r).toFixed(1)}`;
+    let s = `<path d="M${p(a0)}A${r} ${r} 0 1 1 ${p(a1)}" ${S(thick > 14 ? 'bad' : thick > 7 ? 'warm' : 'glow', thick.toFixed(1), ';stroke-linecap:round;stroke-opacity:.8')}/>` + arrowHead(cx + Math.cos(a1 + .22) * r, cy + Math.sin(a1 + .22) * r, a1 + .22 + Math.PI / 2, thick > 14 ? 'bad' : thick > 7 ? 'warm' : 'glow', 10 + thick * .6);
+    s += TX(cx, cy - 2, thick > 14 ? 'Replaying' : thick > 7 ? 'Loosening' : 'Let go', 'text', 20, 'middle', 'font-family="Instrument Serif"') + TX(cx, cy + 18, `${done} of ${items.length} sorted`, 'faint', 11.5, 'middle');
+    if (!N){ s += wrap(110, cy, 'Each story you spot is one less reason to replay it', 18, 16, 'muted', 13) + wrap(W - 110, cy, 'The facts are what is left to work with', 18, 16, 'muted', 13); }
+    el.innerHTML = s; });
+  sorter('#pss13', '#pst13', bins, items, false, (it, ok) => { if (!it){ thick = 24; done = 0; } else { done++; if (ok) thick = Math.max(3, thick - (it.a === 'story' ? 4.5 : 2)); } draw(); });
+  draw();
+}
+
+/* ---------- 14: argument thermometer ---------- */
+{ const el = $('#at14'), BEAT = ['The dishes come up', '“You never help”', 'Defending yourself', 'Last month dragged in', 'Raised voices', 'Someone storms off', 'Silence', 'How it ends'];
+  const BASE = [3, 5.5, 6.5, 7.5, 8.5, 9, 7.5, 7];
+  const PR = [
+    ['Commit to daily mindfulness', [.6, .6, .6, .6, .6, .6, .6, .6]],
+    ['Tell your partner you are practising', [0, .5, .5, .5, .5, .5, .5, .5]],
+    ['Stay emotionally present', [0, 0, 1, 1, 1.2, 1.4, 1, 0]],
+    ['Listen without defensiveness', [0, 0, 2.2, 1.5, 1.4, 1, .5, .5]],
+    ['Reflect back what you hear', [0, 1, 1.5, 1.2, 1.2, 1, .5, .5]],
+    ['Speak honestly, not in attacks', [0, 2.2, 1, 1.4, 1, .8, .5, .5]],
+    ['Look for the lesson in it', [0, 0, 0, 0, 0, .8, 2, 2.6]],
+    ['Regular time together, no screens', [1, .6, .4, .4, .4, .4, .4, .6]],
+  ];
+  const on = PR.map(() => false);
+  $('#atT').innerHTML = PR.map((p, i) => `<label class="tg"><input type="checkbox" data-i="${i}"><span>${p[0]}</span></label>`).join('');
+  const temps = () => BASE.map((b, k) => clamp(b - PR.reduce((s, p, i) => s + (on[i] ? p[1][k] : 0), 0), 1, 10));
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 260 : 270; vb(el, W, H);
+    const x0 = N ? 30 : 60, x1 = W - (N ? 20 : 60), y0 = 16, y1 = H - (N ? 40 : 66), T = temps(), X = k => x0 + k / 7 * (x1 - x0), Y = v => y1 - v / 10 * (y1 - y0);
+    let s = `<rect x="${x0}" y="${Y(10)}" width="${x1 - x0}" height="${Y(7) - Y(10)}" ${F('bad', .08)}/>` + TX(x1 - 6, Y(10) + 14, 'Heated', 'bad', 11.5, 'end') + TX(x1 - 6, Y(1.6), 'Calm', 'glow', 11.5, 'end');
+    [2, 4, 6, 8, 10].forEach(v => s += `<line x1="${x0}" y1="${Y(v)}" x2="${x1}" y2="${Y(v)}" ${S('line', 1, ';stroke-dasharray:2 5')}/>` + TX(x0 - 8, Y(v) + 4, v, 'faint', 10.5, 'end'));
+    s += `<path d="${smooth(BASE.map((b, k) => [X(k), Y(b)]))}" ${S('faint', 1.5, ';stroke-dasharray:5 5')}/>`;
+    const pts = T.map((t, k) => [X(k), Y(t)]);
+    s += `<path d="${smooth(pts)}L${X(7)} ${y1}L${X(0)} ${y1}Z" ${F('warm', .12)}/><path d="${smooth(pts)}" ${S('warm', 2.5)}/>`;
+    T.forEach((t, k) => { s += `<circle cx="${X(k).toFixed(1)}" cy="${Y(t).toFixed(1)}" r="5" ${F(t >= 7 ? 'bad' : t >= 4.5 ? 'warm' : 'glow')}/>`;
+      s += N ? TX(X(k), y1 + 18, k + 1, 'faint', 11, 'middle', 'font-family="Geist Mono"') : wrap(X(k), y1 + 22, BEAT[k], 12, 13, 'muted', 11, 'middle'); });
+    if (N) s += TX(W / 2, H - 6, 'Dashed line: the argument with no practices', 'faint', 11, 'middle'); else s += TX(x0, H - 4, 'Dashed line: the same argument with no practices', 'faint', 11);
+    el.innerHTML = s;
+    const pk = Math.max(...T), pi = T.indexOf(pk), end = T[7];
+    $('#atPk').textContent = `${pk.toFixed(1)} at “${BEAT[pi].replace(/[“”]/g, '')}”`; $('#atN').textContent = `${on.filter(Boolean).length} of 8`;
+    $('#atSay').textContent = end <= 3 ? 'You end up closer, with a plan for the dishes.' : end <= 5 ? 'It fizzles out, still unresolved.' : 'Cold silence for the rest of the evening.'; });
+  $$('#atT input').forEach(c => c.addEventListener('change', () => { on[+c.dataset.i] = c.checked; draw(); })); draw();
+}
+
+/* ---------- 15: energy ledger ---------- */
+{ const el = $('#el15'), P = [{n:'Partner', h:10, f:3}, {n:'Old school friend', h:3, f:-4}, {n:'Colleague', h:8, f:-1}, {n:'Sister', h:2, f:4}];
+  $('#elCtl').innerHTML = `<div class="grid2">${P.map((p, i) => `<div class="who"><input type="text" id="eln${i}" value="${p.n}" maxlength="24" aria-label="Person ${i + 1}">${rangeH('elh' + i, 'Hours together a week', 0, 20, p.h)}${rangeH('elf' + i, 'How I feel after (drained to lifted)', -5, 5, p.f)}</div>`).join('')}</div>`;
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, rowH = N ? 52 : 46, H = 40 + P.length * rowH; vb(el, W, H);
+    P.forEach((p, i) => { p.n = $('#eln' + i).value || 'Person ' + (i + 1); p.h = +$('#elh' + i).value; p.f = +$('#elf' + i).value; out('elh' + i, p.h + ' h'); out('elf' + i, (p.f > 0 ? '+' : '') + p.f); });
+    const lx = N ? 16 : 170, x0 = N ? 16 : 190, x1 = W - 20, mid = (x0 + x1) / 2, sc = (x1 - mid) / 100;
+    let s = `<line x1="${mid}" y1="10" x2="${mid}" y2="${H - 20}" ${S('line', 1.5)}/>` + TX(x0, H - 6, '← drains you', 'bad', 11.5) + TX(x1, H - 6, 'lifts you →', 'glow', 11.5, 'end');
+    P.forEach((p, i) => { const y = 14 + i * rowH + (N ? 18 : 6), v = clamp(p.h * p.f, -100, 100), w = Math.abs(v) * sc;
+      s += N ? TX(lx, y - 6, esc(p.n), 'text', 12.5) : TX(lx, y + 15, esc(p.n), 'text', 13.5, 'end');
+      s += `<rect x="${(v < 0 ? mid - w : mid).toFixed(1)}" y="${y}" width="${Math.max(2, w).toFixed(1)}" height="20" rx="5" ${F(v < 0 ? 'bad' : 'glow', .8)}/>`;
+      const tx = v < 0 ? mid - w - 6 : mid + w + 6; s += TX(tx, y + 15, (v > 0 ? '+' : '') + v, 'muted', 11.5, v < 0 ? 'end' : 'start', 'font-family="Geist Mono"'); });
+    el.innerHTML = s;
+    const net = P.reduce((a, p) => a + p.h * p.f, 0), d = P.reduce((a, p) => p.h * p.f < a.h * a.f ? p : a);
+    $('#elNet').textContent = (net > 0 ? '+' : '') + net; $('#elD').textContent = d.h * d.f < 0 ? d.n : 'Nobody';
+    $('#elSay').textContent = d.h * d.f <= -12 ? `Try a boundary with ${d.n} first, such as less time or clearer limits. If it still drains you, the six steps above are for this.` : d.h * d.f < 0 ? `${d.n} takes a little energy. A small boundary may be enough.` : 'Everyone here lifts you. Protect that time.'; });
+  $$('#elCtl input').forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 16: ten-minute sprint ---------- */
+{ const el = $('#hm16'), IT = ['Old magazines', 'Broken lamp', 'Gift never used', 'Winter coat', 'Tangled cables', 'Books already read', 'Mug collection', 'Unopened post', 'Outgrown toys', 'Spare keys', 'Exercise bike', 'Photo prints'];
+  const BOX = [['keep', 'Keep'], ['move', 'Relocate'], ['give', 'Donate'], ['bin', 'Throw away']];
+  let left, sel, where, maybe;
+  const reset = () => { left = 600; sel = -1; where = IT.map(() => null); maybe = new Set(); draw(); };
+  $('#hmB').innerHTML = BOX.map(b => `<button class="btn" data-b="${b[0]}">${b[1]}</button>`).join('') + '<button class="btn" data-b="maybe">Not sure…</button>';
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, cols = N ? 3 : 6, cw = N ? 108 : 112, ch = 58, gx = (W - cols * cw) / (cols + 1), rows = Math.ceil(IT.length / cols), roomH = 30 + rows * (ch + 12), H = roomH + 110; vb(el, W, H);
+    let s = `<rect x="6" y="6" width="${W - 12}" height="${roomH}" rx="14" ${FS('deep', 'line', 1)}/>` + TX(18, 24, 'The spare room', 'faint', 12);
+    IT.forEach((t, i) => { if (where[i]) return; const c = i % cols, r = Math.floor(i / cols), x = gx + c * (cw + gx), y = 34 + r * (ch + 12), on = sel === i;
+      s += `<g class="svgbtn" tabindex="0" role="button" aria-pressed="${on}" aria-label="${t}" data-i="${i}"><rect x="${x}" y="${y}" width="${cw}" height="${ch}" rx="10" ${FS(on ? 'glow-soft' : 'panel-2', on ? 'glow' : maybe.has(i) ? 'warm' : 'line', on ? 2.2 : 1.2)}/>` + wrap(x + cw / 2, y + ch / 2 + 4, t, 13, 15, 'text', 12.5) + (maybe.has(i) ? TX(x + cw - 10, y + 16, '?', 'warm', 14, 'middle') : '') + '</g>'; });
+    if (where.every(Boolean)) s += TX(W / 2, roomH / 2 + 10, 'Clear. Enjoy the space.', 'glow', 26, 'middle', 'font-family="Instrument Serif"');
+    const bw = (W - 12 - 3 * 10) / 4, by = roomH + 22;
+    BOX.forEach((b, k) => { const x = 6 + k * (bw + 10), n = where.filter(w => w === b[0]).length;
+      s += `<path d="M${x} ${by}h${bw}l-8 ${70}h${-(bw - 16)}Z" ${FS('panel-2', 'line', 1.2)}/>` + TX(x + bw / 2, by + 26, b[1], 'muted', N ? 11.5 : 13, 'middle') + TX(x + bw / 2, by + 54, n, 'text', 22, 'middle', 'font-family="Instrument Serif"'); });
+    el.innerHTML = s;
+    svgBtn(el, '.svgbtn', g => { if (left <= 0) return; sel = +g.dataset.i; draw(); const f = el.querySelector(`[data-i="${sel}"]`); if (f) f.focus({preventScroll: true}); });
+    const cleared = where.filter(Boolean).length;
+    $('#hmT').textContent = left > 0 ? fmtT(left) : "Time's up"; $('#hmN').textContent = `${cleared} of ${IT.length}`;
+    $('#hmSay').textContent = cleared === IT.length ? 'Done inside ten minutes.' : left <= 0 ? `${IT.length - cleared} items left. ${maybe.size ? 'The “not sure” pile cost you the most.' : ''}` : sel < 0 ? 'Tap an item in the room.' : `Where does “${IT[sel]}” go?`;
+    $$('#hmB .btn').forEach(b => b.disabled = sel < 0 || left <= 0); });
+  $$('#hmB .btn').forEach(b => b.addEventListener('click', () => { if (sel < 0 || left <= 0) return;
+    if (b.dataset.b === 'maybe'){ maybe.add(sel); left = Math.max(0, left - 60); } else { where[sel] = b.dataset.b; maybe.delete(sel); left = Math.max(0, left - 20); }
+    sel = -1; draw(); }));
+  $('#hmReset').addEventListener('click', reset); reset();
+}
+
+/* ---------- 17: interrupted day ---------- */
+{ const el = $('#dg17'), r = rng(42);
+  const CAT = {notif:['App alerts', 'warm', 34], news:['News alerts', 'bad', 6], email:['Email', 'cool', 22], chat:['Group chats', 'glow', 14], social:['Social checks', 'muted', 16]};
+  let EV = []; Object.entries(CAT).forEach(([k, c]) => { for (let i = 0; i < c[2]; i++) EV.push({k, h: 7 + r() * 16, r: r()}); });
+  for (let i = 0; i < 6; i++) EV.push({k: 'social', h: 22 + r() * 1, r: r()}); EV.sort((a, b) => a.h - b.h);
+  const TG = [['off', 'Turn off non-essential notifications'], ['unsub', 'Unsubscribe from lists you never read'], ['batch', 'Check email three times a day'], ['mute', 'Mute group chats, check twice a day'], ['limit', 'Daily limit on social apps'], ['bed', 'Phone out of the bedroom from 10pm']];
+  const on = {}; $('#dgT').innerHTML = TG.map(t => `<label class="tg"><input type="checkbox" data-t="${t[0]}"><span>${t[1]}</span></label>`).join('');
+  const events = () => { let e = EV.filter(x => !(on.off && (x.k === 'notif' || x.k === 'news')));
+    if (on.unsub) e = e.filter(x => !(x.k === 'email' && x.r < .6));
+    if (on.batch){ e = e.filter(x => x.k !== 'email'); [9, 13, 17].forEach(h => e.push({k: 'email', h})); }
+    if (on.mute){ e = e.filter(x => x.k !== 'chat'); [12.5, 18.5].forEach(h => e.push({k: 'chat', h})); }
+    if (on.limit) e = e.filter(x => !(x.k === 'social' && x.r < .7));
+    if (on.bed) e = e.filter(x => x.h < 22);
+    return e.sort((a, b) => a.h - b.h); };
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720; const E = events();
+    const rowsD = N ? [[7, 15], [15, 23]] : [[7, 23]], rowH = 64, H = 30 + rowsD.length * rowH + (N ? 66 : 40); vb(el, W, H);
+    let s = ''; rowsD.forEach(([a, b], ri) => { const y = 20 + ri * rowH, x0 = 16, x1 = W - 16, X = h => x0 + (h - a) / (b - a) * (x1 - x0);
+      s += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="30" rx="6" ${F('panel-2')}/>`;
+      for (let h = a; h <= b; h += 2) s += TX(X(h), y + 46, hh(h), 'faint', 10.5, 'middle');
+      E.filter(e => e.h >= a && e.h < b).forEach(e => s += `<rect x="${(X(e.h) - 1.2).toFixed(1)}" y="${y + 3}" width="2.4" height="24" rx="1" ${F(CAT[e.k][1])}/>`); });
+    let ly = 30 + rowsD.length * rowH, lx = 16;
+    Object.values(CAT).forEach(c => { const w = c[0].length * 6.6 + 24; if (lx + w > W - 10){ lx = 16; ly += 20; } s += `<rect x="${lx}" y="${ly}" width="10" height="10" rx="2" ${F(c[1])}/>` + TX(lx + 15, ly + 9, c[0], 'muted', 11.5); lx += w; });
+    el.innerHTML = s;
+    const hs = [7, ...E.map(e => e.h), 22]; let gap = 0; for (let i = 1; i < hs.length; i++) gap = Math.max(gap, hs[i] - hs[i - 1]);
+    $('#dgN').textContent = E.length; $('#dgL').textContent = gap >= 1 ? `${Math.floor(gap)} h ${Math.round((gap % 1) * 60)} min` : `${Math.round(gap * 60)} min`;
+    $('#dgSay').textContent = gap >= 2 ? 'Long stretches where you can think. This is what a decluttered day feels like.' : gap >= 1 ? 'Better: some real stretches of focus.' : 'Constant pings. Hard to finish a thought.'; });
+  $$('#dgT input').forEach(c => c.addEventListener('change', () => { on[c.dataset.t] = c.checked; draw(); })); draw();
+}
+
+/* ---------- 18: purge week + flow ---------- */
+{ const el = $('#wk18'), ESS = [['Work', 42, .6], ['Commute and chores', 24, .42], ['Meals', 10, .28]];
+  const OPT = [['Overtime nobody asked for', 5], ['Committee you joined out of guilt', 2], ["Kids' third weekly activity", 3], ['Scrolling on the sofa', 7], ["Favour for a friend's side project", 2], ['A gym class you dread', 2], ["A TV series you're not enjoying", 4], ['Second book club', 1.5]];
+  const drop = OPT.map(() => false);
+  $('#wkT').innerHTML = OPT.map((o, i) => `<label class="tg"><input type="checkbox" data-i="${i}"><span>${o[0]}</span><em>${o[1]} h</em></label>`).join('');
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 200 : 150, TOT = 112; vb(el, W, H);
+    const x0 = 16, x1 = W - 16, sc = (x1 - x0) / TOT, y = 34; let x = x0, s = TX(x0, 20, 'Your waking week: 112 hours', 'faint', 12);
+    const seg = (w, c, op, lab) => { s += `<rect x="${x.toFixed(1)}" y="${y}" width="${Math.max(0, w * sc - 1).toFixed(1)}" height="44" rx="4" ${F(c, op)}/>`; if (lab && w * sc > 54) s += TX(x + w * sc / 2, y + 27, lab, 'text', 11.5, 'middle'); x += w * sc; };
+    ESS.forEach(e => seg(e[1], 'cool', e[2], e[0].split(' ')[0]));
+    OPT.forEach((o, i) => { if (!drop[i]) seg(o[1], 'warm', .55, ''); });
+    const fixed = ESS.reduce((a, e) => a + e[1], 0), kept = OPT.reduce((a, o, i) => a + (drop[i] ? 0 : o[1]), 0), freed = OPT.reduce((a, o, i) => a + (drop[i] ? o[1] : 0), 0), rest = TOT - fixed - kept - freed;
+    seg(rest, 'panel-2', 1, 'Free'); if (freed) seg(freed, 'glow', .8, 'Sacred time');
+    const ly = y + 70; [['Essentials', 'cool'], ['Optional commitments', 'warm'], ['Freed: sacred time', 'glow']].forEach(([l, c], i) => { const lx = N ? 16 : 16 + i * 200, yy = N ? ly + i * 20 : ly; s += `<rect x="${lx}" y="${yy - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(lx + 15, yy, l, 'muted', 12); });
+    el.innerHTML = s;
+    $('#wkH').textContent = (fixed + kept) + ' h'; $('#wkF').textContent = freed + ' h';
+    $('#wkSay').textContent = freed >= 10 ? 'A whole extra evening, every day. Guard it.' : freed >= 4 ? 'Room to breathe. Put it in the diary as sacred time.' : 'Tap the commitments that do not fit your priorities.'; });
+  $$('#wkT input').forEach(c => c.addEventListener('change', () => { drop[+c.dataset.i] = c.checked; draw(); })); draw();
+}
+{ const el = $('#fl18');
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, H = N ? 330 : 320; vb(el, W, H);
+    const C = +$('#flC').value, K = +$('#flK').value; out('flC', C + '/10'); out('flK', K + '/10');
+    const x0 = N ? 40 : 200, x1 = N ? 344 : 520, y0 = 14, y1 = H - 40, X = v => x0 + v / 10 * (x1 - x0), Y = v => y1 - v / 10 * (y1 - y0);
+    let s = `<rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" ${FS('deep', 'line', 1)}/>`;
+    s += `<polygon points="${X(0)},${Y(2)} ${X(0)},${Y(10)} ${X(8)},${Y(10)}" ${F('bad', .1)}/><polygon points="${X(2)},${Y(0)} ${X(10)},${Y(0)} ${X(10)},${Y(8)}" ${F('cool', .1)}/>`;
+    s += `<polygon points="${X(0)},${Y(0)} ${X(2)},${Y(0)} ${X(10)},${Y(8)} ${X(10)},${Y(10)} ${X(8)},${Y(10)} ${X(0)},${Y(2)}" ${F('glow', .16)}/>`;
+    s += `<rect x="${X(0)}" y="${Y(3)}" width="${X(3) - X(0)}" height="${Y(0) - Y(3)}" ${F('faint', .14)}/>`;
+    s += TX(X(2), Y(8.6), 'Anxiety', 'bad', 13, 'middle') + TX(X(8), Y(1.4), 'Boredom', 'cool', 13, 'middle') + `<text transform="translate(${X(6.2)} ${Y(5.8)}) rotate(${-Math.atan((y1 - y0) / (x1 - x0)) * 57.3})" font-size="15" text-anchor="middle" ${F('glow')} font-family="Instrument Serif">The flow channel</text>` + TX(X(1.5), Y(1.3), 'Apathy', 'faint', 12, 'middle');
+    s += TX((x0 + x1) / 2, H - 12, 'Your skill →', 'muted', 12, 'middle') + `<text transform="translate(${x0 - 14} ${(y0 + y1) / 2}) rotate(-90)" font-size="12" text-anchor="middle" ${F('muted')}>Challenge →</text>`;
+    s += `<circle cx="${X(K)}" cy="${Y(C)}" r="10" ${FS('warm', 'text', 2)}/>`;
+    el.innerHTML = s;
+    const z = C <= 3 && K <= 3 ? 'apathy' : C - K > 2 ? 'anxiety' : K - C > 2 ? 'boredom' : 'flow';
+    $('#flZ').textContent = {apathy: 'Apathy', anxiety: 'Anxiety', boredom: 'Boredom', flow: 'Flow'}[z];
+    $('#flSay').textContent = {apathy: 'Too easy and too unfamiliar to care. Pick something that matters and stretches you a bit.', anxiety: 'The task is beyond you for now. Break it down, or build skill first.', boredom: 'You have outgrown this. Raise the stakes, add a deadline or a harder version.', flow: 'Clear goal, no distractions, fifteen minutes to settle in, and time disappears.'}[z]; });
+  ['flC', 'flK'].forEach(id => $('#' + id).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 19: focus session ---------- */
+{ const el = $('#fs19'), TG = [['phone', 'Phone in another room', 2], ['tabs', 'Email and extra tabs closed', 1.5], ['door', 'Door shut or headphones on', 1], ['plan', 'Planned the night before', .5], ['sub', 'Task broken into sub-tasks', .5], ['breath', 'A minute of breathing first', .5]];
+  const on = {}; $('#fsT').innerHTML = TG.map(t => `<label class="tg"><input type="checkbox" data-t="${t[0]}"><span>${t[1]}</span></label>`).join('');
+  const draw = onLayout(() => { const N = NARROW(), W = N ? 360 : 720, B = +$('#fsB').value, R = +$('#fsR').value; out('fsB', B + ' min'); out('fsR', R + ' min');
+    const blocks = []; let t = 0, k = 0; while (t < 120){ const len = Math.min(B, 120 - t); blocks.push(['f', t, len]); t += len; k++; if (t >= 120) break; const br = k % 4 === 0 ? 15 : R; blocks.push(['b', t, Math.min(br, 120 - t)]); t += br; }
+    const rate = Math.max(.5, 6 - TG.reduce((a, g) => a + (on[g[0]] ? g[2] : 0), 0)) + (B > 40 ? 1 : 0);
+    const rr = rng(5); const ints = []; blocks.filter(b => b[0] === 'f').forEach(b => { const n = Math.round(rate * b[2] / 60 + (rr() - .5) * .6); for (let i = 0; i < n; i++) ints.push(b[1] + 2 + rr() * Math.max(1, b[2] - 4)); });
+    const focus = blocks.filter(b => b[0] === 'f').reduce((a, b) => a + b[2], 0), real = Math.max(0, Math.round(focus - ints.length * 5));
+    const rowsD = N ? [[0, 60], [60, 120]] : [[0, 120]], rowH = 70, H = 20 + rowsD.length * rowH + 30; vb(el, W, H);
+    let s = ''; rowsD.forEach(([a, b], ri) => { const y = 16 + ri * rowH, x0 = 24, x1 = W - 28, X = m => x0 + (m - a) / (b - a) * (x1 - x0);
+      blocks.forEach(([ty, st, len]) => { const s0 = Math.max(a, st), e0 = Math.min(b, st + len); if (e0 <= s0) return;
+        s += `<rect x="${X(s0).toFixed(1)}" y="${y}" width="${(X(e0) - X(s0) - 1.5).toFixed(1)}" height="34" rx="5" ${ty === 'f' ? F('glow', .5) : F('cool', .25)}/>`;
+        if (ty === 'b' && X(e0) - X(s0) > 34) s += TX((X(s0) + X(e0)) / 2, y + 22, 'break', 'cool', 11, 'middle'); });
+      ints.filter(m => m >= a && m < b).forEach(m => { const blk = blocks.find(q => q[0] === 'f' && m >= q[1] && m < q[1] + q[2]), xs = X(m), xe = X(Math.min(b, m + 5, blk ? blk[1] + blk[2] : b)); s += `<rect x="${xs.toFixed(1)}" y="${y}" width="${(xe - xs).toFixed(1)}" height="34" ${F('deep', .7)}/><rect x="${(xs - 1.2).toFixed(1)}" y="${y - 4}" width="2.4" height="42" rx="1" ${F('bad')}/>`; });
+      for (let m = a; m <= b; m += N ? 15 : 15) s += TX(X(m), y + 52, m + ' min', 'faint', 10.5, 'middle'); });
+    const ly = 20 + rowsD.length * rowH + 8; [['Focus', 'glow'], ['Break', 'cool'], ['Interruption, then refocusing', 'bad']].forEach(([l, c], i) => { const lx = 16 + i * (N ? 90 : 120); s += `<rect x="${lx}" y="${ly - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(lx + 15, ly, l, 'muted', 11.5); });
+    el.innerHTML = s;
+    $('#fsM').textContent = `${real} of 120`; $('#fsI').textContent = ints.length;
+    $('#fsSay').textContent = B > 40 ? 'Long blocks invite drift. Most people do better with 25 to 40 minutes.' : ints.length <= 2 ? 'Deep work. Reward yourself when it is done.' : ints.length <= 6 ? 'Decent, but each interruption costs more than it seems.' : 'Mostly interrupted. Remove a distraction or two.'; });
+  ['fsB', 'fsR'].forEach(id => $('#' + id).addEventListener('input', draw)); $$('#fsT input').forEach(c => c.addEventListener('change', () => { on[c.dataset.t] = c.checked; draw(); })); draw();
+}
+
+/* ---------- 20: five senses ---------- */
+{ const el = $('#ss20'), ACT = ['Eating', 'Washing up', 'Walking', 'In nature', 'Exercise'], SEN = ['See', 'Hear', 'Smell', 'Touch', 'Taste'];
+  const PR = {
+    'Eating': ['The colours and shapes on the plate, as if you had never seen this food.', 'The sound of cutlery, of chewing, of the room around you.', 'Breathe in before the first bite. What is the smell, exactly?', 'The weight of the fork, the texture in your mouth.', 'How the taste changes from the first moment to the last.'],
+    'Washing up': ['Light on the bubbles, steam rising, the shine of a clean plate.', 'Water running, the clink of dishes.', 'The washing-up liquid, the food you are clearing.', 'Warm water on your hands, the smooth and the rough.', 'Maybe nothing, and that is fine. Notice the absence.'],
+    'Walking': ['Three things you have never noticed on this route.', 'Your footsteps, and the furthest sound you can pick out.', 'Air: rain, cut grass, a bakery, traffic.', 'Each foot meeting the ground, heel to toe.', 'The air on your tongue as you breathe in through your mouth.'],
+    'In nature': ['The many different greens, or the movement in the clouds.', 'Birds, wind in leaves, water: count the layers.', 'Earth, flowers, the smell before rain.', 'Bark, grass, the temperature of the air on your skin.', 'Fresh air, or a piece of fruit eaten outside.'],
+    'Exercise': ['Your surroundings rather than a screen.', 'Your breath: its rhythm and its sound.', 'The air in the room, or outside.', 'Muscles working, the ground pushing back.', 'Water when you stop. Notice your thirst.'],
+  };
+  let act = 0, done = new Set(), cur = -1;
+  $('#ssA').innerHTML = ACT.map((a, i) => `<button class="btn" data-a="${i}" aria-pressed="${i === 0}">${a}</button>`).join('');
+  const draw = () => { const N = NARROW(); vb(el, N ? 420 : 720, 300); const cx = N ? 210 : 360, cy = 150;
+    let s = ''; SEN.forEach((sn, i) => { const a = -Math.PI / 2 + i * Math.PI * 2 / 5, px = cx + Math.cos(a) * 82, py = cy + Math.sin(a) * 82, on = done.has(i), c = cur === i;
+      s += `<g class="svgbtn" tabindex="0" role="button" aria-label="${sn}" aria-pressed="${on}" data-s="${i}"><ellipse cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" rx="54" ry="38" transform="rotate(${(a * 57.3 + 90).toFixed(1)} ${px.toFixed(1)} ${py.toFixed(1)})" ${FS(on ? 'glow' : 'panel-2', c ? 'glow' : on ? 'glow' : 'line', c ? 2.4 : 1.3, on ? .35 : 1)}/>` + TX(px, py + 5, sn, on ? 'text' : 'muted', 15, 'middle') + '</g>'; });
+    s += `<circle cx="${cx}" cy="${cy}" r="38" ${FS('deep', 'glow', 1.5)}/>` + TX(cx, cy - 2, ACT[act], 'text', 15, 'middle', 'font-family="Instrument Serif" font-size="18"') + TX(cx, cy + 16, `${done.size} of 5`, 'faint', 11.5, 'middle');
+    el.innerHTML = s;
+    svgBtn(el, '.svgbtn', g => { cur = +g.dataset.s; done.add(cur); draw(); const f = el.querySelector(`[data-s="${cur}"]`); if (f) f.focus({preventScroll: true}); });
+    $('#ssD').innerHTML = cur < 0 ? '<span class="k">Five senses</span><p>Tap a petal to get a prompt for that sense. Give each one a few slow seconds.</p>' : `<span class="k">${ACT[act]} · ${SEN[cur]}</span><span class="h">${PR[ACT[act]][cur]}</span>${done.size === 5 ? '<p>All five. That was a complete mindfulness practice.</p>' : ''}`; };
+  onLayout(() => draw());
+  $$('#ssA .btn').forEach(b => b.addEventListener('click', () => { act = +b.dataset.a; press($$('#ssA .btn'), b); done = new Set(); cur = -1; draw(); }));
+  draw();
+}
+
+/* ---------- afterword: plan ---------- */
+{ const AREAS = [
+    ['Thoughts', ['Five minutes of deep breathing each morning', 'Ten minutes of meditation a day', 'The rubber band trick for negative loops', 'A fifteen-minute worry window']],
+    ['Obligations', ['Write down my top five values', 'Rate my life wheel and pick a lever', 'Set one SMART goal for this quarter', 'Link one goal to something I love']],
+    ['Relationships', ['Phone away in real conversations', 'Separate fact from story when I replay the past', 'Reflect back before I reply in disagreements', 'Set a boundary with one draining relationship']],
+    ['Surroundings', ['Ten-minute declutter sessions, three times a week', 'Turn off non-essential notifications', 'Protect two hours of sacred time a week', 'One mindful meal a day']]];
+  let plan = store.get('dym-plan', ['', '', '', '']);
+  $('#planF').innerHTML = AREAS.map((a, i) => `<div class="field"><label for="pl${i}">${a[0]}</label><select id="pl${i}"><option value="">Choose one…</option>${a[1].map(o => `<option${plan[i] === o ? ' selected' : ''}>${o}</option>`).join('')}</select></div>`).join('');
+  const text = () => { const vals = store.get('dym-values', {picked: []}).picked; return { vals, rows: AREAS.map((a, i) => plan[i] ? [a[0], plan[i]] : null).filter(Boolean) }; };
+  const render = () => { store.set('dym-plan', plan); const {vals, rows} = text();
+    $('#planOut').innerHTML = (rows.length ? rows.map(([a, p]) => `<p><i>${a}</i>${esc(p)}</p>`).join('') : '<p class="empty">Pick a habit above for each area. Start with whichever feels smallest.</p>') + (vals.length ? `<p class="empty">Guided by your values: <b>${vals.map(esc).join(', ')}</b></p>` : ''); };
+  AREAS.forEach((_, i) => $('#pl' + i).addEventListener('change', e => { plan[i] = e.target.value; render(); }));
+  document.addEventListener('dym-values', render);
+  $('#planClear').addEventListener('click', () => { plan = ['', '', '', '']; AREAS.forEach((_, i) => $('#pl' + i).value = ''); render(); });
+  $('#planCopy').addEventListener('click', async e => { const b = e.currentTarget, {vals, rows} = text(); const t = ['My declutter plan', ...rows.map(([a, p]) => `${a}: ${p}`), ...(vals.length ? ['Values: ' + vals.join(', ')] : [])].join('\n');
+    try { await navigator.clipboard.writeText(t); b.textContent = 'Copied'; } catch(err){ b.textContent = 'Copy failed'; } setTimeout(() => b.textContent = 'Copy my plan', 1600); });
+  render();
+}
+})();
+
+</script>
+</body>
+</html>
