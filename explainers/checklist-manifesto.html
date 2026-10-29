@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Checklist Manifesto, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an operating-room checklist. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into the problem, the checklist, building one and the proof.
+   Dark-first: deep slate with a surgical-teal accent and a cool blue second series; light mode is clinical paper. */
+:root{
+  color-scheme: dark;
+  --ink:#0D1314;--panel:#151D1F;--panel-2:#1E282A;--line:#2E3B3E;--text:#EEF3F1;--muted:#A7B6B2;--faint:#788986;
+  --glow:#3FD3C2;--glow-soft:rgba(63,211,194,.11);--hl:rgba(63,211,194,.26);--cool:#8DB8EA;--cool-soft:rgba(141,184,234,.1);
+  --good:#9BDB7A;--good-soft:rgba(155,219,122,.1);--bad:#FF8A6B;--bad-soft:rgba(255,138,107,.12);
+  --soft:#D4DEDB;--deep:#090E0F;--toc-bg:rgba(21,29,31,.74);--glow-line:rgba(63,211,194,.36);--cool-line:rgba(141,184,234,.3);--on-glow:#04201C;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F2F5F3;--panel:#FFFFFF;--panel-2:#E8EEEB;--line:#D2DCD8;--text:#10191A;--muted:#4E5D5A;--faint:#7A8986;
+  --glow:#0B7568;--glow-soft:rgba(11,117,104,.06);--hl:#C9EBE5;--cool:#245C9A;--cool-soft:rgba(36,92,154,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A1E;--bad-soft:rgba(184,58,30,.07);
+  --soft:#25302F;--deep:#FAFCFB;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(11,117,104,.28);--cool-line:rgba(36,92,154,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F2F5F3;--panel:#FFFFFF;--panel-2:#E8EEEB;--line:#D2DCD8;--text:#10191A;--muted:#4E5D5A;--faint:#7A8986;
+  --glow:#0B7568;--glow-soft:rgba(11,117,104,.06);--hl:#C9EBE5;--cool:#245C9A;--cool-soft:rgba(36,92,154,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A1E;--bad-soft:rgba(184,58,30,.07);
+  --soft:#25302F;--deep:#FAFCFB;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(11,117,104,.28);--cool-line:rgba(36,92,154,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The Checklist Manifesto additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.wcl{display:grid;gap:0;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;min-width:0}
+.wcl-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.wcl-tabs button{font:inherit;text-align:left;background:var(--panel-2);color:var(--muted);border:0;border-right:1px solid var(--line);padding:10px 14px;cursor:pointer;display:grid;gap:2px;min-width:0}
+.wcl-tabs button:last-child{border-right:0}
+.wcl-tabs button b{font-family:var(--f-display);font-weight:400;font-size:22px;color:var(--text);line-height:1.1}
+.wcl-tabs button span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.wcl-tabs button[aria-selected=true]{background:var(--panel);box-shadow:inset 0 3px 0 var(--glow)}
+.wcl-tabs button.full span{color:var(--glow)}
+.wcl-list{display:grid;gap:2px;padding:12px;min-height:230px;align-content:start}
+.ck{display:flex;gap:12px;align-items:flex-start;font:inherit;text-align:left;font-size:14.5px;line-height:1.35;color:var(--text);background:none;border:0;border-radius:10px;padding:8px 10px;cursor:pointer}
+.ck:hover{background:var(--panel-2)}
+.ck .box{flex:0 0 auto;width:20px;height:20px;border-radius:5px;border:1.5px solid var(--faint);display:grid;place-items:center;margin-top:1px}
+.ck .box svg{width:14px;height:14px;opacity:0;stroke:var(--on-glow)}
+.ck[aria-pressed=true] .box{background:var(--glow);border-color:var(--glow)}
+.ck[aria-pressed=true] .box svg{opacity:1}
+.ck[aria-pressed=true] .t{color:var(--muted)}
+.ck .who{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+.wcl .cap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.wcl .cap b{color:var(--glow);font-weight:500}
+.wcl .cap .btn{flex:0 0 auto}
+.lint{display:grid;gap:6px}
+.lint div{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--soft)}
+.lint i{font-style:normal;font-family:var(--f-mono);font-size:12px;flex:0 0 22px;text-align:center;border-radius:6px;padding:1px 0}
+.lint .ok i{background:var(--good-soft);color:var(--good)}
+.lint .no i{background:var(--bad-soft);color:var(--bad)}
+.ckcard{display:grid;gap:6px;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:var(--panel);max-width:560px}
+.ckcard .hd{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:2px}
+.ckcard .hd b{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.15}
+.ckcard .hd span{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--glow)}
+.ckcard .pp{font-size:13px;color:var(--muted)}
+.ckcard .ck{padding:6px 8px}
+.ckcard .rm{margin-left:auto;font:inherit;font-size:16px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.ckcard .rm:hover{color:var(--bad)}
+.ckrow{display:flex;align-items:center;gap:4px}
+.ckrow .ck{flex:1;min-width:0}
+.ckcard .empty{color:var(--muted);font-size:14px;padding:6px 0}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:720px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+@media (max-width: 560px){ .fq{padding:14px 16px} .wcl-tabs button{padding:8px 10px} .wcl-tabs button b{font-size:18px} .wcl-list{min-height:0;padding:8px} .wcl .cap{flex-direction:column;align-items:flex-start} .ck{font-size:14px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Atul Gawande's book</div>
+    <h1><em>The Checklist Manifesto</em>,<br>Explained</h1>
+    <p class="lede">Atul Gawande is a surgeon who noticed that most mistakes in his operating room weren't caused by a lack of knowledge, but by failing to use what everyone already knew. <b>The Checklist Manifesto</b> follows a humble tool, the checklist, from 1930s bombers to intensive care, skyscrapers and the World Health Organization, and shows how a two-minute pause can save lives. This guide takes the introduction and all nine chapters one at a time, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>When the work outgrows memory, a short list of the <em>steps that matter</em> isn't a crutch. It's how experts get it right <em>every time</em>.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">Where do things go wrong for you?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="wcl" style="margin:0" aria-label="The three pause points of the surgical safety checklist">
+        <div class="wcl-tabs" id="wclTabs" role="tablist"></div>
+        <div class="wcl-list" id="wclList"></div>
+        <div class="cap"><span id="wclCap"></span><button class="btn" id="wclReset" type="button">Reset</button></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapter 1</span><span class="q">The Problem</span><span class="d">Ignorance, ineptitude and the problem of extreme complexity</span></a>
+      <a href="#part2"><span class="n">Chapters 2 and 3</span><span class="q">The Checklist</span><span class="d">From the B-17 bomber to the ICU and the building site</span></a>
+      <a href="#part3"><span class="n">Chapters 4 to 6</span><span class="q">Building One</span><span class="d">The WHO, the first try and Boeing's checklist factory</span></a>
+      <a href="#part4"><span class="n">Chapters 7 to 9</span><span class="q">Proof and Pride</span><span class="d">Eight hospitals, the Hudson landing and the save</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2009</span>
+      <span><b>Author</b> Atul Gawande, surgeon, public health researcher and staff writer for The New Yorker</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE PROBLEM ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the problem</span>
+      <h2>The Problem</h2>
+      <p>Gawande opens with a puzzle. We know more than any generation before us, yet skilled, hard-working people still make avoidable mistakes every day. The reason is not laziness or a lack of knowledge. It is that the work has become too complex for any one memory to carry.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Most failures today are not failures of knowing. They are failures of applying what we already know, reliably, every single time.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Two reasons we fail</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>We fail for two reasons: because we don't know enough, or because we don't use what we know. Today the second kind is the bigger problem, and it calls for a different fix.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two kinds of failure.</b> In the 1970s, the philosophers Samuel Gorovitz and Alasdair MacIntyre split human error into ignorance (the knowledge doesn't exist yet) and ineptitude (the knowledge exists, but we fail to apply it).</span></li>
+          <li><span><b>The balance has flipped.</b> For most of history, ignorance was the main enemy. A doctor in 1950 had little to offer a heart attack patient. Now there are many proven treatments, and the trouble is giving the right ones, correctly, to every patient.</span></li>
+          <li><span><b>Ineptitude feels worse.</b> We forgive a doctor who couldn't have known. We are far harder on one who knew the right thing and still didn't do it, and so are doctors on themselves.</span></li>
+          <li><span><b>Know-how has outgrown us.</b> Medicine, building, finance and flying now hold so much knowledge, in so many steps, that even the best-trained expert slips. The question is what tool can help.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>As a young surgical resident, Gawande helped treat a man stabbed at a costume party. The wound looked small, the man was stable, and the team prepared for a routine repair. Then his blood pressure collapsed. The blade had gone much deeper than anyone guessed, into the body's main artery. They saved him, but in the review afterwards nobody could say who should have asked the obvious question: what was the weapon, and how long was it? Everyone knew the step. Nobody took it.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: ignorance or ineptitude?</div><div class="tally" id="tally1" aria-label="Score"></div></div>
+        <div class="sorter" id="sort1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something goes wrong, ask whether anyone could have known better, or whether someone knew and it slipped. Most modern mistakes are the second kind, and you don't fix those with more training. You fix them with a better system.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Extreme complexity →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Too many steps for one memory</div>
+        <h2>The Problem of Extreme Complexity</h2>
+        <div class="short"><span class="lbl">In short</span><p>Modern work, from intensive care to engineering, involves so many steps that even near-perfect people make several errors a day. Specialising helps, but it can't keep up on its own.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The girl in the pond.</b> A three-year-old in the Austrian Alps fell through the ice of a frozen pond and spent about thirty minutes underwater. Her heart had stopped. A rescue team, a helicopter and a hospital ready with a heart-lung machine brought her back, and she recovered fully. It took dozens of people doing hundreds of things right, in order.</span></li>
+          <li><span><b>178 actions a day.</b> A study of intensive care units in Israel counted an average of 178 separate actions per patient per day, from giving a drug to suctioning a lung. Staff got them right about 99 percent of the time, which still left around two errors a day for every patient.</span></li>
+          <li><span><b>The size of the field.</b> The World Health Organization's list of diseases and injuries runs to more than 13,000 entries, and doctors have thousands of drugs and procedures to choose from. No one can hold all of it.</span></li>
+          <li><span><b>Specialists are not enough.</b> Medicine's answer was to split into ever-narrower specialties. That helps with knowledge, but it multiplies the number of people who must coordinate, and the gaps between them become a new source of error.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande describes intensive care as a place where a single patient can need help with breathing, blood pressure, kidneys and infection all at once, each managed by different people with different machines. One common slip is infection from a central line, the tube threaded into a large vein. Each line is put in by someone who knows exactly how to do it safely, yet line infections were common enough to kill many thousands of patients a year. The steps were known. They just weren't always followed.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the perfect day</div><div class="hint">Change the steps and the error rate</div></div>
+        <div class="stage"><svg id="pd2" role="img" aria-label="A grid of the day's steps with the ones that went wrong highlighted"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="pdN">Steps in a patient's day <output id="opdN"></output></label><input type="range" id="pdN" min="10" max="300" step="2" value="178"></div><div class="ctl"><label for="pdE">Chance of a slip on any one step <output id="opdE"></output></label><input type="range" id="pdE" min="1" max="50" value="10"></div></div><div class="row"><button class="btn primary" id="pdGo" type="button">Run another day</button></div></div><div class="stats"><div class="stat"><span class="k">Slips today</span><span class="v glow" id="pdSlip"></span></div><div class="stat"><span class="k">Average slips a day</span><span class="v" id="pdAvg"></span></div><div class="stat"><span class="k">Chance of a perfect day</span><span class="v" id="pdPerf"></span></div></div><p class="callout">Each square is one step. A 1 percent slip rate sounds excellent until you multiply it by 178 steps. <b>At that scale, being very good still means making mistakes every day.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Complexity, not stupidity, is what trips experts up. When a job has hundreds of steps, a small error rate turns into errors every day. The fix has to work at the level of the system, not just the individual.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: The checklist →</a></div>
+    </section>
+    <!-- ===================== THE CHECKLIST ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · the tool</span>
+      <h2>The Checklist</h2>
+      <p>A pilot's card and a builder's wall chart turn out to answer the same problem. A short list of the steps people skip catches slips of memory, and a schedule of who must talk to whom catches the problems no list can predict.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>There are two kinds of checklist: one for the simple steps everyone forgets, and one that forces experts to talk before the unexpected bites.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · From the B-17 to the ICU</div>
+        <h2>The Checklist</h2>
+        <div class="short"><span class="lbl">In short</span><p>When a plane became too complex for one pilot to remember, pilots wrote a checklist. Decades later, a doctor used the same trick to wipe out a deadly hospital infection.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Too much airplane.</b> In 1935, Boeing's new Model 299 bomber crashed on a demonstration flight, killing two of the crew. The expert pilot had forgotten to release a lock on the controls. A newspaper called it too much airplane for one man to fly.</span></li>
+          <li><span><b>An index card.</b> Instead of more training, test pilots wrote simple checklists for takeoff, flight, landing and taxiing, short enough for a card. The plane went on to fly 1.8 million miles without an accident, and the army ordered thousands as the B-17.</span></li>
+          <li><span><b>Five steps in the ICU.</b> In 2001, Peter Pronovost at Johns Hopkins listed the five steps to avoid line infections: wash hands, clean the skin with chlorhexidine, cover the patient with sterile drapes, wear a mask, hat, gown and gloves, and put a sterile dressing on the site.</span></li>
+          <li><span><b>Nurses could stop doctors.</b> Nurses watched for a month and found doctors skipped at least one step with more than a third of patients. So the hospital let nurses stop a doctor who skipped a step. The ten-day infection rate fell from 11 percent to zero.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The results kept coming. Over a little more than a year at Johns Hopkins, Pronovost's checklist was credited with preventing 43 infections and 8 deaths and saving about two million dollars. Then Michigan tried it across its intensive care units in what was called the Keystone Initiative. Within three months, line infections fell by two thirds, and over its first eighteen months the project was estimated to have saved more than 1,500 lives. The steps were not new. What was new was writing them down and making them stick.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: a hundred central lines</div><div class="hint">Run a month with and without the checklist</div></div>
+        <div class="stage"><svg id="cl3" role="img" aria-label="One hundred central lines, showing which ones became infected"></svg></div><div class="lab-ctl"><div class="row" id="clM"></div><div class="toggles" id="clSteps"></div></div><div class="stats"><div class="stat"><span class="k">Lines where a step was skipped</span><span class="v" id="clSkip"></span></div><div class="stat"><span class="k">Infections</span><span class="v glow" id="clInf"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="clSay"></span></div></div><p class="callout">An illustrative model: a line with every step done rarely gets infected; each skipped step raises the risk. Without the checklist, busy staff skip steps more than a third of the time. <b>Untick a step to see what it's worth.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A checklist doesn't teach anyone something new. It makes sure the dull, essential steps happen every time, and it gives the whole team, not just the person in charge, the right to say "stop, we skipped one".</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The master builder →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · How builders handle the unexpected</div>
+        <h2>The End of the Master Builder</h2>
+        <div class="short"><span class="lbl">In short</span><p>No single master builder can design a modern skyscraper. Construction copes with complexity by pairing a checklist of tasks with a checklist of conversations, and by pushing decisions out to the people closest to the problem.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Sixteen trades.</b> Buildings were once designed and built by a master builder. Today they need structural engineers, architects, electricians, plumbers and many more specialists, none of whom sees the whole job.</span></li>
+          <li><span><b>A schedule of tasks.</b> On a Boston tower project, Gawande saw a huge wall chart listing every task in order, day by day. It is a checklist for the steps everyone knows must happen.</span></li>
+          <li><span><b>A schedule of conversations.</b> Beside it was a second chart, the submittal schedule, that listed which experts had to check in with each other, and by when. It covers the problems no one can predict by making sure the right people talk.</span></li>
+          <li><span><b>Power to the edges.</b> When Hurricane Katrina hit, Walmart's chief told store managers to make decisions above their level and do the right thing. Stores sent out water and food days before the government. In a crisis, central plans fail and local judgement plus communication wins.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande sat with the structural engineer Joe Salvia, whose firm worked on the building. Salvia explained that the industry had learned to distrust any one person's judgement on a complex job. Every decision that crossed specialties had to be signed off by the others, so problems surfaced early, in meetings, instead of later, in collapsing beams. The result is a striking safety record: the book notes that serious building failures happen at a rate of less than 0.00002 percent a year.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: who has to talk to whom</div><div class="hint">Add specialists to the project</div></div>
+        <div class="stage"><svg id="mb4" role="img" aria-label="Specialists in a circle with every pair connected"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mbN">Specialists on the job <output id="ombN"></output></label><input type="range" id="mbN" min="2" max="16" value="6"></div></div><div class="row" id="mbM"></div></div><div class="stats"><div class="stat"><span class="k">Pairs who might need to talk</span><span class="v" id="mbPairs"></span></div><div class="stat"><span class="k">Check-ins on the schedule</span><span class="v glow" id="mbChecks"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="mbSay"></span></div></div><p class="callout">Every new specialist adds a link to every other one, so the number of possible conversations grows far faster than the team. <b>A submittal schedule doesn't try to cover them all. It names the ones that matter.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>For simple, known steps, use a task list. For complex, unpredictable work, use a list that forces the right people to talk at the right moments, and then trust them to decide.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: The idea →</a></div>
+    </section>
+    <!-- ===================== BUILDING ONE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · the craft</span>
+      <h2>Building One</h2>
+      <p>Gawande takes the idea into the operating room for the World Health Organization. The first drafts flop, and he learns from Boeing's checklist makers that a good checklist is short, precise, tested and built for a pause in the work.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A bad checklist is long, vague and treats people as idiots. A good one is a quick reminder of the critical steps that even experts miss.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Simple tools, big effects</div>
+        <h2>The Idea</h2>
+        <div class="short"><span class="lbl">In short</span><p>Gawande is asked to help the World Health Organization make surgery safer worldwide. Looking at kitchens and a public health study with soap, he sees how simple tools can change what people do.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The scale of surgery.</b> By the WHO's estimate, around 234 million operations were done each year, more than the number of births. At least 7 million people a year were left disabled by complications, and about a million died.</span></li>
+          <li><span><b>Soap in Karachi.</b> Stephen Luby, a public health researcher, gave free soap to families in poor neighbourhoods of Karachi and showed them when to wash. Compared with similar families, their children had about half as much diarrhoea and pneumonia.</span></li>
+          <li><span><b>Why soap worked.</b> The families already knew washing mattered. The good soap made the habit easy and pleasant, and the simple instructions made it routine. A small tool changed behaviour where lectures hadn't.</span></li>
+          <li><span><b>A chef's checklist.</b> At a busy Boston restaurant, Gawande saw recipes treated as checklists, a list of each night's changes for the cooks and a head chef checking every plate before it left. Great cooks still use lists.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The WHO gathered surgeons, anaesthetists, nurses and safety experts from around the world in Geneva to find a single fix for surgery, which has thousands of different operations. The group argued over training, incentives and new technology. What kept coming back was something cheaper: a short check that any team, in any hospital, could run in a couple of minutes, covering the steps most often missed.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the soap study</div><div class="hint">Compare homes with and without soap</div></div>
+        <div class="stage"><svg id="sp5" role="img" aria-label="Illness rates for children in homes with and without soap"></svg></div><div class="lab-ctl"><div class="row" id="spM"></div><div class="row"><div class="ctl"><label for="spK">Children in the neighbourhood <output id="ospK"></output></label><input type="range" id="spK" min="100" max="5000" step="100" value="1000"></div></div></div><div class="stats"><div class="stat"><span class="k">Cases of diarrhoea a year</span><span class="v glow" id="spD"></span></div><div class="stat"><span class="k">Cases of pneumonia a year</span><span class="v" id="spP"></span></div><div class="stat"><span class="k">What changed</span><span class="s" id="spSay"></span></div></div><p class="callout">The drops are the ones the book reports, about 52 percent for diarrhoea and 48 percent for pneumonia; the starting rates are illustrative. <b>Nobody learned anything new. A simple tool made a known habit stick.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>People often know the right thing already. What changes behaviour is a simple tool that makes the right thing easy, clear and routine. That's what a checklist is meant to be.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The first try →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Teamwork is a checklist item</div>
+        <h2>The First Try</h2>
+        <div class="short"><span class="lbl">In short</span><p>The first surgical checklist was clumsy and confused the team. But one item proved surprisingly powerful: having everyone in the room say their name and role before the operation starts.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Antibiotics on time.</b> Giving an antibiotic in the hour before the first cut cuts infection risk sharply, yet it was missed in a large share of operations. That became a classic checklist item.</span></li>
+          <li><span><b>Say your name.</b> Operating teams often hadn't met. Studies at Johns Hopkins and elsewhere found that when everyone introduced themselves before starting, people were more likely to speak up later when they saw a problem.</span></li>
+          <li><span><b>The activation phenomenon.</b> Giving someone a chance to say something at the start, even just their name, seems to switch on their sense of responsibility and their willingness to talk.</span></li>
+          <li><span><b>A messy first test.</b> When Gawande's own team tried the draft, nobody knew who should lead it, the questions were unclear and it took too long. A checklist can be right in principle and still fail in practice.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande describes the awkwardness of the first trial runs in his own operating room. Some items made sense on paper but confused people at the table. Some checks happened at the wrong moment, after the step they were meant to catch. The surgeons felt silly reading aloud. It was clear that writing a good checklist was a craft in itself, and that the team would need to learn it from people who had been doing it for decades.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: who speaks up?</div><div class="hint">Start the operation with and without introductions</div></div>
+        <div class="stage"><svg id="ac6" role="img" aria-label="An operating team around a table and who speaks up when something is wrong"></svg></div><div class="lab-ctl"><div class="row" id="acM"></div><div class="row"><button class="btn primary" id="acGo" type="button">Something goes wrong</button></div></div><div class="stats"><div class="stat"><span class="k">People who noticed</span><span class="v" id="acSaw"></span></div><div class="stat"><span class="k">People who spoke up</span><span class="v glow" id="acSpoke"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="acSay"></span></div></div><p class="callout">An illustrative model of the activation phenomenon, not data from a study. <b>Saying your name at the start makes you more likely to say "wait" later.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Some of the most important checklist items aren't technical at all. Making sure everyone knows each other and has spoken once turns a group of strangers into a team that will speak up when it matters.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: The checklist factory →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · How Boeing writes a checklist</div>
+        <h2>The Checklist Factory</h2>
+        <div class="short"><span class="lbl">In short</span><p>At Boeing, Gawande learns that a good checklist is short, precise and built for a natural pause in the work. It is not a how-to manual; it is a quick check of the killer steps.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Pause points.</b> Decide when the checklist will be used. In aviation it's before engine start, before takeoff and so on: moments when the team can stop for a minute.</span></li>
+          <li><span><b>Read-do or do-confirm.</b> With a read-do list, you read each step and then do it, like a recipe. With a do-confirm list, the team works from memory, then stops to confirm nothing was missed.</span></li>
+          <li><span><b>Five to nine items.</b> Keep it to a single page with roughly five to nine items, the steps most dangerous to skip and most likely to be missed. Run it in about a minute.</span></li>
+          <li><span><b>Test and rewrite.</b> Use simple, exact words, familiar to the people using it. Then try it in the real world, find where it fails, and fix it. Checklists are never finished.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande spent time with Daniel Boorman, who had written checklists for Boeing's aircraft for years. In a flight simulator, Boorman showed him how a crew handles a warning light: one pilot flies while the other pulls up the right checklist and reads it aloud, step by step. The list was short and precise, made for the moment. Boorman's message was that a bad checklist is vague and long and tries to spell out everything, and that a good one trusts the pros and targets only what they might miss.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: write your own checklist</div><div class="hint">Build a checklist and test it against Boeing's rules</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="ckName">What is the checklist for?</label><input id="ckName" maxlength="60" placeholder="e.g. Leaving for a flight"></div><div class="field"><label for="ckPause">Pause point: when do you run it?</label><input id="ckPause" maxlength="60" placeholder="e.g. Before I lock the front door"></div><div class="field"><label for="ckType">Type</label><select id="ckType"><option value="DO-CONFIRM">DO-CONFIRM: do it from memory, then check</option><option value="READ-DO">READ-DO: read each step, then do it</option></select></div></div><div class="fields"><div class="field" style="grid-column:1/-1"><label for="ckAdd">Add a step (keep it short and exact)</label><div class="row" style="flex-wrap:nowrap"><input id="ckAdd" maxlength="70" placeholder="e.g. Passport in bag"><button class="btn primary" id="ckAddB" type="button">Add</button></div></div></div><div class="out"><span class="k">Your checklist</span><div id="ckCard"></div><span class="k">Boeing's rules</span><div class="lint" id="ckLint"></div><div class="row"><button class="btn" id="ckEx" type="button">Load an example</button><button class="btn" id="ckClr" type="button">Clear</button></div></div></div><p class="callout">Your checklist is saved in this browser only, and shows up in the afterword. <b>Tick the steps on the card to run it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A good checklist is short, specific, quick and used at a set moment. It reminds skilled people of the few things they're most likely to skip, and it gets tested and rewritten until it works.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: The test →</a></div>
+    </section>
+    <!-- ===================== PROOF AND PRIDE ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · the proof</span>
+      <h2>Proof and Pride</h2>
+      <p>The surgical checklist is tried in eight hospitals around the world, and the results are startling. Then Gawande asks why so many experts still refuse it, with stories from investors, an airliner on the Hudson and one of his own operations.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Using a checklist is not a sign of weakness. In a complex world, it is what discipline and teamwork look like.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Eight hospitals, one checklist</div>
+        <h2>The Test</h2>
+        <div class="short"><span class="lbl">In short</span><p>The WHO surgical checklist was tried in eight very different hospitals around the world. Major complications fell by more than a third and deaths by almost half.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Eight cities.</b> The hospitals were in Toronto, London, Seattle, Auckland, Amman, New Delhi, Manila and Ifakara in rural Tanzania, from rich teaching hospitals to places with few resources.</span></li>
+          <li><span><b>Three pause points.</b> The final checklist had about nineteen items in three stops: before anaesthesia, before the first incision, and before the patient leaves the operating room. It took about two minutes.</span></li>
+          <li><span><b>The results.</b> Across nearly 4,000 patients before and nearly 4,000 after, major complications fell from 11 to 7 percent, and deaths fell from 1.5 to 0.8 percent. Every hospital improved.</span></li>
+          <li><span><b>Doubters who would want it.</b> About a fifth of staff found it hard to use or felt it didn't improve safety. But when asked whether they would want the checklist used if they were the patient, 93 percent said yes.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande admits he was nervous. The checklist could easily have done nothing, or the hospitals could have quietly stopped using it. When the data came in, the size of the drop surprised even the researchers. Some of the gain came from specific items, like antibiotics being given on time. But a lot of it seemed to come from teamwork: people who had talked before the first cut handled the unexpected better when it came.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: before and after</div><div class="hint">Pick a measure and the number of operations</div></div>
+        <div class="stage"><svg id="ts7" role="img" aria-label="Rates of complications and deaths before and after the checklist"></svg></div><div class="lab-ctl"><div class="row" id="tsM"></div><div class="row"><div class="ctl"><label for="tsK">Operations a year <output id="otsK"></output></label><input type="range" id="tsK" min="0" max="100" value="40"></div></div></div><div class="stats"><div class="stat"><span class="k">Before the checklist</span><span class="v" id="tsB"></span></div><div class="stat"><span class="k">After the checklist</span><span class="v" id="tsA"></span></div><div class="stat"><span class="k">Avoided</span><span class="v glow" id="tsSave"></span></div></div><p class="callout">The rates are the averages the book reports across the eight hospitals. Scaling them to other numbers of operations is a rough illustration. <b>A two-minute check, repeated millions of times, adds up to an enormous number of people.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The checklist worked everywhere it was tried, rich hospital or poor. Even the people who grumbled about it wanted it used on themselves.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: The hero →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Discipline, not swagger</div>
+        <h2>The Hero in the Age of Checklists</h2>
+        <div class="short"><span class="lbl">In short</span><p>We love lone heroes, but the real experts are the ones who follow their checklists under pressure. Gawande finds them among investors and in the cockpit of a plane that landed on the Hudson.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Investors with lists.</b> Some investors, like Mohnish Pabrai, studied their own and others' costly mistakes and turned them into checklists to run before buying. It made them slower to jump and helped them avoid traps others fell into.</span></li>
+          <li><span><b>Fear and greed.</b> Checklists help most in high-pressure moments when emotions take over and people skip the steps they know they should take.</span></li>
+          <li><span><b>Miracle on the Hudson.</b> In January 2009, US Airways Flight 1549 hit a flock of geese after takeoff from LaGuardia and lost both engines. Captain Sullenberger flew while First Officer Skiles worked the engine failure checklist. They glided onto the Hudson and all 155 people survived.</span></li>
+          <li><span><b>Not one hero.</b> Sullenberger kept stressing that the crew, the procedures and the training did it. The press wanted a lone hero; the reality was a disciplined team.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande notes that pilots are trained to treat checklists as part of being a pro, not a slight on their skill. On Flight 1549, there were only about three and a half minutes from the bird strike to the water. In that time, the co-pilot ran through as much of the restart checklist as he could while the captain picked a landing spot, and the cabin crew got passengers into brace positions. Each did their part, by the book, at speed.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: 208 seconds</div><div class="hint">Drag through Flight 1549's last minutes</div></div>
+        <div class="stage"><svg id="fl8" role="img" aria-label="A timeline of Flight 1549 from bird strike to landing, showing what each crew member did"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="flT">Seconds after the bird strike <output id="oflT"></output></label><input type="range" id="flT" min="0" max="208" value="0"></div></div><div class="row"><button class="btn primary" id="flGo" type="button">Play</button></div></div><div class="detail" id="flD" aria-live="polite"></div><p class="callout">Times are rounded from the public record, and the events are simplified. <b>One flies, one runs the checklist, the cabin crew prepares the passengers. Nobody does it alone.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Following a checklist under pressure is what heroes actually do. The best performers are disciplined enough to admit they are fallible and use the tools that catch them.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The save →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · When the checklist catches you</div>
+        <h2>The Save</h2>
+        <div class="short"><span class="lbl">In short</span><p>Gawande ends with one of his own operations, where a sudden, massive bleed could have killed the patient. The checklist had already put the team, and the blood, in place.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>He uses it too.</b> Gawande started using the checklist in his own operating room, half expecting it to be a waste of time. It soon caught problems he would have missed, like an antibiotic not yet given.</span></li>
+          <li><span><b>The tear.</b> During an operation to remove a tumour, he accidentally tore the vena cava, the body's largest vein. The patient lost a huge amount of blood in moments.</span></li>
+          <li><span><b>Ready before it happened.</b> Because the team had discussed the risk of major blood loss before the first cut, blood had been ordered and was ready. Everyone knew each other's names and roles. They worked fast and the patient survived.</span></li>
+          <li><span><b>Humility.</b> Gawande's closing point is that we are not as good as we think. Accepting a checklist means accepting our limits, and that is the beginning of doing better.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Gawande writes that he went into the operation with no particular worry. The tumour was in a difficult spot, and in the checklist briefing he had mentioned, almost in passing, that blood loss was possible. The anaesthetist made sure blood was available. When the vein tore, the room didn't freeze. The nurses knew what to fetch, the anaesthetist started transfusing at once, and he was able to get control of the bleeding. Without that two-minute conversation, he believes, the patient would have died.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: slices of defence</div><div class="hint">Add defences and send problems through</div></div>
+        <div class="stage"><svg id="sw9" role="img" aria-label="Problems passing through layers of defence, each with holes"></svg></div><div class="lab-ctl"><div class="toggles" id="swL"></div><div class="row"><button class="btn primary" id="swGo" type="button">Send 50 problems through</button></div></div><div class="stats"><div class="stat"><span class="k">Problems that got through</span><span class="v glow" id="swThru"></span></div><div class="stat"><span class="k">Caught</span><span class="v" id="swCaught"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="swSay"></span></div></div><p class="callout">An illustrative "Swiss cheese" model, a common way safety experts picture layers of defence. Each layer has holes; <b>a checklist adds one more slice, and every extra slice makes it far less likely that all the holes line up.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Checklists don't replace skill. They protect it. The day something unexpected goes wrong, the conversation you had at the start may be what saves the day.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#after">Next: your checklist →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your checklist</h2>
+      <p class="big">The whole book fits on one card: find the pause point, list the few steps people skip, and give everyone in the room the right to say "stop".</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">The problem</span><b>Ineptitude, not ignorance</b><span>Most failures now come from not applying what we already know.</span></div>
+        <div><span class="n">Complexity</span><b>Too many steps</b><span>Even a 1 percent slip rate means mistakes every day when the work has hundreds of steps.</span></div>
+        <div><span class="n">Two kinds</span><b>Tasks and talks</b><span>One list for the simple steps, another to make the right experts talk at the right time.</span></div>
+        <div><span class="n">The craft</span><b>Short and tested</b><span>A pause point, five to nine killer items, READ-DO or DO-CONFIRM, simple words, revised in the field.</span></div>
+        <div><span class="n">The proof</span><b>Two minutes, half the deaths</b><span>Eight hospitals saw complications fall by a third and deaths by almost half.</span></div>
+        <div><span class="n">The hero</span><b>Discipline over swagger</b><span>The best teams accept that they are fallible and use the tools that catch them.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Checklist Manifesto: How to Get Things Right</i> by Atul Gawande (2009). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The problem", "The checklist", "Building one", "Proof"];
+const CH = [["Introduction", "Ignorance and ineptitude", 0, "Introduction"], ["The Problem of Extreme Complexity", "Extreme complexity", 0, "Chapter 1"], ["The Checklist", "The checklist", 1, "Chapter 2"], ["The End of the Master Builder", "The master builder", 1, "Chapter 3"], ["The Idea", "The idea", 2, "Chapter 4"], ["The First Try", "The first try", 2, "Chapter 5"], ["The Checklist Factory", "The checklist factory", 2, "Chapter 6"], ["The Test", "The test", 3, "Chapter 7"], ["The Hero in the Age of Checklists", "The hero", 3, "Chapter 8"], ["The Save", "The save", 3, "Chapter 9"]];
+const QUIZ = {
+"1": {
+"q": "A pharmacist knows a drug interaction exists but misses it on a busy shift. Which kind of failure is it?",
+"o": [
+"Ignorance",
+"Ineptitude",
+"Bad luck"
+],
+"a": 1,
+"w": "The knowledge existed and wasn't applied. That's what Gorovitz and MacIntyre called ineptitude, the kind of failure checklists are built for."
+},
+"2": {
+"q": "Why do highly trained ICU staff still make about two errors per patient each day?",
+"o": [
+"They are poorly trained",
+"Each patient needs so many actions that even a tiny error rate adds up",
+"The equipment is unreliable"
+],
+"a": 1,
+"w": "With around 178 actions a day, getting 99 percent right still leaves about two slips. The problem is volume and complexity."
+},
+"3": {
+"q": "What made Pronovost's line checklist work, beyond writing the steps down?",
+"o": [
+"New sterile equipment",
+"Nurses were allowed to stop a doctor who skipped a step",
+"Doctors were tested on the steps each week"
+],
+"a": 1,
+"w": "The list only stuck because nurses had the authority to intervene. A checklist also changes who is allowed to speak up."
+},
+"4": {
+"q": "What is the submittal schedule in construction?",
+"o": [
+"A list of materials to order",
+"A checklist of which experts must consult each other, and by when",
+"The building's budget"
+],
+"a": 1,
+"w": "It is a communication checklist. It doesn't say what to decide. It makes sure the right people talk before they decide."
+},
+"5": {
+"q": "What does the Karachi soap study teach about checklists?",
+"o": [
+"People need more education before they change",
+"A simple tool can turn known good practice into a habit",
+"Expensive interventions work best"
+],
+"a": 1,
+"w": "Families knew washing mattered. The soap and a few clear instructions made it happen, just as a checklist turns known steps into routine."
+},
+"6": {
+"q": "What is the \"activation phenomenon\"?",
+"o": [
+"Anaesthetic drugs taking effect",
+"People who speak at the start are more likely to speak up later",
+"The checklist turning on automatically"
+],
+"a": 1,
+"w": "Giving each person a voice at the outset, even just their name, makes them more willing to raise a concern during the operation."
+},
+"7": {
+"q": "What's the difference between a DO-CONFIRM and a READ-DO checklist?",
+"o": [
+"DO-CONFIRM is for experts, READ-DO for beginners",
+"DO-CONFIRM: work from memory then check; READ-DO: read each step then do it",
+"There is no real difference"
+],
+"a": 1,
+"w": "DO-CONFIRM lets the team work from memory and then pause to confirm. READ-DO is followed step by step, like a recipe."
+},
+"8": {
+"q": "Roughly how much did deaths fall in the eight-hospital trial?",
+"o": [
+"By about 10 percent",
+"By almost half",
+"They didn't change"
+],
+"a": 1,
+"w": "Deaths fell from 1.5 percent to 0.8 percent, a drop of about 47 percent."
+},
+"9": {
+"q": "On Flight 1549, what was First Officer Skiles doing while Sullenberger flew?",
+"o": [
+"Talking to the passengers",
+"Running the engine failure checklist",
+"Nothing, there wasn't time"
+],
+"a": 1,
+"w": "Skiles worked through the restart checklist while the captain flew the plane. Each had a role, and the procedures held."
+},
+"10": {
+"q": "Why did Gawande's patient survive the torn vein?",
+"o": [
+"Gawande is an unusually fast surgeon",
+"The checklist briefing had raised the risk of blood loss, so blood was ready and the team was prepared",
+"The tear turned out to be minor"
+],
+"a": 1,
+"w": "The briefing made the team plan for a bleed before it happened. When it came, blood was on hand and everyone knew their role."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0d1314';
+try { const t = localStorage.getItem('cm-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('cm-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('cm-done', []));
+const save = () => store.set('cm-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+
+/* ---------- afterword card (reads the checklist saved in the chapter 6 lab) ---------- */
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const L = store.get('cm-list', null);
+  if (!L || !L.items || !L.items.length){ el.innerHTML = '<span class="k">Nothing saved yet</span><p class="empty">Write your own checklist in the <a href="#ch7">checklist factory</a> lab. What you save shows up here, in this browser only.</p>'; return; }
+  el.innerHTML = `<span class="k">Your checklist</span><div class="ckcard"><div class="hd"><b>${esc(L.name || 'My checklist')}</b><span>${esc(L.type)}</span></div>${L.pause ? `<div class="pp">Pause point: ${esc(L.pause)}</div>` : ''}${L.items.map(it => `<div class="ck" style="cursor:default"><span class="box"></span><span class="t">${esc(it.t)}</span></div>`).join('')}</div><p class="empty">Print it, stick it by the door, run it at the pause point. Then rewrite it the first time it misses something.</p>`;
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I know what to do, but still slip up', 1, 'Ineptitude, not ignorance', 'The knowledge is there; applying it every time is the hard part. That is exactly the kind of failure a checklist is built to catch.'],
+    ['There are too many steps to remember', 2, 'Extreme complexity', 'At hundreds of steps a day, even a 1 percent slip rate means mistakes daily. Stop relying on memory alone.'],
+    ['People skip the boring steps', 3, 'The checklist', 'Write the dull, essential steps down, and give someone the right to say "stop" when one is skipped.'],
+    ['Specialists don\'t talk to each other', 4, 'A schedule of conversations', 'For problems no one can predict, list who has to check in with whom, and by when. Then trust them to decide.'],
+    ['Nobody speaks up when they see a problem', 6, 'The activation phenomenon', 'Have everyone say their name and role at the start. People who speak once are more likely to speak again.'],
+    ['Our checklists are long and ignored', 7, 'The checklist factory', 'Pick a pause point, cut it to five to nine killer items, use exact words, and test it in the real world.'],
+    ['I freeze under pressure', 9, 'The hero with a checklist', 'Split the roles: one person handles the crisis, another runs the checklist. Discipline holds when nerves don\'t.'],
+    ['I\'m too experienced to need one', 10, 'The save', 'Gawande thought so too, until the checklist caught him. Humility is where getting better starts.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the surgical safety checklist, three pause points ---------- */
+{ const PP = [
+    ['Sign in', 'Before anaesthesia', [
+      ['Patient has confirmed their identity, the site, the procedure and consent', 'Nurse and anaesthetist'],
+      ['Site is marked', 'Surgeon'],
+      ['Anaesthesia machine and medicines checked', 'Anaesthetist'],
+      ['Pulse oximeter on the patient and working', 'Anaesthetist'],
+      ['Any known allergy?', 'Anaesthetist'],
+      ['Difficult airway or risk of aspiration? Help and equipment ready', 'Anaesthetist'],
+      ['Risk of losing more than 500 ml of blood? Access and fluids planned', 'Anaesthetist']]],
+    ['Time out', 'Before the first cut', [
+      ['Everyone introduces themselves by name and role', 'Whole team'],
+      ['Surgeon, anaesthetist and nurse confirm patient, site and procedure', 'Whole team'],
+      ['Antibiotic given within the last 60 minutes', 'Anaesthetist'],
+      ['Critical steps, expected length and expected blood loss', 'Surgeon'],
+      ['Any concerns specific to this patient', 'Anaesthetist'],
+      ['Sterility confirmed; any equipment issues', 'Nurse'],
+      ['Essential imaging is on display', 'Surgeon']]],
+    ['Sign out', 'Before leaving the room', [
+      ['Name of the procedure recorded', 'Nurse'],
+      ['Instrument, sponge and needle counts are correct', 'Nurse'],
+      ['Specimen labelled with the patient\'s name', 'Nurse'],
+      ['Any equipment problems to fix', 'Nurse'],
+      ['Key concerns for this patient\'s recovery', 'Whole team']]] ];
+  const TOT = PP.reduce((s, p) => s + p[2].length, 0);
+  const tabs = $('#wclTabs'), list = $('#wclList'), cap = $('#wclCap');
+  let cur = 0, on = PP.map(p => p[2].map(() => false));
+  function draw(){
+    tabs.innerHTML = PP.map(([n, w, it], i) => `<button type="button" role="tab" aria-selected="${i === cur}" class="${on[i].every(Boolean) ? 'full' : ''}" data-t="${i}"><span>${on[i].filter(Boolean).length}/${it.length} · ${w}</span><b>${n}</b></button>`).join('');
+    list.innerHTML = PP[cur][2].map(([t, who], k) => `<button type="button" class="ck" aria-pressed="${on[cur][k]}" data-k="${k}"><span class="box">${TICK}</span><span><span class="t">${t}</span><span class="who">${who}</span></span></button>`).join('');
+    const n = on.flat().filter(Boolean).length;
+    cap.innerHTML = n === TOT ? '<b>All three pause points done.</b> About two minutes, start to finish.' : `<b>${n} of ${TOT}</b> checked · a simplified version of the WHO checklist`;
+    tabs.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.t; draw(); }));
+    list.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { const k = +b.dataset.k; on[cur][k] = !on[cur][k];
+      if (on[cur].every(Boolean) && cur < PP.length - 1){ draw(); setTimeout(() => { cur++; draw(); }, RM ? 0 : 350); return; }
+      draw(); list.querySelector(`[data-k="${k}"]`).focus({preventScroll:true}); }));
+  }
+  $('#wclReset').addEventListener('click', () => { on = PP.map(p => p[2].map(() => false)); cur = 0; draw(); });
+  draw();
+}
+
+/* ---------- intro: ignorance or ineptitude ---------- */
+sorter('#sort1', '#tally1', [{ id: 'ign', label: 'Ignorance', d: 'Nobody knew how yet' }, { id: 'inept', label: 'Ineptitude', d: 'The know-how existed but wasn\'t used' }], [
+  { t: 'In 1950, a doctor has no treatment that can stop the damage of a heart attack.', q: true, a: 'ign', w: 'The knowledge didn\'t exist yet. No one could have done better at the time.' },
+  { t: 'A surgeon forgets the antibiotic that everyone knows prevents infection.', q: true, a: 'inept', w: 'The step is well known. It just didn\'t happen, which is the classic checklist failure.' },
+  { t: 'A test pilot takes off with the control lock still engaged.', q: true, a: 'inept', w: 'The 1935 Model 299 crash. The pilot was an expert; he simply forgot one step.' },
+  { t: 'A new virus spreads before any vaccine has been developed.', q: true, a: 'ign', w: 'Science hasn\'t caught up yet. That\'s ignorance, not a failure to apply knowledge.' },
+  { t: 'A doctor puts in a central line without washing their hands first.', q: true, a: 'inept', w: 'Everyone knows hand washing prevents line infections. Skipping it is ineptitude.' },
+  { t: 'Seismologists can\'t say on which day an earthquake will strike.', q: true, a: 'ign', w: 'There is no method yet that predicts the exact day. That\'s a limit of knowledge.' },
+  { t: 'Nobody in the trauma bay asks how long the blade was.', q: true, a: 'inept', w: 'The question was obvious and known. Everyone assumed someone else would ask it.' },
+  { t: 'A contractor skips a load check that the building code requires.', q: true, a: 'inept', w: 'The rule and the method both exist. Not using them is ineptitude.' },
+]);
+
+/* ---------- 1: the perfect day ---------- */
+{ const el = $('#pd2'), nI = $('#pdN'), eI = $('#pdE'); let seed = 7, slips = [];
+  function roll(){ const r = rng(seed), n = +nI.value, p = +eI.value / 1000; slips = [...Array(n)].map(() => r() < p); }
+  const draw = onLayout(() => { const n = +nI.value, p = +eI.value / 1000, nw = NARROW(), cols = nw ? 15 : 30, cs = nw ? 22 : 24, W = cols * cs + 20, rows = Math.ceil(n / cols), H = rows * cs + 40;
+    vb(el, W, H); let g = ''; const bad = slips.filter(Boolean).length;
+    for (let i = 0; i < rows * cols; i++){ const x = 10 + (i % cols) * cs, y = 8 + Math.floor(i / cols) * cs, s = cs - 5;
+      if (i >= n){ g += `<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="4" ${S('line', 1, ';stroke-dasharray:2 3;stroke-opacity:.5')}/>`; continue; }
+      g += slips[i] ? `<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="4" ${F('bad')}/><text x="${x + s / 2}" y="${y + s / 2 + 4.5}" font-size="13" text-anchor="middle" ${F('ink')}>×</text>` : `<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="4" ${F('glow', .28)}/>`; }
+    g += TX(10, H - 10, n + ' steps today', 'muted', 12) + TX(W - 10, H - 10, bad ? bad + (bad === 1 ? ' slip' : ' slips') : 'a perfect day', bad ? 'bad' : 'good', 12, 'end');
+    el.innerHTML = g;
+    out('pdN', n); out('pdE', (p * 100).toFixed(1) + '%');
+    $('#pdSlip').textContent = bad; $('#pdAvg').textContent = (n * p).toFixed(1);
+    const perf = Math.pow(1 - p, n); $('#pdPerf').textContent = perf < .001 ? 'under 0.1%' : (perf * 100).toFixed(perf < .1 ? 1 : 0) + '%';
+  });
+  const go = () => { roll(); draw(); };
+  nI.addEventListener('input', go); eI.addEventListener('input', go);
+  $('#pdGo').addEventListener('click', () => { seed = (seed * 9301 + 49297) % 233280 + 1; go(); });
+  go();
+}
+
+/* ---------- 2: a hundred central lines ---------- */
+{ const el = $('#cl3'), STEPS = ['Wash hands', 'Clean skin with chlorhexidine', 'Drape the whole patient', 'Mask, hat, gown and gloves', 'Sterile dressing on the site'];
+  let mode = 'before', seed = 11, on = STEPS.map(() => true);
+  $('#clM').innerHTML = `<button class="btn" data-m="before" aria-pressed="true">Before: busy staff, no list</button><button class="btn" data-m="after" aria-pressed="false">After: the checklist, nurses can stop doctors</button><button class="btn" id="clGo" type="button">Run a new month</button>`;
+  const mb = [...$('#clM').querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  $('#clSteps').innerHTML = STEPS.map((s, i) => `<label class="tg"><input type="checkbox" data-s="${i}" checked><span>${s}</span></label>`).join('');
+  $$('#clSteps [data-s]').forEach(cb => cb.addEventListener('change', () => { on[+cb.dataset.s] = cb.checked; draw(); }));
+  $('#clGo').addEventListener('click', () => { seed += 17; draw(); });
+  const draw = onLayout(() => { const r = rng(seed + (mode === 'after' ? 1000 : 0)), nw = NARROW(), cols = nw ? 10 : 20, cs = nw ? 32 : 36, W = cols * cs + 20, H = Math.ceil(100 / cols) * cs + 44;
+    $$('#clSteps .tg').forEach(t => t.style.opacity = mode === 'after' ? 1 : .5); $$('#clSteps input').forEach(c => c.disabled = mode !== 'after');
+    vb(el, W, H); let g = '', skipped = 0, inf = 0;
+    for (let i = 0; i < 100; i++){ let k = 0; STEPS.forEach((_, s) => { const p = mode === 'after' && on[s] ? .01 : .09; if (r() < p) k++; });
+      const infected = r() < .005 + .2 * k; if (k) skipped++; if (infected) inf++;
+      const x = 10 + (i % cols) * cs + cs / 2, y = 8 + Math.floor(i / cols) * cs + cs / 2, rr = cs * .34;
+      g += infected ? `<circle cx="${x}" cy="${y}" r="${rr}" ${F('bad')}/>` : k ? `<circle cx="${x}" cy="${y}" r="${rr}" ${FS('panel', 'cool', 2)}/>` : `<circle cx="${x}" cy="${y}" r="${rr}" ${F('glow', .3)}/>`; }
+    const ly = H - 12; g += `<circle cx="16" cy="${ly - 4}" r="6" ${F('glow', .3)}/>` + TX(28, ly, 'every step done', 'muted', 12) + `<circle cx="${nw ? 140 : 150}" cy="${ly - 4}" r="6" ${FS('panel', 'cool', 2)}/>` + TX(nw ? 152 : 162, ly, 'a step skipped', 'muted', 12) + `<circle cx="${nw ? 262 : 286}" cy="${ly - 4}" r="6" ${F('bad')}/>` + TX(nw ? 274 : 298, ly, 'infected', 'muted', 12);
+    el.innerHTML = g;
+    $('#clSkip').textContent = skipped + ' of 100'; $('#clInf').textContent = inf;
+    const off = on.filter(x => !x).length;
+    $('#clSay').textContent = mode === 'before' ? 'Every step is known, yet about a third of lines miss one. Infections follow.' : off ? `With ${off === 1 ? 'one step' : off + ' steps'} left off the list, those get skipped again and infections creep back.` : 'Skipped steps almost vanish, and so do the infections.';
+  });
+  draw();
+}
+
+/* ---------- 3: who has to talk to whom ---------- */
+{ const el = $('#mb4'), nI = $('#mbN');
+  const WHO = ['Owner', 'Architect', 'Structural', 'Mechanical', 'Electrical', 'Plumbing', 'Fire safety', 'Elevators', 'Concrete', 'Steel', 'Glazing', 'Lighting', 'Acoustics', 'Security', 'Interiors', 'Landscape'];
+  /* which pairs the submittal schedule names: each trade checks in with the ones whose work it touches */
+  const TOUCH = [[1,2],[0,1],[1,3],[1,4],[2,3],[3,4],[3,5],[4,6],[5,6],[2,7],[4,7],[2,8],[8,9],[2,9],[1,10],[9,10],[4,11],[1,11],[1,12],[3,12],[4,13],[6,13],[1,14],[11,14],[1,15],[5,15],[0,13],[0,14]];
+  let mode = 'all';
+  $('#mbM').innerHTML = `<button class="btn" data-m="all" aria-pressed="true">Everyone talks to everyone</button><button class="btn" data-m="sched" aria-pressed="false">Follow the submittal schedule</button>`;
+  const mb = [...$('#mbM').querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  const draw = onLayout(() => { const n = +nI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 360 : 380, cx = W / 2, cy = H / 2, R = nw ? 104 : 140;
+    vb(el, W, H); const P = [...Array(n)].map((_, i) => { const a = -Math.PI / 2 + i / n * Math.PI * 2; return [cx + R * Math.cos(a), cy + R * Math.sin(a), a]; });
+    const sched = TOUCH.filter(([a, b]) => a < n && b < n), key = new Set(sched.map(([a, b]) => a + '-' + b));
+    let g = '';
+    for (let a = 0; a < n; a++) for (let b = a + 1; b < n; b++){ const s = key.has(a + '-' + b) || key.has(b + '-' + a);
+      if (mode === 'all') g += `<line x1="${P[a][0].toFixed(1)}" y1="${P[a][1].toFixed(1)}" x2="${P[b][0].toFixed(1)}" y2="${P[b][1].toFixed(1)}" ${S('cool', 1, ';stroke-opacity:' + (n > 10 ? .3 : .5))}/>`;
+      else if (s) g += `<line x1="${P[a][0].toFixed(1)}" y1="${P[a][1].toFixed(1)}" x2="${P[b][0].toFixed(1)}" y2="${P[b][1].toFixed(1)}" ${S('glow', 2.2)}/>`; }
+    P.forEach(([x, y, a], i) => { const lx = cx + (R + (nw ? 18 : 22)) * Math.cos(a), ly = cy + (R + (nw ? 18 : 22)) * Math.sin(a), anc = Math.abs(Math.cos(a)) < .25 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end';
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${nw ? 7 : 9}" ${FS('panel', i ? 'text' : 'glow', 2)}/>` + TX(lx.toFixed(1), (ly + 4).toFixed(1), WHO[i], 'muted', nw ? 11 : 12.5, anc); });
+    el.innerHTML = g;
+    const pairs = n * (n - 1) / 2; out('mbN', n);
+    $('#mbPairs').textContent = pairs; $('#mbChecks').textContent = mode === 'all' ? '—' : sched.length;
+    $('#mbSay').textContent = n <= 3 ? 'Small enough for one master builder to keep in their head.' : mode === 'all' ? `${pairs} possible conversations. Nobody can hold that, so things fall through the gaps.` : `${sched.length} named check-ins, where one trade\'s work meets another\'s. The rest decide on their own.`;
+  });
+  nI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 4: the soap study ---------- */
+{ const el = $('#sp5'), kI = $('#spK'); let soap = false;
+  const BASE = [['Diarrhoea', 2.0, .48], ['Pneumonia', .4, .52]]; /* illustrative cases per child per year; fraction left after soap, as reported */
+  $('#spM').innerHTML = `<button class="btn" data-m="0" aria-pressed="true">No soap</button><button class="btn" data-m="1" aria-pressed="false">Free soap and simple instructions</button>`;
+  const mb = [...$('#spM').querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { soap = b.dataset.m === '1'; press(mb, b); draw(); }));
+  const draw = onLayout(() => { const k = +kI.value, nw = NARROW(), W = nw ? 360 : 760, H = 250, L = nw ? 92 : 120, R = W - (nw ? 16 : 60), rowH = 92, T = 24;
+    vb(el, W, H); const X = v => L + v / 2.2 * (R - L); let g = '';
+    BASE.forEach(([name, b, left], i) => { const y = T + i * rowH, v = soap ? b * left : b;
+      g += TX(L - 12, y + 30, name, 'text', 14, 'end');
+      if (soap) g += `<rect x="${L}" y="${y + 6}" width="${(X(b) - L).toFixed(1)}" height="16" rx="8" ${F('cool', .25)}/>` + TX(X(b) + 6, y + 19, 'without soap', 'faint', 11);
+      g += `<rect x="${L}" y="${y + 28}" width="${(X(v) - L).toFixed(1)}" height="22" rx="8" ${F(soap ? 'glow' : 'cool')} style="transition:${RM ? 'none' : 'width .5s'}"/>`;
+      if (soap) g += TX(X(v) + 8, y + 44, '−' + Math.round((1 - left) * 100) + '%', 'glow', 13, 'start', 'class="mono"');
+      g += TX(L, y + 68, (v).toFixed(2) + ' cases per child per year', 'muted', 11.5, 'start', 'class="mono"');
+    });
+    el.innerHTML = g; out('spK', fmtN(k));
+    $('#spD').textContent = fmtN(k * BASE[0][1] * (soap ? BASE[0][2] : 1)); $('#spP').textContent = fmtN(k * BASE[1][1] * (soap ? BASE[1][2] : 1));
+    $('#spSay').textContent = soap ? `About ${fmtN(k * (BASE[0][1] * (1 - BASE[0][2]) + BASE[1][1] * (1 - BASE[1][2])))} fewer cases, with no new knowledge, just soap and a routine.` : 'Families know washing matters. Without an easy tool and a routine, it doesn\'t happen enough.';
+  });
+  kI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: who speaks up ---------- */
+{ const el = $('#ac6'), TEAM = [['Surgeon', .95], ['Assistant', .35], ['Anaesthetist', .6], ['Anaesthesia nurse', .3], ['Scrub nurse', .3], ['Circulating nurse', .25]];
+  let intro = false, seed = 3, run = null, runs = 0, raised = 0;
+  $('#acM').innerHTML = `<button class="btn" data-m="0" aria-pressed="true">Straight to the first cut</button><button class="btn" data-m="1" aria-pressed="false">Everyone says their name and role first</button>`;
+  const mb = [...$('#acM').querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { intro = b.dataset.m === '1'; press(mb, b); run = null; runs = 0; raised = 0; draw(); }));
+  $('#acGo').addEventListener('click', () => { const r = rng(seed += 31); let saw = TEAM.map(() => r() < .45); if (!saw.some((x, i) => x && i)) saw[1 + Math.floor(r() * 5)] = true; saw[0] = false;
+    const spoke = saw.map((s, i) => s && r() < (intro ? Math.min(.92, TEAM[i][1] + .5) : TEAM[i][1]));
+    run = { saw, spoke }; runs++; if (spoke.some(Boolean)) raised++; draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 350 : 320, cx = W / 2, cy = H / 2 - 6, rx = nw ? 70 : 150, ry = nw ? 46 : 52, Rx = nw ? 128 : 260, Ry = nw ? 112 : 104;
+    vb(el, W, H);
+    let g = `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" ${FS('panel-2', 'line', 1.5)}/>` + TX(cx, cy + 4, 'patient', 'faint', 12, 'middle');
+    TEAM.forEach(([name], i) => { const a = -Math.PI / 2 + i / TEAM.length * Math.PI * 2 + Math.PI / TEAM.length, x = cx + Rx * Math.cos(a), y = cy + Ry * Math.sin(a);
+      const saw = run && run.saw[i], spoke = run && run.spoke[i];
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${nw ? 15 : 18}" ${spoke ? F('glow') : saw ? FS('panel', 'cool', 2.5) : FS('panel', 'line', 1.5)}/>`;
+      if (intro) g += TX(x.toFixed(1), (y + 4).toFixed(1), '✓', spoke ? 'on-glow' : 'good', 12, 'middle');
+      const ty = y + (Math.sin(a) > 0 ? (nw ? 30 : 34) : -(nw ? 22 : 26));
+      g += TX(x.toFixed(1), ty.toFixed(1), name, 'muted', nw ? 10.5 : 12, 'middle');
+      if (spoke) g += `<rect x="${(x + (nw ? 10 : 14)).toFixed(1)}" y="${(y - (nw ? 30 : 34)).toFixed(1)}" width="${nw ? 44 : 52}" height="20" rx="8" ${F('glow')}/>` + TX((x + (nw ? 32 : 40)).toFixed(1), (y - (nw ? 16 : 20)).toFixed(1), 'Wait!', 'on-glow', 11.5, 'middle');
+      else if (saw) g += TX((x + (nw ? 18 : 24)).toFixed(1), (y - (nw ? 14 : 18)).toFixed(1), '…', 'cool', 16, 'start');
+    });
+    g += `<circle cx="16" cy="${H - 14}" r="6" ${FS('panel', 'cool', 2)}/>` + TX(28, H - 10, 'noticed, stayed quiet', 'muted', 11.5) + `<circle cx="${nw ? 170 : 190}" cy="${H - 14}" r="6" ${F('glow')}/>` + TX(nw ? 182 : 202, H - 10, 'spoke up', 'muted', 11.5) + (intro ? TX(W - 12, H - 10, '✓ introduced', 'good', 11.5, 'end') : '');
+    el.innerHTML = g;
+    if (!run){ $('#acSaw').textContent = '—'; $('#acSpoke').textContent = '—'; $('#acSay').textContent = 'Press the button to throw a problem into the operation.'; return; }
+    const s = run.saw.filter(Boolean).length, sp = run.spoke.filter(Boolean).length;
+    $('#acSaw').textContent = s; $('#acSpoke').textContent = sp;
+    $('#acSay').textContent = (sp ? 'Someone raised it. ' : 'Nobody said a word, and the problem goes on. ') + `Raised in ${raised} of ${runs} ${runs === 1 ? 'try' : 'tries'} so far.`;
+  });
+  draw();
+}
+
+/* ---------- 6: write your own checklist ---------- */
+{ const EX = { name: 'Leaving for a flight', pause: 'Before I lock the front door', type: 'DO-CONFIRM', items: ['Passport or ID in my bag', 'Phone, wallet and keys', 'Boarding pass on my phone', 'Charger packed', 'Medicines packed', 'Stove and iron off', 'Back door locked'].map(t => ({ t, on: false })) };
+  let L = store.get('cm-list', null) || { name: '', pause: '', type: 'DO-CONFIRM', items: [] };
+  const nm = $('#ckName'), ps = $('#ckPause'), ty = $('#ckType'), add = $('#ckAdd');
+  const VAGUE = /\b(everything|properly|be careful|as needed|make sure|appropriate|etc)\b/i;
+  const keep = () => { store.set('cm-list', L); renderCard(); };
+  function fill(){ nm.value = L.name; ps.value = L.pause; ty.value = L.type; }
+  function draw(){
+    const n = L.items.length, words = L.items.map(it => it.t.trim().split(/\s+/).length), secs = n * 6;
+    $('#ckCard').innerHTML = `<div class="ckcard"><div class="hd"><b>${esc(L.name || 'My checklist')}</b><span>${esc(L.type)}</span></div>${L.pause ? `<div class="pp">Pause point: ${esc(L.pause)}</div>` : ''}${n ? L.items.map((it, i) => `<div class="ckrow"><button type="button" class="ck" aria-pressed="${it.on}" data-i="${i}"><span class="box">${TICK}</span><span class="t">${esc(it.t)}</span></button><button type="button" class="rm" data-rm="${i}" aria-label="Remove ${esc(it.t)}">×</button></div>`).join('') : '<p class="empty">No steps yet. Add the ones people most often skip, not every step there is.</p>'}</div>`;
+    const R = [
+      [!!L.pause.trim(), 'A clear pause point', L.pause.trim() ? 'You\'ll run it ' + esc(L.pause.trim().replace(/^./, c => c.toLowerCase())) + '.' : 'Say exactly when the list gets used, like "before takeoff".'],
+      [n >= 5 && n <= 9, 'Five to nine items', n < 5 ? `${n} so far. Fewer is fine if that\'s truly all that gets missed, but most jobs have a few more killer steps.` : n > 9 ? `${n} items. Cut the ones people never forget; long lists get skipped.` : `${n} items. That\'s the sweet spot.`],
+      [n > 0 && words.every(w => w <= 9), 'Short, exact wording', !n ? 'Add some steps first.' : words.some(w => w > 9) ? 'At least one step is more than nine words. Trim it to the action.' : 'Every step is nine words or fewer.'],
+      [n > 0 && !L.items.some(it => VAGUE.test(it.t)), 'No vague words', L.items.some(it => VAGUE.test(it.t)) ? 'Words like "properly" or "everything" don\'t tell anyone what to check. Name the thing.' : 'Each step names something specific to check.'],
+      [n > 0 && secs <= 90, 'Runs in about a minute', n ? `Roughly ${secs} seconds at a brisk pace.` : 'An empty list is very quick, but not much use.'],
+    ];
+    $('#ckLint').innerHTML = R.map(([ok, h, d]) => `<div class="${ok ? 'ok' : 'no'}"><i>${ok ? '✓' : '!'}</i><span><b>${h}.</b> ${d}</span></div>`).join('') + `<div class="ok"><i>·</i><span><b>${L.type}.</b> ${L.type === 'READ-DO' ? 'Read each step aloud, then do it, like a recipe. Good for rare or emergency tasks.' : 'Do the work from memory, then stop and confirm each item. Good for routines you know well.'}</span></div>`;
+    $$('#ckCard [data-i]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; L.items[i].on = !L.items[i].on; keep(); draw(); $(`#ckCard [data-i="${i}"]`).focus({preventScroll:true}); }));
+    $$('#ckCard [data-rm]').forEach(b => b.addEventListener('click', () => { L.items.splice(+b.dataset.rm, 1); keep(); draw(); }));
+  }
+  const addIt = () => { const t = add.value.trim(); if (!t) return; L.items.push({ t, on: false }); add.value = ''; keep(); draw(); add.focus(); };
+  $('#ckAddB').addEventListener('click', addIt);
+  add.addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); addIt(); } });
+  nm.addEventListener('input', () => { L.name = nm.value; keep(); draw(); });
+  ps.addEventListener('input', () => { L.pause = ps.value; keep(); draw(); });
+  ty.addEventListener('change', () => { L.type = ty.value; keep(); draw(); });
+  $('#ckEx').addEventListener('click', () => { L = JSON.parse(JSON.stringify(EX)); fill(); keep(); draw(); });
+  $('#ckClr').addEventListener('click', () => { L = { name: '', pause: '', type: 'DO-CONFIRM', items: [] }; fill(); keep(); draw(); });
+  fill(); draw();
+}
+
+/* ---------- 7: before and after ---------- */
+{ const el = $('#ts7'), kI = $('#tsK'), M = { comp: ['Major complications', 11.0, 7.0], death: ['Deaths', 1.5, .8] }; let m = 'comp';
+  $('#tsM').innerHTML = `<button class="btn" data-m="comp" aria-pressed="true">Major complications</button><button class="btn" data-m="death" aria-pressed="false">Deaths</button>`;
+  const mb = [...$('#tsM').querySelectorAll('[data-m]')];
+  mb.forEach(b => b.addEventListener('click', () => { m = b.dataset.m; press(mb, b); draw(); }));
+  const ops = () => { const v = +kI.value; return Math.round(Math.pow(10, 3 + v / 100 * (Math.log10(234e6) - 3)) / (v > 60 ? 1e5 : v > 25 ? 100 : 10)) * (v > 60 ? 1e5 : v > 25 ? 100 : 10); };
+  const draw = onLayout(() => { const [name, b, a] = M[m], nw = NARROW(), W = nw ? 360 : 760, H = 270, B = H - 40, T = 30, top = m === 'comp' ? 12 : 1.6;
+    vb(el, W, H); const Y = v => B - v / top * (B - T), bw = nw ? 80 : 120, x1 = W / 2 - bw - (nw ? 20 : 50), x2 = W / 2 + (nw ? 20 : 50);
+    let g = `<line x1="20" x2="${W - 20}" y1="${B}" y2="${B}" ${S('line', 1.5)}/>`;
+    g += `<rect x="${x1}" y="${Y(b)}" width="${bw}" height="${B - Y(b)}" rx="6" ${F('cool', .7)}/>` + TX(x1 + bw / 2, Y(b) - 8, b.toFixed(1) + '%', 'text', 16, 'middle', 'class="mono"') + TX(x1 + bw / 2, B + 20, 'Before', 'muted', 13, 'middle');
+    g += `<rect x="${x2}" y="${Y(a)}" width="${bw}" height="${B - Y(a)}" rx="6" ${F('glow')}/>` + TX(x2 + bw / 2, Y(a) - 8, a.toFixed(1) + '%', 'glow', 16, 'middle', 'class="mono"') + TX(x2 + bw / 2, B + 20, 'With the checklist', 'muted', 13, 'middle');
+    g += `<line x1="${x1 + bw}" x2="${x2}" y1="${Y(b)}" y2="${Y(b)}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>` + `<path d="M${x2 - 12} ${Y(b)}V${Y(a) - 4}" ${S('glow', 1.5)}/>` + arrowHead(x2 - 12, Y(a) - 2, Math.PI / 2, 'glow');
+    g += TX(x2 - 18, (Y(b) + Y(a)) / 2 + 4, '−' + Math.round((1 - a / b) * 100) + '%', 'glow', 13, 'end', 'class="mono"');
+    g += TX(20, 16, name + ', share of operations', 'faint', 12);
+    el.innerHTML = g;
+    const k = ops(); out('tsK', fmtN(k) + (k >= 234e6 * .98 ? ' (the whole world)' : ''));
+    $('#tsB').textContent = fmtN(k * b / 100); $('#tsA').textContent = fmtN(k * a / 100); $('#tsSave').textContent = fmtN(k * (b - a) / 100) + (m === 'comp' ? ' complications' : ' deaths');
+  });
+  kI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 8: 208 seconds ---------- */
+{ const el = $('#fl8'), tI = $('#flT'), END = 208; let timer = null;
+  const LANES = ['Captain Sullenberger', 'First Officer Skiles', 'Cabin crew'], SHORT = ['Sullenberger', 'Skiles', 'Cabin crew'];
+  const EV = [
+    [0, 0, 'Bird strike', 'Geese hit both engines at about 3,000 feet. Thrust is gone almost at once. The captain takes over the flying.'],
+    [0, 1, 'Starts the checklist', 'The first officer hands over the controls and reaches for the checklist for losing both engines, starting an engine restart.'],
+    [22, 0, 'Mayday', 'The captain tells air traffic control they have lost thrust in both engines and are turning back.'],
+    [35, 1, 'Working the restart', 'Step by step through the restart procedure, reading and doing, while the plane glides.'],
+    [54, 0, 'Unable', 'Offered a runway back at LaGuardia, the captain judges they can\'t make it.'],
+    [80, 0, 'Teterboro?', 'He asks about Teterboro airport in New Jersey, then judges that too far.'],
+    [137, 0, 'The Hudson', 'He tells controllers they are going into the Hudson River.'],
+    [150, 1, 'Ditching prep', 'The restart hasn\'t worked. The first officer moves on to preparing the plane for the water: flaps, speeds, height callouts.'],
+    [157, 0, 'Brace for impact', 'The captain tells the cabin to brace.'],
+    [158, 2, 'Brace, brace, heads down', 'The flight attendants shout their brace commands, over and over, as they were trained to.'],
+    [208, 0, 'On the water', 'The plane touches down on the Hudson, intact.'],
+    [208, 2, 'Evacuation', 'The crew opens the doors and gets everyone onto the wings and slides. Ferries arrive. All 155 people survive.'] ];
+  const draw = onLayout(() => { const t = +tI.value, nw = NARROW(), W = nw ? 360 : 760, L = nw ? 12 : 170, R = W - (nw ? 14 : 24), laneH = nw ? 58 : 50, T = 26, H = T + LANES.length * laneH + 34;
+    vb(el, W, H); const X = s => L + s / END * (R - L); let g = '';
+    LANES.forEach((n, i) => { const y = T + i * laneH + laneH / 2;
+      g += `<line x1="${L}" x2="${R}" y1="${y}" y2="${y}" ${S('line', 1.5)}/>`;
+      g += nw ? TX(L, y - 14, n, 'muted', 11) : TX(L - 14, y + 4, n, 'muted', 12.5, 'end'); });
+    g += `<rect x="${L}" y="${T - 4}" width="${(X(t) - L).toFixed(1)}" height="${LANES.length * laneH + 8}" rx="6" ${F('glow', .07)}/>`;
+    EV.forEach(([s, ln]) => { const y = T + ln * laneH + laneH / 2, past = s <= t;
+      g += `<circle cx="${X(s).toFixed(1)}" cy="${y}" r="${nw ? 5 : 6}" ${past ? F(ln === 1 ? 'glow' : ln === 2 ? 'good' : 'cool') : FS('panel', 'faint', 1.5)}/>`; });
+    g += `<line x1="${X(t).toFixed(1)}" x2="${X(t).toFixed(1)}" y1="${T - 8}" y2="${T + LANES.length * laneH + 4}" ${S('text', 1.5)}/>`;
+    [0, 60, 120, 180, 208].forEach(s => { g += TX(X(s).toFixed(1), H - 8, s === 208 ? (nw ? '208s' : '208 s') : s ? s + 's' : 'strike', 'faint', 10.5, s === 208 ? 'end' : s ? 'middle' : 'start', 'class="mono"'); });
+    el.innerHTML = g;
+    const m = Math.floor(t / 60), sec = t % 60; out('flT', t + ' s' + (t >= 60 ? ` (${m}:${String(sec).padStart(2, '0')})` : ''));
+    const cur = [...EV].filter(e => e[0] <= t), last = cur[cur.length - 1];
+    const latest = LANES.map((_, i) => cur.filter(e => e[1] === i).pop()).map((e, i) => e ? `<p><b style="color:var(--${i === 1 ? 'glow' : i === 2 ? 'good' : 'cool'});font-weight:500">${SHORT[i]}:</b> ${e[2]}</p>` : '').join('');
+    $('#flD').innerHTML = `<span class="k">About ${last[0]} seconds after the strike</span><span class="h">${last[2]}</span><p>${last[3]}</p>${latest}`;
+  });
+  tI.addEventListener('input', () => { clearInterval(timer); $('#flGo').textContent = 'Play'; draw(); });
+  $('#flGo').addEventListener('click', e => { const b = e.currentTarget;
+    if (timer){ clearInterval(timer); timer = null; b.textContent = 'Play'; return; }
+    if (+tI.value >= END) tI.value = 0; b.textContent = 'Pause';
+    timer = setInterval(() => { tI.value = Math.min(END, +tI.value + 2); draw(); if (+tI.value >= END){ clearInterval(timer); timer = null; b.textContent = 'Play'; } }, RM ? 20 : 120); });
+  draw();
+}
+
+/* ---------- 9: slices of defence ---------- */
+{ const el = $('#sw9'), LAY = [['The surgeon\'s skill', .3, true, false], ['The anaesthetist\'s monitoring', .3, true, false], ['The nurses\' counts', .32, true, false], ['The checklist briefing', .26, false, true], ['A team that speaks up', .28, false, true]];
+  let seed = 5, shots = null;
+  $('#swL').innerHTML = LAY.map((l, i) => `<label class="tg"><input type="checkbox" data-l="${i}"${l[2] ? ' checked' : ''}><span>${l[0]}</span><em>${l[3] ? 'checklist' : 'always'}</em></label>`).join('');
+  $$('#swL [data-l]').forEach(cb => cb.addEventListener('change', () => { LAY[+cb.dataset.l][2] = cb.checked; shots = null; draw(); }));
+  /* each slice gets a few holes covering about its hole fraction; they move from day to day */
+  let holes = [];
+  function shuffle(){ const r = rng(seed += 13); holes = LAY.map(([, f]) => { const k = 4, hs = []; for (let i = 0; i < k; i++){ const w = f / k, c = (i + .5) / k + (r() - .5) * (1 / k - w) * .9; hs.push([c - w / 2, c + w / 2]); } return hs; }); }
+  const inHole = (li, y) => holes[li].some(([a, b]) => y >= a && y <= b);
+  $('#swGo').addEventListener('click', () => { shuffle(); const r = rng(seed + 7); shots = [...Array(50)].map(() => .03 + r() * .94); draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 300, T = 20, B = H - 44, act = LAY.map((l, i) => i).filter(i => LAY[i][2]), n = act.length;
+    vb(el, W, H); const x0 = nw ? 16 : 30, x1 = W - (nw ? 16 : 30), gap = (x1 - x0) / (n + 1), sw = nw ? 14 : 24, Y = v => T + v * (B - T);
+    let g = '', thru = 0;
+    if (shots) shots.forEach(y => { let stop = null; for (let j = 0; j < n; j++){ if (!inHole(act[j], y)){ stop = j; break; } }
+      const xe = stop == null ? x1 : x0 + gap * (stop + 1) - sw / 2; if (stop == null) thru++;
+      g += `<line x1="${x0}" x2="${xe.toFixed(1)}" y1="${Y(y).toFixed(1)}" y2="${Y(y).toFixed(1)}" ${S(stop == null ? 'bad' : 'faint', stop == null ? 2 : 1, stop == null ? '' : ';stroke-opacity:.5')}/>` + (stop == null ? arrowHead(x1, Y(y), 0, 'bad', 8) : `<circle cx="${xe.toFixed(1)}" cy="${Y(y).toFixed(1)}" r="2.2" ${F('faint')}/>`); });
+    act.forEach((li, j) => { const x = x0 + gap * (j + 1) - sw / 2, c = LAY[li][3] ? 'glow' : 'cool'; let prev = 0;
+      const hs = holes[li] ? [...holes[li]].sort((a, b) => a[0] - b[0]) : [];
+      hs.concat([[1, 1]]).forEach(([a, b]) => { if (a > prev) g += `<rect x="${x}" y="${Y(prev).toFixed(1)}" width="${sw}" height="${(Y(a) - Y(prev)).toFixed(1)}" rx="5" ${F(c, .75)}/>`; prev = b; });
+      g += wrap(x + sw / 2, B + 22, LAY[li][0].replace('The ', '').replace('A team', 'team'), nw ? 10 : 16, 12, 'muted', nw ? 9.5 : 11.5); });
+    if (!n) g += TX(W / 2, H / 2, 'No defences at all', 'bad', 14, 'middle');
+    el.innerHTML = g;
+    if (!shots){ $('#swThru').textContent = '—'; $('#swCaught').textContent = '—'; $('#swSay').textContent = 'Each problem is a line. It gets through only if it finds a hole in every slice.'; return; }
+    $('#swThru').textContent = thru + ' of 50'; $('#swCaught').textContent = 50 - thru;
+    const ck = LAY[3][2] || LAY[4][2];
+    $('#swSay').textContent = thru === 0 ? 'Every problem was stopped somewhere. That\'s what the save looks like.' : ck ? 'Fewer get through, but holes still line up sometimes. No list is perfect.' : 'Skill alone leaves holes that line up. Tick the checklist slices and run it again.';
+  });
+  shuffle(); draw();
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
