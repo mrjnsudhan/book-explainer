@@ -1,0 +1,1474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Thinking in Bets, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a card table. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into the bet, beliefs and outcomes, other people and your future self.
+   Dark-first: deep felt green with a chip-gold accent and a cool blue second series; light mode is a cream card table. */
+:root{
+  color-scheme: dark;
+  --ink:#0E1412;--panel:#141E1A;--panel-2:#1C2924;--line:#2C3C35;--text:#F1F2EC;--muted:#ADB8B0;--faint:#7E8C84;
+  --glow:#F2B84B;--glow-soft:rgba(242,184,75,.11);--hl:rgba(242,184,75,.26);--cool:#86B8EA;--cool-soft:rgba(134,184,234,.1);
+  --good:#8FD97A;--good-soft:rgba(143,217,122,.1);--bad:#FF7F6E;--bad-soft:rgba(255,127,110,.12);
+  --soft:#D6DCD4;--deep:#09100D;--toc-bg:rgba(20,30,26,.74);--glow-line:rgba(242,184,75,.36);--cool-line:rgba(134,184,234,.3);--on-glow:#2A1B00;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F5F2E9;--panel:#FFFDF7;--panel-2:#ECE7DA;--line:#D9D2C1;--text:#16201B;--muted:#55605A;--faint:#828A84;
+  --glow:#9A5E00;--glow-soft:rgba(154,94,0,.06);--hl:#F6E2B5;--cool:#2A5C94;--cool-soft:rgba(42,92,148,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2A332E;--deep:#FBF9F3;--toc-bg:rgba(255,253,247,.84);--glow-line:rgba(154,94,0,.28);--cool-line:rgba(42,92,148,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F5F2E9;--panel:#FFFDF7;--panel-2:#ECE7DA;--line:#D9D2C1;--text:#16201B;--muted:#55605A;--faint:#828A84;
+  --glow:#9A5E00;--glow-soft:rgba(154,94,0,.06);--hl:#F6E2B5;--cool:#2A5C94;--cool-soft:rgba(42,92,148,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2A332E;--deep:#FBF9F3;--toc-bg:rgba(255,253,247,.84);--glow-line:rgba(154,94,0,.28);--cool-line:rgba(42,92,148,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Thinking in Bets additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.wheel{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.wheel-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.wheel-top .moves{gap:6px}
+.wheel-top .btn{padding:5px 11px}
+.wheel-stage{padding:10px 10px 4px}
+.wheel-stage svg{display:block;width:100%;height:auto}
+.wheel .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.wheel .cap b{color:var(--glow);font-weight:600}
+.cal,.wf,.blind{display:grid;gap:14px;padding:18px}
+.cal .ctl,.wf .ctl{flex:none}
+.wf .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--faint)}
+.wf .ctl label span{color:var(--text)}
+.cal-end{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:center}
+.cal-end svg{display:block;width:100%;height:auto;max-width:420px}
+.cal-sum{display:grid;gap:10px}
+.cal-sum .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.cal-sum .stat{border:1px solid var(--line);border-radius:10px}
+.rate{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.rate .btn{border-radius:10px;padding:9px 6px;text-align:center}
+.bet{display:grid;gap:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.bet.closed{opacity:.85}
+.bet-h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.bet-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15}
+.bet-h .mono{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.bet p{font-size:14.5px;color:var(--soft)}
+.bet .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.bet .rm:hover{color:var(--bad)}
+.tag{font-family:var(--f-mono);font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--good);border-color:var(--good)}
+.tag.no{color:var(--bad);border-color:var(--bad)}
+.field label output{font-family:var(--f-mono);color:var(--text);float:right}
+.field input[type=range]{padding:0;border:0;background:transparent}
+@media (max-width: 760px){ .cal-end{grid-template-columns:minmax(0,1fr)} }
+@media (max-width: 560px){ .fq{padding:14px 16px} .rate{grid-template-columns:repeat(2,minmax(0,1fr))} .rate .btn:last-child{grid-column:1/-1} .cal,.wf,.blind{padding:14px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Annie Duke's book</div>
+    <h1><em>Thinking in Bets</em>,<br>Explained</h1>
+    <p class="lede">Annie Duke trained as a cognitive psychologist and then spent two decades as a professional poker player. <b>Thinking in Bets</b> takes the habits of the best players into everyday life: almost every decision is a bet made with incomplete information and some luck, so judge decisions by their reasoning rather than their results, put numbers on how sure you are, and build people and habits around you that help you learn. This guide takes the introduction and all six chapters in twelve sections, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>A bad result doesn't mean a bad decision. Judge the <em>bet</em>, not the outcome, and ask yourself <em>how sure</em> you really are.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you wrestling with?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="wheel" style="margin:0" aria-label="A wheel you can spin to see how often a good bet loses">
+        <div class="wheel-top"><span>Chance the bet wins</span><div class="moves" id="whOdds"></div></div>
+        <div class="wheel-stage"><svg id="whSvg" viewBox="0 0 400 230" role="img" aria-label="A spinning wheel and the record of every spin"></svg></div>
+        <div class="row" style="padding:0 16px 12px"><button class="btn primary" id="whOne" type="button">Spin once</button><button class="btn" id="whMany" type="button">Spin 100 times</button><button class="btn" id="whReset" type="button">Reset</button></div>
+        <div class="cap" id="whCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapter 1</span><span class="q">The Bet</span><span class="d">Why life is poker, not chess, and why results mislead</span></a>
+      <a href="#part2"><span class="n">Chapters 2 and 3</span><span class="q">Beliefs and Outcomes</span><span class="d">Wanna bet? Then learn honestly from what happens</span></a>
+      <a href="#part3"><span class="n">Chapters 4 and 5</span><span class="q">Other People</span><span class="d">A truthseeking pod, CUDOS and dissent without a fight</span></a>
+      <a href="#part4"><span class="n">Chapter 6</span><span class="q">Your Future Self</span><span class="d">Mental time travel, scenarios and premortems</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2018</span>
+      <span><b>Author</b> Annie Duke, former professional poker player and decision strategist</span>
+      <span><b>Full title</b> Thinking in Bets: Making Smarter Decisions When You Don't Have All the Facts</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 12 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE BET ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the bet</span>
+      <h2>The Bet</h2>
+      <p>Duke starts with a claim that sounds obvious and turns out not to be. Almost every decision we make is a bet, because we never have all the facts and luck always gets a vote. Chess, where everything is visible and the better player usually wins, is a poor model for life. Poker, where good players lose plenty of hands, is a much better one.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The quality of a decision and the quality of its outcome are two different things. Mixing them up teaches us the wrong lessons.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Every decision is a bet</div>
+        <h2>Why This Isn't a Poker Book</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most decisions are made without all the facts and with luck in the mix. That makes them bets, and poker players, who live with both every hand, have useful habits for making them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>From psychology to poker.</b> Duke studied cognitive psychology as a graduate student at the University of Pennsylvania. She left shortly before finishing her doctorate and spent about twenty years as a professional poker player, winning a World Series of Poker bracelet in 2004 and the NBC National Heads-Up Poker Championship in 2010.</span></li>
+          <li><span><b>Two things you can't control.</b> Between any decision and its result sit two things: luck, and hidden information. You never know everything that matters, and even a perfect choice can be undone by chance.</span></li>
+          <li><span><b>A bet is a choice about the future.</b> Taking a job, moving city, hiring someone or cutting a price all put something at stake on one version of the future over others. You are betting, whether or not you call it that.</span></li>
+          <li><span><b>Bet on purpose.</b> The aim isn't to remove uncertainty, which is impossible. It is to get comfortable with it: to say "I'm not sure", put rough odds on what might happen, and learn from what does.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Duke left graduate school she started playing poker in a small card room in Montana, coached by her brother Howard Lederer, who was already a top professional. Every hand turned out to be a tiny experiment in decision-making, with real money at stake and a result within minutes. What struck her over the years was that the habits separating winners from losers had little to do with the cards. They were about how players thought about uncertainty, luck and their own mistakes, and those habits work just as well away from the table.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: luck, hidden information or your decision?</div><div class="tally" id="tally1" aria-label="Score"></div></div>
+        <div class="sorter" id="sort1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Whenever you choose, you're betting on a future you can't fully see. Some of what happens will come down to what you didn't know, some to plain luck, and only some to the choice itself. Knowing which is which is the whole game.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Resulting →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Resulting</div>
+        <h2>Life Is Poker, Not Chess</h2>
+        <div class="short"><span class="lbl">In short</span><p>We judge decisions by how they turned out. Poker players call this resulting, and it teaches the wrong lessons, because good decisions can end badly and bad ones can end well.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The worst call in history?</b> With 26 seconds left in Super Bowl XLIX in February 2015, the Seattle Seahawks trailed the New England Patriots by four points and had the ball on the one-yard line. Coach Pete Carroll called a pass instead of a handoff to his star running back, Marshawn Lynch. It was intercepted, Seattle lost, and the next day's headlines called it the worst play call ever.</span></li>
+          <li><span><b>Judge the call, not the result.</b> Duke points out that interceptions from the one-yard line were rare, and that passing on second down stopped the clock and left time for two more plays. If the pass had been caught, the same call would have been praised as clever. The decision was the same either way. Only the luck was different.</span></li>
+          <li><span><b>Resulting.</b> That is the poker word for judging a decision by its outcome. In the short run, the link between how good a decision is and how it turns out is loose, so resulting fools us often.</span></li>
+          <li><span><b>Hindsight bias.</b> Once we know the outcome, it feels as though we should have seen it coming. That makes us blame ourselves for bad luck and take credit for good luck, and both mistakes stick.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke describes a chief executive who, asked for the worst decision he had made that year, named firing his company's president. The president hadn't been performing, and the executive had thought it through: he took advice, planned a replacement search and made the change. Afterwards, things went badly, and he had concluded the firing was a mistake. When Duke walked through the decision with him, he couldn't find anything wrong with how he had made it. He had judged it purely by what happened next.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the one-yard line</div><div class="hint">Set the odds, then let the game play out</div></div>
+        <div class="stage"><svg id="yd2" role="img" aria-label="Win chances for the pass-first and run-first plans, and a record of how each game ended"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ydRun">Chance a run scores <output id="oydRun"></output></label><input type="range" id="ydRun" min="20" max="80" value="50"></div><div class="ctl"><label for="ydPass">Chance a pass scores <output id="oydPass"></output></label><input type="range" id="ydPass" min="20" max="80" value="45"></div><div class="ctl"><label for="ydInt">Chance a pass is intercepted <output id="oydInt"></output></label><input type="range" id="ydInt" min="0" max="20" value="2"></div></div><div class="row"><span class="tip">Call the play:</span><button class="btn" id="ydP" type="button" aria-pressed="true">Pass first</button><button class="btn" id="ydR" type="button" aria-pressed="false">Run first</button><button class="btn primary" id="ydGo" type="button">Play it out</button><button class="btn" id="ydTen" type="button">Play 20 games</button></div></div><div class="stats"><div class="stat"><span class="k">Win chance of your call</span><span class="v glow" id="ydWin"></span></div><div class="stat"><span class="k">Games played</span><span class="v" id="ydN"></span></div><div class="stat"><span class="k">The headline</span><span class="s" id="ydHead">Call a play and see what the papers say.</span></div></div><p class="callout">An illustrative model: a pass first stops the clock and leaves time for two runs, while running first leaves time for two plays in all. <b>Notice that the win chance of your call never changes when the headline does.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you decide a choice was bad, ask what you knew, what you could have found out and what the odds were. If the answers hold up, a bad result was probably bad luck. Grade the decision on those answers, not on the scoreboard.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Four kinds of outcome →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Skill, luck and "I'm not sure"</div>
+        <h2>Decisions Versus Outcomes</h2>
+        <div class="short"><span class="lbl">In short</span><p>Separate the decision from the outcome and you get four boxes, and only the decision is yours to grade. Getting good at telling them apart starts with being willing to say "I'm not sure".</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Chess versus poker.</b> The mathematician John von Neumann, a founder of game theory, didn't think of chess as a real game: in principle every position has a right answer you could calculate. Real life, he said, is full of bluffing and guessing what other people are thinking. That makes it much more like poker.</span></li>
+          <li><span><b>Your best and worst decisions.</b> Ask people for their best and worst decisions of the past year and they almost always name their best and worst outcomes. Good decisions that turned out badly, and bad ones that got lucky, don't come to mind.</span></li>
+          <li><span><b>Drunk, and home safe.</b> Driving home after too many drinks and arriving safely doesn't make it a good decision. One lucky result says almost nothing about the odds you took.</span></li>
+          <li><span><b>"I'm not sure" is a strength.</b> Saying it isn't admitting ignorance. It's an accurate description of a world full of luck and hidden information, and it opens the door to the next question: how sure are you?</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke recalls the line about von Neumann from the scientist Jacob Bronowski, who worked with him. Bronowski once described himself as a chess fan, and von Neumann corrected him: chess is a form of computation, he said, and real games, like real life, involve bluffing, small deceptions and asking yourself what the other person thinks you are going to do. Von Neumann's game theory drew on poker rather than chess, and Duke takes that as her starting point.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: which box does it go in?</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Every outcome lands in one of four boxes: good decision with a good result, good decision with a bad result, bad decision with a good result, bad decision with a bad result. The outcome tells you which row you landed in. It doesn't tell you which column, and the column is the part you can improve.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: How we form beliefs →</a></div>
+    </section>
+    <!-- ===================== BELIEFS AND OUTCOMES ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · beliefs and outcomes</span>
+      <h2>Beliefs and Outcomes</h2>
+      <p>Every bet rests on beliefs, and we form beliefs carelessly. Then, once results come in, we sort them in whatever way flatters us. These two chapters are about catching both habits: rating how sure we really are, and learning from outcomes without fooling ourselves.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Treat beliefs as estimates you can update, and treat outcomes as clues you must sort fairly into luck and skill.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · How we form beliefs</div>
+        <h2>Wanna Bet?</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every decision is a bet on our beliefs, yet we form beliefs carelessly. We tend to take in what we hear as true and check later, if ever, and then read new facts so they fit what we already think.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Believe first, check later.</b> Research by the psychologist Daniel Gilbert suggests our minds accept a claim as true by default. Questioning it is a separate, later step, one we often skip when we're busy or distracted.</span></li>
+          <li><span><b>The bald truth.</b> Duke spent years believing, and repeating, that baldness is inherited from your mother's father. It's a common myth. Hair loss is shaped by genes from both sides of the family, but the claim had never been worth checking.</span></li>
+          <li><span><b>Beliefs defend themselves.</b> Once a belief is in, we look for evidence that supports it and pick holes in evidence that doesn't. This is motivated reasoning, and it explains why fake news spreads so well: we want to believe the stories that suit us.</span></li>
+          <li><span><b>Smart is no shield.</b> Being clever doesn't protect you. In a study by Dan Kahan and colleagues, people who were good with numbers read data accurately until the answer clashed with their politics. Then they were just as likely as anyone to read it the way their side wanted, and the gap between sides was, if anything, wider among the most numerate.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In 1951 Dartmouth and Princeton played a bad-tempered football game full of penalties and injuries. Afterwards the psychologists Albert Hastorf and Hadley Cantril showed students from both colleges a film of the game and asked them to note every infraction. Princeton students counted far more fouls by Dartmouth players, more than twice as many as Dartmouth students saw. The two groups watched the same film and, in a real sense, saw different games. Their beliefs about their own team shaped what they took in.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: they saw a game</div><div class="hint">Turn up loyalty and rewatch the same plays</div></div>
+        <div class="stage"><svg id="gm4" role="img" aria-label="Twenty-four plays from one game, as seen by a neutral referee, a Princeton fan and a Dartmouth fan"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="gmL">How much each fan wants their team to win <output id="ogmL"></output></label><input type="range" id="gmL" min="0" max="100" value="60"></div></div><div class="row"><button class="btn primary" id="gmGo" type="button">Watch another game</button></div></div><div class="stats"><div class="stat"><span class="k">Dartmouth fouls, by the referee</span><span class="v" id="gmRef"></span></div><div class="stat"><span class="k">by the Princeton fan</span><span class="v glow" id="gmP"></span></div><div class="stat"><span class="k">by the Dartmouth fan</span><span class="v" id="gmD"></span></div></div><p class="callout">An illustrative model. Every play is the same footage for everyone; each fan simply gives their own side the benefit of the doubt on close calls. <b>Nobody is lying. Loyalty quietly changes what counts as a foul.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most of your beliefs arrived without a check at the door. That's fine for trivia and dangerous for the beliefs you bet on. The ones that feel most obviously true, especially about your own side, are the ones most worth questioning.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Redefining confidence →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Beliefs in percentages</div>
+        <h2>Redefining Confidence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Instead of treating beliefs as simply right or wrong, rate how sure you are. Saying "I'm 70 percent sure" makes it easier to change your mind and harder to fool yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"Wanna bet?"</b> If someone challenged you to put money on a belief, you'd suddenly think harder: where did I hear that, how much do I really know? Duke suggests asking yourself the question even when nobody else does.</span></li>
+          <li><span><b>Beliefs come in degrees.</b> Very little of what we believe is certain. Rating a belief from 0 to 100 forces you to say how much you actually know, instead of rounding everything to yes or no.</span></li>
+          <li><span><b>Updating gets easier.</b> If you were 100 percent sure and you're wrong, you've failed. If you were 60 percent sure, new information just moves the number. Changing your mind becomes an adjustment, not a defeat.</span></li>
+          <li><span><b>It invites help.</b> Saying "I'm fairly sure, maybe 70 percent" tells people you're open to what they know. They're more likely to share the fact that would change your mind.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the poker world Duke came up in, a confident claim over dinner was often met with two words: "Wanna bet?" The effect was immediate. Someone who had just stated a fact would start to hedge: well, they'd read it somewhere, they were fairly sure, it might have been a while ago. Nothing about the world had changed. Being asked to put something on the line simply made them vet a belief they had been happy to state as certain a moment before.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: how sure are you?</div><div class="hint">Answer, set your confidence and see if you're calibrated</div></div>
+        <div class="cal" id="cal5"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you state a belief, attach a number to it, even silently. Over time, check whether the things you're 90 percent sure of come true about 90 percent of the time. That habit alone makes you a better bettor.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Fielding outcomes →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Fielding the unfolding future</div>
+        <h2>Bet to Learn</h2>
+        <div class="short"><span class="lbl">In short</span><p>Outcomes are feedback, but only if we sort them honestly into luck and skill. We tend to take credit for good results and blame luck for bad ones, and that keeps us from learning.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Every result is a puzzle.</b> When something happens, we have to decide how much came from our decisions and how much from luck. Duke calls this fielding outcomes, and we rarely field them fairly.</span></li>
+          <li><span><b>The self-serving bias.</b> We credit our wins to skill and our losses to bad luck. Duke quotes lines said to come from car insurance claim forms, where drivers describe crashes as something that happened to them, such as a telephone pole that "was approaching".</span></li>
+          <li><span><b>The learning loop breaks.</b> If every loss is bad luck, you never fix your mistakes. If every win is skill, you repeat the lucky ones. Either way, experience stops making you better.</span></li>
+          <li><span><b>Rewire the reward.</b> Borrowing from Charles Duhigg's work on habits, Duke suggests keeping the cue (an outcome) and the reward (feeling good about yourself), but changing the routine: feel good for spotting luck, crediting others and finding your own mistakes, rather than for being right.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke describes having dinner with Phil Ivey, one of the best poker players in the world, right after he had won a tournament. Most people would have spent the evening enjoying the win. Ivey spent it going through the hands he thought he had played badly, asking for opinions and picking apart his own decisions. He wasn't upset. He simply treated a win as just as much a chance to learn as a loss, and Duke saw that habit as a large part of why he was so good.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: two learners</div><div class="hint">Same results, different ways of fielding them</div></div>
+        <div class="stage"><svg id="tl6" role="img" aria-label="Two learners' estimates of their own skill over two hundred hands, against the true value"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="tlT">Your true chance of winning a hand <output id="otlT"></output></label><input type="range" id="tlT" min="30" max="70" value="45"></div><div class="ctl"><label for="tlB">Share of losses the self-server blames on luck <output id="otlB"></output></label><input type="range" id="tlB" min="0" max="90" step="5" value="60"></div></div><div class="row"><button class="btn primary" id="tlGo" type="button">Play another 200 hands</button></div></div><div class="stats"><div class="stat"><span class="k">True win rate</span><span class="v" id="tlTrue"></span></div><div class="stat"><span class="k">The self-server thinks</span><span class="v glow" id="tlSelf"></span></div><div class="stat"><span class="k">The truthseeker thinks</span><span class="v" id="tlSeek"></span></div></div><p class="callout">An illustrative model. Both learners see exactly the same wins and losses. The self-server writes off some losses as bad luck and learns nothing from them. <b>The more losses you excuse, the better you think you are, and the less you fix.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>After any result, good or bad, ask two questions: what part of this was luck, and what would I do differently? Asking them after wins is the hard part, and the most valuable.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Other people's outcomes →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · The mirror flips</div>
+        <h2>Other People's Outcomes</h2>
+        <div class="short"><span class="lbl">In short</span><p>We do the reverse for others: their wins look like luck and their losses look like their fault. And because we feel results by comparison, we'd often rather beat someone than learn.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The mirror flips.</b> When a rival succeeds, we put it down to luck; when they fail, we put it down to poor play. That robs us of the lessons in other people's experience, which is most of the experience available to us.</span></li>
+          <li><span><b>Winning means beating someone.</b> We judge outcomes against other people's. In one survey, about half the people asked preferred earning $50,000 a year while others earned $25,000 over earning $100,000 while others earned $200,000.</span></li>
+          <li><span><b>Schadenfreude.</b> Taking pleasure in other people's bad luck feels good, which is exactly why it's a trap. It's a sign we are keeping score against them instead of learning from them.</span></li>
+          <li><span><b>Change what you compete at.</b> Duke doesn't ask us to drop the competitive drive. She suggests aiming it at accuracy: compete to be the best at spotting luck, giving credit and admitting mistakes.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke tells of a player she calls Nick the Greek, who was convinced that seven-deuce, the weakest starting hand in Texas Hold'em, was a great hand to play because opponents never expected it. When it won, that proved his genius. When it lost, which was most of the time, that was bad luck. Since every result confirmed his theory, he never had a reason to change it, and he lost a lot of money playing it. The pattern is extreme, but the habit of fielding outcomes to protect a belief is something we all do.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: whose fault was it?</div><div class="hint">Rate the same events for you, then for a rival</div></div>
+        <div class="wf" id="wf7"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something good happens to someone you don't like, ask what they did right. When something bad happens to them, ask how much was luck. Treating other people's outcomes the way you treat your own, and the reverse, doubles what you can learn.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: The buddy system →</a></div>
+    </section>
+    <!-- ===================== OTHER PEOPLE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · other people</span>
+      <h2>Other People</h2>
+      <p>It is very hard to see your own biases. It is much easier for someone else to see them, if the group around you is set up for it. Duke describes how to build a small truthseeking pod, the rules from science that keep it honest, and how to bring the same spirit to people who never signed up for it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A good group rewards accuracy over agreement, shares all the data and makes dissent part of the job.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Find a truthseeking pod</div>
+        <h2>The Buddy System</h2>
+        <div class="short"><span class="lbl">In short</span><p>It's hard to be objective on your own. A small group that rewards accuracy, holds each other to account and welcomes different views can catch the biases you can't see in yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A charter.</b> A group helps only if its members agree up front what they're there for: accuracy over feeling good, accountability for their reasoning, and openness to views that differ from their own.</span></li>
+          <li><span><b>Exploratory thought.</b> The psychologists Jennifer Lerner and Philip Tetlock found people think most even-handedly when they know they'll have to explain their reasoning to an audience whose views they don't know, who cares about accuracy and is well informed.</span></li>
+          <li><span><b>Agreement isn't the point.</b> A group of people who all think alike is an echo chamber: it makes everyone more confident without making anyone more right. The value of a pod comes from members who see things differently.</span></li>
+          <li><span><b>Many minds beat one.</b> In a 2015 study led by Anna Dreber, researchers betting in a prediction market on whether psychology studies would replicate got it right 71 percent of the time, against 58 percent when the same experts were simply surveyed.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Early in her poker career, Duke tried to tell a bad-beat story, a tale of losing a hand to rotten luck, to the champion player Erik Seidel. He stopped her. He didn't want to hear about luck, he said; if she had a question about how she had played the hand, he was happy to talk about that. It stung at the time. It also showed her what a good truthseeking partner does: they won't help you feel better at the expense of seeing clearly, and they keep the conversation on the decisions you can actually improve.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: echo chamber or pod?</div><div class="hint">Add people and change how alike they think</div></div>
+        <div class="stage"><svg id="ec8" role="img" aria-label="Each member's estimate of a hidden number, the group's average and the true value"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ecN">People in the group <output id="oecN"></output></label><input type="range" id="ecN" min="1" max="15" value="6"></div><div class="ctl"><label for="ecR">How alike they think <output id="oecR"></output></label><input type="range" id="ecR" min="0" max="100" step="5" value="80"></div></div><div class="row"><button class="btn primary" id="ecGo" type="button">Ask a new question</button></div></div><div class="stats"><div class="stat"><span class="k">Typical error, one person alone</span><span class="v" id="ecOne"></span></div><div class="stat"><span class="k">Typical error, the group's average</span><span class="v glow" id="ecGrp"></span></div><div class="stat"><span class="k">What's happening</span><span class="s" id="ecSay"></span></div></div><p class="callout">An illustrative model. Each person's guess has a shared error (what the group believes in common) and a personal one. Averaging cancels personal errors but not shared ones. <b>Adding more people who think alike barely helps. Adding people who think differently does.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Find two or three people who care more about getting it right than about agreeing with you. Agree on the rules out loud. Then bring them your decisions, especially the ones that worked out, and let them poke holes.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: CUDOS →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · CUDOS: rules for a truthseeking group</div>
+        <h2>Dissent to Win</h2>
+        <div class="short"><span class="lbl">In short</span><p>In 1942 the sociologist Robert K. Merton described the norms that make science work, known as CUDOS. Duke borrows them as rules for any group that wants to make better bets.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Communism: share the data.</b> Information belongs to the group. Share all the details, especially the ones that make you look bad, because we tend to leave out whatever doesn't fit our story. Duke points to the film Rashomon, in which four witnesses give four different accounts of the same event.</span></li>
+          <li><span><b>Universalism: don't shoot the message.</b> Judge an idea on its merits, not on who said it. Duke admits that early on she wrote off players she didn't respect and missed the things they were doing well. Good ideas come from people you don't like, too.</span></li>
+          <li><span><b>Disinterestedness: hide the ending.</b> We all have a stake in how a story comes out. When you ask for advice on a decision, describe it without saying how it turned out, so listeners judge the decision rather than working back from the result.</span></li>
+          <li><span><b>Organised scepticism: dissent on purpose.</b> Make disagreement part of the job. The US State Department has a Dissent Channel that lets staff send objections to policy straight to senior leaders, and many organisations use red teams whose task is to argue the other side.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke describes what happens whenever she tells a poker hand to friends or students: almost the first thing they want to know is how it ended. And once they know, their analysis bends around the result. If she won, her choices look sound; if she lost, they look reckless. So in her own truthseeking group, players learned to describe hands up to the decision point and stop there, letting the others judge the play before hearing the outcome. It is the same idea as a blind trial in science, applied over a drink.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: hide the ending</div><div class="hint">Rate six decisions, then see what the outcomes did to you</div></div>
+        <div class="blind" id="bl9"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you review a decision, yours or anyone's, cover up the ending first. Ask what was known, what the options were and what the odds looked like. Only then look at the result, and notice how much it wants to change your mind.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Dissent without a fight →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Talking to people outside the pod</div>
+        <h2>Dissent Without a Fight</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most people haven't signed up for truthseeking. To share a different view without setting off their defences, express uncertainty, lead with agreement, say "and" instead of "but", ask first and talk about the future.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Express uncertainty.</b> Starting with how sure you are, or aren't, makes it easier for the other person to disagree, and easier for you to listen when they do.</span></li>
+          <li><span><b>Lead with assent.</b> Begin with the parts you agree with, and mean it. People are far more open to the rest once they've heard their own view acknowledged.</span></li>
+          <li><span><b>"And", not "but".</b> "But" tells the listener that everything before it didn't count. "And" adds to it. Duke borrows the idea from improv comedy's rule of "yes, and".</span></li>
+          <li><span><b>Ask, then look forward.</b> Before giving hard feedback, ask whether the person wants it; sometimes they just want to vent. And instead of picking over what went wrong, ask what they might do next. People are much more open to the future than to being judged on the past.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke gives the example of someone venting about a bad situation, a boss who treats them unfairly or a relationship that went wrong. Pointing out where they went wrong, however true, only makes them defensive. Asking what they would like to happen from here, and what they might try next time, lets them look at the same facts without feeling judged. The truthseeking still happens; it just arrives facing forward.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: say it so it lands</div><div class="hint">Switch the moves on and watch the line change</div></div>
+        <div class="builder"><div class="fields" style="border-bottom:0;padding-bottom:6px"><div class="field" style="grid-column:1/-1"><label>The situation</label><div class="moves" id="dsSit"></div></div></div><div style="padding:0 18px 16px"><div class="toggles" id="dsMoves"></div></div><div class="out"><span class="k">What you say</span><p class="say-out" id="dsOut" aria-live="polite"></p><div class="tip"><span class="meter"><i id="dsBar"></i></span><span id="dsLand"></span></div></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want someone to hear a hard truth, make it easy to accept: say how sure you are, agree with what's right, add rather than cancel, ask before you advise and point the conversation at what happens next.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Mental time travel →</a></div>
+    </section>
+    <!-- ===================== YOUR FUTURE SELF ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · your future self</span>
+      <h2>Your Future Self</h2>
+      <p>The person making a decision is often the version of us least suited to it: tired, angry or carried away by the moment. The last chapter is a toolkit for bringing past and future selves into the room, and for mapping the futures that could follow before you choose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Before you bet, travel in time: ask how your future self will see it, and imagine both success and failure in advance.</p></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Let your future self in</div>
+        <h2>Adventures in Mental Time Travel</h2>
+        <div class="short"><span class="lbl">In short</span><p>In the moment, emotions and the present loom large. Pulling in the views of your past and future selves, with tools like 10-10-10 and advance commitments, keeps one bad hour from steering a big decision.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Night guy and morning guy.</b> Jerry Seinfeld jokes that night guy stays up late without a care, and morning guy pays for it. Our present self keeps making choices our future self has to live with.</span></li>
+          <li><span><b>10-10-10.</b> The business writer Suzy Welch's test: how will I feel about this in ten minutes, ten months and ten years? Asking it shrinks the moment back to its real size.</span></li>
+          <li><span><b>Zoom out on the ticker.</b> Don't watch your happiness like a stock price, minute by minute. A bad day feels like a crash when you're zoomed in. Zoom out and it is often a small dip in a longer trend.</span></li>
+          <li><span><b>Ulysses contracts.</b> Ulysses had himself tied to the mast so he could hear the Sirens without steering onto the rocks. You can bind your future self too: a loss limit at the table, a rule to wait a day before sending an angry email, a "decision swear jar" for phrases that signal you're not thinking straight.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In poker, Duke writes, a bad beat, losing a hand you were a big favourite to win, can send a player on tilt. The word comes from pinball machines, which flash TILT and freeze when you shake them too hard. A player on tilt chases losses, plays hands they would normally fold and makes choices their calmer self would never sign off on. Recognising the signs, the hot face, the urge to win it all back right now, is the cue to step away from the table before the next bet.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the happiness ticker</div><div class="hint">Today was a bad day. Zoom out</div></div>
+        <div class="stage"><svg id="tk11" role="img" aria-label="A chart of how life is going over time, ending in a bad day today"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">Look back over:</span><div class="moves" id="tkZoom"></div></div><div class="row"><button class="btn" id="tkGo" type="button">A different life</button></div></div><div class="stats"><div class="stat"><span class="k">Today's change, at this zoom</span><span class="v glow" id="tkDrop"></span></div><div class="stat"><span class="k">Over the whole window</span><span class="v" id="tkTrend"></span></div><div class="stat"><span class="k">How it feels</span><span class="s" id="tkSay"></span></div></div><p class="callout">An illustrative random walk with a gentle upward drift. <b>The bad day is identical at every zoom. Only the frame around it changes.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a decision feels urgent and emotional, ask how you'll see it in ten months and ten years. And for the moments you know will tempt you, decide in advance and make the rule hard to break.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Scouting the future →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Scenario planning, backcasting and premortems</div>
+        <h2>Scouting the Future</h2>
+        <div class="short"><span class="lbl">In short</span><p>Map the futures that could follow a decision, put rough odds and values on each, and work backwards from both success and failure. When the result arrives, don't let hindsight chop the rest of the tree away.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Scenario planning.</b> List the ways a decision could turn out, estimate how likely each is and what each is worth. Even rough guesses are better than none, because they make you think about the futures you'd rather ignore.</span></li>
+          <li><span><b>Backcasting.</b> Imagine you've succeeded and ask how you got there. Working backwards from the goal reveals the steps you need, and the luck you'd be relying on.</span></li>
+          <li><span><b>The premortem.</b> The psychologist Gary Klein's technique: imagine it's a year from now and the plan has failed. Why? It's far easier to spot weaknesses when failure is a given. Gabriele Oettingen's research points the same way: positive fantasies alone can sap the energy to act, while pairing a goal with its obstacles helps.</span></li>
+          <li><span><b>Don't take a chainsaw to the tree.</b> Before a decision, the future is a tree with many branches. Once an outcome happens, hindsight cuts away all the others, and the one that happened looks as if it was always going to. Remember the whole tree when you look back.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duke worked with After-School All-Stars, a charity that relies on grants. Its team ranked grant applications by how much money each could bring in, and put the most effort into the biggest. When she asked them to estimate their chance of winning each one, the list reshuffled: a huge grant with a slim chance could be worth less than a modest one they were likely to win. Putting rough odds on the futures, even guesses, changed where the team spent its time.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the grant list</div><div class="hint">Set the odds and watch the ranking change</div></div>
+        <div class="stage"><svg id="gr12" role="img" aria-label="Five grants ranked by expected value, with their full amounts behind"></svg></div><div class="lab-ctl"><div class="row" id="grCtl"></div><div class="row"><button class="btn primary" id="grGo" type="button">Let the year happen</button><button class="btn" id="grBack" type="button" disabled>Grow the tree back</button></div></div><div class="stats"><div class="stat"><span class="k">Expected total</span><span class="v glow" id="grEV"></span></div><div class="stat"><span class="k">Best bet by odds</span><span class="s" id="grTop"></span></div><div class="stat"><span class="k">This year</span><span class="s" id="grYear">Not decided yet.</span></div></div><p class="callout">Expected value is the amount times the chance of winning. The grants and numbers are invented for the lab. <b>When the year plays out, notice how quickly one branch starts to feel like the only one there ever was.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before a big decision, sketch the main futures, guess their odds and values, and run a premortem on your favourite. Afterwards, judge yourself against the tree you drew, not just the branch that happened.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#after">Next: your bet log →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your bet log</h2>
+      <p class="big">The whole book in one habit: before a decision, write down what you're betting on and how sure you are. Afterwards, check back and ask how much was the decision and how much was luck.</p>
+      <figure class="lab" id="betlog">
+        <div class="lab-top"><div class="t">Log a bet</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="blWhat">The decision</label><input id="blWhat" maxlength="120" placeholder="e.g. Take the job in Leeds"></div>
+          <div class="field" style="grid-column:1/-1"><label for="blBet">What I'm betting will happen</label><input id="blBet" maxlength="140" placeholder="e.g. I'll be happier there in a year than I am now"></div>
+          <div class="field"><label for="blConf">How sure I am <output id="oblConf"></output></label><input type="range" id="blConf" min="5" max="95" step="5" value="65"></div>
+          <div class="field"><label for="blWhen">Check back on</label><input type="date" id="blWhen"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="blAdd" type="button">Add to my log</button><span class="tip" id="blMsg"></span></div>
+        </div>
+        <div class="out" id="blList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">The bet</span><b>Decisions are bets</b><span>Luck and hidden information mean even great choices can lose.</span></div>
+        <div><span class="n">Resulting</span><b>Judge the call</b><span>A bad outcome is not proof of a bad decision, and a good one is not proof of a good one.</span></div>
+        <div><span class="n">Beliefs</span><b>Wanna bet?</b><span>Rate how sure you are in percentages, and changing your mind becomes an update, not a defeat.</span></div>
+        <div><span class="n">Learning</span><b>Field outcomes fairly</b><span>Give luck its share of your wins and other people's losses, too.</span></div>
+        <div><span class="n">People</span><b>Find your pod</b><span>A group that rewards accuracy, shares the data and argues on purpose.</span></div>
+        <div><span class="n">Time</span><b>Travel in your head</b><span>Ask your future self, bind your hands against tilt, and run the premortem.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Thinking in Bets: Making Smarter Decisions When You Don't Have All the Facts</i> by Annie Duke (2018). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book or a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The bet", "Beliefs and outcomes", "Other people", "Your future self"];
+const CH = [["Why This Isn't a Poker Book", "Every decision is a bet", 0, "Introduction"], ["Life Is Poker, Not Chess", "Resulting", 0, "Chapter 1"], ["Decisions Versus Outcomes", "Four kinds of outcome", 0, "Chapter 1"], ["Wanna Bet?", "How we form beliefs", 1, "Chapter 2"], ["Redefining Confidence", "Redefining confidence", 1, "Chapter 2"], ["Bet to Learn", "Fielding outcomes", 1, "Chapter 3"], ["Other People's Outcomes", "Other people's outcomes", 1, "Chapter 3"], ["The Buddy System", "The buddy system", 2, "Chapter 4"], ["Dissent to Win", "CUDOS", 2, "Chapter 5"], ["Dissent Without a Fight", "Dissent without a fight", 2, "Chapter 5"], ["Adventures in Mental Time Travel", "Mental time travel", 3, "Chapter 6"], ["Scouting the Future", "Scouting the future", 3, "Chapter 6"]];
+const QUIZ = {
+"1": {
+"q": "What makes a decision a bet, in Duke's sense?",
+"o": [
+"Money is at stake",
+"The result depends on luck and on information you don't have",
+"You are up against an opponent"
+],
+"a": 1,
+"w": "Duke uses \"bet\" broadly: any choice about an uncertain future, where luck and hidden information stand between the decision and the result."
+},
+"2": {
+"q": "Pete Carroll's pass was intercepted and Seattle lost. What does Duke say the result tells us about the call?",
+"o": [
+"It was clearly a terrible decision",
+"Very little on its own; we have to look at the reasoning and the odds",
+"Coaches should always run near the goal line"
+],
+"a": 1,
+"w": "One outcome is a poor guide to decision quality. With a low interception rate and time saved for more plays, the call was defensible. The result was a matter of luck."
+},
+"3": {
+"q": "You chose the surgeon with the best record and a rare complication still happened. Which box is that?",
+"o": [
+"Bad decision, bad result",
+"Good decision, bad result",
+"Bad decision, good result"
+],
+"a": 1,
+"w": "You made the best choice available and lost to the odds. That's bad luck, and it's no reason to choose differently next time."
+},
+"4": {
+"q": "Why did Princeton and Dartmouth students count such different numbers of fouls?",
+"o": [
+"They watched different films",
+"Each group saw the game through the lens of the team it backed",
+"The film was too blurry to judge"
+],
+"a": 1,
+"w": "Same footage, different beliefs going in. What people expected and wanted shaped what they noticed, which is motivated reasoning at work."
+},
+"5": {
+"q": "Why does Duke suggest stating beliefs as percentages?",
+"o": [
+"It sounds more scientific",
+"It makes it easier to update and invites others to share what they know",
+"Because most beliefs are 50 percent likely"
+],
+"a": 1,
+"w": "A percentage admits uncertainty up front, so new evidence just moves the number, and other people feel freer to offer it."
+},
+"6": {
+"q": "What did Phil Ivey do after winning a tournament, in Duke's telling?",
+"o": [
+"Celebrated and moved on",
+"Went over the hands he thought he'd played badly",
+"Blamed his opponents' luck for the close hands"
+],
+"a": 1,
+"w": "Ivey treated a win as a chance to find mistakes, not as proof that he'd played well. That is fielding outcomes honestly."
+},
+"7": {
+"q": "A rival wins a big contract. What does the self-serving bias tempt us to think?",
+"o": [
+"They must have earned it",
+"They probably got lucky",
+"We should copy their approach"
+],
+"a": 1,
+"w": "We tend to flip the bias for other people: their wins look like luck, their losses like their own fault. Duke asks us to treat them the way we'd treat ourselves at our most honest."
+},
+"8": {
+"q": "When do people reason most even-handedly, according to Lerner and Tetlock?",
+"o": [
+"When talking to a friend who agrees with them",
+"When they expect to explain themselves to an informed audience whose views they don't know",
+"When no one will ever check their reasoning"
+],
+"a": 1,
+"w": "Accountability to an unknown, accuracy-minded audience pushes people into exploratory thought, weighing all sides instead of building a case for one."
+},
+"9": {
+"q": "Why does Duke suggest describing a decision without saying how it turned out?",
+"o": [
+"To keep the story short",
+"So listeners judge the decision itself instead of working back from the result",
+"Because outcomes never matter"
+],
+"a": 1,
+"w": "Knowing the ending pulls our judgement towards resulting. Hiding it is the disinterestedness norm in practice."
+},
+"10": {
+"q": "Why does Duke suggest \"and\" instead of \"but\"?",
+"o": [
+"\"But\" signals that what came before didn't count; \"and\" adds to it",
+"\"And\" sounds more formal",
+"\"But\" is grammatically wrong in feedback"
+],
+"a": 0,
+"w": "\"But\" cancels the agreement you just offered. \"And\" keeps it, so the listener stays open to what comes next."
+},
+"11": {
+"q": "What is a Ulysses contract?",
+"o": [
+"A promise to a business partner",
+"A commitment made in advance that limits what your future self can do in the moment",
+"A bet on a long-term outcome"
+],
+"a": 1,
+"w": "Like Ulysses tied to the mast, you lock in a choice while you're calm, before tilt or temptation can override it."
+},
+"12": {
+"q": "What does a premortem ask you to imagine?",
+"o": [
+"That the plan has already succeeded",
+"That the plan has already failed, and why",
+"That nothing has happened yet"
+],
+"a": 1,
+"w": "Assuming failure makes it easier to find the weaknesses and the bad luck you'd otherwise overlook. Backcasting is the mirror image, working back from success."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0e1412';
+try { const t = localStorage.getItem('tb-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('tb-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('tb-done', []));
+const save = () => store.set('tb-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+const money = n => n >= 1000000 ? '$' + (n / 1e6).toFixed(1) + 'm' : '$' + fmtN(n / 1000) + 'k';
+const shuffled = a => { const b = [...a]; for (let k = b.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [b[k], b[j]] = [b[j], b[k]]; } return b; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I judge myself by how things turned out', 2, 'Resulting', 'A bad result doesn\'t prove a bad decision. Grade the call on what you knew and the odds you faced, not on the scoreboard.'],
+    ['I can\'t tell if it was luck or skill', 3, 'Four kinds of outcome', 'Separate the decision from the result. Only one of the two is yours to grade.'],
+    ['I\'m too certain about things', 5, 'Redefining confidence', 'Put a number on it. "I\'m 70 percent sure" is easier to update and invites the fact that would change your mind.'],
+    ['I keep making the same mistakes', 6, 'Bet to learn', 'Field outcomes fairly: give luck its share of your wins, and look for your mistakes even when things go well.'],
+    ['Other people\'s success bugs me', 7, 'Other people\'s outcomes', 'We flip the bias for rivals. Ask what they did right, and compete at being accurate instead.'],
+    ['Everyone around me agrees with me', 8, 'The buddy system', 'Build a small pod that values accuracy over agreement, and includes people who see things differently.'],
+    ['I need honest feedback', 9, 'CUDOS', 'Share all the details, judge ideas not people, hide how it ended and make dissent part of the job.'],
+    ['My feedback starts arguments', 10, 'Dissent without a fight', 'Say how sure you are, lead with what you agree with, use "and" not "but", ask first and talk about next time.'],
+    ['I decide badly when I\'m upset', 11, 'Mental time travel', 'Ask how you\'ll feel in ten minutes, ten months and ten years, and set rules in advance for the moments you\'ll be on tilt.'],
+    ['I don\'t know how to plan for an unclear future', 12, 'Scouting the future', 'Sketch the futures, guess their odds, then run a premortem: imagine it failed and ask why.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: spin the wheel, a good bet still loses ---------- */
+{ const ODDS = [30, 55, 70, 90], svg = $('#whSvg'), cap = $('#whCap'), oddsBox = $('#whOdds');
+  let p = 70, rec = [], ang = 0, busy = false;
+  const CX = 105, CY = 115, R = 88;
+  oddsBox.innerHTML = ODDS.map(o => `<button class="btn" type="button" data-o="${o}" aria-pressed="${o === p}">${o}%</button>`).join('');
+  const pt = (a, r) => [CX + r * Math.sin(a), CY - r * Math.cos(a)];
+  function slice(a0, a1){ const [x0, y0] = pt(a0, R), [x1, y1] = pt(a1, R); return `M${CX} ${CY}L${x0.toFixed(1)} ${y0.toFixed(1)}A${R} ${R} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}Z`; }
+  function draw(){
+    const wa = 2 * Math.PI * p / 100; let g = '';
+    g += `<path d="${slice(0, wa)}" ${FS('glow', 'ink', 2, .85)}/><path d="${slice(wa, 2 * Math.PI)}" ${FS('bad', 'ink', 2, .5)}/>`;
+    const [wx, wy] = pt(wa / 2, R * .58), [lx, ly] = pt(wa + (2 * Math.PI - wa) / 2, R * .62);
+    g += TX(wx, wy + 5, 'win', 'on-glow', 15, 'middle', 'font-weight="600"') + TX(lx, ly + 5, 'lose', 'text', 14, 'middle');
+    g += `<g id="whNeedle" transform="rotate(${ang.toFixed(1)} ${CX} ${CY})"><path d="M${CX - 5} ${CY}L${CX} ${CY - R + 8}L${CX + 5} ${CY}Z" ${F('text')}/><circle cx="${CX}" cy="${CY}" r="8" ${FS('panel', 'text', 2)}/></g>`;
+    const x0 = 226, n = rec.length, w = rec.filter(Boolean).length, last = rec.slice(-100);
+    g += TX(x0, 26, n ? `Last ${last.length} spins` : 'Your spins will show here', 'muted', 12);
+    for (let i = 0; i < 100; i++){ const x = x0 + (i % 10) * 17, y = 38 + Math.floor(i / 10) * 17, r = last[i];
+      g += r == null ? `<rect x="${x}" y="${y}" width="13" height="13" rx="3" ${S('line', 1)}/>` : `<rect x="${x}" y="${y}" width="13" height="13" rx="3" ${F(r ? 'glow' : 'bad', r ? .9 : .6)}/>`; }
+    if (n) g += TX(x0, 222, `${w} won of ${n} · ${pct(w / n)}`, 'text', 12.5);
+    svg.innerHTML = g;
+  }
+  function say(last){
+    const n = rec.length, w = rec.filter(Boolean).length;
+    if (!n){ cap.innerHTML = `This bet wins <b>${p} percent</b> of the time. Spin once, then spin a hundred times.`; return; }
+    if (n === 1 || last === 'one'){
+      const won = rec[n - 1];
+      cap.innerHTML = won ? (p < 50 ? `<b>You won</b>, on a bet that loses ${100 - p} percent of the time. Resulting would call that a smart decision. It wasn't.` : `<b>You won.</b> Nice, but one win doesn't prove the bet was good. The odds do.`)
+        : (p >= 50 ? `<b>You lost.</b> Was it a bad bet? No. It wins ${p} percent of the time; this was one of the other ${100 - p}.` : `<b>You lost</b>, as this bet usually does. Here the result and the decision agree, but only because the odds were poor.`);
+      return; }
+    cap.innerHTML = `<b>${w} wins in ${n} spins (${pct(w / n)}).</b> Over many spins the results line up with the odds. A single spin tells you almost nothing about whether the bet was good.`;
+  }
+  function spin(){
+    if (busy) return; const u = Math.random(), won = u < p / 100;
+    const target = ang - (ang % 360) + 1080 + u * 360, from = ang, t0 = performance.now(), dur = RM ? 0 : 1100;
+    busy = true;
+    const step = now => { const t = dur ? Math.min(1, (now - t0) / dur) : 1, e = 1 - Math.pow(1 - t, 3); ang = from + (target - from) * e;
+      const nd = $('#whNeedle'); if (nd) nd.setAttribute('transform', `rotate(${ang.toFixed(1)} ${CX} ${CY})`);
+      if (t < 1) requestAnimationFrame(step); else { ang = target % 360; busy = false; rec.push(won); draw(); say('one'); } };
+    requestAnimationFrame(step);
+  }
+  $('#whOne').addEventListener('click', spin);
+  $('#whMany').addEventListener('click', () => { if (busy) return; for (let i = 0; i < 100; i++) rec.push(Math.random() < p / 100); draw(); say('many'); });
+  $('#whReset').addEventListener('click', () => { rec = []; draw(); say(); });
+  oddsBox.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => { if (busy) return; p = +b.dataset.o; press([...oddsBox.querySelectorAll('[data-o]')], b); rec = []; draw(); say(); }));
+  draw(); say();
+}
+
+/* ---------- intro: luck, hidden information or your decision ---------- */
+sorter('#sort1', '#tally1', [{ id: 'luck', label: 'Luck', d: 'Chance no one could control' }, { id: 'hid', label: 'Hidden information', d: 'Something you couldn\'t see' }, { id: 'dec', label: 'Your decision', d: 'The part you chose' }], [
+  { t: 'It pours with rain on the outdoor wedding you booked a year ago.', q: true, a: 'luck', w: 'No forecast reaches a year ahead. That one is down to chance.' },
+  { t: 'Your opponent at the poker table is holding a pair of aces you can\'t see.', q: true, a: 'hid', w: 'The cards exist; you just can\'t see them. That is hidden information, the thing that makes poker unlike chess.' },
+  { t: 'You drive home after four drinks and get there safely.', q: true, a: 'dec', w: 'Getting home was luck, but the thing to grade is the choice to drive, and it was a bad one.' },
+  { t: 'A rival firm was secretly about to launch the same product as you.', q: true, a: 'hid', w: 'The plan was real but kept private. You were betting without a piece of the picture.' },
+  { t: 'Your flight is cancelled when a volcano erupts across the ocean.', q: true, a: 'luck', w: 'Nobody could reasonably see that coming. Pure chance.' },
+  { t: 'You put all your savings into one stock because a friend tipped it.', q: true, a: 'dec', w: 'Whatever the stock does next, putting everything on one tip is the choice that matters.' },
+  { t: 'The interviewer had just had a furious call before meeting you.', q: true, a: 'hid', w: 'It shaped the outcome and you had no way to know about it.' },
+  { t: 'You leave an hour early for the airport so a delay won\'t matter.', q: true, a: 'dec', w: 'Building a cushion against bad luck is a decision, and a good one.' },
+]);
+
+/* ---------- 1: the one-yard line ---------- */
+{ const el = $('#yd2'), rI = $('#ydRun'), pI = $('#ydPass'), iI = $('#ydInt'), bP = $('#ydP'), bR = $('#ydR');
+  let plan = 'pass', games = [];
+  const odds = () => { const r = +rI.value / 100, ps = Math.min(+pI.value / 100, 1 - +iI.value / 100), it = +iI.value / 100, two = 1 - (1 - r) * (1 - r);
+    return { r, ps, it, pass: ps + (1 - ps - it) * two, run: two }; };
+  const HEAD = {
+    pw: ['Gutsy pass call wins it', 'Bold call on second down pays off', 'Genius! The surprise pass wins the title'],
+    pi: ['Worst play call in history', 'Why on earth would you throw there?', 'Intercepted: the call that lost a championship'],
+    pf: ['Stuffed at the goal line', 'Wasted pass, then the run game fails'],
+    rw: ['Hand it off: textbook call wins it', 'Smart, simple, champions'],
+    rl: ['Clock runs out: why didn\'t they pass?', 'Predictable runs cost them the title'] };
+  function play(){ const o = odds(), u = Math.random();
+    if (plan === 'pass'){ if (u < o.ps) return 'pw'; if (u < o.ps + o.it) return 'pi'; const a = Math.random() < o.r || Math.random() < o.r; return a ? 'rw' : 'pf'; }
+    return (Math.random() < o.r || Math.random() < o.r) ? 'rw' : 'rl'; }
+  const won = k => k === 'pw' || k === 'rw';
+  const draw = onLayout(() => {
+    const o = odds(), nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 130, bw = W - L - 70, H = nw ? 180 : 160; vb(el, W, H); let g = '', y = 14;
+    [['pass', 'Pass first', o.pass], ['run', 'Run first', o.run]].forEach(([k, lab, v]) => {
+      const on = plan === k, ty = nw ? y : y + 17, by = nw ? y + 8 : y;
+      g += TX(nw ? 0 : 0, nw ? y + 1 : y + 17, lab, on ? 'text' : 'muted', 13, 'start', on ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="26" rx="6" ${F('panel-2')}/><rect x="${L}" y="${by}" width="${(bw * v).toFixed(1)}" height="26" rx="6" ${F(on ? 'glow' : 'cool', on ? .9 : .45)}/>`;
+      g += TX(L + bw + 8, by + 18, pct(v), on ? 'glow' : 'muted', 13);
+      y += nw ? 48 : 40; });
+    const gy = y + 10, cols = nw ? 20 : 30, cs = nw ? 17 : 16;
+    g += TX(0, gy, games.length ? `Last ${Math.min(games.length, cols * 2)} games with your calls · ${games.filter(won).length} won of ${games.length}` : 'Each game you play shows up here', 'muted', 12);
+    games.slice(-cols * 2).forEach((k, i) => { const x = (i % cols) * cs, yy = gy + 10 + Math.floor(i / cols) * cs;
+      g += `<rect x="${x}" y="${yy}" width="${cs - 4}" height="${cs - 4}" rx="3" ${F(won(k) ? 'good' : 'bad', won(k) ? .8 : .6)}/>`; });
+    el.innerHTML = g;
+    out('ydRun', rI.value + '%'); out('ydPass', pI.value + '%'); out('ydInt', iI.value + '%');
+    $('#ydWin').textContent = pct(plan === 'pass' ? o.pass : o.run, 1);
+    const w = games.filter(won).length; $('#ydN').textContent = games.length ? `${games.length} (${w} won)` : '0';
+  });
+  function go(n){ let k; for (let i = 0; i < n; i++){ k = play(); games.push(k); }
+    const hs = HEAD[k], praised = won(k);
+    $('#ydHead').innerHTML = `<b style="color:var(--${praised ? 'good' : 'bad'})">“${hs[Math.floor(Math.random() * hs.length)]}”</b>` + (n > 1 ? ` (the last of ${n})` : '');
+    draw(); }
+  [rI, pI, iI].forEach(x => x.addEventListener('input', () => { games = []; $('#ydHead').textContent = 'Odds changed. Play it out again.'; draw(); }));
+  bP.addEventListener('click', () => { plan = 'pass'; press([bP, bR], bP); games = []; draw(); });
+  bR.addEventListener('click', () => { plan = 'run'; press([bP, bR], bR); games = []; draw(); });
+  $('#ydGo').addEventListener('click', () => go(1));
+  $('#ydTen').addEventListener('click', () => go(20));
+  draw();
+}
+
+/* ---------- 2: four kinds of outcome ---------- */
+sorter('#sort3', '#tally3', [{ id: 'gg', label: 'Good decision, good result', d: 'Earned' }, { id: 'gb', label: 'Good decision, bad result', d: 'Bad luck' }, { id: 'bg', label: 'Bad decision, good result', d: 'Dumb luck' }, { id: 'bb', label: 'Bad decision, bad result', d: 'Just deserts' }], [
+  { t: 'You wear your seatbelt, a driver runs a red light and you break your arm.', q: true, a: 'gb', w: 'Wearing a seatbelt was right. The crash was bad luck, and the belt probably made it less bad.' },
+  { t: 'You drive home after too many drinks and arrive without a scratch.', q: true, a: 'bg', w: 'A safe arrival doesn\'t redeem the decision. This is the textbook case of dumb luck.' },
+  { t: 'You put your savings in a low-cost index fund and it grows over twenty years.', q: true, a: 'gg', w: 'A sound, diversified bet that paid off as the odds suggested.' },
+  { t: 'You bet your rent money on a single hand of blackjack and lose it.', q: true, a: 'bb', w: 'A reckless bet with the expected result.' },
+  { t: 'You buy a coin a stranger tipped online and it triples in a week.', q: true, a: 'bg', w: 'It worked, but nothing about the choice made it likely to. Resulting would teach you to do it again.' },
+  { t: 'You pick the surgeon with the best record and a rare complication still happens.', q: true, a: 'gb', w: 'The best available choice can still lose to the odds.' },
+  { t: 'You run a red light to save a minute and get a ticket.', q: true, a: 'bb', w: 'A bad decision that met a fitting result.' },
+  { t: 'You revise from past papers, sleep well and pass the exam.', q: true, a: 'gg', w: 'Good preparation, good result. Earned, though luck still had a small say.' },
+]);
+
+/* ---------- 3: they saw a game ---------- */
+{ const el = $('#gm4'), lI = $('#gmL'); let seed = 11, plays = [];
+  function gen(){ const r = rng(seed); plays = [...Array(24)].map(() => ({ team: r() < .5 ? 'D' : 'P', a: r() })); }
+  const call = (pl, view, L) => { if (view === 'ref') return pl.a > .5; const own = (view === 'P') === (pl.team === 'P'); return pl.a > (own ? .5 + .38 * L : .5 - .38 * L); };
+  const draw = onLayout(() => { const L = +lI.value / 100, nw = NARROW(), cols = nw ? 12 : 24, cs = nw ? 26 : 19, lab = nw ? 0 : 150, rowsPer = 24 / cols, block = rowsPer * cs + (nw ? 22 : 10);
+    const W = nw ? 12 * cs + 4 : lab + 24 * cs + 70, H = 3 * block + 34; vb(el, W, H); let g = '';
+    const views = [['ref', 'Neutral referee'], ['P', 'Princeton fan'], ['D', 'Dartmouth fan']];
+    const counts = {};
+    views.forEach(([v, name], vi) => { const y0 = 6 + vi * block + (nw ? 18 : 0); let dF = 0, pF = 0;
+      g += nw ? TX(0, y0 - 6, name, 'text', 12.5) : TX(0, y0 + cs * .7, name, 'text', 13);
+      plays.forEach((pl, i) => { const x = lab + (i % cols) * cs, y = y0 + Math.floor(i / cols) * cs, s = cs - 5, f = call(pl, v, L), c = pl.team === 'D' ? 'good' : 'glow';
+        if (f){ pl.team === 'D' ? dF++ : pF++; }
+        g += f ? `<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="4" ${F(c, .9)}/><text x="${x + s / 2}" y="${y + s / 2 + 4.5}" font-size="12" text-anchor="middle" ${F('ink')}>×</text>` : `<rect x="${x}" y="${y}" width="${s}" height="${s}" rx="4" ${FS(c, c, 1.2, .1)}/>`; });
+      counts[v] = [dF, pF];
+      if (!nw) g += TX(W - 64, y0 + cs * .7, `${dF} D · ${pF} P`, 'muted', 12);
+      else g += TX(W - 2, y0 - 6, `${dF} D · ${pF} P fouls`, 'muted', 11.5, 'end'); });
+    const ly = H - 10;
+    g += `<rect x="0" y="${ly - 10}" width="11" height="11" rx="3" ${F('good', .9)}/>` + TX(16, ly, 'Dartmouth player involved', 'muted', 12);
+    g += `<rect x="${nw ? 180 : 200}" y="${ly - 10}" width="11" height="11" rx="3" ${F('glow', .9)}/>` + TX(nw ? 196 : 216, ly, 'Princeton player', 'muted', 12);
+    g += nw ? '' : TX(W, ly, '× = called a foul', 'faint', 12, 'end');
+    el.innerHTML = g; out('gmL', lI.value + '%');
+    $('#gmRef').textContent = counts.ref[0]; $('#gmP').textContent = counts.P[0]; $('#gmD').textContent = counts.D[0];
+  });
+  lI.addEventListener('input', draw);
+  $('#gmGo').addEventListener('click', () => { seed = (seed * 9301 + 49297) % 233280 + 1; gen(); draw(); });
+  gen(); draw();
+}
+
+/* ---------- 4: calibration ---------- */
+{ const box = $('#cal5'), QS = [
+    ['Lightning never strikes the same place twice.', false, 'Tall buildings get hit again and again; New York\'s Empire State Building is struck many times a year.'],
+    ['An octopus has three hearts.', true, 'Two pump blood through the gills and one through the rest of the body.'],
+    ['The Great Wall of China is easy to see from the Moon with the naked eye.', false, 'It is long but narrow. From the Moon, no individual human structure is visible to the naked eye.'],
+    ['Venus is hotter than Mercury, even though it is further from the Sun.', true, 'Its thick carbon dioxide atmosphere traps heat, making it the hottest planet.'],
+    ['Bats are blind.', false, 'All bats can see; many species also use echolocation.'],
+    ['Sound travels faster through water than through air.', true, 'Roughly four times faster.'],
+    ['Measured from base to peak, Mount Everest is the tallest mountain on Earth.', false, 'Everest is highest above sea level, but Mauna Kea in Hawaii is taller from its base on the ocean floor.'],
+    ['A day on Venus is longer than its year.', true, 'Venus takes about 243 Earth days to turn once, and about 225 to orbit the Sun.'],
+    ['Napoleon was unusually short for a Frenchman of his time.', false, 'He was about average or a little above. The myth comes partly from a mix-up between French and English inches.'],
+    ['Bananas are berries, botanically speaking.', true, 'Botanically they are berries, while strawberries are not.'],
+    ['Goldfish can only remember things for about three seconds.', false, 'Experiments show goldfish can learn and remember for months.'],
+    ['Cracking your knuckles causes arthritis.', false, 'Studies have found no link between knuckle cracking and arthritis.'] ];
+  let i, ans, pick, conf;
+  function start(){ i = 0; ans = []; card(); }
+  function card(){
+    if (i >= QS.length) return done();
+    pick = null; conf = 70; const [t] = QS[i];
+    box.innerHTML = `<div class="sort-card"><span class="k">Statement ${i + 1} of ${QS.length}</span><span class="item q">${t}</span><span class="fb" hidden></span></div>
+      <div class="row"><button class="btn" type="button" data-p="1" aria-pressed="false">True</button><button class="btn" type="button" data-p="0" aria-pressed="false">False</button></div>
+      <div class="ctl"><label for="calC">How sure are you? <output id="ocalC">70%</output></label><input type="range" id="calC" min="50" max="100" step="5" value="70"></div>
+      <div class="row"><button class="btn primary" type="button" data-lock disabled>Lock it in</button></div>`;
+    const pb = [...box.querySelectorAll('[data-p]')], lock = box.querySelector('[data-lock]'), cI = box.querySelector('#calC');
+    pb.forEach(b => b.addEventListener('click', () => { pick = b.dataset.p === '1'; press(pb, b); lock.disabled = false; }));
+    cI.addEventListener('input', () => { conf = +cI.value; out('calC', conf + '%'); });
+    lock.addEventListener('click', () => { const [, truth, why] = QS[i], ok = pick === truth; ans.push({ conf: conf / 100, ok });
+      pb.forEach(b => b.disabled = true); cI.disabled = true;
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? 'Right' : 'Wrong'}, at ${conf}% sure.</b> It's ${truth ? 'true' : 'false'}. ${why}`;
+      lock.textContent = i === QS.length - 1 ? 'See how calibrated you are →' : 'Next →';
+      lock.replaceWith(lock.cloneNode(true)); const nx = box.querySelector('[data-lock]'); nx.focus({ preventScroll: true });
+      nx.addEventListener('click', () => { i++; card(); }); });
+  }
+  function done(){
+    const exp = ans.reduce((s, a) => s + a.conf, 0), got = ans.filter(a => a.ok).length, brier = ans.reduce((s, a) => s + Math.pow(a.conf - (a.ok ? 1 : 0), 2), 0) / ans.length;
+    const B = [[.5, .6, '50–60%'], [.65, .75, '65–75%'], [.8, .9, '80–90%'], [.95, 1, '95–100%']];
+    const W = 360, H = 250, x0 = 46, y0 = 16, pw = W - x0 - 14, ph = H - y0 - 44; let g = '';
+    const X = c => x0 + (c - .5) / .5 * pw, Y = r => y0 + ph - r * ph;
+    [0, .25, .5, .75, 1].forEach(r => { g += `<line x1="${x0}" y1="${Y(r)}" x2="${x0 + pw}" y2="${Y(r)}" ${S('line', 1)}/>` + TX(x0 - 6, Y(r) + 4, pct(r), 'faint', 11, 'end'); });
+    [.5, .75, 1].forEach(c => { g += TX(X(c), H - 26, pct(c), 'faint', 11, 'middle'); });
+    g += TX(x0 + pw / 2, H - 6, 'How sure you said you were', 'muted', 11.5, 'middle');
+    g += `<line x1="${X(.5)}" y1="${Y(.5)}" x2="${X(1)}" y2="${Y(1)}" ${S('faint', 1.5, ';stroke-dasharray:4 4')}/>` + TX(X(.62), Y(.66) - 8, 'perfectly calibrated', 'faint', 11, 'middle', `transform="rotate(-40 ${X(.62)} ${Y(.66) - 8})"`);
+    B.forEach(([lo, hi]) => { const inB = ans.filter(a => a.conf >= lo - 1e-9 && a.conf <= hi + 1e-9); if (!inB.length) return;
+      const c = inB.reduce((s, a) => s + a.conf, 0) / inB.length, r = inB.filter(a => a.ok).length / inB.length;
+      g += `<circle cx="${X(c)}" cy="${Y(r)}" r="${5 + inB.length * 1.6}" ${FS('glow', 'ink', 1.5, .85)}/>` + TX(X(c) + 9 + inB.length * 1.6, Y(r) + 4, `${inB.filter(a => a.ok).length}/${inB.length}`, 'text', 11.5); });
+    const diff = got - exp, verdict = Math.abs(diff) < 1.2 ? 'Well calibrated: you were about as sure as you deserved to be.' : diff < 0 ? 'Overconfident: you expected more right answers than you got. That is the most common result.' : 'Underconfident: you knew more than you gave yourself credit for.';
+    box.innerHTML = `<div class="cal-end"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="How often you were right at each level of confidence">${g}</svg>
+      <div class="cal-sum"><span class="k">Your result</span><p class="say-out" style="font-size:26px">${verdict}</p>
+      <div class="stats" style="border:0;background:none;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))"><div class="stat"><span class="k">You expected to get</span><span class="v">${exp.toFixed(1)} right</span></div><div class="stat"><span class="k">You got</span><span class="v glow">${got} of ${ans.length}</span></div><div class="stat"><span class="k">Brier score</span><span class="v">${brier.toFixed(3)}</span></div></div>
+      <p class="tip">The Brier score measures how far your confidence was from what happened: 0 is perfect, and always saying 50 percent scores 0.25. Each circle groups the statements at that confidence level; on the dashed line, you're right exactly as often as you say.</p>
+      <div class="row"><button class="btn primary" type="button" data-again>Try again</button></div></div></div>`;
+    box.querySelector('[data-again]').addEventListener('click', start);
+  }
+  start();
+}
+
+/* ---------- 5: two learners ---------- */
+{ const el = $('#tl6'), tI = $('#tlT'), bI = $('#tlB'); let seed = 5;
+  const draw = onLayout(() => { const t = +tI.value / 100, b = +bI.value / 100, r = rng(seed), N = 200, nw = NARROW(), W = nw ? 360 : 640, H = 270, x0 = 40, y0 = 14, pw = W - x0 - (nw ? 12 : 120), ph = H - y0 - 40;
+    vb(el, W, H); let w = 0, l = 0; const self = [], seek = [];
+    for (let i = 0; i < N; i++){ r() < t ? w++ : l++; self.push((w + 1) / (w + l * (1 - b) + 2)); seek.push((w + 1) / (w + l + 2)); }
+    const X = i => x0 + i / (N - 1) * pw, Y = v => y0 + ph - v * ph; let g = '';
+    [0, .25, .5, .75, 1].forEach(v => { g += `<line x1="${x0}" y1="${Y(v)}" x2="${x0 + pw}" y2="${Y(v)}" ${S('line', 1)}/>` + TX(x0 - 6, Y(v) + 4, pct(v), 'faint', 11, 'end'); });
+    g += TX(x0, H - 12, 'hand 1', 'faint', 11) + TX(x0 + pw, H - 12, 'hand 200', 'faint', 11, 'end') + TX(x0 + pw / 2, H - 12, 'what each learner believes their win rate is', 'muted', 11.5, 'middle');
+    g += `<line x1="${x0}" y1="${Y(t)}" x2="${x0 + pw}" y2="${Y(t)}" ${S('text', 1.5, ';stroke-dasharray:5 4;stroke-opacity:.7')}/>`;
+    const path = a => 'M' + a.map((v, i) => `${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join('L');
+    g += `<path d="${path(seek)}" ${S('cool', 2.2)}/><path d="${path(self)}" ${S('glow', 2.6)}/>`;
+    const lbl = (v, txt, c, dy) => nw ? '' : TX(x0 + pw + 8, Y(v) + 4 + dy, txt, c, 12.5);
+    const ys = Y(self[N - 1]), yk = Y(seek[N - 1]), yt = Y(t), sep = (a, c) => Math.abs(a - c) < 14;
+    g += lbl(self[N - 1], 'self-server', 'glow', sep(ys, yk) ? -8 : 0) + lbl(seek[N - 1], 'truthseeker', 'cool', sep(ys, yk) ? 8 : 0) + (sep(yt, yk) || sep(yt, ys) ? '' : lbl(t, 'the truth', 'text', 0));
+    if (nw) g += TX(x0, y0 - 2, '— self-server', 'glow', 11.5) + TX(x0 + 110, y0 - 2, '— truthseeker', 'cool', 11.5) + TX(x0 + 220, y0 - 2, '- - the truth', 'text', 11.5);
+    el.innerHTML = g; out('tlT', tI.value + '%'); out('tlB', bI.value + '%');
+    $('#tlTrue').textContent = pct(t); $('#tlSelf').textContent = pct(self[N - 1]); $('#tlSeek').textContent = pct(seek[N - 1]);
+  });
+  tI.addEventListener('input', draw); bI.addEventListener('input', draw);
+  $('#tlGo').addEventListener('click', () => { seed = (seed * 9301 + 49297) % 233280 + 1; draw(); });
+  draw();
+}
+
+/* ---------- 6: whose fault was it? ---------- */
+{ const box = $('#wf7'), EV = [
+    ['You win a big new client.', 'A colleague you don\'t get on with wins a big new client.', true, 'Wins a big new client'],
+    ['You miss a flight after getting stuck in traffic.', 'That colleague misses a flight after getting stuck in traffic.', false, 'Misses a flight in traffic'],
+    ['You get promoted over three other candidates.', 'That colleague gets promoted over three other candidates.', true, 'Promoted over three others'],
+    ['Your investments fall 15 percent in a year.', 'Their investments fall 15 percent in a year.', false, 'Investments fall 15 percent'],
+    ['Your dinner party falls flat when the main course is ruined.', 'Their dinner party falls flat when the main course is ruined.', false, 'Dinner party falls flat'],
+    ['Your side project suddenly takes off online.', 'Their side project suddenly takes off online.', true, 'Side project takes off'] ];
+  let order, step, me, them;
+  function start(){ order = [...shuffled(EV.map((_, k) => [k, 0])), ...shuffled(EV.map((_, k) => [k, 1]))]; step = 0; me = []; them = []; card(); }
+  function card(){
+    if (step >= order.length) return done();
+    const [k, who] = order[step], txt = EV[k][who];
+    box.innerHTML = `<div class="sort-card"><span class="k">${who ? 'Round 2 · a rival' : 'Round 1 · you'} · ${step % EV.length + 1} of ${EV.length}</span><span class="item q">${txt}</span></div>
+      <div class="ctl"><label for="wfS"><span>How much was down to ${who ? 'their' : 'your'} decisions, rather than luck?</span><output id="owfS">50%</output></label><input type="range" id="wfS" min="0" max="100" step="5" value="50"><div class="ends"><span>All luck</span><span>All decisions</span></div></div>
+      <div class="row"><button class="btn primary" type="button" data-next>${step === EV.length - 1 ? 'Start round 2 →' : step === order.length - 1 ? 'See the mirror →' : 'Next →'}</button></div>`;
+    const s = box.querySelector('#wfS'); s.addEventListener('input', () => out('wfS', s.value + '%'));
+    box.querySelector('[data-next]').addEventListener('click', () => { (who ? them : me)[k] = +s.value; step++; card(); });
+  }
+  function done(){
+    const W = 360, rowH = 34, H = EV.length * rowH + 50, x0 = 12, pw = W - 24; let g = '';
+    const X = v => x0 + v / 100 * pw;
+    EV.forEach(([, , good, short], k) => { const y = 14 + k * rowH;
+      g += TX(x0, y, (good ? '+ ' : '− ') + short, good ? 'good' : 'bad', 11.5);
+      g += `<line x1="${x0}" y1="${y + 12}" x2="${x0 + pw}" y2="${y + 12}" ${S('line', 1)}/><line x1="${X(me[k])}" y1="${y + 12}" x2="${X(them[k])}" y2="${y + 12}" ${S('muted', 2)}/>`;
+      g += `<circle cx="${X(me[k])}" cy="${y + 12}" r="6" ${F('glow')}/><circle cx="${X(them[k])}" cy="${y + 12}" r="6" ${FS('cool', 'ink', 1.5)}/>`; });
+    g += TX(x0, H - 12, 'all luck', 'faint', 11) + TX(x0 + pw, H - 12, 'all decisions', 'faint', 11, 'end') + `<circle cx="${W / 2 - 52}" cy="${H - 16}" r="5" ${F('glow')}/>` + TX(W / 2 - 44, H - 12, 'you', 'muted', 11) + `<circle cx="${W / 2 + 8}" cy="${H - 16}" r="5" ${F('cool')}/>` + TX(W / 2 + 16, H - 12, 'the rival', 'muted', 11);
+    const avg = (arr, good) => { const ks = EV.map((e, k) => k).filter(k => EV[k][2] === good); return ks.reduce((s, k) => s + arr[k], 0) / ks.length; };
+    const gWin = avg(me, true) - avg(them, true), gLoss = avg(them, false) - avg(me, false);
+    const verdict = gWin > 8 && gLoss > 8 ? 'The mirror flipped: your wins were skill, theirs luck; their losses were their fault, yours bad luck.'
+      : gWin > 8 ? 'You gave yourself more credit for the wins than you gave the rival.'
+      : gLoss > 8 ? 'You blamed the rival\'s losses on their decisions more than your own.'
+      : 'Remarkably even-handed. You treated the rival the way you treated yourself.';
+    box.innerHTML = `<div class="cal-end"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your ratings for yourself and for a rival on each event">${g}</svg>
+      <div class="cal-sum"><span class="k">The mirror</span><p class="say-out" style="font-size:26px">${verdict}</p>
+      <div class="stats" style="border:0;background:none;gap:10px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))"><div class="stat"><span class="k">Extra credit you took for wins</span><span class="v glow">${gWin > 0 ? '+' : ''}${gWin.toFixed(0)} pts</span></div><div class="stat"><span class="k">Extra blame you gave their losses</span><span class="v">${gLoss > 0 ? '+' : ''}${gLoss.toFixed(0)} pts</span></div></div>
+      <p class="tip">The events were identical in both rounds. Any gap between the gold and blue dots is the self-serving bias, and its mirror image for other people.</p>
+      <div class="row"><button class="btn primary" type="button" data-again>Try again</button></div></div></div>`;
+    box.querySelector('[data-again]').addEventListener('click', start);
+  }
+  start();
+}
+
+/* ---------- 7: echo chamber or pod ---------- */
+{ const el = $('#ec8'), nI = $('#ecN'), rI = $('#ecR'); let seed = 3;
+  const SD = 100;
+  const draw = onLayout(() => { const n = +nI.value, rho = +rI.value / 100, r = rng(seed), nw = NARROW(), W = nw ? 360 : 640, H = 150, x0 = 14, pw = W - 28;
+    vb(el, W, H); const shared = gauss(r) * SD, gs = [...Array(n)].map(() => Math.sqrt(rho) * shared + Math.sqrt(1 - rho) * gauss(r) * SD), avg = gs.reduce((s, v) => s + v, 0) / n;
+    const X = v => x0 + (clamp(v, -320, 320) + 320) / 640 * pw; let g = '';
+    g += `<line x1="${x0}" y1="${H - 40}" x2="${x0 + pw}" y2="${H - 40}" ${S('line', 1.5)}/>`;
+    [-300, -150, 0, 150, 300].forEach(v => { g += `<line x1="${X(v)}" y1="${H - 44}" x2="${X(v)}" y2="${H - 36}" ${S('faint', 1)}/>` + TX(X(v), H - 22, v === 0 ? 'the truth' : (v > 0 ? '+' : '') + v, v === 0 ? 'good' : 'faint', 11, 'middle'); });
+    g += `<line x1="${X(0)}" y1="10" x2="${X(0)}" y2="${H - 40}" ${S('good', 2, ';stroke-dasharray:4 3')}/>`;
+    gs.forEach((v, i) => { g += `<circle cx="${X(v).toFixed(1)}" cy="${(H - 58 - (i % 4) * 14).toFixed(1)}" r="6" ${FS('cool', 'ink', 1, .7)}/>`; });
+    g += `<path d="M${X(avg)} ${H - 40}l-8 -14h16Z" ${F('glow')}/>` + TX(X(avg), 18, 'group average', 'glow', 12, X(avg) > W - 70 ? 'end' : X(avg) < 70 ? 'start' : 'middle');
+    g += `<line x1="${X(avg)}" y1="24" x2="${X(avg)}" y2="${H - 54}" ${S('glow', 1.5)}/>`;
+    g += TX(x0, H - 4, 'each blue dot is one member\'s guess', 'muted', 11.5);
+    el.innerHTML = g; out('ecN', n); out('ecR', rI.value + '%');
+    const grp = SD * Math.sqrt(rho + (1 - rho) / n);
+    $('#ecOne').textContent = '±' + fmtN(SD); $('#ecGrp').textContent = '±' + fmtN(grp);
+    $('#ecSay').textContent = n === 1 ? 'Alone, your error is all yours.' : rho >= .6 ? 'A shared blind spot: averaging can\'t cancel what everyone gets wrong together.' : rho <= .3 && n >= 4 ? 'Personal errors cancel out: the group beats almost every member.' : 'Some errors cancel, some are shared.';
+  });
+  nI.addEventListener('input', draw); rI.addEventListener('input', draw);
+  $('#ecGo').addEventListener('click', () => { seed = (seed * 9301 + 49297) % 233280 + 1; draw(); });
+  draw();
+}
+
+/* ---------- 8: hide the ending ---------- */
+{ const box = $('#bl9'), ST = [
+    ['A manager hires the candidate with the strongest references and work sample over a more charming interviewee.', 'A year later, she is the team\'s best performer.', 'She leaves after four months when her partner takes a job abroad.'],
+    ['A runner follows a gradual 16-week marathon plan drawn up with a coach.', 'She finishes in her goal time.', 'She turns an ankle on a kerb two weeks before the race and can\'t run.'],
+    ['A family sees a 10 percent chance of rain and holds the party in the garden, with a gazebo on standby.', 'The sun shines all afternoon.', 'A freak storm blows in and the party ends early.'],
+    ['A café owner tries a new dish as a weekly special before adding it to the menu.', 'It sells out and becomes a regular.', 'Hardly anyone orders it and the ingredients go to waste.'],
+    ['An investor puts her savings in a broad, low-cost index fund.', 'It\'s up 12 percent after a year.', 'A market crash leaves it down 18 percent after a year.'],
+    ['A driver leaves 30 minutes early for an important interview.', 'He arrives early and calm.', 'A bridge closure makes him ten minutes late anyway.'] ];
+  const LBL = ['Poor', 'Weak', 'Okay', 'Good', 'Great'];
+  let order, step, blind, rates, runs = [];
+  function start(b){ blind = b; const goods = shuffled([0, 1, 2, 3, 4, 5]).slice(0, 3); order = shuffled(ST.map((_, k) => [k, goods.includes(k)])); step = 0; rates = []; card(); }
+  function card(){
+    if (step >= order.length) return done();
+    const [k, good] = order[step], [d, gO, bO] = ST[k];
+    box.innerHTML = `<div class="sort-card"><span class="k">Decision ${step + 1} of ${ST.length}${blind ? ' · outcome hidden' : ''}</span><span class="item q">${d}</span>${blind ? '<span class="ctx">How it turned out is hidden.</span>' : `<span class="ctx" style="color:var(--${good ? 'good' : 'bad'})">${good ? gO : bO}</span>`}</div>
+      <p class="tip" style="margin:0">How good was the <b>decision</b>?</p>
+      <div class="rate">${LBL.map((l, i) => `<button class="btn" type="button" data-r="${i + 1}">${i + 1} · ${l}</button>`).join('')}</div>`;
+    box.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => { rates.push({ good, r: +b.dataset.r }); step++; card(); }));
+  }
+  function done(){
+    const avg = g => { const xs = rates.filter(x => x.good === g); return xs.reduce((s, x) => s + x.r, 0) / xs.length; };
+    const aG = avg(true), aB = avg(false), gap = aG - aB; runs.push({ blind, gap });
+    const W = 360, H = 130; let g = '';
+    [['Decisions that ended well', aG, 'good'], ['Decisions that ended badly', aB, 'bad']].forEach(([l, v, c], i) => { const y = 14 + i * 50;
+      g += TX(0, y, l, 'muted', 12) + `<rect x="0" y="${y + 8}" width="${W - 50}" height="20" rx="5" ${F('panel-2')}/><rect x="0" y="${y + 8}" width="${((W - 50) * v / 5).toFixed(1)}" height="20" rx="5" ${F(c, .75)}/>` + TX(W - 42, y + 23, v.toFixed(1) + ' / 5', 'text', 12.5); });
+    const verdict = blind ? (Math.abs(gap) < .5 ? 'With the endings hidden, the two groups scored about the same, because they were equally sound decisions.' : 'Even blind, the groups differ a little; that is just noise between six stories.')
+      : gap >= .5 ? `You rated the same kind of decision ${gap.toFixed(1)} points higher when it happened to end well. That's resulting.` : 'You rated the decisions alike whatever happened. Good: the outcomes were assigned at random.';
+    box.innerHTML = `<div class="cal-end"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your average rating for decisions that ended well and badly">${g}</svg>
+      <div class="cal-sum"><span class="k">${blind ? 'Blind round' : 'What the outcomes did'}</span><p class="say-out" style="font-size:26px">${verdict}</p>
+      <p class="tip">All six are reasonable decisions. Which three ended well was decided by a coin toss when you started. ${blind ? '' : 'Now try rating them with the endings hidden, the way Duke\'s group described hands.'}</p>
+      <div class="row">${blind ? '' : '<button class="btn primary" type="button" data-blind>Try it blind</button>'}<button class="btn" type="button" data-again>Start again with outcomes</button></div></div></div>`;
+    const bb = box.querySelector('[data-blind]'); if (bb) bb.addEventListener('click', () => start(true));
+    box.querySelector('[data-again]').addEventListener('click', () => start(false));
+  }
+  start(false);
+}
+
+/* ---------- 9: say it so it lands ---------- */
+{ const SIT = [
+    { k: 'A colleague\'s plan', ask: 'Can I share a thought on the plan?', assent: 'I really like the customers you\'ve picked and the timing.', blunt: 'the budget is far too small, and this plan won\'t work.', future: 'what would it take to give the budget more room before launch?' },
+    { k: 'A friend\'s new car', ask: 'Do you want my honest take, or did you just want to show it off?', assent: 'It looks great, and I can see why the low mileage appealed.', blunt: 'you paid far too much for it.', future: 'next time you\'re buying, shall we check prices together first?' },
+    { k: 'The team\'s release', ask: 'Can I raise something about the release?', assent: 'Everyone worked incredibly hard to get this out on time.', blunt: 'we shipped it with far too many bugs.', future: 'what\'s one check we could add so the next release goes out cleaner?' } ];
+  const MV = [['unc', 'Express uncertainty'], ['assent', 'Lead with assent'], ['and', '"And", not "but"'], ['ask', 'Ask permission first'], ['fut', 'Focus on the future']];
+  let cur = 0, on = {};
+  const sit = $('#dsSit'), mv = $('#dsMoves');
+  sit.innerHTML = SIT.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s.k}</button>`).join('');
+  mv.innerHTML = MV.map(([id, l]) => `<label class="tg"><input type="checkbox" data-m="${id}"><span>${l}</span><em id="dsN_${id}"></em></label>`).join('');
+  const cap = s => s[0].toUpperCase() + s.slice(1);
+  function draw(){
+    const S0 = SIT[cur]; let parts = [];
+    if (on.ask) parts.push(S0.ask);
+    if (on.assent) parts.push(S0.assent);
+    let c = on.fut ? S0.future : S0.blunt;
+    if (on.unc) c = 'I might be wrong about this: ' + c;
+    if (on.assent) c = (on.and ? 'And ' : 'But ') + c; else c = cap(c);
+    parts.push(c);
+    $('#dsOut').textContent = '“' + parts.join(' ') + '”';
+    const sc = 10 + (on.ask ? 18 : 0) + (on.assent ? 18 : 0) + (on.assent && on.and ? 18 : 0) + (on.unc ? 18 : 0) + (on.fut ? 18 : 0);
+    $('#dsBar').style.width = sc + '%';
+    $('#dsLand').textContent = sc < 30 ? 'Likely to land as an attack. Expect a defence, not a rethink.' : sc < 55 ? 'Better. Some of it will get through.' : sc < 80 ? 'Good. They can hear the concern without feeling cornered.' : 'An invitation to think about what happens next, together.';
+    $('#dsN_and').textContent = on.assent ? '' : 'needs assent';
+  }
+  sit.querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.s; press([...sit.querySelectorAll('[data-s]')], b); draw(); }));
+  mv.querySelectorAll('[data-m]').forEach(cb => cb.addEventListener('change', () => { on[cb.dataset.m] = cb.checked; draw(); }));
+  draw();
+}
+
+/* ---------- 10: the happiness ticker ---------- */
+{ const el = $('#tk11'), ZM = [['A week', 7], ['A month', 30], ['A year', 365], ['Ten years', 3650]], zb = $('#tkZoom');
+  let seed = 21, z = 0, series = [];
+  function gen(){ const r = rng(seed); let v = 100; series = [v];
+    for (let i = 1; i < 3650; i++){ v += .02 + gauss(r) * .55; series.push(v); }
+    series[3649] = series[3648] - 4.5; }
+  zb.innerHTML = ZM.map(([l], i) => `<button class="btn" type="button" data-z="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  const draw = onLayout(() => { const n = ZM[z][1], w = series.slice(-n), nw = NARROW(), W = nw ? 360 : 640, H = 230, x0 = 10, y0 = 18, pw = W - 20, ph = H - y0 - 34;
+    vb(el, W, H); let lo = Math.min(...w), hi = Math.max(...w); const pad = (hi - lo) * .08 || 1; lo -= pad; hi += pad;
+    const X = i => x0 + i / (n - 1) * pw, Y = v => y0 + ph - (v - lo) / (hi - lo) * ph; let g = '';
+    [.25, .5, .75].forEach(f => { g += `<line x1="${x0}" y1="${y0 + ph * f}" x2="${x0 + pw}" y2="${y0 + ph * f}" ${S('line', 1)}/>`; });
+    const step = Math.max(1, Math.floor(n / 600));
+    let d = ''; for (let i = 0; i < n; i += step) d += (d ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(w[i]).toFixed(1);
+    d += 'L' + X(n - 2).toFixed(1) + ' ' + Y(w[n - 2]).toFixed(1);
+    g += `<path d="${d}" ${S('cool', n > 400 ? 1.4 : 2.2)}/>`;
+    g += `<line x1="${X(n - 2)}" y1="${Y(w[n - 2])}" x2="${X(n - 1)}" y2="${Y(w[n - 1])}" ${S('bad', 3)}/><circle cx="${X(n - 1)}" cy="${Y(w[n - 1])}" r="5" ${F('bad')}/>`;
+    g += TX(X(n - 1) - 8, Math.min(Y(w[n - 1]) + 20, H - 26), 'today', 'bad', 12, 'end');
+    g += TX(x0, H - 8, ZM[z][0].toLowerCase() + ' ago', 'faint', 11.5) + TX(x0 + pw, H - 8, 'now', 'faint', 11.5, 'end');
+    el.innerHTML = g;
+    const share = (w[n - 2] - w[n - 1]) / (hi - lo + 1e-9), tr = w[n - 1] - w[0];
+    $('#tkDrop').textContent = pct(share) + ' of the chart';
+    $('#tkTrend').textContent = (tr >= 0 ? '+' : '') + tr.toFixed(0) + ' points';
+    $('#tkSay').textContent = share > .4 ? 'A crash. Everything is ruined.' : share > .15 ? 'A real setback, but there have been others.' : share > .05 ? 'A dip. Annoying, not defining.' : 'A blip you won\'t remember.';
+  });
+  zb.querySelectorAll('[data-z]').forEach(b => b.addEventListener('click', () => { z = +b.dataset.z; press([...zb.querySelectorAll('[data-z]')], b); draw(); }));
+  $('#tkGo').addEventListener('click', () => { seed = (seed * 9301 + 49297) % 233280 + 1; gen(); draw(); });
+  gen(); draw();
+}
+
+/* ---------- 11: the grant list ---------- */
+{ const el = $('#gr12'), G = [['National foundation, flagship', 500000, 5], ['City youth fund', 120000, 40], ['Local business partner', 40000, 75], ['State education grant', 250000, 15], ['Family trust', 60000, 55]];
+  let ch = G.map(g => g[2]), year = null;
+  $('#grCtl').innerHTML = G.map(([n, a], i) => `<div class="ctl"><label for="grC${i}"><span>${n} · ${money(a)}</span><output id="ogrC${i}"></output></label><input type="range" id="grC${i}" min="0" max="100" value="${ch[i]}"></div>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, rowH = nw ? 50 : 40, H = G.length * rowH + 30, L = nw ? 0 : 210, bw = W - L - (nw ? 60 : 110); vb(el, W, H);
+    const ev = G.map((g, i) => g[1] * ch[i] / 100), ord = G.map((_, i) => i).sort((a, b) => ev[b] - ev[a]), mx = Math.max(...G.map(g => g[1])); let g = '';
+    ord.forEach((i, r) => { const y = 8 + r * rowH, by = nw ? y + 16 : y + 4, cut = year && !year[i], won = year && year[i];
+      g += `<g style="opacity:${cut ? .32 : 1}">`;
+      g += TX(0, nw ? y + 10 : y + 19, `${r + 1}. ${G[i][0]}`, won ? 'good' : 'text', 12.5, 'start', won ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${by}" width="${(bw * G[i][1] / mx).toFixed(1)}" height="20" rx="4" ${FS('panel-2', 'line', 1)}/><rect x="${L}" y="${by}" width="${Math.max(2, bw * ev[i] / mx).toFixed(1)}" height="20" rx="4" ${F(won ? 'good' : 'glow', .9)}/>`;
+      g += TX(L + bw * G[i][1] / mx + 6, by + 15, won ? 'won ' + money(G[i][1]) : cut ? 'not this year' : money(ev[i]), won ? 'good' : 'muted', 12);
+      if (cut) g += `<line x1="${L}" y1="${by + 10}" x2="${L + bw * G[i][1] / mx}" y2="${by + 10}" ${S('bad', 1.5)}/>`;
+      g += '</g>'; });
+    g += TX(0, H - 6, 'gold = expected value (amount × chance) · outline = full amount', 'faint', 11.5);
+    el.innerHTML = g; G.forEach((_, i) => out('grC' + i, ch[i] + '%'));
+    $('#grEV').textContent = money(ev.reduce((s, v) => s + v, 0)); $('#grTop').textContent = G[ord[0]][0] + (ord[0] === 0 ? '' : ', not the biggest grant');
+  });
+  G.forEach((_, i) => $('#grC' + i).addEventListener('input', e => { ch[i] = +e.target.value; draw(); }));
+  $('#grGo').addEventListener('click', () => { year = G.map((_, i) => Math.random() < ch[i] / 100); const tot = G.reduce((s, g, i) => s + (year[i] ? g[1] : 0), 0), n = year.filter(Boolean).length;
+    $('#grYear').innerHTML = n ? `Won ${n} of 5, ${money(tot)} in all. <b>It already feels like the obvious result.</b>` : 'Won nothing. Bad luck, if the odds were right; not proof the list was wrong.';
+    $('#grBack').disabled = false; draw(); });
+  $('#grBack').addEventListener('click', () => { year = null; $('#grYear').textContent = 'Not decided yet. All five branches are back.'; $('#grBack').disabled = true; draw(); });
+  draw();
+}
+
+/* ---------- afterword: the bet log ---------- */
+{ const list = $('#blList'), cI = $('#blConf'), dI = $('#blWhen');
+  let log = store.get('tb-log', []);
+  const iso = d => d.toISOString().slice(0, 10);
+  dI.value = iso(new Date(Date.now() + 30 * 864e5));
+  const showC = () => out('blConf', cI.value + '%'); cI.addEventListener('input', showC); showC();
+  const save = () => store.set('tb-log', log);
+  function draw(){
+    if (!log.length){ list.innerHTML = '<span class="k">Your log</span><p class="tip">Nothing logged yet. Add a decision you\'re facing; when the check-back date comes, mark what happened and how much was luck.</p>'; return; }
+    const res = log.filter(e => e.res), hit = res.filter(e => e.res === 'yes').length, avgC = res.length ? res.reduce((s, e) => s + e.conf, 0) / res.length : 0;
+    const today = iso(new Date());
+    list.innerHTML = `<span class="k">Your log · ${log.length} bet${log.length === 1 ? '' : 's'}</span>` + (res.length ? `<p class="tip">Of ${res.length} checked, <b>${hit}</b> came true (${pct(hit / res.length)}), against an average confidence of ${Math.round(avgC)}%.</p>` : '') +
+      log.map(e => `<div class="bet${e.res ? ' closed' : ''}"><div class="bet-h"><b>${esc(e.what)}</b><span class="mono">${e.conf}% sure${e.when ? ' · check ' + e.when + (!e.res && e.when <= today ? ' · due' : '') : ''}</span><button class="rm" type="button" data-rm="${e.id}" aria-label="Remove this bet">×</button></div>${e.bet ? `<p>${esc(e.bet)}</p>` : ''}
+        <div class="row">${e.res ? `<span class="tag ${e.res === 'yes' ? 'ok' : 'no'}">${e.res === 'yes' ? 'It happened' : 'It didn\'t'}</span>${e.why ? `<span class="tag">${{ luck: 'Mostly luck', dec: 'Mostly my decision', both: 'A bit of both' }[e.why]}</span>` : ['luck', 'dec', 'both'].map(w => `<button class="btn" type="button" data-why="${w}" data-id="${e.id}">${{ luck: 'Mostly luck', dec: 'Mostly my decision', both: 'Both' }[w]}</button>`).join('')}<button class="btn" type="button" data-undo="${e.id}">Undo</button>`
+          : `<button class="btn" type="button" data-res="yes" data-id="${e.id}">It happened</button><button class="btn" type="button" data-res="no" data-id="${e.id}">It didn't</button>`}</div></div>`).join('');
+    list.querySelectorAll('[data-res]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.id); e.res = b.dataset.res; save(); draw(); }));
+    list.querySelectorAll('[data-why]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.id); e.why = b.dataset.why; save(); draw(); }));
+    list.querySelectorAll('[data-undo]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.undo); e.res = null; e.why = null; save(); draw(); }));
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { log = log.filter(x => x.id !== b.dataset.rm); save(); draw(); }));
+  }
+  $('#blAdd').addEventListener('click', () => { const what = $('#blWhat').value.trim(), msg = $('#blMsg');
+    if (!what){ msg.textContent = 'Name the decision first.'; $('#blWhat').focus(); return; }
+    log.unshift({ id: Date.now().toString(36), what, bet: $('#blBet').value.trim(), conf: +cI.value, when: dI.value, res: null, why: null }); save();
+    $('#blWhat').value = ''; $('#blBet').value = ''; msg.textContent = 'Logged. Come back on the check-back date.'; draw(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
