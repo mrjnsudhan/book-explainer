@@ -1,0 +1,1521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Four Thousand Weeks, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an hourglass at dusk. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into the introduction, Part I (choosing to choose) and Part II (beyond control).
+   Dark-first: warm near-black with an apricot accent and a sage second series; light mode is cream paper with burnt orange and teal. */
+:root{
+  color-scheme: dark;
+  --ink:#14110E;--panel:#1D1915;--panel-2:#28221C;--line:#3B3229;--text:#F5EEE4;--muted:#BFB3A3;--faint:#8C8072;
+  --glow:#F2A65A;--glow-soft:rgba(242,166,90,.11);--hl:rgba(242,166,90,.26);--cool:#8FC7B8;--cool-soft:rgba(143,199,184,.1);
+  --good:#9BD99B;--good-soft:rgba(155,217,155,.1);--bad:#FF8C7A;--bad-soft:rgba(255,140,122,.12);
+  --soft:#E3D9CB;--deep:#0E0C0A;--toc-bg:rgba(29,25,21,.74);--glow-line:rgba(242,166,90,.36);--cool-line:rgba(143,199,184,.3);--on-glow:#2A1600;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F1E6;--panel:#FFFFFF;--panel-2:#EFE7D8;--line:#DED3C0;--text:#1E1812;--muted:#5E5446;--faint:#8C8070;
+  --glow:#B4531C;--glow-soft:rgba(180,83,28,.06);--hl:#F6DCC4;--cool:#2D6E64;--cool-soft:rgba(45,110,100,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2E261D;--deep:#FCF8F1;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(180,83,28,.3);--cool-line:rgba(45,110,100,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F1E6;--panel:#FFFFFF;--panel-2:#EFE7D8;--line:#DED3C0;--text:#1E1812;--muted:#5E5446;--faint:#8C8070;
+  --glow:#B4531C;--glow-soft:rgba(180,83,28,.06);--hl:#F6DCC4;--cool:#2D6E64;--cool-soft:rgba(45,110,100,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2E261D;--deep:#FCF8F1;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(180,83,28,.3);--cool-line:rgba(45,110,100,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Four Thousand Weeks additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.weeks{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.weeks-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.weeks-top output{font-family:var(--f-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.weeks-body{padding:12px 14px 4px}
+.weeks-body svg{display:block;width:100%;height:auto}
+.weeks-read{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:6px 16px 12px}
+.weeks-read div{display:grid;gap:2px;min-width:0}
+.weeks-read .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.weeks-read .v{font-family:var(--f-mono);font-size:16px;color:var(--text);font-variant-numeric:tabular-nums}
+.weeks-read .v.glow{color:var(--glow)}
+.weeks-ctl{display:grid;gap:6px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.weeks-ctl label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.weeks-ctl output{font-family:var(--f-mono);color:var(--text)}
+.picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 18px 16px}
+.picks .col{display:grid;gap:6px;align-content:start;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--deep);min-height:90px}
+.picks .col .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.picks .col.now{border-color:var(--glow-line)}
+.picks .col.now .k{color:var(--glow)}
+.picks .col span{font-size:14px;color:var(--soft);padding:6px 10px;border-radius:8px;background:var(--panel)}
+.picks .col.avoid span{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad)}
+.picks .col .empty{background:none;color:var(--faint);padding:0}
+.qs{display:grid;gap:14px;padding:18px;border-bottom:1px solid var(--line)}
+.qs .field label{font-size:14.5px;color:var(--soft);line-height:1.4}
+.qs .field label b{font-family:var(--f-mono);font-size:11px;color:var(--glow);margin-right:6px;font-weight:500}
+.qs textarea{min-height:64px}
+.saved{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:8px;max-width:900px;width:100%;min-width:0}
+.after > *{min-width:0}
+.tool{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;text-align:left;font:inherit;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer}
+.tool:hover{border-color:var(--glow-line)}
+.tool .bx{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.tool .bx svg{width:15px;height:15px;stroke:var(--on-glow);opacity:0}
+.tool[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.tool[aria-pressed=true] .bx{background:var(--glow);border-color:var(--glow)}
+.tool[aria-pressed=true] .bx svg{opacity:1}
+.tool b{display:block;font-weight:500;font-size:15px;margin-bottom:2px}
+.tool span span{font-size:13.5px;color:var(--muted);line-height:1.4}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:760px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.card1 .qa{display:grid;gap:3px}
+.card1 .qa i{font-style:normal;font-size:13px;color:var(--faint)}
+.card1 .qa p{font-family:var(--f-display);font-size:clamp(19px,2.5vw,23px);line-height:1.3}
+.cal{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px}
+.who{display:grid;gap:8px}
+.who .wr{display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:center}
+.who .wr > span{font-size:13.5px;color:var(--soft)}
+.who .sw{display:flex;flex-wrap:wrap;gap:5px}
+.who .sw button{width:34px;height:28px;border-radius:8px;border:2px solid transparent;cursor:pointer;padding:0}
+.who .sw button[aria-pressed=true]{border-color:var(--text)}
+.ldg-wrap{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:center}
+.ldg-wrap svg{width:100%;max-width:220px;justify-self:center}
+.ldg{display:grid;gap:6px}
+.ldg .li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;font-size:14px;color:var(--soft);padding:6px 10px;border-radius:9px;background:var(--panel)}
+.ldg .li .row{gap:4px;flex-wrap:nowrap}
+.ldg .li .btn{padding:5px 9px;font-size:12px;white-space:nowrap}
+.ldg .li small{color:var(--faint);font-family:var(--f-mono);font-size:11px;margin-left:6px}
+@media (max-width: 560px){ .fq{padding:14px 16px} .weeks-read{padding:6px 12px 12px} .weeks-read .v{font-size:14px}
+  .picks{grid-template-columns:1fr;padding:0 12px 12px} .qs{padding:14px}
+  .ldg .li{grid-template-columns:1fr} .ldg-wrap{grid-template-columns:1fr} .ldg-wrap svg{max-width:180px;order:-1} .who .wr{grid-template-columns:72px minmax(0,1fr)} .who .sw button{width:30px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Oliver Burkeman's book</div>
+    <h1><em>Four Thousand Weeks</em>,<br>Explained</h1>
+    <p class="lede">If you live to eighty, you get roughly four thousand weeks. Oliver Burkeman spent years as a self-confessed productivity geek, trying every system for getting on top of it all, and finally concluded that the whole project was hopeless. <b>Four Thousand Weeks</b> is the book that came out of that: an argument that you will never get everything done, and that admitting it is the beginning of a better life, not the end of one. This guide takes the introduction and all fourteen chapters in turn, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>You can't do it all, so stop trying, and <em>choose what to neglect</em> on purpose.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's bothering you about time?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="weeks" style="margin:0" aria-label="Your four thousand weeks">
+        <div class="weeks-top"><span>Your four thousand weeks</span><output id="wkV"></output></div>
+        <div class="weeks-body"><svg id="wkSvg" role="img" aria-label="A grid of every week in an eighty-year life, with the weeks already lived filled in"></svg></div>
+        <div class="weeks-read" id="wkRead" aria-live="polite"></div>
+        <div class="weeks-ctl"><label for="wkR">Your age <output id="owkR"></output></label><input type="range" id="wkR" min="0" max="79" value="35"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction</span><span class="q">In the Long Run</span><span class="d">Why four thousand weeks is so few, and why time management made it worse</span></a>
+      <a href="#part2"><span class="n">Chapters 1 to 6</span><span class="q">Choosing to Choose</span><span class="d">Limits, efficiency, finitude, procrastination and attention</span></a>
+      <a href="#part3"><span class="n">Chapters 7 to 14</span><span class="q">Beyond Control</span><span class="d">The future, the present, rest, patience, shared time and the cosmos</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2021</span>
+      <span><b>Author</b> Oliver Burkeman, a British journalist who wrote the Guardian's long-running "This Column Will Change Your Life"</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 15 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== IN THE LONG RUN, WE'RE ALL DEAD ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Introduction</span>
+      <h2>In the Long Run, We're All Dead</h2>
+      <p>Burkeman opens with a number most people have never worked out: if you live to eighty, you get about four thousand weeks. Then he asks why, if time is so short, all our tools for managing it leave us feeling more rushed than ever.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Life is absurdly short, and the usual answer, squeezing more into it, is the problem rather than the cure.</p></div>
+    </section>
+    <!-- ===================== 0 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Four thousand weeks</div>
+        <h2>In the Long Run, We're All Dead</h2>
+        <div class="short"><span class="lbl">In short</span><p>Eighty years is about four thousand weeks, a shockingly small number. Burkeman argues that our anxious race to fit more into those weeks, with ever-better systems and apps, has made us busier and less present, not more in control.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Do the arithmetic.</b> Eighty years comes to a little over four thousand weeks. Put that way, even a long life feels insultingly brief, and every week spent on something you don't care about suddenly looks expensive.</span></li>
+          <li><span><b>Time management has failed.</b> We have more productivity tools than ever, yet people feel more pressed for time than ever. The tools promise control and deliver a faster treadmill.</span></li>
+          <li><span><b>Time as a thing you own.</b> Before clocks and wages, people lived inside time, doing what the season or the task demanded. Once time became a resource to be used, every hour turned into something you could waste.</span></li>
+          <li><span><b>A different question.</b> Instead of asking how to fit everything in, the book asks how to spend a finite life well, knowing that most things will never get done.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman describes himself as a recovering productivity geek. For years he tried every system going, from inbox zero to elaborate to-do lists, always believing the next technique would finally bring calm. It never did. The more efficiently he worked, the more work came his way, and the sense of being on top of things kept slipping further out of reach. The book is what he wrote once he concluded that the goal itself was the mistake.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: count what's left</div><div class="hint">Set your age and two habits</div></div>
+        <div class="stage"><svg id="clSvg" role="img" aria-label="Dots for each remaining visit"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="clA">Your age <output id="oclA"></output></label><input type="range" id="clA" min="10" max="79" value="35"></div><div class="ctl"><label for="clB">Books you finish a year <output id="oclB"></output></label><input type="range" id="clB" min="0" max="52" value="8"></div><div class="ctl"><label for="clV">Times a year you see someone you love who lives far away <output id="oclV"></output></label><input type="range" id="clV" min="1" max="24" value="3"></div></div></div><div class="stats"><div class="stat"><span class="k">Weeks left (to 80)</span><span class="v glow" id="clW"></span></div><div class="stat"><span class="k">Summers left</span><span class="v" id="clS"></span></div><div class="stat"><span class="k">Books left</span><span class="v" id="clBk"></span></div><div class="stat"><span class="k">Visits left</span><span class="v" id="clVs"></span></div></div><p class="callout">Nobody gets these numbers wrong because they can't multiply. We get them wrong because we never do the sum. <b>Seen plainly, every one of these is a short list, and that is what makes each item matter.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your life is a few thousand weeks long. You can't make that number bigger by rushing, and trying to fit everything in is what makes days feel crushed. The rest of the book is about what to do instead.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this section</label><a class="next" href="#ch2">Next: The limit-embracing life →</a></div>
+    </section>
+    <!-- ===================== CHOOSING TO CHOOSE ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part one · choosing to choose</span>
+      <h2>Choosing to Choose</h2>
+      <p>The first six chapters take apart the fantasy of getting on top of everything. There will always be too much to do, efficiency only speeds up the treadmill, and the only real move is to choose a few things on purpose and let the rest go, including where your attention goes from moment to moment.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You can't avoid hard choices about your time. You can only make them consciously or let them be made for you.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · You will never get it all done</div>
+        <h2>The Limit-Embracing Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>There will always be more worth doing than you have time for. That isn't a temporary problem a better system will fix. It is the permanent condition of a finite life, and accepting it is oddly freeing.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The task is infinite.</b> The number of things you could do, read, see and become has no ceiling. Your time does. So the gap never closes, however hard you work.</span></li>
+          <li><span><b>Choose what to neglect.</b> Since you can't do everything, the real skill is deciding what you won't do, deliberately, instead of letting it happen by accident.</span></li>
+          <li><span><b>The flaw in the big rocks.</b> A popular parable says that if you put the big rocks in the jar first, the sand and pebbles fit around them. Burkeman points out the catch: most of us have far too many big rocks to fit in the jar at all.</span></li>
+          <li><span><b>Relief, not defeat.</b> Once you accept you'll never be on top of it all, you can stop feeling guilty about the backlog and give your full attention to what you did choose.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman takes on the well-loved story of the jar: a teacher fills it with big rocks, then pebbles, then sand, to show that if you schedule what matters first, everything else fits around it. It is a comforting picture, and he argues it is a lie by omission. The trick only works because the teacher chose exactly the right number of rocks. Real life hands you more big rocks than the jar can hold, and the honest lesson is that some of them will never go in.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the jar with too many rocks</div><div class="hint">Fill your free hours with what matters</div></div>
+        <div class="stage"><svg id="jrSvg" role="img" aria-label="A jar being filled with rocks of different sizes"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="jrC">Free hours a week, after sleep, work and chores <output id="ojrC"></output></label><input type="range" id="jrC" min="10" max="50" value="28"></div></div><div class="row" id="jrR"></div></div><div class="stats"><div class="stat"><span class="k">Hours chosen</span><span class="v" id="jrH"></span></div><div class="stat"><span class="k">What you're neglecting</span><span class="s" id="jrN"></span></div></div><p class="callout">Every rock here is worth doing. That is exactly the problem. <b>You aren't choosing between good and bad uses of time, but between good ones, and leaving some out is the price of doing any well.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Stop trying to fit everything in. Pick the few things that matter most right now, and consciously decide to let the others wait or go. The guilt about everything else is optional.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: The efficiency trap →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Faster means fuller</div>
+        <h2>The Efficiency Trap</h2>
+        <div class="short"><span class="lbl">In short</span><p>Getting more efficient doesn't empty your plate. It fills it faster. Answer emails quickly and you get more emails; prove you can handle more and more arrives. The bucket has no bottom.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Efficiency breeds demand.</b> The quicker you deal with things, the more you're seen as someone who deals with things, and the more gets sent your way.</span></li>
+          <li><span><b>Labour-saving that didn't save labour.</b> When washing machines and vacuum cleaners arrived, the hours spent on housework barely fell, because standards of cleanliness rose to match.</span></li>
+          <li><span><b>Busyness as a hiding place.</b> Staying frantically busy lets you avoid the harder question of which few things actually matter. Clearing the small stuff feels productive while the big stuff waits.</span></li>
+          <li><span><b>Do the important thing first.</b> Rather than clearing the decks before starting real work, start the real work and accept that the decks will never be clear.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman draws on the historian Ruth Schwartz Cowan, whose book More Work for Mother found that the twentieth century's labour-saving appliances didn't free up housewives' time. Instead, expectations rose: clothes that had been washed occasionally were now washed after every wearing, and floors were expected to gleam. The same thing happens with email. Every reply you send tends to prompt another, so the person who empties their inbox fastest often ends up with the fullest one.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: the bottomless inbox</div><div class="hint">Slide how fast you reply and watch what comes back</div></div>
+        <div class="stage"><svg id="ibSvg" role="img" aria-label="A chart of emails arriving and inbox size over twenty working days"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ibS">Emails you send a day <output id="oibS"></output></label><input type="range" id="ibS" min="5" max="90" value="25" step="5"></div></div></div><div class="stats"><div class="stat"><span class="k">Arriving a day by week four</span><span class="v glow" id="ibA"></span></div><div class="stat"><span class="k">Hours a day on email</span><span class="v" id="ibH"></span></div><div class="stat"><span class="k">Left in the inbox</span><span class="v" id="ibL"></span></div></div><p class="callout">In this model about 85 of every 100 emails you send bring a reply. <b>Speed up, and the arrivals line climbs to meet you: you spend more hours on email and the inbox still isn't empty.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Being faster at small tasks mostly earns you more small tasks. Decide what deserves your time and do that, even while the rest piles up.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Facing finitude →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Every decision is a loss</div>
+        <h2>Facing Finitude</h2>
+        <div class="short"><span class="lbl">In short</span><p>We avoid choosing because every choice closes off other lives we might have lived. But a finite life is made of exactly those closures. Saying yes to one path is what gives it meaning.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Decide means cut off.</b> The word decide comes from the Latin for cutting off. Every real decision cuts away other possibilities, and that loss is unavoidable.</span></li>
+          <li><span><b>Keeping options open.</b> Many of us dodge commitment to a partner, a career or a place because it means giving up the alternatives. The result is a life spent in the waiting room.</span></li>
+          <li><span><b>Being toward death.</b> The philosopher Martin Heidegger argued that we don't just have a limited amount of time, we are time: a finite span. Facing that head-on is what lets a life take shape.</span></li>
+          <li><span><b>Joy of missing out.</b> Once you accept you'll miss almost everything, missing out stops being a fear and becomes the cost of being anywhere at all.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman leans on Heidegger, who said human beings are essentially finite: our lives are not containers that hold time but spans of time themselves. Most of the time we flee that thought into busyness and distraction. Burkeman's practical reading is that you can stop treating each closed-off option as a failure. If you chose a career, you didn't choose the other careers. That is not a mistake to fix; it is what having a life, rather than a menu of possible ones, means.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the lives you cut off</div><div class="hint">Choose at each fork and watch the other branches go</div></div>
+        <div class="stage"><svg id="fkSvg" role="img" aria-label="A tree of 27 possible lives, narrowing with each choice"></svg></div><div class="lab-ctl"><div class="row" id="fk0"></div><div class="row" id="fk1"></div><div class="row" id="fk2"></div><div class="row"><button class="btn" type="button" id="fkReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Lives still open</span><span class="v glow" id="fkOpen"></span></div><div class="stat"><span class="k">The life you're living</span><span class="s" id="fkLife"></span></div></div><p class="callout">Three forks, twenty-seven possible lives, and you only ever get one. <b>The other twenty-six aren't wasted. Cutting them off is what makes the remaining one real.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a decision feels hard because of what you'd give up, remember that you'll give up almost everything whatever you choose. Pick one, commit, and let the alternatives go.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Becoming a better procrastinator →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Procrastinate on the right things</div>
+        <h2>Becoming a Better Procrastinator</h2>
+        <div class="short"><span class="lbl">In short</span><p>You'll always be putting something off, so the question is what. Good procrastination means letting the middling stuff slide so the few things that matter get done.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Pay yourself first.</b> Give the most important work the first slice of each day or week, before email and errands eat it. If you wait for spare time, it never comes.</span></li>
+          <li><span><b>Limit work in progress.</b> Keep only a small number of projects open at once, say three. A new one only starts when an old one finishes.</span></li>
+          <li><span><b>Resist the middling priorities.</b> The dangerous tasks aren't the trivial ones but the fairly good ones, interesting enough to take your time and not important enough to deserve it.</span></li>
+          <li><span><b>Accept the trade-off.</b> Procrastinating on purpose means living with some things undone. That discomfort is the sign you're choosing.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman retells a story often told about Warren Buffett, while noting it may well be made up. Buffett supposedly told his pilot to write down his top twenty-five goals, circle the five most important, and treat the other twenty as an "avoid at all costs" list. The point lands whether or not it happened: the goals ranked six to twenty-five aren't harmless. They're the attractive ones that will quietly steal the time your top five need.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: your three, and the avoid list</div><div class="hint">Pick just three things to work on now</div></div>
+        <div class="lab-ctl"><div class="row" id="pcG"></div></div><div class="picks"><div class="col now"><span class="k">Your three, now</span><div id="pcNow" style="display:grid;gap:6px"></div></div><div class="col avoid"><span class="k">Avoid at all costs, for now</span><div id="pcAv" style="display:grid;gap:6px"></div></div></div><div class="stats"><div class="stat"><span class="k">Work in progress</span><span class="v glow" id="pcW"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="pcSay"></span></div></div><p class="callout">Notice how the avoid list fills up with things you'd genuinely like to do. <b>That is the point: the middling priorities are the ones that steal your time, because they're worth wanting.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide your few priorities, give them the first and best of your time, and put everything else on hold on purpose. You'll be procrastinating either way; choose what on.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The watermelon problem →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Attention is life</div>
+        <h2>The Watermelon Problem</h2>
+        <div class="short"><span class="lbl">In short</span><p>At the end of your life, what you paid attention to will have been your life. The attention economy is built to capture that attention, so distraction is not a small annoyance but a theft of the only thing you have.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Attention is life.</b> Whatever you attend to is, moment by moment, what you're experiencing. Spend your attention on something and you've spent part of your life on it.</span></li>
+          <li><span><b>Built to capture you.</b> Apps and feeds are engineered to hold your attention for as long as possible, because your attention is what they sell to advertisers.</span></li>
+          <li><span><b>It shapes what you care about.</b> Beyond eating time, distraction changes what seems important. Outrage and novelty crowd out the things you'd choose if you stepped back.</span></li>
+          <li><span><b>Not just willpower.</b> Fighting a system designed by thousands of engineers with willpower alone is a losing game. The answer begins with seeing what's at stake.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The chapter's title comes from a 2016 livestream in which two people slowly wrapped rubber bands around a watermelon until it burst. Hundreds of thousands of people watched live, and Burkeman confesses he was nearly one of them. It's harmless fun, he says, and also a perfect picture of how the attention economy works: a stream engineered to be just interesting enough that you keep watching, at the cost of whatever you'd otherwise have done with that slice of your four thousand weeks.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: where your attention goes</div><div class="hint">Set your age and your daily scrolling</div></div>
+        <div class="stage"><svg id="atSvg" role="img" aria-label="A grid of your remaining waking life with the share spent scrolling filled in"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="atA">Your age <output id="oatA"></output></label><input type="range" id="atA" min="10" max="75" value="35"></div><div class="ctl"><label for="atH">Hours a day on feeds and scrolling <output id="oatH"></output></label><input type="range" id="atH" min="0" max="8" step="0.5" value="3"></div></div></div><div class="stats"><div class="stat"><span class="k">Share of waking life</span><span class="v glow" id="atP"></span></div><div class="stat"><span class="k">Waking years, to 80</span><span class="v" id="atY"></span></div><div class="stat"><span class="k">In weeks</span><span class="v" id="atW"></span></div></div><p class="callout">Each square is one percent of the waking hours you have left, at 16 a day. <b>Attention you hand to the feed doesn't come back. It is spent life, not spare time.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Treat your attention as the most precious thing you own, because it is your life. Notice what is designed to grab it, and give it on purpose to what you care about.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: The intimate interrupter →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · The distraction comes from inside</div>
+        <h2>The Intimate Interrupter</h2>
+        <div class="short"><span class="lbl">In short</span><p>We blame our phones, but the urge to flee usually starts within. When a task is hard, uncertain or exposes our limits, distraction offers an escape from that discomfort. The cure is to stay with the discomfort, not to win a war against apps.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>We go looking for it.</b> Distraction isn't only done to us. We reach for the phone at the exact moment the real work becomes difficult.</span></li>
+          <li><span><b>An escape from finitude.</b> Meaningful work makes you face your limits: you might fail, it might be ordinary, you can't control how it lands. Distraction promises a world with no such limits.</span></li>
+          <li><span><b>Let the urge pass.</b> An urge to escape rises, peaks and fades if you don't act on it. Each time you give in, it comes back sooner and stronger.</span></li>
+          <li><span><b>Surrender to the difficulty.</b> Accepting that the task will be hard and uncomfortable, rather than wishing it weren't, takes much of the sting out of it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman draws on Buddhist teachers who describe the mind's habit of fleeing whatever is unpleasant toward whatever promises relief. He notices it in his own writing day: the impulse to check the news arrives not at random but exactly when a sentence won't come right. The phone isn't the cause, it's the exit. Meditation teachers suggest simply noticing the urge, feeling it fully and letting it pass, the way you might let a wave rise and fall without getting off your board.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: ride the urge</div><div class="hint">Start the hard task and choose: check or stay</div></div>
+        <div class="stage"><svg id="ugSvg" role="img" aria-label="A chart of the urge to escape rising and falling over a minute of hard work"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="ugGo">Start the hard task</button><button class="btn" type="button" id="ugCheck" disabled>Check my phone</button></div></div><div class="stats"><div class="stat"><span class="k">Work done</span><span class="v glow" id="ugP"></span></div><div class="stat"><span class="k">Times you escaped</span><span class="v" id="ugN"></span></div><div class="stat"><span class="k">What's happening</span><span class="s" id="ugSay"></span></div></div><p class="callout">The urge is a wave, not a wall. <b>If you stay, it peaks and falls away. Each escape resets the work and makes the next wave come sooner and higher.</b> (An illustrative model.)</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you reach for a distraction, notice what you were in the middle of. Usually it's something hard. Stay a little longer and let the urge pass.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: We never really have time →</a></div>
+    </section>
+    <!-- ===================== BEYOND CONTROL ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part two · beyond control</span>
+      <h2>Beyond Control</h2>
+      <p>The second half is about the parts of time you can't manage at all: the future that never arrives on your terms, the present you keep postponing, rest, patience, the time you share with other people, and your place in a universe that will barely notice you were here.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Much of our pain about time comes from trying to control what can't be controlled. Letting go of that is where freedom starts.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · The future isn't yours</div>
+        <h2>We Never Really Have Time</h2>
+        <div class="short"><span class="lbl">In short</span><p>We talk about having time as if the future were a store we own. We don't. All you ever have is this moment. Worry is the attempt to get guarantees from a future that can't give them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You don't have time.</b> "I'll have time on Friday" is a guess, not a possession. The future is never in your hands until it becomes the present.</span></li>
+          <li><span><b>Worry demands certainty.</b> Anxiety is the mind trying to know for sure how things will turn out. Since that's impossible, worry never finishes its job.</span></li>
+          <li><span><b>Plans are present-moment acts.</b> A plan is a statement of what you intend now. It's useful. Treating it as a promise the future must keep is where the trouble starts.</span></li>
+          <li><span><b>Respond to what comes.</b> Instead of trying to lock the future down, deal with each situation when it arrives. You'll be there when it does.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman describes the familiar scene of lying awake running through tomorrow: the meeting, the conversation, the journey, all the ways each could go wrong. The mind keeps searching for the version where you can be certain it'll be fine, and it never finds one, so it keeps searching. His reading is that the worrying isn't really about the meeting at all. It's a refusal to accept that tomorrow is not yet yours to control, and never will be ahead of time.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: plan or demand?</div><div class="tally" id="tally8" aria-label="Score"></div></div>
+        <div class="sorter" id="sort8"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Make plans, but hold them lightly. When you catch yourself worrying, ask whether you're planning or demanding a guarantee. The first helps; the second never ends.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: You are here →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Stop living for later</div>
+        <h2>You Are Here</h2>
+        <div class="short"><span class="lbl">In short</span><p>We treat the present as a means to some better future: when I finish this, when I get that, then life starts. But the future keeps moving. If life is always about later, you never actually live it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Using time up.</b> When every moment is valued only for what it leads to, the present becomes a corridor you hurry down rather than a place you live.</span></li>
+          <li><span><b>The causal-target trap.</b> Fixating on some future point when things will finally be sorted means today only counts as a step toward then.</span></li>
+          <li><span><b>Atelic activities.</b> Some things are worth doing for their own sake, with no end point: a walk, a conversation, music. They can't be finished, only lived.</span></li>
+          <li><span><b>Only now is real.</b> The future and past are ideas. The present is the only place anything ever happens to you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman quotes the economist John Maynard Keynes on what he called the purposive man, who never loves his cat but only his cat's kittens, and then only the kittens' kittens, and so on forever. It's "jam tomorrow and never jam today." Keynes saw it as a kind of pathology: a constant pushing of value into the future, so that nothing is ever enjoyed as it is. Burkeman sees the same habit in our attitude to time, always deferring the real thing until later.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: the horizon that keeps moving</div><div class="hint">Chase the moment life finally starts</div></div>
+        <div class="stage"><svg id="hzSvg" role="img" aria-label="A timeline from now to old age with a marker for when life is supposed to start"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="hzGo">Get there</button><button class="btn" type="button" id="hzNow">Live now instead</button><button class="btn" type="button" id="hzReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Your age</span><span class="v glow" id="hzAge"></span></div><div class="stat"><span class="k">Years spent waiting</span><span class="v" id="hzWait"></span></div><div class="stat"><span class="k">What you tell yourself</span><span class="s" id="hzSay"></span></div></div><p class="callout">Each time you arrive, a new condition appears. <b>The moment life finally starts is always one milestone ahead, until you decide it already has.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice when you're treating today as a waiting room for some future when things will be sorted. They won't ever be fully sorted. This is the part of your life you're living now.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Rediscovering rest →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Leisure for its own sake</div>
+        <h2>Rediscovering Rest</h2>
+        <div class="short"><span class="lbl">In short</span><p>We've turned rest into another kind of work: exercise to be productive, hobbies to build a side income, holidays to recharge for the office. Real leisure is worth doing for nothing beyond itself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Rest became an investment.</b> When leisure has to earn its keep, by making you fitter or more productive, it stops being rest and becomes another task to optimise.</span></li>
+          <li><span><b>Do it badly.</b> Burkeman recommends a hobby you're mediocre at and have no plans to improve. Doing something just because you enjoy it is a quiet act of rebellion.</span></li>
+          <li><span><b>Leisure as the point.</b> Older traditions saw leisure as the goal of life, and work as what you did to make it possible. We've flipped that.</span></li>
+          <li><span><b>Rest needs no excuse.</b> You don't have to justify rest by what it does for you. Feeling that you must is a sign of how far the productivity mindset has spread.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman recalls the labour movement's old demand for "eight hours for work, eight hours for rest, eight hours for what we will." The third eight hours was meant to be truly free. Over time, he argues, it got colonised: we now jog to improve our stats, read to get ahead and take holidays so we come back more productive. Even the advice to rest is often framed as a way to work better. He proposes reclaiming leisure that has no purpose at all, like the hobby you'll never be good at and don't need to be.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the leisure ledger</div><div class="hint">Mark each pastime: for its own sake, or for something else</div></div>
+        <div class="lab-ctl ldg-wrap"><div class="ldg" id="lgL"></div><svg id="lgSvg" viewBox="0 0 220 220" role="img" aria-label="A ring showing how much of your leisure is for its own sake"></svg></div><div class="stats"><div class="stat"><span class="k">For its own sake</span><span class="v glow" id="lgO"></span></div><div class="stat"><span class="k">To get something out of it</span><span class="v" id="lgI"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="lgSay"></span></div></div><p class="callout">There's nothing wrong with training for a race. <b>But if every spare hour has to earn something, you have no leisure left, just a second shift.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Keep at least one pastime that does nothing for your career, health or image. Do it badly if you like. Rest is allowed to be the point.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: The impatience spiral →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Patience as a superpower</div>
+        <h2>The Impatience Spiral</h2>
+        <div class="short"><span class="lbl">In short</span><p>The faster the world gets, the more impatient we become, and the more we rush, the less we enjoy or achieve. Patience, letting things take the time they take, turns out to be a source of power.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Speed feeds impatience.</b> Every speed-up raises our expectations, so the slightest delay becomes unbearable. We're addicted to a speed that never satisfies.</span></li>
+          <li><span><b>Develop a taste for having problems.</b> There'll always be problems. Expecting a life without them sets you up to be frustrated by every one.</span></li>
+          <li><span><b>Radical incrementalism.</b> Do a little of the important thing every day, and stop when the time's up, even if you're on a roll. Small and steady beats occasional bursts.</span></li>
+          <li><span><b>Originality lies on the far side of copying.</b> Early work always looks like someone else's. Only by sticking with it long enough do you get to the part that's yours.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman cites the psychologist Robert Boice, who studied how new university staff wrote. Those who waited for a free day and wrote in long, intense binges produced less, and felt worse, than those who wrote in short daily sessions and stopped when the session ended, even mid-flow. The bingers burned out and then avoided the work. The daily writers, by accepting slow progress, kept going, and their small pieces added up to far more.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: bursts or bricks?</div><div class="hint">Run a term of writing both ways</div></div>
+        <div class="stage"><svg id="bxSvg" role="img" aria-label="A chart of pages written over twelve weeks by two approaches"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="bxM">Minutes a day for the steady writer <output id="obxM"></output></label><input type="range" id="bxM" min="15" max="90" step="15" value="45"></div><button class="btn" type="button" id="bxRe">Rerun the term</button></div></div><div class="stats"><div class="stat"><span class="k">Steady, daily, stops on time</span><span class="v glow" id="bxD"></span></div><div class="stat"><span class="k">Waits for a free day, then binges</span><span class="v" id="bxB"></span></div><div class="stat"><span class="k">Why</span><span class="s" id="bxSay"></span></div></div><p class="callout">An illustrative model inspired by Boice's findings, not his data. <b>The binger has great days. The steady writer has no great days and finishes far more.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Do a modest amount of your most important work every day and stop when the time is up. It will feel too slow. That's the point: patience is what lets things grow.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Staying on the bus →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Stick with it past the copycat stops</div>
+        <h2>Staying on the Bus</h2>
+        <div class="short"><span class="lbl">In short</span><p>When you start anything creative, your early work will look like everyone else's. The temptation is to give up and start something new. But originality only shows up if you stay on long enough.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Every route starts the same.</b> In any field, the first years follow paths others have already taken. Looking derivative at the start isn't a sign you're on the wrong track.</span></li>
+          <li><span><b>Hopping off resets you.</b> If you switch to a fresh start each time, you keep riding the same shared stretch and never reach the part that's yours.</span></li>
+          <li><span><b>Patience produces originality.</b> Distinctive work comes from sticking with something long after it stops being new and exciting.</span></li>
+          <li><span><b>Accept the dull middle.</b> There will be long, unglamorous stretches. They're not a detour; they're the route.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The photographer Arno Rafael Minkkinen gave a talk about the main bus station in Helsinki. Dozens of lines leave from it, and for the first several stops they all follow the same streets. A young photographer who spends a few years on one line and shows their work is told it looks just like someone else's. So they get off, go back to the station and start again on another line, only to hear the same thing. Minkkinen's advice: stay on the bus. Past the shared stretch, the lines fan out, and that's where your own work begins.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the Helsinki bus station</div><div class="hint">Ride, or hop off and start over</div></div>
+        <div class="stage"><svg id="bsSvg" role="img" aria-label="Bus routes leaving a station along a shared road, then splitting apart"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="bsRide">Ride one stop</button><button class="btn" type="button" id="bsHop">Hop off and start a new line</button><button class="btn" type="button" id="bsReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Stops ridden in total</span><span class="v" id="bsT"></span></div><div class="stat"><span class="k">Distance from the station</span><span class="v glow" id="bsD"></span></div><div class="stat"><span class="k">What people say about your work</span><span class="s" id="bsSay"></span></div></div><p class="callout">Every line shares the first five stops. <b>Hopping off feels like a fresh start, but it sends you straight back to the shared stretch. The only way to reach your own route is to stay on.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When your work looks like a copy of others', that's normal for the early stops. Don't switch lines. Keep going until it starts to look like yours.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: The loneliness of the digital nomad →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Time is better shared</div>
+        <h2>The Loneliness of the Digital Nomad</h2>
+        <div class="short"><span class="lbl">In short</span><p>Total control over your own schedule sounds like freedom, but much of time's value comes from sharing it with others. A schedule nobody else is on is a lonely one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Time is a network good.</b> Like a phone, time is worth more when others are using it at the same moment: the same weekend, the same holiday, the same evening off.</span></li>
+          <li><span><b>Flexibility can isolate.</b> Working whenever you like means your free time rarely lines up with anyone else's. Freedom over your schedule can cost you company.</span></li>
+          <li><span><b>Synchronised rest helps.</b> Researchers in Sweden found people's wellbeing rose when more of the population was on holiday at the same time, not just when they themselves were.</span></li>
+          <li><span><b>Give up some control.</b> Joining a choir, a team or a regular dinner means fitting your time to others'. The constraint is where the connection comes from.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman tells the story of the Soviet Union's continuous working week, introduced in 1929. To keep factories running every day, workers were split into groups, each with a different colour, and each group got a different day off in a rolling five-day cycle. Production didn't stop, but life did: husbands, wives and friends on different colours rarely had a day off together. The scheme was so unpopular it was abandoned within a few years. Your time is only partly yours; the rest of its worth lies in sharing it.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: the continuous week</div><div class="hint">Give each person a colour and count your days off together</div></div>
+        <div class="lab-ctl"><div class="who" id="cwW"></div></div><div class="stage"><svg id="cwSvg" role="img" aria-label="A month of days showing who is off work each day"></svg></div><div class="stats"><div class="stat"><span class="k">Days everyone is off together, this month</span><span class="v glow" id="cwT"></span></div><div class="stat"><span class="k">With an ordinary shared weekend</span><span class="v" id="cwS"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="cwSay"></span></div></div><p class="callout">Each colour group rests one day in five, as in the 1929 scheme. <b>Everyone gets the same amount of rest. What changes is whether anyone is free to spend it with you.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you plan your time, think about whose time it lines up with. A little less flexibility in exchange for shared evenings, weekends and rituals is usually a very good trade.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Cosmic insignificance therapy →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · You don't have to matter that much</div>
+        <h2>Cosmic Insignificance Therapy</h2>
+        <div class="short"><span class="lbl">In short</span><p>On the scale of the universe, your life barely registers. Burkeman finds that oddly comforting: it frees you from the pressure to do something extraordinary and lets an ordinary life be enough.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A blink in deep time.</b> The universe is about 13.8 billion years old. Squeeze that into a calendar year and a whole human life lasts a fraction of a second.</span></li>
+          <li><span><b>The pressure to be remarkable.</b> We assume a life only counts if it leaves a big mark. That standard makes almost every real life feel like a failure.</span></li>
+          <li><span><b>Relief, not despair.</b> If nothing you do will matter cosmically, you're free to do things simply because they're worth doing to you and the people around you.</span></li>
+          <li><span><b>Ordinary is meaningful.</b> Caring for a child, making a good meal, helping a neighbour: these matter enormously on the human scale, which is the only scale you live on.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman describes the dizzying feeling of zooming out, whether looking at the night sky or picturing the age of the universe, and how quickly the things you were anxious about shrink. He calls it cosmic insignificance therapy. The usual fear is that this makes life pointless. He argues the opposite: it lifts an impossible burden. You were never supposed to justify your existence with spectacular achievements. You only have to live a finite life, as well as you can.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: the cosmic calendar</div><div class="hint">Squeeze the universe into one year, then zoom in</div></div>
+        <div class="stage"><svg id="ccSvg" role="img" aria-label="A timeline of the universe squeezed into one year"></svg></div><div class="lab-ctl"><div class="row" id="ccZ"></div></div><div class="stats"><div class="stat"><span class="k">This view spans</span><span class="v" id="ccSpan"></span></div><div class="stat"><span class="k">Your 80-year life</span><span class="v glow" id="ccLife"></span></div><div class="stat"><span class="k">What you see</span><span class="s" id="ccSay"></span></div></div><p class="callout">Even zoomed into the last second of December 31st, a human life is a sliver. <b>That isn't a reason to despair. It's permission to stop trying to be a big deal and just live.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When the pressure to achieve something huge gets heavy, zoom out. Nobody needs your life to be cosmically important. A decent, ordinary, finite life is plenty.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The human disease →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Five questions</div>
+        <h2>The Human Disease</h2>
+        <div class="short"><span class="lbl">In short</span><p>The human disease is the urge to get on top of time, to secure our existence before we start living it. The cure isn't a technique but a set of honest questions about where you're still fighting your limits.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Stop trying to get it handled.</b> There's no moment when life will be secured and you can finally relax into it. This, now, is it.</span></li>
+          <li><span><b>Imperfect is the only option.</b> Holding yourself to impossible standards of productivity guarantees you'll feel you've failed.</span></li>
+          <li><span><b>You are who you are.</b> Much stress comes from refusing to accept your real temperament, talents and limits in favour of who you think you should be.</span></li>
+          <li><span><b>Act without the outcome.</b> If you didn't need to see your efforts reach completion, what would you do? Often it's what you should do now.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Burkeman closes the main book not with a system but with five questions to carry around. Where are you choosing comfort when discomfort is what's needed? Are you holding yourself to standards no one could meet? Where have you not yet accepted that you are who you are? Where are you holding back until you feel you know what you're doing? And how would you spend your days if you didn't care so much about seeing your actions bear fruit? The answers, he suggests, point to where you're still fighting finitude.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: the five questions</div><div class="hint">Write a line for each; it saves in this browser</div></div>
+        <div class="qs" id="qsF"></div><div class="callout" style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><span>Your answers appear in the afterword, with the ten tools. <b>Honest, specific answers beat clever ones.</b></span><span class="saved" id="qsSaved"></span></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You won't ever finish getting your life in order. Ask the five questions, notice where you're still fighting your limits, and start living inside them.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#after">Next: beyond hope →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Beyond hope</h2>
+      <p class="big">Burkeman ends by suggesting you give up hope, in a particular sense: the hope that one day, with the right system, you'll finally get on top of it all. Once that hope goes, a strange relief arrives. The problem was never solvable, so you can stop waiting to solve it and get on with the few things that matter, today, imperfectly.</p>
+      <p>The book closes with an appendix of ten practical tools for living within your limits. Tick the ones you'll try. Your answers to the five questions from chapter 14 show up below them.</p>
+      <div class="tools" id="tools"></div>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">Limits</span><b>You'll never get it all done</b><span>So stop trying to fit everything in, and choose what to neglect.</span></div>
+        <div><span class="n">Efficiency</span><b>Speed fills the bucket faster</b><span>Getting quicker at tasks mostly brings you more tasks.</span></div>
+        <div><span class="n">Finitude</span><b>Every choice is a loss</b><span>Saying yes to one life means saying no to others, and that's what makes it count.</span></div>
+        <div><span class="n">Attention</span><b>Attention is life</b><span>What you attend to is, in the end, what your life was.</span></div>
+        <div><span class="n">Control</span><b>The future isn't yours</b><span>Plan, but stop demanding guarantees. Live in the only moment you get.</span></div>
+        <div><span class="n">Perspective</span><b>Cosmic insignificance</b><span>You don't need to do something remarkable. A finite, ordinary life is plenty.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Four Thousand Weeks: Time Management for Mortals</i> by Oliver Burkeman (2021). The explanations, retold examples and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Introduction", "Choosing to choose", "Beyond control"];
+const CH = [["In the Long Run, We're All Dead", "In the long run, we're all dead", 0, "Introduction"], ["The Limit-Embracing Life", "The limit-embracing life", 1, "Chapter 1"], ["The Efficiency Trap", "The efficiency trap", 1, "Chapter 2"], ["Facing Finitude", "Facing finitude", 1, "Chapter 3"], ["Becoming a Better Procrastinator", "Becoming a better procrastinator", 1, "Chapter 4"], ["The Watermelon Problem", "The watermelon problem", 1, "Chapter 5"], ["The Intimate Interrupter", "The intimate interrupter", 1, "Chapter 6"], ["We Never Really Have Time", "We never really have time", 2, "Chapter 7"], ["You Are Here", "You are here", 2, "Chapter 8"], ["Rediscovering Rest", "Rediscovering rest", 2, "Chapter 9"], ["The Impatience Spiral", "The impatience spiral", 2, "Chapter 10"], ["Staying on the Bus", "Staying on the bus", 2, "Chapter 11"], ["The Loneliness of the Digital Nomad", "The loneliness of the digital nomad", 2, "Chapter 12"], ["Cosmic Insignificance Therapy", "Cosmic insignificance therapy", 2, "Chapter 13"], ["The Human Disease", "The human disease", 2, "Chapter 14"]];
+const QUIZ = {
+"1": {
+"q": "Why does Burkeman say time management has failed?",
+"o": [
+"People aren't using the tools properly",
+"The tools promise control but mostly make us busier and more anxious",
+"Modern life has too few distractions"
+],
+"a": 1,
+"w": "His point is that the tools aim at an impossible goal, getting on top of everything, so getting better at them only speeds up the treadmill."
+},
+"2": {
+"q": "What does Burkeman say is wrong with the big-rocks-in-a-jar story?",
+"o": [
+"Small tasks are more important than big ones",
+"In real life there are usually more big rocks than will fit",
+"Jars are a poor metaphor for weeks"
+],
+"a": 1,
+"w": "The parable assumes everything important can fit if you schedule it first. Usually it can't, so you have to choose which important things to leave out."
+},
+"3": {
+"q": "Why did labour-saving appliances fail to cut the hours spent on housework?",
+"o": [
+"They broke down too often",
+"Standards rose, so people did more of the work they made easier",
+"Few households could afford them"
+],
+"a": 1,
+"w": "As each task got easier, people did it more often and to a higher standard, so the total time stayed about the same. That is the efficiency trap."
+},
+"4": {
+"q": "What does Burkeman draw from the word \"decide\"?",
+"o": [
+"That good decisions should be fast",
+"That deciding means cutting off other possibilities, which is unavoidable",
+"That decisions should be put off until you have all the facts"
+],
+"a": 1,
+"w": "The root means to cut off. Every real choice closes doors, and accepting that loss is part of living a finite life."
+},
+"5": {
+"q": "Which tasks does Burkeman warn are most dangerous to your time?",
+"o": [
+"The trivial ones, like tidying your desk",
+"The middling ones: appealing enough to pursue, not important enough to deserve it",
+"The biggest, hardest projects"
+],
+"a": 1,
+"w": "Trivial tasks are easy to dismiss. It's the fairly good ones, priorities six to twenty-five, that quietly eat the time your top few need."
+},
+"6": {
+"q": "Why does Burkeman call distraction more serious than an annoyance?",
+"o": [
+"Because it lowers your salary",
+"Because what you pay attention to is, in the end, what your life consists of",
+"Because screens damage your eyes"
+],
+"a": 1,
+"w": "Attention is life. Whatever captures it captures part of your four thousand weeks, and it shapes what you come to care about too."
+},
+"7": {
+"q": "According to Burkeman, why do we reach for distractions?",
+"o": [
+"Because apps are simply irresistible",
+"Often to escape the discomfort of hard, uncertain work that shows us our limits",
+"Because we're bored by easy tasks"
+],
+"a": 1,
+"w": "The interrupter is intimate: the urge comes from inside, as a way to flee the discomfort of facing our limits. Phones just make the exit easy."
+},
+"8": {
+"q": "How does Burkeman describe worry?",
+"o": [
+"A useful way to prepare for every outcome",
+"The attempt to get certainty about a future you can't control",
+"A sign you haven't planned enough"
+],
+"a": 1,
+"w": "Worry tries to be sure how things will go. Because the future is never ours ahead of time, the search for certainty never ends."
+},
+"9": {
+"q": "What does Keynes's \"purposive man\" do?",
+"o": [
+"He enjoys each day as it comes",
+"He values things only for what they lead to later, so never enjoys them now",
+"He refuses to make plans"
+],
+"a": 1,
+"w": "Jam tomorrow, never jam today: he keeps pushing value into the future, so nothing is enjoyed in the present. Burkeman sees the same habit in how we treat time."
+},
+"10": {
+"q": "Why does Burkeman recommend a hobby you're bad at?",
+"o": [
+"Because it will eventually make you better at work",
+"Because doing something purely for enjoyment frees leisure from the demand to be productive",
+"Because experts get bored more easily"
+],
+"a": 1,
+"w": "A hobby you don't need to improve at can't be turned into another project. It's leisure for its own sake, which is the kind we've largely lost."
+},
+"11": {
+"q": "What did Robert Boice find about academic writers?",
+"o": [
+"Those who wrote in long binges produced the most",
+"Those who wrote in short daily sessions, stopping on time, produced more and felt better",
+"Writing output had nothing to do with habits"
+],
+"a": 1,
+"w": "Brief daily sessions beat binges. Accepting slow, steady progress is a form of patience that pays off."
+},
+"12": {
+"q": "What is the lesson of the Helsinki bus station?",
+"o": [
+"Pick the most original bus line from the start",
+"Stay on one line past the shared stretch, and your work will become distinctively yours",
+"Switch lines often to find the fastest one"
+],
+"a": 1,
+"w": "All routes share the first stops. Only by staying on do you reach where they diverge, which is where originality lies."
+},
+"13": {
+"q": "What went wrong with the Soviet continuous working week?",
+"o": [
+"Factories produced less",
+"People got fewer days off",
+"Families and friends on different schedules rarely had a day off together"
+],
+"a": 2,
+"w": "Everyone still rested, but on different days. Time lost much of its value because it couldn't be shared, and the scheme was soon dropped."
+},
+"14": {
+"q": "Why does Burkeman find cosmic insignificance comforting?",
+"o": [
+"It means nothing we do matters at all",
+"It frees us from the pressure to do something remarkable, so an ordinary life can be enough",
+"It proves the universe was made for us"
+],
+"a": 1,
+"w": "Zooming out removes the impossible standard of cosmic importance. What matters on the human scale still matters, and that's enough."
+},
+"15": {
+"q": "What does Burkeman mean by \"the human disease\"?",
+"o": [
+"Physical illness caused by stress",
+"The urge to get on top of time and secure life before we actually live it",
+"Laziness"
+],
+"a": 1,
+"w": "It's the attempt to master time completely before life can begin. Since that's impossible, the cure is accepting limits and living now."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#14110e';
+try { const t = localStorage.getItem('ftw-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('ftw-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${i ? String(i).padStart(2,'0') : 'In'}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i ? i + '. ' : ''}${s}</a>`).join('');
+let done = new Set(store.get('ftw-done', []));
+const save = () => store.set('ftw-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const AGE_KEY = 'ftw-age';
+const fmt = n => Math.round(n).toLocaleString('en-GB');
+
+/* ---------- afterword: ten tools + your answers ---------- */
+const QS = [
+  'Where in your life are you choosing comfort when what\'s called for is a little discomfort?',
+  'Are you holding yourself to standards of productivity or performance that nobody could meet?',
+  'In what ways have you not yet accepted that you are who you are, rather than who you think you should be?',
+  'Where are you still holding back until you feel you know what you\'re doing?',
+  'How would you spend your days if you didn\'t care so much about seeing your actions bear fruit?' ];
+const TOOLS = [
+  ['Adopt a fixed-volume approach', 'Keep an open list of everything and a closed list of at most ten items. Something joins the closed list only when something leaves it.'],
+  ['Serialise, serialise, serialise', 'Work on one big project at a time, to completion, rather than nudging several forward together.'],
+  ['Decide in advance what to fail at', 'Pick the areas where you\'ll accept doing badly for now, so the failure is a choice, not a surprise.'],
+  ['Focus on what you\'ve already done', 'Keep a done list as well as a to-do list. It shows what you did with your time, not just what\'s left.'],
+  ['Consolidate your caring', 'You can\'t care about every cause the news brings you. Choose a few and put your energy there.'],
+  ['Embrace boring, single-purpose technology', 'Make devices duller: remove apps from your phone, use gadgets that do one thing.'],
+  ['Seek out novelty in the mundane', 'Pay closer attention to ordinary days. Noticing more makes time feel fuller, without a single extra trip.'],
+  ['Be a researcher in relationships', 'Approach the people in your life with curiosity about who they are, not a plan for how things should go.'],
+  ['Cultivate instantaneous generosity', 'When a generous impulse arises, a thank-you, a donation, a kind word, act on it straight away.'],
+  ['Practise doing nothing', 'Spend a few minutes a day resisting the urge to do anything at all. It gets easier, and it loosens the grip of busyness.'] ];
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const a = store.get('ftw-qs', []), tl = store.get('ftw-tools', []);
+  const qa = QS.map((q, i) => (a[i] || '').trim() ? `<div class="qa"><i>${i + 1}. ${q}</i><p>${esc(a[i])}</p></div>` : '').join('');
+  const picked = TOOLS.filter((_, i) => tl[i]).map(t => t[0]);
+  if (!qa && !picked.length){ el.innerHTML = '<span class="k">Nothing saved yet</span><p class="empty">Tick a few of the tools above and answer <a href="#ch15">the five questions in chapter 14</a>. What you save shows up here, in this browser only.</p>'; return; }
+  let h = '';
+  if (picked.length) h += `<span class="k">Tools you\'ll try · ${picked.length} of 10</span><p class="empty" style="color:var(--soft)">${picked.join(' · ')}</p>`;
+  if (qa) h += `<span class="k">Your five questions</span>${qa}`;
+  el.innerHTML = h;
+}
+{ const box = $('#tools'); let tl = store.get('ftw-tools', []);
+  const draw = () => { box.innerHTML = TOOLS.map((t, i) => `<button class="tool" type="button" data-t="${i}" aria-pressed="${!!tl[i]}"><span class="bx">${TICK}</span><span><b>${i + 1}. ${t[0]}</b><span>${t[1]}</span></span></button>`).join('');
+    box.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => { tl[+b.dataset.t] = !tl[+b.dataset.t]; store.set('ftw-tools', tl); draw(); renderCard(); })); };
+  draw();
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['My to-do list never ends', 2, 'The limit-embracing life', 'It never will. Stop trying to fit everything in and choose, on purpose, what you\'ll neglect.'],
+    ['The faster I work, the busier I get', 3, 'The efficiency trap', 'Efficiency fills the bucket faster. Do the important thing first instead of clearing the decks.'],
+    ['I can\'t commit to anything', 4, 'Facing finitude', 'Every choice closes other doors. That loss is the price of having a life rather than a menu of them.'],
+    ['I put off what matters most', 5, 'Becoming a better procrastinator', 'You\'ll always procrastinate on something. Make it the middling stuff, not your top few.'],
+    ['My phone eats my days', 6, 'The watermelon problem', 'Attention is life. What captures your attention captures part of your four thousand weeks.'],
+    ['I can\'t focus even when I try', 7, 'The intimate interrupter', 'The urge to escape comes from inside, usually when the work gets hard. Let it rise and pass.'],
+    ['I worry about the future', 8, 'We never really have time', 'Worry demands guarantees the future can\'t give. Plan, then hold the plan lightly.'],
+    ['I\'m always living for later', 9, 'You are here', 'The moment life finally starts keeps moving. This is already it.'],
+    ['I feel guilty when I rest', 10, 'Rediscovering rest', 'Rest doesn\'t have to earn its keep. Leisure for its own sake is allowed to be the point.'],
+    ['I want results faster', 11, 'The impatience spiral', 'Speed feeds impatience. Small, steady daily work beats waiting for a big push.'],
+    ['My work feels unoriginal', 12, 'Staying on the bus', 'Every route shares the early stops. Stay on long enough and your work becomes your own.'],
+    ['I never see my friends', 13, 'The loneliness of the digital nomad', 'Time is worth more when it\'s shared. Give up a little flexibility for time together.'],
+    ['I feel I must do something big', 14, 'Cosmic insignificance therapy', 'On the cosmic scale nobody matters much. That frees you to live an ordinary life well.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: four thousand weeks grid (one column per year, one row per week) ---------- */
+{ const R = $('#wkR'), el = $('#wkSvg');
+  R.value = store.get(AGE_KEY, 35);
+  const draw = onLayout(() => {
+    const age = +R.value, nw = NARROW(), cs = nw ? 4 : 5, gap = 1, cols = 80, rows = 52, L = 4, T = 4;
+    const W = L + cols * cs + 4, H = T + rows * cs + 20; vb(el, W, H);
+    let lived = '', left = '';
+    const lw = age * 52 + 26;
+    for (let y = 0; y < cols; y++) for (let w = 0; w < rows; w++){
+      const i = y * 52 + w, x = L + y * cs, yy = T + w * cs, d = `M${x} ${yy}h${cs - gap}v${cs - gap}h-${cs - gap}Z`;
+      if (i < lw) lived += d; else left += d; }
+    const cx = L + age * cs, cy = T + 26 * cs;
+    let g = `<path d="${left}" ${F('line')}/><path d="${lived}" ${F('glow', .85)}/>`;
+    g += `<rect x="${cx - 1.5}" y="${cy - 1.5}" width="${cs + 2}" height="${cs + 2}" ${S('text', 1.2)}/>`;
+    [0, 20, 40, 60, 80].forEach(a => { g += TX(Math.min(L + a * cs, W - 4), H - 6, a, 'faint', nw ? 9 : 10, a === 80 ? 'end' : a ? 'middle' : 'start'); });
+    el.innerHTML = g;
+    const used = age * 52, rest = 4160 - used;
+    out('wkR', age); $('#wkV').textContent = fmt(rest) + ' left';
+    $('#wkRead').innerHTML = `<div><span class="k">Weeks lived</span><span class="v">${fmt(used)}</span></div><div><span class="k">Weeks left to 80</span><span class="v glow">${fmt(rest)}</span></div><div><span class="k">Share used</span><span class="v">${Math.round(used / 4160 * 100)}%</span></div>`;
+  });
+  R.addEventListener('input', () => { store.set(AGE_KEY, +R.value); draw(); }); draw();
+}
+
+/* ---------- intro: count what's left ---------- */
+{ const A = $('#clA'), B = $('#clB'), V = $('#clV'), el = $('#clSvg');
+  A.value = clamp(store.get(AGE_KEY, 35), 10, 79);
+  const draw = onLayout(() => {
+    const age = +A.value, yrs = 80 - age, books = yrs * +B.value, visits = yrs * +V.value;
+    out('clA', age); out('clB', B.value); out('clV', V.value);
+    $('#clW').textContent = fmt(yrs * 52); $('#clS').textContent = yrs; $('#clBk').textContent = fmt(books); $('#clVs').textContent = fmt(visits);
+    const nw = NARROW(), per = nw ? 20 : 40, W = nw ? 360 : 640, r = nw ? 6 : 6.2, step = (W - 20) / per, n = Math.min(visits, 400), rowsN = Math.ceil(n / per), H = 42 + Math.max(1, rowsN) * step + 6;
+    vb(el, W, H);
+    let g = TX(10, 18, visits > 400 ? `Each dot is one visit · showing 400 of ${fmt(visits)}` : `Each dot is one visit you have left · ${visits} in all`, 'muted', 12);
+    for (let k = 0; k < n; k++){ const x = 10 + step / 2 + (k % per) * step, y = 36 + step / 2 + Math.floor(k / per) * step; g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" ${F(k < +V.value ? 'glow' : 'cool', k < +V.value ? 1 : .75)}/>`; }
+    el.innerHTML = g;
+  });
+  [A, B, V].forEach(x => x.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 1: the jar ---------- */
+{ const ROCKS = [['A big work project', 12, 'Work project'], ['Time with family', 10, 'Family'], ['Exercise', 5, 'Exercise'], ['Friends', 6, 'Friends'], ['Learning an instrument', 5, 'Instrument'], ['A side business', 10, 'Side business'], ['Volunteering', 4, 'Volunteering'], ['Writing a novel', 8, 'Novel'], ['Reading', 4, 'Reading'], ['Learning a language', 4, 'Language']];
+  const on = new Set([0, 1, 2, 3, 7]); const C = $('#jrC'), el = $('#jrSvg');
+  $('#jrR').innerHTML = ROCKS.map((r, i) => `<button class="btn" type="button" data-r="${i}" aria-pressed="${on.has(i)}">${r[0]} · ${r[1]}h</button>`).join('');
+  $$('#jrR [data-r]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.r; on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); draw(); }));
+  C.addEventListener('input', () => draw());
+  const draw = onLayout(() => {
+    const cap = +C.value, nw = NARROW(), W = nw ? 360 : 640, H = 300; vb(el, W, H); out('jrC', cap);
+    const jx = nw ? 60 : 190, jw = nw ? 160 : 200, jt = 40, jb = 280, jh = jb - jt, unit = jh / 50;
+    let g = '', y = jb, fitted = [], over = [], used = 0;
+    [...on].sort((a, b) => ROCKS[b][1] - ROCKS[a][1]).forEach(i => { const h = ROCKS[i][1]; if (used + h <= cap){ used += h; fitted.push(i); } else over.push(i); });
+    const capY = jb - cap * unit;
+    g += `<rect x="${jx}" y="${capY}" width="${jw}" height="${jb - capY}" ${F('glow-soft')}/>`;
+    fitted.forEach((i, k) => { const h = ROCKS[i][1] * unit; y -= h; g += `<rect x="${jx + 6}" y="${(y + 1).toFixed(1)}" width="${jw - 12}" height="${(h - 2).toFixed(1)}" rx="8" ${FS('panel-2', 'glow', 1.3)}/>` + TX(jx + jw / 2, y + h / 2 + 4, nw ? ROCKS[i][2] : ROCKS[i][0], 'text', nw ? 11 : 12, 'middle'); });
+    g += `<path d="M${jx} ${jt}V${jb}h${jw}V${jt}" ${S('text', 2.5)}/><line x1="${jx - 10}" y1="${capY}" x2="${jx + jw + 10}" y2="${capY}" ${S('glow', 1.5, ';stroke-dasharray:5 4')}/>`;
+    g += TX(jx - 14, capY + 4, `${cap}h`, 'glow', 11, 'end');
+    const ox = jx + jw + (nw ? 10 : 30); let oy = 50;
+    if (over.length) g += TX(ox, 30, nw ? 'WON\'T FIT' : 'DOESN\'T FIT', 'bad', 10.5, 'start', 'letter-spacing="1.2"');
+    over.forEach(i => { const bw = nw ? 116 : 150; g += `<rect x="${ox}" y="${oy}" width="${bw}" height="26" rx="7" ${FS('bad-soft', 'bad', 1.2, 1)}/>` + TX(ox + 8, oy + 17, nw ? ROCKS[i][2] : ROCKS[i][0], 'text', 11.5); oy += 32; });
+    el.innerHTML = g;
+    const tot = [...on].reduce((s, i) => s + ROCKS[i][1], 0);
+    $('#jrH').textContent = `${tot}h wanted · ${cap}h free`;
+    const neg = ROCKS.map((r, i) => i).filter(i => !on.has(i) || over.includes(i)).map(i => ROCKS[i][0].toLowerCase());
+    $('#jrN').textContent = over.length ? `Already too much: ${over.map(i => ROCKS[i][0].toLowerCase()).join(', ')} won't fit. Choose what to drop, or it chooses for you.` : neg.length ? `It fits, because you've chosen to leave out ${neg.join(', ')}.` : 'Nothing left out. Try adding up the hours honestly.';
+  });
+  draw();
+}
+
+/* ---------- 2: the bottomless inbox ---------- */
+{ const Sp = $('#ibS'), el = $('#ibSvg');
+  const draw = onLayout(() => {
+    const sp = +Sp.value, D = 20, base = 20, back = .85; out('ibS', sp);
+    let inbox = 30, arr = [], box = [], sentToday = 0, sentY = 0;
+    for (let d = 0; d < D; d++){ const a = Math.round(base + back * sentY); inbox += a; sentToday = Math.min(sp, inbox); inbox -= sentToday; sentY = sentToday; arr.push(a); box.push(inbox); }
+    const nw = NARROW(), W = nw ? 360 : 640, H = 250, L = 40, R = W - 14, T = 20, B = H - 32; vb(el, W, H);
+    const mx = Math.max(100, ...arr, ...box) * 1.1, X = d => L + (R - L) * d / (D - 1), Y = v => B - (B - T) * v / mx;
+    let g = '';
+    for (let k = 0; k <= 4; k++){ const v = Math.round(mx * k / 4 / 10) * 10, yy = Y(v); g += `<line x1="${L}" y1="${yy}" x2="${R}" y2="${yy}" ${S('line', 1)}/>` + TX(L - 6, yy + 4, v, 'faint', 10, 'end'); }
+    const line = (vs, c, w, dash = '') => `<path d="${vs.map((v, d) => (d ? 'L' : 'M') + X(d).toFixed(1) + ' ' + Y(v).toFixed(1)).join('')}" ${S(c, w, dash)}/>`;
+    g += line(box, 'cool', 2, ';stroke-dasharray:5 4') + line(arr, 'glow', 2.6);
+    [1, 5, 10, 15, 20].forEach(d => g += TX(X(d - 1), H - 12, 'Day ' + d, 'faint', 10, 'middle'));
+    g += `<circle cx="${L + 10}" cy="${T - 6}" r="4" ${F('glow')}/>` + TX(L + 18, T - 2, 'Arriving per day', 'muted', 11) + `<circle cx="${L + (nw ? 140 : 150)}" cy="${T - 6}" r="4" ${F('cool')}/>` + TX(L + (nw ? 148 : 158), T - 2, 'Left in inbox', 'muted', 11);
+    el.innerHTML = g;
+    $('#ibA').textContent = arr[D - 1]; $('#ibH').textContent = (Math.min(sp, arr[D - 1] + box[D - 2]) * 2 / 60).toFixed(1) + ' h'; $('#ibL').textContent = box[D - 1];
+  });
+  Sp.addEventListener('input', draw); draw();
+}
+
+/* ---------- 3: the lives you cut off ---------- */
+{ const LV = [['A big city', 'A small town', 'Abroad'], ['Doctor', 'Musician', 'Start a business'], ['Partner and children', 'Single and free', 'A late family']];
+  let pick = [], el = $('#fkSvg');
+  function buttons(){ LV.forEach((opts, lv) => { const row = $('#fk' + lv); row.innerHTML = `<span class="mono" style="font-size:11px;color:var(--faint);min-width:58px">FORK ${lv + 1}</span>` + opts.map((o, k) => `<button class="btn" type="button" data-k="${k}" aria-pressed="${pick[lv] === k}" ${lv !== pick.length ? 'disabled' : ''}>${o}</button>`).join('');
+    row.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { pick[lv] = +b.dataset.k; buttons(); draw(); })); }); }
+  $('#fkReset').addEventListener('click', () => { pick = []; buttons(); draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 320; vb(el, W, H);
+    const xs = nw ? [24, 120, 220, 330] : [40, 220, 400, 590], T = 18, B = H - 18;
+    const yAt = (lv, idx) => { const n = Math.pow(3, lv); return lv === 0 ? H / 2 : T + (B - T) * (idx + .5) / n; };
+    const alive = (lv, idx) => { for (let d = 0; d < lv && d < pick.length; d++){ const anc = Math.floor(idx / Math.pow(3, lv - 1 - d)) % 3; if (anc !== pick[d]) return false; } return true; };
+    let g = '';
+    for (let lv = 1; lv <= 3; lv++) for (let idx = 0; idx < Math.pow(3, lv); idx++){
+      const par = Math.floor(idx / 3), on = alive(lv, idx), chosen = on && lv <= pick.length;
+      g += `<line x1="${xs[lv - 1]}" y1="${yAt(lv - 1, par).toFixed(1)}" x2="${xs[lv]}" y2="${yAt(lv, idx).toFixed(1)}" ${S(chosen ? 'glow' : on ? 'muted' : 'line', chosen ? 2.6 : on ? 1.2 : .8, on ? '' : ';stroke-opacity:.6')}/>`; }
+    for (let lv = 0; lv <= 3; lv++) for (let idx = 0; idx < Math.pow(3, lv); idx++){
+      const on = alive(lv, idx), chosen = lv === 0 || (on && lv <= pick.length), r = lv === 3 ? 4 : lv === 0 ? 9 : 6;
+      g += `<circle cx="${xs[lv]}" cy="${yAt(lv, idx).toFixed(1)}" r="${r}" ${chosen ? F('glow') : on ? FS('panel', 'muted', 1.2) : F('line')}/>`; }
+    if (!nw){ LV[0].forEach((t, k) => g += TX(xs[1] + 10, yAt(1, k) - 10, t, alive(1, k) ? 'text' : 'faint', 12)); g += TX(xs[0], H / 2 + 26, 'You, now', 'muted', 11, 'middle'); }
+    el.innerHTML = g;
+    const open = Math.pow(3, 3 - pick.length);
+    $('#fkOpen').textContent = `${open} of 27`;
+    $('#fkLife').textContent = pick.length ? pick.map((k, lv) => LV[lv][k]).join(' · ') + (pick.length < 3 ? ' · …' : '. The other 26 are gone, and this one is yours.') : 'Not chosen yet. Every life is still possible, and none is being lived.';
+  });
+  buttons(); draw();
+}
+
+/* ---------- 4: your three, and the avoid list ---------- */
+{ const G = ['Get fit', 'Learn Spanish', 'Write a book', 'Start a podcast', 'Renovate the kitchen', 'Go for a promotion', 'Learn to code', 'Run a marathon', 'Reconnect with old friends', 'Grow vegetables'];
+  let sel = [];
+  const draw = () => {
+    $('#pcG').innerHTML = G.map((g, i) => `<button class="btn" type="button" data-i="${i}" aria-pressed="${sel.includes(i)}" ${sel.length >= 3 && !sel.includes(i) ? 'disabled' : ''}>${g}</button>`).join('');
+    $$('#pcG [data-i]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; sel = sel.includes(i) ? sel.filter(x => x !== i) : [...sel, i]; draw(); }));
+    $('#pcNow').innerHTML = sel.length ? sel.map(i => `<span>${G[i]}</span>`).join('') : '<span class="empty">Pick up to three.</span>';
+    $('#pcAv').innerHTML = sel.length ? G.filter((_, i) => !sel.includes(i)).map(g => `<span>${g}</span>`).join('') : '<span class="empty">Everything else lands here.</span>';
+    $('#pcW').textContent = `${sel.length} of 3`;
+    $('#pcSay').textContent = sel.length < 3 ? 'Choose your three. The hard part isn\'t picking them, it\'s what happens to the other seven.' : 'Your three get the first hours of each week. The seven aren\'t bad ideas; they wait until one of the three is finished.';
+  };
+  draw();
+}
+
+/* ---------- 5: where your attention goes ---------- */
+{ const A = $('#atA'), Hh = $('#atH'), el = $('#atSvg');
+  A.value = clamp(store.get(AGE_KEY, 35), 10, 75);
+  const draw = onLayout(() => {
+    const age = +A.value, h = +Hh.value, yrs = 80 - age, share = h / 16, wakeYrs = yrs * share * 16 / 24, pct = Math.round(share * 100);
+    out('atA', age); out('atH', h + ' h');
+    $('#atP').textContent = pct + '%'; $('#atY').textContent = (yrs * h * 365 / (16 * 365)).toFixed(1) + ' of ' + yrs; $('#atW').textContent = fmt(yrs * 52 * share) + ' weeks';
+    const nw = NARROW(), per = nw ? 10 : 20, W = nw ? 360 : 640, c = (W - 20) / per, rowsN = 100 / per, H = 30 + rowsN * c; vb(el, W, H);
+    let g = TX(10, 18, `${yrs} years of waking life left · ${pct} of every 100 hours to the feed`, 'muted', 12);
+    for (let k = 0; k < 100; k++){ const x = 10 + (k % per) * c, y = 28 + Math.floor(k / per) * c; g += `<rect x="${x + 2}" y="${y + 2}" width="${c - 4}" height="${c - 4}" rx="4" ${k < pct ? F('glow', .9) : F('panel-2')}/>`; }
+    el.innerHTML = g;
+    void wakeYrs;
+  });
+  [A, Hh].forEach(x => x.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 6: ride the urge ---------- */
+{ const el = $('#ugSvg'), go = $('#ugGo'), ck = $('#ugCheck'), DUR = 60;
+  let t = 0, last = 0, peak = 60, prog = 0, checks = 0, hist = [], timer = null, running = false;
+  const urge = () => { const s = t - last, tp = Math.max(5, 12 - checks * 2); return Math.min(100, peak * (s / tp) * Math.exp(1 - s / tp)); };
+  function reset(){ t = 0; last = 0; peak = 60; prog = 0; checks = 0; hist = []; }
+  function tick(){ t += .5; prog = Math.min(100, prog + 100 / 45 * .5); hist.push([t, urge()]); if (t >= DUR){ clearInterval(timer); running = false; go.disabled = false; go.textContent = 'Try again'; ck.disabled = true; } draw(); }
+  go.addEventListener('click', () => { reset(); running = true; go.disabled = true; ck.disabled = false; clearInterval(timer); timer = setInterval(tick, RM ? 250 : 120); draw(); });
+  ck.addEventListener('click', () => { if (!running) return; checks++; last = t; peak = Math.min(100, peak * 1.25); prog = Math.max(0, prog - 25); hist.push([t, 0]); draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 220, L = 34, R = W - 12, T = 16, B = H - 30; vb(el, W, H);
+    const X = s => L + (R - L) * s / DUR, Y = v => B - (B - T) * v / 100;
+    let g = `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" ${S('line', 1.2)}/>` + TX(L - 6, T + 8, 'high', 'faint', 10, 'end') + TX(L - 6, B, 'low', 'faint', 10, 'end');
+    [0, 15, 30, 45, 60].forEach(s => g += TX(X(s), H - 10, s + 's', 'faint', 10, 'middle'));
+    if (hist.length) g += `<path d="M${X(0)} ${Y(0)}${hist.map(([s, v]) => 'L' + X(s).toFixed(1) + ' ' + Y(v).toFixed(1)).join('')}" ${S('bad', 2.4, ';stroke-linejoin:round')}/>`;
+    g += `<rect x="${L}" y="${B + 4}" width="${((R - L) * prog / 100).toFixed(1)}" height="5" rx="2.5" ${F('glow')}/>`;
+    g += TX(R, T + 4, 'urge to escape', 'bad', 11, 'end');
+    el.innerHTML = g;
+    $('#ugP').textContent = Math.round(prog) + '%'; $('#ugN').textContent = checks;
+    const u = urge();
+    $('#ugSay').textContent = !hist.length ? 'Press start. The work is hard, and the urge to escape will arrive.' : t >= DUR ? (checks ? `You escaped ${checks} time${checks > 1 ? 's' : ''}. Each one cost progress and brought the next wave sooner.` : 'You stayed. The wave peaked, then faded on its own, and the work got done.') : u > 55 ? 'The urge is peaking. This is the moment to stay.' : (t - last) > 14 ? 'It\'s fading. You rode it out.' : 'It\'s building. Notice it without obeying it.';
+  });
+  draw();
+}
+
+/* ---------- 7: plan or demand? ---------- */
+sorter('#sort8', '#tally8', [{id:'p', label:'A plan', d:'An intention, made now'}, {id:'d', label:'A demand', d:'A guarantee asked of the future'}], [
+  {t:'"I\'ll draft the report on Tuesday morning."', a:'p', w:'A clear intention about what you\'ll do. Useful, and it doesn\'t pretend to control the outcome.'},
+  {t:'"I need to know the report will go down well."', a:'d', w:'Nobody can know that in advance. This is worry asking for certainty.'},
+  {t:'"I\'ll book the flights tonight."', a:'p', w:'A present-moment decision. Whatever happens on the trip, this part is in your hands.'},
+  {t:'"Nothing can go wrong on this holiday."', a:'d', w:'A demand the future can\'t meet. Things will go wrong; you\'ll deal with them when they do.'},
+  {t:'"I\'ll call my mum on Sunday."', a:'p', w:'A plan. If Sunday changes, you\'ll adjust.'},
+  {t:'"I have to be sure this relationship will last before I commit."', a:'d', w:'No one can be sure. Waiting for that certainty means waiting forever.'},
+  {t:'"I\'ll put a hundred a month into savings."', a:'p', w:'A sensible intention, made now and repeatable.'},
+  {t:'"I must know I\'ll never have money worries again."', a:'d', w:'A guarantee nobody gets. The worry won\'t end because the certainty can\'t arrive.'} ]);
+
+/* ---------- 8: the horizon that keeps moving ---------- */
+{ const STEPS = [[22, 'when I finish my degree'], [26, 'when I land a proper job'], [31, 'when I get promoted'], [36, 'when we buy a house'], [45, 'when the kids are older'], [55, 'when the mortgage is paid'], [65, 'when I retire'], [72, 'when my health is sorted'], [79, 'when …']];
+  let age = 18, k = 0, now = false, wait = 0; const el = $('#hzSvg');
+  $('#hzGo').addEventListener('click', () => { if (now || k >= STEPS.length - 1) return; wait += STEPS[k][0] - age; age = STEPS[k][0]; k++; draw(); });
+  $('#hzNow').addEventListener('click', () => { now = true; draw(); });
+  $('#hzReset').addEventListener('click', () => { age = 18; k = 0; now = false; wait = 0; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 170, L = 20, R = W - 20, Y0 = 92; vb(el, W, H);
+    const X = a => L + (R - L) * (a - 18) / (80 - 18);
+    let g = `<line x1="${L}" y1="${Y0}" x2="${R}" y2="${Y0}" ${S('line', 6, ';stroke-linecap:round')}/>`;
+    g += `<line x1="${L}" y1="${Y0}" x2="${X(age)}" y2="${Y0}" ${S(now ? 'cool' : 'bad', 6, ';stroke-linecap:round;stroke-opacity:.7')}/>`;
+    if (now) g += `<line x1="${X(age)}" y1="${Y0}" x2="${R}" y2="${Y0}" ${S('glow', 6, ';stroke-linecap:round')}/>`;
+    [18, 30, 40, 50, 60, 70, 80].forEach(a => g += TX(X(a), Y0 + 26, a, 'faint', 10.5, 'middle'));
+    g += `<circle cx="${X(age)}" cy="${Y0}" r="9" ${FS('panel', 'text', 2)}/>` + TX(X(age), Y0 - 18, 'You', 'text', 12, 'middle');
+    if (!now){ const tx = X(STEPS[k][0]); g += `<line x1="${tx}" y1="${Y0 - 36}" x2="${tx}" y2="${Y0 + 8}" ${S('glow', 2, ';stroke-dasharray:4 3')}/><path d="M${tx} ${Y0 - 36}l14 6-14 6Z" ${F('glow')}/>`;
+      g += nw ? TX(L, 24, 'Real life starts ' + STEPS[k][1], 'glow', 11.5) : TX(clamp(tx, 150, W - 150), 24, 'Real life starts ' + STEPS[k][1], 'glow', 13, 'middle'); }
+    else g += TX(W / 2, 24, 'Real life starts here. It always did.', 'glow', nw ? 12 : 14, 'middle');
+    g += TX(L, H - 8, now ? 'Lived as preparation' : 'Lived as a waiting room', 'muted', 11);
+    el.innerHTML = g;
+    $('#hzAge').textContent = age; $('#hzWait').textContent = wait;
+    $('#hzSay').textContent = now ? 'Nothing got sorted first. You simply stopped postponing.' : k === 0 ? 'Press "Get there" and see what happens when you arrive.' : `You got there, and life still hasn't started. Now it's ${STEPS[k][1]}.`;
+    $('#hzGo').disabled = now || k >= STEPS.length - 1;
+  });
+  draw();
+}
+
+/* ---------- 9: the leisure ledger ---------- */
+{ const ACT = [['Running, training for a time', 3, 2], ['Reading novels', 4, 1], ['Podcasts at double speed to learn', 3, 2], ['Playing guitar badly', 2, 1], ['Walking with nowhere to go', 2, 1], ['Yoga to be more productive', 2, 2], ['Gardening', 3, 1], ['Posting the weekend online', 2, 2]];
+  let st = ACT.map(a => a[2]); const el = $('#lgSvg');
+  const LB = ['Skip', 'For itself', 'For a payoff'];
+  const draw = () => {
+    $('#lgL').innerHTML = ACT.map((a, i) => `<div class="li"><span>${a[0]}<small>${a[1]}h</small></span><div class="row">${LB.map((l, s) => `<button class="btn" type="button" data-i="${i}" data-s="${s}" aria-pressed="${st[i] === s}">${l}</button>`).join('')}</div></div>`).join('');
+    $$('#lgL [data-i]').forEach(b => b.addEventListener('click', () => { st[+b.dataset.i] = +b.dataset.s; draw(); }));
+    const own = ACT.reduce((s, a, i) => s + (st[i] === 1 ? a[1] : 0), 0), ins = ACT.reduce((s, a, i) => s + (st[i] === 2 ? a[1] : 0), 0), tot = own + ins;
+    const cx = 110, cy = 110, r = 80, C = 2 * Math.PI * r, f = tot ? own / tot : 0;
+    el.innerHTML = `<circle cx="${cx}" cy="${cy}" r="${r}" ${S('bad', 26, ';stroke-opacity:.55')}/><circle cx="${cx}" cy="${cy}" r="${r}" ${S('glow', 26, `;stroke-dasharray:${(C * f).toFixed(1)} ${C.toFixed(1)};transform:rotate(-90deg);transform-origin:${cx}px ${cy}px`)}/>` + TX(cx, cy + 4, tot ? Math.round(f * 100) + '%' : '–', 'text', 30, 'middle', 'font-family="Instrument Serif, serif"') + TX(cx, cy + 26, 'for its own sake', 'muted', 11, 'middle');
+    $('#lgO').textContent = own + ' h'; $('#lgI').textContent = ins + ' h';
+    $('#lgSay').textContent = !tot ? 'Mark a few pastimes.' : f >= .6 ? 'You still have real leisure. Guard it.' : f >= .3 ? 'Half your rest is working for you. Is any of it actually rest?' : 'Most of your leisure is a second job. Keep one thing that\'s for nothing.';
+  };
+  draw();
+}
+
+/* ---------- 10: bursts or bricks ---------- */
+{ let seed = 7; const M = $('#bxM'), el = $('#bxSvg');
+  $('#bxRe').addEventListener('click', () => { seed = Math.floor(Math.random() * 1e6); draw(); });
+  M.addEventListener('input', () => draw());
+  const draw = onLayout(() => {
+    const m = +M.value, r = rng(seed), wk = 12; out('bxM', m + ' min');
+    const daily = [0], binge = [0]; let cool = 0;
+    for (let w = 1; w <= wk; w++){
+      daily.push(daily[w - 1] + 5 * m / 60 * 1.1 * (0.9 + r() * .2));
+      let g = 0; if (cool > 0){ cool--; g = 0.3; } else if (r() < .35){ g = 6 + r() * 4; cool = 2; } else g = .5;
+      binge.push(binge[w - 1] + g); }
+    const nw = NARROW(), W = nw ? 360 : 640, H = 240, L = 36, R = W - 14, T = 20, B = H - 30; vb(el, W, H);
+    const mx = Math.max(daily[wk], binge[wk], 10) * 1.12, X = w => L + (R - L) * w / wk, Y = v => B - (B - T) * v / mx;
+    let g = '';
+    for (let k = 0; k <= 4; k++){ const v = Math.round(mx * k / 4), yy = Y(v); g += `<line x1="${L}" y1="${yy}" x2="${R}" y2="${yy}" ${S('line', 1)}/>` + TX(L - 6, yy + 4, v, 'faint', 10, 'end'); }
+    const step = vs => vs.map((v, w) => (w ? 'L' : 'M') + X(w).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
+    g += `<path d="${step(binge)}" ${S('cool', 2.2, ';stroke-linejoin:round')}/><path d="${step(daily)}" ${S('glow', 2.8, ';stroke-linejoin:round')}/>`;
+    [0, 4, 8, 12].forEach(w => g += TX(X(w), H - 10, w ? 'Week ' + w : 'Start', 'faint', 10, 'middle'));
+    g += TX(L + 6, T + 2, 'Pages written', 'muted', 11);
+    el.innerHTML = g;
+    $('#bxD').textContent = Math.round(daily[wk]) + ' pages'; $('#bxB').textContent = Math.round(binge[wk]) + ' pages';
+    $('#bxSay').textContent = daily[wk] > binge[wk] ? 'Each binge is followed by days of recovery and avoidance. The steady writer never has to recover.' : 'This term the binger had a lucky run. Rerun it: on average, the steady writer wins.';
+  });
+  draw();
+}
+
+/* ---------- 11: the Helsinki bus station ---------- */
+{ const SH = 5, MAX = 10, LINES = ['glow', 'cool', 'good', 'bad', 'muted'];
+  let line = 0, pos = 0, total = 0, hops = 0; const el = $('#bsSvg');
+  $('#bsRide').addEventListener('click', () => { if (pos < MAX){ pos++; total++; draw(); } });
+  $('#bsHop').addEventListener('click', () => { if (!pos) return; hops++; line = (line + 1) % LINES.length; pos = 0; draw(); });
+  $('#bsReset').addEventListener('click', () => { line = 0; pos = 0; total = 0; hops = 0; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 260, x0 = 34, sx = nw ? 26 : 50, y0 = H / 2; vb(el, W, H);
+    const pt = (ln, s) => { const x = x0 + s * sx; if (s <= SH) return [x, y0]; const spread = (ln - 2) * (nw ? 22 : 26); return [x, y0 + spread * (s - SH) / 2.2]; };
+    let g = '';
+    LINES.forEach((c, ln) => { let d = ''; for (let s = 0; s <= MAX; s++){ const [x, y] = pt(ln, s); d += (s ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); } g += `<path d="${d}" ${S(c, ln === line ? 3 : 1.4, ln === line ? '' : ';stroke-opacity:.35')}/>`; });
+    for (let s = 1; s <= MAX; s++){ const [x, y] = pt(line, s); g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" ${FS('panel', s <= SH ? 'faint' : LINES[line], 1.4)}/>`; }
+    g += `<rect x="${x0 - 22}" y="${y0 - 20}" width="30" height="40" rx="6" ${FS('panel-2', 'text', 1.4)}/>` + TX(x0 - 7, y0 + 34, 'Station', 'muted', 10.5, 'middle');
+    const sh = pt(line, SH)[0]; g += `<line x1="${sh + sx / 2}" y1="20" x2="${sh + sx / 2}" y2="${H - 20}" ${S('line', 1.2, ';stroke-dasharray:4 4')}/>` + TX((x0 + sh) / 2 + 4, 26, 'Shared stretch', 'faint', 10.5, 'middle') + TX(sh + sx / 2 + 8, 26, 'Your own route', 'faint', 10.5);
+    const [bx, by] = pt(line, pos); g += `<rect x="${(bx - 13).toFixed(1)}" y="${(by - 9).toFixed(1)}" width="26" height="18" rx="5" ${F(LINES[line])}/><rect x="${(bx - 9).toFixed(1)}" y="${(by - 6).toFixed(1)}" width="7" height="6" rx="1" ${F('ink', .7)}/><rect x="${(bx + 2).toFixed(1)}" y="${(by - 6).toFixed(1)}" width="7" height="6" rx="1" ${F('ink', .7)}/>`;
+    el.innerHTML = g;
+    $('#bsT').textContent = total + (hops ? ` (${hops} restart${hops > 1 ? 's' : ''})` : ''); $('#bsD').textContent = pos + ' stops';
+    $('#bsSay').textContent = pos === 0 ? (hops ? 'Back at the station, on a new line. The same shared stops are ahead.' : 'Board a line and start riding.') : pos <= SH ? '"Nice, but it looks a lot like someone else\'s work."' : pos < MAX ? '"I haven\'t seen anything quite like this."' : '"That\'s unmistakably yours."';
+    $('#bsRide').disabled = pos >= MAX;
+  });
+  draw();
+}
+
+/* ---------- 12: the continuous week ---------- */
+{ const COL = [['Yellow', '#E7C24A'], ['Pink', '#E98BB4'], ['Red', '#D9534F'], ['Purple', '#8E6BC9'], ['Green', '#5BB36A']];
+  const WHO = ['You', 'Your partner', 'Your best friend', 'Your sister'];
+  let g4 = [0, 2, 0, 4]; const el = $('#cwSvg');
+  const ui = () => { $('#cwW').innerHTML = WHO.map((w, i) => `<div class="wr"><span>${w}</span><div class="sw">${COL.map((c, k) => `<button type="button" data-p="${i}" data-c="${k}" aria-pressed="${g4[i] === k}" aria-label="${w}: ${c[0]}" style="background:${c[1]}"></button>`).join('')}</div></div>`).join('');
+    $$('#cwW [data-p]').forEach(b => b.addEventListener('click', () => { g4[+b.dataset.p] = +b.dataset.c; ui(); draw(); })); };
+  const draw = onLayout(() => {
+    const nw = NARROW(), per = nw ? 6 : 10, D = 30, W = nw ? 360 : 640, c = (W - 20) / per, H = 10 + Math.ceil(D / per) * c; vb(el, W, H);
+    let g = '', tog = 0;
+    for (let d = 0; d < D; d++){
+      const x = 10 + (d % per) * c, y = 6 + Math.floor(d / per) * c, off = WHO.map((_, i) => d % 5 === g4[i]), all = off.every(Boolean);
+      if (all) tog++;
+      g += `<rect x="${x + 2}" y="${y + 2}" width="${c - 4}" height="${c - 4}" rx="7" ${all ? FS('glow-soft', 'glow', 2) : FS('panel', 'line', 1)}/>` + TX(x + 8, y + 17, d + 1, 'faint', 10);
+      off.forEach((o, i) => { if (o) g += `<circle cx="${(x + 12 + i * (c - 20) / 3.2).toFixed(1)}" cy="${(y + c - 13).toFixed(1)}" r="${nw ? 5 : 6}" style="fill:${COL[g4[i]][1]}"/>`; });
+    }
+    el.innerHTML = g;
+    $('#cwT').textContent = tog; $('#cwS').textContent = '8 or 9';
+    const same = new Set(g4).size;
+    $('#cwSay').textContent = same === 1 ? 'Same colour for everyone: you rest together, which is the exception the scheme made hard.' : tog ? 'Some days line up, most don\'t.' : `Everyone gets the same rest, but on ${same} different days. You never get a day off together.`;
+  });
+  ui(); draw();
+}
+
+/* ---------- 13: the cosmic calendar ---------- */
+{ const AGE = 13.8e9, YR = 365 * 24 * 3600; // seconds in the calendar year
+  const EV = [[13.8e9, 'Big Bang'], [13.2e9, 'First galaxies'], [4.6e9, 'Sun and Earth form'], [3.8e9, 'First life'], [5.4e8, 'Animals explode in variety'], [2.3e8, 'First dinosaurs'], [6.6e7, 'Dinosaurs wiped out'], [6e6, 'Our line splits from chimps'], [3e5, 'Homo sapiens'], [1.2e4, 'Farming begins'], [5e3, 'Writing'], [2026 - 1492, 'Columbus'], [200, 'Industrial age'], [80, 'Your life']];
+  const ZOOM = [['The whole year', YR, 'The universe\'s whole history. Everything you know of is crammed into the right-hand edge.'], ['December', 31 * 86400, 'December alone. Dinosaurs arrive on Christmas Day; all of human history is still invisible.'], ['December 31st', 86400, 'The last day. Our species shows up in the final few minutes.'], ['The last minute', 60, 'The last minute before midnight. All of recorded history fits into its final seconds.'], ['The last second', 1, 'The final second. A whole human life is a short sliver at the very end.']];
+  let z = 0; const el = $('#ccSvg');
+  $('#ccZ').innerHTML = ZOOM.map((q, i) => `<button class="btn" type="button" data-z="${i}" aria-pressed="${i === 0}">${q[0]}</button>`).join('');
+  $$('#ccZ [data-z]').forEach(b => b.addEventListener('click', () => { press($$('#ccZ [data-z]'), b); z = +b.dataset.z; draw(); }));
+  const toSec = ya => ya / AGE * YR; // seconds before midnight
+  const draw = onLayout(() => {
+    const span = ZOOM[z][1], nw = NARROW(), W = nw ? 360 : 640, L = 16, R = W - 16, H = nw ? 300 : 230, Y0 = H - 46; vb(el, W, H);
+    const X = s => R - (R - L) * s / span;
+    let g = `<line x1="${L}" y1="${Y0}" x2="${R}" y2="${Y0}" ${S('line', 8, ';stroke-linecap:round')}/>`;
+    const vis = EV.filter(([ya]) => toSec(ya) <= span * 1.0001);
+    let lane = 0;
+    vis.forEach(([ya, name], i) => { const s = toSec(ya), x = X(s), me = name === 'Your life';
+      if (me){ g += `<rect x="${Math.min(x, R - 3).toFixed(1)}" y="${Y0 - 7}" width="${Math.max(3, R - x).toFixed(1)}" height="14" rx="3" ${F('glow')}/>`; }
+      else g += `<circle cx="${x.toFixed(1)}" cy="${Y0}" r="4" ${F('cool')}/>`;
+      const ly = Y0 - 22 - (lane % (nw ? 8 : 5)) * 24; lane++;
+      g += `<line x1="${x.toFixed(1)}" y1="${Y0 - 6}" x2="${x.toFixed(1)}" y2="${ly + 4}" ${S(me ? 'glow' : 'line', 1)}/>` + TX(clamp(x, L + 4, R - 4), ly, name, me ? 'glow' : 'soft', nw ? 11 : 12, x > W * .7 ? 'end' : x < W * .25 ? 'start' : 'middle'); });
+    const tick = z === 0 ? [['Jan 1', 0], ['Midnight Dec 31', 1]] : z === 1 ? [['Dec 1', 0], ['Midnight', 1]] : z === 2 ? [['00:00', 0], ['Midnight', 1]] : z === 3 ? [['23:59:00', 0], ['Midnight', 1]] : [['23:59:59', 0], ['Midnight', 1]];
+    tick.forEach(([t, f]) => g += TX(f ? R : L, Y0 + 26, t, 'faint', 10.5, f ? 'end' : 'start'));
+    el.innerHTML = g;
+    const life = toSec(80);
+    $('#ccSpan').textContent = z === 0 ? '13.8 billion years' : z === 1 ? `${fmt(31 * 86400 / YR * AGE / 1e6)} million years` : z === 2 ? `${fmt(86400 / YR * AGE / 1e6)} million years` : z === 3 ? `${fmt(60 / YR * AGE)} years` : `${fmt(AGE / YR)} years`;
+    $('#ccLife').textContent = life.toFixed(2) + ' seconds';
+    $('#ccSay').textContent = ZOOM[z][2];
+  });
+  draw();
+}
+
+/* ---------- 14: the five questions ---------- */
+{ let a = store.get('ftw-qs', []), t = null;
+  $('#qsF').innerHTML = QS.map((q, i) => `<div class="field"><label for="qs${i}"><b>${i + 1}</b>${q}</label><textarea id="qs${i}" rows="2" placeholder="A line or two, as honest as you can make it">${esc(a[i] || '')}</textarea></div>`).join('');
+  QS.forEach((_, i) => $('#qs' + i).addEventListener('input', e => { a[i] = e.target.value; store.set('ftw-qs', a); $('#qsSaved').textContent = 'Saved in this browser'; clearTimeout(t); t = setTimeout(() => { $('#qsSaved').textContent = ''; }, 1600); renderCard(); }));
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
