@@ -1,0 +1,1717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>System Design Interview, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an architect's whiteboard. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, the interview angle,
+   a lab, plain words, quick check), grouped into foundations, building blocks, web services and big systems.
+   Dark-first: blueprint navy with an amber marker accent and a sky-blue second series; light mode is whiteboard paper.
+   --s0..--s7 are server colours for the hashing labs. */
+:root{
+  color-scheme: dark;
+  --ink:#0B1220;--panel:#121B2C;--panel-2:#1A2538;--line:#2A3850;--text:#EDF2FA;--muted:#A3B1C6;--faint:#74839A;
+  --glow:#FFB547;--glow-soft:rgba(255,181,71,.11);--hl:rgba(255,181,71,.26);--cool:#7FD1FF;--cool-soft:rgba(127,209,255,.1);
+  --good:#8FDB8A;--good-soft:rgba(143,219,138,.1);--bad:#FF7A6B;--bad-soft:rgba(255,122,107,.12);
+  --soft:#D2DAE6;--deep:#080D18;--toc-bg:rgba(18,27,44,.74);--glow-line:rgba(255,181,71,.36);--cool-line:rgba(127,209,255,.3);--on-glow:#2A1800;
+  --s0:#FFB547;--s1:#7FD1FF;--s2:#8FDB8A;--s3:#F28DC8;--s4:#B9A2FF;--s5:#FF8A5B;--s6:#5FE0C8;--s7:#E8E36A;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F5F9;--panel:#FFFFFF;--panel-2:#E7ECF3;--line:#D0D8E4;--text:#0E1626;--muted:#4B5A70;--faint:#7A879A;
+  --glow:#A65A00;--glow-soft:rgba(166,90,0,.06);--hl:#FCE3BD;--cool:#1D5FA0;--cool-soft:rgba(29,95,160,.06);--good:#2E7A22;--good-soft:rgba(46,122,34,.08);--bad:#B8381E;--bad-soft:rgba(184,56,30,.07);
+  --soft:#243042;--deep:#FAFBFD;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(166,90,0,.28);--cool-line:rgba(29,95,160,.26);--on-glow:#FFFFFF;
+  --s0:#B86200;--s1:#1D6FB8;--s2:#2E8A22;--s3:#B8327E;--s4:#6A4BD0;--s5:#C2410C;--s6:#0E8A78;--s7:#8A7A00;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F5F9;--panel:#FFFFFF;--panel-2:#E7ECF3;--line:#D0D8E4;--text:#0E1626;--muted:#4B5A70;--faint:#7A879A;
+  --glow:#A65A00;--glow-soft:rgba(166,90,0,.06);--hl:#FCE3BD;--cool:#1D5FA0;--cool-soft:rgba(29,95,160,.06);--good:#2E7A22;--good-soft:rgba(46,122,34,.08);--bad:#B8381E;--bad-soft:rgba(184,56,30,.07);
+  --soft:#243042;--deep:#FAFBFD;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(166,90,0,.28);--cool-line:rgba(29,95,160,.26);--on-glow:#FFFFFF;
+  --s0:#B86200;--s1:#1D6FB8;--s2:#2E8A22;--s3:#B8327E;--s4:#6A4BD0;--s5:#C2410C;--s6:#0E8A78;--s7:#8A7A00;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- System Design Interview additions ---------- */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.clock{display:grid;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;min-width:0}
+.clock-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:500}
+.clock-top output{font-family:var(--f-mono);font-size:13px;color:var(--glow)}
+.clock-body{display:grid;grid-template-columns:150px minmax(0,1fr);gap:14px;padding:14px 16px;align-items:center}
+.clock-body svg{width:100%;height:auto;display:block}
+.clock-say{display:grid;gap:6px;min-height:170px;align-content:start}
+.clock-say .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--glow)}
+.clock-say b{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.1}
+.clock-say ul{margin:0;padding-left:18px;font-size:14px;color:var(--soft);display:grid;gap:3px}
+.clock-say .no{font-size:13px;color:var(--muted)}
+.clock-say .no i{font-style:normal;color:var(--bad)}
+.clock-ctl{display:flex;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.clock-ctl input{flex:1}
+.clock .seg{cursor:pointer}
+.story .lbl{color:var(--cool)}
+.plog{display:grid;gap:6px;max-width:820px}
+.plog .row1{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.plog .row1 a{color:var(--text);text-decoration:none;font-size:15px}
+.plog .row1 a span{font-family:var(--f-mono);font-size:11px;color:var(--faint);margin-right:8px}
+.plog .lv{display:flex;gap:4px}
+.plog .lv button{font:inherit;font-size:12px;padding:5px 9px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);cursor:pointer}
+.plog .lv button[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.plog .sum{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--glow);text-transform:uppercase;margin-bottom:4px}
+.inline-in{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.inline-in input[type=text],.inline-in input[type=number]{font:inherit;font-size:14px;flex:1;min-width:160px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--deep);color:var(--text)}
+.inline-in input:focus{outline:2px solid var(--glow);outline-offset:1px}
+.shorty{font-family:var(--f-mono);font-size:14px;color:var(--glow);overflow-wrap:anywhere}
+svg .hit{cursor:pointer}
+@media (max-width: 560px){ .fq{padding:14px 16px} .clock-body{grid-template-columns:110px minmax(0,1fr);gap:10px;padding:12px} .clock-say b{font-size:20px} .clock-say{min-height:190px} .plog .row1{grid-template-columns:1fr} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Alex Xu's book · Volume 1</div>
+    <h1><em>System Design Interview</em>,<br>Explained</h1>
+    <p class="lede">In a system design interview you get forty-five minutes, a whiteboard and a prompt like "design YouTube". Alex Xu's <b>System Design Interview: An Insider's Guide</b> teaches the moves: how to grow a system from one server to millions of users, how to do the maths on the back of an envelope, a four-step plan for the interview itself, and twelve worked designs from a rate limiter to Google Drive. This guide takes all sixteen chapters one at a time, with a lab in each where you can poke at the idea yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>There is no single right answer. Clarify the problem, sketch a design, <em>defend its trade-offs</em>, and think out loud the whole way.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What do you want to get better at?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="clock" style="margin:0" aria-label="How to spend a 45-minute interview">
+        <div class="clock-top"><span>The 45-minute interview</span><output id="clkMin"></output></div>
+        <div class="clock-body">
+          <svg id="clk" viewBox="0 0 240 240" role="img" aria-label="A clock face split into the four steps of the interview"></svg>
+          <div class="clock-say" id="clkSay" aria-live="polite"></div>
+        </div>
+        <div class="clock-ctl"><label for="clkR" class="sr">Minute of the interview</label><input type="range" id="clkR" min="0" max="44" value="2"><button class="btn" id="clkPlay" type="button">Play</button></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 3</span><span class="q">Foundations</span><span class="d">Scaling up, the maths on an envelope and a plan for the interview</span></a>
+      <a href="#part2"><span class="n">Chapters 4 to 7</span><span class="q">Building Blocks</span><span class="d">Rate limiter, consistent hashing, key-value store, unique IDs</span></a>
+      <a href="#part3"><span class="n">Chapters 8 to 11</span><span class="q">Web Services</span><span class="d">URL shortener, web crawler, notifications, news feed</span></a>
+      <a href="#part4"><span class="n">Chapters 12 to 16</span><span class="q">Big Systems</span><span class="d">Chat, search autocomplete, YouTube, Google Drive, what next</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2020</span>
+      <span><b>Author</b> Alex Xu, a software engineer who worked at Twitter, Apple, Zynga and Oracle and runs ByteByteGo</span>
+      <span><b>Read time</b> about 5 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 16 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== FOUNDATIONS ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the toolkit</span>
+      <h2>Foundations</h2>
+      <p>Before any design, Xu lays down three tools. A tour of how a real system grows from one box to millions of users, the habit of rough maths with powers of two and latency numbers, and a four-step plan for spending the forty-five minutes.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Every design question is the same question underneath: what breaks first as you grow, and what do you add to fix it?</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · How a system grows up</div>
+        <h2>Scale from Zero to Millions of Users</h2>
+        <div class="short"><span class="lbl">In short</span><p>A system starts as one server. As users arrive, you split out the database, add load balancers, replicas, caches and a CDN, make the web tier stateless, then spread across data centres, queues and database shards.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start with one box.</b> Web app, database and cache all run on a single server. Users find it through DNS and talk to it over HTTP. It works, until it doesn't.</span></li>
+          <li><span><b>Scale out, not just up.</b> Vertical scaling (a bigger machine) is simple but has a hard ceiling and no failover. Horizontal scaling (more machines behind a load balancer) is how large systems grow.</span></li>
+          <li><span><b>Copy the data, cache the hot parts.</b> Database replication gives one master for writes and several replicas for reads. A cache keeps frequently read data in memory, and a CDN serves static files from servers near the user.</span></li>
+          <li><span><b>Stateless, then spread out.</b> Move session data out of the web servers into a shared store, so any server can handle any request. Then add more data centres, message queues between parts, monitoring, and finally sharding to split the database itself.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Interviewers love this chapter because it is the vocabulary for everything else. If you are asked how to handle ten times the traffic, walk the path out loud: what fails first, what you add, and the new problem that addition brings. A cache raises the question of stale data. A replica raises the question of failover. Sharding raises the question of hot keys and joins. Naming the new problem is what shows you understand the old fix.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: grow the system</div><div class="hint">Drag the slider to add users</div></div>
+        <div class="stage"><svg id="sc1" role="img" aria-label="An architecture diagram that grows as users are added"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="scN">Stage <output id="oscN"></output></label><input type="range" id="scN" min="0" max="9" value="0"></div></div></div><div class="stats"><div class="stat"><span class="k">What you add</span><span class="v glow" id="scAdd"></span></div><div class="stat"><span class="k">What it fixes</span><span class="s" id="scFix"></span></div><div class="stat"><span class="k">The new problem it brings</span><span class="s" id="scRisk"></span></div></div><p class="callout">The user counts are rough signposts, not rules from the book. <b>Highlighted boxes are new at this stage.</b> Each fix solves one bottleneck and exposes the next.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Growing a system is a chain of fixes. Find the part that breaks first, add the standard piece that relieves it, and be ready to explain what that new piece costs you.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Envelope maths →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Rough numbers, fast</div>
+        <h2>Back-of-the-envelope Estimation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Good designers estimate. With powers of two, a feel for how long common operations take and a few stated assumptions, you can work out traffic, storage and server counts in a couple of minutes.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Powers of two.</b> Data sizes go up in steps of about a thousand: a kilobyte is 2 to the 10 bytes, a megabyte 2 to the 20, then gigabyte, terabyte and petabyte. Knowing these makes storage sums quick.</span></li>
+          <li><span><b>Latency numbers.</b> Memory is fast and disk is slow. Reading 1 MB from memory takes about 250 microseconds, from a spinning disk about 30 milliseconds. A packet from California to the Netherlands and back takes about 150 milliseconds. Avoid disk seeks, compress before sending, and put data near users.</span></li>
+          <li><span><b>Availability in nines.</b> Uptime is quoted in nines. 99 percent allows about 3.65 days of downtime a year; 99.9 percent about 8.8 hours; 99.99 percent about 53 minutes; 99.999 percent about 5 minutes.</span></li>
+          <li><span><b>The worked example.</b> A Twitter-like service with 300 million monthly users, half active each day, posting twice a day, gives about 3,500 posts a second and a peak near 7,000. If 10 percent carry 1 MB of media, that is 30 TB a day and about 55 PB over five years.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Nobody checks your arithmetic to the decimal place. What the interviewer watches is the process. Round aggressively (99,987 divided by 9.1 becomes 100,000 divided by 10), write your assumptions down so you can revisit them, and label every number with its unit. The usual asks are queries per second, peak QPS, storage, cache size and number of servers.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the envelope</div><div class="hint">Compare speeds, then estimate a service</div></div>
+        <div class="stage"><svg id="lt2" role="img" aria-label="A ladder of how long common computer operations take, on a log scale"></svg></div><div class="lab-ctl"><div class="row" id="ltM"></div><div class="row"><div class="ctl"><label for="esU">Monthly users <output id="oesU"></output></label><input type="range" id="esU" min="0" max="12" value="8"></div><div class="ctl"><label for="esD">Active each day <output id="oesD"></output></label><input type="range" id="esD" min="5" max="100" step="5" value="50"></div></div><div class="row"><div class="ctl"><label for="esP">Posts per user per day <output id="oesP"></output></label><input type="range" id="esP" min="1" max="20" value="2"></div><div class="ctl"><label for="esM">Posts with 1 MB of media <output id="oesM"></output></label><input type="range" id="esM" min="0" max="100" step="5" value="10"></div><div class="ctl"><label for="esY">Years kept <output id="oesY"></output></label><input type="range" id="esY" min="1" max="10" value="5"></div></div></div><div class="stats"><div class="stat"><span class="k">Daily active users</span><span class="v" id="esDAU"></span></div><div class="stat"><span class="k">Posts per second</span><span class="v" id="esQ"></span></div><div class="stat"><span class="k">Peak (2×)</span><span class="v" id="esPk"></span></div><div class="stat"><span class="k">Media per day</span><span class="v" id="esS"></span></div><div class="stat"><span class="k">Media kept in total</span><span class="v glow" id="esT"></span></div></div><p class="callout">The defaults are the book's Twitter example. The latency figures are the widely shared "numbers every programmer should know"; real hardware today is faster, but <b>the gaps between memory, network and disk are what matter.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Estimation is about orders of magnitude, not exact answers. State your assumptions, round hard, keep units, and use the result to decide what the design must handle.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: The 4-step framework →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Forty-five minutes, four steps</div>
+        <h2>A Framework for System Design Interviews</h2>
+        <div class="short"><span class="lbl">In short</span><p>The interview is a collaboration, not an exam. Spend the time in four steps: understand the problem and agree on scope, propose a high-level design, dive deep into the parts that matter, and wrap up.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Step 1: understand the problem (3 to 10 minutes).</b> Don't rush to answer. Ask what features matter, how many users, how fast it must grow, what the existing tech stack is. Write the assumptions down.</span></li>
+          <li><span><b>Step 2: a high-level design (10 to 15 minutes).</b> Sketch the main boxes, from clients and APIs to servers, caches and databases, and get the interviewer's agreement. Do rough sums to check the design fits the scale.</span></li>
+          <li><span><b>Step 3: the deep dive (10 to 25 minutes).</b> With the interviewer, pick the components that matter most and go into detail. For a URL shortener it might be the hash function; for chat it might be latency and online status.</span></li>
+          <li><span><b>Step 4: wrap up (3 to 5 minutes).</b> Name bottlenecks and improvements, recap, and talk about error cases, operations, monitoring and the next scale step. Never say the design is perfect.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Xu lists what interviewers are really looking for: the ability to collaborate, to work under pressure, to resolve ambiguity and to ask good questions. They also watch for red flags. Over-engineering is a common one, since many engineers enjoy building for scale that will never come. Narrow-mindedness and stubbornness are others. Think out loud, offer more than one approach, and treat hints as help, not as failure.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: which step is this?</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Spend the first minutes asking, not drawing. Agree on a simple design before polishing any part of it, go deep where it counts, and finish by pointing at the weak spots yourself.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Rate limiter →</a></div>
+    </section>
+    <!-- ===================== BUILDING BLOCKS ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · the parts</span>
+      <h2>Building Blocks</h2>
+      <p>Four designs that show up inside almost every bigger system: a rate limiter to protect services, consistent hashing to spread data, a key-value store that survives failures, and a way to hand out unique IDs across many machines.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Big systems are built from a small set of reusable parts. Learn the parts well and the big designs become assembly.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Saying no, politely</div>
+        <h2>Design a Rate Limiter</h2>
+        <div class="short"><span class="lbl">In short</span><p>A rate limiter caps how many requests a client can send in a period, to stop abuse, cut costs and protect servers. The interesting part is the algorithm, and making it work across many servers.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Where it lives.</b> You can limit on the client (easy to bypass), on the server, or in a middleware such as an API gateway. Rejected requests get HTTP 429, Too Many Requests, with headers saying how many are left and when to retry.</span></li>
+          <li><span><b>Token bucket and leaking bucket.</b> A token bucket refills at a steady rate and each request takes a token, so short bursts are allowed; Amazon and Stripe use it. A leaking bucket queues requests and processes them at a fixed rate, which smooths traffic; Shopify uses it.</span></li>
+          <li><span><b>Windows and logs.</b> A fixed window counter is simple but lets twice the limit through around a window edge. A sliding window log keeps every timestamp, which is exact but heavy on memory. A sliding window counter blends the current and previous windows as a cheap approximation.</span></li>
+          <li><span><b>Counters in Redis.</b> Counts are kept in an in-memory store such as Redis, with INCR and EXPIRE. Across many limiter servers you must handle race conditions (a Lua script or sorted sets) and keep them in sync by sharing one central store.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The interviewer will usually push on the distributed case. Two requests read the counter at the same moment, both see 3, both write 4, and the limit leaks. Saying where the race is, and how you would close it, earns more credit than picking the perfect algorithm. Also be ready to say what happens to rejected requests: drop them, or queue them for later.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: five ways to say no</div><div class="hint">Pick an algorithm and a traffic pattern</div></div>
+        <div class="stage"><svg id="rl4" role="img" aria-label="A timeline of requests, each marked allowed or rejected"></svg></div><div class="lab-ctl"><div class="row" id="rlA"></div><div class="row" id="rlP"></div><div class="row"><div class="ctl"><label for="rlL">Limit per second <output id="orlL"></output></label><input type="range" id="rlL" min="2" max="8" value="4"></div></div></div><div class="stats"><div class="stat"><span class="k">Allowed</span><span class="v" id="rlOk"></span></div><div class="stat"><span class="k">Rejected</span><span class="v" id="rlNo"></span></div><div class="stat"><span class="k">Most in any 1-second span</span><span class="v glow" id="rlMax"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="rlSay"></span></div></div><p class="callout">Each dot is a request. <b>Try the fixed window with the edge-burst pattern:</b> twice the limit gets through in one second, because the burst straddles two windows.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A rate limiter is a counter with rules. Choose an algorithm by what you can tolerate: bursts, memory, or a small error, then keep the counters in one fast shared store.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Consistent hashing →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Adding a server without chaos</div>
+        <h2>Design Consistent Hashing</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you pick a server with hash(key) mod N, adding or removing one server moves almost every key. Consistent hashing places servers and keys on a ring, so a change moves only a small slice of keys.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The rehashing problem.</b> With hash mod N, going from 4 servers to 3 changes the answer for most keys. For a cache, that means a storm of misses all at once.</span></li>
+          <li><span><b>The hash ring.</b> Map the whole hash space (for SHA-1, 0 to 2 to the 160 minus 1) onto a circle. Put servers on it by hashing their names. A key belongs to the first server found going clockwise from the key's spot.</span></li>
+          <li><span><b>Only neighbours move.</b> Add a server and only the keys between it and the previous server move to it. Remove one and only its keys move to the next server. On average, k divided by n keys move.</span></li>
+          <li><span><b>Virtual nodes.</b> With few servers the slices are uneven. Give each server many virtual nodes around the ring and the load evens out; the book cites a standard deviation of 5 to 10 percent of the mean with 100 to 200 virtual nodes.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>This is often asked as a building block inside a bigger design, like a distributed cache or a key-value store. Be ready to draw the ring, add a server and show which keys move, then explain why virtual nodes are needed. Mentioning who uses it, such as Amazon's Dynamo, Apache Cassandra, Discord and Akamai's CDN, shows you know it is not just theory.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the hash ring</div><div class="hint">Add servers and virtual nodes</div></div>
+        <div class="stage"><svg id="hr5" role="img" aria-label="A ring with servers and keys, coloured by which server owns each key"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="hrN">Servers <output id="ohrN"></output></label><input type="range" id="hrN" min="2" max="8" value="4"></div><div class="ctl"><label for="hrV">Virtual nodes per server <output id="ohrV"></output></label><input type="range" id="hrV" min="1" max="60" value="1"></div></div></div><div class="stats"><div class="stat"><span class="k">Keys that moved (ring)</span><span class="v glow" id="hrMv"></span></div><div class="stat"><span class="k">Would move with hash mod N</span><span class="v" id="hrMod"></span></div><div class="stat"><span class="k">Busiest vs quietest server</span><span class="v" id="hrSpread"></span></div><div class="stat"><span class="k">Spread (std dev ÷ mean)</span><span class="v" id="hrSd"></span></div></div><p class="callout">120 keys. Ringed dots are keys that moved on your last change. <b>Raise the virtual nodes and watch the bars below the ring even out.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Put servers and keys on the same circle and let each key walk clockwise to a server. Changes then disturb only the neighbours, and virtual nodes keep the shares fair.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Key-value store →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Big, fast, and still standing</div>
+        <h2>Design a Key-Value Store</h2>
+        <div class="short"><span class="lbl">In short</span><p>A distributed key-value store like Dynamo or Cassandra spreads data with consistent hashing, copies it to several servers, and uses quorums to trade consistency against speed and availability.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>CAP.</b> A distributed system can't promise consistency, availability and partition tolerance all at once. Since networks do fail, the real choice is between consistency (CP, like a bank) and availability (AP) during a partition.</span></li>
+          <li><span><b>Replicate around the ring.</b> Each key is stored on the first N distinct servers clockwise from it. Spreading replicas across data centres protects against a whole site going dark.</span></li>
+          <li><span><b>Quorums.</b> A write must be acknowledged by W replicas and a read must hear from R. If W plus R is greater than N, every read overlaps the latest write, so you get strong consistency. W=1 makes writes fast; R=1 makes reads fast.</span></li>
+          <li><span><b>Living with failure.</b> Vector clocks detect conflicting versions. A gossip protocol spreads heartbeats so nodes notice who is down. Sloppy quorums with hinted handoff ride out short outages, and Merkle trees find which data to repair after a long one.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Here the interviewer wants trade-offs, said plainly. If you choose N=3, W=2, R=2, explain that you tolerate one slow or failed replica on each side and still read the latest value. If the product is a shopping cart, explain why availability might matter more and how you would merge conflicting carts. The book also walks the write path (commit log, then memory, then sorted files on disk) and the read path (memory, then a Bloom filter to skip files).</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: quorum dial</div><div class="hint">Set N, W and R, then knock out replicas</div></div>
+        <div class="stage"><svg id="kv6" role="img" aria-label="A coordinator and its replicas, showing which ones a write and a read touch"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="kvN">Replicas N <output id="okvN"></output></label><input type="range" id="kvN" min="1" max="5" value="3"></div><div class="ctl"><label for="kvW">Write quorum W <output id="okvW"></output></label><input type="range" id="kvW" min="1" max="3" value="2"></div><div class="ctl"><label for="kvR">Read quorum R <output id="okvR"></output></label><input type="range" id="kvR" min="1" max="3" value="2"></div></div><div class="row"><button class="btn primary" id="kvGo" type="button">Write a new value, then read it</button><span class="hint" style="font-size:13px;color:var(--faint)">Click a replica to take it down or bring it back.</span></div></div><div class="stats"><div class="stat"><span class="k">Guarantee</span><span class="v glow" id="kvC"></span></div><div class="stat"><span class="k">Last write</span><span class="s" id="kvWs"></span></div><div class="stat"><span class="k">Last read</span><span class="s" id="kvRs"></span></div><div class="stat"><span class="k">Can lose and still work</span><span class="s" id="kvTol"></span></div></div><p class="callout">Amber replicas took the latest write; blue ones answered the read. <b>When W + R ≤ N the two sets can miss each other</b>, and the read returns an old value.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Copy every key to N servers. Wait for W to confirm a write and R to answer a read. Make W plus R bigger than N when you need the latest value, smaller when you need speed.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Unique IDs →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · 64 bits, no collisions</div>
+        <h2>Design a Unique ID Generator in Distributed Systems</h2>
+        <div class="short"><span class="lbl">In short</span><p>A single database's auto-increment doesn't work across many machines. The book compares four ways to hand out unique IDs and settles on Twitter's Snowflake: a 64-bit number built from a timestamp, a data centre, a machine and a counter.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The requirements.</b> IDs must be unique, numbers only, fit in 64 bits, roughly sortable by time, and the system must make over 10,000 of them a second.</span></li>
+          <li><span><b>Three options that fall short.</b> Multi-master replication (each server counts up by k) breaks when servers are added. UUIDs are easy but 128 bits and not numeric or time-ordered. A single ticket server, as Flickr used, is a single point of failure.</span></li>
+          <li><span><b>Snowflake's layout.</b> 1 sign bit, 41 bits of milliseconds since a chosen epoch, 5 bits of data centre ID, 5 bits of machine ID and 12 bits of sequence number. Each machine can make 4,096 IDs every millisecond.</span></li>
+          <li><span><b>Mind the clock.</b> 41 bits of milliseconds last about 69 years from the epoch. Machines must keep their clocks in sync (with NTP), and the bit split can be tuned: fewer sequence bits and more timestamp bits suit low-volume systems.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Interviewers often add a twist after you settle on Snowflake: what if a machine's clock jumps backwards? Talk about refusing to issue IDs until the clock catches up, or why NTP matters. Also note that the IDs are only roughly time-ordered across machines, since each one's clock differs a little. That honesty about limits is part of the answer.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: build a Snowflake ID</div><div class="hint">Set the parts, then mint IDs</div></div>
+        <div class="stage"><svg id="sf7" role="img" aria-label="Sixty-four bits split into sign, timestamp, data centre, machine and sequence"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="sfD">Data centre ID <output id="osfD"></output></label><input type="range" id="sfD" min="0" max="31" value="3"></div><div class="ctl"><label for="sfM">Machine ID <output id="osfM"></output></label><input type="range" id="sfM" min="0" max="31" value="17"></div><div class="ctl"><label for="sfT">Timestamp bits <output id="osfT"></output></label><input type="range" id="sfT" min="36" max="46" value="41"></div></div><div class="row"><button class="btn primary" id="sfGo" type="button">Mint an ID</button><button class="btn" id="sfBurst" type="button">Mint 5 in the same millisecond</button></div></div><div class="stats"><div class="stat"><span class="k">The ID</span><span class="v glow" id="sfId"></span></div><div class="stat"><span class="k">IDs per millisecond per machine</span><span class="v" id="sfCap"></span></div><div class="stat"><span class="k">Lasts until</span><span class="v" id="sfLife"></span></div></div><p class="callout">Timestamps count from Twitter's epoch, 4 November 2010. Moving the timestamp slider takes bits from the sequence number: <b>more years, fewer IDs per millisecond.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pack the time, the place and a counter into one 64-bit number. Each machine can then mint IDs on its own, with no central server and no collisions.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: URL shortener →</a></div>
+    </section>
+    <!-- ===================== WEB SERVICES ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · the classics</span>
+      <h2>Web Services</h2>
+      <p>Four classic interview prompts, each worked from requirements to a deep dive: a URL shortener, a web crawler, a notification system and a news feed. Each one adds a new kind of pressure: reads, scale of the web, reliability, and fan-out.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Start from the numbers. How many reads, how many writes, how much data. The numbers tell you which part of the design deserves the deep dive.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Long link in, seven characters out</div>
+        <h2>Design a URL Shortener</h2>
+        <div class="short"><span class="lbl">In short</span><p>A URL shortener maps a long link to a short code and redirects people back. The core choices are the redirect type, the code length, and whether codes come from a hash or from a unique ID converted to base 62.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The numbers.</b> The book assumes 100 million new links a day: about 1,160 writes a second and, at ten reads per write, 11,600 reads. Over ten years that is 365 billion records, around 36.5 TB at 100 bytes each.</span></li>
+          <li><span><b>301 or 302.</b> A 301 redirect is permanent, so browsers cache it and later clicks skip your servers. A 302 is temporary, so every click comes back to you, which costs more but lets you count clicks.</span></li>
+          <li><span><b>Seven characters.</b> Using 0 to 9, a to z and A to Z gives 62 symbols. 62 to the 7th is about 3.5 trillion, enough for 365 billion links, so seven characters will do.</span></li>
+          <li><span><b>Hash or base 62.</b> Hashing (CRC32, MD5, SHA-1) and taking the first seven characters needs collision checks, made cheaper with a Bloom filter. Converting a unique ID to base 62 never collides, but the codes are guessable and it depends on an ID generator.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The interviewer will often ask why you picked one approach over the other. A strong answer names what each costs: hashing gives fixed-length, unguessable codes but needs a database lookup on every collision; base 62 is simple and collision-free but leaks how many links exist and needs the ID generator from chapter 7. Then cover the read path: cache the hot mappings, because reads outnumber writes ten to one.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: shorten a link</div><div class="hint">Shorten links, then size the code</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="inline-in"><label class="sr" for="usIn">Long URL</label><input type="text" id="usIn" value="https://en.wikipedia.org/wiki/Systems_design" spellcheck="false"><button class="btn primary" id="usGo" type="button">Shorten</button></div><div class="shorty" id="usOut" aria-live="polite"></div></div><div class="stage"><svg id="us8" role="img" aria-label="The steps of converting an ID to base 62, and a chart of code length against capacity"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="usL">Code length <output id="ousL"></output></label><input type="range" id="usL" min="4" max="9" value="7"></div><div class="ctl"><label for="usY">Years of links at 100 million a day <output id="ousY"></output></label><input type="range" id="usY" min="1" max="30" value="10"></div></div></div><div class="stats"><div class="stat"><span class="k">Codes available</span><span class="v" id="usCap"></span></div><div class="stat"><span class="k">Links needed</span><span class="v" id="usNeed"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="usSay"></span></div></div><p class="callout">The first ID, 2009215674938, is the book's example; it becomes <b>zn9edcu</b>. Digits 0 to 9 stay as they are, 10 to 35 become a to z, 36 to 61 become A to Z.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Give each link a unique number and write it in base 62, or hash it and handle clashes. Seven characters cover hundreds of billions of links, and a cache handles the flood of clicks.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Web crawler →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Reading the web, politely</div>
+        <h2>Design a Web Crawler</h2>
+        <div class="short"><span class="lbl">In short</span><p>A crawler starts from seed URLs, downloads pages, extracts links and repeats. At a billion pages a month the hard parts are politeness, priority, freshness and not wasting work on duplicates and traps.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The scale.</b> 1 billion pages a month is about 400 pages a second, 800 at peak. At 500 KB a page that is 500 TB a month, about 30 PB over five years.</span></li>
+          <li><span><b>The parts.</b> Seed URLs feed a URL frontier. An HTML downloader (with a DNS resolver) fetches pages, a parser checks them, 'content seen?' drops duplicate pages, a link extractor finds new URLs, a filter cleans them, and 'URL seen?' (often a Bloom filter) stops repeats.</span></li>
+          <li><span><b>Breadth-first, but polite.</b> The web is a graph, and breadth-first search is the natural walk. But most links on a page point to the same site, so a naive crawler hammers one host. The frontier keeps one queue per host and one worker per queue, with a delay between requests.</span></li>
+          <li><span><b>Priority and freshness.</b> A prioritiser ranks URLs by usefulness (PageRank, traffic, update rate) into front queues, and pages are recrawled based on how often they change. Robots.txt is respected, and spider traps and noise are filtered out.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The book points out that around 30 percent of web pages are duplicates, so 'content seen?' with a hash of the page saves a lot of storage. In the interview, the frontier is the part to dive into. Show the two layers: front queues sorted by priority, back queues split by host for politeness. Then mention the extras that show experience: cache DNS lookups, use short timeouts, spread crawlers geographically, and save crawl state so a crash doesn't start you over.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: crawl a little web</div><div class="hint">Turn the safeguards on and off, then crawl</div></div>
+        <div class="stage"><svg id="wc9" role="img" aria-label="A grid of requests per site over time; red cells mean a site was hit too often"></svg></div><div class="lab-ctl"><div class="toggles" id="wcT"></div><div class="row"><button class="btn primary" id="wcGo" type="button">Crawl a new web</button></div></div><div class="stats"><div class="stat"><span class="k">New pages found</span><span class="v glow" id="wcNew"></span></div><div class="stat"><span class="k">Wasted fetches (URL seen before)</span><span class="v" id="wcWaste"></span></div><div class="stat"><span class="k">Duplicate pages stored</span><span class="v" id="wcDup"></span></div><div class="stat"><span class="k">Worst hits on one site in a step</span><span class="v" id="wcHot"></span></div></div><p class="callout">An illustrative model: 4 workers, 30 steps, 6 sites. Most links point to the same site. <b>Without the per-site queues, the big site gets hit by every worker at once.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A crawler is a loop: fetch, parse, extract links, filter, repeat. The design work is in the queue that decides what to fetch next, and the checks that stop you fetching the same thing twice.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Notifications →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Push, text and email, at scale</div>
+        <h2>Design a Notification System</h2>
+        <div class="short"><span class="lbl">In short</span><p>A notification system sends push alerts, texts and emails through outside providers like Apple's APNs, Firebase, Twilio and SendGrid. The design adds queues between parts so one failing channel doesn't take down the rest, and a log so nothing is lost.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three kinds, four providers.</b> iOS pushes go through APNs, Android through Firebase Cloud Messaging, texts through a service like Twilio or Nexmo, and email through SendGrid or Mailchimp. Device tokens, phone numbers and emails are collected when users sign up.</span></li>
+          <li><span><b>The first design breaks.</b> One notification server doing everything is a single point of failure, is hard to scale, and becomes a bottleneck when a provider is slow.</span></li>
+          <li><span><b>Queues per channel.</b> Notification servers check settings and rate limits, then put each message on a queue for its channel. Workers pull from the queues and call the providers. If texting is down, push and email keep flowing.</span></li>
+          <li><span><b>Reliability.</b> Messages are saved in a notification log and retried if sending fails. Exactly-once delivery is impossible to promise, so an event ID is used to drop duplicates. Templates, opt-out settings, rate limits and tracking finish the design.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Expect the interviewer to ask, 'what if the third-party provider goes down?' or 'how do you make sure a user doesn't get the same alert twice?'. The answers are the two pillars of the chapter: retries from a durable log, and deduplication by event ID. It also helps to say that users must be able to opt out of each channel, and that too many notifications make people turn them off entirely.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: send forty notifications</div><div class="hint">Break a provider and see what survives</div></div>
+        <div class="stage"><svg id="nt10" role="img" aria-label="Notifications flowing from services through queues and workers to outside providers"></svg></div><div class="lab-ctl"><div class="toggles" id="ntT"></div><div class="row"><button class="btn primary" id="ntGo" type="button">Send 40 notifications</button></div></div><div class="stats"><div class="stat"><span class="k">Delivered</span><span class="v glow" id="ntOk"></span></div><div class="stat"><span class="k">Waiting to retry</span><span class="v" id="ntWait"></span></div><div class="stat"><span class="k">Lost</span><span class="v" id="ntLost"></span></div><div class="stat"><span class="k">Sent twice</span><span class="v" id="ntTwice"></span></div></div><p class="callout">An illustrative model. About one event in eight is a duplicate from an upstream retry. <b>Turn the SMS outage on with a single shared queue</b>: the retrying texts block everything behind them.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Put a queue between deciding to notify and actually sending, one per channel, and keep a log so failures can be retried. Use an ID on every event so retries don't become spam.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: News feed →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Push, pull, or both</div>
+        <h2>Design a News Feed System</h2>
+        <div class="short"><span class="lbl">In short</span><p>A news feed shows posts from the people you follow. When someone posts, you can copy it to every follower's feed right away (fan-out on write) or assemble feeds when people open them (fan-out on read). Real systems mix the two.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two flows.</b> Feed publishing stores a new post and spreads it to friends. Feed building gathers a user's feed when they open the app. The book assumes up to 5,000 friends per user and 10 million daily users.</span></li>
+          <li><span><b>Fan-out on write (push).</b> Precompute every follower's feed as soon as a post is made, so reading is fast. But a user with millions of followers turns one post into millions of writes, and many go to people who never log in.</span></li>
+          <li><span><b>Fan-out on read (pull).</b> Build the feed when it is requested. Nothing is wasted on inactive users and celebrities are no problem, but opening the feed is slow because it has to gather posts from everyone you follow.</span></li>
+          <li><span><b>Hybrid.</b> Push for most users, pull for celebrities: followers fetch a famous account's posts at read time and merge them in. The feed cache holds only post and user IDs, with a content cache, social graph cache, action cache and counter cache beside it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The celebrity problem is the trap in this question. If you only propose fan-out on write, a good interviewer will ask what happens when a pop star with 100 million followers posts. Getting ahead of it, by naming the hot key problem and proposing the hybrid, is the moment that separates a memorised answer from a reasoned one. Keep the feed cache small by storing IDs, not whole posts.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: fan-out</div><div class="hint">Change the poster's followers and the strategy</div></div>
+        <div class="stage"><svg id="nf11" role="img" aria-label="A poster and their followers, showing where the work happens for each strategy"></svg></div><div class="lab-ctl"><div class="row" id="nfM"></div><div class="row"><div class="ctl"><label for="nfF">Poster's followers <output id="onfF"></output></label><input type="range" id="nfF" min="1" max="8" step="0.25" value="2.5"></div><div class="ctl"><label for="nfA">Followers active today <output id="onfA"></output></label><input type="range" id="nfA" min="5" max="100" step="5" value="30"></div><div class="ctl"><label for="nfR">Accounts a reader follows <output id="onfR"></output></label><input type="range" id="nfR" min="20" max="2000" step="20" value="300"></div></div></div><div class="stats"><div class="stat"><span class="k">Feed writes for one post</span><span class="v glow" id="nfW"></span></div><div class="stat"><span class="k">Wasted on inactive followers</span><span class="v" id="nfWaste"></span></div><div class="stat"><span class="k">Lookups when a reader opens the feed</span><span class="v" id="nfRd"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="nfSay"></span></div></div><p class="callout">The hybrid here treats anyone with more than 10,000 followers as a celebrity; the threshold is a design choice, not a number from the book. <b>Push the slider to a million followers and compare the three.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide where to pay: when posting or when reading. Pay at posting time for ordinary users so feeds load instantly, and at reading time for celebrities so one post doesn't trigger millions of writes.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Chat system →</a></div>
+    </section>
+    <!-- ===================== BIG SYSTEMS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · the giants</span>
+      <h2>Big Systems</h2>
+      <p>The last designs are whole products: a chat app, search autocomplete, YouTube and Google Drive. They mix real-time connections, data structures, huge files and money, and the book closes with where to keep learning.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>At this size the right answer is about trade-offs you can defend: speed against cost, consistency against availability, simplicity against scale.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Messages in real time</div>
+        <h2>Design a Chat System</h2>
+        <div class="short"><span class="lbl">In short</span><p>A chat app needs messages to arrive instantly in both directions. That rules out plain HTTP requests and points to WebSockets, stateful chat servers, a key-value store for history, and heartbeats for showing who is online.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The scope.</b> One-to-one and group chat (up to 100 people), online status, multiple devices per user, push notifications, and 50 million daily users. Messages up to 100,000 characters.</span></li>
+          <li><span><b>Getting messages to the client.</b> Polling asks the server over and over, mostly for nothing. Long polling holds each request open until there is a message or a timeout. WebSocket keeps one two-way connection open, which is the book's choice for sending and receiving.</span></li>
+          <li><span><b>Stateless and stateful parts.</b> Login, profiles and service discovery (with ZooKeeper) are ordinary stateless services. Chat servers are stateful: each holds open connections, so service discovery assigns each user to the best server for them.</span></li>
+          <li><span><b>Storage and IDs.</b> Chat history is huge and read mostly by recency, so a key-value store fits; Facebook Messenger uses HBase and Discord uses Cassandra. Message IDs must be sortable, from a global generator or a per-chat sequence. Each device tracks its latest message ID to sync.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The online indicator is a favourite follow-up. Logging a user offline every time their connection drops would make them flicker on bad networks. Instead, the client sends a heartbeat every few seconds, and the user is shown as offline only if heartbeats stop for a while (the book uses 5 seconds and 30 seconds). Then say how status reaches friends: a publish and subscribe channel per friendship, which works for small groups but not for groups of thousands.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: polling, long polling or WebSocket</div><div class="hint">Pick a method and watch thirty seconds of chat</div></div>
+        <div class="stage"><svg id="ct12" role="img" aria-label="A timeline of requests between a phone and a chat server"></svg></div><div class="lab-ctl"><div class="row" id="ctM"></div><div class="row"><div class="ctl"><label for="ctI">Polling interval <output id="octI"></output></label><input type="range" id="ctI" min="1" max="10" value="3"></div><button class="btn" id="ctGo" type="button">New conversation</button></div></div><div class="stats"><div class="stat"><span class="k">Requests sent</span><span class="v" id="ctReq"></span></div><div class="stat"><span class="k">Empty answers</span><span class="v" id="ctEmpty"></span></div><div class="stat"><span class="k">Average wait for a message</span><span class="v glow" id="ctDelay"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="ctSay"></span></div></div><p class="callout">Amber diamonds are messages arriving at the server. Lines show each request and response. <b>Long polling holds each request for up to 10 seconds</b>; WebSocket opens once and stays open.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Keep a live two-way connection to each online device, store messages in a store built for huge, recent-first data, and use heartbeats so a shaky network doesn't make people flicker offline.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Autocomplete →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Top five, in a tenth of a second</div>
+        <h2>Design a Search Autocomplete System</h2>
+        <div class="short"><span class="lbl">In short</span><p>As you type, autocomplete suggests the five most popular searches that start with your letters, within about 100 milliseconds. The heart of it is a trie, with the top answers cached at every node, rebuilt from logs on a schedule.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The numbers.</b> 10 million daily users making 10 searches a day of about 20 characters, with a request for each character typed, comes to about 24,000 queries a second and 48,000 at peak.</span></li>
+          <li><span><b>A trie.</b> A tree of letters where each path spells a prefix. Finding suggestions means walking down to the prefix and then searching everything below it, which is slow if the subtree is big.</span></li>
+          <li><span><b>Two speed-ups.</b> Cap the prefix length (people rarely type 50 characters) and cache the top five queries at every node. Then answering is just walking to the node and reading its list, at the cost of extra memory.</span></li>
+          <li><span><b>Built offline.</b> Search logs are aggregated (weekly, in the book's design) and workers rebuild the trie, which is stored in a database and kept in a cache. Browsers cache results too; Google keeps them for an hour. Filters remove hateful or dangerous suggestions.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>When you scale this up, the interviewer may ask how to shard the trie. Splitting by first letter sounds neat but gives uneven shards, since far more words start with 's' than with 'x'. The book's answer is a shard map manager that splits by actual query volume. Also mention sampling the logs (keep one query in N) to cut processing costs, and what changes for real-time trends, where weekly rebuilds are too slow.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: the trie</div><div class="hint">Type a prefix or click a node</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="inline-in"><label class="sr" for="acIn">Search box</label><input type="text" id="acIn" value="w" autocomplete="off" spellcheck="false" placeholder="Start typing: t, tr, w, win…"></div><div class="toggles" id="acT"></div></div><div class="stage"><svg id="ac13" role="img" aria-label="A trie of searches with the path for the typed prefix highlighted"></svg></div><div class="stats"><div class="stat"><span class="k">Suggestions</span><span class="s" id="acTop"></span></div><div class="stat"><span class="k">Nodes visited</span><span class="v glow" id="acCost"></span></div></div><p class="callout">Numbers are how often each search was made. <b>With the top results cached at each node</b>, you stop as soon as you reach the prefix; without it, you also walk every node below.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Store searches as a tree of letters, keep the best few answers ready at every branch, and rebuild the tree from logs in the background so lookups stay instant.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: YouTube →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Upload, transcode, stream</div>
+        <h2>Design YouTube</h2>
+        <div class="short"><span class="lbl">In short</span><p>A video service has two flows: uploading, where videos are stored and converted into many formats, and streaming, where they are served from a CDN close to viewers. The biggest bill is the CDN, and the design looks for ways to cut it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The numbers.</b> The book assumes 5 million daily users watching 5 videos each, with 10 percent uploading one 300 MB video a day: 150 TB of new storage daily. Serving all views from a CDN at 2 cents a gigabyte costs about $150,000 a day.</span></li>
+          <li><span><b>Transcoding.</b> Raw uploads are huge and every device wants something different, so each video is encoded into several resolutions, bitrates and formats. The work is modelled as a graph of tasks (a DAG), split across video, audio and metadata, run by a scheduler and many workers.</span></li>
+          <li><span><b>Faster uploads.</b> Clients split videos into chunks by group of pictures and upload them in parallel, to upload centres near the user. Message queues between each step let them run in parallel too. Pre-signed URLs make sure only allowed users upload.</span></li>
+          <li><span><b>Cutting costs.</b> Video popularity is a long tail: a few videos get most views. Serve the popular ones from the CDN and the rest from your own servers, encode fewer versions of rarely watched videos, keep regional hits regional, and partner with internet providers.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>This question rewards a clear split between the two flows, with a diagram for each. A good deep dive is the transcoding pipeline: why a DAG, why the steps are separated by queues, and how failures are handled (retry recoverable errors like a failed upload chunk, reject non-recoverable ones like a corrupt file). Bringing up the CDN bill unprompted shows you think like someone who will have to pay it.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: the CDN bill</div><div class="hint">Pick how many videos go on the CDN</div></div>
+        <div class="stage"><svg id="yt14" role="img" aria-label="A long-tail curve of views by video, with the CDN share shaded"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ytC">Most popular videos served from the CDN <output id="oytC"></output></label><input type="range" id="ytC" min="1" max="100" value="100"></div><div class="ctl"><label for="ytU">Daily users <output id="oytU"></output></label><input type="range" id="ytU" min="1" max="20" value="5"></div><div class="ctl"><label for="ytS">Average video size <output id="oytS"></output></label><input type="range" id="ytS" min="50" max="1000" step="50" value="300"></div></div></div><div class="stats"><div class="stat"><span class="k">Views from the CDN</span><span class="v" id="ytShare"></span></div><div class="stat"><span class="k">CDN cost per day</span><span class="v glow" id="ytCost"></span></div><div class="stat"><span class="k">All on the CDN would be</span><span class="v" id="ytAll"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="ytSay"></span></div></div><p class="callout">Defaults match the book: 5 million users, 5 views each, 300 MB videos, $0.02 per GB. The popularity curve is an illustrative long tail. <b>A small head of videos gets most of the views.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Store the original, convert it into many versions in a pipeline of small tasks, and stream from a CDN. Then save money by putting only the popular videos on the CDN.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Google Drive →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Files that follow you</div>
+        <h2>Design Google Drive</h2>
+        <div class="short"><span class="lbl">In short</span><p>A cloud drive stores files, keeps every device in sync, keeps old versions and lets people share. Files are split into blocks so only the changed parts are sent, and file metadata is kept strongly consistent.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The numbers.</b> 50 million signed-up users, 10 million daily, 10 GB free each: 500 PB in total. Two uploads a day of about 500 KB each gives about 240 uploads a second, 480 at peak.</span></li>
+          <li><span><b>From one server to many.</b> Start with a single server storing files under a folder per user. Then move files to cloud storage like Amazon S3 (replicated across regions), add load balancers and more API servers, and move metadata into a replicated database.</span></li>
+          <li><span><b>Block servers.</b> Files are cut into blocks (Dropbox uses up to 4 MB), each compressed, encrypted and stored. Delta sync means only blocks that changed are uploaded. Identical blocks, found by their hash, are stored once.</span></li>
+          <li><span><b>Sync and conflicts.</b> A notification service (using long polling) tells other devices when a file changes. If two people edit the same file, the first version processed wins and the second gets a conflict to merge or override. Offline devices catch up from a backup queue.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>The interviewer will probe the trade-off between strong and eventual consistency. For file metadata the book insists on strong consistency, since showing different versions of the same file on two devices is unacceptable, which is why it picks a relational database with ACID guarantees. For saving space, mention deduplication, limiting the number of stored versions, and moving rarely used data to cold storage like Amazon S3 Glacier.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: sync a 40 MB file</div><div class="hint">Edit some blocks, then sync</div></div>
+        <div class="stage"><svg id="gd15" role="img" aria-label="A file split into blocks, showing which blocks are uploaded"></svg></div><div class="lab-ctl"><div class="toggles" id="gdT"></div><div class="row"><button class="btn" id="gdRnd" type="button">Make a random edit</button><button class="btn" id="gdClr" type="button">Clear edits</button><span style="font-size:13px;color:var(--faint)">Click a block to edit it.</span></div></div><div class="stats"><div class="stat"><span class="k">Blocks uploaded</span><span class="v" id="gdN"></span></div><div class="stat"><span class="k">Data sent</span><span class="v glow" id="gdMB"></span></div><div class="stat"><span class="k">Saved</span><span class="v" id="gdSave"></span></div></div><p class="callout">Ten blocks of 4 MB. Two of them (striped) already exist in storage, byte for byte, from another file. Compression assumes about half the size, which varies a lot by file type. <b>Delta sync is the big win: one changed block sends 4 MB, not 40.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Split files into blocks, send only the blocks that changed, store identical blocks once, and keep the file list strictly consistent so every device agrees on what exists.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: Keep learning →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Where to go next</div>
+        <h2>The Learning Continues</h2>
+        <div class="short"><span class="lbl">In short</span><p>The book closes by pointing beyond itself: read how real companies built their systems, follow their engineering blogs, and practise. Each design in the book reuses the same handful of building blocks, and spotting them is the skill.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Real-world systems.</b> Xu lists write-ups of how large companies built their systems, from Facebook's timeline and Netflix's architecture to Twitter's timelines at scale and Uber's real-time market platform.</span></li>
+          <li><span><b>Engineering blogs.</b> Companies like Airbnb, Amazon, Dropbox, LinkedIn, Netflix, Slack, Uber and many more publish how they solved real problems. They are free and current.</span></li>
+          <li><span><b>Same parts, new shapes.</b> A ride-sharing app needs real-time connections like chat; a ticket sale needs rate limiting; a search box needs a trie. Most new prompts are combinations of designs you have already seen.</span></li>
+          <li><span><b>Practice, out loud.</b> Knowing a design and explaining one under time pressure are different skills. Talk through designs with a friend or a timer, and use the four-step framework every time.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">In the interview</span><p>Many interviewers deliberately ask questions that aren't in any book. That is not a trap; it is the point. They want to see you reach into a toolbox: 'this part needs fresh data at huge read volume, so I'll cache it'; 'this needs to survive a provider outage, so I'll put a queue in front'. If you can name the building block and its trade-off, an unfamiliar prompt becomes a familiar one.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: reach for the right block</div><div class="tally" id="tally16" aria-label="Score"></div></div>
+        <div class="sorter" id="sort16"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The book's twelve designs are a toolbox, not a script. Read how real systems were built, practise out loud, and for any new problem, ask which familiar parts it is made of.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#after">Next: your practice log →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your practice log</h2>
+      <p class="big">Reading a design is not the same as giving one. Pick a problem, set a 45-minute timer, talk it through out loud, then mark how it went.</p>
+      <div class="plog" id="plog"></div>
+      <div class="recap">
+        <div><span class="n">Web tier</span><b>Keep it stateless</b><span>Move session data to a shared store so any server can take any request.</span></div>
+        <div><span class="n">Every tier</span><b>Build in redundancy</b><span>Two of everything, so no single machine takes the whole system down.</span></div>
+        <div><span class="n">Speed</span><b>Cache what you can</b><span>Keep hot data in memory and static files on a CDN close to users.</span></div>
+        <div><span class="n">Data</span><b>Shard to grow</b><span>Split data by a well-chosen key, and plan for hot keys and resharding.</span></div>
+        <div><span class="n">Coupling</span><b>Queue and split</b><span>Put a message queue between parts so each one scales and fails on its own.</span></div>
+        <div><span class="n">Operations</span><b>Monitor and automate</b><span>Logs, metrics and automated deploys are what let a big system keep running.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>System Design Interview: An Insider's Guide</i> (Volume 1) by Alex Xu (2020). The explanations and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Foundations", "Building blocks", "Web services", "Big systems"];
+const CH = [["Scale from Zero to Millions of Users", "Zero to millions", 0, "Chapter 1"], ["Back-of-the-envelope Estimation", "Envelope maths", 0, "Chapter 2"], ["A Framework for System Design Interviews", "The 4-step framework", 0, "Chapter 3"], ["Design a Rate Limiter", "Rate limiter", 1, "Chapter 4"], ["Design Consistent Hashing", "Consistent hashing", 1, "Chapter 5"], ["Design a Key-Value Store", "Key-value store", 1, "Chapter 6"], ["Design a Unique ID Generator in Distributed Systems", "Unique IDs", 1, "Chapter 7"], ["Design a URL Shortener", "URL shortener", 2, "Chapter 8"], ["Design a Web Crawler", "Web crawler", 2, "Chapter 9"], ["Design a Notification System", "Notifications", 2, "Chapter 10"], ["Design a News Feed System", "News feed", 2, "Chapter 11"], ["Design a Chat System", "Chat system", 3, "Chapter 12"], ["Design a Search Autocomplete System", "Autocomplete", 3, "Chapter 13"], ["Design YouTube", "YouTube", 3, "Chapter 14"], ["Design Google Drive", "Google Drive", 3, "Chapter 15"], ["The Learning Continues", "Keep learning", 3, "Chapter 16"]];
+const QUIZ = {
+"1": {
+"q": "Why does the book move session data out of the web servers?",
+"o": [
+"To save disk space",
+"So any web server can handle any request, which makes adding and removing servers easy",
+"Because databases are faster than memory"
+],
+"a": 1,
+"w": "A stateless web tier lets the load balancer send a user to any server, so you can autoscale freely. Sticky sessions tie users to one machine."
+},
+"2": {
+"q": "Roughly how many seconds are there in a day, for quick QPS sums?",
+"o": [
+"About 10,000",
+"About 100,000 (86,400 exactly)",
+"About 1,000,000"
+],
+"a": 1,
+"w": "86,400 seconds a day, which most people round to 100,000 for speed, or keep as 86,400 when they want a closer figure."
+},
+"3": {
+"q": "The interviewer says \"design a news feed\". What should you do first?",
+"o": [
+"Draw the database schema",
+"Ask questions: mobile or web, how many users, what the feed contains, how it is sorted",
+"Pick a NoSQL database"
+],
+"a": 1,
+"w": "Step one is understanding the problem and agreeing on scope. Jumping straight to a solution without clarifying is one of the book's don'ts."
+},
+"4": {
+"q": "What is the known weakness of a fixed window counter?",
+"o": [
+"It uses too much memory",
+"A burst at the edge of two windows can let through up to twice the limit",
+"It cannot return HTTP 429"
+],
+"a": 1,
+"w": "Requests at the end of one window and the start of the next both count as within limits, so a one-second span can see double."
+},
+"5": {
+"q": "Why add virtual nodes?",
+"o": [
+"To encrypt keys",
+"To even out how much of the ring, and so how many keys, each server owns",
+"To make lookups faster than O(log n)"
+],
+"a": 1,
+"w": "With a few points per server the slices are uneven. Many virtual nodes per server average the slices out."
+},
+"6": {
+"q": "With N = 3, which setting guarantees a read sees the latest write?",
+"o": [
+"W = 1, R = 1",
+"W = 2, R = 2",
+"W = 1, R = 2"
+],
+"a": 1,
+"w": "2 + 2 = 4 is greater than 3, so at least one replica in every read also took the latest write."
+},
+"7": {
+"q": "Why does Snowflake put the timestamp in the highest bits?",
+"o": [
+"So the IDs sort roughly by creation time",
+"Because timestamps are the largest number",
+"To hide the machine ID"
+],
+"a": 0,
+"w": "With time in the top bits, a later ID is a bigger number, so IDs sort by time without any extra field."
+},
+"8": {
+"q": "You need click analytics on every short link. Which redirect should you use?",
+"o": [
+"301 Moved Permanently",
+"302 Found (temporary)",
+"404"
+],
+"a": 1,
+"w": "With a 302 the browser comes back to your server for every click, so you can count them. A 301 gets cached and the clicks vanish from your view."
+},
+"9": {
+"q": "Why does the URL frontier keep a separate queue for each host?",
+"o": [
+"To sort pages alphabetically",
+"So each host is fetched by one worker with a delay, which keeps the crawler polite",
+"To store the page contents"
+],
+"a": 1,
+"w": "Mapping each host to one queue and one worker means a site never gets a flood of requests from the crawler."
+},
+"10": {
+"q": "Why give each channel (push, SMS, email) its own queue?",
+"o": [
+"It is cheaper to run",
+"A failure or slowdown in one channel doesn't hold up the others",
+"Providers require it"
+],
+"a": 1,
+"w": "Separate queues isolate failures. If the SMS provider is down, push and email workers carry on."
+},
+"11": {
+"q": "What is the main problem with pure fan-out on write?",
+"o": [
+"Feeds load slowly",
+"One post from an account with millions of followers causes millions of writes",
+"Posts can't be deleted"
+],
+"a": 1,
+"w": "That is the hot key, or celebrity, problem. The hybrid model pulls celebrity posts at read time instead."
+},
+"12": {
+"q": "Why does the book use heartbeats for online status?",
+"o": [
+"To save battery",
+"So a brief network drop doesn't immediately mark someone offline",
+"Because WebSockets can't detect disconnection"
+],
+"a": 1,
+"w": "A user is marked offline only if heartbeats stop for a set time, which avoids the indicator flickering on a weak connection."
+},
+"13": {
+"q": "Why cache the top queries at every trie node?",
+"o": [
+"To save memory",
+"So a lookup only walks to the prefix node instead of searching its whole subtree",
+"So the trie can be rebuilt faster"
+],
+"a": 1,
+"w": "It trades memory for speed: the answer is waiting at the node, so there is no subtree search on the request path."
+},
+"14": {
+"q": "Which is a cost-saving idea from the chapter?",
+"o": [
+"Encode every video in as many formats as possible",
+"Serve only popular videos from the CDN and the long tail from your own servers",
+"Store all videos twice on the CDN"
+],
+"a": 1,
+"w": "Most views go to a few videos. Putting only those on the CDN cuts the biggest bill without hurting most viewers."
+},
+"15": {
+"q": "What does delta sync do?",
+"o": [
+"Uploads the whole file again, compressed",
+"Uploads only the blocks that changed",
+"Syncs only at night"
+],
+"a": 1,
+"w": "Only modified blocks travel, which saves bandwidth and makes syncing a small edit to a big file fast."
+},
+"16": {
+"q": "Which chapter's idea fits \"suggest product names as a shopper types\"?",
+"o": [
+"Consistent hashing",
+"Search autocomplete with a trie and cached top results",
+"Unique ID generator"
+],
+"a": 1,
+"w": "It is the autocomplete problem in a new costume: a trie, top-k cached per node, rebuilt from logs."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0b1220';
+try { const t = localStorage.getItem('sdi1-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('sdi1-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('sdi1-done', []));
+const save = () => store.set('sdi1-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const big = n => n >= 1e12 ? (n / 1e12).toFixed(n >= 1e13 ? 0 : 1) + ' trillion' : n >= 1e9 ? (n / 1e9).toFixed(n >= 1e10 ? 0 : 1) + ' billion' : n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + ' million' : fmtN(n);
+const short = n => n >= 1e12 ? +(n / 1e12).toFixed(n >= 1e14 ? 0 : 1) + 'T' : n >= 1e9 ? +(n / 1e9).toFixed(1) + 'B' : n >= 1e6 ? +(n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? +(n / 1e3).toFixed(1) + 'k' : String(Math.round(n));
+/* bytes, decimal units, from megabytes */
+const bytesMB = mb => { const u = [['PB', 1e9], ['TB', 1e6], ['GB', 1e3], ['MB', 1]]; for (const [n, f] of u) if (mb >= f) { const v = mb / f; return (v >= 100 ? Math.round(v) : +v.toFixed(1)) + ' ' + n; } return '0 MB'; };
+const fnv = s => { let h = 0x811c9dc5; for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); } h ^= h >>> 15; h = Math.imul(h, 0x2c1b3c6d); h ^= h >>> 12; return (h >>> 0); };
+const box = (x, y, w, h, l, sub, cls = 'old', fs = 13) => {
+  const st = cls === 'new' ? FS('glow-soft', 'glow', 2) : cls === 'cool' ? FS('cool-soft', 'cool', 1.5) : cls === 'bad' ? FS('bad-soft', 'bad', 1.5) : FS('panel-2', 'line', 1.2);
+  return `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="8" ${st}/>` + (sub ? TX(x, y - 2, l, 'text', fs, 'middle') + TX(x, y + fs - 1, sub, 'faint', fs - 2.5, 'middle') : TX(x, y + fs * .36, l, 'text', fs, 'middle'));
+};
+const curve = (x1, y1, x2, y2, vert, c = 'faint', w = 1.4, dash = '') => {
+  const d = vert ? `M${x1} ${y1}C${x1} ${(y1 + y2) / 2} ${x2} ${(y1 + y2) / 2} ${x2} ${y2}` : `M${x1} ${y1}C${(x1 + x2) / 2} ${y1} ${(x1 + x2) / 2} ${y2} ${x2} ${y2}`;
+  return `<path d="${d}" ${S(c, w, dash ? ';stroke-dasharray:' + dash : '')}/>` + arrowHead(x2, y2, vert ? Math.PI / 2 : 0, c, 6);
+};
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I freeze on an open question', 3, 'Use the four steps', 'Ask first, sketch second, go deep third, wrap up last. Structure is what keeps you talking when the prompt is vague.'],
+    ['I don\'t know how systems grow', 1, 'From one box to millions', 'Learn the standard path: load balancer, replicas, cache, CDN, stateless web tier, data centres, queues, shards.'],
+    ['My numbers are guesses', 2, 'Back-of-the-envelope maths', 'Powers of two, latency numbers and a few stated assumptions turn a guess into an estimate.'],
+    ['Protecting an API', 4, 'Rate limiting', 'Token bucket, leaking bucket or sliding windows, with counters in a shared in-memory store.'],
+    ['Spreading data over servers', 5, 'Consistent hashing', 'A ring where adding a server moves only its neighbours\' keys, with virtual nodes to even the load.'],
+    ['Consistency versus availability', 6, 'Quorums', 'N copies, W to write, R to read. W + R > N means every read sees the latest write.'],
+    ['Real-time features', 12, 'WebSockets and heartbeats', 'One long-lived two-way connection per device, and heartbeats so status doesn\'t flicker.'],
+    ['Feeds and celebrities', 11, 'Hybrid fan-out', 'Push posts to most followers right away, pull a celebrity\'s posts when the feed opens.'],
+    ['Huge files and video', 14, 'Pipelines and CDNs', 'Transcode in a graph of small tasks, and put only the popular videos on the expensive CDN.'] ];
+  const bx = $('#find'), ans = $('#findA');
+  bx.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  bx.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...bx.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the 45-minute clock ---------- */
+{ const STEPS = [
+    [0, 7, 'Step 1', 'Understand the problem', '3 to 10 minutes', ['Ask what features matter most', 'Ask about users, scale and growth', 'Write your assumptions down'], 'jumping straight to a solution'],
+    [7, 20, 'Step 2', 'Propose a high-level design', '10 to 15 minutes', ['Sketch clients, APIs, servers and storage', 'Do rough sums to check it fits', 'Get the interviewer to agree'], 'polishing one box before the whole picture exists'],
+    [20, 40, 'Step 3', 'Design deep dive', '10 to 25 minutes', ['Agree which parts matter most', 'Go into detail on those', 'Explain each trade-off you make'], 'detail nobody asked for, like an algorithm the prompt doesn\'t need'],
+    [40, 45, 'Step 4', 'Wrap up', '3 to 5 minutes', ['Name the bottlenecks yourself', 'Talk about errors, monitoring and the next scale step', 'Recap the design'], 'saying the design is perfect'] ];
+  const el = $('#clk'), r = $('#clkR'), say = $('#clkSay'), cx = 120, cy = 120, R1 = 112, R0 = 80;
+  const ang = m => -Math.PI / 2 + m / 45 * Math.PI * 2;
+  const pt = (rr, a) => [(cx + rr * Math.cos(a)).toFixed(2), (cy + rr * Math.sin(a)).toFixed(2)];
+  const arc = (m0, m1) => { const a0 = ang(m0), a1 = ang(m1), lg = (m1 - m0) > 22.5 ? 1 : 0, [x0, y0] = pt(R1, a0), [x1, y1] = pt(R1, a1), [x2, y2] = pt(R0, a1), [x3, y3] = pt(R0, a0);
+    return `M${x0} ${y0}A${R1} ${R1} 0 ${lg} 1 ${x1} ${y1}L${x2} ${y2}A${R0} ${R0} 0 ${lg} 0 ${x3} ${y3}Z`; };
+  let timer = null;
+  function draw(){ const m = +r.value, k = STEPS.findIndex(s => m >= s[0] && m < s[1]);
+    let g = '';
+    STEPS.forEach((s, i) => { g += `<path class="seg" data-s="${i}" d="${arc(s[0] + .25, s[1] - .25)}" ${i === k ? F('glow', .9) : F('cool', .22)}><title>${s[2]}: ${s[3]}</title></path>`;
+      const [lx, ly] = pt((R0 + R1) / 2, ang((s[0] + s[1]) / 2)); g += `<text x="${lx}" y="${+ly + 5}" font-size="15" text-anchor="middle" ${F(i === k ? 'on-glow' : 'text')} style="pointer-events:none">${i + 1}</text>`; });
+    const [hx, hy] = pt(R0 - 12, ang(m + .5));
+    g += `<line x1="${cx}" y1="${cy}" x2="${hx}" y2="${hy}" ${S('glow', 3, ';stroke-linecap:round')}/><circle cx="${cx}" cy="${cy}" r="5" ${F('glow')}/>`;
+    g += TX(cx, cy + 30, (m + 1) + ' min', 'muted', 13, 'middle');
+    el.innerHTML = g;
+    const s = STEPS[k];
+    say.innerHTML = `<span class="k">${s[2]} · ${s[4]}</span><b>${s[3]}</b><ul>${s[5].map(x => `<li>${x}</li>`).join('')}</ul><span class="no"><i>Avoid</i> ${s[6]}</span>`;
+    $('#clkMin').textContent = `minute ${m + 1} of 45`;
+    el.querySelectorAll('.seg').forEach(p => p.addEventListener('click', () => { r.value = STEPS[+p.dataset.s][0]; stop(); draw(); }));
+  }
+  const stop = () => { if (timer){ clearInterval(timer); timer = null; } $('#clkPlay').textContent = 'Play'; };
+  r.addEventListener('input', () => { stop(); draw(); });
+  $('#clkPlay').addEventListener('click', () => { if (timer) return stop(); if (+r.value >= 44) r.value = 0; $('#clkPlay').textContent = 'Pause';
+    timer = setInterval(() => { if (+r.value >= 44) return stop(); r.value = +r.value + 1; draw(); }, RM ? 600 : 300); });
+  draw();
+}
+
+/* ---------- 1: grow the system ---------- */
+{ const el = $('#sc1'), rI = $('#scN');
+  const STG = [
+    ['1 user', 'One server', 'Nothing yet. Web app, database and cache share one machine.', 'One machine is a single point of failure, and web and data compete for it.'],
+    ['Hundreds', 'A separate database', 'Web traffic and data can now scale on their own.', 'Still one web server: if it dies, the site is down.'],
+    ['Thousands', 'Load balancer, second web server', 'Traffic is spread out, and one server can fail without an outage.', 'The single database is now the weak point.'],
+    ['Tens of thousands', 'Database replication', 'Writes go to the master, reads to replicas; a replica can take over if the master fails.', 'Replicas can lag, and every read still hits a database.'],
+    ['About 100,000', 'A cache', 'Hot data is read from memory, sparing the database.', 'Stale data, and deciding when entries expire.'],
+    ['Half a million', 'A CDN', 'Images, video, CSS and JavaScript load from servers near the user.', 'CDN bills, and invalidating files that change.'],
+    ['A million', 'A shared session store', 'Web servers hold no state, so they can be added or removed automatically.', 'All users are still served from one place.'],
+    ['Millions, worldwide', 'A second data centre', 'GeoDNS sends users to the nearest site, and one site can take over if the other fails.', 'Keeping data and deployments in sync across sites.'],
+    ['Several million', 'Queue, logging and metrics', 'Slow jobs run in the background, and you can see what the system is doing.', 'The database is outgrowing even the biggest machine.'],
+    ['10 million and up', 'Database sharding', 'Data is split across shards by a key such as user ID, so each shard stays small.', 'Hot keys (the celebrity problem), resharding, and joins across shards.'] ];
+  const NODES = [
+    { id:'user', l:'Users', s:'web + mobile', c:0, r:1.5, from:0 },
+    { id:'dns', l:st => st >= 7 ? 'GeoDNS' : 'DNS', c:1, r:.25, from:0 },
+    { id:'cdn', l:'CDN', s:'static files', c:1, r:2.75, from:5 },
+    { id:'lb', l:'Load balancer', c:2, r:1.5, from:2 },
+    { id:'mon', l:'Logs, metrics', c:2, r:2.75, from:8 },
+    { id:'one', l:'Web + DB', s:'one server', c:3, r:1.5, from:0, to:1 },
+    { id:'web1', l:'Web server', c:3, r:st => st === 1 ? 1.5 : 1, from:1 },
+    { id:'web2', l:'Web server', c:3, r:2, from:2 },
+    { id:'cache', l:'Cache', s:'read-through', c:4, r:1.5, from:4 },
+    { id:'sess', l:'Session store', s:'shared state', c:3, r:0, from:6 },
+    { id:'mq', l:'Queue', s:'+ workers', c:3, r:3, from:8 },
+    { id:'db', l:'Database', c:5, r:1.5, from:1, to:3 },
+    { id:'master', l:'Master DB', s:'writes', c:5, r:.75, from:3, to:9 },
+    { id:'slave', l:'Replicas', s:'reads', c:5, r:2.25, from:3, to:9 },
+    ...[0, 1, 2, 3].map(i => ({ id:'sh' + i, l:'Shard ' + i, s:'user_id % 4 = ' + i, c:5, r:i, from:9 })) ];
+  const draw = onLayout(() => { const st = +rI.value, nw = NARROW(), W = nw ? 370 : 770, H = nw ? 572 : 352, bw = nw ? 84 : 110, bh = nw ? 40 : 44, fs = nw ? 11.5 : 13;
+    vb(el, W, H);
+    const P = (c, r) => nw ? [48 + r * 91, 34 + c * 96] : [66 + c * 126, 46 + r * 82];
+    const live = NODES.filter(n => st >= n.from && (n.to == null || st < n.to));
+    const pos = {}; live.forEach(n => pos[n.id] = P(n.c, typeof n.r === 'function' ? n.r(st) : n.r));
+    let g = '';
+    if (st >= 7){ const [ax, ay] = P(2, -.1), [bx2, by2] = P(5, 3.2);
+      const x0 = nw ? 6 : ax - bw / 2 - 12, y0 = nw ? ay - bh / 2 - 12 : 10, x1 = nw ? W - 6 : bx2 + bw / 2 + 12, y1 = nw ? by2 + bh / 2 + 14 : H - 26;
+      g += `<rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="12" ${S('cool-line', 1.2, ';stroke-dasharray:5 4')}/>` + TX(nw ? x0 + 6 : x0 + 8, nw ? y1 + 14 : H - 9, 'Data centre 1 · data centre 2 mirrors all of this', 'cool', 11.5); }
+    const E = (a, b, c, dash) => { if (!pos[a] || !pos[b]) return; const [x1, y1] = pos[a], [x2, y2] = pos[b];
+      g += nw ? curve(x1, y1 + bh / 2, x2, y2 - bh / 2 - 2, true, c, 1.3, dash) : curve(x1 + bw / 2, y1, x2 - bw / 2 - 2, y2, false, c, 1.3, dash); };
+    E('user', 'dns'); E('user', 'one'); if (st === 1) E('user', 'web1'); E('user', 'lb'); E('user', 'cdn'); E('lb', 'web1'); E('lb', 'web2');
+    if (st === 1) E('web1', 'db');
+    if (st >= 2){ const a = P(3, 1.5), src = nw ? [a[0], a[1]] : [a[0], a[1]];
+      const DBT = ['db', 'master', 'slave', 'sh0', 'sh1', 'sh2', 'sh3'], via = pos.cache;
+      const to = t => { if (!pos[t]) return; const [x2, y2] = pos[t];
+        if (via) g += nw ? curve(via[0], via[1] + bh / 2, x2, y2 - bh / 2 - 2, true, 'faint', 1.1) : curve(via[0] + bw / 2, via[1], x2 - bw / 2 - 2, y2, false, 'faint', 1.1);
+        else g += nw ? curve(src[0], src[1] + bh * 1.1, x2, y2 - bh / 2 - 2, true, 'faint', 1.1) : curve(src[0] + bw / 2 + 4, src[1], x2 - bw / 2 - 2, y2, false, 'faint', 1.1); };
+      if (via) g += nw ? curve(src[0], src[1] + bh * 1.1, via[0], via[1] - bh / 2 - 2, true, 'faint', 1.1) : curve(src[0] + bw / 2 + 4, src[1], via[0] - bw / 2 - 2, via[1], false, 'faint', 1.1);
+      DBT.forEach(to);
+      const link = (a1, b1) => { if (!pos[a1] || !pos[b1]) return; const [x1, y1] = pos[a1], [x2, y2] = pos[b1];
+        g += nw ? `<path d="M${Math.min(x1, x2) + bw / 2} ${y1}H${Math.max(x1, x2) - bw / 2}" ${S('cool', 1.3, ';stroke-dasharray:3 3')}/>` : `<path d="M${x1} ${Math.min(y1, y2) + bh / 2}V${Math.max(y1, y2) - bh / 2}" ${S('cool', 1.3, ';stroke-dasharray:3 3')}/>`; };
+      link('sess', 'web1'); link('web2', 'mq');
+      if (!nw) g += `<path d="M${a[0] + bw / 2} ${P(3, 1)[1]}L${a[0] + bw / 2 + 4} ${a[1]}L${a[0] + bw / 2} ${P(3, 2)[1]}" ${S('faint', 1.1)}/>`;
+      else g += `<path d="M${P(3, 1)[0]} ${a[1] + bh / 2}L${a[0]} ${a[1] + bh * 1.1}L${P(3, 2)[0]} ${a[1] + bh / 2}" ${S('faint', 1.1)}/>`; }
+    if (pos.master && pos.slave){ const [x1, y1] = pos.master, [x2, y2] = pos.slave; g += nw ? `<path d="M${x1 + bw / 2} ${y1}L${x2 - bw / 2} ${y2}" ${S('cool', 1.3, ';stroke-dasharray:3 3')}/>` : `<path d="M${x1} ${y1 + bh / 2}L${x2} ${y2 - bh / 2 - 2}" ${S('cool', 1.3, ';stroke-dasharray:3 3')}/>` + arrowHead(x2, y2 - bh / 2 - 2, Math.PI / 2, 'cool', 6); }
+    live.forEach(n => { const [x, y] = pos[n.id], l = typeof n.l === 'function' ? n.l(st) : n.l, isNew = n.from === st && st > 0 || (n.id === 'dns' && st === 7);
+      g += box(x, y, bw, bh, l, nw && n.s && n.s.length > 13 ? '' : n.s, isNew ? 'new' : 'old', fs); });
+    el.innerHTML = g;
+    const s = STG[st]; out('scN', `${st + 1} of 10 · ${s[0]}`); $('#scAdd').textContent = s[1]; $('#scFix').textContent = s[2]; $('#scRisk').textContent = s[3];
+  });
+  rI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 2: latency ladder and estimates ---------- */
+{ const el = $('#lt2'), LAT = [
+    ['L1 cache reference', .5], ['Branch mispredict', 5], ['L2 cache reference', 7], ['Mutex lock or unlock', 100], ['Main memory reference', 100],
+    ['Compress 1 KB with Zippy', 1e4], ['Send 2 KB over a 1 Gbps network', 2e4], ['Read 1 MB from memory', 2.5e5], ['Round trip inside a data centre', 5e5],
+    ['Disk seek', 1e7], ['Read 1 MB from the network', 1e7], ['Read 1 MB from disk', 3e7], ['Packet California → Netherlands → California', 1.5e8] ];
+  let human = false;
+  $('#ltM').innerHTML = '<button class="btn" data-h="0" aria-pressed="true">Real time</button><button class="btn" data-h="1" aria-pressed="false">If an L1 reference took 1 second</button>';
+  const hb = [...$('#ltM').querySelectorAll('[data-h]')]; hb.forEach(b => b.addEventListener('click', () => { human = b.dataset.h === '1'; press(hb, b); draw(); }));
+  const real = ns => ns < 1e3 ? ns + ' ns' : ns < 1e6 ? +(ns / 1e3).toFixed(1) + ' µs' : +(ns / 1e6).toFixed(1) + ' ms';
+  const hum = ns => { const s = ns * 2; return s < 60 ? s + ' s' : s < 3600 ? +(s / 60).toFixed(1) + ' min' : s < 86400 ? +(s / 3600).toFixed(1) + ' hours' : s < 86400 * 365 ? +(s / 86400).toFixed(1) + ' days' : +(s / 86400 / 365).toFixed(1) + ' years'; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, rh = nw ? 36 : 25, H = LAT.length * rh + 30, x0 = nw ? 8 : 300, x1 = nw ? 262 : 650;
+    vb(el, W, H); const X = ns => x0 + (Math.log10(ns) + 1) / 10 * (x1 - x0); let g = '';
+    [0, 3, 6, 9].forEach(d => { const x = X(Math.pow(10, d)); g += `<line x1="${x}" y1="6" x2="${x}" y2="${H - 22}" ${S('line', 1, ';stroke-dasharray:2 4')}/>` + TX(x, H - 8, ['1 ns', '1 µs', '1 ms', '1 s'][d / 3], 'faint', 11, 'middle'); });
+    LAT.forEach(([l, ns], i) => { const y = 8 + i * rh, c = ns >= 1e7 ? 'bad' : ns >= 1e5 ? 'cool' : 'glow';
+      if (nw){ g += TX(x0, y + 11, l, 'soft', 11.5); g += `<rect x="${x0}" y="${y + 16}" width="${Math.max(3, X(ns) - x0)}" height="10" rx="3" ${F(c, .75)}/>` + TX(W - 4, y + 25, human ? hum(ns) : real(ns), 'text', 11.5, 'end'); }
+      else { g += TX(x0 - 10, y + 13, l, 'soft', 12.5, 'end') + `<rect x="${x0}" y="${y + 4}" width="${Math.max(3, X(ns) - x0)}" height="13" rx="3" ${F(c, .75)}/>` + TX(x1 + 10, y + 14, human ? hum(ns) : real(ns), 'text', 12.5); } });
+    el.innerHTML = g; });
+  $$('#ltM [data-h]').forEach(b => b.addEventListener('click', draw)); draw();
+  const MAU = [1e6, 2e6, 5e6, 1e7, 2e7, 5e7, 1e8, 2e8, 3e8, 5e8, 1e9, 2e9, 3e9];
+  const est = () => { const u = MAU[+$('#esU').value], d = +$('#esD').value / 100, p = +$('#esP').value, m = +$('#esM').value / 100, y = +$('#esY').value;
+    out('esU', big(u)); out('esD', Math.round(d * 100) + '%'); out('esP', p); out('esM', Math.round(m * 100) + '%'); out('esY', y);
+    const dau = u * d, q = dau * p / 86400, day = dau * p * m; $('#esDAU').textContent = big(dau); $('#esQ').textContent = '≈ ' + fmtN(q); $('#esPk').textContent = '≈ ' + fmtN(q * 2);
+    $('#esS').textContent = bytesMB(day); $('#esT').textContent = bytesMB(day * 365 * y); };
+  ['esU', 'esD', 'esP', 'esM', 'esY'].forEach(id => $('#' + id).addEventListener('input', est)); est();
+}
+
+/* ---------- 3: which step is this? ---------- */
+sorter('#sort3', '#tally3', [{ id: 's1', label: 'Step 1', d: 'Understand the problem' }, { id: 's2', label: 'Step 2', d: 'High-level design' }, { id: 's3', label: 'Step 3', d: 'Deep dive' }, { id: 's4', label: 'Step 4', d: 'Wrap up' }], [
+  { t: 'Ask how many daily users the product has, and how fast that will grow.', q: true, a: 's1', w: 'Scale questions come first: they decide what the whole design must handle.' },
+  { t: 'Ask whether this is for a mobile app, a web app, or both.', q: true, a: 's1', w: 'Clarifying the product is step one. Answering a question nobody asked is a classic mistake.' },
+  { t: 'Sketch the main boxes: clients, API servers, cache, database, CDN.', q: true, a: 's2', w: 'The blueprint comes in step two, and you want the interviewer to agree with it before going further.' },
+  { t: 'Do a rough sum to check your boxes can handle the traffic.', q: true, a: 's2', w: 'The book suggests checking the high-level design against back-of-the-envelope numbers, after asking if the interviewer wants them.' },
+  { t: 'Propose the API endpoints the clients will call.', q: true, a: 's2', w: 'Endpoints and a first data model belong with the high-level design.' },
+  { t: 'Work out how your URL shortener\'s hash function avoids collisions.', q: true, a: 's3', w: 'One component, in detail, because it is the crux of this particular problem. That is the deep dive.' },
+  { t: 'Explain how you would keep chat latency low and show who is online.', q: true, a: 's3', w: 'For a chat system these are the parts worth the deep dive time.' },
+  { t: 'Point out the bottleneck in your own design and how you would fix it.', q: true, a: 's4', w: 'The wrap-up is where you criticise your own design. There is always something to improve.' },
+  { t: 'Talk about monitoring, error cases and how you would roll it out.', q: true, a: 's4', w: 'Operations and failure cases are wrap-up topics that show experience.' },
+  { t: 'Describe what changes when you go from 1 million to 10 million users.', q: true, a: 's4', w: 'The next scale step is a good way to close: it shows you know the design has limits.' } ], true);
+
+/* ---------- 4: rate limiter ---------- */
+{ const el = $('#rl4'), lI = $('#rlL'), T = 6;
+  const ALG = [['token', 'Token bucket'], ['leak', 'Leaking bucket'], ['fixed', 'Fixed window'], ['log', 'Sliding window log'], ['count', 'Sliding window counter']];
+  const PAT = [['steady', 'Steady stream'], ['bursty', 'Bursts'], ['edge', 'Edge burst']];
+  let alg = 'token', pat = 'steady';
+  $('#rlA').innerHTML = ALG.map(([k, l], i) => `<button class="btn" data-a="${k}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $('#rlP').innerHTML = PAT.map(([k, l], i) => `<button class="btn" data-p="${k}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  const ab = [...$('#rlA').querySelectorAll('[data-a]')], pb = [...$('#rlP').querySelectorAll('[data-p]')];
+  ab.forEach(b => b.addEventListener('click', () => { alg = b.dataset.a; press(ab, b); draw(); }));
+  pb.forEach(b => b.addEventListener('click', () => { pat = b.dataset.p; press(pb, b); draw(); }));
+  function arrivals(){ const r = rng(42), a = [];
+    if (pat === 'steady') for (let t = .1; t < T; t += .18) a.push(t);
+    if (pat === 'bursty'){ [.4, 2.2, 4.3].forEach(b => { for (let k = 0; k < 9; k++) a.push(b + k * .03 + r() * .02); }); for (let k = 0; k < 7; k++) a.push(r() * T); }
+    if (pat === 'edge'){ [1, 4].forEach(e => { for (let k = 0; k < 8; k++){ a.push(e - .42 + k * .05); a.push(e + .02 + k * .05); } }); }
+    return a.sort((x, y) => x - y); }
+  function run(a, L){ const res = [], state = [];
+    if (alg === 'token'){ let tok = L, last = 0; a.forEach(t => { tok = Math.min(L, tok + (t - last) * L); last = t; const ok = tok >= 1; if (ok) tok -= 1; res.push({ t, ok, at: t }); state.push([t, tok]); }); }
+    if (alg === 'leak'){ let q = [], free = 0; a.forEach(t => { q = q.filter(p => p > t); const ok = q.length < L; let at = t; if (ok){ at = Math.max(t, free) + 1 / L; free = at; q.push(at); } res.push({ t, ok, at }); state.push([t, q.length]); }); }
+    if (alg === 'fixed'){ const c = {}; a.forEach(t => { const w = Math.floor(t); c[w] = c[w] || 0; const ok = c[w] < L; if (ok) c[w]++; res.push({ t, ok, at: t }); state.push([t, c[w]]); }); }
+    if (alg === 'log'){ let log = []; a.forEach(t => { log = log.filter(x => x > t - 1); log.push(t); const ok = log.length <= L; res.push({ t, ok, at: t }); state.push([t, log.length]); }); }
+    if (alg === 'count'){ const c = {}; a.forEach(t => { const w = Math.floor(t), ov = 1 - (t - w), e = (c[w] || 0) + (c[w - 1] || 0) * ov, ok = Math.floor(e) < L; if (ok) c[w] = (c[w] || 0) + 1; res.push({ t, ok, at: t }); state.push([t, (c[w] || 0) + (c[w - 1] || 0) * ov]); }); }
+    return [res, state]; }
+  const SAY = { token: 'Tokens refill at the limit rate; a full bucket lets a short burst through, then requests wait for tokens.',
+    leak: 'Allowed requests join a queue and leave at a fixed rate, so output is smooth but some are delayed. Grey lines show the wait.',
+    fixed: 'Each whole second gets its own counter. Simple and cheap, but bursts on either side of a boundary both fit.',
+    log: 'Every timestamp in the last second is kept, even rejected ones, so it is exact but stores a lot.',
+    count: 'Current window plus a weighted share of the previous one. A cheap, smooth approximation.' };
+  const STATE = { token: 'tokens in the bucket', leak: 'requests in the queue', fixed: 'count in this window', log: 'timestamps in the log', count: 'weighted count' };
+  const draw = onLayout(() => { const L = +lI.value, nw = NARROW(), W = nw ? 360 : 760, H = nw ? 300 : 270, x0 = nw ? 14 : 40, x1 = W - (nw ? 14 : 20), X = t => x0 + t / T * (x1 - x0);
+    out('rlL', L); vb(el, W, H); const a = arrivals(), [res, state] = run(a, L); let g = '';
+    const top = 26, laneH = nw ? 15 : 17, lanes = 5, botY = top + lanes * laneH + 30, bandTop = botY + 20, bandBot = H - 26;
+    for (let s = 0; s <= T; s++){ const x = X(s); g += `<line x1="${x}" y1="${top - 10}" x2="${x}" y2="${bandBot}" ${S(alg === 'fixed' || alg === 'count' ? 'line' : 'line', 1, alg === 'fixed' || alg === 'count' ? '' : ';stroke-dasharray:2 4')}/>` + TX(x, H - 8, s + 's', 'faint', 11, 'middle'); }
+    g += TX(x0, 14, 'Requests arriving', 'muted', 11.5);
+    if (alg === 'leak') g += TX(x0, botY - 4, 'Processed', 'muted', 11.5) + `<line x1="${x0}" y1="${botY + 4}" x2="${x1}" y2="${botY + 4}" ${S('line', 1)}/>`;
+    res.forEach((q, i) => { const x = X(q.t), y = top + (i % lanes) * laneH + 6;
+      if (alg === 'leak' && q.ok){ const xa = X(Math.min(q.at, T)); g += `<line x1="${x}" y1="${y}" x2="${xa}" y2="${botY + 4}" ${S('faint', 1, ';stroke-opacity:.5')}/>` + (q.at <= T ? `<circle cx="${xa}" cy="${botY + 4}" r="3.5" ${F('good')}/>` : ''); }
+      g += q.ok ? `<circle cx="${x}" cy="${y}" r="${nw ? 4 : 5}" ${F('good')}/>` : `<circle cx="${x}" cy="${y}" r="${nw ? 4 : 5}" ${FS('bad-soft', 'bad', 1.6)}/>`; });
+    const mx = Math.max(L * 2, ...state.map(s => s[1])), Y = v => bandBot - v / mx * (bandBot - bandTop);
+    g += TX(x0, bandTop - 6, 'Inside the limiter: ' + STATE[alg], 'muted', 11.5);
+    g += `<line x1="${x0}" y1="${Y(L)}" x2="${x1}" y2="${Y(L)}" ${S('glow', 1, ';stroke-dasharray:4 3')}/>` + TX(x1, Y(L) - 4, 'limit ' + L, 'glow', 11, 'end');
+    let d = `M${x0} ${Y(alg === 'token' ? L : 0)}`; state.forEach(([t, v]) => { d += `H${X(t).toFixed(1)}V${Y(v).toFixed(1)}`; }); d += `H${x1}`;
+    g += `<path d="${d}" ${S('cool', 1.8)}/>`;
+    el.innerHTML = g;
+    const ok = res.filter(q => q.ok), times = ok.map(q => q.at).filter(t => t <= T + 1).sort((p, q) => p - q); let best = 0, j = 0;
+    for (let i = 0; i < times.length; i++){ while (times[i] - times[j] >= 1) j++; best = Math.max(best, i - j + 1); }
+    $('#rlOk').textContent = ok.length; $('#rlNo').textContent = res.length - ok.length; $('#rlMax').textContent = best + (best > L ? ' (over the limit)' : '');
+    $('#rlSay').textContent = SAY[alg]; });
+  lI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: the hash ring ---------- */
+{ const el = $('#hr5'), nI = $('#hrN'), vI = $('#hrV'), K = 120;
+  const keys = [...Array(K)].map((_, i) => fnv('key-' + i) / 4294967296), keyInt = [...Array(K)].map((_, i) => fnv('user:' + i));
+  let prev = null, prevN = +nI.value, lastMv = 0, lastMod = null, moved = new Set();
+  function owners(N, V){ const pts = []; for (let s = 0; s < N; s++) for (let v = 0; v < V; v++) pts.push([fnv(`server-${s}#${v}`) / 4294967296, s]); pts.sort((a, b) => a[0] - b[0]);
+    return [keys.map(k => { const p = pts.find(q => q[0] >= k) || pts[0]; return p[1]; }), pts]; }
+  function change(){ const N = +nI.value, V = +vI.value, [own] = owners(N, V);
+    if (prev){ moved = new Set(); own.forEach((o, i) => { if (o !== prev[i]) moved.add(i); }); lastMv = moved.size;
+      lastMod = N !== prevN ? keyInt.filter(h => h % N !== h % prevN).length : null; }
+    prev = own; prevN = N; draw(); }
+  const draw = onLayout(() => { const N = +nI.value, V = +vI.value, [own, pts] = owners(N, V), nw = NARROW();
+    out('hrN', N); out('hrV', V);
+    const W = nw ? 360 : 760, cx = nw ? 180 : 190, cy = nw ? 160 : 180, R = nw ? 128 : 148, bx0 = nw ? 40 : 410, bx1 = W - 20, by0 = nw ? 330 : 50, bh = nw ? 22 : 30, H = nw ? by0 + N * bh + 20 : 360;
+    vb(el, W, H); let g = `<circle cx="${cx}" cy="${cy}" r="${R}" ${S('line', 2)}/>`;
+    const at = (p, rr) => [cx + rr * Math.cos(-Math.PI / 2 + p * Math.PI * 2), cy + rr * Math.sin(-Math.PI / 2 + p * Math.PI * 2)];
+    pts.forEach(([p, s]) => { const [x1, y1] = at(p, R - 6), [x2, y2] = at(p, R + 9); g += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" ${S('s' + s, V > 20 ? 2 : 3.5)}/>`; });
+    if (V === 1) pts.forEach(([p, s]) => { const [x, y] = at(p, R + 24); g += TX(x.toFixed(1), (y + 4).toFixed(1), 'S' + s, 's' + s, 12, 'middle'); });
+    keys.forEach((k, i) => { const [x, y] = at(k, R - 20 - (i % 3) * 9); g += moved.has(i) ? `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5" ${FS('s' + own[i], 'text', 1.6)}/>` : `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3.4" ${F('s' + own[i], .9)}/>`; });
+    g += TX(cx, cy - 4, '120 keys', 'muted', 13, 'middle') + TX(cx, cy + 14, N + ' servers × ' + V, 'faint', 11.5, 'middle');
+    const cnt = [...Array(N)].map((_, s) => own.filter(o => o === s).length), mxc = Math.max(...cnt), mean = K / N;
+    g += TX(bx0, by0 - 14, 'Keys per server', 'muted', 12) ;
+    const bw0 = bx0 + 34, scale = (bx1 - bw0 - 40) / Math.max(mxc, mean * 2);
+    g += `<line x1="${bw0 + mean * scale}" y1="${by0 - 6}" x2="${bw0 + mean * scale}" y2="${by0 + N * bh}" ${S('faint', 1, ';stroke-dasharray:3 3')}/>` + TX(bw0 + mean * scale, by0 + N * bh + 13, 'fair share ' + mean.toFixed(0), 'faint', 11, 'middle');
+    cnt.forEach((c, s) => { const y = by0 + s * bh; g += TX(bx0, y + bh * .62, 'S' + s, 's' + s, 12) + `<rect x="${bw0}" y="${y + 4}" width="${Math.max(2, c * scale)}" height="${bh - 9}" rx="4" ${F('s' + s, .8)}/>` + TX(bw0 + c * scale + 6, y + bh * .62, c, 'text', 12); });
+    el.innerHTML = g;
+    const sd = Math.sqrt(cnt.reduce((s, c) => s + (c - mean) ** 2, 0) / N);
+    $('#hrMv').textContent = prev ? lastMv + ' of 120' : '—'; $('#hrMod').textContent = lastMod == null ? 'change the server count' : lastMod + ' of 120';
+    $('#hrSpread').textContent = Math.max(...cnt) + ' vs ' + Math.min(...cnt); $('#hrSd').textContent = Math.round(sd / mean * 100) + '%'; });
+  nI.addEventListener('input', change); vI.addEventListener('input', change); prev = owners(+nI.value, +vI.value)[0]; draw();
+}
+
+/* ---------- 6: quorum dial ---------- */
+{ const el = $('#kv6'), nI = $('#kvN'), wI = $('#kvW'), rI = $('#kvR');
+  let down = new Set(), ver = [1, 1, 1, 1, 1], latest = 1, wrote = new Set(), read = new Set(), lastW = 'Not yet', lastR = 'Not yet', seed = 3;
+  function sync(){ const N = +nI.value; wI.max = N; rI.max = N; if (+wI.value > N) wI.value = N; if (+rI.value > N) rI.value = N; }
+  const pick = (arr, k, r) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a.slice(0, k); };
+  function trial(){ const N = +nI.value, W = +wI.value, R = +rI.value, r = rng(seed += 7), alive = [...Array(N).keys()].filter(i => !down.has(i));
+    alive.forEach(i => ver[i] = latest);
+    wrote = new Set(); read = new Set();
+    if (alive.length < W){ lastW = `Failed: only ${alive.length} replica${alive.length === 1 ? '' : 's'} up, W needs ${W}`; }
+    else { latest++; pick(alive, W, r).forEach(i => { ver[i] = latest; wrote.add(i); }); lastW = `v${latest} acknowledged by ${W}`; }
+    if (alive.length < R){ lastR = `Failed: R needs ${R} replicas`; }
+    else { const rs = pick(alive, R, r); rs.forEach(i => read.add(i)); const got = Math.max(...rs.map(i => ver[i]));
+      lastR = got === latest ? `Got v${got}, the latest` : `Got v${got}: stale! The latest is v${latest}`; }
+    draw(); }
+  const draw = onLayout(() => { sync(); const N = +nI.value, W = +wI.value, R = +rI.value, nw = NARROW(), Wd = nw ? 360 : 760, H = nw ? 250 : 240;
+    out('kvN', N); out('kvW', W); out('kvR', R); vb(el, Wd, H);
+    const cx = Wd / 2, cy = 46, gap = nw ? 68 : 130, y = nw ? 180 : 170; let g = box(cx, cy, nw ? 130 : 160, 40, 'Coordinator', 'the node the client asked', 'cool', nw ? 12 : 13);
+    for (let i = 0; i < N; i++){ const x = cx + (i - (N - 1) / 2) * gap, isW = wrote.has(i), isR = read.has(i), dn = down.has(i);
+      if (isW) g += `<path d="M${cx - 8} ${cy + 20}L${x - 6} ${y - 26}" ${S('glow', 2)}/>`;
+      if (isR) g += `<path d="M${cx + 8} ${cy + 20}L${x + 6} ${y - 26}" ${S('cool', 2, ';stroke-dasharray:5 3')}/>`;
+      if (!isW && !isR) g += `<path d="M${cx} ${cy + 20}L${x} ${y - 26}" ${S('line', 1)}/>`;
+      const rr = nw ? 24 : 26, st = dn ? FS('bad-soft', 'bad', 1.6) : isW ? FS('glow-soft', 'glow', 2.4) : FS('panel-2', isR ? 'cool' : 'line', isR ? 2.4 : 1.4);
+      g += `<g class="hit" data-r="${i}" role="button" tabindex="0" aria-label="Replica ${i + 1}, ${dn ? 'down' : 'up'}"><circle cx="${x}" cy="${y}" r="${rr}" ${st}/>` + TX(x, y + 5, dn ? '×' : 'v' + ver[i], dn ? 'bad' : ver[i] === latest ? 'text' : 'muted', dn ? 20 : 14, 'middle') + TX(x, y + rr + 16, 'replica ' + (i + 1), 'faint', 11, 'middle') + '</g>'; }
+    el.innerHTML = g;
+    el.querySelectorAll('[data-r]').forEach(n => { const t = () => { const i = +n.dataset.r; down.has(i) ? down.delete(i) : down.add(i); draw(); }; n.addEventListener('click', t); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } }); });
+    $('#kvC').textContent = W + R > N ? `Strong (W + R = ${W + R} > ${N})` : `Eventual (W + R = ${W + R} ≤ ${N})`;
+    $('#kvWs').textContent = lastW; $('#kvRs').textContent = lastR; $('#kvTol').textContent = `${N - W} down for writes, ${N - R} for reads`; });
+  [nI, wI, rI].forEach(x => x.addEventListener('input', () => { for (let i = +nI.value; i < 5; i++) down.delete(i); wrote.clear(); read.clear(); lastW = lastR = 'Not yet'; draw(); }));
+  $('#kvGo').addEventListener('click', trial); draw();
+}
+
+/* ---------- 7: snowflake ---------- */
+{ const el = $('#sf7'), EPOCH = 1288834974657; let lastTs = -1, seq = 0, id = null, parts = null;
+  function mint(sameMs){ const T = +$('#sfT').value, Sb = 53 - T, ts = sameMs && lastTs >= 0 ? lastTs : Date.now() - EPOCH;
+    if (ts === lastTs) seq = (seq + 1) % (2 ** Sb); else seq = 0; lastTs = ts;
+    const dc = +$('#sfD').value, m = +$('#sfM').value, over = ts >= 2 ** T;
+    id = over ? null : (BigInt(ts) << BigInt(10 + Sb)) | (BigInt(dc) << BigInt(5 + Sb)) | (BigInt(m) << BigInt(Sb)) | BigInt(seq);
+    parts = { ts, dc, m, seq, T, Sb, over }; draw(); }
+  const draw = onLayout(() => { const T = +$('#sfT').value, Sb = 53 - T, nw = NARROW(), W = nw ? 360 : 760;
+    out('sfD', $('#sfD').value); out('sfM', $('#sfM').value); out('sfT', `${T} (sequence gets ${Sb})`);
+    if (!parts || parts.T !== T){ parts = null; }
+    const segs = [['Sign', 1, 'faint'], ['Timestamp', T, 'glow'], ['Data centre', 5, 'cool'], ['Machine', 5, 's2'], ['Sequence', Sb, 's3']];
+    const bits = id != null ? id.toString(2).padStart(64, '0') : '0'.repeat(64);
+    const per = nw ? 32 : 64, cw = nw ? 10.5 : 11, x0 = nw ? 12 : 28, rowsH = nw ? 2 : 1, H = nw ? 190 : 140;
+    vb(el, W, H); let g = '', b = 0;
+    segs.forEach(([name, n, c]) => { for (let k = 0; k < n; k++, b++){ const row = Math.floor(b / per), col = b % per, x = x0 + col * cw, y = 14 + row * 40;
+        g += `<rect x="${x}" y="${y}" width="${cw - 1.5}" height="26" rx="2" ${F(c, id != null ? .85 : .3)}/>` + (id != null ? `<text x="${x + (cw - 1.5) / 2}" y="${y + 17}" font-size="${nw ? 9 : 9.5}" text-anchor="middle" ${F('ink')}>${bits[b]}</text>` : ''); } });
+    if (!nw){ let s = 0; segs.forEach(([name, n, c]) => { const xa = x0 + s * cw, xb = x0 + (s + n) * cw - 1.5; g += `<path d="M${xa} 46v6H${xb}v-6" ${S(c, 1.2)}/>` + TX((xa + xb) / 2, 68, n === 1 ? '1' : name, c, 11.5, 'middle') + (n > 1 ? TX((xa + xb) / 2, 82, n + ' bits', 'faint', 10.5, 'middle') : ''); s += n; }); }
+    const ly = nw ? 106 : 104, vals = parts ? [0, parts.ts, parts.dc, parts.m, parts.seq] : null;
+    let lxp = 28; segs.forEach(([name, n, c], i) => { const t = name + (vals ? ': ' + fmtN(vals[i]) : ''), x = nw ? 12 + (i % 2) * 172 : lxp, y = nw ? ly + Math.floor(i / 2) * 26 : ly; lxp += t.length * 6.6 + 40;
+      g += `<rect x="${x}" y="${y - 10}" width="10" height="10" rx="2" ${F(c)}/>` + TX(x + 16, y, t, 'soft', 11.5); });
+    if (parts && parts.over) g += TX(W / 2, H - 6, 'The timestamp no longer fits in ' + T + ' bits: this layout ran out of time.', 'bad', 12, 'middle');
+    el.innerHTML = g;
+    $('#sfId').textContent = id != null ? id.toString() : parts && parts.over ? 'overflowed' : 'press Mint';
+    $('#sfCap').textContent = fmtN(2 ** Sb);
+    const end = new Date(EPOCH + 2 ** T); $('#sfLife').textContent = end.getUTCFullYear() + (end.getTime() < Date.now() ? ' (already passed)' : ''); });
+  $('#sfGo').addEventListener('click', () => mint(false));
+  $('#sfBurst').addEventListener('click', () => { mint(false); for (let i = 0; i < 4; i++) mint(true); });
+  ['sfD', 'sfM'].forEach(k => $('#' + k).addEventListener('input', draw));
+  $('#sfT').addEventListener('input', () => { id = null; parts = null; lastTs = -1; draw(); });
+  draw();
+}
+
+/* ---------- 8: URL shortener ---------- */
+{ const el = $('#us8'), A = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let next = 2009215674938, cur = next, seen = new Map();
+  const b62 = n => { let s = ''; do { s = A[n % 62] + s; n = Math.floor(n / 62); } while (n > 0); return s; };
+  function shorten(){ const u = $('#usIn').value.trim() || 'https://example.com'; let isNew = false;
+    if (!seen.has(u)){ seen.set(u, next++); isNew = true; } cur = seen.get(u);
+    $('#usOut').innerHTML = `https://tinyurl.com/${b62(cur)} <span style="color:var(--faint)">· ID ${fmtN(cur)}${isNew ? '' : ' · already in the database, same code returned'}</span>`; draw(); }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, L = +$('#usL').value, Y = +$('#usY').value, need = 1e8 * 365 * Y, cap = Math.pow(62, L);
+    out('usL', L + ' characters'); out('usY', Y);
+    const steps = []; let n = cur; do { steps.push([n, Math.floor(n / 62), n % 62]); n = Math.floor(n / 62); } while (n > 0);
+    const sh = 22, sx = nw ? 10 : 20, H1 = steps.length * sh + 54, bx = nw ? 10 : 470, by = nw ? H1 + 24 : 26, H = nw ? by + 6 * 26 + 40 : Math.max(H1, 230);
+    vb(el, W, H); let g = TX(sx, 16, 'Divide by 62, keep the remainders', 'muted', 12);
+    steps.forEach(([a, q, r], i) => { const y = 38 + i * sh; g += `<text x="${sx}" y="${y}" font-size="${nw ? 11.5 : 12.5}" ${F('soft')} class="mono">${fmtN(a)} ÷ 62${nw ? '' : ' = ' + fmtN(q)}</text>` + TX(nw ? 248 : 330, y, 'r ' + r, 'faint', nw ? 11.5 : 12.5) + TX(nw ? 300 : 392, y, '→ ' + A[r], 'glow', 13); });
+    g += TX(sx, 38 + steps.length * sh + 6, 'Read the letters bottom-up: ' + b62(cur), 'text', 12.5);
+    g += TX(bx, by - 10 + (nw ? 0 : 0), 'Codes available by length (log scale)', 'muted', 12);
+    const bw = nw ? 230 : 200, lx = bx + 34, LX = v => lx + Math.log10(v) / 17 * bw;
+    for (let k = 4; k <= 9; k++){ const y = by + (k - 4) * 26, v = Math.pow(62, k), ok = v >= need;
+      g += TX(bx, y + 14, k + ' ch', k === L ? 'text' : 'faint', 12) + `<rect x="${lx}" y="${y + 3}" width="${LX(v) - lx}" height="15" rx="3" ${F(ok ? 'good' : 'bad', k === L ? .9 : .35)}/>` + TX(LX(v) + 6, y + 14, short(v), k === L ? 'text' : 'faint', 11.5); }
+    const nx = LX(need); g += `<line x1="${nx}" y1="${by - 2}" x2="${nx}" y2="${by + 6 * 26}" ${S('glow', 1.5, ';stroke-dasharray:4 3')}/>` + TX(nx, by + 6 * 26 + 14, 'needed: ' + short(need), 'glow', 11.5, 'middle');
+    el.innerHTML = g;
+    $('#usCap').textContent = big(cap); $('#usNeed').textContent = big(need);
+    $('#usSay').textContent = cap >= need ? `${L} characters is enough, with ${Math.round(cap / need)}× headroom.` : `Too short: you would run out after about ${+(cap / 1e8 / 365).toFixed(1)} years.`; });
+  $('#usGo').addEventListener('click', shorten); $('#usIn').addEventListener('keydown', e => { if (e.key === 'Enter') shorten(); });
+  ['usL', 'usY'].forEach(k => $('#' + k).addEventListener('input', draw)); shorten();
+}
+
+/* ---------- 9: crawl a little web ---------- */
+{ const el = $('#wc9'), HOSTS = ['bigsite.com', 'news.org', 'blog.io', 'shop.net', 'wiki.edu', 'tiny.dev'], SIZE = [24, 10, 8, 6, 5, 4], STEPS = 30, WK = 4;
+  const opt = { polite: false, url: false, content: false }; let seed = 5;
+  $('#wcT').innerHTML = [['polite', 'Politeness: a queue per site, one worker each, with a pause'], ['url', '"URL seen?" filter'], ['content', '"Content seen?" filter']].map(([k, l]) => `<label class="tg"><input type="checkbox" data-o="${k}"><span>${l}</span></label>`).join('');
+  $$('#wcT [data-o]').forEach(c => c.addEventListener('change', () => { opt[c.dataset.o] = c.checked; draw(); }));
+  $('#wcGo').addEventListener('click', () => { seed += 11; draw(); });
+  function sim(){ const r = rng(seed), pages = []; SIZE.forEach((n, h) => { for (let i = 0; i < n; i++) pages.push({ h, id: pages.length }); });
+    pages.forEach(p => { p.content = r() < .25 ? Math.floor(r() * pages.length) : p.id; p.links = [...Array(4)].map(() => { const sameHost = r() < .75, h = sameHost ? p.h : Math.floor(r() * HOSTS.length), list = pages.filter(q => q.h === h); return list[Math.floor(r() * list.length)].id; }); });
+    const seen = new Set(), fetched = new Set(), stored = new Set(), grid = HOSTS.map(() => Array(STEPS).fill(0)); let waste = 0, dup = 0;
+    const frontier = [0, pages.find(p => p.h === 3).id]; frontier.forEach(u => seen.add(u)); const rest = {};
+    for (let s = 0; s < STEPS; s++){ let take = [];
+      if (!opt.polite) take = frontier.splice(0, WK);
+      else { const used = new Set(); for (let i = 0; i < frontier.length && take.length < WK; i++){ const h = pages[frontier[i]].h; if (used.has(h) || (rest[h] != null && s - rest[h] < 2)) continue; used.add(h); take.push(frontier.splice(i, 1)[0]); i--; } }
+      take.forEach(u => { const p = pages[u]; grid[p.h][s]++; if (opt.polite) rest[p.h] = s;
+        if (fetched.has(u)){ waste++; return; } fetched.add(u);
+        if (stored.has(p.content)){ if (opt.content) return; dup++; } stored.add(p.content);
+        p.links.forEach(l => { if (opt.url && seen.has(l)) return; seen.add(l); frontier.push(l); }); }); }
+    return { grid, fresh: fetched.size, waste, dup, hot: Math.max(...grid.flat()) }; }
+  const draw = onLayout(() => { const res = sim(), nw = NARROW(); let g = '';
+    if (!nw){ const W = 760, lx = 100, cw = 21, ch = 26, H = HOSTS.length * ch + 36; vb(el, W, H);
+      HOSTS.forEach((h, i) => { g += TX(lx - 8, 14 + i * ch + 12, h, 'soft', 12, 'end'); res.grid[i].forEach((v, s) => { const x = lx + s * cw, y = 10 + i * ch;
+        g += v === 0 ? `<rect x="${x}" y="${y}" width="${cw - 3}" height="${ch - 4}" rx="3" ${S('line', 1)}/>` : `<rect x="${x}" y="${y}" width="${cw - 3}" height="${ch - 4}" rx="3" ${F(v > 1 ? 'bad' : 'glow', v > 1 ? .9 : .45)}/>` + (v > 1 ? `<text x="${x + (cw - 3) / 2}" y="${y + 15}" font-size="11" text-anchor="middle" ${F('ink')}>${v}</text>` : ''); }); });
+      g += TX(lx, H - 6, 'step 1', 'faint', 11) + TX(lx + STEPS * cw - 3, H - 6, 'step 30', 'faint', 11, 'end'); }
+    else { const W = 360, ty = 48, cw = 50, ch = 13, lx = 50, H = ty + STEPS * ch + 10; vb(el, W, H);
+      HOSTS.forEach((h, i) => { g += `<text x="${lx + i * cw + cw / 2 - 2}" y="${ty - 8}" font-size="10" text-anchor="start" transform="rotate(-35 ${lx + i * cw + cw / 2 - 2} ${ty - 8})" ${F('soft')}>${h}</text>`;
+        res.grid[i].forEach((v, s) => { const x = lx + i * cw, y = ty + s * ch; g += v === 0 ? `<rect x="${x}" y="${y}" width="${cw - 4}" height="${ch - 3}" rx="2" ${S('line', 1)}/>` : `<rect x="${x}" y="${y}" width="${cw - 4}" height="${ch - 3}" rx="2" ${F(v > 1 ? 'bad' : 'glow', v > 1 ? .9 : .45)}/>` + (v > 1 ? `<text x="${x + (cw - 4) / 2}" y="${y + 9}" font-size="9" text-anchor="middle" ${F('ink')}>${v}</text>` : ''); }); });
+      g += TX(lx - 6, ty + 9, 'step 1', 'faint', 10, 'end') + TX(lx - 6, ty + (STEPS - 1) * ch + 9, '30', 'faint', 10, 'end'); }
+    el.innerHTML = g;
+    $('#wcNew').textContent = res.fresh + ' of 57'; $('#wcWaste').textContent = res.waste; $('#wcDup').textContent = res.dup; $('#wcHot').textContent = res.hot + (res.hot > 1 ? ' at once' : ''); });
+  draw();
+}
+
+/* ---------- 10: notifications ---------- */
+{ const el = $('#nt10'), CHN = [['iOS push', 'APNs'], ['Android push', 'FCM'], ['SMS', 'Twilio'], ['Email', 'SendGrid']];
+  const opt = { perq: true, retry: false, dedupe: false, down: true }; let seed = 9, res = null;
+  $('#ntT').innerHTML = [['perq', 'A separate queue per channel'], ['retry', 'Notification log + retry'], ['dedupe', 'Drop duplicates by event ID'], ['down', 'The SMS provider is down']].map(([k, l]) => `<label class="tg"><input type="checkbox" data-o="${k}"${opt[k] ? ' checked' : ''}><span>${l}</span></label>`).join('');
+  $$('#ntT [data-o]').forEach(c => c.addEventListener('change', () => { opt[c.dataset.o] = c.checked; run(); }));
+  $('#ntGo').addEventListener('click', () => { seed += 13; run(); });
+  function run(){ const r = rng(seed), ev = []; let id = 0;
+    for (let i = 0; i < 40; i++){ if (i > 4 && r() < .125){ const e = ev[Math.floor(r() * ev.length)]; ev.push({ ...e, dup: true }); continue; }
+      const x = r(), c = x < .3 ? 0 : x < .6 ? 1 : x < .75 ? 2 : 3; ev.push({ id: id++, c, flaky: r() < .08, dup: false }); }
+    const seen = new Set(), st = CHN.map(() => ({ ok: 0, wait: 0, lost: 0 })); let twice = 0, blocked = false;
+    ev.forEach(e => { if (opt.dedupe && seen.has(e.id)) return; seen.add(e.id); const s = st[e.c];
+      if (!opt.perq && blocked){ s.wait++; return; }
+      const fails = (e.c === 2 && opt.down) || e.flaky;
+      if (!fails){ s.ok++; if (e.dup) twice++; return; }
+      if (opt.retry){ if (e.flaky && !(e.c === 2 && opt.down)){ s.ok++; if (e.dup) twice++; return; } s.wait++; if (!opt.perq) blocked = true; }
+      else s.lost++; });
+    res = { st, twice }; draw(); }
+  const draw = onLayout(() => { if (!res) return; const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 470 : 300; vb(el, W, H); let g = '';
+    const { st } = res, tot = k => st.reduce((s, x) => s + x[k], 0);
+    if (!nw){ const cols = [70, 210, 370, 520, 670], rows = [0, 1, 2, 3].map(i => 50 + i * 64), mid = (rows[0] + rows[3]) / 2;
+      g += box(cols[0], mid, 110, 52, 'Services', 'billing, shop…', 'old') + box(cols[1], mid, 120, 52, 'Notification', 'servers', 'old');
+      g += curve(cols[0] + 55, mid, cols[1] - 62, mid, false);
+      if (opt.perq) rows.forEach((y, i) => { g += curve(cols[1] + 60, mid, cols[2] - 62, y, false) + box(cols[2], y, 120, 44, CHN[i][0] + ' queue', st[i].wait ? st[i].wait + ' waiting' : 'empty', st[i].wait ? 'bad' : 'old', 12.5); });
+      else { g += curve(cols[1] + 60, mid, cols[2] - 62, mid, false) + `<rect x="${cols[2] - 60}" y="${rows[0] - 22}" width="120" height="${rows[3] - rows[0] + 44}" rx="8" ${tot('wait') ? FS('bad-soft', 'bad', 1.5) : FS('panel-2', 'line', 1.2)}/>` + TX(cols[2], mid - 6, 'One shared', 'text', 13, 'middle') + TX(cols[2], mid + 12, 'queue', 'text', 13, 'middle') + TX(cols[2], mid + 32, tot('wait') ? tot('wait') + ' waiting' : 'empty', 'faint', 11, 'middle'); }
+      rows.forEach((y, i) => { const dn = i === 2 && opt.down; g += curve(cols[2] + 60, opt.perq ? y : mid, cols[3] - 52, y, false) + box(cols[3], y, 100, 40, 'Workers', '', 'old', 12.5) + curve(cols[3] + 50, y, cols[4] - 66, y, false, dn ? 'bad' : 'faint', 1.4, dn ? '4 3' : '')
+        + box(cols[4], y, 128, 44, CHN[i][1] + (dn ? ' · down' : ''), `${st[i].ok} delivered${st[i].lost ? ' · ' + st[i].lost + ' lost' : ''}`, dn ? 'bad' : st[i].ok ? 'new' : 'old', 12.5); }); }
+    else { const xs = [0, 1, 2, 3].map(i => 50 + i * 87); g += box(95, 30, 150, 40, 'Services', '', 'old', 12) + box(265, 30, 150, 40, 'Notification servers', '', 'old', 11.5) + curve(170, 30, 188, 30, false);
+      if (opt.perq) xs.forEach((x, i) => { g += curve(265, 50, x, 106, true) + box(x, 130, 80, 44, CHN[i][0].replace(' push', ''), st[i].wait ? st[i].wait + ' waiting' : 'queue', st[i].wait ? 'bad' : 'old', 11.5); });
+      else { g += curve(265, 50, 180, 106, true) + `<rect x="10" y="108" width="340" height="44" rx="8" ${tot('wait') ? FS('bad-soft', 'bad', 1.5) : FS('panel-2', 'line', 1.2)}/>` + TX(180, 128, 'One shared queue', 'text', 12, 'middle') + TX(180, 144, tot('wait') ? tot('wait') + ' waiting' : 'empty', 'faint', 10.5, 'middle'); }
+      xs.forEach((x, i) => { const dn = i === 2 && opt.down; g += curve(x, 152, x, 206, true) + box(x, 228, 80, 38, 'Workers', '', 'old', 11.5) + curve(x, 247, x, 300, true, dn ? 'bad' : 'faint', 1.4, dn ? '4 3' : '')
+        + box(x, 330, 80, 56, CHN[i][1], '', dn ? 'bad' : st[i].ok ? 'new' : 'old', 12) + TX(x, 376, st[i].ok + ' sent', 'soft', 11, 'middle') + (st[i].lost ? TX(x, 392, st[i].lost + ' lost', 'bad', 11, 'middle') : '') + (dn ? TX(x, 408, 'down', 'bad', 11, 'middle') : ''); }); }
+    el.innerHTML = g;
+    $('#ntOk').textContent = tot('ok'); $('#ntWait').textContent = tot('wait'); $('#ntLost').textContent = tot('lost'); $('#ntTwice').textContent = res.twice; });
+  run();
+}
+
+/* ---------- 11: fan-out ---------- */
+{ const el = $('#nf11'), fI = $('#nfF'), aI = $('#nfA'), rI = $('#nfR'), CELEB = 1e4; let mode = 'push';
+  $('#nfM').innerHTML = [['push', 'Fan-out on write (push)'], ['pull', 'Fan-out on read (pull)'], ['hybrid', 'Hybrid']].map(([k, l], i) => `<button class="btn" data-m="${k}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  const mb = [...$('#nfM').querySelectorAll('[data-m]')]; mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  const draw = onLayout(() => { const F0 = Math.round(Math.pow(10, +fI.value)), a = +aI.value / 100, R = +rI.value, celeb = F0 > CELEB, pushes = mode === 'push' || (mode === 'hybrid' && !celeb);
+    out('nfF', short(F0)); out('nfA', Math.round(a * 100) + '%'); out('nfR', fmtN(R));
+    const writes = pushes ? F0 : 0, waste = pushes ? F0 * (1 - a) : 0, celebFollowed = Math.ceil(R * .05), reads = mode === 'push' ? 1 : mode === 'pull' ? R : 1 + celebFollowed;
+    $('#nfW').textContent = fmtN(writes); $('#nfWaste').textContent = fmtN(waste); $('#nfRd').textContent = fmtN(reads) + (mode === 'hybrid' ? ` (feed + ${celebFollowed} celebrities)` : '');
+    $('#nfSay').textContent = mode === 'push' ? (F0 > 1e6 ? 'One post becomes millions of cache writes: the hot key problem. Feeds still load instantly.' : 'Feeds load instantly from the cache; posting does the work.') : mode === 'pull' ? (R > 500 ? 'Nothing wasted on posting, but opening the feed means gathering posts from hundreds of accounts. Slow.' : 'Nothing wasted on posting; the feed is built when it is opened, which is slower.') : (celeb ? 'This poster counts as a celebrity, so the post is not pushed. Followers pull it when they open their feed.' : 'An ordinary poster: the post is pushed to followers\' feed caches. Celebrities they follow are pulled in at read time.');
+    const nw = NARROW(), W = nw ? 360 : 760, PW = nw ? 360 : 380, H = nw ? 470 : 250; vb(el, W, H); let g = '';
+    // panel 1: posting
+    const p1x = 0, p1y = 0, px = p1x + 50, py = p1y + 120, cols = 10, rows = 6, gx = p1x + 130, gy = p1y + 40, cs = nw ? 21 : 22;
+    g += TX(p1x + 10, p1y + 18, 'When the post is made', 'muted', 12);
+    g += `<circle cx="${px}" cy="${py}" r="20" ${FS('glow-soft', 'glow', 2)}/>` + TX(px, py + 4, 'post', 'text', 11.5, 'middle') + TX(px, py + 38, short(F0) + ' followers', 'faint', 11, 'middle');
+    for (let i = 0; i < cols * rows; i++){ const x = gx + (i % cols) * cs, y = gy + Math.floor(i / cols) * cs, act = (i * 37 % 100) / 100 < a;
+      if (pushes && i % 7 === 0) g += `<line x1="${px + 20}" y1="${py}" x2="${x}" y2="${y + 6}" ${S('glow', .8, ';stroke-opacity:.35')}/>`;
+      g += `<rect x="${x}" y="${y}" width="${cs - 6}" height="${cs - 8}" rx="3" ${pushes ? F(act ? 'glow' : 'bad', act ? .7 : .35) : S('line', 1)}/>`; }
+    g += TX(gx, gy + rows * cs + 12, pushes ? 'feed caches written (red: inactive followers)' : 'no feed caches touched', 'faint', 11);
+    // panel 2: reading
+    const q0x = nw ? 0 : PW, q0y = nw ? 240 : 0, rx = q0x + 60, ry = q0y + 120;
+    g += TX(q0x + 10, q0y + 18, 'When a follower opens the app', 'muted', 12);
+    g += `<circle cx="${rx}" cy="${ry}" r="20" ${FS('cool-soft', 'cool', 2)}/>` + TX(rx, ry + 4, 'reader', 'text', 11, 'middle');
+    const fcx = q0x + (nw ? 250 : 270);
+    if (mode !== 'pull'){ g += `<line x1="${rx + 20}" y1="${ry}" x2="${fcx - 50}" y2="${q0y + 70}" ${S('cool', 2)}/>` + box(fcx, q0y + 70, 110, 40, 'Feed cache', 'post IDs, ready', 'cool', 12); }
+    const nAcc = mode === 'push' ? 0 : mode === 'pull' ? Math.min(32, R) : Math.min(32, celebFollowed), ax0 = q0x + 140, ay0 = q0y + 118;
+    for (let i = 0; i < nAcc; i++){ const x = ax0 + (i % 8) * 24, y = ay0 + Math.floor(i / 8) * 22;
+      g += `<line x1="${rx + 20}" y1="${ry}" x2="${x}" y2="${y}" ${S('cool', .8, ';stroke-opacity:.5')}/><circle cx="${x}" cy="${y}" r="6" ${F(mode === 'hybrid' ? 'glow' : 'cool', .85)}/>`; }
+    if (nAcc) g += TX(q0x + 10, q0y + 226, mode === 'pull' ? `pulls recent posts from ${fmtN(R)} accounts${R > 32 ? ' (32 drawn)' : ''}` : `plus ${celebFollowed} celebrities pulled at read time`, 'faint', 11);
+    el.innerHTML = g; });
+  [fI, aI, rI].forEach(x => x.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 12: polling, long polling, WebSocket ---------- */
+{ const el = $('#ct12'), iI = $('#ctI'), T = 30; let mode = 'poll', seed = 4, msgs = [];
+  $('#ctM').innerHTML = [['poll', 'Polling'], ['long', 'Long polling'], ['ws', 'WebSocket']].map(([k, l], i) => `<button class="btn" data-m="${k}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  const mb = [...$('#ctM').querySelectorAll('[data-m]')]; mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  const gen = () => { const r = rng(seed); msgs = [...Array(6)].map(() => 1 + r() * 27.5).sort((a, b) => a - b); };
+  $('#ctGo').addEventListener('click', () => { seed += 3; gen(); draw(); });
+  function sim(){ const I = +iI.value, ev = [], del = []; let req = 0, empty = 0;
+    if (mode === 'poll'){ let lastP = 0; for (let t = 0; t <= T; t += I){ req++; const got = msgs.filter(m => m > lastP && m <= t); if (!got.length && t > 0) empty++; got.forEach(m => del.push(t - m)); ev.push({ q: t, a: t + .15, got: got.length }); lastP = t; } }
+    if (mode === 'long'){ let t = 0, guard = 0; const got = new Set();
+      while (t < T && guard++ < 80){ req++;
+        const wait = msgs.filter(m => m < t && !got.has(m)), first = msgs.find(m => m >= t && m < t + 10);
+        if (wait.length){ ev.push({ q: t, a: t + .15, got: wait.length }); wait.forEach(m => { got.add(m); del.push(t + .15 - m); }); t += .3; continue; }
+        if (first != null){ ev.push({ q: t, a: first + .1, got: 1, hold: true }); got.add(first); del.push(.1); t = first + .3; }
+        else { ev.push({ q: t, a: Math.min(T, t + 10), got: 0, hold: true }); empty++; t += 10.2; } } }
+    if (mode === 'ws'){ req = 1; msgs.forEach(() => del.push(.05)); }
+    return { ev, req, empty, avg: del.length ? del.reduce((s, x) => s + x, 0) / del.length : 0 }; }
+  const draw = onLayout(() => { const I = +iI.value; out('ctI', I + ' s'); iI.disabled = mode !== 'poll'; iI.parentElement.style.opacity = mode === 'poll' ? 1 : .5;
+    const res = sim(), nw = NARROW(), W = nw ? 360 : 760, H = 220, x0 = nw ? 54 : 70, x1 = W - 14, X = t => x0 + t / T * (x1 - x0), yc = 50, ys = 160;
+    vb(el, W, H); let g = TX(x0 - 8, yc + 4, 'Phone', 'soft', 12, 'end') + TX(x0 - 8, ys + 4, 'Server', 'soft', 12, 'end');
+    g += `<line x1="${x0}" y1="${yc}" x2="${x1}" y2="${yc}" ${S('line', 2)}/><line x1="${x0}" y1="${ys}" x2="${x1}" y2="${ys}" ${S('line', 2)}/>`;
+    [0, 10, 20, 30].forEach(t => g += TX(X(t), H - 8, t + 's', 'faint', 11, 'middle'));
+    if (mode === 'ws'){ g += `<rect x="${X(0)}" y="${yc + 6}" width="${X(T) - X(0)}" height="${ys - yc - 12}" rx="6" ${F('cool', .1)}/>` + `<line x1="${X(0)}" y1="${yc}" x2="${X(.2)}" y2="${ys}" ${S('cool', 1.6)}/>` + TX(X(0) + 8, yc + 24, 'one connection, open the whole time', 'cool', 11.5);
+      msgs.forEach(m => { g += `<line x1="${X(m)}" y1="${ys}" x2="${X(m)}" y2="${yc + 8}" ${S('glow', 2)}/>` + arrowHead(X(m), yc + 4, -Math.PI / 2, 'glow', 7); }); }
+    else res.ev.forEach(e => { const xq = X(e.q), xa = X(Math.min(e.a, T));
+      g += `<line x1="${xq}" y1="${yc}" x2="${xq + 2}" y2="${ys}" ${S('cool', 1.1)}/>`;
+      if (e.hold) g += `<line x1="${xq + 2}" y1="${ys - 5}" x2="${xa}" y2="${ys - 5}" ${S('cool', 4, ';stroke-opacity:.25;stroke-linecap:round')}/>`;
+      if (e.a <= T) g += `<line x1="${xa}" y1="${ys}" x2="${xa + 2}" y2="${yc}" ${S(e.got ? 'glow' : 'faint', e.got ? 2 : 1, e.got ? '' : ';stroke-dasharray:2 3')}/>`; });
+    msgs.forEach(m => { const x = X(m); g += `<path d="M${x} ${ys - 8}L${x + 7} ${ys}L${x} ${ys + 8}L${x - 7} ${ys}Z" ${F('glow')}/>`; });
+    el.innerHTML = g;
+    $('#ctReq').textContent = res.req; $('#ctEmpty').textContent = res.empty; $('#ctDelay').textContent = res.avg < .1 ? 'instant' : res.avg.toFixed(1) + ' s';
+    $('#ctSay').textContent = mode === 'poll' ? 'The phone keeps asking. Short intervals waste requests; long ones make messages late.' : mode === 'long' ? 'Each request waits at the server until a message comes or it times out, then the phone asks again. Fewer empty answers, but the server holds many open requests.' : 'One handshake, then the server pushes each message the moment it arrives, and the phone can send on the same connection.'; });
+  iI.addEventListener('input', draw); gen(); draw();
+}
+
+/* ---------- 13: the trie ---------- */
+{ const el = $('#ac13'), inp = $('#acIn'), WORDS = { tree: 10, true: 35, try: 29, toy: 14, top: 40, wish: 25, win: 50, wine: 18, wind: 12, window: 30, best: 48, bed: 20, bee: 15 }, K = 5;
+  let cache = true;
+  $('#acT').innerHTML = '<label class="tg"><input type="checkbox" id="acC" checked><span>Cache the top 5 at each node</span></label>';
+  $('#acC').addEventListener('change', e => { cache = e.target.checked; draw(); });
+  const root = { ch: '', pre: '', kids: {}, n: 0 };
+  Object.entries(WORDS).sort().forEach(([w, f]) => { let nd = root; [...w].forEach((c, i) => { nd.kids[c] = nd.kids[c] || { ch: c, pre: w.slice(0, i + 1), kids: {}, n: 0 }; nd = nd.kids[c]; }); nd.n = f; });
+  const all = []; let leaf = 0; (function lay(nd, d){ nd.d = d; all.push(nd); const ks = Object.values(nd.kids); if (!ks.length){ nd.x = leaf++; return; } ks.forEach(k => lay(k, d + 1)); nd.x = (ks[0].x + ks[ks.length - 1].x) / 2; })(root, 0);
+  const sub = nd => [nd, ...Object.values(nd.kids).flatMap(sub)];
+  const draw = onLayout(() => { const p = inp.value.toLowerCase().replace(/[^a-z]/g, ''), nw = NARROW(), W = nw ? 360 : 760, H = nw ? 310 : 340, rr = nw ? 11 : 13, X = x => (nw ? 18 : 40) + x / (leaf - 1) * (W - (nw ? 36 : 80)), Y = d => 22 + d * (nw ? 44 : 46);
+    let nd = root, path = [root]; for (const c of p){ nd = nd && nd.kids[c]; if (!nd) break; path.push(nd); }
+    const found = nd && path.length === p.length + 1, below = found ? sub(nd) : [], onPath = new Set(path), searched = new Set(found && !cache ? below : []);
+    vb(el, W, H); let g = '';
+    all.forEach(n => Object.values(n.kids).forEach(k => { const hot = found && onPath.has(n) && onPath.has(k); g += `<line x1="${X(n.x)}" y1="${Y(n.d)}" x2="${X(k.x)}" y2="${Y(k.d)}" ${S(hot ? 'glow' : searched.has(k) ? 'cool' : 'line', hot ? 2.4 : 1.2)}/>`; }));
+    all.forEach(n => { const on = found && onPath.has(n), sr = searched.has(n) && !(on && n !== nd), x = X(n.x), y = Y(n.d);
+      g += `<g class="hit" data-p="${n.pre}"><circle cx="${x}" cy="${y}" r="${rr}" ${on ? FS('glow', 'glow', 1) : sr ? FS('cool-soft', 'cool', 1.6) : FS('panel-2', n.n ? 'soft' : 'line', 1.2)}/>` + TX(x, y + 4.5, n === root ? '·' : n.ch, on ? 'on-glow' : 'text', nw ? 11.5 : 13, 'middle') + (n.n ? TX(x, y + rr + 12, n.n, 'faint', nw ? 9.5 : 10.5, 'middle') : '') + '</g>'; });
+    if (found && cache && nd !== root && !nw){ const words = below.filter(n => n.n).sort((a, b) => b.n - a.n).slice(0, K), x = X(nd.x), y = Y(nd.d), bx = x > W * .6 ? x - rr - 116 : x + rr + 8, by = Math.min(H - 16 - words.length * 15, y - 10);
+      g += `<rect x="${bx}" y="${by}" width="106" height="${words.length * 15 + 10}" rx="6" ${FS('panel', 'glow-line', 1)}/>` + words.map((w, i) => TX(bx + 8, by + 17 + i * 15, w.pre + ' · ' + w.n, 'soft', 11)).join(''); }
+    el.innerHTML = g;
+    el.querySelectorAll('[data-p]').forEach(n => n.addEventListener('click', () => { inp.value = n.dataset.p; draw(); }));
+    const top = found ? below.filter(n => n.n).sort((a, b) => b.n - a.n).slice(0, K) : [];
+    $('#acTop').innerHTML = !p ? 'Type a letter' : top.length ? top.map(n => `<b>${n.pre}</b> <span style="color:var(--faint)">${n.n}</span>`).join(' · ') : 'No suggestions';
+    $('#acCost').textContent = !found || !p ? '—' : cache ? `${p.length} (walk to the prefix, read the list)` : `${p.length + below.length - 1} (walk ${p.length}, then search ${below.length - 1} below)`; });
+  inp.addEventListener('input', draw); draw();
+}
+
+/* ---------- 14: the CDN bill ---------- */
+{ const el = $('#yt14'), NV = 10000, H_ = []; let acc = 0; for (let i = 1; i <= NV; i++){ acc += 1 / i; H_.push(acc); }
+  const share = pct => H_[Math.max(1, Math.round(NV * pct / 100)) - 1] / H_[NV - 1];
+  const draw = onLayout(() => { const c = +$('#ytC').value, u = +$('#ytU').value * 1e6, sz = +$('#ytS').value, sh = share(c);
+    out('ytC', c + '%'); out('ytU', u / 1e6 + ' million'); out('ytS', sz + ' MB');
+    const all = u * 5 * sz / 1000 * .02, cost = all * sh;
+    $('#ytShare').textContent = Math.round(sh * 100) + '%'; $('#ytCost').textContent = '$' + fmtN(cost); $('#ytAll').textContent = '$' + fmtN(all);
+    $('#ytSay').textContent = c === 100 ? 'Everything streams from the CDN: simplest, and the most expensive.' : `The top ${c}% of videos cover ${Math.round(sh * 100)}% of views. The other ${100 - Math.round(sh * 100)}% stream from your own video servers, which need their own capacity.`;
+    const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 230 : 250, x0 = nw ? 36 : 56, x1 = W - 14, y0 = 20, y1 = H - 34, X = p => x0 + p / 100 * (x1 - x0), Y = v => y0 + (-Math.log10(v)) / 4 * (y1 - y0);
+    vb(el, W, H); let g = '';
+    [1, .1, .01, .001, .0001].forEach((v, i) => g += `<line x1="${x0}" y1="${Y(v)}" x2="${x1}" y2="${Y(v)}" ${S('line', 1, ';stroke-dasharray:2 4')}/>` + TX(x0 - 6, Y(v) + 4, ['1×', '1/10', '1/100', '1/1k', '1/10k'][i], 'faint', 10.5, 'end'));
+    let head = `M${X(0)} ${y1}`, tail = `M${X(c)} ${y1}`, line = ''; for (let k = 0; k <= 200; k++){ const p = k / 2, rank = Math.max(1, p / 100 * NV), v = 1 / rank, pt = `${X(p).toFixed(1)} ${Y(v).toFixed(1)}`;
+      line += (k ? 'L' : 'M') + pt; if (p <= c) head += 'L' + pt; if (p >= c) tail += 'L' + pt; }
+    const yc = Y(1 / Math.max(1, c / 100 * NV)); head += `L${X(c)} ${yc}L${X(c)} ${y1}Z`; tail += `L${X(100)} ${y1}Z`;
+    g += `<path d="${head}" ${F('glow', .3)}/><path d="${tail}" ${F('cool', .14)}/><path d="${line}" ${S('text', 1.6)}/>`;
+    g += `<line x1="${X(c)}" y1="${y0}" x2="${X(c)}" y2="${y1}" ${S('glow', 1.5, ';stroke-dasharray:4 3')}/>`;
+    g += TX(X(Math.min(c, 60) / 2) + 6, y0 + 40, 'CDN', 'glow', 12.5) + (c < 96 ? TX(X((c + 100) / 2), Y(.0003) - 10, 'own servers', 'cool', 12.5, 'middle') : '');
+    g += TX(x0, H - 10, 'most popular video', 'faint', 11) + TX(x1, H - 10, 'least popular', 'faint', 11, 'end') + TX(x0 + 4, y0 - 6, 'views (log scale)', 'faint', 11);
+    el.innerHTML = g; });
+  ['ytC', 'ytU', 'ytS'].forEach(k => $('#' + k).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 15: block sync ---------- */
+{ const el = $('#gd15'), NB = 10, DUPB = new Set([7, 8]); let edited = new Set([3]), mode = 'edit', seed = 2;
+  const opt = { delta: true, comp: false, dedupe: false };
+  $('#gdT').innerHTML = '<div class="row" id="gdM" style="grid-column:1/-1"></div>' + [['delta', 'Delta sync'], ['comp', 'Compress blocks'], ['dedupe', 'Skip blocks already stored']].map(([k, l]) => `<label class="tg"><input type="checkbox" data-o="${k}"${opt[k] ? ' checked' : ''}><span>${l}</span></label>`).join('');
+  $('#gdM').innerHTML = '<button class="btn" data-m="first" aria-pressed="false">First upload</button><button class="btn" data-m="edit" aria-pressed="true">Sync an edit</button>';
+  const mb = [...$('#gdM').querySelectorAll('[data-m]')]; mb.forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press(mb, b); draw(); }));
+  $$('#gdT [data-o]').forEach(c => c.addEventListener('change', () => { opt[c.dataset.o] = c.checked; draw(); }));
+  $('#gdRnd').addEventListener('click', () => { const r = rng(seed += 5); edited = new Set([Math.floor(r() * NB)]); if (r() < .5) edited.add(Math.floor(r() * NB)); mode = 'edit'; press(mb, mb[1]); draw(); });
+  $('#gdClr').addEventListener('click', () => { edited.clear(); draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, per = nw ? 5 : 10, bw = nw ? 58 : 62, gap = nw ? 68 : 72, x0 = nw ? 14 : 30, rows = NB / per, H = nw ? 380 : 230;
+    const send = []; for (let i = 0; i < NB; i++){ const isDup = DUPB.has(i) && !edited.has(i); let s = mode === 'first' ? true : opt.delta ? edited.has(i) : true; if (s && opt.dedupe && isDup) s = false; send.push(s); }
+    const n = send.filter(Boolean).length, mb_ = n * 4 * (opt.comp ? .5 : 1);
+    $('#gdN').textContent = n + ' of ' + NB; $('#gdMB').textContent = mb_ + ' MB'; $('#gdSave').textContent = Math.round((1 - mb_ / 40) * 100) + '%';
+    vb(el, W, H); let g = '<defs><pattern id="gdStripe" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="3" height="6" style="fill:var(--cool);fill-opacity:.35"/></pattern></defs>';
+    const yA = 30, yB = nw ? 230 : 160, bh = 40;
+    g += TX(x0, yA - 10, 'Your laptop · report.psd, 40 MB', 'muted', 12) + TX(x0, yB - 10, 'Cloud storage (block servers)', 'muted', 12);
+    for (let i = 0; i < NB; i++){ const row = Math.floor(i / per), col = i % per, x = x0 + col * gap, ya = yA + row * (bh + 14), yb = yB + row * (bh + 14), isDup = DUPB.has(i) && !edited.has(i), ed = edited.has(i) && mode === 'edit';
+      g += `<g class="hit" data-b="${i}" role="button" tabindex="0" aria-label="Block ${i + 1}${ed ? ', edited' : ''}"><rect x="${x}" y="${ya}" width="${bw}" height="${bh}" rx="6" ${ed ? FS('glow-soft', 'glow', 2) : FS('panel-2', 'line', 1.2)}/>` + (isDup ? `<rect x="${x}" y="${ya}" width="${bw}" height="${bh}" rx="6" style="fill:url(#gdStripe)"/>` : '') + TX(x + bw / 2, ya + 18, 'block ' + (i + 1), 'text', 11.5, 'middle') + TX(x + bw / 2, ya + 32, ed ? 'edited' : '4 MB', ed ? 'glow' : 'faint', 10.5, 'middle') + '</g>';
+      const stored = send[i] || isDup || mode === 'edit';
+      g += `<rect x="${x}" y="${yb}" width="${bw}" height="${bh}" rx="6" ${send[i] ? FS('glow-soft', 'glow', 1.6) : stored ? FS('panel-2', 'line', 1.2) : S('line', 1, ';stroke-dasharray:3 3')}/>` + (isDup ? `<rect x="${x}" y="${yb}" width="${bw}" height="${bh}" rx="6" style="fill:url(#gdStripe)"/>` : '') + TX(x + bw / 2, yb + 24, send[i] ? (opt.comp ? '2 MB' : '4 MB') : stored ? 'kept' : '', send[i] ? 'glow' : 'faint', 11, 'middle');
+      if (send[i] && !nw) g += curve(x + bw / 2, ya + bh + 2, x + bw / 2, yb - 4, true, 'glow', 1.6); }
+    if (nw) g += TX(W / 2, yB - 34, n ? `↓ ${n} block${n === 1 ? '' : 's'} sent` : 'nothing to send', n ? 'glow' : 'faint', 12.5, 'middle');
+    el.innerHTML = g;
+    el.querySelectorAll('[data-b]').forEach(nd => { const t = () => { const i = +nd.dataset.b; edited.has(i) ? edited.delete(i) : edited.add(i); mode = 'edit'; press(mb, mb[1]); draw(); }; nd.addEventListener('click', t); nd.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); t(); } }); }); });
+  draw();
+}
+
+/* ---------- 16: reach for the right block ---------- */
+{ const B = { rl: ['Rate limiter', 'Ch. 4'], chash: ['Consistent hashing', 'Ch. 5'], kv: ['Quorum key-value store', 'Ch. 6'], id: ['Snowflake IDs', 'Ch. 7'], b62: ['Base 62 short codes', 'Ch. 8'], bloom: ['Bloom filter ("URL seen?")', 'Ch. 9'], q: ['Queues + notification log', 'Ch. 10'], fan: ['Hybrid fan-out', 'Ch. 11'], ws: ['WebSocket + heartbeats', 'Ch. 12'], trie: ['Trie with cached top 5', 'Ch. 13'], cdn: ['CDN for the popular head', 'Ch. 14'], delta: ['Block-level delta sync', 'Ch. 15'] };
+  const bins = ks => ks.map(k => ({ id: k, label: B[k][0], d: B[k][1] }));
+  sorter('#sort16', '#tally16', null, [
+    { t: 'Stop one customer from calling your API a thousand times a second.', q: true, bins: bins(['rl', 'trie', 'delta']), a: 'rl', w: 'A per-client limit with counters in a shared store, returning 429 when it is exceeded.' },
+    { t: 'Show drivers moving on a rider\'s map, updated every few seconds.', q: true, bins: bins(['ws', 'b62', 'cdn']), a: 'ws', w: 'Live two-way updates and presence are the chat system\'s tools: a persistent connection and heartbeats.' },
+    { t: 'Give every order a 64-bit number that sorts by when it was placed.', q: true, bins: bins(['id', 'chash', 'q']), a: 'id', w: 'Timestamp in the high bits, then machine and sequence. Snowflake, exactly.' },
+    { t: 'Add a server to a 50-node cache without emptying most of it.', q: true, bins: bins(['chash', 'rl', 'fan']), a: 'chash', w: 'On a hash ring only the new server\'s neighbours give up keys.' },
+    { t: 'Suggest product names as the shopper types.', q: true, bins: bins(['trie', 'kv', 'id']), a: 'trie', w: 'Prefix lookups with the best answers cached at each node.' },
+    { t: 'Send booking receipts by email and push, even when one provider is down.', q: true, bins: bins(['q', 'ws', 'bloom']), a: 'q', w: 'A queue per channel isolates the outage, and the log lets you retry later.' },
+    { t: 'Check whether a link was already crawled, among billions, using little memory.', q: true, bins: bins(['bloom', 'delta', 'rl']), a: 'bloom', w: 'A Bloom filter answers "probably seen" or "definitely not" in a tiny amount of memory.' },
+    { t: 'Save a 2 GB design file quickly after a small change.', q: true, bins: bins(['delta', 'cdn', 'id']), a: 'delta', w: 'Split into blocks and upload only the ones that changed.' },
+    { t: 'Build a timeline that includes posts from a sports star with 80 million fans.', q: true, bins: bins(['fan', 'trie', 'chash']), a: 'fan', w: 'Push ordinary posts, pull the star\'s posts at read time.' },
+    { t: 'Halve the bill for streaming an archive of old lectures.', q: true, bins: bins(['cdn', 'kv', 'ws']), a: 'cdn', w: 'Most of the archive is long tail. Keep only the popular lectures on the CDN.' },
+    { t: 'Keep a shopping cart writable even when the link between data centres is cut.', q: true, bins: bins(['kv', 'b62', 'q']), a: 'kv', w: 'Choose availability: a low write quorum, then reconcile versions afterwards, as Dynamo does.' } ]);
+}
+
+/* ---------- afterword: practice log ---------- */
+{ const el = $('#plog'), LV = ['Read it', 'Sketched it', 'Could teach it']; let log = store.get('sdi1-log', {});
+  function draw(){ const designs = CH.map((c, i) => [i + 1, c]).filter(([n]) => n >= 4 && n <= 15), taught = designs.filter(([n]) => log[n] === 3).length, any = designs.filter(([n]) => log[n]).length;
+    el.innerHTML = `<div class="sum">${any ? `${any} of 12 practised · ${taught} you could teach` : 'Nothing logged yet · saved in this browser only'}</div>` + designs.map(([n, c]) => `<div class="row1"><a href="#ch${n}"><span>${String(n).padStart(2, '0')}</span>${c[0].replace(/^Design (a |an )?/, '')}</a><div class="lv">${LV.map((l, k) => `<button type="button" data-n="${n}" data-l="${k + 1}" aria-pressed="${log[n] === k + 1}">${l}</button>`).join('')}</div></div>`).join('');
+    el.querySelectorAll('[data-n]').forEach(b => b.addEventListener('click', () => { const n = b.dataset.n, l = +b.dataset.l; log[n] = log[n] === l ? 0 : l; if (!log[n]) delete log[n]; store.set('sdi1-log', log); draw(); })); }
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
