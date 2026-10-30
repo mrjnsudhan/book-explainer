@@ -1,0 +1,1373 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Great Mental Models, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a surveyor's desk at night. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into start here, see clearly, think it through, weigh the odds and cut through.
+   Dark-first: graphite with a signal-orange accent and a sky-blue second series; light mode is map paper with burnt orange and deep blue. */
+:root{
+  color-scheme: dark;
+  --ink:#11151B;--panel:#181D25;--panel-2:#212833;--line:#323B4A;--text:#F2F0EB;--muted:#B0B5BF;--faint:#7D8491;
+  --glow:#FF8A4C;--glow-soft:rgba(255,138,76,.11);--hl:rgba(255,138,76,.26);--cool:#7CC4E8;--cool-soft:rgba(124,196,232,.1);
+  --good:#8FD9A0;--good-soft:rgba(143,217,160,.1);--bad:#FF7B7B;--bad-soft:rgba(255,123,123,.12);
+  --soft:#D9DCE2;--deep:#0B0E13;--toc-bg:rgba(24,29,37,.76);--glow-line:rgba(255,138,76,.36);--cool-line:rgba(124,196,232,.3);--on-glow:#2A1200;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F4F1E9;--panel:#FFFFFF;--panel-2:#ECE7DC;--line:#D9D2C3;--text:#1A1D23;--muted:#585C66;--faint:#878B94;
+  --glow:#B4461A;--glow-soft:rgba(180,70,26,.06);--hl:#F6D9C6;--cool:#1F6E99;--cool-soft:rgba(31,110,153,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2C3038;--deep:#FBF9F4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(180,70,26,.3);--cool-line:rgba(31,110,153,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F4F1E9;--panel:#FFFFFF;--panel-2:#ECE7DC;--line:#D9D2C3;--text:#1A1D23;--muted:#585C66;--faint:#878B94;
+  --glow:#B4461A;--glow-soft:rgba(180,70,26,.06);--hl:#F6D9C6;--cool:#1F6E99;--cool-soft:rgba(31,110,153,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2C3038;--deep:#FBF9F4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(180,70,26,.3);--cool-line:rgba(31,110,153,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The Great Mental Models additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.lattice{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.lattice-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lattice-top output{font-family:var(--f-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.lattice svg{display:block;width:100%;height:auto;padding:6px 10px 0}
+.lattice-cap{padding:10px 16px 14px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.support{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--cool-line);background:var(--cool-soft)}
+.support .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.support p{color:var(--soft);font-size:15px}
+.cc-rows{display:grid;gap:10px;padding:14px 18px;border-top:1px solid var(--line)}
+.cc-row{display:grid;grid-template-columns:minmax(120px,1.1fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:end}
+.cc-row input[type=text]{min-width:0;font:inherit;font-size:14.5px;width:100%;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.cc-row input[type=text]:focus{border-color:var(--glow);outline:none}
+.cc-row .ctl{flex:none}
+.cc-row .ctl label{font-size:12px}
+.fp-wrap{padding:16px 18px;display:grid;justify-items:center}
+.fp-tower{display:grid;gap:6px;width:100%;max-width:640px}
+.fp-tower .tier{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px}
+.fp-tower .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.blk{font:inherit;font-size:13.5px;line-height:1.3;text-align:left;color:var(--text);padding:10px 12px;border-radius:6px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel-2),var(--panel));cursor:pointer;display:grid;gap:4px;min-height:58px;transition:opacity .35s, transform .35s, border-color .2s}
+.blk:hover:not(:disabled){border-color:var(--glow)}
+.blk small{font-size:12px;color:var(--muted)}
+.blk.gone{opacity:.42;transform:translateY(6px) rotate(-1.5deg);border-style:dashed;background:transparent;cursor:default}
+.blk.gone b{text-decoration:line-through;text-decoration-color:var(--bad)}
+.blk.solid{border-color:var(--good);background:var(--good-soft);cursor:default}
+.blk.base{border-color:var(--cool-line)}
+.blk.new{border-color:var(--glow);background:var(--glow-soft);cursor:default}
+.dc-sum{display:grid;gap:8px}
+.dc-sum div{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--soft)}
+.dc-sum div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--glow)}
+.dc-sum .empty{color:var(--muted);font-size:14.5px}
+.dc-q{font-family:var(--f-display);font-size:clamp(21px,2.6vw,26px);line-height:1.2}
+.field textarea{min-height:64px}
+.field.wide{grid-column:1/-1}
+@media (max-width: 560px){ .fq{padding:14px 16px} .cc-row{grid-template-columns:1fr 1fr} .cc-row input[type=text]{grid-column:1/-1} .fp-tower .tier{grid-template-columns:1fr 1fr} }
+.lw-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:6px;padding:6px 18px 14px}
+.lw-list div{display:grid;gap:2px;font-size:14px;color:var(--soft);padding:8px 12px;border-radius:10px;background:var(--panel-2);border-left:3px solid var(--glow)}
+.lw-list div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--glow)}
+.lw-list .empty{border-left-color:var(--line);color:var(--muted)}
+#lwSvg{max-width:600px;margin:0 auto}
+#bySvg{max-width:440px;margin:0 auto}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Shane Parrish and Rhiannon Beaubien's book</div>
+    <h1><em>The Great Mental Models</em>,<br>Explained</h1>
+    <p class="lede">A mental model is a simple picture of how some part of the world works, one you can carry from problem to problem. Shane Parrish, who writes the Farnam Street blog, set out to collect the most useful of them from across physics, biology, economics and history. <b>Volume 1: General Thinking Concepts</b> covers the nine that apply to almost everything, from knowing that your map is not the territory to not assuming malice when a mistake will do. This guide takes each one in turn, with a lab in every chapter where you can put the model to work.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>You think better with <em>many simple models</em> drawn from many fields than with one clever theory you apply to everything.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you facing?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="lattice" style="margin:0" aria-label="Your latticework of models">
+        <div class="lattice-top"><span>Your latticework</span><output id="latV"></output></div>
+        <svg id="latSvg" viewBox="0 0 300 250" role="img" aria-label="Nine mental models joined into a lattice; the ones you have understood light up"></svg>
+        <p class="lattice-cap" id="latCap">Each model lights up when you tick "I understand" or get its quick check right. Tap one to go there.</p>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction</span><span class="q">Start here</span><span class="d">Why a latticework of models beats a single hammer</span></a>
+      <a href="#part2"><span class="n">Models 1 and 2</span><span class="q">See clearly</span><span class="d">Know your map's limits and your own</span></a>
+      <a href="#part3"><span class="n">Models 3 to 5</span><span class="q">Think it through</span><span class="d">Rebuild from the ground, imagine it, ask "and then what?"</span></a>
+      <a href="#part4"><span class="n">Models 6 and 7</span><span class="q">Weigh the odds</span><span class="d">Think in chances, and work the problem backwards</span></a>
+      <a href="#part5"><span class="n">Models 8 and 9</span><span class="q">Cut through</span><span class="d">Prefer the simple story, and the honest mistake</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2019 by Latticework Publishing (Farnam Street)</span>
+      <span><b>Authors</b> Shane Parrish, founder of Farnam Street, with Rhiannon Beaubien</span>
+      <span><b>Read time</b> about 5 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== START HERE ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Start here</span>
+      <h2>Start Here</h2>
+      <p>Before the first model, the book makes its case for collecting models at all. Most bad decisions don't come from a lack of intelligence. They come from looking at a problem through one narrow lens, from ego, and from being too far from the results to learn.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The quality of your thinking depends on the models in your head. Collect many, from many fields, and use them together.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why collect models at all</div>
+        <h2>Acquiring Wisdom</h2>
+        <div class="short"><span class="lbl">In short</span><p>The world is too complicated to understand all at once, so we rely on simplified pictures of how it works. The more good pictures you have, from more fields, the fewer things you miss. One model alone turns every problem into the same problem.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A model is a shortcut.</b> Supply and demand, natural selection, compounding: each is a compact way of explaining a slice of reality. You already use models all the time; the question is how many good ones you have.</span></li>
+          <li><span><b>The man with a hammer.</b> If the only tool you own is a hammer, every problem looks like a nail. A specialist who sees everything through one discipline will be confidently wrong whenever the problem lives somewhere else.</span></li>
+          <li><span><b>Build a latticework.</b> Charlie Munger's phrase. Hang your experience on a lattice of models drawn from many fields, so each new fact connects to something and each problem can be seen from several angles.</span></li>
+          <li><span><b>Three things get in the way.</b> Perspective (we can't see the whole system we're part of), ego (we would rather be right than learn), and distance (the further we are from the results of a decision, the less it can teach us).</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book's starting point is a 1994 talk Charlie Munger, Warren Buffett's partner, gave to business students. You can't really know anything, he said, if you only remember isolated facts. You need models from many disciplines, joined in a latticework, because to a man with a hammer every problem looks pretty much like a nail. Parrish spent years collecting such models on his Farnam Street blog. This volume is the first set: the general thinking tools that work on almost any problem, before the later volumes take on physics, biology, systems and economics.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: a hammer or a lattice</div><div class="hint">Pick a problem, then switch models on</div></div>
+        <div class="lab-ctl"><div class="row" id="lwP"></div></div><div class="stage"><svg id="lwSvg" role="img" aria-label="A problem in the middle with the angles each model reveals around it"></svg></div><div class="lw-list" id="lwList" aria-live="polite"></div><div class="lab-ctl"><div class="row" id="lwM"></div><div class="row"><button class="btn" id="lwHammer" type="button">Just my hammer</button><button class="btn" id="lwAll" type="button">The whole lattice</button></div></div><div class="stats"><div class="stat"><span class="k">Angles you can see</span><span class="v glow" id="lwN"></span></div><div class="stat"><span class="k">What you'd conclude</span><span class="s" id="lwSay"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before deciding anything that matters, ask which lenses you're using. If the answer is one, borrow another. The aim isn't to know every model, it's to stop seeing every problem as a nail.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The map is not the territory →</a></div>
+    </section>
+    <!-- ===================== SEE CLEARLY ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Models 1 and 2 · see clearly</span>
+      <h2>See Clearly</h2>
+      <p>The first two models are about honesty: with the tools you use to describe the world, and with yourself. Every map leaves things out, and every person knows less than they think outside a fairly small area.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Know the limits of your map and the edge of your circle. Most expensive mistakes happen just past one or the other.</p></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 1</span> · Every model leaves things out</div>
+        <h2>The Map Is Not the Territory</h2>
+        <div class="short"><span class="lbl">In short</span><p>A map is useful precisely because it simplifies: it leaves out almost everything so you can see what matters. The trouble starts when we forget that, and treat the map as if it were the ground itself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Simplifying is the point.</b> A map the size of the land would be useless. Reports, budgets, scientific theories and job titles are all maps: they help because they compress.</span></li>
+          <li><span><b>Reality is the referee.</b> When the map and the territory disagree, the territory wins. Check your maps against the ground, and update them when they're wrong.</span></li>
+          <li><span><b>Consider the cartographer.</b> Maps carry the views and interests of whoever drew them. Ask who made it, for what purpose, and what they had reason to leave out.</span></li>
+          <li><span><b>Maps go stale.</b> The ground keeps changing after the map is printed. A model that was right ten years ago can quietly turn wrong, and nothing on the paper will tell you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The phrase comes from Alfred Korzybski, who used it in a paper in 1931. The book's best illustration is the commons. In 1968 Garrett Hardin described a pasture shared by herders: each gains by adding one more cow, so together they ruin it. His map said shared resources must be privatised or controlled from above. Elinor Ostrom went out and studied the territory: Swiss alpine meadows, Japanese forests and Spanish irrigation channels that communities had shared for centuries without ruining, using rules they had built themselves. Hardin's map was a useful warning, but it wasn't the ground. Ostrom won the Nobel prize in economics in 2009 for looking.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: plan by the map, walk the territory</div><div class="hint">Coarsen the map, age it, then walk the route</div></div>
+        <div class="stage"><svg id="mtSvg" role="img" aria-label="A coarse map and the real terrain side by side, with the route planned on the map"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mtS">Map detail <output id="omtS"></output></label><input type="range" id="mtS" min="1" max="4" value="3"></div></div><div class="row" id="mtAge"></div><div class="row"><button class="btn primary" id="mtGo" type="button">Walk the route</button><button class="btn" id="mtNew" type="button">New terrain</button></div></div><div class="stats"><div class="stat"><span class="k">The map says</span><span class="s" id="mtMap"></span></div><div class="stat"><span class="k">The territory says</span><span class="s" id="mtTer"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Whenever you rely on a summary, a forecast or a rule of thumb, ask what it leaves out and when it was last checked against reality. Use maps, but keep looking up from them.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Circle of competence →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 2</span> · Know where your knowledge ends</div>
+        <h2>Circle of Competence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Everyone has areas they truly understand, built from years of experience and feedback. Inside that circle you can decide quickly and well. The danger is not having a small circle; it's not knowing where its edge is.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Lifer versus stranger.</b> Someone who has lived in a town all their life knows which roads flood, who to trust and what the locals mean. A visitor with a guidebook knows the names. Competence is that lived detail.</span></li>
+          <li><span><b>Size matters less than edges.</b> A small circle you know well beats a large one you only think you have. Overconfidence lives right at the boundary.</span></li>
+          <li><span><b>Keep it growing, honestly.</b> Circles shrink if you stop learning. Grow them with curiosity, a record of your own predictions, and feedback from people who will tell you when you're wrong.</span></li>
+          <li><span><b>Outside the circle, borrow.</b> Learn the basics, ask an expert whose circle it is, and question them until you understand their reasoning. Admitting "I don't know" is a skill, not a weakness.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Most climbers who reach the summit of Everest do it behind Sherpa guides. The climbers may be rich, fit and brave, but the Sherpas have spent their lives on that mountain: they know the weather, the ice and how the body fails at altitude. That is a circle of competence, earned over years. The book sets beside it Queen Elizabeth I, who ruled England for 44 years in dangerous times. She was clever and well educated, and still she gathered capable advisers and listened to them on what she didn't know. Knowing the edge of her own circle was part of why she lasted.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: draw your circle</div><div class="hint">Set how much you know and how sure you feel</div></div>
+        <div class="stage"><svg id="ccSvg" role="img" aria-label="Your circle of competence with topics placed by how much you know"></svg></div><div class="cc-rows" id="ccRows"></div><div class="stats"><div class="stat"><span class="k">Inside your circle</span><span class="s" id="ccIn"></span></div><div class="stat"><span class="k">Watch out</span><span class="s" id="ccWarn"></span></div></div>
+      </figure>
+      <div class="support"><span class="lbl">Supporting idea · falsifiability</span><p>Karl Popper's test for a real theory: it has to say what would prove it wrong. "This stock will go up eventually" can never fail, so it tells you nothing. Ideas that can't be tested sit outside anyone's circle, however confidently they're held.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before a decision, ask honestly: have I done this before, did I get feedback, could I explain where I might be wrong? If not, you're outside the circle. Slow down, and find someone whose circle it is.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: First principles thinking →</a></div>
+    </section>
+    <!-- ===================== THINK IT THROUGH ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Models 3 to 5 · think it through</span>
+      <h2>Think It Through</h2>
+      <p>The next three models are ways of thinking a problem through more carefully than habit allows: break it down to what is certainly true, explore it safely in your head, and follow the consequences further than the first step.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Go down to the foundations, run the experiment in your head, and keep asking "and then what?"</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 3</span> · Down to the foundations</div>
+        <h2>First Principles Thinking</h2>
+        <div class="short"><span class="lbl">In short</span><p>Break a problem down into the parts you know are true, and set aside everything that's just assumption, habit or "how it's always been done". Then build back up. It's how you find answers nobody else has tried.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Separate facts from assumptions.</b> Most of what we "know" about a problem is inherited: conventions, analogies, what others did. First principles are the pieces that are still standing after you question everything.</span></li>
+          <li><span><b>Socratic questioning.</b> What exactly do I think, and why? How do I know it's true? What's the evidence? What if I'm wrong? What follows if it's right?</span></li>
+          <li><span><b>The five whys.</b> Keep asking why. Each answer peels a layer off, until you either hit something solid or find the answer is "because that's what we do".</span></li>
+          <li><span><b>Incremental versus fresh.</b> Improving on what exists keeps you inside its assumptions. Rebuilding from foundations can open options the incremental path never reaches.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>For most of the twentieth century, doctors "knew" that stomach ulcers were caused by stress and acid, and that nothing could live in the stomach. Patients took antacids for years. In the early 1980s two Australian doctors, Robin Warren and Barry Marshall, kept seeing spiral bacteria in biopsies of inflamed stomachs. They questioned the assumptions instead of the evidence. When colleagues stayed sceptical, Marshall drank a culture of the bacteria, fell ill with gastritis and cured himself with antibiotics. Ulcers turned out to be largely caused by Helicobacter pylori and curable in weeks. The pair won the Nobel prize in 2005.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: knock out the assumptions</div><div class="hint">Tap a block to ask "is that really true?"</div></div>
+        <div class="lab-ctl"><div class="row" id="fpP"></div></div><div class="fp-wrap"><div class="fp-tower" id="fpT"></div></div><div class="stats"><div class="stat"><span class="k">Assumptions cleared</span><span class="v glow" id="fpN"></span></div><div class="stat"><span class="k">What you can now build</span><span class="s" id="fpNew"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a problem feels stuck, list everything you believe about it. Ask of each item: do I know this, or did I inherit it? Keep only the facts, and see what new options appear.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Thought experiment →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 4</span> · Test it in your head</div>
+        <h2>Thought Experiment</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some experiments are impossible, too expensive or too dangerous to run. You can still run them in your imagination, carefully: set up the situation, change one thing, and follow the logic to see what must happen.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A method, not a daydream.</b> Ask a question, gather what you know, form a hypothesis, test it in your mind, and draw a conclusion. The discipline is what separates it from wishful thinking.</span></li>
+          <li><span><b>Imagine the impossible.</b> Riding beside a beam of light. Being born into a society without knowing who you'll be. You can't do either, but you can reason about them.</span></li>
+          <li><span><b>Re-run history.</b> Ask what would have happened if one thing had changed. It helps you separate what was skill from what was luck, and what really caused what.</span></li>
+          <li><span><b>Expose contradictions.</b> A good thought experiment can break a theory without any equipment, just by showing it disagrees with itself.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Aristotle taught that heavier things fall faster, and for nearly two thousand years most people agreed. Galileo, in a book published in 1638, defeated the idea with a thought experiment. Take a heavy stone and a light one, and tie them together. If heavy things fall faster, the light stone should drag on the heavy one, so the pair falls slower than the heavy stone alone. But the pair is heavier than the heavy stone, so it should fall faster. It can't do both. The theory contradicts itself, so it must be wrong: all things must fall at the same rate, air aside. No tower needed. Einstein used the same tool at sixteen, imagining chasing a beam of light.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: Galileo's tied stones</div><div class="hint">Pick a theory, then drop the stones</div></div>
+        <div class="lab-ctl"><div class="row" id="geM"></div></div><div class="stage"><svg id="geSvg" role="img" aria-label="A heavy stone, a light stone and the two tied together falling from a tower"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="geGo" type="button">Drop all three</button></div></div><div class="stats"><div class="stat"><span class="k">The theory predicts</span><span class="s" id="gePred"></span></div><div class="stat"><span class="k">Does it hold together?</span><span class="s" id="geSay"></span></div></div>
+      </figure>
+      <div class="support"><span class="lbl">Supporting idea · necessity and sufficiency</span><p>What's necessary for an outcome isn't the same as what's enough. Being able to write well is necessary to become a famous novelist; it is nowhere near sufficient. Thought experiments help you sort the conditions you must have from the ones that would actually get you there.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before trying something big, run it in your head first. Change one variable at a time, follow the logic honestly, and look for the point where the story contradicts itself.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Second-order thinking →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 5</span> · And then what?</div>
+        <h2>Second-Order Thinking</h2>
+        <div class="short"><span class="lbl">In short</span><p>Almost anyone can predict the immediate result of a decision. Second-order thinking asks what happens next, and after that. The effects that arrive later are often the ones that matter most, and they can point in the opposite direction.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>First-order is easy.</b> Cut prices, sales go up. Skip sleep, get more done tonight. The first effect is obvious, which is why it's what everyone optimises for.</span></li>
+          <li><span><b>Keep asking "and then what?"</b> Follow each consequence one more step, over time: in ten minutes, ten months, ten years. Look for who reacts and how.</span></li>
+          <li><span><b>It can win arguments.</b> Pointing to the long-term benefits for everyone, not just the immediate gain for one side, can persuade people the first-order case never reaches.</span></li>
+          <li><span><b>Don't overdo it.</b> You can't trace every ripple. Second-order thinking isn't a reason to freeze, and it isn't the same as a fearful slippery-slope argument. Follow the likely chains, then decide.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>From the 1940s, farmers found that small doses of antibiotics in animal feed made livestock grow bigger and faster. The first-order effect was cheaper meat, and the practice spread around the world. The second-order effect took longer: bacteria living in those animals were bathed in low doses of antibiotics, and the ones that resisted survived and spread. Drug-resistant infections now reach people. The book contrasts this with Mary Wollstonecraft, who in 1792 argued for educating women. Rather than stopping at fairness to women, she laid out the knock-on benefits: better partners, better parents and a stronger society, a second-order case aimed at the people she needed to convince.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: and then what?</div><div class="hint">Pick a decision and follow the chain</div></div>
+        <div class="lab-ctl"><div class="row" id="soP"></div></div><div class="stage"><svg id="soSvg" role="img" aria-label="A chain of consequences from a decision, one order at a time"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="soGo" type="button">And then what?</button><button class="btn" id="soReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">First-order verdict</span><span class="s" id="soFirst"></span></div><div class="stat"><span class="k">Verdict so far</span><span class="s" id="soNow"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you act, ask "and then what?" at least twice. Think about how other people will react, and what the result looks like a year from now, not just tomorrow.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Probabilistic thinking →</a></div>
+    </section>
+    <!-- ===================== WEIGH THE ODDS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Models 6 and 7 · weigh the odds</span>
+      <h2>Weigh the Odds</h2>
+      <p>The world rarely gives certainty, so these two models are about acting well without it. Think in chances instead of yes-or-no answers, and when the forward road is foggy, approach the problem from the far end.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Estimate the odds honestly, update as you learn, and ask what would make things go wrong.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 6</span> · Think in odds</div>
+        <h2>Probabilistic Thinking</h2>
+        <div class="short"><span class="lbl">In short</span><p>The future isn't certain, so stop treating it as yes or no. Estimate how likely each outcome is, start from how often things like this usually happen, update as evidence comes in, and pay special attention to rare events with huge consequences.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Bayesian thinking.</b> Start with the prior: how common is this in general? Then let new evidence move you, by as much as it deserves and no more. A dramatic headline about a rare event doesn't make it common.</span></li>
+          <li><span><b>Fat-tailed curves.</b> Height clusters around the average; nobody is ten metres tall. Wealth, wars and pandemics don't: the extremes are far more likely than a bell curve suggests. Know which kind of world you're in.</span></li>
+          <li><span><b>Asymmetries.</b> We tend to be overconfident in our estimates, and errors mostly run one way: projects run late far more often than early. Adjust for it.</span></li>
+          <li><span><b>Prepare, don't predict.</b> In a fat-tailed world you can't forecast the next big shock, but you can be robust to it: keep slack, avoid ruin, and position yourself to benefit from surprises.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>During the Second World War, Vera Atkins helped run the French section of Britain's Special Operations Executive, which sent agents into occupied France. Every decision was a bet made with scraps of information: who to send, where, and whether a network or a radio contact could still be trusted. There was no way to be certain, so she had to weigh the odds and act, knowing that a wrong estimate could cost lives. After the war, she spent years tracing what had happened to the agents who never came back.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: update with Bayes</div><div class="hint">Set the base rate and the test, then look at the dots</div></div>
+        <div class="stage"><svg id="bySvg" role="img" aria-label="A grid of 400 people showing who has a condition and who tests positive"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="byB">How common it is (base rate) <output id="obyB"></output></label><input type="range" id="byB" min="1" max="30" value="2"></div><div class="ctl"><label for="byH">Test catches real cases <output id="obyH"></output></label><input type="range" id="byH" min="50" max="100" value="90"></div><div class="ctl"><label for="byF">False alarms in healthy people <output id="obyF"></output></label><input type="range" id="byF" min="1" max="30" value="8"></div></div><div class="row"><button class="btn" id="byAgain" type="button" aria-pressed="false">Test the positives again</button></div></div><div class="stats"><div class="stat"><span class="k">If you test positive, the chance you have it</span><span class="v glow" id="byP"></span></div><div class="stat"><span class="k">Why</span><span class="s" id="bySay"></span></div></div>
+      </figure>
+      <div class="support"><span class="lbl">Supporting idea · causation versus correlation</span><p>Two things moving together doesn't mean one causes the other. Often a third factor drives both, or it's chance. A special case is regression to the mean: after an unusually good or bad result, the next one is usually closer to average, whatever you did in between. Before you credit a cause, ask what would have happened anyway.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you hear news or get a result, first ask how common the thing is in general. Then ask how much this evidence should move you. Hold estimates loosely, update them, and make sure no single bad outcome can wipe you out.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Inversion →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 7</span> · Work it backwards</div>
+        <h2>Inversion</h2>
+        <div class="short"><span class="lbl">In short</span><p>Instead of only asking how to succeed, ask what would guarantee failure, and avoid it. Or start from the result you want and work backwards to what must be true. Turning a problem around often shows you what the forward view hides.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Invert, always invert.</b> The mathematician Carl Jacobi's advice for hard problems. Assume the opposite of what you want to prove, or start from the end, and see what follows.</span></li>
+          <li><span><b>Avoid stupidity.</b> Munger's version: it's often easier to stop doing the dumb things than to find the brilliant one. Ask "how could I ruin this?" and then don't.</span></li>
+          <li><span><b>Start at the end.</b> Picture the result already achieved. What would have to be true for it to happen? Then make those things true.</span></li>
+          <li><span><b>Remove what holds you back.</b> Kurt Lewin's force field analysis: a situation sits where the forces pushing for change balance the forces resisting it. Removing a resisting force often works better than pushing harder.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the 1920s, piano makers asked the publicist Edward Bernays to sell more pianos. The forward approach was obvious: advertise pianos. Bernays inverted it and asked what would have to be true for people to want one. His answer was a home with a music room. So he set about making the music room fashionable, getting respected people to talk about it and architects to design houses with one. Once families had a music room, they needed something to put in it. People started calling the piano makers instead of the other way round.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: push harder, or remove a restraint</div><div class="hint">Switch forces on and off and watch the line</div></div>
+        <div class="lab-ctl"><div class="row" id="ivP"></div></div><div class="stage"><svg id="ivSvg" role="img" aria-label="A force field: forces pushing toward the goal and forces holding it back"></svg></div><div class="lab-ctl"><div class="toggles" id="ivT"></div></div><div class="stats"><div class="stat"><span class="k">How far you get</span><span class="v glow" id="ivPos"></span></div><div class="stat"><span class="k">Effort you spend each day</span><span class="v" id="ivEff"></span></div><div class="stat"><span class="k">What it shows</span><span class="s" id="ivSay"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're stuck on how to succeed, flip it: list the surest ways to fail, and stop doing them. Ask what's holding the problem in place, not just what would push it forward.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Occam's razor →</a></div>
+    </section>
+    <!-- ===================== CUT THROUGH ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Models 8 and 9 · cut through</span>
+      <h2>Cut Through</h2>
+      <p>The volume ends with two razors: quick rules for shaving away explanations that are probably wrong. One prefers the simpler story; the other prefers the honest mistake to the hidden plot.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>When several explanations fit, start with the one that needs the fewest assumptions and the least villainy.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 8</span> · Fewer assumptions, better odds</div>
+        <h2>Occam's Razor</h2>
+        <div class="short"><span class="lbl">In short</span><p>When several explanations fit the facts, start with the one that needs the fewest assumptions. Every extra assumption is another thing that has to be true, and the chances multiply down fast.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Simpler is likelier.</b> Each assumption has its own chance of being wrong. An explanation that needs five things to all be true is usually far less likely than one that needs one.</span></li>
+          <li><span><b>Horses, not zebras.</b> Doctors are taught: when you hear hoofbeats, think horses, not zebras. Common causes are common. Check them first.</span></li>
+          <li><span><b>It saves time and effort.</b> Starting with the simple explanation means you test the likeliest thing first, and you don't build elaborate plans on top of speculation.</span></li>
+          <li><span><b>Simple isn't always right.</b> The razor is a starting point, not a law. When the evidence demands a more complicated answer, follow the evidence. Some things really are complex.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The razor is named after William of Ockham, a fourteenth-century English friar, though the idea is older. The book's modern example is the astronomer Vera Rubin. In the 1970s she and Kent Ford measured how fast stars orbit at the edges of galaxies, and found they moved far too fast for the visible matter to hold them. Either our understanding of gravity was badly wrong in many places at once, or there was a lot of matter we couldn't see. The explanation that needed fewest new assumptions was the unseen matter. It was surprising, but it was the simplest thing that fitted. Most astronomers now accept dark matter, though what it is remains open.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: multiply the odds</div><div class="hint">Pick a puzzle, then add the new clue</div></div>
+        <div class="lab-ctl"><div class="row" id="ocP"></div></div><div class="stage"><svg id="ocSvg" role="img" aria-label="Each explanation as a chain of assumptions, with how likely the whole chain is"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="ocClue" type="button" aria-pressed="false"></button></div></div><div class="stats"><div class="stat"><span class="k">Start with</span><span class="s" id="ocBest"></span></div><div class="stat"><span class="k">What it shows</span><span class="s" id="ocSay"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something goes wrong, list the possible explanations and count what each one needs to be true. Check the one with the fewest moving parts first, and only move on when the evidence says so.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Hanlon's razor →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Model 9</span> · Mistakes before malice</div>
+        <h2>Hanlon's Razor</h2>
+        <div class="short"><span class="lbl">In short</span><p>Don't put down to malice what can be explained by carelessness, ignorance or a mistake. Most people aren't plotting against you; they're busy, distracted or wrong. Assuming the worst makes you paranoid and leads to worse decisions.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The world isn't about you.</b> When a driver cuts you off or an email goes unanswered, the likely reason is that they're preoccupied, not that they're out to get you.</span></li>
+          <li><span><b>We over-blame.</b> We tend to explain other people's behaviour by their character, and our own by circumstances. Hanlon's razor corrects for that bias.</span></li>
+          <li><span><b>Malice is a heavy assumption.</b> Intent requires motive, planning and secrecy. A mistake needs only a person having a bad day. It's Occam's razor applied to people.</span></li>
+          <li><span><b>A default, not blindness.</b> Some people really do mean harm, and scams are designed to look like accidents. Start with the charitable reading, but keep your guard where the stakes are high and the pattern repeats.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In October 1962, during the Cuban Missile Crisis, the Soviet submarine B-59 was hiding deep under the Caribbean, out of contact with Moscow, when American ships began dropping small depth charges. The Americans meant them as signals to surface. Inside the hot, failing submarine, the captain assumed war had started and wanted to fire a nuclear torpedo. Launching needed the agreement of three senior officers. One of them, Vasili Arkhipov, refused: the charges could be something other than an attack. The submarine surfaced instead. By declining to assume the worst, Arkhipov may have prevented a nuclear war.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: mistake or malice?</div><div class="tally" id="tally10" aria-label="Score"></div></div>
+        <div class="sorter" id="sort10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone's behaviour annoys or hurts you, look for the ordinary explanation first: they forgot, they didn't know, they were rushed. Ask before you accuse, and save suspicion for patterns, not one-offs.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#after">Next: run a decision through the lattice →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Run a decision through the lattice</h2>
+      <p class="big">The models only pay off when you use them on something real. Pick a decision you're facing and ask each model its one question. Your answers stay in this browser.</p>
+      <figure class="lab" id="labAfter">
+        <div class="lab-top"><div class="t">Your decision, nine ways</div><div class="hint">Answer as many as help</div></div>
+        <div class="builder"><div class="fields" id="dcF"></div><div class="out" id="dcOut" aria-live="polite"></div></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Map</span><b>The map is not the territory</b><span>Every model leaves things out. Know what yours leaves out, and update it.</span></div>
+        <div><span class="n">Circle</span><b>Know your circle of competence</b><span>Be honest about where your knowledge ends, and borrow other people's past that point.</span></div>
+        <div><span class="n">Ground</span><b>Think from first principles</b><span>Strip away assumptions until you reach what you know is true, then rebuild.</span></div>
+        <div><span class="n">Imagine</span><b>Run the thought experiment</b><span>Test ideas in your head where failure is free.</span></div>
+        <div><span class="n">Then</span><b>Ask "and then what?"</b><span>Look past the first effect to the second and third.</span></div>
+        <div><span class="n">Odds</span><b>Think in probabilities</b><span>Start from the base rate, update with evidence, and respect the tails.</span></div>
+        <div><span class="n">Invert</span><b>Turn the problem around</b><span>Ask what would guarantee failure, and avoid that.</span></div>
+        <div><span class="n">Razors</span><b>Simple, and honest</b><span>Prefer the explanation with fewer assumptions, and the mistake over the plot.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Great Mental Models, Volume 1: General Thinking Concepts</i> by Shane Parrish and Rhiannon Beaubien (2019). The explanations, retold examples and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Start here", "See clearly", "Think it through", "Weigh the odds", "Cut through"];
+const CH = [["Acquiring Wisdom", "Acquiring wisdom", 0, "Introduction"], ["The Map Is Not the Territory", "The map is not the territory", 1, "Model 1"], ["Circle of Competence", "Circle of competence", 1, "Model 2"], ["First Principles Thinking", "First principles thinking", 2, "Model 3"], ["Thought Experiment", "Thought experiment", 2, "Model 4"], ["Second-Order Thinking", "Second-order thinking", 2, "Model 5"], ["Probabilistic Thinking", "Probabilistic thinking", 3, "Model 6"], ["Inversion", "Inversion", 3, "Model 7"], ["Occam's Razor", "Occam's razor", 4, "Model 8"], ["Hanlon's Razor", "Hanlon's razor", 4, "Model 9"]];
+const QUIZ = {
+"1": {
+"q": "What is Munger's \"latticework\" of mental models?",
+"o": [
+"One master theory that explains everything",
+"Many models from different fields, connected so you can look at a problem from several angles",
+"A list of rules to memorise for exams"
+],
+"a": 1,
+"w": "The point is variety and connection. Models from many fields, used together, cover each other's blind spots."
+},
+"2": {
+"q": "Why can't you just make a perfect map?",
+"o": [
+"Because a map with every detail would be as complex as the territory and no longer useful",
+"Because cartographers are lazy",
+"You can, with enough satellites"
+],
+"a": 0,
+"w": "Leaving things out is what makes a map useful. The risk isn't simplification; it's forgetting that you simplified."
+},
+"3": {
+"q": "According to the chapter, what matters most about your circle of competence?",
+"o": [
+"Making it as large as possible",
+"Knowing where its edge is",
+"Never stepping outside it"
+],
+"a": 1,
+"w": "A small circle is fine. The costly mistakes come from thinking you're inside it when you're not."
+},
+"4": {
+"q": "What did Warren and Marshall question to crack the ulcer puzzle?",
+"o": [
+"The evidence in the biopsies",
+"The assumption that nothing could live in the stomach and that stress was the cause",
+"Whether ulcers existed at all"
+],
+"a": 1,
+"w": "They trusted the evidence and questioned the inherited assumptions. That's first principles thinking in one story."
+},
+"5": {
+"q": "How did Galileo's tied-stones argument defeat Aristotle?",
+"o": [
+"He timed stones dropped from a tower",
+"He showed the theory predicts the tied pair falls both slower and faster, which is impossible",
+"He proved stones have no weight"
+],
+"a": 1,
+"w": "The argument needs no equipment. It shows the theory disagrees with itself, so it can't be right."
+},
+"6": {
+"q": "Why did antibiotics in animal feed turn out to be a problem?",
+"o": [
+"The animals stopped growing",
+"Low doses helped resistant bacteria spread, a second-order effect that arrived later",
+"Meat became more expensive"
+],
+"a": 1,
+"w": "The first-order effect (cheaper meat) was real. The second-order effect (resistant bacteria) was slower, bigger and pointed the other way."
+},
+"7": {
+"q": "A test is quite accurate but the condition is very rare. What usually happens when someone tests positive?",
+"o": [
+"They almost certainly have it",
+"There's a good chance it's a false alarm, because healthy people vastly outnumber sick ones",
+"The test is useless"
+],
+"a": 1,
+"w": "The base rate matters. When almost everyone is healthy, even a small false-alarm rate produces more false positives than true ones."
+},
+"8": {
+"q": "How did Bernays invert the problem of selling pianos?",
+"o": [
+"He cut piano prices",
+"He asked what would make people want a piano, and made the music room fashionable",
+"He advertised pianos more heavily"
+],
+"a": 1,
+"w": "He worked backwards from the result. Create the conditions that make people want the thing, and the selling takes care of itself."
+},
+"9": {
+"q": "Why does an explanation with more assumptions tend to be less likely?",
+"o": [
+"Because complicated things never happen",
+"Because every assumption must be true at once, so the chances multiply down",
+"Because William of Ockham said so"
+],
+"a": 1,
+"w": "Each assumption is a separate bet. Five bets that are each 50% likely all come true only about 3% of the time."
+},
+"10": {
+"q": "Why did Arkhipov's choice matter?",
+"o": [
+"He fired first and won",
+"He refused to assume the depth charges meant an attack, and the submarine surfaced instead of launching",
+"He repaired the submarine"
+],
+"a": 1,
+"w": "The charges were signals, not an attack. Assuming the worst could have started a nuclear war."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#11151b';
+try { const t = localStorage.getItem('gmm-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('gmm-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('gmm-done', []));
+const save = () => store.set('gmm-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+  if (typeof drawLattice === 'function') drawLattice();
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+
+/* ---------- shared: the nine models (chapter numbers match section ids) ---------- */
+const MODELS = [
+  ['map', 2, 'Map'], ['circle', 3, 'Circle'], ['first', 4, 'First principles'], ['thought', 5, 'Thought experiment'], ['second', 6, 'Second order'],
+  ['prob', 7, 'Probability'], ['invert', 8, 'Inversion'], ['occam', 9, 'Occam'], ['hanlon', 10, 'Hanlon'] ];
+
+/* ---------- hero: the latticework (called from renderProgress, so it only uses common.js state) ---------- */
+function drawLattice(){
+  const el = document.getElementById('latSvg'); if (!el) return;
+  const names = ['Map', 'Circle', 'First principles', 'Thought exp.', 'Second order', 'Probability', 'Inversion', 'Occam', 'Hanlon'];
+  const pos = names.map((_, i) => [50 + (i % 3) * 100, 38 + Math.floor(i / 3) * 80]);
+  const edges = [[0,1],[1,2],[3,4],[4,5],[6,7],[7,8],[0,3],[3,6],[1,4],[4,7],[2,5],[5,8],[0,4],[4,8],[2,4],[4,6]];
+  const lit = i => done.has(String(i + 2));
+  let g = '';
+  edges.forEach(([a, b]) => { const on = lit(a) && lit(b); g += `<line x1="${pos[a][0]}" y1="${pos[a][1]}" x2="${pos[b][0]}" y2="${pos[b][1]}" ${S(on ? 'glow' : 'line', on ? 2.2 : 1.2)}/>`; });
+  names.forEach((nm, i) => { const [x, y] = pos[i], on = lit(i);
+    g += `<a href="#ch${i + 2}" class="svgbtn" aria-label="${nm}${on ? ', understood' : ''}"><circle cx="${x}" cy="${y}" r="15" ${FS(on ? 'glow' : 'panel-2', on ? 'glow' : 'line', 1.5)}/>` +
+      TX(x, y + 4.5, i + 1, on ? 'on-glow' : 'muted', 12, 'middle', 'font-family="Geist Mono, monospace"') + TX(x, y + 31, nm, on ? 'text' : 'faint', 11.5, 'middle') + '</a>'; });
+  el.innerHTML = g;
+  const n = names.filter((_, i) => lit(i)).length;
+  const v = document.getElementById('latV'); if (v) v.textContent = n + ' of 9';
+}
+drawLattice();
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I see every problem the same way', 1, 'A latticework of models', 'One lens makes every problem look like a nail. Borrow models from other fields and look again.'],
+    ['It worked on paper, not in practice', 2, 'The map is not the territory', 'Your model left something out, or went stale. Go and look at the ground.'],
+    ['I\'m not sure I know enough', 3, 'Circle of competence', 'Ask whether you\'ve done this before and had feedback. If not, find someone whose circle it is.'],
+    ['Everyone says it can\'t be done differently', 4, 'First principles thinking', 'Separate what you know from what you inherited, and rebuild from the facts.'],
+    ['I can\'t test it for real', 5, 'Thought experiment', 'Set the situation up in your head, change one thing, and follow the logic carefully.'],
+    ['It looks like an easy win', 6, 'Second-order thinking', 'Ask "and then what?" at least twice, and think about how other people will react.'],
+    ['A scary headline worries me', 7, 'Probabilistic thinking', 'Start from how often this happens in general, then ask how much the news should move you.'],
+    ['I\'m stuck on how to succeed', 8, 'Inversion', 'Ask what would guarantee failure, and remove what is holding you back.'],
+    ['Too many possible explanations', 9, 'Occam\'s razor', 'Start with the one that needs the fewest assumptions to be true.'],
+    ['Someone seems to be against me', 10, 'Hanlon\'s razor', 'Look for the ordinary mistake before the hidden motive.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- 1: a hammer or a lattice ---------- */
+{ const PROBS = [
+    { t: 'Sales fell 20% this quarter', a: {
+      map: 'The report counts orders, not customers. The drop may sit in one channel the dashboard lumps in with the rest.',
+      circle: 'We just moved into a market none of us really understands. Who does?',
+      first: 'Why do customers buy from us at all? Has that reason changed?',
+      thought: 'Imagine we\'d changed nothing this year. Would sales still have dropped?',
+      second: 'Last quarter\'s big discount pulled this quarter\'s sales forward.',
+      prob: 'One bad quarter may be noise. How often have we seen a drop this size before?',
+      invert: 'What would guarantee customers leave? Are we doing any of it?',
+      occam: 'The simplest fit: a competitor launched something cheaper.',
+      hanlon: 'The partner who "dropped" us may just have a broken product feed, not a grudge.' } },
+    { t: 'A friend hasn\'t replied to my invite in three days', a: {
+      map: 'Silence is a thin map of someone\'s week. It leaves almost everything out.',
+      circle: 'I don\'t know what their week is like. They do. I could ask.',
+      first: 'What do I actually know? Only that there\'s no reply yet.',
+      thought: 'If I\'d got this invite during a hectic week, what would I have done?',
+      second: 'If I send an annoyed message now, how does that play out next month?',
+      prob: 'Most unanswered messages are simply unread or forgotten.',
+      invert: 'How would I make sure this friendship fades? Assume the worst and say nothing.',
+      occam: 'The simplest fit: they saw it while busy and forgot.',
+      hanlon: 'Not a snub. A full inbox.' } } ];
+  let pi = 0; const on = new Set(['occam']); const el = $('#lwSvg');
+  $('#lwP').innerHTML = PROBS.map((p, i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${p.t}</button>`).join('');
+  $$('#lwP [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#lwP [data-p]'), b); pi = +b.dataset.p; draw(); }));
+  $('#lwM').innerHTML = MODELS.map(([id,, nm]) => `<button class="btn" type="button" data-m="${id}" aria-pressed="${on.has(id)}">${nm}</button>`).join('');
+  $$('#lwM [data-m]').forEach(b => b.addEventListener('click', () => { const id = b.dataset.m; on.has(id) ? on.delete(id) : on.add(id); b.setAttribute('aria-pressed', on.has(id)); draw(); }));
+  const sync = () => $$('#lwM [data-m]').forEach(b => b.setAttribute('aria-pressed', on.has(b.dataset.m)));
+  $('#lwHammer').addEventListener('click', () => { const ids = MODELS.map(m => m[0]); on.clear(); on.add(ids[Math.floor(Math.random() * ids.length)]); sync(); draw(); });
+  $('#lwAll').addEventListener('click', () => { MODELS.forEach(m => on.add(m[0])); sync(); draw(); });
+  const draw = onLayout(() => {
+    const P = PROBS[pi], fs = NARROW() ? 15 : 11.5, W = 450, H = 300, cx = 225, cy = 150; vb(el, W, H);
+    let g = '';
+    MODELS.forEach(([id,, nm], i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / 9, x = cx + Math.cos(a) * (fs > 12 ? 98 : 122), y = cy + Math.sin(a) * 112, lit = on.has(id);
+      g += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S(lit ? 'glow' : 'line', lit ? 2 : 1, lit ? '' : ';stroke-dasharray:3 4')}/>`;
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${lit ? 9 : 6}" ${FS(lit ? 'glow' : 'panel-2', lit ? 'glow' : 'line', 1.5)}/>`;
+      const ty = y + (Math.sin(a) < -0.3 ? -14 : 22), anchor = Math.cos(a) > 0.3 ? 'start' : Math.cos(a) < -0.3 ? 'end' : 'middle', tx = x + (anchor === 'start' ? 8 : anchor === 'end' ? -8 : 0);
+      g += TX(tx.toFixed(1), ty.toFixed(1), fs > 12 && id === 'thought' ? 'Thought exp.' : nm, lit ? 'text' : 'faint', fs, anchor); });
+    g += `<rect x="${cx - 74}" y="${cy - 34}" width="148" height="68" rx="12" ${FS('panel', 'glow-line', 1.5)}/>` + wrap(cx, cy, P.t, 20, fs + 3, 'text', fs + 1.5);
+    el.innerHTML = g;
+    const lit = MODELS.filter(m => on.has(m[0]));
+    $('#lwList').innerHTML = lit.length ? lit.map(([id,, nm]) => `<div><span>${nm}</span>${P.a[id]}</div>`).join('') : '<div class="empty">Switch on a model to see the angle it reveals.</div>';
+    $('#lwN').textContent = lit.length + ' of 9';
+    $('#lwSay').textContent = lit.length === 0 ? 'Nothing yet: no model, no view.' : lit.length === 1 ? 'With one lens you\'d settle on that one answer and stop looking. That\'s the hammer.' :
+      lit.length < 5 ? 'Several possible causes. Better, but some angles are still dark.' : 'A full picture of what might be going on. Now test the likeliest first.';
+  });
+  draw();
+}
+
+/* ---------- 2: map vs territory ---------- */
+{ const C = 24, R = 12, el = $('#mtSvg'); let seed = 5, ter, oldTer, A, B, old = false, walked = -1, timer = null, path = [];
+  $('#mtAge').innerHTML = '<button class="btn" type="button" data-a="0" aria-pressed="true">A fresh map</button><button class="btn" type="button" data-a="1" aria-pressed="false">A ten-year-old map</button>';
+  $$('#mtAge [data-a]').forEach(b => b.addEventListener('click', () => { press($$('#mtAge [data-a]'), b); old = b.dataset.a === '1'; plan(); }));
+  function gen(){
+    const r = rng(seed); ter = [...Array(R)].map(() => Array(C).fill(0));
+    const rc = 9 + Math.floor(r() * 3), ph = r() * 6;
+    const rx = [...Array(R)].map((_, y) => rc + Math.round(Math.sin(y * .8 + ph)));
+    rx.forEach((x, y) => { ter[y][x] = 1; });
+    const bNew = 1 + Math.floor(r() * 10); let bOld; do { bOld = 1 + Math.floor(r() * 10); } while (Math.abs(bOld - bNew) < 4);
+    const cx = 16 + Math.floor(r() * 3), top = r() < .5;
+    for (let y = 0; y < R; y++){ const inWall = top ? y <= 8 : y >= 3; if (inWall) ter[y][cx + (y > 5 ? 1 : 0)] = 2; }
+    for (let k = 0; k < 2; k++){ const px = 2 + Math.floor(r() * 5) + k * 11, py = 1 + Math.floor(r() * 9); for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) if (ter[py + dy] && ter[py + dy][px + dx] === 0) ter[py + dy][px + dx] = 1; }
+    oldTer = ter.map(row => [...row]);
+    ter[bNew][rx[bNew]] = 3; oldTer[bOld][rx[bOld]] = 3;
+    A = [0, 2 + Math.floor(r() * 8)]; B = [C - 1, 2 + Math.floor(r() * 8)];
+    [ter, oldTer].forEach(t => { t[A[1]][A[0]] = 0; t[B[1]][B[0]] = 0; });
+  }
+  const blk = () => [4, 3, 2, 1][+$('#mtS').value - 1];
+  function mapAt(x, y){ const b = blk(), src = old ? oldTer : ter, bx = Math.floor(x / b) * b, by = Math.floor(y / b) * b; let w = 0, c = 0;
+    for (let dy = 0; dy < b; dy++) for (let dx = 0; dx < b; dx++){ const t = src[by + dy][bx + dx]; if (t === 1) w++; else if (t === 2) c++; }
+    const half = b * b / 2; return w > half ? 1 : c > half ? 2 : (w + c > half ? (w >= c ? 1 : 2) : 0); }
+  function bfs(){ const prev = {}, q = [A], key = (x, y) => x + ',' + y; prev[key(...A)] = null;
+    while (q.length){ const [x, y] = q.shift(); if (x === B[0] && y === B[1]) break;
+      [[1,0],[0,1],[0,-1],[-1,0]].forEach(([dx, dy]) => { const nx = x + dx, ny = y + dy; if (nx < 0 || ny < 0 || nx >= C || ny >= R) return; const k = key(nx, ny); if (k in prev || mapAt(nx, ny) !== 0) return; prev[k] = [x, y]; q.push([nx, ny]); }); }
+    if (!(key(...B) in prev)) return []; const p = []; let c = B; while (c){ p.unshift(c); c = prev[key(...c)]; } return p; }
+  function plan(){ clearInterval(timer); walked = -1; path = bfs(); draw(); }
+  const blockedAt = () => path.findIndex(([x, y]) => ter[y][x] === 1 || ter[y][x] === 2);
+  const COL = t => t === 1 ? 'cool' : t === 2 ? 'bad' : t === 3 ? 'glow' : 'panel-2';
+  const draw = onLayout(() => {
+    const b = blk(); out('mtS', b === 1 ? 'every detail' : `1 square = ${b}×${b} cells`);
+    const nw = NARROW(), cs = 13, pw = C * cs, ph = R * cs, gap = 30, W = nw ? pw + 16 : pw * 2 + gap + 16, H = nw ? ph * 2 + 92 : ph + 46;
+    vb(el, W, H); let g = '';
+    const ox1 = 8, oy1 = 22, ox2 = nw ? 8 : 8 + pw + gap, oy2 = nw ? 22 + ph + 38 : 22;
+    g += TX(ox1, oy1 - 8, old ? 'The map (drawn ten years ago)' : 'The map', 'muted', 12) + TX(ox2, oy2 - 8, 'The territory', 'muted', 12);
+    for (let y = 0; y < R; y += b) for (let x = 0; x < C; x += b){ const t = mapAt(x, y);
+      g += `<rect x="${ox1 + x * cs}" y="${oy1 + y * cs}" width="${b * cs - 1}" height="${b * cs - 1}" rx="2" ${F(COL(t), t ? .85 : 1)}/>`; }
+    if (b === 1) for (let y = 0; y < R; y++) for (let x = 0; x < C; x++) if ((old ? oldTer : ter)[y][x] === 3) g += `<rect x="${ox1 + x * cs}" y="${oy1 + y * cs}" width="${cs - 1}" height="${cs - 1}" rx="2" ${F('glow')}/>`;
+    for (let y = 0; y < R; y++) for (let x = 0; x < C; x++){ const t = ter[y][x]; g += `<rect x="${ox2 + x * cs}" y="${oy2 + y * cs}" width="${cs - 1}" height="${cs - 1}" rx="2" ${F(COL(t), t ? .85 : 1)}/>`; }
+    const line = (ox, oy, pts, c, w, extra = '') => pts.length ? `<polyline points="${pts.map(([x, y]) => `${ox + x * cs + cs / 2},${oy + y * cs + cs / 2}`).join(' ')}" ${S(c, w, ';stroke-linejoin:round;stroke-linecap:round' + extra)}/>` : '';
+    g += line(ox1, oy1, path, 'text', 2.4) + line(ox2, oy2, path, 'text', 1.6, ';stroke-dasharray:3 4;opacity:.7');
+    if (walked >= 0){ const k = blockedAt(), stop = k < 0 ? walked : Math.min(walked, k); g += line(ox2, oy2, path.slice(0, stop + 1), 'good', 3);
+      if (k >= 0 && walked >= k){ const [x, y] = path[k], px = ox2 + x * cs + cs / 2, py = oy2 + y * cs + cs / 2; g += `<circle cx="${px}" cy="${py}" r="9" ${S('bad', 2.5)}/><path d="M${px - 5} ${py - 5}L${px + 5} ${py + 5}M${px + 5} ${py - 5}L${px - 5} ${py + 5}" ${S('bad', 2.5)}/>`; } }
+    [[ox1, oy1], [ox2, oy2]].forEach(([ox, oy]) => { g += `<circle cx="${ox + A[0] * cs + cs / 2}" cy="${oy + A[1] * cs + cs / 2}" r="5" ${F('text')}/>` + `<circle cx="${ox + B[0] * cs + cs / 2}" cy="${oy + B[1] * cs + cs / 2}" r="5.5" ${FS('glow', 'text', 1.5)}/>`; });
+    const ly = nw ? H - 10 : oy1 + ph + 18; let lx = 8;
+    [['cool', 'water'], ['bad', 'cliff'], ['glow', 'bridge']].forEach(([c, t]) => { g += `<rect x="${lx}" y="${ly - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(lx + 14, ly, t, 'faint', 11); lx += 66; });
+    g += TX(W - 8, ly, 'start ● → ◉ goal', 'faint', 11, 'end');
+    el.innerHTML = g;
+    $('#mtMap').textContent = path.length ? `A clear route, ${path.length - 1} steps.` : 'No route at all: the map shows the way blocked.';
+    const k = blockedAt();
+    if (walked < 0) $('#mtTer').textContent = 'Walk the route to find out.';
+    else if (k >= 0 && walked >= k){ const [x, y] = path[k], t = ter[y][x], wasBridge = old && oldTer[y][x] === 3;
+      $('#mtTer').textContent = `Stopped after ${k} steps: ${wasBridge ? 'the bridge on your map is gone' : t === 1 ? 'water the map didn\'t show' : 'a cliff the map smoothed away'}.`; }
+    else if (walked >= path.length - 1) $('#mtTer').textContent = b === 1 && !old ? 'Arrived. A detailed, up-to-date map matched the ground.' : 'Arrived. This time the details the map left out didn\'t matter, but that was luck.';
+    else $('#mtTer').textContent = 'Walking…';
+  });
+  $('#mtS').addEventListener('input', plan);
+  $('#mtGo').addEventListener('click', () => { if (!path.length) return; clearInterval(timer); const k = blockedAt(), end = k < 0 ? path.length - 1 : k;
+    if (RM){ walked = end; draw(); return; } walked = 0; draw(); timer = setInterval(() => { walked++; draw(); if (walked >= end) clearInterval(timer); }, 60); });
+  $('#mtNew').addEventListener('click', () => { seed += 13; gen(); plan(); });
+  gen(); plan();
+}
+
+/* ---------- 3: circle of competence ---------- */
+{ const DEF = [['My day job', 8, 8], ['Cooking dinner', 6, 7], ['Picking single stocks', 2, 7], ['Fixing my car', 1, 3], ['Training a puppy', 4, 6]];
+  let rows = store.get('gmm-circle', null); if (!Array.isArray(rows) || rows.length !== 5) rows = DEF.map(r => [...r]);
+  const el = $('#ccSvg');
+  $('#ccRows').innerHTML = rows.map((r, i) => `<div class="cc-row"><input type="text" data-i="${i}" maxlength="28" value="${esc(r[0])}" aria-label="Topic ${i + 1}"><div class="ctl"><label for="ccK${i}">How much I really know <output id="occK${i}"></output></label><input type="range" id="ccK${i}" data-k="${i}" min="0" max="10" value="${r[1]}"></div><div class="ctl"><label for="ccF${i}">How sure I feel <output id="occF${i}"></output></label><input type="range" id="ccF${i}" data-f="${i}" min="0" max="10" value="${r[2]}"></div></div>`).join('');
+  $$('#ccRows [data-i]').forEach(inp => inp.addEventListener('input', () => { rows[+inp.dataset.i][0] = inp.value; upd(); }));
+  $$('#ccRows [data-k]').forEach(inp => inp.addEventListener('input', () => { rows[+inp.dataset.k][1] = +inp.value; upd(); }));
+  $$('#ccRows [data-f]').forEach(inp => inp.addEventListener('input', () => { rows[+inp.dataset.f][2] = +inp.value; upd(); }));
+  const rad = k => 20 + (10 - k) * 13;
+  function upd(){ store.set('gmm-circle', rows); draw(); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 340 : 560, H = 330, cx = W / 2, cy = 160; vb(el, W, H);
+    let g = `<circle cx="${cx}" cy="${cy}" r="${rad(0) + 8}" ${FS('deep', 'line', 1, .6)}/><circle cx="${cx}" cy="${cy}" r="${rad(3.5)}" ${FS('cool-soft', 'cool-line', 1.2)}/><circle cx="${cx}" cy="${cy}" r="${rad(6.5)}" ${FS('glow-soft', 'glow', 2)}/>`;
+    g += TX(cx, cy - rad(6.5) + 14, 'inside', 'glow', 11, 'middle') + TX(cx, cy - rad(3.5) + 13, 'the edge', 'cool', 11, 'middle') + TX(cx, cy - rad(0) + 6, 'outside', 'faint', 11, 'middle');
+    rows.forEach(([t, k, f], i) => { const a = -Math.PI / 2 + (i + .5) * 2 * Math.PI / rows.length, ca = Math.cos(a), sa = Math.sin(a);
+      const x = cx + ca * rad(k), y = cy + sa * rad(k), fx = cx + ca * rad(f), fy = cy + sa * rad(f), over = f - k >= 3;
+      out('ccK' + i, k); out('ccF' + i, f);
+      if (Math.abs(f - k) >= 1) g += `<line x1="${fx.toFixed(1)}" y1="${fy.toFixed(1)}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S(over ? 'bad' : 'faint', 1.4, ';stroke-dasharray:3 3')}/>`;
+      g += `<circle cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="6" ${S(over ? 'bad' : 'muted', 1.6)}/>`;
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6.5" ${F(k >= 6.5 ? 'glow' : k >= 3.5 ? 'cool' : 'faint')}/>`;
+      const lx = x + (ca >= 0 ? 10 : -10), ly = y + (sa > .6 ? 16 : sa < -.6 ? -10 : 4);
+      g += TX(lx.toFixed(1), ly.toFixed(1), esc((t || 'Topic ' + (i + 1)).slice(0, nw ? 16 : 28)), 'text', 12, ca >= 0 ? 'start' : 'end'); });
+    g += `<circle cx="14" cy="${H - 12}" r="5" ${F('glow')}/>` + TX(24, H - 8, 'what you know', 'faint', 11) + `<circle cx="${nw ? 130 : 140}" cy="${H - 12}" r="5" ${S('muted', 1.5)}/>` + TX(nw ? 140 : 150, H - 8, 'how sure you feel', 'faint', 11);
+    el.innerHTML = g;
+    const name = r => esc(r[0] || 'that topic');
+    const inside = rows.filter(r => r[1] >= 7), over = rows.filter(r => r[2] - r[1] >= 3);
+    $('#ccIn').innerHTML = inside.length ? inside.map(name).join(', ') + '. Decide these with confidence.' : 'Nothing yet. That\'s honest, and the place to start learning.';
+    $('#ccWarn').innerHTML = over.length ? `You feel far surer than you know on <b>${over.map(name).join(', ')}</b>. That gap is where expensive mistakes happen. Ask someone whose circle it is.` : 'Your confidence roughly matches what you know. That is rarer, and more useful, than a big circle.';
+  });
+  draw();
+}
+
+/* ---------- 4: first principles ---------- */
+{ const PROBS = [
+    { t: 'Curing stomach ulcers', top: [
+      ['Stress causes ulcers', 0, 'Stress went along with ulcers, but nobody had shown it caused them. A correlation was treated as the cause.'],
+      ['Nothing can live in stomach acid', 0, 'Nobody had looked closely. Warren saw bacteria in the biopsies with his own eyes.'],
+      ['Ulcers are a lifelong condition', 0, 'Only because the treatment never touched the cause. Antacids eased the pain; they didn\'t cure.'],
+      ['The stomach lining is being damaged', 1, 'True. That is the observed fact you can build on.'] ],
+      base: ['Something keeps damaging the lining', 'Remove the cause and the lining can heal', 'Biopsies show bacteria in inflamed stomachs'],
+      build: 'Test for the bacteria and treat the cause with antibiotics: a cure in weeks instead of antacids for life.' },
+    { t: 'Making meat', top: [
+      ['Meat has to come from a whole animal', 0, 'Meat is tissue. Raising the animal is just the way we\'ve always grown it.'],
+      ['You need fields, feed and years', 0, 'Those are what a whole animal needs, not what tissue needs.'],
+      ['It has to look like a cut from the butcher', 0, 'Habit. Much of the meat we eat is minced, sliced or cooked into something else.'],
+      ['People want food that tastes like meat', 1, 'True, and it\'s the goal you\'re building toward.'] ],
+      base: ['Meat is mostly muscle cells, fat and connective tissue', 'Cells grow and divide when they\'re fed', 'Cells can be grown outside a body'],
+      build: 'Grow the tissue directly from cells. That is the idea behind cultivated meat; making it cheaply at scale is still being worked out.' },
+    { t: 'A shorter commute', top: [
+      ['I have to drive', 0, 'That\'s how you\'ve always gone, not a law. What matters is getting there.'],
+      ['Work only happens at the office', 0, 'Some of it does. A lot of it is writing, reading and calls.'],
+      ['Rush hour is just how it is', 0, 'Rush hour is a time of day, and your start time may be movable.'],
+      ['My team needs me in person some of the time', 1, 'True for many jobs. Build around it rather than ignoring it.'] ],
+      base: ['The work has to get done and handed over', 'Some meetings work better face to face', 'Travel time is time spent on nothing else'],
+      build: 'Agree two in-person days, start early on those to miss the rush, and work from home the rest of the week.' } ];
+  let pi = 0, gone = new Set(), checked = new Set(), order = [];
+  $('#fpP').innerHTML = PROBS.map((p, i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${p.t}</button>`).join('');
+  $$('#fpP [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#fpP [data-p]'), b); pi = +b.dataset.p; reset(); }));
+  function reset(){ gone = new Set(); checked = new Set(); order = PROBS[pi].top.map((_, i) => i); for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } draw(); }
+  function draw(){
+    const P = PROBS[pi], total = P.top.filter(b => !b[1]).length, complete = gone.size === total;
+    let h = '';
+    if (complete) h += `<span class="lbl">What you can build now</span><div class="tier"><div class="blk new" style="grid-column:1/-1"><b>${P.build}</b></div></div>`;
+    h += '<span class="lbl">What everyone assumes</span><div class="tier">' + order.map(i => { const [t, ok, why] = P.top[i];
+      const st = gone.has(i) ? ' gone' : checked.has(i) ? ' solid' : '';
+      return `<button class="blk${st}" type="button" data-b="${i}"${st ? ' disabled' : ''}><b>${t}</b>${st ? `<small>${why}</small>` : '<small>Is that really true?</small>'}</button>`; }).join('') + '</div>';
+    h += '<span class="lbl">What you know is true</span><div class="tier">' + P.base.map(t => `<div class="blk base"><b>${t}</b></div>`).join('') + '</div>';
+    $('#fpT').innerHTML = h;
+    $$('#fpT [data-b]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.b; P.top[i][1] ? checked.add(i) : gone.add(i); draw(); }));
+    $('#fpN').textContent = `${gone.size} of ${total}`;
+    $('#fpNew').textContent = complete ? P.build : 'Keep questioning. The new option only appears once the inherited assumptions are out of the way.';
+  }
+  reset();
+}
+
+/* ---------- 5: Galileo's tied stones ---------- */
+{ let mode = 'ari', t = 0, raf = null; const el = $('#geSvg');
+  $('#geM').innerHTML = '<button class="btn" type="button" data-m="ari" aria-pressed="true">Aristotle: heavier falls faster</button><button class="btn" type="button" data-m="gal" aria-pressed="false">Galileo: everything falls together</button>';
+  $$('#geM [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#geM [data-m]'), b); mode = b.dataset.m; cancelAnimationFrame(raf); t = 0; draw(); }));
+  const objs = () => mode === 'ari' ? [['Heavy', 2, 'text', 0], ['Light', 1, 'text', 0], ['Tied: the light one drags', 1.5, 'cool', 1], ['Tied: the pair is heavier', 3, 'glow', 1]] : [['Heavy', 1, 'text', 0], ['Light', 1, 'text', 0], ['Tied pair', 1, 'glow', 1]];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 340 : 640, H = 340, top = 52, ground = 292; vb(el, W, H);
+    const O = objs(), vmax = Math.max(...O.map(o => o[1])), x0 = nw ? 64 : 120, span = W - x0 - (nw ? 24 : 40), dx = span / O.length;
+    let g = `<rect x="${nw ? 10 : 30}" y="${top - 20}" width="${nw ? 36 : 56}" height="${ground - top + 20}" ${FS('panel-2', 'line', 1.2)}/>`;
+    for (let y = top; y < ground - 10; y += 26) g += `<rect x="${nw ? 18 : 42}" y="${y}" width="${nw ? 8 : 12}" height="12" ${F('deep')}/><rect x="${nw ? 30 : 62}" y="${y}" width="${nw ? 8 : 12}" height="12" ${F('deep')}/>`;
+    g += TX(nw ? 28 : 58, top - 26, 'tower', 'faint', 11, 'middle');
+    g += `<line x1="${x0 - 30}" y1="${top}" x2="${W - 8}" y2="${top}" ${S('line', 1, ';stroke-dasharray:4 4')}/><line x1="0" y1="${ground}" x2="${W}" y2="${ground}" ${S('faint', 2)}/>`;
+    O.forEach(([nm, v, c, tied], i) => { const f = Math.min(1, t * t * v / vmax), x = x0 + dx * (i + .5), y = top + (ground - top - 24) * f + 12;
+      if (tied){ g += `<line x1="${x - 10}" y1="${y}" x2="${x + 12}" y2="${y - 4}" ${S(c, 1.6)}/><circle cx="${x - 10}" cy="${y}" r="13" ${FS(c, c, 1.5, .85)}/><circle cx="${x + 15}" cy="${y - 4}" r="7" ${FS(c, c, 1.5, .55)}/>`; }
+      else g += `<circle cx="${x}" cy="${y}" r="${nm === 'Heavy' ? 13 : 7}" ${FS(c, c, 1.5, nm === 'Heavy' ? .85 : .55)}/>`;
+      g += wrap(x, top - 32, nm, nw ? 10 : 16, 13, c === 'text' ? 'muted' : c, nw ? 10.5 : 12); });
+    if (mode === 'ari' && t >= 1){ const xa = x0 + dx * 2.5, xb = x0 + dx * 3.5; g += `<path d="M${xa} ${ground + 16}H${xb}" ${S('bad', 2)}/>` + TX((xa + xb) / 2, ground + 34, 'the same pair, two answers', 'bad', 12, 'middle'); }
+    el.innerHTML = g;
+    $('#gePred').textContent = mode === 'ari' ? 'The heavy stone beats the light one. But the tied pair gets two answers: slower than the heavy stone (the light one drags it) and faster (the pair weighs more).' : 'All three land together, whatever they weigh (leaving air resistance aside).';
+    $('#geSay').innerHTML = mode === 'ari' ? (t >= 1 ? '<b style="color:var(--bad)">No.</b> One object can\'t fall at two speeds. The theory contradicts itself, so it must be wrong, and no one had to climb a tower.' : 'Drop them and look at the tied pair.') : (t >= 1 ? '<b style="color:var(--good)">Yes.</b> Tying stones together changes nothing, so there is no contradiction. Later experiments confirmed it.' : 'Drop them and compare.');
+  });
+  $('#geGo').addEventListener('click', () => { cancelAnimationFrame(raf); if (RM){ t = 1; draw(); return; } const t0 = performance.now();
+    const step = now => { t = Math.min(1, (now - t0) / 1600); draw(); if (t < 1) raf = requestAnimationFrame(step); }; raf = requestAnimationFrame(step); });
+  draw();
+}
+
+/* ---------- 6: and then what? ---------- */
+{ const SC = [
+    ['Antibiotics in farm feed', 'Add low-dose antibiotics to animal feed', [['Animals grow faster; meat gets cheaper', 2], ['Bacteria in the animals evolve resistance', -2], ['Common infections in people get harder to treat', -4]]],
+    ['Cut prices', 'Cut prices 30% to hit this quarter\'s target', [['Sales jump this quarter', 2], ['Rivals match; customers learn to wait for sales', -2], ['Thin margins leave less to spend on the product', -2]]],
+    ['Educate girls (Wollstonecraft)', 'Educate girls as well as boys', [['Women gain knowledge and independence', 2], ['Families gain better-informed partners and parents', 2], ['A more capable society, which benefits everyone', 3]]],
+    ['Cram all night', 'Stay up all night to study for an exam', [['Six extra hours of revision', 1], ['A tired brain recalls less in the exam', -2], ['A worse grade, and a habit that repeats', -2]]] ];
+  let si = 0, shown = 0; const el = $('#soSvg');
+  $('#soP').innerHTML = SC.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s[0]}</button>`).join('');
+  $$('#soP [data-s]').forEach(b => b.addEventListener('click', () => { press($$('#soP [data-s]'), b); si = +b.dataset.s; shown = 0; draw(); }));
+  const verdict = v => v > 0 ? `<b style="color:var(--good)">Looks good</b> (${v > 0 ? '+' : ''}${v})` : v < 0 ? `<b style="color:var(--bad)">Looks bad</b> (${v})` : 'Even (0)';
+  const draw = onLayout(() => {
+    const [, d, chain] = SC[si], nw = NARROW(), n = chain.length + 1;
+    const bw = nw ? 300 : 150, bh = nw ? 58 : 108, gx = nw ? 0 : 22, gy = nw ? 26 : 0, W = nw ? 340 : n * bw + (n - 1) * gx + 20, H = nw ? n * bh + (n - 1) * gy + 40 : bh + 76;
+    vb(el, W, H); let g = '', sum = 0;
+    for (let i = 0; i < n; i++){ const x = nw ? 20 : 10 + i * (bw + gx), y = nw ? 10 + i * (bh + gy) : 24, vis = i <= shown;
+      const v = i ? chain[i - 1][1] : 0, c = !i ? 'line' : v > 0 ? 'good' : 'bad';
+      if (i){ if (vis) sum += v;
+        g += nw ? `<line x1="${W / 2}" y1="${y - gy + 2}" x2="${W / 2}" y2="${y - 4}" ${S('faint', 1.4)}/>` + arrowHead(W / 2, y - 3, Math.PI / 2) : `<line x1="${x - gx + 2}" y1="${y + bh / 2}" x2="${x - 5}" y2="${y + bh / 2}" ${S('faint', 1.4)}/>` + arrowHead(x - 4, y + bh / 2, 0); }
+      g += `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="10" ${vis ? FS(i ? c + '-soft' : 'panel-2', c, 1.5) : FS('panel', 'line', 1, .5) + ' stroke-dasharray="4 4"'}/>`;
+      if (!nw) g += TX(x + bw / 2, y - 8, i ? ['First order', 'Second order', 'Third order'][i - 1] : 'Decision', 'faint', 11, 'middle');
+      const txt = vis ? (i ? chain[i - 1][0] : d) : '?';
+      g += nw ? wrap(x + 14 + (bw - 70) / 2, y + bh / 2, txt, 30, 15, vis ? 'text' : 'faint', 13) + (i ? TX(x + bw - 12, y + bh / 2 + 5, vis ? (v > 0 ? '+' : '') + v : '', c, 14, 'end', 'font-family="Geist Mono, monospace"') : '')
+        : wrap(x + bw / 2, y + bh / 2 - (i ? 8 : 0), txt, 18, 15, vis ? 'text' : 'faint', 12.5) + (i && vis ? TX(x + bw / 2, y + bh - 12, (v > 0 ? '+' : '') + v, c, 13, 'middle', 'font-family="Geist Mono, monospace"') : ''); }
+    const by = H - 18, bx0 = nw ? 20 : 10, bwid = W - 2 * bx0, mid = bx0 + bwid / 2, scale = bwid / 2 / 6;
+    g += `<line x1="${mid}" y1="${by - 10}" x2="${mid}" y2="${by + 6}" ${S('faint', 1)}/><rect x="${Math.min(mid, mid + sum * scale)}" y="${by - 6}" width="${Math.abs(sum * scale)}" height="8" rx="3" ${F(sum >= 0 ? 'good' : 'bad')}/>` + TX(bx0, by + 4, 'net so far', 'faint', 11);
+    el.innerHTML = g;
+    $('#soFirst').innerHTML = shown >= 1 ? verdict(chain[0][1]) : 'Ask "and then what?" once.';
+    $('#soNow').innerHTML = shown >= 1 ? verdict(sum) + (shown === chain.length ? (Math.sign(sum) !== Math.sign(chain[0][1]) ? '. The later effects flipped the answer.' : '. The later effects made the case stronger.') : '') : '…';
+    $('#soGo').disabled = shown >= chain.length;
+  });
+  $('#soGo').addEventListener('click', () => { shown = Math.min(SC[si][2].length, shown + 1); draw(); });
+  $('#soReset').addEventListener('click', () => { shown = 0; draw(); });
+  draw();
+}
+
+/* ---------- 7: Bayes in dots ---------- */
+{ const N = 400, el = $('#bySvg'); let again = false;
+  const shuf = (n, seed) => { const r = rng(seed), a = [...Array(n).keys()]; for (let k = n - 1; k > 0; k--){ const j = Math.floor(r() * (k + 1)); [a[k], a[j]] = [a[j], a[k]]; } return a; };
+  $('#byAgain').addEventListener('click', () => { again = !again; $('#byAgain').setAttribute('aria-pressed', again); draw(); });
+  function draw(){
+    const b = +$('#byB').value / 100, h = +$('#byH').value / 100, f = +$('#byF').value / 100;
+    out('byB', Math.round(b * 100) + '%'); out('byH', Math.round(h * 100) + '%'); out('byF', Math.round(f * 100) + '%');
+    const sick = Math.round(N * b), healthy = N - sick;
+    let tp = Math.round(sick * h), fp = Math.round(healthy * f);
+    let post = b * h / (b * h + (1 - b) * f);
+    if (again){ tp = Math.round(tp * h); fp = Math.round(fp * f); const b2 = post; post = b2 * h / (b2 * h + (1 - b2) * f); }
+    const sickPos = new Set(shuf(sick, 3).slice(0, tp)), healthyPos = new Set(shuf(healthy, 7).slice(0, fp));
+    const cols = 20, cs = 17, W = cols * cs + 20, H = 20 * cs + 46; vb(el, W, H);
+    let g = '';
+    for (let i = 0; i < N; i++){ const x = 10 + (i % cols) * cs + cs / 2, y = 8 + Math.floor(i / cols) * cs + cs / 2, isS = i < sick, pos = isS ? sickPos.has(i) : healthyPos.has(i - sick);
+      g += `<circle cx="${x}" cy="${y}" r="5" ${F(isS ? 'cool' : 'line', isS ? 1 : .9)}/>`;
+      if (pos) g += `<circle cx="${x}" cy="${y}" r="7.3" ${S('glow', 2)}/>`; }
+    const ly = H - 14;
+    g += `<circle cx="16" cy="${ly - 4}" r="5" ${F('cool')}/>` + TX(26, ly, 'has it', 'faint', 11) + `<circle cx="86" cy="${ly - 4}" r="5" ${F('line')}/>` + TX(96, ly, 'doesn\'t', 'faint', 11) + `<circle cx="160" cy="${ly - 4}" r="7" ${S('glow', 2)}/>` + TX(172, ly, again ? 'positive twice' : 'tests positive', 'faint', 11);
+    el.innerHTML = g;
+    $('#byP').textContent = (post * 100).toFixed(post < .1 ? 1 : 0) + '%';
+    $('#bySay').textContent = `Of 400 people, ${sick} have it and ${again ? 'two tests' : 'the test'} catch${again ? '' : 'es'} ${tp}. But ${fp} healthy people ${again ? 'also test positive twice' : 'also test positive'}, so only ${tp} of the ${tp + fp} ringed dots really have it.` + (!again && post < .5 ? ' A second test changes things a lot: try it.' : '');
+  }
+  ['byB', 'byH', 'byF'].forEach(id => $('#' + id).addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 8: force field ---------- */
+{ const SC = [
+    ['Get fit', [['Sheer willpower to go', 3, 1], ['A friend to train with', 2, 0], ['A tracker that nags you', 1, 0]], [['The gym is 40 minutes away', 3, 1], ['Late nights; too tired at 6am', 2, 1], ['Snacks in the cupboard', 2, 1]]],
+    ['Ship the project', [['Deadline pressure', 3, 1], ['Working weekends', 2, 0], ['Daily status meetings', 1, 0]], [['Unclear requirements', 3, 1], ['Waiting on another team\'s sign-off', 2, 1], ['Constant interruptions', 2, 1]]] ];
+  let si = 0, st; const el = $('#ivSvg');
+  $('#ivP').innerHTML = SC.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s[0]}</button>`).join('');
+  $$('#ivP [data-s]').forEach(b => b.addEventListener('click', () => { press($$('#ivP [data-s]'), b); si = +b.dataset.s; init(); }));
+  function init(){ const [, d, r] = SC[si]; st = { d: d.map(x => !!x[2]), r: r.map(x => !!x[2]) };
+    $('#ivT').innerHTML = d.map((x, i) => `<label class="tg"><input type="checkbox" data-d="${i}"${st.d[i] ? ' checked' : ''}><span>Push: ${x[0]}</span><em>+${x[1]}</em></label>`).join('') + r.map((x, i) => `<label class="tg"><input type="checkbox" data-r="${i}"${st.r[i] ? ' checked' : ''}><span>Holding back: ${x[0]}</span><em>−${x[1]}</em></label>`).join('');
+    $$('#ivT [data-d]').forEach(c => c.addEventListener('change', () => { st.d[+c.dataset.d] = c.checked; draw(); }));
+    $$('#ivT [data-r]').forEach(c => c.addEventListener('change', () => { st.r[+c.dataset.r] = c.checked; draw(); }));
+    draw(); }
+  const draw = onLayout(() => {
+    const [nm, d, r] = SC[si], nw = NARROW(), W = nw ? 340 : 640, H = 250; vb(el, W, H);
+    const drive = d.reduce((s, x, i) => s + (st.d[i] ? x[1] : 0), 0), rest = r.reduce((s, x, i) => s + (st.r[i] ? x[1] : 0), 0), net = drive - rest;
+    const mid = W / 2, k = nw ? 12 : 20, lx = clamp(mid + net * k, 40, W - 40), u = nw ? 14 : 22;
+    let g = `<rect x="${W - (nw ? 56 : 90)}" y="20" width="${nw ? 46 : 76}" height="${H - 60}" rx="8" ${FS('glow-soft', 'glow-line', 1.2)}/>` + TX(W - (nw ? 33 : 52), 38, 'goal', 'glow', 11, 'middle');
+    g += `<line x1="${mid}" y1="18" x2="${mid}" y2="${H - 38}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>` + TX(mid, H - 24, 'where you started', 'faint', 11, 'middle');
+    g += `<line x1="${lx}" y1="14" x2="${lx}" y2="${H - 42}" ${S('text', 3)}/>` + TX(lx, 12, 'you', 'text', 11, 'middle');
+    let y = 46; d.forEach((x, i) => { if (!st.d[i]) return; const len = x[1] * u; g += `<line x1="${lx - 4 - len}" y1="${y}" x2="${lx - 8}" y2="${y}" ${S('good', 5, ';stroke-linecap:round')}/>` + arrowHead(lx - 3, y, 0, 'good', 9); if (!nw) g += TX(lx - 10 - len, y + 4, x[0], 'muted', 11, 'end'); y += 30; });
+    y = 46 + 3 * 30 - 20; r.forEach((x, i) => { if (!st.r[i]) return; const len = x[1] * u; g += `<line x1="${lx + 8}" y1="${y}" x2="${lx + 4 + len}" y2="${y}" ${S('bad', 5, ';stroke-linecap:round')}/>` + arrowHead(lx + 3, y, Math.PI, 'bad', 9); if (!nw) g += TX(lx + 10 + len, y + 4, x[0], 'muted', 11, 'start'); y += 30; });
+    el.innerHTML = g;
+    $('#ivPos').textContent = (net > 0 ? '+' : '') + net + (net > 0 ? ' toward the goal' : net < 0 ? ' (sliding back)' : ' (stuck)');
+    $('#ivEff').textContent = drive + (drive === 1 ? ' unit' : ' units');
+    $('#ivSay').textContent = net <= 0 ? 'Stuck: the forces holding you back match or beat the push. Instead of pushing harder, try switching one of them off.'
+      : drive >= 5 ? 'Moving, but only while you keep pushing this hard. Ease off and the restraints push you straight back.'
+      : 'Moving without strain. You took obstacles away instead of adding effort, so the progress lasts. That\'s inversion.';
+  });
+  init();
+}
+
+/* ---------- 9: Occam's razor ---------- */
+{ const PZ = [
+    { t: 'The lights went out', clue: 'The neighbours\' lights are out too', ex: [
+      ['A fuse tripped', [['Something tripped the fuse', .4]], [['Something tripped the fuse', .02]]],
+      ['A power cut in the street', [['The local supply failed', .15]], [['The local supply failed', .85]]],
+      ['Someone sabotaged it', [['Someone wanted to', .02], ['They reached the fuse box unseen', .2], ['They left no trace', .3]], [['Someone wanted to', .02], ['They cut the whole street', .05], ['They left no trace', .3]]] ],
+      say: ['One assumption at 40% beats three that multiply down to a fraction of a percent.', 'The clue rules out the fuse, so the next simplest explanation takes over. Still not sabotage.'] },
+    { t: 'A fever and a cough', clue: 'They just got back from the tropics, and the fever returns every two days', ex: [
+      ['A common cold or flu', [['A common virus is going round', .6]], [['A common virus is going round', .1]]],
+      ['Pneumonia', [['An infection reached the lungs', .08]], [['An infection reached the lungs', .05]]],
+      ['Malaria', [['They were bitten by an infected mosquito', .01], ['The infection took hold', .5]], [['They were bitten by an infected mosquito', .6], ['The infection took hold', .7]]] ],
+      say: ['Horses, not zebras: the common cause is far likelier, so check it first.', 'Now the evidence demands the rarer, more complicated answer. The razor is where you start, not where you have to stop.'] },
+    { t: 'The cake didn\'t rise', clue: 'You opened a new tin of baking powder today', ex: [
+      ['The baking powder was old', [['The tin had gone stale', .35]], [['The tin had gone stale', .02]]],
+      ['The oven ran cool', [['The thermostat is off', .2]], [['The thermostat is off', .2]]],
+      ['Someone swapped the flour', [['Someone wanted to', .01], ['They found a lookalike flour', .3]], [['Someone wanted to', .01], ['They found a lookalike flour', .3]]] ],
+      say: ['Start with the one-step story. You can test it in a minute.', 'The clue knocks out the favourite, so check the oven next. The plot is still the least likely story.'] } ];
+  let pi = 0, clue = false; const el = $('#ocSvg');
+  $('#ocP').innerHTML = PZ.map((p, i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${p.t}</button>`).join('');
+  $$('#ocP [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#ocP [data-p]'), b); pi = +b.dataset.p; clue = false; draw(); }));
+  $('#ocClue').addEventListener('click', () => { clue = !clue; draw(); });
+  const draw = onLayout(() => {
+    const P = PZ[pi], nw = NARROW(), W = nw ? 340 : 680, rh = nw ? 104 : 92, H = P.ex.length * rh + 10; vb(el, W, H);
+    const probs = P.ex.map(e => (clue ? e[2] : e[1]).reduce((s, a) => s * a[1], 1)), best = probs.indexOf(Math.max(...probs));
+    let g = '';
+    P.ex.forEach((e, i) => { const y = 8 + i * rh, ch = clue ? e[2] : e[1], p = probs[i], c = i === best ? 'glow' : 'muted';
+      g += TX(10, y + 16, e[0], i === best ? 'text' : 'soft', 14) + TX(W - 10, y + 16, (p * 100).toFixed(p < .01 ? 2 : p < .1 ? 1 : 0) + '%', c, 14, 'end', 'font-family="Geist Mono, monospace"');
+      const bw = nw ? (W - 20 - (ch.length - 1) * 14) / ch.length : Math.min(190, (W - 20 - (ch.length - 1) * 18) / ch.length);
+      ch.forEach((a, j) => { const x = 10 + j * (bw + (nw ? 14 : 18));
+        if (j) g += TX(x - (nw ? 7 : 9), y + 44, '×', 'faint', 14, 'middle');
+        g += `<rect x="${x}" y="${y + 26}" width="${bw}" height="34" rx="7" ${FS('panel-2', 'line', 1)}/>` + wrap(x + bw / 2, y + 39, a[0], nw ? Math.floor(bw / 6.4) : Math.floor(bw / 6.6), 11, 'muted', 10.5) + TX(x + bw - 6, y + 56, Math.round(a[1] * 100) + '%', 'text', 10, 'end', 'font-family="Geist Mono, monospace"'); });
+      g += `<rect x="10" y="${y + 68}" width="${W - 20}" height="8" rx="4" ${F('line', .6)}/><rect x="10" y="${y + 68}" width="${Math.max(2, (W - 20) * p)}" height="8" rx="4" ${F(c === 'glow' ? 'glow' : 'faint')}/>`; });
+    el.innerHTML = g;
+    $('#ocClue').textContent = clue ? 'Remove the clue' : 'Add a clue: ' + P.clue.toLowerCase();
+    $('#ocClue').setAttribute('aria-pressed', clue);
+    $('#ocBest').textContent = P.ex[best][0];
+    $('#ocSay').textContent = P.say[clue ? 1 : 0];
+  });
+  draw();
+}
+
+/* ---------- 10: Hanlon's razor (sorter) ---------- */
+sorter('#sort10', '#tally10',
+  [{ id: 'mis', label: 'Most likely a mistake', d: 'busy, careless or unaware' }, { id: 'mal', label: 'Probably deliberate', d: 'the evidence points to intent' }],
+  [ { t: 'A colleague hasn\'t answered your email in two days.', a: 'mis', w: 'A full inbox, a sick child, or it slid off the screen. Assume busy and follow up politely.' },
+    { t: 'A driver cuts into your lane without signalling.', a: 'mis', w: 'Most likely they didn\'t see you. People who drive at you on purpose are rare.' },
+    { t: 'Small depth charges explode near your submarine.', ctx: 'October 1962, the Soviet submarine B-59', a: 'mis', w: 'They were signals to surface, not an attack. Arkhipov\'s refusal to assume the worst may have prevented a nuclear war.' },
+    { t: 'A text says your bank account is locked and asks for the code it just sent you.', a: 'mal', no: 'Careful.', w: 'This is built to look routine. Banks don\'t ask for those codes. Hanlon\'s razor is a default, not a reason to drop your guard.' },
+    { t: 'A good friend forgot your birthday this year.', a: 'mis', w: 'Forgetting is common and rarely means they don\'t care. Tell them it mattered to you.' },
+    { t: 'Your manager gave the project you wanted to someone else, without explaining.', a: 'mis', w: 'They probably weighed things you can\'t see, or didn\'t think to explain. Ask what they were looking for before deciding it\'s personal.' },
+    { t: 'The same supplier\'s invoice is "wrong" in their favour for the fifth month running.', a: 'mal', no: 'Look again.', w: 'One error is a mistake. A pattern that only ever runs one way is evidence. Time to look closer.' } ]);
+
+/* ---------- afterword: run a decision through the lattice ---------- */
+{ const Q = [['map', 'Map', 'What is my picture of this leaving out?'], ['circle', 'Circle', 'Is this inside my circle? Who knows more?'], ['first', 'First principles', 'What do I know for sure, and what am I assuming?'],
+    ['thought', 'Thought experiment', 'If I imagine it done, what goes wrong?'], ['second', 'Second order', 'And then what? A year from now?'], ['prob', 'Probability', 'How likely is each outcome, and can I survive the worst?'],
+    ['invert', 'Inversion', 'What would guarantee this fails?'], ['occam', 'Occam', 'What is the simplest explanation of the situation?'], ['hanlon', 'Hanlon', 'Am I assuming bad intent where a mistake would do?'] ];
+  const d = store.get('gmm-decision', {}) || {};
+  $('#dcF').innerHTML = `<div class="field wide"><label for="dc_q">The decision I'm facing</label><textarea id="dc_q" maxlength="200" placeholder="e.g. Should I take the job offer in another city?">${esc(d.q || '')}</textarea></div>` +
+    Q.map(([id, nm, q]) => `<div class="field"><label for="dc_${id}">${nm}: ${q}</label><input id="dc_${id}" maxlength="140" value="${esc(d[id] || '')}"></div>`).join('');
+  function render(){
+    const filled = Q.filter(([id]) => (d[id] || '').trim());
+    $('#dcOut').innerHTML = !(d.q || '').trim() && !filled.length ? '<p class="dc-sum"><span class="empty">Write the decision, then answer whichever questions help. Your notes are saved in this browser only.</span></p>' :
+      `<span class="sub">${filled.length} of 9 models applied</span>${(d.q || '').trim() ? `<p class="dc-q">${esc(d.q)}</p>` : ''}<div class="dc-sum">${filled.map(([id, nm]) => `<div><span>${nm}</span>${esc(d[id])}</div>`).join('')}</div>`;
+  }
+  ['q', ...Q.map(x => x[0])].forEach(id => $('#dc_' + id).addEventListener('input', e => { d[id] = e.target.value; store.set('gmm-decision', d); render(); }));
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
