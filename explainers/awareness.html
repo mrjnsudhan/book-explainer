@@ -1,0 +1,1722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Awareness, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a sky just before dawn. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, from the talks,
+   a lab, plain words, quick check). The book's 56 short sections are grouped into 19 chapters in five parts.
+   Dark-first: night indigo with a saffron accent (dawn) and a lavender second series; light mode is warm paper with deep saffron and violet. */
+:root{
+  color-scheme: dark;
+  --ink:#0F0E1C;--panel:#17162B;--panel-2:#211F3A;--line:#34315A;--text:#F3F0FA;--muted:#B3AECD;--faint:#7F7AA0;
+  --glow:#FFB454;--glow-soft:rgba(255,180,84,.11);--hl:rgba(255,180,84,.26);--cool:#B9A8FF;--cool-soft:rgba(185,168,255,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B7A;--bad-soft:rgba(255,139,122,.12);
+  --soft:#DAD6EE;--deep:#0A0915;--toc-bg:rgba(23,22,43,.74);--glow-line:rgba(255,180,84,.36);--cool-line:rgba(185,168,255,.3);--on-glow:#2A1600;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F2E9;--panel:#FFFFFF;--panel-2:#EFE9DE;--line:#DDD5C7;--text:#1C1830;--muted:#5A5570;--faint:#8A869C;
+  --glow:#A65A00;--glow-soft:rgba(166,90,0,.06);--hl:#F7E0BC;--cool:#5B3FC4;--cool-soft:rgba(91,63,196,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2E2A44;--deep:#FCF9F3;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(166,90,0,.3);--cool-line:rgba(91,63,196,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F2E9;--panel:#FFFFFF;--panel-2:#EFE9DE;--line:#DDD5C7;--text:#1C1830;--muted:#5A5570;--faint:#8A869C;
+  --glow:#A65A00;--glow-soft:rgba(166,90,0,.06);--hl:#F7E0BC;--cool:#5B3FC4;--cool-soft:rgba(91,63,196,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2E2A44;--deep:#FCF9F3;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(166,90,0,.3);--cool-line:rgba(91,63,196,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Awareness additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.sky{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.sky-top{padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sky-stage svg{display:block;width:100%;height:auto}
+.sky-say{padding:12px 16px 4px;font-family:var(--f-display);font-size:clamp(21px,2.6vw,26px);line-height:1.2;min-height:2.6em}
+.sky-say small{display:block;font-family:var(--f-body);font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+.sky-ctl{padding:10px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.secs{max-width:70ch;font-size:13.5px;color:var(--muted);line-height:1.5}
+.secs .lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-right:6px}
+.steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.steps4 div{display:grid;gap:4px;align-content:start;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-size:14px;color:var(--faint);transition:all .25s}
+.steps4 div b{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.steps4 div.on{border-color:var(--glow-line);background:var(--glow-soft);color:var(--soft)}
+.steps4 div.on b{color:var(--glow)}
+.steps4 div.cur{border-color:var(--glow)}
+.aplist{display:grid;gap:6px}
+.aprow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);font-size:14.5px}
+.aprow .seg{display:flex;gap:4px}
+.aprow .seg button{font:inherit;font-size:12.5px;padding:5px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);cursor:pointer}
+.aprow .seg button[aria-pressed=true][data-v="must"]{background:var(--bad-soft);border-color:var(--bad);color:var(--text)}
+.aprow .seg button[aria-pressed=true][data-v="pref"]{background:var(--good-soft);border-color:var(--good);color:var(--text)}
+.dig-list{display:grid;gap:6px;min-height:40px}
+.dig-list div{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--soft);padding:8px 12px;border-radius:10px;background:var(--panel-2);border-left:3px solid var(--glow)}
+.dig-list i{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--glow);flex:0 0 auto;margin-top:3px}
+.dig-list .empty{border-left-color:var(--line);color:var(--muted)}
+.card3.gone{opacity:.45;text-decoration:line-through;text-decoration-color:var(--faint)}
+.card3.gone b{font-weight:500}
+.field select{font:inherit;font-size:15px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:760px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.card1 .entry{display:grid;gap:3px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14.5px;color:var(--soft)}
+.card1 .entry span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.card1 .entry button{justify-self:start;font:inherit;font-size:12px;color:var(--faint);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+@media (max-width: 760px){ .steps4{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 560px){ .fq{padding:14px 16px} .aprow{grid-template-columns:1fr} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Anthony de Mello's talks</div>
+    <h1><em>Awareness</em>,<br>Explained</h1>
+    <p class="lede">Anthony de Mello was an Indian Jesuit priest and psychotherapist who ran retreats around the world, and he had one message he never tired of: most of us go through life asleep. We run on conditioning, chase approval, and blame other people for feelings that start in us. <b>Awareness</b> is a record of those talks, published after his death, in 56 short, funny, often blunt sections. This guide groups them into nineteen chapters, with a lab in every one where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>You don't need to add anything to be happy. You need to <em>wake up</em>, and see that the things you thought you couldn't live without were never you.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="sky" style="margin:0" aria-label="You are the sky">
+        <div class="sky-top"><span>You are the sky, not the clouds</span></div>
+        <div class="sky-stage"><svg id="skySvg" viewBox="0 0 360 200" role="img" aria-label="A sky with clouds of feeling drifting across it"></svg></div>
+        <div class="sky-say" id="skySay" aria-live="polite"></div>
+        <div class="sky-ctl"><div class="row" id="skyMode"></div></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 4</span><span class="q">Waking Up</span><span class="d">Asleep, selfish, unlearning and the masks of charity</span></a>
+      <a href="#part2"><span class="n">Chapters 5 to 8</span><span class="q">Seeing Yourself</span><span class="d">Illusions about others, self-observation, I and me</span></a>
+      <a href="#part3"><span class="n">Chapters 9 to 12</span><span class="q">Fear and Labels</span><span class="d">Fear, labels, four steps to wisdom and change</span></a>
+      <a href="#part4"><span class="n">Chapters 13 to 16</span><span class="q">Dropping Illusions</span><span class="d">The rat race, attachment, words and the approval drug</span></a>
+      <a href="#part5"><span class="n">Chapters 17 to 19</span><span class="q">Love and Reality</span><span class="d">Dying to the me, seeing people fresh, finding the fire</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 1990, three years after de Mello's death, edited by J. Francis Stroud</span>
+      <span><b>Speaker</b> Anthony de Mello (1931 to 1987), Jesuit priest and psychotherapist from India</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 19 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== WAKING UP ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · waking up</span>
+      <h2>Waking Up</h2>
+      <p>De Mello opens his retreat by telling the audience they are asleep, that they don't really want to wake up, and that he can't wake them anyway. Then he goes after the things that keep people asleep: happiness with conditions, renunciation, and the comfortable belief that our good deeds are pure.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Spirituality means waking up. Nobody can do it for you, and the first step is admitting you'd rather stay asleep.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Most people are asleep</div>
+        <h2>On Waking Up</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> On Waking Up · Will I Be of Help to You in This Retreat?</div>
+        <div class="short"><span class="lbl">In short</span><p>For de Mello, spirituality means one thing: waking up. Most people are born, grow up, marry, work and die without ever waking. And when they come for help, they don't want to be woken. They want their broken toys mended so they can go back to sleep.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Asleep in a nightmare.</b> People live with fear, conflict and loneliness and call it normal. They never question the beliefs and habits running the show.</span></li>
+          <li><span><b>All is well, say the mystics.</b> Mystics of every religion agree on one strange thing: in spite of the mess, all is well. The problem isn't the world. It's that we're asleep and can't see it.</span></li>
+          <li><span><b>Relief, not a cure.</b> Most people want to feel better, not to change. Give me back my spouse, my job, my reputation, they say, and I'll be fine. That is asking for relief. A cure is painful, so they avoid it.</span></li>
+          <li><span><b>Nobody can wake you.</b> De Mello tells his audience he doesn't expect to help or harm anyone. Whatever happens to you, you'll have done it. A talk is like rain: the same rain grows flowers in a garden and thorns in a marsh.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello starts with a scene from Spanish television. A father knocks on his son's door and tells Jaime to get up for school. Jaime says he won't go, and he has three reasons: school is boring, the kids tease him, and he hates it. The father says he'll give three reasons why Jaime must go. First, it's his duty. Second, he is forty-five years old. Third, he is the headmaster. Wake up, says de Mello. You've grown up. You're too big to be asleep.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: relief or cure?</div><div class="tally" id="tally1" aria-label="Score"></div></div>
+        <div class="sorter" id="sort1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you want something fixed, ask whether you want the toy repaired or whether you want to see why it mattered so much. The first gets you back to sleep. The second is the start of waking up.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Happiness, provided that →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Happiness, provided that…</div>
+        <h2>On the Proper Kind of Selfishness, and On Wanting Happiness</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> On the Proper Kind of Selfishness · On Wanting Happiness</div>
+        <div class="short"><span class="lbl">In short</span><p>The first step to waking up is honesty: you don't really want to be happy. You want to be happy provided you keep this person, get that job, are thought well of. And you've been taught that simply wanting to be happy is selfish.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Try the test.</b> Picture someone you love and say silently, "I'd rather be happy than have you." Most people feel guilty saying it. That guilt shows how thoroughly we've been taught to tie happiness to other people.</span></li>
+          <li><span><b>Conditions, conditions.</b> We don't want happiness, we want happiness on terms. Every condition you attach is one more way to be unhappy when life doesn't meet it.</span></li>
+          <li><span><b>Sacrifice can be selfish too.</b> Love that asks you to be miserable as proof of it is also self-interest. It only feels nobler.</span></li>
+          <li><span><b>The most practical thing there is.</b> Spirituality, meaning waking up, deals with fear, inner conflict and loneliness. Business, politics and science, for all their success, don't touch those.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello once heard a retreat speaker say that the test of love is sacrifice. He put the idea to a woman listening: would she want the man she loved to love her at the cost of his own happiness? Yes, she said. Then, said de Mello, you'll have two unhappy people instead of one. But long live love!</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: happiness, provided that…</div><div class="hint">Add conditions and watch the happy days thin out</div></div>
+        <div class="stage"><svg id="hpSvg" role="img" aria-label="A month of days, lit on the days every condition is met"></svg></div><div class="lab-ctl"><div class="toggles" id="hpT"></div><div class="row"><button class="btn" id="hpRoll" type="button">Live another month</button><button class="btn" id="hpDrop" type="button" aria-pressed="false">Drop the conditions</button></div></div><div class="stats"><div class="stat"><span class="k">Happy days this month</span><span class="v glow" id="hpDays"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="hpSay"></span></div></div><p class="callout">An illustrative model: each condition is met on most days, but not all. <b>Every "provided that" multiplies the ways a day can go wrong.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice the small print on your happiness: "provided she calls", "provided the meeting goes well". You don't have to give up wanting those things. Just see that you put the conditions there, and you can take them off.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Listen and unlearn →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Understanding, not giving up</div>
+        <h2>Psychology, Renunciation, and Listening to Unlearn</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Are We Talking About Psychology in This Spirituality Course? · Neither Is Renunciation the Solution · Listen and Unlearn</div>
+        <div class="short"><span class="lbl">In short</span><p>Psychology can ease the pain and renunciation can tighten your grip, but neither wakes you up. What does is understanding: seeing a thing for what it's really worth, so it drops away by itself. And to understand, you have to listen openly and be ready to unlearn.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Sick of being sick.</b> Relief can keep you asleep. Sometimes people have to hit rock bottom, to be thoroughly fed up, before they'll look at what's really going on.</span></li>
+          <li><span><b>What you fight, you're tied to.</b> Renouncing something keeps your mind fixed on it. De Mello tells of a guru whose visitors were a prostitute who talked only about God and a priest who talked only about sex.</span></li>
+          <li><span><b>See its true value.</b> You don't have to give a thing up. See through it, see what it's actually worth to you, and it loses its hold, the way a child's toy does once the child grows.</span></li>
+          <li><span><b>Faith means openness.</b> Belief gives you security. Faith risks it for the truth. Don't swallow what you hear and don't reject it on reflex: test it the way the Buddha said a goldsmith tests gold, by cutting, scraping and melting it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello tells of a boy in a school for children with learning difficulties, modelling something from a lump of cow dung. His teacher asks what he's making. "A teacher." The principal comes by and asks. "A principal." Then the school psychologist asks, and the boy says, "Not enough dung." The school had labelled him slow. De Mello's point: what everyone agrees is normal isn't necessarily right, and every new idea starts as a minority of one.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: push it away, or look at it</div><div class="hint">Pick a craving, then try both</div></div>
+        <div class="stage"><svg id="rnSvg" role="img" aria-label="You and a craving joined by an elastic band"></svg></div><div class="lab-ctl"><div class="row" id="rnPick"></div><div class="row"><button class="btn" id="rnPush" type="button">Renounce it: push it away</button><button class="btn primary" id="rnLook" type="button">Understand it: look closely</button><button class="btn" id="rnReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">How much it's on your mind</span><span class="v glow" id="rnMind"></span></div><div class="stat"><span class="k">What you notice</span><span class="s" id="rnSay"></span></div></div><p class="callout">Pushing stretches the band; it doesn't cut it. <b>Seeing what the thing is really worth is what lets it go.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you want to be rid of a habit or a craving, stop fighting it for a moment and look at it. What does it actually give you? What do you think it gives you? The gap between those two is where it loosens.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The masks of charity →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Kinds of self-interest</div>
+        <h2>The Masquerade of Charity, and What's on Your Mind?</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> The Masquerade of Charity · What's on Your Mind?</div>
+        <div class="short"><span class="lbl">In short</span><p>Most charity is self-interest in disguise. De Mello names three kinds: doing what pleases you, doing good so you can feel good, and the worst, doing good so you won't feel bad. Seeing this isn't cynical. It punctures pride, and it leaves room for the kind of goodness that doesn't notice itself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two kinds of selfishness.</b> One is pleasing yourself. The other is pleasing yourself by pleasing others. The second feels like virtue, which makes it the harder one to see.</span></li>
+          <li><span><b>The worst kind.</b> Doing good to avoid guilt or criticism. You do it, you resent it, and the other person usually feels it.</span></li>
+          <li><span><b>Call it what it is.</b> A woman who volunteers because she needs to feel needed isn't doing wrong. De Mello just asks her to call it enlightened self-interest rather than charity.</span></li>
+          <li><span><b>Life is a banquet.</b> Yet most people are starving, like castaways off the coast of Brazil who died of thirst on a raft, not knowing they were floating on fresh water from a great river.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello admits to his own worst kind of charity. Someone he'd rather not see turns up at his door in the evening, and he says "Come in", because saying no would make him feel like a bad person. Then he sits through the visit resenting every minute. Real goodness, he says, looks more like the people in the Gospel parable who are thanked for feeding the hungry and ask, puzzled, "When did we do that?" They hadn't noticed they were being good.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: why am I doing this?</div><div class="tally" id="tally4" aria-label="Score"></div></div>
+        <div class="sorter" id="sort4"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't need pure motives to do good. You need honest ones. When you help, notice whether you're enjoying it, polishing your image or dodging guilt. Admitting it takes the pride out, and the help gets lighter.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Nobody lets you down →</a></div>
+    </section>
+    <!-- ===================== SEEING YOURSELF ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · seeing yourself</span>
+      <h2>Seeing Yourself</h2>
+      <p>Once you admit everyone is self-interested, yourself included, two things change: other people stop disappointing you, and you can start to watch yourself honestly. These sections teach the core practice, self-observation, and the distinction at the centre of the book: the "I" who watches and the "me" it watches.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Watch yourself as if you were watching someone else. What you can watch, you are not.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Nobody lets you down</div>
+        <h2>Good, Bad, or Lucky, and Our Illusion About Others</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Good, Bad, or Lucky · Our Illusion About Others</div>
+        <div class="short"><span class="lbl">In short</span><p>Self-preservation is our deepest instinct, so everyone is self-interested, in refined ways or crude ones. You aren't better than the criminal, only luckier or more aware. Expect people to look after themselves and they can't disappoint you. Oddly, that's when you can start to love them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Lucky, not virtuous.</b> People who win the lottery say they were lucky, not that they earned it. De Mello says the same of virtue and awareness. There's nothing to be proud of.</span></li>
+          <li><span><b>At home with sinners.</b> Someone outside Christianity once told de Mello that Jesus was at home with sinners because he saw he was no better than they were.</span></li>
+          <li><span><b>Disappointment is your illusion.</b> A young man complains his girlfriend let him down. She didn't, says de Mello. You built her up and expected too much.</span></li>
+          <li><span><b>See through yourself first.</b> Once you've seen your own self-interest, other people's stops shocking you. Then you can see them as they are, and love what you see.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello tells of an old man in a dream. He's paralysed, and he watches his old enemy climb the hill to his house carrying a gun. He can't run and he can't fight. Then it dawns on him: he can wake up. And he does. That's the book's whole idea in one scene. You don't have to defeat the nightmare. You have to see that it's a dream.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the expectation gap</div><div class="hint">Build someone up and watch the month unfold</div></div>
+        <div class="stage"><svg id="exSvg" role="img" aria-label="A month of a friend's behaviour against your expectation of them"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="exR">How high you've built Sam up <output id="oexR"></output></label><input type="range" id="exR" min="1" max="10" value="8"></div></div><div class="row"><button class="btn" id="exSee" type="button" aria-pressed="false">See Sam as Sam is</button><button class="btn" id="exRoll" type="button">Another month</button></div></div><div class="stats"><div class="stat"><span class="k">Times Sam "let you down"</span><span class="v glow" id="exSting"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="exSay"></span></div></div><p class="callout">Sam behaves exactly the same in every version. <b>Only your expectation changes, and with it the disappointment.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone disappoints you, look at the picture of them you were holding. They didn't fall short of themselves. They fell short of your idea of them, and that idea was yours.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Self-observation →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Watch yourself like someone else</div>
+        <h2>Self-Observation, and Awareness Without Evaluating Everything</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Self-observation · Awareness Without Evaluating Everything</div>
+        <div class="short"><span class="lbl">In short</span><p>The one thing nobody can do for you is self-observation: watching what goes on inside and around you as though it were happening to someone else. No judging, no justifying, no trying to fix. Most of us run on praise and blame like puppets on strings, and watching is how the strings show.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Observation, not self-absorption.</b> Self-absorption is anxious preoccupation with yourself. Observation is calm watching from a little way off, the way the sky watches clouds pass.</span></li>
+          <li><span><b>"I am depressed" isn't true.</b> Depression, anxiety and joy are experiences passing through. Say "there is depression" and you've already stepped back from it.</span></li>
+          <li><span><b>Understand, don't label.</b> A dog trainer studies dogs to get tricks out of them. A scientist watches ants simply to understand them. Self-observation needs the scientist's attitude.</span></li>
+          <li><span><b>Change comes by itself.</b> Awareness changes you without effort, the way a river makes its own banks. Forced discipline is a poor imitation.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>Visitors to de Mello's centre in India used to admire the trees and the climate, and he caught himself glowing with pride, as if he'd planted them. When people criticised India's poverty he felt ashamed of something he hadn't caused. Someone likes your shirt and you feel good. That's how mechanical we are. He jokes that the most liberating book title would be "I'm an Ass, You're an Ass": admit it openly and nobody can wound you with it.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the puppet and the watcher</div><div class="hint">Pull the strings, then switch to watching</div></div>
+        <div class="stage"><svg id="ppSvg" role="img" aria-label="A puppet whose mood swings with praise and blame"></svg></div><div class="lab-ctl"><div class="row" id="ppMode"></div><div class="row" id="ppEv"></div></div><div class="stats"><div class="stat"><span class="k">Inner voice</span><span class="s" id="ppSay"></span></div><div class="stat"><span class="k">Mood swing</span><span class="v glow" id="ppV"></span></div></div><p class="callout">The events are the same in both modes. <b>The puppet is whoever believes what other people say about them.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A few times today, catch yourself in the middle of a reaction and describe it as a reporter would: "He's pleased because someone liked his idea." Don't fix anything. Just watch, and notice who's watching.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: I and me →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · I and me</div>
+        <h2>The Illusion of Rewards, Finding Yourself, and Stripping Down to the "I"</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> The Illusion of Rewards · Finding Yourself · Stripping Down to the "I"</div>
+        <div class="short"><span class="lbl">In short</span><p>The most important question, says de Mello, isn't whether there's life after death but whether there's life before it. To find out, ask "Who am I?" Your body, name, job, religion, nationality, even your thoughts, are "me": things that change. The "I" is the one who notices them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Life before death.</b> Eternity isn't endless time later. It's timelessness, available now. Repentance means waking up, not weeping over the past.</span></li>
+          <li><span><b>Whose thoughts are these?</b> Much of what you think, feel and believe came from your parents and your culture. Sit in any group and you can hear people's parents talking through them.</span></li>
+          <li><span><b>You aren't your labels.</b> Change your party, your job or your country and you're still there. De Mello compares the body to Niagara Falls: the same name for water that's never the same twice.</span></li>
+          <li><span><b>Suffering is identification.</b> The "I" is never hurt. It's the "me" that gets threatened, and suffering starts the moment you take the "me" to be you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>Labels get people killed, says de Mello, and he tells it as a joke. In Belfast a man is stopped at gunpoint and asked, "Catholic or Protestant?" He thinks fast: "I'm Jewish." The gunman says, "Then I must be the luckiest Arab in Belfast." Neither man is a label. Both are ready to die or kill for one.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: strip down to the I</div><div class="hint">Take away each thing you call yourself</div></div>
+        <div class="stage"><svg id="stSvg" role="img" aria-label="Rings of labels around a still centre"></svg></div><div class="lab-ctl"><div class="cards3" id="stChips"></div><div class="row"><button class="btn" id="stReset" type="button">Put them all back</button></div></div><div class="stats"><div class="stat"><span class="k">Labels left</span><span class="v glow" id="stN"></span></div><div class="stat"><span class="k">What you notice</span><span class="s" id="stSay"></span></div></div><p class="callout">Worth knowing: the popular claim that every cell in your body is replaced every seven years, which de Mello repeats, isn't quite right. Some cells, like most brain cells, last a lifetime. <b>His point holds anyway: the body changes all the time, and you call it the same "me".</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Try describing yourself without a single label: no job, nationality, religion, role or adjective. It's surprisingly hard. Whatever is left when you run out of words is closer to the "I".</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: No one can make you unhappy →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · No one can make you unhappy</div>
+        <h2>Negative Feelings, Dependence, and How Happiness Happens</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Negative Feelings Toward Others · On Dependence · How Happiness Happens</div>
+        <div class="short"><span class="lbl">In short</span><p>A negative feeling about someone means you're caught in an illusion, and it's you who has to change, not them. Leaning on others for your happiness breeds fear and control. Happiness isn't a thrill you chase. It's what's left when you stop clinging, and trying too hard is what blocks it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The feeling is in you.</b> A hospital dietitian flinched every time someone at a staff meeting said the food stank. She'd identified herself with the food. The remark wasn't the problem; the identification was.</span></li>
+          <li><span><b>Love doesn't cling.</b> Enjoy someone the way you enjoy a symphony: fully, while it plays, without demanding the orchestra never stop.</span></li>
+          <li><span><b>Loneliness isn't cured by company.</b> It's cured by contact with reality. Distracting yourself with people only postpones it.</span></li>
+          <li><span><b>Thrills aren't happiness.</b> Excitement is followed by a crash. Chasing the next high is addiction, whether the high is a drug, a win or a romance.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello retells a Chinese sage's poem about an archer. When he shoots for nothing, he has all his skill. When he shoots for a brass buckle, he gets nervous. When he shoots for a prize of gold, he goes blind, or sees two targets. His skill hasn't changed. The prize divides him, because now part of him is thinking about winning instead of shooting.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the archer</div><div class="hint">Set the prize and shoot ten arrows</div></div>
+        <div class="stage"><svg id="arSvg" role="img" aria-label="A target with arrows that scatter more as the prize grows"></svg></div><div class="lab-ctl"><div class="row" id="arP"></div><div class="row"><button class="btn primary" id="arShoot" type="button">Shoot ten arrows</button></div></div><div class="stats"><div class="stat"><span class="k">Arrows in the gold</span><span class="v glow" id="arD"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="arSay"></span></div></div><p class="callout">Same archer, same bow. <b>The more he needs to win, the less of him is left to shoot.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you feel bad about someone, look for what you were demanding of them. When you need someone to be happy, notice the fear that comes with the need. Enjoy people without holding on, and the fear has nothing to grip.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Love or fear →</a></div>
+    </section>
+    <!-- ===================== FEAR AND LABELS ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · fear and labels</span>
+      <h2>Fear and Labels</h2>
+      <p>Here de Mello names what drives the sleep: fear of losing something, and the labels we cling to so we know who we are. He gives his most practical method, four steps for any negative feeling, and warns that even the wish to become a better person can be one more form of greed.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Behind anger is fear, and behind fear is a label you think you are. Understanding, not effort, sets you free.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Love or fear</div>
+        <h2>Fear, Contact with Reality, and Good Religion</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Fear—The Root of Violence · Awareness and Contact with Reality · Good Religion—The Antithesis of Unawareness</div>
+        <div class="short"><span class="lbl">In short</span><p>There are only two forces in us, de Mello says: love and fear. Fear is the root of violence, and behind every anger is a fear of losing something. Awareness means contact with reality as it is, and good religion should wake you up, not give you a comfortable substitute for being awake.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Anger hides fear.</b> Think of the last time you were angry and ask what you were afraid of losing. There's almost always something.</span></li>
+          <li><span><b>The fearless are nonviolent.</b> People who have nothing to lose have nothing to defend. Real nonviolence comes from fearlessness, not from gritted teeth.</span></li>
+          <li><span><b>A floodlight, not a spotlight.</b> Concentration narrows to one thing. Awareness takes in everything, like a driver deep in an argument who still notices a door rattling.</span></li>
+          <li><span><b>Rules over people.</b> Religion goes wrong when worship, rules and institutions matter more than love. A devotion that doesn't change you is a distraction.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello passes on a story he credits to Cardinal Martini. An Italian couple's wedding reception is rained out, so they ask the parish priest if they can hold it in the church: just a little cake, a little song. The party gets loud. The priest is beside himself. His assistant reminds him that Jesus went to a wedding. "I know," says the priest, "but they didn't have the Blessed Sacrament there."</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: the root of the anger</div><div class="hint">Pick an angry moment and dig under it</div></div>
+        <div class="stage"><svg id="fxSvg" role="img" aria-label="A plant of anger above ground with a root of fear below"></svg></div><div class="lab-ctl"><div class="row" id="fxS"></div><div class="row"><button class="btn primary" id="fxDig" type="button">Dig under it</button></div></div><div class="stats"><div class="stat"><span class="k">The fear underneath</span><span class="s" id="fxFear"></span></div><div class="stat"><span class="k">What changes when you see it</span><span class="s" id="fxSay"></span></div></div><p class="callout">Anger is what shows above ground. <b>Fear of losing something is the root, and that's where awareness has to look.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you're angry, don't argue with the anger. Ask: what am I afraid of losing right now? Respect, control, being right, someone's love? Seeing the fear doesn't make it vanish, but it stops it driving.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Black paint in the air →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Black paint in the air</div>
+        <h2>Labels, and Obstacles to Happiness</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Labels · Obstacles to Happiness</div>
+        <div class="short"><span class="lbl">In short</span><p>You don't find the truth by hunting for it, goes a Zen saying de Mello likes; you just drop your opinions. Identify with a label like success, failure or genius and you start clinging to it and dreading its loss. Suffering is the signal that an illusion has run into reality. Someone who doesn't identify is as untouched as the air you throw black paint into.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Drop your opinions.</b> Truth isn't something you add. It appears when you stop insisting on what you already think.</span></li>
+          <li><span><b>Suffering is a signal.</b> Pain tells you something's wrong in the body. Suffering tells you you're out of touch with reality, holding an illusion that's just collided with what is.</span></li>
+          <li><span><b>Who decides what success is?</b> Success and failure are verdicts other people taught you to want or fear. They come and go; you don't.</span></li>
+          <li><span><b>The air stays clear.</b> Throw black paint into the air and the air doesn't turn black. A person who hasn't identified with the labels is just as clean after praise or blame.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello describes a fifty-five-year-old small businessman sitting in a bar with a beer, comparing himself to the classmates who "made it": one runs a big corporation, another is a chief justice. He feels like a failure. De Mello is unimpressed by the list. Those are labels, he says, and the man is making himself miserable over a scoreboard someone else drew up.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: black paint in the air</div><div class="hint">Throw labels at two people</div></div>
+        <div class="stage"><svg id="bpSvg" role="img" aria-label="Two figures, one who takes on the colour of every label and one the paint passes through"></svg></div><div class="lab-ctl"><div class="row" id="bpEv"></div><div class="row"><button class="btn" id="bpReset" type="button">Wash it all off</button></div></div><div class="stats"><div class="stat"><span class="k">Labels stuck to the "me"</span><span class="v glow" id="bpN"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="bpSay"></span></div></div><p class="callout">The praise sticks just as hard as the blame. <b>Whatever you take on as you can be taken away, and that is what you fear.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice which label you'd hate to lose most: clever, kind, successful, a good parent. That's where you're most easily hurt. You can still be all those things without needing to be.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Four steps to wisdom →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Four steps for any bad feeling</div>
+        <h2>Four Steps to Wisdom, and All's Right with the World</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Four Steps to Wisdom · All's Right with the World</div>
+        <div class="short"><span class="lbl">In short</span><p>De Mello gives a plain method for any negative feeling. Name it. See that it's in you, not in the world. Don't identify with it. And understand that when you change, everything changes. Underneath sits the mystics' claim that all is well, even when you can't yet see it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>1. Name the feeling.</b> Most people don't even notice they're anxious or resentful; they just are. Notice it and give it a name.</span></li>
+          <li><span><b>2. It's in you.</b> No person or event has the power to make you unhappy. Reality provides the stimulus; you provide the reaction. The feeling comes from your programming, not from out there.</span></li>
+          <li><span><b>3. It isn't you.</b> Don't say "I am angry". Say "there is anger". It's a cloud passing, and you're the sky.</span></li>
+          <li><span><b>4. When you change, everything changes.</b> You don't have to fix the world first. Change the way you see, and the problem you were sure was out there looks different or disappears.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello's image for trying to fix your feelings by fixing the world: it's like changing your pen to improve your handwriting. You can buy a new job, a new partner, a new city, and the same hand writes the same way. Every time you're unhappy, he says, you have added something to reality that wasn't there.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: walk a feeling through the four steps</div><div class="hint">Pick a feeling and what set it off</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="fsFeel">The feeling</label><select id="fsFeel"></select></div><div class="field"><label for="fsWho">What set it off</label><input id="fsWho" maxlength="70" placeholder="e.g. my sister cancelled again"></div></div><div class="steps4" id="fsSteps"></div><div class="row"><button class="btn" id="fsBack" type="button">← Back</button><button class="btn primary" id="fsNext" type="button">Next step →</button><button class="btn" id="fsSave" type="button">Save to my log</button><span class="tip" id="fsTip"></span></div></div><p class="callout">Saved in this browser only, and it shows up in the afterword. <b>The steps don't make the feeling disappear. They stop it from being you.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Try it on the next small irritation: name it, own it, step back from it, and see what happens to the situation when you're no longer fighting it. Small feelings are good practice for big ones.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Don't try to change →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Don't try to change</div>
+        <h2>Sleepwalking, Change as Greed, and A Changed Person</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Sleepwalking · Change as Greed · A Changed Person</div>
+        <div class="short"><span class="lbl">In short</span><p>Wanting to change yourself out of dissatisfaction is more of the same greed: a spiritual ambition instead of a worldly one. De Mello's advice is not to push but to understand. Change that comes from awareness happens through you, not by you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Sleepwalking.</b> Most of the day we're on autopilot, reacting the way we were programmed to react, and calling it choice.</span></li>
+          <li><span><b>Change as greed.</b> Trying hard to become a better, holier or calmer person is often the "me" wanting more for itself. The striving is part of the sleep.</span></li>
+          <li><span><b>Understand, don't change.</b> It makes no sense to change what you don't understand. See a habit clearly enough and it changes on its own.</span></li>
+          <li><span><b>Others keep the old picture.</b> A changed person may find the people around them still treat them as the old one. That's their image, not your reality.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello describes a priest who was lazy and tried system after system to make himself work harder, with no lasting success. What changed him in the end wasn't willpower but insight: he saw that the laziness went back to an old disappointment. Once he understood it, the effort he'd been forcing simply wasn't needed.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: willpower or understanding</div><div class="hint">Set the effort and the insight, then watch twelve weeks</div></div>
+        <div class="stage"><svg id="cgSvg" role="img" aria-label="Two lines over twelve weeks: change forced by willpower and change from understanding"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="cgE">Willpower you throw at it <output id="ocgE"></output></label><input type="range" id="cgE" min="0" max="10" value="8"></div><div class="ctl"><label for="cgA">How well you understand the habit <output id="ocgA"></output></label><input type="range" id="cgA" min="0" max="10" value="2"></div></div></div><div class="stats"><div class="stat"><span class="k">Change still there at week 12</span><span class="v glow" id="cgV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="cgSay"></span></div></div><p class="callout">An illustrative model, not data. <b>Forcing builds inner conflict that pulls you back; understanding has nothing to fight.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one habit you've been fighting. For a week, stop fighting and just watch it: when it shows up, what it gives you, what it protects. You may find you no longer need the fight.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Losing the rat race →</a></div>
+    </section>
+    <!-- ===================== DROPPING ILLUSIONS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · dropping illusions</span>
+      <h2>Dropping Illusions</h2>
+      <p>The next run of sections takes apart the illusions that feel most like reality: that you must win the race, that you can't be happy without certain people and things, that words and concepts show you the world as it is, and that you need approval to live.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>An attachment is a belief, not a fact. See through it and you keep the enjoyment without the fear.</p></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Step off the treadmill</div>
+        <h2>Arriving at Silence, Losing the Rat Race, and Permanent Worth</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Arriving at Silence · Losing the Rat Race · Permanent Worth</div>
+        <div class="short"><span class="lbl">In short</span><p>Truth lies beyond words, so deep knowing ends in silence. The race for success and status burns the energy you need for living, and the awake person is untroubled by honour or disgrace. Your worth was never at stake in the race in the first place.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Words run out.</b> Near the end of his life Thomas Aquinas stopped writing. After an experience he couldn't describe, he said everything he had written was straw.</span></li>
+          <li><span><b>The race has no finish.</b> Whoever you compare yourself with moves too. Win and you find a new group to measure against.</span></li>
+          <li><span><b>Honour and disgrace.</b> An awakened person is indifferent to both. Not cold, just not run by them.</span></li>
+          <li><span><b>You're not O.K. and you're not not O.K.</b> Your worth isn't something others hand out or take back. You're simply you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>Thomas Aquinas wrote some of the most influential theology ever produced. Then, the story goes, after an experience at Mass late in life, he stopped. When his secretary begged him to finish his great work, he said that everything he'd written seemed like straw next to what he had seen. De Mello loves the story: the best minds end up at a loss for words, because words aren't the thing.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: the treadmill</div><div class="hint">Get ahead, then look at the gap</div></div>
+        <div class="stage"><svg id="rrSvg" role="img" aria-label="Your standing against the people you compare yourself with"></svg></div><div class="lab-ctl"><div class="row" id="rrEv"></div><div class="row"><button class="btn" id="rrOff" type="button" aria-pressed="false">Step off: stop comparing</button><button class="btn" id="rrReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Gap to the people you measure against</span><span class="v glow" id="rrGap"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="rrSay"></span></div></div><p class="callout">An illustrative model. <b>Every rung you climb brings a new crowd to compare with, so the gap never closes.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice whom you compare yourself with, and how that group changed the last time you moved up. You can keep working and keep improving. Just stop using the race to decide whether you're worth something.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Attachment or preference →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Attachment and preference</div>
+        <h2>Desire, Not Preference; Clinging to Illusion; Hugging Memories</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Desire, Not Preference · Clinging to Illusion · Hugging Memories</div>
+        <div class="short"><span class="lbl">In short</span><p>An attachment is a belief that without something or someone you can't be happy. A preference is wanting it without that belief. Drop the attachment and keep the preference, and you can enjoy everything without being enslaved by it. Memories work the same way: we hug our picture of the past instead of what's here.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>An attachment is a belief.</b> "I can't be happy without this" isn't a fact about the world. It's a conviction you were taught, and convictions can be seen through.</span></li>
+          <li><span><b>Understood desire becomes preference.</b> Don't suppress desire. Understand it, see its true worth, and it turns into a preference: welcome when it comes, not a disaster when it doesn't.</span></li>
+          <li><span><b>Clinging to illusion.</b> We hold on to ideas of how things should be because letting go feels like losing ourselves. It's only losing the illusion.</span></li>
+          <li><span><b>Hugging memories.</b> Meeting an old friend, you may be embracing your memory of them, not the person standing there now.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello imagines someone embracing a friend they haven't seen in years. The warmth is real, but whom is it for? Often it's for the friend of twenty years ago, the one in the memory. The person in front of you has changed, and if you only greet the memory, you miss them. The same happens with old hurts: what wounds us now is usually a memory being replayed, not anything happening today.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: let a year happen</div><div class="hint">Mark each one as a must or a nice-to-have</div></div>
+        <div class="lab-ctl"><div class="aplist" id="apList"></div><div class="row"><button class="btn primary" id="apGo" type="button">Let a year happen</button></div></div><div class="stage"><svg id="apSvg" role="img" aria-label="What life took this year and how much each loss hurt"></svg></div><div class="stats"><div class="stat"><span class="k">Suffering this year</span><span class="v glow" id="apHurt"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="apSay"></span></div></div><p class="callout">An illustrative model: life takes the same things either way. <b>A must turns a loss into suffering; a preference turns it into a passing disappointment.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>List three things you're sure you can't be happy without. For each, ask: is that true, or is it something I was told? You can keep wanting all three. Just try wanting them without the "or else".</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Words are not the thing →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Words are not the thing</div>
+        <h2>Getting Concrete, At a Loss for Words, Cultural Conditioning, and Filtered Reality</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Getting Concrete · At a Loss for Words · Cultural Conditioning · Filtered Reality</div>
+        <div class="short"><span class="lbl">In short</span><p>Concepts freeze a flowing world into fixed pieces. Name a bird and you stop seeing it. Your culture told you whom to love and whom to fear before you could choose, and your filters decide what reaches you at all. Awareness means coming back to your senses and looking again.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Name it and stop seeing it.</b> De Mello quotes Krishnamurti: once you teach a child the word "bird", the child may never really see a bird again. They see the word.</span></li>
+          <li><span><b>Even "God" can get in the way.</b> Our idea of God can block the experience of God. De Mello says concepts point at reality; they never contain it.</span></li>
+          <li><span><b>Who taught you to hate?</b> A baby born in America and raised in Russia would grow up feeling what Russians feel about Americans. National hatreds are learned, not discovered.</span></li>
+          <li><span><b>Filtered reality.</b> Like a president who only hears what aides pass up, we receive a world already sorted by our fears, beliefs and habits.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello leans on Krishnamurti here. A child sees a bird for the first time and is absorbed: the colours, the hop, the cocked head. Then someone says "That's a sparrow," and something closes. Next time, the child sees "sparrow" and moves on. Concepts are useful, he says. They just aren't the thing, and we keep mistaking them for it.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: name it, or look at it</div><div class="hint">Switch between the word and the bird</div></div>
+        <div class="stage"><svg id="bdSvg" role="img" aria-label="A bird, covered by its name or seen in detail"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="bdName" type="button" aria-pressed="true">Name it</button><button class="btn primary" id="bdLook" type="button">Look again</button></div><div class="dig-list" id="bdList" aria-live="polite"></div></div><p class="callout">The label takes a second and tells you almost nothing. <b>Each time you look again, there's more than the word let you see.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick something you see every day, a tree, a mug, a colleague's face, and look at it for a minute as if you had no word for it. Notice how much the word had been hiding.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: The approval drug →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · The approval drug</div>
+        <h2>Detachment, Addictive Love, More Words, Hidden Agendas, and Giving In</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Detachment · Addictive Love · More Words · Hidden Agendas · Giving In</div>
+        <div class="short"><span class="lbl">In short</span><p>Society got you hooked early on a drug: approval, appreciation, attention. Once hooked, you live for the next dose and dread withdrawal, and you call the craving love. Real love is clear seeing and an honest response. Detachment isn't coldness; it's being free enough to love.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The drug called approval.</b> As a child you were given a taste for it, then taught you'd be miserable without it. Now the people who supply it control you.</span></li>
+          <li><span><b>Addiction isn't love.</b> If you can't be happy without someone, you need them, and need brings fear, jealousy and control. Love doesn't.</span></li>
+          <li><span><b>Hidden agendas.</b> Before you speak or help, ask what you're really after. Often it's another dose.</span></li>
+          <li><span><b>Aloneness, not loneliness.</b> Drop the need for people and you aren't left lonely. You're alone, free, and finally able to enjoy them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello describes a man who realised, with some shock, that he didn't need his closest friend in order to be happy. He was afraid that meant he loved the friend less. It turned out the opposite way: without the need, there was nothing to protect and nothing to demand, and the friendship got easier and warmer.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: dose and withdrawal</div><div class="hint">Feed the need, then drop it</div></div>
+        <div class="stage"><svg id="drSvg" role="img" aria-label="Your mood over time as approval comes and goes"></svg></div><div class="lab-ctl"><div class="row" id="drMode"></div><div class="row" id="drEv"></div></div><div class="stats"><div class="stat"><span class="k">Mood now</span><span class="v glow" id="drMood"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="drSay"></span></div></div><p class="callout">An illustrative model of craving. <b>Each high fades below where it started, so you need the next dose sooner.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice the moments today when you're fishing: for a like, a thank-you, a sign you did well. You don't have to stop enjoying appreciation. Just see that you can live without it, and you'll stop being run by it.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Through you, not by you →</a></div>
+    </section>
+    <!-- ===================== LOVE AND REALITY ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Part five · love and reality</span>
+      <h2>Love and Reality</h2>
+      <p>The last sections bring it home. Dying to the "me", changing through insight rather than effort, meeting people without yesterday's images, and living fully in the present. Love, for de Mello, is what remains when fear and need are gone.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Love can't be defined, only uncovered. Drop what isn't love and what's left is it.</p></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · Through you, not by you</div>
+        <h2>Assorted Landmines, The Death of Me, Insight and Understanding, and Not Pushing It</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Assorted Landmines · The Death of Me · Insight and Understanding · Not Pushing It</div>
+        <div class="short"><span class="lbl">In short</span><p>Dying to self means dying to the "me", the bundle of labels and demands, not the body. Insight, not effort, is what changes you. Pushing a stalled car down the road is not the same as fixing its engine.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Watch for landmines.</b> Some ideas feel like progress and keep you asleep: needing to be right, needing to be good, needing results from your awareness.</span></li>
+          <li><span><b>The death of the me.</b> Imagine yourself lying in a coffin. From there, look at what you were so worried about. Most of it shrinks, and you start to live.</span></li>
+          <li><span><b>Insight isn't information.</b> Knowing that something is bad for you rarely changes you. Seeing it, really seeing it, does.</span></li>
+          <li><span><b>Don't push.</b> Change happens through you, not by you. You can't force awareness; you can only stop getting in its way.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello's image for effort without insight is a car that's broken down. You can get out and push it, and it'll move a little while you're pushing, and stop the moment you tire. Or you can look under the bonnet and find what's wrong. Fix the engine and you don't need to push at all.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: push the car, or fix the engine</div><div class="hint">Try pushing first</div></div>
+        <div class="stage"><svg id="crSvg" role="img" aria-label="A stalled car on a road"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="crPush" type="button">Push it</button><button class="btn primary" id="crFix" type="button">Look under the bonnet</button><button class="btn" id="crReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Distance covered</span><span class="v glow" id="crD"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="crSay"></span></div></div><p class="callout">Effort moves the car only while you keep pushing. <b>Insight fixes why it stopped.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you've been pushing yourself to change something for months, stop and ask what's actually broken. The answer usually isn't "not enough willpower".</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: Seeing people fresh →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Seeing people fresh</div>
+        <h2>Getting Real, Assorted Images, Saying Nothing About Love, and Losing Control</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Getting Real · Assorted Images · Saying Nothing About Love · Losing Control</div>
+        <div class="short"><span class="lbl">In short</span><p>You can't say what love is, only what it isn't: not need, not image, not control. Most of the time we relate to our pictures of people, built from yesterday, rather than to the people themselves. Love means dropping those images and seeing the person now, and giving up the control we try to keep over them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Images, not people.</b> Every past hurt, compliment and habit adds a layer to your picture of someone. Soon you're talking to the picture.</span></li>
+          <li><span><b>Love can't be defined.</b> De Mello prefers to say nothing about love directly. Remove fear, need and illusion, and love is what's there.</span></li>
+          <li><span><b>Love is clear seeing.</b> To love someone you have to see them as they are, not as you need them to be, and respond to that.</span></li>
+          <li><span><b>Losing control.</b> Trying to control people, and life, is fear in action. Letting go isn't defeat; it's waking up.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello's pictures of love come from nature. A rose doesn't decide to give its scent to good people and hold it back from bad ones; it just smells sweet to whoever comes near. A lamp lights up the room for everyone in it. A tree gives shade to the one who waters it and the one who cuts it down. Love like that has no conditions, because it was never about getting something back.</p></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: the person behind the pictures</div><div class="hint">Drop the images one by one</div></div>
+        <div class="stage"><svg id="imSvg" role="img" aria-label="A person hidden behind layers of old images"></svg></div><div class="lab-ctl"><div class="cards3" id="imList"></div><div class="row"><button class="btn" id="imReset" type="button">Put the pictures back</button></div></div><div class="stats"><div class="stat"><span class="k">How clearly you see Kim</span><span class="v glow" id="imV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="imSay"></span></div></div><p class="callout">Every picture was true once. <b>None of them is Kim today.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you see someone close to you, try to meet them as if for the first time. Leave last week's argument and last year's label at the door. You may be surprised who's there.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#ch19">Next: Where's the fire? →</a></div>
+    </section>
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 19</span> · Where's the fire?</div>
+        <h2>Listening to Life, The End of Analysis, Dead Ahead, and The Land of Love</h2>
+        <div class="secs"><span class="lbl">The book's sections</span> Listening to Life · The End of Analysis · Dead Ahead · The Land of Love</div>
+        <div class="short"><span class="lbl">In short</span><p>Life is something to listen to, not to analyse to death. Live each moment fully, dying to the past as you go. And remember what religion so easily forgets: the point was always the fire, never the shrine built to honour it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Listen to life.</b> Stop commenting and start hearing. Life is happening now, and most of us miss it narrating it to ourselves.</span></li>
+          <li><span><b>Analysis isn't awareness.</b> Analysing your problems can become one more way to stay in your head. Awareness simply sees.</span></li>
+          <li><span><b>Die to the past.</b> To live fully you have to let each moment go as it ends, without dragging it into the next.</span></li>
+          <li><span><b>The land of love.</b> When fear and need are gone, what's left is love. Not a feeling you produce, but a place you arrive.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the talks</span><p>De Mello's closing parable: a man discovers how to make fire and goes from tribe to tribe teaching people to cook and keep warm. He becomes so popular that the priests feel threatened and have him killed. Then, to keep the people's loyalty, they put his portrait on an altar, with the tools he used, and teach people to revere them. For centuries the worship goes on, with prayers and rituals. But there's no fire. "Where's the fire?" asks de Mello. That, for him, is the danger in all religion: honouring the tools and forgetting what they were for.</p></div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: where's the fire?</div><div class="hint">Move through the centuries</div></div>
+        <div class="stage"><svg id="fpSvg" role="img" aria-label="An altar to the man who discovered fire, through the centuries"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="fpR">Time since he taught the tribes <output id="ofpR"></output></label><input type="range" id="fpR" min="0" max="6" value="0"></div></div><div class="row"><button class="btn primary" id="fpLight" type="button">Light the fire yourself</button></div></div><div class="stats"><div class="stat"><span class="k">People keeping warm</span><span class="v glow" id="fpWarm"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="fpSay"></span></div></div><p class="callout">The altar grows grander every century. <b>The fire was the point, and only you can light it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Whatever you believe or practise, ask now and then whether it still gives you fire: more awareness, more love, more freedom. If it's only a beautiful altar, light the fire again.</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this chapter</label><a class="next" href="#after">Next: awareness, awareness, awareness →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Awareness, awareness, awareness</h2>
+      <p class="big">A disciple once asked a master to write down the most important thing. The master wrote "Awareness". Asked for more, he wrote it three times. Asked what it meant, he wrote: "Awareness means awareness." There is no technique to take away, only the practice of watching. Here is what you noticed, and the whole book on one page.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">Asleep</span><b>Most of us are sleepwalking</b><span>We want our toys fixed, not to wake up. Waking up is the only real cure.</span></div>
+        <div><span class="n">Self-interest</span><b>See it in yourself first</b><span>Then nobody can disappoint you, and you can love people as they are.</span></div>
+        <div><span class="n">I and me</span><b>You are not your labels</b><span>Body, job, nation, feelings: they change. The one who watches them doesn't.</span></div>
+        <div><span class="n">Feelings</span><b>The feeling is in you</b><span>Name it, own it, don't identify with it. When you change, everything changes.</span></div>
+        <div><span class="n">Attachment</span><b>Keep preferences, drop demands</b><span>"I can't be happy without it" is the belief that makes you suffer.</span></div>
+        <div><span class="n">Love</span><b>Love is clear seeing</b><span>Drop the need, the images and the control, and what's left is love.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Awareness: The Perils and Opportunities of Reality</i> by Anthony de Mello, edited by J. Francis Stroud (1990). The explanations, retold stories and labs are written in our own words; section titles are the book's. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Waking up", "Seeing yourself", "Fear and labels", "Dropping illusions", "Love and reality"];
+const CH = [["Waking up", "Waking up", 0, "Chapter 1"], ["Happiness, provided that", "Happiness, provided that", 0, "Chapter 2"], ["Listen and unlearn", "Listen and unlearn", 0, "Chapter 3"], ["The masks of charity", "The masks of charity", 0, "Chapter 4"], ["Nobody lets you down", "Nobody lets you down", 1, "Chapter 5"], ["Self-observation", "Self-observation", 1, "Chapter 6"], ["I and me", "I and me", 1, "Chapter 7"], ["No one can make you unhappy", "No one can make you unhappy", 1, "Chapter 8"], ["Love or fear", "Love or fear", 2, "Chapter 9"], ["Black paint in the air", "Black paint in the air", 2, "Chapter 10"], ["Four steps to wisdom", "Four steps to wisdom", 2, "Chapter 11"], ["Don't try to change", "Don't try to change", 2, "Chapter 12"], ["Losing the rat race", "Losing the rat race", 3, "Chapter 13"], ["Attachment or preference", "Attachment or preference", 3, "Chapter 14"], ["Words are not the thing", "Words are not the thing", 3, "Chapter 15"], ["The approval drug", "The approval drug", 3, "Chapter 16"], ["Through you, not by you", "Through you, not by you", 4, "Chapter 17"], ["Seeing people fresh", "Seeing people fresh", 4, "Chapter 18"], ["Where's the fire?", "Where's the fire?", 4, "Chapter 19"]];
+const QUIZ = {
+"1": {
+"q": "What does de Mello say most people want when they come for help?",
+"o": [
+"To wake up, whatever it costs",
+"To have their broken toys fixed so they can carry on as before",
+"To give up everything they own"
+],
+"a": 1,
+"w": "They want relief: the job, the spouse, the reputation put back. Waking up is a cure, and cures hurt, so most people would rather not."
+},
+"2": {
+"q": "What does de Mello say most people actually want?",
+"o": [
+"Unconditional happiness",
+"Happiness on condition that certain things happen",
+"To make others happy at any cost"
+],
+"a": 1,
+"w": "We've been taught to tie happiness to people, events and things. So we want it, but only on our terms."
+},
+"3": {
+"q": "Why does de Mello say renunciation doesn't free you?",
+"o": [
+"Because it's too difficult for most people",
+"Because fighting something keeps your mind fixed on it",
+"Because desires are good and should be followed"
+],
+"a": 1,
+"w": "What you push against, you stay tied to. Understanding a thing's real value is what makes the desire drop on its own."
+},
+"4": {
+"q": "When, according to de Mello, is a good deed at its best?",
+"o": [
+"When others see it and are inspired",
+"When you're unaware that you're doing good",
+"When it costs you a great deal"
+],
+"a": 1,
+"w": "The righteous in the parable didn't know they had done anything special. Goodness that keeps score of itself is already turning into self-interest."
+},
+"5": {
+"q": "A friend forgets your birthday and you feel let down. Where does de Mello locate the problem?",
+"o": [
+"In your friend's carelessness",
+"In the expectation you built up",
+"In how society treats birthdays"
+],
+"a": 1,
+"w": "Disappointment comes from the illusion that people should be other than they are. Drop the illusion and the sting goes."
+},
+"6": {
+"q": "What does de Mello mean by self-observation?",
+"o": [
+"Thinking hard about your faults so you can improve",
+"Watching yourself without judging, as if you were watching someone else",
+"Keeping a strict diary of your sins"
+],
+"a": 1,
+"w": "It's detached watching, with no comment and no attempt to change anything. Judging and fixing come from the same \"me\" you're trying to see."
+},
+"7": {
+"q": "In de Mello's terms, which of these is the \"I\"?",
+"o": [
+"Your name and reputation",
+"Your thoughts and feelings",
+"The one who is aware of all of them"
+],
+"a": 2,
+"w": "Name, body, thoughts and feelings all change and can be observed. The \"I\" is the observer, which is why it can't be hurt by what happens to the \"me\"."
+},
+"8": {
+"q": "What does the archer story show?",
+"o": [
+"That practice makes perfect",
+"That needing to win divides your attention and drains your skill",
+"That gold is better than brass"
+],
+"a": 1,
+"w": "The prize doesn't change his skill, it changes his attention. Craving the result makes him worse at the very thing he wants."
+},
+"9": {
+"q": "What does de Mello say lies at the root of anger and violence?",
+"o": [
+"Hunger and poverty",
+"Fear of losing something",
+"Too much religion"
+],
+"a": 1,
+"w": "Love and fear are the two forces in us. Anger is fear that something you think you need is under threat."
+},
+"10": {
+"q": "What does the black paint in the air stand for?",
+"o": [
+"How bad news spreads",
+"A person who doesn't identify with what happens, and so isn't stained by it",
+"The pollution of modern life"
+],
+"a": 1,
+"w": "The air isn't coloured by the paint thrown into it. An awake person isn't coloured by praise, blame, success or failure."
+},
+"11": {
+"q": "Which is step two of de Mello's four steps?",
+"o": [
+"Tell the person who upset you",
+"See that the feeling is in you, not in reality",
+"Push the feeling down until it goes"
+],
+"a": 1,
+"w": "Step two is ownership: the feeling is generated by your programming, not caused by the event."
+},
+"12": {
+"q": "Why does de Mello call the drive to change yourself a kind of greed?",
+"o": [
+"Because change costs money",
+"Because it's often the ego wanting more for itself, just in spiritual form",
+"Because people should never change"
+],
+"a": 1,
+"w": "Ambition to be holier or better can be the same craving in new clothes. He'd rather you understand than push."
+},
+"13": {
+"q": "Why does the rat race never end, in de Mello's view?",
+"o": [
+"Because there's always someone to compare yourself with",
+"Because people are lazy",
+"Because success is impossible"
+],
+"a": 0,
+"w": "Comparison has no finish line. As you rise, you just find new people to measure against."
+},
+"14": {
+"q": "What is the difference between an attachment and a preference?",
+"o": [
+"An attachment is for people, a preference is for things",
+"An attachment includes the belief you can't be happy without it",
+"There is no difference"
+],
+"a": 1,
+"w": "You can want the same thing either way. The attachment adds the belief that your happiness depends on it, and that belief is what makes you suffer."
+},
+"15": {
+"q": "What is Krishnamurti's point about teaching a child the word \"bird\"?",
+"o": [
+"That children should learn more bird names",
+"That the label can replace actually seeing the bird",
+"That birds are hard to see"
+],
+"a": 1,
+"w": "Once we have the word, we tend to see the word and move on. Concepts filter reality; they don't show it."
+},
+"16": {
+"q": "What does de Mello call \"the drug\" society hooks us on?",
+"o": [
+"Money",
+"Approval, appreciation and attention",
+"Television"
+],
+"a": 1,
+"w": "We're trained to crave approval and fear its loss. Whoever supplies it can then control us."
+},
+"17": {
+"q": "What does the stalled car stand for?",
+"o": [
+"Laziness",
+"Trying to change by effort instead of insight",
+"The need for a new car"
+],
+"a": 1,
+"w": "Pushing moves you a little while you strain. Understanding what's wrong fixes it, and then no pushing is needed."
+},
+"18": {
+"q": "What does de Mello say we usually relate to instead of people?",
+"o": [
+"Their money",
+"Our images of them, built from the past",
+"Their families"
+],
+"a": 1,
+"w": "We carry pictures built from old experiences and respond to those. Love means seeing the person freshly."
+},
+"19": {
+"q": "What is the point of the fire parable?",
+"o": [
+"That fire is dangerous",
+"That people can end up worshipping the tools and forget the fire they were meant to bring",
+"That priests are always wicked"
+],
+"a": 1,
+"w": "The ritual grew while the thing it honoured disappeared. De Mello wants awareness and love, the fire, not just the altar."
+}
+};
+const SORTERS = {"1": {"bins": [{"id": "rel", "label": "Relief", "d": "Fix my toys"}, {"id": "cur", "label": "Cure", "d": "Wake up"}], "items": [{"t": "\"Make my boss appreciate me.\"", "a": "rel", "w": "You'd feel better, and your happiness would still be in your boss's hands."}, {"t": "\"Help me see why criticism stings so much.\"", "a": "cur", "w": "That's looking at the programming, not asking for a better world to sleep in."}, {"t": "\"Get my partner to stop doing the thing that annoys me.\"", "a": "rel", "w": "The partner changes, the annoyance finds a new target. The demand is still there."}, {"t": "\"Show me what I'm afraid of losing.\"", "a": "cur", "w": "Finding the fear is the start of waking up."}, {"t": "\"Once I get the promotion, I'll finally relax.\"", "a": "rel", "w": "A mended toy. Relaxing on condition of a promotion is happiness with small print."}, {"t": "\"I want to notice what I'm telling myself when I'm upset.\"", "a": "cur", "w": "That's self-observation, the heart of the book."}, {"t": "\"Give me something to stop the worry for tonight.\"", "a": "rel", "w": "Relief has its place, but the worry will be back tomorrow."}, {"t": "\"I'd like to find out who's doing the worrying.\"", "a": "cur", "w": "Asking who the \"me\" is that worries is exactly where de Mello points."}]}, "4": {"bins": [{"id": "me", "label": "It pleases me", "d": "Plain self-interest"}, {"id": "good", "label": "To feel good", "d": "Pleasing others to please myself"}, {"id": "bad", "label": "To avoid feeling bad", "d": "Guilt, fear of criticism"}], "items": [{"t": "Eating a mango because I love mangoes", "a": "me", "w": "Honest, simple self-interest. De Mello has no quarrel with it."}, {"t": "Volunteering every week because I like feeling needed", "a": "good", "w": "De Mello's woman at the rectory. Fine, he says, just call it enlightened self-interest."}, {"t": "Saying yes to a favour I resent because I'd feel guilty saying no", "a": "bad", "w": "The worst kind: done to escape a bad feeling, and resented the whole time."}, {"t": "Giving generously where people will notice", "a": "good", "w": "The good feeling comes from being seen as generous. That's pleasing others to please yourself."}, {"t": "Visiting a relative so the family won't talk about me", "a": "bad", "w": "Fear of criticism is driving it, so it won't feel like love to either of you."}, {"t": "Playing the piano for hours because I can't get enough of it", "a": "me", "w": "Pure enjoyment. The pleasure is the point."}, {"t": "Letting in a visitor I don't want, then sulking all evening", "a": "bad", "w": "That's de Mello's own confession, and his example of charity at its worst."}]}};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0f0e1c';
+try { const t = localStorage.getItem('aw-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('aw-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('aw-done', []));
+const save = () => store.set('aw-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- afterword card (reads the four-step log from chapter 11) ---------- */
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const log = store.get('aw-log', []);
+  if (!log.length){ el.innerHTML = '<span class="k">Nothing saved yet</span><p class="empty">Walk a feeling through <a href="#ch11">the four steps to wisdom</a> and save it. What you save shows up here, in this browser only.</p>'; return; }
+  el.innerHTML = `<span class="k">Your log · ${log.length} feeling${log.length === 1 ? '' : 's'} watched</span>` + log.slice().reverse().map((e, k) => `<div class="entry"><span>${esc(e.d)} · ${esc(e.f)}</span>There was ${esc(e.f.toLowerCase())}${e.w ? ' when ' + esc(e.w) : ''}. It was in me, it wasn't me, and it passed.<button type="button" data-del="${log.length - 1 - k}">Remove</button></div>`).join('') + '<p class="empty">Read back over these in a month. Notice which feelings keep coming, and what they were protecting.</p>';
+  el.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { const l = store.get('aw-log', []); l.splice(+b.dataset.del, 1); store.set('aw-log', l); renderCard(); }));
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['Someone has let me down', 5, 'Nobody lets you down', 'The disappointment comes from the picture you built of them. Drop the picture and the sting goes.'],
+    ['I\'m upset with someone', 8, 'The feeling is in you', 'A negative feeling about someone means an illusion of yours has hit reality. It\'s you who has to change.'],
+    ['I\'m angry', 9, 'Anger hides fear', 'Ask what you\'re afraid of losing. Respect, control, being right? That\'s the root.'],
+    ['I\'m in a bad mood and can\'t shift it', 11, 'Four steps to wisdom', 'Name it, see it\'s in you, don\'t identify with it, and see that when you change, everything changes.'],
+    ['I keep trying to change myself', 12, 'Don\'t try to change', 'Effort is often more greed. Understand the habit and it changes on its own.'],
+    ['I feel I\'m not enough', 13, 'Losing the rat race', 'Comparison has no finish line. Your worth was never at stake in the race.'],
+    ['I can\'t let go of someone or something', 14, 'Attachment or preference', 'An attachment is the belief you can\'t be happy without it. Keep the wanting, drop the "or else".'],
+    ['I live for other people\'s approval', 16, 'The approval drug', 'You were hooked early. See the craving clearly and it loses its grip.'],
+    ['I don\'t know who I am', 7, 'I and me', 'Body, job, nation and feelings are the "me". The one who notices them is the "I".'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][1]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: you are the sky ---------- */
+{ const el = $('#skySvg'), say = $('#skySay'); let mode = 'obs', t0 = performance.now(), raf = null;
+  const CL = [['Anxiety', 'bad'], ['Joy', 'glow'], ['Anger', 'bad'], ['Boredom', 'faint'], ['Hope', 'good'], ['Sadness', 'cool'], ['Pride', 'glow'], ['Worry', 'cool']];
+  const W = 360, H = 200, SP = 150, LOOP = CL.length * SP;
+  $('#skyMode').innerHTML = '<button class="btn" type="button" data-m="id" aria-pressed="false">Identify with it</button><button class="btn" type="button" data-m="obs" aria-pressed="true">Watch it pass</button>';
+  $$('#skyMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#skyMode [data-m]'), b); mode = b.dataset.m; frame(performance.now()); }));
+  const cloud = (x, y, s, c, lbl, op) => `<g transform="translate(${x.toFixed(1)} ${y}) scale(${s})" style="opacity:${op}"><path d="M-46 14a18 18 0 0 1 4-34 24 24 0 0 1 44-8 20 20 0 0 1 36 12 16 16 0 0 1-4 30Z" ${FS(c, c, 1.2, .28)}/>${TX(-3, 6, lbl, 'text', 13, 'middle', 'font-weight="500"')}</g>`;
+  function frame(now){
+    const t = RM ? 40 : (now - t0) / 1000 * 22; let g = '', near = null, best = 1e9;
+    CL.forEach(([lbl, c], i) => { let x = ((i * SP + t) % LOOP) - 70; const y = 64 + (i % 3) * 40, s = .78 + (i % 2) * .14;
+      if (x > W + 70) return; const d = Math.abs(x - W / 2); if (d < best){ best = d; near = [lbl, c]; } });
+    const tint = mode === 'id' && near ? near[1] : null;
+    g += `<rect x="0" y="0" width="${W}" height="${H}" ${tint ? F(tint, .32) : F('cool', .06)}/>`;
+    if (!tint) g += `<circle cx="${W - 46}" cy="40" r="16" ${F('glow', .85)}/>`;
+    CL.forEach(([lbl, c], i) => { const x = ((i * SP + t) % LOOP) - 70; if (x > W + 70) return; const y = 64 + (i % 3) * 40, s = .78 + (i % 2) * .14; g += cloud(x, y, s, c, lbl, 1); });
+    g += `<line x1="${W / 2}" y1="8" x2="${W / 2}" y2="${H - 8}" ${S('faint', 1, ';stroke-dasharray:3 5;opacity:.5')}/>`;
+    el.innerHTML = g;
+    if (near){ const w = near[0].toLowerCase();
+      say.innerHTML = mode === 'id' ? `"I am ${w === 'joy' ? 'joyful' : w === 'hope' ? 'hopeful' : w === 'anger' ? 'angry' : w === 'sadness' ? 'sad' : w === 'boredom' ? 'bored' : w === 'pride' ? 'proud' : w === 'worry' ? 'worried' : 'anxious'}."<small>The whole sky turns the colour of the cloud. When it passes, you\'re waiting for the next one to decide who you are.</small>` : `"There is ${w} passing."<small>The clouds still come, dark and bright. The sky doesn\'t fight them or cling to them, and it\'s never stained.</small>`; }
+    if (!RM) raf = requestAnimationFrame(frame);
+  }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ if (!raf && !RM) raf = requestAnimationFrame(frame); } else { cancelAnimationFrame(raf); raf = null; } }));
+  frame(performance.now()); io.observe(el);
+}
+
+/* ---------- 1 and 4: sorters ---------- */
+sorter('#sort1', '#tally1', SORTERS[1].bins, SORTERS[1].items);
+sorter('#sort4', '#tally4', SORTERS[4].bins, SORTERS[4].items);
+
+/* ---------- 2: happiness, provided that ---------- */
+{ const C = [['provided my partner is in a good mood', .8], ['provided work goes smoothly', .75], ['provided nobody criticises me', .7], ['provided I sleep well', .75], ['provided the weather is nice', .65], ['provided I look good today', .7]];
+  const on = [true, true, true, false, false, false]; let drop = false, seed = 5, days = [], el = $('#hpSvg');
+  $('#hpT').innerHTML = C.map((c, i) => `<label class="tg"><input type="checkbox" data-c="${i}" ${on[i] ? 'checked' : ''}><span>Happy, ${c[0]}</span><em>${Math.round(c[1] * 100)}%</em></label>`).join('');
+  function roll(){ const r = rng(seed); days = [...Array(30)].map(() => C.map(c => r() < c[1])); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), cols = nw ? 6 : 15, cs = nw ? 50 : 52, rows = Math.ceil(30 / cols), W = cols * cs + 12, H = rows * cs + 30; vb(el, W, H);
+    let g = '', cnt = 0;
+    days.forEach((d, i) => { const ok = drop || d.every((m, k) => !on[k] || m); if (ok) cnt++;
+      const x = 6 + (i % cols) * cs, y = 4 + Math.floor(i / cols) * cs, miss = C.filter((c, k) => on[k] && !d[k]).length;
+      g += `<rect x="${x}" y="${y}" width="${cs - 6}" height="${cs - 6}" rx="8" ${ok ? F('glow') : F('line', .5)}/>` + TX(x + (cs - 6) / 2, y + (cs - 6) / 2 + 4, ok ? '☀' : drop ? '' : '×' + miss, ok ? 'on-glow' : 'faint', ok ? 16 : 11, 'middle'); });
+    g += TX(6, H - 8, 'one square = one day · ×n = conditions not met', 'faint', 11);
+    el.innerHTML = g; $('#hpDays').textContent = cnt + ' of 30';
+    const n = on.filter(Boolean).length;
+    $('#hpSay').textContent = drop ? 'Same month, same events. Without the small print, a day doesn\'t have to qualify before you\'re allowed to enjoy it.' :
+      n === 0 ? 'No conditions ticked: every day qualifies. That\'s what de Mello means by happiness that isn\'t on terms.' :
+      `Each condition is usually met, but with ${n} of them all at once, most days fail at least one test. ${cnt < 8 ? 'Happiness becomes a rare event.' : 'Add another and watch the month go dark.'}`;
+  });
+  $$('#hpT [data-c]').forEach(cb => cb.addEventListener('change', () => { on[+cb.dataset.c] = cb.checked; draw(); }));
+  $('#hpRoll').addEventListener('click', () => { seed += 13; roll(); draw(); });
+  $('#hpDrop').addEventListener('click', e => { drop = !drop; e.currentTarget.setAttribute('aria-pressed', drop); e.currentTarget.textContent = drop ? 'Put the conditions back' : 'Drop the conditions'; draw(); });
+  roll(); draw();
+}
+
+/* ---------- 3: renounce or understand ---------- */
+{ const D = [['Sweets', ['A few seconds of sweetness.', 'Then a dip, and wanting more.', 'It was never really about hunger. It was comfort at four o\'clock.', 'Seen plainly, it\'s just a sweet. Nice, and not a rescue.']],
+    ['Being right', ['A small glow when the other person gives in.', 'A conversation that got colder.', 'The glow was relief: being wrong felt like being less.', 'You aren\'t less when you\'re wrong. The need to win loosens.']],
+    ['Approval', ['A warm moment when someone says well done.', 'It fades by evening, and you start looking for the next one.', 'It was never the praise you wanted. It was proof you were all right.', 'You were all right before they said it. The hook comes out.']] ];
+  let di = 0, dist = 0, tension = 30, seen = 0; const el = $('#rnSvg');
+  $('#rnPick').innerHTML = D.map((d, i) => `<button class="btn" type="button" data-d="${i}" aria-pressed="${i === 0}">${d[0]}</button>`).join('');
+  $$('#rnPick [data-d]').forEach(b => b.addEventListener('click', () => { press($$('#rnPick [data-d]'), b); di = +b.dataset.d; reset(); }));
+  function reset(){ dist = 0; tension = 30; seen = 0; draw(); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = 170, yx = 70, gone = seen >= 4; vb(el, W, H);
+    const dx = Math.min(W - 70, (nw ? 170 : 260) + dist * (nw ? 22 : 34)) + (gone ? 400 : 0), y = 86;
+    const thick = gone ? 0 : 1.5 + tension / 14;
+    let g = `<circle cx="${yx}" cy="${y}" r="26" ${FS('panel-2', 'cool', 2)}/>` + TX(yx, y + 5, 'you', 'text', 13, 'middle');
+    if (!gone){ const sag = Math.max(0, 30 - tension / 3); g += `<path d="M${yx + 26} ${y} Q ${(yx + dx) / 2} ${y + sag} ${dx - 34} ${y}" ${S(tension > 60 ? 'bad' : 'glow', thick.toFixed(1), ';stroke-linecap:round')}/>`;
+      g += `<rect x="${dx - 34}" y="${y - 22}" width="${nw ? 84 : 100}" height="44" rx="22" ${FS('glow-soft', 'glow', 1.6)}/>` + TX(dx - 34 + (nw ? 42 : 50), y + 5, D[di][0], 'glow', 13.5, 'middle', 'font-weight="500"'); }
+    else g += TX(W / 2 + 30, y + 5, 'the band is gone, and nothing was given up', 'good', 13, 'middle');
+    g += TX(12, H - 12, gone ? 'understood: no pull left' : tension > 60 ? 'the harder you push, the tighter the band' : 'the band: how strongly it pulls at you', 'faint', 11);
+    el.innerHTML = g;
+    $('#rnMind').textContent = gone ? 'hardly at all' : Math.round(tension) + '%';
+  });
+  $('#rnPush').addEventListener('click', () => { if (seen >= 4) return; dist = Math.min(6, dist + 1); tension = Math.min(98, tension + 12);
+    $('#rnSay').textContent = ['You push it away. It\'s further off, and you think about it more.', 'Further still. Now you\'re watching it to make sure it stays there.', 'The band is stretched tight. Renouncing it has made it the centre of your day.', 'Like the guru\'s priest who talked only about sex: what you fight, you\'re tied to.'][Math.min(3, dist - 1)] || ''; draw(); });
+  $('#rnLook').addEventListener('click', () => { if (seen >= 4) return; seen++; tension = Math.max(0, tension - 24); dist = Math.max(0, dist - 1);
+    $('#rnSay').textContent = D[di][1][seen - 1]; draw(); });
+  $('#rnReset').addEventListener('click', () => { reset(); $('#rnSay').textContent = 'Try pushing it away a few times, then start again and look at it instead.'; });
+  $('#rnSay').textContent = 'Try pushing it away a few times, then start again and look at it instead.'; draw();
+}
+
+/* ---------- 5: the expectation gap ---------- */
+{ const R = $('#exR'), el = $('#exSvg'); let see = false, seed = 3, acts = [];
+  function roll(){ const r = rng(seed); acts = [...Array(30)].map(() => clamp(5.6 + gauss(r) * 1.7, 1, 10)); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 210, L = 30, B = 180, T = 14, sx = (W - L - 12) / 29, sy = v => B - (B - T) * (v - 1) / 9; vb(el, W, H);
+    const avg = acts.reduce((a, b) => a + b, 0) / acts.length, ex = see ? avg - 1.2 : +R.value; out('exR', see ? 'as Sam is' : R.value + ' / 10');
+    let g = `<line x1="${L}" y1="${B}" x2="${W - 8}" y2="${B}" ${S('line')}/>`, sting = 0, nice = 0;
+    acts.forEach((v, i) => { const x = L + i * sx; if (v < ex){ sting++; g += `<line x1="${x}" y1="${sy(ex)}" x2="${x}" y2="${sy(v)}" ${S('bad', nw ? 4 : 6, ';stroke-opacity:.45;stroke-linecap:round')}/>`; } else if (see) nice++; });
+    g += `<line x1="${L}" y1="${sy(ex)}" x2="${W - 8}" y2="${sy(ex)}" ${S('glow', 2, ';stroke-dasharray:6 4')}/>` + TX(W - 10, sy(ex) - 6, see ? 'what Sam is actually like' : 'what you expect of Sam', 'glow', 11, 'end');
+    acts.forEach((v, i) => { g += `<circle cx="${(L + i * sx).toFixed(1)}" cy="${sy(v).toFixed(1)}" r="4" ${v < ex ? F('bad') : F('good')}/>`; });
+    g += TX(L, B + 18, 'day 1', 'faint', 11) + TX(W - 8, B + 18, 'day 30', 'faint', 11, 'end') + TX(4, T + 4, 'kind', 'faint', 10) + TX(4, B, 'selfish', 'faint', 10);
+    el.innerHTML = g; $('#exSting').textContent = sting;
+    $('#exSay').textContent = see ? `Same thirty days. Seen as an ordinary, mostly decent, sometimes selfish person, Sam rarely "fails". The good days (${nice}) start to look like gifts.` :
+      +R.value >= 8 ? 'You\'ve put Sam on a pedestal, so nearly every ordinary day feels like a betrayal. Sam hasn\'t changed; the pedestal is yours.' :
+      +R.value >= 5 ? 'Even a modest picture gets bruised on Sam\'s off days.' : 'Low expectations cut the sting, but they\'re still a picture. Try seeing Sam as Sam is.';
+  });
+  R.addEventListener('input', () => { if (see){ see = false; $('#exSee').setAttribute('aria-pressed', false); } draw(); });
+  $('#exSee').addEventListener('click', e => { see = !see; e.currentTarget.setAttribute('aria-pressed', see); draw(); });
+  $('#exRoll').addEventListener('click', () => { seed += 9; roll(); draw(); });
+  roll(); draw();
+}
+
+/* ---------- 6: the puppet and the watcher ---------- */
+{ const EV = [['Someone likes your shirt', 3, 'Ooh, they noticed. I must look good.', 'There\'s a pleased feeling. Nice shirt; it isn\'t me.'],
+    ['Your idea is ignored in a meeting', -3, 'Nobody listens to me. Why do I bother?', 'There\'s a sting. Interesting: I needed them to agree.'],
+    ['A visitor praises your town', 2, 'Proud, as if I\'d built it myself.', 'There\'s pride about something I didn\'t make. Funny.'],
+    ['Someone criticises your country', -2, 'How dare they. I feel ashamed and angry.', 'There\'s a flash of shame for something I didn\'t cause.'],
+    ['A friend calls you a genius', 4, 'Yes! Now I have to live up to it.', 'There\'s a glow, and a little tension. "Genius" is just a word.'],
+    ['Someone calls you an ass', -4, 'I\'m hurt. I\'ll be thinking about this all day.', 'There\'s hurt. And yes, sometimes I am an ass. So are we all.'] ];
+  let mode = 'pup', mood = 0, last = null, hist = []; const el = $('#ppSvg');
+  $('#ppMode').innerHTML = '<button class="btn" type="button" data-m="pup" aria-pressed="true">Puppet: believe what they say</button><button class="btn" type="button" data-m="obs" aria-pressed="false">Watcher: observe the reaction</button>';
+  $$('#ppMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#ppMode [data-m]'), b); mode = b.dataset.m; mood = 0; hist = []; last = null; draw(); }));
+  $('#ppEv').innerHTML = EV.map((e, i) => `<button class="btn" type="button" data-e="${i}">${e[0]}</button>`).join('');
+  $$('#ppEv [data-e]').forEach(b => b.addEventListener('click', () => { const e = EV[+b.dataset.e]; last = e; const k = mode === 'pup' ? 1 : .2; mood = clamp(mood * .4 + e[1] * k * 2, -10, 10); hist.push(mood); if (hist.length > 14) hist.shift(); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230, px = nw ? 100 : 150, py = 128; vb(el, W, H);
+    const arm = clamp(mood, -10, 10) * 3.2, pup = mode === 'pup';
+    let g = `<line x1="${px - 60}" y1="16" x2="${px + 60}" y2="16" ${S('faint', 4, ';stroke-linecap:round;opacity:' + (pup ? 1 : .2))}/>`;
+    [[px - 46, py - 4 - arm], [px + 46, py - 4 - arm], [px, py - 58]].forEach(([x, y]) => { g += `<line x1="${x}" y1="16" x2="${x}" y2="${y}" ${S('faint', 1, ';opacity:' + (pup ? .9 : .12))}/>`; });
+    g += `<circle cx="${px}" cy="${py - 44}" r="16" ${FS('panel-2', pup ? 'text' : 'cool', 1.8)}/>`;
+    const mouth = mood > 1 ? `M${px - 7} ${py - 41}q7 6 14 0` : mood < -1 ? `M${px - 7} ${py - 37}q7 -6 14 0` : `M${px - 7} ${py - 39}h14`;
+    g += `<path d="${mouth}" ${S(pup ? 'text' : 'cool', 1.6, ';stroke-linecap:round')}/><circle cx="${px - 5}" cy="${py - 48}" r="1.6" ${F(pup ? 'text' : 'cool')}/><circle cx="${px + 5}" cy="${py - 48}" r="1.6" ${F(pup ? 'text' : 'cool')}/>`;
+    g += `<path d="M${px} ${py - 28}v44M${px} ${py - 18}L${px - 46} ${py - 4 - arm}M${px} ${py - 18}L${px + 46} ${py - 4 - arm}M${px} ${py + 16}l-18 40M${px} ${py + 16}l18 40" ${S(pup ? 'text' : 'cool', 2.6, ';stroke-linecap:round')}/>`;
+    const L = nw ? 200 : 300, R = W - 14, mid = 120, sc = 8;
+    g += `<line x1="${L}" y1="${mid}" x2="${R}" y2="${mid}" ${S('line')}/>` + TX(L, 30, 'mood after each event', 'faint', 11) + TX(L, mid - 10 * sc + 4, '+', 'faint', 11) + TX(L, mid + 10 * sc, '−', 'faint', 11);
+    if (hist.length){ const sx = (R - L - 16) / 13; g += `<path d="${hist.map((v, i) => (i ? 'L' : 'M') + (L + 14 + i * sx).toFixed(1) + ' ' + (mid - v * sc).toFixed(1)).join('')}" ${S(pup ? 'glow' : 'cool', 2.2)}/>`;
+      hist.forEach((v, i) => { g += `<circle cx="${(L + 14 + i * sx).toFixed(1)}" cy="${(mid - v * sc).toFixed(1)}" r="3.2" ${F(pup ? 'glow' : 'cool')}/>`; }); }
+    el.innerHTML = g;
+    $('#ppSay').textContent = !last ? 'Press an event to pull a string.' : pup ? last[2] : last[3];
+    const sw = hist.length > 1 ? Math.max(...hist) - Math.min(...hist) : 0; $('#ppV').textContent = hist.length > 1 ? sw.toFixed(1) : '·';
+  });
+  draw();
+}
+
+/* ---------- 7: strip down to the I ---------- */
+{ const LB = [['My name', 'Given to you by someone else. Change it and you\'re still here.'], ['My body', 'Always changing, cell by cell, and you still call it "me".'], ['My job', 'You could lose it tomorrow and wake up the day after.'], ['My religion', 'Born somewhere else, you\'d likely have had a different one.'], ['My nationality', 'An accident of birthplace, and the label people kill for.'], ['My age', 'It changes every year. The one who notices hasn\'t aged.'], ['My reputation', 'It lives in other people\'s heads, not in you.'], ['My past', 'Memories, replayed. You\'re the one remembering them.'], ['My thoughts', 'You can watch them come and go, so they can\'t be the watcher.'], ['My feelings', 'Clouds across the sky. Watched, so not the one watching.']];
+  const gone = new Set(); const el = $('#stSvg');
+  function chips(){ $('#stChips').innerHTML = LB.map((l, i) => `<button class="card3${gone.has(i) ? ' gone' : ''}" type="button" data-i="${i}" aria-pressed="${gone.has(i)}"><b>${l[0]}</b><span>${gone.has(i) ? l[1] : 'Tap to take it away'}</span></button>`).join('');
+    $$('#stChips [data-i]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; gone.has(i) ? gone.delete(i) : gone.add(i); last = i; chips(); draw(); })); }
+  let last = null;
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 300 : 280, cx = W / 2, cy = H / 2; vb(el, W, H);
+    let g = ''; const rx = nw ? 150 : 250, ry = nw ? 120 : 110;
+    LB.forEach((l, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / LB.length, x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a), off = gone.has(i);
+      g += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S('line', 1, off ? ';opacity:.15' : '')}/>`;
+      g += `<g style="opacity:${off ? .18 : 1}"><rect x="${(x - (nw ? 44 : 54)).toFixed(1)}" y="${(y - 13).toFixed(1)}" width="${nw ? 88 : 108}" height="26" rx="13" ${FS('panel-2', 'line', 1)}/>` + TX(x, y + 4.5, l[0].replace('My ', ''), 'soft', nw ? 11.5 : 12.5, 'middle') + '</g>'; });
+    const left = LB.length - gone.size, r = 22 + gone.size * 2.2;
+    g += `<circle cx="${cx}" cy="${cy}" r="${r + 10}" ${F('glow', .08 + gone.size * .02)}/><circle cx="${cx}" cy="${cy}" r="${r}" ${FS('glow-soft', 'glow', 1.8)}/>` + TX(cx, cy + 6, 'I', 'glow', 22, 'middle', 'font-family="Instrument Serif, Georgia, serif"');
+    el.innerHTML = g; $('#stN').textContent = left + ' of ' + LB.length;
+    $('#stSay').textContent = left === 0 ? 'Everything you could name is gone, and someone is still here, noticing. That noticing is what de Mello means by the "I".' :
+      last != null && gone.has(last) ? LB[last][1] : 'Each label is part of the "me": real enough, but it changes, and it can be watched.';
+  });
+  $('#stReset').addEventListener('click', () => { gone.clear(); last = null; chips(); draw(); });
+  chips(); draw();
+}
+
+/* ---------- 8: the archer ---------- */
+{ const P = [['For nothing', 0, 'He shoots for the joy of it. All his skill is in the arrow.'], ['For a brass buckle', 1, 'Now there\'s something to win. He starts to worry, and the arrows wander.'], ['For a prize of gold', 2, 'Half of him is shooting; the other half is already spending the gold. He can barely see the target.']];
+  let pi = 0, seed = 1, shots = []; const el = $('#arSvg');
+  $('#arP').innerHTML = P.map((p, i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${p[0]}</button>`).join('');
+  $$('#arP [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#arP [data-p]'), b); pi = +b.dataset.p; shots = []; draw(); }));
+  function shoot(){ const r = rng(seed += 17), sd = [.12, .3, .55][pi]; shots = [...Array(10)].map(() => [gauss(r) * sd, gauss(r) * sd + (pi === 2 ? .12 : 0)]); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 560, H = 260, cx = W / 2, cy = 128, R = 110; vb(el, W, H);
+    let g = ''; [[1, 'panel-2'], [.8, 'line'], [.6, 'panel-2'], [.4, 'cool'], [.2, 'glow']].forEach(([f, c]) => { g += `<circle cx="${cx}" cy="${cy}" r="${R * f}" ${FS(c, 'line', 1, c === 'glow' ? .9 : c === 'cool' ? .35 : 1)}/>`; });
+    if (pi === 2) g += `<circle cx="${cx + 18}" cy="${cy - 6}" r="${R * .2}" ${S('glow', 1.2, ';stroke-dasharray:3 3;opacity:.6')}/>` + TX(cx + R + 8, cy - R + 10, 'sees two targets', 'faint', 11);
+    let inG = 0;
+    shots.forEach(([x, y]) => { const sx = cx + x * R, sy = cy + y * R; if (Math.hypot(x, y) < .2) inG++;
+      g += `<line x1="${sx.toFixed(1)}" y1="${sy.toFixed(1)}" x2="${(sx + 14).toFixed(1)}" y2="${(sy - 14).toFixed(1)}" ${S('text', 1.6)}/><circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="3" ${F('bad')}/>`; });
+    if (!shots.length) g += TX(cx, H - 6, 'press shoot', 'faint', 11, 'middle');
+    el.innerHTML = g; $('#arD').textContent = shots.length ? inG + ' of 10' : '·';
+    $('#arSay').textContent = P[pi][2];
+  });
+  $('#arShoot').addEventListener('click', () => { shoot(); draw(); });
+  draw();
+}
+
+/* ---------- 9: the root of the anger ---------- */
+{ const SC = [['A driver cuts you up', 'Being respected. Being safe.', 'He was in a hurry, nothing more. Your dignity was never on the road.'],
+    ['Your partner forgets your plans', 'Being important to them.', 'You see you\'d made your worth depend on being remembered. You can still ask them to remember.'],
+    ['A colleague takes credit for your work', 'Recognition, and the career it might bring.', 'The work is still yours to do well. You can speak up calmly, without the panic.'],
+    ['Your child won\'t listen', 'Control, and your picture of a good parent.', 'Under the shouting is fear of failing as a parent. Seen, it stops driving your voice.'],
+    ['Someone disagrees with your beliefs', 'Being right. The security of what you were taught.', 'De Mello calls this a warning sign: a strong emotional reaction means a belief was swallowed, not chosen.']];
+  let si = 0, dug = false; const el = $('#fxSvg');
+  $('#fxS').innerHTML = SC.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s[0]}</button>`).join('');
+  $$('#fxS [data-s]').forEach(b => b.addEventListener('click', () => { press($$('#fxS [data-s]'), b); si = +b.dataset.s; dug = false; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 250, cx = W / 2, gy = 110; vb(el, W, H);
+    let g = `<rect x="0" y="${gy}" width="${W}" height="${H - gy}" ${F(dug ? 'panel-2' : 'deep')}/><line x1="0" y1="${gy}" x2="${W}" y2="${gy}" ${S('faint', 1.4)}/>`;
+    g += `<path d="M${cx} ${gy}V36" ${S('bad', 3, ';stroke-linecap:round')}/>`;
+    [[-1, 70], [1, 56], [-1, 46], [1, 82]].forEach(([d, y]) => { g += `<path d="M${cx} ${y}q${d * 24} -14 ${d * 40} -6q${-d * 16} 14 ${-d * 40} 6Z" ${FS('bad-soft', 'bad', 1.2)}/>`; });
+    g += wrap(cx, 22, 'anger: ' + SC[si][0].toLowerCase(), nw ? 40 : 60, 14, 'bad', 13, 'middle');
+    const rc = dug ? 'glow' : 'line';
+    g += `<path d="M${cx} ${gy}c-6 30 -40 40 -70 70M${cx} ${gy}c4 40 30 50 60 76M${cx} ${gy}v90M${cx - 30} ${gy + 44}c-20 6 -34 2 -48 12M${cx + 24} ${gy + 52}c18 4 30 0 46 10" ${S(rc, dug ? 2.4 : 1.4, ';stroke-linecap:round')}/>`;
+    g += dug ? wrap(cx, gy + 116, 'fear of losing: ' + SC[si][1].toLowerCase(), nw ? 36 : 56, 15, 'glow', 13.5, 'middle', 'font-weight="500"') : TX(cx, gy + 116, '?', 'faint', 18, 'middle');
+    el.innerHTML = g;
+    $('#fxFear').textContent = dug ? SC[si][1] : 'Dig under it to find out.';
+    $('#fxSay').textContent = dug ? SC[si][2] : 'Above ground it looks like they made you angry.';
+  });
+  $('#fxDig').addEventListener('click', () => { dug = true; draw(); });
+  draw();
+}
+
+/* ---------- 10: black paint in the air ---------- */
+{ const EV = [['Success!', 'glow'], ['Failure', 'bad'], ['Genius', 'glow'], ['Has-been', 'bad'], ['Promoted', 'glow'], ['Fired', 'bad']];
+  let splats = []; const el = $('#bpSvg'); let lastEv = null;
+  $('#bpEv').innerHTML = EV.map((e, i) => `<button class="btn" type="button" data-e="${i}">Throw "${e[0]}"</button>`).join('');
+  $$('#bpEv [data-e]').forEach(b => b.addEventListener('click', () => { const e = EV[+b.dataset.e]; lastEv = e; splats.push([e, Math.random(), Math.random()]); draw(); }));
+  const fig = (x, y, c, op) => `<g style="opacity:${op}"><circle cx="${x}" cy="${y - 52}" r="16" ${S(c, 2)}/><path d="M${x} ${y - 36}v46M${x} ${y - 24}l-24 18M${x} ${y - 24}l24 18M${x} ${y + 10}l-16 34M${x} ${y + 10}l16 34" ${S(c, 2.4, ';stroke-linecap:round')}/></g>`;
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = 230, ax = W * .27, bx = W * .73, y = 128; vb(el, W, H);
+    let g = fig(ax, y, 'text', 1) + fig(bx, y, 'cool', 1);
+    splats.forEach(([e, r1, r2], k) => { const sx = ax + (r1 - .5) * 50, sy = y - 60 + r2 * 100;
+      g += `<circle cx="${sx.toFixed(1)}" cy="${sy.toFixed(1)}" r="${(7 + r1 * 6).toFixed(1)}" ${F(e[1], .55)}/>`;
+      if (k >= splats.length - 3){ const tx = bx + (r1 - .5) * 70, ty = y - 60 + r2 * 100; g += `<circle cx="${tx.toFixed(1)}" cy="${ty.toFixed(1)}" r="${(7 + r1 * 6).toFixed(1)}" ${S(e[1], 1, ';stroke-dasharray:2 3;opacity:.5')}/>`; } });
+    g += TX(ax, H - 8, 'identifies with labels', 'muted', 12, 'middle') + TX(bx, H - 8, 'doesn\'t identify', 'cool', 12, 'middle');
+    el.innerHTML = g; $('#bpN').textContent = splats.length;
+    $('#bpSay').textContent = !lastEv ? 'Throw some labels, good and bad.' : lastEv[1] === 'glow' ? `"${lastEv[0]}" sticks to the first figure like any other paint. Now there\'s something to protect, and to lose. It passes straight through the second.` : `"${lastEv[0]}" stains the first figure. The second notices it pass, like air with paint thrown through it.`;
+  });
+  $('#bpReset').addEventListener('click', () => { splats = []; lastEv = null; draw(); });
+  draw();
+}
+
+/* ---------- 11: the four steps ---------- */
+{ const FEEL = ['Anger', 'Anxiety', 'Hurt', 'Jealousy', 'Resentment', 'Shame', 'Disappointment', 'Irritation'];
+  const sel = $('#fsFeel'), who = $('#fsWho'); let step = 0;
+  sel.innerHTML = FEEL.map(f => `<option>${f}</option>`).join('');
+  function render(){ const f = sel.value.toLowerCase(), w = who.value.trim() || 'what happened';
+    const S4 = [['1 · Name it', `There is ${f}. Not "this is terrible", just: ${f}, here, now.`], ['2 · It\'s in me', `The ${f} is in me, not in ${esc(w)}. ${esc(w[0].toUpperCase() + w.slice(1))} was the stimulus; the reaction is my programming.`], ['3 · It isn\'t me', `I am not my ${f}. It\'s a cloud passing. I can watch it without fighting it or feeding it.`], ['4 · When I change, everything changes', `Seen this way, ${esc(w)} looks different. I can still act, ask, say no, but from clarity instead of ${f}.`]];
+    $('#fsSteps').innerHTML = S4.map((s, i) => `<div class="${i <= step ? 'on' : ''}${i === step ? ' cur' : ''}"><b>${s[0]}</b>${i <= step ? s[1] : '…'}</div>`).join('');
+    $('#fsBack').disabled = step === 0; $('#fsNext').disabled = step === 3; }
+  $('#fsNext').addEventListener('click', () => { step = Math.min(3, step + 1); render(); });
+  $('#fsBack').addEventListener('click', () => { step = Math.max(0, step - 1); render(); });
+  [sel, who].forEach(x => x.addEventListener('input', render));
+  $('#fsSave').addEventListener('click', () => { const l = store.get('aw-log', []); l.push({ f: sel.value, w: who.value.trim().slice(0, 70), d: new Date().toLocaleDateString(undefined, {day:'numeric', month:'short'}) }); if (l.length > 30) l.shift(); store.set('aw-log', l);
+    $('#fsTip').textContent = 'Saved. It\'s in the afterword.'; renderCard(); step = 0; who.value = ''; render(); setTimeout(() => $('#fsTip').textContent = '', 2600); });
+  render();
+}
+
+/* ---------- 12: willpower or understanding ---------- */
+{ const E = $('#cgE'), A = $('#cgA'), el = $('#cgSvg');
+  const draw = onLayout(() => {
+    const e = +E.value, a = +A.value; out('cgE', e); out('cgA', a);
+    const nw = NARROW(), W = nw ? 360 : 640, H = 210, L = 34, B = 176, T = 14, sx = (W - L - 14) / 12, sy = v => B - (B - T) * v / 100; vb(el, W, H);
+    const wp = [], cf = [], tot = [];
+    for (let w = 0; w <= 12; w++){ const conflict = Math.min(100, e * w * 1.1 * (1 - a / 14)); const forced = e * 7 * Math.exp(-w / (3 + a)) * (w ? 1 : 0) + e * 3 * (1 - Math.exp(-w)) - conflict * .25;
+      const insight = a * 8 * (1 - Math.exp(-w / 3)); cf.push(conflict); wp.push(clamp(forced, 0, 100)); tot.push(clamp(forced + insight, 0, 100)); }
+    let g = `<line x1="${L}" y1="${B}" x2="${W - 10}" y2="${B}" ${S('line')}/>`;
+    const path = (arr, c, w, dash = '') => `<path d="${arr.map((v, i) => (i ? 'L' : 'M') + (L + i * sx).toFixed(1) + ' ' + sy(v).toFixed(1)).join('')}" ${S(c, w, dash)}/>`;
+    g += path(cf, 'bad', 1.6, ';stroke-dasharray:4 4') + path(tot, 'glow', 2.6);
+    g += TX(W - 12, sy(cf[12]) - 6, 'inner conflict', 'bad', 11, 'end') + TX(W - 12, sy(tot[12]) - 6, 'change', 'glow', 11, 'end');
+    for (let w = 0; w <= 12; w += 4) g += TX(L + w * sx, B + 18, 'wk ' + w, 'faint', 11, 'middle');
+    el.innerHTML = g; $('#cgV').textContent = Math.round(tot[12]) + '%';
+    $('#cgSay').textContent = a >= 7 ? 'With real understanding there\'s little to fight. Change builds and stays, even with little effort.' :
+      e >= 6 ? 'A quick burst from willpower, then the inner conflict grows and drags you back. Classic New Year\'s resolution.' :
+      a + e < 4 ? 'Not much effort and not much insight: not much happens.' : 'Some change, some struggle. Turn up the understanding and watch the conflict line flatten.';
+  });
+  [E, A].forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 13: the treadmill ---------- */
+{ const EV = [['Get a raise', 8], ['Buy a bigger car', 6], ['Win an award', 10], ['Move to a nicer area', 9]];
+  let me = 20, them = 34, off = false, last = null; const el = $('#rrSvg');
+  $('#rrEv').innerHTML = EV.map((e, i) => `<button class="btn" type="button" data-e="${i}">${e[0]}</button>`).join('');
+  $$('#rrEv [data-e]').forEach(b => b.addEventListener('click', () => { const e = EV[+b.dataset.e]; last = e; me = Math.min(96, me + e[1]); if (!off) them = Math.min(100, me + 12 + Math.random() * 4); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 220, B = 190, T = 16, sy = v => B - (B - T) * v / 100, x1 = W * .32, x2 = W * .68, bw = nw ? 56 : 80; vb(el, W, H);
+    let g = `<line x1="20" y1="${B}" x2="${W - 20}" y2="${B}" ${S('line')}/>`;
+    g += `<rect x="${x1 - bw / 2}" y="${sy(me)}" width="${bw}" height="${B - sy(me)}" rx="6" ${F('glow')}/>` + TX(x1, B + 18, 'you', 'glow', 12, 'middle');
+    if (!off){ g += `<rect x="${x2 - bw / 2}" y="${sy(them)}" width="${bw}" height="${B - sy(them)}" rx="6" ${F('bad', .7)}/>` + TX(x2, B + 18, 'the people you compare with', 'bad', 12, 'middle');
+      g += `<line x1="${x1 + bw / 2}" y1="${sy(them)}" x2="${x2 - bw / 2}" y2="${sy(them)}" ${S('bad', 1, ';stroke-dasharray:3 4')}/>` + arrowHead(x1, sy(them) + 2, Math.PI / 2, 'bad') + `<line x1="${x1}" y1="${sy(them)}" x2="${x1}" y2="${sy(me)}" ${S('bad', 1.4)}/>`; }
+    else g += wrap(x2, sy(50), 'no one to measure against: just your life, as it is', nw ? 20 : 26, 16, 'good', 13, 'middle');
+    el.innerHTML = g; $('#rrGap').textContent = off ? 'none' : Math.round(them - me);
+    $('#rrSay').textContent = off ? 'You can still get the raise and enjoy the car. They just stop being a verdict on you.' : !last ? 'Do well at something and see who you compare yourself with next.' : `You ${last[0].toLowerCase()}. For a moment you\'re ahead, then you start noticing the people who have more. The gap is back.`;
+  });
+  $('#rrOff').addEventListener('click', e => { off = !off; e.currentTarget.setAttribute('aria-pressed', off); draw(); });
+  $('#rrReset').addEventListener('click', () => { me = 20; them = 34; last = null; draw(); });
+  draw();
+}
+
+/* ---------- 14: attachment or preference ---------- */
+{ const IT = ['My partner\'s good mood', 'Getting the promotion', 'My phone', 'Being liked by my team', 'Sunny holidays', 'My favourite café staying open'];
+  const v = IT.map((_, i) => i % 2 ? 'pref' : 'must'); let year = null, seed = 2; const el = $('#apSvg');
+  function list(){ $('#apList').innerHTML = IT.map((t, i) => `<div class="aprow"><span>${t}</span><span class="seg"><button type="button" data-i="${i}" data-v="must" aria-pressed="${v[i] === 'must'}">Can\'t be happy without it</button><button type="button" data-i="${i}" data-v="pref" aria-pressed="${v[i] === 'pref'}">I\'d like it</button></span></div>`).join('');
+    $$('#apList [data-v]').forEach(b => b.addEventListener('click', () => { v[+b.dataset.i] = b.dataset.v; list(); draw(); })); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 760, rh = 30, H = IT.length * rh + 30, L = nw ? 130 : 230; vb(el, W, H);
+    let g = '', tot = 0;
+    IT.forEach((t, i) => { const y = 10 + i * rh, lost = year && year[i], hurt = lost ? (v[i] === 'must' ? 9 : 1.5) : 0; tot += hurt;
+      g += TX(L - 8, y + 15, t.length > (nw ? 18 : 30) ? t.slice(0, nw ? 17 : 29) + '…' : t, 'muted', 12, 'end');
+      g += `<rect x="${L}" y="${y + 4}" width="${W - L - 10}" height="16" rx="4" ${F('line', .3)}/>`;
+      if (year) g += lost ? `<rect x="${L}" y="${y + 4}" width="${((W - L - 10) * hurt / 10).toFixed(1)}" height="16" rx="4" ${F(v[i] === 'must' ? 'bad' : 'good', .85)}/>` + TX(W - 14, y + 16, v[i] === 'must' ? 'lost: suffering' : 'lost: a pang', v[i] === 'must' ? 'bad' : 'good', 11, 'end') : TX(L + 8, y + 16, 'kept this year', 'faint', 11); });
+    if (!year) g += TX(L + 8, H - 6, 'press "let a year happen"', 'faint', 11);
+    el.innerHTML = g; $('#apHurt').textContent = year ? Math.round(tot) : '·';
+    if (year){ const lm = IT.filter((_, i) => year[i] && v[i] === 'must').length, lp = IT.filter((_, i) => year[i] && v[i] === 'pref').length;
+      $('#apSay').textContent = `Life took ${lm + lp} things. ${lm ? lm + ' were musts, and each felt like the floor giving way.' : 'None were musts.'} ${lp ? lp + ' were preferences: disappointing, then fine.' : ''} Flip the musts to preferences and let the same year happen.`; }
+    else $('#apSay').textContent = 'Mark each one, then let the year happen.';
+  });
+  $('#apGo').addEventListener('click', () => { const r = rng(seed += 31); year = IT.map(() => r() < .45); draw(); });
+  list(); draw();
+}
+
+/* ---------- 15: name it, or look at it ---------- */
+{ const SEE = ['The tail flicks up each time it lands.', 'A dull brown, then rust where the light catches the wing.', 'It cocks its head, one eye, then the other.', 'Tiny feet gripping, slightly pink.', 'A sharp chirp, then a softer one, almost a question.', 'The breast feathers lift with each breath.', 'It hops twice, never walks.', 'A seed held for a moment before the crack.', 'It notices you watching, and decides you\'re fine.', 'It\'s gone. You\'ll never see that bird again.'];
+  let named = true, shown = 0; const el = $('#bdSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 560, H = 200, cx = W / 2, cy = 108; vb(el, W, H);
+    const d = Math.min(1, shown / 6);
+    let g = `<line x1="${cx - 120}" y1="${cy + 46}" x2="${cx + 120}" y2="${cy + 52}" ${S('faint', 4, ';stroke-linecap:round')}/>`;
+    g += `<g style="opacity:${named ? .25 : 1}"><ellipse cx="${cx}" cy="${cy}" rx="44" ry="32" ${FS('glow', 'glow', 1.4, .25 + d * .45)}/><circle cx="${cx + 38}" cy="${cy - 22}" r="20" ${FS('glow', 'glow', 1.4, .3 + d * .4)}/>`;
+    g += `<path d="M${cx + 56} ${cy - 24}l16 4-16 5Z" ${F('text')}/><circle cx="${cx + 44}" cy="${cy - 27}" r="3.2" ${F('text')}/>`;
+    g += `<path d="M${cx - 40} ${cy - 6}l-40 ${-18 - (shown % 2) * 8}l10 26Z" ${FS('glow', 'glow', 1.2, .4 + d * .3)}/>`;
+    if (shown > 1) g += `<path d="M${cx - 20} ${cy - 6}q20 -18 40 0q-20 12 -40 0Z" ${FS('bad', 'bad', 1, .45)}/>`;
+    if (shown > 3) g += `<path d="M${cx - 6} ${cy + 30}v18M${cx + 10} ${cy + 30}v18" ${S('bad', 2, ';stroke-linecap:round')}/>`;
+    if (shown > 4) g += `<path d="M${cx - 18} ${cy + 6}q16 10 32 0M${cx - 14} ${cy + 16}q12 8 24 0" ${S('soft', 1, ';opacity:.6')}/>`;
+    g += '</g>';
+    if (named) g += `<rect x="${cx - 86}" y="${cy - 30}" width="172" height="56" rx="10" ${FS('panel', 'line', 1.2)}/>` + TX(cx, cy + 9, 'SPARROW', 'text', 26, 'middle', 'letter-spacing="3"');
+    el.innerHTML = g;
+    $('#bdList').innerHTML = named ? '<div class="empty">"Oh, a sparrow." And you\'ve moved on.</div>' : SEE.slice(0, shown).map((s, i) => `<div><i>${String(i + 1).padStart(2, '0')}</i>${s}</div>`).join('') || '<div class="empty">Look again.</div>';
+    $('#bdName').setAttribute('aria-pressed', named);
+  });
+  $('#bdName').addEventListener('click', () => { named = true; shown = 0; draw(); });
+  $('#bdLook').addEventListener('click', () => { named = false; shown = Math.min(SEE.length, shown + 1); draw(); });
+  draw();
+}
+
+/* ---------- 16: dose and withdrawal ---------- */
+{ const EV = [['Get a like', 3], ['Get praised', 6], ['Get ignored', -5], ['Get criticised', -7]];
+  let mode = 'hook', base = 0, mood = 0, hist = [0], last = null; const el = $('#drSvg');
+  $('#drMode').innerHTML = '<button class="btn" type="button" data-m="hook" aria-pressed="true">Hooked on approval</button><button class="btn" type="button" data-m="free" aria-pressed="false">Dropped the need</button>';
+  $$('#drMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#drMode [data-m]'), b); mode = b.dataset.m; base = 0; mood = 0; hist = [0]; last = null; draw(); }));
+  $('#drEv').innerHTML = EV.map((e, i) => `<button class="btn" type="button" data-e="${i}">${e[0]}</button>`).join('') + '<button class="btn" type="button" data-e="w">Wait an hour</button>';
+  $$('#drEv [data-e]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.e;
+    if (k === 'w'){ last = 'w'; mood = mode === 'hook' ? Math.min(mood, base) - (mood > base ? 2 : 1) : mood * .5; if (mode === 'hook') base = Math.max(-8, base - .6); }
+    else { const e = EV[+k]; last = e; mood = mode === 'hook' ? clamp(base + e[1] * 1.3, -10, 10) : clamp(mood * .5 + e[1] * .2, -10, 10); }
+    mood = clamp(mood, -10, 10); hist.push(mood); if (hist.length > 18) hist.shift(); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 200, L = 26, mid = 100, sc = 8.5, sx = (W - L - 12) / 17; vb(el, W, H);
+    let g = `<line x1="${L}" y1="${mid}" x2="${W - 8}" y2="${mid}" ${S('line')}/>` + TX(L - 4, mid + 4, '0', 'faint', 11, 'end');
+    if (mode === 'hook') g += `<line x1="${L}" y1="${mid - base * sc}" x2="${W - 8}" y2="${mid - base * sc}" ${S('bad', 1, ';stroke-dasharray:4 4')}/>` + TX(W - 10, mid - base * sc + 14, 'your baseline', 'bad', 11, 'end');
+    g += `<path d="${hist.map((v, i) => (i ? 'L' : 'M') + (L + i * sx).toFixed(1) + ' ' + (mid - v * sc).toFixed(1)).join('')}" ${S(mode === 'hook' ? 'glow' : 'cool', 2.4)}/>`;
+    hist.forEach((v, i) => { g += `<circle cx="${(L + i * sx).toFixed(1)}" cy="${(mid - v * sc).toFixed(1)}" r="3" ${F(mode === 'hook' ? 'glow' : 'cool')}/>`; });
+    el.innerHTML = g; $('#drMood').textContent = (mood > 0 ? '+' : '') + mood.toFixed(1);
+    $('#drSay').textContent = !last ? 'Feed it some approval, then wait an hour, and repeat.' : mode === 'free' ? 'Praise is pleasant and criticism stings a little, but neither runs you. The line stays near calm.' :
+      last === 'w' ? 'The high fades, and you drop below where you were. The baseline is slipping, so the next dose has to be bigger.' : last[1] > 0 ? 'A rush. Enjoy it while it lasts, because it won\'t.' : 'Withdrawal. Whoever withholds approval now has power over your whole day.';
+  });
+  draw();
+}
+
+/* ---------- 17: push the car, or fix the engine ---------- */
+{ let pos = 0, fixed = false, pushes = 0, timer = null; const el = $('#crSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = 150, road = 116, x = 30 + Math.min(pos, 100) / 100 * (W - 150); vb(el, W, H);
+    let g = `<line x1="0" y1="${road}" x2="${W}" y2="${road}" ${S('line', 2)}/>`;
+    for (let k = 0; k < W; k += 40) g += `<line x1="${k}" y1="${road + 14}" x2="${k + 18}" y2="${road + 14}" ${S('faint', 2, ';opacity:.5')}/>`;
+    g += `<path d="M${x} ${road - 12}v-22l20 -4 16 -20h46l18 20h12v26Z" ${FS(fixed ? 'glow' : 'panel-2', fixed ? 'glow' : 'muted', 1.6, fixed ? .5 : 1)}/>`;
+    g += `<circle cx="${x + 24}" cy="${road - 10}" r="10" ${FS('deep', 'text', 2)}/><circle cx="${x + 92}" cy="${road - 10}" r="10" ${FS('deep', 'text', 2)}/>`;
+    if (!fixed && pushes) g += `<circle cx="${x - 16}" cy="${road - 52}" r="7" ${S('cool', 1.8)}/><path d="M${x - 16} ${road - 45}l4 22M${x - 14} ${road - 36}l14 2M${x - 12} ${road - 23}l-8 23M${x - 12} ${road - 23}l8 23" ${S('cool', 1.8, ';stroke-linecap:round')}/>`;
+    if (fixed) g += `<path d="M${x - 8} ${road - 18}h-18M${x - 10} ${road - 28}h-26" ${S('glow', 1.6, ';stroke-linecap:round;opacity:.7')}/>`;
+    else g += `<path d="M${x + 112} ${road - 46}q6 -10 0 -18q6 -6 0 -14" ${S('faint', 1.4, ';opacity:.6')}/>`;
+    el.innerHTML = g; $('#crD').textContent = Math.round(pos) + ' m';
+  });
+  $('#crPush').addEventListener('click', () => { if (fixed) return; pushes++; pos = Math.min(100, pos + Math.max(1, 6 - pushes * .5)); draw();
+    $('#crSay').textContent = pushes < 3 ? 'It rolls a few metres, and stops the moment you let go.' : pushes < 7 ? 'Each push gets you less. You\'re tiring, and the car is no better.' : 'This is change by willpower: exhausting, and over the instant you stop.'; });
+  $('#crFix').addEventListener('click', () => { if (fixed) return; fixed = true; clearInterval(timer);
+    $('#crSay').textContent = 'You find the loose lead. It was a small thing, easy to miss while you were pushing. Now the car goes by itself.';
+    timer = setInterval(() => { pos = Math.min(100, pos + (RM ? 100 : 2)); draw(); if (pos >= 100) clearInterval(timer); }, 30); });
+  $('#crReset').addEventListener('click', () => { clearInterval(timer); pos = 0; fixed = false; pushes = 0; $('#crSay').textContent = 'The engine has cut out. Try pushing first.'; draw(); });
+  $('#crSay').textContent = 'The engine has cut out. Try pushing first.'; draw();
+}
+
+/* ---------- 18: the person behind the pictures ---------- */
+{ const IM = [['"Always late"', 'From three late dinners, years ago.'], ['"The clever one"', 'A label from school that Kim never chose.'], ['"Forgot my birthday"', 'Once. You\'ve been holding it ever since.'], ['"Can\'t handle criticism"', 'From one bad week at work.'], ['"My best friend"', 'Even the good pictures hide the real Kim.'], ['"Not as fun as before"', 'Compared with a memory, not a person.']];
+  const gone = new Set(); let last = null; const el = $('#imSvg');
+  function list(){ $('#imList').innerHTML = IM.map((m, i) => `<button class="card3${gone.has(i) ? ' gone' : ''}" type="button" data-i="${i}" aria-pressed="${gone.has(i)}"><b>${m[0]}</b><span>${m[1]}</span></button>`).join('');
+    $$('#imList [data-i]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; gone.has(i) ? gone.delete(i) : gone.add(i); last = i; list(); draw(); })); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 560, H = 220, cx = W / 2, cy = 112; vb(el, W, H);
+    const clear = gone.size / IM.length;
+    let g = `<circle cx="${cx}" cy="${cy - 30}" r="28" ${FS('glow', 'glow', 2, .2 + clear * .5)}/><path d="M${cx - 50} ${cy + 80}q0 -60 50 -60q50 0 50 60" ${FS('glow', 'glow', 2, .2 + clear * .5)}/>`;
+    g += `<path d="M${cx - 10} ${cy - 22}q10 8 20 0" ${S('text', 1.8, ';stroke-linecap:round;opacity:' + clear)}/><circle cx="${cx - 9}" cy="${cy - 36}" r="2.4" ${F('text', clear)}/><circle cx="${cx + 9}" cy="${cy - 36}" r="2.4" ${F('text', clear)}/>`;
+    IM.forEach((m, i) => { if (gone.has(i)) return; const w = nw ? 106 : 150, ox = (i % 3 - 1) * (w + 8), oy = (Math.floor(i / 3) - .5) * 48;
+      g += `<g transform="rotate(${i % 2 ? 2 : -2} ${cx + ox} ${cy + oy})"><rect x="${cx + ox - w / 2}" y="${cy + oy - 20}" width="${w}" height="40" rx="6" ${FS('panel-2', 'line', 1.2, .9)}/>` + TX(cx + ox, cy + oy + 5, m[0], 'muted', nw ? 10 : 12, 'middle') + '</g>'; });
+    el.innerHTML = g; $('#imV').textContent = Math.round(clear * 100) + '%';
+    $('#imSay').textContent = gone.size === IM.length ? 'There\'s Kim, today. You don\'t know what they\'ll say next, and that\'s what makes it a real meeting.' : last != null && gone.has(last) ? 'One less picture between you. ' + IM[last][1] : 'You can barely see Kim for the pictures. Drop them one at a time.';
+  });
+  $('#imReset').addEventListener('click', () => { gone.clear(); last = null; list(); draw(); });
+  list(); draw();
+}
+
+/* ---------- 19: where's the fire? ---------- */
+{ const ST = [['Day one', 'He shows the tribes how to make fire. Everyone cooks and keeps warm.', 100], ['A year later', 'He\'s loved everywhere. The priests notice nobody listens to them any more.', 100], ['Soon after', 'The priests have him killed, and the people grieve.', 60], ['A generation', 'The priests set his portrait on an altar, with his tools, to keep the people\'s loyalty.', 30], ['A century', 'There are hymns now, and rules about how to bow to the tools.', 10], ['Five centuries', 'The temple is magnificent. Scholars argue about the tools\' true meaning.', 2], ['Today', 'Crowds still come to worship. And there is no fire.', 0]];
+  const R = $('#fpR'), el = $('#fpSvg'); let lit = false;
+  const draw = onLayout(() => {
+    const s = +R.value, st = ST[s]; out('fpR', st[0]);
+    const nw = NARROW(), W = nw ? 360 : 620, H = 220, cx = W / 2, base = 180; vb(el, W, H);
+    let g = `<line x1="10" y1="${base}" x2="${W - 10}" y2="${base}" ${S('line', 1.5)}/>`;
+    if (s >= 3){ const tall = 40 + s * 10, w = 60 + s * 16; g += `<path d="M${cx - w / 2} ${base}v-${tall}l${w / 2} -${16 + s * 4}l${w / 2} ${16 + s * 4}v${tall}Z" ${FS('panel-2', 'line', 1.2)}/>`;
+      g += `<rect x="${cx - 18}" y="${base - tall + 6}" width="36" height="44" rx="3" ${FS('deep', 'glow', 1.2, 1)}/><circle cx="${cx}" cy="${base - tall + 22}" r="8" ${S('glow', 1.2)}/><path d="M${cx - 10} ${base - tall + 46}q10 -14 20 0" ${S('glow', 1.2)}/>`;
+      g += `<path d="M${cx - 30} ${base - 10}l12 -12M${cx + 18} ${base - 22}l12 12" ${S('muted', 2.4, ';stroke-linecap:round')}/>`; }
+    const n = s === 0 ? 4 : s < 3 ? 6 : Math.min(16, 4 + s * 2);
+    for (let k = 0; k < n; k++){ const px = 24 + k * ((W - 48) / Math.max(1, n - 1)); if (Math.abs(px - cx) < (s >= 3 ? 50 + s * 8 : 30)) continue; g += `<circle cx="${px}" cy="${base - 30}" r="6" ${S('soft', 1.4)}/><path d="M${px} ${base - 24}v14M${px - 6} ${base}l6 -10 6 10" ${S('soft', 1.4)}/>`; }
+    const fire = lit ? 100 : st[2];
+    if (fire > 0){ const fh = 14 + fire * .34, fx = s >= 3 && !lit ? cx : lit ? cx : cx; g += `<path d="M${fx - 14} ${base}q-4 -${fh * .5} 14 -${fh}q18 ${fh * .5} 14 ${fh}Z" ${F('glow', .3 + fire / 160)}/><path d="M${fx - 6} ${base}q0 -${fh * .3} 6 -${fh * .55}q6 ${fh * .25} 6 ${fh * .55}Z" ${F('bad', .7)}/>`; }
+    else g += TX(cx, base + 30 > H ? base - 4 : base + 28, 'where\'s the fire?', 'bad', 13, 'middle');
+    el.innerHTML = g; $('#fpWarm').textContent = fire + '%';
+    $('#fpSay').textContent = lit ? 'You don\'t need to tear down the temple. You need the fire: awareness, love, freedom, lit in you.' : st[1];
+    $('#fpLight').disabled = s < 6 && !lit; $('#fpLight').textContent = lit ? 'Let it go out again' : 'Light the fire yourself';
+  });
+  R.addEventListener('input', () => { lit = false; draw(); });
+  $('#fpLight').addEventListener('click', () => { lit = !lit; draw(); });
+  draw();
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
