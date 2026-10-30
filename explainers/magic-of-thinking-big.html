@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Magic of Thinking Big, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night sky over a small town. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a lesson from the book,
+   a lab, plain words, quick check), grouped into belief, thinking big, your world and action.
+   Dark-first: midnight blue with a warm gold accent and a periwinkle second series; light mode is warm paper with cobalt. */
+:root{
+  color-scheme: dark;
+  --ink:#0B0F22;--panel:#121834;--panel-2:#1B2244;--line:#2C3560;--text:#F1F2FA;--muted:#ADB2D2;--faint:#7C82A8;
+  --glow:#FFC94A;--glow-soft:rgba(255,201,74,.11);--hl:rgba(255,201,74,.26);--cool:#9DB0FF;--cool-soft:rgba(157,176,255,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B7A;--bad-soft:rgba(255,139,122,.12);
+  --soft:#D7DAEE;--deep:#080B1A;--toc-bg:rgba(18,24,52,.74);--glow-line:rgba(255,201,74,.36);--cool-line:rgba(157,176,255,.3);--on-glow:#241A00;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F3EA;--panel:#FFFFFF;--panel-2:#EEEAE0;--line:#DCD6C8;--text:#161A2E;--muted:#55596F;--faint:#868A9C;
+  --glow:#9A5E00;--glow-soft:rgba(154,94,0,.06);--hl:#F6E2B5;--cool:#2F48C4;--cool-soft:rgba(47,72,196,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2A2E44;--deep:#FCFAF4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(154,94,0,.3);--cool-line:rgba(47,72,196,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F3EA;--panel:#FFFFFF;--panel-2:#EEEAE0;--line:#DCD6C8;--text:#161A2E;--muted:#55596F;--faint:#868A9C;
+  --glow:#9A5E00;--glow-soft:rgba(154,94,0,.06);--hl:#F6E2B5;--cool:#2F48C4;--cool-soft:rgba(47,72,196,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2A2E44;--deep:#FCFAF4;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(154,94,0,.3);--cool-line:rgba(47,72,196,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The Magic of Thinking Big additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.thermo{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.thermo-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.thermo-top output{font-family:var(--f-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.thermo-body{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;padding:14px 16px;align-items:center}
+.thermo-body svg{width:96px;height:auto;display:block}
+.thermo-read{display:grid;gap:10px}
+.thermo-read div{display:grid;gap:2px}
+.thermo-read .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.thermo-read .v{font-size:14.5px;line-height:1.35;color:var(--soft)}
+.thermo-ctl{display:grid;gap:6px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.thermo-ctl label{font-size:13px;color:var(--muted)}
+.fivegrid{display:grid;grid-template-columns:minmax(120px,1.6fr) repeat(7,minmax(28px,1fr));gap:4px;align-items:center;font-size:13px}
+.fivegrid .hd{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:center}
+.fivegrid .nm{color:var(--soft);line-height:1.25}
+.fivegrid button{font:inherit;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel);cursor:pointer;display:grid;place-items:center;padding:0}
+.fivegrid button svg{width:15px;height:15px;opacity:0;stroke:var(--on-glow)}
+.fivegrid button[aria-pressed=true]{background:var(--glow);border-color:var(--glow)}
+.fivegrid button[aria-pressed=true] svg{opacity:1}
+.dig-list{display:grid;gap:6px;min-height:40px}
+.dig-list div{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:var(--soft);padding:8px 12px;border-radius:10px;background:var(--panel-2);border-left:3px solid var(--glow)}
+.dig-list i{font-style:normal;font-family:var(--f-mono);font-size:11px;color:var(--glow);flex:0 0 auto;margin-top:3px}
+.dig-list .empty{border-left-color:var(--line);color:var(--muted)}
+.traits{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}
+.traits span{font-size:13.5px;padding:7px 10px;border-radius:9px;border:1px solid var(--line);color:var(--faint);transition:all .2s}
+.traits span.on.p{color:var(--text);border-color:var(--good);background:var(--good-soft)}
+.traits span.on.n{color:var(--text);border-color:var(--bad);background:var(--bad-soft)}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.card3.right{border-color:var(--good);background:var(--good-soft)}
+.card3.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.days30{display:grid;grid-template-columns:repeat(15,minmax(0,1fr));gap:4px;max-width:560px}
+.days30 button{font:inherit;font-family:var(--f-mono);font-size:11px;aspect-ratio:1;border-radius:7px;border:1px solid var(--line);background:var(--panel);color:var(--faint);cursor:pointer;padding:0}
+.days30 button[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:760px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.card1 .ad{font-family:var(--f-display);font-size:clamp(21px,2.8vw,27px);line-height:1.25}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.plan div{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--soft)}
+.plan div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .thermo-body{grid-template-columns:72px minmax(0,1fr);gap:10px;padding:12px} .thermo-body svg{width:72px}
+  .fivegrid{grid-template-columns:minmax(92px,1.4fr) repeat(7,minmax(22px,1fr));gap:3px;font-size:12px} .fivegrid button{height:26px}
+  .days30{grid-template-columns:repeat(10,minmax(0,1fr))} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to David J. Schwartz's book</div>
+    <h1><em>The Magic of Thinking Big</em>,<br>Explained</h1>
+    <p class="lede">David J. Schwartz taught marketing and ran workshops for salespeople and managers, and he kept noticing the same thing: the people who got furthest weren't the cleverest or the luckiest. They simply thought bigger about what they could do, and then acted on it. <b>The Magic of Thinking Big</b> turns that into thirteen chapters of plain, practical habits, from curing your favourite excuse to sitting in the front row. This guide takes each chapter in turn, with a lab in every one where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>How far you go is set less by your brains or your luck than by <em>the size of your thinking</em>, and thinking can be trained.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's holding you back?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="thermo" style="margin:0" aria-label="The belief thermostat">
+        <div class="thermo-top"><span>The belief thermostat</span><output id="thV"></output></div>
+        <div class="thermo-body"><svg id="thSvg" viewBox="0 0 120 260" role="img" aria-label="A thermostat showing how big you believe"></svg><div class="thermo-read" id="thRead" aria-live="polite"></div></div>
+        <div class="thermo-ctl"><label for="thR">How big do you believe you can go?</label><input type="range" id="thR" min="1" max="10" value="4"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 3</span><span class="q">Belief</span><span class="d">Believe, drop the excuses and act your way out of fear</span></a>
+      <a href="#part2"><span class="n">Chapters 4 to 6</span><span class="q">Thinking Big</span><span class="d">See what could be, find better ways, think of yourself as important</span></a>
+      <a href="#part3"><span class="n">Chapters 7 to 9</span><span class="q">Your World</span><span class="d">Your surroundings, your attitudes and the people around you</span></a>
+      <a href="#part4"><span class="n">Chapters 10 to 13</span><span class="q">Action</span><span class="d">Start now, learn from setbacks, set goals and lead</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 1959</span>
+      <span><b>Author</b> David J. Schwartz, professor of marketing at Georgia State University and a consultant and speaker on motivation</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 13 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== BELIEF ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · belief</span>
+      <h2>Belief</h2>
+      <p>Schwartz starts with the foundation. Before you can think big, you have to believe big things are possible for you, stop hiding behind excuses, and get a grip on the fear that keeps you small. None of this needs talent. It needs practice.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Success starts in the head: belief opens the door, excuses close it, and action is the cure for fear.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Belief is where it starts</div>
+        <h2>Believe You Can Succeed and You Will</h2>
+        <div class="short"><span class="lbl">In short</span><p>Believing you can do something isn't magic, but it is the switch that sets your mind looking for ways to do it. Doubt does the opposite: it hands your mind a job of finding reasons why not.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Belief finds the how.</b> When you truly believe something can be done, your mind starts working on methods. When you doubt it, your mind works just as hard, only on excuses.</span></li>
+          <li><span><b>A thermostat, not a wish.</b> Schwartz compares belief to a thermostat. It sets the level you will reach. People who expect a little get a little; people who expect a lot reach for a lot.</span></li>
+          <li><span><b>Ordinary people, big belief.</b> Successful people are mostly ordinary people who have come to believe in themselves and what they do. The belief came first, and the skill followed.</span></li>
+          <li><span><b>Three habits.</b> Think success, not failure. Remind yourself often that you are better than you think. And believe big, because the size of your success is set by the size of your belief.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz admits nobody moves a mountain just by wishing for it. But look at what people who believed it could be done have built: tunnels through mountains, bridges over bays, roads over passes. The belief didn't move the rock. It made them ask how, and the answer to how was engineering. He finds the same thing in his sales workshops: the people who expect to climb are the ones who go looking for the ladder.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: what your mind gets busy with</div><div class="hint">Pick a goal, then flip between doubt and belief</div></div>
+        <div class="stage"><svg id="bmSvg" role="img" aria-label="A goal in the middle with branches of thoughts around it"></svg></div><div class="lab-ctl"><div class="row" id="bmGoal"></div><div class="row" id="bmMode"></div></div><p class="callout">Same person, same goal, same brain. <b>The only thing that changes is the question your belief sets: "why can't I?" or "how can I?"</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you start anything big, check which question you're asking. "Can I?" invites your mind to argue. "How can I?" puts it to work. Believing first is what makes the planning possible.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Cure excusitis →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · The four favourite alibis</div>
+        <h2>Cure Yourself of Excusitis, the Failure Disease</h2>
+        <div class="short"><span class="lbl">In short</span><p>Unsuccessful people tend to carry a ready excuse for why they can't. Schwartz calls the habit excusitis and names its four common forms: health, intelligence, age and luck. Each one has a cure.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Health excusitis.</b> "I'd do it, but my health isn't good." The cure: refuse to talk about your health, refuse to worry about it, be grateful it's as good as it is, and remember it's better to wear out than to rust out.</span></li>
+          <li><span><b>Intelligence excusitis.</b> "You need brains for that." The cure: never underrate your own intelligence or overrate other people's. Your attitude matters more than your IQ, and knowing how to think beats storing facts.</span></li>
+          <li><span><b>Age excusitis.</b> "I'm too old" or "too young". The cure: look at your age positively, work out how many productive years you still have, and spend that time on what you actually want.</span></li>
+          <li><span><b>Luck excusitis.</b> "They just got lucky." The cure: accept that results have causes. People who look lucky usually prepared, planned and kept at it. You can't wish your way to success.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz retells a well-known moment from Henry Ford's life. In a court case, lawyers tried to show Ford was ignorant by quizzing him on history and general knowledge. Ford, as the story goes, said he had a row of buttons on his desk, and if he needed a fact he could press one and get someone who knew it in minutes. Why fill his head with facts when he could keep it free for thinking? Schwartz's point: what pays off is not how much you've memorised, but how well you use your mind.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: diagnose the excuse</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Listen for your favourite "but". Whatever form it takes, it's comfortable because it lets you off the hook. Name it, then do the opposite of what it tells you.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Destroy fear →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Action cures fear</div>
+        <h2>Build Confidence and Destroy Fear</h2>
+        <div class="short"><span class="lbl">In short</span><p>Fear is real, but it can be cured, and the cure is action. Waiting and worrying feed fear. Naming it and doing something about it shrink it. Small daily habits build confidence from the outside in.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Action cures fear.</b> Hesitating makes fear grow. Isolate exactly what you fear, then find the action that answers it, and take it.</span></li>
+          <li><span><b>Manage your memory.</b> Your mind is like a bank. Deposit positive thoughts and replay them; refuse to keep withdrawing the unpleasant ones.</span></li>
+          <li><span><b>People are just people.</b> If others intimidate you, remember they are human too, with the same worries. Try to understand them rather than fear them.</span></li>
+          <li><span><b>Do what's right.</b> Acting against your conscience breeds guilt, and guilt eats confidence. Doing what you know is right keeps it intact.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz noticed that in meetings, lectures and church, the back rows fill up first. People choose them because they don't want to be noticed, and that is fear talking. So his first confidence builder is to sit at the front. The others are just as plain: look people in the eye, walk about a quarter faster than usual as if you have somewhere to be, speak up at least once in every meeting, and smile a big, full smile. Each one feels awkward at first, and each one sends a message back to your own head: I'm confident.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: from fear to action</div><div class="hint">Pick a fear, then track the five confidence builders</div></div>
+        <div class="lab-ctl"><div class="row" id="faF"></div></div><div class="stats"><div class="stat"><span class="k">What you fear</span><span class="s" id="faFear"></span></div><div class="stat"><span class="k">The action that answers it</span><span class="s" id="faAct"></span></div></div><div class="lab-ctl" style="border-top:1px solid var(--line)"><div class="fivegrid" id="fbGrid"></div><div class="row"><span class="tip" id="fbSay"></span><button class="btn" id="fbReset" type="button">Clear the week</button></div></div><p class="callout">Tick a builder each day you do it. Your week is saved in this browser only. <b>Confidence grows from doing, not from waiting to feel ready.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're afraid, don't sit and wait for the feeling to pass. Pin down what exactly scares you, do the one thing that deals with it, and practise looking confident until you feel it.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Think big →</a></div>
+    </section>
+    <!-- ===================== THINKING BIG ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · thinking big</span>
+      <h2>Thinking Big</h2>
+      <p>With belief in place, the next three chapters are about the size and quality of your thinking: how big thinkers talk and see, how they find better ways to do things, and how the way you see yourself shapes what you do.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Big thinkers aren't born with bigger brains. They use bigger words, picture what could be, and treat themselves and their work as important.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · The size of your thinking</div>
+        <h2>How to Think Big</h2>
+        <div class="short"><span class="lbl">In short</span><p>People are measured by the size of their thinking. To think bigger, take honest stock of your strengths, use words that paint big pictures, see things as they could be, and stop sweating the small stuff.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Measure yourself fairly.</b> Most people sell themselves short. List your main strengths, then think of people who have them and aren't doing better than you. You're bigger than you think.</span></li>
+          <li><span><b>Use a big thinker's vocabulary.</b> Words make pictures in people's heads. Choose ones that are positive, hopeful and cheerful, and avoid ones that paint failure or defeat.</span></li>
+          <li><span><b>See what can be.</b> Big thinkers look past how a thing is to how it could be. Practise adding value in your head to things, to people and to yourself.</span></li>
+          <li><span><b>Rise above the trivial.</b> Before you fight about something, ask: will it really make a difference? Petty quarrels and small irritations eat the energy big goals need.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>One of Schwartz's examples is about selling property. Someone who sees a run-down place only as it stands, with peeling paint and an overgrown yard, struggles to sell it. Someone who sees and describes what it could become, with a fresh coat, a tidy garden and a family living there, gives the buyer a picture worth paying for. Schwartz says the same "see what can be" habit works on a job, on a colleague and on yourself.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: see what can be</div><div class="hint">Picture improvements and watch the place change</div></div>
+        <div class="stage"><svg id="hsSvg" role="img" aria-label="A run-down house that changes as you picture improvements"></svg></div><div class="lab-ctl"><div class="toggles" id="hsT"></div></div><div class="stats"><div class="stat"><span class="k">How a small thinker describes it</span><span class="s" id="hsSmall"></span></div><div class="stat"><span class="k">How a big thinker describes it</span><span class="s" id="hsBig"></span></div></div><p class="callout">Nothing in the real house has changed yet. <b>What changed is what you can see, and that is what you can sell, plan or build.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you size something up, including yourself, add the question "what could it become?". Talk in words that point forward. Save your fight for things that will matter in a year.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Think creatively →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Finding better ways</div>
+        <h2>How to Think and Dream Creatively</h2>
+        <div class="short"><span class="lbl">In short</span><p>Creative thinking isn't just for artists. It means finding new and better ways to do anything. It starts with believing a thing can be done, and grows when you stay open, ask how to do better, and listen.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Believe it can be done.</b> Once you believe something is possible, your mind starts to find the way. Say "impossible" and the thinking stops.</span></li>
+          <li><span><b>Beat tradition's grip.</b> Welcome new ideas, try new things, and ask "how can we do this better?" rather than "we've always done it this way".</span></li>
+          <li><span><b>Capacity is a state of mind.</b> How much you can do depends on how much you think you can do. Ask "how can I do more?" and you'll find ways to make room.</span></li>
+          <li><span><b>Listen more, and write ideas down.</b> Big people do more listening than talking. Spend time with people who stretch your thinking, and capture every idea before it slips away.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz describes asking a training group whether prisons could be done away with within thirty years. At first the group listed every reason it couldn't happen. Then he asked them to assume it could be done, and to think about how. The ideas began to flow: better youth programmes, more education, help for people at risk before they turn to crime. The question was the same; only the starting belief had changed.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: how can I do more?</div><div class="hint">Add jobs to a full day, then ask how to fit them</div></div>
+        <div class="stage"><svg id="cpSvg" role="img" aria-label="A working day filled with blocks of tasks"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="cpAdd" type="button">Take on one more job</button><button class="btn" id="cpReset" type="button">Reset</button></div><div class="toggles" id="cpT"></div></div><div class="stats"><div class="stat"><span class="k">Hours booked</span><span class="v glow" id="cpH"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="cpSay"></span></div></div><p class="callout">An illustrative day. When the day looks full, <b>tick the ideas a "how can I do more?" mind comes up with</b>, and watch the room appear.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The next time someone says it can't be done, try saying "suppose it could. How?" And when your plate looks full, ask how to do more rather than whether you can. You'll often find the room.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: You are what you think →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Think yourself important</div>
+        <h2>You Are What You Think You Are</h2>
+        <div class="short"><span class="lbl">In short</span><p>Others see you the way you see yourself. If you think of yourself and your work as important, you act that way, and people respond. So look the part, value your work, and give yourself a pep talk.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Look important.</b> Your appearance speaks to you as much as to others. Dress well and you feel more capable. Pay twice as much and buy half as many, so what you own is good.</span></li>
+          <li><span><b>Think your work is important.</b> People who see their job as a stepping stone to something worthwhile do it better, get noticed and move up. People who think it's nothing stay put.</span></li>
+          <li><span><b>Sell yourself to yourself.</b> Write a short commercial about your strengths and your goals, and play it to yourself several times a day. It pushes out the negative self-talk.</span></li>
+          <li><span><b>Upgrade your thinking.</b> In any situation, ask yourself: is this how an important person would think? Then think and act that way.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz's advice on clothes is blunt: pay twice as much and buy half as many. It isn't about vanity. When you look right, he argues, you think and act with more confidence, and people treat you with more respect, which feeds the confidence again. He makes the same point about work: a person who sees their job, however humble, as important does it with care, and care is what gets noticed.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: your one-minute commercial</div><div class="hint">Write the ad you'll play to yourself</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="adName">Your first name</label><input id="adName" maxlength="30" placeholder="e.g. Sam"></div><div class="field"><label for="adS1">A real strength you have</label><input id="adS1" maxlength="60" placeholder="e.g. I stay calm when things go wrong"></div><div class="field"><label for="adS2">Another one</label><input id="adS2" maxlength="60" placeholder="e.g. People trust me with hard jobs"></div><div class="field"><label for="adGoal">Where you're going</label><input id="adGoal" maxlength="70" placeholder="e.g. lead my own team by next year"></div></div><div class="out"><span class="k">Your commercial</span><div class="say-out" id="adOut"></div><div class="row"><button class="btn primary" id="adSave" type="button">Save my commercial</button><span class="tip" id="adTip"></span></div></div></div><p class="callout">Read it out loud before a hard moment. Saved in this browser only, and it shows up in the afterword. <b>Your opinion of yourself is the one you hear most.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Treat yourself as someone who matters, because people take their cue from you. Dress for the person you're becoming, take pride in your work, and talk to yourself the way a good coach would.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Manage your environment →</a></div>
+    </section>
+    <!-- ===================== YOUR WORLD ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · your world</span>
+      <h2>Your World</h2>
+      <p>Thinking doesn't happen in a vacuum. Schwartz turns to the things that feed it every day: the people and places around you, the attitudes you carry, and the way you think about others.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Your mind takes on the colour of what surrounds it. Choose your surroundings, your attitudes and your view of people on purpose.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · What you feed your mind</div>
+        <h2>Manage Your Environment: Go First Class</h2>
+        <div class="short"><span class="lbl">In short</span><p>Your mind takes on the shape of what it's fed. The people you spend time with, what you read and listen to, and the places you go all push your thinking bigger or smaller. So choose them on purpose.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Environment shapes thinking.</b> We pick up the attitudes of those around us. Spend your days with small thinkers and your goals shrink to match.</span></li>
+          <li><span><b>Beware the people who pull you down.</b> Some people will tell you it can't be done, often because they never tried. Don't let them set your limits.</span></li>
+          <li><span><b>Get advice from the successful.</b> If you want guidance, ask people who have done what you want to do. Asking a failure how to succeed is asking for more failure.</span></li>
+          <li><span><b>Avoid thought poison, go first class.</b> Gossip and constant complaining are poison for your thinking. And in what you buy, eat and do, go for quality over quantity.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz describes how ambition gets worn down by the people around it: the co-workers who tease anyone who studies at night, the friends who say a plan is unrealistic, the gatherings where the talk is mostly complaints about the boss. None of it is dramatic, but it adds up day by day. His answer is to make friends in more than one circle, seek out people with big ideas, and make a habit of going first class, even if that means doing fewer things, so your mind gets used to quality.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: your thought diet</div><div class="hint">Set your weekly hours and see where your thinking drifts</div></div>
+        <div class="stage"><svg id="enSvg" role="img" aria-label="A line showing how big your thinking gets over twelve weeks"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="enA">Time with big thinkers (hours a week) <output id="oenA"></output></label><input type="range" id="enA" min="0" max="15" value="2"></div><div class="ctl"><label for="enB">Time with people who run things down <output id="oenB"></output></label><input type="range" id="enB" min="0" max="15" value="6"></div></div><div class="row"><div class="ctl"><label for="enC">Gossip and complaining <output id="oenC"></output></label><input type="range" id="enC" min="0" max="10" value="3"></div><div class="ctl"><label for="enD">Reading and learning from the best <output id="oenD"></output></label><input type="range" id="enD" min="0" max="10" value="1"></div></div></div><div class="stats"><div class="stat"><span class="k">Size of thinking after 12 weeks</span><span class="v glow" id="enV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="enSay"></span></div></div><p class="callout">An illustrative model, not a measurement. <b>The point is the drift: small daily inputs add up to a direction.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Look at who and what you spend your time with, and ask whether it makes you think bigger or smaller. Add more of the first, cut back on the second, and don't let gossip set your mood.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Attitudes as allies →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Three attitudes that pay</div>
+        <h2>Make Your Attitudes Your Allies</h2>
+        <div class="short"><span class="lbl">In short</span><p>People can read your attitude in how you speak, look and act, and they respond to it. Schwartz names three that work in your favour: being activated, making others feel important, and putting service first.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>"I'm activated."</b> Enthusiasm is catching. To grow it, dig deeper into anything you find dull, put life into everything you do, and broadcast good news rather than bad.</span></li>
+          <li><span><b>"You are important."</b> Everyone wants to feel they matter. Show appreciation, use people's names, give credit freely and never hog the glory.</span></li>
+          <li><span><b>"Service first."</b> Give people more than they expect. Put service first and the money tends to follow; put money first and both slip away.</span></li>
+          <li><span><b>Attitudes show.</b> You can't hide a bad attitude for long. It leaks out in your voice, your face and your work, so fix the attitude, not the mask.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz's cure for being bored by something is to learn more about it. A subject that seems dull from the outside often turns fascinating once you dig in, and the interest you find becomes real enthusiasm that others can feel. He pairs this with a simple daily habit: be the person who brings good news. Lead with what went right. People are drawn to those who leave them feeling better, and the habit lifts your own mood too.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: dig deeper</div><div class="hint">Pick something dull and keep digging</div></div>
+        <div class="stage"><svg id="dgSvg" role="img" aria-label="An enthusiasm meter that rises as you dig into a subject"></svg></div><div class="lab-ctl"><div class="row" id="dgPick"></div><div class="dig-list" id="dgList" aria-live="polite"></div><div class="row"><button class="btn primary" id="dgGo" type="button">Dig deeper</button></div></div><p class="callout">Schwartz's rule: <b>to get enthusiastic about something, learn more about it.</b> Interest follows knowledge more often than the other way round.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If something bores you, find out more about it. Walk in with energy, make the people around you feel noticed, and give a little more than you're asked. Those three habits change how people respond to you.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Think right toward people →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Be easy to support</div>
+        <h2>Think Right Toward People</h2>
+        <div class="short"><span class="lbl">In short</span><p>Nobody gets far alone. Success depends on other people supporting you, and people support those they like. So take the first step with others, accept their flaws, look for their good side, and let them talk.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Be the one who starts.</b> Don't wait to be greeted. Introduce yourself, learn names and take the first step in building a friendship.</span></li>
+          <li><span><b>Accept differences.</b> Nobody is perfect, including you. Accept people's quirks and limits instead of expecting them to be like you.</span></li>
+          <li><span><b>Tune in to channel P.</b> Think of your mind as a radio with two stations: P for positive and N for negative. Tune to P and look for what's good in people.</span></li>
+          <li><span><b>Let them talk, and don't blame.</b> Practise conversation generosity: ask questions and listen. Be courteous to everyone. When things go wrong, look at your own part before blaming others.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz's picture of the mind as a radio is one of the book's best known. Every person you know has good and bad points. On channel N you notice only the irritations: the colleague who talks too much, the neighbour who's always late. On channel P you notice that the talker is generous and the late neighbour would help anyone. The person is the same either way. What changes is how you treat them, and how they come to treat you.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: channel P or channel N</div><div class="hint">Tune the dial and see the same person differently</div></div>
+        <div class="stage"><svg id="chSvg" role="img" aria-label="A radio dial tuned to channel P or channel N"></svg></div><div class="lab-ctl"><div class="row" id="chMode"></div><div class="traits" id="chTraits"></div></div><div class="stats"><div class="stat"><span class="k">What you'd say about Alex</span><span class="s" id="chSay"></span></div><div class="stat"><span class="k">How Alex responds to you</span><span class="s" id="chBack"></span></div></div><p class="callout">Alex has all eight traits on both channels. <b>You choose which ones get airtime.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Make the first move with people, forgive their rough edges and go looking for their good side. Ask about them, listen properly, and stay polite even when it's hard. People back those who make them feel liked.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The action habit →</a></div>
+    </section>
+    <!-- ===================== ACTION ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · action</span>
+      <h2>Action</h2>
+      <p>The last four chapters move from thinking to doing. Start before conditions are perfect, treat defeat as a lesson, steer by written goals, and when you lead, put yourself in the other person's place.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Ideas only count when you act on them. Big thinkers start now, adjust as they go and bring other people with them.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Do it now</div>
+        <h2>Get the Action Habit</h2>
+        <div class="short"><span class="lbl">In short</span><p>Good ideas are worth nothing until someone acts on them. Successful people are doers: they don't wait for perfect conditions, they start before they feel ready, and they make "now" their working word.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Don't wait for perfect.</b> Conditions will never be perfect. Expect problems and deal with them as they come, rather than waiting for the day when nothing is wrong.</span></li>
+          <li><span><b>Ideas need action.</b> An idea alone doesn't win anything. Plenty of people had the same idea as someone who got rich from it; the difference is that one of them acted.</span></li>
+          <li><span><b>Start your mind mechanically.</b> Don't wait to feel inspired. Sit down and start, and the mind usually warms up once the work is under way.</span></li>
+          <li><span><b>Think now, and take the initiative.</b> "Tomorrow" and "someday" are the words of people who don't act. Use "now". Volunteer, speak up and get on with it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz tells of a young couple who wanted their own home but never seemed to have enough saved, and kept waiting for the right moment. When they finally decided to act instead of wait, they found a house, worked out how to raise the down payment, and moved in, discovering they could manage what had seemed out of reach. Waiting would have felt safer, and they would still be waiting.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: waiting for perfect conditions</div><div class="hint">Set how many things must line up</div></div>
+        <div class="stage"><svg id="wpSvg" role="img" aria-label="A year of days, with the rare days when every condition is right highlighted"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="wpN">Conditions that must all be right <output id="owpN"></output></label><input type="range" id="wpN" min="1" max="10" value="8"></div><div class="ctl"><label for="wpP">Chance each one is right on a given day <output id="owpP"></output></label><input type="range" id="wpP" min="30" max="95" value="60" step="5"></div></div><div class="row"><button class="btn" id="wpRoll" type="button">Roll another year</button></div></div><div class="stats"><div class="stat"><span class="k">Perfect days this year</span><span class="v glow" id="wpDays"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="wpSay"></span></div></div><p class="callout">An illustrative model: every condition you insist on multiplies the wait. <b>Start on an ordinary day and fix problems as you meet them.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick the thing you've been waiting to start and do a small part of it today. Don't wait to feel ready or for everything to line up. Action creates the confidence and the conditions you were waiting for.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Defeat into victory →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Setbacks as lessons</div>
+        <h2>How to Turn Defeat into Victory</h2>
+        <div class="short"><span class="lbl">In short</span><p>Everyone meets setbacks. The difference is what you do next. Study each defeat, criticise yourself honestly, stop blaming luck, and combine persistence with trying new approaches.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Study the setback.</b> Treat each defeat as information. Ask what it teaches, and use it to plan a better attempt.</span></li>
+          <li><span><b>Be your own constructive critic.</b> Look for your own weaknesses and faults, then fix them. Doing that is how professionals improve.</span></li>
+          <li><span><b>Stop blaming luck.</b> Bad luck is a convenient story that teaches nothing. Look for the cause, because a cause can be fixed.</span></li>
+          <li><span><b>Persist, but experiment.</b> Persistence alone can mean hitting the same wall forever. Keep the goal, but try a new approach when one fails, and look for the good side of every situation.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz is careful to say that persistence is not enough on its own. He describes people who keep doing the same thing, harder and longer, and keep failing. His advice is to step back from the problem, look at it fresh and try a different route. Many breakthroughs, he notes, come from people who refused to give up on the goal but were willing to give up on the method.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the wall</div><div class="hint">Try to get through with two strategies</div></div>
+        <div class="stage"><svg id="wlSvg" role="img" aria-label="Attempts thrown at a wall with one hidden gap"></svg></div><div class="lab-ctl"><div class="row" id="wlMode"></div><div class="row"><button class="btn primary" id="wlGo" type="button">Make 12 attempts</button><button class="btn" id="wlNew" type="button">New wall</button></div></div><div class="stats"><div class="stat"><span class="k">Attempts to get through</span><span class="v glow" id="wlN"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="wlSay"></span></div></div><p class="callout">The gap is somewhere you can't see. <b>Persistence keeps you trying; experimenting makes each try teach you something.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something fails, ask what it taught you and what you'd do differently. Keep the goal fixed, change the approach, and don't hand the result over to luck.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Use goals →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Know where you're going</div>
+        <h2>Use Goals to Help You Grow</h2>
+        <div class="short"><span class="lbl">In short</span><p>A goal is a clear picture of where you want to be. Without one, you drift. Schwartz asks you to write a ten-year plan for work, home and social life, then take it a step at a time, with a 30-day improvement guide.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Set a ten-year plan.</b> Picture yourself ten years from now in three departments: work, home and social. Write down what you want in each.</span></li>
+          <li><span><b>Let goals give you energy.</b> People with a clear goal have more drive. Deep desire for something makes you act, think and push harder.</span></li>
+          <li><span><b>One step at a time.</b> Big goals are reached through small ones. Break the plan into 30-day steps, and treat each task, however small, as part of the climb.</span></li>
+          <li><span><b>Invest in yourself, accept detours.</b> Spend on education and on things that feed your mind. If a road is blocked, take a detour, but don't drop the destination.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz gives the reader a simple form to fill in each month, a 30-day improvement guide. It has a few headings: habits to break, habits to acquire, ways to become more valuable at work, ways to become more valuable at home, and ways to sharpen your mind. At the end of the month you review it and write the next one. It turns a ten-year dream into something you can do this week.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: your plan</div><div class="hint">Write a ten-year picture and this month's guide</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="g10w">In ten years, at work</label><input id="g10w" maxlength="80" placeholder="e.g. running my own design studio"></div><div class="field"><label for="g10h">At home</label><input id="g10h" maxlength="80" placeholder="e.g. a house with a garden, kids who see me at dinner"></div><div class="field"><label for="g10s">Socially</label><input id="g10s" maxlength="80" placeholder="e.g. a few close friends, coaching the local team"></div></div><div class="fields"><div class="field"><label for="g30b">This month, a habit to break</label><input id="g30b" maxlength="70" placeholder="e.g. scrolling in bed"></div><div class="field"><label for="g30a">A habit to acquire</label><input id="g30a" maxlength="70" placeholder="e.g. a 20-minute walk every morning"></div><div class="field"><label for="g30w">More valuable at work by</label><input id="g30w" maxlength="70" placeholder="e.g. learning the new reporting tool"></div><div class="field"><label for="g30h">More valuable at home by</label><input id="g30h" maxlength="70" placeholder="e.g. cooking dinner twice a week"></div><div class="field"><label for="g30m">Sharpen my mind by</label><input id="g30m" maxlength="70" placeholder="e.g. reading two books"></div></div><div class="out"><span class="k">Your 30 days</span><div class="days30" id="gDays"></div><div class="row"><button class="btn primary" id="gSave" type="button">Save my plan</button><span class="tip" id="gTip"></span></div></div></div><p class="callout">Tick off each day you work the guide. Saved in this browser only, and it shows up in the afterword. <b>Review it in 30 days and write the next one.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide where you want to be in ten years, in work, home and life. Then decide what you'll do this month to move one step closer, write it down, and check it daily.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Think like a leader →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Four rules for leading</div>
+        <h2>How to Think Like a Leader</h2>
+        <div class="short"><span class="lbl">In short</span><p>Leaders aren't pushed up by luck. They're lifted by people who want to follow them. Schwartz gives four rules: trade minds with the people you want to influence, ask what the human way is, think progress, and take time to think alone.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Trade minds.</b> Before you try to persuade anyone, ask what you'd think and want in their place. Then speak to that.</span></li>
+          <li><span><b>Find the human way.</b> When dealing with people, ask what the kind and decent way to handle this is. Firmness and fairness can go together.</span></li>
+          <li><span><b>Think progress.</b> Believe in improvement, push for it, and set high standards. People follow those who expect things to get better.</span></li>
+          <li><span><b>Confer with yourself.</b> Spend some time alone each day thinking. Schwartz calls it managed solitude, and he credits it for many leaders' best decisions.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Schwartz suggests a simple test before any attempt to persuade: trade minds. A salesperson asks what the customer is worried about, not what commission is at stake. A manager announcing a change asks how it looks from the shop floor. He adds a daily habit for leaders: an hour of quiet, alone, with no distractions, to think things through. Big decisions, he says, are rarely made well in a crowd.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: trade minds</div><div class="hint">Pick the pitch that speaks to the other person</div></div>
+        <div class="stage"><svg id="tmSvg" role="img" aria-label="A seesaw weighing your interest against theirs"></svg></div><div class="lab-ctl"><div class="row" id="tmS"></div><div class="tm-ask" id="tmAsk"></div><div class="cards3" id="tmP"></div></div><div class="stats"><div class="stat"><span class="k">What they care about</span><span class="s" id="tmCare"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="tmSay"></span></div></div><p class="callout">The pitches all ask for the same thing. <b>The winning one is written from the other side of the table.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you ask anyone for anything, spend a minute in their shoes. Treat people decently, push for things to get better, and give yourself some quiet time each day to think.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#after">Next: think big, starting today →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Think big, starting today</h2>
+      <p class="big">Schwartz closes by asking you to use the book where it counts: when you meet a setback, when you're tempted to settle, when someone tells you it can't be done. Here is your plan, and the whole book on one page.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">Belief</span><b>Believe it, then find how</b><span>Belief switches your mind from reasons it can't work to ways it can.</span></div>
+        <div><span class="n">Excuses</span><b>Cure excusitis</b><span>Health, brains, age and luck are the four favourite alibis. None of them holds up.</span></div>
+        <div><span class="n">Fear</span><b>Action cures fear</b><span>Name the fear, do the thing that answers it, and sit in the front row.</span></div>
+        <div><span class="n">Size</span><b>See what can be</b><span>Use big words, add value in your head and ignore the trivial.</span></div>
+        <div><span class="n">People</span><b>Go first class</b><span>Choose who and what you let into your head, and tune in to the good in others.</span></div>
+        <div><span class="n">Action</span><b>Do it now</b><span>Don't wait for perfect conditions, learn from each setback and lead by trading minds.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Magic of Thinking Big</i> by David J. Schwartz (1959). The explanations, retold examples and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Belief", "Thinking big", "Your world", "Action"];
+const CH = [["Believe You Can Succeed and You Will", "Believe you can succeed", 0, "Chapter 1"], ["Cure Yourself of Excusitis, the Failure Disease", "Cure excusitis", 0, "Chapter 2"], ["Build Confidence and Destroy Fear", "Destroy fear", 0, "Chapter 3"], ["How to Think Big", "Think big", 1, "Chapter 4"], ["How to Think and Dream Creatively", "Think creatively", 1, "Chapter 5"], ["You Are What You Think You Are", "You are what you think", 1, "Chapter 6"], ["Manage Your Environment: Go First Class", "Manage your environment", 2, "Chapter 7"], ["Make Your Attitudes Your Allies", "Attitudes as allies", 2, "Chapter 8"], ["Think Right Toward People", "Think right toward people", 2, "Chapter 9"], ["Get the Action Habit", "The action habit", 3, "Chapter 10"], ["How to Turn Defeat into Victory", "Defeat into victory", 3, "Chapter 11"], ["Use Goals to Help You Grow", "Use goals", 3, "Chapter 12"], ["How to Think Like a Leader", "Think like a leader", 3, "Chapter 13"]];
+const QUIZ = {
+"1": {
+"q": "According to Schwartz, what does believing you can do something actually do?",
+"o": [
+"It guarantees success without effort",
+"It sets your mind looking for ways to do it",
+"It removes every obstacle in your way"
+],
+"a": 1,
+"w": "Belief isn't magic. It points your thinking at methods instead of excuses, and methods are what get things done."
+},
+"2": {
+"q": "Someone says, \"I'm 45, it's too late to retrain.\" What does Schwartz suggest?",
+"o": [
+"Agree and settle for what they have",
+"Count the productive years still ahead and use them on what they want",
+"Wait for a lucky break instead"
+],
+"a": 1,
+"w": "A 45-year-old may have twenty or more working years left. Seeing the time ahead, not the time gone, is the cure for age excusitis."
+},
+"3": {
+"q": "You're dreading a call with an unhappy client. What is Schwartz's cure?",
+"o": [
+"Put it off until you feel calmer",
+"Make the call, after deciding what you'll say",
+"Ask someone else to make it"
+],
+"a": 1,
+"w": "Indecision and delay feed fear. Isolating the fear and taking the action that answers it is what shrinks it."
+},
+"4": {
+"q": "A colleague is irritated that a meeting started five minutes late. What's the big thinker's test?",
+"o": [
+"Complain to the organiser",
+"Ask whether it will really make any difference",
+"Arrive late next time to make a point"
+],
+"a": 1,
+"w": "Schwartz's test for petty problems: will this matter? Most small irritations don't, and big thinkers let them go."
+},
+"5": {
+"q": "What happened when Schwartz's group assumed prisons could be eliminated?",
+"o": [
+"They decided the idea was absurd",
+"They started producing ideas for how it might happen",
+"They voted on whether it was possible"
+],
+"a": 1,
+"w": "Believing it can be done switches the mind from reasons why not to ways how. That is the start of creative thinking."
+},
+"6": {
+"q": "What is Schwartz's \"commercial\" for?",
+"o": [
+"Advertising yourself to employers",
+"Selling yourself to yourself, by reminding yourself of your strengths and goals",
+"Practising a sales pitch"
+],
+"a": 1,
+"w": "The commercial is for you. Played often, it replaces the habit of running yourself down."
+},
+"7": {
+"q": "You want to start a business. Whose advice does Schwartz say to seek?",
+"o": [
+"Friends who have never tried it, because they're objective",
+"People who have built successful businesses",
+"Anyone who will tell you it's risky"
+],
+"a": 1,
+"w": "Ask people who have succeeded at what you want to do. Advice from people who have failed or never tried tends to teach you how not to."
+},
+"8": {
+"q": "What does Schwartz suggest if your job feels dull?",
+"o": [
+"Look for a new one straight away",
+"Dig deeper into it, because learning more builds real enthusiasm",
+"Do the minimum and save energy for hobbies"
+],
+"a": 1,
+"w": "Enthusiasm grows from knowledge. The more you learn about something, the more interesting it becomes."
+},
+"9": {
+"q": "What does \"tuning in to channel P\" mean?",
+"o": [
+"Pretending people have no faults",
+"Choosing to focus on people's good qualities",
+"Only spending time with positive people"
+],
+"a": 1,
+"w": "Everyone has good and bad points. Channel P means deliberately noticing the good ones, which changes how you treat people and how they respond."
+},
+"10": {
+"q": "Why does waiting for perfect conditions usually fail?",
+"o": [
+"Because conditions are never perfect, so the wait never ends",
+"Because perfect conditions are illegal",
+"It doesn't; waiting is the safest plan"
+],
+"a": 0,
+"w": "There is always something wrong. The more conditions you demand, the rarer the perfect day, until it effectively never comes."
+},
+"11": {
+"q": "What does Schwartz add to persistence?",
+"o": [
+"Luck",
+"Experimenting with new approaches",
+"Working longer hours"
+],
+"a": 1,
+"w": "Blind persistence repeats the same mistake. Persistence blended with experimentation keeps you going while changing what doesn't work."
+},
+"12": {
+"q": "Which three departments does Schwartz's ten-year plan cover?",
+"o": [
+"Money, health and hobbies",
+"Work, home and social life",
+"Career, education and travel"
+],
+"a": 1,
+"w": "The plan covers work, home and social life, so ambition in one area doesn't quietly wreck the others."
+},
+"13": {
+"q": "What does \"trading minds\" mean?",
+"o": [
+"Arguing until the other person agrees",
+"Imagining yourself in the other person's place before trying to influence them",
+"Swapping jobs with a colleague for a day"
+],
+"a": 1,
+"w": "Trading minds is asking what you'd want if you were them, then speaking to that. It is Schwartz's first rule of leadership."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0b0f22';
+try { const t = localStorage.getItem('mtb-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('mtb-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('mtb-done', []));
+const save = () => store.set('mtb-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+/* ---------- afterword card (reads the commercial from chapter 6 and the plan from chapter 12) ---------- */
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const ad = store.get('mtb-ad', null), pl = store.get('mtb-plan', null);
+  const hasPlan = pl && ['g10w', 'g10h', 'g10s', 'g30b', 'g30a', 'g30w', 'g30h', 'g30m'].some(k => (pl[k] || '').trim());
+  if (!(ad && ad.text) && !hasPlan){ el.innerHTML = '<span class="k">Nothing saved yet</span><p class="empty">Write <a href="#ch6">your one-minute commercial</a> and <a href="#ch12">your ten-year and 30-day plan</a>. What you save shows up here, in this browser only.</p>'; return; }
+  let h = '';
+  if (ad && ad.text) h += `<span class="k">Your commercial</span><p class="ad">${esc(ad.text)}</p>`;
+  if (hasPlan){
+    const cell = (k, l) => (pl[k] || '').trim() ? `<div><span>${l}</span>${esc(pl[k])}</div>` : '';
+    const ten = cell('g10w', 'Ten years · work') + cell('g10h', 'Ten years · home') + cell('g10s', 'Ten years · social');
+    const thirty = cell('g30b', 'Break') + cell('g30a', 'Acquire') + cell('g30w', 'At work') + cell('g30h', 'At home') + cell('g30m', 'Sharpen my mind');
+    const days = (pl.days || []).filter(Boolean).length;
+    if (ten) h += `<span class="k">Ten-year plan</span><div class="plan">${ten}</div>`;
+    if (thirty) h += `<span class="k">This month · ${days} of 30 days worked</span><div class="plan">${thirty}</div>`;
+  }
+  el.innerHTML = h + '<p class="empty">Read the commercial out loud each morning. Review the guide in 30 days and write the next one.</p>';
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I don\'t really believe I can', 1, 'Belief finds the how', 'Doubt sets your mind hunting for reasons why not. Belief sets it hunting for methods. Start by switching the question.'],
+    ['I have a good reason why not', 2, 'Excusitis', 'Health, brains, age and luck are the four favourite excuses. Each has a cure, and the first step is noticing your favourite.'],
+    ['I\'m scared to try', 3, 'Action cures fear', 'Pin down exactly what you fear, then take the action that answers it. Waiting only makes it grow.'],
+    ['I think too small', 4, 'How to think big', 'Measure yourself fairly, use bigger words, and practise seeing things as they could be.'],
+    ['I\'m stuck in a rut', 5, 'Think creatively', 'Believe a better way exists and ask "how can I do better?" The answers start once you ask.'],
+    ['The people around me are negative', 7, 'Manage your environment', 'Your thinking takes on the shape of your surroundings. Choose them, and steer clear of thought poison.'],
+    ['I keep putting things off', 10, 'The action habit', 'Conditions will never be perfect. Start now and fix problems as they come up.'],
+    ['I failed and want to give up', 11, 'Defeat into victory', 'Study the setback, stop blaming luck, and keep the goal while changing the method.'],
+    ['I don\'t know where I\'m going', 12, 'Use goals', 'Write a ten-year picture for work, home and social life, then a 30-day guide to move toward it.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the belief thermostat ---------- */
+{ const R = $('#thR'), el = $('#thSvg');
+  const BANDS = [
+    [3, 'Keep what I\'ve got', 'Reasons it won\'t work', '"I could never do that."'],
+    [6, 'A little more than now', 'Safe, familiar options', '"Maybe one day."'],
+    [8, 'The next level up', 'Ways to stretch', '"I\'m working on it."'],
+    [10, 'The top of my field', 'Methods, people and ways how', '"Here\'s how we\'ll do it."'] ];
+  function draw(){
+    const v = +R.value, top = 22, bot = 196, y = bot - (bot - top) * (v / 10);
+    let g = `<rect x="44" y="${top - 12}" width="32" height="${bot - top + 30}" rx="16" ${FS('panel-2', 'line', 1.5)}/>`;
+    g += `<circle cx="60" cy="226" r="24" ${FS('panel-2', 'line', 1.5)}/>`;
+    g += `<rect x="52" y="${y.toFixed(1)}" width="16" height="${(bot + 18 - y).toFixed(1)}" rx="8" ${F('glow')}/><circle cx="60" cy="226" r="17" ${F('glow')}/>`;
+    for (let k = 2; k <= 10; k += 2){ const ty = bot - (bot - top) * (k / 10); g += `<line x1="80" y1="${ty}" x2="88" y2="${ty}" ${S('faint', 1.2)}/>` + TX(92, ty + 4, k, 'faint', 11); }
+    for (let k = 1; k <= 9; k += 2){ const ty = bot - (bot - top) * (k / 10); g += `<line x1="80" y1="${ty}" x2="84" y2="${ty}" ${S('line', 1)}/>`; }
+    el.innerHTML = g;
+    const b = BANDS.find(x => v <= x[0]);
+    $('#thV').textContent = v + ' / 10';
+    $('#thRead').innerHTML = `<div><span class="k">What you aim for</span><span class="v">${b[1]}</span></div><div><span class="k">What your mind looks for</span><span class="v">${b[2]}</span></div><div><span class="k">What you say</span><span class="v">${b[3]}</span></div>`;
+  }
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 1: what your mind gets busy with ---------- */
+{ const GOALS = [
+    ['Start my own business', ['I don\'t have the money', 'Most new firms fail', 'I\'m not a business type', 'The market is crowded', 'I\'d lose my safe salary', 'Who would buy from me?'],
+      ['Test it on weekends first', 'Find ten paying customers', 'Talk to three owners', 'Start small, then grow', 'Save six months of costs', 'Find the gap nobody fills']],
+    ['Get promoted to manager', ['They\'ll pick someone else', 'I\'m too quiet', 'I don\'t have the degree', 'My boss doesn\'t rate me', 'It\'s all politics', 'I\'ve never led anyone'],
+      ['Ask what the job needs', 'Lead one small project', 'Find a mentor above me', 'Train the new starter', 'Fix a problem nobody owns', 'Tell my boss I want it']],
+    ['Run a marathon', ['I\'m not a runner', 'My knees would hurt', 'I have no time', 'I\'m too heavy', 'I hate running', 'People will laugh'],
+      ['Follow a 16-week plan', 'Join a running club', 'Run before work', 'Start with 5 km', 'Get proper shoes', 'Sign up for a race date']],
+    ['Write a book', ['I\'m not a real writer', 'It\'s been done before', 'I\'d never finish', 'Nobody would publish it', 'I have no time', 'My spelling is bad'],
+      ['Write 300 words a day', 'Outline ten chapters', 'Join a writing group', 'Write before breakfast', 'Find an editor later', 'Read the books I love'] ] ];
+  let gi = 0, belief = false; const el = $('#bmSvg');
+  $('#bmGoal').innerHTML = GOALS.map((g, i) => `<button class="btn" type="button" data-g="${i}" aria-pressed="${i === 0}">${g[0]}</button>`).join('');
+  $('#bmMode').innerHTML = '<button class="btn" type="button" data-m="0" aria-pressed="true">"Can I?" (doubt)</button><button class="btn" type="button" data-m="1" aria-pressed="false">"How can I?" (belief)</button>';
+  $$('#bmGoal [data-g]').forEach(b => b.addEventListener('click', () => { press($$('#bmGoal [data-g]'), b); gi = +b.dataset.g; draw(); }));
+  $$('#bmMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#bmMode [data-m]'), b); belief = b.dataset.m === '1'; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 470 : 340, cx = W / 2, cy = H / 2, rx = nw ? 112 : 232, ry = nw ? 176 : 122, bw = nw ? 120 : 150, bh = 46;
+    vb(el, W, H); const c = belief ? 'glow' : 'bad', items = GOALS[gi][belief ? 2 : 1];
+    let g = '';
+    items.forEach((t, k) => { const a = -Math.PI / 2 + k * Math.PI * 2 / 6 + Math.PI / 6, NP = [[90, -150], [118, 0], [90, 150], [-90, 150], [-118, 0], [-90, -150]], x = nw ? cx + NP[k][0] : cx + rx * Math.cos(a), y = nw ? cy + NP[k][1] : cy + ry * Math.sin(a);
+      g += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S(c, 1.5, ';stroke-opacity:.55' + (belief ? '' : ';stroke-dasharray:4 4'))}/>`;
+      g += `<rect x="${(x - bw / 2).toFixed(1)}" y="${(y - bh / 2).toFixed(1)}" width="${bw}" height="${bh}" rx="10" ${F('panel')}/>`;
+      g += `<rect x="${(x - bw / 2).toFixed(1)}" y="${(y - bh / 2).toFixed(1)}" width="${bw}" height="${bh}" rx="10" ${FS(belief ? 'glow-soft' : 'bad-soft', c, 1.2)}/>` + wrap(x, y + 4.5, t, nw ? 16 : 20, 15, 'text', 13); });
+    g += `<circle cx="${cx}" cy="${cy}" r="${nw ? 56 : 62}" ${FS('panel', c, 2)}/>` + wrap(cx, cy - 4, GOALS[gi][0], 12, 17, 'text', 14.5);
+    g += TX(cx, cy + (nw ? 32 : 36), belief ? 'HOW CAN I?' : 'CAN I?', c, 10.5, 'middle', 'letter-spacing="1.5"');
+    el.innerHTML = g;
+  });
+  draw();
+}
+
+/* ---------- 2: diagnose the excuse ---------- */
+sorter('#sort2', '#tally2', [{ id: 'health', label: 'Health', d: '"My body won\'t let me"' }, { id: 'brains', label: 'Intelligence', d: '"I\'m not clever enough"' }, { id: 'age', label: 'Age', d: '"Too old" or "too young"' }, { id: 'luck', label: 'Luck', d: '"They just got lucky"' }], [
+  { t: '"I\'d go for the job, but they want someone with a sharper mind than mine."', q: true, a: 'brains', w: 'Cure: don\'t underrate yourself or overrate others. Attitude and how you use your mind matter more than raw IQ.' },
+  { t: '"I\'m 52. Nobody starts a new career at my age."', q: true, a: 'age', w: 'Cure: count the productive years still ahead. At 52 that could be fifteen or more, plenty for a new career.' },
+  { t: '"She only got the account because she happened to sit next to the client at dinner."', q: true, a: 'luck', w: 'Cure: look for the cause. She went to the dinner, started the conversation and followed up. That\'s preparation, not luck.' },
+  { t: '"With my back, I can\'t really take on anything demanding."', q: true, a: 'health', w: 'Cure: stop talking about it, be grateful for the health you have, and do what you can. Better to wear out than rust out.' },
+  { t: '"I\'m only 24. They\'ll never let someone so young lead the project."', q: true, a: 'age', w: 'Age excusitis works both ways. Youth is an asset when you act with confidence and competence.' },
+  { t: '"Some people are born winners. I wasn\'t."', q: true, a: 'luck', w: 'Success has causes you can study and copy. Calling it fate is a way of not trying.' },
+  { t: '"I was never good at school, so I couldn\'t run a business."', q: true, a: 'brains', w: 'Many successful people had average grades. Thinking, attitude and persistence matter far more than storing facts.' },
+  { t: '"I get tired easily, so I\'ll wait until I feel better before I start."', q: true, a: 'health', w: 'Waiting to feel perfect is excusitis. Work within your health, and refuse to worry it into something bigger.' },
+]);
+
+/* ---------- 3: from fear to action + the five confidence builders ---------- */
+{ const FEARS = [
+    ['Speaking in a meeting', 'Looking foolish in front of colleagues', 'Prepare two or three points and speak in the first ten minutes, before the fear has time to build.'],
+    ['Asking for a raise', 'Being turned down', 'List what you delivered this year, book the meeting today, and ask for a specific figure.'],
+    ['Calling a stranger', 'Being rejected', 'Write the first sentence down, make the call now, and count rejections as part of the job.'],
+    ['Losing my job', 'Being let go', 'Make yourself harder to lose: take on a problem nobody wants and build contacts outside the firm.'],
+    ['A health worry', 'Something serious being wrong', 'See a doctor. A check-up swaps a vague dread for facts you can act on.'],
+    ['A big exam', 'Failing it', 'Split the syllabus into topics, schedule them, and do the first block tonight.'] ];
+  $('#faF').innerHTML = FEARS.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { $('#faFear').textContent = FEARS[i][1]; $('#faAct').textContent = FEARS[i][2]; };
+  $$('#faF [data-f]').forEach(b => b.addEventListener('click', () => { press($$('#faF [data-f]'), b); show(+b.dataset.f); }));
+  show(0);
+  const FIVE = ['Sit at the front', 'Look people in the eye', 'Walk 25% faster', 'Speak up once', 'Smile big'];
+  const DAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  let wk = store.get('mtb-five', null); if (!Array.isArray(wk) || wk.length !== 35) wk = Array(35).fill(false);
+  function draw(){
+    let h = '<span></span>' + DAYS.map(d => `<span class="hd">${d}</span>`).join('');
+    FIVE.forEach((f, r) => { h += `<span class="nm">${f}</span>` + DAYS.map((d, c) => `<button type="button" data-k="${r * 7 + c}" aria-pressed="${wk[r * 7 + c]}" aria-label="${f}, day ${c + 1}">${TICK}</button>`).join(''); });
+    $('#fbGrid').innerHTML = h;
+    $$('#fbGrid [data-k]').forEach(b => b.addEventListener('click', () => { const k = +b.dataset.k; wk[k] = !wk[k]; store.set('mtb-five', wk); draw(); $(`#fbGrid [data-k="${k}"]`).focus({preventScroll:true}); }));
+    const n = wk.filter(Boolean).length;
+    $('#fbSay').textContent = n === 0 ? 'Nothing ticked yet. Pick one builder and do it today.' : n < 12 ? `${n} of 35 this week. A start; aim for at least one a day.` : n < 28 ? `${n} of 35. These are becoming habits.` : `${n} of 35. You're acting confident, and it shows.`;
+  }
+  $('#fbReset').addEventListener('click', () => { wk = Array(35).fill(false); store.set('mtb-five', wk); draw(); });
+  draw();
+}
+
+/* ---------- 4: see what can be ---------- */
+{ const IMP = [
+    ['paint', 'A fresh coat of paint', 'freshly painted walls'],
+    ['roof', 'A mended roof', 'a sound roof'],
+    ['win', 'Lights on in the windows', 'warm light in every window'],
+    ['garden', 'A cleared garden', 'a garden in bloom'],
+    ['fence', 'A white picket fence', 'a neat front fence'],
+    ['life', 'A family living there', 'a family making it home'] ];
+  const on = {}; const el = $('#hsSvg');
+  $('#hsT').innerHTML = IMP.map(([k, l]) => `<label class="tg"><input type="checkbox" data-k="${k}"><span>${l}</span></label>`).join('');
+  $$('#hsT input').forEach(c => c.addEventListener('change', () => { on[c.dataset.k] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = 560, H = 300; el.setAttribute('viewBox', nw ? '70 34 420 236' : '0 0 560 300');
+    let g = `<rect x="0" y="252" width="${W}" height="48" ${F('panel-2')}/>`;
+    // body and roof
+    g += `<rect x="170" y="140" width="220" height="112" ${on.paint ? FS('cool', 'cool', 1.5, .28) : FS('panel', 'faint', 1.5)}/>`;
+    if (!on.paint) g += `<path d="M190 160l14 6M330 150l18 10M352 210l16-4M200 228l10 10" ${S('faint', 1, ';stroke-opacity:.6')}/>`;
+    g += `<path d="M150 142 280 66 410 142Z" ${on.roof ? FS('glow', 'glow', 1.5, .5) : FS('panel-2', 'faint', 1.5)}/>`;
+    if (!on.roof) g += `<path d="M240 110l14-4 4 12-14 3Z M318 118l12 2-3 10-11-3Z" ${F('ink')}/>`;
+    // windows
+    [[196, 166], [318, 166]].forEach(([x, y], i) => { g += `<rect x="${x}" y="${y}" width="46" height="40" rx="2" ${on.win ? FS('glow', 'glow', 1.5, .85) : FS('deep', 'faint', 1.5)}/><path d="M${x + 23} ${y}v40M${x} ${y + 20}h46" ${S(on.win ? 'on-glow' : 'faint', 1.2)}/>`;
+      if (!on.win && i === 1) g += `<path d="M${x + 6} ${y + 4}l12 14-6 4 14 14" ${S('bad', 1.3)}/>`; });
+    g += `<rect x="262" y="196" width="36" height="56" rx="2" ${on.paint ? FS('glow', 'glow', 1.2, .55) : FS('panel-2', 'faint', 1.2)}/><circle cx="291" cy="226" r="2.4" ${F('text')}/>`;
+    // fence
+    if (on.fence){ g += `<path d="M30 236h120M410 236h130M30 246h120M410 246h130" style="stroke:#EDE8DA;stroke-width:2;fill:none"/>`; for (let x = 34; x < 545; x += 16){ if (x > 150 && x < 410) continue; g += `<path d="M${x} 254V230l4-5 4 5v24Z" style="fill:#F7F3E8;stroke:#B9B2A0;stroke-width:1"/>`; } }
+    // garden or weeds
+    if (on.garden){ [[120, 1], [150, 0], [410, 1], [440, 0], [470, 1]].forEach(([x, k]) => { g += `<ellipse cx="${x}" cy="244" rx="18" ry="12" ${F('good', .55)}/>` + [[-8, -6], [3, -9], [9, -2]].map(([dx, dy]) => `<circle cx="${x + dx}" cy="${244 + dy}" r="3" ${F(k ? 'glow' : 'bad')}/>`).join(''); }); }
+    else { for (let x = 100; x < 500; x += 26){ if (x > 160 && x < 400) continue; g += `<path d="M${x} 252l4-18 3 12 4-20 3 16 4-10 2 20" ${S('faint', 1.3)}/>`; } }
+    // people
+    if (on.life){ [[214, 1], [236, .8], [356, .65]].forEach(([x, s]) => { const hgt = 30 * s; g += `<circle cx="${x}" cy="${252 - hgt - 7 * s}" r="${6 * s}" ${F('text')}/><path d="M${x} ${252 - hgt}v${hgt * .55}M${x - 8 * s} ${252 - hgt * .7}h${16 * s}M${x} ${252 - hgt * .45}l-${6 * s} ${hgt * .45}M${x} ${252 - hgt * .45}l${6 * s} ${hgt * .45}" ${S('text', 2)}/>`; }); g += `<path d="M300 66v-14h12v20" ${FS('panel-2', 'faint', 1.2)}/><path d="M306 46c-6-8 4-10 0-18M312 42c-4-6 4-8 1-14" ${S('faint', 1.2, ';stroke-opacity:.7')}/>`; }
+    const n = IMP.filter(([k]) => on[k]).length;
+    g += TX(nw ? 482 : W - 14, nw ? 56 : 26, n ? `${n} of 6 pictured` : 'as it stands', n ? 'glow' : 'faint', 12, 'end');
+    el.innerHTML = g;
+    $('#hsSmall').textContent = 'An old wreck with peeling paint, a leaking roof and a yard full of weeds. Too much work.';
+    const picks = IMP.filter(([k]) => on[k]).map(x => x[2]);
+    $('#hsBig').textContent = !picks.length ? 'Tick an improvement to start seeing it as it could be.' :
+      'Picture it with ' + (picks.length === 1 ? picks[0] : picks.slice(0, -1).join(', ') + ' and ' + picks[picks.length - 1]) + '. ' + (n >= 5 ? 'Someone\'s dream home, for the price of a bit of work.' : 'Good bones, waiting for someone with vision.');
+  });
+  draw();
+}
+
+/* ---------- 5: how can I do more? ---------- */
+{ const BASE = [['Email', 90, 'mail'], ['Meetings', 150, 'meet'], ['The weekly report', 120, 'rep'], ['Calls', 60, 'call'], ['Admin', 60, 'adm']];
+  const EXTRA = [['New client', 60], ['Training the new hire', 60], ['A side project', 60], ['A proposal', 60]];
+  const IDEAS = [['mail', 'Batch email into two slots a day', .5], ['meet', 'Make meetings 25 minutes, not an hour', .4], ['rep', 'Build a template for the report', .4], ['call', 'Group calls into one block', .3], ['adm', 'Hand routine admin to a tool', .6]];
+  let extra = 0; const on = {}; const el = $('#cpSvg');
+  $('#cpT').innerHTML = IDEAS.map(([k, l, f]) => `<label class="tg"><input type="checkbox" data-k="${k}"><span>${l}</span><em>−${Math.round(f * 100)}%</em></label>`).join('');
+  $$('#cpT input').forEach(c => c.addEventListener('change', () => { on[c.dataset.k] = c.checked; draw(); }));
+  $('#cpAdd').addEventListener('click', () => { if (extra < EXTRA.length){ extra++; draw(); } $('#cpAdd').disabled = extra >= EXTRA.length; });
+  $('#cpReset').addEventListener('click', () => { extra = 0; $$('#cpT input').forEach(c => { c.checked = false; on[c.dataset.k] = false; }); $('#cpAdd').disabled = false; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 150, x0 = 14, span = W - 28, MAX = 720, sc = span / MAX, y = 40, bh = 52;
+    vb(el, W, H);
+    const blocks = BASE.map(([l, m, k]) => [l, on[k] ? m * (1 - IDEAS.find(i => i[0] === k)[2]) : m, 'cool']).concat(EXTRA.slice(0, extra).map(([l, m]) => [l, m, 'glow']));
+    let g = `<rect x="${x0}" y="${y}" width="${480 * sc}" height="${bh}" rx="8" ${FS('deep', 'line', 1)}/><rect x="${x0 + 480 * sc}" y="${y}" width="${240 * sc}" height="${bh}" rx="8" ${FS('bad-soft', 'bad', 1, null)} />`;
+    let x = x0, tot = 0;
+    blocks.forEach(([l, m, c]) => { const w = m * sc; g += `<rect x="${(x + 1).toFixed(1)}" y="${y + 3}" width="${Math.max(0, w - 2).toFixed(1)}" height="${bh - 6}" rx="6" ${F(c, c === 'glow' ? .75 : .32)}/>`;
+      if (w > (nw ? 30 : 40)) g += wrap(x + w / 2, y + bh / 2 + 4, l, Math.max(5, Math.floor(w / 7.2)), 13, c === 'glow' ? 'on-glow' : 'text', nw ? 10.5 : 12);
+      x += w; tot += m; });
+    g += `<line x1="${x0 + 480 * sc}" y1="${y - 14}" x2="${x0 + 480 * sc}" y2="${y + bh + 14}" ${S('text', 1.5, ';stroke-dasharray:3 3')}/>` + TX(x0 + 480 * sc, y - 18, 'end of an 8-hour day', 'muted', 11, 'middle');
+    for (let hh = 0; hh <= 12; hh += 2) g += TX(x0 + hh * 60 * sc, y + bh + 22, hh + 'h', 'faint', 10.5, 'middle');
+    el.innerHTML = g;
+    const hrs = tot / 60; $('#cpH').textContent = hrs.toFixed(1) + ' h';
+    const over = tot > 480 + 1;
+    $('#cpSay').textContent = extra === 0 ? (tot < 479 ? 'Already room to spare. Take on another job.' : 'The day is full. Try taking on one more job.') :
+      over ? (Object.values(on).some(Boolean) ? `Still ${Math.round(tot - 480)} minutes over. Keep asking how.` : 'Overbooked. A small thinker says "I can\'t". Ask "how can I?" and tick an idea.') :
+      'It fits. The day didn\'t get longer; your idea of what it could hold did.';
+  });
+  draw();
+}
+
+/* ---------- 6: your one-minute commercial ---------- */
+{ const F6 = ['adName', 'adS1', 'adS2', 'adGoal'];
+  const saved = store.get('mtb-ad', null);
+  if (saved && saved.f) F6.forEach(k => { if (saved.f[k]) $('#' + k).value = saved.f[k]; });
+  const strip = s => s.trim().replace(/[.!\s]+$/, '');
+  const compose = () => { const v = k => strip($('#' + k).value);
+    const name = v('adName') || 'You', s1 = v('adS1') || 'you stay calm when things go wrong', s2 = v('adS2') || 'people trust you with hard jobs', goal = v('adGoal') || 'lead your own team by next year';
+    const low = s => s.charAt(0).toLowerCase() + s.slice(1);
+    return `${name}, remember who you are. ${s1.charAt(0).toUpperCase() + s1.slice(1)}. ${s2.charAt(0).toUpperCase() + s2.slice(1)}. You are going to ${low(goal).replace(/^to /, '')}, and today is one more step there. Think big and act like it.`; };
+  const draw = () => { $('#adOut').textContent = compose(); };
+  F6.forEach(k => $('#' + k).addEventListener('input', () => { draw(); $('#adTip').textContent = ''; }));
+  $('#adSave').addEventListener('click', () => { const f = {}; F6.forEach(k => f[k] = $('#' + k).value.trim()); store.set('mtb-ad', { f, text: compose() }); $('#adTip').textContent = 'Saved. It\'s in the afterword too.'; renderCard(); });
+  draw();
+}
+
+/* ---------- 7: your thought diet ---------- */
+{ const ids = ['enA', 'enB', 'enC', 'enD'], el = $('#enSvg');
+  ids.forEach(id => $('#' + id).addEventListener('input', () => draw()));
+  const draw = onLayout(() => {
+    const [a, b, c, d] = ids.map(id => +$('#' + id).value); ids.forEach(id => out(id, $('#' + id).value + ' h'));
+    const pts = [50]; let s = 50;
+    for (let w = 1; w <= 12; w++){ const del = .6 * a - .5 * b - .7 * c + .8 * d; s += del * (del > 0 ? (100 - s) / 100 : s / 100) * 1.1; s = clamp(s, 3, 98); pts.push(s); }
+    const nw = NARROW(), W = nw ? 360 : 640, H = 250, L = 40, R = W - 16, T = 20, B = H - 34;
+    vb(el, W, H);
+    const X = w => L + (R - L) * w / 12, Y = v => B - (B - T) * v / 100;
+    let g = '';
+    [[0, 'Small'], [50, 'Where you started'], [100, 'Big']].forEach(([v, l]) => { g += `<line x1="${L}" y1="${Y(v)}" x2="${R}" y2="${Y(v)}" ${S('line', 1, v === 50 ? ';stroke-dasharray:3 4' : '')}/>` + TX(L + 4, Y(v) - 5, l, 'faint', 10.5); });
+    for (let w = 0; w <= 12; w += (nw ? 3 : 2)) g += TX(X(w), B + 18, w === 0 ? 'now' : 'wk ' + w, 'faint', 10.5, 'middle');
+    const up = pts[12] >= 50, col = up ? 'glow' : 'bad';
+    g += `<path d="M${pts.map((v, w) => X(w).toFixed(1) + ' ' + Y(v).toFixed(1)).join('L')}L${X(12)} ${B}L${X(0)} ${B}Z" ${F(col, .12)}/>`;
+    g += `<path d="M${pts.map((v, w) => X(w).toFixed(1) + ' ' + Y(v).toFixed(1)).join('L')}" ${S(col, 2.5, ';stroke-linejoin:round')}/>`;
+    g += `<circle cx="${X(12)}" cy="${Y(pts[12])}" r="5" ${F(col)}/>`;
+    el.innerHTML = g;
+    const v = Math.round(pts[12]); $('#enV').textContent = v + ' / 100';
+    $('#enSay').textContent = v >= 75 ? 'Your goals are growing. You\'re picking up the outlook of people who think big.' : v >= 55 ? 'Drifting upward. More time with big thinkers would speed it up.' : v >= 45 ? 'Holding steady. The pull up and the pull down are cancelling out.' : v >= 25 ? 'Shrinking. The small-thinking inputs are winning, a little each week.' : 'Your horizon has narrowed sharply. Cut the gossip and find some big thinkers.';
+  });
+  draw();
+}
+
+/* ---------- 8: dig deeper ---------- */
+{ const SUBJ = [
+    ['A pencil', ['The "lead" isn\'t lead at all. It\'s graphite mixed with clay; the name stuck because early users mistook graphite for lead.',
+      'More clay makes a harder, paler line and more graphite a softer, darker one. That\'s what the H and B grades on a pencil mean.',
+      'A rich deposit of pure graphite was found in Borrowdale in the north of England in the 1500s, and for a long time it was the best in the world.',
+      'One ordinary pencil holds enough graphite to draw a line tens of kilometres long.']],
+    ['A honeybee', ['A single colony can hold tens of thousands of bees, and nearly all of them are female workers.',
+      'Workers share where the flowers are with a "waggle dance": its angle gives the direction relative to the sun, and its length signals the distance.',
+      'One worker makes only about a twelfth of a teaspoon of honey in her whole life. Every jar is the work of a crowd.',
+      'Bees beat their wings more than two hundred times a second. That\'s the buzz.']],
+    ['Your own job', ['Who uses what you make or do, and what would their day look like without it?',
+      'Who is the best in the world at your kind of work, and what do they do differently?',
+      'What changed in your field in the last ten years, and what is likely to change in the next ten?',
+      'Which part of the job could you become the go-to person for?']] ];
+  const LV = ['Bored', 'Curious', 'Interested', 'Fascinated', 'Activated'];
+  let si = 0, lv = 0; const el = $('#dgSvg');
+  $('#dgPick').innerHTML = SUBJ.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s[0]}</button>`).join('');
+  $$('#dgPick [data-s]').forEach(b => b.addEventListener('click', () => { press($$('#dgPick [data-s]'), b); si = +b.dataset.s; lv = 0; draw(); }));
+  $('#dgGo').addEventListener('click', () => { if (lv < 4){ lv++; draw(); } });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 96, L = 16, R = W - 16, y = 46; vb(el, W, H);
+    let g = `<rect x="${L}" y="${y - 9}" width="${R - L}" height="18" rx="9" ${F('panel-2')}/><rect x="${L}" y="${y - 9}" width="${Math.max(18, (R - L) * lv / 4)}" height="18" rx="9" ${F('glow', .35 + lv * .15)}/>`;
+    LV.forEach((l, k) => { const x = L + (R - L) * k / 4; g += `<circle cx="${clamp(x, L + 9, R - 9)}" cy="${y}" r="5" ${F(k <= lv ? 'glow' : 'line')}/>`;
+      if (!nw || k % 2 === 0 || k === lv) g += TX(clamp(x, L + 4, R - 4), y + 30, l, k === lv ? 'glow' : 'faint', 11.5, k === 0 ? 'start' : k === 4 ? 'end' : 'middle'); });
+    g += TX(L, 20, 'ENTHUSIASM', 'faint', 10.5, 'start', 'letter-spacing="1.5"');
+    el.innerHTML = g;
+    const facts = SUBJ[si][1].slice(0, lv);
+    $('#dgList').innerHTML = facts.length ? facts.map((f, k) => `<div><i>${String(k + 1).padStart(2, '0')}</i><span>${f}</span></div>`).join('') : `<div class="empty"><span>${SUBJ[si][0]}. Not very exciting, is it? Press "Dig deeper".</span></div>`;
+    $('#dgGo').disabled = lv >= 4; $('#dgGo').textContent = lv >= 4 ? 'Still bored?' : 'Dig deeper';
+  });
+  draw();
+}
+
+/* ---------- 9: channel P or channel N ---------- */
+{ const TR = [['Talks too much in meetings', 'n'], ['Always has ideas to share', 'p'], ['Slow to reply to messages', 'n'], ['Takes care to get details right', 'p'], ['Blunt, sometimes tactless', 'n'], ['Tells you the truth', 'p'], ['Has the messiest desk', 'n'], ['Drops everything to help', 'p']];
+  let ch = 'n'; const el = $('#chSvg');
+  $('#chMode').innerHTML = '<button class="btn" type="button" data-c="n" aria-pressed="true">Tune to channel N</button><button class="btn" type="button" data-c="p" aria-pressed="false">Tune to channel P</button>';
+  $$('#chMode [data-c]').forEach(b => b.addEventListener('click', () => { press($$('#chMode [data-c]'), b); ch = b.dataset.c; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 170, cx = W / 2, cy = 150, r = 120; vb(el, W, H);
+    let g = `<path d="M${cx - r} ${cy}A${r} ${r} 0 0 1 ${cx + r} ${cy}" ${S('line', 14, ';stroke-linecap:round')}/>`;
+    g += `<path d="M${cx - r} ${cy}A${r} ${r} 0 0 1 ${cx} ${cy - r}" ${S('bad', 14, ';stroke-opacity:' + (ch === 'n' ? .8 : .2))}/><path d="M${cx} ${cy - r}A${r} ${r} 0 0 1 ${cx + r} ${cy}" ${S('good', 14, ';stroke-opacity:' + (ch === 'p' ? .8 : .2))}/>`;
+    for (let k = 0; k <= 10; k++){ const a = Math.PI + k * Math.PI / 10, x1 = cx + (r - 22) * Math.cos(a), y1 = cy + (r - 22) * Math.sin(a), x2 = cx + (r - 30) * Math.cos(a), y2 = cy + (r - 30) * Math.sin(a); g += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" ${S('faint', 1.2)}/>`; }
+    const a = ch === 'p' ? -Math.PI / 5 : -Math.PI * 4 / 5, nx = cx + (r - 16) * Math.cos(a), ny = cy + (r - 16) * Math.sin(a);
+    g += `<line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" ${S('text', 3, ';stroke-linecap:round')}/><circle cx="${cx}" cy="${cy}" r="8" ${F('text')}/>`;
+    g += TX(cx - r + 8, cy - r * .55, 'N', 'bad', 26, 'middle', 'font-family="Instrument Serif, Georgia, serif"') + TX(cx + r - 8, cy - r * .55, 'P', 'good', 26, 'middle', 'font-family="Instrument Serif, Georgia, serif"');
+    g += TX(cx, cy - 30, 'ALEX', 'faint', 10.5, 'middle', 'letter-spacing="2"');
+    el.innerHTML = g;
+    $('#chTraits').innerHTML = TR.map(([t, k]) => `<span class="${k}${k === ch ? ' on' : ''}">${t}</span>`).join('');
+    $('#chSay').textContent = ch === 'p' ? '"Alex is full of ideas, careful, honest and always ready to help."' : '"Alex never stops talking, takes forever, has no tact and is a mess."';
+    $('#chBack').textContent = ch === 'p' ? 'Alex senses the goodwill, backs your ideas and helps when you\'re stuck.' : 'Alex picks up the chill, keeps a distance and is slower to help you.';
+  });
+  draw();
+}
+
+/* ---------- 10: waiting for perfect conditions ---------- */
+{ const nI = $('#wpN'), pI = $('#wpP'), el = $('#wpSvg'); let seed = 11, perfect = [];
+  function roll(){ const r = rng(seed), n = +nI.value, p = +pI.value / 100; perfect = [...Array(365)].map(() => { let ok = true; for (let k = 0; k < n; k++) if (r() >= p) ok = false; return ok; }); }
+  const draw = onLayout(() => {
+    const n = +nI.value, p = +pI.value / 100; out('wpN', n); out('wpP', Math.round(p * 100) + '%');
+    const nw = NARROW(), cols = nw ? 21 : 53, cs = nw ? 16 : 11.6, rows = Math.ceil(365 / cols), W = cols * cs + 16, H = rows * cs + 34;
+    vb(el, W, H); let g = '';
+    let first = -1;
+    for (let i = 0; i < 365; i++){ const c = nw ? i % cols : Math.floor(i / 7), r = nw ? Math.floor(i / cols) : i % 7, x = 8 + c * cs, y = 6 + r * cs, s = cs - 2.4;
+      if (perfect[i] && first < 0) first = i;
+      g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${s.toFixed(1)}" height="${s.toFixed(1)}" rx="2" ${perfect[i] ? F('glow') : F('line', .55)}/>`; }
+    const cnt = perfect.filter(Boolean).length;
+    g += TX(8, H - 9, 'one square = one day', 'faint', 11) + TX(W - 8, H - 9, first < 0 ? 'no perfect day this year' : 'first perfect day: day ' + (first + 1), first < 0 ? 'bad' : 'glow', 11, 'end');
+    el.innerHTML = g;
+    $('#wpDays').textContent = cnt;
+    const pr = Math.pow(p, n), wait = 1 / pr;
+    $('#wpSay').textContent = n === 1 ? 'With only one condition, good days are common. Most real plans need far more to line up.' :
+      `Each day has a ${(pr * 100).toFixed(pr < .01 ? 2 : 1)}% chance of being perfect, so on average you wait ${wait < 1.5 ? 'a day' : wait < 60 ? Math.round(wait) + ' days' : wait < 730 ? Math.round(wait / 30) + ' months' : Math.round(wait / 365) + ' years'} to start. ${cnt < 5 ? 'Most people give up waiting first.' : 'And that\'s with only ' + n + ' conditions.'}`;
+  });
+  [nI, pI].forEach(i => i.addEventListener('input', () => { roll(); draw(); }));
+  $('#wpRoll').addEventListener('click', () => { seed += 7; roll(); draw(); });
+  roll(); draw();
+}
+
+/* ---------- 11: the wall ---------- */
+{ const SLOTS = 12, el = $('#wlSvg'); let mode = 'exp', gap = 0, start = 0, tries = [], timer = null;
+  $('#wlMode').innerHTML = '<button class="btn" type="button" data-m="per" aria-pressed="false">Persist only</button><button class="btn" type="button" data-m="exp" aria-pressed="true">Persist and experiment</button>';
+  $$('#wlMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#wlMode [data-m]'), b); mode = b.dataset.m; reset(); }));
+  function newWall(){ gap = Math.floor(Math.random() * SLOTS); do { start = Math.floor(Math.random() * SLOTS); } while (start === gap); }
+  function reset(){ clearTimeout(timer); tries = []; draw(); }
+  function plan(){ if (mode === 'per') return Array(12).fill(start);
+    const order = [start], left = [...Array(SLOTS).keys()].filter(k => k !== start);
+    while (left.length){ const last = order[order.length - 1]; left.sort((a, b) => Math.abs(a - last) - Math.abs(b - last) || Math.random() - .5); order.push(left.shift()); }
+    return order; }
+  $('#wlGo').addEventListener('click', () => { clearTimeout(timer); tries = []; const seq = plan(); let k = 0;
+    const step = () => { tries.push(seq[k]); draw(); if (seq[k] === gap || ++k >= seq.length) return; timer = setTimeout(step, RM ? 0 : 260); };
+    step(); });
+  $('#wlNew').addEventListener('click', () => { newWall(); reset(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 290, wx = W - (nw ? 90 : 130), top = 22, sh = 20, px = 34, py = top + SLOTS * sh / 2;
+    vb(el, W, H); let g = '';
+    for (let s = 0; s < SLOTS; s++){ const y = top + s * sh, got = tries.includes(gap) && s === gap;
+      g += got ? `<rect x="${wx}" y="${y}" width="22" height="${sh}" ${F('good', .25)}/>` : `<rect x="${wx}" y="${y + 1}" width="22" height="${sh - 2}" rx="2" ${FS('panel-2', 'line', 1)}/>`; }
+    g += `<circle cx="${px}" cy="${py}" r="12" ${F('glow')}/>` + TX(px, py + 30, 'you', 'faint', 11, 'middle');
+    tries.forEach((s, k) => { const y = top + s * sh + sh / 2, hit = s !== gap, last = k === tries.length - 1;
+      g += `<line x1="${px + 12}" y1="${py}" x2="${hit ? wx : W - 12}" y2="${y}" ${S(hit ? 'bad' : 'good', last ? 2 : 1.2, ';stroke-opacity:' + (last ? 1 : .4))}/>`;
+      if (hit) g += `<path d="M${wx - 6} ${y - 5}l10 10M${wx + 4} ${y - 5}l-10 10" ${S('bad', 1.6)}/>`; else g += `<circle cx="${W - 12}" cy="${y}" r="6" ${F('good')}/>`; });
+    g += TX(wx + 11, H - 14, 'the gap is hidden', 'faint', 11, 'middle');
+    el.innerHTML = g;
+    const through = tries.includes(gap), sameCount = mode === 'per' ? tries.length : new Set(tries).size;
+    $('#wlN').textContent = !tries.length ? '–' : through ? tries.length : tries.length + ', not through';
+    $('#wlSay').textContent = !tries.length ? (mode === 'per' ? 'Keep throwing the same way, harder each time.' : 'Keep the goal, change the angle after every miss.') :
+      through ? (tries.length === 1 ? 'Through first time. It won\'t always be that easy.' : `Through after ${tries.length} tries. Each miss ruled out one angle and pointed to the next.`) :
+      mode === 'per' ? `${tries.length} tries, all at the same spot. Plenty of persistence, and nothing learned.` : `${sameCount} different angles tried so far.`;
+  });
+  newWall(); draw();
+}
+
+/* ---------- 12: your plan ---------- */
+{ const KEYS = ['g10w', 'g10h', 'g10s', 'g30b', 'g30a', 'g30w', 'g30h', 'g30m'];
+  let pl = store.get('mtb-plan', null) || {}; if (!Array.isArray(pl.days) || pl.days.length !== 30) pl.days = Array(30).fill(false);
+  KEYS.forEach(k => { if (pl[k]) $('#' + k).value = pl[k]; });
+  function days(){ $('#gDays').innerHTML = pl.days.map((d, i) => `<button type="button" data-d="${i}" aria-pressed="${d}" aria-label="Day ${i + 1}">${i + 1}</button>`).join('');
+    $$('#gDays [data-d]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.d; pl.days[i] = !pl.days[i]; store.set('mtb-plan', pl); days(); renderCard(); $(`#gDays [data-d="${i}"]`).focus({preventScroll:true}); })); }
+  KEYS.forEach(k => $('#' + k).addEventListener('input', () => { $('#gTip').textContent = ''; }));
+  $('#gSave').addEventListener('click', () => { KEYS.forEach(k => pl[k] = $('#' + k).value.trim()); store.set('mtb-plan', pl); $('#gTip').textContent = 'Saved. It\'s in the afterword too.'; renderCard(); });
+  days();
+}
+
+/* ---------- 13: trade minds ---------- */
+{ const SC = [
+    ['A customer', 'You sell bookkeeping software to <b>a busy bakery owner</b> who is wary of the cost.', 'Time, cash flow, and not being made to feel clumsy with computers.', [
+      ['"This is our best-selling package, and I\'m close to my target this month."', -1],
+      ['"It does your books in ten minutes a week, and it pays for itself if it catches one unpaid invoice."', 1],
+      ['"It has 140 features and connects to every major platform."', 0]]],
+    ['Your team', 'You want <b>your team</b> to switch to a new reporting process.', 'Not more admin, not looking bad while learning, and a reason it helps them.', [
+      ['"Head office wants this, so we\'re doing it from Monday."', -1],
+      ['"It replaces the Friday spreadsheet, so you get that hour back, and I\'ll set it up with each of you in week one."', 1],
+      ['"It\'s the industry standard now."', 0]]],
+    ['Your manager', 'You want <b>your manager</b> to approve a paid training course.', 'Results for the team, the budget, and who covers your work while you\'re away.', [
+      ['"I\'ve earned it, and everyone else has been on one."', -1],
+      ['"It\'s a three-day course, and it would let me take over the analysis we pay a contractor for. I\'ll book a quiet week."', 1],
+      ['"It looks really interesting."', 0]]] ];
+  let si = 0, pick = null, order = [0, 1, 2]; const el = $('#tmSvg');
+  $('#tmS').innerHTML = SC.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${s[0]}</button>`).join('');
+  $$('#tmS [data-s]').forEach(b => b.addEventListener('click', () => { press($$('#tmS [data-s]'), b); si = +b.dataset.s; pick = null; shuffle(); draw(); }));
+  function shuffle(){ order = [0, 1, 2]; for (let k = 2; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  const draw = onLayout(() => {
+    const s = SC[si], nw = NARROW(), W = nw ? 360 : 600, H = 150, cx = W / 2, cy = 92; vb(el, W, H);
+    const w = pick == null ? 0 : s[3][pick][1], ang = w * 12 * Math.PI / 180, dx = 130 * Math.cos(ang), dy = 130 * Math.sin(ang);
+    let g = `<path d="M${cx} ${cy}l-18 40h36Z" ${FS('panel-2', 'faint', 1.2)}/><line x1="${cx - 140}" y1="134" x2="${cx + 140}" y2="134" ${S('line', 1.5)}/>`;
+    g += `<line x1="${(cx - dx).toFixed(1)}" y1="${(cy + dy).toFixed(1)}" x2="${(cx + dx).toFixed(1)}" y2="${(cy - dy).toFixed(1)}" ${S('text', 4, ';stroke-linecap:round')}/>`;
+    g += `<rect x="${(cx - dx - 38).toFixed(1)}" y="${(cy + dy - 30).toFixed(1)}" width="76" height="26" rx="6" ${FS(w < 0 ? 'bad-soft' : 'panel', w < 0 ? 'bad' : 'line', 1.2)}/>` + TX(cx - dx, cy + dy - 12.5, 'YOUR SIDE', w < 0 ? 'bad' : 'muted', 9.5, 'middle', 'letter-spacing="1"');
+    g += `<rect x="${(cx + dx - 38).toFixed(1)}" y="${(cy - dy - 30).toFixed(1)}" width="76" height="26" rx="6" ${FS(w > 0 ? 'good-soft' : 'panel', w > 0 ? 'good' : 'line', 1.2)}/>` + TX(cx + dx, cy - dy - 12.5, 'THEIR SIDE', w > 0 ? 'good' : 'muted', 9.5, 'middle', 'letter-spacing="1"');
+    g += `<circle cx="${cx}" cy="${cy}" r="5" ${F('text')}/>`;
+    el.innerHTML = g;
+    $('#tmAsk').innerHTML = s[1] + ' Which line would you open with?';
+    $('#tmP').innerHTML = order.map(k => `<button class="card3${pick == null ? '' : s[3][k][1] === 1 ? ' right' : k === pick ? ' wrong' : ''}" type="button" data-k="${k}" aria-pressed="${k === pick}"><b>${s[3][k][0]}</b></button>`).join('');
+    $$('#tmP [data-k]').forEach(b => b.addEventListener('click', () => { pick = +b.dataset.k; draw(); }));
+    $('#tmCare').textContent = pick == null ? 'Trade minds first: what would you want in their place?' : s[2];
+    $('#tmSay').textContent = pick == null ? 'Pick a line to see which way it tips.' : w === 1 ? 'Yes. It answers their worries, so they lean in.' : w === -1 ? 'That\'s your side of the table. They hear what you want, not why they should care.' : 'Neutral. True, but it doesn\'t touch what they care about.';
+  });
+  shuffle(); draw();
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
