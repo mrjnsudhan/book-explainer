@@ -1,0 +1,1703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Courage to Be Disliked, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a philosopher's study at night, five visits. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas,
+   a scene from the dialogue, the youth's objection, a lab, plain words, quick check), grouped into the book's five nights.
+   Dark-first: night slate with an open-sky blue accent and a warm lamp second series; light mode is daylight paper with deep blue and terracotta. */
+:root{
+  color-scheme: dark;
+  --ink:#0F1A22;--panel:#15232D;--panel-2:#1D2E3A;--line:#2D4352;--text:#EEF3F6;--muted:#A6B7C2;--faint:#768B98;
+  --glow:#86C8F5;--glow-soft:rgba(134,200,245,.11);--hl:rgba(134,200,245,.26);--cool:#FFB088;--cool-soft:rgba(255,176,136,.1);
+  --good:#8FE0B0;--good-soft:rgba(143,224,176,.1);--bad:#FF8B7A;--bad-soft:rgba(255,139,122,.12);
+  --soft:#D3DEE5;--deep:#0A131A;--toc-bg:rgba(21,35,45,.74);--glow-line:rgba(134,200,245,.36);--cool-line:rgba(255,176,136,.3);--on-glow:#06223A;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F4F2EC;--panel:#FFFFFF;--panel-2:#EAE8E0;--line:#D8D5CA;--text:#14202A;--muted:#52606B;--faint:#85909A;
+  --glow:#1C64A6;--glow-soft:rgba(28,100,166,.06);--hl:#D6E8F7;--cool:#B0502A;--cool-soft:rgba(176,80,42,.06);--good:#2C7A4B;--good-soft:rgba(44,122,75,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#26323C;--deep:#FBFAF6;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(28,100,166,.3);--cool-line:rgba(176,80,42,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F4F2EC;--panel:#FFFFFF;--panel-2:#EAE8E0;--line:#D8D5CA;--text:#14202A;--muted:#52606B;--faint:#85909A;
+  --glow:#1C64A6;--glow-soft:rgba(28,100,166,.06);--hl:#D6E8F7;--cool:#B0502A;--cool-soft:rgba(176,80,42,.06);--good:#2C7A4B;--good-soft:rgba(44,122,75,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#26323C;--deep:#FBFAF6;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(28,100,166,.3);--cool-line:rgba(176,80,42,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The Courage to Be Disliked additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.nights{display:grid;grid-template-rows:auto auto 1fr;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.nights-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.nights-top span:last-child{color:var(--faint)}
+.nights svg{display:block;width:100%;height:auto;background:var(--deep)}
+.nights-read{display:grid;gap:4px;align-content:start;padding:14px 16px;border-top:1px solid var(--line);min-height:128px}
+.nights-read .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--cool)}
+.nights-read .h{font-family:var(--f-display);font-size:23px;line-height:1.15}
+.nights-read p{font-size:14px;color:var(--soft);line-height:1.45}
+.nights-read a{font-size:13px;color:var(--glow)}
+.xchg{max-width:68ch;display:grid;gap:8px;padding:14px 16px;border-radius:12px;border:1px dashed var(--line)}
+.xchg .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.xchg p{display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px;font-size:15px;line-height:1.5}
+.xchg p i{font-style:normal;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding-top:4px}
+.xchg .y{color:var(--muted)} .xchg .y i{color:var(--cool)}
+.xchg .ph{color:var(--text)} .xchg .ph i{color:var(--glow)}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.card3.right{border-color:var(--good);background:var(--good-soft)}
+.card3.wrong{border-color:var(--bad);background:var(--bad-soft)}
+#rcQ .item{font-size:19px}
+.out .gs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.out .gs div{display:grid;gap:3px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14.5px;color:var(--soft)}
+.out .gs div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.out .gs div.star{border-color:var(--glow-line);background:var(--glow-soft)}
+.out .gs div.star span{color:var(--glow)}
+.out .empty{color:var(--muted);font-size:15px}
+@media (max-width: 560px){ .fq{padding:14px 16px} .xchg p{grid-template-columns:minmax(0,1fr);gap:2px} .nights-read .h{font-size:21px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A night-by-night guide to Ichiro Kishimi and Fumitake Koga's book</div>
+    <h1><em>The Courage to Be Disliked</em>,<br>Explained</h1>
+    <p class="lede">A restless young man hears of a philosopher on the edge of town who claims that people can change, that the world is simple, and that anyone can be happy. He decides to visit and prove him wrong. <b>The Courage to Be Disliked</b> is the record of their five nights of argument, and through it, an introduction to the psychology of Alfred Adler. This guide follows the five nights in seventeen short sections, each with the youth's objection and a lab where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Your past doesn't decide your life, other people's opinions are their business, and happiness is <em>the feeling of being useful</em>, available right now.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's weighing on you?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="nights" style="margin:0" aria-label="The five nights">
+        <div class="nights-top"><span>Five nights in the study</span><span>tap a window</span></div>
+        <svg id="nsSvg" viewBox="0 0 400 210" role="img" aria-label="Five lit windows, one for each night of the dialogue"></svg>
+        <div class="nights-read" id="nsRead" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The five nights">
+      <a href="#part1"><span class="n">Night 1 · sections 1 to 4</span><span class="q">Deny Trauma</span><span class="d">Goals, not causes, and why people can change</span></a>
+      <a href="#part2"><span class="n">Night 2 · sections 5 to 8</span><span class="q">It's All Relationships</span><span class="d">Inferiority, competition and the tasks of life</span></a>
+      <a href="#part3"><span class="n">Night 3 · sections 9 to 11</span><span class="q">Others' Tasks</span><span class="d">Drop the need for approval and separate tasks</span></a>
+      <a href="#part4"><span class="n">Night 4 · sections 12 to 14</span><span class="q">The Centre of the World</span><span class="d">Community feeling, encouragement and worth</span></a>
+      <a href="#part5"><span class="n">Night 5 · sections 15 to 17</span><span class="q">Here and Now</span><span class="d">Accept, trust, contribute, and dance</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in Japanese in 2013, in English in 2017</span>
+      <span><b>Authors</b> Ichiro Kishimi, a philosopher and Adlerian counsellor, and Fumitake Koga, a writer</span>
+      <span><b>Read time</b> about 4 minutes per section here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 17 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Sections"></nav>
+
+    <!-- ===================== DENY TRAUMA ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">The first night</span>
+      <h2>Deny Trauma</h2>
+      <p>A young man who thinks the world is a messy, unfair place visits a philosopher who claims people can change and anyone can be happy. The youth means to tear the idea apart. The first night is about Adler's most startling claim: your past does not decide who you are. The goals you hold now do.</p>
+      <div class="claim"><span class="lbl">The idea behind this night</span><p>We are not driven by what happened to us. We choose the meaning we give it, and we can choose again.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The world is as simple as you see it</div>
+        <h2>Why People Can Change</h2>
+        <div class="short"><span class="lbl">In short</span><p>The philosopher's opening claim is that the world is simple and life is too. It only looks complicated because of the way we see it. Change the way you look, and the same world looks different. That's why change is possible for anyone.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Subjective worlds.</b> Nobody lives in the objective world. We each live in a world we give meaning to. Two people can stand in the same rain and one calls it miserable, the other calls it fresh.</span></li>
+          <li><span><b>Adler, the forgotten giant.</b> Alfred Adler stands next to Freud and Jung as one of the founders of modern psychology, but his ideas are less famous. The book's philosopher has built his thinking on Adler's individual psychology.</span></li>
+          <li><span><b>Not easy, but simple.</b> Simple doesn't mean easy. Seeing things differently takes courage, because it means giving up the old view you've grown comfortable in.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The philosopher's first example is water from a well. Drawn up all year round, it stays at about the same temperature, around 18 degrees. Yet in summer it feels cool on your hands and in winter it feels warm. The thermometer doesn't change. You do. The youth grumbles that this is only a trick of the senses. That, says the philosopher, is exactly the point: we are always living inside how things feel to us.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Isn't the world just objectively unfair?</p><p class="ph"><i>Philosopher</i>The world is the same for everyone. What differs is the lens. If you can't swap the world, you can still swap the lens.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: the well water</div><div class="hint">Drag through the year and dip your hand in</div></div>
+        <div class="stage"><svg id="wwSvg" role="img" aria-label="A well with a thermometer showing water and air temperature"></svg></div><div class="lab-ctl"><div class="ctl"><label for="wwR">Month <output id="wwM"></output></label><input type="range" id="wwR" min="0" max="11" value="0"></div></div><div class="stats"><div class="stat"><span class="k">Air</span><span class="v" id="wwAir"></span></div><div class="stat"><span class="k">Well water</span><span class="v glow" id="wwW"></span></div><div class="stat"><span class="k">How it feels</span><span class="s" id="wwFeel"></span></div></div><p class="callout">The water never changes. <b>Your sense of "warm" or "cool" comes from where you stand when you touch it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most of what feels like a fact about the world is a fact about how you're seeing it. That's good news: the world is hard to change, but your view of it isn't fixed.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Trauma doesn't decide →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Goals, not causes</div>
+        <h2>Trauma Does Not Exist</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most psychology asks what caused you to be this way. Adler asks what you're using it for. He called the first view etiology and the second teleology. In his view, we aren't pushed by past events. We are pulled by present goals, and we pick experiences out of the past that suit them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Causes or goals.</b> "I can't go out because I'm anxious" puts the cause first. Adler flips it: "I create anxiety so that I don't have to go out." The anxiety is real, but it serves a purpose.</span></li>
+          <li><span><b>Meaning is chosen.</b> The book's line is that we are not determined by our experiences but by the meaning we give them. The same childhood can make one person bitter and another kind.</span></li>
+          <li><span><b>No excuse in the past.</b> If the past decided everything, nobody could change and therapy would be pointless. Denying trauma is not denying pain. It's refusing to let the past be the last word.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth's test case is a friend who has shut himself in his room for years. He wants to go out, but as soon as he tries, his heart pounds and his hands shake. Surely, says the youth, something in his past caused this. The philosopher suggests a harder reading. Staying in means nobody can judge him, nobody can reject him, and his parents keep worrying about him. The anxiety isn't the cause of staying in. It is what he produces so that he can stay in.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>So you're saying my friend's suffering is fake?</p><p class="ph"><i>Philosopher</i>Not at all. His fear is real. The question is what job it's doing. Find that, and you've found what can change.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: cause or goal?</div><div class="hint">Pick a situation, then read it both ways</div></div>
+        <div class="stage"><svg id="cgSvg" role="img" aria-label="An arrow pointing from the past to now, or from now to a goal"></svg></div><div class="lab-ctl"><div class="row" id="cgS"></div><div class="row" id="cgM"></div></div><p class="callout" id="cgSay" aria-live="polite"></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Adler's claim is a philosophical stance, not a medical one. Trauma and post-traumatic stress are well studied today, and they respond to treatment. The useful part of the idea is the question it asks: what am I getting out of staying stuck?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you catch yourself saying "I can't, because of what happened", try asking "what does not doing it get me?" The answer is usually safety from being judged. Knowing that gives you a choice.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Anger is a tool →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Emotions serve goals too</div>
+        <h2>People Fabricate Anger</h2>
+        <div class="short"><span class="lbl">In short</span><p>We say anger "took over". Adler says we use it. Anger is a quick way to make someone back down. The proof is how fast it disappears when it stops being useful.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Anger has a purpose.</b> Shouting at someone isn't a loss of control. It's a shortcut to getting them to give in, without the effort of explaining.</span></li>
+          <li><span><b>You can switch it off.</b> If anger truly controlled us, we couldn't drop it in a second. Yet we do it all the time when the situation changes.</span></li>
+          <li><span><b>Words over force.</b> Anger is a means of communication, but a poor one. Anything it achieves can be achieved more respectfully with words.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth admits he recently shouted at a waiter who spilt coffee on his best jacket. He just lost it, he says. The philosopher offers another scene. A mother is screaming at her daughter when the phone rings. It's the child's teacher. Instantly her voice turns polite and calm. When she hangs up, the shouting starts again. Anger she couldn't control? She turned it off and on like a tap.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>I couldn't help it. It just came over me.</p><p class="ph"><i>Philosopher</i>Then how did the mother stop the instant the teacher called? Anger is a tool you pick up. You can choose another one.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: the phone call</div><div class="hint">Start the argument, then answer the phone</div></div>
+        <div class="stage"><svg id="anSvg" role="img" aria-label="A line chart of how angry the mother is over time"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="anGo">Start the argument</button><button class="btn" type="button" id="anPhone" disabled>The phone rings</button><button class="btn" type="button" id="anReset">Reset</button></div></div><p class="callout" id="anSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you feel anger rising, ask what you want the other person to do. Then try asking for it in words. You'll usually get more of it, and lose less.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: You choose your lifestyle →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Lifestyle, and the fear of change</div>
+        <h2>Unhappiness Is Something You Choose</h2>
+        <div class="short"><span class="lbl">In short</span><p>Adler uses the word lifestyle for your whole way of seeing yourself and the world. You picked it, usually around age ten, and you can pick again. People stay unhappy not because they can't change, but because the familiar is safer than the unknown.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Nobody chooses harm.</b> Following Socrates, the philosopher says no one wants what's bad for them. Even unhappiness is chosen because, in some way, it seemed good: safe, predictable, excusing.</span></li>
+          <li><span><b>Lifestyle is a choice.</b> Your personality isn't set in stone. It's a lifestyle, and it can be traded for another one.</span></li>
+          <li><span><b>Change takes courage.</b> Keeping your current lifestyle is easy. It's like an old car you know how to drive. A new one is scary, so you keep the old car and complain about it.</span></li>
+          <li><span><b>Decided here and now.</b> Whatever happened before, your life from now on is decided by what you do here and now.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth confesses he'd love to be like his friend Y, who is cheerful and gets on with everyone. Why can't he just be Y? The philosopher says the problem isn't that he can't be Y. It's that he has chosen not to be happy as himself. Wanting to be someone else is a way of not starting. He also mentions a young man who dreams of being a novelist but never finishes a story. As long as nothing's submitted, he can keep thinking he'd be brilliant "if only he had time". Finishing would mean finding out.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>If I could change, I would. Why would anyone choose to be unhappy?</p><p class="ph"><i>Philosopher</i>Because the unhappiness you know is safer than the happiness you don't. You aren't lacking ability. You're lacking courage.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the old car or the new one</div><div class="hint">Weigh up staying the same against changing</div></div>
+        <div class="stage"><svg id="lsSvg" role="img" aria-label="A balance between your current lifestyle and a new one"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="lsU">How unhappy you are now <output id="lsUo"></output></label><input type="range" id="lsU" min="0" max="10" value="6"></div><div class="ctl"><label for="lsC">Courage to face the unknown <output id="lsCo"></output></label><input type="range" id="lsC" min="0" max="10" value="2"></div></div></div><p class="callout" id="lsSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you've wanted to change for years and haven't, it's not that you're broken. Your current way of living pays you something, usually safety. Name it, then decide whether it's worth the price.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Why you dislike yourself →</a></div>
+    </section>
+    <!-- ===================== ALL PROBLEMS ARE INTERPERSONAL RELATIONSHIP PROBLEMS ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">The second night</span>
+      <h2>All Problems Are Interpersonal Relationship Problems</h2>
+      <p>The youth comes back the next week with a fresh complaint: he dislikes himself. The philosopher uses it to show Adler's second big claim. Every worry we have, even the ones that look private, is at bottom about other people.</p>
+      <div class="claim"><span class="lbl">The idea behind this night</span><p>Take other people away and most of your problems vanish, but so does everything good. The work is learning to live among them without competing.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Every problem is about other people</div>
+        <h2>Why You Dislike Yourself</h2>
+        <div class="short"><span class="lbl">In short</span><p>The youth lists everything wrong with himself. The philosopher says he focuses on his faults on purpose: if he dislikes himself, he can avoid other people, and if he avoids them, he can't be rejected. Adler's sweeping claim follows: all problems are interpersonal relationship problems.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Self-dislike has a goal.</b> Picking at your flaws gives you a reason to hide. "Nobody could like me" is safer than finding out.</span></li>
+          <li><span><b>Problems come from people.</b> Loneliness only exists because others exist. Even worries that seem private, like money or looks, are about how we stand with other people.</span></li>
+          <li><span><b>Fear of being hurt.</b> The deeper fear is being hurt in relationships. Avoiding people avoids the pain, but it also avoids every good thing they bring.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The philosopher once worked with a student who was ashamed of blushing. She wanted the blushing gone, because then she could tell a boy she liked him. He suggested that she actually needed it. As long as she blushed, she could say "if only I didn't blush, he'd like me", and never risk asking. Being turned down by the boy would be far worse than having a symptom to blame. The goal was to protect her from rejection, and the blushing did the job.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>I really do have these flaws. I'm not making them up.</p><p class="ph"><i>Philosopher</i>I believe you. But of all the things you could notice about yourself, you've chosen these. Ask what they're for.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the wall you build</div><div class="hint">Pick a flaw, then lower the wall</div></div>
+        <div class="stage"><svg id="dsSvg" role="img" aria-label="You behind a wall, with other people on the far side"></svg></div><div class="lab-ctl"><div class="row" id="dsF"></div><div class="row"><button class="btn" type="button" id="dsW" aria-pressed="false">Lower the wall</button></div></div><div class="stats"><div class="stat"><span class="k">What you tell yourself</span><span class="s" id="dsTell"></span></div><div class="stat"><span class="k">What it protects you from</span><span class="s" id="dsAvoid"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice the "if only" sentences you use. "If only I were taller, funnier, braver..." Each one protects you from a risk. Try taking the risk while you're still exactly as you are.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Inferiority is a story →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Feeling, complex and superiority</div>
+        <h2>Feelings of Inferiority Are Subjective Assumptions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Feeling inferior isn't a fact about you. It's a judgement you made by comparing. A healthy feeling of inferiority pushes you to grow. An inferiority complex uses it as an excuse. A superiority complex hides it behind boasting.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A value you assign.</b> Being short or quiet or new has no meaning on its own. You gave it the meaning "less than".</span></li>
+          <li><span><b>Healthy inferiority.</b> Everyone wants to improve, and comparing yourself with your ideal self is normal and useful. That is a feeling of inferiority, and it drives growth.</span></li>
+          <li><span><b>The complex.</b> An inferiority complex is the line "A is true of me, so I can't do B": I didn't go to university, so I'll never succeed. It's an excuse wearing the clothes of a reason.</span></li>
+          <li><span><b>Bragging hides it.</b> People who boast, name-drop or flaunt their misfortune are often covering a feeling of inferiority. Pretending to be superior is the same complex in disguise.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The philosopher tells the youth he is 155 centimetres tall. For years he thought of it as a defect and wondered if he'd be happier a little taller. Then a friend said that his height was a gift: big men can seem intimidating, but he puts people at ease. Nothing about his height changed. Only the value he gave it did. Height was objective. Inferiority was a story he'd been telling.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>But I really did fail where others succeeded.</p><p class="ph"><i>Philosopher</i>Comparing yourself with others is where it goes wrong. Compare yourself with who you want to be, and the same facts become a direction.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: feeling, complex or superiority?</div><div class="tally" id="tally6" aria-label="Score"></div></div>
+        <div class="sorter" id="sort6"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Wanting to be better is fine. Watch for the moment it turns into "so I can't" or into showing off. Both are ways of avoiding the real work of improving.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Life isn't a race →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · A level plane, not a track</div>
+        <h2>Life Is Not a Competition</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you see life as a race, everyone else is a rival, and other people's success feels like your loss. Adler pictures it instead as a level plane where people walk at different paces in different directions. Some are ahead, some behind, and nobody is competing.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Rivals or comrades.</b> Competing turns people into enemies. When others are enemies, the world feels dangerous and their happiness feels like your defeat.</span></li>
+          <li><span><b>Walk your own path.</b> On the level plane you move forward from where you are, toward your ideal self. Being ahead or behind someone else stops mattering.</span></li>
+          <li><span><b>From fight to revenge.</b> Insults are invitations to a power struggle. If you fight and win, the loser moves on to revenge. The way out is not to step into the ring.</span></li>
+          <li><span><b>Admitting fault isn't losing.</b> Saying sorry or admitting a mistake feels like defeat only if it's a contest. Once it isn't, it's just honest.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth says he can't bring himself to be pleased for a friend who's doing well. The philosopher says that's what competition does. While others are rivals, every friend's promotion is a loss for you, and you can never really be happy for anyone. He adds a second example: someone insults you in public. The urge is to fight back and win. But winning makes your opponent want revenge, and the fight goes on. Seeing that it's a power struggle lets you decline it.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Without competition, why would anyone try?</p><p class="ph"><i>Philosopher</i>You still try. You just measure yourself against who you were yesterday and who you want to be, not against the person next to you.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: race track or level plane</div><div class="hint">Switch the view, then let things happen to other people</div></div>
+        <div class="stage"><svg id="lcSvg" role="img" aria-label="People on a race track or walking on a level plane"></svg></div><div class="lab-ctl"><div class="row" id="lcM"></div><div class="row" id="lcE"></div></div><div class="stats"><div class="stat"><span class="k">Your reaction</span><span class="s" id="lcR"></span></div><div class="stat"><span class="k">How the world looks</span><span class="s" id="lcW"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone else wins, notice whether it stings. If it does, you're racing. Try asking where you are on your own path instead, and the other person becomes a fellow walker.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: The life tasks and the life-lie →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Work, friendship, love</div>
+        <h2>Facing the Tasks of Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>Adler names three tasks every adult has to face: work, friendship and love. Each goes deeper than the last and is harder. Avoiding them with excuses is what he calls the life-lie. What matters isn't what you were born with but what use you make of it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three tasks, rising depth.</b> Work ties have a shared goal to hold them together. Friendships have no such goal, so they need more. Love, and family, is the closest and hardest of all.</span></li>
+          <li><span><b>Red string or chains.</b> A close bond can be a red string of connection or a chain. It turns into a chain when one person tries to control the other. Love feels freest when you can be yourself.</span></li>
+          <li><span><b>The life-lie.</b> Blaming someone or something for not facing a life task, "my boss is impossible" or "my parents ruined me", is a life-lie. It lets you off the task.</span></li>
+          <li><span><b>Use, not possession.</b> Adler's psychology is a psychology of use. The question isn't what you were given but what you'll do with it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The philosopher describes a couple whose love has cooled. Suddenly everything about the partner grates: the way they talk, even the way they eat. It feels as if the faults came first. The philosopher suggests the order is backwards. One of them first decided to get out of the relationship, and then went hunting for faults to justify it. The faults are real enough, but they're evidence gathered for a verdict already reached. That's the life-lie at work.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Some people really are impossible to get on with.</p><p class="ph"><i>Philosopher</i>Some are hard. But notice when you started collecting their faults. Was it before or after you'd decided to stay away?</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the three life tasks</div><div class="hint">Tap a task you tend to avoid</div></div>
+        <div class="stage"><svg id="ltSvg" role="img" aria-label="Three rings around you: work, friendship and love"></svg></div><div class="lab-ctl"><div class="row" id="ltT"></div></div><div class="stats"><div class="stat"><span class="k">The life-lie</span><span class="s" id="ltLie"></span></div><div class="stat"><span class="k">Facing the task</span><span class="s" id="ltFace"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Look at the one relationship you most avoid. Ask whether you dislike the person, or whether you decided to avoid the relationship first and found reasons later. Then ask what you could do with what you've got.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Deny the need for approval →</a></div>
+    </section>
+    <!-- ===================== DISCARD OTHER PEOPLE'S TASKS ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">The third night</span>
+      <h2>Discard Other People's Tasks</h2>
+      <p>Two weeks later the youth is angry about the idea of not needing anyone's approval. The philosopher answers with the tool the book is best known for: the separation of tasks. Work out whose task something is, and stop carrying the ones that belong to someone else.</p>
+      <div class="claim"><span class="lbl">The idea behind this night</span><p>You can't control what others think of you. Accepting that, even if it means being disliked, is what freedom is.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · You are not here to meet others' expectations</div>
+        <h2>Deny the Desire for Recognition</h2>
+        <div class="short"><span class="lbl">In short</span><p>We're taught to seek praise and avoid blame, so we grow up living for other people's approval. Adler says to deny that desire. You don't live to meet anyone's expectations, and nobody else lives to meet yours.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Reward and punishment.</b> When praise is the reason to do good, people stop doing good when nobody's watching, or get angry when nobody thanks them.</span></li>
+          <li><span><b>Others' expectations.</b> If you live to satisfy others, you end up living their life, not yours. And you can never satisfy them all.</span></li>
+          <li><span><b>They don't live for you.</b> The flip side matters too. If others don't act as you hoped, that's not a betrayal. They were never living to meet your expectations.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth admits he has spent years trying to be the son his parents hoped for. Isn't wanting recognition just human? The philosopher points out where it leads. Someone who picks up litter only when people are watching, or is hurt when nobody thanks them, is doing good for the praise, not the good. A life built that way is lived by the expectations of others, and it never feels like your own.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>If nobody recognises what I do, how do I know it has value?</p><p class="ph"><i>Philosopher</i>That's the trap. Value judged by others can always be taken away. You'll find a steadier source on the fourth night.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: whose life is this?</div><div class="hint">Make six choices and watch whose path you walk</div></div>
+        <div class="stage"><svg id="rcSvg" role="img" aria-label="A path that bends toward others' expectations or your own"></svg></div><div class="lab-ctl"><div class="sort-card" id="rcQ" aria-live="polite"></div><div class="row" id="rcB"></div></div><p class="callout" id="rcSay"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before a big choice, ask: would I still choose this if nobody ever knew? If not, you may be living to meet someone else's expectations.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Separate the tasks →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Whose task is this?</div>
+        <h2>How to Separate Tasks</h2>
+        <div class="short"><span class="lbl">In short</span><p>The book's most practical tool. For anything that worries you, ask: who will ultimately receive the result of this choice? That person owns the task. Do your own tasks, don't let others into them, and don't intrude on theirs.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>One question.</b> "Who ultimately receives the result?" sorts almost everything. If your child doesn't study, it's the child who lives with the result, so it's the child's task.</span></li>
+          <li><span><b>Help, don't take over.</b> Separating tasks doesn't mean ignoring people. You can let them know you're there to help. You just can't do their task for them.</span></li>
+          <li><span><b>The horse and the water.</b> You can lead a horse to water, but you can't make it drink. Offering is your task. Drinking is the horse's.</span></li>
+          <li><span><b>What others think is theirs.</b> How others judge you is their task. You can do your best, but you can't control their verdict, and trying to is where most stress comes from.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth asks about a child who won't study. Surely making a child study is a parent's job? The philosopher asks who lives with the result of not studying. The child does. Forcing them is stepping into their task, and it usually backfires. What the parent can do is make it clear they are ready to help whenever the child wants. Then the parent has done their own task fully, and left the rest where it belongs.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Isn't that just being cold and leaving people to fail?</p><p class="ph"><i>Philosopher</i>It's the opposite of abandonment. You stay close and offer help. What you stop doing is forcing, because forcing is the thing that damages the relationship.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: whose task?</div><div class="tally" id="tally10" aria-label="Score"></div></div>
+        <div class="sorter" id="sort10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're worrying about something, ask who receives the result. If it's someone else, offer help once, mean it, and then put the worry down. If it's you, act.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Freedom is being disliked →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Cutting the Gordian knot</div>
+        <h2>What Real Freedom Is</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you never want to be disliked, you have to meet everyone's expectations, which is impossible. So freedom, in the philosopher's words, is being disliked by other people. Not trying to be, but accepting the cost of living your way.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The cost of freedom.</b> Being disliked by some people is proof that you're living freely. It's the price, not the goal.</span></li>
+          <li><span><b>Cut the knot.</b> Like Alexander slicing the Gordian knot instead of untying it, separating tasks cuts through the tangle of trying to please everyone.</span></li>
+          <li><span><b>You hold the cards.</b> You can't change anyone else, but you can change yourself. That puts the power to change a relationship in your hands.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth is shocked: surely nobody wants to be disliked? The philosopher agrees it's painful. But to never be disliked you'd have to agree with everyone, change your face for every audience and never say no. That's not freedom, it's a cage. He tells the old story of Alexander the Great and the knot no one could untie. Alexander didn't fuss with it. He cut it with his sword. Separating tasks is that cut. Later he quotes a Jewish teaching: of every ten people, one will criticise you whatever you do, two will become close friends, and the other seven are neither.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>So I should go around upsetting people?</p><p class="ph"><i>Philosopher</i>No. Be kind, do your best. Just don't treat being liked by everyone as the condition for living your own life.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: one in ten</div><div class="hint">Spend effort pleasing the critic and see what it costs</div></div>
+        <div class="stage"><svg id="ttSvg" role="img" aria-label="Ten people: one critic, two friends and seven others"></svg></div><div class="lab-ctl"><div class="ctl"><label for="ttR">Effort spent trying to win over the critic <output id="ttO"></output></label><input type="range" id="ttR" min="0" max="10" value="0"></div></div><div class="stats"><div class="stat"><span class="k">The critic</span><span class="s" id="ttC"></span></div><div class="stat"><span class="k">Your two friends</span><span class="s" id="ttF"></span></div><div class="stat"><span class="k">Your own life</span><span class="v glow" id="ttL"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Someone will always disapprove. You can spend your life trying to change that, or you can accept it, put your energy into the people who are with you and the work that's yours.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: A feeling of community →</a></div>
+    </section>
+    <!-- ===================== WHERE THE CENTRE OF THE WORLD IS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">The fourth night</span>
+      <h2>Where the Centre of the World Is</h2>
+      <p>If we separate tasks, are we all alone? The fourth night answers no. The aim of relationships, for Adler, is a sense that you belong to a community, and you get there by treating people as equals: no praise or blame from above, only encouragement side by side.</p>
+      <div class="claim"><span class="lbl">The idea behind this night</span><p>You are not the centre of the world, but you are part of it. You feel your worth when you feel useful to someone.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Community feeling</div>
+        <h2>You Are Not the Centre of the World</h2>
+        <div class="short"><span class="lbl">In short</span><p>The goal of relationships, for Adler, is community feeling: a sense that you belong, that others are comrades, and that you have a place. People desperate for approval are actually self-centred. They see others only as an audience for themselves.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Holism.</b> You are one undivided person, and you are also part of something bigger. Your problems and your belonging both come from that.</span></li>
+          <li><span><b>Approval-seeking is self-centred.</b> Worrying constantly about how others see you looks humble. It's really putting yourself at the centre and treating others as people who exist to judge you.</span></li>
+          <li><span><b>A part, not the centre.</b> You are a part of the whole, not its centre. Belonging comes from contributing to the whole, not from being served by it.</span></li>
+          <li><span><b>Listen to the larger community.</b> If you're stuck in a small community, like a school or a company, remember it's not the only one. There are always wider circles where you belong.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth jokes that he's not self-centred, he's practically invisible: he spends all his time worrying what others think. The philosopher says that's the giveaway. Everything is about how others see him. He then suggests a way out for anyone trapped in a small world, like a child who's miserable at school. School feels like everything, but it's one community among many. Beyond it are the town, the country, humanity, even the universe. When one circle rejects you, listen to the voice of a larger one.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>The community has to give me a place first, doesn't it?</p><p class="ph"><i>Philosopher</i>That's the centre-of-the-world view. Ask instead what you can give it. A place is something you make by contributing.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the larger community</div><div class="hint">Pick where it hurts, then zoom out</div></div>
+        <div class="stage"><svg id="cmSvg" role="img" aria-label="Nested circles of community around you"></svg></div><div class="lab-ctl"><div class="row" id="cmP"></div><div class="ctl"><label for="cmZ">Zoom out <output id="cmO"></output></label><input type="range" id="cmZ" min="0" max="6" value="0"></div></div><p class="callout" id="cmSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If a group you're in feels like the whole world, step back. It isn't. And the question to ask in any group is not "what will they give me?" but "what can I add?"</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Don't praise or rebuke →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Horizontal, not vertical</div>
+        <h2>Do Not Rebuke or Praise</h2>
+        <div class="short"><span class="lbl">In short</span><p>Praise and blame both come from above. They're judgements by someone with more power on someone with less. Adler wants horizontal relationships, where people are equal but not the same. Instead of praise, encourage: say thank you, say it helped.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Praise is vertical.</b> "Good job" from a parent to a child or a boss to a worker carries a hidden message: I'm in a position to judge you.</span></li>
+          <li><span><b>Equal, not the same.</b> A child and an adult differ in knowledge and experience, but they're equal as people. Horizontal relationships start there.</span></li>
+          <li><span><b>Encourage instead.</b> Gratitude, respect and joy, "thank you, that really helped", tell someone they've contributed. That's what builds the courage to keep going.</span></li>
+          <li><span><b>Help, don't intervene.</b> Intervening is doing someone's task for them from above. Assisting is supporting them, as an equal, to do it themselves.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth objects that children need praise. The philosopher asks what a mother means when she says "well done, you're so clever" to a child who helped. It's the tone you'd use with someone who can't normally do much. Between two adults, the same words would sound patronising. Now picture a friend who helps you move house. You don't tell them "good boy". You say thank you. That simple word treats the helper as an equal who chose to contribute.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Isn't praise how children learn what's right?</p><p class="ph"><i>Philosopher</i>Praise teaches them to look for the next judge. Gratitude teaches them that they're useful. Only one of those lasts without an audience.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: what do you say?</div><div class="hint">Pick the reply that keeps you side by side</div></div>
+        <div class="stage"><svg id="prSvg" role="img" aria-label="Two people on different levels or the same level"></svg></div><div class="lab-ctl"><div class="row" id="prS"></div><div class="tm-ask" id="prAsk"></div><div class="cards3" id="prP"></div></div><p class="callout" id="prSay" aria-live="polite"></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Modern research agrees in part. Praising a fixed trait like "you're so smart" can make children avoid challenges, while specific, honest feedback about what someone did tends to help. The book goes further and drops praise altogether.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Swap "good job" for "thank you" or "that helped me" for a week, with anyone: kids, colleagues, a partner. Notice how it changes the feel of the relationship.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: How to feel you have value →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Contribution at the level of being</div>
+        <h2>How to Feel You Have Value</h2>
+        <div class="short"><span class="lbl">In short</span><p>People feel they have worth when they feel useful to someone. That's the answer to the youth's question about where value comes from, if not from approval. And usefulness doesn't depend on doing. Simply being there can be a contribution.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Worth through contribution.</b> The feeling "I am of use to someone" is what lets a person feel they have value. It doesn't need anyone's praise.</span></li>
+          <li><span><b>Being, not only doing.</b> A newborn, a grandparent in hospital, a friend going through depression: none can do much, but their existence matters to others. Value at the level of being is unconditional.</span></li>
+          <li><span><b>See others that way.</b> Look at people for the fact that they exist, not for what they achieve. Then you can be glad they're there, and say so.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth argues that some people really can't contribute anything: someone bedridden, or a baby. The philosopher asks him to imagine his own mother in hospital after an accident. Would he feel she had no value because she can't work or cook? Of course not. He'd be grateful she was alive. That's contribution at the level of being. And if we can see it in others, we can see it in ourselves too, on days when we achieve nothing at all.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Then a useless person can just say they're valuable?</p><p class="ph"><i>Philosopher</i>Nobody is useless at the level of being. Doing is a bonus. Being here already matters to someone.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: doing or being?</div><div class="hint">Switch the lens and see who counts</div></div>
+        <div class="stage"><svg id="vbSvg" role="img" aria-label="Five people with bars showing what they do and whether they matter"></svg></div><div class="lab-ctl"><div class="row" id="vbL"></div></div><p class="callout" id="vbSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>On a day when you got nothing done, remember: if you'd be glad a friend was simply alive and here, the same holds for you. Then go and be useful to someone, in a small way.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Accept, trust, contribute →</a></div>
+    </section>
+    <!-- ===================== TO LIVE IN EARNEST IN THE HERE AND NOW ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">The fifth night</span>
+      <h2>To Live in Earnest in the Here and Now</h2>
+      <p>On the last night the youth asks how to actually live this way. The philosopher ties it together: accept yourself, trust others, contribute to them, have the courage to be ordinary, and treat life as a series of moments rather than a road to somewhere else.</p>
+      <div class="claim"><span class="lbl">The idea behind this night</span><p>Happiness is the feeling of being useful to others. It is available now, not at the end of some long climb.</p></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Three parts of one cycle</div>
+        <h2>Self-Acceptance, Confidence in Others, Contribution</h2>
+        <div class="short"><span class="lbl">In short</span><p>Community feeling rests on three things, and each feeds the next. Accept yourself as you are. Trust others without conditions. Contribute to them. Contribution makes you feel worthwhile, which makes self-acceptance easier, which makes trust easier.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Acceptance, not affirmation.</b> Self-affirmation tells yourself "I can do it" when you can't. Self-acceptance says "I'm at 60 points; how do I get closer to 100?" It's honest.</span></li>
+          <li><span><b>Affirmative resignation.</b> Change what you can, accept what you can't. Not giving up, but seeing clearly which is which.</span></li>
+          <li><span><b>Confidence, not credit.</b> Credit is trust with conditions, like a bank loan. Confidence is trusting someone without conditions. If they betray it, that's their task, not yours.</span></li>
+          <li><span><b>Contribution, not sacrifice.</b> Contribution is not giving yourself up for others. It's acting as part of a group because you choose to, which also gives you a sense of your own worth.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth says he feels so self-conscious at parties that he can't be himself. The philosopher says that's what happens when you can't accept yourself: you're too busy managing how you look to act freely. He describes the three pillars and why they come as a set. Trust without self-acceptance is fearful. Contribution without trust looks like sacrifice. Self-acceptance without contribution has nothing to stand on. Together they turn into a cycle that strengthens itself.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>If I trust everyone unconditionally, won't I get used?</p><p class="ph"><i>Philosopher</i>Some will betray you. That's their task. Your task is to decide what you'll do. Most people find that trust given is trust returned.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: the three pillars</div><div class="hint">Raise each side and watch the cycle turn</div></div>
+        <div class="stage"><svg id="trSvg" role="img" aria-label="A triangle of self-acceptance, confidence in others and contribution"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="trA">Self-acceptance <output id="trAo"></output></label><input type="range" id="trA" min="0" max="10" value="3"></div><div class="ctl"><label for="trB">Confidence in others <output id="trBo"></output></label><input type="range" id="trB" min="0" max="10" value="5"></div><div class="ctl"><label for="trC">Contribution <output id="trCo"></output></label><input type="range" id="trC" min="0" max="10" value="4"></div></div></div><p class="callout" id="trSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't need to feel 100 points to start. Accept the 60, trust one person a little more than feels safe, and do one useful thing for them today.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: The courage to be normal →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Two paths to being special</div>
+        <h2>The Courage to Be Normal</h2>
+        <div class="short"><span class="lbl">In short</span><p>People who want to feel special take one of two paths: be especially good, or, when that fails, be especially bad. Adler traces how misbehaviour escalates in stages. The way out is the courage to be ordinary, which is not the same as being inferior.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Especially good or especially bad.</b> A child who can't stand out by being good may stand out by being bad. Both are bids for a special place.</span></li>
+          <li><span><b>The stages of misbehaviour.</b> Adler's model runs from demanding admiration, to drawing attention, to a power struggle, to revenge, and finally to showing incompetence so that nobody expects anything.</span></li>
+          <li><span><b>The easy path.</b> Being bad is a shortcut to attention. It skips the hard work of being useful.</span></li>
+          <li><span><b>Normal isn't a failure.</b> Being ordinary doesn't mean being worthless. Accepting it frees you from the endless need to prove something.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The philosopher describes how it starts. A child first tries hard to be praised: the best marks, the tidiest room. If praise doesn't come, they try getting noticed any way they can, being cheeky or clowning. Then come fights with parents and teachers. If those fail, they move on to revenge, and finally to acting hopeless so nobody bothers them. Each stage is a way to stay special. The cure, says the philosopher, is the courage to be normal.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Isn't wanting to be special just ambition?</p><p class="ph"><i>Philosopher</i>Wanting to grow is healthy. Needing to be special, good or bad, is a way of avoiding the plain work of contributing.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: the five stages</div><div class="hint">Tap a stage to see what's going on and how to respond</div></div>
+        <div class="stage"><svg id="psSvg" role="img" aria-label="A staircase of five stages of problem behaviour"></svg></div><div class="detail" id="psD" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you notice you need to be the best, or you find yourself getting noticed in ways you're not proud of, try being ordinary for a while. Do something useful that nobody will praise.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Life is a series of moments →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · Dance, and shine a light on now</div>
+        <h2>Life Is a Series of Moments</h2>
+        <div class="short"><span class="lbl">In short</span><p>We imagine life as a line, climbing toward some summit. The philosopher says it's a series of dots: moments. Live each one fully, like dancing, where every step is complete in itself. The greatest life-lie is not living here and now.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Kinesis and energeia.</b> Borrowing from Aristotle: kinesis is movement toward an end, where it's incomplete until you arrive. Energeia is complete in each moment, like dancing. Life should be energeia.</span></li>
+          <li><span><b>Dots, not a line.</b> If life is a line, you're always on the way and never there. If it's dots, each moment is already the destination.</span></li>
+          <li><span><b>Spotlight the present.</b> Lighting up the past and the future dims the present. Put the spotlight on here and now, and the rest goes dark, as it should.</span></li>
+          <li><span><b>Your own meaning.</b> Adler said life in general has no meaning; you give it one. The philosopher's guiding star is contribution to others. Steer by it, and you won't get lost.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the dialogue</span><p>The youth says this feels like giving up on long-term plans. The philosopher says no. A mountain climber who only counts the summit has wasted the climb if bad weather turns him back. A dancer never gets anywhere, yet every moment of dancing is complete. If you live each moment as the dance, then wherever life stops, you're already there. By the end of the last night the youth has stopped arguing. He leaves resolved to start with himself, rather than waiting for the world to change first.</p></div>
+      <div class="xchg"><span class="lbl">The youth objects</span><p class="y"><i>Youth</i>Without goals, won't I just drift?</p><p class="ph"><i>Philosopher</i>Keep your guiding star, contribution to others, and you'll always know which way you're facing. You just don't have to wait to arrive before life counts.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: the climb or the dance</div><div class="hint">Pick a way to live, then let life stop somewhere</div></div>
+        <div class="stage"><svg id="mmSvg" role="img" aria-label="A line climbing to a summit, or a dance of dots"></svg></div><div class="lab-ctl"><div class="row" id="mmM"></div><div class="row"><button class="btn primary" type="button" id="mmGo">Life stops here</button></div></div><div class="stats"><div class="stat"><span class="k">Stopped at</span><span class="v" id="mmAt"></span></div><div class="stat"><span class="k">How much of it counted</span><span class="v glow" id="mmC"></span></div></div><p class="callout" id="mmSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Plan, by all means. But don't put off living until the plan works out. Today, do the thing that's in front of you as if it were the whole point, because it is.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#after">Next: your guiding star →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your guiding star</h2>
+      <p class="big">The philosopher says that if you keep one star in sight, contribution to others, you won't lose your way, whatever happens. Write down one task you'll hand back and one way you'll be useful this week. It stays in this browser only.</p>
+      <div class="builder lab" style="margin:0">
+        <div class="fields">
+          <div class="field"><label for="gsDrop">A task that isn't mine, which I'll stop carrying</label><input id="gsDrop" maxlength="140" placeholder="e.g. Whether my sister likes my new job"></div>
+          <div class="field"><label for="gsMine">A task that is mine, which I'll face</label><input id="gsMine" maxlength="140" placeholder="e.g. Telling my manager I want the project"></div>
+          <div class="field"><label for="gsGive">One way I'll be useful to someone this week</label><input id="gsGive" maxlength="140" placeholder="e.g. Cook dinner for my dad on Thursday"></div>
+        </div>
+        <div class="out" id="myCard" aria-live="polite"></div>
+      </div>
+      <div class="recap">
+        <div><span class="n">Night 1</span><b>Goals, not causes</b><span>The past doesn't push you. You choose a meaning for it, and you can choose again.</span></div>
+        <div><span class="n">Night 2</span><b>It's all relationships</b><span>Inferiority is a story, life isn't a race, and avoiding the life tasks is a life-lie.</span></div>
+        <div><span class="n">Night 3</span><b>Separate tasks</b><span>Ask who receives the result. Do yours, offer help with theirs, accept being disliked.</span></div>
+        <div><span class="n">Night 4</span><b>Belong as an equal</b><span>You're part of the world, not its centre. Encourage instead of praising, and see value in being.</span></div>
+        <div><span class="n">Night 5</span><b>Live here and now</b><span>Accept yourself, trust others, contribute, dare to be ordinary, and live each moment like a dance.</span></div>
+        <div><span class="n">The star</span><b>Contribution</b><span>Happiness is the feeling of being useful to someone. You can have it today.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Courage to Be Disliked</i> by Ichiro Kishimi and Fumitake Koga (2013; English translation 2017). The explanations, retold scenes and labs are written in our own words; the five nights follow the book's structure, and section titles follow its headings loosely. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Night 1 \u00b7 Deny trauma", "Night 2 \u00b7 Relationships", "Night 3 \u00b7 Others' tasks", "Night 4 \u00b7 The centre", "Night 5 \u00b7 Here and now"];
+const NIGHTS = [["The first night", "Deny Trauma", "We are not driven by what happened to us. We choose the meaning we give it, and we can choose again."], ["The second night", "All Problems Are Interpersonal Relationship Problems", "Take other people away and most of your problems vanish, but so does everything good. The work is learning to live among them without competing."], ["The third night", "Discard Other People's Tasks", "You can't control what others think of you. Accepting that, even if it means being disliked, is what freedom is."], ["The fourth night", "Where the Centre of the World Is", "You are not the centre of the world, but you are part of it. You feel your worth when you feel useful to someone."], ["The fifth night", "To Live in Earnest in the Here and Now", "Happiness is the feeling of being useful to others. It is available now, not at the end of some long climb."]];
+const CH = [["Why People Can Change", "People can change", 0, "Chapter 1"], ["Trauma Does Not Exist", "Trauma doesn't decide", 0, "Chapter 2"], ["People Fabricate Anger", "Anger is a tool", 0, "Chapter 3"], ["Unhappiness Is Something You Choose", "You choose your lifestyle", 0, "Chapter 4"], ["Why You Dislike Yourself", "Why you dislike yourself", 1, "Chapter 5"], ["Feelings of Inferiority Are Subjective Assumptions", "Inferiority is a story", 1, "Chapter 6"], ["Life Is Not a Competition", "Life isn't a race", 1, "Chapter 7"], ["Facing the Tasks of Life", "The life tasks and the life-lie", 1, "Chapter 8"], ["Deny the Desire for Recognition", "Deny the need for approval", 2, "Chapter 9"], ["How to Separate Tasks", "Separate the tasks", 2, "Chapter 10"], ["What Real Freedom Is", "Freedom is being disliked", 2, "Chapter 11"], ["You Are Not the Centre of the World", "A feeling of community", 3, "Chapter 12"], ["Do Not Rebuke or Praise", "Don't praise or rebuke", 3, "Chapter 13"], ["How to Feel You Have Value", "How to feel you have value", 3, "Chapter 14"], ["Self-Acceptance, Confidence in Others, Contribution", "Accept, trust, contribute", 4, "Chapter 15"], ["The Courage to Be Normal", "The courage to be normal", 4, "Chapter 16"], ["Life Is a Series of Moments", "Life is a series of moments", 4, "Chapter 17"]];
+const QUIZ = {
+"1": {
+"q": "Why does the well water feel warm in winter and cool in summer?",
+"o": [
+"Its temperature changes with the seasons",
+"It stays the same; what changes is the person feeling it",
+"Wells are warmer in winter because of the ground"
+],
+"a": 1,
+"w": "The water is steady at about 18 degrees. Your experience of it is relative to the air around you, which is the philosopher's point about subjective worlds."
+},
+"2": {
+"q": "In Adler's teleology, why does the friend stay in his room?",
+"o": [
+"His past trauma forces him to",
+"He has a goal of not going out, and anxiety serves it",
+"He doesn't actually want to go out"
+],
+"a": 1,
+"w": "Teleology reads behaviour by its purpose. Staying in protects him from being judged, and anxiety is the means to that goal."
+},
+"3": {
+"q": "What does the mother's phone call show?",
+"o": [
+"That she was never really angry",
+"That anger is a tool she can put down when it stops being useful",
+"That teachers make parents nervous"
+],
+"a": 1,
+"w": "She was angry, but she controlled it the moment it no longer served her. That's the sense in which people fabricate anger."
+},
+"4": {
+"q": "Why do people stay in a lifestyle that makes them unhappy, according to the book?",
+"o": [
+"They lack the ability to change",
+"The familiar feels safer than the unknown, so they choose not to change",
+"Their personality was fixed in childhood"
+],
+"a": 1,
+"w": "Adler's view is that lifestyle is chosen and can be re-chosen. What stops us is the anxiety of the new, not inability."
+},
+"5": {
+"q": "What purpose did the student's blushing serve?",
+"o": [
+"It showed she was a sensitive person",
+"It let her avoid asking the boy out and risking rejection",
+"It had no purpose; it was a medical condition"
+],
+"a": 1,
+"w": "The blushing gave her an excuse: \"if only I didn't blush\". That kept her safe from the much bigger fear of being turned down."
+},
+"6": {
+"q": "Which is an inferiority complex rather than a healthy feeling of inferiority?",
+"o": [
+"\"I want to get better at public speaking, so I'll practise\"",
+"\"I'm not good with people, so I can't go for a team lead job\"",
+"\"My presentation was weak; next time I'll prepare more\""
+],
+"a": 1,
+"w": "The complex is the \"A, so I can't B\" excuse. The other two use the gap as a reason to grow."
+},
+"7": {
+"q": "Why can't someone who sees life as a competition be truly happy for others?",
+"o": [
+"Because they're selfish by nature",
+"Because other people's success counts as their own defeat",
+"Because they're too busy to notice"
+],
+"a": 1,
+"w": "In a race, every gain by a rival is a loss for you. On the level plane, other people's progress costs you nothing."
+},
+"8": {
+"q": "What does Adler mean by a life-lie?",
+"o": [
+"A small white lie told to be polite",
+"Using someone or something as an excuse to avoid a life task",
+"Lying about your age or background"
+],
+"a": 1,
+"w": "The life-lie is the excuse that lets you dodge work, friendship or love, usually by blaming others or circumstances."
+},
+"9": {
+"q": "What problem does the book see with doing good for praise?",
+"o": [
+"Praise is bad for your health",
+"When nobody is watching or thanking you, the reason to do good disappears",
+"Other people get jealous"
+],
+"a": 1,
+"w": "If recognition is the motive, the behaviour depends on an audience. The book argues you'll end up living for others' approval rather than your own life."
+},
+"10": {
+"q": "Your colleague thinks your idea is foolish. Whose task is that?",
+"o": [
+"Yours: you need to change their mind",
+"Theirs: how they judge your idea is their task",
+"Your manager's"
+],
+"a": 1,
+"w": "How others see you is their task. Yours is to put the idea forward as well as you can. Their verdict is out of your hands."
+},
+"11": {
+"q": "Why does the philosopher say freedom is being disliked by other people?",
+"o": [
+"Because unpopular people are more creative",
+"Because never being disliked means living to everyone's expectations, which isn't freedom",
+"Because being disliked feels good"
+],
+"a": 1,
+"w": "Freedom means living your own way. The unavoidable side effect is that some people won't like it. Accepting that is the courage of the title."
+},
+"12": {
+"q": "Why does the philosopher call approval-seekers self-centred?",
+"o": [
+"Because they talk about themselves a lot",
+"Because they treat others as an audience that exists to judge them",
+"Because they don't care about anyone"
+],
+"a": 1,
+"w": "Constant worry about how you look to others keeps you at the centre. Community feeling moves your attention to what you can contribute."
+},
+"13": {
+"q": "Which reply is horizontal encouragement?",
+"o": [
+"\"Good girl, you're so clever!\"",
+"\"Thank you, that helped me a lot\"",
+"\"About time you did that\""
+],
+"a": 1,
+"w": "Gratitude treats the other person as an equal who contributed. Praise and rebuke both judge from above."
+},
+"14": {
+"q": "What does \"value at the level of being\" mean?",
+"o": [
+"Value that comes from being successful",
+"The worth a person has simply by existing, before anything they do",
+"The value of things you own"
+],
+"a": 1,
+"w": "Adler separates being from doing. Existence alone can be a contribution, as we feel with a newborn or a sick loved one."
+},
+"15": {
+"q": "What's the difference between self-affirmation and self-acceptance?",
+"o": [
+"There's no difference",
+"Affirmation tells yourself you can when you can't; acceptance sees yourself honestly and works from there",
+"Acceptance means giving up on improving"
+],
+"a": 1,
+"w": "Self-acceptance is honest: \"I'm at 60 points; how can I improve?\" Affirmation papers over the gap."
+},
+"16": {
+"q": "Why might a child who can't be especially good turn to being especially bad?",
+"o": [
+"Because they're naturally rebellious",
+"Because being bad is another route to feeling special and getting attention",
+"Because they don't understand the rules"
+],
+"a": 1,
+"w": "Both paths aim at a special place. Being bad is the easy road there, because it skips the effort of being useful."
+},
+"17": {
+"q": "Why does the philosopher compare life to dancing?",
+"o": [
+"Because life should be fun",
+"Because each moment of a dance is complete in itself, not just a step toward an end",
+"Because dancers are good at balance"
+],
+"a": 1,
+"w": "A dance isn't a journey to a destination. Seen as energeia, every moment is complete, so life is never cut short halfway."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0f1a22';
+try { const t = localStorage.getItem('cd-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('cd-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('cd-done', []));
+const save = () => store.set('cd-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const kbd = (el, f) => el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); f(); } });
+/* a simple standing figure; c = colour token, s = scale, arms 'down' | 'up' | 'out' */
+const person = (x, y, c = 'text', s = 1, arms = 'down') => {
+  const hy = y - 44 * s, a = arms === 'up' ? `M${x - 13 * s} ${y - 40 * s}L${x} ${y - 28 * s}L${x + 13 * s} ${y - 40 * s}` : arms === 'out' ? `M${x - 15 * s} ${y - 26 * s}L${x} ${y - 30 * s}L${x + 15 * s} ${y - 26 * s}` : `M${x - 9 * s} ${y - 14 * s}L${x} ${y - 30 * s}L${x + 9 * s} ${y - 14 * s}`;
+  return `<circle cx="${x}" cy="${hy.toFixed(1)}" r="${(7 * s).toFixed(1)}" ${F(c)}/><path d="M${x} ${(y - 36 * s).toFixed(1)}V${(y - 14 * s).toFixed(1)}M${x} ${(y - 14 * s).toFixed(1)}L${(x - 8 * s).toFixed(1)} ${y}M${x} ${(y - 14 * s).toFixed(1)}L${(x + 8 * s).toFixed(1)} ${y}${a}" ${S(c, 2.4 * Math.min(1, s + .2), ';stroke-linecap:round;stroke-linejoin:round')}/>`;
+};
+const btns = (sel, list, attr, cur = 0) => { const box = $(sel); box.innerHTML = list.map((l, i) => `<button class="btn" type="button" data-${attr}="${i}" aria-pressed="${i === cur}">${l}</button>`).join(''); return [...box.querySelectorAll('button')]; };
+
+/* ---------- afterword: your guiding star ---------- */
+{ const K = ['gsDrop', 'gsMine', 'gsGive'], saved = store.get('cd-star', {}) || {};
+  K.forEach(k => { const el = $('#' + k); el.value = saved[k] || ''; el.addEventListener('input', () => { const v = {}; K.forEach(j => v[j] = $('#' + j).value); store.set('cd-star', v); render(); }); });
+  function render(){
+    const v = Object.fromEntries(K.map(k => [k, $('#' + k).value.trim()]));
+    if (!v.gsDrop && !v.gsMine && !v.gsGive){ $('#myCard').innerHTML = '<span class="k">Your card</span><p class="empty">Fill in any of the three lines above. Not sure whose task something is? Try the sorter in <a href="#ch10">section 10</a>.</p>'; return; }
+    const cell = (k, l, cls = '') => v[k] ? `<div class="${cls}"><span>${l}</span>${esc(v[k])}</div>` : '';
+    $('#myCard').innerHTML = `<span class="k">Your card for this week</span><div class="gs">${cell('gsDrop', 'Handing back')}${cell('gsMine', 'Facing')}${cell('gsGive', 'Guiding star · contributing', 'star')}</div><p class="empty">Being disliked by someone for this is the price of living your own way. Saved in this browser only.</p>`;
+  }
+  render();
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['My past holds me back', 2, 'Goals, not causes', 'Adler says the past doesn\'t push you. Ask what staying stuck lets you avoid, and you\'ll find what can change.'],
+    ['I can\'t control my temper', 3, 'Anger is a tool', 'You can switch anger off when it stops being useful. That means you can choose a better tool, like words.'],
+    ['I want to change but don\'t', 4, 'You choose your lifestyle', 'The familiar is safer than the new. What\'s missing usually isn\'t ability. It\'s courage.'],
+    ['I don\'t like myself', 5, 'Why you dislike yourself', 'Self-dislike can be a wall that keeps you safe from being rejected. Lower it a little.'],
+    ['Others seem better than me', 6, 'Inferiority is a story', 'Compare yourself with your ideal self, not with others, and the gap becomes a direction.'],
+    ['I worry what people think', 10, 'Separate the tasks', 'How others judge you is their task. Ask who receives the result, and put down what isn\'t yours.'],
+    ['I hate being disliked', 11, 'Freedom is being disliked', 'One in ten will criticise you whatever you do. Being disliked by some is the price of living your way.'],
+    ['I feel worthless', 14, 'How to feel you have value', 'You feel worth when you feel useful to someone, and simply being here already counts.'],
+    ['I\'m always waiting for later', 17, 'Life is a series of moments', 'Treat life as a dance, not a climb. Each moment is complete, so it counts now.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">Section ${n} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the section →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: five nights ---------- */
+{ const el = $('#nsSvg'); let cur = 0;
+  const FIRST = [1, 5, 9, 12, 15];
+  function draw(){
+    let g = '';
+    for (let k = 0; k < 26; k++){ const r = rng(k + 3); g += `<circle cx="${(r() * 400).toFixed(1)}" cy="${(r() * 70).toFixed(1)}" r="${(0.6 + r() * 1.1).toFixed(1)}" ${F('faint', .8)}/>`; }
+    g += `<circle cx="352" cy="34" r="14" ${F('soft', .85)}/><circle cx="358" cy="30" r="12" ${F('deep')}/>`;
+    g += `<path d="M28 196V96L200 46 372 96V196Z" ${FS('panel', 'line', 1.5)}/><path d="M16 100 200 40 384 100" ${S('faint', 2.5, ';stroke-linejoin:round')}/><rect x="0" y="196" width="400" height="14" ${F('panel-2')}/>`;
+    [56, 120, 184, 248, 312].forEach((x, i) => { const on = i === cur;
+      g += `<g class="svgbtn" data-w="${i}" tabindex="0" role="button" aria-label="Night ${i + 1}: ${NIGHTS[i][1]}" aria-pressed="${on}">`;
+      if (on) g += `<rect x="${x - 10}" y="104" width="52" height="76" rx="6" ${F('cool', .18)}/>`;
+      g += `<rect x="${x - 4}" y="110" width="40" height="64" rx="3" ${FS(on ? 'cool' : 'deep', on ? 'cool' : 'line', 1.5, on ? .9 : 1)}/><path d="M${x + 16} 110v64M${x - 4} 142h40" ${S(on ? 'on-glow' : 'line', 1.4)}/>`;
+      g += TX(x + 16, 194, 'NIGHT ' + (i + 1), on ? 'cool' : 'faint', 10, 'middle', 'letter-spacing="1"') + '</g>'; });
+    el.innerHTML = g;
+    el.querySelectorAll('[data-w]').forEach(w => { const go = () => { cur = +w.dataset.w; draw(); el.querySelector(`[data-w="${cur}"]`).focus({preventScroll:true}); }; w.addEventListener('click', go); kbd(w, go); });
+    const [eb, t, claim] = NIGHTS[cur];
+    $('#nsRead').innerHTML = `<span class="k">${eb}</span><span class="h">${t}</span><p>${claim}</p><a href="#part${cur + 1}">Read night ${cur + 1}, from section ${FIRST[cur]} →</a>`;
+  }
+  draw();
+}
+
+/* ---------- 1: the well water ---------- */
+{ const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const AIR = [4, 6, 10, 15, 20, 23, 27, 28, 24, 18, 12, 7], WELL = 18, R = $('#wwR'), el = $('#wwSvg');
+  const therm = (x, top, bot, v, c, label) => { const y = bot - (bot - top) * clamp(v / 35, 0, 1); let g = `<rect x="${x - 9}" y="${top - 8}" width="18" height="${bot - top + 16}" rx="9" ${FS('panel-2', 'line', 1.3)}/><circle cx="${x}" cy="${bot + 18}" r="14" ${FS('panel-2', 'line', 1.3)}/>`;
+    g += `<rect x="${x - 4.5}" y="${y.toFixed(1)}" width="9" height="${(bot + 10 - y).toFixed(1)}" rx="4.5" ${F(c)}/><circle cx="${x}" cy="${bot + 18}" r="9.5" ${F(c)}/>`;
+    for (let k = 0; k <= 35; k += 5){ const ty = bot - (bot - top) * k / 35; g += `<line x1="${x + 11}" y1="${ty.toFixed(1)}" x2="${x + 16}" y2="${ty.toFixed(1)}" ${S('faint', 1)}/>`; if (k % 10 === 0) g += TX(x + 19, ty + 4, k + '°', 'faint', 10); }
+    return g + TX(x, bot + 48, label, c, 11, 'middle', 'letter-spacing="1"') + TX(x, top - 16, v + '°C', c, 15, 'middle'); };
+  const draw = onLayout(() => {
+    const m = +R.value, a = AIR[m], d = WELL - a, nw = NARROW(), W = nw ? 360 : 600, H = 300; vb(el, W, H);
+    const feel = d > 4 ? ['Warm', 'glow', 'warm', 'cool'] : d < -4 ? ['Cool', 'glow', 'cool', 'cool'] : ['About the same as the air', 'muted', '', ''];
+    const sx = nw ? 120 : 190;
+    let g = `<rect x="0" y="0" width="${W}" height="${H}" ${F(a > 20 ? 'cool' : 'glow', a > 20 ? .07 : .05)}/>`;
+    g += `<rect x="0" y="232" width="${W}" height="68" ${F('panel-2')}/>`;
+    // well
+    g += `<rect x="${sx - 70}" y="160" width="140" height="74" rx="4" ${FS('panel', 'line', 1.5)}/>`;
+    for (let r = 0; r < 3; r++) for (let k = 0; k < 5; k++) g += `<rect x="${sx - 70 + k * 28 + (r % 2 ? 14 : 0) - (r % 2 && k === 4 ? 14 : 0)}" y="${164 + r * 23}" width="${r % 2 && k === 4 ? 14 : 27}" height="21" rx="2" ${FS('panel-2', 'line', .8)}/>`;
+    g += `<ellipse cx="${sx}" cy="160" rx="70" ry="10" ${FS('deep', 'line', 1.5)}/><ellipse cx="${sx}" cy="161" rx="60" ry="6" ${F('glow', .45)}/>`;
+    g += `<path d="M${sx - 62} 160V70M${sx + 62} 160V70M${sx - 72} 72H${sx + 72}" ${S('faint', 3, ';stroke-linecap:round')}/><path d="M${sx} 72v40" ${S('faint', 1.2)}/><path d="M${sx - 14} 112h28l-4 22h-20Z" ${FS('panel-2', 'faint', 1.3)}/><ellipse cx="${sx}" cy="113" rx="13" ry="3" ${F('glow', .6)}/>`;
+    if (feel[2]) g += `<rect x="${sx - 64}" y="20" width="128" height="34" rx="17" ${FS('panel', feel[1], 1.4)}/>` + TX(sx, 42, `"Feels ${feel[2]}!"`, feel[1], 14, 'middle');
+    else g += `<rect x="${sx - 74}" y="20" width="148" height="34" rx="17" ${FS('panel', 'line', 1.4)}/>` + TX(sx, 42, '"Hardly any different"', 'muted', 13, 'middle');
+    // thermometers
+    const tx1 = nw ? 262 : 420, tx2 = nw ? 322 : 520;
+    g += therm(tx1, 70, 210, a, 'cool', 'AIR') + therm(tx2, 70, 210, WELL, 'glow', 'WELL');
+    el.innerHTML = g;
+    $('#wwM').textContent = MON[m]; $('#wwAir').textContent = a + ' °C'; $('#wwW').textContent = WELL + ' °C';
+    $('#wwFeel').textContent = d > 4 ? `Warm, because your hands came from ${a}° air.` : d < -4 ? `Cool, because your hands came from ${a}° air.` : 'Neither. Your hands are already close to it.';
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 2: cause or goal ---------- */
+{ const SC = [
+    ['The friend in his room', 'Stays in his room', 'Something happened at school', 'He\'s too anxious to go out because of his past.', 'Nobody can judge or reject me', 'He wants to avoid being judged, so he produces anxiety, and it keeps him in.'],
+    ['Silent in meetings', 'Says nothing in meetings', 'Laughed at in class as a child', 'She was laughed at once, so now she freezes.', 'Nobody can criticise my ideas', 'If she never speaks, her ideas can never be criticised. Freezing protects that goal.'],
+    ['The unfinished novel', 'Never finishes the book', 'Always a procrastinator', 'He\'s been a procrastinator since school; it\'s just how he is.', 'Keep believing it would be brilliant', 'An unfinished book can\'t be rejected. Not finishing keeps the dream that he\'d be brilliant.'],
+    ['No more dating', 'Won\'t go on dates', 'A painful break-up', 'The last break-up hurt so much that she can\'t try again.', 'I can never be rejected again', 'By not trying, she can never be turned down. The old hurt becomes the reason she needs.'] ];
+  let s = 0, goal = false; const el = $('#cgSvg');
+  const sb = btns('#cgS', SC.map(x => x[0]), 's'), mb = btns('#cgM', ['Read it as a cause', 'Read it as a goal'], 'm');
+  sb.forEach(b => b.addEventListener('click', () => { press(sb, b); s = +b.dataset.s; draw(); }));
+  mb.forEach(b => b.addEventListener('click', () => { press(mb, b); goal = b.dataset.m === '1'; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 330 : 220; vb(el, W, H);
+    const [, beh, past, cause, aim, why] = SC[s], c = goal ? 'glow' : 'cool';
+    let g = '';
+    const box = (x, y, w, h, title, txt, col, dim, now) => `<rect x="${x - w / 2}" y="${y - h / 2}" width="${w}" height="${h}" rx="12" ${FS(dim ? 'panel' : now ? 'panel-2' : col + '-soft', dim ? 'line' : now ? 'soft' : col, 1.4)}/>` + TX(x, y - h / 2 + 18, title, dim ? 'faint' : col, 10.5, 'middle', 'letter-spacing="1.2"') + wrap(x, y + 10, txt, nw ? 22 : 18, 16, dim ? 'faint' : 'text', 13.5);
+    if (nw){
+      g += box(180, 52, 300, 76, 'THE PAST', past, 'cool', goal) + box(180, 165, 300, 66, 'NOW', beh, 'muted', false, true) + box(180, 278, 300, 76, 'THE GOAL', aim, 'glow', !goal);
+      g += goal ? `<path d="M180 240V204" ${S('glow', 2.5)}/>` + arrowHead(180, 202, -Math.PI / 2, 'glow', 10) + TX(194, 228, 'pulls', 'glow', 11) : `<path d="M180 90V126" ${S('cool', 2.5)}/>` + arrowHead(180, 130, Math.PI / 2, 'cool', 10) + TX(194, 112, 'pushes', 'cool', 11);
+    } else {
+      g += `<path d="M30 200H610" ${S('line', 1.5)}/>` + TX(110, 194, 'past', 'faint', 11, 'middle') + TX(320, 194, 'now', 'faint', 11, 'middle') + TX(530, 194, 'what you want', 'faint', 11, 'middle');
+      g += box(110, 96, 176, 104, 'THE PAST', past, 'cool', goal) + box(320, 96, 176, 104, 'NOW', beh, 'muted', false, true) + box(530, 96, 176, 104, 'THE GOAL', aim, 'glow', !goal);
+      g += goal ? `<path d="M440 96H414" ${S('glow', 2.5)}/>` + arrowHead(410, 96, Math.PI, 'glow', 10) + TX(427, 84, 'pulls', 'glow', 11, 'middle') : `<path d="M200 96H226" ${S('cool', 2.5)}/>` + arrowHead(230, 96, 0, 'cool', 10) + TX(213, 84, 'pushes', 'cool', 11, 'middle');
+    }
+    el.innerHTML = g;
+    $('#cgSay').innerHTML = goal ? `<b>Teleology:</b> ${why} <b>Now there's something to work on: the goal.</b>` : `<b>Etiology:</b> ${cause} <b>If that's the whole story, nothing can change.</b>`;
+  });
+  draw();
+}
+
+/* ---------- 3: the phone call ---------- */
+{ const el = $('#anSvg'), N = 70; let pts = [], v = 10, phase = 'idle', timer = null, ph = 0, before = 0;
+  const go = $('#anGo'), phone = $('#anPhone'), reset = $('#anReset');
+  const LINES = { idle: 'Press start. The mother is about to find her daughter\'s school report under the sofa.', arguing: 'She\'s shouting now, and getting louder. "Out of her control", you might say.', phone: '"Oh, hello! Yes, of course, thank you so much for calling..." It\'s the teacher. Her voice is calm and polite in an instant.', after: 'She hangs up, and the shouting starts again right where it left off.', end: 'The anger dropped to nothing the moment it stopped being useful, then came back when it was useful again. <b>That\'s a tool being picked up and put down, not a storm.</b>' };
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230, L = 40, T = 22, B = 190, R = W - 16, x = i => L + (R - L) * i / (N - 1), y = a => B - (B - T) * a / 100; vb(el, W, H);
+    let g = `<rect x="${L}" y="${T}" width="${R - L}" height="${y(66) - T}" ${F('bad', .06)}/>` + TX(L + 6, T + 14, 'shouting', 'bad', 10.5) + TX(L + 6, B - 6, 'calm', 'faint', 10.5);
+    [0, 50, 100].forEach(a => g += `<line x1="${L}" y1="${y(a)}" x2="${R}" y2="${y(a)}" ${S('line', 1)}/>`);
+    g += TX(L - 6, y(100) + 4, '100', 'faint', 10, 'end') + TX(L - 6, y(0) + 4, '0', 'faint', 10, 'end') + TX(R, H - 10, 'time →', 'faint', 10.5, 'end');
+    for (let i = 1; i < pts.length; i++){ const [a0, p0] = pts[i - 1], [a1, p1] = pts[i]; g += `<line x1="${x(i - 1).toFixed(1)}" y1="${y(a0).toFixed(1)}" x2="${x(i).toFixed(1)}" y2="${y(a1).toFixed(1)}" ${S(p1 === 'phone' ? 'glow' : 'bad', 3, ';stroke-linecap:round')}/>`; }
+    const pi = pts.findIndex(p => p[1] === 'phone'); if (pi > 0){ g += `<line x1="${x(pi)}" y1="${T}" x2="${x(pi)}" y2="${B}" ${S('glow', 1, ';stroke-dasharray:3 3')}/>` + TX(x(pi) + 5, T + 30, 'phone rings', 'glow', 11); }
+    if (pts.length){ const [a] = pts[pts.length - 1]; g += `<circle cx="${x(pts.length - 1)}" cy="${y(a)}" r="5" ${F(phase === 'phone' ? 'glow' : 'bad')}/>`; }
+    el.innerHTML = g;
+  });
+  function tick(){
+    if (phase === 'arguing' || phase === 'after') v = Math.min(96, v + (phase === 'after' ? 2.4 : 2.2) + Math.random() * 1.4);
+    else if (phase === 'phone'){ v = 8 + Math.random() * 3; if (++ph > 12){ phase = 'after'; v = before; $('#anSay').innerHTML = LINES.after; } }
+    pts.push([v, phase]);
+    if (pts.length >= N){ clearInterval(timer); timer = null; phase = 'done'; phone.disabled = true; go.disabled = false; go.textContent = 'Run it again'; $('#anSay').innerHTML = LINES.end; }
+    draw();
+  }
+  go.addEventListener('click', () => { pts = []; v = 10; ph = 0; phase = 'arguing'; go.disabled = true; phone.disabled = false; $('#anSay').innerHTML = LINES.arguing; clearInterval(timer); timer = setInterval(tick, RM ? 220 : 110); });
+  phone.addEventListener('click', () => { if (phase !== 'arguing') return; before = v; phase = 'phone'; phone.disabled = true; $('#anSay').innerHTML = LINES.phone; });
+  reset.addEventListener('click', () => { clearInterval(timer); timer = null; pts = []; v = 10; phase = 'idle'; go.disabled = false; go.textContent = 'Start the argument'; phone.disabled = true; $('#anSay').innerHTML = LINES.idle; draw(); });
+  $('#anSay').innerHTML = LINES.idle; draw();
+}
+
+/* ---------- 4: the old car or the new one ---------- */
+{ const U = $('#lsU'), C = $('#lsC'), el = $('#lsSvg'), FAM = 8;
+  const draw = onLayout(() => {
+    const u = +U.value, c = +C.value, change = u * .5 + c, tilt = clamp((change - FAM) / 8, -1, 1), nw = NARROW(), W = nw ? 360 : 600, H = 260; vb(el, W, H);
+    const cx = W / 2, py = 96, arm = nw ? 128 : 200, ang = tilt * .14, dx = arm * Math.cos(ang), dy = arm * Math.sin(ang);
+    const lx = cx - dx, ly = py + dy, rx = cx + dx, ry = py - dy, pw = nw ? 112 : 150;
+    let g = `<path d="M${cx} ${py}L${cx - 26} 246H${cx + 26}Z" ${FS('panel-2', 'line', 1.4)}/><rect x="0" y="246" width="${W}" height="14" ${F('panel-2')}/>`;
+    g += `<line x1="${lx.toFixed(1)}" y1="${ly.toFixed(1)}" x2="${rx.toFixed(1)}" y2="${ry.toFixed(1)}" ${S('faint', 4, ';stroke-linecap:round')}/><circle cx="${cx}" cy="${py}" r="6" ${F('faint')}/>`;
+    const DROP = 112, pan = (x, y) => `<path d="M${x} ${y}L${x - pw / 2} ${y + DROP}M${x} ${y}L${x + pw / 2} ${y + DROP}" ${S('line', 1.2, ';stroke-opacity:.6')}/><path d="M${x - pw / 2 - 4} ${y + DROP}h${pw + 8}" ${S('faint', 3, ';stroke-linecap:round')}/>`;
+    g += pan(lx, ly) + pan(rx, ry);
+    // left: the familiar
+    const lb = ly + DROP - 2, bh = 24 + FAM * 4;
+    g += `<rect x="${(lx - pw / 2 + 8).toFixed(1)}" y="${(lb - bh).toFixed(1)}" width="${pw - 16}" height="${bh}" rx="8" ${FS('panel-2', 'faint', 1.4)}/>` + wrap(lx, lb - bh / 2, 'The familiar lifestyle', 14, 15, 'soft', 13);
+    g += TX(lx, ly - 30, 'STAY THE SAME', 'faint', 10.5, 'middle', 'letter-spacing="1.2"') + TX(lx, ly - 14, nw ? 'safe · known' : 'safe · known · an excuse ready', 'faint', 11, 'middle');
+    // right: unhappiness + courage
+    const rb = ry + DROP - 2, uh = u * 3.6, ch = c * 5.2; let top = rb;
+    if (uh){ g += `<rect x="${(rx - pw / 2 + 8).toFixed(1)}" y="${(top - uh).toFixed(1)}" width="${pw - 16}" height="${uh}" rx="6" ${F('bad', .55)}/>`; if (uh > 18) g += TX(rx, top - uh / 2 + 4, 'unhappiness', 'text', 11.5, 'middle'); top -= uh + 3; }
+    if (ch){ g += `<rect x="${(rx - pw / 2 + 8).toFixed(1)}" y="${(top - ch).toFixed(1)}" width="${pw - 16}" height="${ch}" rx="6" ${F('glow', .75)}/>`; if (ch > 18) g += TX(rx, top - ch / 2 + 4, 'courage', 'on-glow', 11.5, 'middle'); top -= ch; }
+    g += TX(rx, Math.min(ry - 30, top - 24), 'CHANGE', 'glow', 10.5, 'middle', 'letter-spacing="1.2"') + TX(rx, Math.min(ry - 14, top - 8), nw ? 'new · scary' : 'new · unknown · scary', 'faint', 11, 'middle');
+    el.innerHTML = g;
+    $('#lsUo').textContent = u; $('#lsCo').textContent = c;
+    $('#lsSay').innerHTML = change > FAM ? '<b>The scale tips.</b> Not because things got bad enough, but because you found the courage to step into the unknown.' : u >= 8 && c < 4 ? 'Very unhappy, and still staying put. <b>Unhappiness alone doesn\'t tip the scale. The familiar is heavy because it\'s safe.</b>' : 'The old lifestyle wins. It isn\'t good, but it\'s predictable, and it comes with excuses ready-made. <b>Try raising courage instead of unhappiness.</b>';
+  });
+  U.addEventListener('input', draw); C.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: the wall you build ---------- */
+{ const FL = [
+    ['I blush', '"If only I didn\'t blush, they\'d like me."', 'Asking someone out and being turned down'],
+    ['I\'m boring', '"Nobody wants to hear what I have to say."', 'Speaking up and being ignored'],
+    ['I\'m not good-looking', '"Someone like me doesn\'t get chosen."', 'Trying for a relationship and failing'],
+    ['I\'m too shy', '"I\'m just not a people person."', 'Making friends and being let down'],
+    ['I always mess up', '"I\'ll only ruin it."', 'Taking on responsibility and being judged'] ];
+  let f = 0, low = false; const el = $('#dsSvg'), wb = $('#dsW');
+  const fb = btns('#dsF', FL.map(x => x[0]), 'f');
+  fb.forEach(b => b.addEventListener('click', () => { press(fb, b); f = +b.dataset.f; draw(); }));
+  wb.addEventListener('click', () => { low = !low; wb.setAttribute('aria-pressed', low); wb.textContent = low ? 'Put the wall back up' : 'Lower the wall'; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 250, gy = 216; vb(el, W, H);
+    const yx = nw ? 52 : 90, wx = nw ? 150 : 270, ww = nw ? 48 : 64, wh = low ? 30 : 150, px = nw ? [230, 280, 330] : [400, 470, 540];
+    let g = `<rect x="0" y="${gy}" width="${W}" height="${H - gy}" ${F('panel-2')}/>`;
+    if (low){ px.forEach((x, i) => { const ok = i !== 1; g += `<path d="M${yx + 12} ${gy - 34}Q${(yx + x) / 2} ${gy - 120 - i * 14} ${x - 10} ${gy - 34}" ${S(ok ? 'good' : 'bad', 1.6, ';stroke-dasharray:5 4')}/>`; });
+      g += TX((yx + px[2]) / 2, 34, 'you might be hurt, you might be liked', 'soft', 12.5, 'middle'); }
+    g += `<rect x="${wx - ww / 2}" y="${gy - wh}" width="${ww}" height="${wh}" rx="3" ${FS('panel', 'line', 1.5)}/>`;
+    for (let r = 0; r < wh / 20 - .5; r++) g += `<path d="M${wx - ww / 2} ${gy - wh + 20 * (r + 1)}h${ww}" ${S('line', 1)}/>`;
+    if (!low) g += `<text x="${wx}" y="${gy - wh / 2}" font-size="13" text-anchor="middle" ${F('cool')} transform="rotate(-90 ${wx} ${gy - wh / 2})" dy="4">${FL[f][0]}</text>`;
+    g += person(yx, gy, 'glow', 1.25, low ? 'out' : 'down') + TX(yx, gy + 22, 'you', 'glow', 11, 'middle');
+    px.forEach((x, i) => g += person(x, gy, 'soft', 1.05, low && i !== 1 ? 'up' : 'down'));
+    g += TX(px[1], gy + 22, 'other people', 'faint', 11, 'middle');
+    el.innerHTML = g;
+    $('#dsTell').textContent = low ? '"I\'m like this, and I\'ll try anyway."' : FL[f][1];
+    $('#dsAvoid').textContent = low ? 'Nothing. You\'re taking the risk, and the chance.' : FL[f][2];
+  });
+  draw();
+}
+
+/* ---------- 6: feeling, complex or superiority ---------- */
+sorter('#sort6', '#tally6', [{ id: 'feel', label: 'Healthy feeling', d: 'A gap that drives growth' }, { id: 'cx', label: 'Inferiority complex', d: '"A, so I can\'t B"' }, { id: 'sup', label: 'Superiority complex', d: 'Acting above it' }], [
+  { t: '"I didn\'t go to university, so I\'ll never get a good job."', q: true, a: 'cx', w: 'The classic "A, so I can\'t B". The lack of a degree has become the reason not to try.' },
+  { t: '"My Spanish is worse than I\'d like, so I\'m doing twenty minutes a day."', q: true, a: 'feel', w: 'Comparing yourself with your ideal self and working toward it is the healthy kind.' },
+  { t: '"I know the CEO personally, you know. We go way back."', q: true, a: 'sup', w: 'Borrowing someone else\'s status to look bigger is a superiority complex, a cover for feeling small.' },
+  { t: '"I\'m too short to be taken seriously as a leader."', q: true, a: 'cx', w: 'Height became the excuse. The philosopher\'s own 155 cm turned out to be an asset once he saw it differently.' },
+  { t: '"Nobody has suffered the way I have. You couldn\'t understand."', q: true, a: 'sup', w: 'Flaunting misfortune to feel special is a form of superiority too, and it holds people at a distance.' },
+  { t: '"That talk went badly. I\'ll rehearse more next time."', q: true, a: 'feel', w: 'Noticing a shortfall and acting on it is the healthy striving Adler saw in everyone.' },
+  { t: '"I\'d apply, but with my background, what\'s the point?"', q: true, a: 'cx', w: 'Background used as a reason not to act. The complex keeps you safe from finding out.' },
+  { t: '"I never lose an argument. Everyone always ends up agreeing with me."', q: true, a: 'sup', w: 'Needing to be always right is often a way of hiding a fear of being less than others.' },
+]);
+
+/* ---------- 7: race track or level plane ---------- */
+{ const EV = [
+    ['A friend gets promoted', '"Good for him." But it stings: he\'s pulled ahead of you.', '"Brilliant, I\'m glad for him." His step forward costs you nothing.'],
+    ['A colleague is praised', 'You feel smaller, and look for what she did wrong.', 'You\'re pleased, and wonder what you could learn from her.'],
+    ['A rival fails', 'A little flash of relief. One fewer in front.', 'You feel for them. A fellow walker stumbled.'],
+    ['Someone insults you', 'You hit back. Win, and they\'ll want revenge next.', 'You see a power struggle and decline to step into the ring.'] ];
+  let race = true, ev = -1; const el = $('#lcSvg');
+  const mb = btns('#lcM', ['Life as a race', 'Life as a level plane'], 'm'), eb = btns('#lcE', EV.map(e => e[0]), 'e', -1);
+  mb.forEach(b => b.addEventListener('click', () => { press(mb, b); race = b.dataset.m === '0'; draw(); }));
+  eb.forEach(b => b.addEventListener('click', () => { press(eb, b); ev = +b.dataset.e; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 270 : 240; vb(el, W, H);
+    const who = ev < 0 ? -1 : [1, 3, 2, 4][ev];
+    let g = '';
+    if (race){
+      const L = 30, R = W - 40, lanes = 5, lh = (H - 50) / lanes, POS = [.42, .55, .3, .6, .48];
+      if (ev === 0) POS[1] = .78; if (ev === 2) POS[2] = .12;
+      for (let k = 0; k <= lanes; k++) g += `<line x1="${L}" y1="${24 + k * lh}" x2="${R}" y2="${24 + k * lh}" ${S('line', 1)}/>`;
+      g += `<path d="M${R} 24V${24 + lanes * lh}" ${S('bad', 3, ';stroke-dasharray:6 4')}/>` + TX(R + 4, 18, 'FINISH', 'bad', 10, 'end', 'letter-spacing="1"');
+      POS.forEach((p, k) => { const x = L + (R - L) * p, y = 24 + (k + .5) * lh, me = k === 0, hl = k === who;
+        g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${me ? 11 : 9}" ${FS(me ? 'glow' : hl ? 'bad' : 'panel-2', me ? 'glow' : hl ? 'bad' : 'faint', 1.5)}/>`;
+        g += TX(x - 16, y + 4, me ? 'you' : hl ? 'them' : '', me ? 'glow' : 'bad', 11, 'end');
+        if (me && who > 0) g += `<path d="M${x + 14} ${y}h20" ${S('bad', 1.4, ';stroke-dasharray:3 3')}/>`; });
+      g += TX(L, H - 8, (nw ? '' : 'Everyone runs the same track toward the same line. ') + 'Someone else\'s gain is your loss.', 'faint', 11.5);
+    } else {
+      g += `<ellipse cx="${W / 2}" cy="${H / 2 - 6}" rx="${W / 2 - 20}" ry="${H / 2 - 34}" ${F('glow', .05)}/>`;
+      const P = nw ? [[180, 120, -.3], [90, 70, .8], [270, 72, 2.4], [96, 176, -2.2], [280, 178, 1.2]] : [[310, 116, -.3], [150, 70, .8], [470, 66, 2.4], [160, 170, -2.2], [460, 172, 1.2]];
+      P.forEach(([x, y, a], k) => { const me = k === 0, hl = k === who, len = me ? 36 : 28;
+        g += `<line x1="${x}" y1="${y}" x2="${(x + len * Math.cos(a)).toFixed(1)}" y2="${(y + len * Math.sin(a)).toFixed(1)}" ${S(me ? 'glow' : 'faint', 1.6)}/>` + arrowHead(x + (len + 3) * Math.cos(a), y + (len + 3) * Math.sin(a), a, me ? 'glow' : 'faint', 7);
+        g += `<circle cx="${x}" cy="${y}" r="${me ? 11 : 9}" ${FS(me ? 'glow' : hl ? 'good' : 'panel-2', me ? 'glow' : hl ? 'good' : 'faint', 1.5)}/>`;
+        if (me) g += TX(x, y + 28, 'you, toward your ideal self', 'glow', 11, 'middle'); });
+      g += TX(20, H - 8, nw ? 'Everyone walks their own way.' : 'Everyone walks forward from where they are, in their own direction.', 'faint', 11.5);
+    }
+    el.innerHTML = g;
+    $('#lcR').textContent = ev < 0 ? 'Pick something that happens to someone else.' : EV[ev][race ? 1 : 2];
+    $('#lcW').textContent = race ? 'Dangerous. Everyone is a rival.' : 'Safe enough. People are comrades.';
+  });
+  draw();
+}
+
+/* ---------- 8: the three life tasks ---------- */
+{ const T = [
+    ['Work', 'cool', '"My boss is impossible, so there\'s no point trying."', 'Do the job well with the people you\'ve got. Work ties have a shared goal to lean on.'],
+    ['Friendship', 'good', '"People are fake. I\'m better off on my own."', 'Make one friend, starting with one honest conversation. No shared goal forces it, so it takes courage.'],
+    ['Love', 'glow', '"My parents\' marriage ruined love for me."', 'Let someone close while staying free to be yourself: a red string, not a chain.'] ];
+  let on = new Set(); const el = $('#ltSvg');
+  const tb = btns('#ltT', T.map(t => 'I avoid ' + t[0].toLowerCase()), 't', -1);
+  tb.forEach((b, i) => b.addEventListener('click', () => { on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = nw ? 330 : 280, cx = nw ? 180 : 220, cy = H / 2, R = nw ? [150, 102, 56] : [124, 86, 48]; vb(el, W, H);
+    let g = '';
+    T.forEach(([n, c], i) => { const av = on.has(i); g += `<circle cx="${cx}" cy="${cy}" r="${R[i]}" ${FS(av ? 'bad-soft' : c, av ? 'bad' : c, av ? 1.8 : 1.4, av ? 1 : .1)}/>`;
+      if (av) g += `<circle cx="${cx}" cy="${cy}" r="${R[i]}" ${S('bad', 2, ';stroke-dasharray:6 5')}/>`;
+      g += TX(cx, cy - R[i] + 18, n.toUpperCase(), av ? 'bad' : c, 11, 'middle', 'letter-spacing="1.5"'); });
+    g += person(cx, cy + 22, 'text', .9);
+    if (!nw){ const ax = 400; g += `<path d="M${ax} 56V230" ${S('faint', 1.4)}/>` + arrowHead(ax, 234, Math.PI / 2, 'faint', 8);
+      g += TX(ax + 14, 62, 'further away', 'faint', 12) + TX(ax + 14, 78, 'a shared goal holds it', 'faint', 11);
+      g += TX(ax + 14, 140, 'closer', 'faint', 12) + TX(ax + 14, 156, 'nothing forces it', 'faint', 11);
+      g += TX(ax + 14, 220, 'closest and hardest', 'faint', 12) + TX(ax + 14, 236, 'love and family', 'faint', 11); }
+    if (on.size) g += TX(nw ? 180 : 400, nw ? H - 6 : 266, on.size === 3 ? 'All three avoided: a life spent behind life-lies' : on.size + ' of 3 avoided', 'bad', 12, nw ? 'middle' : 'start');
+    el.innerHTML = g;
+    const last = [...on].pop();
+    $('#ltLie').textContent = last == null ? 'Tap a task you tend to dodge.' : T[last][2];
+    $('#ltFace').textContent = last == null ? 'Each task gets deeper and harder as you move inward.' : T[last][3];
+  });
+  draw();
+}
+
+/* ---------- 9: whose life is this? ---------- */
+{ const Q = [
+    ['What to study', 'Law, like Dad hoped', 'The design course I keep reading about'],
+    ['Where to live', 'Near the family, as expected', 'The city where the work I want is'],
+    ['A friend\'s party', 'Go, so nobody\'s upset', 'Stay in; I\'m exhausted'],
+    ['At work', 'Say yes to every request', 'Say no to the one I can\'t do well'],
+    ['Weekends', 'Post the trips people will like', 'Do what I actually enjoy, unposted'],
+    ['A job offer', 'The one with the impressive name', 'The one with the work I care about'] ];
+  let picks = []; const el = $('#rcSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 250, cx = W / 2, dx = nw ? 26 : 44; vb(el, W, H);
+    let g = `<path d="M${cx} 230V30" ${S('line', 1, ';stroke-dasharray:3 4')}/>` + TX(nw ? 14 : cx - 200, 18, '← THEIR EXPECTATIONS', 'cool', 10.5, 'start', 'letter-spacing="1"') + TX(nw ? W - 14 : cx + 200, 18, 'YOUR OWN WAY →', 'glow', 10.5, 'end', 'letter-spacing="1"');
+    let x = cx, y = 230, d = `M${x} ${y}`; const step = 32;
+    picks.forEach(p => { x = x + (p ? dx : -dx); y -= step; d += `L${x} ${y}`; });
+    g += `<path d="${d}" ${S('text', 2.5, ';stroke-linecap:round;stroke-linejoin:round')}/>`;
+    let xx = cx, yy = 230; picks.forEach(p => { xx = xx + (p ? dx : -dx); yy -= step; g += `<circle cx="${xx}" cy="${yy}" r="5" ${F(p ? 'glow' : 'cool')}/>`; });
+    g += `<circle cx="${cx}" cy="230" r="6" ${F('text')}/>` + TX(cx + 12, 244, 'you start here', 'faint', 10.5);
+    el.innerHTML = g;
+    const n = picks.length;
+    if (n < Q.length){
+      $('#rcQ').innerHTML = `<span class="k">Choice ${n + 1} of ${Q.length}</span><span class="item">${Q[n][0]}</span>`;
+      $('#rcB').innerHTML = `<button class="btn" type="button" data-p="0">${Q[n][1]}</button><button class="btn" type="button" data-p="1">${Q[n][2]}</button>`;
+      $$('#rcB [data-p]').forEach(b => b.addEventListener('click', () => { picks.push(b.dataset.p === '1'); draw(); }));
+      $('#rcSay').innerHTML = 'Neither column is wrong on its own. Notice which one you pick out of fear of disapproval.';
+    } else {
+      const own = picks.filter(Boolean).length;
+      $('#rcQ').innerHTML = `<span class="k">Your path</span><span class="item">${own} of ${Q.length} choices were your own</span>`;
+      $('#rcB').innerHTML = '<button class="btn primary" type="button" id="rcAgain">Choose again</button>';
+      $('#rcAgain').addEventListener('click', () => { picks = []; draw(); });
+      $('#rcSay').innerHTML = own <= 2 ? '<b>A life lived mostly by others\' expectations.</b> Everyone may approve, but it won\'t feel like yours.' : own >= 5 ? '<b>Your own path.</b> Some people won\'t approve. That\'s their task.' : '<b>A mix.</b> Look at the choices where you leaned left. Were they kindness, or fear of being disliked?';
+    }
+  });
+  draw();
+}
+
+/* ---------- 10: whose task? ---------- */
+sorter('#sort10', '#tally10', [{ id: 'mine', label: 'My task', d: 'I receive the result' }, { id: 'theirs', label: 'Their task', d: 'They receive the result' }], [
+  { t: 'Whether my teenage son does his homework', q: false, ctx: 'Who lives with the result?', a: 'theirs', w: 'He receives the result of studying or not. Your task is to let him know you\'ll help if he asks.' },
+  { t: 'Whether I prepare properly for my presentation', ctx: 'Who lives with the result?', a: 'mine', w: 'You give the talk and you live with how it goes. Fully yours.' },
+  { t: 'Whether my colleague likes my presentation', ctx: 'Who lives with the result?', a: 'theirs', w: 'How they judge it is their task. You can do your best, not decide their verdict.' },
+  { t: 'Whether my partner forgives me after I apologise', ctx: 'Who lives with the result?', a: 'theirs', w: 'Apologising sincerely is yours. Forgiving is theirs, in their own time.' },
+  { t: 'Whether I apologise for what I said', ctx: 'Who lives with the result?', a: 'mine', w: 'Admitting fault is your task, and it isn\'t a defeat.' },
+  { t: 'Whether my adult daughter marries the person she has chosen', ctx: 'Who lives with the result?', a: 'theirs', w: 'She lives with that choice. You can give your view once, then it\'s hers.' },
+  { t: 'Whether I take the job my parents disapprove of', ctx: 'Who lives with the result?', a: 'mine', w: 'You live the job. Their disappointment is theirs to deal with.' },
+  { t: 'Whether my friend replies to my message', ctx: 'Who lives with the result?', a: 'theirs', w: 'Sending it was yours. Replying is theirs. Waiting anxiously won\'t change that.' },
+]);
+
+/* ---------- 11: one in ten ---------- */
+{ const R = $('#ttR'), el = $('#ttSvg');
+  const draw = onLayout(() => {
+    const e = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = nw ? 290 : 230; vb(el, W, H);
+    const cols = nw ? 5 : 10, gap = nw ? 62 : 54, x0 = nw ? 56 : 66, yRow = nw ? [96, 190] : [110], me = nw ? [180, 270] : [W / 2, 206];
+    const ROLE = ['critic', 'friend', 'friend', 'n', 'n', 'n', 'n', 'n', 'n', 'n'];
+    let g = '';
+    const pos = k => [x0 + (k % cols) * gap, yRow[Math.floor(k / cols)]];
+    // effort lines from you
+    const [cx0, cy0] = pos(0), [f1x, f1y] = pos(1), [f2x, f2y] = pos(2);
+    if (e) g += `<path d="M${me[0]} ${me[1] - 40}Q${(me[0] + cx0) / 2} ${me[1] - 110} ${cx0} ${cy0 + 8}" ${S('bad', 1 + e * .7, ';stroke-opacity:.7')}/>`;
+    [[f1x, f1y], [f2x, f2y]].forEach(([x, y]) => g += `<path d="M${me[0]} ${me[1] - 40}Q${(me[0] + x) / 2} ${me[1] - 80} ${x} ${y + 8}" ${S('good', Math.max(.6, 7 - e * .6), `;stroke-opacity:${(1 - e / 12).toFixed(2)}`)}/>`);
+    ROLE.forEach((r, k) => { const [x, y] = pos(k), c = r === 'critic' ? 'bad' : r === 'friend' ? 'good' : 'faint';
+      g += person(x, y, c, .85, r === 'friend' ? 'up' : 'down');
+      g += TX(x, y + 16, r === 'critic' ? 'the critic' : r === 'friend' ? 'friend' : '', c, 10.5, 'middle'); });
+    g += person(me[0], me[1], 'glow', 1.15, e > 6 ? 'down' : 'out') + TX(me[0], me[1] + 18, 'you', 'glow', 11, 'middle');
+    if (!nw) g += TX(W - 14, 24, '1 will criticise · 2 will be friends · 7 are neither', 'faint', 11.5, 'end');
+    el.innerHTML = g;
+    $('#ttO').textContent = e + ' / 10';
+    $('#ttC').textContent = e === 0 ? 'Criticises you. It\'s their task.' : e < 5 ? 'Still criticises. Maybe a little more quietly.' : e < 9 ? 'Still not won over. Now they know they can steer you.' : 'Still critical. You\'ve given them your life and they want more.';
+    $('#ttF').textContent = e < 3 ? 'Plenty of time together.' : e < 7 ? 'Seeing less of you lately.' : 'You keep cancelling on them.';
+    $('#ttL').textContent = (100 - e * 8) + '% yours';
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 12: the larger community ---------- */
+{ const RINGS = ['You', 'Family', 'Class or team', 'School or workplace', 'Town', 'Country', 'Humanity', 'Everything that exists'];
+  const PAIN = [['At home', 1], ['In my class or team', 2], ['At school or work', 3]];
+  let p = 2; const Z = $('#cmZ'), el = $('#cmSvg');
+  const pb = btns('#cmP', PAIN.map(x => x[0]), 'p', 2);
+  pb.forEach(b => b.addEventListener('click', () => { press(pb, b); p = +b.dataset.p; draw(); }));
+  const draw = onLayout(() => {
+    const z = +Z.value, hurt = PAIN[p][1], vis = Math.min(7, hurt + z), nw = NARROW(), W = nw ? 360 : 600, H = nw ? 340 : 300, cx = W / 2, cy = H - 18; vb(el, W, H);
+    const base = k => 22 * Math.pow(1.62, k), sc = (Math.min(W / 2, H) - 30) / base(vis);
+    let g = '';
+    for (let k = vis; k >= 0; k--){ const r = base(k) * sc, h = k === hurt;
+      if (r < 3) continue;
+      g += `<path d="M${(cx - r).toFixed(1)} ${cy}A${r.toFixed(1)} ${r.toFixed(1)} 0 0 1 ${(cx + r).toFixed(1)} ${cy}Z" ${FS(h ? 'bad-soft' : k > hurt ? 'glow' : 'panel-2', h ? 'bad' : k > hurt ? 'glow' : 'line', h ? 1.8 : 1.2, h ? 1 : k > hurt ? .06 : 1)}/>`;
+      if (r > 34) g += TX(cx, cy - r + 15, RINGS[k], h ? 'bad' : k > hurt ? 'glow' : 'muted', r > 70 ? 12 : 10.5, 'middle'); }
+    const r0 = base(0) * sc; g += `<circle cx="${cx}" cy="${cy - Math.max(3, r0 * .45)}" r="${Math.max(2.5, r0 * .3).toFixed(1)}" ${F('text')}/>`;
+    el.innerHTML = g;
+    $('#cmO').textContent = vis > hurt ? RINGS[vis] : 'not yet';
+    $('#cmSay').innerHTML = z === 0 ? `Right now ${RINGS[hurt].toLowerCase()} looks like the whole world, and it's the part that hurts. <b>Drag the slider to listen to a larger community.</b>` : vis === 7 ? `${RINGS[hurt]} is still real, and still hard. But it's a tiny circle inside everything you belong to. <b>There is always a wider place for you.</b>` : `${RINGS[hurt]} is one circle among many. ${RINGS[vis]} holds it, and holds you too.`;
+  });
+  Z.addEventListener('input', draw); draw();
+}
+
+/* ---------- 13: what do you say? ---------- */
+{ const SC = [
+    ['Child clears the table', 'Your eight-year-old clears the table without being asked.', [['"Good boy! You\'re so clever!"', 'praise'], ['"Thank you, that really helped me."', 'thanks'], ['"Finally. You should do that every night."', 'rebuke']]],
+    ['Colleague fixes a bug', 'A junior colleague stays late and fixes the bug that was blocking you.', [['"Thanks, that saved my afternoon."', 'thanks'], ['"Well done, I\'m impressed you managed it."', 'praise'], ['"Took a while, didn\'t it?"', 'rebuke']]],
+    ['Partner cooks dinner', 'Your partner cooks dinner after a long day at work.', [['"See, you can cook when you try!"', 'praise'], ['"You forgot the salt again."', 'rebuke'], ['"I\'m so glad you did this. Thank you."', 'thanks']]] ];
+  const KIND = { praise: ['Praise', 'Judging from above, kindly. It tells them you\'re the one who decides what\'s good.'], rebuke: ['Rebuke', 'Judging from above, harshly. It teaches them to avoid you, not to help.'], thanks: ['Encouragement', 'Side by side. It tells them they contributed, which is what builds courage.'] };
+  let s = 0, pick = null; const el = $('#prSvg');
+  const sb = btns('#prS', SC.map(x => x[0]), 's');
+  sb.forEach(b => b.addEventListener('click', () => { press(sb, b); s = +b.dataset.s; pick = null; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 560, H = 176, gy = 156; vb(el, W, H);
+    const k = pick == null ? null : SC[s][2][pick][1], vert = k === 'praise' || k === 'rebuke', ax = nw ? 110 : 200, bx = nw ? 250 : 360;
+    let g = `<rect x="0" y="${gy}" width="${W}" height="${H - gy}" ${F('panel-2')}/>`;
+    if (vert) g += `<rect x="${ax - 40}" y="${gy - 70}" width="80" height="70" rx="4" ${FS('panel', 'line', 1.3)}/>` + TX(ax, gy - 30, 'above', 'faint', 11, 'middle');
+    g += person(ax, vert ? gy - 70 : gy, 'glow', 1.1, 'down') + TX(ax, vert ? gy - 132 : gy - 64, 'you', 'glow', 11, 'middle');
+    g += person(bx, gy, 'cool', vert ? .85 : 1.1, k === 'thanks' ? 'up' : 'down') + TX(bx, gy - (vert ? 54 : 64), 'them', 'cool', 11, 'middle');
+    if (k) g += vert ? `<path d="M${ax + 30} ${gy - 116}Q${(ax + bx) / 2} ${gy - 120} ${bx - 14} ${gy - 60}" ${S(k === 'rebuke' ? 'bad' : 'muted', 1.6)}/>` + arrowHead(bx - 12, gy - 57, 1.1, k === 'rebuke' ? 'bad' : 'muted', 8) + TX((ax + bx) / 2, gy - 128, 'a verdict, handed down', k === 'rebuke' ? 'bad' : 'muted', 11.5, 'middle')
+      : `<path d="M${ax + 20} ${gy - 44}H${bx - 20}" ${S('good', 1.8)}/>` + arrowHead(bx - 18, gy - 44, 0, 'good', 8) + arrowHead(ax + 18, gy - 44, Math.PI, 'good', 8) + TX((ax + bx) / 2, gy - 54, 'equals, not the same', 'good', 11.5, 'middle');
+    else g += TX(W / 2, 30, 'Choose a reply below', 'faint', 12, 'middle');
+    el.innerHTML = g;
+    $('#prAsk').innerHTML = `<b>${SC[s][1]}</b> What do you say?`;
+    $('#prP').innerHTML = SC[s][2].map(([t, kd], i) => `<button class="card3${pick == null ? '' : kd === 'thanks' ? ' right' : i === pick ? ' wrong' : ''}" type="button" data-k="${i}" aria-pressed="${i === pick}"><b>${t}</b>${pick == null ? '' : `<span>${KIND[kd][0]}</span>`}</button>`).join('');
+    $$('#prP [data-k]').forEach(b => b.addEventListener('click', () => { pick = +b.dataset.k; draw(); }));
+    $('#prSay').innerHTML = k ? `<b>${KIND[k][0]}.</b> ${KIND[k][1]}` : 'Two of the three replies are vertical. Only one keeps you on the same level.';
+  });
+  draw();
+}
+
+/* ---------- 14: doing or being ---------- */
+{ const P = [['A newborn', .04], ['Grandma, in hospital', .08], ['A friend with depression', .18], ['A colleague at their peak', .95], ['You, on a bad day', .14]];
+  let being = false; const el = $('#vbSvg');
+  const lb = btns('#vbL', ['Value by what they do', 'Value by being here'], 'l');
+  lb.forEach(b => b.addEventListener('click', () => { press(lb, b); being = b.dataset.l === '1'; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = nw ? 300 : 250; vb(el, W, H);
+    let g = '';
+    if (nw){
+      P.forEach(([n, d], i) => { const y = 34 + i * 54, bw = 170, v = being ? 1 : d;
+        g += TX(16, y, n, 'soft', 12.5) + `<rect x="16" y="${y + 8}" width="${bw}" height="14" rx="7" ${F('panel-2')}/><rect x="16" y="${y + 8}" width="${Math.max(6, bw * v).toFixed(1)}" height="14" rx="7" ${F(being ? 'glow' : 'cool', being ? .85 : .7)}/>`;
+        g += TX(200, y + 20, being ? 'matters to someone' : d < .3 ? 'not much' : 'a lot', being ? 'glow' : d < .3 ? 'faint' : 'cool', 11.5); });
+    } else {
+      const base = 196, top = 50;
+      P.forEach(([n, d], i) => { const x = 70 + i * 115, v = being ? 1 : d, h = (base - top) * v;
+        if (being) g += `<circle cx="${x}" cy="${base - 74}" r="40" ${F('glow', .12)}/>`;
+        g += person(x, base - 50, being ? 'glow' : 'soft', .9, being ? 'out' : 'down');
+        g += `<rect x="${x - 34}" y="${base - 6}" width="68" height="10" rx="5" ${F('panel-2')}/><rect x="${x - 34}" y="${base - 6}" width="${Math.max(5, 68 * v).toFixed(1)}" height="10" rx="5" ${F(being ? 'glow' : 'cool', .8)}/>`;
+        g += wrap(x, base + 28, n, 14, 14, 'soft', 12); });
+      g += TX(20, 24, being ? 'Every bar full: existing is already a contribution' : 'Bar = how much they produce', being ? 'glow' : 'faint', 12);
+    }
+    el.innerHTML = g;
+    $('#vbSay').innerHTML = being ? 'If your grandmother were in hospital, you wouldn\'t judge her by her output. You\'d be glad she was alive. <b>That gladness is value at the level of being, and it applies to you too.</b>' : 'Judged by doing, a baby, a sick grandparent and you on a bad day all look nearly worthless. <b>Does that match how you\'d really feel about them?</b>';
+  });
+  draw();
+}
+
+/* ---------- 15: the three pillars ---------- */
+{ const A = $('#trA'), B = $('#trB'), C = $('#trC'), el = $('#trSvg');
+  const NAME = ['Self-acceptance', 'Confidence in others', 'Contribution'];
+  const TIP = ['Accept the 60 points you are. Not "I can do anything", just "this is me; how can I get closer to 100?"', 'Trust one person a little without conditions. If they let you down, that\'s their task.', 'Do one useful thing for someone, by choice. Not sacrifice: you\'re part of the group.'];
+  const draw = onLayout(() => {
+    const v = [+A.value, +B.value, +C.value], m = Math.min(...v), lo = v.indexOf(m), avg = (v[0] + v[1] + v[2]) / 3, nw = NARROW(), W = nw ? 360 : 560, H = 270; vb(el, W, H);
+    const cx = W / 2, P = [[cx, 36], [cx + (nw ? 108 : 170), 220], [cx - (nw ? 108 : 170), 220]];
+    let g = `<path d="M${P.map(p => p.join(' ')).join('L')}Z" ${F('glow', (.04 + m * .025).toFixed(3))}/>`;
+    for (let k = 0; k < 3; k++){ const [x1, y1] = P[k], [x2, y2] = P[(k + 1) % 3], w = 1 + Math.min(v[k], v[(k + 1) % 3]) * .8, weak = Math.min(v[k], v[(k + 1) % 3]) === m && m < 6;
+      g += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" ${S(weak ? 'bad' : 'glow', w, ';stroke-linecap:round' + (weak ? ';stroke-dasharray:6 5' : ''))}/>`;
+      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2, a = Math.atan2(y2 - y1, x2 - x1); g += arrowHead(mx + 6 * Math.cos(a), my + 6 * Math.sin(a), a, weak ? 'bad' : 'glow', 9); }
+    P.forEach(([x, y], k) => { const r = 10 + v[k] * 1.6; g += `<circle cx="${x}" cy="${y}" r="${r}" ${FS(k === lo && m < 6 ? 'bad-soft' : 'panel', k === lo && m < 6 ? 'bad' : 'glow', 1.6)}/>` + TX(x, y + 5, v[k], 'text', 13, 'middle');
+      const ty = k === 0 ? y - r - 8 : y + r + 18; g += TX(x, ty, NAME[k], k === lo && m < 6 ? 'bad' : 'soft', 12.5, 'middle'); });
+    g += TX(cx, 152, m >= 7 ? 'the cycle turns' : m >= 4 ? 'turning slowly' : 'stuck', m >= 7 ? 'glow' : m >= 4 ? 'muted' : 'bad', 13, 'middle', 'font-style="italic"');
+    el.innerHTML = g;
+    $('#trAo').textContent = v[0]; $('#trBo').textContent = v[1]; $('#trCo').textContent = v[2];
+    $('#trSay').innerHTML = m >= 7 ? '<b>All three are strong, so each feeds the next:</b> contributing makes you feel worthwhile, which makes accepting yourself easier, which makes trusting others easier.' : `The cycle is only as strong as its weakest side, here <b>${NAME[lo].toLowerCase()}</b>. ${TIP[lo]}`;
+  });
+  [A, B, C].forEach(r => r.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 16: the five stages ---------- */
+{ const ST = [
+    ['Demanding admiration', 'Trying hard to be the good one: top marks, perfect behaviour, always helping.', 'To be praised and stand out as special.', 'Notice the effort and say thank you, but don\'t make praise the reason. Show they belong even when they\'re ordinary.'],
+    ['Drawing attention', 'Clowning, cheekiness, small mischief: anything to be noticed.', 'If I can\'t be praised, at least I\'ll be seen.', 'Give attention when they\'re being useful and plain, not only when they misbehave.'],
+    ['Power struggle', 'Defiance, open rule-breaking, endless arguments.', 'To prove I\'m stronger than you.', 'Don\'t step into the ring. Winning only escalates it. Stay calm and stay on their side.'],
+    ['Revenge', 'Hurting others or themselves to get back at people who "beat" them.', 'If I can\'t win, I\'ll make you suffer.', 'This needs patient, outside help. Keep the door open; don\'t retaliate.'],
+    ['Proving incompetence', 'Acting hopeless: "I can\'t do anything, don\'t expect anything of me."', 'If nobody expects anything, nobody can be disappointed in me.', 'Professional help. And unconditional confidence that they can still contribute.'] ];
+  let cur = 0; const el = $('#psSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 300 : 284; vb(el, W, H);
+    let g = '';
+    ST.forEach(([n], i) => { const on = i === cur, x = nw ? 16 + i * 20 : 20 + i * 118, y = nw ? 20 + i * 54 : 20 + i * 38, w = nw ? 300 : 112, h = nw ? 46 : 62;
+      g += `<g class="svgbtn" data-s="${i}" tabindex="0" role="button" aria-label="Stage ${i + 1}: ${n}" aria-pressed="${on}"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" ${FS(on ? 'cool-soft' : 'panel', on ? 'cool' : 'line', on ? 1.8 : 1.2)}/>`;
+      g += TX(x + 12, y + 18, 'STAGE ' + (i + 1), on ? 'cool' : 'faint', 10, 'start', 'letter-spacing="1"') + (nw ? TX(x + 12, y + 36, n, 'text', 13) : wrap(x + 12, y + 42, n, 15, 14, 'text', 12.5, 'start')) + '</g>'; });
+    if (!nw) g += `<path d="M24 258H596" ${S('bad', 1.4, ';stroke-dasharray:4 4')}/>` + arrowHead(600, 258, 0, 'bad', 8) + TX(24, 278, 'deeper into "being special by being bad"', 'bad', 11);
+    el.innerHTML = g;
+    el.querySelectorAll('[data-s]').forEach(s => { const go = () => { cur = +s.dataset.s; draw(); el.querySelector(`[data-s="${cur}"]`).focus({preventScroll:true}); }; s.addEventListener('click', go); kbd(s, go); });
+    const [n, look, goal, help] = ST[cur];
+    $('#psD').innerHTML = `<span class="k">Stage ${cur + 1} of 5</span><span class="h">${n}</span><p>${look}</p><p><b style="color:var(--cool);font-weight:500">The hidden goal:</b> ${goal}</p><p class="lesson"><b>What helps:</b> ${help}</p>`;
+  });
+  draw();
+}
+
+/* ---------- 17: the climb or the dance ---------- */
+{ let dance = false, stop = null; const el = $('#mmSvg');
+  const mb = btns('#mmM', ['Life as a climb (kinesis)', 'Life as a dance (energeia)'], 'm');
+  mb.forEach(b => b.addEventListener('click', () => { press(mb, b); dance = b.dataset.m === '1'; draw(); }));
+  $('#mmGo').addEventListener('click', () => { stop = .18 + Math.random() * .74; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = 240, L = 24, R = W - 24, B = 210, T = 40; vb(el, W, H);
+    const X = t => L + (R - L) * t, Y = t => B - (B - T) * t * (.85 + .15 * Math.sin(t * 9));
+    let g = '';
+    if (!dance){
+      let d = `M${X(0)} ${Y(0)}`; for (let t = .02; t <= 1.001; t += .02) d += `L${X(t).toFixed(1)} ${Y(t).toFixed(1)}`;
+      g += `<path d="${d}L${R + 24} ${B + 30}L${L - 24} ${B + 30}Z" ${F('panel-2', .7)}/><path d="${d}" ${S('line', 2.5, ';stroke-dasharray:5 5')}/>`;
+      g += `<path d="M${X(1)} ${Y(1)}v-24l16 6-16 6" ${FS('glow', 'glow', 1.4)}/>` + TX(X(1) - 8, Y(1) - 14, 'the summit', 'glow', 11, 'end');
+      if (stop != null){ let d2 = `M${X(0)} ${Y(0)}`; for (let t = .02; t <= stop; t += .02) d2 += `L${X(t).toFixed(1)} ${Y(t).toFixed(1)}`; g += `<path d="${d2}" ${S('faint', 3)}/><circle cx="${X(stop)}" cy="${Y(stop)}" r="7" ${F('bad')}/>` + TX(X(stop), Y(stop) + 26, 'stopped on the way', 'bad', 11.5, 'middle'); }
+    } else {
+      const N = nw ? 18 : 30;
+      for (let k = 0; k < N; k++){ const t = (k + .5) / N, x = X(t), y = (T + B) / 2 + Math.sin(k * 1.3) * 46, done = stop == null || t <= stop;
+        g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${done ? 7 : 5}" ${done ? F('glow', .9) : FS('panel', 'line', 1.2)}/>`; }
+      if (stop != null) g += `<line x1="${X(stop)}" y1="${T - 10}" x2="${X(stop)}" y2="${B}" ${S('bad', 1.4, ';stroke-dasharray:3 3')}/>` + TX(X(stop) + 6, T - 2, 'stopped here', 'bad', 11.5);
+      g += TX(L, B + 22, 'each dot is a moment, complete in itself', 'faint', 11.5);
+    }
+    el.innerHTML = g;
+    $('#mmAt').textContent = stop == null ? 'not yet' : Math.round(stop * 100) + '% of the way';
+    $('#mmC').textContent = stop == null ? '?' : dance ? '100%' : '0%';
+    $('#mmSay').innerHTML = stop == null ? 'Choose a way of living, then press the button. Nobody knows where their life will stop.' : dance ? '<b>Every moment you lived was already complete.</b> Stopping early doesn\'t take any of them away. That\'s energeia.' : `You were ${Math.round(stop * 100)}% of the way up, and by the climber's own rule, none of it counted, because it was all "on the way". <b>That's the trap of living life as kinesis.</b>`;
+  });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
