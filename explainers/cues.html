@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cues, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a field guide to the signals people send. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, try it this week, plain words, quick check), grouped into charisma, body language, voice, words and visuals, and practice.
+   Dark-first: warm plum-charcoal. The two series are the book's two traits: --glow is warmth (coral), --cool is competence (blue). */
+:root{
+  color-scheme: dark;
+  --ink:#141015;--panel:#1C171D;--panel-2:#261F27;--line:#3A3039;--text:#F5EEF1;--muted:#B9AAB2;--faint:#8A7B84;
+  --glow:#FF7E8A;--glow-soft:rgba(255,126,138,.11);--hl:rgba(255,126,138,.26);--cool:#86B6FF;--cool-soft:rgba(134,182,255,.1);
+  --good:#9BDB7A;--good-soft:rgba(155,219,122,.1);--bad:#FFB25B;--bad-soft:rgba(255,178,91,.12);
+  --soft:#E1D6DB;--deep:#0D0A0E;--toc-bg:rgba(28,23,29,.74);--glow-line:rgba(255,126,138,.36);--cool-line:rgba(134,182,255,.3);--on-glow:#2A0910;
+  --skin:#E9B99A;--skin-2:#C98E6E;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F1F2;--panel:#FFFFFF;--panel-2:#F0E7EA;--line:#E0D2D7;--text:#1C1418;--muted:#5E4F57;--faint:#8C7C84;
+  --glow:#C23A4E;--glow-soft:rgba(194,58,78,.06);--hl:#F6D3D8;--cool:#2457A6;--cool-soft:rgba(36,87,166,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#A55A06;--bad-soft:rgba(165,90,6,.08);
+  --soft:#33282D;--deep:#FDFAFB;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(194,58,78,.28);--cool-line:rgba(36,87,166,.26);--on-glow:#FFFFFF;--skin:#EDC2A4;--skin-2:#B97C5C;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F1F2;--panel:#FFFFFF;--panel-2:#F0E7EA;--line:#E0D2D7;--text:#1C1418;--muted:#5E4F57;--faint:#8C7C84;
+  --glow:#C23A4E;--glow-soft:rgba(194,58,78,.06);--hl:#F6D3D8;--cool:#2457A6;--cool-soft:rgba(36,87,166,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#A55A06;--bad-soft:rgba(165,90,6,.08);
+  --soft:#33282D;--deep:#FDFAFB;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(194,58,78,.28);--cool-line:rgba(36,87,166,.26);--on-glow:#FFFFFF;--skin:#EDC2A4;--skin-2:#B97C5C;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Cues additions ---------- */
+.w{color:var(--glow)} .c{color:var(--cool)}
+.hero .lede .w,.hero .lede .c{font-weight:500}
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal}
+.fq em.w{color:var(--glow)} .fq em.c{color:var(--cool)}
+.mix{display:grid;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;min-width:0}
+.mix-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line)}
+.mix-top b{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.1}
+.mix-top span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.mix-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:12px;padding:12px;align-items:center}
+.mix-cues{display:flex;flex-wrap:wrap;gap:6px;align-content:start}
+.mix-cues .btn{font-size:12.5px;padding:6px 10px}
+.mix-cues .btn[aria-pressed=true]{background:var(--glow);border-color:var(--glow);color:var(--on-glow)}
+.mix-cues .btn.neg{color:var(--muted);border-style:dashed}
+.mix-cues .btn.neg[aria-pressed=true]{background:var(--bad);border-color:var(--bad);color:var(--ink);border-style:solid}
+.mix-map svg{display:block;width:100%;height:auto;max-width:340px;margin:0 auto}
+.mix .cap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.mix .cap b{color:var(--glow);font-weight:500}
+.mix .cap .btn{flex:0 0 auto}
+/* checkboxes */
+.ck{display:flex;gap:12px;align-items:flex-start;font:inherit;text-align:left;font-size:14.5px;line-height:1.35;color:var(--text);background:none;border:0;border-radius:10px;padding:8px 10px;cursor:pointer}
+.ck:hover{background:var(--panel-2)}
+.ck .box{flex:0 0 auto;width:20px;height:20px;border-radius:5px;border:1.5px solid var(--faint);display:grid;place-items:center;margin-top:1px}
+.ck .box svg{width:14px;height:14px;opacity:0;stroke:var(--on-glow)}
+.ck[aria-pressed=true] .box{background:var(--glow);border-color:var(--glow)}
+.ck[aria-pressed=true] .box svg{opacity:1}
+/* cluster grid */
+.clus{display:grid;gap:3px;padding:14px;overflow-x:auto}
+.cl-row{display:grid;grid-template-columns:minmax(120px,1.6fr) repeat(6,minmax(34px,1fr));gap:3px;align-items:center}
+.cl-head span,.cl-foot span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);text-align:center;padding:4px 0;border-radius:6px}
+.cl-head span.hot,.cl-foot span.hot{color:var(--on-glow);background:var(--glow)}
+.cl-l{font-size:13px;color:var(--soft);line-height:1.2;padding-right:6px;text-align:left!important;text-transform:none!important;letter-spacing:0!important;font-family:var(--f-body)!important}
+.cl-c{height:30px;border-radius:7px;border:1px solid var(--line);background:var(--panel);cursor:pointer;padding:0}
+.cl-c.hotc{background:var(--glow-soft);border-color:var(--glow-line)}
+.cl-c:hover{border-color:var(--faint)}
+.cl-c[aria-pressed=true]{background:var(--bad);border-color:var(--bad)}
+/* script marker */
+.script{padding:20px 18px;font-size:20px;line-height:2.4;font-family:var(--f-display)}
+.sw{font:inherit;color:var(--text);background:none;border:0;border-radius:6px;padding:0 3px;cursor:pointer;position:relative}
+.sw:hover{background:var(--panel-2)}
+.sw.mk-stress{font-weight:600;text-decoration:underline;text-decoration-color:var(--glow);text-decoration-thickness:3px;text-underline-offset:5px}
+.sw.mk-slow{letter-spacing:.18em;color:var(--cool)}
+.sw.mk-smile{background:var(--glow-soft)}
+.sw .pz{font-style:normal;color:var(--cool);font-family:var(--f-mono);font-weight:600;margin-left:8px}
+.sw .sm{position:absolute;left:50%;top:-1.05em;transform:translateX(-50%);font-style:normal;font-size:16px;color:var(--glow);line-height:1}
+.mk-stress,.mk-pause,.mk-smile,.mk-slow{font-family:var(--f-mono);margin-right:2px}
+#scKey .mk-stress{text-decoration:underline;color:var(--glow)} #scKey .mk-pause,#scKey .mk-slow{color:var(--cool)} #scKey .mk-smile{color:var(--glow)}
+#scIn{margin-top:10px}
+/* email audit */
+#emIn{font-family:var(--f-mono);font-size:13.5px;margin:14px 14px 0;width:calc(100% - 28px)}
+.em-out{margin:10px 14px 0;padding:12px 14px;border-radius:10px;background:var(--deep);border:1px solid var(--line);font-size:14.5px;line-height:1.6;color:var(--muted);max-height:240px;overflow:auto}
+.em-out .ww{color:var(--glow);background:var(--glow-soft);border-radius:4px;padding:0 2px}
+.em-out .cw{color:var(--cool);background:var(--cool-soft);border-radius:4px;padding:0 2px}
+/* rule of three */
+.ro3{display:grid;gap:12px;padding:16px}
+.ro3 select{font:inherit;font-size:15px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);max-width:420px}
+.ro3-d{font-size:14.5px;color:var(--soft);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.ro3-d b{font-weight:500}
+.ro3-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ro3-grid .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ro3-box{display:grid;gap:2px;margin-top:6px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:0 0 auto}
+.dot.w{background:var(--glow)} .dot.c{background:var(--cool)} .dot.b{background:linear-gradient(90deg,var(--glow) 50%,var(--cool) 50%)} .dot.d{background:var(--bad)}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:720px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.logrows{display:grid;gap:8px}
+.logrow{display:grid;grid-template-columns:auto 1fr auto auto;gap:4px 10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.logrow b{font-weight:500}
+.logrow .pips{display:flex;gap:3px;align-items:center}
+.logrow .pips i{width:9px;height:9px;border-radius:3px;border:1px solid var(--faint)}
+.logrow .pips i.on{background:var(--glow);border-color:var(--glow)}
+.logrow .pips em{font-style:normal;color:var(--faint);padding:0 2px}
+.logrow .m{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.logrow p{grid-column:2 / -1;font-size:13.5px;color:var(--muted)}
+@media (max-width: 860px){ .mix-body{grid-template-columns:1fr} }
+@media (max-width: 560px){ .fq{padding:14px 16px} .script{font-size:18px;padding:16px 10px} .ro3-grid{grid-template-columns:1fr} .cl-row{grid-template-columns:minmax(96px,1.4fr) repeat(6,minmax(30px,1fr))} .cl-l{font-size:11.5px} .cl-head span,.cl-foot span{font-size:9px} .mix .cap{flex-direction:column;align-items:flex-start} .logrow{grid-template-columns:auto 1fr auto} .logrow .m{grid-column:2} }
+
+#fc4{max-width:400px;margin:0 auto;display:block}
+#vf10{max-width:640px;margin:0 auto;display:block}
+.mix-map svg{max-height:340px}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Vanessa Van Edwards's book</div>
+    <h1><em>Cues</em>,<br>Explained</h1>
+    <p class="lede">Before anyone weighs your words, they have already read your face, your hands, your voice and even your profile picture. Vanessa Van Edwards runs Science of People, a human behaviour research lab, and <b>Cues</b> is her field guide to those signals: more than forty of them, sorted by whether they make you look <span class="w">warm</span>, <span class="c">competent</span>, or both. This guide takes the introduction, all ten chapters and the conclusion one at a time, with a lab in each where you can try the cue for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Charisma isn't a gift you're born with. It's a mix of <em class="w">warmth</em> and <em class="c">competence</em> cues, and every one of them can be learned.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What do you want to fix?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="mix" style="margin:0" aria-label="The cue mixer: switch cues on and off and watch where you land on the warmth and competence map">
+        <div class="mix-top"><b>The cue mixer</b><span>Switch cues on and see how you come across</span></div>
+        <div class="mix-body">
+          <div class="mix-cues" id="mixCues"></div>
+          <div class="mix-map"><svg id="mixMap" role="img" aria-label="A map with warmth across and competence up, and a dot for you"></svg></div>
+        </div>
+        <div class="cap"><span id="mixCap"></span><button class="btn" id="mixReset" type="button">Clear</button></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction, chapters 1 and 2</span><span class="q">Charisma</span><span class="d">Warmth, competence and the cue cycle</span></a>
+      <a href="#part2"><span class="n">Chapters 3 to 6</span><span class="q">Body Language</span><span class="d">Leader, warmth, power and danger-zone cues</span></a>
+      <a href="#part3"><span class="n">Chapters 7 and 8</span><span class="q">Voice</span><span class="d">Sounding powerful and sounding likable</span></a>
+      <a href="#part4"><span class="n">Chapters 9 and 10</span><span class="q">Words and Visuals</span><span class="d">Charismatic writing, colour and visual presence</span></a>
+      <a href="#part5"><span class="n">Conclusion</span><span class="q">Practice</span><span class="d">Three rules and a cue practice log</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2022</span>
+      <span><b>Author</b> Vanessa Van Edwards, behavioural investigator and founder of Science of People</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 12 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== CHARISMA ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the code</span>
+      <h2>Charisma</h2>
+      <p>Van Edwards starts with a founder who lost a room before he finished his pitch, then gives the formula behind every first impression. People are asking two silent questions about you, and they answer them from cues long before they weigh your words.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Charisma is warmth plus competence, and both are sent and read through cues that you can learn to see and to use.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why good ideas still lose</div>
+        <h2>The Signals That Are Secretly Shaping You</h2>
+        <div class="short"><span class="lbl">In short</span><p>A cue is any signal that changes how people see you. We send them all the time through our bodies, voices, words and images, and other people read them before they have heard a word of our argument.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A good idea isn't enough.</b> Van Edwards opens with a founder who walked into a TV investor show with a product that would later be worth a fortune, and still walked out with nothing. The problem wasn't the idea. It was the signals he sent while presenting it.</span></li>
+          <li><span><b>Four channels.</b> The book sorts cues into four kinds: nonverbal (face, hands, posture, space), vocal (pitch, pace, volume), verbal (the words you choose) and imagery (photos, colours, clothes and objects).</span></li>
+          <li><span><b>Fast and mostly unconscious.</b> We read cues in a flash and act on them without noticing. That's why someone can leave a meeting liking or doubting you and be unable to say why.</span></li>
+          <li><span><b>Cue literacy.</b> The fix is to become literate in cues: learn to read them in others, notice the ones you send by accident, and choose the ones that match what you mean.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In 2013, Jamie Siminoff pitched his video doorbell company, then called Doorbot, on the TV show Shark Tank. By the book's reading, his cues worked against him from the first second: his greeting rose at the end like a question, as if he wasn't sure who he was, and when he named his price one shoulder lifted in a little shrug. The investors read doubt, and he left without the deal he came for. The product survived anyway. Renamed Ring, it was bought by Amazon in 2018 for around a billion dollars, and Siminoff later came back to the show as a guest shark.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: replay the pitch</div><div class="hint">Swap the cues, keep the words</div></div>
+        <div class="stage"><svg id="pi1" role="img" aria-label="A founder on stage pitching, with the cues he sends"></svg></div><div class="lab-ctl"><div class="toggles" id="piT"></div></div><div class="stats"><div class="stat"><span class="k">Investors read warmth</span><span class="v glow" id="piW"></span></div><div class="stat"><span class="k">Investors read competence</span><span class="v" id="piC"></span></div><div class="stat"><span class="k">What they feel</span><span class="s" id="piSay"></span></div></div><p class="callout">An illustrative model: the words never change, only the cues around them. <b>The same pitch can sound like a question or a promise.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Record yourself on your next video call or practice talk, then watch it back with the sound off. Write down three cues you send without meaning to.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>People respond to how you come across as much as to what you say. Learning to read and choose your cues is a skill, not a personality trait, and it starts with noticing the ones you already send.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Cue for charisma →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Warmth plus competence</div>
+        <h2>Cue for Charisma</h2>
+        <div class="short"><span class="lbl">In short</span><p>Charisma is not mystery or magnetism. It is the combination of two traits: warmth, which answers "Can I trust you?", and competence, which answers "Can I rely on you?". The most charismatic people send cues for both.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two questions.</b> When we meet someone, we quietly ask whether they mean us well (warmth) and whether they can act on it (competence). By the book's account, these two judgements make up more than 82 percent of our overall impressions.</span></li>
+          <li><span><b>Too warm.</b> All warmth and no competence reads as likable but a pushover: the people-pleaser who is liked, interrupted and passed over.</span></li>
+          <li><span><b>Too competent.</b> All competence and no warmth reads as cold, intimidating or even suspicious: respected, perhaps, but not trusted or followed.</span></li>
+          <li><span><b>Balance on purpose.</b> Most of us lean one way by habit. Charisma comes from noticing your lean and deliberately adding the cues of the other side, not from changing who you are.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Van Edwards points out how often famous partnerships pair the two traits: one partner is the warm face people love, the other the capable mind people rely on. Teams and couples do it naturally because each half covers the other's gap. Her argument is that you don't need a partner to fill yours. You can learn to send the missing set of cues yourself, and the people who seem effortlessly charismatic are usually doing exactly that.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: warm, competent or both?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Think of the last time someone underestimated you or kept their distance. Was it warmth they doubted, or competence? Pick one cue from the other side to add next time.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Charisma has two halves. If people like you but don't take you seriously, add competence cues. If they respect you but keep their distance, add warmth cues. If you're aiming for both, the book's charisma cues do double duty.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: How cues work →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · The cue cycle</div>
+        <h2>How Cues Work</h2>
+        <div class="short"><span class="lbl">In short</span><p>Cues move in a loop. We decode the cues others send, we internalise them so they change how we feel, and then we encode new cues of our own, which the next person decodes. That makes cues contagious.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Decode.</b> Your brain reads other people's cues constantly, mostly before you are aware of it: a frown, a flat voice, a short reply.</span></li>
+          <li><span><b>Internalise.</b> Those cues don't stay outside you. Seeing tension tends to make you tense; seeing someone relaxed tends to relax you.</span></li>
+          <li><span><b>Encode.</b> Then you send cues of your own, often copies of the ones you just took in, and the next person decodes them. The loop keeps turning.</span></li>
+          <li><span><b>Cues are contagious.</b> Because of the loop, one person's mood can move a whole room. That cuts both ways: a stressed leader spreads stress, and a warm one spreads warmth.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book's simplest example is a joke that lands badly. You tell it, a friend frowns, and before you've thought anything at all you feel a small drop in your stomach and your own face tightens. Your friend reads your tension, decides something is off, and the next minute of conversation is a little stiffer for both of you. Nobody chose any of it. Van Edwards's point is that once you can see the cycle, you can step into it, and choose the cue you send next instead of passing the last one along.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: one face in a meeting</div><div class="hint">Choose the cue you send, then press play</div></div>
+        <div class="stage"><svg id="ct2" role="img" aria-label="People around a table whose moods change as cues spread"></svg></div><div class="lab-ctl"><div class="row" id="ctM"></div><div class="row"><button class="btn primary" id="ctGo" type="button">Play the meeting</button><button class="btn" id="ctReset" type="button">Reset the room</button></div></div><div class="stats"><div class="stat"><span class="k">Minute</span><span class="v" id="ctMin"></span></div><div class="stat"><span class="k">Mood of the room</span><span class="v glow" id="ctMood"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="ctSay"></span></div></div><p class="callout">An illustrative model of the cue cycle: each minute, everyone decodes the people beside them and drifts towards their mood, and everyone can see you. <b>You are one face, but a steady one.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next meeting or call, decide on one cue you'll hold for the first minute, such as a real smile or a calm, slow voice. Watch whether others pick it up.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You catch moods from the people around you, and they catch yours. Since you can't control their cues, the useful move is to notice yours and send the one you'd like the room to copy.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Leader body language →</a></div>
+    </section>
+    <!-- ===================== BODY LANGUAGE ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · nonverbal cues</span>
+      <h2>Body Language</h2>
+      <p>Four chapters on the body: the cues that make leaders look both warm and capable, the cues that make people like you, the cues that make them take you seriously, and the danger-zone cues that quietly break trust.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Your body is talking all the time. The goal is to make sure it says what you mean, and nothing you don't.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Cues that signal both warmth and competence</div>
+        <h2>The Body Language of Leaders</h2>
+        <div class="short"><span class="lbl">In short</span><p>A few cues say "I'm with you" and "I'm capable" at once. Lean in, face people fully, stay open, use space wisely and hold eye contact with purpose.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Lean like a leader.</b> A small lean towards someone shows interest and agreement. Leaning back can read as doubt, boredom or disapproval.</span></li>
+          <li><span><b>Open body, open mind.</b> Crossed arms, a laptop held like a shield or a bag on your lap put a barrier between you and others, and people tend to close up in return. Clear the space between you.</span></li>
+          <li><span><b>Front forward.</b> Point your three Ts, toes, torso and top (your head), at the person you're talking to. Facing someone fully tells them they have your attention.</span></li>
+          <li><span><b>Smart with space.</b> There are rough zones of distance: intimate (up to about 18 inches), personal (about 1.5 to 4 feet), social (about 4 to 7 feet) and public (beyond that). Stepping into a closer zone too fast feels pushy; staying too far feels cold. On camera, sit around two feet from the lens.</span></li>
+          <li><span><b>Engage with gaze.</b> Eye contact builds connection. The book suggests aiming for roughly 60 to 70 percent of a conversation: enough to show you're listening, not so much it feels like a stare.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Van Edwards's team ran an online quiz asking people to read emotions from photos of eyes alone, and more than 15,000 people took it. Most found negative emotions such as contempt or fear the hardest to spot. Her takeaway: we lose a lot of information when we don't really look at people, and we miss the most when it matters most. Holding someone's gaze isn't only a cue you send. It's how you gather the cues they send you.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>The figure that 65 to 90 percent of communication is nonverbal is a wide estimate, and it varies a lot with the situation. The famous "93 percent" version comes from small studies about tone of voice and single words, so don't take any exact share too literally. The point that body language matters a great deal still holds.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: space and stance</div><div class="hint">Move, turn and open up</div></div>
+        <div class="stage"><svg id="sp3" role="img" aria-label="A top-down view of two people with distance zones drawn around one of them"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="spD">Distance between you <output id="ospD"></output></label><input type="range" id="spD" min="1" max="14" step=".5" value="5"></div><div class="ctl"><label for="spA">Turned away by <output id="ospA"></output></label><input type="range" id="spA" min="0" max="90" step="5" value="45"></div></div><div class="row"><div class="ctl"><label for="spG">Eye contact during the talk <output id="ospG"></output></label><input type="range" id="spG" min="0" max="100" step="5" value="35"></div></div><div class="toggles" id="spT"></div></div><div class="stats"><div class="stat"><span class="k">Zone</span><span class="v" id="spZone"></span></div><div class="stat"><span class="k">Charisma cues on</span><span class="v glow" id="spOn"></span></div><div class="stat"><span class="k">How it reads</span><span class="s" id="spSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>In your next conversation, check your three Ts. If your toes or torso are pointing at the door or your screen, turn them towards the other person and see if the conversation warms up.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>To look like someone people want to follow, turn towards them, lean in a little, keep your arms and the space between you clear, stand at a comfortable distance and really look at them.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: The wow factor →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Warmth cues</div>
+        <h2>The Wow Factor</h2>
+        <div class="short"><span class="lbl">In short</span><p>Warmth cues make people feel seen and safe: the head tilt, the nod, the eyebrow raise, the real smile, a well-placed touch and mirroring. Use them on purpose and people open up.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Time your tilts.</b> Tilting your head shows curiosity and says "tell me more". It exposes the neck, which reads as trust. Use it while listening; overdo it in a negotiation and it can look submissive.</span></li>
+          <li><span><b>Nod to know.</b> Slow nods encourage people to keep talking, and a triple nod in particular invites them to go on. Nodding yes tends to draw more agreement back.</span></li>
+          <li><span><b>Eyebrows raise expectations.</b> A quick lift of the brows is a near-universal signal of interest and recognition. It's the face we make when we spot a friend across a room.</span></li>
+          <li><span><b>Savor smiles.</b> A real smile reaches the eyes and crinkles the corners. Don't wear a permanent smile; be smile-ready, and let a real one spread slowly when you mean it.</span></li>
+          <li><span><b>A touch of trust and mirroring.</b> A light, appropriate touch on the arm or shoulder can build trust. Mirroring someone's positive cues, such as their gestures, volume or pace, makes you feel in step; when they send a negative cue, don't copy it, change it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book cites a study of professional basketball. Researchers counted the touches among teammates early in the 2008 to 2009 NBA season: high fives, fist bumps, chest bumps and hugs. Teams that touched more early on tended to cooperate more and to play better later in the season, even after accounting for how good the players were expected to be. Van Edwards also notes research on profile photos, where pictures with a slight head tilt and a smile showing some teeth were rated among the most likable.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: a face you can tune</div><div class="hint">Tilt, lift, smile and nod</div></div>
+        <div class="stage"><svg id="fc4" role="img" aria-label="A face whose tilt, eyebrows and smile change"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="fcT">Head tilt <output id="ofcT"></output></label><input type="range" id="fcT" min="-14" max="14" value="0"></div></div><div class="row" id="fcS"></div><div class="row"><button class="btn" id="fcB" type="button">Flash the eyebrows</button><button class="btn" id="fcN" type="button">Triple nod</button></div></div><div class="stats"><div class="stat"><span class="k">Warmth this face sends</span><span class="v glow" id="fcW"></span></div><div class="stat"><span class="k">How it reads</span><span class="s" id="fcSay"></span></div></div><p class="callout">Look at the eyes when you switch smiles. <b>A polite smile moves only the mouth; a real one lifts the cheeks and crinkles the corners of the eyes.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Next time someone is telling you something that matters to them, try the triple nod and a slight head tilt, and notice whether they keep going for longer.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Warmth is shown, not told. Tilt your head to listen, nod to encourage, lift your brows when you greet people, smile only when you mean it, and match the good cues people send you.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Look powerful →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Competence cues</div>
+        <h2>How to Look Powerful</h2>
+        <div class="short"><span class="lbl">In short</span><p>Competence cues tell people you're capable and in control: a confident posture, a focused lower eyelid, the steeple, gestures that explain, and visible palms. A few more cues help you hold the floor when you're interrupted.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Powerful posture.</b> Roll your shoulders back and down, keep your feet a little apart, and let your hands rest loose and visible. You look relaxed and ready at the same time.</span></li>
+          <li><span><b>All seeing, all knowing.</b> Tightening your lower eyelids slightly, the look of someone concentrating, signals focus and intensity. The book borrows Tyra Banks's word for smiling with your eyes, the smize.</span></li>
+          <li><span><b>The steeple.</b> Touch your fingertips together with the palms apart, like a church steeple. It's a classic sign of calm, confident thinking.</span></li>
+          <li><span><b>Excel at explaining.</b> Gestures that show size, number, direction or yourself help people follow you. Show three fingers when you list three points.</span></li>
+          <li><span><b>Palm power and holding the floor.</b> Open, visible palms say you have nothing to hide and invite people to listen. If someone interrupts, try the fish (a slightly open mouth, as if about to speak), the bookmark (a raised hand or finger meaning "I'm not done") or the anchor touch (a light touch on the arm to regain attention).</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Van Edwards's lab watched hundreds of hours of TED talks and had people rate the speakers. The most popular talks used far more hand gestures than the least popular ones, roughly 465 against 272 in the same eighteen minutes, and people who watched with the sound off rated the speakers much as people who heard them did. Hands, the book argues, are one of the first places we look to decide whether someone can be trusted and whether they know what they're talking about.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: what your hands are saying</div><div class="hint">Pick a pose and a posture</div></div>
+        <div class="stage"><svg id="hd5" role="img" aria-label="A figure whose hands and posture change"></svg></div><div class="lab-ctl"><div class="row" id="hdP"></div><div class="toggles" id="hdT"></div></div><div class="stats"><div class="stat"><span class="k">Warmth</span><span class="v glow" id="hdW"></span></div><div class="stat"><span class="k">Competence</span><span class="v" id="hdC"></span></div><div class="stat"><span class="k">How it reads</span><span class="s" id="hdSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next presentation, plan one explanatory gesture for each key point: a number on your fingers, a size with your hands, a sweep for a timeline.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>To look capable, stand easy and open, keep your hands where people can see them, and use them to explain. When someone talks over you, a small cue can win the floor back without a fight.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: The danger zone →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Danger-zone cues</div>
+        <h2>How to Spot a Bad Guy… and Not Be One Yourself</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some cues quietly signal discomfort, distrust or contempt: distancing, self-soothing, blocking, the shame touch and an accidental bothered face. No single one proves anything, but a cluster is worth noticing, in other people and in yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Distancing.</b> Leaning back, looking away, edging away or reaching for a phone puts space between you. Physical distance tends to create emotional distance.</span></li>
+          <li><span><b>Self-comfort.</b> Rubbing the neck or arm, fanning yourself (ventilating) or fixing hair and clothes (preening) are ways of calming ourselves. They show stress and pull attention from what we're saying.</span></li>
+          <li><span><b>Blocking.</b> Covering the notch at the base of the throat, clutching a bag or cup, covering the face or eyes, or shifting eye contact away are ways of protecting ourselves.</span></li>
+          <li><span><b>Shame and the bothered face.</b> Touching the forehead while looking down often goes with shame or embarrassment. And some resting faces send cues we never meant: a furrowed brow reads as anger, drooping lids and mouth as sadness, a one-sided smirk as contempt.</span></li>
+          <li><span><b>Clusters and congruence.</b> There is no single cue for lying. Look for several danger-zone cues together, and for words that don't match the body, such as "I'm thrilled" said with a flat face and crossed arms.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book suggests an experiment you can run on yourself. Film three short clips: one telling the truth about your day, one describing something that makes you anxious, and one telling a small, harmless lie. Then watch them side by side. Most people are surprised by how much changes: they touch their face, lean back, slow down or speed up, and their smile changes shape. Seeing your own danger-zone cues is the fastest way to stop sending them by accident. Van Edwards also mentions research on Botox: people who can no longer frown report feeling a little less angry, a sign that our faces feed back into our moods.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: the cluster detector</div><div class="hint">Tap cues into a conversation</div></div>
+        <div class="clus" id="clGrid"></div><div class="lab-ctl"><div class="row" id="clPre"></div></div><div class="stats"><div class="stat"><span class="k">Danger-zone cues seen</span><span class="v" id="clCount"></span></div><div class="stat"><span class="k">Clusters</span><span class="v glow" id="clClus"></span></div><div class="stat"><span class="k">What to do</span><span class="s" id="clSay"></span></div></div><p class="callout">One cue on its own means very little: maybe they're cold, maybe their neck itches. <b>Three or more at the same moment is a cluster, and a cluster is a reason to ask a kind question, not to accuse.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Film the three clips: truth, anxious, harmless lie. Write down the cues that change between them. Those are the ones to watch for in yourself.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Watch for groups of uneasy cues, not single ones, and treat them as a prompt to check in rather than proof that someone is lying. Then make sure your own resting face and habits aren't saying something you don't mean.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Sound powerful →</a></div>
+    </section>
+    <!-- ===================== VOICE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · vocal cues</span>
+      <h2>Voice</h2>
+      <p>People decide how they feel about a voice in a fraction of a second. These chapters cover the vocal cues that make you sound sure of yourself, and the ones that make you sound like someone people want to keep talking to.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>How you say it is a message of its own. Pitch, pace, pauses and volume can carry warmth or competence, or quietly cancel your words.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Vocal competence cues</div>
+        <h2>Sound Powerful</h2>
+        <div class="short"><span class="lbl">In short</span><p>Your voice can make you sound sure or unsure regardless of your words. Speak from your lowest comfortable pitch, end statements on a downward note, skip the vocal fry, vary your volume and use pauses instead of fillers.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Sound confident.</b> Nerves push our voices up and tighten them. Speaking in your lowest comfortable pitch, the one you hit as you breathe out, not your deepest possible growl, sounds steadier and surer.</span></li>
+          <li><span><b>Drop the question inflection.</b> Ending a statement with a rising tone turns it into a question. "I charge $100 per hour?" invites a haggle; "I charge $100 per hour." doesn't.</span></li>
+          <li><span><b>Eliminate vocal fry.</b> The creaky, crackling sound at the end of a sentence when we run low on breath tends to make listeners rate us as less competent. Breathe before you run out.</span></li>
+          <li><span><b>Volume control and power pauses.</b> Getting a little louder for your key point marks it as important. And a deliberate pause, instead of "um", "like" or "you know", makes you sound in control and gives people time to take in what you said.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book points to a study of surgeons. Researchers recorded doctors talking with their patients, then filtered the clips so the words could no longer be understood, leaving only the tone of voice. Listeners rated each surgeon on how dominant or caring they sounded. Those ratings alone were linked to which surgeons had been sued for malpractice: the ones who sounded more domineering and less concerned were more likely to have been. Patients were reacting to vocal cues, not to medical skill.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the pitch line</div><div class="hint">Say the same sentence six ways</div></div>
+        <div class="stage"><svg id="vc7" role="img" aria-label="The pitch of a spoken sentence drawn as a line over the words"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="vcP">Starting pitch <output id="ovcP"></output></label><input type="range" id="vcP" min="0" max="100" value="70"></div></div><div class="toggles" id="vcT"></div></div><div class="stats"><div class="stat"><span class="k">Sounds confident</span><span class="v glow" id="vcC"></span></div><div class="stat"><span class="k">How it sounds</span><span class="s" id="vcSay"></span></div></div><p class="callout">Line height is pitch, line thickness is volume, a gap is a pause and the jagged tail is vocal fry. <b>Try it out loud as you change it.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Read your rates, prices or main ask aloud into your phone. Listen for a rising ending or fry, then rerecord it with a downward finish and a pause before the number.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want to be taken seriously, finish statements on a falling note, speak from the bottom of your comfortable range, breathe so you don't fry, and let silence do the work of "um".</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Vocal likability →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Vocal warmth cues</div>
+        <h2>Vocal Likability</h2>
+        <div class="short"><span class="lbl">In short</span><p>People decide how they feel about your voice almost instantly. Warm up your greeting, vary your delivery so you sound interested, and use small listening sounds that invite others to keep talking.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A fast first impression.</b> Listeners form an impression of a voice within a fraction of a second, around 200 milliseconds by one estimate. Don't answer the phone mid-sigh, distracted or holding your breath.</span></li>
+          <li><span><b>Sound friendly.</b> A vocal hug, such as "Oh, it's so good to hear from you!", said like you mean it, warms the start of any call. A real smile changes the sound of your voice, and people can hear it.</span></li>
+          <li><span><b>Sound more interesting.</b> A flat, unchanging voice tells people you're bored. Vary pitch, pace and volume. The book suggests marking up scripts with small symbols: a smiley where you should smile, a line where you pause, underlines for stress.</span></li>
+          <li><span><b>Sound encouraging.</b> Small sounds such as "mm-hmm" and "ooh", and nudges like "tell me more", show you're listening and invite people to go on.</span></li>
+          <li><span><b>Channel your charisma.</b> Thinking of a charismatic person you admire as you speak can shift your own delivery. In one study, people asked to channel Steve Jobs while presenting spoke more loudly, held more eye contact and gestured more clearly.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Van Edwards admits she used to swallow her own name. Whenever she introduced herself while nervous, her name came out rushed and quiet, and people would ask her to repeat it or just get it wrong. Her fix was a vocal cue paired with a nonverbal one: she now touches her chest and says her name slowly and clearly, as if it's worth hearing. A name, she argues, is the first thing people remember you by, so it deserves the most care in your delivery.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: score your script</div><div class="hint">Tap a word to mark how you'll say it</div></div>
+        <div class="script" id="scBox"></div><div class="lab-ctl"><div class="row" id="scKey"></div><div class="row"><button class="btn" id="scEdit" type="button">Use my own words</button><button class="btn" id="scClear" type="button">Clear marks</button></div><div id="scIn" hidden><textarea id="scText" rows="3" aria-label="Your own script"></textarea><div class="row" style="margin-top:8px"><button class="btn primary" id="scUse" type="button">Mark these words</button></div></div></div><div class="stats"><div class="stat"><span class="k">Marks</span><span class="v" id="scN"></span></div><div class="stat"><span class="k">Vocal variety</span><span class="v glow" id="scVar"></span></div><div class="stat"><span class="k">Reads as</span><span class="s" id="scSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Mark up your opening line for your next call or talk: one smile, one pause, one stressed word. Say your name slowly, as if it matters. It does.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Warmth in a voice comes from a real smile, variety in how you speak, and small sounds that tell people you're with them. Plan where you'll pause and smile, and slow down on your name.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Charismatic words →</a></div>
+    </section>
+    <!-- ===================== WORDS AND VISUALS ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · verbal and imagery cues</span>
+      <h2>Words and Visuals</h2>
+      <p>Cues don't stop when you go quiet. Emails, texts, profile pictures, colours and the objects behind you on a video call all send warmth or competence signals of their own.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Everything people see or read from you is a cue. Choose your words, colours and images as carefully as your posture.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Verbal cues</div>
+        <h2>How to Communicate with Charisma</h2>
+        <div class="short"><span class="lbl">In short</span><p>Words carry warmth and competence too. Audit your emails, make your openers and closers memorable, pick words to suit the person, and ask questions that start real conversations.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Run an email audit.</b> Look at five emails you sent recently and count the warm words (thanks, glad, excited, appreciate), the competent words (plan, results, data, deadline) and the words that do both. Most of us lean hard one way.</span></li>
+          <li><span><b>Stop being boring.</b> Openers and closers are the most read parts of any message. Swap "Hi" and "Best" for something with a little life, like "Happy Monday, team!" or "Appreciatively".</span></li>
+          <li><span><b>Inspirational or informational.</b> Warmth-minded people are moved by stories, people and social proof; competence-minded people by data, research and results. Match your message to your reader.</span></li>
+          <li><span><b>Better questions.</b> Questions like "Been busy?" or "How are you?" get autopilot answers. Try "Working on anything exciting recently?" or "Doing anything fun this weekend?" instead.</span></li>
+          <li><span><b>Be a verbal chameleon.</b> Notice the words and style people use, short and direct or chatty and emoji-rich, and mirror them a little. It tells them you're on the same wavelength.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Hotmail launched in 1996, its founders, Sabeer Bhatia and Jack Smith, had almost no marketing budget. So they added one line to the bottom of every email their users sent: "PS: I love you. Get your free email at Hotmail." Every message became an advert with a warm sign-off, and the service grew to millions of users with astonishing speed. The book pairs the story with research from the pollster Frank Luntz suggesting that a postscript is one of the most read parts of any letter, second only to the opening.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the email audit</div><div class="hint">Paste an email, or edit the sample</div></div>
+        <textarea id="emIn" rows="7" aria-label="Your email"></textarea><div class="em-out" id="emOut" aria-live="polite"></div><div class="stats"><div class="stat"><span class="k">Warm words</span><span class="v glow" id="emW"></span></div><div class="stat"><span class="k">Competent words</span><span class="v" id="emC" style="color:var(--cool)"></span></div><div class="stat"><span class="k">Tips</span><span class="s" id="emTip"></span></div></div><p class="callout">Words highlighted <span style="color:var(--glow)">in coral</span> lean warm and <span style="color:var(--cool)">in blue</span> lean competent. The word lists are a simple illustration, so <b>treat the balance as a mirror, not a grade.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Do the audit on your last five sent emails. Then rewrite one opener and one closer so they sound like you on a good day.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your written words are cues as well. Notice whether you sound warm, competent or both, give your openers and closers some life, and speak each reader's language.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Visual presence →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Imagery cues</div>
+        <h2>Creating a Powerful Visual Presence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Photos, colours, clothes, objects and packaging all send cues. Choose them so they say what you want: premium or friendly, warm or competent, and never accidentally biased.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Elevate.</b> Visual cues can raise value. Tiffany's turquoise box makes whatever is inside feel precious before it's opened. A warm drink in your hand can even make others seem warmer: in one study, people holding a hot coffee rated a stranger as warmer than those holding an iced one.</span></li>
+          <li><span><b>Images that inspire.</b> The pictures around you, your video background, profile photo, slides, even your phone wallpaper, nudge how you and others feel. Pick ones that match the message.</span></li>
+          <li><span><b>Your nonverbal brand.</b> Objects carry meaning. In one study, people primed with a briefcase were more competitive than those primed with a backpack. Glasses tend to read as competent. A dating-app study found women rated men pictured holding cats as less masculine and less dateable.</span></li>
+          <li><span><b>Colour me confident.</b> In Western settings, red tends to signal action and urgency, blue calm and trust, green go and nature, and yellow warmth and joy, though too much yellow overwhelms. Typography matters too: text in ALL CAPS is harder to read.</span></li>
+          <li><span><b>Cue that bias.</b> People make biased snap judgements from appearance, such as seeing women as warm but less competent. Van Edwards describes deliberately adding competence cues, from word choice to dress to her video background, to get ahead of them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In 2016, Van Edwards's company hired a marketing agency and invited several firms to pitch. One proposal stood out from the start. That agency had built its slides in the company's own brand colours, fonts and photos, so its ideas already looked like they belonged. The team found itself picturing the work as finished before it had been agreed. The lesson she draws: when people can see themselves in your visuals, they find it much easier to say yes.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Colour meanings vary between cultures (white is a colour of mourning in parts of East Asia, for example), and studies of colour and of priming with objects have had mixed results when repeated. Treat these as tendencies to test with your own audience.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: set up your video call</div><div class="hint">Choose a backdrop, framing and props</div></div>
+        <div class="stage"><svg id="vf10" role="img" aria-label="A video call frame with a person, a backdrop colour and props"></svg></div><div class="lab-ctl"><div class="row" id="vfCol"></div><div class="row" id="vfFr"></div><div class="toggles" id="vfT"></div></div><div class="stats"><div class="stat"><span class="k">Warmth</span><span class="v glow" id="vfW"></span></div><div class="stat"><span class="k">Competence</span><span class="v" id="vfC"></span></div><div class="stat"><span class="k">What your frame says</span><span class="s" id="vfSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Open your camera and look at your frame as a stranger would. Change one thing, the backdrop, the light, the distance or an object, so it says what you want it to.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Everything people see around you is a cue. Frame yourself well on camera, choose colours and objects on purpose, and use visuals your audience can see themselves in.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Best practices →</a></div>
+    </section>
+    <!-- ===================== PRACTICE ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Part five · the practice</span>
+      <h2>Practice</h2>
+      <p>The book closes with three rules for using everything that came before, and a method for turning forty-odd cues into habits.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Assume the best about people, never fake a cue, and practise each one three times in each direction until it becomes yours.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Conclusion</span> · Three rules for using cues</div>
+        <h2>Cues Best Practices</h2>
+        <div class="short"><span class="lbl">In short</span><p>Use cues with good intentions and good sense. Expect the best of people, never fake a cue you don't feel, and learn each one with the rule of three.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Rule 1: expect the best.</b> A crossed arm may just mean a cold room. Give people the benefit of the doubt, and use what you read to ask better questions, not to judge.</span></li>
+          <li><span><b>Rule 2: don't fake it.</b> A cue that doesn't match what you feel tends to look phony, and people sense it. Find the real feeling first: think of something that truly makes you smile before you smile.</span></li>
+          <li><span><b>Rule 3: the rule of three.</b> Take one cue at a time. Spot it in other people three times, use it yourself three times, and jot down what happens. Then move on to the next.</span></li>
+          <li><span><b>A lifelong skill.</b> The book contains more than forty cues. Nobody uses them all at once. Learn them one by one, and in time the useful ones become how you naturally show up.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Van Edwards ends where she began: cues are a language, and like any language you get fluent by using it, not by reading about it. She asks readers not to try to change everything on Monday morning. Pick one cue that addresses your own gap, warmth or competence, and spend a week on it. Notice it on television, in meetings, across the dinner table. Then try it, and watch what changes in the people around you.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the rule of three</div><div class="hint">Pick a cue, spot it three times, use it three times</div></div>
+        <div class="ro3"><div class="field"><label for="roCue">This week's cue</label><select id="roCue"></select></div><div class="ro3-d" id="roDesc"></div><div class="ro3-grid"><div><span class="k">Decoded in others</span><div class="ro3-box" id="roDec"></div></div><div><span class="k">Encoded myself</span><div class="ro3-box" id="roEnc"></div></div></div><div class="field"><label for="roNote">What happened</label><textarea id="roNote" rows="2" placeholder="e.g. Tried the triple nod with my manager; she kept talking for another five minutes."></textarea></div></div><div class="stats"><div class="stat"><span class="k">Cues practised</span><span class="v glow" id="roDone"></span></div><div class="stat"><span class="k">Saved</span><span class="s" id="roSay">In this browser only.</span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick one cue from your weaker side in the lab above and practise it for a week. Come back and tick it off.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Learn cues slowly and honestly. Assume the best about others, never fake it, and practise one cue at a time: three times reading it, three times using it.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#after">Next: your cue practice →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your cue practice</h2>
+      <p class="big">The book's last rule is the one that makes the rest stick: spot a cue three times in other people, use it three times yourself, and write down what happened.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">The formula</span><b>Warmth + competence</b><span>Can I trust you? Can I rely on you? Charisma is a yes to both.</span></div>
+        <div><span class="n">The cycle</span><b>Decode, internalise, encode</b><span>Cues are contagious: what you read changes you, and what you send changes them.</span></div>
+        <div><span class="n">The body</span><b>Lean, front, open</b><span>Tilts, nods and real smiles for warmth; posture, steeples and palms for competence.</span></div>
+        <div><span class="n">The danger zone</span><b>Clusters, not single cues</b><span>Distancing, blocking and self-soothing matter when several show up together.</span></div>
+        <div><span class="n">The voice</span><b>Low, steady, warm</b><span>Drop the question inflection and the fry; pause on purpose; let your voice smile.</span></div>
+        <div><span class="n">The rest</span><b>Words and pictures</b><span>Emails, colours, photos and props all send warmth or competence cues too.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Cues: Master the Secret Language of Charismatic Communication</i> by Vanessa Van Edwards (2022). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show scores are illustrative models, not measurements from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Charisma", "Body language", "Voice", "Words and visuals", "Practice"];
+const CH = [["The Signals That Are Secretly Shaping You", "Hidden signals", 0, "Introduction"], ["Cue for Charisma", "Cue for charisma", 0, "Chapter 1"], ["How Cues Work", "How cues work", 0, "Chapter 2"], ["The Body Language of Leaders", "Leader body language", 1, "Chapter 3"], ["The Wow Factor", "The wow factor", 1, "Chapter 4"], ["How to Look Powerful", "Look powerful", 1, "Chapter 5"], ["How to Spot a Bad Guy… and Not Be One Yourself", "The danger zone", 1, "Chapter 6"], ["Sound Powerful", "Sound powerful", 2, "Chapter 7"], ["Vocal Likability", "Vocal likability", 2, "Chapter 8"], ["How to Communicate with Charisma", "Charismatic words", 3, "Chapter 9"], ["Creating a Powerful Visual Presence", "Visual presence", 3, "Chapter 10"], ["Cues Best Practices", "Best practices", 4, "Conclusion"]];
+const QUIZ = {
+"1": {
+"q": "Which of these is an imagery cue?",
+"o": [
+"A rising pitch at the end of a sentence",
+"The photo on your social media profile",
+"Leaning towards someone"
+],
+"a": 1,
+"w": "Imagery cues are visual signals beyond your body: photos, colours, clothes and objects. Pitch is vocal, and leaning is nonverbal."
+},
+"2": {
+"q": "A manager is very capable but her team finds her intimidating. Which side does she need to add?",
+"o": [
+"More competence cues",
+"More warmth cues",
+"Neither; it's her personality"
+],
+"a": 1,
+"w": "She already signals competence. Adding warmth cues answers the question her team is quietly asking: can I trust you?"
+},
+"3": {
+"q": "What are the three steps of the cue cycle, in order?",
+"o": [
+"Encode, decode, repeat",
+"Decode, internalise, encode",
+"See, judge, respond"
+],
+"a": 1,
+"w": "We decode others' cues, internalise them so they change how we feel, then encode cues of our own, which others decode in turn."
+},
+"4": {
+"q": "What are the three Ts you point at someone when you front them?",
+"o": [
+"Toes, torso, top",
+"Tone, timing, touch",
+"Teeth, temples, thumbs"
+],
+"a": 0,
+"w": "Facing someone with your toes, torso and top (your head) shows them they have your full attention."
+},
+"5": {
+"q": "What sets a real smile apart from a polite one?",
+"o": [
+"It shows more teeth",
+"It reaches the eyes, lifting the cheeks and crinkling the corners",
+"It lasts longer"
+],
+"a": 1,
+"w": "A sincere smile engages the muscles around the eyes. A polite one moves the mouth only, and people can usually tell."
+},
+"6": {
+"q": "Someone cuts in while you're mid-point. Which cue is a raised finger or hand that says \"I'm not finished\"?",
+"o": [
+"The fish",
+"The bookmark",
+"The steeple"
+],
+"a": 1,
+"w": "The bookmark holds your place in the conversation. The fish is a slightly open mouth; the steeple is fingertips together."
+},
+"7": {
+"q": "Your colleague says they love the plan while leaning back, rubbing their neck and looking away. What does the book suggest?",
+"o": [
+"They are definitely lying",
+"Ignore it; one person's body language means nothing",
+"It's a cluster with words that don't match, so gently ask what they really think"
+],
+"a": 2,
+"w": "Several danger-zone cues at once, plus words that don't match, is worth noticing. The book's advice is to check in kindly, not to assume deception."
+},
+"8": {
+"q": "Which version of a price is most likely to sound confident?",
+"o": [
+"A rising tone at the end, to sound friendly",
+"A falling tone at the end, with a short pause before the number",
+"Saying it fast to get it over with"
+],
+"a": 1,
+"w": "A downward ending makes it a statement, and a pause before the key number gives it weight."
+},
+"9": {
+"q": "Which is a vocal warmth cue the book recommends?",
+"o": [
+"Answering the phone as fast as possible",
+"A vocal hug, such as \"It's so good to hear from you!\"",
+"Keeping a steady, unchanging tone"
+],
+"a": 1,
+"w": "A sincere warm-up phrase sets a friendly tone from the first second. A flat, unchanging tone does the opposite."
+},
+"10": {
+"q": "You're pitching to a data-driven finance lead. What will probably land best?",
+"o": [
+"A heart-warming customer story",
+"Clear numbers and research, with the result up front",
+"Lots of emojis to seem friendly"
+],
+"a": 1,
+"w": "Competence-minded people tend to want information: data, research, results. Warmth-minded people respond more to stories."
+},
+"11": {
+"q": "Which colour does the book link with calm, productivity and trust?",
+"o": [
+"Red",
+"Blue",
+"Yellow"
+],
+"a": 1,
+"w": "Blue tends to read as calm and trustworthy. Red signals action, and yellow warmth, though too much of it can overwhelm."
+},
+"12": {
+"q": "What is the book's rule of three?",
+"o": [
+"Use three cues at once for maximum effect",
+"Spot a cue three times in others, use it three times yourself, and take notes",
+"Repeat your main point three times"
+],
+"a": 1,
+"w": "Decoding a cue three times and encoding it three times, with notes, is how the book suggests turning a cue into a habit."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#141015';
+try { const t = localStorage.getItem('cu-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('cu-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('cu-done', []));
+const save = () => store.set('cu-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const TICK = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const score10 = v => clamp(Math.round(v), 0, 10) + '/10';
+const toggles = (sel, list, on) => { $(sel).innerHTML = list.map(([id, label]) => `<label class="tg"><input type="checkbox" data-t="${id}"${on.has(id) ? ' checked' : ''}><span>${label}</span></label>`).join(''); };
+const pills = (sel, list, cur, key = 'p') => { $(sel).innerHTML = list.map(([id, label]) => `<button class="btn" type="button" data-${key}="${id}" aria-pressed="${id === cur}">${label}</button>`).join(''); return [...$(sel).querySelectorAll(`[data-${key}]`)]; };
+
+/* ---------- a simple front-view figure, feet at (x, y), drawn in local units and scaled by s ----------
+   o: shirt colour var, arms pose, lean (deg), tilt (deg), shrug (px on the left shoulder), slouch, turn (0 front .. 1 side),
+      smile none|flat|polite|real|smirk|frown, brows flat|up|furrow, lid (flexed lower lid), down (eyes down), glasses */
+const S0 = w => `style="stroke:#2A1B17;stroke-width:${w};fill:none;stroke-linecap:round"`;
+function figure(x, y, s, o = {}){
+  const shirt = o.shirt || 'cool', pose = o.arms || 'down', turn = o.turn || 0, tw = 1 - turn * .45, sl = o.slouch ? 6 : 0;
+  const shL = -34 * tw, shR = 34 * tw, shY = -160 + sl, shYL = shY - (o.shrug || 0);
+  const skin = 'style="fill:var(--skin);stroke:var(--skin-2);stroke-width:1.2"';
+  const armSt = `style="stroke:var(--${shirt});stroke-width:13;stroke-linecap:round;fill:none;stroke-opacity:.9"`;
+  const hand = (hx, hy, r = 6.5) => `<circle cx="${hx}" cy="${hy}" r="${r}" ${skin}/>`;
+  /* elbow and hand per side; side = -1 left, 1 right */
+  const P = {
+    down:    s => [[40 * s * tw, -118], [42 * s * tw, -80], 'hand'],
+    behind:  s => [[38 * s * tw, -120], [18 * s, -96], 'none'],
+    pockets: s => [[39 * s * tw, -116], [24 * s * tw, -84], 'none'],
+    crossed: s => [[38 * s * tw, -122], [-20 * s, -128], 'hand'],
+    steeple: s => [[40 * s * tw, -110], [5 * s, -128], 'steeple'],
+    palms:   s => [[42 * s * tw, -112], [62 * s * tw, -116], 'palmUp'],
+    explain: s => [[48 * s * tw, -122], [44 * s * tw, -146], 'palmIn'],
+    neck:    s => s < 0 ? [[40 * s * tw, -118], [42 * s * tw, -80], 'hand'] : [[36, -140], [12, -172], 'hand'],
+    face:    s => s < 0 ? [[40 * s * tw, -118], [42 * s * tw, -80], 'hand'] : [[34, -150], [6, -200], 'hand'],
+    cup:     s => [[38 * s * tw, -116], [10 * s, -122], s < 0 ? 'none' : 'cup']
+  }[pose] || (s => [[40 * s * tw, -118], [42 * s * tw, -80], 'hand']);
+  let back = '', front = '';
+  [-1, 1].forEach(side => { const [[ex, ey], [hx, hy], kind] = P(side), sx = side < 0 ? shL + 6 : shR - 6, sy = (side < 0 ? shYL : shY) + 8;
+    const path = `<path d="M${sx} ${sy}L${ex} ${ey}L${hx} ${hy}" ${armSt}/>`;
+    if (pose === 'behind') { back += path; return; }
+    let h = '';
+    if (kind === 'hand') h = hand(hx, hy);
+    else if (kind === 'steeple') h = `<path d="M${hx} ${hy + 6}L${side * 1} ${hy - 12}L${hx + side * 7} ${hy + 4}Z" ${skin}/>`;
+    else if (kind === 'palmUp') h = `<ellipse cx="${hx + side * 4}" cy="${hy}" rx="10" ry="5" ${skin}/><path d="M${hx + side * 2} ${hy - 1}h${side * 7}" style="stroke:var(--skin-2);stroke-width:1"/>`;
+    else if (kind === 'palmIn') h = `<ellipse cx="${hx}" cy="${hy - 4}" rx="5" ry="10" ${skin}/>`;
+    else if (kind === 'cup') h = `<rect x="${hx - 12}" y="${hy - 16}" width="22" height="24" rx="4" ${FS('panel-2', 'muted', 1.5)}/>` + hand(hx + 8, hy - 2, 6);
+    front += path + h; });
+  const lean = o.lean || 0, tilt = o.tilt || 0, hy0 = -190 + sl * 1.6 + (o.down ? 3 : 0), hx0 = sl ? 0 : 0;
+  /* face */
+  const ey = hy0 - 3, ex = 8 * (1 - turn * .3);
+  let face = '';
+  const eye = cx => o.lid ? `<path d="M${cx - 4} ${ey + (o.down ? 2 : 0)}q4 -3 8 0q-4 2 -8 0Z" style="fill:#2A1B17"/>` : `<circle cx="${cx}" cy="${ey + (o.down ? 2.5 : 0)}" r="2.3" style="fill:#2A1B17"/>`;
+  face += eye(-ex) + eye(ex);
+  const by = ey - 8 - (o.brows === 'up' ? 4 : 0);
+  face += o.brows === 'furrow' ? `<path d="M${-ex - 5} ${by - 2}L${-ex + 4} ${by + 2}M${ex + 5} ${by - 2}L${ex - 4} ${by + 2}" ${S0(2)}/>` : `<path d="M${-ex - 5} ${by}h9M${ex - 4} ${by}h9" ${S0(2)}/>`;
+  const my = hy0 + 10, sm = o.smile || 'flat';
+  face += sm === 'real' ? `<path d="M-8 ${my - 1}Q0 ${my + 9} 8 ${my - 1}Z" ${'style="fill:#3A1F1C;stroke:#2A1B17;stroke-width:1.5"'}/><path d="M${-ex - 8} ${ey - 1}l-3 -2M${ex + 8} ${ey - 1}l3 -2" ${S0(1)}/>`
+    : sm === 'polite' ? `<path d="M-7 ${my}Q0 ${my + 4} 7 ${my}" ${S0(1.8)}/>`
+    : sm === 'smirk' ? `<path d="M-6 ${my + 1}L3 ${my + 1}Q7 ${my} 9 ${my - 4}" ${S0(1.8)}/>`
+    : sm === 'frown' ? `<path d="M-7 ${my + 3}Q0 ${my - 2} 7 ${my + 3}" ${S0(1.8)}/>`
+    : sm === 'none' ? '' : `<path d="M-6 ${my + 1}h12" ${S0(1.8)}/>`;
+  if (o.glasses) face += `<circle cx="${-ex}" cy="${ey}" r="6" ${S0(1.6)}/><circle cx="${ex}" cy="${ey}" r="6" ${S0(1.6)}/><path d="M${-ex + 6} ${ey}h${2 * ex - 12}" ${S0(1.6)}/>`;
+  const head = `<g transform="rotate(${tilt} 0 ${hy0 + 14})"><rect x="-7" y="${hy0 + 14}" width="14" height="14" ${skin}/><circle cx="${hx0}" cy="${hy0}" r="22" ${skin}/>${face}</g>`;
+  const torso = `<path d="M${shL} ${shYL}Q0 ${shY - 6} ${shR} ${shY}L${26 * tw} -80L${-26 * tw} -80Z" ${F(shirt, .9)}/>`;
+  const legs = `<path d="M${-12 * tw} -82L${(o.wide ? -24 : -15) * tw} 0M${12 * tw} -82L${(o.wide ? 24 : 15) * tw} 0" style="stroke:var(--faint);stroke-width:14;stroke-linecap:round"/>`;
+  return `<g transform="translate(${x} ${y}) scale(${s})">${legs}<g transform="rotate(${lean} 0 -80)">${back}${torso}${head}${front}</g></g>`;
+}
+
+/* ---------- afterword card (reads the rule-of-three log from the conclusion lab) ---------- */
+let CUES_ALL = [];
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const L = store.get('cu-ro3', { log: {} }).log || {};
+  const ids = Object.keys(L).filter(k => { const r = L[k]; return r && ((r.d || []).some(Boolean) || (r.e || []).some(Boolean) || r.note); });
+  if (!ids.length){ el.innerHTML = '<span class="k">Nothing logged yet</span><p class="empty">Pick a cue in the <a href="#ch12">rule of three</a> lab and tick it off as you spot it and use it. Your log shows up here, in this browser only.</p>'; return; }
+  el.innerHTML = '<span class="k">Your cue log</span><div class="logrows">' + ids.map(id => { const c = CUES_ALL.find(x => x[0] === id); if (!c) return ''; const r = L[id], n = (r.d || []).filter(Boolean).length + (r.e || []).filter(Boolean).length;
+    return `<div class="logrow"><span class="dot ${c[2]}"></span><b>${c[1]}</b><span class="pips">${[0, 1, 2].map(i => `<i class="${(r.d || [])[i] ? 'on' : ''}"></i>`).join('')}<em>·</em>${[0, 1, 2].map(i => `<i class="${(r.e || [])[i] ? 'on' : ''}"></i>`).join('')}</span><span class="m">${n === 6 ? 'learned' : n + ' of 6'}</span>${r.note ? `<p>${esc(r.note)}</p>` : ''}</div>`; }).join('') + '</div><p class="empty">Coral pips are times you spotted the cue in someone else; the second three are times you used it yourself.</p>';
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['People like me but don\'t take me seriously', 6, 'Add competence cues', 'Stand easy and open, steeple when you think, show your palms and use gestures that explain. Then check your voice in chapter 7.'],
+    ['People respect me but keep their distance', 5, 'Add warmth cues', 'Tilt your head as you listen, nod, flash your eyebrows when you greet people and let real smiles spread slowly.'],
+    ['I lose the room when I pitch', 1, 'Mind your cues, not just your idea', 'A great idea can sink under a questioning tone and a shrug. Watch a recording of yourself with the sound off.'],
+    ['A bad mood spreads through my team', 3, 'Cues are contagious', 'You decode, internalise and encode. Choose the cue you send first, and the room is more likely to copy it.'],
+    ['I can\'t tell what people really think', 7, 'Look for clusters', 'One crossed arm means little. Three uneasy cues at once, or words that don\'t match the face, are worth a kind question.'],
+    ['I sound nervous when I name my price', 8, 'Drop the question inflection', 'End on a falling note, from the bottom of your comfortable range, with a pause before the number.'],
+    ['I sound flat on calls', 9, 'Warm up your voice', 'Start with a vocal hug, mark where to smile and pause, and use small listening sounds.'],
+    ['My emails get ignored', 10, 'Audit your words', 'Count your warm and competent words, liven up your opener and closer, and ask questions people want to answer.'],
+    ['I look off on video calls', 11, 'Mind your frame', 'Sit about two feet back, light your face, and pick a backdrop and objects that say what you mean.'],
+    ['I don\'t know where to start', 12, 'The rule of three', 'Pick one cue, spot it three times and use it three times. Then pick the next.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the cue mixer on a warmth x competence map ---------- */
+{ const MIX = [
+    ['Lean in', 1, 1], ['Head tilt', 2, 0], ['Real smile', 2, 0], ['Triple nod', 1.5, 0], ['Steeple', 0, 2], ['Open palms', 1, 1.5],
+    ['Low, steady voice', 0, 2], ['Eye contact 60–70%', 1, 1], ['Question inflection', 0, -2.5], ['Crossed arms', -2, -1], ['Vocal fry', 0, -1.5], ['Checking your phone', -2, -1.5] ];
+  const el = $('#mixMap'), on = new Set();
+  $('#mixCues').innerHTML = MIX.map(([t, w, c], i) => `<button class="btn mixb ${w + c < 0 ? 'neg' : ''}" type="button" data-m="${i}" aria-pressed="false">${t}</button>`).join('');
+  const QN = [['Charismatic', 'glow'], ['Warm but overlooked', 'muted'], ['Capable but cold', 'muted'], ['Forgettable', 'muted']];
+  const draw = onLayout(() => { const W = 300, H = 300, m = 34, X = v => m + (v + 7) / 14 * (W - 2 * m), Y = v => H - m - (v + 7) / 14 * (H - 2 * m);
+    vb(el, W, H); let w = 0, c = 0; on.forEach(i => { w += MIX[i][1]; c += MIX[i][2]; }); w = clamp(w, -6.5, 6.5); c = clamp(c, -6.5, 6.5);
+    let g = `<rect x="${X(0)}" y="${Y(7)}" width="${X(7) - X(0)}" height="${Y(0) - Y(7)}" ${F('glow', .08)}/>`;
+    g += `<rect x="${m}" y="${m}" width="${W - 2 * m}" height="${H - 2 * m}" rx="10" ${S('line', 1)}/><path d="M${X(0)} ${m}V${H - m}M${m} ${Y(0)}H${W - m}" ${S('line', 1, ';stroke-dasharray:3 4')}/>`;
+    g += TX(X(3.5), Y(6.2), QN[0][0], 'glow', 12, 'middle') + TX(X(3.5), Y(-6), QN[1][0], 'muted', 11.5, 'middle') + TX(X(-3.5), Y(6.2), QN[2][0], 'muted', 11.5, 'middle') + TX(X(-3.5), Y(-6), QN[3][0], 'muted', 11.5, 'middle');
+    g += TX(W / 2, H - 10, 'Warmth →', 'glow', 12, 'middle') + `<text x="14" y="${H / 2}" font-size="12" text-anchor="middle" transform="rotate(-90 14 ${H / 2})" ${F('cool')}>Competence →</text>`;
+    g += `<circle cx="${X(w)}" cy="${Y(c)}" r="16" ${F('glow', .18)}/><circle cx="${X(w)}" cy="${Y(c)}" r="8" ${FS('glow', 'ink', 2)}/>`;
+    el.innerHTML = g;
+    const q = w > 0.5 && c > 0.5 ? 0 : w > 0.5 ? 1 : c > 0.5 ? 2 : (w < -0.5 || c < -0.5) ? 3 : -1;
+    $('#mixCap').innerHTML = !on.size ? 'Switch on a few cues. Coral ones help, grey ones hurt.' : q < 0 ? '<b>Neutral.</b> Your cues are cancelling out.' : `<b>${QN[q][0]}.</b> ${['People trust you and rely on you.', 'Liked, but maybe not taken seriously. Add a competence cue.', 'Respected, but maybe not trusted. Add a warmth cue.', 'Your cues are sending people away.'][q]}`;
+  });
+  $$('#mixCues [data-m]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.m; on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); draw(); }));
+  $('#mixReset').addEventListener('click', () => { on.clear(); $$('#mixCues [data-m]').forEach(b => b.setAttribute('aria-pressed', 'false')); draw(); });
+  draw();
+}
+
+/* ---------- intro: replay the pitch ---------- */
+{ const T = [['q', 'Greets with a rising, question-like tone', -1, -3], ['shrug', 'Shrugs one shoulder on the price', 0, -3], ['hide', 'Hands hidden behind his back', -2, -1], ['eyes', 'Eyes down at the floor', -1, -2],
+             ['smile', 'A real smile on the greeting', 3, 0], ['palms', 'Open palms when naming the price', 1, 2], ['front', 'Squares up to the panel', 1, 1.5]];
+  const on = new Set(['q', 'shrug', 'hide']), el = $('#pi1');
+  toggles('#piT', T, on);
+  $$('#piT [data-t]').forEach(cb => cb.addEventListener('change', () => { const t = cb.dataset.t; cb.checked ? on.add(t) : on.delete(t);
+    if (cb.checked && t === 'hide'){ on.delete('palms'); } if (cb.checked && t === 'palms'){ on.delete('hide'); }
+    $$('#piT [data-t]').forEach(x => x.checked = on.has(x.dataset.t)); draw(); }));
+  const bubble = (x, y, w, txt, tone) => `<rect x="${x}" y="${y}" width="${w}" height="44" rx="12" ${FS('panel', tone, 1.5)}/><path d="M${x + 10} ${y + 44}l-12 10l22 -10" ${FS('panel', tone, 1.5)}/><rect x="${x + 2}" y="${y + 40}" width="22" height="5" ${F('panel')}/>` + TX(x + w / 2, y + 28, txt, 'text', 16, 'middle');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = 300; vb(el, W, H);
+    let w = 5, c = 5; T.forEach(([id, , dw, dc]) => { if (on.has(id)){ w += dw; c += dc; } });
+    const fx = nw ? 80 : 200, arms = on.has('palms') ? 'palms' : on.has('hide') ? 'behind' : 'down';
+    let g = `<rect x="0" y="${H - 34}" width="${W}" height="34" ${F('panel-2')}/>`;
+    g += figure(fx, H - 30, nw ? .98 : 1.1, { arms, shrug: on.has('shrug') ? 18 : 0, down: on.has('eyes'), smile: on.has('smile') ? 'real' : 'flat', turn: on.has('front') ? 0 : .35, shirt: 'cool' });
+    const bx = nw ? 150 : 330, bw = nw ? 196 : 300;
+    g += bubble(bx, 30, bw, on.has('q') ? 'Hi… I\'m Jamie?' : 'Hi, I\'m Jamie.', on.has('q') ? 'bad' : 'good');
+    g += bubble(bx, 112, bw, 'And here\'s our ask.', on.has('shrug') ? 'bad' : on.has('palms') ? 'good' : 'line');
+    const tags = T.filter(([id]) => on.has(id)).map(([id, , dw, dc]) => [id, dw + dc]);
+    const lab = { q: 'rising tone', shrug: 'one-shoulder shrug', hide: 'hidden hands', eyes: 'eyes down', smile: 'real smile', palms: 'open palms', front: 'fronting' };
+    let ty = 196; tags.slice(0, 4).forEach(([id, v], k) => { g += TX(bx, ty + k * 18, (v < 0 ? '− ' : '+ ') + lab[id], v < 0 ? 'bad' : 'good', 13); });
+    if (tags.length > 4) g += TX(bx + (nw ? 110 : 160), ty, '+' + (tags.length - 4) + ' more', 'faint', 12);
+    el.innerHTML = g;
+    $('#piW').textContent = score10(w); $('#piC').textContent = score10(c);
+    const cc = clamp(c, 0, 10), ww = clamp(w, 0, 10);
+    $('#piSay').textContent = cc <= 3 ? 'Doubt. If he isn\'t sure of himself or his price, why should they be?' : cc >= 7 && ww >= 6 ? 'A founder they\'d back: sure of the number and easy to like.' : cc >= 7 ? 'Capable, but a little guarded. A real smile would help.' : 'Mixed signals. They\'ll want to hear more before they trust it.';
+  });
+  draw();
+}
+
+/* ---------- 1: warm, competent or both ---------- */
+sorter('#sort2', '#tally2', [{ id: 'w', label: 'Warmth', d: 'Can I trust you?' }, { id: 'c', label: 'Competence', d: 'Can I rely on you?' }, { id: 'b', label: 'Both', d: 'A charisma cue' }], [
+  { t: 'Tilting your head while someone talks', a: 'w', w: 'The head tilt says "tell me more". It\'s one of the book\'s classic warmth cues.' },
+  { t: 'Touching your fingertips together in a steeple', a: 'c', w: 'The steeple signals calm, confident thinking: a competence cue.' },
+  { t: 'Leaning slightly towards the person you\'re talking to', a: 'b', w: 'Leaning in shows interest and engagement at once, so the book counts it as a charisma cue.' },
+  { t: '"I\'m so glad you could make it."', a: 'w', w: 'Warm words about the other person build trust.' },
+  { t: 'Speaking from the bottom of your comfortable pitch', a: 'c', w: 'A lower, steady voice sounds sure of itself: competence.' },
+  { t: 'Turning your toes, torso and head to face someone', a: 'b', w: 'Fronting shows attention (warmth) and presence (competence): a charisma cue.' },
+  { t: 'A quick eyebrow flash when you spot a friend', a: 'w', w: 'The eyebrow raise signals recognition and interest: warmth.' },
+  { t: '"Here are the Q3 results and the plan for next quarter."', a: 'c', w: 'Data, results and plans are competence words.' },
+  { t: 'Holding eye contact for most of the conversation', a: 'b', w: 'Gaze shows you\'re listening and that you\'re confident: both sides at once.' },
+  { t: 'Using your hands to show the size of a number', a: 'c', w: 'Explanatory gestures help people understand you, a competence cue.' },
+]);
+
+/* ---------- 2: one face in a meeting (the cue cycle) ---------- */
+{ const el = $('#ct2'), N = 10, MOODS = [['warm', 'A warm, real smile', .9], ['neutral', 'A neutral face', 0], ['stress', 'A stressed frown', -.9], ['phone', 'Eyes on my phone', -.5]];
+  let you = 'warm', mood = [], minute = 0, timer = null;
+  const reset = () => { const r = rng(21); mood = [...Array(N)].map(() => (r() - .5) * .5); mood[3] = -.8; mood[7] = .5; minute = 0; };
+  const mb = pills('#ctM', MOODS.map(([id, t]) => [id, t]), you, 'm');
+  mb.forEach(b => b.addEventListener('click', () => { you = b.dataset.m; press(mb, b); draw(); }));
+  const yv = () => MOODS.find(m => m[0] === you)[2];
+  function step(){ const y = yv(); mood = mood.map((m, i) => { const l = mood[(i + N - 1) % N], r = mood[(i + 1) % N]; return clamp(m + .28 * ((l + r) / 2 - m) + .14 * (y - m), -1, 1); }); minute++; }
+  const col = m => m > .15 ? 'glow' : m < -.15 ? 'bad' : 'faint';
+  const face = (x, y, r, m, isYou) => { const c = col(m), my = y + r * .35, k = m * r * .35;
+    return `<circle cx="${x}" cy="${y}" r="${r}" ${FS(isYou ? 'panel' : 'panel-2', c, isYou ? 3 : 2)}/><circle cx="${x - r * .32}" cy="${y - r * .15}" r="${r * .09}" ${F('text')}/><circle cx="${x + r * .32}" cy="${y - r * .15}" r="${r * .09}" ${F('text')}/><path d="M${x - r * .38} ${my - k / 2}Q${x} ${my + k} ${x + r * .38} ${my - k / 2}" ${S('text', 2)}/>`; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 330 : 300, cx = W / 2, cy = nw ? 180 : 160, rx = nw ? 130 : 290, ry = nw ? 110 : 100, fr = nw ? 18 : 22;
+    vb(el, W, H); let g = `<ellipse cx="${cx}" cy="${cy}" rx="${rx - 46}" ry="${ry - 40}" ${FS('panel-2', 'line', 1)}/>`;
+    const pos = i => { const a = -Math.PI / 2 + 2 * Math.PI * (.08 + (i + .5) / N * .84); return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)]; };
+    const yx = cx, yy = cy - ry + (nw ? 4 : 10);
+    mood.forEach((m, i) => { const [x, y] = pos(i); g += `<line x1="${yx}" y1="${yy}" x2="${x}" y2="${y}" ${S('line', 1, ';stroke-opacity:.5')}/>`; });
+    mood.forEach((m, i) => { const [x, y] = pos(i); g += face(x, y, fr, m, false); });
+    g += face(yx, yy, fr + 6, yv(), true) + TX(yx, yy - fr - 14, 'You', 'text', 13, 'middle');
+    el.innerHTML = g;
+    const avg = mood.reduce((a, b) => a + b, 0) / N;
+    $('#ctMin').textContent = minute; $('#ctMood').textContent = (avg > 0 ? '+' : '') + Math.round(avg * 100);
+    $('#ctSay').textContent = minute === 0 ? 'One person arrives grumpy, one cheerful. Press play.' : avg > .4 ? 'Your warmth has spread round the table.' : avg < -.4 ? 'The tension spread. Everyone caught it, including the cheerful one.' : 'The room is drifting. Hold your cue a little longer.';
+  });
+  $('#ctGo').addEventListener('click', e => { const b = e.currentTarget; if (timer){ clearInterval(timer); timer = null; b.textContent = 'Play the meeting'; return; }
+    if (minute >= 20) reset(); b.textContent = 'Pause';
+    timer = setInterval(() => { step(); draw(); if (minute >= 20){ clearInterval(timer); timer = null; b.textContent = 'Play the meeting'; } }, RM ? 30 : 260); });
+  $('#ctReset').addEventListener('click', () => { if (timer){ clearInterval(timer); timer = null; $('#ctGo').textContent = 'Play the meeting'; } reset(); draw(); });
+  reset(); draw();
+}
+
+/* ---------- 3: space and stance ---------- */
+{ const el = $('#sp3'), dI = $('#spD'), aI = $('#spA'), gI = $('#spG'), T = [['lean', 'Lean in a little'], ['arms', 'Arms crossed'], ['laptop', 'Laptop held in front'], ['phone', 'Phone in hand']];
+  const on = new Set(['arms']); toggles('#spT', T, on);
+  $$('#spT [data-t]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? on.add(cb.dataset.t) : on.delete(cb.dataset.t); draw(); }));
+  const ZONES = [[1.5, 'Intimate'], [4, 'Personal'], [7, 'Social'], [99, 'Public']];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = nw ? 260 : 300, d = +dI.value, a = +aI.value, gz = +gI.value, px = nw ? 21 : 44, x0 = nw ? 40 : 70, y0 = H / 2 - 10;
+    vb(el, W, H); let g = '';
+    [[7, .05], [4, .08], [1.5, .12]].forEach(([r, o]) => { g += `<circle cx="${x0}" cy="${y0}" r="${r * px}" ${FS('glow', 'glow-line', 1, o)}/>`; });
+    [[1.5, 'intimate'], [4, 'personal'], [7, 'social']].forEach(([r, t]) => { const R = r * px, dy = Math.min(nw ? 70 : 100, R * .75); g += TX(x0 + Math.sqrt(R * R - dy * dy) - 4, y0 + dy + 4, t, 'faint', nw ? 9.5 : 11, 'end'); });
+    /* other person, facing you */
+    const ox = Math.min(x0 + d * px, W - 26);
+    g += `<ellipse cx="${ox}" cy="${y0}" rx="11" ry="24" ${F('cool', .85)}/><circle cx="${ox}" cy="${y0}" r="11" ${F('skin')}/><path d="M${ox - 13} ${y0}l-6 0" ${S('skin-2', 3)}/>`;
+    g += TX(ox, y0 - 40, 'them', 'muted', 12, 'middle');
+    /* you, turned away by a degrees; leaning moves the head forward */
+    const rad = a * Math.PI / 180, lean = on.has('lean') ? 7 : 0;
+    g += `<g transform="translate(${x0} ${y0}) rotate(${-a})">`;
+    g += `<ellipse cx="0" cy="0" rx="11" ry="25" ${F('glow', .9)}/>`;
+    if (on.has('arms')) g += `<path d="M6 -16Q16 0 6 16" ${S('skin-2', 6)}/>`;
+    if (on.has('laptop')) g += `<rect x="14" y="-15" width="6" height="30" rx="2" ${F('muted')}/>`;
+    if (on.has('phone')) g += `<rect x="12" y="10" width="5" height="10" rx="1.5" ${F('text')}/>`;
+    g += `<circle cx="${lean}" cy="0" r="11" ${F('skin')}/><path d="M${lean + 12} 0l7 0" ${S('skin-2', 3)}/>`;
+    g += `<path d="M24 -26l10 0M24 26l10 0" ${S('glow', 2.5, ';stroke-linecap:round')}/></g>`;
+    g += TX(x0, y0 - 40, 'you', 'glow', 12, 'middle');
+    /* gaze line */
+    if (gz > 0) g += `<line x1="${x0 + 14 * Math.cos(rad)}" y1="${y0 - 14 * Math.sin(rad)}" x2="${ox - 12}" y2="${y0}" ${S('glow', 1.5, ';stroke-dasharray:' + (gz / 10).toFixed(1) + ' ' + ((100 - gz) / 10 + 2).toFixed(1))}/>`;
+    g += TX(W - 10, H - 12, 'top-down view · 1 ft ≈ ' + px + ' px', 'faint', 11, 'end');
+    el.innerHTML = g;
+    out('spD', d + ' ft'); out('spA', a + '°'); out('spG', gz + '%');
+    const zone = ZONES.find(z => d < z[0])[1];
+    const cues = [a <= 15, on.has('lean'), !on.has('arms') && !on.has('laptop'), d >= 1.5 && d <= 7, gz >= 55 && gz <= 75, !on.has('phone')];
+    $('#spZone').textContent = zone; $('#spOn').textContent = cues.filter(Boolean).length + ' of 6';
+    const say = [];
+    if (d < 1.5) say.push('Too close for most conversations: it feels invasive.'); else if (d > 7) say.push('Public distance: fine for a talk, cold for a chat.');
+    if (a > 15) say.push(`Turned ${a}° away: your toes and torso say you\'d rather be elsewhere.`);
+    if (on.has('arms') || on.has('laptop')) say.push('Something is blocking the space between you.');
+    if (on.has('phone')) say.push('The phone pulls your attention away.');
+    if (gz < 40) say.push('Too little eye contact reads as nervous or bored.'); else if (gz > 85) say.push('That much eye contact starts to feel like a stare.');
+    $('#spSay').textContent = say.length ? say[0] + (say.length > 1 ? ' ' + say[1] : '') : 'Facing, open, leaning in, at a comfortable distance: warm and capable.';
+  });
+  [dI, aI, gI].forEach(i => i.addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 4: a face you can tune ---------- */
+{ const el = $('#fc4'), tI = $('#fcT'), SM = [['flat', 'No smile'], ['polite', 'Polite smile'], ['real', 'Real smile'], ['smirk', 'One-sided smirk']];
+  let sm = 'flat', brow = false, nodY = 0, used = { brow: false, nod: false };
+  const sb = pills('#fcS', SM, sm, 's'); sb.forEach(b => b.addEventListener('click', () => { sm = b.dataset.s; press(sb, b); draw(); }));
+  const draw = onLayout(() => { const W = 360, H = 270, t = +tI.value, cx = 180, cy = 136 + nodY; vb(el, W, H);
+    const real = sm === 'real', ey = cy - 12, ex = 30, eh = real ? 4 : 8, by = ey - 22 - (brow ? 10 : 0);
+    let f = `<ellipse cx="${cx}" cy="${cy}" rx="74" ry="90" style="fill:var(--skin);stroke:var(--skin-2);stroke-width:2"/>`;
+    f += `<path d="M${cx - 74} ${cy - 20}Q${cx - 70} ${cy - 108} ${cx} ${cy - 96}Q${cx + 70} ${cy - 108} ${cx + 74} ${cy - 20}Q${cx + 50} ${cy - 76} ${cx} ${cy - 70}Q${cx - 50} ${cy - 76} ${cx - 74} ${cy - 20}Z" style="fill:#4A3029"/>`;
+    [-1, 1].forEach(s => { const x = cx + s * ex;
+      f += `<ellipse cx="${x}" cy="${ey}" rx="12" ry="${eh}" style="fill:#FFFFFF"/><circle cx="${x}" cy="${ey}" r="${Math.min(eh, 5.5)}" style="fill:#2A1B17"/>`;
+      if (real) f += `<path d="M${x + s * 16} ${ey - 6}l${s * 8} -4M${x + s * 17} ${ey}l${s * 9} 0M${x + s * 16} ${ey + 6}l${s * 8} 4" ${S('skin-2', 1.6)}/><path d="M${x - 12} ${ey + 12}Q${x} ${ey + 6} ${x + 12} ${ey + 12}" ${S('skin-2', 1.4)}/>`;
+      f += `<path d="M${x - 16} ${by + (s * 0)}Q${x} ${by - 6} ${x + 16} ${by}" ${S0(4)}/>`; });
+    f += `<path d="M${cx} ${cy - 6}L${cx - 8} ${cy + 22}L${cx + 4} ${cy + 24}" ${S('skin-2', 2)}/>`;
+    const my = cy + 48;
+    f += sm === 'real' ? `<path d="M${cx - 30} ${my - 6}Q${cx} ${my + 26} ${cx + 30} ${my - 6}Q${cx} ${my + 4} ${cx - 30} ${my - 6}Z" style="fill:#3A1F1C;stroke:var(--skin-2);stroke-width:2"/><path d="M${cx - 24} ${my - 2}Q${cx} ${my + 8} ${cx + 24} ${my - 2}" style="stroke:#FFFFFF;stroke-width:5;fill:none;stroke-opacity:.9"/>`
+      : sm === 'polite' ? `<path d="M${cx - 26} ${my - 2}Q${cx} ${my + 12} ${cx + 26} ${my - 2}" ${S('skin-2', 3.5, ';stroke-linecap:round')}/>`
+      : sm === 'smirk' ? `<path d="M${cx - 22} ${my + 4}L${cx + 10} ${my + 4}Q${cx + 22} ${my + 2} ${cx + 28} ${my - 10}" ${S('skin-2', 3.5, ';stroke-linecap:round')}/>`
+      : `<path d="M${cx - 22} ${my + 2}h44" ${S('skin-2', 3.5, ';stroke-linecap:round')}/>`;
+    el.innerHTML = `<g transform="rotate(${t} ${cx} ${cy + 90})">${f}</g>` + TX(W / 2, H - 6, real ? 'eyes crinkle, cheeks lift' : sm === 'polite' ? 'only the mouth moves' : '', 'faint', 12, 'middle');
+    out('fcT', t === 0 ? 'none' : Math.abs(t) + '°');
+    const at = Math.abs(t); let w = 2 + (at >= 4 && at <= 11 ? 2 : at > 11 ? 1 : 0) + ({ flat: 0, polite: 1, real: 4, smirk: -3 })[sm] + (used.brow ? 1 : 0) + (used.nod ? 1 : 0);
+    $('#fcW').textContent = score10(w);
+    $('#fcSay').textContent = sm === 'smirk' ? 'A one-sided smile reads as contempt, even when you only meant to be wry.' : at > 11 ? 'A deep tilt can look submissive. Keep it slight.' : sm === 'real' && at >= 4 ? 'Curious and genuinely glad to see them. That\'s the wow factor.' : sm === 'polite' ? 'Polite, but people can tell the eyes aren\'t in it.' : at >= 4 ? 'Interested. A real smile would finish the job.' : 'Neutral. Fine for listening, but not much warmth.';
+  });
+  tI.addEventListener('input', draw);
+  $('#fcB').addEventListener('click', () => { used.brow = true; brow = true; draw(); setTimeout(() => { brow = false; draw(); }, RM ? 400 : 650); });
+  $('#fcN').addEventListener('click', () => { used.nod = true; if (RM){ draw(); return; } let k = 0; const seq = [6, 0, 6, 0, 6, 0]; const iv = setInterval(() => { nodY = seq[k++]; draw(); if (k >= seq.length){ clearInterval(iv); nodY = 0; draw(); } }, 160); });
+  draw();
+}
+
+/* ---------- 5: what your hands are saying ---------- */
+{ const el = $('#hd5'), POSE = [['down', 'At your sides', 0, 1, 'Relaxed and readable.'], ['behind', 'Hidden behind you', -2, -1, 'Hidden hands make people wary: what are you holding back?'], ['pockets', 'In your pockets', -1, -1, 'Hands in pockets look closed off, or unsure.'],
+    ['crossed', 'Arms crossed', -2, 0, 'Crossed arms read as a barrier, even if you\'re just cold.'], ['steeple', 'Steeple', 0, 3, 'Calm, confident thinking. Use it while you listen or pause.'], ['palms', 'Open palms', 2, 2, 'Nothing to hide, and an invitation to listen.'],
+    ['explain', 'Showing size', 1, 3, 'Explanatory gestures help people see what you mean.'], ['neck', 'Rubbing your neck', -1, -3, 'A self-soothing cue: it says you\'re under stress.']];
+  const T = [['post', 'Shoulders back and down'], ['wide', 'Feet a little apart'], ['lid', 'Slightly flexed lower lids']];
+  let pose = 'pockets'; const on = new Set();
+  const pb = pills('#hdP', POSE.map(([id, t]) => [id, t]), pose); pb.forEach(b => b.addEventListener('click', () => { pose = b.dataset.p; press(pb, b); draw(); }));
+  toggles('#hdT', T, on); $$('#hdT [data-t]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? on.add(cb.dataset.t) : on.delete(cb.dataset.t); draw(); }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = 300; vb(el, W, H);
+    const P = POSE.find(p => p[0] === pose);
+    let g = `<rect x="0" y="${H - 24}" width="${W}" height="24" ${F('panel-2')}/>`;
+    g += figure(nw ? 110 : 230, H - 22, 1.2, { arms: pose, slouch: !on.has('post'), wide: on.has('wide'), lid: on.has('lid'), smile: 'polite', shirt: 'cool' });
+    const tx = nw ? 210 : 420;
+    g += TX(tx, 70, P[1], 'text', nw ? 17 : 22);
+    g += wrap(tx, 110, P[4], nw ? 20 : 34, 18, 'muted', 13.5, 'start');
+    const extra = [on.has('post') ? '+ posture: ready and relaxed' : '− slouch: shoulders rolled forward', on.has('wide') ? '+ stance: grounded' : '', on.has('lid') ? '+ flexed lids: focused' : ''].filter(Boolean);
+    extra.forEach((t, k) => { g += TX(tx, 190 + k * 20, t, t[0] === '+' ? 'good' : 'bad', 13); });
+    el.innerHTML = g;
+    const w = 5 + P[2] + (on.has('post') ? 0 : -1), c = 4 + P[3] + (on.has('post') ? 2 : -1) + (on.has('wide') ? 1 : 0) + (on.has('lid') ? 1 : 0);
+    $('#hdW').textContent = score10(w); $('#hdC').textContent = score10(c);
+    $('#hdSay').textContent = c >= 8 && w >= 6 ? 'Capable and approachable: the powerful look the chapter is after.' : c >= 8 ? 'Very capable. Add open palms for some warmth.' : c <= 3 ? 'Low on competence. Bring your hands out and stand tall.' : 'Getting there. Try the steeple or an explanatory gesture.';
+  });
+  draw();
+}
+
+/* ---------- 6: the cluster detector ---------- */
+{ const ROWS = ['Leans back or edges away', 'Looks away, checks phone', 'Rubs neck or arm', 'Fixes hair or clothes', 'Covers throat or mouth', 'Clutches a cup or bag', 'Forehead touch, eyes down', 'One-sided smirk', 'Words don\'t match the face'];
+  const COLS = ['Hello', 'Chat', 'Ask', 'Reply', 'Probe', 'Bye'];
+  const PRE = { truth: [[1, 1], [3, 4], [5, 0]], nervous: [[2, 2], [3, 2], [5, 2], [2, 3], [4, 3], [5, 3], [3, 4]], hiding: [[0, 3], [1, 3], [4, 3], [8, 3], [2, 4], [6, 4], [1, 5]] };
+  let grid = ROWS.map(() => COLS.map(() => false));
+  const set = k => { grid = ROWS.map(() => COLS.map(() => false)); (PRE[k] || []).forEach(([r, c]) => grid[r][c] = true); draw(); };
+  const pb = pills('#clPre', [['truth', 'Telling the truth'], ['nervous', 'Nervous about a talk'], ['hiding', 'Hiding something'], ['clear', 'Clear']], '', 'k');
+  pb.forEach(b => b.addEventListener('click', () => { press(pb, b.dataset.k === 'clear' ? null : b); set(b.dataset.k); }));
+  function draw(){ const cnt = COLS.map((_, c) => grid.filter(r => r[c]).length);
+    let h = `<div class="cl-row cl-head"><span></span>${COLS.map((c, i) => `<span class="${cnt[i] >= 3 ? 'hot' : ''}">${c}</span>`).join('')}</div>`;
+    h += ROWS.map((r, i) => `<div class="cl-row"><span class="cl-l">${r}</span>${COLS.map((c, j) => `<button type="button" class="cl-c${cnt[j] >= 3 ? ' hotc' : ''}" data-r="${i}" data-c="${j}" aria-pressed="${grid[i][j]}" aria-label="${r} during ${c}"></button>`).join('')}</div>`).join('');
+    h += `<div class="cl-row cl-foot"><span class="cl-l">cues at this moment</span>${cnt.map(n => `<span class="${n >= 3 ? 'hot' : ''}">${n || ''}</span>`).join('')}</div>`;
+    $('#clGrid').innerHTML = h;
+    $$('#clGrid [data-r]').forEach(b => b.addEventListener('click', () => { const r = +b.dataset.r, c = +b.dataset.c; grid[r][c] = !grid[r][c]; draw(); $(`#clGrid [data-r="${r}"][data-c="${c}"]`).focus({preventScroll:true}); }));
+    const total = cnt.reduce((a, b) => a + b, 0), cl = cnt.map((n, i) => n >= 3 ? COLS[i] : null).filter(Boolean), mism = grid[8].some(Boolean);
+    $('#clCount').textContent = total; $('#clClus').textContent = cl.length;
+    $('#clSay').textContent = !total ? 'Tap the cells to log cues, or load a scenario.' : cl.length ? `A cluster at "${cl[0]}"${mism ? ', and words that don\'t match' : ''}. Ask a kind question: "How are you feeling about this?"` : 'Scattered single cues. Nothing to read into; people itch and get cold.';
+  }
+  press(pb, pb[2]); set('hiding');
+}
+
+/* ---------- 7: the pitch line ---------- */
+{ const el = $('#vc7'), pI = $('#vcP'), T = [['q', 'Question ending (rising tone)'], ['fry', 'Vocal fry at the end'], ['um', '"Um" before the price'], ['pause', 'Pause before the price'], ['loud', 'A little louder on the price']];
+  const on = new Set(['q', 'um']); toggles('#vcT', T, on);
+  $$('#vcT [data-t]').forEach(cb => cb.addEventListener('change', () => { const t = cb.dataset.t; cb.checked ? on.add(t) : on.delete(t); if (cb.checked && t === 'um') on.delete('pause'); if (cb.checked && t === 'pause') on.delete('um'); $$('#vcT [data-t]').forEach(x => x.checked = on.has(x.dataset.t)); draw(); }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 760, H = 250, p = +pI.value / 100; vb(el, W, H);
+    const words = ['I', 'charge']; if (on.has('um')) words.push('um…'); words.push('$100', 'per', 'hour' + (on.has('q') ? '?' : '.'));
+    const size = nw ? 16 : 26, cw = size * .58, gap = size * .6, pz = on.has('pause') ? (nw ? 26 : 50) : 0;
+    let x = 0; let pos = words.map(w => { if (w === '$100') x += pz; const a = x; x += w.length * cw; const b = x; x += gap; return [w, a, b]; });
+    const x0 = nw ? 40 : 70, k = (W - x0 - (nw ? 16 : 40)) / (x - gap); pos = pos.map(([w, a, b]) => [w, x0 + a * k, x0 + b * k]);
+    const top = 30, bot = 170, Yp = v => bot - v * (bot - top);
+    let g = `<path d="M${pos[0][1]} ${bot + 34}H${W - 16}" ${S('line', 1)}/>`;
+    g += TX(nw ? 10 : 18, top + 4, 'high', 'faint', 11) + TX(nw ? 10 : 18, bot, 'low', 'faint', 11);
+    const base = lerp(.25, .7, p);
+    pos.forEach(([w, a, b], i) => { const last = i === pos.length - 1, price = w === '$100', isUm = w === 'um…';
+      let v0 = base - i * .025, v1 = v0 - .02; if (price){ v0 += on.has('loud') ? .12 : .05; v1 = v0 - .04; }
+      if (isUm){ v0 = base - .05; v1 = v0; }
+      if (last){ v1 = on.has('q') ? v0 + .32 : v0 - .18; }
+      const sw = price && on.has('loud') ? 7 : isUm ? 2 : 3.5;
+      if (last && on.has('fry')){ const m = (a + b) / 2; let d = `M${a} ${Yp(v0)}L${m} ${Yp((v0 + v1) / 2)}`; for (let k = 1; k <= 6; k++) d += `L${(m + (b - m) * k / 6).toFixed(1)} ${(Yp(lerp((v0 + v1) / 2, v1, k / 6)) + (k % 2 ? 6 : -6)).toFixed(1)}`; g += `<path d="${d}" ${S('bad', 2.5)}/>`; }
+      else g += `<path d="M${a} ${Yp(v0).toFixed(1)}Q${(a + b) / 2} ${Yp((v0 + v1) / 2 + (last && on.has('q') ? -.06 : 0)).toFixed(1)} ${b} ${Yp(v1).toFixed(1)}" ${S(isUm ? 'bad' : 'glow', sw, ';stroke-linecap:round' + (isUm ? ';stroke-dasharray:3 4' : ''))}/>`;
+      g += TX((a + b) / 2, bot + 28, w, price ? 'text' : isUm ? 'bad' : 'muted', size * (price && on.has('loud') ? 1.1 : 1), 'middle', price ? 'font-weight="600"' : ''); });
+    if (on.has('pause')){ const i = pos.findIndex(q => q[0] === '$100'), a = pos[i - 1][2] + 6, b = pos[i][1] - 6; g += `<path d="M${a} ${bot + 46}H${b}" ${S('cool', 2)}/>` + TX((a + b) / 2, bot + 62, 'pause', 'cool', 11, 'middle'); }
+    el.innerHTML = g;
+    out('vcP', p < .25 ? 'lowest comfortable' : p < .6 ? 'mid-range' : 'high and tight');
+    const c = 9 - p * 3 - (on.has('q') ? 3 : 0) - (on.has('fry') ? 2 : 0) - (on.has('um') ? 1.5 : 0) + (on.has('pause') ? 1 : 0) + (on.has('loud') ? 1 : 0);
+    $('#vcC').textContent = score10(c);
+    $('#vcSay').textContent = on.has('q') ? 'Like you\'re asking permission. Expect a counter-offer.' : on.has('fry') ? 'The fry at the end trails off and drains the authority from the number.' : c >= 9 ? 'Settled and sure. That\'s a price, not a suggestion.' : p > .6 ? 'Statement, but pitched high and tight. Breathe out and drop to your natural floor.' : 'Better. A pause before the number would give it more weight.';
+  });
+  pI.addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 8: score your script ---------- */
+{ const SAMPLE = 'Hi, I\'m Sam. It\'s so good to finally meet you. I lead the design team, and I\'d love to hear what you\'re working on right now.';
+  const MARKS = [['stress', 'Stress', 'ab'], ['pause', 'Pause after', '|'], ['smile', 'Smile', '☺'], ['slow', 'Slow down', '~']];
+  let words = SAMPLE.split(/\s+/), marks = {}, brush = 'stress';
+  const kb = pills('#scKey', MARKS.map(([id, t, s]) => [id, `<span class="mk-${id}">${s}</span> ${t}`]), brush, 'b');
+  kb.forEach(b => b.addEventListener('click', () => { brush = b.dataset.b; press(kb, b); }));
+  function draw(){ $('#scBox').innerHTML = words.map((w, i) => `<button type="button" class="sw ${marks[i] ? 'mk-' + marks[i] : ''}" data-i="${i}">${esc(w)}${marks[i] === 'pause' ? '<i class="pz">|</i>' : ''}${marks[i] === 'smile' ? '<i class="sm">☺</i>' : ''}</button>`).join(' ');
+    $$('#scBox [data-i]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; marks[i] = marks[i] === brush ? null : brush; if (!marks[i]) delete marks[i]; draw(); $(`#scBox [data-i="${i}"]`).focus({preventScroll:true}); }));
+    const n = Object.keys(marks).length, r = n / words.length, kinds = new Set(Object.values(marks)).size;
+    $('#scN').textContent = n; $('#scVar').textContent = !n ? 'none' : r > .5 ? 'overdone' : kinds >= 3 && r >= .1 ? 'lively' : 'some';
+    $('#scSay').textContent = !n ? 'Monotone. Pick a mark, then tap the words you\'d change.' : r > .5 ? 'Too much. When everything is stressed, nothing is.' : kinds >= 3 && r >= .1 ? 'Varied and warm. Now read it aloud, following your marks.' : 'A start. Try mixing kinds of marks: a smile, a pause and a stress.';
+  }
+  $('#scEdit').addEventListener('click', () => { const box = $('#scIn'); box.hidden = !box.hidden; if (!box.hidden){ $('#scText').value = words.join(' '); $('#scText').focus(); } });
+  $('#scUse').addEventListener('click', () => { const t = $('#scText').value.trim(); if (!t) return; words = t.split(/\s+/).slice(0, 80); marks = {}; $('#scIn').hidden = true; draw(); });
+  $('#scClear').addEventListener('click', () => { marks = {}; draw(); });
+  draw();
+}
+
+/* ---------- 9: the email audit ---------- */
+{ const WARM = 'thank thanks thankful grateful appreciate appreciated appreciatively glad happy excited exciting love loved delighted wonderful together welcome hope enjoy enjoyed fun kind care sorry share feel friend friends congrats congratulations amazing thrilled pleasure lovely warm warmly cheers smile great awesome'.split(' ');
+  const COMP = 'plan plans results result data deadline research analysis strategy goal goals target targets report budget efficient expert proven evidence metrics performance deliver delivered priority priorities timeline review decide decision achieve achieved progress success impact improve solution solutions numbers percent revenue forecast attached quarter q1 q2 q3 q4 kpi roadmap milestone milestones schedule'.split(' ');
+  const SAMPLE = 'Hi team,\n\nHope this email finds you well. Been busy?\n\nAttached is the Q3 report. Results are up 12 percent against the target, and the plan for next quarter is in section two. Please review the timeline by Friday so we can decide on next steps.\n\nBest,\nSam';
+  const inp = $('#emIn'); inp.value = SAMPLE;
+  function run(){ const t = inp.value; let w = 0, c = 0;
+    const html = esc(t).replace(/[A-Za-z0-9']+/g, m => { const k = m.toLowerCase().replace(/'s$/, ''); if (WARM.includes(k)){ w++; return `<span class="ww">${m}</span>`; } if (COMP.includes(k)){ c++; return `<span class="cw">${m}</span>`; } return m; });
+    $('#emOut').innerHTML = html.replace(/\n/g, '<br>');
+    $('#emW').textContent = w; $('#emC').textContent = c;
+    const lines = t.split('\n').map(l => l.trim()).filter(Boolean), tips = [];
+    if (lines.length && /^(hi|hello|hey|dear)\b[^.!?]{0,24},?$/i.test(lines[0])) tips.push('Liven up the opener, e.g. "Happy Monday, team!"');
+    if (/hope this (e-?mail |message )?finds you well/i.test(t)) tips.push('"Hope this finds you well" is autopilot; cut it or make it specific.');
+    if (/been busy\??|how are (you|ya)\?|what'?s up\?/i.test(t)) tips.push('Swap the autopilot question for "Working on anything exciting?"');
+    const closer = lines.slice(-2).find(l => /^(best|regards|best regards|kind regards|thanks|sincerely|cheers),?$/i.test(l)); if (closer) tips.push(`Try a closer with more life than "${closer.replace(/,$/, '')}", such as "Appreciatively".`);
+    if (c > w * 2 && c > 2) tips.push('Leans competent. Add a line of thanks or a warm word.'); else if (w > c * 2 && w > 2) tips.push('Leans warm. Add a result, a number or a clear next step.');
+    if (!/\bps\b|p\.s\./i.test(t)) tips.push('Consider a PS: it\'s one of the most read lines.');
+    $('#emTip').textContent = tips.length ? tips.slice(0, 2).join(' ') : 'Balanced, lively and specific. Send it.';
+  }
+  inp.addEventListener('input', run); run();
+}
+
+/* ---------- 10: set up your video call ---------- */
+{ const el = $('#vf10'), COL = [['grey', 'Grey wall', '#8D8A8E', 0, 0, 'neutral and safe'], ['blue', 'Blue', '#4F7FB8', 1, 1, 'calm and trustworthy'], ['green', 'Green', '#5E9C6E', 1, 0, 'fresh, natural, "go"'], ['red', 'Red', '#C2483F', -1, 1, 'urgent and intense'], ['yellow', 'Bright yellow', '#E7C53A', 1, -1, 'cheerful, but a lot to look at']];
+  const FR = [['close', 'Too close'], ['right', 'Head and shoulders'], ['far', 'Far away']];
+  const T = [['light', 'Light on your face'], ['glasses', 'Glasses'], ['mug', 'A warm mug'], ['books', 'A bookshelf behind'], ['plant', 'A plant'], ['mess', 'Laundry pile in shot'], ['caps', 'Name in ALL CAPS']];
+  let col = 'grey', fr = 'close'; const on = new Set(['mess', 'caps']);
+  const cb = pills('#vfCol', COL.map(([id, t]) => [id, t]), col, 'c'); cb.forEach(b => b.addEventListener('click', () => { col = b.dataset.c; press(cb, b); draw(); }));
+  const fb = pills('#vfFr', FR, fr, 'f'); fb.forEach(b => b.addEventListener('click', () => { fr = b.dataset.f; press(fb, b); draw(); }));
+  toggles('#vfT', T, on); $$('#vfT [data-t]').forEach(x => x.addEventListener('change', () => { x.checked ? on.add(x.dataset.t) : on.delete(x.dataset.t); draw(); }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 220 : 360, C = COL.find(c => c[0] === col); vb(el, W, H);
+    let g = `<defs><clipPath id="vfClip"><rect x="0" y="0" width="${W}" height="${H}" rx="14"/></clipPath></defs><g clip-path="url(#vfClip)"><rect width="${W}" height="${H}" style="fill:${C[2]}"/>`;
+    if (!on.has('light')) g += `<rect width="${W}" height="${H}" style="fill:#000;fill-opacity:.32"/>`;
+    if (on.has('books')){ const bx = W * .66, bw = W * .3; for (let r = 0; r < 3; r++){ const y = H * (.12 + r * .2); g += `<rect x="${bx}" y="${y + H * .16}" width="${bw}" height="4" style="fill:#5A4636"/>`; for (let k = 0; k < 9; k++) g += `<rect x="${bx + 4 + k * bw / 9.5}" y="${y + H * .06 + (k % 3) * 3}" width="${bw / 11}" height="${H * .1 - (k % 3) * 3}" style="fill:${['#7A3B3B', '#2F4F6F', '#C9A65A', '#4E6B4A', '#6B4E7A'][(k + r) % 5]}"/>`; } }
+    if (on.has('plant')) g += `<rect x="${W * .06}" y="${H * .62}" width="${W * .07}" height="${H * .14}" rx="3" style="fill:#9C5B3A"/><path d="M${W * .095} ${H * .62}q-${W * .05} -${H * .2} -${W * .03} -${H * .26}M${W * .095} ${H * .62}q${W * .01} -${H * .24} ${W * .04} -${H * .3}M${W * .095} ${H * .62}q${W * .05} -${H * .12} ${W * .07} -${H * .14}" style="stroke:#3E7A3E;stroke-width:${nw ? 4 : 7};fill:none;stroke-linecap:round"/>`;
+    if (on.has('mess')) g += `<path d="M${W * .02} ${H}L${W * .05} ${H * .7}Q${W * .14} ${H * .6} ${W * .22} ${H * .72}L${W * .26} ${H}Z" style="fill:#B9A27F"/><path d="M${W * .06} ${H * .78}q${W * .06} -${H * .06} ${W * .13} 0M${W * .08} ${H * .88}q${W * .05} -${H * .05} ${W * .12} 0" style="stroke:#6B6FA3;stroke-width:${nw ? 5 : 9};fill:none"/>`;
+    const sc = fr === 'close' ? (nw ? 1.55 : 2.4) : fr === 'right' ? (nw ? .95 : 1.55) : (nw ? .5 : .78), fy = fr === 'close' ? H + (nw ? 130 : 210) : fr === 'right' ? H + (nw ? 62 : 104) : H - 6;
+    g += figure(W / 2, fy, sc, { arms: on.has('mug') ? 'cup' : 'down', glasses: on.has('glasses'), smile: 'real', shirt: 'cool' });
+    g += `<rect x="10" y="${H - 34}" width="${nw ? 120 : 150}" height="24" rx="6" style="fill:#000;fill-opacity:.55"/><text x="20" y="${H - 17}" font-size="13" style="fill:#fff">${on.has('caps') ? 'SAM RIVERA' : 'Sam Rivera'}</text></g>`;
+    el.innerHTML = g;
+    let w = 4 + C[3] + (on.has('mug') ? 1 : 0) + (on.has('plant') ? 1 : 0) + (on.has('light') ? 1 : -1) - (on.has('mess') ? 1 : 0) + (fr === 'far' ? -1 : 0);
+    let c = 4 + C[4] + (on.has('glasses') ? 1 : 0) + (on.has('books') ? 2 : 0) + (on.has('light') ? 1 : -1) - (on.has('mess') ? 2 : 0) - (on.has('caps') ? 1 : 0) + (fr === 'right' ? 1 : -1);
+    $('#vfW').textContent = score10(w); $('#vfC').textContent = score10(c);
+    const say = [`The ${C[1].toLowerCase()} reads as ${C[5]}.`];
+    if (fr === 'close') say.push('So close it feels like you\'re in their personal space; sit about two feet back.'); else if (fr === 'far') say.push('So far away they can\'t read your face.');
+    if (!on.has('light')) say.push('Your face is in shadow, so your cues are hard to read.');
+    if (on.has('mess')) say.push('The laundry pile is the loudest cue in the frame.'); else if (on.has('caps')) say.push('ALL CAPS is harder to read and can feel like shouting.');
+    $('#vfSay').textContent = say.slice(0, 2).join(' ');
+  });
+  draw();
+}
+
+/* ---------- 12: the rule of three ---------- */
+{ const CUES = [
+    ['tilt', 'Head tilt', 'w', 'Tilt your head slightly while listening: "tell me more".'], ['nod', 'Triple nod', 'w', 'Three slow nods to invite someone to keep going.'], ['brow', 'Eyebrow raise', 'w', 'A quick brow flash when you greet someone or hear good news.'], ['smile', 'Savored smile', 'w', 'Let a real smile spread slowly, and only when you mean it.'], ['touch', 'Touch of trust', 'w', 'A light, appropriate touch on the arm or shoulder.'], ['mirror', 'Mirroring', 'w', 'Match someone\'s positive gestures, pace or volume.'], ['hug', 'Vocal hug', 'w', 'Warm up your greeting: "It\'s so good to hear from you!"'], ['listen', 'Listening sounds', 'w', 'Mm-hmm, ooh, tell me more.'],
+    ['posture', 'Powerful posture', 'c', 'Shoulders back and down, feet apart, hands loose and visible.'], ['lid', 'Flexed lower lid', 'c', 'A slight squint of focus while you think or listen.'], ['steeple', 'Steeple', 'c', 'Fingertips together, palms apart, while you pause or listen.'], ['explain', 'Explanatory gestures', 'c', 'Show sizes, numbers and directions with your hands.'], ['palm', 'Palm flash', 'c', 'Open, visible palms when you make your point.'], ['low', 'Lowest comfortable pitch', 'c', 'Speak from the floor of your natural range as you breathe out.'], ['fall', 'Falling ending', 'c', 'Finish statements on a downward note, never a question.'], ['pause', 'Power pause', 'c', 'Swap an "um" for a deliberate silence before key points.'],
+    ['lean', 'Lean in', 'b', 'Lean slightly towards the person you\'re talking to.'], ['front', 'Fronting', 'b', 'Point your toes, torso and top at them.'], ['open', 'Anti-blocking', 'b', 'Clear the space between you: no crossed arms, laptops or cups as shields.'], ['space', 'Space smarts', 'b', 'Pick the right distance: personal for a chat, social for a meeting.'], ['gaze', 'Engaged gaze', 'b', 'Eye contact for around 60 to 70 percent of the conversation.'],
+    ['xdist', 'Spot: distancing', 'd', 'Notice when someone leans back, looks away or edges off.'], ['xsoothe', 'Spot: self-soothing', 'd', 'Notice neck rubs, fanning and preening.'], ['xblock', 'Spot: blocking', 'd', 'Notice throat covering, face covering and clutched objects.'], ['xface', 'Check: your resting face', 'd', 'Film yourself listening. Is your neutral face sending anger, sadness or contempt?']];
+  CUES_ALL = CUES;
+  const GRP = { w: 'Warmth', c: 'Competence', b: 'Charisma (both)', d: 'Danger zone' };
+  let st = store.get('cu-ro3', null); if (!st || !st.log) st = { cur: 'tilt', log: {} };
+  const sel = $('#roCue'); sel.innerHTML = Object.entries(GRP).map(([g, n]) => `<optgroup label="${n}">${CUES.filter(c => c[2] === g).map(c => `<option value="${c[0]}">${c[1]}</option>`).join('')}</optgroup>`).join('');
+  sel.value = st.cur in Object.fromEntries(CUES.map(c => [c[0], 1])) ? st.cur : 'tilt';
+  const rec = () => { const k = sel.value; if (!st.log[k]) st.log[k] = { d: [false, false, false], e: [false, false, false], note: '' }; return st.log[k]; };
+  const persist = () => { st.cur = sel.value; store.set('cu-ro3', st); renderCard(); };
+  function draw(){ const r = rec(), c = CUES.find(x => x[0] === sel.value);
+    $('#roDesc').innerHTML = `<span class="dot ${c[2]}"></span><b>${GRP[c[2]]}</b> · ${c[3]}`;
+    ['d', 'e'].forEach(k => { $(k === 'd' ? '#roDec' : '#roEnc').innerHTML = [0, 1, 2].map(i => `<button type="button" class="ck" aria-pressed="${r[k][i]}" data-k="${k}" data-i="${i}"><span class="box">${TICK}</span><span class="t">${k === 'd' ? 'Spotted' : 'Used'} ${['once', 'twice', 'three times'][i]}</span></button>`).join(''); });
+    $$('.ro3-box [data-k]').forEach(b => b.addEventListener('click', () => { const r = rec(); r[b.dataset.k][+b.dataset.i] = !r[b.dataset.k][+b.dataset.i]; persist(); draw(); $(`.ro3-box [data-k="${b.dataset.k}"][data-i="${b.dataset.i}"]`).focus({preventScroll:true}); }));
+    $('#roNote').value = r.note || '';
+    const n = Object.values(st.log).filter(x => x.d.every(Boolean) && x.e.every(Boolean)).length;
+    $('#roDone').textContent = n + ' of ' + CUES.length;
+  }
+  sel.addEventListener('change', () => { persist(); draw(); });
+  $('#roNote').addEventListener('input', e => { rec().note = e.target.value.slice(0, 400); persist(); });
+  draw();
+}
+
+renderCard();
+
+})();
+</script>
+</body>
+</html>
