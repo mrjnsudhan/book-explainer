@@ -1,0 +1,1566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>System Design Interview Vol. 2, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an engineer's blueprint. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, the four steps
+   walked for this design, a lab, plain words, quick check), grouped into location, data in motion, state at scale and money.
+   Dark-first: blueprint navy with a cyan accent and an amber second series; light mode is drafting paper. */
+:root{
+  color-scheme: dark;
+  --ink:#0B1220;--panel:#111A2C;--panel-2:#18233A;--line:#283652;--text:#EAF0FA;--muted:#A3B1C8;--faint:#74839E;
+  --glow:#5CC8FF;--glow-soft:rgba(92,200,255,.11);--hl:rgba(92,200,255,.26);--cool:#FFC857;--cool-soft:rgba(255,200,87,.1);
+  --good:#7EDC9A;--good-soft:rgba(126,220,154,.1);--bad:#FF7A7A;--bad-soft:rgba(255,122,122,.12);
+  --soft:#D2DBEA;--deep:#080E1A;--toc-bg:rgba(17,26,44,.74);--glow-line:rgba(92,200,255,.36);--cool-line:rgba(255,200,87,.32);--on-glow:#04192A;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F6FB;--panel:#FFFFFF;--panel-2:#E7EDF6;--line:#CFD9E8;--text:#0E1626;--muted:#4A5872;--faint:#7A879E;
+  --glow:#0B6FB8;--glow-soft:rgba(11,111,184,.06);--hl:#CBE4F7;--cool:#9A6200;--cool-soft:rgba(154,98,0,.07);--good:#23804A;--good-soft:rgba(35,128,74,.08);--bad:#C0392B;--bad-soft:rgba(192,57,43,.07);
+  --soft:#243049;--deep:#FAFCFF;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(11,111,184,.28);--cool-line:rgba(154,98,0,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F6FB;--panel:#FFFFFF;--panel-2:#E7EDF6;--line:#CFD9E8;--text:#0E1626;--muted:#4A5872;--faint:#7A879E;
+  --glow:#0B6FB8;--glow-soft:rgba(11,111,184,.06);--hl:#CBE4F7;--cool:#9A6200;--cool-soft:rgba(154,98,0,.07);--good:#23804A;--good-soft:rgba(35,128,74,.08);--bad:#C0392B;--bad-soft:rgba(192,57,43,.07);
+  --soft:#243049;--deep:#FAFCFF;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(11,111,184,.28);--cool-line:rgba(154,98,0,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- System Design Interview Vol. 2 additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.est{display:grid;border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;min-width:0;align-content:start}
+.est-top{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.est-top b{font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1.1}
+.est-top select{font:inherit;font-size:13px;max-width:100%;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel-2);color:var(--text)}
+.est-in{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;padding:14px 16px}
+.est-in label{display:grid;gap:4px;font-size:12.5px;color:var(--muted);min-width:0}
+.est-in input{font:inherit;font-family:var(--f-mono);font-size:14px;width:100%;min-width:0;padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--deep);color:var(--text)}
+.est-in input:focus{border-color:var(--glow);outline:none}
+.est-out{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.est-out div{background:var(--deep);padding:10px 16px;display:grid;gap:1px;min-width:0}
+.est-out .k{font-size:12px;color:var(--faint)}
+.est-out .v{font-family:var(--f-mono);font-size:18px;color:var(--glow);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.est-out .f{font-family:var(--f-mono);font-size:11px;color:var(--faint);overflow-wrap:anywhere}
+.est .cap{padding:10px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.est .cap b{color:var(--text);font-weight:500}
+.lb{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 16px 4px}
+.lb .col{display:grid;gap:2px;align-content:start;min-width:0}
+.lb .h{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
+.lb .r{display:grid;grid-template-columns:48px 1fr auto;gap:8px;font-size:14px;padding:4px 10px;border-radius:8px;font-variant-numeric:tabular-nums;transition:background .2s}
+.lb .r .n{font-family:var(--f-mono);color:var(--faint)}
+.lb .r .s{font-family:var(--f-mono);color:var(--muted)}
+.lb .r.me{background:var(--glow-soft);box-shadow:inset 3px 0 0 var(--glow)}
+.lb .r.me .n,.lb .r.me .s{color:var(--glow)}
+.mock{min-width:0;display:grid;gap:14px;padding:18px 20px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep)}
+.mock .top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.mock select{font:inherit;font-size:14px;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);max-width:100%}
+.mock .clock{font-family:var(--f-mono);font-size:34px;font-variant-numeric:tabular-nums;color:var(--text)}
+.mock .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mock .stp{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:12px 14px;display:grid;gap:4px;align-content:start;min-width:0;transition:border-color .2s,box-shadow .2s}
+.mock .stp .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.mock .stp b{font-weight:600;font-size:14.5px}
+.mock .stp span{font-size:13.5px;color:var(--muted)}
+.mock .stp.on{border-color:var(--glow);box-shadow:inset 0 3px 0 var(--glow)}
+.mock .stp.on .n{color:var(--glow)}
+.mock .stp.past{opacity:.6}
+.mock .tl{height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden;display:flex}
+.mock .tl i{display:block;height:100%;background:var(--glow);width:0}
+.mock .log{max-height:140px}
+@media (max-width: 860px){ .mock .steps{grid-template-columns:1fr 1fr} }
+@media (max-width: 560px){ .mock select{width:100%} .mock .top>*{min-width:0} .fq{padding:14px 16px} .est-in,.est-out{grid-template-columns:1fr 1fr} .est-in{padding:12px} .lb{grid-template-columns:1fr;padding:12px 12px 0} .mock{padding:14px} .mock .steps{grid-template-columns:1fr} .mock .clock{font-size:28px} }
+svg .disp{font-family:var(--f-display)}
+svg#gx1{max-width:560px;margin:0 auto}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Alex Xu and Sahn Lam's book</div>
+    <h1><em>System Design Interview</em>,<br>Volume 2, Explained</h1>
+    <p class="lede">In a system design interview you get 45 minutes and a vague prompt like "design Google Maps". <b>System Design Interview, Volume 2</b> works through thirteen of the hardest prompts, from finding restaurants near you to running a stock exchange, using the same four steps every time: pin down the scope, sketch the big picture, dig into the hard parts, and wrap up. This guide takes all thirteen chapters one at a time, with a lab in each where you can run the core idea yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>There is no single right design. There are <em>trade-offs</em>, and the interview is about showing you can see them and <em>choose</em>.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What have you been asked to design?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="est" style="margin:0" aria-label="Back-of-the-envelope estimator">
+        <div class="est-top"><b>Back of the envelope</b><select id="estP" aria-label="Load the numbers for a chapter"></select></div>
+        <div class="est-in" id="estIn"></div>
+        <div class="est-out" id="estOut" aria-live="polite"></div>
+        <div class="cap">A day has 86,400 seconds; interviewers round it to <b>10<sup>5</sup></b>. Peak is usually 2 to 5 times the average.</div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 3</span><span class="q">Where Things Are</span><span class="d">Nearby search, live friend locations and a map with directions</span></a>
+      <a href="#part2"><span class="n">Chapters 4 to 6</span><span class="q">Data in Motion</span><span class="d">A message queue, metrics and alerts, and counting ad clicks</span></a>
+      <a href="#part3"><span class="n">Chapters 7 to 10</span><span class="q">State at Scale</span><span class="d">Hotel bookings, email, object storage and a leaderboard</span></a>
+      <a href="#part4"><span class="n">Chapters 11 to 13</span><span class="q">Moving Money</span><span class="d">Payments, a digital wallet and a stock exchange</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2022</span>
+      <span><b>Authors</b> Alex Xu, creator of ByteByteGo, and Sahn Lam</span>
+      <span><b>Read time</b> about 6 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 13 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== WHERE THINGS ARE ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · location</span>
+      <h2>Where Things Are</h2>
+      <p>The book opens with three systems built around a place on Earth: a search for businesses near you, a feature that shows which friends are close by right now, and a full map with directions. They share one hard problem. A database is good at finding rows by a key, but "near me" is not a key, so each design has to turn two-dimensional distance into something a computer can look up fast.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Location problems become easy once you divide the map into cells with names, because then "nearby" is just "in the same cell or the next one".</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Find the restaurants near me</div>
+        <h2>Proximity Service</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design the search behind "restaurants within 1 km", like Yelp. The trick is a geospatial index that splits the map into named cells, so finding nearby businesses means reading a few cells instead of scanning the whole world.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Read-heavy and simple to scale.</b> With 100 million daily users and 200 million businesses, searches run at about 5,000 per second, while business owners rarely change their listings. A stateless location service behind a load balancer, plus read replicas of the database, handles that load.</span></li>
+          <li><span><b>Why not just compare latitude and longitude?</b> A query like "latitude between A and B and longitude between C and D" has to intersect two huge ranges, and an ordinary index on each column can't do that efficiently. You need an index built for two dimensions.</span></li>
+          <li><span><b>Geohash.</b> Geohash repeatedly halves the world, alternating longitude and latitude, and writes the result as a short base-32 string. Each extra character makes the cell smaller: 4 characters is about 39 by 20 km, 5 is about 5 by 5 km, 6 is about 1.2 km by 600 m. Nearby places usually share a prefix, so a search reads your cell and its eight neighbours to cover the edges.</span></li>
+          <li><span><b>Quadtrees and S2.</b> A quadtree keeps splitting a square into four until each leaf holds at most about 100 businesses, so dense cities get tiny cells and the ocean stays one big one. The book estimates the whole tree fits in under 2 GB of memory. Google's S2 maps the sphere onto a Hilbert curve and is used at Google and Tinder.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: ask how far users search (up to 20 km), whether results update while they walk (no), and how fast an owner's edits must appear (the next day is fine). Step two: split the system into a location-based service that answers searches and a business service that handles edits, with a primary database and read replicas. Step three: compare geospatial indexes, choose geohash or a quadtree, and cache results keyed by geohash cell. Step four: mention filtering by opening hours or category, and serving several regions from data centres close to users.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: three ways to index a map</div><div class="hint">Tap the map to move, then compare</div></div>
+        <div class="stage"><svg id="gx1" role="img" aria-label="A city map of businesses divided into cells by the chosen index, with your search circle"></svg></div><div class="lab-ctl"><div class="row" id="gxM"></div><div class="row"><div class="ctl"><label for="gxR">Search radius <output id="ogxR"></output></label><input type="range" id="gxR" min="1" max="12" value="4"></div><div class="ctl"><label for="gxK">Quadtree: most businesses per leaf <output id="ogxK"></output></label><input type="range" id="gxK" min="4" max="40" value="12"></div></div></div><div class="stats"><div class="stat"><span class="k">Cells read</span><span class="v" id="gxCells"></span></div><div class="stat"><span class="k">Businesses checked</span><span class="v" id="gxScan"></span></div><div class="stat"><span class="k">Actually within radius</span><span class="v glow" id="gxFound"></span></div><div class="stat"><span class="k">What to notice</span><span class="s" id="gxSay"></span></div></div><p class="callout">The map is 40 km across with 700 made-up businesses packed into two city centres. An even grid wastes cells on empty land; geohash picks a cell at least as big as your radius and reads its eight neighbours; a quadtree adapts to density. <b>All three check only a sliver of the map instead of every business.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When people ask for things near them, don't scan everything. Cut the map into cells with names, store each business under its cell, and look in a handful of cells around the user.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Nearby friends →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Who is close to me right now</div>
+        <h2>Nearby Friends</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design a feature that shows which of your friends are within 5 miles, updating as everyone moves. Unlike chapter 1, the data changes every few seconds, so the design is about pushing fresh locations to exactly the right people.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Locations go stale fast.</b> With 10 million users online at once, each sending their position every 30 seconds, the system receives about 334,000 location updates per second. Nothing here is read-heavy; it's a constant stream of small writes that must reach friends quickly.</span></li>
+          <li><span><b>WebSockets keep the line open.</b> Each phone holds a persistent WebSocket connection to a server, so the server can push a friend's new position the moment it arrives. These servers are stateful, which makes deploying and scaling them more careful work than for ordinary web servers.</span></li>
+          <li><span><b>Redis pub/sub as the switchboard.</b> Every user gets a channel. When you move, your server publishes to your channel; each online friend's WebSocket handler is subscribed to it, checks the distance, and forwards the update only if you're within range. The latest location also sits in a Redis cache with a time-to-live, so inactive users fade out.</span></li>
+          <li><span><b>The fan-out is the cost.</b> With about 400 friends each and 10 percent of them online, those 334,000 updates become roughly 14 million pushes a second. The book sizes the pub/sub cluster by CPU, not memory: at about 100,000 pushes per server, that's well over a hundred servers, spread with consistent hashing.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree that "nearby" means within 5 miles, positions refresh every 30 seconds, and a short delay is fine. Step two: phones connect to WebSocket servers; a location cache stores each user's latest position; a history database (Cassandra suits the write load) keeps the trail; Redis pub/sub links each user to their friends. Step three: work out the fan-out, size and shard the pub/sub cluster, and handle adding or removing friends and users with thousands of friends. Step four: extend it to "nearby random people" by giving each geohash cell its own channel.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the location fan-out</div><div class="hint">Tick the clock, then size the cluster</div></div>
+        <div class="stage"><svg id="nf2" role="img" aria-label="You and your friends on a map with the 5-mile circle and which updates are pushed"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="nfGo" type="button">Advance 30 seconds</button><span class="hint" id="nfT"></span></div><div class="row"><div class="ctl"><label for="nfU">Users online at once <output id="onfU"></output></label><input type="range" id="nfU" min="1" max="40" value="10"></div><div class="ctl"><label for="nfF">Friends per user <output id="onfF"></output></label><input type="range" id="nfF" min="50" max="1000" step="50" value="400"></div></div><div class="row"><div class="ctl"><label for="nfO">Share of friends online <output id="onfO"></output></label><input type="range" id="nfO" min="1" max="40" value="10"></div><div class="ctl"><label for="nfI">Seconds between updates <output id="onfI"></output></label><input type="range" id="nfI" min="5" max="60" step="5" value="30"></div></div></div><div class="stats"><div class="stat"><span class="k">Updates in per second</span><span class="v" id="nfIn"></span></div><div class="stat"><span class="k">Pushes out per second</span><span class="v glow" id="nfOut"></span></div><div class="stat"><span class="k">Pub/sub servers at 100k pushes each</span><span class="v" id="nfSrv"></span></div><div class="stat"><span class="k">This tick on the map</span><span class="s" id="nfSay"></span></div></div><p class="callout">On the map, every online friend subscribed to your channel receives your new position, but only those inside the circle see it on screen. The default numbers are the book's. <b>Doubling friends or online share doubles the pushes, which is why the cluster is sized by CPU.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If data changes every few seconds, don't make people ask for it. Keep a connection open, give every user a channel, and push each update only to the friends who are listening.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Google Maps →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Tiles, routes and arrival times</div>
+        <h2>Google Maps</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design a simplified Google Maps with three jobs: draw the map, find the best route, and keep the arrival time honest as traffic changes. Each job uses a different trick: pre-drawn tiles on a CDN, a road graph cut into tiles, and a stream of live locations.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The map is pre-drawn tiles.</b> The world is cut into 256 by 256 pixel images at 21 zoom levels, and each level has four times as many tiles as the one before. The book estimates about 4.4 trillion tiles at the closest zoom, roughly 100 PB for all levels before compressing the oceans and forests, so tiles are generated ahead of time and served from a CDN.</span></li>
+          <li><span><b>Location updates arrive in batches.</b> A billion daily users navigating about 35 minutes a week would send millions of updates a second if each phone reported every second. Instead phones record every second but send a batch every 15 seconds, cutting the load to about 200,000 requests a second.</span></li>
+          <li><span><b>Routing on a tiled graph.</b> Roads become a graph of intersections and segments. The full graph is too big for one machine, so it's cut into routing tiles, with three layers: small tiles of local streets, bigger ones of arterial roads and huge ones of highways. A route search like A* only loads the tiles it needs and hops up to highways for long trips.</span></li>
+          <li><span><b>ETA and rerouting.</b> Live locations stream through Kafka into a traffic service, and machine learning combines current and historical traffic to predict arrival times. When conditions change, the navigation service finds which active users are affected and pushes new routes to them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree on the three features (location updates, navigation with arrival times, map rendering) and estimate storage for tiles and traffic for updates. Step two: a location service writes batched positions to a database like Cassandra and onto Kafka; a navigation service calls a geocoder, a route planner and a ranker; tiles come from a CDN using URLs built from geohashes. Step three: dig into the routing tile hierarchy, the ETA service and adaptive rerouting, and how updates reach phones through WebSockets. Step four: mention multi-stop routes and features like avoiding tolls.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: find the fastest route</div><div class="hint">Tap any junction to set the destination</div></div>
+        <div class="stage"><svg id="gm3" role="img" aria-label="A road grid with a highway, traffic, the junctions the search explored and the chosen route"></svg></div><div class="lab-ctl"><div class="row" id="gmA"></div><div class="row"><div class="ctl"><label for="gmT">Traffic in the city centre <output id="ogmT"></output></label><input type="range" id="gmT" min="0" max="10" value="4"></div><div class="ctl"><label for="gmZ">Map zoom level <output id="ogmZ"></output></label><input type="range" id="gmZ" min="0" max="21" value="21"></div></div></div><div class="stats"><div class="stat"><span class="k">Junctions explored</span><span class="v glow" id="gmEx"></span></div><div class="stat"><span class="k">Drive time</span><span class="v" id="gmTime"></span></div><div class="stat"><span class="k">Map tiles at this zoom</span><span class="v" id="gmTiles"></span></div><div class="stat"><span class="k">At 100 KB a tile</span><span class="v" id="gmSize"></span></div></div><p class="callout">Dijkstra spreads out evenly in every direction; A* uses the straight-line distance to aim at the destination and explores far fewer junctions for the same answer. Turn up traffic and watch the route move to the highway. <b>The zoom slider shows why tiles must be pre-drawn: each level has four times the tiles of the last.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A map app is three systems wearing one coat: a giant cache of pictures, a graph search over roads, and a live traffic feed. Pre-compute what you can, split what's too big, and stream what changes.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Message queue →</a></div>
+    </section>
+    <!-- ===================== DATA IN MOTION ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · streams</span>
+      <h2>Data in Motion</h2>
+      <p>The next three systems never stop receiving data: a message queue that passes events between services, a monitoring system that swallows millions of metrics a second, and a pipeline that counts ad clicks for billing. The common thread is the log, an append-only list of events that many readers can replay at their own pace.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Write everything to a durable log first, then process it. The log is what lets fast producers and slow consumers live together without losing anything.</p></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · A log that many can read</div>
+        <h2>Distributed Message Queue</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design something like Kafka: producers write messages to topics, consumers read them later, and nothing is lost when machines fail. The heart of it is a partitioned, replicated, append-only log on disk.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Topics, partitions, offsets.</b> A topic is split into partitions spread across brokers. Each partition is an ordered log where every message gets an increasing offset. Messages with the same key go to the same partition, so their order is kept.</span></li>
+          <li><span><b>Sequential disk is fast.</b> Brokers append messages to a write-ahead log split into segments and rely on the operating system's page cache. Writing and reading disk sequentially, in batches, is far faster than random access, which is why a message queue can keep weeks of data cheaply.</span></li>
+          <li><span><b>Consumer groups pull.</b> Consumers in a group share a topic: each partition is read by exactly one consumer in the group, so adding consumers adds throughput, up to the number of partitions. Consumers pull at their own pace and commit their offset, and a coordinator rebalances partitions when members join or leave.</span></li>
+          <li><span><b>Replication and acks.</b> Each partition has a leader and followers; followers that are caught up form the in-sync replica set. A producer chooses how long to wait: ack=0 doesn't wait, ack=1 waits for the leader, ack=all waits for every in-sync replica. That choice, plus how consumers commit offsets, decides at-most-once, at-least-once or exactly-once delivery.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: settle on message size (kilobytes), ordering, retention (two weeks), throughput and the delivery guarantee users can choose. Step two: producers, brokers holding partitions, consumer groups, and storage for messages, consumer offsets and cluster metadata, with something like ZooKeeper coordinating. Step three: the on-disk log format, batching, the pull model and rebalancing, replication with in-sync replicas and acks, and scaling each part. Step four: extras such as message filtering by tag and delayed or scheduled messages.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: partitions, consumers and a crash</div><div class="hint">Produce, then crash a leader</div></div>
+        <div class="stage"><svg id="mq4" role="img" aria-label="A producer writing to partitions with leaders and followers, and a consumer group reading them"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mqP">Partitions <output id="omqP"></output></label><input type="range" id="mqP" min="1" max="6" value="3"></div><div class="ctl"><label for="mqC">Consumers in the group <output id="omqC"></output></label><input type="range" id="mqC" min="1" max="6" value="2"></div></div><div class="row" id="mqA"></div><div class="row"><button class="btn primary" id="mqGo" type="button">Produce 12 messages</button><button class="btn" id="mqX" type="button">Crash a leader</button><button class="btn" id="mqR" type="button">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Producer was told "saved"</span><span class="v" id="mqAck"></span></div><div class="stat"><span class="k">Saved, then lost in the crash</span><span class="v glow" id="mqLost"></span></div><div class="stat"><span class="k">Idle consumers</span><span class="v" id="mqIdle"></span></div><div class="stat"><span class="k">Producer wait per message</span><span class="s" id="mqLat"></span></div></div><p class="callout">Each partition has a leader (left) and two followers that copy it with a small lag. A crash promotes the most caught-up follower, and anything it hadn't copied is gone. <b>ack=all never loses an acknowledged message, at the cost of waiting for every in-sync copy.</b> More consumers than partitions leaves some idle.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A message queue is a durable, shared to-do list. Split it into partitions so many machines can work in parallel, keep copies so a crash loses nothing, and let each reader track where it got to.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Metrics and alerts →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Watching ten million numbers</div>
+        <h2>Metrics Monitoring and Alerting System</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design an internal system like Datadog or Prometheus that collects CPU, memory and request numbers from every server, stores them as time series, draws dashboards and pages someone when things go wrong.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Ten million metrics.</b> The book imagines 1,000 server pools of 100 machines, each reporting about 100 metrics, so roughly 10 million series. The load is constant heavy writing; reads are spiky, from dashboards and alert checks.</span></li>
+          <li><span><b>A time-series database.</b> Each data point is a metric name, a set of labels, a timestamp and a value. A general database struggles with this pattern, so the book uses a purpose-built store such as InfluxDB or Prometheus, tuned for writes and queries over time ranges.</span></li>
+          <li><span><b>Pull or push.</b> In a pull model, collectors scrape each server's metrics endpoint, which makes it easy to tell when a server is down. In a push model, agents on each server send metrics, which works better through firewalls and for short-lived jobs. Large systems often put Kafka between collectors and the database to absorb bursts.</span></li>
+          <li><span><b>Keep less, for longer.</b> Raw data is kept for 7 days, one-minute summaries for 30 days and one-hour summaries for a year. Downsampling, compact encodings for timestamps and cold storage keep the bill sane, while an alert manager reads rules from config files, removes duplicates and sends alerts to email, text, PagerDuty or webhooks.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: ask what's being monitored (infrastructure, not business metrics), how many machines, how long to keep data and at what resolution, and which alert channels. Step two: sketch data collection, a transport layer, the time-series store, a query service, alerting and visualization. Step three: pull vs push, scaling the pipeline with Kafka, where to aggregate, storage tricks, and building the alerting and dashboards (or buying Grafana). Step four: revisit the trade-offs and mention that off-the-shelf tools often win here.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: an alert rule and its data</div><div class="hint">Tune the rule, then change resolution</div></div>
+        <div class="stage"><svg id="mt5" role="img" aria-label="Six hours of CPU usage with the alert threshold and the periods where the alert fired"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mtT">Alert when CPU is above <output id="omtT"></output></label><input type="range" id="mtT" min="50" max="95" value="80"></div><div class="ctl"><label for="mtD">For at least <output id="omtD"></output></label><input type="range" id="mtD" min="1" max="15" value="5"></div></div><div class="row" id="mtR"></div></div><div class="stats"><div class="stat"><span class="k">Alerts fired</span><span class="v glow" id="mtFire"></span></div><div class="stat"><span class="k">Points kept for 6 hours</span><span class="v" id="mtPts"></span></div><div class="stat"><span class="k">Highest value you can see</span><span class="v" id="mtMax"></span></div><div class="stat"><span class="k">What to notice</span><span class="s" id="mtSay"></span></div></div><p class="callout">Alerts are always checked on the fine-grained data; the resolution buttons change what you could still see later. <b>A "for 5 minutes" clause stops one noisy spike from paging someone at 3 a.m.</b>, and one-hour averages smooth the spikes away entirely, which is why raw data is kept for the first week.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Monitoring is a firehose of tiny numbers. Store them in a database built for time, keep detail only while it's useful, and write alert rules that wait long enough to be sure.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Ad click counting →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Counting clicks you get paid for</div>
+        <h2>Ad Click Event Aggregation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design the pipeline that counts a billion ad clicks a day, per ad and per minute, and finds the most-clicked ads. Because advertisers are billed on these numbers, the counts must be correct, not just fast.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The numbers.</b> A billion clicks a day is about 10,000 a second on average and 50,000 at peak, over 2 million ads. The system must answer two queries: clicks for an ad in the last few minutes, and the top 100 ads in the past minute, with filters such as country.</span></li>
+          <li><span><b>A streaming pipeline.</b> Raw click logs flow into Kafka, an aggregation service counts them using a MapReduce-style graph of map, aggregate and reduce nodes, and results flow through a second Kafka topic into a database for queries. Raw data is kept too, so numbers can be recalculated if a bug is found.</span></li>
+          <li><span><b>Event time, not arrival time.</b> A click can reach the system seconds or minutes late. Counting by when the click happened (event time) is accurate but means waiting for stragglers. A watermark sets how long to wait: longer catches more late clicks but adds delay. Counts are made in windows: tumbling one-minute windows for per-ad counts, sliding windows for the top ads.</span></li>
+          <li><span><b>Exactly once and reconciliation.</b> The book uses one streaming path (the Kappa architecture) rather than separate batch and stream systems. To avoid double counting after a crash, the aggregator saves its position in Kafka together with its results, and a nightly batch job reconciles the streaming totals against raw data.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: confirm the queries, the volume, the acceptable delay (a few minutes), and that correctness matters because of billing. Step two: define the query API, store raw and aggregated data, and connect log watchers, Kafka, the aggregation service and the databases. Step three: choose event time with watermarks, pick window types, guarantee exactly-once processing, handle hot ads, recover from failures with snapshots, and reconcile. Step four: monitor the pipeline and mention alternatives like a hosted service.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: late clicks and the watermark</div><div class="hint">Change how late clicks arrive and how long you wait</div></div>
+        <div class="stage"><svg id="ac6" role="img" aria-label="Clicks placed in one-minute windows by event time, with late clicks that missed their window marked"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="acL">Typical network delay <output id="oacL"></output></label><input type="range" id="acL" min="0" max="40" value="12"></div><div class="ctl"><label for="acW">Watermark: extra wait before closing a window <output id="oacW"></output></label><input type="range" id="acW" min="0" max="60" step="5" value="15"></div></div><div class="row"><button class="btn primary" id="acGo" type="button">New stream of clicks</button><button class="btn" id="acRec" type="button" aria-pressed="false">Run nightly reconciliation</button></div></div><div class="stats"><div class="stat"><span class="k">Clicks counted on time</span><span class="v" id="acOk"></span></div><div class="stat"><span class="k">Missed their window</span><span class="v glow" id="acLate"></span></div><div class="stat"><span class="k">Count accuracy</span><span class="v" id="acAcc"></span></div><div class="stat"><span class="k">Extra delay per result</span><span class="v" id="acDelay"></span></div></div><p class="callout">Each dot is a click, placed across at the moment it really happened and up by how late it arrived; the dashed line is where its window closes. Red dots arrived after their window had closed. <b>A longer watermark catches more of them but makes every result later</b>; reconciliation against the raw log fixes the rest after the fact.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When counts mean money, count by when things happened, wait a moment for the stragglers, and check the totals again later from the raw data.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Hotel reservation →</a></div>
+    </section>
+    <!-- ===================== STATE AT SCALE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · state</span>
+      <h2>State at Scale</h2>
+      <p>Four systems that hold data people care about: hotel rooms that must never be sold twice, a billion mailboxes, a storage service for a hundred petabytes of files, and a leaderboard that must rank millions of players in real time. Each one picks the right storage for the job and then fights a different enemy: races, size, disk failures or slow sorting.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Pick the data store by its access pattern, then decide what you will give up. Every design here trades a little of something to get a lot of something else.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Never sell the last room twice</div>
+        <h2>Hotel Reservation System</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design the booking system for a hotel chain like Marriott. The traffic is modest, but two guests must never get the same room, the same click must never book twice, and the hotel wants to overbook a little on purpose.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Small numbers, strict rules.</b> With 5,000 hotels and a million rooms, about 70 percent full and three-night stays, the book estimates around 240,000 bookings a day, only about 3 a second. A relational database with ACID transactions is the natural choice.</span></li>
+          <li><span><b>Book a room type, not a room.</b> Guests reserve "a king room" for given dates, and the specific room is assigned at check-in. Inventory is a table with one row per hotel, room type and date, holding the total rooms and how many are reserved. The hotel can allow about 10 percent overbooking.</span></li>
+          <li><span><b>Two ways to double-book.</b> The same user can click Book twice, which an idempotency key fixes: the reservation ID is created before submitting and is the primary key, so the second insert fails. Or two users can race for the last room, which needs concurrency control.</span></li>
+          <li><span><b>Locks, versions or constraints.</b> Pessimistic locking (SELECT ... FOR UPDATE) makes the second buyer wait. Optimistic locking adds a version number and rejects a write if the row changed since it was read. A database constraint refuses any update where reserved exceeds total. The book prefers optimistic locking or constraints when contention is low, which it usually is.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree on the scale, booking by room type, overbooking and price changes per day. Step two: design the API and data model (hotel, room type inventory, reservation) and split services for hotels, rates, reservations, payments and management behind a gateway. Step three: handle concurrency with idempotency and locking, scale to booking.com size by sharding on hotel ID and caching inventory in Redis, and keep reservation and inventory data consistent, ideally in one database rather than a saga across services. Step four: recap the choices.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: two guests, one room left</div><div class="hint">Pick a strategy and step through it</div></div>
+        <div class="stage"><svg id="ht7" role="img" aria-label="A sequence diagram of two booking requests racing for the last room"></svg></div><div class="lab-ctl"><div class="row" id="htS"></div><div class="row"><button class="btn primary" id="htGo" type="button">Next step</button><button class="btn" id="htAll" type="button">Show all steps</button><button class="btn" id="htRe" type="button">Start over</button></div></div><div class="stats"><div class="stat"><span class="k">Room inventory row</span><span class="v" id="htRow"></span></div><div class="stat"><span class="k">Confirmed bookings</span><span class="v glow" id="htBk"></span></div><div class="stat"><span class="k">Outcome</span><span class="s" id="htSay"></span></div></div><p class="callout">The hotel has 100 king rooms for the night and 99 are taken. <b>Without any protection, both requests read 99, both decide there's room, and both succeed.</b> Each strategy stops that in a different place, with a different cost.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When two people want the last of something, don't trust what you read a moment ago. Either lock it, check it hasn't changed when you write, or let the database refuse an impossible number.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Email service →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · A billion inboxes</div>
+        <h2>Distributed Email Service</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design Gmail-scale email: send and receive, folders, search, and keeping spam out of the inbox. The old one-server mail designs don't scale, so the book rebuilds email around web servers, real-time servers and a custom metadata store.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Huge storage, steady traffic.</b> A billion users sending about 10 emails a day is around 100,000 sends a second. Receiving 40 a day at about 50 KB of metadata each comes to roughly 730 PB a year, and attachments add even more, so storage dominates the design.</span></li>
+          <li><span><b>The protocols.</b> SMTP moves mail between servers; POP and IMAP let clients fetch it; modern webmail uses HTTP. A sender finds the recipient's mail server through a DNS MX record.</span></li>
+          <li><span><b>Store by mailbox.</b> Email metadata is partitioned by user ID, so one user's mail lives together, and sorted by a time-based email ID. Read and unread mail go into separate tables to make "show unread" fast, attachments go to object storage, and recent mail is cached. A single primary per mailbox favours consistency over availability.</span></li>
+          <li><span><b>Getting into the inbox.</b> Sending is easy; being trusted is hard. Use dedicated IP addresses, warm them up slowly over weeks, separate marketing from transactional mail, process bounces and complaints quickly, ban spammers, and sign mail with SPF, DKIM and DMARC so receivers can check it really came from you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: confirm the features (send, receive, fetch, folders, search, spam filtering) and estimate the traffic and storage. Step two: walk through how traditional mail servers work and why they don't scale, then propose webmail, web servers, real-time servers on WebSockets, a metadata database, an attachment store, a cache and a search store, with separate sending and receiving flows through queues. Step three: choose the metadata store and data model, keep threads together with message headers, handle consistency, deliverability and search. Step four: scaling across regions and other extras.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: will your email reach the inbox?</div><div class="hint">Turn on the protections, then send</div></div>
+        <div class="stage"><svg id="em8" role="img" aria-label="The path of an email from your outgoing servers to the recipient, ending in the inbox, spam or rejected"></svg></div><div class="lab-ctl"><div class="toggles" id="emT"></div><div class="row"><button class="btn primary" id="emGo" type="button">Send 100 emails</button></div></div><div class="stats"><div class="stat"><span class="k">Inbox</span><span class="v glow" id="emIn"></span></div><div class="stat"><span class="k">Spam folder</span><span class="v" id="emSp"></span></div><div class="stat"><span class="k">Rejected</span><span class="v" id="emRj"></span></div><div class="stat"><span class="k">The receiver thinks</span><span class="s" id="emSay"></span></div></div><p class="callout">An illustrative model, not a real spam filter: each practice from the chapter nudges how much the receiving server trusts you. <b>Authentication proves the mail is yours; reputation, built slowly, decides whether it's welcome.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Email at scale is a storage problem dressed as a messaging problem. Keep each mailbox together, separate what people search for from what they just read, and earn the trust of other mail servers slowly.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Object storage →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · A hundred petabytes that never vanish</div>
+        <h2>S3-like Object Storage</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design a storage service like Amazon S3: put files (objects) into buckets, get them back by name, and make sure that almost nothing is ever lost, even as disks fail every day.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Block, file and object.</b> Block storage gives raw disk blocks to a server; file storage adds folders and is shared over a network; object storage gives up editing in place for nearly unlimited scale and low cost. Objects are written once and replaced whole, and are addressed by bucket and name.</span></li>
+          <li><span><b>Split metadata from data.</b> Names, sizes and permissions are small and change often; the bytes are big and never change. So a metadata service (a sharded database) keeps the first, and a data store keeps the second. In the data store, a placement service tracks which data nodes are alive and where copies go, and a routing service sends reads and writes to them.</span></li>
+          <li><span><b>Pack small objects together.</b> Millions of tiny files would waste disk blocks and overwhelm the file system. Data nodes append objects to one large file until it reaches a few gigabytes, then seal it as read-only, and keep a small local table of which object sits at which offset.</span></li>
+          <li><span><b>Durability: copies or codes.</b> Three copies on different failure domains give about six nines of durability for 200 percent extra space. Erasure coding (for example 8 data chunks plus 4 parity chunks) survives any 4 failures, reaches about eleven nines, and costs only 50 percent extra, but reads touch more machines. Checksums catch silent corruption.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree on bucket and object operations, versioning, large uploads, 100 PB of data, six nines of durability and four of availability. Step two: explain storage types and terms, then sketch the API service, identity and access, the metadata store and the data store, with upload and download flows. Step three: data routing and placement, replication, packing small objects, durability with failure domains and erasure coding, checksums, the metadata schema, listing objects, versioning, multipart uploads and garbage collection. Step four: recap and point out what was left out.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: break the disks</div><div class="hint">Tap nodes to fail them</div></div>
+        <div class="stage"><svg id="s39" role="img" aria-label="Twelve storage nodes holding copies or erasure-coded chunks, with failed nodes marked"></svg></div><div class="lab-ctl"><div class="row" id="s3M"></div><div class="row"><button class="btn primary" id="s3X" type="button">Fail a random node</button><button class="btn" id="s3R" type="button">Repair all</button></div></div><div class="stats"><div class="stat"><span class="k">Data stored on 12 nodes</span><span class="v" id="s3Cap"></span></div><div class="stat"><span class="k">Extra space used</span><span class="v" id="s3Over"></span></div><div class="stat"><span class="k">Data still readable</span><span class="v glow" id="s3Ok"></span></div><div class="stat"><span class="k">What to notice</span><span class="s" id="s3Say"></span></div></div><p class="callout">With three copies, the 12 nodes hold 4 objects; lose all three copies of one and it's gone. With 8+4 erasure coding the same 12 nodes hold twice as much data, and any 8 surviving chunks rebuild the object. <b>Erasure coding stores more and survives more, but every read needs 8 nodes instead of 1.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>To store files forever, keep the small, changing facts about them apart from the big, unchanging bytes. Then spread the bytes so that losing several machines at once still loses nothing.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Leaderboard →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Your rank, right now</div>
+        <h2>Real-time Gaming Leaderboard</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design a monthly leaderboard for a mobile game: show the top 10 players and your own rank, updated the moment you win. A sorted set in Redis does almost all the work.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Modest load, hard query.</b> With 5 million daily players finishing about 10 matches each, scores change about 500 times a second, peaking around 2,500. The hard part is not the writes but answering "what is my rank?" among millions, instantly.</span></li>
+          <li><span><b>Why not SQL?</b> A relational database can sort by score, but ranking millions of rows for every request means scanning and sorting again and again. It works for small games and falls over in real time at scale.</span></li>
+          <li><span><b>Redis sorted sets.</b> A sorted set keeps members ordered by score using a skip list, a linked list with express lanes. Adding points (ZINCRBY), fetching the top 10 (ZREVRANGE) and finding a player's rank (ZREVRANK) all take logarithmic time. One leaderboard per month is one key, and 25 million players need well under a gigabyte.</span></li>
+          <li><span><b>When one Redis isn't enough.</b> At 100 times the scale, shard by score range (each shard holds a band of scores, so finding the top is easy) or by hash (Redis Cluster spreads players evenly, but top 10 needs a scatter-gather across shards). Ties can be broken by who reached the score first. A NoSQL table like DynamoDB with sharded writes is another option.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: confirm how points are scored, how many players, that the board resets monthly, and that ties and real-time updates matter. Step two: the game service calls a leaderboard service after each win; scores go to Redis and to a database for history; clients ask the leaderboard service for the top 10 and their own position. Step three: compare SQL with Redis sorted sets, size the memory, plan persistence and replicas, then scale out with sharding or switch to a NoSQL design. Step four: tie-breaking and recovering from a Redis failure.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: climb the leaderboard</div><div class="hint">Win matches and watch the sorted set</div></div>
+        <div class="lb" id="lb10"></div><div class="stage"><svg id="sk10" role="img" aria-label="A skip list with express lanes and the path taken to find your score"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="lbW" type="button">Win a match (+1)</button><button class="btn" id="lbW5" type="button">Win 5 matches</button><button class="btn" id="lbR" type="button">New month</button></div></div><div class="stats"><div class="stat"><span class="k">Your rank of 1,000</span><span class="v glow" id="lbRank"></span></div><div class="stat"><span class="k">Steps to find you in the skip list</span><span class="v" id="lbSteps"></span></div><div class="stat"><span class="k">Steps for a plain sorted list</span><span class="v" id="lbLin"></span></div><div class="stat"><span class="k">Last Redis command</span><span class="s mono" id="lbCmd"></span></div></div><p class="callout">The skip list drawing shows a sample of the 1,000 scores: the search starts in the top lane and drops down a lane each time the next jump would overshoot. <b>That is why ranking a million players takes about twenty steps, not a million.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you need "who's on top" and "where am I" in real time, keep the data already sorted. A sorted set answers both in a handful of steps, however many players there are.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Payment system →</a></div>
+    </section>
+    <!-- ===================== MOVING MONEY ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · money</span>
+      <h2>Moving Money</h2>
+      <p>The book ends with the systems where a bug costs real money: a payment service that talks to card networks, a digital wallet that moves balances a million times a second, and a stock exchange where microseconds decide who gets the trade. Correctness comes first, and speed is earned without giving it up.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>With money, every action must happen exactly once and be explainable afterwards. Idempotency, double-entry ledgers and replayable event logs are how you get there.</p></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Charge once, exactly once</div>
+        <h2>Payment System</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design the payment backend for an online shop like Amazon. The volume is low, but every charge must happen exactly once, every cent must be accounted for, and the system must keep working when banks and networks misbehave.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Correctness over speed.</b> A million transactions a day is only about 10 a second. The challenge is never charging twice, never losing a payment, and being able to prove what happened, even when a call to a payment provider times out.</span></li>
+          <li><span><b>Pay-in and pay-out.</b> When you buy, money flows in: a payment service records the event, a payment executor sends each order to a payment service provider (PSP) such as Stripe, which talks to card networks. A ledger records every movement in double-entry form, where each debit has a matching credit, and a wallet tracks what each seller is owed. Pay-out sends money to sellers later.</span></li>
+          <li><span><b>Hosted pages and webhooks.</b> To avoid handling card numbers (and the PCI rules that come with them), the shop shows the PSP's hosted payment page. The PSP tells the shop the result through a webhook, and some payments take hours or days to finish, so the system must track pending states.</span></li>
+          <li><span><b>Retries plus idempotency.</b> Retries with exponential backoff give at-least-once delivery; an idempotency key, often sent in a header and enforced with a unique key, gives at-most-once. Together they make exactly-once. Failures that keep failing go to a dead-letter queue, and nightly reconciliation compares the ledger with the PSP's settlement file.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: pin down the scope (pay-in for an e-commerce site, using a third-party PSP, card payments), the volume, and the need for reliability, reconciliation and fault tolerance. Step two: sketch the pay-in flow through the payment service, executor, PSP, ledger and wallet, then the API and data model, and the pay-out flow. Step three: PSP integration and hosted pages, reconciliation, handling slow payments, sync versus async communication, failed payments, exactly-once delivery, consistency and security. Step four: monitoring, alerting, debugging tools, currency exchange and cash payments.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: retries on a bad network</div><div class="hint">Make the network worse, then add an idempotency key</div></div>
+        <div class="stage"><svg id="py11" role="img" aria-label="Twenty checkouts over time, each with its attempts and whether the customer was charged once, twice or not at all"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="pyF">Chance a call or reply is lost <output id="opyF"></output></label><input type="range" id="pyF" min="0" max="60" step="5" value="30"></div></div><div class="row" id="pyR"></div><div class="row"><label class="tg" style="flex:0 1 auto"><input type="checkbox" id="pyK"><span>Send an idempotency key</span></label><button class="btn primary" id="pyGo" type="button">Run 20 checkouts</button></div></div><div class="stats"><div class="stat"><span class="k">Charged exactly once</span><span class="v" id="pyOk"></span></div><div class="stat"><span class="k">Charged twice or more</span><span class="v glow" id="pyDup"></span></div><div class="stat"><span class="k">Gave up, not charged</span><span class="v" id="pyFail"></span></div><div class="stat"><span class="k">Calls to the provider</span><span class="v" id="pyCalls"></span></div></div><p class="callout">When a reply is lost, the shop can't tell whether the charge went through, so it retries. <b>Without an idempotency key, the provider treats each retry as a new payment.</b> Exponential backoff spaces retries out so a struggling provider isn't hammered.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Networks fail in the worst place: after the money moved but before you heard back. Retry so nothing is lost, and send a key with every request so a retry can never charge twice.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Digital wallet →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · A million transfers a second</div>
+        <h2>Digital Wallet</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design the balance-transfer engine behind a wallet like PayPal's: move money between accounts a million times a second, never lose a cent, and be able to rebuild any balance at any moment in the past.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A million transactions a second.</b> Each transfer is two operations, a debit and a credit, so the system really needs two million a second. If one database node handles about 1,000 a second, that's about 2,000 nodes, so the data must be sharded, and a transfer will often span two shards.</span></li>
+          <li><span><b>Atomic across shards.</b> In-memory sharding with Redis is fast but can't make a debit on one shard and a credit on another happen together. Distributed transactions can: two-phase commit locks both sides and blocks if the coordinator fails; Try-Confirm/Cancel uses separate, reversible steps at the application level; a Saga runs steps in order and undoes them with compensating actions if one fails.</span></li>
+          <li><span><b>Event sourcing.</b> Auditors want to know not just the balance but how it got there. Event sourcing stores every validated change as an immutable event; the balance is just the result of replaying the events. The rules that turn a command ("send $5") into an event must be deterministic, so replaying always gives the same state. Reads can come from separate, derived views (CQRS).</span></li>
+          <li><span><b>Fast and reliable.</b> To go fast, keep the command and event lists in local files read through mmap, keep state in a local store such as RocksDB, and take snapshots so replays start from a checkpoint. To survive failures, replicate the event list with the Raft consensus algorithm, and coordinate transfers across Raft groups with a Saga or TC/C.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree on balance transfers only, one million transactions a second, high reliability, transactional guarantees and reproducibility. Step two: estimate the node count, then compare in-memory sharding, distributed transactions (2PC, TC/C, Saga) and event sourcing. Step three: make event sourcing fast with local files, mmap and snapshots, make it reliable with Raft, and distribute it across groups with Saga or TC/C coordination. Step four: recap the progression from simple sharding to distributed event sourcing.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: replay the event log</div><div class="hint">Send transfers, then scrub through history</div></div>
+        <div class="stage"><svg id="es12" role="img" aria-label="Account balances rebuilt from an event log, with rejected commands marked"></svg></div><div class="lab-ctl"><div class="row"><div class="field" style="flex:0 1 110px"><label for="esF">From</label><select id="esF"></select></div><div class="field" style="flex:0 1 110px"><label for="esTo">To</label><select id="esTo"></select></div><div class="field" style="flex:0 1 120px"><label for="esAmt">Amount ($)</label><input id="esAmt" type="number" min="1" max="200" value="20"></div><button class="btn primary" id="esGo" type="button" style="align-self:end">Send command</button><button class="btn" id="esRe" type="button" style="align-self:end">Reset</button></div><div class="ctl"><label for="esT">Replay up to event <output id="oesT"></output></label><input type="range" id="esT" min="0" max="1" value="1"></div></div><div class="stats"><div class="stat"><span class="k">Commands received</span><span class="v" id="esC"></span></div><div class="stat"><span class="k">Events stored</span><span class="v glow" id="esE"></span></div><div class="stat"><span class="k">Rejected (not enough money)</span><span class="v" id="esX"></span></div><div class="stat"><span class="k">Total money in the system</span><span class="v" id="esSum"></span></div></div><p class="callout">Commands are requests; only valid ones become events. The balances are never stored as the truth: they're rebuilt by replaying events, so the slider shows any account at any point in time. <b>Every transfer is a debit and a matching credit, so the total never changes.</b> Dashed lines mark snapshots every four events.</p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Instead of overwriting a balance, write down every change that caused it. Then the balance is easy to recompute, any past moment can be replayed, and an auditor can see exactly why.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Stock exchange →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Where microseconds decide</div>
+        <h2>Stock Exchange</h2>
+        <div class="short"><span class="lbl">In short</span><p>Design an electronic stock exchange that takes buy and sell orders, matches them fairly, and publishes prices, all with latency measured in microseconds. The surprising answer is to put the critical path on one machine.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Orders, not users.</b> The book designs for 100 symbols and a billion orders a day. Spread across six and a half trading hours that's about 43,000 orders a second, with peaks around five times higher, and the latency that matters most is at the 99th percentile.</span></li>
+          <li><span><b>The critical path.</b> An order passes through the client gateway (checks and rate limits), the order manager (risk checks and the trader's wallet), the sequencer (which stamps every order and every result with a sequence number), and the matching engine. Market data and reporting sit off the critical path.</span></li>
+          <li><span><b>The order book.</b> For each symbol, the matching engine keeps buy orders and sell orders by price level, and orders at the same price in time order. A new order matches against the best opposite price first, oldest order first. Lists and maps make adding, cancelling and matching constant-time.</span></li>
+          <li><span><b>Fewer hops, one thread.</b> Every network hop costs hundreds of microseconds, so the book puts the gateway-to-engine path on a single server. Components talk through shared memory with mmap, each runs a single-threaded loop pinned to a CPU core, and the whole thing is an event-sourced, deterministic log that a warm standby, or a Raft group, can replay to take over instantly.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">Walking the four steps</span><p>Step one: agree on the scope (stocks only, limit orders, cancel, real-time market data, risk checks), the volume and the latency target. Step two: trace the trading flow, market data flow and reporting flow, then define the API, the order book and candlestick data. Step three: cut latency with one server, mmap and pinned threads; use event sourcing; make it fault tolerant with hot-warm engines and Raft; talk about determinism, market data multicast for fairness, colocation and DDoS protection. Step four: note that some exchanges now run in the cloud and use automated market makers.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: run the matching engine</div><div class="hint">Place orders and watch them match</div></div>
+        <div class="stage"><svg id="ob13" role="img" aria-label="An order book with sell orders above and buy orders below, each price level showing its queue of orders"></svg></div><div class="lab-ctl"><div class="row" id="obSide"></div><div class="row" id="obType"></div><div class="row"><div class="ctl"><label for="obP">Limit price <output id="oobP"></output></label><input type="range" id="obP" min="9940" max="10060" step="5" value="10015"></div><div class="ctl"><label for="obQ">Quantity <output id="oobQ"></output></label><input type="range" id="obQ" min="10" max="600" step="10" value="200"></div></div><div class="row"><button class="btn primary" id="obGo" type="button">Send order</button><button class="btn" id="obRe" type="button">Reset the book</button></div></div><div class="stats"><div class="stat"><span class="k">Best bid / best ask</span><span class="v" id="obBA"></span></div><div class="stat"><span class="k">Last trade</span><span class="v glow" id="obLast"></span></div><div class="stat"><span class="k">Sequence number</span><span class="v" id="obSeq"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="obSay"></span></div></div><p class="callout">Each block in a row is one resting order, oldest on the left. A buy at or above the best ask trades immediately, against the lowest price first and the oldest order first; whatever is left rests in the book. <b>Price, then time: that's the whole fairness rule.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>An exchange is a fair queue that has to be extremely fast. Number everything, match by price and then by time, and keep the critical path on one machine so nothing waits on the network.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#after">Next: your mock interview →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your mock interview</h2>
+      <p class="big">Reading a design is not the same as giving one. Pick a prompt, start the 45-minute clock and talk it through out loud, one step at a time.</p>
+      <div class="mock" id="mock"></div>
+      <div class="recap">
+        <div><span class="n">Location</span><b>Index the map</b><span>Geohash, quadtrees and S2 turn "what's near me" into a lookup instead of a scan.</span></div>
+        <div><span class="n">Fan-out</span><b>Push to the few who care</b><span>Pub/sub channels and WebSockets send each update only to the people who need it.</span></div>
+        <div><span class="n">Streams</span><b>Log, then process</b><span>A partitioned, replicated log decouples producers from consumers and survives crashes.</span></div>
+        <div><span class="n">Time</span><b>Event time and windows</b><span>Count by when things happened, wait a little for stragglers, and reconcile later.</span></div>
+        <div><span class="n">Concurrency</span><b>Never sell one room twice</b><span>Locks, version numbers or constraints stop two writers from both winning.</span></div>
+        <div><span class="n">Durability</span><b>Copies or codes</b><span>Three replicas or erasure coding, and a checksum on everything you store.</span></div>
+        <div><span class="n">Correctness</span><b>Retry, but only once</b><span>Retries give at-least-once; idempotency keys make it exactly-once.</span></div>
+        <div><span class="n">Speed</span><b>One box, one thread</b><span>When microseconds matter, remove the network hops and replay a deterministic log.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>System Design Interview: An Insider's Guide, Volume 2</i> by Alex Xu and Sahn Lam (2022). The explanations, walk-throughs and labs are written in our own words; chapter titles are the book's. Estimates marked as the book's follow its worked numbers; every lab is a simplified model meant to show the idea, not a benchmark.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Where things are", "Data in motion", "State at scale", "Moving money"];
+const CH = [["Proximity Service", "Proximity service", 0, "Chapter 1"], ["Nearby Friends", "Nearby friends", 0, "Chapter 2"], ["Google Maps", "Google Maps", 0, "Chapter 3"], ["Distributed Message Queue", "Message queue", 1, "Chapter 4"], ["Metrics Monitoring and Alerting System", "Metrics and alerts", 1, "Chapter 5"], ["Ad Click Event Aggregation", "Ad click counting", 1, "Chapter 6"], ["Hotel Reservation System", "Hotel reservation", 2, "Chapter 7"], ["Distributed Email Service", "Email service", 2, "Chapter 8"], ["S3-like Object Storage", "Object storage", 2, "Chapter 9"], ["Real-time Gaming Leaderboard", "Leaderboard", 2, "Chapter 10"], ["Payment System", "Payment system", 3, "Chapter 11"], ["Digital Wallet", "Digital wallet", 3, "Chapter 12"], ["Stock Exchange", "Stock exchange", 3, "Chapter 13"]];
+const QUIZ = {
+"1": {
+"q": "Why does a geohash search read the eight neighbouring cells as well as the user's own?",
+"o": [
+"To return more advertising results",
+"Because a nearby business can sit just across a cell boundary with a very different geohash",
+"Because geohash cells overlap"
+],
+"a": 1,
+"w": "Two points a few metres apart can fall on either side of a boundary and share no prefix. Reading the neighbours covers that edge case."
+},
+"2": {
+"q": "In the book's design, what limits the size of the Redis pub/sub cluster?",
+"o": [
+"Memory for storing channels",
+"CPU for pushing millions of updates a second to subscribers",
+"Disk space for location history"
+],
+"a": 1,
+"w": "The channels fit in a couple of servers' memory, but forwarding around 14 million updates a second needs over a hundred servers' worth of CPU."
+},
+"3": {
+"q": "Why are map tiles pre-generated and served from a CDN instead of drawn on request?",
+"o": [
+"Each tile changes every second",
+"The same tiles are requested by huge numbers of people, so drawing them once and caching them near users is far cheaper",
+"Phones can't display images"
+],
+"a": 1,
+"w": "Tiles are static and shared. Rendering them ahead of time and caching them at the edge makes each request a cheap file download."
+},
+"4": {
+"q": "A consumer group has 6 consumers reading a topic with 4 partitions. What happens?",
+"o": [
+"Each partition is read by 1.5 consumers",
+"4 consumers each read one partition and 2 sit idle",
+"All 6 read every partition"
+],
+"a": 1,
+"w": "Within a group, a partition is read by only one consumer, so the extra two have nothing to do until a partition frees up."
+},
+"5": {
+"q": "Why does the book keep raw data for only 7 days but one-hour averages for a year?",
+"o": [
+"Old data is illegal to keep",
+"Detail matters for recent debugging, while long-term trends only need summaries, and summaries are far cheaper to store",
+"Time-series databases can't store more than a week"
+],
+"a": 1,
+"w": "Downsampling trades detail you rarely need for huge savings, while keeping the long-term shape of the data."
+},
+"6": {
+"q": "What does a longer watermark do?",
+"o": [
+"Counts fewer clicks",
+"Catches more late-arriving clicks in the right window, but delays every result",
+"Removes duplicate clicks"
+],
+"a": 1,
+"w": "The watermark is extra waiting time before a window closes. More waiting means more stragglers make it in, and later answers for everyone."
+},
+"7": {
+"q": "A guest's browser sends the same booking request twice. What stops a second reservation?",
+"o": [
+"Pessimistic locking",
+"An idempotency key: the reservation ID is the primary key, so the duplicate insert is rejected",
+"Overbooking"
+],
+"a": 1,
+"w": "The reservation ID is generated before the request is sent. The second identical request hits a unique key and fails harmlessly."
+},
+"8": {
+"q": "What do SPF, DKIM and DMARC have in common?",
+"o": [
+"They encrypt email bodies",
+"They let a receiving server check that mail really comes from the domain it claims",
+"They compress attachments"
+],
+"a": 1,
+"w": "They are email authentication methods. Without them, receivers can't tell your mail from a forgery and treat it with suspicion."
+},
+"9": {
+"q": "Why does the design pack many small objects into one large file?",
+"o": [
+"To make objects easier to edit",
+"Because millions of tiny files waste disk space and overwhelm the file system's metadata",
+"Because S3 only allows large objects"
+],
+"a": 1,
+"w": "Appending small objects into big files uses disk blocks fully and keeps the number of files manageable. A small lookup table finds each object inside."
+},
+"10": {
+"q": "Why does the book pick a Redis sorted set over a SQL query with ORDER BY?",
+"o": [
+"SQL can't store scores",
+"The sorted set keeps players ordered as scores change, so rank and top-10 lookups take logarithmic time instead of a fresh sort",
+"Redis is always cheaper"
+],
+"a": 1,
+"w": "A sorted set maintains order on every update using a skip list. SQL would have to re-sort millions of rows for each rank request."
+},
+"11": {
+"q": "A payment call times out and the shop retries it. What prevents a double charge?",
+"o": [
+"Exponential backoff",
+"An idempotency key, so the provider recognises the retry and returns the first result",
+"A faster network"
+],
+"a": 1,
+"w": "Backoff controls when to retry, not whether a retry is safe. The idempotency key makes repeating the same request harmless."
+},
+"12": {
+"q": "What does event sourcing give a wallet that a simple balance column doesn't?",
+"o": [
+"Faster single reads",
+"The ability to rebuild the balance at any moment in history by replaying immutable events",
+"No need for any database"
+],
+"a": 1,
+"w": "Because every change is kept as an event, the full history is reproducible, which is what auditors and debugging both need."
+},
+"13": {
+"q": "Why does the book put the gateway, order manager, sequencer and matching engine on one server?",
+"o": [
+"To save money on servers",
+"Network hops add hundreds of microseconds each, and removing them is the biggest latency win",
+"Because the order book is too big to split"
+],
+"a": 1,
+"w": "Inside one machine, components can talk through shared memory in microseconds, which matters when the 99th percentile latency is the target."
+}
+};
+const DRILL = [["Search radius? Real-time while moving? How fresh must owner edits be?", "Location service for reads, business service for writes, primary database with read replicas.", "Pick a geospatial index: geohash vs quadtree vs S2. Caching by geohash cell.", "Filters (open now, category), multi-region deployment, privacy."], ["Radius? Update interval? How stale may a friend's location be? Store history?", "WebSocket servers, location cache with TTL, Redis pub/sub, location history in Cassandra.", "Fan-out maths, sharding pub/sub with consistent hashing, friends with huge friend lists.", "Nearby random people via geohash channels; Erlang as an alternative to Redis pub/sub."], ["Which features? Platforms? Accuracy of ETA? How many users navigate daily?", "Location service, navigation service (geocoding, route planner, ranker), tiles on a CDN.", "Routing tile hierarchy, ETA with live traffic, adaptive rerouting, delivery via WebSockets.", "Multi-stop routes, toll and highway avoidance, offline maps."], ["Message size, ordering, retention, throughput, delivery semantics?", "Producers, brokers with partitions, consumer groups, state and metadata storage, coordination.", "On-disk log segments, batching, pull model, rebalancing, ISR replication and acks.", "Message filtering, delayed and scheduled messages, protocol choice."], ["Which metrics? How many machines? Retention and resolution? Alert channels?", "Collection, transport (Kafka), time-series DB, query service, alerting, dashboards.", "Pull vs push, aggregation points, encoding and downsampling, alert manager design.", "Buy vs build (Grafana, Prometheus), logs and tracing are out of scope."], ["Which queries? Volume and peak? Acceptable latency? How correct must counts be?", "Log watcher, Kafka, aggregation service (map, aggregate, reduce), raw and aggregated stores.", "Event vs processing time, watermarks, tumbling and sliding windows, exactly-once, hotspots, reconciliation.", "Lambda vs Kappa, monitoring the pipeline, hosted alternatives."], ["Scale? Book by room type or room? Overbooking? Cancellations and pricing?", "Hotel, rate, reservation, payment services; inventory table per hotel, room type and date.", "Idempotency key, pessimistic vs optimistic locking vs constraints, sharding, caching, consistency across services.", "Saga vs 2PC vs one database; reporting and analytics."], ["Features? Users and email volume? Attachments? Search? Spam?", "Webmail, web servers, real-time servers, metadata DB, attachment store, cache, search store, queues.", "Metadata data model (partition by user), threads, consistency, deliverability, search engine choice.", "Multi-region, availability vs consistency, anti-virus scanning."], ["Operations? Versioning? Object sizes? Total data, durability and availability targets?", "API service, IAM, metadata service, data store (routing, placement, data nodes).", "Replication vs erasure coding, failure domains, packing small objects, checksums, metadata sharding, multipart upload, GC.", "Listing objects at scale, versioning costs, lifecycle policies."], ["How are points scored? Players? Monthly reset? Ties? Real time?", "Game service, leaderboard service, Redis sorted set, database for history.", "SQL vs sorted sets, memory sizing, persistence, sharding by score range vs hash, NoSQL option.", "Tie-breaking, failure recovery, friends-only leaderboards."], ["Pay-in, pay-out or both? Own card processing or a PSP? Volume? Reconciliation?", "Payment service, executor, PSP, card schemes, double-entry ledger, wallet.", "Hosted payment page, webhooks, reconciliation, retries and dead-letter queues, idempotency, consistency.", "Monitoring, debugging tools, currency exchange, security and fraud checks."], ["Which operations? Throughput? Reliability target? Must history be reproducible?", "Sharded balances; compare Redis sharding, 2PC, TC/C, Saga and event sourcing.", "Command/event/state, determinism, CQRS, mmap files and snapshots, Raft replication, distributed event sourcing.", "Reverse proxies and push vs pull for clients, compensating actions."], ["Which securities and order types? Volume? Latency target? Market data needs?", "Client gateway, order manager, sequencer, matching engine, market data publisher, reporter.", "Order book data structure, single server with mmap and pinned threads, event sourcing, hot-warm and Raft, determinism, fairness.", "Market makers, cloud exchanges, colocation and DDoS protection."]];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0b1220';
+try { const t = localStorage.getItem('sd2-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('sd2-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('sd2-done', []));
+const save = () => store.set('sd2-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const fmtBig = n => { const a = Math.abs(n); return a >= 1e12 ? (n / 1e12).toFixed(a >= 1e13 ? 0 : 1) + ' trillion' : a >= 1e9 ? (n / 1e9).toFixed(a >= 1e10 ? 0 : 1) + ' billion' : a >= 1e6 ? (n / 1e6).toFixed(a >= 1e7 ? 0 : 1) + ' million' : fmtN(n); };
+const fmtBytes = b => { const U = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB']; let i = 0; while (b >= 1000 && i < U.length - 1){ b /= 1000; i++; } return (b >= 100 || i === 0 ? Math.round(b) : b.toFixed(1)) + ' ' + U[i]; };
+const btnRow = (sel, items, cur, pick) => { const box = $(sel); box.innerHTML = items.map(([id, l]) => `<button class="btn" type="button" data-v="${id}" aria-pressed="${id === cur}">${l}</button>`).join('');
+  const bs = [...box.querySelectorAll('[data-v]')]; bs.forEach(b => b.addEventListener('click', () => { press(bs, b); pick(b.dataset.v); })); return bs; };
+/* map a click on an SVG to its viewBox coordinates */
+const svgPt = (el, ev) => { const r = el.getBoundingClientRect(), v = el.viewBox.baseVal; return { x: (ev.clientX - r.left) / r.width * v.width, y: (ev.clientY - r.top) / r.height * v.height }; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['Restaurants near me', 1, 'A geospatial index', 'Split the map into named cells (geohash or a quadtree) so "nearby" becomes a lookup of a few cells.'],
+    ['Friends on a map', 2, 'Push, don\'t poll', 'Keep WebSockets open and give every user a pub/sub channel, so each move reaches only friends who are listening.'],
+    ['Directions and ETA', 3, 'Tiles, graphs and traffic', 'Pre-drawn tiles on a CDN, a road graph cut into routing tiles, and a live stream of locations for arrival times.'],
+    ['A queue like Kafka', 4, 'A partitioned log', 'Append to replicated partitions on disk; consumer groups pull and track their own offsets.'],
+    ['Server monitoring', 5, 'A time-series store', 'Collect by pull or push, buffer in Kafka, downsample old data, and alert only after a rule holds for a while.'],
+    ['Counting ad clicks', 6, 'Streams and windows', 'Count by event time in tumbling windows, wait for stragglers with a watermark, and reconcile against raw data.'],
+    ['Booking a hotel', 7, 'Concurrency control', 'Idempotency keys stop double clicks; optimistic locking or constraints stop two guests getting the last room.'],
+    ['An email service', 8, 'Mailboxes at scale', 'Partition metadata by user, keep attachments in object storage, and earn deliverability with SPF, DKIM and DMARC.'],
+    ['File storage like S3', 9, 'Durable objects', 'Separate metadata from data, pack small objects into big files, and use replication or erasure coding.'],
+    ['A game leaderboard', 10, 'Sorted sets', 'A Redis sorted set gives top 10 and "my rank" in logarithmic time, even with millions of players.'],
+    ['Checkout payments', 11, 'Exactly once', 'Retries for at-least-once, idempotency keys for at-most-once, a double-entry ledger, and nightly reconciliation.'],
+    ['Wallet transfers', 12, 'Event sourcing', 'Store every validated change as an event, replay to get balances, and replicate the log with Raft.'],
+    ['A stock exchange', 13, 'Low latency by design', 'Sequence everything, match by price and time, and keep the critical path on one machine.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: back-of-the-envelope estimator ---------- */
+{ const P = [ // label, users (millions), actions per user per day, active hours, peak x, bytes stored per action, years
+    ['1 · Proximity: searches', 100, 5, 24, 5, 0, 1],
+    ['2 · Nearby friends: location updates', 100, 334, 24, 2, 30, 1],
+    ['3 · Google Maps: batched updates', 1000, 20, 24, 5, 0, 1],
+    ['5 · Metrics: 10M series every 10 s', 10, 8640, 24, 1, 16, 1],
+    ['6 · Ad clicks', 1000, 1, 24, 5, 100, 1],
+    ['7 · Hotel reservations', .24, 1, 24, 5, 1000, 5],
+    ['8 · Email: received metadata', 1000, 40, 24, 2, 50000, 1],
+    ['10 · Leaderboard: score updates', 5, 10, 24, 5, 26, 1],
+    ['11 · Payments', 1, 1, 24, 3, 1000, 5],
+    ['12 · Wallet: transfers', 100, 1000, 24, 1, 0, 1],
+    ['13 · Stock exchange: orders', 1000, 1, 6.5, 5, 0, 1] ];
+  const F = [['u', 'Users or sources (millions)'], ['a', 'Actions each per day'], ['h', 'Active hours per day'], ['p', 'Peak multiple'], ['b', 'Bytes stored per action'], ['y', 'Years kept']];
+  $('#estP').innerHTML = P.map((p, i) => `<option value="${i}">${p[0]}</option>`).join('');
+  $('#estIn').innerHTML = F.map(([k, l]) => `<label>${l}<input id="est_${k}" type="number" min="0" step="any" inputmode="decimal"></label>`).join('');
+  const get = k => Math.max(0, +$('#est_' + k).value || 0);
+  const load = i => { P[i].slice(1).forEach((v, j) => $('#est_' + F[j][0]).value = v); calc(); };
+  function calc(){ const u = get('u') * 1e6, a = get('a'), h = get('h') || 24, p = get('p') || 1, b = get('b'), y = get('y') || 1;
+    const secs = h >= 24 ? 1e5 : h * 3600, qps = u * a / secs, day = u * a * b;
+    const sf = h >= 24 ? '÷ 10⁵ s' : `÷ (${h} h × 3,600 s)`;
+    $('#estOut').innerHTML = `<div><span class="k">Average per second</span><span class="v">${fmtBig(qps)}</span><span class="f">users × actions ${sf}</span></div><div><span class="k">Peak per second</span><span class="v">${fmtBig(qps * p)}</span><span class="f">average × ${p}</span></div><div><span class="k">Stored per day</span><span class="v">${b ? fmtBytes(day) : '—'}</span><span class="f">users × actions × bytes</span></div><div><span class="k">Stored over ${y} year${y === 1 ? '' : 's'}</span><span class="v">${b ? fmtBytes(day * 365 * y) : '—'}</span><span class="f">per day × 365 × ${y}</span></div>`; }
+  $('#estP').addEventListener('change', e => load(+e.target.value));
+  $$('#estIn input').forEach(i => i.addEventListener('input', calc));
+  load(0);
+}
+
+/* ---------- afterword: mock interview ---------- */
+{ const STEPS = [['Step 1', 'Scope the problem', 0, 7], ['Step 2', 'High-level design', 7, 20], ['Step 3', 'Deep dive', 20, 40], ['Step 4', 'Wrap up', 40, 45]];
+  const el = $('#mock'); let ch = 0, left = 45 * 60, timer = null;
+  el.innerHTML = `<div class="top"><select id="mkC" aria-label="Choose a prompt">${CH.map((c, i) => `<option value="${i}">Design ${c[0].replace(/ System$/, ' system')}</option>`).join('')}</select><span class="clock" id="mkT">45:00</span><div class="row"><button class="btn primary" id="mkGo" type="button">Start the clock</button><button class="btn" id="mkRe" type="button">Reset</button><button class="btn" id="mkLog" type="button">Log this practice</button></div></div><div class="tl"><i id="mkBar"></i></div><div class="steps" id="mkS"></div><div><span class="eyebrow">Your practice log</span><div class="log" id="mkL"></div></div>`;
+  const draw = () => { const m = (45 * 60 - left) / 60, d = DRILL[ch];
+    $('#mkT').textContent = `${String(Math.floor(left / 60)).padStart(2, '0')}:${String(left % 60).padStart(2, '0')}`;
+    $('#mkBar').style.width = (m / 45 * 100) + '%';
+    $('#mkS').innerHTML = STEPS.map(([n, t, a, b], i) => `<div class="stp${timer || left < 2700 ? (m >= a && m < b ? ' on' : m >= b ? ' past' : '') : ''}"><span class="n">${n} · ${a}–${b} min</span><b>${t}</b><span>${d[i]}</span></div>`).join(''); };
+  const drawLog = () => { const L = store.get('sd2-practice', []);
+    $('#mkL').innerHTML = L.length ? L.slice().reverse().map(x => `<div><b>${esc(x.d)}</b> · Design ${esc(CH[x.c] ? CH[x.c][0] : '')} · ${x.m} min</div>`).join('') : 'Nothing logged yet. Practise a prompt and press "Log this practice"; it is kept in this browser only.'; };
+  const stop = () => { clearInterval(timer); timer = null; $('#mkGo').textContent = left < 2700 ? 'Resume' : 'Start the clock'; };
+  $('#mkC').addEventListener('change', e => { ch = +e.target.value; draw(); });
+  $('#mkGo').addEventListener('click', () => { if (timer){ stop(); draw(); return; } if (!left) left = 45 * 60;
+    timer = setInterval(() => { left = Math.max(0, left - 1); if (!left) stop(); draw(); }, 1000); $('#mkGo').textContent = 'Pause'; draw(); });
+  $('#mkRe').addEventListener('click', () => { stop(); left = 45 * 60; $('#mkGo').textContent = 'Start the clock'; draw(); });
+  $('#mkLog').addEventListener('click', () => { const L = store.get('sd2-practice', []); const m = Math.max(1, Math.round((45 * 60 - left) / 60));
+    L.push({ c: ch, d: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }), m }); store.set('sd2-practice', L.slice(-30)); drawLog(); });
+  draw(); drawLog();
+}
+
+/* ---------- 1: three ways to index a map ---------- */
+{ const el = $('#gx1'), KM = 40, R = [0.5, 1, 1.5, 2, 3, 4, 5, 6, 8, 10, 12, 15], r0 = rng(21), PTS = [];
+  for (let i = 0; i < 700; i++){ let x, y; const c = r0();
+    if (c < .45){ x = .3 + gauss(r0) * .07; y = .36 + gauss(r0) * .06; } else if (c < .8){ x = .7 + gauss(r0) * .05; y = .64 + gauss(r0) * .06; } else { x = r0(); y = r0(); }
+    PTS.push({ x: clamp(x, .002, .998) * KM, y: clamp(y, .002, .998) * KM }); }
+  let mode = 'geo', me = { x: 12.5, y: 14.5 };
+  btnRow('#gxM', [['grid', 'Even grid'], ['geo', 'Geohash'], ['quad', 'Quadtree']], mode, v => { mode = v; draw(); });
+  function quad(x, y, s, pts, k, d, out){ if (pts.length <= k || d >= 9){ out.push({ x, y, w: s, h: s, n: pts.length }); return; }
+    const h = s / 2; [[x, y], [x + h, y], [x, y + h], [x + h, y + h]].forEach(([qx, qy]) => quad(qx, qy, h, pts.filter(p => p.x >= qx && p.x < qx + h && p.y >= qy && p.y < qy + h), k, d + 1, out)); }
+  const hits = (c, rad) => { const nx = clamp(me.x, c.x, c.x + c.w), ny = clamp(me.y, c.y, c.y + c.h); return (nx - me.x) ** 2 + (ny - me.y) ** 2 <= rad * rad; };
+  const draw = onLayout(() => { const W = 640, s = W / KM, rad = R[+$('#gxR').value - 1], k = +$('#gxK').value, nw = NARROW(), fs = nw ? 22 : 13;
+    vb(el, W, W); out('gxR', rad + ' km'); out('gxK', k);
+    $('#gxK').disabled = mode !== 'quad'; $('#gxK').closest('.ctl').style.opacity = mode === 'quad' ? 1 : .45;
+    let cells = [], read = [], say = '', lines = '';
+    if (mode === 'grid'){ const n = 16, cw = KM / n;
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) cells.push({ x: i * cw, y: j * cw, w: cw, h: cw });
+      read = cells.filter(c => hits(c, rad));
+      const counts = cells.map(c => PTS.filter(p => p.x >= c.x && p.x < c.x + c.w && p.y >= c.y && p.y < c.y + c.h).length);
+      say = `Fixed 2.5 km cells. The busiest holds ${Math.max(...counts)} businesses while ${counts.filter(x => !x).length} of 256 are empty.`;
+      for (let i = 1; i < n; i++) lines += `<path d="M${i * cw * s} 0V${W}M0 ${i * cw * s}H${W}" ${S('line', 1)}/>`;
+    } else if (mode === 'geo'){ let b = 1; while (b < 30){ const w = KM / 2 ** Math.ceil((b + 1) / 2), h = KM / 2 ** Math.floor((b + 1) / 2); if (Math.min(w, h) < rad) break; b++; }
+      const nx = 2 ** Math.ceil(b / 2), ny = 2 ** Math.floor(b / 2), cw = KM / nx, ch = KM / ny, ci = Math.floor(me.x / cw), cj = Math.floor(me.y / ch);
+      for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++){ const i = ci + di, j = cj + dj; if (i >= 0 && j >= 0 && i < nx && j < ny) read.push({ x: i * cw, y: j * ch, w: cw, h: ch }); }
+      let bits = ''; for (let q = 0, i = ci, j = ny - 1 - cj, bi = Math.ceil(b / 2), bj = Math.floor(b / 2); q < b; q++){ if (q % 2 === 0){ bi--; bits += (i >> bi) & 1; } else { bj--; bits += (j >> bj) & 1; } }
+      say = `${b}-bit cells of ${cw < 1 ? (cw * 1000).toFixed(0) + ' m' : cw.toFixed(1) + ' km'} × ${ch < 1 ? (ch * 1000).toFixed(0) + ' m' : ch.toFixed(1) + ' km'}, the smallest at least as big as your radius. Your cell: ${bits.replace(/(.{5})/g, '$1 ').trim()}`;
+      if (nx * ny <= 4096){ for (let i = 1; i < nx; i++) lines += `<path d="M${i * cw * s} 0V${W}" ${S('line', 1)}/>`; for (let j = 1; j < ny; j++) lines += `<path d="M0 ${j * ch * s}H${W}" ${S('line', 1)}/>`; }
+    } else { const leaves = []; quad(0, 0, KM, PTS, k, 0, leaves); read = leaves.filter(c => hits(c, rad));
+      const small = Math.min(...leaves.map(l => l.w));
+      say = `${leaves.length} leaves. Dense centres split down to ${small < 1 ? (small * 1000).toFixed(0) + ' m' : small.toFixed(1) + ' km'} cells; empty land stays in big ones.`;
+      leaves.forEach(c => lines += `<rect x="${c.x * s}" y="${c.y * s}" width="${c.w * s}" height="${c.h * s}" ${S('line', 1)}/>`); }
+    const inCells = p => read.some(c => p.x >= c.x && p.x < c.x + c.w && p.y >= c.y && p.y < c.y + c.h);
+    let g = `<rect width="${W}" height="${W}" ${F('deep')}/>` + lines;
+    read.forEach(c => g += `<rect x="${c.x * s}" y="${c.y * s}" width="${c.w * s}" height="${c.h * s}" ${FS('glow', 'glow', 1.5, .1)}/>`);
+    let scan = 0, found = 0;
+    PTS.forEach(p => { const inside = (p.x - me.x) ** 2 + (p.y - me.y) ** 2 <= rad * rad, sc = inCells(p); if (sc) scan++; if (inside) found++;
+      g += `<circle cx="${(p.x * s).toFixed(1)}" cy="${(p.y * s).toFixed(1)}" r="${nw ? 4 : 2.8}" ${inside ? F('glow') : sc ? F('cool', .85) : F('faint', .45)}/>`; });
+    g += `<circle cx="${me.x * s}" cy="${me.y * s}" r="${rad * s}" ${S('glow', 2, ';stroke-dasharray:6 5')}/><circle cx="${me.x * s}" cy="${me.y * s}" r="${nw ? 10 : 7}" ${FS('text', 'ink', 3)}/>`;
+    g += `<rect x="8" y="${W - (nw ? 40 : 30)}" width="${nw ? 330 : 214}" height="${nw ? 32 : 22}" rx="6" ${F('panel', .85)}/>` + TX(16, W - (nw ? 17 : 15), '40 km across · tap to move', 'muted', fs);
+    el.innerHTML = g;
+    $('#gxCells').textContent = read.length; $('#gxScan').textContent = scan + ' of 700'; $('#gxFound').textContent = found; $('#gxSay').textContent = say; });
+  el.style.cursor = 'crosshair';
+  el.addEventListener('click', ev => { const p = svgPt(el, ev), s = 640 / KM; me = { x: clamp(p.x / s, .01, KM - .01), y: clamp(p.y / s, .01, KM - .01) }; draw(); });
+  $('#gxR').addEventListener('input', draw); $('#gxK').addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 2: the location fan-out ---------- */
+{ const el = $('#nf2'), r = rng(5), FR = [], NAMES = ['Ama', 'Bo', 'Cy', 'Dev', 'Eli', 'Fen', 'Gus', 'Hana', 'Ivo', 'Jun', 'Kai', 'Lea', 'Mo', 'Nia', 'Oz', 'Pia', 'Raj', 'Sol'];
+  let me = { x: 0, y: 0 }, t = 0;
+  NAMES.forEach((n, i) => { const a = r() * Math.PI * 2, d = 1 + r() * 10; FR.push({ n, x: Math.cos(a) * d, y: Math.sin(a) * d, on: r() < .72 }); });
+  const step = () => { t += 30; const w = (o, m) => { o.x += (r() - .5) * m; o.y += (r() - .5) * m; }; w(me, 1.2); FR.forEach(f => { w(f, 2.2); const d = Math.hypot(f.x - me.x, f.y - me.y); if (d > 11){ f.x = me.x + (f.x - me.x) * 10 / d; f.y = me.y + (f.y - me.y) * 10 / d; } }); };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, H = nw ? 400 : 380, s = nw ? 15 : 16.5, cx = W / 2, cy = H / 2, fs = nw ? 13 : 12;
+    vb(el, W, H); let g = `<rect width="${W}" height="${H}" ${F('deep')}/>`;
+    for (let i = -20; i <= 20; i++){ const gx = cx + i * 2 * s, gy = cy + i * 2 * s; if (gx > 0 && gx < W) g += `<path d="M${gx} 0V${H}" ${S('line', 1, ';stroke-opacity:.5')}/>`; if (gy > 0 && gy < H) g += `<path d="M0 ${gy}H${W}" ${S('line', 1, ';stroke-opacity:.5')}/>`; }
+    g += `<circle cx="${cx}" cy="${cy}" r="${5 * s}" ${FS('glow', 'glow', 1.5, .07)}/>` + TX(cx, cy - 5 * s - 6, '5 miles', 'glow', fs, 'middle');
+    let shown = 0, dropped = 0, off = 0;
+    FR.forEach(f => { const x = cx + (f.x - me.x) * s, y = cy + (f.y - me.y) * s, d = Math.hypot(f.x - me.x, f.y - me.y), near = d <= 5;
+      if (x < -10 || x > W + 10 || y < -10 || y > H + 10) return;
+      if (!f.on){ off++; g += `<circle cx="${x}" cy="${y}" r="6" ${FS('deep', 'faint', 1.5)}/>` + TX(x + 9, y + 4, f.n, 'faint', fs); return; }
+      if (near){ shown++; g += `<path d="M${cx} ${cy}L${x} ${y}" ${S('glow', 1.6)}/>`; } else { dropped++; g += `<path d="M${cx} ${cy}L${x} ${y}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>`; }
+      g += `<circle cx="${x}" cy="${y}" r="6.5" ${near ? F('glow') : F('cool', .9)}/>` + TX(x + 9, y + 4, f.n, near ? 'text' : 'muted', fs); });
+    g += `<circle cx="${cx}" cy="${cy}" r="9" ${FS('text', 'ink', 3)}/>` + TX(cx + 13, cy + 18, 'You', 'text', fs + 1);
+    const ly = H - 12; g += `<rect x="6" y="${ly - 17}" width="${nw ? 368 : 430}" height="24" rx="6" ${F('panel', .9)}/><circle cx="18" cy="${ly - 5}" r="5" ${F('glow')}/>` + TX(28, ly, 'shown', 'muted', fs) + `<circle cx="${nw ? 86 : 90}" cy="${ly - 5}" r="5" ${F('cool')}/>` + TX(nw ? 96 : 100, ly, 'pushed, too far', 'muted', fs) + `<circle cx="${nw ? 216 : 222}" cy="${ly - 5}" r="5" ${FS('deep', 'faint', 1.5)}/>` + TX(nw ? 226 : 232, ly, 'offline, not subscribed', 'muted', fs);
+    el.innerHTML = g;
+    $('#nfT').textContent = t ? `t = ${t} s` : 't = 0 s';
+    $('#nfSay').textContent = `${shown + dropped} online friends got your update: ${shown} within 5 miles see you, ${dropped} drop it. ${off} offline friends get nothing.`; });
+  const calc = () => { const u = +$('#nfU').value * 1e6, f = +$('#nfF').value, o = +$('#nfO').value, iv = +$('#nfI').value, inn = u / iv, outp = inn * f * o / 100;
+    out('nfU', fmtBig(u)); out('nfF', f); out('nfO', o + '%'); out('nfI', iv + ' s');
+    $('#nfIn').textContent = fmtBig(inn); $('#nfOut').textContent = fmtBig(outp); $('#nfSrv').textContent = fmtN(Math.ceil(outp / 1e5)); };
+  ['#nfU', '#nfF', '#nfO', '#nfI'].forEach(s => $(s).addEventListener('input', calc));
+  $('#nfGo').addEventListener('click', () => { step(); draw(); });
+  calc(); draw();
+}
+
+/* ---------- 3: find the fastest route ---------- */
+{ const el = $('#gm3'); let algo = 'astar', dest = null, G = null;
+  btnRow('#gmA', [['dijkstra', 'Dijkstra'], ['astar', 'A* search']], algo, v => { algo = v; draw(); });
+  function build(nw){ const cols = nw ? 8 : 14, rows = nw ? 11 : 8, r = rng(9), N = [], E = [];
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) N.push({ i, j });
+    const id = (i, j) => j * cols + i, mid = Math.floor(rows / 2), mc = Math.floor(cols / 2);
+    const kind = (a, b) => { const A = N[a], B = N[b]; if (A.j === B.j && A.j === 0) return 'hw'; if (A.i === B.i && A.i === cols - 1) return 'hw'; if (A.i === B.i && A.i === 0) return 'hw'; if (A.j === B.j && A.j === mid) return 'art'; if (A.i === B.i && A.i === mc) return 'art'; return 'loc'; };
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++){ if (i < cols - 1) E.push([id(i, j), id(i + 1, j)]); if (j < rows - 1) E.push([id(i, j), id(i, j + 1)]); }
+    const keep = E.filter(([a, b]) => kind(a, b) !== 'loc' || r() > .16).map(([a, b]) => ({ a, b, k: kind(a, b) }));
+    const start = nw ? id(0, rows - 1) : id(0, mid + 1);
+    return { cols, rows, N, E: keep, start, def: nw ? id(cols - 1, 1) : id(cols - 1, mid - 1), mid, mc }; }
+  const SPEED = { hw: 100, art: 50, loc: 30 };
+  function route(){ const { N, E, start, cols, rows } = G, tr = +$('#gmT').value, d = dest == null ? G.def : dest, adj = N.map(() => []);
+    E.forEach(e => { const A = N[e.a], B = N[e.b], mx = (A.i + B.i) / 2 - (cols - 1) / 2, my = (A.j + B.j) / 2 - (rows - 1) / 2, cen = Math.hypot(mx, my) < Math.min(cols, rows) * .36;
+      e.jam = e.k !== 'hw' && cen ? tr / 10 : 0; e.t = 60 / SPEED[e.k] * (1 + e.jam * 3); adj[e.a].push([e.b, e.t, e]); adj[e.b].push([e.a, e.t, e]); });
+    const h = n => algo === 'astar' ? Math.hypot(N[n].i - N[d].i, N[n].j - N[d].j) * 60 / SPEED.hw : 0;
+    const dist = N.map(() => Infinity), prev = N.map(() => null), seen = new Set(); dist[start] = 0; const open = new Set([start]);
+    while (open.size){ let u = null, best = Infinity; open.forEach(n => { const f = dist[n] + h(n); if (f < best - 1e-9){ best = f; u = n; } }); open.delete(u); if (seen.has(u)) continue; seen.add(u); if (u === d) break;
+      adj[u].forEach(([v, w, e]) => { if (dist[u] + w < dist[v] - 1e-9){ dist[v] = dist[u] + w; prev[v] = [u, e]; open.add(v); } }); }
+    const path = new Set(); for (let n = d; prev[n]; n = prev[n][0]) path.add(prev[n][1]);
+    return { d, seen, path, time: dist[d] }; }
+  const draw = onLayout(() => { const nw = NARROW(); if (!G || G.nw !== nw){ G = build(nw); G.nw = nw; dest = null; }
+    const { cols, rows, N, E, start } = G, gap = nw ? 44 : 44, pad = 26, W = pad * 2 + (cols - 1) * gap, H = pad * 2 + (rows - 1) * gap + 22, P = n => [pad + N[n].i * gap, pad + N[n].j * gap];
+    vb(el, W, H); out('gmT', ['none', 'light', 'light', 'some', 'some', 'busy', 'busy', 'heavy', 'heavy', 'jammed', 'gridlock'][+$('#gmT').value]);
+    const R = route(); let g = `<rect width="${W}" height="${H}" ${F('deep')}/>`;
+    E.forEach(e => { const [x1, y1] = P(e.a), [x2, y2] = P(e.b); g += `<path d="M${x1} ${y1}L${x2} ${y2}" ${S(e.k === 'hw' ? 'cool' : e.k === 'art' ? 'muted' : 'line', e.k === 'hw' ? 5 : e.k === 'art' ? 3 : 2, e.k === 'hw' ? ';stroke-opacity:.55' : '')}/>`;
+      if (e.jam > 0) g += `<path d="M${x1} ${y1}L${x2} ${y2}" ${S('bad', e.k === 'art' ? 3 : 2, ';stroke-opacity:' + (e.jam * .85).toFixed(2))}/>`; });
+    R.path.forEach(e => { const [x1, y1] = P(e.a), [x2, y2] = P(e.b); g += `<path d="M${x1} ${y1}L${x2} ${y2}" ${S('glow', 6, ';stroke-linecap:round')}/>`; });
+    N.forEach((n, k) => { const [x, y] = P(k); g += `<circle cx="${x}" cy="${y}" r="${R.seen.has(k) ? 7 : 4}" ${R.seen.has(k) ? FS('glow', 'glow', 1, .3) : F('faint', .7)} data-n="${k}"/>`; });
+    const [sx, sy] = P(start), [dx, dy] = P(R.d);
+    g += `<circle cx="${sx}" cy="${sy}" r="10" ${FS('text', 'ink', 3)}/><path d="M${dx} ${dy - 22}l0 14" ${S('bad', 2.5)}/><path d="M${dx} ${dy - 22}l11 4l-11 4z" ${F('bad')}/><circle cx="${dx}" cy="${dy}" r="8" ${FS('bad', 'ink', 3)}/>`;
+    const ly = H - 10, fs = nw ? 13 : 12; g += `<path d="M${pad} ${ly - 4}h20" ${S('cool', 5, ';stroke-opacity:.55')}/>` + TX(pad + 26, ly, 'highway 100', 'muted', fs) + `<path d="M${pad + (nw ? 118 : 126)} ${ly - 4}h20" ${S('muted', 3)}/>` + TX(pad + (nw ? 144 : 152), ly, 'arterial 50', 'muted', fs) + `<path d="M${pad + (nw ? 230 : 246)} ${ly - 4}h20" ${S('line', 2)}/>` + TX(pad + (nw ? 256 : 272), ly, 'local 30 km/h', 'muted', fs);
+    el.innerHTML = g;
+    $('#gmEx').textContent = R.seen.size + ' of ' + N.length; $('#gmTime').textContent = isFinite(R.time) ? R.time.toFixed(1) + ' min' : 'no route';
+    const z = +$('#gmZ').value, tiles = 4 ** z; out('gmZ', z); $('#gmTiles').textContent = fmtBig(tiles); $('#gmSize').textContent = fmtBytes(tiles * 1e5); });
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', ev => { const p = svgPt(el, ev), gap = 44, pad = 26; const i = clamp(Math.round((p.x - pad) / gap), 0, G.cols - 1), j = clamp(Math.round((p.y - pad) / gap), 0, G.rows - 1), n = j * G.cols + i; if (n !== G.start){ dest = n; draw(); } });
+  $('#gmT').addEventListener('input', draw); $('#gmZ').addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 4: partitions, consumers and a crash ---------- */
+{ const el = $('#mq4'); let acks = '1', parts = [], msgN = 0, acked = 0, lostAcked = 0, crashed = -1, r = rng(3);
+  const reset = () => { const P = +$('#mqP').value; parts = [...Array(P)].map(() => ({ log: [], f: [0, 0], lost: [] })); msgN = 0; acked = 0; lostAcked = 0; crashed = -1; };
+  btnRow('#mqA', [['0', 'ack=0: don\'t wait'], ['1', 'ack=1: leader only'], ['all', 'ack=all: every in-sync copy']], acks, v => { acks = v; draw(); });
+  function produce(){ for (let k = 0; k < 12; k++){ const key = Math.floor(r() * 6), p = parts[key % parts.length], m = { id: ++msgN, key, ack: false };
+      if (acks === '0' && r() < .08){ acked++; lostAcked++; p.lost.push({ ...m, ack: true, inflight: true }); continue; }
+      p.log.push(m); if (acks !== 'all'){ m.ack = true; acked++; } }
+    parts.forEach(p => { const L = p.log.length; p.f = p.f.map(() => acks === 'all' ? L : Math.max(0, L - 1 - Math.floor(r() * 3))); if (acks === 'all') p.log.forEach(m => { if (!m.ack){ m.ack = true; acked++; } }); });
+    crashed = -1; }
+  function crash(){ const cand = parts.map((p, i) => [p.log.length - Math.max(...p.f), i, p.log.length]).filter(x => x[2] > 0); if (!cand.length) return;
+    cand.sort((a, b) => b[0] - a[0] || r() - .5); const i = cand[0][1], p = parts[i], keep = Math.max(...p.f);
+    const gone = p.log.splice(keep); gone.forEach(m => { if (m.ack) lostAcked++; p.lost.push(m); }); p.f = [keep, keep]; crashed = i; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, P = parts.length, C = +$('#mqC').value, rowH = nw ? 58 : 50, top = 34, H = top + P * rowH + 20, fs = nw ? 13 : 12;
+    const x0 = nw ? 64 : 96, x1 = W - (nw ? 70 : 110), cw = nw ? 16 : 18, maxC = Math.floor((x1 - x0 - 6) / cw);
+    vb(el, W, H); out('mqP', P); out('mqC', C);
+    let g = TX(8, 18, 'Producer', 'muted', fs) + TX(x0, 18, nw ? 'Partition logs' : 'Partition logs (leader), oldest left', 'muted', fs) + TX(W - 8, 18, 'Consumers', 'muted', fs, 'end');
+    g += `<rect x="6" y="${top}" width="${nw ? 46 : 70}" height="${P * rowH - 10}" rx="10" ${FS('panel-2', 'line', 1)}/>` + wrap(nw ? 29 : 41, top + (P * rowH - 10) / 2, `${msgN} sent`, 8, 15, 'text', fs);
+    parts.forEach((p, i) => { const y = top + i * rowH, items = [...p.log.map(m => ({ m, st: 'ok' })), ...p.lost.map(m => ({ m, st: 'lost' }))].sort((a, b) => a.m.id - b.m.id), show = items.slice(-maxC), skip = items.length - show.length, fmin = Math.min(...p.f);
+      g += `<path d="M${nw ? 52 : 76} ${y + 14}L${x0 - 4} ${y + 14}" ${S('faint', 1)}/>` + arrowHead(x0 - 4, y + 14, 0);
+      g += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="28" rx="6" ${FS(crashed === i ? 'bad-soft' : 'panel', crashed === i ? 'bad' : 'line', 1)}/>`;
+      let li = skip ? p.log.length - show.filter(s => s.st === 'ok').length : 0;
+      show.forEach((s, k) => { const x = x0 + 3 + k * cw;
+        if (s.st === 'lost') g += `<rect x="${x}" y="${y + 4}" width="${cw - 3}" height="20" rx="3" ${FS('bad-soft', 'bad', 1)}/>` + TX(x + (cw - 3) / 2, y + 18, '×', 'bad', 13, 'middle');
+        else { const rep = li < fmin; g += `<rect x="${x}" y="${y + 4}" width="${cw - 3}" height="20" rx="3" ${rep ? F('glow', .45) : FS('panel', 'glow', 1.2)}/>`; li++; } });
+      const fx = k => x0 + 3 + Math.max(0, Math.min(show.length, p.f[k] - (p.log.length - show.filter(s => s.st === 'ok').length))) * cw;
+      g += TX(x0, y + 42, `P${i}`, 'text', fs) + `<path d="M${x0 + 24} ${y + 37}H${fx(0)}" ${S('cool', 2)}/><path d="M${x0 + 24} ${y + 41}H${fx(1)}" ${S('cool', 2, ';stroke-opacity:.6')}/>` + (crashed === i ? TX(x1 - 4, y + 42, nw ? 'leader crashed' : 'leader crashed, follower promoted', 'bad', fs - 1, 'end') : TX(x1 - 4, y + 42, 'followers', 'faint', fs - 1, 'end'));
+    });
+    const cy = k => top + (C === 1 ? (P * rowH - 10) / 2 : k * (P * rowH - 10) / (C - 1)) + (C === 1 ? 0 : 0), cxp = W - (nw ? 22 : 30);
+    let idle = 0;
+    for (let k = 0; k < C; k++){ const mine = parts.map((_, i) => i).filter(i => i % C === k && k < P), yk = top + 8 + (C === 1 ? (P * rowH - 26) / 2 : k * (P * rowH - 26) / (C - 1));
+      if (!mine.length) idle++;
+      mine.forEach(i => { const y = top + i * rowH + 14; g += `<path d="M${x1} ${y}C${x1 + 30} ${y} ${cxp - 30} ${yk} ${cxp - 11} ${yk}" ${S('glow', 1.4, ';stroke-opacity:.7')}/>`; });
+      g += `<circle cx="${cxp}" cy="${yk}" r="10" ${mine.length ? F('glow') : FS('deep', 'faint', 1.5)}/>` + TX(cxp, yk + 4, 'C' + (k + 1), mine.length ? 'on-glow' : 'faint', 11, 'middle'); }
+    g += TX(8, H - 4, 'filled = on every copy · outlined = leader only · × = lost', 'faint', fs - 1);
+    el.innerHTML = g;
+    $('#mqAck').textContent = acked; $('#mqLost').textContent = lostAcked; $('#mqIdle').textContent = idle + ' of ' + C;
+    $('#mqLat').textContent = acks === '0' ? 'None: fire and forget, fastest' : acks === '1' ? 'One write on the leader' : 'Until every in-sync follower has it, slowest'; });
+  $('#mqP').addEventListener('input', () => { reset(); draw(); }); $('#mqC').addEventListener('input', draw);
+  $('#mqGo').addEventListener('click', () => { produce(); draw(); }); $('#mqX').addEventListener('click', () => { crash(); draw(); }); $('#mqR').addEventListener('click', () => { reset(); draw(); });
+  reset(); produce(); draw();
+}
+
+/* ---------- 5: an alert rule and its data ---------- */
+{ const el = $('#mt5'), r = rng(17), RAW = [];
+  const EV = [[42, 2, 96], [95, 20, 89], [160, 1, 93], [205, 6, 85], [262, 3, 91], [300, 12, 83], [335, 1, 97]];
+  for (let i = 0; i < 2160; i++){ const m = i / 6; let v = 46 + 9 * Math.sin(m / 38) + 5 * Math.sin(m / 9 + 1) + gauss(r) * 3.2;
+    EV.forEach(([a, d, pk]) => { if (m >= a && m < a + d) v = pk + gauss(r) * 2.2; }); RAW.push(clamp(v, 3, 99.5)); }
+  const MIN = [...Array(360)].map((_, m) => RAW.slice(m * 6, m * 6 + 6).reduce((s, x) => s + x, 0) / 6);
+  const HOUR = [...Array(6)].map((_, h) => MIN.slice(h * 60, h * 60 + 60).reduce((s, x) => s + x, 0) / 60);
+  let res = 'raw';
+  btnRow('#mtR', [['raw', 'Raw, every 10 s (kept 7 days)'], ['min', '1-minute (kept 30 days)'], ['hour', '1-hour (kept 1 year)']], res, v => { res = v; draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, H = nw ? 300 : 280, L = 38, Rt = 10, T = 14, B = 34, iw = W - L - Rt, ih = H - T - B, th = +$('#mtT').value, du = +$('#mtD').value, fs = nw ? 13 : 12;
+    vb(el, W, H); out('mtT', th + '%'); out('mtD', du + ' min');
+    const X = m => L + m / 360 * iw, Y = v => T + ih - v / 100 * ih;
+    let g = '', fired = [], run = 0;
+    MIN.forEach((v, m) => { run = v > th ? run + 1 : 0; if (run === du) fired.push([m - du + 1, m]); if (run > du) fired[fired.length - 1][1] = m; });
+    [0, 25, 50, 75, 100].forEach(v => g += `<path d="M${L} ${Y(v)}H${W - Rt}" ${S('line', 1)}/>` + TX(L - 6, Y(v) + 4, v + '%', 'faint', fs - 1, 'end'));
+    for (let h = 0; h <= 6; h++) g += TX(X(h * 60), H - 12, (h ? '+' + h + 'h' : 'now−6h').replace('now−6h', '0h'), 'faint', fs - 1, 'middle');
+    fired.forEach(([a, b]) => { const fx = X(a + du - 1); g += `<rect x="${X(a)}" y="${T}" width="${Math.max(2, X(b + 1) - X(a))}" height="${ih}" ${F('bad', .1)}/><path d="M${fx} ${T}V${T + ih}" ${S('bad', 1.5)}/><circle cx="${fx}" cy="${T + 7}" r="5" ${F('bad')}/>`; });
+    const series = res === 'raw' ? RAW.map((v, i) => [i / 6, v]) : res === 'min' ? MIN.map((v, m) => [m + .5, v]) : HOUR.map((v, h) => [h * 60 + 30, v]);
+    g += `<path d="${series.map(([m, v], i) => (i ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(v).toFixed(1)).join('')}" ${S('glow', res === 'raw' ? 1 : res === 'min' ? 1.6 : 2.4, ';stroke-linejoin:round')}/>`;
+    if (res === 'hour') series.forEach(([m, v]) => g += `<circle cx="${X(m)}" cy="${Y(v)}" r="4.5" ${F('glow')}/>`);
+    g += `<path d="M${L} ${Y(th)}H${W - Rt}" ${S('bad', 1.5, ';stroke-dasharray:6 4')}/>` + TX(W - Rt - 4, Y(th) - 5, 'threshold', 'bad', fs - 1, 'end');
+    el.innerHTML = g;
+    const mx = Math.max(...series.map(s => s[1]));
+    $('#mtFire').textContent = fired.length; $('#mtPts').textContent = fmtN(series.length); $('#mtMax').textContent = mx.toFixed(0) + '%';
+    const spikes = EV.filter(([, d, pk]) => pk > th && d < du).length;
+    $('#mtSay').textContent = res === 'hour' ? 'Hourly averages hide every spike: useful for trends, useless for debugging last night.' : spikes ? `${spikes} short spike${spikes > 1 ? 's' : ''} crossed the line but didn't last ${du} minutes, so nobody was paged.` : du === 1 ? 'With a 1-minute rule, every blip pages someone.' : 'Every crossing lasted long enough to page.'; });
+  $('#mtT').addEventListener('input', draw); $('#mtD').addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 6: late clicks and the watermark ---------- */
+{ const el = $('#ac6'); let seed = 31, clicks = [], rec = false;
+  const gen = () => { const r = rng(seed), L = +$('#acL').value; clicks = [...Array(70)].map(() => { const e = r() * 300; let d = -Math.log(1 - r()) * Math.max(.5, L); if (r() < .08) d += 40 + r() * 70; return { e, d }; }); };
+  const recB = $('#acRec'); recB.addEventListener('click', () => { rec = !rec; recB.setAttribute('aria-pressed', rec); draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, H = nw ? 340 : 300, L = 40, Rt = 10, T = 12, B = 76, iw = W - L - Rt, ih = H - T - B, Wm = +$('#acW').value, fs = nw ? 13 : 12, DMAX = 150;
+    vb(el, W, H); out('acL', $('#acL').value + ' s'); out('acW', Wm + ' s');
+    const X = e => L + e / 300 * iw, Y = d => T + ih - Math.min(d, DMAX) / DMAX * ih;
+    let g = '', ok = 0, late = 0; const cnt = [0, 0, 0, 0, 0], tru = [0, 0, 0, 0, 0];
+    for (let k = 0; k < 5; k++){ g += `<rect x="${X(k * 60)}" y="${T}" width="${iw / 5}" height="${ih}" ${F(k % 2 ? 'panel-2' : 'panel', .7)}/>`;
+      const a = 60 + Wm, b = Wm; g += `<path d="M${X(k * 60)} ${Y(a)}L${X(k * 60 + 60)} ${Y(b)}" ${S('cool', 1.6, ';stroke-dasharray:5 4')}/>`; }
+    [0, 50, 100, 150].forEach(d => g += TX(L - 6, Y(d) + 4, d + 's', 'faint', fs - 1, 'end'));
+    clicks.forEach(c => { const k = Math.min(4, Math.floor(c.e / 60)), isLate = c.e + c.d > (k + 1) * 60 + Wm; tru[k]++; if (isLate) late++; else { ok++; cnt[k]++; }
+      g += `<circle cx="${X(c.e).toFixed(1)}" cy="${Y(c.d).toFixed(1)}" r="${nw ? 5 : 4.2}" ${isLate ? (rec ? FS('cool', 'cool', 1, .9) : F('bad')) : F('glow', .9)}/>`; });
+    const by = H - B + 16, bh = 34, mx = Math.max(...tru, 1);
+    for (let k = 0; k < 5; k++){ const x = X(k * 60) + 8, w = iw / 5 - 16, c = rec ? tru[k] : cnt[k];
+      g += `<rect x="${x}" y="${by}" width="${w}" height="${bh}" rx="4" ${F('line', .5)}/><rect x="${x}" y="${by + bh - bh * c / mx}" width="${w}" height="${bh * c / mx}" rx="4" ${F(rec ? 'cool' : 'glow', .7)}/>` + TX(x + w / 2, by + bh + 16, `${c}/${tru[k]}`, c === tru[k] ? 'text' : 'bad', fs, 'middle');
+      g += TX(X(k * 60 + 30), T + 14, 'min ' + (k + 1), 'muted', fs - 1, 'middle'); }
+    el.innerHTML = g;
+    $('#acOk').textContent = ok; $('#acLate').textContent = late; $('#acAcc').textContent = rec ? '100% after reconciling' : (ok / clicks.length * 100).toFixed(1) + '%'; $('#acDelay').textContent = Wm + ' s'; });
+  $('#acL').addEventListener('input', () => { gen(); draw(); }); $('#acW').addEventListener('input', draw);
+  $('#acGo').addEventListener('click', () => { seed += 7; gen(); draw(); });
+  gen(); draw();
+}
+
+/* ---------- 7: two guests, one room left ---------- */
+{ const el = $('#ht7'); let sc = 'none', shown = 0;
+  const SC = {
+    none: { lanes: ['Alice', 'Database', 'Bob'], steps: [
+      ['A', 'SELECT reserved → 99 of 100', [99, 7], 0], ['B', 'SELECT reserved → 99 of 100', [99, 7], 0],
+      ['A', '99 + 1 ≤ 100, so UPDATE reserved = 100', [100, 7], 1], ['B', '99 + 1 ≤ 100, so UPDATE reserved = 100', [100, 7], 2]],
+      end: ['bad', 'Double booked. Two confirmed guests, one room, and the row still says 100.'] },
+    pess: { lanes: ['Alice', 'Database', 'Bob'], steps: [
+      ['A', 'SELECT … FOR UPDATE → 99 (row locked)', [99, 7], 0], ['B', 'SELECT … FOR UPDATE → waits for the lock', [99, 7], 0],
+      ['A', 'UPDATE reserved = 100; COMMIT, lock released', [100, 7], 1], ['D', 'lock granted: Bob reads 100 of 100', [100, 7], 1], ['b', 'no room left: booking refused', [100, 7], 1]],
+      end: ['good', 'Safe, but Bob waited for Alice\'s whole transaction. With many buyers, waits and deadlocks pile up.'] },
+    opt: { lanes: ['Alice', 'Database', 'Bob'], steps: [
+      ['A', 'SELECT → 99, version 7', [99, 7], 0], ['B', 'SELECT → 99, version 7', [99, 7], 0],
+      ['A', 'UPDATE reserved = 100, version = 8 WHERE version = 7 → 1 row', [100, 8], 1], ['B', 'UPDATE … WHERE version = 7 → 0 rows changed', [100, 8], 1], ['B', 'retry: SELECT → 100, version 8, sold out', [100, 8], 1]],
+      end: ['good', 'Safe, and nobody waited. If many people collide, most retries fail, so it suits low contention, like most hotels.'] },
+    cons: { lanes: ['Alice', 'Database', 'Bob'], steps: [
+      ['A', 'SELECT → 99', [99, 7], 0], ['B', 'SELECT → 99', [99, 7], 0],
+      ['A', 'UPDATE reserved = reserved + 1 → 100, CHECK passes', [100, 7], 1], ['B', 'UPDATE reserved = reserved + 1 → 101 violates CHECK (reserved ≤ total)', [100, 7], 1], ['b', 'transaction rolled back: sold out', [100, 7], 1]],
+      end: ['good', 'Safe and simple: the database enforces the rule. But not every database supports it, and the rule lives outside your code.'] },
+    dup: { lanes: ['First click', 'Database', 'Second click'], steps: [
+      ['A', 'INSERT reservation r-7f3a … → reserved 100', [100, 7], 1], ['B', 'INSERT reservation r-7f3a … → duplicate key', [100, 7], 1], ['D', 'returns the existing booking r-7f3a', [100, 7], 1]],
+      end: ['good', 'One booking. The reservation ID was created when the page loaded, so both clicks carry the same key.'] } };
+  btnRow('#htS', [['none', 'No protection'], ['pess', 'Pessimistic lock'], ['opt', 'Optimistic lock'], ['cons', 'Database constraint'], ['dup', 'Same user clicks twice']], sc, v => { sc = v; shown = 0; draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, s = SC[sc], n = s.steps.length, rowH = nw ? 66 : 56, T = 50, H = T + n * rowH + 20, fs = nw ? 13 : 12.5;
+    const LX = nw ? [44, 190, 336] : [90, 320, 550]; vb(el, W, H);
+    let g = ''; s.lanes.forEach((l, i) => { g += `<rect x="${LX[i] - (nw ? 42 : 60)}" y="8" width="${nw ? 84 : 120}" height="28" rx="8" ${FS(i === 1 ? 'panel-2' : 'panel', i === 1 ? 'cool' : 'line', 1.2)}/>` + TX(LX[i], 27, l, 'text', fs, 'middle') + `<path d="M${LX[i]} 36V${H - 8}" ${S('line', 1.2, ';stroke-dasharray:4 4')}/>`; });
+    s.steps.forEach(([who, txt], k) => { if (k >= shown) return; const y = T + k * rowH + rowH * .62, from = who === 'A' ? 0 : who === 'B' ? 2 : 1, to = who === 'D' ? 2 : 1, bad = /violates|duplicate|0 rows|waits|refused|sold out|rolled/.test(txt);
+      if (who === 'b'){ g += `<rect x="${LX[2] - (nw ? 44 : 120)}" y="${y - 20}" width="${nw ? 88 : 200}" height="${nw ? 42 : 30}" rx="8" ${FS('bad-soft', 'bad', 1)}/>` + wrap(LX[2] - (nw ? 0 : 20), y - (nw ? 0 : 5), txt, nw ? 14 : 30, 15, 'bad', fs); return; }
+      const x1 = LX[from], x2 = LX[to], dir = Math.sign(x2 - x1); g += `<path d="M${x1} ${y}L${x2 - dir * 6} ${y}" ${S(bad ? 'bad' : 'glow', 2)}/>` + arrowHead(x2 - dir * 2, y, dir > 0 ? 0 : Math.PI, bad ? 'bad' : 'glow', 9);
+      g += wrap((x1 + x2) / 2, y - (nw ? 22 : 14), txt, nw ? 22 : 36, 15, bad ? 'bad' : 'text', fs); });
+    el.innerHTML = g;
+    const st = shown ? s.steps[shown - 1] : null, row = st ? st[2] : [99, 7], bk = st ? st[3] : 0;
+    $('#htRow').textContent = `${row[0]} of 100 reserved` + (sc === 'opt' ? ` · v${row[1]}` : '');
+    $('#htBk').textContent = bk + (bk === 2 ? ' for 1 room' : '');
+    const say = $('#htSay'); if (shown >= n){ say.innerHTML = `<b style="color:var(--${s.end[0]})">${s.end[0] === 'bad' ? 'Problem.' : 'Correct.'}</b> ${s.end[1]}`; } else say.textContent = `Step ${shown} of ${n}. Press "Next step".`;
+    $('#htGo').disabled = shown >= n; });
+  $('#htGo').addEventListener('click', () => { shown++; draw(); }); $('#htAll').addEventListener('click', () => { shown = SC[sc].steps.length; draw(); }); $('#htRe').addEventListener('click', () => { shown = 0; draw(); });
+  draw();
+}
+
+/* ---------- 8: will your email reach the inbox? ---------- */
+{ const el = $('#em8'); let seed = 3, res = null;
+  const T = [['spf', 'SPF record published', true], ['dkim', 'DKIM signature', false], ['dmarc', 'DMARC policy', false], ['ded', 'Dedicated sending IPs', false], ['warm', 'IPs warmed up over weeks', false], ['fb', 'Bounces and complaints handled', false], ['spam', 'Content looks like spam', true]];
+  $('#emT').innerHTML = T.map(([k, l, on]) => `<label class="tg"><input type="checkbox" data-k="${k}"${on ? ' checked' : ''}><span>${l}</span></label>`).join('');
+  const on = k => $(`#emT [data-k="${k}"]`).checked;
+  function send(){ const r = rng(seed += 11), auth = on('spf') || on('dkim');
+    let sc = .18 + (on('spf') ? .14 : 0) + (on('dkim') ? .16 : 0) + (on('dmarc') && auth ? .1 : 0) + (on('ded') ? .08 : 0) + (on('warm') ? (on('ded') ? .16 : .06) : 0) + (on('fb') ? .1 : 0) - (on('spam') ? .38 : 0);
+    const pin = clamp(sc, .02, .97), rej = auth ? (on('dmarc') ? .01 : .03) : .2;
+    res = [...Array(100)].map(() => r() < rej ? 'rej' : r() < pin ? 'in' : 'sp'); }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, fs = nw ? 12.5 : 12;
+    const BOX = ['Web server', 'Outgoing queue', 'SMTP out', 'DNS MX lookup', 'Their SMTP', 'Spam and auth checks'], per = nw ? 3 : 6, bw = nw ? 108 : 94, gap = (W - per * bw) / (per + 1), bh = 40;
+    const rows = Math.ceil(BOX.length / per), gy = 14 + rows * (bh + 22) + 6, cs = nw ? 30 : 22, gw = 10 * cs, H = gy + 10 * cs + 34;
+    vb(el, W, H); let g = '';
+    BOX.forEach((b, i) => { const rr = Math.floor(i / per), cc = i % per, x = gap + cc * (bw + gap), y = 14 + rr * (bh + 22);
+      g += `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="8" ${FS(i === 5 ? 'panel-2' : 'panel', i === 5 ? 'cool' : 'line', 1.2)}/>` + wrap(x + bw / 2, y + bh / 2 + 4, b, 13, 13, 'text', fs);
+      if (cc < per - 1 && i < BOX.length - 1) g += `<path d="M${x + bw + 3} ${y + bh / 2}H${x + bw + gap - 5}" ${S('faint', 1.2)}/>` + arrowHead(x + bw + gap - 3, y + bh / 2, 0);
+      else if (i < BOX.length - 1) g += `<path d="M${x + bw / 2} ${y + bh + 2}V${y + bh + 10}H${gap + bw / 2}V${y + bh + 18}" ${S('faint', 1.2)}/>` + arrowHead(gap + bw / 2, y + bh + 20, Math.PI / 2); });
+    const gx = nw ? (W - gw) / 2 : 30;
+    (res || []).forEach((o, i) => { const x = gx + (i % 10) * cs, y = gy + Math.floor(i / 10) * cs; g += `<rect x="${x + 2}" y="${y + 2}" width="${cs - 4}" height="${cs - 4}" rx="4" ${o === 'in' ? F('glow', .85) : o === 'sp' ? F('cool', .75) : F('bad', .8)}/>`; });
+    if (!res) g += TX(gx + gw / 2, gy + 5 * cs, 'Press "Send 100 emails"', 'faint', 14, 'middle');
+    const ly = H - 12, lx = nw ? gx : gx + gw + 40;
+    if (nw){ g += `<rect x="${lx}" y="${ly - 10}" width="12" height="12" rx="3" ${F('glow', .85)}/>` + TX(lx + 18, ly, 'inbox', 'muted', fs) + `<rect x="${lx + 80}" y="${ly - 10}" width="12" height="12" rx="3" ${F('cool', .75)}/>` + TX(lx + 98, ly, 'spam', 'muted', fs) + `<rect x="${lx + 156}" y="${ly - 10}" width="12" height="12" rx="3" ${F('bad', .8)}/>` + TX(lx + 174, ly, 'rejected', 'muted', fs); }
+    else { [['glow', 'Inbox', 'in'], ['cool', 'Spam folder', 'sp'], ['bad', 'Rejected', 'rej']].forEach(([c, l, k], i) => { const y = gy + 20 + i * 64, n = res ? res.filter(x => x === k).length : 0;
+      g += `<rect x="${lx}" y="${y - 14}" width="16" height="16" rx="4" ${F(c, .85)}/>` + TX(lx + 26, y, l, 'muted', 13) + `<text x="${lx + 26}" y="${y + 32}" font-size="30" class="disp" ${F('text')}>${n}</text>`; }); }
+    el.innerHTML = g;
+    const c = k => res ? res.filter(x => x === k).length : '–'; $('#emIn').textContent = c('in'); $('#emSp').textContent = c('sp'); $('#emRj').textContent = c('rej');
+    const auth = on('spf') || on('dkim');
+    $('#emSay').textContent = !auth ? 'No SPF or DKIM: I can\'t tell this from a forgery.' : on('spam') ? 'Authenticated, but the content reads like spam.' : !on('ded') || !on('warm') ? 'Authenticated, but this IP has no track record with me yet.' : !on('fb') ? 'Good so far, but complaints and bounces keep piling up.' : 'Authenticated, warmed up and well behaved: welcome.'; });
+  $$('#emT input').forEach(i => i.addEventListener('change', () => { if (res){ seed -= 11; send(); } draw(); }));
+  $('#emGo').addEventListener('click', () => { send(); draw(); });
+  draw();
+}
+
+/* ---------- 9: break the disks ---------- */
+{ const el = $('#s39'); let mode = 'rep', down = new Set();
+  btnRow('#s3M', [['rep', 'Three copies'], ['ec', 'Erasure coding 8 + 4']], mode, v => { mode = v; draw(); });
+  const holds = i => mode === 'rep' ? { t: 'ABCD'[i % 4], k: 'copy ' + (Math.floor(i / 4) + 1) } : i < 8 ? { t: 'd' + (i + 1), k: 'data' } : { t: 'p' + (i - 7), k: 'parity' };
+  const state = () => { if (mode === 'rep'){ const ok = [0, 1, 2, 3].filter(o => [o, o + 4, o + 8].some(n => !down.has(n))); return { ok: ok.length, tot: 4 }; } const alive = 12 - down.size; return { ok: alive >= 8 ? 1 : 0, tot: 1, alive }; };
+  const draw = onLayout(() => { const nw = NARROW(), cols = nw ? 4 : 6, W = nw ? 380 : 640, bw = nw ? 80 : 90, bh = nw ? 92 : 84, gx = (W - cols * bw) / (cols + 1), gy = 22, rows = 12 / cols, H = 34 + rows * (bh + gy) + 10, fs = nw ? 13 : 12;
+    vb(el, W, H); let g = ''; const st = state(), lostObj = mode === 'rep' ? new Set([0, 1, 2, 3].filter(o => [o, o + 4, o + 8].every(n => down.has(n)))) : null;
+    const rackW = nw ? null : (W - 2 * gx + gx) / 3;
+    if (!nw) for (let k = 0; k < 3; k++){ const x = gx / 2 + k * 2 * (bw + gx); g += `<rect x="${x}" y="8" width="${2 * (bw + gx)}" height="${H - 16}" rx="12" ${FS('deep', 'line', 1, .6)}/>` + TX(x + 10, 26, 'Rack ' + (k + 1), 'faint', fs); }
+    for (let i = 0; i < 12; i++){ const rack = Math.floor(i / 4), slot = i % 4, pos = nw ? i : rack * 4 + slot, c = nw ? i % cols : [0, 1, 0, 1][slot] + rack * 2, r = nw ? Math.floor(i / cols) : Math.floor(slot / 2);
+      const x = gx + c * (bw + gx), y = 34 + r * (bh + gy), h = holds(i), dead = down.has(i), lost = lostObj && lostObj.has(i % 4);
+      g += `<g data-node="${i}" style="cursor:pointer"><rect x="${x}" y="${y}" width="${bw}" height="${bh}" rx="10" ${dead ? FS('bad-soft', 'bad', 1.5) : FS('panel', mode === 'ec' && i >= 8 ? 'cool' : 'glow-line', 1.5)}/>`;
+      for (let k = 0; k < 3; k++) g += `<rect x="${x + 10}" y="${y + 10 + k * 9}" width="${bw - 20}" height="5" rx="2" ${F(dead ? 'bad' : 'line', dead ? .3 : 1)}/>`;
+      g += `<text x="${x + bw / 2}" y="${y + bh - 22}" font-size="${nw ? 24 : 22}" text-anchor="middle" class="disp" ${F(dead ? 'bad' : lost ? 'bad' : mode === 'ec' && i >= 8 ? 'cool' : 'glow')}>${h.t}</text>` + TX(x + bw / 2, y + bh - 7, dead ? 'failed' : h.k, dead ? 'bad' : 'faint', fs - 1, 'middle');
+      if (dead) g += `<path d="M${x + 14} ${y + 14}L${x + bw - 14} ${y + bh - 14}M${x + bw - 14} ${y + 14}L${x + 14} ${y + bh - 14}" ${S('bad', 2, ';stroke-opacity:.5')}/>`;
+      g += `<rect x="${x}" y="${y}" width="${bw}" height="${bh}" fill="transparent"/></g>`; }
+    if (nw) g += TX(gx, 24, 'Racks: nodes 1–4, 5–8, 9–12', 'faint', fs);
+    el.innerHTML = g;
+    el.querySelectorAll('[data-node]').forEach(n => n.addEventListener('click', () => { const i = +n.dataset.node; down.has(i) ? down.delete(i) : down.add(i); draw(); }));
+    $('#s3Cap').textContent = mode === 'rep' ? '4 objects' : '8 chunks, twice as much'; $('#s3Over').textContent = mode === 'rep' ? '200%' : '50%';
+    $('#s3Ok').textContent = mode === 'rep' ? `${st.ok} of 4 objects` : st.ok ? `Yes, ${st.alive} of 12 chunks` : `No, only ${st.alive} chunks left`;
+    $('#s3Say').textContent = mode === 'rep' ? (st.ok < 4 ? 'All three copies of one object were lost. Copies sit in different racks so this needs three separate failures.' : `About six nines of durability. ${down.size} failed, still nothing lost; a read needs just one healthy copy.`) : (st.ok ? `About eleven nines. Any 8 of 12 chunks rebuild the data, so up to 4 nodes can fail, but each read touches 8 nodes.` : 'More than 4 chunks lost: the data can no longer be rebuilt.'); });
+  $('#s3X').addEventListener('click', () => { const up = [...Array(12).keys()].filter(i => !down.has(i)); if (up.length) down.add(up[Math.floor(Math.random() * up.length)]); draw(); });
+  $('#s3R').addEventListener('click', () => { down.clear(); draw(); });
+  draw();
+}
+
+/* ---------- 10: climb the leaderboard ---------- */
+{ const SY = ['ka', 'ri', 'mo', 'zen', 'lu', 'ta', 'vi', 'no', 'sha', 'ro', 'mi', 'dax', 'el', 'fi', 'qu', 'jo', 'ne', 'ux'];
+  const MON = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+  let P = [], me = null, tick = 0, month = new Date().getMonth(), year = new Date().getFullYear(), seed = 41, last = '';
+  const key = () => `leaderboard_${MON[month]}_${year}`;
+  const fresh = () => { const r = rng(seed); P = [...Array(999)].map((_, i) => ({ n: SY[Math.floor(r() * 18)] + SY[Math.floor(r() * 18)] + (r() < .4 ? Math.floor(r() * 99) : ''), s: Math.max(0, Math.round(18 + gauss(r) * 9)), t: Math.floor(r() * 1e4) }));
+    me = { n: 'You', s: 0, t: 1e4, me: true }; P.push(me); tick = 1e4; last = `ZADD ${key()} 0 you`; };
+  const sorted = () => P.slice().sort((a, b) => b.s - a.s || a.t - b.t);
+  function skipSteps(arr, idx){ const r = rng(77), lv = arr.map(() => { let l = 1; while (l < 12 && r() < .5) l++; return l; }), top = Math.max(...lv); let steps = 0, pos = -1;
+    for (let L = top; L >= 1; L--){ let nx = arr.findIndex((_, j) => j > pos && lv[j] >= L); while (nx !== -1 && nx <= idx){ steps++; pos = nx; if (pos === idx) return steps; nx = arr.findIndex((_, j) => j > pos && lv[j] >= L); } steps++; }
+    return steps; }
+  const row = (p, i) => `<div class="r${p.me ? ' me' : ''}"><span class="n">#${i + 1}</span><span>${esc(p.n)}</span><span class="s">${p.s}</span></div>`;
+  const el = $('#sk10');
+  const draw = onLayout(() => { const S2 = sorted(), rk = S2.indexOf(me);
+    $('#lb10').innerHTML = `<div class="col"><span class="h">Top 10 · ZREVRANGE 0 9</span>${S2.slice(0, 10).map(row).join('')}</div><div class="col"><span class="h">Around you · ZREVRANK ± 4</span>${S2.slice(Math.max(0, rk - 4), rk + 5).map((p, k) => row(p, Math.max(0, rk - 4) + k)).join('')}</div>`;
+    const asc = S2.slice().reverse(), ai = asc.indexOf(me);
+    $('#lbRank').textContent = '#' + (rk + 1); $('#lbSteps').textContent = skipSteps(asc, ai); $('#lbLin').textContent = fmtN(rk + 1); $('#lbCmd').textContent = last;
+    const nw = NARROW(), n = nw ? 9 : 16, W = nw ? 380 : 640, lvH = 22, fs = nw ? 12 : 11.5;
+    const pick = new Set([ai]); for (let k = 0; pick.size < n && k < n * 3; k++) pick.add(Math.round(k / (n * 3 - 1) * (asc.length - 1)));
+    const idx = [...pick].sort((a, b) => a - b).slice(0, n), r = rng(5 + idx.length), lv = idx.map(i => i === ai ? 3 : (() => { let l = 1; while (l < 4 && r() < .45) l++; return l; })()), top = 4;
+    const H = 30 + top * lvH + 40, cw = (W - 70) / n, X = k => 62 + k * cw + cw / 2, Y = L => 20 + (top - L) * lvH + lvH / 2;
+    vb(el, W, H); let g = `<rect x="6" y="14" width="44" height="${top * lvH}" rx="6" ${FS('panel-2', 'line', 1)}/>` + TX(28, H - 22, 'head', 'faint', fs, 'middle');
+    const tgt = idx.indexOf(ai); let path = [], pos = -1;
+    for (let L = top; L >= 1; L--){ let moved = true; while (moved){ moved = false; const nx = idx.findIndex((_, k) => k > pos && lv[k] >= L); if (nx !== -1 && nx <= tgt){ path.push([pos, nx, L]); pos = nx; moved = true; } } if (pos === tgt) break; }
+    for (let L = 1; L <= top; L++){ let prev = -1; idx.forEach((_, k) => { if (lv[k] >= L){ const on = path.some(([a, b, l]) => a === prev && b === k && l === L), x1 = prev < 0 ? 50 : X(prev) + 12, x2 = X(k) - 12;
+      g += `<path d="M${x1} ${Y(L)}H${x2 - 3}" ${S(on ? 'glow' : 'line', on ? 2.5 : 1.2)}/>` + arrowHead(x2, Y(L), 0, on ? 'glow' : 'faint', 6); prev = k; } }); }
+    idx.forEach((i, k) => { const isMe = i === ai; for (let L = 1; L <= lv[k]; L++) g += `<rect x="${X(k) - 12}" y="${Y(L) - 8}" width="24" height="16" rx="4" ${isMe ? F('glow') : FS('panel', path.some(p => p[1] === k) ? 'glow' : 'line', 1.2)}/>`;
+      g += TX(X(k), H - 22, asc[i].s, isMe ? 'glow' : 'muted', fs, 'middle') + (isMe ? TX(X(k), H - 7, 'you', 'glow', fs, 'middle') : ''); });
+    el.innerHTML = g; });
+  const win = k => { me.s += k; me.t = ++tick; last = `ZINCRBY ${key()} ${k} you`; draw(); };
+  $('#lbW').addEventListener('click', () => win(1)); $('#lbW5').addEventListener('click', () => win(5));
+  $('#lbR').addEventListener('click', () => { month = (month + 1) % 12; if (!month) year++; seed += 13; fresh(); last = `ZADD ${key()} 0 you  (new key, last month's board kept)`; draw(); });
+  fresh(); draw();
+}
+
+/* ---------- 11: retries on a bad network ---------- */
+{ const el = $('#py11'); let strat = 'exp', seed = 8, runs = null;
+  const WAIT = { none: [], imm: [0, 0, 0], fixed: [2, 2, 2], exp: [1, 2, 4] };
+  btnRow('#pyR', [['none', 'No retries'], ['imm', 'Retry immediately'], ['fixed', 'Fixed 2 s gaps'], ['exp', 'Exponential backoff']], strat, v => { strat = v; run(); draw(); });
+  function run(){ const r = rng(seed), f = +$('#pyF').value / 100, key = $('#pyK').checked;
+    runs = [...Array(20)].map(() => { let t = 0, charges = 0, att = [], ok = false; const W = WAIT[strat];
+      for (let a = 0; a <= W.length; a++){ const lostReq = r() < f / 2; let st;
+        if (lostReq) st = 'req'; else { if (!(key && charges)) charges++; st = r() < f / 2 ? 'rep' : 'ok'; }
+        att.push({ t, st }); if (st === 'ok'){ ok = true; break; } t += 1 + (W[a] || 0); }
+      return { att, charges, ok }; }); }
+  const draw = onLayout(() => { if (!runs) run(); const nw = NARROW(), W = nw ? 380 : 640, L = nw ? 28 : 36, Rt = nw ? 66 : 120, T = 22, rh = nw ? 15 : 13, H = T + 20 * rh + 34, TM = 12, fs = nw ? 12 : 11.5, X = t => L + t / TM * (W - L - Rt);
+    out('pyF', $('#pyF').value + '%'); vb(el, W, H); let g = '';
+    for (let t = 0; t <= TM; t += 2) g += `<path d="M${X(t)} ${T - 6}V${T + 20 * rh}" ${S('line', 1)}/>` + TX(X(t), H - 16, t + ' s', 'faint', fs, 'middle');
+    let once = 0, dup = 0, none = 0, calls = 0;
+    runs.forEach((rn, i) => { const y = T + i * rh + rh / 2, last = rn.att[rn.att.length - 1]; calls += rn.att.length;
+      g += `<path d="M${X(0)} ${y}H${X(last.t)}" ${S('line', 1.5)}/>`;
+      rn.att.forEach(a => g += `<circle cx="${X(a.t)}" cy="${y}" r="${nw ? 5 : 4.5}" ${a.st === 'ok' ? F('good') : a.st === 'rep' ? F('cool') : FS('deep', 'bad', 1.6)}/>`);
+      const tag = rn.charges === 1 ? (rn.ok ? ['good', 'charged once'] : ['cool', 'once, unconfirmed']) : rn.charges > 1 ? ['bad', `charged ×${rn.charges}`] : ['faint', 'not charged'];
+      if (rn.charges === 1) once++; else if (rn.charges > 1) dup++; else none++;
+      g += TX(W - Rt + 8, y + 4, nw ? tag[1].replace('charged ', '').replace('once, unconfirmed', 'once?') : tag[1], tag[0], fs); });
+    const ly = 12; g += `<circle cx="${L + 4}" cy="${ly - 4}" r="4.5" ${F('good')}/>` + TX(L + 13, ly, 'reply received', 'muted', fs) + `<circle cx="${L + (nw ? 112 : 120)}" cy="${ly - 4}" r="4.5" ${F('cool')}/>` + TX(L + (nw ? 121 : 129), ly, 'charged, reply lost', 'muted', fs) + `<circle cx="${L + (nw ? 248 : 264)}" cy="${ly - 4}" r="4.5" ${FS('deep', 'bad', 1.6)}/>` + TX(L + (nw ? 257 : 273), ly, 'request lost', 'muted', fs);
+    el.innerHTML = g;
+    $('#pyOk').textContent = once; $('#pyDup').textContent = dup; $('#pyFail').textContent = none; $('#pyCalls').textContent = calls; });
+  $('#pyF').addEventListener('input', () => { run(); draw(); }); $('#pyK').addEventListener('change', () => { run(); draw(); });
+  $('#pyGo').addEventListener('click', () => { seed += 5; run(); draw(); });
+  draw();
+}
+
+/* ---------- 12: replay the event log ---------- */
+{ const el = $('#es12'), AC = ['Ana', 'Ben', 'Cai', 'Dee'];
+  const START = [[0, 1, 30], [1, 2, 50], [2, 3, 120], [1, 3, 90], [3, 0, 60]];
+  let cmds = [];
+  $('#esF').innerHTML = AC.map((a, i) => `<option value="${i}">${a}</option>`).join(''); $('#esTo').innerHTML = AC.map((a, i) => `<option value="${i}"${i === 1 ? ' selected' : ''}>${a}</option>`).join('');
+  const reset = () => { cmds = AC.map((_, i) => ({ dep: true, to: i, amt: 100 })); START.forEach(([f, t, a]) => cmds.push({ f, to: t, amt: a })); };
+  /* validate commands in order: the state machine turns each valid command into an event */
+  const process = () => { const bal = AC.map(() => 0), ev = []; cmds.forEach((c, i) => { c.ok = c.dep || bal[c.f] >= c.amt; if (!c.ok) return; if (!c.dep) bal[c.f] -= c.amt; bal[c.to] += c.amt; c.ev = ev.length + 1; ev.push(c); }); return ev; };
+  const state = (ev, n) => { const b = AC.map(() => 0); ev.slice(0, n).forEach(e => { if (!e.dep) b[e.f] -= e.amt; b[e.to] += e.amt; }); return b; };
+  let follow = true;
+  const draw = onLayout(() => { const ev = process(), sl = $('#esT'); sl.max = ev.length; if (follow) sl.value = ev.length; const n = +sl.value; out('esT', n + ' of ' + ev.length);
+    const nw = NARROW(), W = nw ? 380 : 640, fs = nw ? 12 : 11.5, show = cmds.slice(-(nw ? 10 : 15)), cw = (W - 20) / Math.max(show.length, nw ? 10 : 15), th = 46, by = th + 58, bh = 30, H = by + AC.length * (bh + 10) + 10;
+    vb(el, W, H); let g = TX(10, 14, 'Command log, oldest left' + (cmds.length > show.length ? ' (latest ' + show.length + ')' : ''), 'muted', fs);
+    show.forEach((c, k) => { const x = 10 + k * cw, live = c.ok && c.ev <= n;
+      g += `<rect x="${x + 2}" y="22" width="${cw - 4}" height="${th}" rx="6" ${c.ok ? (live ? FS('glow-soft', 'glow', 1.2) : FS('panel', 'line', 1)) : FS('bad-soft', 'bad', 1)}/>`;
+      g += TX(x + cw / 2, 38, c.ok ? '#' + c.ev : '✕', c.ok ? (live ? 'glow' : 'faint') : 'bad', fs - 1, 'middle') + TX(x + cw / 2, 53, c.dep ? '+' + c.amt : AC[c.f][0] + '→' + AC[c.to][0], c.ok ? 'text' : 'bad', fs, 'middle') + (c.dep ? TX(x + cw / 2, 65, AC[c.to], 'muted', fs - 1, 'middle') : TX(x + cw / 2, 65, '$' + c.amt, 'muted', fs - 1, 'middle'));
+      if (c.ok && c.ev % 4 === 0) g += `<path d="M${x + cw - 1} 18V${th + 30}" ${S('cool', 1.4, ';stroke-dasharray:3 3')}/>`; });
+    const b = state(ev, n), mx = Math.max(250, ...b);
+    g += TX(10, by - 14, n ? `State after replaying events 1 to ${n}` : 'State before any event', 'muted', fs);
+    AC.forEach((a, i) => { const y = by + i * (bh + 10), w = (W - 120) * b[i] / mx; g += TX(10, y + bh / 2 + 5, a, 'text', 13) + `<rect x="60" y="${y}" width="${W - 120}" height="${bh}" rx="6" ${F('panel-2')}/><rect x="60" y="${y}" width="${Math.max(0, w)}" height="${bh}" rx="6" ${F('glow', .6)}/>` + TX(W - 10, y + bh / 2 + 5, '$' + b[i], 'text', 13, 'end'); });
+    el.innerHTML = g;
+    $('#esC').textContent = cmds.length; $('#esE').textContent = ev.length; $('#esX').textContent = cmds.filter(c => !c.ok).length; $('#esSum').textContent = '$' + b.reduce((s, x) => s + x, 0); });
+  $('#esT').addEventListener('input', () => { follow = +$('#esT').value === +$('#esT').max; draw(); });
+  $('#esGo').addEventListener('click', () => { const f = +$('#esF').value, t = +$('#esTo').value, a = Math.round(clamp(+$('#esAmt').value || 0, 1, 1000)); if (f === t) return; cmds.push({ f, to: t, amt: a }); follow = true; draw(); });
+  $('#esRe').addEventListener('click', () => { reset(); follow = true; draw(); });
+  reset(); draw();
+}
+
+/* ---------- 13: run the matching engine ---------- */
+{ const el = $('#ob13'); let side = 'buy', type = 'limit', book, seq, oid, last, say = 'Place an order. Buys rest below, sells above.', mine = null;
+  btnRow('#obSide', [['buy', 'Buy'], ['sell', 'Sell']], side, v => { side = v; });
+  btnRow('#obType', [['limit', 'Limit order'], ['market', 'Market order']], type, v => { type = v; $('#obP').disabled = v === 'market'; $('#obP').closest('.ctl').style.opacity = v === 'market' ? .45 : 1; });
+  const reset = () => { const r = rng(12); book = { buy: new Map(), sell: new Map() }; seq = 1000; oid = 0; last = null; mine = null;
+    for (let k = 0; k < 6; k++){ [['sell', 10005 + k * 5], ['buy', 9995 - k * 5]].forEach(([s, p]) => { const q = []; const n = 1 + Math.floor(r() * 3); for (let j = 0; j < n; j++) q.push({ id: ++oid, q: 20 + Math.round(r() * 14) * 10 }); book[s].set(p, q); }); } };
+  const best = s => { const ks = [...book[s].keys()].filter(p => book[s].get(p).length); return ks.length ? (s === 'buy' ? Math.max(...ks) : Math.min(...ks)) : null; };
+  const $p = c => '$' + (c / 100).toFixed(2);
+  function send(){ const p = +$('#obP').value; let q = +$('#obQ').value; const opp = side === 'buy' ? 'sell' : 'buy', fills = []; seq++;
+    while (q > 0){ const bp = best(opp); if (bp == null) break; if (type === 'limit' && (side === 'buy' ? bp > p : bp < p)) break;
+      const lvl = book[opp].get(bp), o = lvl[0], f = Math.min(q, o.q); o.q -= f; q -= f; fills.push([bp, f]); seq++; last = bp; if (!o.q) lvl.shift(); if (!lvl.length) book[opp].delete(bp); }
+    const filled = fills.reduce((s, x) => s + x[1], 0), avg = filled ? fills.reduce((s, x) => s + x[0] * x[1], 0) / filled : 0, lvls = new Set(fills.map(x => x[0])).size;
+    let txt = filled ? `${side === 'buy' ? 'Bought' : 'Sold'} ${filled} in ${fills.length} fill${fills.length > 1 ? 's' : ''} across ${lvls} price level${lvls > 1 ? 's' : ''}, average ${$p(Math.round(avg))}.` : '';
+    mine = null;
+    if (q > 0){ if (type === 'limit'){ if (!book[side].has(p)) book[side].set(p, []); const o = { id: ++oid, q, mine: true }; book[side].get(p).push(o); mine = o.id; txt += ` ${q} rest${filled ? '' : 's'} in the book at ${$p(p)}, ${book[side].get(p).length === 1 ? 'first in line' : 'behind ' + (book[side].get(p).length - 1) + ' earlier order' + (book[side].get(p).length === 2 ? '' : 's')}.`; }
+      else txt += ` ${q} cancelled: no more ${opp === 'sell' ? 'sellers' : 'buyers'}.`; }
+    say = txt.trim(); }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 380 : 640, N = nw ? 6 : 7, rh = nw ? 24 : 22, H = 2 * N * rh + 50, px = nw ? 62 : 80, qx = W - (nw ? 44 : 56), bx = px + 10, bw = qx - bx - 12, fs = nw ? 12.5 : 12, PER = bw / 900;
+    out('obP', $p(+$('#obP').value)); out('obQ', $('#obQ').value); vb(el, W, H);
+    const asks = [...book.sell.keys()].filter(k => book.sell.get(k).length).sort((a, b) => a - b).slice(0, N).reverse(), bids = [...book.buy.keys()].filter(k => book.buy.get(k).length).sort((a, b) => b - a).slice(0, N);
+    let g = TX(6, 14, 'Price', 'faint', fs) + TX(bx, 14, 'Resting orders, oldest first', 'faint', fs) + TX(W - 6, 14, 'Total', 'faint', fs, 'end');
+    const rowG = (p, s, y) => { const lvl = book[s].get(p), c = s === 'sell' ? 'bad' : 'good'; let x = bx, tot = 0;
+      g += TX(px, y + rh / 2 + 4, $p(p), c, fs + .5, 'end');
+      lvl.forEach(o => { const w = Math.max(4, o.q * PER); if (x + w <= bx + bw){ g += `<rect x="${x}" y="${y + 3}" width="${w - 2}" height="${rh - 6}" rx="3" ${o.mine ? FS(c, 'text', 2, .55) : F(c, .32)}/>`; } x += w; tot += o.q; });
+      g += TX(W - 6, y + rh / 2 + 4, fmtN(tot), 'muted', fs, 'end'); };
+    asks.forEach((p, k) => rowG(p, 'sell', 22 + (N - asks.length + k) * rh));
+    const my = 22 + N * rh, ba = best('sell'), bb = best('buy');
+    g += `<path d="M6 ${my + 3}H${W - 6}" ${S('line', 1)}/>` + TX(W / 2, my + 0, '', 'faint', fs, 'middle');
+    g += `<rect x="${bx}" y="${my - 2}" width="${bw}" height="10" ${F('deep')}/>` + TX(bx + bw / 2, my + 7, ba && bb ? `spread ${$p(ba - bb)}` : 'one side empty', 'faint', fs - 1, 'middle');
+    bids.forEach((p, k) => rowG(p, 'buy', my + 8 + k * rh));
+    el.innerHTML = g;
+    $('#obBA').textContent = `${bb ? $p(bb) : '—'} / ${ba ? $p(ba) : '—'}`; $('#obLast').textContent = last ? $p(last) : '—'; $('#obSeq').textContent = seq; $('#obSay').textContent = say; });
+  $('#obP').addEventListener('input', draw); $('#obQ').addEventListener('input', draw);
+  $('#obGo').addEventListener('click', () => { send(); draw(); }); $('#obRe').addEventListener('click', () => { reset(); say = 'Fresh book. Buys rest below, sells above.'; draw(); });
+  reset(); draw();
+}
+
+})();
+</script>
+</body>
+</html>
