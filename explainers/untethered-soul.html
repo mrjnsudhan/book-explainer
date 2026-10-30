@@ -1,0 +1,1767 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Untethered Soul, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the sky just before dawn. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, from the book,
+   a lab, plain words, quick check), grouped into the book's five parts.
+   Dark-first: deep violet night with a dawn-amber accent and a teal second series; light mode is warm paper with burnt orange. */
+:root{
+  color-scheme: dark;
+  --ink:#100C1C;--panel:#18132A;--panel-2:#221B38;--line:#352C52;--text:#F3EFFA;--muted:#B5ACCB;--faint:#8379A0;
+  --glow:#FFB36B;--glow-soft:rgba(255,179,107,.11);--hl:rgba(255,179,107,.26);--cool:#8EDBD6;--cool-soft:rgba(142,219,214,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B9A;--bad-soft:rgba(255,139,154,.12);
+  --soft:#DCD6EA;--deep:#0B0815;--toc-bg:rgba(24,19,42,.74);--glow-line:rgba(255,179,107,.36);--cool-line:rgba(142,219,214,.3);--on-glow:#2A1400;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F2EA;--panel:#FFFFFF;--panel-2:#EFE8DD;--line:#DDD3C4;--text:#1D1630;--muted:#5A526D;--faint:#8A8299;
+  --glow:#A8500F;--glow-soft:rgba(168,80,15,.06);--hl:#F8DFC6;--cool:#1E7A75;--cool-soft:rgba(30,122,117,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2D2542;--deep:#FCF9F3;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(168,80,15,.3);--cool-line:rgba(30,122,117,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F2EA;--panel:#FFFFFF;--panel-2:#EFE8DD;--line:#DDD3C4;--text:#1D1630;--muted:#5A526D;--faint:#8A8299;
+  --glow:#A8500F;--glow-soft:rgba(168,80,15,.06);--hl:#F8DFC6;--cool:#1E7A75;--cool-soft:rgba(30,122,117,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#2D2542;--deep:#FCF9F3;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(168,80,15,.3);--cool-line:rgba(30,122,117,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- The Untethered Soul additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.seat{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.seat-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.seat-top output{font-family:var(--f-display);font-size:22px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.seat svg{display:block;width:100%;height:auto}
+.seat-ctl{display:grid;gap:6px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.seat-ctl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.seat-ctl p{font-size:14px;color:var(--soft);min-height:42px}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.after .big{max-width:52ch;font-size:clamp(20px,2.6vw,25px)}
+.lg-item{display:grid;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.lg-item .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.lg-item .k.r{color:var(--good)}
+.lg-item .k.l{color:var(--glow)}
+.lg-item .k.h{color:var(--bad)}
+.lg-item p{font-size:14.5px}
+.lg-item button{justify-self:start;font:inherit;font-size:12px;color:var(--faint);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+@keyframes us-float{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@media (max-width: 560px){ .fq{padding:14px 16px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Michael A. Singer's book</div>
+    <h1><em>The Untethered Soul</em>,<br>Explained</h1>
+    <p class="lede">There is a voice in your head that never stops talking, and there is someone who hears it. Michael Singer's <b>The Untethered Soul</b> is about the second one. Across nineteen short chapters it asks you to notice that you are the one watching your thoughts and feelings, not the thoughts and feelings themselves, and then to practise one simple thing: when something inside you tightens, relax and let it pass instead of closing around it. This guide takes each chapter in turn, with a lab in every one where you can try the idea.</p>
+    <blockquote class="fq" aria-label="The book in one line"><p>You are not the voice in your head. You are <em>the one who hears it</em>, and you can stop letting it run your life.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's going on inside?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="seat" style="margin:0" aria-label="Where are you sitting?">
+        <div class="seat-top"><span>Where are you sitting?</span><output id="seatV"></output></div>
+        <svg id="seatSvg" role="img" aria-label="You at the centre, with thoughts, feelings and the world around you"></svg>
+        <div class="seat-ctl"><label for="seatR">Lost in it <span>Watching it</span></label><input type="range" id="seatR" min="0" max="10" value="2"><p id="seatTxt" aria-live="polite"></p></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 to 4</span><span class="q">Awakening Consciousness</span><span class="d">The voice, the roommate, and the one who notices</span></a>
+      <a href="#part2"><span class="n">Chapters 5 to 7</span><span class="q">Experiencing Energy</span><span class="d">The energy inside you and the heart that opens and closes</span></a>
+      <a href="#part3"><span class="n">Chapters 8 to 11</span><span class="q">Freeing Yourself</span><span class="d">Letting go early, removing thorns and paying the price of pain</span></a>
+      <a href="#part4"><span class="n">Chapters 12 to 14</span><span class="q">Going Beyond</span><span class="d">The walls you live inside and what lies past them</span></a>
+      <a href="#part5"><span class="n">Chapters 15 to 19</span><span class="q">Living Life</span><span class="d">Happiness without conditions, nonresistance, death and balance</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2007</span>
+      <span><b>Author</b> Michael A. Singer, meditation teacher, founder of the Temple of the Universe retreat in Florida and a software entrepreneur</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 19 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== AWAKENING CONSCIOUSNESS ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · awakening consciousness</span>
+      <h2>Awakening Consciousness</h2>
+      <p>Singer opens with something you can check for yourself right now: there is a voice in your head that talks almost all the time, and you can hear it. If you can hear it, you can't be it. The first four chapters walk you back from the noise to the one who notices it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You are not your thoughts, your feelings or your circumstances. You are the awareness that experiences them.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Who is listening?</div>
+        <h2>The Voice Inside Your Head</h2>
+        <div class="short"><span class="lbl">In short</span><p>There is a running commentary in your head that rarely stops. It narrates, judges, worries and rehearses. Singer's first point is simple: you can hear it, so you are not it. You are the one listening.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It never really stops.</b> The voice comments on the weather, the driver in front, what someone meant by that look. It talks even when nothing needs saying.</span></li>
+          <li><span><b>Notice that you hear it.</b> Say "hello" silently in your head, then notice that you heard it. The listener and the voice are two different things.</span></li>
+          <li><span><b>It argues both sides.</b> The voice can say "call her" and then "don't call her" a second later. Something that switches sides that easily isn't a reliable guide, and it isn't you.</span></li>
+          <li><span><b>Most of it is about comfort.</b> Much of the chatter is an attempt to make the world feel controllable: predicting, explaining, rehearsing. It talks because it is uneasy.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer asks you to try something. Sit quietly and say "hello" inside your head a few times, then shout it inside, then whisper it. Now notice: who heard all that? The voice spoke, and you were aware of it speaking. He compares it to a running narration of a trip you are already on. You can see the trees, yet the voice still says "look at the trees". Once you notice the narrator, you notice it is almost never quiet.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: the narrator</div><div class="hint">Step through a morning, then choose how you hear the voice</div></div>
+        <div class="stage"><svg id="vSvg" role="img" aria-label="A figure with thought bubbles coming from its head"></svg></div><div class="lab-ctl"><div class="row" id="vMode"></div><div class="row"><button class="btn primary" type="button" id="vNext">Next moment →</button><button class="btn" type="button" id="vReset">Start the morning again</button></div></div><div class="stats"><div class="stat"><span class="k">Comments so far</span><span class="v" id="vN">0</span></div><div class="stat"><span class="k">Inner tension</span><span class="v glow" id="vT">0%</span></div><div class="stat"><span class="k">What is going on</span><span class="s" id="vS"></span></div></div><p class="callout">Same morning, same voice. <b>Believing every comment winds you up. Hearing it as a voice you are listening to lets it go by.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Several times today, notice the voice talking and say to yourself, "there it goes again". You don't need to argue with it or shut it up. Just notice that it is something you hear.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Your inner roommate →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Would you live with this person?</div>
+        <h2>Your Inner Roommate</h2>
+        <div class="short"><span class="lbl">In short</span><p>Imagine the voice in your head as a real person sharing your home, saying out loud everything it says inside. You would never put up with it. Singer uses that picture to show how much it talks, and why: it is trying to calm an inner unease.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Give it a body.</b> Picture the voice as a roommate who follows you around talking. It worries about tomorrow, replays yesterday and comments on everyone. You would ask it to leave.</span></li>
+          <li><span><b>It talks because you are uneasy.</b> The more disturbed you feel inside, the more the voice talks. Chatter is the mind's attempt to release that inner pressure.</span></li>
+          <li><span><b>It builds a model of the world.</b> The voice narrates so it can feel in control: if everything is described, labelled and predicted, it feels safer.</span></li>
+          <li><span><b>Don't fight it, step back.</b> Trying to silence the voice is just more voice. The way out is to notice it calmly, and the calmer you are, the less it has to say.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer suggests a test. Suppose the voice really were a person sitting on your couch. You're about to fall asleep and it starts: "Did you lock the door? What did your boss mean today? What if you get sick?" A minute later it says the opposite of what it just said. Then it starts on your partner. You'd think this person needed help, and you'd certainly not ask them for advice. Yet you listen to the same thing inside your own head all day and take it seriously.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the roommate gets louder</div><div class="hint">Turn up how uneasy you feel and watch what the roommate says</div></div>
+        <div class="stage"><svg id="rmSvg" role="img" aria-label="Two figures on a couch, one talking"></svg></div><div class="lab-ctl"><div class="ctl"><label for="rmR">How uneasy you feel inside <output id="rmO"></output></label><input type="range" id="rmR" min="0" max="10" value="3"></div></div><div class="stats"><div class="stat"><span class="k">Words per minute (model)</span><span class="v glow" id="rmW"></span></div><div class="stat"><span class="k">What the roommate is doing</span><span class="s" id="rmS"></span></div></div><p class="callout">The roommate doesn't talk because there is something to say. <b>It talks because you are uneasy, and the talking is how it tries to let off steam.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When the voice is loud, don't ask what it's saying. Ask what you're feeling. The chatter is a sign of inner unease, and easing that unease quiets it far better than arguing.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Who are you? →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Peeling back the answers</div>
+        <h2>Who Are You?</h2>
+        <div class="short"><span class="lbl">In short</span><p>Ask "who are you?" and most people give a name, a job, a body, a history. Singer keeps asking: are you that, or are you the one who knows that? Each answer turns out to be something you are aware of, which leaves the awareness itself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Not your name.</b> You could change your name tomorrow and still be you. A name is a label you notice.</span></li>
+          <li><span><b>Not your body.</b> Your body has changed completely since you were a child, yet the one looking out through your eyes feels the same.</span></li>
+          <li><span><b>Not your thoughts or feelings.</b> Thoughts and feelings come and go, and you notice them doing it. Something that watches them can't be them.</span></li>
+          <li><span><b>The one who sees.</b> What's left is the plain sense of being there, aware. Singer calls it the Self, and says you have always been it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer imagines a conversation. Someone asks who you are and you give your name. "No, that's just a label." You say you are the person who was born in a certain town, who did certain things. "That's your history." You point to your body. "If you lost an arm, would you still be you?" Then he asks you to remember looking in a mirror at age ten, at twenty, and now. The face changed every time. The one looking did not.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: peel the layers</div><div class="hint">Ask of each layer: can I notice this?</div></div>
+        <div class="stage"><svg id="whoSvg" role="img" aria-label="Rings of identity around a centre point"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="whoNext">Can I notice this? Peel it</button><button class="btn" type="button" id="whoReset">Put it all back</button></div></div><div class="detail" aria-live="polite"><span class="k" id="whoK"></span><span class="h" id="whoH"></span><p id="whoP"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you look in a mirror, notice that you are looking. The face is something you see. You are the one seeing it, and that one hasn't aged a day.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The lucid self →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Awake to being aware</div>
+        <h2>The Lucid Self</h2>
+        <div class="short"><span class="lbl">In short</span><p>Your awareness can be pulled into what it looks at, the way you vanish into a film. Singer describes three things you are aware of: thoughts, feelings and the outside world. Being lucid means staying aware that you are aware while they go by.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three kinds of object.</b> Thoughts inside, emotions inside, and the world outside through the senses. Consciousness experiences all three.</span></li>
+          <li><span><b>Getting lost.</b> When a thought or show grabs you completely, you forget yourself. You are still there, just absorbed, the way you forget you are in a cinema.</span></li>
+          <li><span><b>Centred behind.</b> You can rest back, aware of the thoughts and feelings in front of you without being dragged into them. That is the seat of Self.</span></li>
+          <li><span><b>Like a lucid dream.</b> In a lucid dream you know you're dreaming. The lucid self knows it is watching, even while life is going on.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer uses the picture of watching television. You sit down meaning to relax and an hour later you've forgotten the room, your body, even that you are watching. Your awareness poured itself into the screen. The same thing happens with a worry or a grudge: awareness focuses so hard on one object that it forgets itself. The practice is to notice the moment you wake up from that, and to rest there a bit longer each time.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the spotlight of awareness</div><div class="hint">Pick what is grabbing you, then slide between absorbed and lucid</div></div>
+        <div class="stage"><svg id="lucSvg" role="img" aria-label="A point of awareness with a beam pointing at objects"></svg></div><div class="lab-ctl"><div class="row" id="lucObj"></div><div class="ctl"><label for="lucR">How lucid you are <output id="lucO"></output></label><input type="range" id="lucR" min="0" max="10" value="2"></div></div><div class="stats"><div class="stat"><span class="k">Aware of being aware</span><span class="v glow" id="lucA"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="lucS"></span></div></div><p class="callout">The object doesn't change. <b>What changes is whether you are still there, behind the beam, while you look.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A few times a day, ask yourself "am I here?" You will usually find you've been lost in something. The question itself wakes you up, and that moment of waking is what lucidity feels like.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Infinite energy →</a></div>
+    </section>
+    <!-- ===================== EXPERIENCING ENERGY ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · experiencing energy</span>
+      <h2>Experiencing Energy</h2>
+      <p>Once you are watching from the seat of awareness, you start to notice something else: a flow of energy inside you that rises when you feel open and drops away when you shut down. These chapters are about that flow and the heart that controls it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Energy is always available inside you. What cuts it off is the habit of closing your heart when something disturbs you.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Where your energy comes from</div>
+        <h2>Infinite Energy</h2>
+        <div class="short"><span class="lbl">In short</span><p>You know the feeling of being so excited you don't need sleep, and the feeling of being so low you can't get out of bed. Singer says the energy for both comes from inside you. It doesn't run out. It gets blocked when you close down.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Energy rises from inside.</b> When you fall in love or get great news, a wave of energy comes up from nowhere. It wasn't in your food. It was always there.</span></li>
+          <li><span><b>Closing blocks it.</b> When you close down, because you're hurt, defensive or bored, the flow stops and you feel drained.</span></li>
+          <li><span><b>Opening lets it back.</b> You don't need to get energy from somewhere. You need to stop blocking it, and opening is how.</span></li>
+          <li><span><b>Stay open, always.</b> Singer's advice is blunt: don't close. Whatever happens, choose to stay open, and the energy keeps coming.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer points out how odd energy is if you think of it only as food and sleep. Someone who is falling in love can stay up all night talking and feel wonderful the next day. The same person, told something they didn't want to hear, can feel exhausted in minutes with no change in calories. Nothing physical changed. What changed was whether they were open or closed inside.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the energy gauge</div><div class="hint">Meet each moment of a day open or closed</div></div>
+        <div class="stage"><svg id="enSvg" role="img" aria-label="A line chart of your energy across a day"></svg></div><div class="lab-ctl"><div class="tm-ask" id="enAsk"></div><div class="row"><button class="btn primary" type="button" id="enOpen">Stay open</button><button class="btn" type="button" id="enClose">Close down</button><button class="btn" type="button" id="enReset">New day</button></div></div><div class="stats"><div class="stat"><span class="k">Energy now</span><span class="v glow" id="enV"></span></div><div class="stat"><span class="k">Moments</span><span class="v" id="enM"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="enS"></span></div></div><p class="callout">The events are the same whichever way you go. <b>Your energy follows whether you open or close, not what happened.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice when you feel suddenly tired. Often it's right after something you didn't like. See if relaxing and opening, rather than shutting down, brings some of the energy back.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The secrets of the spiritual heart →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · The valve that controls the flow</div>
+        <h2>The Secrets of the Spiritual Heart</h2>
+        <div class="short"><span class="lbl">In short</span><p>Singer describes the heart as an energy centre that opens and closes, a valve for the flow from chapter five. Old hurts that were never let go of are stored there and get in the way. When something touches one, the heart closes.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You feel it open and close.</b> Love opens the heart and you feel warmth and energy in the chest. Hurt closes it and you feel tight and cut off.</span></li>
+          <li><span><b>Stored impressions.</b> Experiences you resisted don't leave. They get stored, and Singer borrows the yogic word samskara for them: blockages in the flow.</span></li>
+          <li><span><b>Triggers stir them up.</b> When something resembles an old hurt, the stored block stirs, and the heart closes to protect it.</span></li>
+          <li><span><b>It can be cleared.</b> Each block you let pass instead of protecting is one less thing in the way. The heart can open more and more.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer describes how someone you love can open your heart just by walking in, and how the same person can shut it with one comment that reminds you of an old wound. You didn't decide to feel either way. The heart reacted to what was stored inside it. He compares the stored hurts to blockages in a pipe: energy that should flow freely meets them and backs up, and you feel that as tightness, anxiety or a wall going up.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the heart valve</div><div class="hint">Add old hurts, then let them go, and watch the flow</div></div>
+        <div class="stage"><svg id="hvSvg" role="img" aria-label="Energy flowing through a channel with blockages"></svg></div><div class="lab-ctl"><div class="row" id="hvAdd"></div><div class="row"><button class="btn primary" type="button" id="hvLet">Relax and let one pass</button><button class="btn" type="button" id="hvTrig">Something triggers you</button></div></div><div class="stats"><div class="stat"><span class="k">Stored blocks</span><span class="v" id="hvN"></span></div><div class="stat"><span class="k">Flow getting through</span><span class="v glow" id="hvF"></span></div><div class="stat"><span class="k">The heart</span><span class="s" id="hvS"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you feel a sudden tightness in your chest around a person or topic, that's an old block being touched. It's information, not a command. You can let it be felt and pass.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Transcending the tendency to close →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Relax when you feel it start</div>
+        <h2>Transcending the Tendency to Close</h2>
+        <div class="short"><span class="lbl">In short</span><p>Closing is a habit. When something hits a sore spot, the heart starts to shut almost by reflex. Singer's practice is to notice the very start of that closing and relax into it instead, every time, until staying open becomes the habit.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Catch the first twinge.</b> There's a moment when the closing begins: a tightening in the chest, the shoulders, the gut. That moment is where you have a choice.</span></li>
+          <li><span><b>Relax and lean in.</b> Relax your shoulders, relax your heart, and lean into the feeling rather than away from it. Let it come up and pass.</span></li>
+          <li><span><b>Commit to not closing.</b> Singer suggests deciding, as a lifelong commitment, that you won't close no matter what happens.</span></li>
+          <li><span><b>It gets easier.</b> Each time you stay open, the next time is a bit easier. Each time you close, the pattern gets deeper.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer describes someone cutting you off in traffic. You feel a jolt, and immediately something inside starts to tighten and the voice begins: "Who does he think he is?" He says there's a gap between that jolt and the reaction that follows. If you relax right there, letting the feeling rise without adding to it, it passes through in seconds. If you don't, you'll spend the next half hour reliving it.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: relax before it shuts</div><div class="hint">When a trigger hits, press Relax before the heart closes past the line</div></div>
+        <div class="stage"><svg id="tcSvg" role="img" aria-label="A heart gauge closing"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="tcGo">Next trigger</button><button class="btn" type="button" id="tcRelax" disabled>Relax</button></div></div><div class="stats"><div class="stat"><span class="k">Caught early</span><span class="v glow" id="tcY">0</span></div><div class="stat"><span class="k">Closed</span><span class="v" id="tcN">0</span></div><div class="stat"><span class="k">What happened</span><span class="s" id="tcS"></span></div></div><p class="callout">In real life you have more than a second. <b>But the earlier you relax, the less there is to undo.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one recurring trigger: a person, a topic, a type of email. Next time it happens, feel for the first tightening and drop your shoulders. That's the whole practice.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Let go now or fall →</a></div>
+    </section>
+    <!-- ===================== FREEING YOURSELF ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · freeing yourself</span>
+      <h2>Freeing Yourself</h2>
+      <p>Now the practical work. Singer shows how small disturbances grow into big ones if you hold on, how we build whole lives around protecting old hurts, and why being willing to feel a little pain is the price of getting free of it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Freedom comes from letting things pass through you, early and without a fight, instead of storing them and arranging your life around them.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · The longer you wait, the harder it gets</div>
+        <h2>Let Go Now or Fall</h2>
+        <div class="short"><span class="lbl">In short</span><p>A disturbance starts small. If you let go right away, it's over. If you hold on, it pulls you down step by step: from a twinge, into thoughts, into words, into actions you regret. Singer's title is the whole lesson.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It starts as a twinge.</b> First there's only a small inner reaction. At this point letting go costs almost nothing.</span></li>
+          <li><span><b>Then it grabs your thoughts.</b> Hold on and the voice starts explaining, blaming and planning. Now you're in the story.</span></li>
+          <li><span><b>Then your mouth and hands.</b> A bit further and you say something or do something, and now it's out in the world with consequences.</span></li>
+          <li><span><b>The choice is at the top.</b> You don't have to understand the disturbance or fix it. You just have to let go before it takes you down.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer compares it to someone standing at the edge of a slope. A small slip is easy to recover from. If you keep holding on to the thing that's pulling you, you slide further and faster until you can't stop. Jealousy is his example: a small pang when your partner talks to someone. Let go there and it's gone. Hold on and an hour later you're reading their messages and starting a fight you'll be sorry for.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the slide</div><div class="hint">Pick a disturbance and choose how long you hold on</div></div>
+        <div class="stage"><svg id="slSvg" role="img" aria-label="A slope with stages from twinge to regret"></svg></div><div class="lab-ctl"><div class="row" id="slPick"></div><div class="ctl"><label for="slR">How long before you let go <output id="slO"></output></label><input type="range" id="slR" min="0" max="4" value="0" step="1"></div></div><div class="detail" aria-live="polite"><span class="k" id="slK"></span><span class="h" id="slH"></span><p id="slP"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't have to win the argument with yourself. When you notice you're upset, let go first and think later. Most of the time there won't be anything left to think about.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Removing your inner thorn →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Protect it, or take it out</div>
+        <h2>Removing Your Inner Thorn</h2>
+        <div class="short"><span class="lbl">In short</span><p>Imagine a thorn in your arm that hurts whenever anything touches it. You can spend your life protecting it, or you can pull it out. Singer says most of us do the first with our inner hurts, and it slowly takes over our lives.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Protecting runs your life.</b> To avoid touching the thorn you stop sleeping on that side, avoid crowds, build a guard for your arm. Each fix shapes your life around the thorn.</span></li>
+          <li><span><b>Inner thorns work the same way.</b> Loneliness, insecurity, a fear of rejection: we arrange our friendships, jobs and habits so nothing touches them.</span></li>
+          <li><span><b>Removing hurts, briefly.</b> Taking out a thorn hurts once. Protecting it hurts for ever, and limits you too.</span></li>
+          <li><span><b>Let it come up.</b> When something touches your thorn, don't rearrange the world. Let the pain come up and pass, and the thorn loosens.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer tells it as a story. A man has a thorn that hurts when brushed. He can't sleep, so he invents a padded device to protect his arm at night. He can't walk in crowds, so he builds a frame around himself. Soon his whole life is the device: where he can go, who he can see. Then he realises he could simply have taken the thorn out. Singer's point: people do the same with loneliness, picking partners and friends whose main job is to keep that thorn from being touched.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: protect or remove</div><div class="hint">Choose a path, then watch a year go by</div></div>
+        <div class="stage"><svg id="thSvg2" role="img" aria-label="A chart of pain over a year, and your life space"></svg></div><div class="lab-ctl"><div class="row" id="thPath"></div><div class="ctl"><label for="thM">Months gone by <output id="thMo"></output></label><input type="range" id="thM" min="0" max="12" value="12"></div></div><div class="stats"><div class="stat"><span class="k">Pain this month</span><span class="v" id="thP"></span></div><div class="stat"><span class="k">Life space left</span><span class="v glow" id="thL"></span></div><div class="stat"><span class="k">What it looks like</span><span class="s" id="thS"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice something you avoid because it hurts: a topic, a place, a kind of person. That avoidance is a device around a thorn. Next time, let the feeling come and go, and see if the thorn is smaller than you thought.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Stealing freedom from your soul →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · The self-concept you defend</div>
+        <h2>Stealing Freedom from Your Soul</h2>
+        <div class="short"><span class="lbl">In short</span><p>We build a mental model of who we are and how things should go, then spend our lives defending it. Anything that doesn't fit the model hurts. Singer says this self-concept quietly steals the freedom of the one who built it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A model of yourself.</b> You collect thoughts about who you are, what you like and how people should treat you. Together they form a self-concept.</span></li>
+          <li><span><b>The world rarely complies.</b> Reality isn't obliged to fit your model. Each event that doesn't fit feels like a threat and needs defending.</span></li>
+          <li><span><b>Defence costs freedom.</b> The more you have to protect, the more of life is off limits and the more time you spend managing it.</span></li>
+          <li><span><b>You can loosen it.</b> Notice the model as just thoughts you're holding. The fewer conditions you place on reality, the less there is to defend.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer notes how strange it is that someone can ruin your day by not saying good morning. Nothing happened to your body. What was touched was a picture you hold of yourself as someone who gets greeted. He describes the self-concept as built for safety: if you know who you are and how the world should behave, it feels manageable. The price is that you are now the guard of that picture, and the guard never gets a day off.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the conditions you set</div><div class="hint">Add or remove rules for how life should be, then run a day</div></div>
+        <div class="stage"><svg id="scSvg" role="img" aria-label="A ring of rules with events arriving"></svg></div><div class="lab-ctl"><div class="row" id="scRules"></div><div class="row"><button class="btn primary" type="button" id="scRun">Run a day</button></div></div><div class="stats"><div class="stat"><span class="k">Rules you hold</span><span class="v" id="scN"></span></div><div class="stat"><span class="k">Events that hurt</span><span class="v glow" id="scH"></span></div><div class="stat"><span class="k">The day</span><span class="s" id="scS"></span></div></div><p class="callout">The events are the same every time. <b>The rules decide how many of them land as a threat.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something small upsets you, ask "which picture of myself just got touched?" Seeing the picture is the first step to holding it more loosely.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Pain, the price of freedom →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Let it hurt, and let it go</div>
+        <h2>Pain, the Price of Freedom</h2>
+        <div class="short"><span class="lbl">In short</span><p>To get free of a stored hurt, you have to be willing to feel it as it leaves. Singer says pain is the price of freedom: not suffering for its own sake, but letting the discomfort pass through instead of pushing it back down.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Pain is energy passing.</b> When a stored block is stirred, it hurts as it moves. That pain is the block on its way out.</span></li>
+          <li><span><b>Avoiding it stores it again.</b> If you push it down, distract yourself or close around it, the block goes back into storage, ready for next time.</span></li>
+          <li><span><b>Be willing.</b> Decide that you're willing to feel it. Willingness alone takes much of the fear out of the pain.</span></li>
+          <li><span><b>Use it as fuel.</b> Every bit of discomfort becomes a chance to grow. Instead of asking how to stop it, ask how to let it pass.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer compares inner pain to a fire that burns away what's in the way. When someone rejects you and it stings, there are two moves. One is to close, blame them and avoid that kind of person in future. The other is to relax and let the sting move through you. The second hurts more at the time, he admits. But afterwards the old hurt it touched is a bit smaller, and the next rejection lands with less to catch on.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the wave</div><div class="hint">When the pain comes, choose to resist it or relax into it</div></div>
+        <div class="stage"><svg id="pwSvg" role="img" aria-label="A wave of pain over time, and what's stored afterwards"></svg></div><div class="lab-ctl"><div class="row" id="pwMode"></div><div class="row"><button class="btn primary" type="button" id="pwHit">Something hurts</button><button class="btn" type="button" id="pwReset">Start over</button></div></div><div class="stats"><div class="stat"><span class="k">Peak this time</span><span class="v" id="pwP"></span></div><div class="stat"><span class="k">Total pain felt</span><span class="v" id="pwT"></span></div><div class="stat"><span class="k">Still stored inside</span><span class="v glow" id="pwS"></span></div></div><p class="callout">Resisting keeps each hit smaller, and keeps all of them. <b>Relaxing lets each one hurt fully, once, and then it's gone.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time something stings, try saying silently, "I'm willing to feel this." Then relax and let it move. It usually passes faster than you expect.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Taking down the walls →</a></div>
+    </section>
+    <!-- ===================== GOING BEYOND ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · going beyond</span>
+      <h2>Going Beyond</h2>
+      <p>Most of us live inside walls we built for safety: a comfort zone made of ideas about who we are and how things should be. These chapters are about noticing those walls, relaxing at their edges and stepping past them.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The limits you feel are mostly made of thought. Each time you relax at the edge instead of retreating, the walls give way.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · The house you built for safety</div>
+        <h2>Taking Down the Walls</h2>
+        <div class="short"><span class="lbl">In short</span><p>We build walls in the mind to feel safe: ideas about what we can do, where we fit and what we avoid. Inside it feels secure but it's dark. Singer says you meet the walls as discomfort at the edges, and that's exactly where to relax and keep going.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A house with no windows.</b> Picture someone who builds a house to escape the weather, then seals every window. Safe, but they've shut out the sun as well.</span></li>
+          <li><span><b>Artificial light.</b> Inside, you make do with substitutes: approval, distraction, small comforts. They're a poor replacement for what's outside.</span></li>
+          <li><span><b>You feel the edges.</b> When life asks you to do something new, you feel uneasy. That unease is you touching a wall.</span></li>
+          <li><span><b>Relax at the edge.</b> Don't retreat and don't force it. Relax into the discomfort and step through. Walls are made of thought, and they give.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer tells of someone so afraid of storms that they built a house, then shuttered it, then sealed the cracks. Eventually it was pitch dark inside and they wired up lamps so they could see. They became so used to the lamps that they forgot there was a sun. That, he says, is the psyche: we keep out the things that frighten us and, with them, the light. The walls aren't evil. They're just in the way now.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the edge</div><div class="hint">Events touch the edge of your comfort zone. Relax and step through, or retreat</div></div>
+        <div class="stage"><svg id="wlSvg" role="img" aria-label="A comfort zone circle with light outside"></svg></div><div class="lab-ctl"><div class="tm-ask" id="wlAsk"></div><div class="row"><button class="btn primary" type="button" id="wlGo">Relax and step through</button><button class="btn" type="button" id="wlBack">Retreat</button><button class="btn" type="button" id="wlReset">Start over</button></div></div><div class="stats"><div class="stat"><span class="k">Room to live in</span><span class="v glow" id="wlA"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="wlS"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The discomfort you feel before something new isn't a stop sign. It's the wall. Notice it, relax your body, and take one step anyway.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Far, far beyond →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Past every edge</div>
+        <h2>Far, Far Beyond</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once you see that your limits are walls of thought, Singer asks you to keep going, past each edge as you meet it. There's no final wall. What you find beyond is vast, and the small worries inside look different from out there.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Don't stop at the first wall.</b> Past one comfort zone is another. Going beyond means never treating any edge as final.</span></li>
+          <li><span><b>Your world is tiny.</b> The things that take up your whole mind are a speck in a vast universe. That isn't a reason to despair, it's a relief.</span></li>
+          <li><span><b>Beyond is not empty.</b> Singer describes what lies past the walls as open, alive and full of light, not a void.</span></li>
+          <li><span><b>Keep walking.</b> The journey beyond yourself isn't a single step. You keep relaxing and moving past each edge for the rest of your life.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer asks you to picture your situation from further and further away. Here you are, upset about what someone said. Now see the room, the street, the town. Now the Earth spinning in space, one planet around one star among billions. From there, the thing that felt like the centre of the world is barely visible. He doesn't mean your life doesn't matter. He means your psyche has been treating a speck as the whole sky.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: zoom out</div><div class="hint">Drag to step back from the thing that's bothering you</div></div>
+        <div class="stage"><svg id="zmSvg" role="img" aria-label="A worry inside nested scales from room to galaxy"></svg></div><div class="lab-ctl"><div class="row" id="zmW"></div><div class="ctl"><label for="zmR">Step back <output id="zmO"></output></label><input type="range" id="zmR" min="0" max="6" value="0" step="1"></div></div><div class="stats"><div class="stat"><span class="k">Size of the worry on screen</span><span class="v glow" id="zmS"></span></div><div class="stat"><span class="k">How it feels from here</span><span class="s" id="zmF"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something feels huge, step back in your imagination: the room, the city, the planet. You aren't dismissing it, you're putting it in its true size.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Letting go of false solidity →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Held together by effort</div>
+        <h2>Letting Go of False Solidity</h2>
+        <div class="short"><span class="lbl">In short</span><p>The sense of a solid, fixed "me" is something you keep building and maintaining, thought by thought. Singer says it only feels solid because you're constantly holding it together. When you stop clutching, it loosens, and that's freedom rather than loss.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You hold it together.</b> Your self-image takes constant work: defending, explaining, comparing. The effort is what makes it feel solid.</span></li>
+          <li><span><b>Fear of falling apart.</b> When the structure is shaken, by a loss or a failure, it feels like you might fall apart. What's falling is the structure, not you.</span></li>
+          <li><span><b>Let it fall.</b> Instead of rushing to rebuild, let it fall and stay present. The awareness you are doesn't fall with it.</span></li>
+          <li><span><b>What's left is light.</b> Without the effort of holding up a self, what remains is the simple, open awareness of chapter three.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer describes what happens when life knocks the structure: a relationship ends, a job goes, a belief is proved wrong. Most people scramble to put the pieces back as fast as possible, because without them they don't know who they are. He suggests a different move. Sit still and watch the pieces fall. Notice that you are still here, watching. The thing that felt solid was a pile of thoughts held up by effort.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: stop holding it up</div><div class="hint">Ease the grip and watch the solid shape come apart</div></div>
+        <div class="stage"><svg id="fsSvg" role="img" aria-label="Particles forming the word me"></svg></div><div class="lab-ctl"><div class="ctl"><label for="fsR">How hard you hold on <output id="fsO"></output></label><input type="range" id="fsR" min="0" max="10" value="10"></div></div><div class="stats"><div class="stat"><span class="k">Effort spent holding</span><span class="v" id="fsE"></span></div><div class="stat"><span class="k">What you notice</span><span class="s" id="fsS"></span></div></div><p class="callout">The pieces are thoughts, memories and opinions. <b>They only form a solid shape while you keep pulling them together.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something shakes your sense of who you are, don't rush to rebuild. Sit with it. You'll find you're still here even while the picture of you is in pieces.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The path of unconditional happiness →</a></div>
+    </section>
+    <!-- ===================== LIVING LIFE ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Part five · living life</span>
+      <h2>Living Life</h2>
+      <p>The last five chapters bring it back to ordinary days: choosing to be happy without conditions, meeting each moment without resistance, using death as a teacher, avoiding extremes, and seeing the world with loving eyes.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A spiritual life isn't somewhere else. It is how you meet this moment, the next one and the one after that.</p></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Happy, no matter what</div>
+        <h2>The Path of Unconditional Happiness</h2>
+        <div class="short"><span class="lbl">In short</span><p>Ask people if they want to be happy and they say yes, then add conditions: if the job goes well, if they're treated fairly. Singer asks for a different answer: decide to be happy no matter what happens, and treat everything that comes up as something to let go of.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The question.</b> Do you want to be happy? Really, no matter what? Most of us quietly say "yes, as long as..."</span></li>
+          <li><span><b>Conditions make it fragile.</b> Every condition is a way for life to take your happiness away. The more you have, the more often it goes.</span></li>
+          <li><span><b>It's a commitment.</b> Unconditional happiness isn't a feeling you wait for. It's a decision not to close, whatever happens.</span></li>
+          <li><span><b>Then practise.</b> When something tries to take it away, you notice and let it go. Over time, the decision becomes your nature.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer says the biggest step on the spiritual path is a simple question with a hard answer: do you want to be happy, no matter what? Not "as long as my partner stays" or "unless I lose my job". He admits most people find this hard to say yes to, because it feels like losing the right to be upset. But that right, he says, is just a habit of closing. Once you decide, every disturbance becomes a reminder of the decision.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: a month with conditions</div><div class="hint">Toggle your conditions and run the same month</div></div>
+        <div class="stage"><svg id="uhSvg" role="img" aria-label="Your happiness across a month"></svg></div><div class="lab-ctl"><div class="row" id="uhC"></div><div class="row" id="uhMode"></div></div><div class="stats"><div class="stat"><span class="k">Days you were happy</span><span class="v glow" id="uhD"></span></div><div class="stat"><span class="k">What decided it</span><span class="s" id="uhS"></span></div></div><p class="callout">The month is the same each time. <b>Conditional happiness follows the events. Unconditional happiness follows your decision.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Try saying it once, privately: "I want to be happy no matter what." Notice what in you objects. That objection is the next thing to let go of.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: The spiritual path of nonresistance →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · This moment took billions of years</div>
+        <h2>The Spiritual Path of Nonresistance</h2>
+        <div class="short"><span class="lbl">In short</span><p>The moment in front of you is the result of forces that have been working for billions of years. Resisting it doesn't change it, it only stores the disturbance inside you. Singer's path is to accept each moment as it is, then act from that acceptance.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Every moment is huge.</b> For this exact moment to arrive, the whole history of the universe had to happen. It isn't personal.</span></li>
+          <li><span><b>Resistance stores it.</b> Pushing against what has already happened doesn't undo it. It just keeps the energy in you.</span></li>
+          <li><span><b>Accept, then act.</b> Nonresistance isn't passivity. Let the moment be, then do what needs doing with a clear head.</span></li>
+          <li><span><b>Let it pass through.</b> Experiences that aren't resisted move through you and leave nothing behind.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer describes standing in a long checkout queue, getting more irritated by the minute. The queue is the end of an almost endless chain: the shop's staffing, the person in front's day, the weather, the economy, all the way back to the Big Bang. Your irritation can't touch any of it. It can only make the next ten minutes worse. Seeing the scale of what led here makes resisting it look slightly ridiculous, and makes letting it be much easier.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: the river</div><div class="hint">Choose how you meet the current</div></div>
+        <div class="stage"><svg id="rvSvg" role="img" aria-label="A boat on a river with a current"></svg></div><div class="lab-ctl"><div class="row" id="rvMode"></div></div><div class="stats"><div class="stat"><span class="k">Energy spent</span><span class="v" id="rvE"></span></div><div class="stat"><span class="k">Distance covered</span><span class="v glow" id="rvD"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="rvS"></span></div></div><p class="callout">Nonresistance isn't drifting. <b>You still steer, you just stop fighting the water.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you catch yourself resisting something that's already happened, say "this is what's here now". Then ask what to do next. The acceptance comes first.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Contemplating death →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · The best teacher</div>
+        <h2>Contemplating Death</h2>
+        <div class="short"><span class="lbl">In short</span><p>Death is certain and its timing isn't. Singer says keeping that in mind isn't morbid, it's clarifying. If you knew you had a week left, you'd stop wasting time on grudges and small worries. You can live that way now.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>It could be any time.</b> Nobody is promised tomorrow. Remembering that puts petty things in their place.</span></li>
+          <li><span><b>The one-week test.</b> If you had a week to live, what would you stop doing, and who would you call?</span></li>
+          <li><span><b>Every moment counts.</b> Death makes each ordinary moment precious, including the boring ones.</span></li>
+          <li><span><b>Nothing to hold on to.</b> Since you can't keep anything, there's no reason to cling. That makes letting go easier now.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer imagines the angel of death appearing and saying you have one week. Suddenly the argument with your sibling doesn't matter. You don't care about the traffic. You'd want to see the people you love and look at the sky. Then he asks: why wait for the angel? You could live that week now, and the next one, without the news. People who've come close to death often say it changed how they lived. He suggests getting the lesson without the brush.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: your life in weeks</div><div class="hint">Enter your age, then answer the one-week question</div></div>
+        <div class="stage"><svg id="dtSvg" role="img" aria-label="A grid of weeks in a life"></svg></div><div class="fields"><div class="field"><label for="dtAge">Your age</label><input id="dtAge" type="number" min="1" max="100" value="35"></div><div class="field" style="grid-column:span 2;min-width:0"><label for="dtWeek">If this were your last week, what would you do differently?</label><input id="dtWeek" type="text" maxlength="160" placeholder="e.g. call my dad, stop arguing about the kitchen"></div></div><div class="stats"><div class="stat"><span class="k">Weeks lived (model, 85 years)</span><span class="v" id="dtL"></span></div><div class="stat"><span class="k">Weeks that might be left</span><span class="v glow" id="dtR"></span></div><div class="stat"><span class="k">Your answer</span><span class="s" id="dtA"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Once a week, ask the one-week question and do one thing from your answer. It is a quick way to see what actually matters.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: The secret of the middle way →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Extremes swing back</div>
+        <h2>The Secret of the Middle Way</h2>
+        <div class="short"><span class="lbl">In short</span><p>Singer draws on the Tao Te Ching: every extreme creates its opposite. Swing hard one way and you'll swing back just as hard. The middle, where the swing is smallest, takes the least energy and gives the most balance.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Like a pendulum.</b> Push a pendulum to one side and it swings just as far to the other. Extremes come with a built-in return trip.</span></li>
+          <li><span><b>Diets and binges.</b> Starve yourself and you'll binge. Work non-stop and you'll crash. The extreme creates the swing.</span></li>
+          <li><span><b>The middle is not dull.</b> The middle isn't timid compromise. It's balance, where you have the most energy and the clearest view.</span></li>
+          <li><span><b>Notice the push.</b> When you feel yourself pushing to one extreme, ease back toward the centre before the swing starts.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer uses the Tao's image of the pendulum. Someone decides to give up all sweets forever. For a week it works, then they find themselves eating a whole cake. Someone else swings from total indulgence to strict discipline and back, every few months. Each extreme took a lot of energy to reach and created the force that threw them the other way. The person in the middle eats some sweets, some days, and simply doesn't swing.</p></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: the pendulum</div><div class="hint">Push it to an extreme and watch it swing back</div></div>
+        <div class="stage"><svg id="pdSvg" role="img" aria-label="A pendulum swinging between two extremes"></svg></div><div class="lab-ctl"><div class="row" id="pdTopic"></div><div class="ctl"><label for="pdR">How far you push <output id="pdO"></output></label><input type="range" id="pdR" min="0" max="10" value="7"></div></div><div class="stats"><div class="stat"><span class="k">Energy to get there</span><span class="v" id="pdE"></span></div><div class="stat"><span class="k">Where it swings back to</span><span class="s" id="pdB"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you notice yourself saying "never again" or "from now on, always", that's a push toward an extreme. Find the gentler middle version and do that instead.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#ch19">Next: The loving eyes of God →</a></div>
+    </section>
+    <!-- ===================== 19 ===================== -->
+    <section class="ch" id="ch19" data-n="19">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 19</span> · Seeing with love</div>
+        <h2>The Loving Eyes of God</h2>
+        <div class="short"><span class="lbl">In short</span><p>Singer ends with what life looks like once you are free: you see everyone and everything with the kind of compassion a loving parent has, or as he puts it, through the loving eyes of God. Not judging, not needing anything, just seeing clearly and with care.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Judgement needs a self to defend.</b> Most of our judging comes from the self-concept: people are good or bad depending on how they touch our thorns.</span></li>
+          <li><span><b>Love sees the whole person.</b> When there's nothing to defend, you see why people do what they do, and compassion comes naturally.</span></li>
+          <li><span><b>Not passive.</b> Seeing with love doesn't mean approving of everything. It means you respond without closing.</span></li>
+          <li><span><b>The end of the journey.</b> The soul that is untethered has nothing to defend and nothing to grab. What's left is a steady, open love.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Singer asks you to imagine how a loving parent sees a small child having a tantrum. They don't take it personally. They see a tired little person who doesn't have the words for what's wrong, and they respond with care while still being firm. He says that's how you'll see everyone when you've let go of enough: the rude colleague, the difficult relative, yourself. Not because they deserve it, but because there's nothing in you left that needs them to be different.</p></div>
+      <figure class="lab" id="lab19">
+        <div class="lab-top"><div class="t">Lab: two ways of seeing</div><div class="hint">Pick a moment, then switch your eyes</div></div>
+        <div class="stage"><svg id="leSvg" role="img" aria-label="A scene seen with judging or loving eyes"></svg></div><div class="lab-ctl"><div class="row" id="lePick"></div><div class="row" id="leMode"></div></div><div class="detail" aria-live="polite"><span class="k" id="leK"></span><span class="h" id="leH"></span><p id="leP"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one person who irritates you and try seeing them the way you'd see a tired child. You don't have to agree with them. Just notice what changes in you.</p></div>
+      <div class="quiz" data-q="19"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="19"> I understand this chapter</label><a class="next" href="#after">Next: relax, release, repeat →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Relax, release, repeat</h2>
+      <p class="big">Singer's whole practice fits in one move you can make a hundred times a day: notice the tightening, relax your shoulders and your heart, and let the energy pass through before it builds into a story. Keep a small log of the moments you caught. What you write stays in this browser only.</p>
+      <figure class="lab" id="logLab">
+        <div class="lab-top"><div class="t">Your letting-go log</div><div class="hint">One line per moment you caught</div></div>
+        <div class="fields"><div class="field" style="grid-column:1/-1"><label for="lgT">What tightened?</label><input id="lgT" type="text" maxlength="140" placeholder="e.g. my colleague took credit in the meeting"></div>
+          <div class="field"><label for="lgW">What did you do?</label><select id="lgW"><option value="r">Relaxed and let it pass</option><option value="l">Caught it late, then let go</option><option value="h">Held on this time</option></select></div>
+          <div class="field" style="align-content:end"><div class="row"><button class="btn primary" type="button" id="lgAdd">Add to my log</button><button class="btn" type="button" id="lgClr">Clear log</button></div></div></div>
+        <div class="pad" style="padding-top:14px"><div class="mine" id="lgList"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Moments logged</span><span class="v" id="lgN">0</span></div><div class="stat"><span class="k">Let go</span><span class="v glow" id="lgR">0</span></div><div class="stat"><span class="k">Last seven days</span><span class="v" id="lg7">0</span></div></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Witness</span><b>You are the one who notices</b><span>The voice, the feelings and the world are all things you are aware of. You are the awareness.</span></div>
+        <div><span class="n">Energy</span><b>Stay open</b><span>Energy flows when your heart is open and stops when you close. Closing is a habit you can drop.</span></div>
+        <div><span class="n">Release</span><b>Let go early</b><span>The moment you feel the tightening is the moment to relax. Wait, and you fall into the drama.</span></div>
+        <div><span class="n">Thorns</span><b>Remove, don't protect</b><span>Building a life around old hurts makes the life smaller. Let the pain pass and the hurt goes with it.</span></div>
+        <div><span class="n">Beyond</span><b>Walk past the walls</b><span>Your comfort zone is a house made of thoughts. At its edge, relax and keep going.</span></div>
+        <div><span class="n">Life</span><b>Happy, no matter what</b><span>Decide not to close, take each moment as it comes, remember death, and stay in the middle.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Untethered Soul: The Journey Beyond Yourself</i> by Michael A. Singer (2007). The explanations, retold examples and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Awakening consciousness", "Experiencing energy", "Freeing yourself", "Going beyond", "Living life"];
+const CH = [["The Voice Inside Your Head", "The voice inside your head", 0, "Chapter 1"], ["Your Inner Roommate", "Your inner roommate", 0, "Chapter 2"], ["Who Are You?", "Who are you?", 0, "Chapter 3"], ["The Lucid Self", "The lucid self", 0, "Chapter 4"], ["Infinite Energy", "Infinite energy", 1, "Chapter 5"], ["The Secrets of the Spiritual Heart", "The secrets of the spiritual heart", 1, "Chapter 6"], ["Transcending the Tendency to Close", "Transcending the tendency to close", 1, "Chapter 7"], ["Let Go Now or Fall", "Let go now or fall", 2, "Chapter 8"], ["Removing Your Inner Thorn", "Removing your inner thorn", 2, "Chapter 9"], ["Stealing Freedom from Your Soul", "Stealing freedom from your soul", 2, "Chapter 10"], ["Pain, the Price of Freedom", "Pain, the price of freedom", 2, "Chapter 11"], ["Taking Down the Walls", "Taking down the walls", 3, "Chapter 12"], ["Far, Far Beyond", "Far, far beyond", 3, "Chapter 13"], ["Letting Go of False Solidity", "Letting go of false solidity", 3, "Chapter 14"], ["The Path of Unconditional Happiness", "The path of unconditional happiness", 4, "Chapter 15"], ["The Spiritual Path of Nonresistance", "The spiritual path of nonresistance", 4, "Chapter 16"], ["Contemplating Death", "Contemplating death", 4, "Chapter 17"], ["The Secret of the Middle Way", "The secret of the middle way", 4, "Chapter 18"], ["The Loving Eyes of God", "The loving eyes of God", 4, "Chapter 19"]];
+const QUIZ = {
+"1": {
+"q": "What is Singer's main point about the voice in your head?",
+"o": [
+"You should argue with it until it agrees with you",
+"You can hear it, which means you are not the voice but the one aware of it",
+"It is always right if you listen carefully"
+],
+"a": 1,
+"w": "If you can hear the voice, you are the one listening to it. That small step back is where the whole book starts."
+},
+"2": {
+"q": "According to Singer, why does the voice talk so much?",
+"o": [
+"Because it has important information you need",
+"Because it is trying to release inner unease and feel in control",
+"Because you haven't trained it to be quiet"
+],
+"a": 1,
+"w": "The voice talks most when you feel disturbed inside. Narrating and predicting is how it tries to make things feel safe."
+},
+"3": {
+"q": "Why does Singer say you are not your body or your thoughts?",
+"o": [
+"Because they aren't real",
+"Because you can notice them, and the one noticing is separate from what it notices",
+"Because they belong to other people"
+],
+"a": 1,
+"w": "Anything you can be aware of is an object of awareness. You are the awareness itself."
+},
+"4": {
+"q": "What does Singer mean by the lucid self?",
+"o": [
+"Someone who never has thoughts or feelings",
+"Awareness that stays aware of itself while thoughts, feelings and the world go by",
+"A person who remembers their dreams"
+],
+"a": 1,
+"w": "Thoughts and feelings still come. The lucid self simply doesn't get lost in them."
+},
+"5": {
+"q": "According to Singer, what makes you lose energy?",
+"o": [
+"Not eating enough sugar",
+"Closing your heart and blocking the energy that is always inside",
+"Using it up too fast"
+],
+"a": 1,
+"w": "The energy doesn't run out. Closing blocks it, and opening lets it flow again."
+},
+"6": {
+"q": "What are the stored blockages Singer describes?",
+"o": [
+"Physical problems with the heart muscle",
+"Past experiences you resisted, which stay stored and get stirred up later",
+"Memories you've chosen to keep"
+],
+"a": 1,
+"w": "Unfinished experiences get stored as blocks. When something touches one, the heart closes around it."
+},
+"7": {
+"q": "When does Singer say you should let go?",
+"o": [
+"After you've worked out why you're upset",
+"At the very first sign of the heart starting to close",
+"Only once the situation is resolved"
+],
+"a": 1,
+"w": "The earliest moment is the easiest. Relax at the first twinge, before it builds into a reaction."
+},
+"8": {
+"q": "What does \"let go now or fall\" mean?",
+"o": [
+"Give up on your goals before you fail",
+"Let go of a disturbance as soon as it starts, or it will pull you deeper",
+"Quit your job before you get fired"
+],
+"a": 1,
+"w": "The longer you hold on, the further it takes you. Letting go at the start is easy; later it's hard."
+},
+"9": {
+"q": "What is the problem with protecting your inner thorn?",
+"o": [
+"It is too expensive",
+"Your whole life ends up arranged around avoiding it, and the thorn stays",
+"It works too well"
+],
+"a": 1,
+"w": "Protection never ends and keeps shrinking your life. Removing the thorn hurts once and frees you."
+},
+"10": {
+"q": "Why does Singer say the self-concept steals your freedom?",
+"o": [
+"Because you have to keep defending it against a world that doesn't fit it",
+"Because other people control it",
+"Because it is always negative"
+],
+"a": 0,
+"w": "The more conditions you hold about how life should go, the more of life feels like a threat you have to manage."
+},
+"11": {
+"q": "What does Singer mean by pain being the price of freedom?",
+"o": [
+"You should seek out painful situations",
+"Letting a stored hurt pass means feeling it as it leaves, and that's worth it",
+"Freedom is always painful"
+],
+"a": 1,
+"w": "The pain is the block on its way out. Feel it and let it pass, rather than storing it again."
+},
+"12": {
+"q": "What does Singer say to do when you feel uncomfortable at the edge of your comfort zone?",
+"o": [
+"Retreat to safety and try again when you're ready",
+"Relax into the discomfort and keep going",
+"Force your way through with willpower"
+],
+"a": 1,
+"w": "The edge is where the wall is. Relaxing there, rather than retreating or forcing, is what lets it give."
+},
+"13": {
+"q": "What does going \"far beyond\" mean in this chapter?",
+"o": [
+"Travelling to new places",
+"Keeping on past each mental limit instead of stopping at the next comfort zone",
+"Ignoring your problems"
+],
+"a": 1,
+"w": "There's always another wall. Going beyond means not settling behind any of them."
+},
+"14": {
+"q": "Why does the self feel solid, according to Singer?",
+"o": [
+"Because it really is fixed from birth",
+"Because you keep holding it together with constant mental effort",
+"Because other people define it"
+],
+"a": 1,
+"w": "The solidity comes from effort. Stop clutching and it loosens, and you are still there."
+},
+"15": {
+"q": "What does Singer mean by unconditional happiness?",
+"o": [
+"Pretending to be happy when you aren't",
+"Deciding to be happy no matter what happens, and letting go of whatever gets in the way",
+"Being happy only when all your conditions are met"
+],
+"a": 1,
+"w": "It is a commitment not to close, rather than a feeling that depends on events."
+},
+"16": {
+"q": "Is nonresistance the same as doing nothing?",
+"o": [
+"Yes, you let everything happen to you",
+"No, you accept the moment first and then act clearly",
+"Yes, but only at work"
+],
+"a": 1,
+"w": "Accept what's already here, so you aren't storing the fight, then act from that clear place."
+},
+"17": {
+"q": "Why does Singer recommend contemplating death?",
+"o": [
+"To make you anxious about the future",
+"Because it shows what really matters and makes it easier to let go of small things",
+"To plan your funeral"
+],
+"a": 1,
+"w": "Death is a teacher: it reminds you that every moment counts and nothing is worth clinging to."
+},
+"18": {
+"q": "What does the middle way help you avoid?",
+"o": [
+"Making any decisions",
+"The big swings that extremes create in the opposite direction",
+"Having strong opinions"
+],
+"a": 1,
+"w": "Every extreme builds the energy for its opposite. The middle swings least and costs least."
+},
+"19": {
+"q": "What does seeing \"through the loving eyes of God\" mean?",
+"o": [
+"Approving of everything anyone does",
+"Seeing everyone with compassion because you no longer have anything to defend",
+"Believing in a particular religion"
+],
+"a": 1,
+"w": "When you have let go of what you were defending, compassion is what's left. It doesn't mean approving of everything."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#100c1c';
+try { const t = localStorage.getItem('us-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('us-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('us-done', []));
+const save = () => store.set('us-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- shared: run a frame loop only while the element is on screen ---------- */
+function anim(el, fn){
+  if (RM){ fn(0); return { kick(){ fn(0); } }; }
+  let on = false, raf = 0;
+  const loop = t => { raf = 0; if (!on) return; fn(t); raf = requestAnimationFrame(loop); };
+  new IntersectionObserver(es => { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(loop); }).observe(el);
+  return { kick(){ if (!on) fn(performance.now()); } };
+}
+/* a simple standing figure: head and shoulders */
+const person = (x, y, s, fill = 'panel-2', stroke = 'faint', w = 1.5) =>
+  `<circle cx="${x}" cy="${y - 34 * s}" r="${13 * s}" ${FS(fill, stroke, w)}/><path d="M${x - 24 * s} ${y + 18 * s}c0-26 ${10 * s}-38 ${24 * s}-38s${24 * s} 12 ${24 * s} 38Z" ${FS(fill, stroke, w)}/>`;
+const bubble = (x, y, w, h, t, c, fo = 1, n = 22, size = 12.5) =>
+  `<g style="opacity:${fo}"><rect x="${(x - w / 2).toFixed(1)}" y="${(y - h / 2).toFixed(1)}" width="${w}" height="${h}" rx="${h / 2.2}" ${FS('panel', c, 1.3)}/>${wrap(x, y + 4, t, n, 15, 'text', size)}</g>`;
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['My head won\'t stop talking', 1, 'You are the one who hears it', 'The voice narrates, worries and argues all day. Start by noticing that you can hear it, which means you aren\'t it.'],
+    ['I don\'t know who I really am', 3, 'Peel back the labels', 'Name, job, body, thoughts: each is something you notice. What\'s left is the one noticing.'],
+    ['I feel drained all the time', 5, 'Stop blocking the flow', 'Energy comes from inside and stops when you close. Staying open lets it back.'],
+    ['Small things set me off', 7, 'Relax at the first twinge', 'Catch the moment your heart starts to close and relax right there, before it becomes a reaction.'],
+    ['I keep reliving an old hurt', 9, 'Remove the thorn', 'Arranging your life to protect an old hurt makes the life smaller. Let it come up and pass instead.'],
+    ['I\'m stuck in my comfort zone', 12, 'Relax at the edge', 'The unease you feel before something new is the wall. Relax into it and step through.'],
+    ['I fight things I can\'t change', 16, 'Nonresistance', 'This moment took billions of years to arrive. Accept it first, then act.'],
+    ['I swing between extremes', 18, 'The middle way', 'Every extreme builds the energy for its opposite. The middle swings least.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: where are you sitting? ---------- */
+{ const R = $('#seatR'), el = $('#seatSvg');
+  const OBJ = [['A worry', 'bad', -1], ['A thought', 'cool', 0], ['A feeling', 'glow', 1], ['The world', 'faint', 2], ['A memory', 'cool', 3], ['A craving', 'bad', 4]];
+  const BANDS = [[2, 'Lost in it', 'You are the worry. There is no gap between you and what you\'re thinking.'], [4, 'Caught up', 'You\'re mostly inside the story, with the odd moment of noticing.'],
+    [6, 'Noticing', 'You can see the thoughts and feelings as things happening in front of you.'], [8, 'Watching', 'They come and go. You stay where you are, behind them.'],
+    [10, 'The seat of Self', 'Quiet, wide awareness. Thoughts, feelings and the world all pass through it, and none of them pull you in.']];
+  vb(el, 360, 236);
+  function draw(){
+    const v = +R.value, t = v / 10, cx = 180, cy = 118, rad = lerp(30, 92, t);
+    let g = '';
+    if (t > .35) g += `<circle cx="${cx}" cy="${cy}" r="${(rad + 12).toFixed(1)}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    OBJ.forEach(([lab, c], k) => { const a = -Math.PI / 2 + k * Math.PI / 3 + .3, jit = (1 - t) * 6 * Math.sin(k * 2.1),
+      x = cx + (rad + jit) * Math.cos(a) * 1.45, y = cy + (rad + jit) * Math.sin(a) * .95, w = 74;
+      g += `<rect x="${(x - w / 2).toFixed(1)}" y="${(y - 13).toFixed(1)}" width="${w}" height="26" rx="13" style="fill:var(--panel-2);stroke:var(--${c});stroke-width:1.3;fill-opacity:${(.55 + .45 * t).toFixed(2)}"/>` + TX(x, y + 4.5, lab, 'text', 11.5, 'middle'); });
+    const r = lerp(4, 12, t);
+    g += `<circle cx="${cx}" cy="${cy}" r="${(r + 10 * t).toFixed(1)}" ${F('glow', (.12 * t).toFixed(2))}/><circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" ${F('glow', (.35 + .65 * t).toFixed(2))}/>`;
+    if (t > .5) g += TX(cx, cy + r + 16, 'you', 'glow', 11, 'middle', 'letter-spacing="1.5"');
+    el.innerHTML = g;
+    const b = BANDS.find(x => v <= x[0]); $('#seatV').textContent = b[1]; $('#seatTxt').textContent = b[2];
+  }
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 1: the narrator ---------- */
+{ const M = [
+    ['The alarm goes off', 'Already? I feel terrible. Five more minutes.'], ['You look in the mirror', 'Is that a grey hair? I look tired.'],
+    ['The kettle is slow', 'Come on. I\'m going to be late again.'], ['A message from your boss', 'What does she want? Did I do something wrong?'],
+    ['Traffic on the way in', 'Why does this guy drive like that? Unbelievable.'], ['A colleague says hi, briefly', 'That was cold. Is he annoyed with me?'],
+    ['Sun through the window', 'Nice day. Wasted, stuck in here.'], ['Lunch is a sandwich', 'I should eat better. I\'ll start Monday.'] ];
+  let i = 0, watch = false, tension = 0; const el = $('#vSvg'), shown = [];
+  $('#vMode').innerHTML = '<button class="btn" type="button" data-m="0" aria-pressed="true">Believe every word</button><button class="btn" type="button" data-m="1" aria-pressed="false">Hear it as a voice</button>';
+  $$('#vMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#vMode [data-m]'), b); watch = b.dataset.m === '1'; draw(); }));
+  $('#vNext').addEventListener('click', () => { if (i >= M.length) return; shown.push(watch); tension = clamp(tension + (watch ? -4 : 13), 0, 100); i++; draw(); });
+  $('#vReset').addEventListener('click', () => { i = 0; tension = 0; shown.length = 0; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 320 : 260; vb(el, W, H);
+    const px = nw ? 60 : 110, py = H - 40;
+    let g = `<line x1="0" y1="${py + 22}" x2="${W}" y2="${py + 22}" ${S('line', 1)}/>`;
+    g += `<circle cx="${px}" cy="${py - 30}" r="${30 + tension * .25}" ${F('bad', (tension / 260).toFixed(2))}/>` + person(px, py, 1.1, 'panel-2', tension > 50 ? 'bad' : 'faint');
+    if (i === 0) g += wrap(W / 2 + 40, H / 2 - 20, 'Press "Next moment" to start the morning.', 26, 18, 'muted', 14);
+    const start = Math.max(0, i - 4);
+    for (let k = start; k < i; k++){ const age = i - 1 - k, w = shown[k];
+      const bx = w ? (nw ? 232 : 380) + age * (nw ? 6 : 46) : (nw ? 226 : 330) - age * 4, by = (nw ? 52 : 40) + (3 - age) * (nw ? 58 : 50) - (w ? age * 8 : 0);
+      if (!w) g += `<line x1="${px + 10}" y1="${py - 46}" x2="${(bx - 80).toFixed(1)}" y2="${by}" ${S('bad', 1.2, ';stroke-opacity:.5')}/>`;
+      g += bubble(bx, by, nw ? 200 : 280, nw ? 46 : 40, '"' + M[k][1] + '"', w ? 'line' : 'bad', w ? Math.max(.25, 1 - age * .25) : 1, nw ? 30 : 42, 12.5); }
+    if (watch && i) g += TX(px, py + 40 - 4, 'just listening', 'cool', 11, 'middle', 'letter-spacing="1"');
+    el.innerHTML = g;
+    $('#vN').textContent = i; $('#vT').textContent = Math.round(tension) + '%';
+    $('#vS').textContent = i ? M[i - 1][0] + (i >= M.length ? '. That\'s the morning.' : '') : 'Not up yet';
+    $('#vNext').disabled = i >= M.length;
+  });
+  draw();
+}
+
+/* ---------- 2: the roommate gets louder ---------- */
+{ const R = $('#rmR'), el = $('#rmSvg');
+  const L = [[1, 'Quiet. The odd remark about the weather.', '"Nice evening."'], [3, 'Light commentary. Easy to ignore.', '"Should I make pasta? Maybe."'],
+    [5, 'Planning and checking, over and over.', '"Did I reply to that email? I should check. What if they\'re waiting?"'],
+    [7, 'Replaying, blaming, predicting the worst.', '"Why did he say that? He always does this. Tomorrow will be a disaster."'],
+    [10, 'Non-stop. Arguing both sides, never resting.', '"Call her. No, don\'t. She\'ll think you\'re needy. But if you don\'t... What if this never works out? What if..."']];
+  const draw = onLayout(() => {
+    const v = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = nw ? 290 : 250; vb(el, W, H);
+    const b = L.find(x => v <= x[0]), cy = H - 50, x1 = nw ? 110 : 230, x2 = nw ? 230 : 380;
+    let g = `<rect x="${x1 - 60}" y="${cy - 6}" width="${x2 - x1 + 120}" height="34" rx="10" ${FS('panel-2', 'line', 1.2)}/><rect x="${x1 - 70}" y="${cy - 34}" width="18" height="62" rx="8" ${FS('panel-2', 'line', 1.2)}/><rect x="${x2 + 52}" y="${cy - 34}" width="18" height="62" rx="8" ${FS('panel-2', 'line', 1.2)}/>`;
+    g += person(x1, cy - 8, .9, 'panel', 'faint') + TX(x1, cy + 44, 'you', 'muted', 11, 'middle');
+    g += person(x2, cy - 8, .9, 'panel', v > 6 ? 'bad' : 'glow') + TX(x2, cy + 44, 'the roommate', 'muted', 11, 'middle');
+    const bw = nw ? 300 : 360, bh = v > 6 ? 78 : 58, bx = nw ? W / 2 : x2 + 40, by = 16 + bh / 2;
+    g += bubble(bx, by, bw, bh, b[2], v > 6 ? 'bad' : 'glow', 1, nw ? 44 : 52, 12.5);
+    for (let k = 0; k < Math.round(v * .8); k++){ const a = k * 1.9, rr = 40 + (k % 3) * 14; g += `<circle cx="${(x2 + rr * Math.cos(a) * .9).toFixed(1)}" cy="${(cy - 70 + rr * Math.sin(a) * .5).toFixed(1)}" r="${2.5 + (k % 2)}" ${F(v > 6 ? 'bad' : 'glow', .6)}/>`; }
+    el.innerHTML = g;
+    $('#rmO').textContent = v + ' / 10'; $('#rmW').textContent = Math.round(20 + 14 * Math.pow(v, 1.35)); $('#rmS').textContent = b[1];
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 3: peel the layers ---------- */
+{ const LY = [
+    ['Your name', 'You could change it tomorrow and still be you. A name is a label you hear and answer to.'],
+    ['Your roles', 'Parent, manager, friend, student. Roles change over a life, and you notice yourself playing each one.'],
+    ['Your history', 'Where you were born and what happened to you. Memories you can look at, which means you are the one looking.'],
+    ['Your body', 'It has changed completely since you were small, yet the one looking out through your eyes feels the same.'],
+    ['Your feelings', 'Joy, fear, irritation: they come and go like weather, and you notice each one arrive and leave.'],
+    ['Your thoughts', 'Even the voice in your head is something you hear. If you can hear it, you aren\'t it.'] ];
+  let peeled = 0; const el = $('#whoSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = nw ? 360 : 330, cx = W / 2, cy = H / 2, R0 = nw ? 165 : 155; vb(el, W, H);
+    let g = '';
+    LY.forEach(([t], k) => { const r = R0 - k * (nw ? 24 : 22), off = k < peeled;
+      g += `<ellipse cx="${cx}" cy="${cy}" rx="${(r * (nw ? 1 : 1.75)).toFixed(1)}" ry="${r}" ${off ? S('line', 1, ';stroke-dasharray:3 5') : FS(k % 2 ? 'panel' : 'panel-2', 'line', 1.2)}/>`;
+      g += TX(cx, cy - r + 15, t, off ? 'faint' : 'text', 11.5, 'middle', off ? 'text-decoration="line-through"' : ''); });
+    const done = peeled >= LY.length;
+    g += `<circle cx="${cx}" cy="${cy + 6}" r="${done ? 26 : 8}" ${F('glow', done ? .2 : .5)}/><circle cx="${cx}" cy="${cy + 6}" r="7" ${F('glow')}/>`;
+    if (done) g += TX(cx, cy + 50, 'the one who notices', 'glow', 12, 'middle', 'letter-spacing="1"');
+    el.innerHTML = g;
+    if (peeled === 0){ $('#whoK').textContent = 'Who are you?'; $('#whoH').textContent = 'Start with the outermost answer'; $('#whoP').textContent = 'Each ring is an answer people give. Ask of each one: can I notice this? If you can, you are the one noticing, not the thing noticed.'; }
+    else if (!done){ const [t, d] = LY[peeled - 1]; $('#whoK').textContent = `Peeled ${peeled} of ${LY.length}`; $('#whoH').textContent = t + ': something you notice'; $('#whoP').textContent = d; }
+    else { $('#whoK').textContent = 'What\'s left'; $('#whoH').textContent = 'The one who notices'; $('#whoP').textContent = 'Everything else was an object of awareness. What remains can\'t be peeled, because it\'s the one doing the peeling. Singer calls it the Self.'; }
+    $('#whoNext').disabled = done;
+  });
+  $('#whoNext').addEventListener('click', () => { peeled = Math.min(LY.length, peeled + 1); draw(); });
+  $('#whoReset').addEventListener('click', () => { peeled = 0; draw(); });
+  draw();
+}
+
+/* ---------- 4: the spotlight of awareness ---------- */
+{ const OB = ['A TV show', 'A money worry', 'A crush', 'Last week\'s argument'];
+  const BAND = [[2, 'Gone into it. You forget the room, your body, even that you\'re watching.'], [5, 'Mostly absorbed, with flickers of "oh, I\'m doing this".'],
+    [8, 'Engaged, but you know you\'re the one looking.'], [10, 'Lucid: fully present to the object and fully aware that you are aware.']];
+  let oi = 0; const R = $('#lucR'), el = $('#lucSvg');
+  $('#lucObj').innerHTML = OB.map((o, i) => `<button class="btn" type="button" data-o="${i}" aria-pressed="${i === 0}">${o}</button>`).join('');
+  $$('#lucObj [data-o]').forEach(b => b.addEventListener('click', () => { press($$('#lucObj [data-o]'), b); oi = +b.dataset.o; draw(); }));
+  const draw = onLayout(() => {
+    const v = +R.value, t = v / 10, nw = NARROW(), W = nw ? 360 : 620, H = 220, oy = H / 2; vb(el, W, H);
+    const ox = W - (nw ? 80 : 130), ax = lerp(ox - (nw ? 70 : 110), nw ? 50 : 90, t), spread = lerp(10, 70, t);
+    let g = `<path d="M${ax.toFixed(1)} ${oy}L${ox - 40} ${oy - spread}L${ox - 40} ${oy + spread}Z" ${F('glow', (.08 + .14 * (1 - t)).toFixed(2))}/>`;
+    g += `<rect x="${ox - 60}" y="${oy - 40}" width="120" height="80" rx="14" ${FS('panel-2', 'cool', 1.5)}/>` + wrap(ox, oy + 4, OB[oi], 13, 16, 'text', 13.5);
+    if (t > .4) g += `<circle cx="${ax.toFixed(1)}" cy="${oy}" r="${(14 + 18 * t).toFixed(1)}" ${S('glow', 1.2, ';stroke-dasharray:2 4;stroke-opacity:' + t.toFixed(2))}/>`;
+    g += `<circle cx="${ax.toFixed(1)}" cy="${oy}" r="${lerp(4, 10, t).toFixed(1)}" ${F('glow', (.4 + .6 * t).toFixed(2))}/>`;
+    g += TX(ax, oy + 44, t > .4 ? 'you, aware of yourself' : 'you (forgotten)', t > .4 ? 'glow' : 'faint', 11, 'middle');
+    el.innerHTML = g;
+    $('#lucO').textContent = v + ' / 10'; $('#lucA').textContent = Math.round(t * 100) + '%'; $('#lucS').textContent = BAND.find(x => v <= x[0])[1];
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: the energy gauge ---------- */
+{ const EV = [['Someone praises your work', 1], ['A driver honks at you', 0], ['A friend cancels lunch', 0], ['A walk in the sun', 1], ['Your boss criticises a report', 0], ['A child laughs at your joke', 1], ['A bill is higher than expected', 0], ['A long queue at the shop', 0]];
+  let pts = [70], last = ''; const el = $('#enSvg');
+  const step = open => { if (pts.length > EV.length) return; const good = EV[pts.length - 1][1], v = pts[pts.length - 1];
+    const nv = open ? clamp(v + (good ? 9 : 2), 0, 100) : clamp(v - (good ? 8 : 17), 0, 100);
+    last = open ? (good ? 'You let it in fully. Energy rises.' : 'It stung, you relaxed, it passed. Energy holds.') : (good ? 'You held back ("what does he want?"). Even good news drains you closed.' : 'You shut down. You feel the drop at once.');
+    pts.push(nv); draw(); };
+  $('#enOpen').addEventListener('click', () => step(true)); $('#enClose').addEventListener('click', () => step(false));
+  $('#enReset').addEventListener('click', () => { pts = [70]; last = ''; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230, L = 34, Rr = W - 14, T = 16, B = H - 30; vb(el, W, H);
+    const X = k => L + (Rr - L) * k / EV.length, Y = v => B - (B - T) * v / 100;
+    let g = '';
+    [0, 50, 100].forEach(v => { g += `<line x1="${L}" y1="${Y(v)}" x2="${Rr}" y2="${Y(v)}" ${S('line', 1, v ? ';stroke-dasharray:2 4' : '')}/>` + TX(L - 6, Y(v) + 4, v, 'faint', 10.5, 'end'); });
+    for (let k = 1; k <= EV.length; k++) g += TX(X(k), B + 16, k, k < pts.length ? 'muted' : 'faint', 10.5, 'middle');
+    g += TX(L, B + 16, 'start', 'faint', 10.5, 'start');
+    g += `<path d="M${X(0)} ${B}${pts.map((v, k) => `L${X(k).toFixed(1)} ${Y(v).toFixed(1)}`).join('')}L${X(pts.length - 1).toFixed(1)} ${B}Z" ${F('glow', .12)}/>`;
+    g += `<path d="${pts.map((v, k) => `${k ? 'L' : 'M'}${X(k).toFixed(1)} ${Y(v).toFixed(1)}`).join('')}" ${S('glow', 2.5, ';stroke-linejoin:round')}/>`;
+    pts.forEach((v, k) => { g += `<circle cx="${X(k).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="4" ${F(k && v < pts[k - 1] ? 'bad' : 'glow')}/>`; });
+    el.innerHTML = g;
+    const n = pts.length - 1, done = n >= EV.length;
+    $('#enAsk').innerHTML = done ? '<b>That\'s the day.</b> Try it again the other way.' : `Moment ${n + 1} of ${EV.length}: <b>${EV[n][0]}</b>`;
+    $('#enV').textContent = pts[n] + ' / 100'; $('#enM').textContent = n + ' of ' + EV.length; $('#enS').textContent = last || 'The day hasn\'t started.';
+    $('#enOpen').disabled = $('#enClose').disabled = done;
+  });
+  draw();
+}
+
+/* ---------- 6: the heart valve ---------- */
+{ const HURT = ['Left out at school', 'A harsh word from a parent', 'A betrayal', 'Being laughed at'], SHORT = ['left out', 'harsh word', 'betrayal', 'laughed at'];
+  let blocks = [1, 2], closedUntil = 0, msg = 'Two old hurts are stored already. Most people carry a few.'; const el = $('#hvSvg');
+  $('#hvAdd').innerHTML = HURT.map((h, i) => `<button class="btn" type="button" data-h="${i}">Store: ${h.toLowerCase()}</button>`).join('');
+  $$('#hvAdd [data-h]').forEach(b => b.addEventListener('click', () => { const h = +b.dataset.h; if (!blocks.includes(h)){ blocks.push(h); msg = `You resisted it, so it stayed. "${HURT[h]}" is now stored.`; } stat(); a.kick(); }));
+  $('#hvLet').addEventListener('click', () => { if (blocks.length){ const h = blocks.pop(); msg = `You let "${HURT[h].toLowerCase()}" come up and pass. One less block.`; } else msg = 'Nothing left stored. The heart is wide open.'; stat(); a.kick(); });
+  $('#hvTrig').addEventListener('click', () => { if (!blocks.length){ msg = 'Something rude happens, but there\'s nothing stored for it to catch on. It passes straight through.'; stat(); return; }
+    const h = blocks[Math.floor(Math.random() * blocks.length)]; closedUntil = performance.now() + 2600; msg = `A comment brushes "${HURT[h].toLowerCase()}". The heart snaps shut to protect it.`; stat(); a.kick(); setTimeout(stat, 2700); });
+  const flow = () => performance.now() < closedUntil ? 5 : Math.max(10, 100 - blocks.length * 22);
+  function stat(){ $('#hvN').textContent = blocks.length; $('#hvF').textContent = flow() + '%'; $('#hvS').textContent = msg; }
+  const pts = Array.from({length: 46}, (_, k) => [Math.random(), Math.random(), k / 46]);
+  const a = anim(el, t => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 190, cy = H / 2, x0 = 20, x1 = W - 20; vb(el, W, H);
+    const f = flow() / 100, gap = lerp(6, 46, f);
+    let g = `<rect x="${x0}" y="${cy - 34}" width="${x1 - x0}" height="68" rx="34" ${FS('panel-2', 'line', 1.2)}/>`;
+    const vx = W / 2; g += `<path d="M${vx - 16} ${cy - 34}L${vx} ${cy - gap / 2}L${vx + 16} ${cy - 34}Z M${vx - 16} ${cy + 34}L${vx} ${cy + gap / 2}L${vx + 16} ${cy + 34}Z" ${FS('panel', f < .2 ? 'bad' : 'glow', 1.5)}/>`;
+    g += TX(vx, cy - 44, 'the heart', 'muted', 11, 'middle', 'letter-spacing="1"');
+    blocks.forEach((h, k) => { const bx = x0 + 40 + k * ((vx - 70 - x0) / 4); g += `<rect x="${bx}" y="${cy - 20}" width="${nw ? 30 : 46}" height="40" rx="6" ${FS('bad-soft', 'bad', 1.2)}/>`; if (!nw) g += wrap(bx + 23, cy + 4, SHORT[h], 8, 12, 'bad', 10); });
+    pts.forEach(p => { const sp = .00006 * (.3 + f), x = ((p[0] + t * sp) % 1), xx = x0 + 14 + x * (x1 - x0 - 28), past = xx > vx;
+      if (past && p[2] > f) return; const yy = cy + (p[1] - .5) * (past ? gap * .9 : 50);
+      g += `<circle cx="${xx.toFixed(1)}" cy="${yy.toFixed(1)}" r="2.6" ${F('glow', past ? .9 : .6)}/>`; });
+    el.innerHTML = g;
+  });
+  stat();
+}
+
+/* ---------- 7: relax before it shuts ---------- */
+{ const TR = ['Someone cuts you off in traffic', 'Your partner sighs at you', 'A colleague interrupts you', 'A text with no reply for hours', 'Someone criticises your cooking', 'You spill coffee on your shirt'];
+  let v = 0, run = false, t0 = 0, ti = -1, yes = 0, no = 0, msg = 'Press "Next trigger". The heart starts to close; press Relax before it crosses the line.'; const el = $('#tcSvg');
+  const LINE = 60, DUR = 2200;
+  $('#tcGo').addEventListener('click', () => { ti = (ti + 1) % TR.length; v = 0; run = true; t0 = performance.now(); msg = TR[ti] + '. You feel it start to tighten...'; $('#tcRelax').disabled = false; $('#tcGo').disabled = true; tick(); });
+  $('#tcRelax').addEventListener('click', () => { if (!run) return; run = false; $('#tcRelax').disabled = true; $('#tcGo').disabled = false;
+    if (v < LINE){ yes++; msg = `Caught at ${Math.round(v)}%. You relaxed and it passed in seconds.`; } else { no++; msg = `At ${Math.round(v)}% it had a grip. You let go, but you'll feel it for a while.`; } v = 0; draw(); });
+  function tick(){ if (!run) return; v = Math.min(100, (performance.now() - t0) / DUR * 100); if (v >= 100){ run = false; no++; msg = 'Closed. The voice is off and running: "Who does he think he is?"'; $('#tcRelax').disabled = true; $('#tcGo').disabled = false; }
+    draw(); if (run) requestAnimationFrame(tick); }
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 170, x0 = 30, x1 = W - 30, y = 120; vb(el, W, H);
+    const X = p => x0 + (x1 - x0) * p / 100, s = 1 - v / 140;
+    let g = `<rect x="${x0}" y="${y - 8}" width="${x1 - x0}" height="16" rx="8" ${F('panel-2')}/><rect x="${x0}" y="${y - 8}" width="${(X(v) - x0).toFixed(1)}" height="16" rx="8" ${F(v < LINE ? 'glow' : 'bad')}/>`;
+    g += `<line x1="${X(LINE)}" y1="${y - 18}" x2="${X(LINE)}" y2="${y + 18}" ${S('text', 1.5, ';stroke-dasharray:3 3')}/>` + TX(X(LINE), y + 32, 'past here it has a grip', 'muted', 11, 'middle');
+    g += TX(x0, y + 32, 'open', 'faint', 11) + TX(x1, y + 32, 'closed', 'faint', 11, 'end');
+    const hx = W / 2, hy = 52; g += `<g transform="translate(${hx} ${hy}) scale(${(1.5 * s).toFixed(3)})"><path d="M0 14C-14 4-20-3-20-10a9 9 0 0 1 20-4 9 9 0 0 1 20 4c0 7-6 14-20 24Z" ${FS(v < LINE ? 'glow-soft' : 'bad-soft', v < LINE ? 'glow' : 'bad', 1.4)}/></g>`;
+    el.innerHTML = g;
+    $('#tcY').textContent = yes; $('#tcN').textContent = no; $('#tcS').textContent = msg;
+  });
+  draw();
+}
+
+/* ---------- 8: the slide ---------- */
+{ const DS = [
+    ['Jealousy', ['A small pang as your partner laughs with someone at a party.', 'The voice starts: "Why is she so interested in him? She never laughs like that with me."', 'In the car home you say, "You seemed to enjoy yourself."', 'Later you check her phone while she\'s in the shower.', 'A big fight, a week of coldness, and trust that takes months to rebuild.']],
+    ['Criticism at work', ['A twinge as your manager says the report "needs work".', 'The voice replays it all afternoon: "She never liked me. I\'m going to get pushed out."', 'You snap at a colleague who asks a simple question.', 'You send your manager a defensive email at 11pm.', 'Now there\'s a real problem with your manager, created by the reaction, not the report.']],
+    ['A rude driver', ['A jolt as a car cuts in front of you.', '"Unbelievable. People like that shouldn\'t have licences."', 'You lean on the horn and shout at the windscreen.', 'You speed up to tailgate him for a mile.', 'You arrive shaking, late and in a foul mood that spills on to everyone.']] ];
+  const ST = ['The twinge', 'Thoughts', 'Words', 'Actions', 'Aftermath'];
+  let di = 0; const R = $('#slR'), el = $('#slSvg');
+  $('#slPick').innerHTML = DS.map((d, i) => `<button class="btn" type="button" data-d="${i}" aria-pressed="${i === 0}">${d[0]}</button>`).join('');
+  $$('#slPick [data-d]').forEach(b => b.addEventListener('click', () => { press($$('#slPick [data-d]'), b); di = +b.dataset.d; draw(); }));
+  const draw = onLayout(() => {
+    const v = +R.value, nw = NARROW(), W = nw ? 360 : 640, H = nw ? 220 : 210; vb(el, W, H);
+    const P = ST.map((_, k) => [30 + k * (W - 60) / 4, 44 + k * (H - 90) / 4]);
+    let g = `<path d="M${P[0][0] - 20} ${P[0][1] + 14}${P.map(p => `L${p[0]} ${p[1] + 14}`).join('')}L${W - 10} ${H - 22}L${W - 10} ${H}L10 ${H}L10 ${P[0][1] + 14}Z" ${F('panel-2')}/>`;
+    P.forEach(([x, y], k) => { const on = k <= v; g += `<circle cx="${x}" cy="${y + 6}" r="5" ${F(on ? (k ? 'bad' : 'glow') : 'line')}/>` + TX(x, y - 20, ST[k], k === v ? 'text' : 'faint', 11.5, k === 0 ? 'start' : k === 4 ? 'end' : 'middle'); });
+    const [bx, by] = P[v]; g += `<circle cx="${bx}" cy="${by - 4}" r="9" ${FS(v ? 'bad' : 'glow', 'text', 1.2)}/>`;
+    el.innerHTML = g;
+    $('#slO').textContent = v === 0 ? 'right away' : 'after the ' + ST[v - 1].toLowerCase() + (v > 1 ? '' : '');
+    $('#slK').textContent = `Let go at stage ${v + 1} of 5`; $('#slH').textContent = ST[v]; $('#slP').textContent = DS[di][1][v] + (v === 0 ? ' Let go here and that\'s the end of it.' : '');
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 9: protect or remove ---------- */
+{ const r = rng(9), PROT = Array.from({length: 13}, (_, m) => m ? 2.5 + r() * 2.2 : 3), REM = Array.from({length: 13}, (_, m) => m === 0 ? 3 : m === 1 ? 8.5 : Math.max(.3, 6 * Math.exp(-(m - 1) * .7)));
+  const LIFE = m => [Math.round(100 - m * 5), Math.round(m <= 1 ? 100 - m * 8 : Math.min(100, 92 + (m - 1) * 2))];
+  const STEP = ['You avoid the friend who mentioned it.', 'You stop going to parties where it might come up.', 'You pick a partner mainly because they never touch it.', 'You turn down a job that might expose it.'];
+  let path = 0; const M = $('#thM'), el = $('#thSvg2');
+  $('#thPath').innerHTML = '<button class="btn" type="button" data-p="0" aria-pressed="true">Protect the thorn</button><button class="btn" type="button" data-p="1" aria-pressed="false">Remove the thorn</button>';
+  $$('#thPath [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#thPath [data-p]'), b); path = +b.dataset.p; draw(); }));
+  const draw = onLayout(() => {
+    const m = +M.value, nw = NARROW(), W = nw ? 360 : 640, H = nw ? 300 : 220; vb(el, W, H);
+    const cw = nw ? W - 40 : W - 220, L = 30, T = 14, B = nw ? 170 : H - 30, X = k => L + cw * k / 12, Y = v => B - (B - T) * v / 10;
+    let g = `<line x1="${L}" y1="${B}" x2="${L + cw}" y2="${B}" ${S('line', 1)}/>` + TX(L - 4, Y(10) + 4, '10', 'faint', 10, 'end') + TX(L - 4, B + 4, '0', 'faint', 10, 'end');
+    [PROT, REM].forEach((arr, p) => { const on = p === path;
+      g += `<path d="${arr.slice(0, m + 1).map((v, k) => `${k ? 'L' : 'M'}${X(k).toFixed(1)} ${Y(v).toFixed(1)}`).join('')}" ${S(p ? 'cool' : 'bad', on ? 2.5 : 1.2, on ? '' : ';stroke-opacity:.35;stroke-dasharray:3 4')}/>`; });
+    g += TX(L + 4, T + 4, 'pain each month', 'faint', 10.5) + TX(X(12), B + 16, '12 mo', 'faint', 10.5, 'end') + TX(X(0), B + 16, 'now', 'faint', 10.5);
+    const life = LIFE(m)[path], ccx = nw ? W / 2 : W - 95, ccy = nw ? 240 : H / 2, rr = (nw ? 46 : 78) * Math.sqrt(life / 100);
+    g += `<circle cx="${ccx}" cy="${ccy}" r="${nw ? 46 : 78}" ${S('line', 1, ';stroke-dasharray:3 4')}/><circle cx="${ccx}" cy="${ccy}" r="${rr.toFixed(1)}" ${FS('glow-soft', 'glow', 1.5)}/>` + TX(ccx, ccy + 4, 'your life', 'glow', 11, 'middle');
+    if (nw) g += TX(ccx, ccy - 52, '', 'faint', 10, 'middle');
+    el.innerHTML = g;
+    $('#thMo').textContent = m; $('#thP').textContent = (path ? REM : PROT)[m].toFixed(1) + ' / 10'; $('#thL').textContent = life + '%';
+    $('#thS').textContent = path ? (m < 1 ? 'You decide to let it be touched.' : m < 3 ? 'It hurts to let it come up. Then it hurts less each time.' : 'It barely catches now. You go where you like.')
+      : (m < 1 ? 'You decide to keep it safe.' : STEP[Math.min(STEP.length - 1, Math.floor(m / 3))] + ' It still hurts when touched.');
+  });
+  M.addEventListener('input', draw); draw();
+}
+
+/* ---------- 10: the conditions you set ---------- */
+{ const RU = ['People should greet me', 'I must never look foolish', 'Plans should go to plan', 'I should be appreciated', 'Things should be fair', 'I must be right'];
+  const EV = [['A colleague walks past without a hello', [0]], ['You trip on the stairs in front of people', [1]], ['Your train is cancelled', [2]], ['Nobody thanks you for the cake', [3, 0]],
+    ['Someone else gets the credit', [4, 3]], ['A friend says your idea won\'t work', [5, 1]], ['It rains on your day off', [2, 4]], ['You mispronounce a word in a meeting', [1]],
+    ['The meeting overruns by an hour', [2]], ['Your partner forgets your news', [3]], ['A queue-jumper at the café', [4, 0]], ['You lose a small argument', [5]]];
+  let on = new Set([0, 1, 2, 3]), day = [], runs = 0; const el = $('#scSvg');
+  $('#scRules').innerHTML = RU.map((r, i) => `<button class="btn" type="button" data-r="${i}" aria-pressed="${on.has(i)}">${r}</button>`).join('');
+  $$('#scRules [data-r]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.r; on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); draw(); }));
+  const run = () => { const r = rng(runs++ * 7 + 3), idx = EV.map((_, k) => k).sort(() => r() - .5).slice(0, 7); day = idx; draw(); };
+  $('#scRun').addEventListener('click', run);
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 360 : 300, cx = W / 2, cy = H / 2, R0 = nw ? 64 : 74; vb(el, W, H);
+    let g = `<circle cx="${cx}" cy="${cy}" r="${R0 + 12}" ${S('line', 1)}/>`;
+    RU.forEach((_, k) => { const a0 = -Math.PI / 2 + k * Math.PI / 3 + .06, a1 = a0 + Math.PI / 3 - .12, rr = R0 + 12;
+      if (on.has(k)) g += `<path d="M${(cx + rr * Math.cos(a0)).toFixed(1)} ${(cy + rr * Math.sin(a0)).toFixed(1)}A${rr} ${rr} 0 0 1 ${(cx + rr * Math.cos(a1)).toFixed(1)} ${(cy + rr * Math.sin(a1)).toFixed(1)}" ${S('cool', 6, ';stroke-linecap:round')}/>`; });
+    g += `<circle cx="${cx}" cy="${cy}" r="${R0}" ${F('panel-2')}/>` + TX(cx, cy - 4, 'you', 'text', 13, 'middle') + TX(cx, cy + 14, on.size + ' rules', 'faint', 10.5, 'middle');
+    let hits = 0;
+    day.forEach((e, k) => { const hit = EV[e][1].some(x => on.has(x)); if (hit) hits++;
+      const a = -Math.PI / 2 + k * Math.PI * 2 / day.length + .2, rx = nw ? 130 : 240, ry = nw ? 150 : 118, x = cx + rx * Math.cos(a), y = cy + ry * Math.sin(a);
+      const ex = cx + (R0 + 14) * Math.cos(a), ey = cy + (R0 + 14) * Math.sin(a);
+      g += `<line x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" ${S(hit ? 'bad' : 'line', hit ? 1.5 : 1, hit ? '' : ';stroke-dasharray:2 4')}/>`;
+      if (hit) g += `<circle cx="${ex.toFixed(1)}" cy="${ey.toFixed(1)}" r="5" ${F('bad')}/>`;
+      const bw = nw ? 124 : 164, bxx = clamp(x, bw / 2 + 4, W - bw / 2 - 4); g += `<rect x="${(bxx - bw / 2).toFixed(1)}" y="${(y - 17).toFixed(1)}" width="${bw}" height="34" rx="9" ${FS('panel', hit ? 'bad' : 'line', 1.2)}/>` + wrap(bxx, y + 4, EV[e][0], nw ? 20 : 26, 13, hit ? 'text' : 'muted', 11); });
+    if (!day.length) g += TX(cx, H - 14, 'Press "Run a day" to send seven ordinary events at you.', 'muted', 12, 'middle');
+    el.innerHTML = g;
+    $('#scN').textContent = on.size; $('#scH').textContent = day.length ? hits + ' of ' + day.length : '–';
+    $('#scS').textContent = !day.length ? 'Not run yet.' : hits === 0 ? 'Nothing landed. The same events just happened.' : hits <= 2 ? 'A couple of stings. Notice which rule each one touched.' : 'A bruising day, though nothing unusual happened. The rules did the bruising.';
+  });
+  draw();
+}
+
+/* ---------- 11: the wave ---------- */
+{ let relax = false, series = [], stored = 3, total = 0, peak = 0; const el = $('#pwSvg');
+  $('#pwMode').innerHTML = '<button class="btn" type="button" data-m="0" aria-pressed="true">Resist it</button><button class="btn" type="button" data-m="1" aria-pressed="false">Relax into it</button>';
+  $$('#pwMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#pwMode [data-m]'), b); relax = b.dataset.m === '1'; }));
+  $('#pwHit').addEventListener('click', () => {
+    if (series.length >= 60) return; const base = () => stored * .6;
+    peak = relax ? 8 : 4.5;
+    for (let k = 0; k < 10; k++){ const w = relax ? peak * Math.exp(-k * .55) * (k ? 1 : .6) : Math.min(peak, 1.5 + k * .6) * (k < 6 ? 1 : .5); series.push([base() + w, relax]); total += w; }
+    stored = relax ? Math.max(0, stored - 1) : stored + 1; draw(); });
+  $('#pwReset').addEventListener('click', () => { series = []; stored = 3; total = 0; peak = 0; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 210, L = 28, Rr = W - 12, T = 14, B = H - 26; vb(el, W, H);
+    const X = k => L + (Rr - L) * k / 60, Y = v => B - (B - T) * Math.min(v, 12) / 12;
+    let g = `<line x1="${L}" y1="${B}" x2="${Rr}" y2="${B}" ${S('line', 1)}/>` + TX(L - 4, Y(12) + 4, 'pain', 'faint', 10, 'end');
+    if (series.length) g += `<path d="M${X(0)} ${B}${series.map((p, k) => `L${X(k + .5).toFixed(1)} ${Y(p[0]).toFixed(1)}`).join('')}L${X(series.length - .5).toFixed(1)} ${B}Z" ${F('glow', .14)}/>`
+      + `<path d="${series.map((p, k) => `${k ? 'L' : 'M'}${X(k + .5).toFixed(1)} ${Y(p[0]).toFixed(1)}`).join('')}" ${S('glow', 2)}/>`;
+    g += `<line x1="${L}" y1="${Y(stored * .6)}" x2="${Rr}" y2="${Y(stored * .6)}" ${S('bad', 1.2, ';stroke-dasharray:4 4')}/>` + TX(Rr, Y(stored * .6) - 6, 'background ache from what\'s stored', 'bad', 10.5, 'end');
+    if (!series.length) g += TX(W / 2, H / 2 - 10, 'Press "Something hurts" a few times, in each mode.', 'muted', 12.5, 'middle');
+    el.innerHTML = g;
+    $('#pwP').textContent = peak ? peak.toFixed(1) : '–'; $('#pwT').textContent = total.toFixed(0); $('#pwS').textContent = stored + (stored === 1 ? ' hurt' : ' hurts');
+    $('#pwHit').disabled = series.length >= 60;
+  });
+  draw();
+}
+
+/* ---------- 12: the edge ---------- */
+{ const EV = ['Speak up in a meeting', 'Eat lunch alone in a busy café', 'Tell a friend how you really feel', 'Try a dance class', 'Say no to a favour', 'Ask for a raise', 'Share your work online', 'Travel somewhere alone'];
+  let r = 50, i = 0, msg = 'Each step brings you to an edge. Notice the unease, then choose.'; const el = $('#wlSvg');
+  const go = through => { if (i >= EV.length) return; r = through ? Math.min(150, r + 13) : Math.max(28, r - 6); msg = through ? `"${EV[i]}": the unease peaked, you relaxed, and the wall moved out.` : `"${EV[i]}": you backed off. Relief now, and the wall creeps a little closer.`; i++; draw(); };
+  $('#wlGo').addEventListener('click', () => go(true)); $('#wlBack').addEventListener('click', () => go(false));
+  $('#wlReset').addEventListener('click', () => { r = 50; i = 0; msg = 'Each step brings you to an edge. Notice the unease, then choose.'; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 320 : 300, cx = W / 2, cy = H / 2; vb(el, W, H);
+    let g = '';
+    for (let k = 0; k < 16; k++){ const a = k * Math.PI / 8, x0 = cx + (r + 8) * Math.cos(a), y0 = cy + (r + 8) * Math.sin(a), x1 = cx + 400 * Math.cos(a), y1 = cy + 400 * Math.sin(a); g += `<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${x1.toFixed(1)}" y2="${y1.toFixed(1)}" ${S('glow', 1, ';stroke-opacity:.18')}/>`; }
+    g += `<circle cx="${cx}" cy="${cy}" r="${r}" ${FS('panel-2', 'cool', 2.5)}/>` + `<circle cx="${cx}" cy="${cy}" r="7" ${F('glow')}/>` + TX(cx, cy + 22, 'you', 'muted', 11, 'middle');
+    if (i < EV.length){ const a = -Math.PI / 4 - i * .7, x = cx + r * Math.cos(a), y = cy + r * Math.sin(a); g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" ${F('glow')}/>`;
+      const lx = clamp(x + (Math.cos(a) > 0 ? 14 : -14), 10, W - 10); g += TX(lx, y - 12, 'the edge', 'glow', 11, Math.cos(a) > 0 ? 'start' : 'end'); }
+    el.innerHTML = g;
+    $('#wlAsk').innerHTML = i < EV.length ? `Edge ${i + 1} of ${EV.length}: <b>${EV[i]}</b>` : '<b>Done.</b> Start over and try it the other way.';
+    $('#wlA').textContent = (r * r / 2500).toFixed(1) + '× where you started'; $('#wlS').textContent = msg;
+    $('#wlGo').disabled = $('#wlBack').disabled = i >= EV.length;
+  });
+  draw();
+}
+
+/* ---------- 13: zoom out ---------- */
+{ const WO = ['What my boss said', 'A rude comment online', 'A bill I can\'t face'];
+  const SC = [['The worry', 'It fills the whole screen. It\'s all you can see.'], ['Your room', 'Already there\'s a chair, a window, a cup of tea.'], ['Your street', 'Hundreds of people, each with their own worry.'],
+    ['Your city', 'A million lives going on. Yours is one light among them.'], ['The Earth', 'Eight billion people, oceans, weather, a spinning planet.'], ['The solar system', 'A small star, eight planets, and a lot of space.'], ['The galaxy', 'A hundred billion stars or more. The worry is still real, and it\'s tiny.']];
+  let wi = 0; const R = $('#zmR'), el = $('#zmSvg'), F0 = 2.6;
+  $('#zmW').innerHTML = WO.map((w, i) => `<button class="btn" type="button" data-w="${i}" aria-pressed="${i === 0}">${w}</button>`).join('');
+  $$('#zmW [data-w]').forEach(b => b.addEventListener('click', () => { press($$('#zmW [data-w]'), b); wi = +b.dataset.w; draw(); }));
+  const draw = onLayout(() => {
+    const v = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = nw ? 300 : 280, cx = W / 2, cy = H / 2 + 6; vb(el, W, H);
+    let g = '';
+    for (let k = v; k >= 0; k--){ const s = Math.pow(F0, k - v), w = (W - 30) * s, h = (H - 30) * s; if (w < 2) break;
+      g += `<rect x="${(cx - w / 2).toFixed(1)}" y="${(cy - h / 2).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${Math.min(14, w / 10).toFixed(1)}" ${k === 0 ? FS('bad-soft', 'bad', 1.5) : FS(k === v ? 'panel' : 'panel-2', 'line', 1)}/>`;
+      if (k === 0 && w > 120) g += wrap(cx, cy + 6, WO[wi], 18, Math.max(16, 26 * s), 'text', Math.max(13, 24 * s));
+      if (k > 0 && w > 70) g += TX(cx - w / 2 + 8, cy - h / 2 + 15, SC[k][0], 'faint', 10.5); }
+    if (v > 1) g += `<circle cx="${cx}" cy="${cy}" r="9" ${S('bad', 1.2)}/>` + TX(cx + 13, cy + 4, 'the worry', 'bad', 10.5);
+    el.innerHTML = g;
+    $('#zmO').textContent = SC[v][0]; $('#zmS').textContent = (100 * Math.pow(F0, -v)).toFixed(v > 3 ? 2 : 0) + '%'; $('#zmF').textContent = SC[v][1];
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 14: stop holding it up ---------- */
+{ const GL = { M: ['10001', '11011', '10101', '10101', '10001', '10001', '10001'], E: ['11111', '10000', '10000', '11110', '10000', '10000', '11111'] };
+  const R = $('#fsR'), el = $('#fsSvg'), r = rng(14);
+  const TG = []; ['M', 'E'].forEach((ch, ci) => GL[ch].forEach((row, y) => [...row].forEach((c, x) => { if (c === '1') TG.push([ci * 6 + x, y, r() * Math.PI * 2, .4 + r() * .6]); })));
+  const W = 600, H = 260; vb(el, W, H);
+  el.innerHTML = TG.map(() => `<circle r="7" cx="0" cy="0" ${F('glow')} style="fill:var(--glow);transition:transform .7s cubic-bezier(.3,.7,.3,1),opacity .7s"/>`).join('') + `<text id="fsTx" x="300" y="246" font-size="12" text-anchor="middle" ${F('faint')}></text>`;
+  const dots = [...el.querySelectorAll('circle')];
+  function draw(){
+    const v = +R.value, loose = 1 - v / 10, sx = (W - 11 * 26) / 2, sy = 46;
+    TG.forEach(([gx, gy, a, m], k) => { const x = sx + gx * 26 + Math.cos(a) * loose * 260 * m, y = sy + gy * 22 + Math.sin(a) * loose * 120 * m;
+      dots[k].style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`; dots[k].style.opacity = (.35 + .65 * v / 10).toFixed(2); });
+    $('#fsTx').textContent = v > 7 ? '' : v > 3 ? 'thoughts, memories, opinions, drifting' : 'just pieces, and you, watching them';
+    $('#fsO').textContent = v + ' / 10'; $('#fsE').textContent = v * 10 + '%';
+    $('#fsS').textContent = v > 7 ? 'A solid "me". It feels real because you\'re working to keep it that way.' : v > 3 ? 'It\'s loosening. It feels unsettling, but you\'re still here.' : 'The shape is gone. The one who was holding it up is still here, and much lighter.';
+  }
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 15: a month with conditions ---------- */
+{ const CO = ['work goes well', 'people treat me fairly', 'the weather is nice', 'I feel healthy'];
+  const r = rng(15), MET = Array.from({length: 30}, () => CO.map((_, c) => r() > [.28, .22, .4, .15][c]));
+  let on = new Set([0, 1, 2]), uncond = false; const el = $('#uhSvg');
+  $('#uhC').innerHTML = CO.map((c, i) => `<button class="btn" type="button" data-c="${i}" aria-pressed="${on.has(i)}">Only if ${c}</button>`).join('');
+  $$('#uhC [data-c]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.c; on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); draw(); }));
+  $('#uhMode').innerHTML = '<button class="btn" type="button" data-m="0" aria-pressed="true">Happy if my conditions are met</button><button class="btn" type="button" data-m="1" aria-pressed="false">Happy no matter what</button>';
+  $$('#uhMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#uhMode [data-m]'), b); uncond = b.dataset.m === '1'; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), cols = nw ? 6 : 10, cs = nw ? 54 : 58, W = cols * cs + 20, rows = Math.ceil(30 / cols), H = rows * cs + 34; vb(el, W, H);
+    let g = '', happy = 0;
+    MET.forEach((m, d) => { const miss = [...on].filter(c => !m[c]), ok = uncond || !miss.length; if (ok) happy++;
+      const x = 10 + (d % cols) * cs + cs / 2, y = 10 + Math.floor(d / cols) * cs + cs / 2;
+      g += `<circle cx="${x}" cy="${y}" r="${cs * .38}" ${ok ? FS('glow-soft', 'glow', 1.5) : FS('bad-soft', 'bad', 1.2)}/>` + TX(x, y + 4, d + 1, ok ? 'text' : 'bad', 11, 'middle');
+      if (miss.length) g += `<circle cx="${x + cs * .28}" cy="${y - cs * .28}" r="5" ${F(uncond ? 'cool' : 'bad')}/>`; });
+    g += `<circle cx="18" cy="${H - 12}" r="5" ${F(uncond ? 'cool' : 'bad')}/>` + TX(28, H - 8, uncond ? 'a condition failed, you noticed and let it go' : 'a condition failed', 'faint', 11);
+    el.innerHTML = g;
+    $('#uhD').textContent = happy + ' of 30';
+    $('#uhS').textContent = uncond ? 'Your decision. The bad days still came; they just didn\'t get to switch you off.' : on.size ? `The events. With ${on.size} condition${on.size > 1 ? 's' : ''}, any one failing takes the day.` : 'No conditions held, so nothing could take it away.';
+  });
+  draw();
+}
+
+/* ---------- 16: the river ---------- */
+{ const MO = [['Fight the current', 92, 8, 'Exhausting. You thrash and barely move. The river doesn\'t notice.'], ['Drift and give up', 4, 45, 'No effort, but you bump into every bank. Nonresistance isn\'t this.'], ['Accept it, and steer', 28, 100, 'You go with the water and use the paddle to steer. Least effort, furthest travelled.']];
+  let mi = 2; const el = $('#rvSvg');
+  $('#rvMode').innerHTML = MO.map((m, i) => `<button class="btn" type="button" data-m="${i}" aria-pressed="${i === mi}">${m[0]}</button>`).join('');
+  $$('#rvMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#rvMode [data-m]'), b); mi = +b.dataset.m; stat(); a.kick(); }));
+  function stat(){ $('#rvE').textContent = MO[mi][1] + '%'; $('#rvD').textContent = MO[mi][2] + '%'; $('#rvS').textContent = MO[mi][3]; }
+  const a = anim(el, t => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 180, top = 34, bot = 146; vb(el, W, H);
+    let g = `<rect x="0" y="${top}" width="${W}" height="${bot - top}" ${F('cool', .12)}/><line x1="0" y1="${top}" x2="${W}" y2="${top}" ${S('cool', 1.5)}/><line x1="0" y1="${bot}" x2="${W}" y2="${bot}" ${S('cool', 1.5)}/>`;
+    for (let k = 0; k < 14; k++){ const y = top + 12 + (k % 5) * 20, x = ((k * 97 + t * .05) % (W + 60)) - 30; g += `<path d="M${x.toFixed(1)} ${y}h26" ${S('cool', 1.5, ';stroke-linecap:round;stroke-opacity:.5')}/>`; }
+    const p = (t / 1000) % 6 / 6, cyc = Math.sin(t / 300);
+    let bx, by, wob = 0;
+    if (mi === 0){ bx = W * .3 + cyc * 6; by = (top + bot) / 2; wob = Math.sin(t / 90) * 8; }
+    else if (mi === 1){ bx = W * (.1 + .45 * p); by = (top + bot) / 2 + Math.sin(p * 9) * 38; wob = Math.sin(p * 9) * 25; }
+    else { bx = W * (.1 + .8 * p); by = (top + bot) / 2 + Math.sin(p * 5) * 6; wob = 0; }
+    g += `<g transform="translate(${bx.toFixed(1)} ${by.toFixed(1)}) rotate(${wob.toFixed(1)})"><path d="M-22 -2h44l-8 10h-28Z" ${FS('panel', 'glow', 1.5)}/><circle cx="0" cy="-10" r="5" ${F('glow')}/><line x1="${mi === 0 ? -16 : 12}" y1="-16" x2="${mi === 0 ? -26 : 22}" y2="12" ${S('text', 1.5)}/></g>`;
+    g += TX(W - 10, 22, 'the current →', 'cool', 11, 'end') + TX(10, 22, mi === 0 ? 'you, going the other way' : mi === 1 ? 'you, letting go of the paddle' : 'you, steering with it', 'muted', 11);
+    el.innerHTML = g;
+  });
+  stat();
+}
+
+/* ---------- 17: your life in weeks ---------- */
+{ const el = $('#dtSvg'), A = $('#dtAge'), WK = $('#dtWeek');
+  WK.value = store.get('us-week', '');
+  const draw = onLayout(() => {
+    const age = clamp(+A.value || 0, 0, 100), lived = Math.min(4420, Math.round(age * 52)), nw = NARROW();
+    const cols = nw ? 52 : 104, rows = Math.ceil(4420 / cols), c = nw ? 6.4 : 5.6, W = cols * c + 8, H = rows * c + 8; vb(el, W, H);
+    let a = '', b = '';
+    for (let k = 0; k < 4420; k++){ const x = 4 + (k % cols) * c, y = 4 + Math.floor(k / cols) * c, d = `M${x.toFixed(1)} ${y.toFixed(1)}h${(c - 1.4).toFixed(1)}v${(c - 1.4).toFixed(1)}h-${(c - 1.4).toFixed(1)}Z`; if (k < lived) a += d; else b += d; }
+    let g = `<path d="${a}" ${F('faint', .55)}/><path d="${b}" ${F('glow', .75)}/>`;
+    if (lived < 4420){ const x = 4 + (lived % cols) * c, y = 4 + Math.floor(lived / cols) * c; g += `<rect x="${x - 1.5}" y="${y - 1.5}" width="${c + 1.6}" height="${c + 1.6}" ${S('text', 1.4)}/>`; }
+    el.innerHTML = g;
+    $('#dtL').textContent = lived.toLocaleString(); $('#dtR').textContent = Math.max(0, 4420 - lived).toLocaleString();
+    $('#dtA').textContent = WK.value.trim() ? WK.value.trim() : 'Write it above. It\'s saved in this browser.';
+  });
+  A.addEventListener('input', draw); WK.addEventListener('input', () => { store.set('us-week', WK.value); draw(); }); draw();
+}
+
+/* ---------- 18: the pendulum ---------- */
+{ const TP = [['Eating', 'A strict diet', 'A binge'], ['Work', 'Working every hour', 'Burnout, then doing nothing'], ['Money', 'Saving every penny', 'A spending splurge'], ['Feelings', 'Bottling everything up', 'An explosion']];
+  let ti = 0, t0 = performance.now(); const R = $('#pdR'), el = $('#pdSvg');
+  $('#pdTopic').innerHTML = TP.map((p, i) => `<button class="btn" type="button" data-t="${i}" aria-pressed="${i === 0}">${p[0]}</button>`).join('');
+  $$('#pdTopic [data-t]').forEach(b => b.addEventListener('click', () => { press($$('#pdTopic [data-t]'), b); ti = +b.dataset.t; stat(); a.kick(); }));
+  function stat(){ const v = +R.value; $('#pdO').textContent = v === 0 ? 'the middle' : v + ' / 10'; $('#pdE').textContent = v * v + ' units';
+    $('#pdB').textContent = v === 0 ? 'Nowhere. In the middle there is no swing to come back from.' : v < 4 ? `A gentle sway, never far from balance.` : `"${TP[ti][1]}" builds the energy for "${TP[ti][2].toLowerCase()}". The harder the push, the harder the swing back.`; }
+  R.addEventListener('input', () => { stat(); a.kick(); });
+  const a = anim(el, t => {
+    const v = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = 230, px = W / 2, py = 24, Lr = 160; vb(el, W, H);
+    const amp = v / 10 * 1.05, ang = RM ? -amp : amp * Math.cos((t - t0) / 650);
+    const bx = px + Lr * Math.sin(ang), by = py + Lr * Math.cos(ang);
+    let g = `<path d="M${px - Lr * Math.sin(1.05)} ${py + Lr * Math.cos(1.05)}A${Lr} ${Lr} 0 0 0 ${px + Lr * Math.sin(1.05)} ${py + Lr * Math.cos(1.05)}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    g += `<line x1="${px}" y1="${py}" x2="${bx.toFixed(1)}" y2="${by.toFixed(1)}" ${S('faint', 2)}/><circle cx="${px}" cy="${py}" r="4" ${F('faint')}/>`;
+    g += `<circle cx="${bx.toFixed(1)}" cy="${by.toFixed(1)}" r="14" ${FS(Math.abs(ang) > .5 ? 'bad-soft' : 'glow-soft', Math.abs(ang) > .5 ? 'bad' : 'glow', 2)}/>`;
+    g += `<circle cx="${px}" cy="${py + Lr}" r="4" ${F('good')}/>` + TX(px, py + Lr + 30, 'the middle', 'good', 11, 'middle');
+    g += wrap(nw ? 54 : 110, H - 30, TP[ti][1], nw ? 12 : 18, 14, 'muted', 11.5) + wrap(W - (nw ? 54 : 110), H - 30, TP[ti][2], nw ? 12 : 18, 14, 'muted', 11.5);
+    el.innerHTML = g;
+  });
+  stat();
+}
+
+/* ---------- 19: two ways of seeing ---------- */
+{ const MO = [
+    ['A colleague snaps at you', ['He\'s rude and always has been. He thinks he\'s better than everyone.', 'He\'s under pressure and slept badly. Snapping is what he does when he\'s scared of falling behind.']],
+    ['Your teenager slams the door', ['Ungrateful. After everything I do.', 'They\'re overwhelmed and don\'t have the words for it yet. The slam is the words.']],
+    ['A driver cuts in front of you', ['Selfish idiot.', 'Maybe late for something that matters to them, maybe just distracted. Same as I\'ve been.']],
+    ['You make a big mistake at work', ['I\'m useless. Everyone will see it now.', 'A person doing their best got it wrong. Fix it, learn, and be as kind to yourself as to a friend.']] ];
+  let mi = 0, love = false; const el = $('#leSvg');
+  $('#lePick').innerHTML = MO.map((m, i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${m[0]}</button>`).join('');
+  $('#leMode').innerHTML = '<button class="btn" type="button" data-m="0" aria-pressed="true">Judging eyes</button><button class="btn" type="button" data-m="1" aria-pressed="false">Loving eyes</button>';
+  $$('#lePick [data-p]').forEach(b => b.addEventListener('click', () => { press($$('#lePick [data-p]'), b); mi = +b.dataset.p; draw(); }));
+  $$('#leMode [data-m]').forEach(b => b.addEventListener('click', () => { press($$('#leMode [data-m]'), b); love = b.dataset.m === '1'; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 600, H = 170, cx = W / 2, cy = H / 2, c = love ? 'glow' : 'bad', open = love ? 46 : 20; vb(el, W, H);
+    let g = '';
+    if (love) for (let k = 0; k < 12; k++){ const an = k * Math.PI / 6; g += `<line x1="${(cx + 100 * Math.cos(an)).toFixed(1)}" y1="${(cy + 64 * Math.sin(an)).toFixed(1)}" x2="${(cx + 130 * Math.cos(an)).toFixed(1)}" y2="${(cy + 80 * Math.sin(an)).toFixed(1)}" ${S('glow', 1.5, ';stroke-opacity:.45;stroke-linecap:round')}/>`; }
+    g += `<path d="M${cx - 92} ${cy}Q${cx} ${cy - open * 2} ${cx + 92} ${cy}Q${cx} ${cy + open * 2} ${cx - 92} ${cy}Z" ${FS('panel', c, 2)}/>`;
+    g += `<circle cx="${cx}" cy="${cy}" r="${love ? 30 : 16}" ${F(c, .35)}/><circle cx="${cx}" cy="${cy}" r="${love ? 13 : 9}" ${F(c)}/>`;
+    if (!love) g += `<path d="M${cx - 70} ${cy - 46}L${cx - 20} ${cy - 30}M${cx + 70} ${cy - 46}L${cx + 20} ${cy - 30}" ${S('bad', 3, ';stroke-linecap:round')}/>`;
+    el.innerHTML = g;
+    $('#leK').textContent = love ? 'Loving eyes' : 'Judging eyes'; $('#leH').textContent = MO[mi][0]; $('#leP').textContent = MO[mi][1][love ? 1 : 0] + (love ? ' You still deal with it, without closing.' : ' And you close around it.');
+  });
+  draw();
+}
+
+/* ---------- afterword: letting-go log ---------- */
+{ let log = store.get('us-log', []);
+  const W = { r: 'Relaxed and let it pass', l: 'Caught it late, then let go', h: 'Held on this time' };
+  function render(){
+    const list = $('#lgList');
+    list.innerHTML = log.length ? log.slice().reverse().slice(0, 12).map((e, k) => `<div class="lg-item"><span class="k ${e.w}">${new Date(e.d).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})} · ${W[e.w]}</span><p>${esc(e.t)}</p><button type="button" data-del="${log.length - 1 - k}">Remove</button></div>`).join('')
+      : '<p class="empty">Nothing logged yet. Next time you feel something tighten and you catch it, write one line here.</p>';
+    list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { log.splice(+b.dataset.del, 1); store.set('us-log', log); render(); }));
+    const wk = Date.now() - 7 * 864e5;
+    $('#lgN').textContent = log.length; $('#lgR').textContent = log.filter(e => e.w !== 'h').length; $('#lg7').textContent = log.filter(e => e.d > wk).length;
+  }
+  $('#lgAdd').addEventListener('click', () => { const t = $('#lgT').value.trim(); if (!t){ $('#lgT').focus(); return; } log.push({ t, w: $('#lgW').value, d: Date.now() }); store.set('us-log', log); $('#lgT').value = ''; render(); });
+  $('#lgT').addEventListener('keydown', e => { if (e.key === 'Enter') $('#lgAdd').click(); });
+  $('#lgClr').addEventListener('click', () => { if (log.length && confirm('Clear your whole letting-go log?')){ log = []; store.set('us-log', log); render(); } });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
