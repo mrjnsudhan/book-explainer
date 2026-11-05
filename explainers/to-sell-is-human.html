@@ -1,0 +1,1296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>To Sell Is Human, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, a try-it step, plain words, quick check), grouped into the book's three parts.
+   Dark-first: midnight navy with a warm tomato accent (the seller) and a teal second series (the buyer); light mode is warm paper. */
+:root{
+  color-scheme: dark;
+  --ink:#0F1424;--panel:#161D31;--panel-2:#1E2740;--line:#2D3852;--text:#F2F1EC;--muted:#AEB4C4;--faint:#7E869A;
+  --glow:#FF8A5B;--glow-soft:rgba(255,138,91,.11);--hl:rgba(255,138,91,.26);--cool:#6FC9C3;--cool-soft:rgba(111,201,195,.1);
+  --good:#8FD97A;--good-soft:rgba(143,217,122,.1);--bad:#FF6F7D;--bad-soft:rgba(255,111,125,.12);
+  --soft:#D7DAE3;--deep:#0A0E1A;--toc-bg:rgba(22,29,49,.74);--glow-line:rgba(255,138,91,.36);--cool-line:rgba(111,201,195,.3);--on-glow:#2A0E00;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F3EC;--panel:#FFFDF8;--panel-2:#EDE8DD;--line:#DAD3C4;--text:#161B2B;--muted:#535A6B;--faint:#83889A;
+  --glow:#B4441C;--glow-soft:rgba(180,68,28,.06);--hl:#F8DCCD;--cool:#1C6F6A;--cool-soft:rgba(28,111,106,.07);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8263A;--bad-soft:rgba(184,38,58,.07);
+  --soft:#283043;--deep:#FBF9F4;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,68,28,.28);--cool-line:rgba(28,111,106,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F3EC;--panel:#FFFDF8;--panel-2:#EDE8DD;--line:#DAD3C4;--text:#161B2B;--muted:#535A6B;--faint:#83889A;
+  --glow:#B4441C;--glow-soft:rgba(180,68,28,.06);--hl:#F8DCCD;--cool:#1C6F6A;--cool-soft:rgba(28,111,106,.07);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8263A;--bad-soft:rgba(184,38,58,.07);
+  --soft:#283043;--deep:#FBF9F4;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,68,28,.28);--cool-line:rgba(28,111,106,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- To Sell Is Human additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.abc{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.abc-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.abc-top .mono{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+.abc-stage{padding:10px 10px 0}
+.abc-stage svg{display:block;width:100%;height:auto;max-width:380px;margin:0 auto}
+.abc-ctl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 14px;align-items:center;padding:8px 16px 14px;font-size:13px;color:var(--muted)}
+.abc-ctl output{font-family:var(--f-mono);color:var(--text);margin-left:6px}
+.abc .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.abc .cap b{color:var(--glow);font-weight:600}
+.abc .cap a{color:var(--glow)}
+.field label output{font-family:var(--f-mono);color:var(--text);float:right}
+.field label output.over{color:var(--bad)}
+.field input[type=range]{padding:0;border:0;background:transparent}
+.field textarea{min-height:150px;font-size:14.5px;line-height:1.5}
+.kit{display:grid;gap:8px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.kit-h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.kit-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15}
+.kit-h .mono{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.kit dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;font-size:14.5px}
+.kit dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--glow);padding-top:3px}
+.kit dd{color:var(--soft);white-space:pre-line;overflow-wrap:anywhere}
+.kit .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.kit .rm:hover{color:var(--bad)}
+.frame-card{display:grid;gap:8px;margin:16px 18px 0;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.frame-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.frame-card .ad{font-family:var(--f-display);font-size:clamp(21px,2.6vw,26px);line-height:1.22}
+.frame-card .ramp{font-size:14.5px;color:var(--good);border-top:1px dashed var(--line);padding-top:8px}
+.frame-card .why{font-size:14px;color:var(--muted)}
+.checks{display:grid;gap:6px;padding:0;list-style:none;font-size:14px}
+.checks li{display:flex;gap:10px;align-items:baseline;color:var(--muted)}
+.checks li::before{content:"";flex:0 0 10px;height:10px;border-radius:50%;border:1.5px solid var(--faint);transform:translateY(1px)}
+.checks li.ok{color:var(--text)}
+.checks li.ok::before{background:var(--good);border-color:var(--good)}
+.say{display:grid;gap:6px;padding:14px 16px;border-radius:12px;background:var(--deep);border:1px solid var(--line)}
+.say .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cool)}
+.say p{font-size:15.5px;color:var(--soft)}
+.say.me .who{color:var(--glow)}
+.convo{display:grid;gap:10px;padding:16px 18px}
+.convo .opts3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.convo .opts3 .btn{text-align:left;border-radius:12px;padding:10px 12px;line-height:1.35;white-space:normal}
+.lab-ctl .lbl2{font-size:13px;color:var(--muted)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .frame-card{margin:12px 12px 0;padding:14px} .convo{padding:14px} .kit dl{grid-template-columns:minmax(0,1fr)} .kit dt{padding-top:6px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Daniel H. Pink's book</div>
+    <h1><em>To Sell Is Human</em>,<br>Explained</h1>
+    <p class="lede">Daniel Pink's argument is that almost all of us are in sales now, even if nobody calls it that. Teachers, nurses, engineers, parents and founders spend a large part of every day trying to move other people to give up something they have in exchange for something we offer. <b>To Sell Is Human</b> explains why this kind of selling has changed, and what works now that buyers know as much as sellers do. This guide takes the introduction and all nine chapters, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>The old ABC was <em>Always Be Closing</em>. The new ABC is <em>Attunement, Buoyancy, Clarity</em>, and the goal is to serve, not to trick.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you trying to get better at?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="abc" style="margin:0" aria-label="Rate yourself on the new ABC of moving people">
+        <div class="abc-top"><span>Your new ABC</span><span class="mono" id="abcSum"></span></div>
+        <div class="abc-stage"><svg id="abcSvg" viewBox="0 0 360 250" role="img" aria-label="A triangle showing your ratings for attunement, buoyancy and clarity"></svg></div>
+        <div class="abc-ctl">
+          <label for="abcA">Attunement <output id="oabcA"></output></label><input type="range" id="abcA" min="1" max="5" step="1" value="3">
+          <label for="abcB">Buoyancy <output id="oabcB"></output></label><input type="range" id="abcB" min="1" max="5" step="1" value="4">
+          <label for="abcC">Clarity <output id="oabcC"></output></label><input type="range" id="abcC" min="1" max="5" step="1" value="2">
+        </div>
+        <div class="cap" id="abcCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapters 1 to 3</span><span class="q">Rebirth of a Salesman</span><span class="d">Why we're all in sales, and why buyers now hold the cards</span></a>
+      <a href="#part2"><span class="n">Chapters 4 to 6</span><span class="q">How to Be</span><span class="d">Attunement, buoyancy and clarity: the new ABC</span></a>
+      <a href="#part3"><span class="n">Chapters 7 to 9</span><span class="q">What to Do</span><span class="d">Pitch, improvise and serve</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2012</span>
+      <span><b>Author</b> Daniel H. Pink, author of <i>Drive</i> and <i>A Whole New Mind</i>, and a former speechwriter</span>
+      <span><b>Full title</b> To Sell Is Human: The Surprising Truth About Moving Others</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 10 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== REBIRTH OF A SALESMAN ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · rebirth of a salesman</span>
+      <h2>Rebirth of a Salesman</h2>
+      <p>Pink opens by widening the meaning of selling. Only about one American worker in nine has a sales job, but nearly everyone else spends a big share of the day persuading, influencing and convincing. He calls this non-sales selling, explains the three forces that spread it to almost every job, and shows why the old image of the slick, pushy salesman belongs to a world where the seller knew more than the buyer.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Selling is no longer a separate profession. It is part of most work, and it now happens in a world where buyers can check everything.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · We're all selling</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most of us spend a large part of each working day trying to move other people, persuading a colleague, a client, a boss or a child. That is selling, even when nobody calls it that.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Selling, broadly.</b> Pink defines selling as persuading, influencing and convincing others to part with something they have, such as money, time, attention or effort, in exchange for what you offer. By that definition almost everyone sells.</span></li>
+          <li><span><b>Non-sales selling.</b> A teacher getting a class to care about fractions, a developer convincing the team to change an approach, a doctor getting a patient to take the pills. None of them has a sales title, and all of them are selling.</span></li>
+          <li><span><b>Two kinds of selling.</b> Traditional sales means getting someone to make a purchase. Non-sales selling has no money changing hands, but it works on the same people, with the same psychology.</span></li>
+          <li><span><b>The question of the book.</b> If we all sell, what actually works now? Pink draws on social science and on people who do it well to answer three things: why selling has changed, how to be, and what to do.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>To find out how much time people really spend moving others, Pink worked with the research firm Qualtrics on a survey called "What Do You Do at Work?". More than nine thousand full-time workers described their days. On average, people said about 40 percent of their time at work went on non-sales selling: persuading, influencing and convincing people in ways that didn't involve a purchase. That is around 24 minutes of every hour. They also rated this part of the job as crucial to their success.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: the selling in your hour</div><div class="hint">Pick a job, then make your own guess</div></div>
+        <div class="stage"><svg id="hr1" role="img" aria-label="A clock face showing how one working hour splits into tasks, with the moving-people tasks highlighted"></svg></div><div class="lab-ctl"><div class="row" id="hrJobs"></div><div class="ctl"><label for="hrMine">My own guess: minutes an hour spent moving people <output id="ohrMine"></output></label><input type="range" id="hrMine" min="0" max="60" step="1" value="15"></div></div><div class="stats"><div class="stat"><span class="k">Moving people in this job</span><span class="v glow" id="hrMove"></span></div><div class="stat"><span class="k">Survey average</span><span class="v" id="hrAvg">about 24 min</span></div><div class="stat"><span class="k">Your guess</span><span class="s" id="hrSay"></span></div></div><p class="callout">The job splits are invented examples. The 24-minute figure is the average from Pink's survey. <b>Count meetings, emails and chats where you were trying to get someone to say yes.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>For one day, put a tick on a sticky note every time you try to get someone to do, agree to or believe something. Count them in the evening.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Selling isn't only what people in sales do. Whenever you try to get someone to give their time, attention or effort to your idea, you're selling, and most of us do it for close to half the day.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: We're all in sales now →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The last Fuller Brush man</div>
+        <h2>We're All in Sales Now</h2>
+        <div class="short"><span class="lbl">In short</span><p>The traditional salesman is fading, but selling isn't. About one American worker in nine works in sales, and almost all the other eight spend much of their day selling something too.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>One in nine.</b> Government figures Pink cites put roughly one in nine American workers in a sales job, from shop staff to account managers. The share is similar in other rich countries.</span></li>
+          <li><span><b>The other eight.</b> For everyone else, selling hides inside the job. People pitch ideas in meetings, convince suppliers to deliver early, and talk patients or students into doing what's good for them.</span></li>
+          <li><span><b>It's not optional.</b> In Pink's survey, people rated moving others as one of the most important parts of their work, even though most had never been trained in it.</span></li>
+          <li><span><b>A new picture.</b> The image of the lone door-to-door salesman is out of date. Selling today is something we all do, every day, mostly without a commission.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pink tracks down Norman Hall, believed to be the last Fuller Brush salesman in San Francisco. The Fuller Brush Company, founded by Alfred Fuller in 1906, once had thousands of men going door to door with brushes, mops and cleaning products. Hall had been at it for decades, walking the same hilly streets every day, getting turned away again and again and coming back the next morning. Pink uses him as a symbol of a kind of selling that is fading, even as selling of another kind spreads to everybody else.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: is this selling?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down the three people you most need to move this month, and what you need each of them to give: money, time, attention or effort.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Only a small share of people have sales jobs, but almost everyone spends their day trying to move others. That makes selling a skill for everyone, not a niche.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Entrepreneurship, elasticity, ed-med →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Why selling spread</div>
+        <h2>Entrepreneurship, Elasticity, and Ed-Med</h2>
+        <div class="short"><span class="lbl">In short</span><p>Three trends pulled selling into nearly every job: more people working for themselves or in tiny firms, jobs that stretch across many skills, and the growth of education and health care.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Entrepreneurship.</b> Cheap tools, online marketplaces such as Etsy and funding sites such as Kickstarter make it easy to start something small. In a company of one or five, everyone has to sell.</span></li>
+          <li><span><b>Elasticity.</b> Even in big organisations, roles stretch. An engineer who once only wrote code is now asked to present to customers and win over other teams. Some software firms, such as Atlassian at the time, grew large with no traditional sales team at all, because everyone helped persuade.</span></li>
+          <li><span><b>Ed-Med.</b> Education and health care became the biggest and fastest-growing sources of jobs. Teachers and clinicians spend their days moving people: getting students to learn and patients to change how they live.</span></li>
+          <li><span><b>The result.</b> Put these together and the line between sales and everything else blurs. Selling becomes a basic part of work rather than a department.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pink points to companies that grew without the usual sales force. The Australian software firm Atlassian was a well-known case at the time: it sold its tools to developers mostly through its website and word of mouth, without a team of traditional salespeople. Selling didn't disappear there. It was spread across everyone, from the engineers who made the product easy to try to the support staff who turned users into fans.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: shrink the team</div><div class="hint">Drag the team size down and watch who has to sell</div></div>
+        <div class="stage"><svg id="tm3" role="img" aria-label="A team of people, each carrying the jobs assigned to them, with the jobs that involve moving people highlighted"></svg></div><div class="lab-ctl"><div class="ctl"><label for="tmN">People in the team <output id="otmN"></output></label><input type="range" id="tmN" min="1" max="12" step="1" value="12"></div></div><div class="stats"><div class="stat"><span class="k">Jobs per person</span><span class="v" id="tmJobs"></span></div><div class="stat"><span class="k">People who have to move others</span><span class="v glow" id="tmSell"></span></div><div class="stat"><span class="k">What it feels like</span><span class="s" id="tmSay"></span></div></div><p class="callout">Twelve jobs are shared out between the team. The ones in orange involve moving people: customers, investors, recruits or partners. <b>The smaller the team, the more of them land on everyone.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Look at your own job description. Underline every line that only works if someone else says yes to you.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Selling spread because more people work in small outfits, because jobs now stretch across many skills, and because the biggest employers are schools and hospitals, where moving people is the job.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Seller beware →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · When buyers know as much as sellers</div>
+        <h2>From Caveat Emptor to Caveat Venditor</h2>
+        <div class="short"><span class="lbl">In short</span><p>Sales got a bad name in a world where the seller knew far more than the buyer. Now that buyers can look up almost anything, that gap has closed, and the rule has flipped from buyer beware to seller beware.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What people think of sales.</b> Pink asked people for the first word that came to mind when they thought of sales. The most common was "pushy", and most of the rest were negative too.</span></li>
+          <li><span><b>Information asymmetry.</b> That reputation grew up when the seller had information the buyer didn't. If you can't check a used car's history, the seller can tell you anything, and the sleazy salesman can win.</span></li>
+          <li><span><b>The gap closed.</b> The internet gave buyers reviews, price comparisons and vehicle-history reports. When both sides know roughly the same, trickery stops paying.</span></li>
+          <li><span><b>Seller beware.</b> In the old world it was caveat emptor, let the buyer beware. Now it is caveat venditor, let the seller beware: a seller who misleads gets found out and talked about.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In 1970 the economist George Akerlof published a paper called "The Market for 'Lemons'". Its idea was simple: when buyers can't tell good used cars from bad ones, they offer only an average price, owners of good cars refuse to sell, and the market fills up with lemons. Several leading journals rejected the paper as too trivial or obvious before it was published. It went on to help win Akerlof a share of the Nobel Prize in economics in 2001. Pink uses it to explain why selling got its sleazy image, and why that image no longer fits.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: the market for lemons</div><div class="hint">Set how much buyers can check, then run the market</div></div>
+        <div class="stage"><svg id="lm4" role="img" aria-label="A grid of used cars from lemons to good cars, showing which owners stay in the market at the price buyers offer"></svg></div><div class="lab-ctl"><div class="ctl"><label for="lmInfo">How much buyers can check before they buy <output id="olmInfo"></output></label><input type="range" id="lmInfo" min="0" max="100" step="10" value="0"></div><div class="row"><button class="btn primary" id="lmGo" type="button">Run one more round</button><button class="btn" id="lmReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Round</span><span class="v" id="lmRound"></span></div><div class="stat"><span class="k">Cars still for sale</span><span class="v glow" id="lmLeft"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="lmSay"></span></div></div><p class="callout">A simple model of Akerlof's idea. Each round buyers offer what the average car still on sale is worth to them, mixed with what they can check about each car. Owners won't sell for less than their own car is worth. <b>With nothing to check, the good cars leave first.</b></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Pink's argument isn't that information asymmetry has vanished. Doctors, mechanics and financial advisers can still know far more than we do. It's that in most everyday markets the gap is much smaller than it was, and the balance of power has shifted toward the buyer.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next pitch, assume the other person has already searched for everything about it. What would they have found, and what would you need to say differently?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Selling got its bad reputation when sellers knew more than buyers. Now buyers can check nearly everything, so honesty and real help work better than tricks.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Attunement →</a></div>
+    </section>
+    <!-- ===================== HOW TO BE ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · how to be</span>
+      <h2>How to Be</h2>
+      <p>If the old motto was Always Be Closing, Pink offers a new ABC: three qualities that help anyone move others. Attunement is seeing the situation from the other person's side. Buoyancy is staying afloat in an ocean of rejection. Clarity is helping people see their situation in a fresh way and find problems they didn't know they had.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Moving people starts with who you are in the conversation: tuned in, resilient, and clear.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Seeing it from their side</div>
+        <h2>Attunement</h2>
+        <div class="short"><span class="lbl">In short</span><p>Attunement means bringing your actions and outlook into harmony with other people and the situation you're in. Pink gives three rules for it, and shows that the best sellers are neither loud extraverts nor quiet introverts but somewhere in between.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Increase your power by reducing it.</b> In a study led by Adam Galinsky, people who were first made to feel powerful were much more likely, when asked to draw a capital E on their own forehead, to draw it so they could read it, rather than so someone facing them could. Power makes us worse at seeing other people's point of view.</span></li>
+          <li><span><b>Use your head as much as your heart.</b> In negotiation experiments, people asked to imagine what the other side was thinking found deals more often than people asked to imagine what the other side was feeling. Empathy matters, but perspective-taking works better for finding a solution.</span></li>
+          <li><span><b>Mimic strategically.</b> People who subtly mirrored the other side's phrases and posture reached more deals in negotiation studies, and waiters who repeated orders back word for word got bigger tips. The key word is subtly: obvious copying backfires.</span></li>
+          <li><span><b>Be an ambivert.</b> Adam Grant studied call-centre sales reps and found that the people who brought in the most revenue weren't the strongest extraverts. They were ambiverts, near the middle of the scale, who could talk and also listen.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In Galinsky's experiment, one group of people first wrote about a time they'd had power over someone; another group wrote about a time someone had power over them. Then each person was asked to draw a capital letter E on their own forehead with a marker. People in the high-power group were about three times as likely to draw it the way they themselves would read it, so it appeared backwards to anyone looking at them. A small task, but a telling one: feeling powerful made them forget that someone else was looking.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the ambivert curve</div><div class="hint">Slide from introvert to extravert</div></div>
+        <div class="stage"><svg id="am5" role="img" aria-label="A curve of sales by personality, rising from introverts to a peak among ambiverts and falling for strong extraverts"></svg></div><div class="lab-ctl"><div class="ctl"><label for="amX">Where you sit on the scale <output id="oamX"></output></label><input type="range" id="amX" min="1" max="7" step="0.5" value="2"></div></div><div class="stats"><div class="stat"><span class="k">Type</span><span class="v glow" id="amType"></span></div><div class="stat"><span class="k">Relative sales in the model</span><span class="v" id="amRev"></span></div><div class="stat"><span class="k">How it tends to go</span><span class="s" id="amSay"></span></div></div><p class="callout">The shape follows Grant's finding. The heights are illustrative. <b>Most people are ambiverts, which means most of us are already built for this.</b></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Grant's study was of one call centre over three months. Later research has supported the idea that moderate extraversion tends to do best in sales, but the gap between types is smaller than popular retellings sometimes suggest.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>In your next meeting, before you speak, ask yourself what the other person is thinking, not only what they're feeling. Then mirror one phrase they used, once, without making a show of it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Get in tune with the other person: step down from your power, think about their thinking, and mirror them gently. You don't need to be loud to do it well.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Buoyancy →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Staying afloat in an ocean of rejection</div>
+        <h2>Buoyancy</h2>
+        <div class="short"><span class="lbl">In short</span><p>Anyone who tries to move people meets a lot of no. Buoyancy is the quality that keeps you afloat, and Pink breaks it into what to do before, during and after an attempt.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Before: ask, don't tell.</b> Instead of the classic pep talk, "I can do this", ask yourself "Can I do this?". In a study by Ibrahim Senay and colleagues, people who asked themselves "Will I?" solved more anagrams than people who told themselves "I will". A question makes you rehearse the reasons and the plan.</span></li>
+          <li><span><b>During: keep positivity high.</b> Pink draws on Barbara Fredrickson's work: positive emotions widen what we notice and help us bounce back. People who flourish have far more positive than negative moments, though not wall-to-wall cheer.</span></li>
+          <li><span><b>After: explain it well.</b> Martin Seligman found that how you explain a setback matters. Optimists see a rejection as temporary, specific and not all about them. Pessimists see it as permanent, pervasive and personal.</span></li>
+          <li><span><b>Not blind optimism.</b> Pink is careful: buoyancy isn't pretending everything is fine. Some negative feeling helps you learn. The aim is to stay realistic and keep going.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the 1980s the insurance company MetLife was losing huge numbers of new sales agents, who quit after the endless rejections of selling life insurance. Martin Seligman gave applicants a test of explanatory style alongside the usual industry test. MetLife then hired a special group who had failed the industry test but scored high on optimism. Those agents outsold the pessimists among the regular hires, and the gap widened in their second year. How they explained a no turned out to matter more than the usual measure of aptitude.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: explain the rejection</div><div class="hint">Flip each switch and read what you'd tell yourself</div></div>
+        <div class="stage"><svg id="bu6" role="img" aria-label="A buoy floating higher or lower depending on how you explain a rejection"></svg></div><div class="lab-ctl"><div class="row" id="buCase"></div><div class="row" id="buDials"></div><div class="say me"><span class="who">What you tell yourself</span><p id="buSelf"></p></div></div><div class="stats"><div class="stat"><span class="k">Style</span><span class="v glow" id="buStyle"></span></div><div class="stat"><span class="k">Likely next move</span><span class="s" id="buNext"></span></div></div><p class="callout">Seligman's three questions: is it permanent, is it pervasive, is it personal? <b>A buoyant explanation is honest, but it doesn't make one no into a life sentence.</b></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Pink cites a specific "positivity ratio" of about three positive emotions to one negative as a tipping point for flourishing. In 2013, the year after the book came out, the mathematical model behind that exact figure was shown to be flawed, and Fredrickson withdrew the precise number. Her broader finding, that positive emotions help people cope and recover, still stands.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next difficult ask, sit for a moment and ask yourself, "Can I do this?" Then answer with three specific reasons why you can.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>To keep going in the face of no, question yourself before, keep your positive moments flowing during, and afterwards explain a setback as temporary, limited and not all your fault.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Clarity →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Finding the right problem</div>
+        <h2>Clarity</h2>
+        <div class="short"><span class="lbl">In short</span><p>When information is everywhere, the valuable skill isn't giving answers, it is helping people see their situation clearly and find the problem they actually have. Then frame the offer well and give them an easy way to act.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Problem finding beats problem solving.</b> In a classic study of art students, Jacob Getzels and Mihaly Csikszentmihalyi found that those who spent longest exploring, rearranging and changing what to draw produced the work experts rated most original, and were more successful years later. Finding the problem was the creative act.</span></li>
+          <li><span><b>Curate.</b> When buyers can find any information themselves, the seller's value shifts to sorting it: pointing out what matters and what doesn't, and asking questions that surface the hidden need.</span></li>
+          <li><span><b>Five frames.</b> Pink lists frames that change how an offer lands: less (fewer options), experience (what they'll do, not just own), label (what the situation is called), blemish (a small drawback stated after strengths) and potential (what something could become).</span></li>
+          <li><span><b>Give an off-ramp.</b> Clarity isn't only about the why. People also need the how: a clear, specific next step. Without it, even persuaded people don't act.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the 1960s Howard Leventhal at Yale gave seniors a booklet about tetanus and urged them to get a free jab at the campus health centre. Some booklets were frightening, with vivid photos; others were mild. The scary version changed what students said they'd do, but hardly anyone acted. What made the difference was a map of the campus with the health centre circled and its opening hours listed. Among those who got the map, 28 percent went for the shot; among those who didn't, 3 percent. Pink calls that kind of practical push an off-ramp.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: frame the offer</div><div class="hint">Try the same offer in five frames</div></div>
+        <div class="row" style="padding:16px 18px 0" id="frBtns"></div><div class="frame-card" aria-live="polite"><span class="k" id="frK"></span><p class="ad" id="frAd"></p><p class="ramp" id="frRamp" hidden></p><p class="why" id="frWhy"></p></div><div class="lab-ctl" style="border-top:0"><label class="tg"><input type="checkbox" id="frOff"><span>Add an off-ramp: a clear, specific next step</span></label></div><p class="callout">The offer is a weekend bread-baking course. The wording is ours; the frames and research are the ones Pink describes. <b>Switch the off-ramp on: it is the line that turns interest into action.</b></p>
+      </figure>
+      <div class="note"><span class="lbl">Worth knowing</span><p>The "less" frame often comes with the famous jam study, where shoppers offered 6 jams bought far more often than those offered 24. Later reviews of many choice-overload studies found the effect is real in some settings but small or absent in others, depending on how familiar and complex the choice is.</p></div>
+      <div class="try"><span class="lbl">Try it this week</span><p>Next time someone asks you for help, spend the first few minutes asking questions to find the real problem before suggesting anything. Finish by naming one specific next step.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Help people find the real problem, show them only what matters, frame it so they see it fresh, and always tell them exactly how to take the next step.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Pitch →</a></div>
+    </section>
+    <!-- ===================== WHAT TO DO ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · what to do</span>
+      <h2>What to Do</h2>
+      <p>With the qualities in place, Pink turns to three skills. Pitch, because attention is short and the elevator pitch is out of date. Improvise, because conversations rarely go to plan. And serve, because the point of moving someone is to leave them, and the world, better off.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Have a short, sharp pitch, be ready to build on whatever comes back, and make the exchange worth it for the other person.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Six successors to the elevator pitch</div>
+        <h2>Pitch</h2>
+        <div class="short"><span class="lbl">In short</span><p>The elevator pitch was built for a world of captive listeners. Attention is shorter now, so Pink offers six alternatives, each designed to get the other person to engage, not just to listen.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Why a pitch at all.</b> A pitch isn't meant to close the deal. Its job is to start a conversation, to get the other person to join in and help shape the idea.</span></li>
+          <li><span><b>One word, a question, a rhyme.</b> The one-word pitch distils the idea, like a campaign built on "Forward". The question pitch invites people to argue with themselves and works best when your case is strong. The rhyming pitch is easier to remember, and studies found rhyming sayings are even judged more true.</span></li>
+          <li><span><b>A subject line and a tweet.</b> Emails get opened for utility or curiosity, and specific beats vague. The Twitter pitch has to say something worth reading in 140 characters, often by asking or engaging rather than broadcasting.</span></li>
+          <li><span><b>The Pixar pitch.</b> Borrowed from Pixar story artist Emma Coats: Once upon a time… Every day… One day… Because of that… Because of that… Until finally… It forces your idea into a story with change in it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the 1980 presidential debate, with the economy struggling, Ronald Reagan closed by asking voters a question: were they better off than they were four years ago? He could have listed statistics about inflation and jobs. Instead, the question made each viewer run the numbers on their own life, and reach the answer themselves. Pink uses it to show why a question can beat a statement: people believe the reasons they come up with more than the reasons they are given, provided the facts are on your side.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: test your subject line</div><div class="hint">Type a subject line and watch the checks</div></div>
+        <div class="fields" style="border-bottom:0"><div class="field" style="grid-column:1/-1"><label for="slIn">Your email subject line <output id="oslIn"></output></label><input id="slIn" maxlength="120" value="Quick question"></div><div class="row" style="grid-column:1/-1" id="slEx"></div></div><div class="lab-ctl"><ul class="checks" id="slChecks"></ul></div><div class="stats"><div class="stat"><span class="k">Strength</span><span class="v glow" id="slScore"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="slSay"></span></div></div><p class="callout">The checks follow the advice Pink gives: be useful or spark curiosity, and be specific. <b>Curiosity works best when people already know you, or when the line also hints at what's in it for them.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Take something you need to propose this week and write it as a one-word pitch and a question pitch. Use whichever one makes a friend ask "tell me more".</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't recite a speech. Write a short pitch that gets the other person thinking and talking: a word, a question, a rhyme, a subject line, a tweet or a six-line story.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Improvise →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Yes, and</div>
+        <h2>Improvise</h2>
+        <div class="short"><span class="lbl">In short</span><p>Even the best pitch meets objections and surprises. Pink borrows three rules from improvisational theatre for handling the conversation once it leaves the script.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Hear offers.</b> In improv, everything your partner says or does is an offer you can build on. Listening for offers, rather than waiting for your turn, changes what you hear. An objection can be an offer in disguise.</span></li>
+          <li><span><b>Say "Yes, and".</b> "Yes, but" shuts an idea down. "Yes, and" accepts what's there and adds to it. It doesn't mean agreeing with everything; it means building rather than blocking.</span></li>
+          <li><span><b>Make your partner look good.</b> Good improvisers try to make the other person shine. In selling, that means aiming for an outcome both sides feel good about, rather than winning the exchange.</span></li>
+          <li><span><b>Planned, then not.</b> Preparation still matters. Improvisation is what you do with it once the other person responds in a way you didn't expect.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pink takes part in a workshop run by Cathy Salit, a former improv performer whose company teaches businesspeople to use improvisation. In one exercise, pairs plan a party together, first by answering every suggestion with "Yes, but", then with "Yes, and". The "but" version stalls almost at once: each idea gets a reason it won't work. The "and" version builds into something lively and odd, and both partners leave it feeling more involved. The point lands quickly once you feel it in your own conversation.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: yes, but or yes, and</div><div class="hint">Answer each offer and watch the idea grow or shrink</div></div>
+        <div class="stage"><svg id="ya8" role="img" aria-label="A stack of blocks showing how far a shared idea has been built"></svg></div><div class="convo" id="yaBox" aria-live="polite"></div><p class="callout">The conversation is invented: a colleague pitching a team offsite. <b>Notice that "yes, and" doesn't mean agreeing to everything. You can add a condition and still build.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>For one day, catch yourself before you say "Yes, but". Replace it with "Yes, and" and see what happens to the conversation.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a conversation goes off-script, listen for what the other person is offering, build on it with "yes, and", and aim for a result that makes them look good too.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Serve →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Upserve, don't upsell</div>
+        <h2>Serve</h2>
+        <div class="short"><span class="lbl">In short</span><p>The best reason to move someone is to make their life better. Pink argues that service, making it personal and making it purposeful, is not only right but effective.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Make it personal.</b> When an Israeli radiologist, Yehonatan Turner, attached a photo of the patient to their scans, radiologists wrote longer reports and caught more problems they hadn't been asked to look for. Seeing a face reminded them a person was on the other end.</span></li>
+          <li><span><b>Make it purposeful.</b> Adam Grant found that people work harder for others than for themselves. In one hospital, a sign at the soap dispenser saying hand hygiene protects patients raised soap and gel use far more than one saying it protects you.</span></li>
+          <li><span><b>Servant selling.</b> Robert Greenleaf's idea of servant leadership, that a leader serves first, applies to selling too. Pink's version: upserve, don't upsell. Do more for the person than they expected.</span></li>
+          <li><span><b>Two questions.</b> Before trying to move anyone, ask: if they agree, will their life improve? And when the exchange is over, will the world be better than when you began? If not, you're doing it wrong.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At a university fundraising call centre, Grant split callers into groups before their shifts. One group read nothing new. A second read stories from former callers about how the job had helped their own careers. A third read stories from students whose scholarships had been paid for by the money these calls raised. In the following weeks, the first two groups performed about the same. The third group, who had seen whom their work helped, raised more than twice as much in pledges and money. Purpose did what self-interest didn't.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the purpose effect</div><div class="hint">Pick what callers read, then what the sign says</div></div>
+        <div class="stage"><svg id="sv9" role="img" aria-label="Two bar charts: fundraising by what callers read, and hand hygiene by what the sign says"></svg></div><div class="lab-ctl"><div><span class="lbl2">Before their shift, the callers read</span><div class="row" id="svCall" style="margin-top:8px"></div></div><div><span class="lbl2">The sign by the soap dispenser says</span><div class="row" id="svSign" style="margin-top:8px"></div></div></div><div class="stats"><div class="stat"><span class="k">Money raised vs no story</span><span class="v glow" id="svMoney"></span></div><div class="stat"><span class="k">Soap and gel use vs the "you" sign</span><span class="v" id="svSoap"></span></div></div><p class="callout">The bar heights are illustrative and follow the size of the effects Pink reports: more than double for the scholarship stories, and roughly 45 percent more soap and gel for the patients sign. <b>The patients sign changed only one word.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next request, answer Pink's two questions in writing: will this person's life be better if they say yes, and will the world be? If either answer is shaky, change the offer.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Move people for their sake, not just yours. Picture the person, remind yourself whom the work helps, and aim to leave them better off than they expected.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#after">Next: your pitch kit →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your pitch kit</h2>
+      <p class="big">Pick one thing you need to move someone on this month: an idea, a project, a hire, a request. Write it six ways, the way chapter 7 suggests, and keep the versions that sound like you.</p>
+      <figure class="lab" id="kit">
+        <div class="lab-top"><div class="t">Six pitches for one idea</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="kWhat">What I'm pitching, and to whom</label><input id="kWhat" maxlength="120" placeholder="e.g. A four-day trial week for my team, to my manager"></div>
+          <div class="field"><label for="kWord">One word</label><input id="kWord" maxlength="30" placeholder="e.g. Focus"></div>
+          <div class="field"><label for="kQ">A question</label><input id="kQ" maxlength="140" placeholder="e.g. When did we last ship anything on a Friday?"></div>
+          <div class="field"><label for="kRhyme">A rhyme</label><input id="kRhyme" maxlength="100" placeholder="e.g. Fewer days, better ways"></div>
+          <div class="field" style="grid-column:1/-1"><label for="kSubj">An email subject line</label><input id="kSubj" maxlength="90" placeholder="e.g. Trial: 4-day week for six weeks, starting 1 March"></div>
+          <div class="field" style="grid-column:1/-1"><label for="kTweet">A Twitter pitch <output id="okTweet">0 / 140</output></label><input id="kTweet" maxlength="200" placeholder="Under 140 characters, so it has to be sharp"></div>
+          <div class="field" style="grid-column:1/-1"><label for="kPixar">A Pixar pitch</label><textarea id="kPixar" rows="6" maxlength="900">Once upon a time ...
+Every day, ...
+One day ...
+Because of that, ...
+Because of that, ...
+Until finally ...</textarea></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="kAdd" type="button">Save to my kit</button><span class="tip" id="kMsg"></span></div>
+        </div>
+        <div class="out" id="kList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Part one</span><b>We're all in sales</b><span>About two-fifths of work time goes on moving people, and buyers now know as much as sellers.</span></div>
+        <div><span class="n">Attunement</span><b>See it their way</b><span>Lower your power, take their perspective, and mimic gently.</span></div>
+        <div><span class="n">Buoyancy</span><b>Stay afloat</b><span>Ask yourself questions, keep positivity flowing, and explain setbacks as temporary, specific and external.</span></div>
+        <div><span class="n">Clarity</span><b>Find the real problem</b><span>Curate, frame it well, and give people an off-ramp to act.</span></div>
+        <div><span class="n">What to do</span><b>Pitch and improvise</b><span>Six short pitches, then hear offers, say "yes, and" and make your partner look good.</span></div>
+        <div><span class="n">Serve</span><b>Upserve, don't upsell</b><span>Make it personal and purposeful. Leave the person and the world better off.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>To Sell Is Human: The Surprising Truth About Moving Others</i> by Daniel H. Pink (2012). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book or a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Rebirth of a salesman", "How to be", "What to do"];
+const CH = [["Introduction", "We're all selling", 0, "Introduction"], ["We're All in Sales Now", "We're all in sales now", 0, "Chapter 1"], ["Entrepreneurship, Elasticity, and Ed-Med", "Entrepreneurship, elasticity, ed-med", 0, "Chapter 2"], ["From Caveat Emptor to Caveat Venditor", "Seller beware", 0, "Chapter 3"], ["Attunement", "Attunement", 1, "Chapter 4"], ["Buoyancy", "Buoyancy", 1, "Chapter 5"], ["Clarity", "Clarity", 1, "Chapter 6"], ["Pitch", "Pitch", 2, "Chapter 7"], ["Improvise", "Improvise", 2, "Chapter 8"], ["Serve", "Serve", 2, "Chapter 9"]];
+const QUIZ = {
+"1": {
+"q": "What does Pink mean by non-sales selling?",
+"o": [
+"Selling a product without saying the price",
+"Persuading and influencing people when no purchase is involved",
+"Selling through a website instead of a person"
+],
+"a": 1,
+"w": "It is the persuading, influencing and convincing we do at work and at home when nobody is buying anything."
+},
+"2": {
+"q": "Roughly what share of American workers have a traditional sales job, according to the figures Pink uses?",
+"o": [
+"About one in two",
+"About one in nine",
+"About one in fifty"
+],
+"a": 1,
+"w": "About one in nine. Pink's point is that the other eight sell too, just without the title."
+},
+"3": {
+"q": "What does Pink mean by elasticity?",
+"o": [
+"Prices that move with demand",
+"Jobs stretching to include many skills, including selling",
+"Workers moving from city to city"
+],
+"a": 1,
+"w": "Elastic jobs stretch across specialities. An engineer now designs, presents and persuades as well as builds."
+},
+"4": {
+"q": "What happens in Akerlof's market for lemons when buyers can't tell good cars from bad?",
+"o": [
+"Prices rise until good cars sell",
+"Owners of good cars leave, so mostly lemons are left",
+"Every car sells at a fair price"
+],
+"a": 1,
+"w": "Buyers will only pay an average price, which is too little for good cars. Their owners pull out, the average drops, and the market fills with lemons."
+},
+"5": {
+"q": "What did Grant's call-centre study find about extraverts?",
+"o": [
+"The strongest extraverts sold the most",
+"Introverts sold the most",
+"Ambiverts, near the middle, sold the most"
+],
+"a": 2,
+"w": "Ambiverts did best. They can talk with energy and also hold back and listen."
+},
+"6": {
+"q": "Which explanation of a rejection is the buoyant one?",
+"o": [
+"\"I'm hopeless at this and always will be.\"",
+"\"Their budget was frozen this quarter; next quarter could be different.\"",
+"\"Nobody ever wants anything I offer.\""
+],
+"a": 1,
+"w": "It is temporary (this quarter), specific (one budget) and external (not a verdict on you), the three marks of an optimistic explanatory style."
+},
+"7": {
+"q": "What was the off-ramp in Leventhal's tetanus study?",
+"o": [
+"A more frightening booklet",
+"A campus map with the health centre circled and its hours",
+"A free gift for getting the shot"
+],
+"a": 1,
+"w": "The map and opening hours made the next step concrete. Fear changed intentions; the off-ramp changed behaviour."
+},
+"8": {
+"q": "When does a question pitch work better than a statement?",
+"o": [
+"When your arguments are strong",
+"When your arguments are weak",
+"Always, regardless of the arguments"
+],
+"a": 0,
+"w": "A question makes people work through the reasons themselves. If the reasons are good, that persuades; if they're weak, it backfires."
+},
+"9": {
+"q": "What does \"yes, and\" ask you to do?",
+"o": [
+"Agree with everything the other person says",
+"Accept what's offered and build on it",
+"Stall until you can make your own point"
+],
+"a": 1,
+"w": "It means accepting the offer as a starting point and adding to it, rather than blocking it. You can still add conditions or concerns."
+},
+"10": {
+"q": "Which hand-hygiene sign worked better in Grant's hospital study?",
+"o": [
+"\"Hand hygiene prevents you from catching diseases\"",
+"\"Hand hygiene prevents patients from catching diseases\"",
+"Both worked the same"
+],
+"a": 1,
+"w": "Changing \"you\" to \"patients\" connected the action to the people it served, and soap and gel use went up noticeably."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0f1424';
+try { const t = localStorage.getItem('tsh-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('tsh-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('tsh-done', []));
+const save = () => store.set('tsh-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const btnRow = (box, items, cur, attr = 'data-k') => { box.innerHTML = items.map((t, i) => `<button class="btn" type="button" ${attr}="${i}" aria-pressed="${i === cur}">${t}</button>`).join(''); return [...box.querySelectorAll(`[${attr}]`)]; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I don\'t think of myself as a salesperson', 1, 'Non-sales selling', 'If you spend part of your day persuading, influencing or convincing, you sell. For most people that\'s around two-fifths of the working day.'],
+    ['My job keeps stretching into new things', 3, 'Elasticity', 'Jobs now stretch across skills, and moving people is one of them. Small teams make it everyone\'s job.'],
+    ['Selling feels pushy and sleazy', 4, 'Seller beware', 'That image comes from a world where sellers knew more than buyers. Now buyers can check, so honesty wins.'],
+    ['I struggle to see things from their side', 5, 'Attunement', 'Lower your sense of power, ask what they\'re thinking, and mirror them gently.'],
+    ['Rejection knocks me flat', 6, 'Buoyancy', 'Ask yourself "Can I?" beforehand, and explain a no as temporary, specific and not all about you.'],
+    ['People agree with me but never act', 7, 'Clarity and off-ramps', 'Help them find the real problem, frame it well, and give a clear, specific next step.'],
+    ['My pitch goes on too long', 8, 'Six pitches', 'Try one word, a question, a rhyme, a subject line, a tweet or a six-line Pixar story.'],
+    ['Conversations go off-script', 9, 'Improvise', 'Hear the offer, answer with "yes, and", and make your partner look good.'],
+    ['I want it to be about more than the sale', 10, 'Serve', 'Make it personal and purposeful. Ask whether their life, and the world, will be better if they say yes.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3] === CH[n - 1][0] ? CH[n - 1][0] : CH[n - 1][3] + ' · ' + CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the new ABC triangle ---------- */
+{ const svg = $('#abcSvg'), ins = ['A', 'B', 'C'].map(k => $('#abc' + k)), cap = $('#abcCap'), sum = $('#abcSum');
+  const NAMES = ['Attunement', 'Buoyancy', 'Clarity'], CHN = [5, 6, 7];
+  const TIPS = ['Before your next ask, picture the conversation from the other person\'s chair. What are they thinking about?', 'Before your next ask, say "Can I do this?" and answer with three reasons. Afterwards, explain any no as temporary and specific.', 'Before your next ask, spend longer on the question than the answer, and end with one concrete next step.'];
+  const CX = 180, CY = 138, R = 96, ANG = [-90, 30, 150].map(a => a * Math.PI / 180);
+  const pt = (i, r) => [CX + r * Math.cos(ANG[i]), CY + r * Math.sin(ANG[i])];
+  const poly = rs => rs.map((r, i) => pt(i, r).map(v => v.toFixed(1)).join(' ')).join(' ');
+  function draw(){
+    const v = ins.map(x => +x.value); ins.forEach((x, i) => out('abc' + 'ABC'[i], v[i] + ' / 5'));
+    let g = '';
+    for (let k = 1; k <= 5; k++) g += `<polygon points="${poly([0, 1, 2].map(() => R * k / 5))}" ${S('line', k === 5 ? 1.4 : 1)}/>`;
+    for (let i = 0; i < 3; i++){ const [x, y] = pt(i, R); g += `<line x1="${CX}" y1="${CY}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S('line', 1)}/>`; }
+    g += `<polygon points="${poly(v.map(x => R * x / 5))}" ${FS('glow', 'glow', 2, .22)}/>`;
+    v.forEach((x, i) => { const [px, py] = pt(i, R * x / 5); g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="5" ${F('glow')}/>`; });
+    const L = [[CX, 26, 'middle'], [CX + R * .87 + 10, CY + R / 2 + 22, 'end'], [CX - R * .87 - 10, CY + R / 2 + 22, 'start']];
+    L.forEach(([x, y, a], i) => { g += TX(x, y, `<tspan font-weight="600">${'ABC'[i]}</tspan> ${NAMES[i]}`, 'text', 13, a); });
+    svg.innerHTML = g;
+    const lo = Math.min(...v), weak = v.indexOf(lo), tot = v.reduce((a, b) => a + b, 0);
+    sum.textContent = `${tot} of 15`;
+    cap.innerHTML = lo === Math.max(...v) ? `<b>Evenly balanced.</b> ${lo >= 4 ? 'You\'re in good shape on all three. Part three is about what to do with them.' : 'Pick one of the three to work on first; each has its own chapter.'} <a href="#part2">See the new ABC →</a>`
+      : `<b>Work on ${NAMES[weak].toLowerCase()} first.</b> ${TIPS[weak]} <a href="#ch${CHN[weak]}">Chapter ${CHN[weak] - 1} →</a>`;
+  }
+  ins.forEach(x => x.addEventListener('input', draw)); draw();
+}
+
+/* ---------- intro: the selling in your hour ---------- */
+{ const JOBS = [
+    ['Teacher', [['Teaching and explaining', 22, 1], ['Getting students to do the work', 8, 1], ['Marking', 12, 0], ['Planning lessons', 10, 0], ['Talking with parents', 4, 1], ['Admin', 4, 0]]],
+    ['Engineer', [['Writing code', 26, 0], ['Code review debates', 8, 1], ['Agreeing an approach', 8, 1], ['Testing', 10, 0], ['Asking other teams for help', 4, 1], ['Email', 4, 0]]],
+    ['Nurse', [['Hands-on care', 24, 0], ['Getting patients to follow the plan', 12, 1], ['Handovers and asking doctors', 6, 1], ['Records', 12, 0], ['Reassuring families', 6, 1]]],
+    ['Manager', [['One-to-ones and coaching', 12, 1], ['Pitching plans upward', 8, 1], ['Meetings to align', 12, 1], ['Reports', 12, 0], ['Hiring', 6, 1], ['Email', 10, 0]]],
+    ['Founder', [['Building the product', 18, 0], ['Pitching investors', 10, 1], ['Talking to customers', 12, 1], ['Recruiting', 8, 1], ['Operations', 12, 0]]],
+    ['Designer', [['Designing', 28, 0], ['Presenting work', 10, 1], ['Feedback rounds', 8, 1], ['Research', 8, 0], ['Admin', 6, 0]]] ];
+  const svg = $('#hr1'), mine = $('#hrMine'); let job = 0;
+  const btns = btnRow($('#hrJobs'), JOBS.map(j => j[0]), 0);
+  btns.forEach(b => b.addEventListener('click', () => { job = +b.dataset.k; press(btns, b); draw(); }));
+  function arc(cx, cy, r0, r1, a0, a1){ const p = (a, r) => [cx + r * Math.sin(a), cy - r * Math.cos(a)].map(v => v.toFixed(1)).join(' ');
+    const lg = a1 - a0 > Math.PI ? 1 : 0; return `M${p(a0, r1)}A${r1} ${r1} 0 ${lg} 1 ${p(a1, r1)}L${p(a1, r0)}A${r0} ${r0} 0 ${lg} 0 ${p(a0, r0)}Z`; }
+  const draw = onLayout(() => {
+    const nar = NARROW(), segs = JOBS[job][1], W = nar ? 360 : 640, H = nar ? 248 + (segs.length + 1) * 26 : 250;
+    vb(svg, W, H);
+    const cx = nar ? 180 : 125, cy = 112, r1 = 96, r0 = 58; let a = 0, g = '', mv = 0;
+    segs.forEach(([t, m, s]) => { const a1 = a + m / 60 * 2 * Math.PI; g += `<path d="${arc(cx, cy, r0, r1, a + .012, a1 - .012)}" ${s ? F('glow', .9) : F('faint', .35)}/>`; a = a1; if (s) mv += m; });
+    const gm = +mine.value * 2 * Math.PI / 60, mx = cx + (r1 + 8) * Math.sin(gm), my = cy - (r1 + 8) * Math.cos(gm), ix = cx + (r0 - 6) * Math.sin(gm), iy = cy - (r0 - 6) * Math.cos(gm);
+    g += `<line x1="${ix.toFixed(1)}" y1="${iy.toFixed(1)}" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}" ${S('cool', 2.5)}/><circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="5" ${F('cool')}/>`;
+    g += TX(cx, cy - 4, mv + ' min', 'text', 22, 'middle', 'font-family="var(--f-display)"') + TX(cx, cy + 16, 'moving people', 'muted', 11.5, 'middle');
+    const lx = nar ? 24 : 270, ly = nar ? 232 : 30;
+    segs.forEach(([t, m, s], i) => { const y = ly + i * (nar ? 26 : 30);
+      g += `<rect x="${lx}" y="${y - 11}" width="14" height="14" rx="3" ${s ? F('glow', .9) : F('faint', .35)}/>` + TX(lx + 24, y + 1, t, s ? 'text' : 'muted', 13.5) + TX(W - 16, y + 1, m + ' min', 'faint', 12.5, 'end'); });
+    g += `<circle cx="${lx + 7}" cy="${(ly + segs.length * (nar ? 26 : 30)) - 4}" r="5" ${F('cool')}/>` + TX(lx + 24, ly + segs.length * (nar ? 26 : 30), 'Your own guess', 'cool', 13);
+    svg.innerHTML = g;
+    out('hrMine', mine.value + ' min');
+    $('#hrMove').textContent = `${mv} min an hour`;
+    const d = +mine.value - 24;
+    $('#hrSay').textContent = Math.abs(d) <= 4 ? 'Right around the survey average.' : d < 0 ? `${-d} minutes under the average. Count again tomorrow: emails and meetings usually hide more than people expect.` : `${d} minutes over the average. Your job leans heavily on moving people.`;
+  });
+  mine.addEventListener('input', draw); draw();
+}
+
+/* ---------- 1: is this selling? ---------- */
+sorter('#sort2', '#tally2', [{ id: 'sale', label: 'Traditional sales', d: 'Someone is asked to buy' }, { id: 'non', label: 'Non-sales selling', d: 'Moving someone, no purchase' }, { id: 'none', label: 'Not really selling', d: 'Nobody is being moved' }], [
+  { t: 'A shop assistant suggests a better pair of running shoes for your stride.', q: true, a: 'sale', w: 'Money will change hands. This is selling in the traditional sense.' },
+  { t: 'A doctor talks a patient into finishing the full course of antibiotics.', q: true, a: 'non', w: 'No purchase, but the doctor is asking the patient to give up time and effort. Classic non-sales selling.' },
+  { t: 'You file your expenses for the month.', q: true, a: 'none', w: 'Necessary, but nobody is being persuaded of anything.' },
+  { t: 'A developer convinces the team to rewrite a slow part of the app.', q: true, a: 'non', w: 'She needs the team to give time and attention to her idea. That is selling without a price tag.' },
+  { t: 'A parent gets a seven-year-old to try one bite of broccoli.', q: true, a: 'non', w: 'Pink would say this is some of the hardest selling there is.' },
+  { t: 'A founder asks an investor for money in exchange for shares.', q: true, a: 'sale', w: 'An exchange of money for something offered: traditional sales, just with shares instead of a product.' },
+  { t: 'A teacher makes a class actually want to learn about volcanoes.', q: true, a: 'non', w: 'Attention and effort are the currency. Teaching is one of the biggest selling jobs there is.' },
+  { t: 'You read a report on your own, at your desk.', q: true, a: 'none', w: 'Solo work moves nobody. It is the rest of the day where the selling hides.' },
+]);
+
+/* ---------- 2: shrink the team ---------- */
+{ const JOBS = [['Win customers', 1], ['Build the product', 0], ['Pitch investors', 1], ['Support users', 0], ['Recruit', 1], ['Accounts', 0], ['Design', 0], ['Win partners', 1], ['Marketing', 1], ['Plan the roadmap', 0], ['Legal', 0], ['Run the office', 0]];
+  const svg = $('#tm3'), nI = $('#tmN');
+  const draw = onLayout(() => {
+    const n = +nI.value, nar = NARROW(), W = nar ? 360 : 640, cols = Math.min(n, nar ? 2 : 4), gap = 10, cw = (W - gap * (cols + 1)) / cols;
+    const per = Array.from({ length: n }, () => []); JOBS.forEach((j, i) => per[i % n].push(j));
+    const rows = Math.ceil(n / cols); let y = gap, g = '', sellers = 0;
+    for (let r = 0; r < rows; r++){
+      const rowP = per.slice(r * cols, r * cols + cols), hmax = Math.max(...rowP.map(p => p.length)) * 22 + 40;
+      rowP.forEach((p, c) => { const x = gap + c * (cw + gap), mv = p.some(j => j[1]); if (mv) sellers++;
+        g += `<rect x="${x}" y="${y}" width="${cw}" height="${hmax}" rx="10" ${FS('panel-2', mv ? 'glow-line' : 'line', 1)}/>`;
+        g += `<circle cx="${x + 18}" cy="${y + 17}" r="7" ${F(mv ? 'glow' : 'faint', mv ? 1 : .6)}/>` + TX(x + 32, y + 21, 'Person ' + (r * cols + c + 1), 'muted', 12);
+        p.forEach((j, k) => { const yy = y + 34 + k * 22;
+          g += `<rect x="${x + 8}" y="${yy}" width="${cw - 16}" height="18" rx="5" ${j[1] ? F('glow', .2) : F('line', .5)}/>` + TX(x + 16, yy + 13, j[0], j[1] ? 'glow' : 'soft', 12); }); });
+      y += hmax + gap;
+    }
+    vb(svg, W, y); svg.innerHTML = g;
+    out('tmN', n); $('#tmJobs').textContent = (12 / n) % 1 ? `${Math.floor(12 / n)} to ${Math.ceil(12 / n)}` : 12 / n;
+    $('#tmSell').textContent = `${sellers} of ${n}`;
+    $('#tmSay').textContent = n >= 10 ? 'Like a big firm: sales is a department and most people never pitch anyone.' : n >= 5 ? 'Like a growing startup: jobs stretch, and most people now move someone as part of the job.' : n > 1 ? 'Like a tiny business: every person sells, whatever their title.' : 'A company of one: you are the sales team, and everything else too.';
+  });
+  nI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 3: the market for lemons ---------- */
+{ const svg = $('#lm4'), info = $('#lmInfo'), N = 24, Q = Array.from({ length: N }, (_, i) => Math.round(2 + i * 96 / (N - 1)));
+  let on, round, offers;
+  const reset = () => { on = Q.map(() => true); round = 0; offers = null; draw(); say(); };
+  function step(){
+    const inf = +info.value / 100, live = Q.filter((_, i) => on[i]); if (!live.length) return;
+    const avg = live.reduce((a, b) => a + b, 0) / live.length;
+    offers = Q.map(q => 1.2 * (inf * q + (1 - inf) * avg));
+    let left = 0; Q.forEach((q, i) => { if (on[i] && offers[i] < q){ on[i] = false; left++; } });
+    round++; draw(); say(left, avg);
+  }
+  const draw = onLayout(() => {
+    const nar = NARROW(), cols = nar ? 6 : 12, W = nar ? 360 : 640, cw = (W - 20) / cols, ch = 54, rows = N / cols, H = rows * ch + 46;
+    vb(svg, W, H); let g = '';
+    Q.forEach((q, i) => { const x = 10 + (i % cols) * cw, y = 10 + Math.floor(i / cols) * ch, w = cw - 8, live = on[i];
+      const col = q < 34 ? 'bad' : q < 67 ? 'cool' : 'good';
+      g += `<g ${live ? '' : 'opacity=".28"'}><rect x="${x + 4}" y="${y + 12}" width="${w}" height="16" rx="5" ${live ? F(col, .85) : S('faint', 1)}/><path d="M${x + 4 + w * .22} ${y + 12}L${x + 4 + w * .32} ${y + 3}H${x + 4 + w * .68}L${x + 4 + w * .78} ${y + 12}Z" ${live ? F(col, .55) : S('faint', 1)}/><circle cx="${x + 4 + w * .25}" cy="${y + 29}" r="4.2" ${F('text', live ? .8 : .4)}/><circle cx="${x + 4 + w * .75}" cy="${y + 29}" r="4.2" ${F('text', live ? .8 : .4)}/>`;
+      g += TX(x + 4 + w / 2, y + 47, q, live ? 'muted' : 'faint', 11, 'middle') + '</g>'; });
+    const ly = H - 12;
+    [['bad', 'Lemon'], ['cool', 'So-so'], ['good', 'Good car']].forEach(([c, t], k) => { const x = 14 + k * (nar ? 100 : 120);
+      g += `<rect x="${x}" y="${ly - 10}" width="12" height="12" rx="3" ${F(c, .85)}/>` + TX(x + 18, ly, t, 'muted', 12); });
+    g += TX(W - 12, ly, 'number = what the car is worth to its owner', 'faint', 11, 'end');
+    if (nar) g = g.replace('number = what the car is worth to its owner', 'number = owner\'s value');
+    svg.innerHTML = g;
+  });
+  function say(left, avg){
+    const n = on.filter(Boolean).length; out('lmInfo', info.value + '%');
+    $('#lmRound').textContent = round; $('#lmLeft').textContent = `${n} of ${N}`;
+    const s = $('#lmSay');
+    if (!round){ s.textContent = 'Every owner is ready to sell. Run a round to see what buyers offer.'; return; }
+    if (left) s.textContent = `Buyers offered about ${Math.round(1.2 * avg * (1 - info.value / 100))} a car${+info.value ? ', plus extra for what they could check' : ''}, so ${left} owner${left > 1 ? 's' : ''} of the better cars refused and left.`;
+    else s.textContent = +info.value >= 70 ? 'Nobody left. Buyers can see quality, so good cars get good prices and the market holds.' : n ? 'The market has settled, but look how few good cars are still on offer.' : 'The market has emptied.';
+  }
+  $('#lmGo').addEventListener('click', step); $('#lmReset').addEventListener('click', reset);
+  info.addEventListener('input', reset); reset();
+}
+
+/* ---------- 4: the ambivert curve ---------- */
+{ const svg = $('#am5'), xI = $('#amX');
+  const f = x => .62 + .48 * Math.exp(-Math.pow(x - 4.1, 2) / (2 * 1.35 * 1.35));
+  const AVG = (() => { let s = 0; for (let i = 0; i <= 60; i++) s += f(1 + i * .1); return s / 61; })();
+  const draw = onLayout(() => {
+    const nar = NARROW(), W = nar ? 360 : 640, H = nar ? 250 : 260, L = 34, R = W - 16, T = 24, B = H - 52;
+    const X = x => L + (x - 1) / 6 * (R - L), Y = v => B - (v - .5) / .65 * (B - T);
+    vb(svg, W, H); let g = '';
+    g += `<rect x="${X(3)}" y="${T - 10}" width="${X(5) - X(3)}" height="${B - T + 10}" rx="8" ${F('glow', .07)}/>` + TX((X(3) + X(5)) / 2, T + 4, 'ambiverts', 'glow', 12, 'middle');
+    g += `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${Y(AVG)}" x2="${R}" y2="${Y(AVG)}" ${S('faint', 1, ';stroke-dasharray:4 4')}/>` + TX(R, Y(AVG) - 6, 'average', 'faint', 11, 'end');
+    let d = ''; for (let i = 0; i <= 60; i++){ const x = 1 + i * .1; d += (i ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(f(x)).toFixed(1); }
+    g += `<path d="${d}" ${S('cool', 3)}/>`;
+    const x = +xI.value; g += `<line x1="${X(x)}" y1="${Y(f(x))}" x2="${X(x)}" y2="${B}" ${S('glow', 1.5, ';stroke-dasharray:3 3')}/><circle cx="${X(x)}" cy="${Y(f(x))}" r="8" ${FS('glow', 'ink', 2)}/>`;
+    g += TX(L, B + 22, 'Introvert', 'muted', 12.5) + TX(R, B + 22, 'Extravert', 'muted', 12.5, 'end') + TX((L + R) / 2, B + 40, 'Revenue per hour (illustrative)', 'faint', 11, 'middle');
+    svg.innerHTML = g;
+    const type = x < 3 ? 'Introvert' : x <= 5 ? 'Ambivert' : 'Extravert';
+    out('amX', x.toFixed(1)); $('#amType').textContent = type; $('#amRev').textContent = (f(x) / AVG * 100).toFixed(0) + '% of average';
+    $('#amSay').textContent = type === 'Introvert' ? 'A careful listener, but may hold back from asking, pressing or closing.' : type === 'Extravert' ? 'Plenty of energy, but can talk too much, push too hard and miss what the buyer is saying.' : 'Knows when to speak up and when to listen: attunement comes naturally.';
+  });
+  xI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: explain the rejection ---------- */
+{ const CASES = [
+    ['A client says no', [['I\'ll never land a client like this.', 'It wasn\'t the right moment for them.'], ['I\'m bad at selling, full stop.', 'This pitch didn\'t fit this client.'], ['It\'s because I\'m not good enough.', 'Their budget and timing were against it.']]],
+    ['Your proposal is turned down', [['My ideas never get through.', 'This round, the timing was off.'], ['Nobody here rates anything I do.', 'This proposal needed a stronger cost case.'], ['I\'m just not a persuasive person.', 'The committee had three other priorities this month.']]],
+    ['A friend won\'t join your project', [['People will always say no to me.', 'They\'re overloaded right now.'], ['I can\'t get anyone to back anything.', 'This project isn\'t their kind of thing.'], ['They don\'t like me.', 'They\'ve got a new baby and no spare evenings.']]] ];
+  const DIMS = [['Permanent', 'Temporary'], ['Pervasive', 'Specific'], ['Personal', 'External']];
+  let cs = 0, st = [0, 0, 0];
+  const svg = $('#bu6'); vb(svg, 640, 150);
+  const cb = btnRow($('#buCase'), CASES.map(c => c[0]), 0);
+  cb.forEach(b => b.addEventListener('click', () => { cs = +b.dataset.k; press(cb, b); draw(); }));
+  $('#buDials').innerHTML = DIMS.map((d, i) => `<div class="moves" role="group" aria-label="${d[0]} or ${d[1]}">${d.map((t, k) => `<button class="btn" type="button" data-d="${i}" data-v="${k}" aria-pressed="${k === 0}">${t}</button>`).join('')}</div>`).join('');
+  $$('#buDials [data-d]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.d; st[i] = +b.dataset.v; press($$(`#buDials [data-d="${i}"]`), b); draw(); }));
+  let lvl = 0;
+  function draw(){
+    const k = st.reduce((a, b) => a + b, 0), target = k / 3;
+    $('#buSelf').textContent = st.map((v, i) => CASES[cs][1][i][v]).join(' ');
+    $('#buStyle').textContent = ['Pessimistic', 'Sinking', 'Mostly buoyant', 'Optimistic'][k];
+    $('#buNext').textContent = ['Stop asking. Each no now feels like proof.', 'Hesitate before the next ask, and maybe skip it.', 'Try again, with one doubt in tow.', 'Learn the one specific lesson and make the next ask.'][k];
+    const from = lvl, t0 = performance.now(), dur = RM ? 0 : 500;
+    const frame = now => { const t = dur ? Math.min(1, (now - t0) / dur) : 1; lvl = from + (target - from) * (1 - Math.pow(1 - t, 3)); paint(); if (t < 1) requestAnimationFrame(frame); };
+    requestAnimationFrame(frame);
+  }
+  function paint(){
+    const wy = 92, by = wy + 26 - lvl * 46; let g = '';
+    let w = 'M0 ' + wy; for (let x = 0; x <= 640; x += 20) w += `Q${x + 10} ${wy + (x / 20 % 2 ? 5 : -5)} ${x + 20} ${wy}`; w += 'V150H0Z';
+    g += `<rect x="300" y="${by - 40}" width="40" height="44" rx="10" ${FS('glow', 'ink', 2, .9)}/><rect x="300" y="${by - 26}" width="40" height="10" ${F('text', .85)}/><line x1="320" y1="${by - 40}" x2="320" y2="${by - 60}" ${S('text', 2)}/><circle cx="320" cy="${by - 62}" r="4" ${F('glow')}/>`;
+    g += `<path d="${w}" ${F('cool', .32)}/>`;
+    g += TX(370, 40, lvl > .6 ? 'Floating high' : lvl > .3 ? 'Bobbing' : 'Going under', lvl > .6 ? 'good' : lvl > .3 ? 'text' : 'bad', 14);
+    svg.innerHTML = g;
+  }
+  draw();
+}
+
+/* ---------- 6: frame the offer ---------- */
+{ const FR = [
+    ['Plain', 'No frame', 'Bread-baking course. Saturday and Sunday, 10 till 4. Sourdough, focaccia, rye, brioche, bagels, flatbreads, pizza dough, enriched doughs, gluten-free loaves and more. £180.', 'Everything is listed and nothing is framed. The reader has to do all the work of deciding whether it matters to them.'],
+    ['Less', 'The less frame', 'Two days. Three loaves you\'ll bake for the rest of your life: sourdough, focaccia and a soft sandwich loaf. £180.', 'Fewer options can make a choice feel easier and the offer clearer. Pink pairs this with Sheena Iyengar\'s jam study, where a table of 6 jams sold far more often than a table of 24.'],
+    ['Experience', 'The experience frame', 'Spend a weekend with flour on your hands, pull your own loaf out of the oven on Sunday afternoon, and carry it home still warm. £180.', 'Research by Leaf Van Boven and Thomas Gilovich found that people get more lasting happiness from experiences than from things. Selling the weekend, not the certificate, taps into that.'],
+    ['Label', 'The label frame', 'Join this season\'s Saturday Bakers: twelve people learning together, swapping starters and recipes long after the course ends. £180.', 'Names shape behaviour. In a study by Lee Ross, the same cooperation game was called the Wall Street Game or the Community Game. About a third cooperated in the first; about two-thirds in the second.'],
+    ['Blemish', 'The blemished frame', 'Small classes, an expert baker, all ingredients included and a loaf to take home. One small catch: the kitchen gets very warm by mid-afternoon.', 'A minor drawback mentioned after the strengths can make an offer more appealing, as long as people are skimming rather than analysing. It reads as honest, and it makes the positives stand out.'],
+    ['Potential', 'The potential frame', 'Most people who finish this course could be baking better bread than their local bakery within a month. £180.', 'Zakary Tormala and colleagues found that people often find potential more interesting than achievement. "Could become" draws attention because it is uncertain, and so worth thinking about.'] ];
+  let f = 0;
+  const bs = btnRow($('#frBtns'), FR.map(x => x[0]), 0), off = $('#frOff');
+  function draw(){ const [, k, ad, why] = FR[f]; $('#frK').textContent = k; $('#frAd').textContent = ad; $('#frWhy').textContent = why;
+    const r = $('#frRamp'); r.hidden = !off.checked; r.textContent = 'Next course: 14 and 15 March, four places left. Reply to this email with "Saturday Bakers" and we\'ll hold one for you.'; }
+  bs.forEach(b => b.addEventListener('click', () => { f = +b.dataset.k; press(bs, b); draw(); }));
+  off.addEventListener('change', draw); draw();
+}
+
+/* ---------- 7: subject line tester ---------- */
+{ const inp = $('#slIn'), list = $('#slChecks');
+  const EX = ['Quick question', 'Proposal: cut our cloud bill 30% by June', 'Why our best customers left in March', 'Following up'];
+  $('#slEx').innerHTML = '<span class="tip">Try:</span>' + EX.map((e, i) => `<button class="btn" type="button" data-e="${i}">${esc(e)}</button>`).join('');
+  $$('#slEx [data-e]').forEach(b => b.addEventListener('click', () => { inp.value = EX[+b.dataset.e]; draw(); }));
+  const UTIL = /\b(how|save|saves|cut|cuts|plan|proposal|agenda|decision|decide|review|deadline|by|free|guide|tips|steps|results|report|budget|invite|offer|fix|faster|cheaper|trial|draft|summary|notes|for)\b|:/i;
+  const CUR = /\?|\b(why|what|who|when|which|surprising|secret|unexpected|the one|mistake|you)\b/i;
+  const SPEC = /\d|\b(mon|tues|wednes|thurs|fri|satur|sun)day\b|\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\b|[A-Z][a-z]+ [A-Z]/;
+  const VAGUE = /^(hi|hello|hey|quick question|update|following up|follow up|touching base|checking in|catch up|important|fyi|re:?)[.!\s]*$/i;
+  function draw(){
+    const s = inp.value.trim(), words = s ? s.split(/\s+/).length : 0;
+    const C = [
+      ['Useful: it says what the reader gets or must do', UTIL.test(s)],
+      ['Curious: it opens a question the reader wants answered', CUR.test(s)],
+      ['Specific: a number, date, name or concrete detail', SPEC.test(s)],
+      ['Short: about 3 to 9 words', words >= 3 && words <= 9],
+      ['Not a generic opener such as "Quick question" or "Following up"', s.length > 0 && !VAGUE.test(s)] ];
+    list.innerHTML = C.map(([t, ok]) => `<li class="${ok ? 'ok' : ''}">${t}</li>`).join('');
+    const n = C.filter(c => c[1]).length; out('slIn', `${s.length} characters`);
+    $('#slScore').textContent = `${n} of 5`;
+    $('#slSay').textContent = !s ? 'Type something.' : n >= 4 ? 'Strong. Someone who doesn\'t know you would still have a reason to open it.' : n >= 3 ? 'Decent. Add a concrete detail or say what\'s in it for them.' : 'Easy to skip. Say what it\'s about, and why it matters to the reader.';
+  }
+  inp.addEventListener('input', draw); draw();
+}
+
+/* ---------- 8: yes, but or yes, and ---------- */
+{ const T = [
+    ['What if we did the team offsite somewhere outdoors this year?', 'Yes, but the weather is a gamble.', 'Yes, and let\'s pick a place with a big indoor room in case it rains.', 'Outdoors, with a rain plan'],
+    ['We could get everyone to cook dinner together.', 'Yes, but half the team can\'t cook.', 'Yes, and we\'ll pair the cooks with the people who can\'t, so everyone learns something.', 'Cook-together dinner'],
+    ['Maybe a short session on next year\'s plans in the morning?', 'Yes, but nobody wants work at an offsite.', 'Yes, and keep it to an hour so the rest of the day feels like a break.', 'One-hour plan session'],
+    ['Could we invite a customer to talk to us?', 'Yes, but that\'s a lot of organising.', 'Yes, and I\'ll ask the one who sent us that long feedback email.', 'A customer\'s story'],
+    ['I\'ll put a rough plan in a doc tomorrow.', 'Yes, but let\'s not rush it.', 'Yes, and I\'ll add a budget so we can take it to the boss on Friday.', 'Plan and budget by Friday'] ];
+  const svg = $('#ya8'), box = $('#yaBox'); let i = 0, picks = [];
+  const draw = onLayout(() => {
+    const nar = NARROW(), W = nar ? 360 : 640, H = 230, bw = nar ? 250 : 300, x0 = (W - bw) / 2; vb(svg, W, H);
+    let g = `<line x1="${x0 - 30}" y1="${H - 14}" x2="${x0 + bw + 30}" y2="${H - 14}" ${S('line', 2)}/>`, y = H - 14;
+    picks.forEach((p, k) => { if (p){ y -= 38; g += `<rect x="${x0}" y="${y}" width="${bw}" height="34" rx="7" ${FS('glow', 'ink', 1.5, .25 + k * .12)}/>` + TX(W / 2, y + 22, T[k][3], 'text', 13.5, 'middle'); }
+      else { g += `<g transform="translate(${x0 + bw + (nar ? -30 : 50) - k * 8} ${H - 34}) rotate(${-12 + k * 9})"><rect width="44" height="16" rx="4" ${F('bad', .35)}/></g>`; } });
+    const ands = picks.filter(Boolean).length;
+    if (!picks.length) g += TX(W / 2, H - 60, 'The shared idea builds here', 'faint', 13, 'middle');
+    g += TX(14, 22, `Idea built: ${ands} of ${T.length}`, 'muted', 12.5) + TX(W - 14, 22, `Ideas blocked: ${picks.length - ands}`, picks.length - ands ? 'bad' : 'faint', 12.5, 'end');
+    svg.innerHTML = g;
+  });
+  function show(){
+    draw();
+    if (i >= T.length){ const ands = picks.filter(Boolean).length;
+      box.innerHTML = `<div class="say"><span class="who">How it went</span><p>${ands === T.length ? 'The offsite plan is built, and your colleague walks away feeling it was half your idea. That is "make your partner look good" in action.' : ands >= 3 ? 'Mostly built. The "but"s didn\'t kill it, but each one cost energy and the plan has gaps.' : 'The plan never really got off the ground. Each "yes, but" gave your colleague one more reason to stop offering ideas.'}</p></div><div class="row"><button class="btn primary" type="button" id="yaAgain">Play again</button></div>`;
+      $('#yaAgain').addEventListener('click', () => { i = 0; picks = []; show(); }); return; }
+    const [o, b, a] = T[i], flip = Math.random() < .5;
+    const opts = flip ? [[a, 1], [b, 0]] : [[b, 0], [a, 1]];
+    box.innerHTML = `<div class="say"><span class="who">Your colleague · offer ${i + 1} of ${T.length}</span><p>"${o}"</p></div><div class="opts3">${opts.map(([t, v]) => `<button class="btn" type="button" data-v="${v}">"${t}"</button>`).join('')}</div>`;
+    box.querySelectorAll('[data-v]').forEach(btn => btn.addEventListener('click', () => { picks.push(+btn.dataset.v === 1); i++; show(); }));
+  }
+  show();
+}
+
+/* ---------- 9: the purpose effect ---------- */
+{ const CALL = [['No story', 1, 'baseline'], ['Stories about personal benefit', 1.04, 'about the same'], ['Stories from scholarship students', 2.2, 'more than 2×']], SIGN = [['"…prevents you from catching diseases"', 1, 'baseline'], ['"…prevents patients from catching diseases"', 1.45, 'about +45%']];
+  let c = 2, s = 1; const svg = $('#sv9');
+  const cb = btnRow($('#svCall'), CALL.map(x => x[0]), c, 'data-c'), sb = btnRow($('#svSign'), SIGN.map(x => x[0].replace(/"/g, '')), s, 'data-s');
+  cb.forEach(b => b.addEventListener('click', () => { c = +b.dataset.c; press(cb, b); draw(); }));
+  sb.forEach(b => b.addEventListener('click', () => { s = +b.dataset.s; press(sb, b); draw(); }));
+  const draw = onLayout(() => {
+    const nar = NARROW(), W = nar ? 360 : 640, H = nar ? 440 : 230; vb(svg, W, H); let g = '';
+    const chart = (x0, y0, w, h, title, data, sel, labels, max) => {
+      g += TX(x0, y0 + 14, title, 'muted', 12.5);
+      const bw = (w - (data.length - 1) * 14) / data.length, base = y0 + h - 34;
+      data.forEach(([, v, lab], k) => { const bh = v / max * (h - 80), x = x0 + k * (bw + 14), on = k === sel;
+        g += `<rect x="${x}" y="${base - bh}" width="${bw}" height="${bh}" rx="6" ${on ? F('glow', .9) : F('faint', .3)}/>` + TX(x + bw / 2, base - bh - 8, lab, on ? 'glow' : 'faint', 12.5, 'middle');
+        g += wrap(x + bw / 2, base + 16, labels[k], Math.max(10, Math.floor(bw / 7)), 13, on ? 'text' : 'muted', 11.5); });
+      g += `<line x1="${x0}" y1="${base}" x2="${x0 + w}" y2="${base}" ${S('line', 1)}/>`;
+    };
+    if (nar){ chart(12, 6, W - 24, 210, 'Money raised by callers', CALL, c, ['No story', 'Own benefit', 'Students\' stories'], 2.4); chart(12, 226, W - 24, 210, 'Soap and gel used at the sink', SIGN, s, ['"…you…"', '"…patients…"'], 2.4); }
+    else { chart(14, 6, 360, 220, 'Money raised by callers', CALL, c, ['No story', 'Own benefit', 'Students\' stories'], 2.4); chart(410, 6, 216, 220, 'Soap and gel used at the sink', SIGN, s, ['"…you…"', '"…patients…"'], 2.4); }
+    svg.innerHTML = g;
+    $('#svMoney').textContent = c === 2 ? 'more than double' : c === 1 ? 'about the same' : 'baseline';
+    $('#svSoap').textContent = s ? 'about 45% more' : 'baseline';
+  });
+  draw();
+}
+
+/* ---------- afterword: pitch kit ---------- */
+{ const K = 'tsh-kit', ids = ['kWhat', 'kWord', 'kQ', 'kRhyme', 'kSubj', 'kTweet', 'kPixar'], LBL = ['', 'One word', 'Question', 'Rhyme', 'Subject line', 'Twitter', 'Pixar'];
+  const tw = $('#kTweet'), o = $('#okTweet'), PIX = $('#kPixar').value;
+  const cnt = () => { o.textContent = `${tw.value.length} / 140`; o.classList.toggle('over', tw.value.length > 140); };
+  tw.addEventListener('input', cnt); cnt();
+  function render(){ const all = store.get(K, []), box = $('#kList');
+    box.innerHTML = all.length ? all.map((k, i) => `<div class="kit"><div class="kit-h"><b>${esc(k.kWhat || 'Untitled pitch')}</b><span class="mono">${esc(k.date)}</span><button class="rm" type="button" data-rm="${i}" aria-label="Delete this pitch">×</button></div><dl>${ids.slice(1).filter(id => k[id] && k[id] !== PIX).map(id => `<dt>${LBL[ids.indexOf(id)]}</dt><dd>${esc(k[id])}</dd>`).join('')}</dl></div>`).join('')
+      : '<p class="tip">Your saved pitches will appear here.</p>';
+    box.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { const a = store.get(K, []); a.splice(+b.dataset.rm, 1); store.set(K, a); render(); }));
+  }
+  $('#kAdd').addEventListener('click', () => {
+    const k = {}; ids.forEach(id => k[id] = $('#' + id).value.trim());
+    if (!ids.slice(1).some(id => k[id] && k[id] !== PIX.trim())){ $('#kMsg').textContent = 'Write at least one pitch first.'; return; }
+    k.date = new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+    const a = store.get(K, []); a.unshift(k); store.set(K, a.slice(0, 30));
+    ids.forEach(id => $('#' + id).value = id === 'kPixar' ? PIX : ''); cnt();
+    $('#kMsg').textContent = 'Saved.'; setTimeout(() => $('#kMsg').textContent = '', 2000); render();
+  });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How Will You Measure Your Life?, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an old brass yardstick on dark oxblood leather. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas,
+   a story from the book, a lab, try it this week, plain words, quick check), grouped by the book's three sections plus intro and epilogue.
+   Dark-first: oxblood ink with a brass accent and a teal second series for family and relationships; light mode is parchment with deep brass and teal. */
+:root{
+  color-scheme: dark;
+  --ink:#1A1113;--panel:#24181B;--panel-2:#302124;--line:#47333A;--text:#F7EFE7;--muted:#C5B4AC;--faint:#917E78;
+  --glow:#E9B65C;--glow-soft:rgba(233,182,92,.1);--hl:rgba(233,182,92,.24);--cool:#6CC7BD;--cool-soft:rgba(108,199,189,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B7A;--bad-soft:rgba(255,139,122,.12);
+  --soft:#E3D7CF;--deep:#120B0D;--toc-bg:rgba(36,24,27,.76);--glow-line:rgba(233,182,92,.36);--cool-line:rgba(108,199,189,.32);--on-glow:#2A1A05;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F1E7;--panel:#FFFFFF;--panel-2:#EEE6D8;--line:#DCD0BE;--text:#24161A;--muted:#5E4E4A;--faint:#8D7F78;
+  --glow:#8A5A0E;--glow-soft:rgba(138,90,14,.06);--hl:#F1E1BF;--cool:#1C6E67;--cool-soft:rgba(28,110,103,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#3A2A2C;--deep:#FBF8F2;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(138,90,14,.32);--cool-line:rgba(28,110,103,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F1E7;--panel:#FFFFFF;--panel-2:#EEE6D8;--line:#DCD0BE;--text:#24161A;--muted:#5E4E4A;--faint:#8D7F78;
+  --glow:#8A5A0E;--glow-soft:rgba(138,90,14,.06);--hl:#F1E1BF;--cool:#1C6E67;--cool-soft:rgba(28,110,103,.07);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#3A2A2C;--deep:#FBF8F2;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(138,90,14,.32);--cool-line:rgba(28,110,103,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- How Will You Measure Your Life additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.ys{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0;align-content:start}
+.ys-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.ys-top output{font-family:var(--f-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.ys-body{padding:12px 16px 4px}
+.ys-body svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+.ys-ctl{display:grid;gap:8px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.ys-say{font-size:14px;color:var(--soft);min-height:2.6em}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.card3.right{border-color:var(--good);background:var(--good-soft)}
+.card3.mid{border-color:var(--cool);background:var(--cool-soft)}
+.card3.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.card3 .tr{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;color:var(--faint)}
+.ledger{display:grid;gap:6px}
+.ledger .empty{color:var(--muted);font-size:14px}
+.ledger label{display:flex;gap:10px;align-items:flex-start;padding:8px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--soft)}
+.ledger label input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto;margin-top:2px}
+.ledger label span{flex:1;min-width:0}
+.ledger label b{color:var(--text);font-weight:500}
+.ledger label i{font-style:normal;display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+.ledger label.done span{text-decoration:line-through;text-decoration-color:var(--faint)}
+.ledger button{font:inherit;font-size:12px;border:0;background:none;color:var(--faint);cursor:pointer;padding:2px 4px}
+.ledger button:hover{color:var(--bad)}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:760px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.card1 .big1{font-family:var(--f-display);font-size:clamp(24px,3vw,30px);line-height:1.2}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.plan div{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--soft)}
+.plan div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.slid{display:grid;gap:6px}
+.slid label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.slid label output{font-family:var(--f-mono);color:var(--text)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .ys-body{padding:10px 12px 2px} }
+.ys-ctl .slid label{font-size:13px}
+.ys-ctl input[type=range]{width:100%;accent-color:var(--glow)}
+.lab-ctl .tip{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.pur{display:grid;gap:4px;padding:12px 14px;border-radius:10px;background:var(--panel);border:1px solid var(--line)}
+.pur span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.pur p{font-size:15px;color:var(--text)}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to the book by Clayton M. Christensen, James Allworth and Karen Dillon</div>
+    <h1><em>How Will You Measure Your Life?</em>,<br>Explained</h1>
+    <p class="lede">Clayton Christensen was the Harvard Business School professor behind the theory of disruptive innovation. On the last day of his course he asked students to point the same business theories at their own lives, and in 2010, while being treated for cancer, he turned that class into a famous talk and an essay. <b>How Will You Measure Your Life?</b> is the book that came out of it: what motivates us, why our strategy is where our time goes, how to invest in the people we love, and how good people end up in jail. This guide takes it chapter by chapter, with a lab in each where you can try the idea.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>The theories that explain why good companies fail can help you build a life you'll be proud of, measured by <em>the people you helped</em>.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="ys" style="margin:0" aria-label="Your three questions">
+        <div class="ys-top"><span>The three questions</span><output id="ysV"></output></div>
+        <div class="ys-body"><svg id="ysSvg" viewBox="0 0 340 190" role="img" aria-label="Three yardsticks, one for each of the book's questions, filled to how sure you are"></svg></div>
+        <div class="ys-ctl">
+          <div class="slid"><label for="ys0">I'll be happy in my career <output id="oys0"></output></label><input type="range" id="ys0" min="0" max="10" value="6"></div>
+          <div class="slid"><label for="ys1">My relationships will be a lasting source of happiness <output id="oys1"></output></label><input type="range" id="ys1" min="0" max="10" value="5"></div>
+          <div class="slid"><label for="ys2">I'll stay true to my principles <output id="oys2"></output></label><input type="range" id="ys2" min="0" max="10" value="8"></div>
+          <p class="ys-say" id="ysSay" aria-live="polite"></p>
+        </div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The sections">
+      <a href="#part1"><span class="n">Introduction</span><span class="q">Theories, Not Answers</span><span class="d">The three questions, and why Andy Grove needed the steel story</span></a>
+      <a href="#part2"><span class="n">Section I · chapters 1 to 3</span><span class="q">Your Career</span><span class="d">What makes us tick, plans versus opportunity, where your time goes</span></a>
+      <a href="#part3"><span class="n">Section II · chapters 4 to 8</span><span class="q">Your Relationships</span><span class="d">Invest early, the milkshake, Theseus's ship, experience and family culture</span></a>
+      <a href="#part4"><span class="n">Section III · chapter 9</span><span class="q">Staying Out of Jail</span><span class="d">Just this once, and why 100 percent is easier than 98</span></a>
+      <a href="#part5"><span class="n">Epilogue</span><span class="q">The Purpose of Your Life</span><span class="d">Likeness, commitment and the metric that matters</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2012</span>
+      <span><b>Authors</b> Clayton M. Christensen (Harvard Business School professor, 1952 to 2020), with James Allworth and Karen Dillon (former editor of Harvard Business Review)</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 11 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THEORIES, NOT ANSWERS ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Introduction · Just because you have feet</span>
+      <h2>Theories, Not Answers</h2>
+      <p>The book grew out of the last class Clayton Christensen taught each year at Harvard Business School. After a term of business theory, he asked his students to turn the same theories on their own lives, and to answer three questions before they left.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Good theories don't tell you what to think. They tell you how to think, so you can work out the answer to a problem nobody has handed you yet.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Three questions, and how to think about them</div>
+        <h2>Just Because You Have Feet</h2>
+        <div class="short"><span class="lbl">In short</span><p>On the last day of his course, Christensen asked his students three questions. How can I be sure I'll be happy in my career? How can I be sure my relationships with my family become a lasting source of happiness? How can I be sure I'll stay out of jail? The book doesn't give answers. It gives theories, tested in business, that help you work out your own.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Theories predict.</b> A good theory explains what causes what, and under which circumstances. That lets you see what is likely to happen before it happens.</span></li>
+          <li><span><b>How to think, not what to think.</b> Advice tells you what to do in one situation. A theory lets you reason about situations no one has seen before.</span></li>
+          <li><span><b>The three questions.</b> Career happiness, lasting relationships and integrity. The book is organised around them.</span></li>
+          <li><span><b>Your classmates are the warning.</b> Christensen watched bright, well-meaning people from his own Harvard class end up unhappy at work, divorced or estranged from their children, and a few in prison. None of them had planned it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Andy Grove, then the head of Intel, read Christensen's early research on disruption and invited him to explain it to his team. Grove soon interrupted: he didn't have time for the academic part, just tell him what it meant for Intel. Christensen refused, politely. He walked them through how small steel minimills had started with the cheapest product, reinforcing bar, then climbed market by market until the big integrated mills had nothing left. Grove saw it for himself and said what it meant: Intel had to go to the bottom of its own market. That became the low-cost Celeron chip. Christensen hadn't told Grove what to think. He had given him a way to think, and Grove reached the answer himself.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: think like Andy Grove</div><div class="hint">Step the minimills up the market, one tier at a time</div></div>
+        <div class="stage"><svg id="mmSvg" role="img" aria-label="Four tiers of the steel market, with minimills taking each tier from the bottom up"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="mmNext" type="button">Next move up</button><button class="btn" id="mmReset" type="button">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Where we are</span><span class="v glow" id="mmY"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="mmSay"></span></div></div><p class="callout">Grove never needed to be told to build a cheap chip. <b>Once he understood the cause, he could see the answer for Intel on his own.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down the three questions and answer each one in a sentence, as honestly as you can. Keep the page; you'll come back to it at the end.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>The book borrows business theories to help you think about your own life. It won't hand you answers, but it will help you ask better questions about your work, your family and your integrity.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: What makes us tick →</a></div>
+    </section>
+    <!-- ===================== FINDING HAPPINESS IN YOUR CAREER ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Section I · Finding happiness in your career</span>
+      <h2>Finding Happiness in Your Career</h2>
+      <p>The first three chapters are about work: what actually motivates people, how to balance a plan against the opportunities that turn up, and why your real strategy is wherever your time and money go.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Find work that gives you meaning, not just pay. Hold your plan loosely until you find it, then put your resources behind it.</p></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Hygiene factors and motivators</div>
+        <h2>What Makes Us Tick</h2>
+        <div class="short"><span class="lbl">In short</span><p>Following the psychologist Frederick Herzberg, Christensen argues that satisfaction and dissatisfaction aren't two ends of one scale. Pay, status and working conditions can make you unhappy if they're bad, but getting them right only stops the unhappiness. What actually makes work fulfilling is something else: challenge, responsibility, recognition and the chance to grow.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two separate scales.</b> The opposite of job satisfaction isn't dissatisfaction. It's no satisfaction. You can be not unhappy and still unfulfilled.</span></li>
+          <li><span><b>Hygiene factors.</b> Pay, status, job security, working conditions, company policy and how you're supervised. Get them wrong and people are miserable. Get them right and people stop complaining, nothing more.</span></li>
+          <li><span><b>Motivators.</b> Challenging work, recognition for real achievement, responsibility, and personal growth. These are what make people love their work.</span></li>
+          <li><span><b>Money is a trap when it's the point.</b> Choosing a job mainly for pay, planning to do the meaningful thing later, is one of the most common ways careers go wrong.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Christensen describes why he came to think management, done well, is one of the most noble jobs there is. Picture someone coming home after a day at work. If their manager gave them a real challenge, trusted them with responsibility and noticed what they achieved, they walk in with more self-respect, and that changes how they treat their family that evening. If the day left them feeling ignored and small, that comes home too. Pay doesn't change which evening it is. The motivators do.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the two scales</div><div class="hint">Fix the hygiene factors, then add motivators</div></div>
+        <div class="stage"><svg id="hzSvg" role="img" aria-label="Two separate meters: one for dissatisfaction, one for satisfaction"></svg></div><div class="lab-ctl"><div class="tip">Hygiene factors (tick the ones that are fine)</div><div class="toggles" id="hzH"></div><div class="tip">Motivators (tick the ones the job has)</div><div class="toggles" id="hzM"></div></div><div class="stats"><div class="stat"><span class="k">How the job feels</span><span class="s" id="hzSay"></span></div></div><p class="callout">Try fixing every hygiene factor with no motivators. <b>The red meter empties, but the gold one doesn't move.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>List what you'd change about your work. Mark each item H for hygiene or M for motivator. If your list is all H, ask what would make the work itself more meaningful.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Fair pay and good conditions stop you being unhappy at work, but they won't make you happy. For that you need work that challenges you, trusts you and lets you grow.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Plans and opportunity →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Deliberate and emergent strategy</div>
+        <h2>The Balance of Plans and Opportunity</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every strategy is a mix of two things: the deliberate plan you make, and the emergent opportunities and problems you didn't foresee. Early in a career, when you don't yet know what work will fulfil you, stay open to the emergent. Once you find it, switch to a deliberate strategy and commit.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Deliberate strategy.</b> The plan you make on purpose, based on what you believe you want and what you think will work.</span></li>
+          <li><span><b>Emergent strategy.</b> What turns up that you didn't plan: a surprise opening, a problem, a door you didn't know existed. It often turns out better than the plan.</span></li>
+          <li><span><b>Know which to use when.</b> If you haven't found work that motivates you, experiment and follow what works. Once you have, focus and push.</span></li>
+          <li><span><b>Ask what has to prove true.</b> Before you commit to a path, list the assumptions that must be right for it to work, and test the shakiest ones first.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Honda came to the United States in 1959, the plan was to sell big motorcycles against Harley-Davidson. It went badly: the bikes weren't built for long American highway rides, and they leaked oil and broke down. Meanwhile, Honda's own staff in Los Angeles were riding small 50cc Super Cubs around town on errands, and people kept asking where they could buy one. Honda's leaders were reluctant, since the small bike didn't fit their plan, but in the end they followed the demand. The Super Cub opened up a whole new market of people who had never owned a motorcycle, and it made Honda's name in America.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: Honda in America</div><div class="hint">Each year, push the plan or follow the signal</div></div>
+        <div class="stage"><svg id="hoSvg" role="img" aria-label="Honda's US sales by year, split into big bikes and Super Cubs"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="hoPlan" type="button">Push the big bikes</button><button class="btn primary" id="hoCub" type="button">Follow the Super Cub</button><button class="btn" id="hoReset" type="button">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Year</span><span class="v glow" id="hoY"></span></div><div class="stat"><span class="k">This year</span><span class="s" id="hoSay"></span></div></div><p class="callout">The numbers are illustrative, not Honda's real figures. <b>The plan was the big bikes. The strategy that worked was the one that emerged.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down the path you're on now and three things that have to prove true for it to make you happy. Which one could you test this month?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Make a plan, but keep your eyes open for the opportunities you didn't plan for. Until you find work you love, be willing to change direction. Once you find it, commit.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Where your time goes →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Strategy is how you allocate resources</div>
+        <h2>Your Strategy Is Not What You Say It Is</h2>
+        <div class="short"><span class="lbl">In short</span><p>A company's real strategy isn't in its mission statement. It's in thousands of daily decisions about where money, time and people go. The same is true of you. Your life strategy is how you spend your time, energy and talent, and high achievers tend to pour them into whatever gives the quickest visible reward.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Strategy is what you fund.</b> Whatever you say your priorities are, your strategy is wherever your resources actually go, day after day.</span></li>
+          <li><span><b>The pull of the immediate.</b> Closing a deal, shipping a product or getting a promotion pays off this quarter. Raising a child or building a marriage pays off years later, so it loses the daily fight for your time.</span></li>
+          <li><span><b>Resources are more than money.</b> Time, energy, attention and talent are your scarcest resources, and they're the ones families need most.</span></li>
+          <li><span><b>Decide on purpose.</b> If you don't allocate deliberately, the loudest short-term demand will decide for you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Christensen points out that at Intel, the shift from memory chips to microprocessors didn't start with a strategy meeting. Middle managers, ranking orders by profit margin, kept giving factory capacity to microprocessors because they paid better. By the time the leaders officially changed strategy, the company had already moved. Christensen then turns it on his classmates. None of them planned to neglect their families, but day after day, they allocated their spare hour to whatever showed results by Friday. Over years, those small allocations added up to a strategy they would never have chosen.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: what your week funds</div><div class="hint">Split your spare hours, then run twenty years</div></div>
+        <div class="stage"><svg id="raSvg" role="img" aria-label="A chart of career and family over twenty years, driven by how you split your spare hours"></svg></div><div class="lab-ctl"><div class="row" style="gap:16px"><div class="ctl"><label for="raW">Spare hours a week to extra work <output id="oraW"></output></label><input type="range" id="raW" min="0" max="20" value="15"></div></div><div class="toggles"><label class="tg"><input type="checkbox" id="raP"><span>Protect family time first, before the week fills up</span></label></div></div><div class="stats"><div class="stat"><span class="k">Hours to family</span><span class="v" id="raF"></span></div><div class="stat"><span class="k">After twenty years</span><span class="s" id="raSay"></span></div></div><p class="callout">An illustrative model with 20 spare hours a week. <b>Work pays back within months. Family pays back years later, which is why it keeps losing the weekly argument.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Track one week of your evenings and weekends in half-hour blocks. Then compare it with the list of what you say matters most.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't have a strategy because you wrote one down. You have one because of where your time and energy go every day. Check that it matches what you care about.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Invest early →</a></div>
+    </section>
+    <!-- ===================== FINDING HAPPINESS IN YOUR RELATIONSHIPS ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Section II · Finding happiness in your relationships</span>
+      <h2>Finding Happiness in Your Relationships</h2>
+      <p>The longest section turns business ideas on family and friendship: invest before you need to, understand the job the people you love need doing, don't outsource raising your children, let them learn from hard experiences, and build a family culture on purpose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Relationships with family and close friends are the deepest source of happiness, and they pay back only if you invest in them long before you need them.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Good money and bad money</div>
+        <h2>The Ticking Clock</h2>
+        <div class="short"><span class="lbl">In short</span><p>In business, Christensen says, new ventures need money that is patient for growth but impatient for profit. Relationships are similar but harsher: you have to invest in them long before you need them, because by the time a problem shows, it's often too late to start.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Good money and bad money.</b> Investors who want quick, huge growth push a new venture into a big bet too early. Money that is patient for growth but wants early profit makes it find a strategy that works.</span></li>
+          <li><span><b>Relationships compound slowly.</b> The return on time spent with family and friends arrives years later, often all at once, in a crisis or in your children's teens.</span></li>
+          <li><span><b>The clock is running.</b> Children grow up on their schedule, not yours. The years when they most want your time are the years your career wants it most.</span></li>
+          <li><span><b>You can't catch up later.</b> If you wait until the relationship needs attention, the investment you didn't make can't be made in a hurry.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The chapter is about the trap of 'later'. Christensen describes high-achieving people telling themselves they'll invest in their families once their careers are secure: after the next promotion, after the deal closes, after the kids are older and more interesting. By the time they look up, the window has passed. Teenagers have other places to turn, and a spouse has learned to live a separate life. The investments that would have paid off now had to be made years before, when nothing seemed urgent.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: when you start investing</div><div class="hint">Move the age at which you start making time for your child</div></div>
+        <div class="stage"><svg id="tcSvg" role="img" aria-label="A chart of your relationship with a child from birth to eighteen, depending on when you start investing time"></svg></div><div class="lab-ctl"><div class="row" style="gap:16px"><div class="ctl"><label for="tcS">Start making real time at age <output id="otcS"></output></label><input type="range" id="tcS" min="0" max="14" value="10"></div></div></div><div class="stats"><div class="stat"><span class="k">Relationship at 15</span><span class="v glow" id="tcV"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="tcSay"></span></div></div><p class="callout">An illustrative model. <b>The teenage years are when you most need the relationship, and the investment had to be made before them.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Name one relationship you've been planning to invest in later. Put one hour for it in your calendar this week, before anything else gets the slot.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Invest in the people you love now, not once you have time. Relationships pay back slowly, and you can't make up the investment when you suddenly need it.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The milkshake →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Jobs to be done, at home</div>
+        <h2>What Job Did You Hire That Milkshake For?</h2>
+        <div class="short"><span class="lbl">In short</span><p>Customers don't buy products, they hire them to do a job. Christensen's famous example is a milkshake bought by morning commuters to make a long drive less boring. In a marriage or friendship, the question is the same: what job does the other person need done? It's often not the one you'd guess.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Hire, don't buy.</b> People bring a product into their lives to get a job done. Understand the job and you understand what to offer.</span></li>
+          <li><span><b>Same product, different jobs.</b> The morning commuter and the parent buying a treat in the afternoon want different things from the same milkshake.</span></li>
+          <li><span><b>Ask what job your partner needs done.</b> Not what you'd want in their place, but what they actually need, which takes attention and empathy to see.</span></li>
+          <li><span><b>Sacrifice deepens commitment.</b> The more you give for someone, the more you value the relationship. Doing the job well often means putting your own priorities second.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>A fast-food chain wanted to sell more milkshakes and asked customers how to improve them. Nothing changed. Christensen's colleagues tried something else: they watched who bought milkshakes and when. A surprising share were bought early in the morning by people alone, heading for a long commute. They were hiring the milkshake to make a boring drive interesting and keep them full until lunch, and it beat bagels and bananas because it lasted and fitted in one hand. Christensen then tells of a man who came home to find his wife exhausted after a long day with the children, so he cleaned up the kitchen. She was still upset. He'd done a job, but not hers: what she needed that evening was for him to listen to her day.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: design for the job</div><div class="hint">Pick who's hiring, then choose what to offer</div></div>
+        <div class="stage"><svg id="msSvg" role="img" aria-label="A meter showing how well what you offer fits the job the person needs done"></svg></div><div class="lab-ctl"><div class="row" id="msW"></div><div class="toggles" id="msT"></div></div><div class="stats"><div class="stat"><span class="k">Job fit</span><span class="v glow" id="msV"></span></div><div class="stat"><span class="k">The job they need done</span><span class="s" id="msSay"></span></div></div><p class="callout">Try the partner with the kitchen cleaned and nothing else. <b>Good intentions on the wrong job still miss.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Ask someone you love: "What would make this week easier for you?" Then do that, rather than what you'd planned to do for them.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't assume you know what the people you love need. Work out the job they're trying to get done, and do that job well, even when it's not the one you'd have picked.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Theseus's ship →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · What happens when you outsource</div>
+        <h2>Sailing Your Children on Theseus's Ship</h2>
+        <div class="short"><span class="lbl">In short</span><p>Dell handed its supplier ASUS one piece of its business after another, and each step looked good on the numbers. At the end, ASUS could make the whole computer and launched its own brand. Christensen warns parents about a similar trap: outsource too much of your children's growing up, and the values and skills they pick up come from someone else.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Theseus's ship.</b> If you replace every plank of a ship one at a time, is it still the same ship? Outsourcing works the same way: piece by piece, the capability moves elsewhere.</span></li>
+          <li><span><b>Capabilities are three things.</b> Resources (what you have), processes (how you do things) and priorities (what you choose). You can buy resources. Processes and priorities have to be built.</span></li>
+          <li><span><b>Activities aren't capabilities.</b> Lessons, camps and tutors can give children skills, but the way they handle hard problems comes from the people who are around when the problems happen.</span></li>
+          <li><span><b>Be there for the learning.</b> Your children learn your values when you face difficulties together, not when you've arranged for someone else to be there.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Dell built its business by assembling computers fast and cheaply. Its Taiwanese supplier, ASUSTeK, offered to make the simple circuit boards for less, and Dell agreed: its numbers improved. Then ASUS offered to make the motherboards, then assemble the whole computer, then manage the supply chain, then design the machine. Each step made Dell's return on assets look better. Then ASUS announced it would sell computers under its own name. Every individual decision made sense, and together they had handed away the heart of the business.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: one more plank</div><div class="hint">Hand ASUS the next piece and watch both columns</div></div>
+        <div class="stage"><svg id="thSvg" role="img" aria-label="Five layers of making a computer, moving from Dell to ASUS one at a time"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="thNext" type="button">Outsource the next piece</button><button class="btn" id="thReset" type="button">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Dell's return on assets</span><span class="v glow" id="thR"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="thSay"></span></div></div><p class="callout">The percentages are illustrative. <b>Every step looked better on paper. The last step showed what had been given away.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Look at your children's week, or a younger person you mentor. Where are they facing something hard? Make sure you're there for one of those moments.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Each thing you hand off can look sensible on its own. Add them up and you may have handed away what mattered most. With children, be there for the hard parts.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Schools of experience →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Courses, not credentials</div>
+        <h2>The Schools of Experience</h2>
+        <div class="short"><span class="lbl">In short</span><p>Christensen learned, painfully, that an impressive résumé doesn't mean someone can do a particular job. What matters is whether they've taken the right 'courses' in the school of experience: whether they've faced the specific problems this job will throw at them. Children need the same: hard, real problems to work through while you're there.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Right stuff isn't enough.</b> Hiring for impressive attributes, like a big-company title, predicts poorly for jobs that need different experience.</span></li>
+          <li><span><b>Schools of experience.</b> The management researcher Morgan McCall argues that people build ability by working through specific challenges. Ask which courses a candidate has taken.</span></li>
+          <li><span><b>Hard problems build children.</b> If children only ever do easy things, or you solve their problems for them, they miss the courses they'll need later.</span></li>
+          <li><span><b>Let them struggle, with you near.</b> Look for real challenges your children can take on, and be there to help them learn from it, rather than to take it over.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Christensen co-founded his materials company, he and his partners hired senior executives with glittering résumés from big, established firms. Several of them struggled. They were capable people, but they had always worked with the resources and systems of a large company behind them. Nobody had ever asked them to build a new plant from nothing or sell a product no one had heard of. They hadn't taken those courses. Christensen came to see that the better question was not "What has this person achieved?" but "Which problems have they already wrestled with?"</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: who has taken the course?</div><div class="hint">Pick the challenge, then compare the two candidates</div></div>
+        <div class="stage"><svg id="seSvg" role="img" aria-label="Two candidates' experience compared with what the job needs"></svg></div><div class="lab-ctl"><div class="row" id="seJ"></div></div><div class="stats"><div class="stat"><span class="k">Better fit</span><span class="v glow" id="seV"></span></div><div class="stat"><span class="k">Why</span><span class="s" id="seSay"></span></div></div><p class="callout">The candidates are made up. <b>The impressive résumé wins on paper. The one who has taken the course wins on the job.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Think of the next hard thing your child, or someone you mentor, will face. Instead of removing it, ask how you can help them get through it themselves.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>To judge whether someone is ready for a job, ask what problems they've already handled, not how impressive their résumé is. Give your children the chance to take those hard courses too.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Family culture →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Culture is how you've solved problems before</div>
+        <h2>The Invisible Hand Inside Your Family</h2>
+        <div class="short"><span class="lbl">In short</span><p>Culture, in the management researcher Edgar Schein's sense, is the way a group has learned to solve problems, repeated so often that people stop thinking about it. Every family has one. It forms whether you shape it or not, so decide what you want it to be, and solve problems that way, together, again and again.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Culture is learned.</b> When a group solves a problem one way and it works, it does the same next time. Soon nobody thinks to do it differently.</span></li>
+          <li><span><b>It forms on its own.</b> If you don't shape your family's culture deliberately, the habits of the moment will shape it for you.</span></li>
+          <li><span><b>Pick the right tool.</b> How much people agree on what they want, and on how to get it, decides whether you need power, leadership, management or culture to get them to cooperate.</span></li>
+          <li><span><b>Repeat it on purpose.</b> To build a culture of, say, working hard or being kind, give children the chance to solve problems that way, and to see it work.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Christensen uses a business idea to explain family life. When the people in a group disagree on both what they want and how to get it, only power works: rules, rewards and punishments. When they agree on what they want but not how, a leader with a vision helps. When they agree on how but not why, management tools such as training and procedures help. When they agree on both, culture does the work and no one needs to be told. He uses the matrix to show why a family culture is worth building on purpose. When parents and children share both the goals and the ways of reaching them, the family cooperates without anyone having to be told, even when the parents aren't in the room.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: the agreement matrix</div><div class="hint">Move how much your family agrees on goals and on methods</div></div>
+        <div class="stage"><svg id="amSvg" role="img" aria-label="A two-by-two matrix of agreement on what we want and agreement on how to get it, with the tools that work in each corner"></svg></div><div class="lab-ctl"><div class="row" style="gap:16px"><div class="ctl"><label for="amW">Agreement on what we want <output id="oamW"></output></label><input type="range" id="amW" min="0" max="10" value="3"></div><div class="ctl"><label for="amH">Agreement on how to get it <output id="oamH"></output></label><input type="range" id="amH" min="0" max="10" value="3"></div></div></div><div class="stats"><div class="stat"><span class="k">Tools that work here</span><span class="v glow" id="amT"></span></div><div class="stat"><span class="k">At home this looks like</span><span class="s" id="amSay"></span></div></div><p class="callout">Based on the tools-of-cooperation matrix Christensen describes. <b>Culture is the goal: when people agree on both, they cooperate without being told.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick one value you want your family, or your team, to be known for. Find a small problem this week you can solve together in a way that shows it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Families develop a culture whether or not anyone plans it. Decide what you want yours to be, and keep solving problems that way together until it becomes automatic.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Just this once →</a></div>
+    </section>
+    <!-- ===================== STAYING OUT OF JAIL ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Section III · Staying out of jail</span>
+      <h2>Staying Out of Jail</h2>
+      <p>The shortest section is the bluntest. Some of Christensen's own classmates ended up in prison. None of them set out to. They got there one small exception at a time.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Decide what you stand for, and hold to it all the time. Holding a line 100 percent of the time is easier than holding it 98 percent of the time.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · The marginal-cost trap</div>
+        <h2>Just This Once...</h2>
+        <div class="short"><span class="lbl">In short</span><p>Businesses often make bad decisions by looking only at the marginal cost of the next move, not the full cost over time. People do the same with their principles. Crossing a line 'just this once' looks cheap each time, and that's how good people end up in places they'd never have chosen.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Marginal versus full cost.</b> Established companies often say no to building something new because using what they already have looks cheaper. Over time, it costs them far more.</span></li>
+          <li><span><b>Small exceptions add up.</b> The first step across a line looks small. The next step is smaller still, because the line has already moved.</span></li>
+          <li><span><b>100 percent is easier than 98.</b> If you've decided something is never an option, you don't have to re-decide it every time temptation turns up.</span></li>
+          <li><span><b>Decide in advance.</b> Work out what you stand for before you're under pressure, because under pressure every exception looks reasonable.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Nick Leeson was a young trader in Singapore for the old British bank Barings. He hid a small loss in a little-checked error account, meaning to win it back. When he didn't, he hid the next one, and the next. By 1995 the hidden losses came to more than eight hundred million pounds, and Barings collapsed. Christensen tells a quieter story of his own. As a student at Oxford, he played centre on the university basketball team. They reached the final of the British championship, and the game was scheduled for a Sunday, which Christensen had committed never to play on for religious reasons. His coach and teammates urged him to make an exception, just this once. He didn't play. The team won without him, and he came to see that if he'd crossed the line that day, he would have kept finding reasons to cross it.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: just this once</div><div class="hint">Make a choice each month and watch where the line goes</div></div>
+        <div class="stage"><svg id="jtSvg" role="img" aria-label="Your line drifting further from your principle with every exception"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="jtEx" type="button">Make an exception, just this once</button><button class="btn primary" id="jtHold" type="button">Hold the line</button><button class="btn" id="jtReset" type="button">Reset</button></div><div class="toggles"><label class="tg"><input type="checkbox" id="jtAll"><span>Decided in advance: 100 percent, no exceptions</span></label></div></div><div class="stats"><div class="stat"><span class="k">How far you've drifted</span><span class="v glow" id="jtV"></span></div><div class="stat"><span class="k">This month</span><span class="s" id="jtSay"></span></div></div><p class="callout">An illustrative model. <b>Each exception makes the next one easier. A line held 100 percent of the time stops the argument before it starts.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down one line you will never cross, at work or at home. Tell one person about it, so the decision is made before the pressure arrives.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Small exceptions to your principles look harmless each time, but they add up and get easier. Decide what you stand for in advance, and hold to it every time.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Your yardstick →</a></div>
+    </section>
+    <!-- ===================== THE PURPOSE OF YOUR LIFE ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Epilogue · The purpose of your life</span>
+      <h2>The Purpose of Your Life</h2>
+      <p>The book ends with the question in its title. Christensen argues that a purpose has to be built deliberately, out of three parts, and that the measure that will matter most at the end is not money or titles.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Decide who you want to become, commit to it, and pick the measure your life will be judged by: the individual people you helped.</p></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Epilogue</span> · Likeness, commitment and metrics</div>
+        <h2>The Purpose of Your Life</h2>
+        <div class="short"><span class="lbl">In short</span><p>A purpose doesn't arrive by accident, Christensen argues, any more than a company's does. It has three parts: a likeness of the person you want to become, a deep commitment to it, and a few metrics to measure your life by. His own conclusion was that the measure that will matter is the individual people you helped.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The likeness.</b> A picture of who you want to be when you're finished, not just what you want to have done.</span></li>
+          <li><span><b>Commitment.</b> Purpose only changes what you do if you're committed to it at a deep level, deeply enough to hold when it's inconvenient.</span></li>
+          <li><span><b>The metrics.</b> A few measures you'll use to judge your life, chosen on purpose. If you don't pick them, money and titles will be picked for you.</span></li>
+          <li><span><b>Count individuals.</b> Christensen concluded that his life would be measured not by totals or aggregates, but by the individual people whose lives he made better.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>As a Rhodes scholar at Oxford, studying econometrics at a demanding pace, Christensen decided to spend an hour every night reading, thinking and praying about why he had been put on Earth. It felt like time he couldn't afford. He later said that if he'd spent that hour learning more econometrics instead, he would have used that knowledge only a few times a year, while he used what he learned about his purpose every day. Years later, after a cancer diagnosis, he wrote that the measure by which God would assess his life wasn't dollars or titles, but the individual people whose lives he had touched.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: your yardstick</div><div class="hint">Write the three parts of your purpose, then add the people</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="ypL">The person I want to become</label><input id="ypL" maxlength="110" placeholder="e.g. someone my children come to first when things go wrong"></div><div class="field"><label for="ypC">I commit to</label><input id="ypC" maxlength="110" placeholder="e.g. being home for dinner four nights a week"></div><div class="field"><label for="ypN">Someone I'll help, and how</label><input id="ypN" maxlength="80" placeholder="e.g. Sam: teach him to drive this summer"></div></div><div class="out"><div class="stage" style="padding:0"><svg id="ypSvg" role="img" aria-label="A yardstick with a notch for each person you have helped"></svg></div><div class="row"><button class="btn primary" id="ypAdd" type="button">Add a notch</button><button class="btn" id="ypSave" type="button">Save my purpose</button><button class="btn" id="ypClear" type="button">Clear</button><span class="tip" id="ypTip"></span></div><div class="ledger" id="ypList"></div></div></div><p class="callout">Saved in this browser only, and it shows up in the afterword. <b>Tick a notch once you've done it.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Set aside an hour this week, alone, to write a first draft of your likeness and your metrics. Treat it as the most useful hour of the week, because Christensen thought it was.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide on purpose who you want to become, commit to it, and pick how you'll measure your life. Christensen's answer was simple: by the individual people you helped.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#after">Next: measure your life →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Measure your life</h2>
+      <p class="big">Christensen asked his students to answer three questions before they left his class. Here is the purpose you wrote, the people on your yardstick, and the whole book on one page.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="recap">
+        <div><span class="n">Ch. 1</span><b>Look for motivators</b><span>Pay and conditions stop you being unhappy. Challenge, responsibility and growth make you happy.</span></div>
+        <div><span class="n">Ch. 2</span><b>Balance plans and opportunity</b><span>Stay open until you find work you love, then commit to it deliberately.</span></div>
+        <div><span class="n">Ch. 3</span><b>Your strategy is where your time goes</b><span>Fund what you care about on purpose, or the loudest short-term demand will.</span></div>
+        <div><span class="n">Ch. 4 and 5</span><b>Invest early, and do their job</b><span>Relationships pay back years later. Find the job the people you love need done.</span></div>
+        <div><span class="n">Ch. 6 to 8</span><b>Raise them yourself</b><span>Don't outsource the hard moments, give children real challenges, and build a family culture on purpose.</span></div>
+        <div><span class="n">Ch. 9</span><b>100 percent, not 98</b><span>Decide your lines in advance. Just this once is how good people go wrong.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>How Will You Measure Your Life?</i> by Clayton M. Christensen, James Allworth and Karen Dillon (2012). The explanations, retold stories and labs are written in our own words and follow the book's introduction, nine chapters and epilogue. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Introduction", "I \u00b7 Your career", "II \u00b7 Your relationships", "III \u00b7 Staying out of jail", "Epilogue"];
+const CH = [["Just Because You Have Feet", "Theories, not answers", 0, "Introduction"], ["What Makes Us Tick", "What makes us tick", 1, "Chapter 1"], ["The Balance of Plans and Opportunity", "Plans and opportunity", 1, "Chapter 2"], ["Your Strategy Is Not What You Say It Is", "Where your time goes", 1, "Chapter 3"], ["The Ticking Clock", "Invest early", 2, "Chapter 4"], ["What Job Did You Hire That Milkshake For?", "The milkshake", 2, "Chapter 5"], ["Sailing Your Children on Theseus's Ship", "Theseus's ship", 2, "Chapter 6"], ["The Schools of Experience", "Schools of experience", 2, "Chapter 7"], ["The Invisible Hand Inside Your Family", "Family culture", 2, "Chapter 8"], ["Just This Once...", "Just this once", 3, "Chapter 9"], ["The Purpose of Your Life", "Your yardstick", 4, "Epilogue"]];
+const QUIZ = {
+"1": {
+"q": "Why did Christensen insist on explaining the steel story to Andy Grove?",
+"o": [
+"He wanted to show off his research",
+"Understanding how the theory worked let Grove find the answer for Intel himself",
+"He didn't know anything about microchips"
+],
+"a": 1,
+"w": "A theory teaches you how to think. Grove saw what the minimills meant for Intel once he understood the mechanism."
+},
+"2": {
+"q": "In Herzberg's theory, what happens when you fix all the hygiene factors?",
+"o": [
+"You become highly motivated",
+"You stop being dissatisfied, but aren't necessarily satisfied",
+"You no longer need any motivators"
+],
+"a": 1,
+"w": "Hygiene factors remove dissatisfaction. Satisfaction comes from the motivators, on a separate scale."
+},
+"3": {
+"q": "What did Honda's success with the Super Cub show?",
+"o": [
+"Plans are useless and should never be made",
+"An emergent opportunity can beat the deliberate plan, if you're willing to follow it",
+"Big motorcycles always sell better in the US"
+],
+"a": 1,
+"w": "Honda's plan was big bikes. The opportunity that emerged, the small Super Cub, built its American business."
+},
+"4": {
+"q": "According to Christensen, what is your real strategy?",
+"o": [
+"The goals you write down at New Year",
+"The pattern of how you actually spend your time, energy and money",
+"Whatever your manager tells you to do"
+],
+"a": 1,
+"w": "Strategy is resource allocation. What you fund, day after day, is your strategy, whatever you say."
+},
+"5": {
+"q": "Why does Christensen warn against investing in family 'later'?",
+"o": [
+"Because families don't need much time",
+"Because the returns come years after the investment, and by the time you need them it's too late to start",
+"Because careers matter more in your twenties"
+],
+"a": 1,
+"w": "Relationships compound slowly. If you wait for a problem to show, the investment you needed was due years earlier."
+},
+"6": {
+"q": "What were morning commuters 'hiring' the milkshake to do?",
+"o": [
+"Give them a healthy breakfast",
+"Make a long, boring drive interesting and keep them full until lunch",
+"Treat their children"
+],
+"a": 1,
+"w": "The morning milkshake did a commuting job. The afternoon milkshake, bought for children, did a different one."
+},
+"7": {
+"q": "What is the lesson of the Dell and ASUS story?",
+"o": [
+"Outsourcing always saves money",
+"Each sensible-looking step of outsourcing can add up to handing away your core capability",
+"Taiwanese companies make better computers"
+],
+"a": 1,
+"w": "Dell's numbers improved at every step, until ASUS could do everything and competed with it."
+},
+"8": {
+"q": "What does 'the schools of experience' mean?",
+"o": [
+"The best universities to attend",
+"People build ability by working through specific challenges, like courses",
+"Experience doesn't matter as much as talent"
+],
+"a": 1,
+"w": "Ability is built course by course, by facing particular kinds of problems. That's what to look for, and what to give children."
+},
+"9": {
+"q": "When do 'culture tools' work best?",
+"o": [
+"When people disagree about everything",
+"When people agree both on what they want and on how to get it",
+"Only in very large companies"
+],
+"a": 1,
+"w": "When there's agreement on both, the group cooperates automatically. That's what culture is."
+},
+"10": {
+"q": "Why does Christensen say it's easier to hold your principles 100 percent of the time than 98 percent?",
+"o": [
+"Because 98 percent is too strict",
+"Because once you allow exceptions, every new situation looks like a reasonable one to make",
+"Because nobody notices the other 2 percent"
+],
+"a": 1,
+"w": "A rule with exceptions has to be argued over every time. A rule with none is already decided."
+},
+"11": {
+"q": "By what metric did Christensen conclude his life would be measured?",
+"o": [
+"The money he earned",
+"The fame of his theories",
+"The individual people he helped become better people"
+],
+"a": 2,
+"w": "He wrote that he would be measured not by aggregates, but by the individuals whose lives he touched."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#1a1113';
+try { const t = localStorage.getItem('hm-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('hm-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('hm-done', []));
+const save = () => store.set('hm-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* clickable SVG group: keyboard users get Enter/Space too */
+const svgClick = (el, sel, fn) => el.querySelectorAll(sel).forEach(g => { g.addEventListener('click', () => fn(g)); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fn(g); } }); });
+const axes = (x0, y0, x1, y1) => `<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" ${S('line', 1.5)}/><line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" ${S('line', 1.5)}/>`;
+const pathOf = (pts) => 'M' + pts.map(([x, y]) => x.toFixed(1) + ' ' + y.toFixed(1)).join('L');
+
+/* ---------- afterword card (reads the purpose and yardstick from the epilogue) ---------- */
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const P = store.get('hm-purpose', {}), L = store.get('hm-notches', []);
+  if (!P.l && !P.c && !L.length){ el.innerHTML = '<span class="k">Your yardstick is empty</span><p class="empty">Write your purpose and add the people you\'ll help in <a href="#ch11">the epilogue</a>. What you save shows up here, in this browser only.</p>'; return; }
+  const done = L.filter(x => x.d).length;
+  el.innerHTML = `<span class="k">Your purpose${L.length ? ` · ${done} of ${L.length} notches done` : ''}</span>` +
+    (P.l ? `<p class="big1">${esc(P.l)}</p>` : '') +
+    `<div class="plan">${P.c ? `<div><span>I commit to</span>${esc(P.c)}</div>` : ''}${L.map(x => `<div><span>Someone I'll help${x.d ? ' · done' : ''}</span>${esc(x.n)}</div>`).join('')}</div>` +
+    '<p class="empty">Christensen\'s metric: not the totals, but the individual people whose lives you made better.</p>';
+}
+renderCard();
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I\'m well paid but bored', 2, 'Hygiene isn\'t motivation', 'Pay only stops you being unhappy. Look for challenge, responsibility, recognition and growth.'],
+    ['I don\'t know what career I want', 3, 'Stay open to the emergent', 'Until you find work you love, experiment and follow what works. Then commit.'],
+    ['Work keeps eating my evenings', 4, 'Your strategy is where your time goes', 'Whatever you say matters, what you fund each day is your real strategy.'],
+    ['I\'ll make time for family later', 5, 'The ticking clock', 'Relationships pay back years later. The investment has to be made before you need it.'],
+    ['My partner and I keep missing each other', 6, 'Do the job they need done', 'Work out what they actually need, not what you\'d want in their place.'],
+    ['My kids\' week is all activities', 7, 'Theseus\'s ship', 'Be there for the hard moments, where values and capabilities are actually learned.'],
+    ['I\'m hiring and the CVs all look great', 8, 'Schools of experience', 'Ask which hard problems they\'ve already handled, not how impressive the résumé is.'],
+    ['Surely once won\'t hurt', 10, 'Just this once', 'Every exception makes the next easier. Hold your line 100 percent of the time.'],
+    ['What is all this for?', 11, 'Your purpose', 'Pick who you want to become, commit, and choose the metric: the people you help.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: three yardsticks ---------- */
+{ const Q = [['CAREER', 2, 'Start with chapter 1: are you being paid, or being motivated?'], ['RELATIONSHIPS', 5, 'Start with chapter 4: the investment has to be made before you need it.'], ['INTEGRITY', 10, 'Start with chapter 9: decide your lines before the pressure arrives.']];
+  const el = $('#ysSvg');
+  function draw(){
+    const v = Q.map((_, i) => +$('#ys' + i).value); v.forEach((x, i) => out('ys' + i, x));
+    let g = ''; const x0 = 20, x1 = 320, w = x1 - x0;
+    Q.forEach(([l], i) => { const y = 22 + i * 58;
+      g += TX(x0, y, l, 'muted', 10, 'start', 'letter-spacing="1.4"');
+      g += `<rect x="${x0}" y="${y + 8}" width="${w}" height="26" rx="4" ${FS('panel-2', 'line', 1)}/>`;
+      g += `<rect x="${x0}" y="${y + 8}" width="${(w * v[i] / 10).toFixed(1)}" height="26" rx="4" ${F(i === 1 ? 'cool' : 'glow', .8)}/>`;
+      for (let t = 0; t <= 20; t++){ const x = x0 + w * t / 20; g += `<line x1="${x.toFixed(1)}" y1="${y + 8}" x2="${x.toFixed(1)}" y2="${y + 8 + (t % 2 ? 7 : 13)}" ${S('deep', 1, ';stroke-opacity:.6')}/>`; }
+    });
+    el.innerHTML = g;
+    const tot = v.reduce((a, b) => a + b, 0), lo = v.indexOf(Math.min(...v));
+    $('#ysV').textContent = tot + ' / 30';
+    $('#ysSay').textContent = Math.min(...v) >= 8 ? 'Sure on all three. The book will help you keep it that way, and check the assumptions behind your confidence.' : Q[lo][2];
+  }
+  Q.forEach((_, i) => $('#ys' + i).addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 1: think like Andy Grove (steel minimills) ---------- */
+{ const TIERS = [['Rebar', 'about 7% margin'], ['Bars and rods', 'about 12% margin'], ['Structural beams', 'about 18% margin'], ['Sheet steel', 'about 25% margin']];
+  const SAY = ['The big integrated mills make every kind of steel. New minimills melt scrap in small electric furnaces, which is far cheaper, but at first the quality is poor.', 'The minimills can only make cheap, low-quality steel. Their first market is rebar, the bars that reinforce concrete. The big integrated mills are glad to let it go: it was their least profitable product.',
+    'Rebar is theirs, and the price of rebar falls because minimills compete with each other. They move up to bars and rods. The integrated mills retreat upmarket again, and their margins actually look better.',
+    'Bars and rods fall too. The minimills learn to make structural beams, and the integrated mills give up that tier as well.',
+    'Now the minimills make sheet steel, the top of the market. The integrated mills have nowhere left to retreat to. Each step looked sensible to them; together, the steps took them out of business.',
+    'Grove\'s answer for Intel: if cheap chips were going to attack from the bottom, Intel should attack its own low end first. That became the Celeron.'];
+  let step = 0; const el = $('#mmSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, rowH = 46, H = TIERS.length * rowH + 50, x0 = nw ? 118 : 170, x1 = W - 16; vb(el, W, H);
+    let g = TX(x0, 18, 'INTEGRATED MILLS', 'muted', 10, 'start', 'letter-spacing="1.3"') + TX(x1, 18, 'MINIMILLS', 'glow', 10, 'end', 'letter-spacing="1.3"');
+    TIERS.slice().reverse().forEach(([n, m], k) => { const y = 30 + k * rowH; /* top tier first */
+      const t = TIERS.length - 1 - k, taken = Math.min(step, 4) > t, part = Math.min(step, 4) === t + 1;
+      g += TX(x0 - 10, y + 20, n, 'text', nw ? 12 : 13.5, 'end') + TX(x0 - 10, y + 35, m, 'faint', 10.5, 'end');
+      g += `<rect x="${x0}" y="${y + 4}" width="${x1 - x0}" height="${rowH - 10}" rx="6" ${FS('panel-2', 'line', 1)}/>`;
+      const share = taken ? 1 : 0, wv = (x1 - x0) * share;
+      if (wv) g += `<rect x="${x0}" y="${y + 4}" width="${wv.toFixed(1)}" height="${rowH - 10}" rx="6" ${F('glow', part ? .9 : .55)}/>`;
+      g += TX(x0 + (x1 - x0) / 2, y + 27, taken ? 'minimills' : 'integrated mills', taken ? 'on-glow' : 'muted', 12, 'middle');
+    });
+        el.innerHTML = g;
+    $('#mmY').textContent = step === 5 ? 'Intel, 1998' : step === 0 ? 'The start' : `Tier ${step} of 4`;
+    $('#mmSay').textContent = SAY[step];
+    $('#mmNext').textContent = step >= 4 ? (step === 5 ? 'Done' : 'What it meant for Intel') : 'Next move up';
+    $('#mmNext').disabled = step === 5;
+  });
+  $('#mmNext').addEventListener('click', () => { step = Math.min(5, step + 1); draw(); });
+  $('#mmReset').addEventListener('click', () => { step = 0; draw(); });
+  draw();
+}
+
+/* ---------- 2: two scales (Herzberg) ---------- */
+{ const HY = ['Fair pay', 'Job security', 'Decent working conditions', 'Sensible company policies', 'A reasonable boss', 'Status'];
+  const MO = ['Challenging work', 'Recognition for real achievement', 'Responsibility', 'Personal growth'];
+  const hy = HY.map((_, i) => i < 2), mo = MO.map(() => false), el = $('#hzSvg');
+  $('#hzH').innerHTML = HY.map((l, i) => `<label class="tg"><input type="checkbox" data-h="${i}"${hy[i] ? ' checked' : ''}><span>${l}</span></label>`).join('');
+  $('#hzM').innerHTML = MO.map((l, i) => `<label class="tg"><input type="checkbox" data-m="${i}"><span>${l}</span></label>`).join('');
+  $$('#hzH input').forEach(c => c.addEventListener('change', () => { hy[+c.dataset.h] = c.checked; draw(); }));
+  $$('#hzM input').forEach(c => c.addEventListener('change', () => { mo[+c.dataset.m] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 230 : 200; vb(el, W, H);
+    const dis = HY.length - hy.filter(Boolean).length, sat = mo.filter(Boolean).length;
+    const bar = (x, y, w, frac, col, title, lo, hi) => {
+      let g = TX(x, y - 10, title, col, 10.5, 'start', 'letter-spacing="1.3"');
+      g += `<rect x="${x}" y="${y}" width="${w}" height="30" rx="8" ${FS('panel-2', 'line', 1)}/>`;
+      if (frac > 0) g += `<rect x="${x}" y="${y}" width="${(w * frac).toFixed(1)}" height="30" rx="8" ${F(col, .85)}/>`;
+      g += TX(x, y + 48, lo, 'faint', 10.5) + TX(x + w, y + 48, hi, 'faint', 10.5, 'end');
+      return g; };
+    let g;
+    if (nw) g = bar(16, 30, W - 32, dis / HY.length, 'bad', 'DISSATISFACTION', 'none', 'miserable') + bar(16, 140, W - 32, sat / MO.length, 'glow', 'SATISFACTION', 'none', 'loves the work');
+    else g = bar(24, 60, 280, dis / HY.length, 'bad', 'DISSATISFACTION · HYGIENE', 'none', 'miserable') + bar(356, 60, 280, sat / MO.length, 'glow', 'SATISFACTION · MOTIVATORS', 'none', 'loves the work') +
+      TX(W / 2, 80, '≠', 'faint', 22, 'middle') + TX(W / 2, 170, 'Two separate scales: one doesn\'t move the other.', 'muted', 12, 'middle');
+    el.innerHTML = g;
+    $('#hzSay').textContent = dis === 0 && sat === 0 ? 'Nothing to complain about, and nothing to love. You\'re not unhappy, just not fulfilled.' :
+      dis === 0 && sat === MO.length ? 'No complaints and work you love. This is the job Herzberg would point you to.' :
+      dis > 3 && sat >= 3 ? 'You love the work but the conditions are wearing you down. Both scales matter.' :
+      dis > 0 && sat === 0 ? 'Fixing the complaints will help, but it won\'t make you love the job. That needs motivators.' :
+      sat > 0 ? 'The motivators are what move the gold meter. Keep the hygiene factors in decent shape too.' : 'Fix what is making you unhappy, then look for what would make you love it.';
+  });
+  draw();
+}
+
+/* ---------- 3: Honda in America ---------- */
+{ const YEARS = [1959, 1960, 1961, 1962, 1963];
+  const NOTE = { plan: ['The big bikes leak oil on long highway rides. Dealers send them back.', 'More big bikes break down. Japan is flying in replacement engines.', 'Harley\'s customers aren\'t switching. The plan is burning cash.', 'Still stuck. The big-bike market hasn\'t opened up.', 'Five years in, the deliberate plan has never worked.'],
+    cub: ['People keep asking where to buy the little bike the staff ride. You start selling a few.', 'Sporting goods shops, not motorcycle dealers, want to stock it. A new market appears.', 'Students and commuters who never wanted a motorcycle are buying Super Cubs.', 'The ads say you meet the nicest people on a Honda. Sales take off.', 'The emergent strategy is now the strategy. Honda leads the US market.'] };
+  let picks = []; const el = $('#hoSvg');
+  const sales = () => { let big = 2, cub = 0, out = []; picks.forEach((p, i) => { if (p === 'plan'){ big = Math.max(1, big * .85); cub = cub * .9; } else { cub = cub === 0 ? 3 : cub * 2.2; big = Math.max(1, big * .95); } out.push([big, cub]); }); return out; };
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 240, x0 = 44, x1 = W - 16, y0 = 20, y1 = H - 34; vb(el, W, H);
+    const s = sales(), mx = Math.max(10, ...s.map(([a, b]) => a + b));
+    let g = axes(x0, y0, x1, y1); const bw = (x1 - x0) / YEARS.length;
+    YEARS.forEach((yr, i) => { const cx = x0 + bw * (i + .5); g += TX(cx, y1 + 16, yr, 'faint', 10.5, 'middle');
+      if (s[i]){ const [a, b] = s[i], ha = (y1 - y0) * a / mx, hb = (y1 - y0) * b / mx, w = bw * .56;
+        g += `<rect x="${(cx - w / 2).toFixed(1)}" y="${(y1 - ha).toFixed(1)}" width="${w.toFixed(1)}" height="${ha.toFixed(1)}" ${F('muted', .55)}/>`;
+        if (hb) g += `<rect x="${(cx - w / 2).toFixed(1)}" y="${(y1 - ha - hb).toFixed(1)}" width="${w.toFixed(1)}" height="${hb.toFixed(1)}" ${F('glow', .9)}/>`; } });
+    g += `<rect x="${x0 + 10}" y="${y0}" width="10" height="10" ${F('muted', .55)}/>` + TX(x0 + 26, y0 + 9, 'big bikes', 'muted', 11) + `<rect x="${x0 + 100}" y="${y0}" width="10" height="10" ${F('glow', .9)}/>` + TX(x0 + 116, y0 + 9, 'Super Cubs', 'glow', 11);
+    g += TX(x0 - 8, y0 + 8, 'sales', 'faint', 10, 'end');
+    el.innerHTML = g;
+    const n = picks.length;
+    $('#hoY').textContent = n ? YEARS[n - 1] : '1959';
+    $('#hoSay').textContent = n ? NOTE[picks[n - 1]][n - 1] : 'Honda arrives in Los Angeles to sell big motorcycles. The staff ride Super Cubs on errands.';
+    ['hoPlan', 'hoCub'].forEach(id => $('#' + id).disabled = n >= YEARS.length);
+  });
+  $('#hoPlan').addEventListener('click', () => { if (picks.length < 5){ picks.push('plan'); draw(); } });
+  $('#hoCub').addEventListener('click', () => { if (picks.length < 5){ picks.push('cub'); draw(); } });
+  $('#hoReset').addEventListener('click', () => { picks = []; draw(); });
+  draw();
+}
+
+/* ---------- 4: what your week funds ---------- */
+{ const el = $('#raSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 240, x0 = 40, x1 = W - 16, y0 = 24, y1 = H - 34; vb(el, W, H);
+    let w = +$('#raW').value; const prot = $('#raP').checked; if (prot) w = Math.min(w, 10); out('raW', w);
+    const f = 20 - w; $('#raF').textContent = f + ' h / week';
+    const car = [], fam = []; let c = 3, m = 5;
+    for (let yr = 0; yr <= 20; yr++){
+      car.push(c); fam.push(m);
+      c = c + (w / 20) * .55 * (1 - c / 10) + .05;
+      const lagged = yr < 3 ? .2 : 1; /* family returns arrive slowly */
+      m = clamp(m + ((f - 8) / 12) * .5 * lagged - (yr > 12 && f < 8 ? .25 : 0), 0, 10);
+    }
+    const X = yr => x0 + (x1 - x0) * yr / 20, Y = v => y1 - (y1 - y0) * v / 10;
+    let g = axes(x0, y0, x1, y1);
+    [0, 5, 10, 15, 20].forEach(yr => g += TX(X(yr), y1 + 16, yr === 0 ? 'now' : yr + ' yrs', 'faint', 10.5, 'middle'));
+    g += `<path d="${pathOf(car.map((v, i) => [X(i), Y(v)]))}" ${S('glow', 2.5, ';stroke-linejoin:round')}/>`;
+    g += `<path d="${pathOf(fam.map((v, i) => [X(i), Y(v)]))}" ${S('cool', 2.5, ';stroke-linejoin:round')}/>`;
+    g += TX(X(20) - 4, Y(car[20]) - 8, 'career', 'glow', 11, 'end') + TX(X(20) - 4, Y(fam[20]) + (Math.abs(fam[20] - car[20]) < .8 ? 18 : -8), 'family', 'cool', 11, 'end');
+    el.innerHTML = g;
+    const cf = car[20], ff = fam[20];
+    $('#raSay').textContent = ff < 3 ? 'A strong career, and a family that learned to live without you. Nobody chose this; the weekly hours chose it.' :
+      ff < 6 ? 'The career did well. The family is holding, but distant. Those hours were the difference.' :
+      cf < 5 ? 'A close family, and a career that grew more slowly than it could have. Some people would gladly take this trade.' : 'Both grew. The family time was protected first, and work got the rest.';
+  });
+  $('#raW').addEventListener('input', draw); $('#raP').addEventListener('change', draw);
+  draw();
+}
+
+/* ---------- 5: the ticking clock ---------- */
+{ const el = $('#tcSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 240, x0 = 40, x1 = W - 16, y0 = 24, y1 = H - 34; vb(el, W, H);
+    const s = +$('#tcS').value; out('tcS', s);
+    const pts = []; let v = 4;
+    for (let a = 0; a <= 18; a++){
+      pts.push(v);
+      if (a >= s) v += (10 - v) * (a < 12 ? .16 : .05); /* early years absorb investment fastest */
+      else v -= a >= 11 ? .45 : .12;
+      v = clamp(v, 0, 10);
+    }
+    const X = a => x0 + (x1 - x0) * a / 18, Y = q => y1 - (y1 - y0) * q / 10;
+    let g = `<rect x="${X(13)}" y="${y0}" width="${X(17) - X(13)}" height="${y1 - y0}" ${F('cool-soft')}/>` + TX((X(13) + X(17)) / 2, y0 + 14, 'TEEN YEARS', 'cool', 10, 'middle', 'letter-spacing="1.3"');
+    g += axes(x0, y0, x1, y1);
+    [0, 3, 6, 9, 12, 15, 18].forEach(a => g += TX(X(a), y1 + 16, a, 'faint', 10.5, 'middle'));
+    g += `<line x1="${X(s)}" y1="${y0}" x2="${X(s)}" y2="${y1}" ${S('glow', 1.5, ';stroke-dasharray:5 4')}/>` + TX(X(s) + 5, y1 - 8, 'you start', 'glow', 10.5, X(s) > x1 - 70 ? 'end' : 'start');
+    g += `<path d="${pathOf(pts.map((q, a) => [X(a), Y(q)]))}" ${S('text', 2.5, ';stroke-linejoin:round')}/>`;
+    g += `<circle cx="${X(15)}" cy="${Y(pts[15])}" r="5" ${F('cool')}/>`;
+    el.innerHTML = g;
+    const r = pts[15]; $('#tcV').textContent = r.toFixed(1) + ' / 10';
+    $('#tcSay').textContent = s <= 3 ? 'You invested early, when it cost the least. By the teen years there is a relationship to lean on.' :
+      s <= 8 ? 'A later start, but in time. The relationship is there when it matters, if a little thinner.' :
+      s <= 11 ? 'You started just before the teen years. You\'re building while they\'re already pulling away.' : 'By the time you started, they had other places to turn. The investment was due years ago.';
+  });
+  $('#tcS').addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 6: design for the job ---------- */
+{ const WHO = [
+    ['Morning commuter', 'Make a long, boring drive interesting, and keep me full until lunch.', [['Thicker, so it lasts the whole drive', 3], ['Little chunks of fruit for surprise', 2], ['Faster to buy: a prepaid card at the counter', 2], ['Smaller, kid-sized portion', -2], ['A free toy', -1]]],
+    ['Parent in the afternoon', 'Give my child a treat, and feel like a good parent, without a long wait.', [['Thicker, so it lasts the whole drive', -2], ['Smaller, kid-sized portion', 3], ['Thinner, so it\'s quick to drink', 2], ['A free toy', 1], ['Faster to buy: a prepaid card at the counter', 1]]],
+    ['Your partner, after a hard day', 'Help me feel understood and less alone with all of this.', [['Clean the kitchen without being asked', 1], ['Ask about the day, and listen', 4], ['Offer three solutions to the problem', -1], ['Take over bedtime so they can rest', 2], ['Check your phone while they talk', -3]]] ];
+  let who = 0; const on = new Set(), el = $('#msSvg');
+  $('#msW').innerHTML = WHO.map((w, i) => `<button class="btn" type="button" data-w="${i}" aria-pressed="${i === 0}">${w[0]}</button>`).join('');
+  const toggles = () => { on.clear(); $('#msT').innerHTML = WHO[who][2].map(([l], i) => `<label class="tg"><input type="checkbox" data-o="${i}"><span>${l}</span></label>`).join('');
+    $$('#msT input').forEach(c => c.addEventListener('change', () => { c.checked ? on.add(+c.dataset.o) : on.delete(+c.dataset.o); draw(); })); };
+  $$('#msW [data-w]').forEach(b => b.addEventListener('click', () => { who = +b.dataset.w; press($$('#msW [data-w]'), b); toggles(); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 130; vb(el, W, H);
+    const opts = WHO[who][2], best = opts.reduce((a, [, s]) => a + Math.max(0, s), 0);
+    const sc = [...on].reduce((a, i) => a + opts[i][1], 0), frac = clamp(sc / best, -0.4, 1);
+    const x0 = 20, x1 = W - 20, mid = x0 + (x1 - x0) * .3, y = 52;
+    let g = TX(x0, 22, 'MISSES THE JOB', 'bad', 10, 'start', 'letter-spacing="1.3"') + TX(x1, 22, 'DOES THE JOB', 'glow', 10, 'end', 'letter-spacing="1.3"');
+    g += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="28" rx="14" ${FS('panel-2', 'line', 1)}/>`;
+    g += `<line x1="${mid}" y1="${y - 6}" x2="${mid}" y2="${y + 34}" ${S('faint', 1.5)}/>`;
+    const fx = frac >= 0 ? mid + (x1 - mid) * frac : mid + (mid - x0) * frac / .4;
+    g += `<rect x="${Math.min(mid, fx).toFixed(1)}" y="${y}" width="${Math.abs(fx - mid).toFixed(1)}" height="28" rx="6" ${F(frac >= 0 ? 'glow' : 'bad', .85)}/>`;
+    g += `<circle cx="${fx.toFixed(1)}" cy="${y + 14}" r="9" ${FS('text', 'deep', 2)}/>`;
+    g += TX(mid, y + 52, 'nothing offered', 'faint', 10.5, 'middle');
+    el.innerHTML = g;
+    $('#msV').textContent = Math.round(Math.max(0, frac) * 100) + '%';
+    const neg = [...on].some(i => opts[i][1] < 0);
+    $('#msSay').textContent = `“${WHO[who][1]}” ` + (neg ? 'Something you added works against that job.' : frac >= .85 ? 'You\'ve understood the job.' : on.size ? 'Closer. What else would do this job?' : '');
+  });
+  toggles(); draw();
+}
+
+/* ---------- 7: one more plank (Dell and ASUS) ---------- */
+{ const STEPS = [['Simple circuit boards', 'ASUS offers to make the simple circuits for 20 percent less. Dell agrees. Its assets shrink and its return on assets rises.'],
+    ['Motherboards', 'ASUS offers to make the motherboards too. Same logic, better numbers. Dell agrees.'],
+    ['Assembling the computer', 'Then the whole assembly. Dell no longer needs those factories. The ratio looks even better.'],
+    ['Managing the supply chain', 'ASUS takes over sourcing parts and logistics. Dell\'s balance sheet is lighter still.'],
+    ['Designing the computer', 'Finally, ASUS designs the machine. Dell keeps the brand and the customers.'],
+    ['', 'ASUS announces it will sell computers under its own name. It now has every capability Dell handed over. Dell has the brand, and little else.']];
+  let k = 0; const el = $('#thSvg'), ROA = [12, 15, 19, 24, 29, 33];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, rowH = 38, H = 5 * rowH + 56; vb(el, W, H);
+    const cw = nw ? 132 : 230, gx = nw ? 96 : 200, xD = 16, xA = W - 16 - cw;
+    let g = TX(xD + cw / 2, 20, 'DELL', 'glow', 11, 'middle', 'letter-spacing="1.5"') + TX(xA + cw / 2, 20, 'ASUS', 'cool', 11, 'middle', 'letter-spacing="1.5"');
+    g += `<rect x="${xD}" y="30" width="${cw}" height="${5 * rowH + 10}" rx="10" ${FS('panel', 'glow-line', 1)}/><rect x="${xA}" y="30" width="${cw}" height="${5 * rowH + 10}" rx="10" ${FS('panel', 'cool-line', 1)}/>`;
+    STEPS.slice(0, 5).forEach(([l], i) => { const y = 36 + (4 - i) * rowH, moved = i < k, x = moved ? xA : xD;
+      g += `<rect x="${x + 6}" y="${y}" width="${cw - 12}" height="${rowH - 6}" rx="6" ${F(moved ? 'cool' : 'glow', moved ? .3 : .22)}/>` + TX(x + cw / 2, y + rowH / 2 + 1, l, 'text', nw ? 10 : 12, 'middle'); });
+    if (k === 6) g += `<rect x="${xA + 6}" y="${H - 18}" width="${cw - 12}" height="14" rx="4" ${F('cool')}/>` + TX(xA + cw / 2, H - 7.5, 'ASUS-BRAND PCs', 'deep', 9.5, 'middle', 'font-weight="700"');
+    else g += TX(W / 2, H - 8, k ? `${k} of 5 handed over` : 'Theseus\'s ship, plank by plank', 'faint', 10.5, 'middle');
+    g += arrowHead(W / 2 + 18, 30 + (5 * rowH + 10) / 2, 0, 'faint') + `<line x1="${W / 2 - 18}" y1="${30 + (5 * rowH + 10) / 2}" x2="${W / 2 + 14}" y2="${30 + (5 * rowH + 10) / 2}" ${S('faint', 1.5)}/>`;
+    el.innerHTML = g;
+    $('#thR').textContent = ROA[Math.min(k, 5)] + '%';
+    $('#thSay').textContent = k === 0 ? 'Dell makes most of its own computers. ASUS is a small supplier offering to help.' : STEPS[k - 1][1];
+    $('#thNext').textContent = k === 5 ? 'What happens next' : 'Outsource the next piece'; $('#thNext').disabled = k === 6;
+  });
+  $('#thNext').addEventListener('click', () => { k = Math.min(6, k + 1); draw(); });
+  $('#thReset').addEventListener('click', () => { k = 0; draw(); });
+  draw();
+}
+
+/* ---------- 8: who has taken the course? ---------- */
+{ const COURSES = ['Built something from nothing', 'Sold a product no one knew', 'Ran a big established team', 'Turned around a failing unit', 'Worked with almost no budget'];
+  const A = { n: 'Alex', r: 'VP at a Fortune 500 company, top MBA', x: [1, 2, 9, 4, 1] }, B = { n: 'Bea', r: 'Ran two small start-ups, one failed', x: [9, 8, 3, 6, 9] };
+  const JOBS = [['Open a new plant from scratch', [0, 4]], ['Launch a product nobody has heard of', [1, 4]], ['Run a mature division', [2]], ['Rescue a struggling team', [3, 2]]];
+  let j = 0; const el = $('#seSvg');
+  $('#seJ').innerHTML = JOBS.map(([l], i) => `<button class="btn" type="button" data-j="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $$('#seJ [data-j]').forEach(b => b.addEventListener('click', () => { j = +b.dataset.j; press($$('#seJ [data-j]'), b); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, rowH = 34, H = COURSES.length * rowH + 64, lx = nw ? 150 : 250, x1 = W - 16, bw = (x1 - lx - 12) / 2; vb(el, W, H);
+    const need = JOBS[j][1];
+    let g = TX(lx + bw / 2, 18, A.n.toUpperCase(), 'muted', 11, 'middle', 'letter-spacing="1.5"') + TX(lx + bw * 1.5 + 12, 18, B.n.toUpperCase(), 'muted', 11, 'middle', 'letter-spacing="1.5"');
+    if (!nw) g += TX(lx + bw / 2, 32, A.r, 'faint', 10, 'middle') + TX(lx + bw * 1.5 + 12, 32, B.r, 'faint', 10, 'middle');
+    COURSES.forEach((c, i) => { const y = 42 + i * rowH, req = need.includes(i);
+      if (req) g += `<rect x="4" y="${y - 2}" width="${W - 8}" height="${rowH - 2}" rx="6" ${F('glow-soft')}/>`;
+      g += (nw ? wrap(lx - 10, y + rowH / 2 - 2, c, 20, 12, req ? 'text' : 'faint', 11, 'end') : TX(lx - 10, y + rowH / 2 + 2, c, req ? 'text' : 'faint', 12.5, 'end'));
+      [[A, lx], [B, lx + bw + 12]].forEach(([p, x]) => { g += `<rect x="${x}" y="${y + 6}" width="${bw}" height="${rowH - 16}" rx="4" ${F('panel-2')}/><rect x="${x}" y="${y + 6}" width="${(bw * p.x[i] / 10).toFixed(1)}" height="${rowH - 16}" rx="4" ${F(req ? 'glow' : 'faint', req ? .85 : .45)}/>`; });
+    });
+    const sa = need.reduce((s, i) => s + A.x[i], 0) / need.length, sb = need.reduce((s, i) => s + B.x[i], 0) / need.length;
+    g += TX(lx + bw / 2, H - 8, 'fit ' + sa.toFixed(1), sa >= sb ? 'glow' : 'faint', 12, 'middle', 'font-family="Geist Mono, monospace"') + TX(lx + bw * 1.5 + 12, H - 8, 'fit ' + sb.toFixed(1), sb > sa ? 'glow' : 'faint', 12, 'middle', 'font-family="Geist Mono, monospace"');
+    el.innerHTML = g;
+    const win = sb > sa ? B : A; $('#seV').textContent = win.n;
+    $('#seSay').textContent = win === B ? `Bea's résumé is less impressive, but she has already taken the courses this job teaches: ${need.map(i => COURSES[i].toLowerCase()).join(' and ')}.` :
+      'This time the big-company résumé is the right school: Alex has done exactly this before. The question is always which courses the job needs.';
+  });
+  draw();
+}
+
+/* ---------- 9: the agreement matrix ---------- */
+{ const Q = { power: ['Power tools', 'Rules, rewards and consequences: "because I said so." Common with small children, but it only works while you\'re watching.'],
+    lead: ['Leadership tools', 'Everyone wants the same thing but argues about how. A clear vision, a story about who we are, and a parent who leads by example.'],
+    mgmt: ['Management tools', 'Everyone knows how things are done, but not why. Routines, chore charts and checklists keep it running while you explain the why.'],
+    cult: ['Culture tools', 'Agreement on both. Traditions and "this is how our family does it" do the work, even when you\'re not in the room.'] };
+  const el = $('#amSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), S0 = nw ? 300 : 320, W = nw ? 360 : 660, H = S0 + 50; vb(el, W, H);
+    const w = +$('#amW').value, h = +$('#amH').value; out('amW', w); out('amH', h);
+    const x0 = nw ? 44 : (W - S0) / 2, y0 = 10, x1 = x0 + S0, y1 = y0 + S0, mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+    const q = w >= 5 ? (h >= 5 ? 'cult' : 'lead') : (h >= 5 ? 'mgmt' : 'power');
+    const cell = (k, x, y) => `<rect x="${x}" y="${y}" width="${S0 / 2}" height="${S0 / 2}" ${F(k === q ? 'glow' : 'panel-2', k === q ? .2 : 1)} /><text x="${x + S0 / 4}" y="${y + S0 / 4 + 4}" font-size="${nw ? 12 : 13}" text-anchor="middle" ${F(k === q ? 'glow' : 'muted')}>${Q[k][0]}</text>`;
+    let g = cell('lead', x0, y0) + cell('cult', mx, y0) + cell('power', x0, my) + cell('mgmt', mx, my);
+    g += `<rect x="${x0}" y="${y0}" width="${S0}" height="${S0}" ${S('line', 1.5)}/><line x1="${mx}" y1="${y0}" x2="${mx}" y2="${y1}" ${S('line', 1)}/><line x1="${x0}" y1="${my}" x2="${x1}" y2="${my}" ${S('line', 1)}/>`;
+    g += TX((x0 + x1) / 2, y1 + 20, 'agreement on how to get it →', 'faint', 11, 'middle');
+    g += `<text x="${x0 - 14}" y="${(y0 + y1) / 2}" font-size="11" text-anchor="middle" transform="rotate(-90 ${x0 - 14} ${(y0 + y1) / 2})" ${F('faint')}>agreement on what we want →</text>`;
+    const px = x0 + S0 * h / 10, py = y1 - S0 * w / 10;
+    g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="10" ${FS('cool', 'deep', 2.5)}/>`;
+    el.innerHTML = g;
+    $('#amT').textContent = Q[q][0]; $('#amSay').textContent = Q[q][1];
+  });
+  ['amW', 'amH'].forEach(id => $('#' + id).addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 10: just this once ---------- */
+{ const TEMPT = ['Your report is due and a number is slightly off. Round it in your favour, just this once?', 'A client asks you to backdate an invoice. It\'s a small favour.', 'Last month\'s rounding needs a bigger adjustment to stay hidden.', 'A colleague asks you to sign off something you haven\'t checked. Everyone does.', 'The gap is bigger now. Moving it into an account nobody checks would buy time.', 'One big bet could win it all back.', 'Auditors are asking questions. A small lie would end them.', 'There is no small option left.'];
+  let hist = [], drift = 0; const el = $('#jtSvg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 220, x0 = 30, x1 = W - 16, y0 = 24, y1 = H - 30; vb(el, W, H);
+    const X = i => x0 + (x1 - x0) * i / TEMPT.length, Y = d => y0 + (y1 - y0) * Math.min(d, 10) / 10;
+    let g = `<line x1="${x0}" y1="${y0}" x2="${x1}" y2="${y0}" ${S('glow', 2)}/>` + TX(x0, y0 - 8, 'YOUR PRINCIPLE', 'glow', 10, 'start', 'letter-spacing="1.3"');
+    g += `<rect x="${x0}" y="${Y(7)}" width="${x1 - x0}" height="${y1 - Y(7)}" ${F('bad-soft')}/>` + TX(x1 - 4, y1 - 6, 'NO WAY BACK', 'bad', 10, 'end', 'letter-spacing="1.3"');
+    let d = 0; const pts = [[X(0), Y(0)]];
+    hist.forEach((h, i) => { if (h){ const n = hist.slice(0, i + 1).filter(Boolean).length; d += .6 + n * .35; } pts.push([X(i + 1), Y(d)]); });
+    g += `<path d="${pathOf(pts)}" ${S('text', 2.5, ';stroke-linejoin:round')}/>`;
+    pts.slice(1).forEach(([x, y], i) => g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" ${F(hist[i] ? 'bad' : 'good')}/>`);
+    for (let i = 1; i <= TEMPT.length; i++) g += TX(X(i), y1 + 16, i, 'faint', 10, 'middle');
+    el.innerHTML = g; drift = d;
+    const n = hist.length, all = $('#jtAll').checked;
+    $('#jtV').textContent = drift.toFixed(1) + (drift >= 7 ? ' · past the point' : '');
+    $('#jtEx').disabled = all || n >= TEMPT.length || drift >= 7; $('#jtHold').disabled = n >= TEMPT.length || drift >= 7;
+    $('#jtSay').textContent = drift >= 7 ? 'Nobody plans to end up here. Each step was only a little further than the last one.' :
+      n >= TEMPT.length ? (drift === 0 ? 'Every month held. With the line decided in advance, temptations become easy to say no to.' : 'You held in the end, but the line is not where it started.') :
+      (all ? 'Decided in advance: ' : '') + TEMPT[n] + (all ? ' Not an option, so there\'s nothing to decide.' : '');
+  });
+  $('#jtEx').addEventListener('click', () => { hist.push(true); draw(); });
+  $('#jtHold').addEventListener('click', () => { hist.push(false); draw(); });
+  $('#jtReset').addEventListener('click', () => { hist = []; draw(); });
+  $('#jtAll').addEventListener('change', draw);
+  draw();
+}
+
+/* ---------- 11: your yardstick ---------- */
+{ let L = store.get('hm-notches', []); const P = store.get('hm-purpose', {}), el = $('#ypSvg');
+  if (P.l) $('#ypL').value = P.l; if (P.c) $('#ypC').value = P.c;
+  const tip = t => { $('#ypTip').textContent = t; setTimeout(() => { if ($('#ypTip').textContent === t) $('#ypTip').textContent = ''; }, 2500); };
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 340 : 520, H = 110; vb(el, W, H);
+    const x0 = 14, x1 = W - 14, y = 40;
+    let g = `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="34" rx="4" ${FS('glow-soft', 'glow-line', 1.5)}/>`;
+    for (let t = 0; t <= 36; t++){ const x = x0 + (x1 - x0) * t / 36; g += `<line x1="${x.toFixed(1)}" y1="${y}" x2="${x.toFixed(1)}" y2="${y + (t % 12 === 0 ? 18 : t % 3 === 0 ? 12 : 6)}" ${S('glow', 1, ';stroke-opacity:.7')}/>`; }
+    const n = L.length;
+    L.forEach((p, i) => { const x = x0 + (x1 - x0) * (i + .5) / Math.max(n, 6), nm = p.n.split(/[:,]/)[0].slice(0, 12);
+      g += `<line x1="${x.toFixed(1)}" y1="${y - 6}" x2="${x.toFixed(1)}" y2="${y + 34}" ${S(p.d ? 'cool' : 'text', 2.5)}/>` + TX(x, y - 12, esc(nm), p.d ? 'cool' : 'text', 10.5, 'middle'); });
+    if (!n) g += TX(W / 2, y + 56, 'Each person you help adds a notch.', 'faint', 11, 'middle');
+    else g += TX(W / 2, y + 56, `${n} ${n === 1 ? 'person' : 'people'} · ${L.filter(x => x.d).length} helped so far`, 'faint', 11, 'middle');
+    el.innerHTML = g;
+    $('#ypList').innerHTML = n ? L.map((p, i) => `<label class="${p.d ? 'done' : ''}"><input type="checkbox" data-i="${i}"${p.d ? ' checked' : ''}><span>${esc(p.n)}</span><button type="button" data-x="${i}" aria-label="Remove">✕</button></label>`).join('') : '<p class="empty">No notches yet.</p>';
+    $$('#ypList input').forEach(c => c.addEventListener('change', () => { L[+c.dataset.i].d = c.checked; store.set('hm-notches', L); draw(); renderCard(); }));
+    $$('#ypList [data-x]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); L.splice(+b.dataset.x, 1); store.set('hm-notches', L); draw(); renderCard(); }));
+  });
+  const savePurpose = () => store.set('hm-purpose', { l: $('#ypL').value.trim(), c: $('#ypC').value.trim() });
+  $('#ypAdd').addEventListener('click', () => { const v = $('#ypN').value.trim(); if (!v){ tip('Write a name and how you\'ll help.'); return; } L.push({ n: v, d: false }); $('#ypN').value = ''; store.set('hm-notches', L); savePurpose(); draw(); renderCard(); tip('Notch added.'); });
+  $('#ypN').addEventListener('keydown', e => { if (e.key === 'Enter') $('#ypAdd').click(); });
+  $('#ypSave').addEventListener('click', () => { savePurpose(); renderCard(); tip('Saved in this browser.'); });
+  $('#ypClear').addEventListener('click', () => { L = []; $('#ypL').value = ''; $('#ypC').value = ''; $('#ypN').value = ''; store.set('hm-notches', L); store.set('hm-purpose', {}); draw(); renderCard(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>

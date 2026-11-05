@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>So Good They Can't Ignore You, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a craftsman's workshop. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped by the book's four rules plus the conclusion.
+   Dark-first: warm walnut with a copper accent and a steel-blue second series; light mode is workshop paper. */
+:root{
+  color-scheme: dark;
+  --ink:#14110E;--panel:#1C1814;--panel-2:#26211B;--line:#3A3229;--text:#F4EFE7;--muted:#B9AE9F;--faint:#8A7F72;
+  --glow:#EE9A5B;--glow-soft:rgba(238,154,91,.11);--hl:rgba(238,154,91,.26);--cool:#8DBBDF;--cool-soft:rgba(141,187,223,.1);
+  --good:#9AD67F;--good-soft:rgba(154,214,127,.1);--bad:#FF7F6E;--bad-soft:rgba(255,127,110,.12);
+  --soft:#DDD4C7;--deep:#0E0C0A;--toc-bg:rgba(28,24,20,.74);--glow-line:rgba(238,154,91,.36);--cool-line:rgba(141,187,223,.3);--on-glow:#2A1404;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F1E8;--panel:#FFFCF6;--panel-2:#EEE6D8;--line:#DCD1BF;--text:#1F1913;--muted:#5E554A;--faint:#8A8074;
+  --glow:#A4500F;--glow-soft:rgba(164,80,15,.06);--hl:#F7DCC2;--cool:#2D5F8E;--cool-soft:rgba(45,95,142,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2E2720;--deep:#FBF8F2;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(164,80,15,.28);--cool-line:rgba(45,95,142,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F1E8;--panel:#FFFCF6;--panel-2:#EEE6D8;--line:#DCD1BF;--text:#1F1913;--muted:#5E554A;--faint:#8A8074;
+  --glow:#A4500F;--glow-soft:rgba(164,80,15,.06);--hl:#F7DCC2;--cool:#2D5F8E;--cool-soft:rgba(45,95,142,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2E2720;--deep:#FBF8F2;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(164,80,15,.28);--cool-line:rgba(45,95,142,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+/* ---------- So Good They Can't Ignore You additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.capfig{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.capfig-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.capfig-top .moves{gap:6px}
+.capfig-top .btn{padding:5px 11px}
+.capfig-stage{padding:10px 10px 4px}
+.capfig-stage svg{display:block;width:100%;height:auto}
+.capfig .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.capfig .cap b{color:var(--glow);font-weight:600}
+.field label output{font-family:var(--f-mono);color:var(--text);float:right}
+.field input[type=range]{padding:0;border:0;background:transparent}
+.reframe{display:grid;gap:12px;padding:18px}
+.rf-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rf-card{display:grid;gap:6px;align-content:start;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);transition:opacity .2s}
+.rf-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.rf-card.pm .k{color:var(--cool)} .rf-card.cm .k{color:var(--glow)}
+.rf-card b{font-family:var(--f-display);font-weight:400;font-size:21px;line-height:1.2}
+.rf-card p{font-size:14.5px;color:var(--soft)}
+.rf-card.dim{opacity:.45}
+.gates{display:grid;gap:10px;padding:18px}
+.gate{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.gate p{font-size:14.5px}
+.gate .moves{gap:6px}
+.gate.fail{border-color:var(--bad);background:var(--bad-soft)}
+.gate.pass{border-color:var(--good);background:var(--good-soft)}
+.verdict{padding:12px 16px;border-radius:12px;border:1px solid var(--line);font-size:15px}
+.verdict b{color:var(--glow)}
+.hours{display:grid;gap:12px;padding:18px}
+.hours .entry{display:flex;flex-wrap:wrap;gap:8px;align-items:end}
+.hours .entry .field{flex:1 1 140px}
+.plan-card{display:grid;gap:6px;padding:14px 16px;border:1px solid var(--glow-line);border-radius:12px;background:var(--glow-soft)}
+.plan-card div{font-size:14.5px;color:var(--soft)}
+.plan-card div b{color:var(--text);font-weight:600}
+@media (max-width: 560px){ .fq{padding:14px 16px} .rf-cards{grid-template-columns:1fr} .reframe,.gates,.hours{padding:14px} .gate{grid-template-columns:1fr} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Cal Newport's book</div>
+    <h1><em>So Good They Can't Ignore You</em>,<br>Explained</h1>
+    <p class="lede">Cal Newport was finishing a PhD in computer science at MIT and wondering what to do next when he set out to answer a simple question: why do some people end up loving their work while so many others don't? His answer turns the usual advice upside down. <b>So Good They Can't Ignore You</b> argues that "follow your passion" is bad advice, that passion usually comes <i>after</i> you get good at something valuable, and that the traits people love about great work are rare, so you have to earn them with rare and valuable skills. This guide takes the introduction, all fifteen chapters across the book's four rules and the conclusion, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Stop asking what the world can offer <em>you</em>. Ask what you can offer the world, get <em>so good</em> at it that you can't be ignored, and trade that skill for the work you'll love.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you wrestling with?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="capfig" style="margin:0" aria-label="A career capital account: how years of practice unlock the traits of great work">
+        <div class="capfig-top"><span>How you spend your working years</span><div class="moves" id="hcMode"></div></div>
+        <div class="capfig-stage"><svg id="hcSvg" viewBox="0 0 400 240" role="img" aria-label="Career capital building up over the years, with the traits of great work it can buy"></svg></div>
+        <div class="row" style="padding:0 16px 12px"><div class="ctl"><label for="hcYears">Years at it <output id="ohcYears"></output></label><input type="range" id="hcYears" min="0" max="12" step="1" value="4"></div></div>
+        <div class="cap" id="hcCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The four rules">
+      <a href="#part1"><span class="n">Rule 1 · chapters 1 to 3</span><span class="q">Don't Follow Your Passion</span><span class="d">Why the passion hypothesis is rare, backwards and risky</span></a>
+      <a href="#part2"><span class="n">Rule 2 · chapters 4 to 7</span><span class="q">Be So Good They Can't Ignore You</span><span class="d">The craftsman mindset and career capital</span></a>
+      <a href="#part3"><span class="n">Rule 3 · chapters 8 to 11</span><span class="q">Turn Down a Promotion</span><span class="d">Control, and the two traps on the way to it</span></a>
+      <a href="#part4"><span class="n">Rule 4 · chapters 12 to 15</span><span class="q">Think Small, Act Big</span><span class="d">Finding a mission at the edge of your field</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2012</span>
+      <span><b>Author</b> Cal Newport, computer scientist at Georgetown University and author of <i>Deep Work</i></span>
+      <span><b>Full title</b> So Good They Can't Ignore You: Why Skills Trump Passion in the Quest for Work You Love</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 17 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== DON'T FOLLOW YOUR PASSION ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Rule 1</span>
+      <h2>Don't Follow Your Passion</h2>
+      <p>The most common career advice of our time says: work out what you're passionate about, then find a job that matches it. Newport calls this the passion hypothesis, and he spends the first rule taking it apart. Even its most famous champion didn't live by it, most people don't have a work passion waiting to be found, and the advice itself may be making people less happy.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Passion is rarely the cause of loving your work. More often it is the result of getting good at it.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why do some people love their work?</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>Newport asks why some people end up loving what they do while so many don't. The usual answer, follow your passion, turns out to be shaky, and the rest of the book offers a better one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A personal question.</b> Newport was close to finishing his doctorate in computer science at MIT and about to look for an academic job. Worried that the wrong choice could lock him into work he didn't love, he set out to find out how people actually end up with careers they find compelling.</span></li>
+          <li><span><b>The passion hypothesis.</b> The idea he tests is simple and everywhere: the key to loving your work is to discover a passion first, then find a job that matches it. It's on graduation stages, in career books and on every motivational poster.</span></li>
+          <li><span><b>Two mindsets.</b> He contrasts two ways of approaching work. The passion mindset keeps asking what the work offers you and whether it feels right. The craftsman mindset asks what value you're producing and how to get better at it.</span></li>
+          <li><span><b>Four rules.</b> The book is laid out as four rules: don't follow your passion; be so good they can't ignore you; turn down a promotion; and think small, act big. Each one comes from the stories of people who love what they do and how they got there.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport opens with a man he calls Thomas, who was sure that the right calling would make him happy. After years of searching, Thomas committed fully to a spiritual life and spent long stretches training at a Zen centre. He reached the level he had been striving for, and found that his everyday worries and unhappiness were still there. The calling he had matched himself to hadn't delivered what the passion story promised. For Newport, Thomas was a warning that matching yourself to a perfect calling is not the same as building a life you love.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: passion mindset or craftsman mindset?</div><div class="tally" id="tally1" aria-label="Score"></div></div>
+        <div class="sorter" id="sort1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The book's starting point is that "follow your passion" sounds wise but doesn't match how most people come to love their work. Notice which questions you ask about your own job: what it gives you, or what you can give through it.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The passion of Steve Jobs →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Even the famous example doesn't fit</div>
+        <h2>The "Passion" of Steve Jobs</h2>
+        <div class="short"><span class="lbl">In short</span><p>In his 2005 Stanford speech, Steve Jobs told graduates to find what they love and not settle. But Jobs's own early years show a young man who stumbled into technology for money and became passionate about it later.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The speech.</b> Jobs's commencement address at Stanford in 2005 has been watched millions of times. Its best-known line urges you to keep looking for work you love and not to settle. It's often held up as the clearest statement of the passion hypothesis.</span></li>
+          <li><span><b>What he was really into.</b> As a young man Jobs was drawn to Western history, dance and Eastern mysticism. He dropped out of Reed College, travelled in India and spent time at a commune. Technology wasn't the obvious calling of his youth.</span></li>
+          <li><span><b>A quick way to make money.</b> He took a night job at Atari for the cash and helped his friend Steve Wozniak sell circuit boards to hobbyists. When the owner of a local computer shop ordered fifty fully built machines, the pair scrambled to deliver them. Apple began as a promising small business, not a mission.</span></li>
+          <li><span><b>Passion came later.</b> Jobs's famous love for his work grew as Apple succeeded and as his skill, influence and freedom grew with it. If he had followed only his early passions, Newport notes, he might have ended up teaching at a Zen centre.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport retraces the months before Apple. Jobs was splitting his time between the All One Farm commune in Oregon and odd jobs back in California, still unsure what he wanted. The chance that changed things was small and practical: a computer shop owner in Mountain View wanted ready-made computers, not kits, and was willing to pay. Jobs saw a way to make good money fast. Newport's point isn't that Jobs lacked passion, but that the order was reversed. He got lucky with a small, well-timed venture, worked hard to make it good, and the passion grew with the success.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: Steve Jobs's early years</div><div class="hint">Step through the timeline and watch which line moves</div></div>
+        <div class="stage"><svg id="jbSvg" role="img" aria-label="A timeline of Steve Jobs's early years with two lines: interest in technology and skill and success"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="jbPrev" type="button">← Earlier</button><button class="btn primary" id="jbNext" type="button">Later →</button><span class="tip" id="jbStep"></span></div></div><div class="stats"><div class="stat"><span class="k">Where he is</span><span class="s" id="jbWhere"></span></div><div class="stat"><span class="k">What it shows</span><span class="s" id="jbWhat"></span></div></div><p class="callout">The two lines are a rough sketch for the lab, not measurements. <b>Watch the order: skill and success rise first, and the love of the work follows.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The poster child for "follow your passion" didn't follow one into technology. He fell into a small business, got good at it, and grew to love it. That order is what the rest of the book is about.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Passion is rare →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Most people don't have a work passion to find</div>
+        <h2>Passion Is Rare</h2>
+        <div class="short"><span class="lbl">In short</span><p>Research suggests that most people's passions have little to do with work, and that people who see their job as a calling usually got there by doing it well for years.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What students are passionate about.</b> In a 2003 study, the psychologist Robert Vallerand surveyed over five hundred Canadian university students. Most said they had a passion. But the top ones were dance, hockey, skiing, reading and swimming, and less than four percent of the passions named had anything to do with work or education.</span></li>
+          <li><span><b>Jobs, careers and callings.</b> The organisational psychologist Amy Wrzesniewski studied how people see their work: as a job that pays the bills, a career on a path upwards, or a calling that matters. Among a group of administrative assistants, all doing roughly the same work, each view was about equally common.</span></li>
+          <li><span><b>Time on the job.</b> The strongest predictor of seeing the work as a calling was how long someone had been doing it. The longer they'd been there, the more skilled they became, and the more likely they were to love it.</span></li>
+          <li><span><b>What actually drives motivation.</b> Self-determination theory, from Edward Deci and Richard Ryan, says we need three things to feel motivated at work: autonomy, competence and relatedness. Competence, the feeling of being good at something, comes from building skill. None of the three requires matching a pre-existing passion.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Wrzesniewski's administrative assistants are a quiet surprise. They held the same title and did similar work, yet a third of them described it as a calling. If passion came from the job matching your inner self, you'd expect very few callings in a job like that. Instead, the people who loved their work tended to be the ones who'd been at it longest. Passion, Newport concludes, is a side effect of mastery and experience, not a condition for starting.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: guess the passions</div><div class="hint">Make a guess, then see the study</div></div>
+        <div class="stage"><svg id="prSvg" role="img" aria-label="Your guess against the share of student passions that were related to work"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="prGuess">What share of students' passions do you think were about work or school? <output id="oprGuess"></output></label><input type="range" id="prGuess" min="0" max="80" step="1" value="35"></div></div><div class="row"><button class="btn primary" id="prReveal" type="button">Show the study</button><button class="btn" id="prCall" type="button" aria-pressed="false">Then: the calling curve</button></div></div><div class="stats"><div class="stat"><span class="k">Students with a passion</span><span class="v" id="prHave">?</span></div><div class="stat"><span class="k">Passions about work or school</span><span class="v glow" id="prWork">?</span></div><div class="stat"><span class="k">What it means</span><span class="s" id="prSay">Make your guess first.</span></div></div><p class="callout">The 84 percent and the under-four-percent figures are from Vallerand's 2003 study as Newport reports it. <b>The calling curve is an illustrative shape of Wrzesniewski's finding that experience predicted a calling, not her data.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you don't have a burning work passion, you're normal. For most people who love their jobs, the feeling came from getting good at the work over time.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Passion is dangerous →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Chasing the perfect match can make you less happy</div>
+        <h2>Passion Is Dangerous</h2>
+        <div class="short"><span class="lbl">In short</span><p>As the passion message has spread, job satisfaction has fallen. Telling people a perfect job is out there makes them restless and anxious, hopping from role to role before any one has the chance to become satisfying.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Satisfaction going down.</b> Newport cites Conference Board surveys showing that the share of Americans satisfied with their jobs has fallen over recent decades. In 2010 it was around 45 percent, down from about 61 percent in 1987.</span></li>
+          <li><span><b>While the passion talk went up.</b> Over the same years, the passion message became the standard career advice. Books like What Color Is Your Parachute? taught a generation to look inside for the right match, and the language of following your dreams spread everywhere.</span></li>
+          <li><span><b>Why it backfires.</b> If you believe a perfect job is waiting, every ordinary day at work looks like evidence that you're in the wrong place. That feeds chronic job-hopping and anxiety, because no job feels like a calling in its first months.</span></li>
+          <li><span><b>Not an argument against loving work.</b> Newport isn't saying passion is bad. He's saying that expecting to find it ready-made is the danger. Loving your work is a worthy goal; the passion hypothesis is a poor strategy for getting there.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Richard Bolles self-published What Color Is Your Parachute? in 1970, and it went on to sell millions of copies. Its central exercise asks readers to work out what they love and then hunt for a job that fits. Newport treats it as a sign of how thoroughly the passion message took over career advice in the decades that followed. If matching yourself to the right job were the answer, he argues, the generations raised on that advice should be the happiest workers yet. The surveys suggest otherwise.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: two careers over ten years</div><div class="hint">Watch what happens to capital when you keep starting over</div></div>
+        <div class="stage"><svg id="twSvg" role="img" aria-label="Career capital and satisfaction over ten years for a passion hopper and a craftsman who stays"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="twPat">The hopper quits if a job doesn't feel like a calling within <output id="otwPat"></output></label><input type="range" id="twPat" min="6" max="36" step="6" value="12"></div></div><div class="row"><button class="btn primary" id="twRun" type="button">Play ten years</button><button class="btn" id="twAgain" type="button">New ten years</button></div></div><div class="stats"><div class="stat"><span class="k">Hopper's jobs</span><span class="v" id="twJobs"></span></div><div class="stat"><span class="k">Hopper's capital at year 10</span><span class="v" id="twHop"></span></div><div class="stat"><span class="k">Craftsman's capital at year 10</span><span class="v glow" id="twCraft"></span></div></div><p class="callout">An illustrative model: skill builds with time in a role, part of it is lost with each fresh start, and satisfaction rises with capital. <b>The hopper is waiting for a feeling that only arrives after the skill does.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Believing a perfect job is out there can make the job you have feel wrong every day. Give work long enough to get good at it before judging whether it could be the one.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: The craftsman mindset →</a></div>
+    </section>
+    <!-- ===================== BE SO GOOD THEY CAN'T IGNORE YOU ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Rule 2 · or, the importance of skill</span>
+      <h2>Be So Good They Can't Ignore You</h2>
+      <p>If passion doesn't come first, what does? Newport's answer is a change of mindset. Instead of asking what the world can offer you, ask what you can offer the world, and then get very good at it. The traits that make work great are rare and valuable, so to get them you need something rare and valuable to trade. He calls that career capital, and he shows how people build it on purpose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The craftsman mindset, plus deliberate practice, builds the career capital that great work costs.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Focus on what you can offer the world</div>
+        <h2>The Clarity of the Craftsman</h2>
+        <div class="short"><span class="lbl">In short</span><p>Performers and craftspeople don't spend their time asking whether their work is their true calling. They focus on getting better at it. Newport calls this the craftsman mindset, and he argues anyone can adopt it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Steve Martin's advice.</b> Asked in a television interview how to make it as a performer, the comedian Steve Martin said his answer was always the same, and nobody liked it: be so good they can't ignore you. People wanted a trick. He was offering the hard part.</span></li>
+          <li><span><b>Two mindsets.</b> The passion mindset focuses on what the world can offer you: is this job fulfilling, is it really me? The craftsman mindset focuses on what you can offer the world: is my work getting better, is it valuable?</span></li>
+          <li><span><b>Why craft brings clarity.</b> The passion mindset keeps you stuck on questions with no clear answer, such as who you really are. The craftsman mindset gives you a concrete one: how do I get better at this? You can always work on that, wherever you are.</span></li>
+          <li><span><b>Feedback you can't argue with.</b> Performers get honest feedback every time they play. Newport admires how this keeps them honest. A song either works or it doesn't, and the only response is to improve it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport spent time with Jordan Tice, a young professional bluegrass guitarist. Tice didn't talk about destiny or whether music was his true self. He talked about getting better: practising pieces he couldn't yet play, recording himself, and pushing past the point where it felt comfortable. Newport noticed how little anxiety this left room for. Tice wasn't wondering if he'd picked the right life. He was busy with the next thing to improve, and that focus, not a search for the perfect match, was what made the work satisfying.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: swap the question</div><div class="hint">Pick a worry and switch mindsets</div></div>
+        <div class="reframe"><div class="moves" id="rfPick"></div><div class="row"><span class="tip">Look at it with the</span><button class="btn" id="rfPM" type="button" aria-pressed="true">Passion mindset</button><button class="btn" id="rfCM" type="button" aria-pressed="false">Craftsman mindset</button></div><div class="rf-cards" id="rfCards" aria-live="polite"></div></div><div class="stats"><div class="stat"><span class="k">The question you're asking</span><span class="s" id="rfQ"></span></div><div class="stat"><span class="k">Can you act on it today?</span><span class="v" id="rfAct"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Stop asking whether this is your true calling. Ask whether you're getting better and whether your work is valuable. The second question always has a next step.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Career capital →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Great work costs rare and valuable skills</div>
+        <h2>The Power of Career Capital</h2>
+        <div class="short"><span class="lbl">In short</span><p>The traits that make people love their work, such as creativity, impact and control, are rare and valuable. Basic economics says you need something rare and valuable to trade for them: skills Newport calls career capital.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What makes work great.</b> Newport boils it down to three traits: creativity, the chance to work on new and interesting things; impact, the chance to make a real difference; and control, a say in what you do and how you do it.</span></li>
+          <li><span><b>Supply and demand.</b> These traits are rare and valuable, so few jobs offer them and many people want them. Like anything scarce, they don't come free.</span></li>
+          <li><span><b>Career capital.</b> What you trade for them is career capital: rare and valuable skills. The rarer and more valuable your skills, the more creativity, impact and control you can ask for.</span></li>
+          <li><span><b>Why the craftsman mindset wins.</b> The craftsman mindset naturally builds career capital, because it keeps you focused on getting better and on producing value. The passion mindset often skips this, because it assumes the great job should be available right away.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Steve Martin's success looked sudden to the outside world, but it rested on a very long apprenticeship. As a teenager he sold magic tricks at a shop in Disneyland and began performing small routines. He spent around a decade developing a strange, original act in clubs and on the road, refining it night after night, before it took off and made him one of the biggest comedians in America. By the time the world noticed, he had something nobody else had. That, in Newport's terms, was his career capital: rare, valuable, and earned slowly.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: how much is your skill worth?</div><div class="hint">Move a skill to see what it can buy</div></div>
+        <div class="stage"><svg id="ccSvg" role="img" aria-label="A chart of how rare and how valuable a skill is, with what each zone can buy"></svg></div><div class="lab-ctl"><div class="moves" id="ccPre"></div><div class="row"><div class="ctl"><label for="ccRare">How rare is it? <output id="occRare"></output></label><input type="range" id="ccRare" min="0" max="100" value="30"></div><div class="ctl"><label for="ccVal">How valuable is it to others? <output id="occVal"></output></label><input type="range" id="ccVal" min="0" max="100" value="40"></div></div></div><div class="stats"><div class="stat"><span class="k">Career capital</span><span class="v glow" id="ccCap"></span></div><div class="stat"><span class="k">What it can buy</span><span class="s" id="ccBuy"></span></div></div><p class="callout">An illustrative model: capital here is rarity times value. <b>A skill that is only rare, or only valuable, buys very little. It needs to be both.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want work with creativity, impact and control, you'll need something rare and valuable to offer in return. Build that first, and the good traits become things you can ask for.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: The career capitalists →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · People who built it, and jobs that block it</div>
+        <h2>The Career Capitalists</h2>
+        <div class="short"><span class="lbl">In short</span><p>Newport meets people who loved their work and finds the same pattern: they built rare skills first, then cashed them in. He also names three kinds of job where the craftsman mindset won't work.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A TV writer.</b> Alex Berger reached the writers' room of a network television show in a few short years. He did it by treating screenwriting as a craft and judging his scripts by one measure: were they good enough that people in the industry couldn't ignore them?</span></li>
+          <li><span><b>Capital first, payoff second.</b> The career capitalists Newport interviewed didn't start with a dream job. They took jobs that let them build valuable skills, and later traded those skills for work with the traits they cared about.</span></li>
+          <li><span><b>Three disqualifiers.</b> The craftsman mindset fails in some jobs. Avoid jobs that give you few chances to stand out by building rare and valuable skills; jobs that focus on something you think is useless or actively bad for the world; and jobs that force you to work with people you really dislike.</span></li>
+          <li><span><b>Not just any job.</b> The advice isn't to grind away anywhere. It's to pick work that passes those three tests, then commit to getting good at it rather than waiting for it to feel perfect.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Newport met Alex Berger, Berger was a young writer in Hollywood who had climbed unusually fast. Others around him talked about their passion for storytelling and their big breaks. Berger talked about the work: drafts, rewrites and whether each script was getting better. In an industry built on who you know, he found that the most reliable way forward was to write something so good that people who read it wanted more. Each script added to his capital, and the capital, not luck or passion, opened the doors.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: does this job pass the three tests?</div><div class="hint">Pick a job or answer for your own</div></div>
+        <div class="gates"><div class="moves" id="gtPre"></div><div id="gtRows"></div><div class="verdict" id="gtV" aria-live="polite"></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most jobs can be a place to build career capital, but not all. If yours gives you no way to stand out, does harm, or traps you with people you dislike, the craftsman mindset won't rescue it.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Deliberate practice →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Deliberate practice, and the five habits</div>
+        <h2>Becoming a Craftsman</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most knowledge workers stop improving once they reach an acceptable level. The way past that plateau is deliberate practice: uncomfortable, focused work on what you can't yet do, with honest feedback.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>What separates experts.</b> The psychologist Anders Ericsson found that top performers aren't defined by hours alone but by deliberate practice: work designed to stretch you, with immediate feedback. Research on chess players found grandmasters had spent several times more hours in serious solo study than strong amateurs who'd played as long.</span></li>
+          <li><span><b>The acceptable plateau.</b> Most of us improve quickly at first, then settle once we're good enough. We keep working, but we stop getting better, because nothing stretches us any more.</span></li>
+          <li><span><b>Five habits of a craftsman.</b> Decide which capital market you're in; identify your capital type; define what good looks like; stretch and destroy, by working past comfort and welcoming honest feedback; and be patient.</span></li>
+          <li><span><b>Two kinds of market.</b> In a winner-take-all market, such as TV writing, one kind of skill counts and you just need more of it. In an auction market, such as many business careers, there are many kinds of capital, and you can choose which to build.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport describes how chess players train. A strong club player and a grandmaster may have played for the same number of years. What differs is how they spent them. The grandmaster put far more hours into serious study alone, working through positions just beyond their understanding and checking their analysis against the masters. Playing games is enjoyable and feels like practice. Hard study is uncomfortable and feels like work. Newport argues that most knowledge workers do the equivalent of only playing games, and wonder why they plateau.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the acceptable plateau</div><div class="hint">Change how much of your time stretches you</div></div>
+        <div class="stage"><svg id="dpSvg" role="img" aria-label="Skill over five years for comfortable work and for work with deliberate practice"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="dpStretch">Share of your working hours spent on deliberate practice <output id="odpStretch"></output></label><input type="range" id="dpStretch" min="0" max="40" step="5" value="10"></div><div class="ctl"><label for="dpFb">How quickly you get honest feedback <output id="odpFb"></output></label><input type="range" id="dpFb" min="1" max="3" step="1" value="2"></div></div></div><div class="stats"><div class="stat"><span class="k">Skill after five years</span><span class="v glow" id="dpSkill"></span></div><div class="stat"><span class="k">Comfortable work only</span><span class="v" id="dpBase"></span></div><div class="stat"><span class="k">Compared with the plateau</span><span class="s" id="dpSay"></span></div></div><p class="callout">An illustrative model of the plateau, not data. <b>Ordinary work levels off; stretch work keeps the line climbing, and faster feedback makes each hour count for more.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Doing your job for years isn't the same as getting better at it. Set aside time to work on what you can't yet do, with feedback that tells you the truth, and be patient while it adds up.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Control →</a></div>
+    </section>
+    <!-- ===================== TURN DOWN A PROMOTION ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Rule 3 · or, the importance of control</span>
+      <h2>Turn Down a Promotion</h2>
+      <p>Once you have career capital, what should you spend it on? Newport argues that control over what you do and how you do it is one of the best buys there is. But two traps wait on the way: grabbing control before you have anything to back it up, and being talked out of control once you've earned it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Spend career capital on control, and use one simple test to know when the time is right: will people pay for it?</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Control is one of the best things capital can buy</div>
+        <h2>The Dream-Job Elixir</h2>
+        <div class="short"><span class="lbl">In short</span><p>Giving people more control over what they do and how they do it is one of the most reliable ways to make work satisfying. Many of the people Newport met who loved their work had spent their capital on exactly that.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The research.</b> Studies in self-determination theory, and Daniel Pink's book Drive, point the same way: autonomy is strongly linked to happiness, engagement and a sense of fulfilment at work.</span></li>
+          <li><span><b>Results only.</b> Newport describes the Results-Only Work Environment, tried at Best Buy's headquarters, where staff could work whenever and wherever they liked as long as the work got done. Engagement went up and staff turnover fell.</span></li>
+          <li><span><b>Capital buys control.</b> The people with the most control in Newport's stories hadn't simply demanded it. They had built skills valuable enough that they could set more of their own terms.</span></li>
+          <li><span><b>Why turn down a promotion.</b> Promotions often bring more money and status but less control. The rule's title is a nudge: when you have capital to spend, consider spending it on autonomy instead of a bigger title.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ryan Voiland runs Red Fire Farm in Granby, Massachusetts, a successful organic farm, and loves the life it gives him. It's easy to read his story as following a dream, but Newport tells it differently. Voiland started growing and selling vegetables as a boy, studied agriculture, and spent years slowly learning the hard skills of farming and selling well, expanding only as each step proved itself. The farm's success, and the control over his days that came with it, rested on a long build-up of skill. The control was the payoff, not the starting point.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: the control dials</div><div class="hint">Turn up the kinds of control and watch engagement</div></div>
+        <div class="stage"><svg id="ctSvg" role="img" aria-label="A gauge of how engaged a person feels, driven by four kinds of control"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ctWhen">When I work <output id="octWhen"></output></label><input type="range" id="ctWhen" min="0" max="4" value="1"></div><div class="ctl"><label for="ctWhere">Where I work <output id="octWhere"></output></label><input type="range" id="ctWhere" min="0" max="4" value="1"></div></div><div class="row"><div class="ctl"><label for="ctWhat">What I work on <output id="octWhat"></output></label><input type="range" id="ctWhat" min="0" max="4" value="1"></div><div class="ctl"><label for="ctHow">How I do it <output id="octHow"></output></label><input type="range" id="ctHow" min="0" max="4" value="1"></div></div><div class="row"><button class="btn" id="ctBoss" type="button">Typical office job</button><button class="btn" id="ctRowe" type="button">Results only</button></div></div><div class="stats"><div class="stat"><span class="k">How engaged you feel</span><span class="v glow" id="ctEng"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="ctSay"></span></div></div><p class="callout">An illustrative model of the direction the research points, not a measured scale. <b>Control over what and how tends to matter even more than when and where.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you want to love your work, control is one of the best things to spend your skills on. Before accepting a bigger title, ask whether it gives you more say over your days or less.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The first control trap →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Control without capital doesn't last</div>
+        <h2>The First Control Trap</h2>
+        <div class="short"><span class="lbl">In short</span><p>Grabbing control before you have rare and valuable skills to back it up is a trap. It feels brave, but without capital you can't keep the freedom you've taken.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The courage culture.</b> A lot of popular advice says the only thing between you and your dream life is the courage to quit. Newport calls this the courage culture, and argues it leaves out the most important ingredient.</span></li>
+          <li><span><b>The first trap.</b> Control that's acquired without career capital isn't sustainable. You can take the leap, but if nobody values what you offer, the freedom collapses.</span></li>
+          <li><span><b>Why it's tempting.</b> Taking control is exciting and quick. Building capital is slow and dull. The first trap looks like boldness, which is why it catches so many people.</span></li>
+          <li><span><b>Courage isn't the bottleneck.</b> Newport doesn't say never take a leap. He says that leaps work when they're backed by skills people will pay for, and that courage alone is rarely what's missing.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport tells of a woman who left a steady corporate career to build a life around yoga. She had little experience in the field when she quit, took a short course to qualify as an instructor, and hoped to make a living teaching. The leap looked courageous, the kind of story the courage culture celebrates. But with few rare or valuable skills to offer in a crowded field, money soon ran tight and the freedom she wanted began to slip away. The problem wasn't her courage. It was that she'd reached for control before she had any capital to pay for it.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the sustainable zone</div><div class="hint">Set how much capital you have and how much control you take</div></div>
+        <div class="stage"><svg id="t1Svg" role="img" aria-label="A chart of career capital against control, with a sustainable zone and a trap zone"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="t1Cap">Career capital you have <output id="ot1Cap"></output></label><input type="range" id="t1Cap" min="0" max="100" value="20"></div><div class="ctl"><label for="t1Ask">Control you take <output id="ot1Ask"></output></label><input type="range" id="t1Ask" min="0" max="100" value="70"></div></div><div class="row"><button class="btn" id="t1Leap" type="button">Quit to follow the dream</button><button class="btn" id="t1Build" type="button">Build first, then leap</button></div></div><div class="stats"><div class="stat"><span class="k">Gap</span><span class="v" id="t1Gap"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="t1Say"></span></div></div><p class="callout">An illustrative model. <b>Above the line you've taken more control than your skills can pay for, and it tends to slide back down.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Quitting to chase freedom only works if you have something valuable enough to support it. Build the capital first, then make your move.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: The second control trap →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · When you've earned control, people push back</div>
+        <h2>The Second Control Trap</h2>
+        <div class="short"><span class="lbl">In short</span><p>The moment you have enough capital to win control is also the moment you become valuable enough that your employer will fight to keep you doing things their way.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The second trap.</b> Once you have capital, your employer has every reason to resist you gaining control, because control usually means you do less of what they want.</span></li>
+          <li><span><b>Offers that pull you back.</b> The pushback is rarely a flat refusal. It's more often a raise, a promotion or a bigger team: real rewards that come with less freedom to shape your own work.</span></li>
+          <li><span><b>Why it's hard.</b> Turning down money and status in favour of autonomy feels risky and odd to everyone around you. Newport admits this is one of the hardest calls in a career.</span></li>
+          <li><span><b>The timing problem.</b> Too early and you fall into the first trap; just right and you meet the second. You'll know you have enough capital partly because people start trying to keep you.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Newport describes people who reached the point where their skills gave them real bargaining power, and who wanted to use it to change how they worked: fewer hours, more freedom over projects, or work on their own terms. Their employers didn't want to lose them, so the response wasn't a no. It was a better offer to stay as they were: more pay, a promotion, a new title. That is where the rule "turn down a promotion" comes from. The people who ended up loving their work were often the ones who accepted less money or status in exchange for more control.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the counter-offer</div><div class="hint">Raise your capital and see how the pushback grows</div></div>
+        <div class="stage"><svg id="t2Svg" role="img" aria-label="Your leverage and your employer's pushback both rising with career capital"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="t2Cap">Career capital <output id="ot2Cap"></output></label><input type="range" id="t2Cap" min="0" max="100" value="60"></div></div><div class="row"><span class="tip">You ask for a four-day week and your own projects. Your boss offers a promotion instead.</span></div><div class="row"><button class="btn" id="t2Take" type="button">Take the promotion</button><button class="btn" id="t2Hold" type="button">Turn it down, keep asking</button></div></div><div class="stats"><div class="stat"><span class="k">Your leverage</span><span class="v glow" id="t2Lev"></span></div><div class="stat"><span class="k">Their pushback</span><span class="v" id="t2Push"></span></div><div class="stat"><span class="k">Five years on</span><span class="s" id="t2Say">Choose how to answer.</span></div></div><p class="callout">An illustrative model. <b>The pushback curve rises with your capital: the more valuable you become, the harder people try to keep you as you are.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you've earned the right to more control, expect to be offered something shinier instead. Know what you're actually after before the offer arrives.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: The law of financial viability →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Will people pay for it?</div>
+        <h2>Avoiding the Control Traps</h2>
+        <div class="short"><span class="lbl">In short</span><p>How do you tell the difference between the first trap and the second? Newport's test is simple: before chasing more control, check whether people are willing to pay you for what you'd be doing.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The law of financial viability.</b> When deciding whether to follow an appealing pursuit that gives you more control, seek evidence that people are willing to pay you for it. If they are, keep going. If not, move on or build more capital.</span></li>
+          <li><span><b>Money as a neutral signal.</b> Money isn't the goal here. It's a hard-to-fake measure of value. Friends will say your idea is great; strangers paying for it is evidence.</span></li>
+          <li><span><b>Separating the traps.</b> If people won't pay, you're probably in the first trap: reaching for control without capital. If people will pay but those around you push back, you're probably in the second, and should hold your ground.</span></li>
+          <li><span><b>Do what people will pay for.</b> Newport borrows a line from the entrepreneur Derek Sivers: do what people are willing to pay for. It cuts through both the courage culture and the fear of disappointing your employer.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Derek Sivers was a working musician who built CD Baby, an online store for independent musicians, almost by accident. Friends asked him to sell their CDs too, and the demand kept growing until it became a large business, which he sold in 2008. Sivers had a habit of testing ideas against whether people would actually pay before he committed to them. Newport finds in that habit the cleanest guide through the control traps: the market's willingness to pay tells you whether you have the capital you think you have.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: pass or fail the money test?</div><div class="tally" id="tally12" aria-label="Score"></div></div>
+        <div class="sorter" id="sort12"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you leap for more freedom, look for proof that people will pay for what you'd be doing. If they will, push through the pushback. If they won't, build more capital first.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Mission →</a></div>
+    </section>
+    <!-- ===================== THINK SMALL, ACT BIG ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Rule 4 · or, the importance of mission</span>
+      <h2>Think Small, Act Big</h2>
+      <p>The last trait is mission: a unifying focus that makes a career feel like it's going somewhere that matters. Missions can't be picked from an armchair. They are found at the cutting edge of a field, tested with small projects, and turned into something people talk about.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Get to the frontier of your field, place little bets there, and make them remarkable.</p></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · A mission makes a career pull in one direction</div>
+        <h2>The Meaningful Life of Pardis Sabeti</h2>
+        <div class="short"><span class="lbl">In short</span><p>A mission is a unifying focus for your work. It turns a pile of separate projects into something going somewhere, and Newport finds it in many of the people who love their careers most.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A full life.</b> Pardis Sabeti is a computational geneticist at Harvard who leads a lab studying some of humanity's oldest diseases. She's also the lead singer of a rock band, and she still seemed to love every part of her life.</span></li>
+          <li><span><b>A unifying focus.</b> Her research isn't a scatter of interesting papers. It's aimed at one thing: using new tools from genomics to understand and fight ancient diseases like malaria and Lassa fever.</span></li>
+          <li><span><b>Why mission matters.</b> Newport sees mission as the fourth trait of compelling work, alongside creativity, impact and control. It gives energy and direction, and makes setbacks feel worthwhile.</span></li>
+          <li><span><b>Rule 4 in a phrase.</b> Think small, act big. Choose a small, focused niche in which to build a mission, then take bold action within it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Sabeti's path wasn't a straight line from a childhood dream. She trained in biology, studied as a Rhodes Scholar at Oxford, and spent years building deep skills in genetics and computation before she found the questions that would define her work. Her lab developed ways to spot traces of natural selection in the human genome and applied them to diseases that have shaped human history. By the time she had a clear mission, she had the capital to pursue it on her own terms, and the energy it gave her overflowed into everything else, music included.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: the pull of a mission</div><div class="hint">Add up a year's projects with and without a mission</div></div>
+        <div class="stage"><svg id="vcSvg" role="img" aria-label="A year of projects drawn as arrows that add up to how far your career moves"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="vcAlign">How closely projects serve one mission <output id="ovcAlign"></output></label><input type="range" id="vcAlign" min="0" max="100" step="5" value="0"></div></div><div class="row"><button class="btn" id="vcNew" type="button">A different year</button></div></div><div class="stats"><div class="stat"><span class="k">Projects</span><span class="v">10</span></div><div class="stat"><span class="k">How far the year moved you</span><span class="v glow" id="vcLen"></span></div><div class="stat"><span class="k">What it feels like</span><span class="s" id="vcSay"></span></div></div><p class="callout">The same ten projects, the same effort. <b>When they pull in one direction, the year adds up to something; when they scatter, most of the effort cancels out.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A mission ties your work together so each project builds on the last. It's one of the most satisfying things a career can have, and as the next chapters show, it has to be earned.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Missions require capital →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Good missions live at the cutting edge</div>
+        <h2>Missions Require Capital</h2>
+        <div class="short"><span class="lbl">In short</span><p>You can't choose a good mission before you know your field well. Missions live in the adjacent possible, at the frontier of what's known, and getting there takes career capital.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Missions from the armchair fail.</b> A mission picked before you have expertise tends to be vague or unoriginal. Without capital you can't see what's really possible, and you can't act on it.</span></li>
+          <li><span><b>The adjacent possible.</b> Newport borrows the idea, popularised by Steven Johnson, that new ideas grow from the edge of existing knowledge. Each breakthrough opens a ring of new possibilities just next to it.</span></li>
+          <li><span><b>Multiple discovery.</b> Big discoveries often happen to several people at once. Sunspots were spotted independently by several astronomers around 1611. Once a field reaches a certain frontier, the next step becomes visible to anyone standing there.</span></li>
+          <li><span><b>Get to the frontier.</b> So the way to find a mission is to build enough capital to reach the cutting edge of your field. From there, good missions start to become obvious.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When the telescope arrived in the early 1600s, sunspots were waiting to be found. In the space of about a year, several astronomers in different countries, including Galileo, observed them independently. None of them needed a stroke of solitary genius. They needed to be standing where the new tool had just pushed the frontier, looking at what was newly visible. Newport argues that missions work the same way: they appear in the adjacent possible, and you can only see the adjacent possible once your capital has carried you to the edge of your field.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: walk to the frontier</div><div class="hint">Learn the squares next to what you know</div></div>
+        <div class="stage"><svg id="apSvg" role="img" aria-label="A grid of a field's knowledge where only squares next to what you know can be learned"></svg></div><div class="lab-ctl"><div class="row"><span class="tip" id="apTip">Tap a glowing square next to what you know.</span><button class="btn" id="apAuto" type="button">Study for a year</button><button class="btn" id="apReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Squares known</span><span class="v" id="apKnown"></span></div><div class="stat"><span class="k">Missions visible</span><span class="v glow" id="apMis"></span></div><div class="stat"><span class="k">What you can see</span><span class="s" id="apSay"></span></div></div><p class="callout">An illustrative model of the adjacent possible. <b>The missions (the stars) only light up when you know a square right next to them, and they sit out at the edge.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't try to pick your mission on day one. Build expertise until you're at the edge of your field, and the missions worth pursuing will start to show themselves.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Little bets →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Test a mission with small projects</div>
+        <h2>Missions Require Little Bets</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once you can see a possible mission, don't bet everything on it at once. Try small, quick projects that give concrete feedback, and let the results steer you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Little bets.</b> The idea comes from Peter Sims's book of the same name: small, low-risk experiments that teach you something quickly, whether they work or not.</span></li>
+          <li><span><b>An archaeologist on television.</b> Kirk French, an archaeologist, wanted to bring archaeology to a wider audience. Rather than leap straight to a grand plan, he tried a series of small public projects, and the ones that drew a response led on to bigger ones, including a television series.</span></li>
+          <li><span><b>Small enough to finish.</b> A good little bet is short, often under a month, and ends with something concrete that people can react to.</span></li>
+          <li><span><b>Feedback steers the mission.</b> Each bet's result tells you where to go next. A mission isn't a single decision; it's a direction you refine through many small trials.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Kirk French had the capital of a trained archaeologist and a hunch that his field could reach far more people than it did. A big, all-or-nothing move, such as quitting research to pitch a television network, would have been the first control trap in disguise. Instead he placed small bets: projects he could finish quickly that put archaeology in front of the public and showed him what caught on. The feedback from each told him which direction had energy. Bit by bit the bets added up to a career that mixed scholarship and broadcasting in a way nobody had planned for him.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: one big bet or twelve little ones</div><div class="hint">Spend a year finding a mission that works</div></div>
+        <div class="stage"><svg id="lbSvg" role="img" aria-label="A year spent on one big project compared with twelve one-month projects that learn from feedback"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="lbRun" type="button">Play the year</button><button class="btn" id="lbTen" type="button">Play 50 years</button></div></div><div class="stats"><div class="stat"><span class="k">One big bet: found a direction that works</span><span class="v" id="lbBig"></span></div><div class="stat"><span class="k">Little bets: found a direction that works</span><span class="v glow" id="lbSmall"></span></div><div class="stat"><span class="k">This year</span><span class="s" id="lbSay">Play a year to see.</span></div></div><p class="callout">An illustrative model: one direction in eight works, the big bet commits to its first guess for twelve months, and each little bet's feedback narrows the search. <b>Little bets don't make you luckier. They let you learn faster.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you think you've found a mission, test it with something small you can finish in weeks. Let what happens tell you what to try next.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: Make it remarkable →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · The law of remarkability</div>
+        <h2>Missions Require Marketing</h2>
+        <div class="short"><span class="lbl">In short</span><p>A mission-driven project succeeds when it's remarkable: so interesting that people talk about it, and launched somewhere that makes it easy to talk about.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The law of remarkability.</b> For a mission-driven project to succeed, it should be remarkable in two ways. It must compel people to remark on it, and it must be launched in a venue that helps that remarking happen.</span></li>
+          <li><span><b>The purple cow.</b> Newport cites Seth Godin's image: a field of brown cows goes unnoticed, but a purple cow stops traffic. Remarkable means worth making a remark about, not just good.</span></li>
+          <li><span><b>A programmer who got noticed.</b> Giles Bowkett, a Ruby programmer, built Archaeopteryx, software that generated electronic music, and presented it in the Ruby community, where an unusual project like that was bound to get people talking. It made his name.</span></li>
+          <li><span><b>Pick the venue.</b> The same project can vanish or spread depending on where it appears. Find the place where the people who care will see it and share it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Giles Bowkett's project was odd in exactly the right way. Programmers had seen plenty of tools; they hadn't seen a program written in their favourite language that composed music on its own. He showed it at conferences and online in the Ruby world, a community with its own talks, blogs and forums that loved clever work. People remarked on it, and the attention brought opportunities that a résumé never could. Newport uses the story to show both halves of the law: a project worth talking about, and a venue built for the talking.</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: the purple cow</div><div class="hint">Set how remarkable it is and where you launch it</div></div>
+        <div class="stage"><svg id="mkSvg" role="img" aria-label="A hundred people, showing how far word of a project spreads"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mkRem">How remarkable is it? <output id="omkRem"></output></label><input type="range" id="mkRem" min="0" max="4" value="1"></div><div class="ctl"><label for="mkVen">How good is the venue for talking about it? <output id="omkVen"></output></label><input type="range" id="mkVen" min="0" max="4" value="1"></div></div><div class="row"><button class="btn primary" id="mkGo" type="button">Launch it</button></div></div><div class="stats"><div class="stat"><span class="k">People who heard about it</span><span class="v glow" id="mkN"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="mkSay">Launch it to see.</span></div></div><p class="callout">An illustrative word-of-mouth model. <b>Both halves of the law multiply: a remarkable project in the wrong venue fades, and so does a dull one in the right venue.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Good work isn't enough on its own. Make it something people want to talk about, and put it where they can.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Newport's own plan →</a></div>
+    </section>
+    <!-- ===================== HOW NEWPORT TOOK HIS OWN ADVICE ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Conclusion</span>
+      <h2>How Newport Took His Own Advice</h2>
+      <p>Newport ends by turning the book on himself. Writing it, he was also choosing his own next step as a young academic, and he tried to live every rule as he wrote it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The rules are not a one-off decision. They are a way of working, week after week.</p></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Conclusion</span> · How Newport took his own advice</div>
+        <h2>Conclusion</h2>
+        <div class="short"><span class="lbl">In short</span><p>Newport applied the rules to his own career as he wrote the book: tracking his hours of hard thinking, stretching himself on difficult papers, placing little bets, and looking for a mission at the edge of his field.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>An hour tally.</b> He kept a simple count of the hours he spent each month on deliberate practice, the uncomfortable kind of thinking, so he couldn't fool himself about how much he was really stretching.</span></li>
+          <li><span><b>A research bible.</b> Each week he wrote a summary of a paper he'd read in depth, in his own words, forcing himself to understand it from the ground up, in the spirit of Richard Feynman.</span></li>
+          <li><span><b>Stretch on hard problems.</b> He picked a notoriously difficult paper in his field and worked through it until he could build on it, rather than staying with problems he already found easy.</span></li>
+          <li><span><b>A mission, tested small.</b> He used little bets, such as short projects with concrete outcomes, and his blog as a venue, to try out directions for a research mission at the frontier of his field.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Writing the book, Newport was in the uncomfortable early years of an academic career at Georgetown, and he admitted he had fallen into easy habits: working hard, but rarely in the stretching way his rules demanded. So he set up systems to keep himself honest. The hour tally showed, sometimes embarrassingly, how little true deliberate practice a busy month contained. The weekly research bible forced him to engage with hard work. Over time, he reports, the effort paid off in better research and a clearer sense of mission, and he came to love his work more, not less, by putting skill first.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: your hour tally</div><div class="hint">Saved in this browser only</div></div>
+        <div class="hours"><div class="entry"><div class="field"><label for="htDate">Day</label><input type="date" id="htDate"></div><div class="field"><label for="htH">Hours of deliberate practice</label><input type="number" id="htH" min="0" max="16" step="0.5" value="1"></div><button class="btn primary" id="htAdd" type="button">Log it</button><button class="btn" id="htClear" type="button">Clear this month</button></div><div class="stage" style="padding:0"><svg id="htSvg" role="img" aria-label="Bars for each day of this month showing hours of deliberate practice"></svg></div></div><div class="stats"><div class="stat"><span class="k">This month</span><span class="v glow" id="htSum"></span></div><div class="stat"><span class="k">Days with practice</span><span class="v" id="htDays"></span></div><div class="stat"><span class="k">Reading it</span><span class="s" id="htSay"></span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The book's rules are habits, not a single decision. Count the hours you spend stretching, keep a record of what you've mastered, and keep testing small ideas at the edge of what you know.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#after">Next: your craftsman plan →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your craftsman plan</h2>
+      <p class="big">The whole book in one page: decide what skill you're building, define what "good" means, stretch every week, and when you have capital to spend, spend it on control and a mission rather than a bigger title.</p>
+      <figure class="lab" id="plan">
+        <div class="lab-top"><div class="t">Write your plan</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field"><label for="plMarket">The market I'm in</label><select id="plMarket"><option value="">Choose…</option><option>Winner-take-all: one skill decides everything</option><option>Auction: many kinds of capital count</option></select></div>
+          <div class="field"><label for="plSkill">The capital I'm building</label><input id="plSkill" maxlength="100" placeholder="e.g. Writing clear technical explanations"></div>
+          <div class="field" style="grid-column:1/-1"><label for="plGood">What "good" looks like, so I can tell</label><input id="plGood" maxlength="140" placeholder="e.g. A post that a senior engineer shares without being asked"></div>
+          <div class="field" style="grid-column:1/-1"><label for="plStretch">My weekly stretch</label><input id="plStretch" maxlength="140" placeholder="e.g. Three hours on the hardest paper I can find, written up in my own words"></div>
+          <div class="field" style="grid-column:1/-1"><label for="plBet">A little bet I could finish in under a month</label><input id="plBet" maxlength="140" placeholder="e.g. A tutorial series, posted where people in my field read"></div>
+          <div class="field" style="grid-column:1/-1"><label for="plCtl">When I have capital to spend, the control I want</label><input id="plCtl" maxlength="140" placeholder="e.g. Choose my own projects, work four days a week"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="plSave" type="button">Save my plan</button><button class="btn" id="plClear" type="button">Clear</button><span class="tip" id="plMsg"></span></div>
+        </div>
+        <div class="out" id="plOut" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Rule 1</span><b>Don't follow your passion</b><span>Pre-existing passions are rare and rarely about work. Matching a job to one is a risky plan.</span></div>
+        <div><span class="n">Rule 2</span><b>Get so good they can't ignore you</b><span>Adopt the craftsman mindset and build career capital through deliberate practice.</span></div>
+        <div><span class="n">Career capital</span><b>Rare and valuable</b><span>Creativity, impact and control are rare and valuable, so they cost rare and valuable skills.</span></div>
+        <div><span class="n">Rule 3</span><b>Turn down a promotion</b><span>Spend capital on control, but only when people will pay for what you offer.</span></div>
+        <div><span class="n">Rule 4</span><b>Think small, act big</b><span>Missions live at the cutting edge. Get there, place little bets, and make them remarkable.</span></div>
+        <div><span class="n">Conclusion</span><b>Work right, then love it</b><span>The feeling follows the work. Build the skill and the love tends to come.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>So Good They Can't Ignore You: Why Skills Trump Passion in the Quest for Work You Love</i> by Cal Newport (2012). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book or a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Rule 1 \u00b7 Don't follow your passion", "Rule 2 \u00b7 Be so good", "Rule 3 \u00b7 Turn down a promotion", "Rule 4 \u00b7 Think small, act big", "Conclusion"];
+const CH = [["Introduction", "The passion trap", 0, "Introduction"], ["The \"Passion\" of Steve Jobs", "The passion of Steve Jobs", 0, "Chapter 1"], ["Passion Is Rare", "Passion is rare", 0, "Chapter 2"], ["Passion Is Dangerous", "Passion is dangerous", 0, "Chapter 3"], ["The Clarity of the Craftsman", "The craftsman mindset", 1, "Chapter 4"], ["The Power of Career Capital", "Career capital", 1, "Chapter 5"], ["The Career Capitalists", "The career capitalists", 1, "Chapter 6"], ["Becoming a Craftsman", "Deliberate practice", 1, "Chapter 7"], ["The Dream-Job Elixir", "Control", 2, "Chapter 8"], ["The First Control Trap", "The first control trap", 2, "Chapter 9"], ["The Second Control Trap", "The second control trap", 2, "Chapter 10"], ["Avoiding the Control Traps", "The law of financial viability", 2, "Chapter 11"], ["The Meaningful Life of Pardis Sabeti", "Mission", 3, "Chapter 12"], ["Missions Require Capital", "Missions require capital", 3, "Chapter 13"], ["Missions Require Little Bets", "Little bets", 3, "Chapter 14"], ["Missions Require Marketing", "Make it remarkable", 3, "Chapter 15"], ["Conclusion", "Newport's own plan", 4, "Conclusion"]];
+const QUIZ = {
+"1": {
+"q": "What is the \"passion hypothesis\"?",
+"o": [
+"Hard work always leads to passion",
+"The key to loving your work is to find your passion first, then a job that matches it",
+"Everyone is born with one true calling and should ignore money"
+],
+"a": 1,
+"w": "That's the idea Newport sets out to test: find the passion, then match the job to it. Most of the book argues the order usually runs the other way."
+},
+"2": {
+"q": "According to Newport, how did Apple start?",
+"o": [
+"As Jobs's lifelong dream of changing the world with computers",
+"As a small, practical way to make money that grew into something more",
+"As a project Jobs began while studying engineering at Stanford"
+],
+"a": 1,
+"w": "Jobs's interests lay elsewhere. Apple started as a chance to make money selling computers to a local shop, and the passion followed its success."
+},
+"3": {
+"q": "In Wrzesniewski's study of administrative assistants, what best predicted seeing the work as a calling?",
+"o": [
+"A passion for administration from childhood",
+"How long they had been doing the job",
+"How much they were paid"
+],
+"a": 1,
+"w": "Time on the job was the strongest predictor. Experience builds skill, and skill tends to bring the sense of a calling with it."
+},
+"4": {
+"q": "Why does Newport call the passion hypothesis dangerous?",
+"o": [
+"Because passionate people burn out",
+"Because it makes people expect a perfect match, so they hop between jobs and feel anxious when one doesn't appear",
+"Because employers punish people who talk about passion"
+],
+"a": 1,
+"w": "Expecting a ready-made calling makes ordinary work look like failure, which leads to restlessness and job-hopping before skill and satisfaction can build."
+},
+"5": {
+"q": "What does the craftsman mindset focus on?",
+"o": [
+"What the world can offer you",
+"What you can offer the world, and getting better at it",
+"Finding the job that matches your personality"
+],
+"a": 1,
+"w": "The craftsman looks outward at the value of the work and inward at how to improve it, rather than at whether the job feels right."
+},
+"6": {
+"q": "What are the three traits Newport says make work great?",
+"o": [
+"Money, status and security",
+"Creativity, impact and control",
+"Passion, purpose and friendship"
+],
+"a": 1,
+"w": "Creativity, impact and control. Because they're rare and valuable, you need rare and valuable skills, career capital, to get them."
+},
+"7": {
+"q": "Which of these is one of Newport's three disqualifiers for a job?",
+"o": [
+"It doesn't feel like your passion yet",
+"It focuses on something you think is useless or harmful",
+"It pays less than your friends earn"
+],
+"a": 1,
+"w": "The three are: few chances to build rare and valuable skills, work you believe is useless or harmful, and colleagues you really dislike. Not feeling passionate yet isn't one of them."
+},
+"8": {
+"q": "Why do most knowledge workers stop improving, according to Newport?",
+"o": [
+"They lack natural talent",
+"They reach an acceptable level and stop stretching themselves",
+"They change jobs too rarely"
+],
+"a": 1,
+"w": "Once we're good enough, ordinary work no longer stretches us. Deliberate practice is uncomfortable, so most people avoid it, and that's why they plateau."
+},
+"9": {
+"q": "What happened in Best Buy's Results-Only Work Environment?",
+"o": [
+"Productivity collapsed and it was scrapped within weeks",
+"Staff could work whenever and wherever as long as results came in, and engagement rose",
+"Managers were given more control over staff hours"
+],
+"a": 1,
+"w": "Freedom over when and where to work raised engagement and lowered turnover, one of the examples Newport uses to show how much control matters."
+},
+"10": {
+"q": "What is the first control trap?",
+"o": [
+"Asking for control too late",
+"Trying to gain control without enough career capital to back it up",
+"Letting your employer control your schedule"
+],
+"a": 1,
+"w": "Control taken without capital isn't sustainable. The leap feels brave, but without valuable skills the freedom can't last."
+},
+"11": {
+"q": "Why is the second control trap hard to spot?",
+"o": [
+"Because the pushback usually comes as rewards like a raise or promotion",
+"Because employers never notice when staff become valuable",
+"Because it only happens to people without skills"
+],
+"a": 0,
+"w": "The resistance looks like a reward. A promotion can quietly cost you the control your capital could have bought."
+},
+"12": {
+"q": "What does the law of financial viability ask?",
+"o": [
+"Whether a pursuit will make you rich",
+"Whether people are willing to pay you for it",
+"Whether your friends approve of it"
+],
+"a": 1,
+"w": "Willingness to pay is used as an honest signal that your skills are valuable enough to support the control you want."
+},
+"13": {
+"q": "What does Newport mean by a mission?",
+"o": [
+"A company's official mission statement",
+"A unifying focus that gives your career direction",
+"A promise to your employer to stay for years"
+],
+"a": 1,
+"w": "A mission is a unifying focus for your work, like Sabeti's genomics of ancient diseases, that makes individual projects add up."
+},
+"14": {
+"q": "Why does Newport say missions require capital?",
+"o": [
+"Because you need money to fund a mission",
+"Because good missions are found at the cutting edge, and you need expertise to get there",
+"Because employers only allow experienced staff to have missions"
+],
+"a": 1,
+"w": "Missions live in the adjacent possible, at the frontier of a field. Capital, meaning expertise, is what carries you there."
+},
+"15": {
+"q": "What makes a good little bet?",
+"o": [
+"A big, bold move that commits you fully",
+"A small project you can finish quickly that gives concrete feedback",
+"A project you keep secret until it's perfect"
+],
+"a": 1,
+"w": "Small, quick and concrete. The point is fast, honest feedback that steers you toward the mission that works."
+},
+"16": {
+"q": "What are the two parts of the law of remarkability?",
+"o": [
+"It must be cheap and fast",
+"It must compel people to remark on it, and launch in a venue that supports remarking",
+"It must be approved by experts and widely advertised"
+],
+"a": 1,
+"w": "Remarkable in both senses: worth remarking on, and placed where remarks can spread."
+},
+"17": {
+"q": "Why did Newport keep an hour tally?",
+"o": [
+"To bill his time to clients",
+"To see honestly how much deliberate practice he was really doing",
+"To prove to his university that he worked long hours"
+],
+"a": 1,
+"w": "A simple count of hours spent on hard, stretching work kept him from mistaking being busy for getting better."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#14110e';
+try { const t = localStorage.getItem('sg-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('sg-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('sg-done', []));
+const save = () => store.set('sg-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+const shuffled = a => { const b = [...a]; for (let k = b.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [b[k], b[j]] = [b[j], b[k]]; } return b; };
+const sl = (id, fmt, f) => { const el = $('#' + id); const u = () => { out(id, fmt(+el.value)); if (f) f(); }; el.addEventListener('input', u); return u; };
+const line = (pts, c, w = 2.5, extra = '') => `<polyline points="${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" ${S(c, w, extra)} stroke-linejoin="round" stroke-linecap="round"/>`;
+const axes = (x0, y0, x1, y1, xl, yl) => `<path d="M${x0} ${y1}V${y0}M${x0} ${y1}H${x1}" ${S('line', 1.5)}/>` + (xl ? TX((x0 + x1) / 2, y1 + 18, xl, 'faint', 11, 'middle') : '') + (yl ? `<text x="${x0 - 8}" y="${(y0 + y1) / 2}" font-size="11" text-anchor="middle" ${F('faint')} transform="rotate(-90 ${x0 - 8} ${(y0 + y1) / 2})">${yl}</text>` : '');
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I\'m waiting to find my passion', 2, 'Passion comes later', 'Even Steve Jobs fell into his business for practical reasons. Passion tends to follow skill and success.'],
+    ['I don\'t have a passion at all', 3, 'Passion is rare', 'Most people\'s hobbies have nothing to do with work. That\'s normal, and not a barrier to loving what you do.'],
+    ['I keep switching jobs looking for the right fit', 4, 'The passion trap', 'Chasing a perfect match can keep you restarting before skill, and satisfaction, have time to build.'],
+    ['I want to get better at what I do', 5, 'The craftsman mindset', 'Ask what you can offer the world, not what it can offer you, and there is always a next step.'],
+    ['What makes a job great, and how do I get it?', 6, 'Career capital', 'Creativity, impact and control are rare and valuable, so you pay for them with rare and valuable skills.'],
+    ['I\'m stuck at a plateau', 8, 'Deliberate practice', 'Work uncomfortably on what you can\'t yet do, with honest feedback, and be patient.'],
+    ['I want more freedom in my work', 9, 'Control', 'Autonomy is one of the best things your skills can buy, but spend capital on it, don\'t just demand it.'],
+    ['I want to quit and follow my dream', 10, 'The first control trap', 'Taking freedom without skills people value tends not to last. Build capital first.'],
+    ['I\'m offered a promotion I don\'t want', 11, 'The second control trap', 'Bosses reward valuable people with bigger titles, not freedom. Know which one you want.'],
+    ['How do I know if an idea is worth chasing?', 12, 'Will people pay?', 'The law of financial viability: look for evidence that people will pay for it.'],
+    ['I want my work to mean something', 13, 'Mission', 'Missions are found at the frontier of a field, so build the expertise to reach it.'],
+    ['I have an idea but I\'m afraid to commit', 15, 'Little bets', 'Try small projects under a month long and let the feedback steer you.'],
+    ['Nobody notices my work', 16, 'Remarkability', 'Make it worth remarking on, and launch it where people will remark.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: career capital over the years ---------- */
+{ const svg = $('#hcSvg'), cap = $('#hcCap'), modeBox = $('#hcMode'); let mode = 'craft';
+  const MODES = [['craft', 'Craftsman'], ['hop', 'Passion hopper']];
+  modeBox.innerHTML = MODES.map(([k, l]) => `<button class="btn" type="button" data-m="${k}" aria-pressed="${k === mode}">${l}</button>`).join('');
+  const capAt = (m, y) => m === 'craft' ? 100 * (1 - Math.exp(-y / 5)) : (() => { let c = 0; for (let i = 0; i < y; i++){ c = (i % 2 === 1) ? c * .45 : c + 14; } return Math.min(c, 40); })();
+  const TR = [['Creativity', 25], ['Impact', 45], ['Control', 65], ['Mission', 85]];
+  const draw = () => { const y = +$('#hcYears').value, c = capAt(mode, y); let g = '';
+    g += `<rect x="30" y="20" width="26" height="190" rx="6" ${F('panel-2')}/><rect x="30" y="${(210 - 190 * c / 100).toFixed(1)}" width="26" height="${(190 * c / 100).toFixed(1)}" rx="6" ${F('glow', .9)}/>`;
+    g += TX(43, 228, 'Capital', 'muted', 11, 'middle');
+    TR.forEach(([t, need], i) => { const on = c >= need, yy = 210 - 190 * need / 100;
+      g += `<path d="M62 ${yy.toFixed(1)}H110" ${S(on ? 'good' : 'line', 1.5, ';stroke-dasharray:' + (on ? '0' : '3 3'))}/><rect x="112" y="${(yy - 14).toFixed(1)}" width="160" height="28" rx="8" ${FS(on ? 'good-soft' : 'panel', on ? 'good' : 'line', 1)}/>` + TX(124, yy + 5, t + (on ? ' unlocked' : ' needs more'), on ? 'good' : 'faint', 12.5); });
+    const pts = []; for (let i = 0; i <= 12; i++) pts.push([300 + i * 8, 210 - 190 * capAt(mode, i) / 100]);
+    g += line(pts, 'line', 2) + line(pts.slice(0, y + 1), mode === 'craft' ? 'glow' : 'bad', 3);
+    g += `<circle cx="${pts[y][0]}" cy="${pts[y][1].toFixed(1)}" r="5" ${F(mode === 'craft' ? 'glow' : 'bad')}/>` + TX(348, 228, 'Years 0 to 12', 'faint', 11, 'middle');
+    svg.innerHTML = g;
+    cap.innerHTML = y === 0 ? `Nothing built yet. Drag the years slider and watch the traits unlock.` : mode === 'craft' ? `<b>${Math.round(c)} units of capital after ${y} years.</b> Steady, deliberate work compounds, and each trait of great work comes within reach once you have enough to trade.` : `<b>${Math.round(c)} units after ${y} years.</b> Each time the hopper moves on, most of what was built is lost. The traits keep staying just out of reach.`; };
+  const u = sl('hcYears', v => v + (v === 1 ? ' year' : ' years'), draw); u();
+  modeBox.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press([...modeBox.querySelectorAll('[data-m]')], b); draw(); }));
+}
+
+/* ---------- intro: passion or craftsman mindset ---------- */
+sorter('#sort1', '#tally1', [{ id: 'pm', label: 'Passion mindset', d: 'What can the work give me?' }, { id: 'cm', label: 'Craftsman mindset', d: 'What can I give, and how do I improve?' }], [
+  { t: '"Is this job really me?"', q: true, a: 'pm', w: 'It points inward at feeling and fit. It has no clear next step.' },
+  { t: '"What would make this report better than anyone expects?"', q: true, a: 'cm', w: 'It points at the value of the work and at improving it.' },
+  { t: '"I\'ll start working hard once I find the right field."', q: true, a: 'pm', w: 'Waiting for a match delays the building of skill.' },
+  { t: '"I want to be the best on the team at one hard thing."', q: true, a: 'cm', w: 'A concrete aim that builds rare and valuable skill.' },
+  { t: '"This task is boring, so I must be in the wrong job."', q: true, a: 'pm', w: 'Treating a feeling as evidence about fit is the passion mindset.' },
+  { t: '"What would a master of this do that I don\'t?"', q: true, a: 'cm', w: 'It looks at the standard of the craft, not at your feelings about it.' },
+  { t: '"I\'ll know it\'s my calling when I feel it."', q: true, a: 'pm', w: 'It waits for a feeling to arrive before acting.' },
+  { t: '"I\'ll ask for feedback on this draft today."', q: true, a: 'cm', w: 'Honest feedback is how craftspeople improve.' },
+]);
+
+/* ---------- 1: Jobs timeline ---------- */
+{ const svg = $('#jbSvg'); let k = 0;
+  const STEPS = [
+    ['1974 · Drifting', 'Interests are history, mysticism and dance. Technology is a way to earn a little money.', 'Nothing yet says he will build a company.', 15, 5],
+    ['1975 · A night job at Atari', 'He takes the job for the pay and starts picking up technical know-how.', 'Skill begins. Passion has barely moved.', 25, 15],
+    ['1976 · Selling boards with Wozniak', 'He helps sell Wozniak\'s circuit boards to hobbyists. It works, so they keep going.', 'Small wins arrive and the interest follows them.', 40, 35],
+    ['1976 · Fifty computers for a shop', 'A shop owner orders fifty built computers. They scramble to deliver. Apple is born from a practical chance.', 'Success makes the work more compelling.', 60, 60],
+    ['1980s · A company and a craft', 'Skill, influence and freedom grow, and with them the famous love of the work.', 'The passion was the effect, not the cause.', 85, 90] ];
+  const draw = () => { const [t, d, w, int, skill] = STEPS[k], X = i => 50 + i * 75, Y = v => 180 - v * 1.6; let g = axes(40, 20, 380, 180, 'Time', 'Level');
+    const a = STEPS.map((s, i) => [X(i), Y(s[3])]), b = STEPS.map((s, i) => [X(i), Y(s[4])]);
+    g += line(a, 'line', 1.5, ';stroke-dasharray:3 4') + line(b, 'line', 1.5, ';stroke-dasharray:3 4');
+    g += line(a.slice(0, k + 1), 'cool', 3) + line(b.slice(0, k + 1), 'glow', 3);
+    g += `<circle cx="${a[k][0]}" cy="${a[k][1]}" r="5" ${F('cool')}/><circle cx="${b[k][0]}" cy="${b[k][1]}" r="5" ${F('glow')}/>`;
+    g += TX(50, 205, 'Blue: love of the work', 'cool', 11.5) + TX(230, 205, 'Orange: skill and success', 'glow', 11.5);
+    vb(svg, 400, 215); svg.innerHTML = g;
+    $('#jbStep').textContent = `Step ${k + 1} of ${STEPS.length}`; $('#jbWhere').innerHTML = `<b>${t}.</b> ${d}`; $('#jbWhat').textContent = w;
+    $('#jbPrev').disabled = k === 0; $('#jbNext').disabled = k === STEPS.length - 1; };
+  $('#jbPrev').addEventListener('click', () => { k = Math.max(0, k - 1); draw(); }); $('#jbNext').addEventListener('click', () => { k = Math.min(STEPS.length - 1, k + 1); draw(); }); draw();
+}
+
+/* ---------- 2: passion is rare ---------- */
+{ const svg = $('#prSvg'); let shown = false, curve = false;
+  const draw = () => { const guess = +$('#prGuess').value; let g = '';
+    if (!curve){
+      g += TX(0, 16, 'Share of students\' passions that were about work or school', 'muted', 12);
+      g += `<rect x="0" y="30" width="360" height="26" rx="6" ${F('panel-2')}/><rect x="0" y="30" width="${3.6 * guess}" height="26" rx="6" ${F('cool', .6)}/>` + TX(8, 48, 'Your guess ' + guess + '%', 'text', 12.5);
+      g += `<rect x="0" y="70" width="360" height="26" rx="6" ${F('panel-2')}/>` + (shown ? `<rect x="0" y="70" width="14" height="26" rx="6" ${F('glow', .9)}/>` + TX(24, 88, 'Under 4%', 'glow', 12.5) : TX(8, 88, 'Hidden until you press the button', 'faint', 12));
+      g += TX(0, 120, shown ? 'Dance, hockey, skiing, reading, swimming… not work.' : 'Most passions named were hobbies.', 'muted', 12);
+    } else {
+      g += axes(40, 20, 380, 170, 'Years in the job', 'Calling');
+      const pts = []; for (let i = 0; i <= 10; i++) pts.push([40 + i * 34, 170 - 140 * (1 - Math.exp(-i / 4))]);
+      g += line(pts, 'glow', 3) + TX(210, 195, 'Illustrative shape: longer in the job, likelier a calling', 'muted', 11, 'middle');
+    }
+    vb(svg, 400, 205); svg.innerHTML = g;
+    $('#prHave').textContent = shown ? '84%' : '?'; $('#prWork').textContent = shown ? 'under 4%' : '?';
+    $('#prSay').textContent = shown ? 'Most people\'s passions aren\'t about work, so "match your job to your passion" has little to match.' : 'Make your guess first.'; };
+  sl('prGuess', v => v + '%', draw)();
+  $('#prReveal').addEventListener('click', () => { shown = true; curve = false; $('#prCall').setAttribute('aria-pressed', false); draw(); });
+  $('#prCall').addEventListener('click', e => { curve = !curve; e.currentTarget.setAttribute('aria-pressed', curve); draw(); });
+}
+
+/* ---------- 3: two careers ---------- */
+{ const svg = $('#twSvg'); let r = rng(7), played = false;
+  const sim = () => { const pat = +$('#twPat').value, hop = [], cr = []; let h = 0, c = 0, since = 0, jobs = 1;
+    for (let m = 0; m <= 120; m++){ hop.push(h); cr.push(c); const gain = 1.1 * (1 - c / 100) + (r() - .5) * .2; c += gain;
+      since++; const feels = since >= pat; if (since >= pat && r() < .9){ h *= .4; since = 0; jobs++; } else h += 1.1 * (1 - h / 100) + (r() - .5) * .2; if (!feels && false) {} }
+    return { hop, cr, jobs }; };
+  let data = sim();
+  const draw = () => { let g = axes(40, 15, 390, 175, 'Months, 0 to 120', 'Career capital');
+    const upto = played ? 121 : 1, f = a => a.slice(0, upto).map((v, i) => [40 + i * 350 / 120, 175 - 1.6 * Math.min(v, 100)]);
+    g += line(f(data.hop), 'bad', 2.5) + line(f(data.cr), 'glow', 3);
+    g += TX(60, 30, 'Orange: stays and practises', 'glow', 11.5) + TX(60, 46, 'Red: starts over when it doesn\'t feel right', 'bad', 11.5);
+    vb(svg, 400, 205); svg.innerHTML = g;
+    $('#twJobs').textContent = played ? data.jobs : '?'; $('#twHop').textContent = played ? Math.round(data.hop[120]) : '?'; $('#twCraft').textContent = played ? Math.round(data.cr[120]) : '?'; };
+  sl('twPat', v => v + ' months', () => { data = sim(); draw(); })();
+  $('#twRun').addEventListener('click', () => { played = true; draw(); });
+  $('#twAgain').addEventListener('click', () => { r = rng(Math.floor(Math.random() * 1e6)); data = sim(); played = true; draw(); }); draw();
+}
+
+/* ---------- 4: swap the question ---------- */
+{ const WORRIES = [
+    ['I\'m bored at work', 'Is this job right for me?', 'What skill could I be sharpening here that few people have?', 'Pick one hard skill and set a weekly stretch.'],
+    ['My work gets criticised', 'Why doesn\'t anyone appreciate me?', 'What is the critic pointing at that I can fix?', 'Ask for the specific feedback and rework one piece.'],
+    ['I\'m not sure about my career', 'What\'s my true calling?', 'What would make me undeniably valuable in five years?', 'List the rare skills your field pays for and choose one.'],
+    ['A colleague is doing better', 'Why do they have it easier?', 'What are they doing that I could learn?', 'Study one of their pieces of work in detail.'] ];
+  let w = 0, cm = false; const pick = $('#rfPick'), cards = $('#rfCards');
+  pick.innerHTML = WORRIES.map((x, i) => `<button class="btn" type="button" data-w="${i}" aria-pressed="${i === 0}">${x[0]}</button>`).join('');
+  const draw = () => { const [, pq, cq, act] = WORRIES[w];
+    cards.innerHTML = `<div class="rf-card pm${cm ? ' dim' : ''}"><span class="k">Passion mindset</span><b>${pq}</b><p>Looks inward at feelings. There's nothing to do about it today.</p></div><div class="rf-card cm${cm ? '' : ' dim'}"><span class="k">Craftsman mindset</span><b>${cq}</b><p>${act}</p></div>`;
+    $('#rfQ').textContent = cm ? cq : pq; $('#rfAct').textContent = cm ? 'Yes' : 'No'; $('#rfAct').style.color = `var(--${cm ? 'good' : 'bad'})`;
+    $('#rfPM').setAttribute('aria-pressed', !cm); $('#rfCM').setAttribute('aria-pressed', cm); };
+  pick.querySelectorAll('[data-w]').forEach(b => b.addEventListener('click', () => { w = +b.dataset.w; press([...pick.querySelectorAll('[data-w]')], b); draw(); }));
+  $('#rfPM').addEventListener('click', () => { cm = false; draw(); }); $('#rfCM').addEventListener('click', () => { cm = true; draw(); }); draw();
+}
+
+/* ---------- 5: rare and valuable ---------- */
+{ const svg = $('#ccSvg'), rI = $('#ccRare'), vI = $('#ccVal');
+  const PRE = [['Typing speed', 20, 20], ['Common office skill', 25, 60], ['Obscure hobby', 85, 12], ['Rare and in demand', 85, 85]];
+  $('#ccPre').innerHTML = PRE.map((p, i) => `<button class="btn" type="button" data-p="${i}">${p[0]}</button>`).join('');
+  const draw = () => { const r = +rI.value, v = +vI.value, c = r * v / 100; let g = '';
+    const X = a => 50 + a * 3.2, Y = a => 180 - a * 1.6;
+    for (let i = 0; i < 10; i++) for (let j = 0; j < 10; j++){ const a = i * 10 + 5, b = j * 10 + 5, k = a * b / 100; g += `<rect x="${X(i * 10)}" y="${Y(j * 10 + 10)}" width="32" height="16" ${F('glow', .05 + k / 100 * .5)}/>`; }
+    g += axes(50, 20, 370, 180, 'How rare', 'How valuable') + `<circle cx="${X(r)}" cy="${Y(v)}" r="9" ${FS('panel', 'glow', 3)}/>`;
+    vb(svg, 400, 205); svg.innerHTML = g;
+    $('#ccCap').textContent = Math.round(c); $('#ccBuy').textContent = c < 15 ? 'Almost nothing: you\'re easily replaced.' : c < 40 ? 'A little flexibility, not much more.' : c < 65 ? 'Real choice over projects and some control.' : 'Creative, high-impact work on your own terms.'; };
+  sl('ccRare', v => v + '%', draw)(); sl('ccVal', v => v + '%', draw)();
+  $('#ccPre').querySelectorAll('[data-p]').forEach(b => b.addEventListener('click', () => { const p = PRE[b.dataset.p]; rI.value = p[1]; vI.value = p[2]; rI.dispatchEvent(new Event('input')); vI.dispatchEvent(new Event('input')); }));
+}
+
+/* ---------- 6: three tests for a job ---------- */
+{ const TESTS = ['Does it give you chances to stand out by building rare and valuable skills?', 'Is it focused on something useful, or at least not harmful?', 'Can you work with people you like or at least respect?'];
+  const JOBS = [['A TV writers\' room', [1, 1, 1]], ['Dead-end data entry', [0, 1, 1]], ['A scam call centre', [1, 0, 1]], ['A great firm with a bullying boss', [1, 1, 0]], ['My own job', null]];
+  let ans = [null, null, null]; const pre = $('#gtPre'), rows = $('#gtRows');
+  pre.innerHTML = JOBS.map((j, i) => `<button class="btn" type="button" data-j="${i}" aria-pressed="${i === 0}">${j[0]}</button>`).join('');
+  const draw = () => { rows.innerHTML = TESTS.map((t, i) => `<div class="gate ${ans[i] === 1 ? 'pass' : ans[i] === 0 ? 'fail' : ''}"><p>${t}</p><div class="moves"><button class="btn" data-t="${i}" data-v="1" aria-pressed="${ans[i] === 1}">Yes</button><button class="btn" data-t="${i}" data-v="0" aria-pressed="${ans[i] === 0}">No</button></div></div>`).join('');
+    rows.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => { ans[+b.dataset.t] = +b.dataset.v; press([...pre.querySelectorAll('[data-j]')], pre.querySelector('[data-j="4"]')); draw(); }));
+    const v = $('#gtV'), n = ans.filter(x => x === null).length, fails = ans.map((a, i) => a === 0 ? i : -1).filter(i => i >= 0);
+    v.innerHTML = n ? 'Answer all three to see the verdict.' : fails.length ? `<b>Fails ${fails.length} of 3.</b> Newport would say the craftsman mindset won't rescue this job: ${fails.map(i => ['it offers no way to build standout skills', 'it focuses on something useless or harmful', 'it forces you to work with people you dislike'][i]).join('; ')}.` : '<b>Passes all three.</b> A good place to practise being so good they can\'t ignore you.'; };
+  pre.querySelectorAll('[data-j]').forEach(b => b.addEventListener('click', () => { const j = JOBS[b.dataset.j]; ans = j[1] ? [...j[1]] : [null, null, null]; press([...pre.querySelectorAll('[data-j]')], b); draw(); })); ans = [...JOBS[0][1]]; draw();
+}
+
+/* ---------- 7: acceptable plateau ---------- */
+{ const svg = $('#dpSvg'), FB = ['', 'slow', 'fairly quick', 'immediate'];
+  const f = (stretch, fb, y) => { const plateau = 55; const base = plateau * (1 - Math.exp(-y / 1)); const climb = stretch / 40 * fb * 14 * Math.max(0, y - 1); return Math.min(100, base + climb); };
+  const draw = () => { const s = +$('#dpStretch').value, fb = +$('#dpFb').value; let g = axes(40, 15, 380, 170, 'Years, 0 to 5', 'Skill');
+    const a = [], b = []; for (let i = 0; i <= 50; i++){ const y = i / 10; a.push([40 + i * 6.8, 170 - 1.55 * f(0, 1, y)]); b.push([40 + i * 6.8, 170 - 1.55 * f(s, fb, y)]); }
+    g += line(a, 'line', 2.5) + line(b, 'glow', 3) + TX(250, 120, 'Acceptable level', 'faint', 11, 'start') + `<path d="M40 ${170 - 1.55 * 55}H380" ${S('line', 1, ';stroke-dasharray:3 4')}/>`;
+    vb(svg, 400, 195); svg.innerHTML = g;
+    const sk = f(s, fb, 5), base = f(0, 1, 5);
+    $('#dpSkill').textContent = Math.round(sk); $('#dpBase').textContent = Math.round(base); $('#dpSay').textContent = sk - base < 5 ? 'Stuck on the plateau.' : sk - base < 25 ? 'Slowly pulling away from the plateau.' : 'Well beyond the plateau.'; };
+  sl('dpStretch', v => v + '%', draw)(); sl('dpFb', v => FB[v], draw)();
+}
+
+/* ---------- 8: control dials ---------- */
+{ const svg = $('#ctSvg'), L = ['none', 'a little', 'some', 'a lot', 'full'], ids = ['ctWhen', 'ctWhere', 'ctWhat', 'ctHow'];
+  const draw = () => { const v = ids.map(i => +$('#' + i).value), w = [1, 1, 2, 2], sc = v.reduce((s, x, i) => s + x * w[i], 0) / (4 * 6), eng = 30 + 65 * sc;
+    const cx = 200, cy = 150, R = 110; let g = `<path d="M${cx - R} ${cy}A${R} ${R} 0 0 1 ${cx + R} ${cy}" ${S('line', 14)}/>`;
+    const a = Math.PI * (1 - eng / 100); g += `<path d="M${cx - R} ${cy}A${R} ${R} 0 0 1 ${(cx + R * Math.cos(a)).toFixed(1)} ${(cy - R * Math.sin(a)).toFixed(1)}" ${S('glow', 14)}/>`;
+    g += TX(cx, cy - 20, Math.round(eng), 'text', 42, 'middle', 'font-weight="600"') + TX(cx, cy + 6, 'engagement', 'muted', 12, 'middle');
+    vb(svg, 400, 170); svg.innerHTML = g;
+    $('#ctEng').textContent = Math.round(eng); $('#ctSay').textContent = eng < 45 ? 'Clock-watching. Someone else decides everything.' : eng < 65 ? 'Fine, but you feel like a cog.' : eng < 85 ? 'You have real say, and it shows.' : 'Close to the Results-Only ideal.'; };
+  ids.forEach(i => sl(i, v => L[v], draw)());
+  const set = a => { ids.forEach((i, k) => { $('#' + i).value = a[k]; out(i, L[a[k]]); }); draw(); };
+  $('#ctBoss').addEventListener('click', () => set([0, 0, 1, 1])); $('#ctRowe').addEventListener('click', () => set([4, 4, 3, 4]));
+}
+
+/* ---------- 9: first control trap ---------- */
+{ const svg = $('#t1Svg'), capI = $('#t1Cap'), askI = $('#t1Ask');
+  const draw = () => { const c = +capI.value, a = +askI.value; let g = axes(40, 15, 380, 170, 'Career capital you have', 'Control you take');
+    g += `<path d="M40 170L380 15" ${S('glow', 2.5)}/><path d="M40 170L380 15L40 15Z" ${F('bad', .1)}/>` + TX(90, 50, 'Trap: control beyond your capital', 'bad', 11.5) + TX(260, 150, 'Sustainable', 'good', 11.5);
+    const x = 40 + c * 3.4, y = 170 - a * 1.55; g += `<circle cx="${x}" cy="${y}" r="8" ${F(a > c ? 'bad' : 'good')}/>`;
+    vb(svg, 400, 195); svg.innerHTML = g;
+    $('#t1Gap').textContent = (a - c > 0 ? '+' : '') + (a - c); $('#t1Say').textContent = a - c > 15 ? 'You\'ve taken freedom your skills can\'t pay for. Expect it to slide back.' : a - c > 0 ? 'A stretch, but you may be able to cover it.' : 'Your control is backed by capital. It should hold.'; };
+  sl('t1Cap', v => v, draw)(); sl('t1Ask', v => v, draw)();
+  const set = (c, a) => { capI.value = c; askI.value = a; out('t1Cap', c); out('t1Ask', a); draw(); };
+  $('#t1Leap').addEventListener('click', () => set(15, 80)); $('#t1Build').addEventListener('click', () => set(75, 70));
+}
+
+/* ---------- 10: second control trap ---------- */
+{ const svg = $('#t2Svg'); let choice = null;
+  const draw = () => { const c = +$('#t2Cap').value; let g = axes(40, 15, 380, 170, 'Career capital', 'Strength'); const lev = [], pu = [];
+    for (let i = 0; i <= 100; i += 5){ lev.push([40 + i * 3.4, 170 - 1.55 * i]); pu.push([40 + i * 3.4, 170 - 1.55 * (100 * Math.pow(i / 100, 2.2))]); }
+    g += line(lev, 'glow', 3) + line(pu, 'bad', 3) + TX(60, 40, 'Your leverage', 'glow', 11.5) + TX(60, 56, 'Their pushback', 'bad', 11.5) + `<path d="M${40 + c * 3.4} 170V15" ${S('faint', 1, ';stroke-dasharray:3 4')}/>`;
+    vb(svg, 400, 195); svg.innerHTML = g;
+    $('#t2Lev').textContent = c; $('#t2Push').textContent = Math.round(100 * Math.pow(c / 100, 2.2));
+    $('#t2Say').textContent = choice === 'take' ? 'More money and a bigger title, and a narrower role. The control is gone.' : choice === 'hold' ? (c >= 50 ? 'Awkward at first, but your capital backs the ask, and you end up with the control.' : 'You may not have enough capital yet, and the answer could still be no.') : 'Choose how to answer.'; };
+  sl('t2Cap', v => v, draw)(); $('#t2Take').addEventListener('click', () => { choice = 'take'; draw(); }); $('#t2Hold').addEventListener('click', () => { choice = 'hold'; draw(); });
+}
+
+/* ---------- 11: money test ---------- */
+sorter('#sort12', '#tally12', [{ id: 'go', label: 'Passes: keep going', d: 'People will pay' }, { id: 'no', label: 'Fails: build more first', d: 'No sign of demand' }], [
+  { t: 'Friends say your app idea is great. Nobody has tried it.', q: true, a: 'no', w: 'Kind words are cheap. Willingness to pay is the hard signal.' },
+  { t: 'Twenty strangers paid for your workshop at the first attempt.', q: true, a: 'go', w: 'Strangers paying is exactly the evidence the law asks for.' },
+  { t: 'You love your idea and have quit your job to work on it, with no customers.', q: true, a: 'no', w: 'Control taken before there is evidence of value is the first trap.' },
+  { t: 'Freelance clients keep asking for more of your work at a higher rate.', q: true, a: 'go', w: 'Demand is growing; you have capital to spend.' },
+  { t: 'Your blog has plenty of likes and nobody has offered a cent.', q: true, a: 'no', w: 'Attention is not payment, so test whether it can turn into money.' },
+  { t: 'A client offers a retainer to stay on your own terms.', q: true, a: 'go', w: 'They will pay for what you want to do.' },
+]);
+
+/* ---------- 12: mission pull ---------- */
+{ const svg = $('#vcSvg'); let r = rng(3);
+  const vecs = () => { const a = +$('#vcAlign').value / 100, out = []; for (let i = 0; i < 10; i++){ const ang = -Math.PI / 2 * 0 + (r() * 2 - 1) * Math.PI * (1 - a), len = 14 + r() * 8; out.push([Math.cos(ang) * len, Math.sin(ang) * len]); } return out; };
+  let rv = []; const seed = () => { r = rng(Math.floor(Math.random() * 1e6)); rv = []; for (let i = 0; i < 10; i++) rv.push([r() * 2 - 1, 14 + r() * 8]); };
+  seed();
+  const draw = () => { const a = +$('#vcAlign').value / 100, vs = rv.map(([u, l]) => { const ang = u * Math.PI * (1 - a); return [Math.cos(ang) * l, Math.sin(ang) * l]; });
+    let x = 30, y = 100, g = `<circle cx="${x}" cy="${y}" r="5" ${F('faint')}/>`; vs.forEach(([dx, dy], i) => { g += `<path d="M${x.toFixed(1)} ${y.toFixed(1)}l${(dx * 1.4).toFixed(1)} ${(dy * 1.4).toFixed(1)}" ${S(i % 2 ? 'cool' : 'glow', 3)}/>`; x += dx * 1.4; y += dy * 1.4; });
+    g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" ${F('glow')}/>`;
+    const dist = Math.hypot(x - 30, y - 100), full = vs.reduce((s, v) => s + Math.hypot(v[0], v[1]) * 1.4, 0);
+    vb(svg, 400, 200); svg.innerHTML = g; $('#vcLen').textContent = Math.round(dist / full * 100) + '% of effort';
+    $('#vcSay').textContent = a < .3 ? 'Busy but scattered. A lot of it cancels out.' : a < .7 ? 'Some momentum, some drift.' : 'Everything builds on the last project.'; };
+  sl('vcAlign', v => v + '%', draw)(); $('#vcNew').addEventListener('click', () => { seed(); draw(); });
+}
+
+/* ---------- 13: adjacent possible ---------- */
+{ const svg = $('#apSvg'), N = 9; let known, stars;
+  const reset = () => { known = new Set(['0,4']); const rr = rng(Math.floor(Math.random() * 1e6)); stars = new Set(); while (stars.size < 4){ stars.add((N - 1 - Math.floor(rr() * 3)) + ',' + Math.floor(rr() * N)); } draw(); };
+  const nbr = (x, y) => [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]].filter(([a, b]) => a >= 0 && b >= 0 && a < N && b < N);
+  const reachable = () => { const s = new Set(); known.forEach(k => { const [x, y] = k.split(',').map(Number); nbr(x, y).forEach(([a, b]) => { if (!known.has(a + ',' + b)) s.add(a + ',' + b); }); }); return s; };
+  const draw = () => { const rch = reachable(); let g = ''; const cs = 34;
+    for (let x = 0; x < N; x++) for (let y = 0; y < N; y++){ const k = x + ',' + y, kn = known.has(k), rc = rch.has(k), st = stars.has(k), vis = st && (kn || rc);
+      g += `<rect class="${rc ? 'svgbtn' : ''}" data-k="${k}" x="${10 + x * cs}" y="${10 + y * cs}" width="${cs - 3}" height="${cs - 3}" rx="5" ${FS(kn ? 'glow' : rc ? 'glow-soft' : 'panel-2', rc ? 'glow' : 'line', 1, kn ? .8 : 1)} ${rc ? 'tabindex="0" role="button" aria-label="Learn this square" style="cursor:pointer;fill:var(--glow-soft);stroke:var(--glow);stroke-width:1.5"' : ''}/>`;
+      if (vis) g += TX(10 + x * cs + (cs - 3) / 2, 10 + y * cs + 21, '★', 'good', 18, 'middle'); }
+    vb(svg, 330, 320); svg.innerHTML = g;
+    svg.querySelectorAll('[data-k]').forEach(r => { const learn = () => { if (rch.has(r.dataset.k)){ known.add(r.dataset.k); draw(); } }; r.addEventListener('click', learn); r.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); learn(); } }); });
+    const seen = [...stars].filter(k => known.has(k) || rch.has(k)).length; $('#apKnown').textContent = known.size; $('#apMis').textContent = seen + ' of 4';
+    $('#apSay').textContent = seen === 0 ? 'Nothing yet. The frontier is far away.' : 'A mission has come into view at the edge.'; };
+  $('#apAuto').addEventListener('click', () => { for (let i = 0; i < 8; i++){ const r = [...reachable()]; if (!r.length) break; known.add(r.sort((a, b) => (+b.split(',')[0]) - (+a.split(',')[0]))[Math.floor(Math.random() * Math.min(3, r.length))]); } draw(); });
+  $('#apReset').addEventListener('click', reset); reset();
+}
+
+/* ---------- 14: little bets ---------- */
+{ const svg = $('#lbSvg'); let wb = 0, ws = 0, yrs = 0;
+  const year = () => { const good = Math.floor(Math.random() * 8); let g = Math.floor(Math.random() * 8); const big = g === good; let pool = 8, ok = false, guess = Math.floor(Math.random() * 8), cand = new Set([...Array(8).keys()]);
+    for (let m = 0; m < 12; m++){ const t = [...cand][Math.floor(Math.random() * cand.size)]; if (t === good){ ok = true; break; } cand.delete(t); }
+    return [big, ok]; };
+  let last = null;
+  const draw = () => { let g = ''; const rowY = [30, 100];
+    ['One big bet', 'Twelve little bets'].forEach((lab, i) => { g += TX(0, rowY[i] - 10, lab, 'muted', 12);
+      for (let m = 0; m < 12; m++){ const w = i ? 20 : 240; if (i === 0 && m > 0) break; g += `<rect x="${i ? m * 28 : 0}" y="${rowY[i]}" width="${i ? 24 : 330}" height="24" rx="5" ${F(last ? (last[i] ? 'good' : 'bad') : 'panel-2', last ? .65 : 1)}/>`; } });
+    g += TX(0, 160, last ? (last[0] ? 'Big bet: the first guess was right.' : 'Big bet: wasted a year.') + '  ' + (last[1] ? 'Little bets: found it.' : 'Little bets: still searching.') : 'Play a year to see.', 'muted', 12);
+    vb(svg, 340, 175); svg.innerHTML = g;
+    $('#lbBig').textContent = yrs ? Math.round(wb / yrs * 100) + '%' : '?'; $('#lbSmall').textContent = yrs ? Math.round(ws / yrs * 100) + '%' : '?'; };
+  const play = n => { for (let i = 0; i < n; i++){ last = year(); yrs++; wb += last[0]; ws += last[1]; } $('#lbSay').textContent = n > 1 ? `After ${yrs} years of trials the little bets hit more often.` : last[0] || last[1] ? (last[1] && !last[0] ? 'Little bets found a direction the big bet missed.' : 'Both found something this year.') : 'Neither found it this year. Little bets still tried twelve ideas.'; draw(); };
+  $('#lbRun').addEventListener('click', () => play(1)); $('#lbTen').addEventListener('click', () => play(50)); draw();
+}
+
+/* ---------- 15: purple cow ---------- */
+{ const svg = $('#mkSvg'), L = ['Dull', 'Decent', 'Good', 'Striking', 'Purple cow'], V = ['Nobody looks', 'Few look', 'Some look', 'The right crowd', 'Built for sharing'];
+  let heard = null, ring = 0;
+  const draw = () => { let g = ''; for (let i = 0; i < 100; i++){ const x = 14 + (i % 20) * 18, y = 14 + Math.floor(i / 20) * 18, on = heard && i < heard; g += `<circle cx="${x}" cy="${y}" r="6" ${F(on ? 'glow' : 'panel-2', on ? .95 : 1)}/>`; }
+    vb(svg, 380, 110); svg.innerHTML = g; $('#mkN').textContent = heard == null ? '?' : heard + ' of 100'; };
+  sl('mkRem', v => L[v], () => {})(); sl('mkVen', v => V[v], () => {})();
+  $('#mkGo').addEventListener('click', () => { const r = +$('#mkRem').value, v = +$('#mkVen').value, k = (r + .5) * (v + .5) / 24 * 100; heard = Math.max(1, Math.min(100, Math.round(k + (Math.random() - .5) * 6)));
+    $('#mkSay').textContent = heard < 15 ? 'It faded. Either nothing to remark on, or nowhere to remark.' : heard < 60 ? 'Some buzz. Push on one half to multiply the other.' : 'People are talking about it. Both halves of the law are working.'; draw(); });
+  draw();
+}
+
+/* ---------- 16: hour tally ---------- */
+{ const svg = $('#htSvg'); const key = 'sg-hours'; let h = store.get(key, {}); const now = new Date(), ym = now.toISOString().slice(0, 7);
+  const dim = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+  $('#htDate').value = now.toISOString().slice(0, 10);
+  const draw = () => { let g = '', sum = 0, days = 0, max = 4;
+    for (let d = 1; d <= dim; d++){ const k = ym + '-' + String(d).padStart(2, '0'), v = h[k] || 0; sum += v; if (v) days++; max = Math.max(max, v); }
+    const bw = 330 / dim;
+    for (let d = 1; d <= dim; d++){ const k = ym + '-' + String(d).padStart(2, '0'), v = h[k] || 0; g += `<rect x="${(10 + (d - 1) * bw).toFixed(1)}" y="${(100 - 90 * v / max).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${(90 * v / max).toFixed(1)}" rx="2" ${F(v ? 'glow' : 'panel-2', v ? .9 : 1)}/>`; }
+    g += `<path d="M10 100H340" ${S('line', 1)}/>` + TX(10, 118, '1', 'faint', 10) + TX(340, 118, String(dim), 'faint', 10, 'end');
+    vb(svg, 350, 125); svg.innerHTML = g;
+    $('#htSum').textContent = sum + ' h'; $('#htDays').textContent = days + ' of ' + dim; $('#htSay').textContent = sum === 0 ? 'Log the hours you spent on hard, stretching work, not just busy hours.' : sum < 15 ? 'A start. Most people find this number smaller than they expected.' : sum < 40 ? 'A real habit. Keep the weekly stretch going.' : 'Serious practice. Watch for burnout and keep feedback honest.'; };
+  $('#htAdd').addEventListener('click', () => { const d = $('#htDate').value, v = parseFloat($('#htH').value); if (!d || isNaN(v)) return; h[d] = Math.max(0, Math.min(16, v)); store.set(key, h); draw(); });
+  $('#htClear').addEventListener('click', () => { Object.keys(h).filter(k => k.startsWith(ym)).forEach(k => delete h[k]); store.set(key, h); draw(); }); draw();
+}
+
+/* ---------- afterword: craftsman plan ---------- */
+{ const ids = ['plMarket', 'plSkill', 'plGood', 'plStretch', 'plBet', 'plCtl'], LB = ['Market', 'Capital I\'m building', 'What good looks like', 'Weekly stretch', 'Little bet', 'Control I want'];
+  let p = store.get('sg-plan', {}); ids.forEach(i => { if (p[i]) $('#' + i).value = p[i]; });
+  const draw = () => { const filled = ids.filter(i => p[i]); $('#plOut').innerHTML = filled.length ? `<span class="k">Your plan</span><div class="plan-card">${ids.map((i, k) => p[i] ? `<div><b>${LB[k]}:</b> ${esc(p[i])}</div>` : '').join('')}</div>` : '<span class="k">Your plan</span><p class="tip">Nothing saved yet. Fill in what you can and press save.</p>'; };
+  $('#plSave').addEventListener('click', () => { p = {}; ids.forEach(i => { const v = $('#' + i).value.trim(); if (v) p[i] = v; }); store.set('sg-plan', p); $('#plMsg').textContent = 'Saved in this browser.'; draw(); });
+  $('#plClear').addEventListener('click', () => { p = {}; ids.forEach(i => $('#' + i).value = ''); store.set('sg-plan', p); $('#plMsg').textContent = 'Cleared.'; draw(); }); draw();
+}
+
+})();
+</script>
+</body>
+</html>

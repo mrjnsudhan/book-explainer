@@ -1,0 +1,1453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Range, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into head starts, learning for a wicked world, finding your fit, breadth at work and range for life.
+   Dark-first: a night-blue field with a sunset-orange accent and a teal second series; light mode is a warm paper page. */
+:root{
+  color-scheme: dark;
+  --ink:#10131C;--panel:#171B27;--panel-2:#1F2433;--line:#2E3547;--text:#F2F0EA;--muted:#ABB1C0;--faint:#7C8396;
+  --glow:#FF8C5A;--glow-soft:rgba(255,140,90,.11);--hl:rgba(255,140,90,.26);--cool:#6FD1C4;--cool-soft:rgba(111,209,196,.1);
+  --good:#8FD97A;--good-soft:rgba(143,217,122,.1);--bad:#FF6F7D;--bad-soft:rgba(255,111,125,.12);
+  --soft:#D7D9E0;--deep:#0A0D14;--toc-bg:rgba(23,27,39,.74);--glow-line:rgba(255,140,90,.36);--cool-line:rgba(111,209,196,.3);--on-glow:#2A1003;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F2EA;--panel:#FFFDF8;--panel-2:#ECE6DA;--line:#DAD2C2;--text:#191B24;--muted:#555A68;--faint:#858A96;
+  --glow:#B4471C;--glow-soft:rgba(180,71,28,.06);--hl:#F8DCCB;--cool:#17706A;--cool-soft:rgba(23,112,106,.07);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8283C;--bad-soft:rgba(184,40,60,.07);
+  --soft:#2A2D36;--deep:#FBF8F2;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,71,28,.28);--cool-line:rgba(23,112,106,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F2EA;--panel:#FFFDF8;--panel-2:#ECE6DA;--line:#DAD2C2;--text:#191B24;--muted:#555A68;--faint:#858A96;
+  --glow:#B4471C;--glow-soft:rgba(180,71,28,.06);--hl:#F8DCCB;--cool:#17706A;--cool-soft:rgba(23,112,106,.07);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8283C;--bad-soft:rgba(184,40,60,.07);
+  --soft:#2A2D36;--deep:#FBF8F2;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,71,28,.28);--cool-line:rgba(23,112,106,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Range additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.race{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.race-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.race-top .moves{gap:6px}
+.race-top .btn{padding:5px 11px}
+.race-stage{padding:10px 10px 4px}
+.race-stage svg{display:block;width:100%;height:auto}
+.race-ctl{display:grid;gap:6px;padding:4px 16px 12px;font-size:13px;color:var(--muted)}
+.race-ctl output{font-family:var(--f-mono);color:var(--text);float:right}
+.race .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.race .cap b{color:var(--glow);font-weight:600}
+.luria{display:grid;gap:14px;padding:18px}
+.lu-card{display:grid;gap:10px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.lu-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.lu-card .q{font-family:var(--f-display);font-size:22px;line-height:1.2}
+.lu-card .ans{display:grid;gap:8px}
+.lu-card .ans .btn{text-align:left;border-radius:10px;padding:10px 12px}
+.lu-res{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.lu-res div{padding:10px 12px;border-radius:10px;font-size:14px;color:var(--soft)}
+.lu-res .a{background:var(--cool-soft);border:1px solid var(--cool-line)}
+.lu-res .c{background:var(--glow-soft);border:1px solid var(--glow-line)}
+.lu-res b{display:block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.lu-res .a b{color:var(--cool)} .lu-res .c b{color:var(--glow)}
+.plan-item{display:grid;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.plan-item .h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.plan-item b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15}
+.plan-item .mono{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.plan-item p{font-size:14.5px;color:var(--soft)}
+.plan-item .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.plan-item .rm:hover{color:var(--bad)}
+.plan-item.done b{text-decoration:line-through;text-decoration-color:var(--glow)}
+.field select{font:inherit}
+@media (max-width: 560px){ .fq{padding:14px 16px} .luria{padding:14px} .lu-res{grid-template-columns:minmax(0,1fr)} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to David Epstein's book</div>
+    <h1><em>Range</em>,<br>Explained</h1>
+    <p class="lede">The usual advice is to start early, focus on one thing and never quit. David Epstein, a science writer, looked at the evidence and found something different. Early specialisation works in tidy worlds like golf and chess. In the messier world most of us live and work in, the people who thrive tend to <b>sample widely, start late, switch when something fits better and borrow ideas from far away</b>. This guide covers the introduction, all twelve chapters and the conclusion, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>In a <em>wicked</em> world, breadth is not a detour. It's how you find what fits, and how you solve what specialists can't.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="race" style="margin:0" aria-label="Skill over the years for an early specialist and a late specialiser">
+        <div class="race-top"><span>The world you're in</span><div class="moves" id="hrWorld"></div></div>
+        <div class="race-stage"><svg id="hrSvg" role="img" aria-label="Two careers compared over the years"></svg></div>
+        <div class="race-ctl"><label for="hrAge">The sampler narrows down at age <output id="ohrAge"></output></label><input type="range" id="hrAge" min="8" max="24" value="15"></div>
+        <div class="cap" id="hrCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapter 1</span><span class="q">Head Starts</span><span class="d">Roger and Tiger, kind and wicked worlds</span></a>
+      <a href="#part2"><span class="n">Chapters 2 to 5</span><span class="q">Learning for a Wicked World</span><span class="d">Abstract thinking, broad practice, struggle and analogy</span></a>
+      <a href="#part3"><span class="n">Chapters 6 and 7</span><span class="q">Finding Your Fit</span><span class="d">Match quality, quitting and possible selves</span></a>
+      <a href="#part4"><span class="n">Chapters 8 to 11</span><span class="q">Breadth at Work</span><span class="d">Outsiders, old tech, foxes and dropping your tools</span></a>
+      <a href="#part5"><span class="n">Chapter 12 and conclusion</span><span class="q">Range for Life</span><span class="d">Deliberate amateurs, and why you're not behind</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2019</span>
+      <span><b>Author</b> David Epstein, science journalist and author of The Sports Gene</span>
+      <span><b>Full title</b> Range: Why Generalists Triumph in a Specialized World</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 14 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+    <!-- ===================== HEAD STARTS ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · head starts</span>
+      <h2>Head Starts</h2>
+      <p>Epstein opens with two of the greatest athletes of their time, who got there by opposite routes. One was trained for a single sport from before he could walk. The other tried everything and settled on tennis late. The question is which story is the rule and which is the exception, and the answer depends on what kind of world you are learning in.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Early, narrow specialisation works brilliantly in tidy worlds with clear rules and instant feedback. Most of life is not like that.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Two roads to the top</div>
+        <h2>Roger vs. Tiger</h2>
+        <div class="short"><span class="lbl">In short</span><p>Tiger Woods was groomed for golf from infancy. Roger Federer played almost every sport going and chose tennis late. Federer's path, a broad sampling period and then a later focus, turns out to be the more common one among elite athletes.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The Tiger story.</b> Tiger Woods had a putter in his hands before he could walk, was putting on national television at two and was in Golf Digest at five. His story became the template for parents and coaches: start early, specialise early, practise deliberately, and greatness follows.</span></li>
+          <li><span><b>The Roger story.</b> Roger Federer's mother was a tennis coach and chose not to coach him. He played squash, skiing, wrestling, swimming, skateboarding, basketball, handball, table tennis, badminton and football, and only narrowed down to tennis in his teens, later than most of his rivals.</span></li>
+          <li><span><b>The sampling period.</b> Studies of elite athletes in many sports find that Roger is the norm, not the exception. Future stars typically spend their early years trying a range of activities, learn about their own abilities and interests, and then specialise later than peers who plateau at lower levels.</span></li>
+          <li><span><b>The book's question.</b> Golf is an unusually tidy activity: the same task, repeated, with instant and accurate feedback. Epstein asks what happens in fields that aren't like golf, which is most of them, and argues that range, breadth across domains, is what those fields reward.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Federer's coaches wanted to move him up to train with older and stronger boys, he said no: he wanted to stay with his friends. His parents, by Epstein's account, were relaxed about tennis and more worried that he'd take it too seriously than not seriously enough. He was later than his peers in hiring a coach who focused on technique, and didn't concentrate on tennis until his early teens. Woods, by contrast, was shooting nine holes in 48 at three. Both reached the very top. Only one of their stories became a parenting manual.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: Roger's road or Tiger's road?</div><div class="tally" id="tally1" aria-label="Score"></div></div>
+        <div class="sorter" id="sort1"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Tiger's story is real, but it is not the usual path to excellence. Most people who end up great at something started broad, found what fit, and narrowed later. Being late to focus is not the same as being behind.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Kind and wicked worlds →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Kind and wicked learning environments</div>
+        <h2>The Cult of the Head Start</h2>
+        <div class="short"><span class="lbl">In short</span><p>Early, intense practice works when the rules are fixed, patterns repeat and feedback is quick and accurate: a kind learning environment. In a wicked one, where patterns are hidden and feedback is slow or misleading, experience can make you confident without making you right.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The Polgár experiment.</b> The Hungarian psychologist László Polgár set out to prove that geniuses are made. He home-schooled his three daughters, Susan, Sofia and Judit, in chess from early childhood. All three became top players, and Judit became the strongest woman in the history of the game.</span></li>
+          <li><span><b>Chess is a kind world.</b> Chess masters don't calculate faster than everyone else; they recognise patterns. In a classic experiment, masters could rebuild a position from a real game after a glance, but did no better than novices when the pieces were placed at random. Their skill was a huge library of familiar chunks.</span></li>
+          <li><span><b>Kind and wicked.</b> The psychologist Robin Hogarth calls environments with clear rules and fast, accurate feedback kind, and ones with hidden rules and late or misleading feedback wicked. Daniel Kahneman and Gary Klein, who disagreed about intuition, agreed on this: gut instinct is only trustworthy in kind worlds.</span></li>
+          <li><span><b>Where machines win.</b> The tidier the world, the better computers do. Garry Kasparov lost to Deep Blue, but in a 2005 freestyle tournament where anyone could team up with computers, the winners were two amateurs running three ordinary machines. Humans added most where the problem was open and strategic.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Epstein retells a story about a New York doctor in the early 1900s who had a gift for diagnosing typhoid before any symptoms appeared. He would feel a patient's tongue with his bare hands, then announce that typhoid was coming, and he was right again and again. He was so accurate because he was spreading the disease from patient to patient on his fingers. The feedback told him he was brilliant, and it was wrong. That is a wicked learning environment: plenty of experience, a convincing pattern and the wrong lesson.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: practise in a kind world or a wicked one</div><div class="hint">Change the feedback and run a career</div></div>
+        <div class="stage"><svg id="kw2" role="img" aria-label="How accurate and how confident a learner becomes over a thousand judgements"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="kwFb">Feedback that is right <output id="okwFb"></output></label><input type="range" id="kwFb" min="50" max="100" value="100"></div><div class="ctl"><label for="kwDrift">How often the rules change <output id="okwDrift"></output></label><input type="range" id="kwDrift" min="0" max="10" value="0"></div></div><div class="row"><span class="tip">Try a world:</span><button class="btn" id="kwKind" type="button" aria-pressed="true">Chess or golf</button><button class="btn" id="kwWick" type="button" aria-pressed="false">The tongue-feeling doctor</button><button class="btn" id="kwMix" type="button" aria-pressed="false">A changing market</button></div></div><div class="stats"><div class="stat"><span class="k">Accuracy after 1,000 cases</span><span class="v glow" id="kwAcc"></span></div><div class="stat"><span class="k">How sure they feel</span><span class="v" id="kwConf"></span></div><div class="stat"><span class="k">What experience did</span><span class="s" id="kwSay"></span></div></div><p class="callout">An illustrative model of a learner who updates on feedback. Confidence grows with every case either way. <b>In a kind world accuracy follows it up; in a wicked one it stalls, and the gap between the two lines is overconfidence.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask what kind of world you're learning in. If the rules are fixed and feedback is fast and honest, early specialisation and drills pay off. If not, piling up repetitions can teach you the wrong lesson with great confidence.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Concrete to abstract →</a></div>
+    </section>
+    <!-- ===================== LEARNING FOR A WICKED WORLD ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · learning for a wicked world</span>
+      <h2>Learning for a Wicked World</h2>
+      <p>If the world rewards people who can carry ideas from one setting to another, then how we learn matters as much as how much. These four chapters follow the shift from concrete to abstract thinking, the orphan musicians of Venice, maths classrooms on two continents and the power of analogy.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Breadth, struggle and variety feel slow while you learn, and they are what let knowledge travel to problems you have never seen.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · From concrete to abstract thinking</div>
+        <h2>How the Wicked World Was Made</h2>
+        <div class="short"><span class="lbl">In short</span><p>Over the twentieth century, people around the world got much better at abstract reasoning, a rise the philosopher James Flynn documented. Modern work rewards thinking in categories and transferring ideas between contexts, yet education still mostly trains narrow, specialised knowledge.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The Flynn effect.</b> Scores on IQ tests rose steadily through the last century, by about three points a decade, and fastest on tests of abstract pattern-finding such as Raven's Progressive Matrices. People did not get more raw brainpower. They put on what Flynn called scientific spectacles: the habit of classifying and reasoning about hypotheticals.</span></li>
+          <li><span><b>Luria's farmers.</b> In the early 1930s the Soviet psychologist Alexander Luria interviewed villagers in remote Uzbekistan whose lives had not yet been touched by modern schooling or industry. Asked which of a hammer, saw, log and hatchet did not belong, they kept the log: you need it for the tools to be useful. They reasoned from experience, not categories.</span></li>
+          <li><span><b>Abstract thinking is portable.</b> Thinking in categories lets you carry a principle from one situation to a completely different one. That is exactly what a complex, fast-changing world asks of us, and what Luria's farmers, expert in their own concrete world, found unnatural.</span></li>
+          <li><span><b>Narrow schooling.</b> Flynn found that university students, even strong ones, rarely applied the reasoning tools of their own subjects to problems outside them. Specialised training produced specialists who struggled to think broadly. Epstein argues that is a mismatch with the wicked world we've built.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>One of Luria's questions was a simple piece of logic: in the far north, where there is snow, all bears are white. Novaya Zemlya is in the far north. What colour are the bears there? Many of the villagers would not answer. They had never been to the far north, they said, and could only speak about what they had seen. One suggested Luria ask someone who had been there. It wasn't that they couldn't think. Their way of thinking was rooted in direct experience, which had served them perfectly well. Within a few years of schooling and collective farms, others in the same region were answering the question easily.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: put on the scientific spectacles</div><div class="hint">Answer, then see how Luria's farmers answered</div></div>
+        <div class="luria" id="lu3" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>We've all learned to think in categories and hypotheticals, and that's what lets ideas travel. Use it on purpose: when you learn something, ask what the general principle is and where else it would apply.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The orphans of Venice →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Breadth in music</div>
+        <h2>When Less of the Same Is More</h2>
+        <div class="short"><span class="lbl">In short</span><p>In music, often held up as proof that early specialisation is needed, many of the greats learned broadly: several instruments, many styles, lots of playing by ear. The orphan musicians of eighteenth-century Venice were the most famous of all.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The figlie del coro.</b> In the 1700s, the Ospedale della Pietà in Venice took in abandoned baby girls. Some became the figlie del coro, the daughters of the choir, and were among the most celebrated musicians in Europe. Vivaldi taught and wrote for them. Visitors were amazed that one young woman might play violin, cello, harpsichord and more.</span></li>
+          <li><span><b>Spreading the practice.</b> In one study of a selective music school, the students judged exceptional hadn't practised their main instrument more than the others. They had spread their practice more evenly across three instruments, and many started their main instrument later.</span></li>
+          <li><span><b>Play first, rules later.</b> Jazz and improvising musicians often learned by playing and listening, picking things up by ear before formal theory. Epstein describes players who could hear a phrase and play it back, but couldn't read music for years. Structure came after exploration.</span></li>
+          <li><span><b>Django's hand.</b> The jazz guitarist Django Reinhardt badly burned his left hand in a caravan fire at eighteen and lost the use of two fingers. Having played several instruments and styles, he invented a new way of playing with what he had left, and became one of the most influential guitarists of the century.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Epstein follows the history of the Pietà's musicians, whose public concerts drew aristocrats and composers from across Europe. The girls had no family names; they were known by their first names and instruments, such as Anna Maria of the violin. Their training was the opposite of a narrow drill. They learned many instruments, taught the younger girls themselves and performed constantly. Rousseau, who heard them, was so taken that he begged to meet them, and was startled to find that some of the voices he had pictured as angelic belonged to young women with smallpox scars. Their fame came from range.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: spread your practice</div><div class="hint">Move hours from your main instrument to others</div></div>
+        <div class="stage"><svg id="mu4" role="img" aria-label="Three skills that change as practice is spread across instruments and styles"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="muShare">Share of 20 weekly hours on other instruments and styles <output id="omuShare"></output></label><input type="range" id="muShare" min="0" max="70" step="5" value="0"></div></div></div><div class="stats"><div class="stat"><span class="k">Hours on the main instrument</span><span class="v" id="muMain"></span></div><div class="stat"><span class="k">Overall musicianship</span><span class="v glow" id="muAll"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="muSay"></span></div></div><p class="callout">An illustrative model, not data. It assumes practice on one instrument has diminishing returns, while other instruments and styles add ear, rhythm and ideas that carry back. <b>A little narrowness costs very little technique; a lot of it costs most of the range.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Even in fields that look like pure drill, breadth often helps. Learning neighbouring skills, styles and approaches feeds back into the main one, and gives you material to improvise with when things change.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Desirable difficulties →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Desirable difficulties</div>
+        <h2>Learning, Fast and Slow</h2>
+        <div class="short"><span class="lbl">In short</span><p>The ways of learning that feel productive, like repeating one type of problem until you get it, often produce shallow knowledge. Struggle, spacing, testing and mixing problem types feel slow and frustrating, and lead to learning that lasts and transfers.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Using procedures, making connections.</b> A large video study of maths lessons classified problems as using procedures, practising a method, or making connections, working out why it works. Teachers in the United States set making-connections problems too, but almost always turned them into procedures by giving hints until the students only had to follow steps.</span></li>
+          <li><span><b>Desirable difficulties.</b> The psychologists Robert and Elizabeth Bjork showed that some kinds of struggle make learning stick: generating an answer before being told it, spacing study out over time, testing yourself rather than rereading, and interleaving different types of problem.</span></li>
+          <li><span><b>Fast now, slow later.</b> At the US Air Force Academy, cadets were randomly assigned to calculus professors and all sat the same exams. The professors whose students scored best in the first course had students who did worse in later courses. The ones who taught for depth looked worse in the short term and better later on.</span></li>
+          <li><span><b>Mixed practice.</b> In a 2007 study by Doug Rohrer and Kelli Taylor, students who practised maths problems blocked by type did far better during practice than those who did them mixed up. A week later, on a test, the mixed group did roughly three times as well.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Epstein visits a maths class in which the teacher sets a problem designed to make students think, then, as soon as they start to struggle, hands them so many hints that the challenge evaporates. The students get the right answer and everyone feels good. But they have practised following instructions, not making connections. Struggling is uncomfortable for students and teachers alike, Epstein writes, and so classrooms quietly remove it, along with the learning it would have produced.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: blocked or mixed practice</div><div class="hint">Pick a schedule, then sit the test a week later</div></div>
+        <div class="stage"><svg id="bl5" role="img" aria-label="A practice schedule and how the student scores during practice and a week later"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">Practise:</span><button class="btn" id="blB" type="button" aria-pressed="true">Blocked: AAAA BBBB CCCC</button><button class="btn" id="blM" type="button" aria-pressed="false">Mixed: ABCB CACB ACBA</button></div><div class="row"><button class="btn primary" id="blTest" type="button">Sit the test a week later</button></div></div><div class="stats"><div class="stat"><span class="k">Score during practice</span><span class="v" id="blP"></span></div><div class="stat"><span class="k">Score a week later</span><span class="v glow" id="blT"></span></div><div class="stat"><span class="k">How it felt</span><span class="s" id="blSay"></span></div></div><p class="callout">Scores are rounded from Rohrer and Taylor's 2007 maths study (about 89 versus 60 percent during practice, 20 versus 63 percent on the test). <b>Mixing feels worse while you learn because you must first work out which method each problem needs, which is exactly the skill a real test asks for.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If learning feels easy, it may not be working. Try to answer before you look, space your study out, test yourself and mix problem types. You'll feel slower, and you'll remember more and use it more flexibly.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Thinking by analogy →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Analogies and the outside view</div>
+        <h2>Thinking Outside Experience</h2>
+        <div class="short"><span class="lbl">In short</span><p>When a problem is new, the most useful tool is an analogy from somewhere else. People who reach for many, varied analogies, and who look at a problem from the outside rather than only from inside its details, solve it better.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Kepler's analogies.</b> With no field of astrophysics to lean on, Johannes Kepler reasoned through analogy after analogy, comparing the force moving the planets to light, smell, heat and magnetism. He wrote that analogies were his most faithful teachers. They led him to the laws of planetary motion.</span></li>
+          <li><span><b>Deep structure.</b> Most of us match problems on surface features: medicine to medicine, sport to sport. Strong problem solvers look for the deep structure underneath. Studies show people rarely spot a distant analogy on their own, but improve sharply when they're prompted to compare several examples.</span></li>
+          <li><span><b>The outside view.</b> Kahneman once asked a team writing a textbook how long it would take. They guessed about two years. He then asked the most experienced member how long similar teams had taken: seven to ten years, and many never finished. They took eight. The inside view focuses on the details of your case; the outside view asks how cases like it usually go.</span></li>
+          <li><span><b>Diverse labs reason better.</b> The psychologist Kevin Dunbar watched molecular biology labs at work. Labs whose members came from varied backgrounds used analogies from more distant fields, and got unstuck faster. A lab of people with the same training tended to repeat the same approach to a problem.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>A classic experiment gives people a medical puzzle. A patient has a tumour deep inside the body. A strong ray will destroy it, but also the healthy tissue on the way; a weak ray is harmless to the tissue and useless against the tumour. Most people cannot solve it. But if they first read an unrelated story about a general who splits his army into small groups to converge on a fortress from all sides, because the roads are mined and can only take a few soldiers at a time, many more do, and most do once they're told the story might help. The fortress is the same problem in different clothes.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the tumour and the fortress</div><div class="hint">Split the ray and aim the beams</div></div>
+        <div class="stage"><svg id="rx6" role="img" aria-label="Beams of radiation converging on a tumour through healthy tissue"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="rxN">Number of beams <output id="orxN"></output></label><input type="range" id="rxN" min="1" max="10" value="1"></div></div><div class="row"><button class="btn" id="rxStory" type="button" aria-expanded="false">Read the fortress story first</button></div><p class="tip" id="rxTale" hidden>A general must capture a fortress in the middle of a country. Many roads lead to it, but each is mined: small groups can pass safely, a whole army will set off the mines. So he divides his army into small groups, sends one down each road and has them all arrive at the fortress at the same moment.</p></div><div class="stats"><div class="stat"><span class="k">Dose at the tumour</span><span class="v glow" id="rxT"></span></div><div class="stat"><span class="k">Worst dose to healthy tissue</span><span class="v" id="rxH"></span></div><div class="stat"><span class="k">Result</span><span class="s" id="rxSay"></span></div></div><p class="callout">The problem is Karl Duncker's; the fortress story is from Mary Gick and Keith Holyoak's experiments. In their studies, roughly one person in ten solved it alone, and most did once they had read the story and were told to use it. <b>The two problems share nothing on the surface and everything underneath.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're stuck, ask what else your problem is like, and reach for examples from distant fields, several at once. And before you trust your plan, ask how things usually go for projects like yours.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Match quality →</a></div>
+    </section>
+    <!-- ===================== FINDING YOUR FIT ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · finding your fit</span>
+      <h2>Finding Your Fit</h2>
+      <p>Grit is usually told as a story about never giving up. Epstein tells a different one: about people who quit, switched and sampled their way into work that fit them, and about why we are so bad at predicting who we will become.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Match quality, the fit between a person and their work, is worth searching for, and you learn who you are by trying things, not by thinking harder.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Quitting, switching and match quality</div>
+        <h2>The Trouble with Too Much Grit</h2>
+        <div class="short"><span class="lbl">In short</span><p>Grit, sticking with a goal, is useful. But switching is often how people find work that fits them. Economists call that fit match quality, and people who sample before they commit tend to find more of it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Van Gogh's detours.</b> Vincent van Gogh worked as an art dealer, a teacher, a bookseller and a preacher, failing or quitting each time, before he began to draw seriously at about 27. Even then he kept switching styles. He painted almost all the works he is famous for in the last few years of his short life.</span></li>
+          <li><span><b>Grit at West Point.</b> Angela Duckworth's grit scale predicted which cadets would make it through West Point's brutal first summer, called Beast Barracks. But the Army had a bigger problem: talented officers leaving once their required service ended. Bonuses didn't fix it. Letting officers choose their branch and posting, a better match, did more.</span></li>
+          <li><span><b>Specialise later, switch less.</b> The economist Ofer Malamud compared English students, who had to pick a subject before university, with Scottish students, who could sample first. The English graduates were more likely to switch to an unrelated field later. Choosing early just meant more people chose wrong.</span></li>
+          <li><span><b>The coin flip.</b> The economist Steven Levitt let people who were stuck over a big decision, such as quitting a job, flip a coin online. Those whose coin told them to make a change were, on average, happier six months later than those told to stay put.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Duckworth's grit research found that the cadets who scored higher on grit were more likely to survive Beast Barracks. Epstein doesn't dispute it. He points out what happens next: West Point graduates, who are among the best-trained young leaders in the country, were leaving the Army in large numbers as soon as their commitment ended, and bonuses mostly paid people who were going to stay anyway. When the Army instead let cadets bid extra years of service for the branch or post they wanted, retention improved. People with grit stay longer, but people with a good match stay for good.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: sample, then commit</div><div class="hint">Set how long you try things before choosing</div></div>
+        <div class="stage"><svg id="bd7" role="img" aria-label="Lifetime fit for different lengths of sampling period, from thousands of simulated careers"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="bdN">Years spent trying different paths <output id="obdN"></output></label><input type="range" id="bdN" min="0" max="10" value="0"></div></div><div class="row"><button class="btn primary" id="bdOne" type="button">Live one life</button></div></div><div class="stats"><div class="stat"><span class="k">Average fit over a 40-year career</span><span class="v glow" id="bdAvg"></span></div><div class="stat"><span class="k">Ended up in their best-fitting path</span><span class="v" id="bdBest"></span></div><div class="stat"><span class="k">One life</span><span class="s" id="bdLife">Press the button to live one.</span></div></div><p class="callout">An illustrative model: eight paths of hidden fit, a year in a path gives a noisy sense of how well it suits you, and you then commit to the one that felt best. Switching costs a little. <b>Committing at once is the grittiest choice and rarely the best fit. Some years of trying pays for itself, until the extra years cost more than they teach.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Quitting isn't failure if it moves you to something that fits better. Sample on purpose, notice what suits you and commit when you've learned enough. Grit works best once you've found the right thing to be gritty about.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Possible selves →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Test and learn, not plan and implement</div>
+        <h2>Flirting with Your Possible Selves</h2>
+        <div class="short"><span class="lbl">In short</span><p>We change more than we expect, so long-term plans built on who we are today often fit badly. Instead of deciding who to be and executing the plan, try things, treat them as experiments and let what you learn reshape the next step.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Frances Hesselbein.</b> Hesselbein reluctantly agreed at 34 to lead a local Girl Scout troop, just for a few weeks. She kept saying yes to the next thing. At 54 she became chief executive of the Girl Scouts of the USA, and turned it around. She was later awarded the Presidential Medal of Freedom.</span></li>
+          <li><span><b>Test and learn.</b> The organisational psychologist Herminia Ibarra found that people who change careers well don't plan a perfect new identity and then implement it. They try small experiments, meet new people and see which of their possible selves takes hold.</span></li>
+          <li><span><b>The end of history illusion.</b> In studies by Jordi Quoidbach, Daniel Gilbert and Timothy Wilson, people of every age said they'd changed a lot in the past ten years, yet expected to change little in the next ten. We keep thinking we're finished, at 18, 40 and 60.</span></li>
+          <li><span><b>Dark horses.</b> Todd Rose and Ogi Ogas's Dark Horse Project interviewed people who found fulfilling work by unusual routes. Few of them followed a long-term plan. They focused on short-term next steps and on what fitted them right now.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Hesselbein had never planned a career, let alone one running the largest organisation for girls in the world. Her first troop was thirty girls in a church basement in Johnstown, Pennsylvania, whose leader had left; she said she knew nothing about girls, having only a son. She agreed to stay six weeks. She stayed eight years, then took on the local council, then the national board. When the national organisation was in decline, the board picked her, an outsider with no corporate pedigree, to lead it. Every step, Epstein writes, was a response to an opportunity she hadn't planned for.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: how much will you change?</div><div class="hint">Set your age, then guess</div></div>
+        <div class="stage"><svg id="eh8" role="img" aria-label="How much people expect to change in the next ten years against how much people ten years older say they did"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ehAge">Your age <output id="oehAge"></output></label><input type="range" id="ehAge" min="18" max="68" value="30"></div><div class="ctl"><label for="ehGuess">How much you'll change in ten years <output id="oehGuess"></output></label><input type="range" id="ehGuess" min="0" max="10" value="3"></div></div></div><div class="stats"><div class="stat"><span class="k">Typical guess at your age</span><span class="v" id="ehPred"></span></div><div class="stat"><span class="k">What people ten years older report</span><span class="v glow" id="ehRep"></span></div><div class="stat"><span class="k">You</span><span class="s" id="ehSay"></span></div></div><p class="callout">Change is on a 0 to 10 scale; the curves are illustrative of the pattern in Quoidbach, Gilbert and Wilson's 2013 study, not its exact numbers. <b>At every age, people underestimate how much they will change.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You will change more than you think, so don't lock in a plan made by today's you. Pick a possible self, run a small experiment, see how it feels and adjust. The question is not "who am I?" but "what can I try next?"</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Outsiders solve it →</a></div>
+    </section>
+    <!-- ===================== BREADTH AT WORK ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · breadth at work</span>
+      <h2>Breadth at Work</h2>
+      <p>Outsiders who solve problems that stumped insiders, a toymaker who built a hit from old parts, forecasters who beat experts by knowing a little about a lot, and a firefighting crew who could not let go of their tools. Breadth turns out to be a working advantage, and narrowness a hidden risk.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The best problem solvers borrow from far away, mix old ideas in new ways and know when to drop the habits of their own field.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Distant fields, fresh solutions</div>
+        <h2>The Outsider Advantage</h2>
+        <div class="short"><span class="lbl">In short</span><p>Problems that stump the specialists are often solved by people from far outside the field, who bring a method that is routine in their world and unknown in this one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>InnoCentive.</b> Founded by people from the drug company Eli Lilly, InnoCentive let organisations post problems their own experts couldn't crack, open to anyone. A large share of them got solved, often by people from entirely different fields.</span></li>
+          <li><span><b>The further away, the better.</b> The researchers Karim Lakhani and Lars Bo Jeppesen studied InnoCentive's results and found that the further a solver's own expertise was from the problem's field, the more likely they were to solve it.</span></li>
+          <li><span><b>Undiscovered public knowledge.</b> The information scientist Don Swanson showed that answers often already exist, scattered across fields that never read each other's journals. He found a likely link between fish oil and a circulation disorder simply by connecting two bodies of literature.</span></li>
+          <li><span><b>Outsiders as a strategy.</b> Epstein argues organisations should broadcast hard problems widely instead of only handing them to the most specialised people, because the right analogy may live in someone else's field.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>After the Exxon Valdez spill in Alaska in 1989, some of the oil recovered from the water stayed stuck. In cold weather the oil and water froze into a thick sludge in the barges, and couldn't be pumped out. Years later, an oil spill institute put the problem on InnoCentive with a $20,000 prize. It was solved by John Davis, a chemist who had worked with concrete. He knew that on building sites, concrete is kept liquid by vibrating it. A device made for construction work solved a problem the oil industry had been stuck on for years.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: who solves the frozen oil?</div><div class="hint">Pick a solver, then see what the data says</div></div>
+        <div class="out" id="oi9pick" style="border-top:0"><span class="k">The problem</span><p>Oil recovered after a spill freezes with water into a sludge in the barges and can't be pumped out. Who solves it?</p><div class="moves" id="oiOpts" style="margin-top:10px"></div><p class="tip" id="oiAns" aria-live="polite" style="margin-top:10px"></p></div><div class="stage"><svg id="oi9" role="img" aria-label="Chance of solving a problem against how far the solver's field is from it"></svg></div><p class="callout">The chart is illustrative of the pattern Jeppesen and Lakhani reported for InnoCentive, not their exact figures. <b>Distance from the field helps because outsiders bring tools the insiders don't know exist.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're stuck, show the problem to someone from a different world. And in your own work, notice what is routine in your field that might be a breakthrough in someone else's.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Withered technology →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · New uses for old ideas</div>
+        <h2>Lateral Thinking with Withered Technology</h2>
+        <div class="short"><span class="lbl">In short</span><p>Gunpei Yokoi, a Nintendo engineer without elite technical training, built hits by combining cheap, well-understood technology in new ways. Breadth of experience, not depth in one specialism, drove the most creative work.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Gunpei Yokoi.</b> Yokoi joined Nintendo, then a playing card company, as a maintenance engineer in 1965. A toy extending arm he built for fun became the Ultra Hand, which sold over a million units. His Game & Watch handhelds used the cheap LCD screens of pocket calculators.</span></li>
+          <li><span><b>Withered technology.</b> Yokoi's philosophy was lateral thinking with withered technology: take components that are old, cheap and thoroughly understood, and use them in a new way. Others chased cutting-edge tech; he chased new ideas.</span></li>
+          <li><span><b>The Game Boy.</b> The 1989 Game Boy had a monochrome screen and a processor that was already dated. Rivals launched with colour screens. But the Game Boy was cheaper, tough and ran for many hours on four AA batteries, and with Tetris it sold more than a hundred million units with its colour successor.</span></li>
+          <li><span><b>Broad creators.</b> A study of comic book creators by Alva Taylor and Henrich Greve found that the best predictor of making a valuable comic was how many genres a creator had worked in, more than years of experience or the resources of the publisher.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Yokoi said he wasn't good enough at electronics to compete with the engineers at bigger companies, so he didn't try to. The Game & Watch began, the story goes, when he watched a bored commuter playing with a calculator on a bullet train. Calculator screens were cheap and everywhere, which made them withered technology. The Game Boy followed the same logic. Its competitors had brighter, better screens that ate through six batteries in a few hours. Yokoi's colleagues worried his machine looked dated. Players cared more that it went in a pocket and lasted all day.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: build a handheld</div><div class="hint">Choose the parts, then compare with 1989</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="row"><span class="tip">Screen:</span><div class="moves" id="hhScr"></div></div><div class="row"><span class="tip">Chip:</span><div class="moves" id="hhChip"></div></div></div><div class="stage"><svg id="hh10" role="img" aria-label="Your handheld compared with the Game Boy, Atari Lynx and Sega Game Gear"></svg></div><div class="stats"><div class="stat"><span class="k">Hours of play</span><span class="v glow" id="hhHrs"></span></div><div class="stat"><span class="k">Launch price</span><span class="v" id="hhPrice"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="hhSay"></span></div></div><p class="callout">Your machine's numbers are an illustrative model. The real consoles' figures are rounded launch prices in the US and typical battery life. <b>The withered parts lose on the spec sheet and win in the pocket.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>New isn't always better. Combining familiar, cheap pieces in an unfamiliar way can beat the cutting edge. Broad experience gives you more pieces to combine.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Hedgehogs and foxes →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Foxes beat hedgehogs</div>
+        <h2>Fooled by Expertise</h2>
+        <div class="short"><span class="lbl">In short</span><p>In Philip Tetlock's long study of expert forecasts, specialists with one big theory did badly, and often worse the more famous they were. Foxes, who knew many small things and borrowed from many views, forecast much better.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Tetlock's tournament.</b> Over about twenty years, the psychologist Philip Tetlock collected tens of thousands of predictions about politics and economics from nearly three hundred experts. On average, they barely did better than chance, and their long-term forecasts were especially poor.</span></li>
+          <li><span><b>Hedgehogs and foxes.</b> Borrowing from the philosopher Isaiah Berlin, Tetlock split experts into hedgehogs, who know one big thing and fit everything to it, and foxes, who know many little things. The foxes were consistently better forecasters, and the hedgehogs, often the most confident and quoted, were the worst.</span></li>
+          <li><span><b>The bet.</b> In 1980 the biologist Paul Ehrlich, who predicted resource shortages, bet the economist Julian Simon that the prices of five metals would rise over ten years. Prices fell and Simon won. Each man stuck to his view for decades, and each could have learned from the other.</span></li>
+          <li><span><b>Superforecasters.</b> In a forecasting tournament run by the US intelligence community, Tetlock's Good Judgment Project, made up of curious, open-minded volunteers, beat the other teams, including, by one account, analysts with access to classified data. Their edge was breadth and a willingness to update.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Epstein describes how the hedgehogs reacted to being wrong. Rather than update, they explained it away: they had been almost right, or right but early, or derailed by something no one could have foreseen. The more their reputation rested on one big idea, the harder it was to let go. The foxes treated their own views more like hypotheses, and were happier to say "I was wrong". Tetlock found that the experts with the most media exposure, the ones most rewarded for a bold and simple story, were among the least accurate.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: hedgehog against fox</div><div class="hint">Set how much the hedgehog's big idea explains</div></div>
+        <div class="stage"><svg id="hf11" role="img" aria-label="Accuracy of a hedgehog and a fox across forty forecasts"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="hfIdea">How often the big idea is what really matters <output id="ohfIdea"></output></label><input type="range" id="hfIdea" min="10" max="90" step="5" value="35"></div></div><div class="row"><button class="btn primary" id="hfGo" type="button">Run 40 forecasts</button></div></div><div class="stats"><div class="stat"><span class="k">Hedgehog's score</span><span class="v" id="hfH"></span></div><div class="stat"><span class="k">Fox's score</span><span class="v glow" id="hfF"></span></div><div class="stat"><span class="k">What happened</span><span class="s" id="hfSay"></span></div></div><p class="callout">An illustrative model using a Brier-style score (100 is perfect, 75 is what you get by always saying fifty-fifty). The hedgehog forecasts 95 or 5 percent from one theory; the fox blends several clues and hedges. <b>The hedgehog only wins when the world really is that simple.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Be suspicious of anyone, including yourself, who explains everything with one idea. Read widely, hold views as estimates, and keep score so that being wrong teaches you something.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Drop your tools →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · When habits become traps</div>
+        <h2>Learning to Drop Your Familiar Tools</h2>
+        <div class="short"><span class="lbl">In short</span><p>Experts can cling to the tools and habits of their field even when the situation calls for something else. In crises, from wildfires to the Challenger launch, the ability to drop familiar tools can be the difference between life and death.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Mann Gulch.</b> In 1949, a crew of smokejumpers in Montana was overtaken by a racing wildfire. Their foreman, Wag Dodge, told them to drop their tools, then lit an escape fire in the grass ahead of him and lay down in the ashes. The others kept running uphill, many still carrying their heavy tools. Dodge and two others survived; thirteen men died.</span></li>
+          <li><span><b>Tools are identity.</b> The organisational psychologist Karl Weick studied these and later firefighter deaths, and found that firefighters often died with their tools still in their hands. For an expert, the tools of the trade are part of who they are, and dropping them feels like giving up.</span></li>
+          <li><span><b>The Challenger launch.</b> On the eve of the 1986 launch, engineers at Thiokol worried that the cold would stop the rubber O-ring seals working. NASA's culture demanded hard numbers, and the engineers' data didn't prove the case, so their worries were overruled. The shuttle broke apart 73 seconds after launch.</span></li>
+          <li><span><b>Carter Racing.</b> Business-school students given a case about a racing team, an engine that sometimes fails and a race on a cold day, mostly decide to race. They only examine the races where something went wrong. The data that would have stopped them was the races where nothing did. The case was built to echo Challenger.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>NASA had a saying: in God we trust, all others bring data. It was a culture that served it superbly through years of engineering problems. On the night before Challenger, it worked against it. The engineers believed the cold was dangerous but had only a chart of flights where O-rings had been damaged, and on that chart there was no clear pattern with temperature. Had they plotted every flight, including the many with no damage, the pattern would have been plain: every launch below about 65 degrees Fahrenheit had trouble. The tool they were trained to use, qualitative concern backed by data, was the tool that failed them, and no one dropped it.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: plot the missing data</div><div class="hint">Switch between the chart they looked at and the full record</div></div>
+        <div class="stage"><svg id="or12" role="img" aria-label="O-ring problems against launch temperature for the flights before Challenger"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="orFail" type="button" aria-pressed="true">Only flights with O-ring problems</button><button class="btn" id="orAll" type="button" aria-pressed="false">All 23 flights</button><button class="btn" id="orFc" type="button" aria-pressed="false">Show launch morning</button></div></div><div class="stats"><div class="stat"><span class="k">Flights on the chart</span><span class="v" id="orN"></span></div><div class="stat"><span class="k">Below 65°F with problems</span><span class="v glow" id="orCold"></span></div><div class="stat"><span class="k">What it says</span><span class="s" id="orSay"></span></div></div><p class="callout">Data: the 23 shuttle flights before Challenger with recoverable boosters, launch temperature and number of O-rings showing heat damage, as published in later analyses. <b>The answer was in the flights where nothing went wrong.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Expertise comes with habits, and habits can become blind spots. In a new situation, ask which of your tools actually fits, and be ready to put down the one you're most comfortable with.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Deliberate amateurs →</a></div>
+    </section>
+    <!-- ===================== RANGE FOR LIFE ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Part five · range for life</span>
+      <h2>Range for Life</h2>
+      <p>The book ends with scientists who keep wandering outside their field on purpose, and with advice for the rest of us: you are probably not behind, and the detours count.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Stay a deliberate amateur somewhere, compare yourself with who you were yesterday and treat your path as a series of experiments.</p></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Wandering outside your field on purpose</div>
+        <h2>Deliberate Amateurs</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some of the most creative scientists deliberately play outside their speciality. Hobbies, side projects and cross-field reading aren't distractions from expertise; they are often where the breakthroughs come from.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Friday night experiments.</b> The physicist Andre Geim set aside time for curiosity-driven experiments outside his main research. One levitated a frog with a powerful magnet and won a spoof Ig Nobel prize. Another, peeling graphite with sticky tape, produced graphene and won the real Nobel Prize in 2010.</span></li>
+          <li><span><b>Nobel hobbies.</b> A 2008 study by Robert Root-Bernstein and colleagues found that Nobel laureates in science were far more likely than typical scientists to have serious artistic hobbies: about twice as likely to play music, and over twenty times as likely to perform as actors, dancers or magicians.</span></li>
+          <li><span><b>Specialisation in science.</b> The microbiologist Arturo Casadevall worries that modern science trains people so narrowly that they can't see across fields, and that research is rewarded for small, safe steps. He argues for teaching broad thinking, philosophy and the history of ideas alongside technique.</span></li>
+          <li><span><b>Integrators.</b> Epstein argues that any field needs both deep specialists and broad integrators, and that the system mostly produces the former. People who connect ideas across fields are rarer and harder to fund, and that is exactly why they matter.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Geim's Friday night experiments were a habit he kept on purpose: something not part of any grant, often in a field he knew little about. Most of them came to nothing, and he expected that. The levitating frog showed that even water-filled living things respond to strong magnetic fields. The graphene work started when he and Konstantin Novoselov looked at what was being thrown away: graphite flakes stripped off with ordinary sticky tape. A material just one atom thick, which many physicists thought couldn't exist on its own, came out of the bin of an experiment done for fun.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: what do Nobel scientists do on weekends?</div><div class="hint">Pick a pastime</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="row"><div class="moves" id="nbH"></div></div></div><div class="stage"><svg id="nb13" role="img" aria-label="How much more likely Nobel scientists are than typical scientists to have each hobby"></svg></div><div class="stats"><div class="stat"><span class="k">More likely than typical scientists</span><span class="v glow" id="nbX"></span></div><div class="stat"><span class="k">Why it might matter</span><span class="s" id="nbSay"></span></div></div><p class="callout">Approximate ratios from Root-Bernstein and colleagues' 2008 comparison of Nobel laureates with members of Sigma Xi and the general public. <b>It's a correlation, not proof that hobbies cause breakthroughs, but the pattern is strikingly consistent.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Keep a corner of your life where you're an amateur on purpose. Read outside your field, take up a hobby that uses a different part of your mind, and run your own Friday night experiments. Most will lead nowhere. One might lead somewhere no specialist would have looked.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Expanding your range →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Conclusion</span> · You are probably not behind</div>
+        <h2>Expanding Your Range</h2>
+        <div class="short"><span class="lbl">In short</span><p>Don't feel behind. Everyone develops at a different pace, and the detours are often the point. Compare yourself to who you were yesterday, not to someone else's head start, and treat your path as a series of experiments.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Don't feel behind.</b> Epstein's main advice: a late start, a switch or a winding path is not a failure. Many of the people in the book began late or changed course, and their breadth was part of what made them good.</span></li>
+          <li><span><b>Compare yourself with yesterday.</b> Measuring yourself against peers who specialised early makes you feel slow. The useful comparison is with your past self: are you learning, and does the work fit you better than it did?</span></li>
+          <li><span><b>Approach life as an experiment.</b> Like a scientist, try something, see what you learn and adjust. Each experiment, whether a job, a project or a hobby, tells you more about what fits than any amount of thinking about it.</span></li>
+          <li><span><b>Specialists still matter.</b> Epstein isn't against specialists; kind worlds and some careers need them. His point is that the world has more room for generalists than we think, and that we shouldn't push everyone into early, narrow paths.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Epstein closes with a reminder of his own winding route: he studied science, worked in research and then became a sports writer and author, a path that felt like a detour at every stage. Looking back on the people in the book, he notes how often the leap forward came from a skill picked up somewhere else. The way to find your own match, he concludes, is to keep sampling, keep learning and not let someone else's timetable tell you you're late.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: who hadn't started yet?</div><div class="hint">Set your age</div></div>
+        <div class="stage"><svg id="ls14" role="img" aria-label="A timeline of late starters and where your age falls"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="lsAge">Your age <output id="olsAge"></output></label><input type="range" id="lsAge" min="15" max="70" value="30"></div></div></div><div class="stats"><div class="stat"><span class="k">Hadn't started yet at your age</span><span class="v glow" id="lsN"></span></div><div class="stat"><span class="k">For example</span><span class="s" id="lsSay"></span></div></div><p class="callout">Van Gogh and Hesselbein are from the book; the others are well-known late starters added for comparison. Ages are approximate. <b>A late start is common among people who did remarkable things.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You're not behind. Keep trying things, learn from each one, and measure progress against your own past rather than other people's timelines. Your range is an asset, not a delay.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#after">Next: your range plan →</a></div>
+    </section>
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your range plan</h2>
+      <p class="big">The book's advice in one habit: pick a few possible selves, and for each one design a small, cheap experiment you can run soon. Then see what you learn.</p>
+      <figure class="lab" id="plan">
+        <div class="lab-top"><div class="t">Add an experiment</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="rpSelf">A possible self</label><input id="rpSelf" maxlength="100" placeholder="e.g. Someone who teaches"></div>
+          <div class="field" style="grid-column:1/-1"><label for="rpTry">A small experiment</label><input id="rpTry" maxlength="160" placeholder="e.g. Run one free workshop for colleagues"></div>
+          <div class="field"><label for="rpKind">What kind of experiment</label><select id="rpKind"><option>Try a project</option><option>Talk to someone who does it</option><option>Learn a neighbouring skill</option><option>A Friday night experiment</option></select></div>
+          <div class="field"><label for="rpWhen">By when</label><input type="date" id="rpWhen"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="rpAdd" type="button">Add to my plan</button><span class="tip" id="rpMsg"></span></div>
+        </div>
+        <div class="out" id="rpList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Kind or wicked</span><b>Know your world</b><span>Head starts and drills work where rules are fixed and feedback is honest. Most of life isn't like that.</span></div>
+        <div><span class="n">Learning</span><b>Make it hard</b><span>Struggle, spacing and mixed practice feel slow and build knowledge that transfers.</span></div>
+        <div><span class="n">Analogy</span><b>Borrow from afar</b><span>Look for the deep structure of a problem, and take the outside view.</span></div>
+        <div><span class="n">Fit</span><b>Sample, then commit</b><span>Switching to find match quality is a strategy, not a failure.</span></div>
+        <div><span class="n">Work</span><b>Outsiders and foxes</b><span>Distance from a field and breadth across many make better solvers and forecasters.</span></div>
+        <div><span class="n">Life</span><b>You're not behind</b><span>Stay a deliberate amateur and compare yourself with who you were yesterday.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Range: Why Generalists Triumph in a Specialized World</i> by David Epstein (2019). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book or a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Head starts", "Learning for a wicked world", "Finding your fit", "Breadth at work", "Range for life"];
+const CH = [["Roger vs. Tiger", "Roger vs. Tiger", 0, "Introduction"], ["The Cult of the Head Start", "Kind and wicked worlds", 0, "Chapter 1"], ["How the Wicked World Was Made", "Concrete to abstract", 1, "Chapter 2"], ["When Less of the Same Is More", "The orphans of Venice", 1, "Chapter 3"], ["Learning, Fast and Slow", "Desirable difficulties", 1, "Chapter 4"], ["Thinking Outside Experience", "Thinking by analogy", 1, "Chapter 5"], ["The Trouble with Too Much Grit", "Match quality", 2, "Chapter 6"], ["Flirting with Your Possible Selves", "Possible selves", 2, "Chapter 7"], ["The Outsider Advantage", "Outsiders solve it", 3, "Chapter 8"], ["Lateral Thinking with Withered Technology", "Withered technology", 3, "Chapter 9"], ["Fooled by Expertise", "Hedgehogs and foxes", 3, "Chapter 10"], ["Learning to Drop Your Familiar Tools", "Drop your tools", 3, "Chapter 11"], ["Deliberate Amateurs", "Deliberate amateurs", 4, "Chapter 12"], ["Expanding Your Range", "Expanding your range", 4, "Conclusion"]];
+const QUIZ = {
+"1": {
+"q": "What does the research on elite athletes mostly show about their childhoods?",
+"o": [
+"They specialised in their sport earlier than everyone else",
+"They usually had a sampling period across many sports before specialising later",
+"They never practised deliberately"
+],
+"a": 1,
+"w": "Most elite athletes tried many sports first and specialised later than peers who plateaued. Tiger's early start is the exception."
+},
+"2": {
+"q": "What makes a learning environment \"wicked\" in Hogarth's sense?",
+"o": [
+"It is very competitive",
+"Its rules are unclear or changing and feedback is slow, missing or misleading",
+"It requires physical skill"
+],
+"a": 1,
+"w": "Wicked environments break the link between experience and accuracy: patterns don't repeat cleanly and feedback doesn't tell you the truth quickly."
+},
+"3": {
+"q": "Why did Luria's villagers keep the log in the hammer, saw, log and hatchet puzzle?",
+"o": [
+"They didn't understand the question",
+"They reasoned from practical experience: the tools are useless without wood",
+"They thought a log was a tool"
+],
+"a": 1,
+"w": "They grouped things by how they work together in real life, not by abstract category. It was concrete reasoning, not a lack of intelligence."
+},
+"4": {
+"q": "In the music school study Epstein cites, what set apart the exceptional students?",
+"o": [
+"Many more hours on their main instrument",
+"Practice spread more evenly across three instruments",
+"Starting lessons before the age of three"
+],
+"a": 1,
+"w": "They didn't out-practise the others on one instrument. They spread their practice more broadly, and often started their main instrument later."
+},
+"5": {
+"q": "What happened to students of the Air Force Academy professors whose classes scored best in the first calculus course?",
+"o": [
+"They did better in every later course",
+"They did worse in later, more advanced courses",
+"They switched to other majors"
+],
+"a": 1,
+"w": "Teaching to the immediate test raised short-term scores but left shallower understanding, which showed up later in harder courses."
+},
+"6": {
+"q": "What is the \"outside view\"?",
+"o": [
+"Asking outsiders for their opinion",
+"Judging a case by how similar cases have usually turned out",
+"Focusing on every detail of your own case"
+],
+"a": 1,
+"w": "The outside view looks at the base rate for the class of things your case belongs to, which corrects the optimism of the inside view."
+},
+"7": {
+"q": "What did Malamud find about English students, who had to choose a specialty earlier than Scottish students?",
+"o": [
+"They earned more for life",
+"They were more likely to switch to an unrelated field after graduating",
+"They were less likely to finish university"
+],
+"a": 1,
+"w": "Specialising before they knew what fit them meant more English graduates made poor matches and switched later, at a higher cost."
+},
+"8": {
+"q": "What is the end of history illusion?",
+"o": [
+"Believing the world will soon end",
+"Seeing how much you've changed in the past but expecting to change little in the future",
+"Forgetting what you were like when younger"
+],
+"a": 1,
+"w": "People at every age recognise past change but predict their present self will stay much the same, which leads to plans that their future self doesn't want."
+},
+"9": {
+"q": "Who solved the problem of frozen oil sludge posted on InnoCentive?",
+"o": [
+"A petroleum engineer",
+"A chemist who knew how vibration keeps concrete liquid",
+"An Alaskan fisherman"
+],
+"a": 1,
+"w": "John Davis borrowed a routine technique from construction, a field the oil spill specialists had no reason to look at."
+},
+"10": {
+"q": "What did Yokoi mean by \"lateral thinking with withered technology\"?",
+"o": [
+"Using the newest components available",
+"Finding new uses for old, cheap and well-understood technology",
+"Refusing to use technology at all"
+],
+"a": 1,
+"w": "Instead of competing on cutting-edge parts, Yokoi combined mature, cheap technology in new ways, as in the Game & Watch and Game Boy."
+},
+"11": {
+"q": "In Tetlock's research, which experts forecast best?",
+"o": [
+"Hedgehogs with one strong theory",
+"Foxes who drew on many ideas and sources",
+"The experts with most media appearances"
+],
+"a": 1,
+"w": "Foxes, who knew many small things and changed their minds readily, outperformed hedgehogs, and media fame went with worse accuracy."
+},
+"12": {
+"q": "Why did the Carter Racing students, like NASA, misread the data?",
+"o": [
+"They had no data at all",
+"They looked only at the cases where something went wrong, not the ones where nothing did",
+"They used the wrong units"
+],
+"a": 1,
+"w": "Without the successful cases, there was no visible link between cold and failure. Including them made the danger obvious."
+},
+"13": {
+"q": "How did Andre Geim's graphene work begin?",
+"o": [
+"As part of a large government programme",
+"As a curiosity-driven \"Friday night experiment\" peeling graphite with tape",
+"By copying a published method"
+],
+"a": 1,
+"w": "Graphene came from a side experiment done for curiosity, the kind of play outside the main research that Geim cultivated deliberately."
+},
+"14": {
+"q": "What comparison does Epstein recommend?",
+"o": [
+"With the most successful person in your field",
+"With who you were yesterday",
+"With people your age who specialised early"
+],
+"a": 1,
+"w": "Comparing yourself with your past self tracks real growth; comparing with early specialists only makes you feel late."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#10131c';
+try { const t = localStorage.getItem('rg-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('rg-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('rg-done', []));
+const save = () => store.set('rg-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I feel behind people who started early', 1, 'Roger vs. Tiger', 'Most people who become excellent sample widely first and specialise later. A late start is the common path, not a handicap.'],
+    ['Should I trust my gut here?', 2, 'Kind and wicked worlds', 'Intuition is reliable only where rules are stable and feedback is fast and honest. Ask which kind of world you\'re in.'],
+    ['My learning doesn\'t stick', 5, 'Desirable difficulties', 'Struggle first, space it out, test yourself and mix problem types. It feels slower and lasts longer.'],
+    ['I\'m stuck on a hard problem', 6, 'Thinking by analogy', 'Ask what else the problem is like, ideally from a field far away, and how similar cases usually turn out.'],
+    ['I\'m thinking about quitting', 7, 'Match quality', 'Switching to find a better fit is a strategy. Grit pays off most once you\'re in the right place.'],
+    ['I don\'t know what I want to be', 8, 'Possible selves', 'Don\'t plan your identity; test it. Run small experiments and let what you learn choose the next step.'],
+    ['I\'m an outsider in my field', 9, 'Outsiders solve it', 'Distance from a field is often an advantage: you bring tools the insiders have never seen.'],
+    ['I want to be more creative', 10, 'Withered technology', 'Combine old, well-understood pieces in new ways. Breadth gives you more pieces.'],
+    ['I keep trusting confident experts', 11, 'Hedgehogs and foxes', 'People with one big theory forecast worst. Prefer the fox who knows many small things and updates.'],
+    ['My team is set in its ways', 12, 'Drop your tools', 'Familiar habits can become traps. Ask which tools actually fit this situation, and look at the data you\'re ignoring.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: early specialist vs sampler ---------- */
+{ const svg = $('#hrSvg'), cap = $('#hrCap'), wb = $('#hrWorld'), aI = $('#hrAge');
+  let world = 'wicked';
+  wb.innerHTML = [['kind', 'Kind (golf, chess)'], ['wicked', 'Wicked (most work)']].map(([k, l]) => `<button class="btn" type="button" data-w="${k}" aria-pressed="${k === world}">${l}</button>`).join('');
+  const P = () => world === 'kind' ? { cs: 95, cg: 88, k2: 7 } : { cs: 66, cg: 92, k2: 5 };
+  const spec = t => P().cs * (1 - Math.exp(-(t - 4) / 7));
+  const samp = (t, A) => { const p = P(), early = .3 * p.cg * (1 - Math.exp(-(t - 4) / 7)); if (t <= A) return early; const b = .3 * p.cg * (1 - Math.exp(-(A - 4) / 7)); return b + (p.cg - b) * (1 - Math.exp(-(t - A) / p.k2)); };
+  function draw(){
+    const A = +aI.value; out('hrAge', A);
+    const W = 400, H = 230, L = 34, R = 12, T = 14, B = 30, x = a => L + (a - 4) / 36 * (W - L - R), y = v => T + (1 - v / 100) * (H - T - B);
+    vb(svg, W, H); let g = '';
+    [0, 50, 100].forEach(v => { g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', 10, 'end'); });
+    [5, 15, 25, 35].forEach(a => g += TX(x(a), H - 10, a, 'faint', 10, 'middle'));
+    g += TX(W - R, H - 10, 'age', 'faint', 10, 'end') + TX(L, T - 2, 'skill and fit', 'faint', 10);
+    g += `<line x1="${x(A)}" x2="${x(A)}" y1="${T}" y2="${H - B}" ${S('cool', 1, ';stroke-dasharray:3 4;stroke-opacity:.6')}/>`;
+    const path = f => { let d = ''; for (let a = 4; a <= 40; a += .5) d += (d ? 'L' : 'M') + x(a).toFixed(1) + ' ' + y(f(a)).toFixed(1); return d; };
+    g += `<path d="${path(spec)}" ${S('muted', 2.5)}/><path d="${path(a => samp(a, A))}" ${S('glow', 3)}/>`;
+    g += TX(x(40) - 2, y(spec(40)) - 6, 'Tiger', 'muted', 12, 'end') + TX(x(40) - 2, y(samp(40, A)) + (samp(40, A) > spec(40) ? -6 : 15), 'Roger', 'glow', 12, 'end', 'font-weight="600"');
+    svg.innerHTML = g;
+    const lead = a => samp(a, A) >= spec(a) ? 'the sampler' : 'the early specialist';
+    let cross = null; for (let a = A; a <= 40; a += .5) if (samp(a, A) >= spec(a)){ cross = a; break; }
+    cap.innerHTML = world === 'kind'
+      ? `In a kind world the head start pays. <b>The early specialist leads at 15, 25 and 35.</b> Drills and repetition are exactly what golf and chess reward.`
+      : (cross ? `The early specialist leads for years, then plateaus. <b>The sampler catches up at about ${Math.round(cross)}</b> and keeps rising, with a better fit and more to draw on. At 35, ${lead(35)} is ahead.` : `Narrowing this late leaves too little time in this model. <b>The early specialist stays ahead</b>, but only just.`);
+  }
+  wb.querySelectorAll('[data-w]').forEach(b => b.addEventListener('click', () => { world = b.dataset.w; press([...wb.querySelectorAll('[data-w]')], b); draw(); }));
+  aI.addEventListener('input', draw); draw();
+}
+
+/* ---------- intro: Roger or Tiger ---------- */
+sorter('#sort1', '#tally1', [{ id: 'r', label: 'Roger Federer', d: 'Sampled widely, focused late' }, { id: 't', label: 'Tiger Woods', d: 'One sport from infancy' }], [
+  { t: 'His mother was a tennis coach, and chose not to coach him.', q: true, a: 'r', w: 'Federer\'s parents were relaxed about tennis and more worried he\'d take it too seriously.' },
+  { t: 'Had a putter in his hands at seven months old.', q: true, a: 't', w: 'Earl Woods started his son before he could walk.' },
+  { t: 'Showed off his putting on national television at the age of two.', q: true, a: 't', w: 'A toddler on a TV talk show, the start of the legend.' },
+  { t: 'As a boy he played squash, skiing, wrestling, basketball, handball, badminton and football.', q: true, a: 'r', w: 'A classic sampling period, building general athletic skill before choosing.' },
+  { t: 'Turned down a move up to train with older boys so he could stay with his friends.', q: true, a: 'r', w: 'Fun and friends came before the fastest route to the top.' },
+  { t: 'Shot 48 over nine holes at the age of three.', q: true, a: 't', w: 'Early, intense specialisation in a very kind learning environment.' },
+  { t: 'Appeared in Golf Digest at five.', q: true, a: 't', w: 'Already famous for one sport before starting school.' },
+  { t: 'Only narrowed down to his eventual sport in his teens.', q: true, a: 'r', w: 'Later than most of his rivals, and typical of elite athletes in most sports.' },
+]);
+
+/* ---------- 1: kind and wicked worlds ---------- */
+{ const el = $('#kw2'), fI = $('#kwFb'), dI = $('#kwDrift'), bs = [$('#kwKind'), $('#kwWick'), $('#kwMix')];
+  const PRE = [[100, 0], [50, 0], [80, 7]];
+  bs.forEach((b, i) => b.addEventListener('click', () => { fI.value = PRE[i][0]; dI.value = PRE[i][1]; press(bs, b); draw(); }));
+  const curves = () => { const fb = +fI.value / 100, dr = +dI.value, r = rng(7), acc = [], conf = [];
+    const cap = 50 + 45 * (2 * fb - 1) * (1 - dr / 14); let a = 50;
+    for (let t = 0; t <= 1000; t += 10){
+      const target = cap - (dr ? dr * 2.2 * Math.max(0, Math.sin(t / (1100 / (dr + 1)))) : 0);
+      a += (target - a) * .045 + gauss(r) * (dr ? 1.1 : .5); a = clamp(a, 45, 99);
+      acc.push(a); conf.push(50 + 46 * (1 - Math.exp(-t / 220))); }
+    return { acc, conf }; };
+  const draw = onLayout(() => {
+    out('kwFb', fI.value + '%'); out('kwDrift', +dI.value ? dI.value + ' / 10' : 'never');
+    const { acc, conf } = curves(), nw = NARROW(), W = nw ? 360 : 640, H = nw ? 220 : 230, L = 40, R = nw ? 12 : 90, T = 16, B = 30;
+    const x = i => L + i / (acc.length - 1) * (W - L - R), y = v => T + (100 - v) / 60 * (H - T - B);
+    vb(el, W, H); let g = '';
+    [40, 60, 80, 100].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v + '%', 'faint', 10, 'end'));
+    g += TX(L, H - 8, '0 cases', 'faint', 10) + TX(W - R, H - 8, '1,000', 'faint', 10, 'end');
+    let gap = 'M' + acc.map((v, i) => `${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join('L') + 'L' + conf.map((v, i) => `${x(i).toFixed(1)} ${y(v).toFixed(1)}`).reverse().join('L') + 'Z';
+    g += `<path d="${gap}" ${F('bad', .12)}/>`;
+    g += `<path d="M${conf.map((v, i) => `${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join('L')}" ${S('cool', 2, ';stroke-dasharray:6 4')}/>`;
+    g += `<path d="M${acc.map((v, i) => `${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join('L')}" ${S('glow', 2.5)}/>`;
+    const n = acc.length - 1;
+    if (nw){ g += TX(L + 4, T + 10, '— accuracy', 'glow', 11) + TX(L + 90, T + 10, '- - confidence', 'cool', 11); }
+    else { g += TX(x(n) + 6, y(conf[n]) + 4, 'confidence', 'cool', 12) + TX(x(n) + 6, y(acc[n]) + (Math.abs(acc[n] - conf[n]) < 4 ? 16 : 4), 'accuracy', 'glow', 12); }
+    el.innerHTML = g;
+    const A = acc[n], C = conf[n]; $('#kwAcc').textContent = Math.round(A) + '%'; $('#kwConf').textContent = Math.round(C) + '%';
+    $('#kwSay').textContent = C - A < 6 ? 'Experience made them both sure and right. A kind world.' : C - A < 25 ? 'They got better, but much less than they think. Partly wicked.' : 'A thousand cases taught them confidence and nothing else. A wicked world.';
+  });
+  [fI, dI].forEach(i => i.addEventListener('input', () => { press(bs, null); draw(); }));
+  draw();
+}
+
+/* ---------- 2: scientific spectacles ---------- */
+{ const box = $('#lu3');
+  const Q = [
+    ['Hammer, saw, log, hatchet. Which one doesn\'t belong?', 'The log. The other three are tools.', 'None of them. Without the log, what would the tools be for?', 'Luria\'s villagers kept the log: the things go together because you use them together.', 'Today most people sort by category, and drop the log.'],
+    ['In the far north, where there is snow, all bears are white. Novaya Zemlya is in the far north. What colour are the bears there?', 'White.', 'I don\'t know. I\'ve never been there; ask someone who has.', 'Many villagers refused to answer about a place they had never seen.', 'Schooled people follow the logic of the premises, even about places they\'ve never been.'],
+    ['What do a dog and a rabbit have in common?', 'They\'re both mammals.', 'You use a dog to hunt rabbits.', 'Flynn\'s example of a pre-modern answer: a practical, real-world link.', 'The modern answer is a category, the kind of thing IQ tests reward.'],
+    ['There are no camels in Germany. B is a city in Germany. Are there camels in B?', 'No, there can\'t be.', 'Probably, if it\'s a big city.', 'Reasoning from experience: big cities have all sorts of things.', 'Reasoning from the premises alone, which school trains us to do.'],
+  ];
+  let i = 0, abs = 0;
+  function show(){
+    if (i >= Q.length){
+      box.innerHTML = `<div class="lu-card"><span class="k">Done</span><span class="q">You answered ${abs} of ${Q.length} with the scientific spectacles on.</span><p class="tip">Neither way is stupid. Concrete reasoning served Luria's farmers perfectly in their world. Abstract reasoning is what lets ideas travel between worlds, and the modern world asks for it constantly.</p><div class="row"><button class="btn primary" type="button" data-again>Start again</button></div></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; abs = 0; show(); }); return; }
+    const [q, a, c, cx, ax] = Q[i], flip = Math.random() < .5, opts = flip ? [['c', c], ['a', a]] : [['a', a], ['c', c]];
+    box.innerHTML = `<div class="lu-card"><span class="k">Puzzle ${i + 1} of ${Q.length}</span><span class="q">${q}</span><div class="ans">${opts.map(([k, t]) => `<button class="btn" type="button" data-k="${k}">${t}</button>`).join('')}</div><div class="lu-res" hidden><div class="a"><b>Scientific spectacles</b>${ax}</div><div class="c"><b>Concrete experience</b>${cx}</div></div><div class="row"><button class="btn primary" type="button" data-next hidden>Next →</button></div></div>`;
+    box.querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => {
+      if (b.dataset.k === 'a') abs++;
+      box.querySelectorAll('[data-k]').forEach(x => { x.disabled = true; x.setAttribute('aria-pressed', x === b); });
+      box.querySelector('.lu-res').hidden = false; const n = box.querySelector('[data-next]'); n.hidden = false; n.focus({preventScroll:true});
+      n.addEventListener('click', () => { i++; show(); }); }));
+  }
+  show();
+}
+
+/* ---------- 3: spread your practice ---------- */
+{ const el = $('#mu4'), sI = $('#muShare');
+  const draw = onLayout(() => {
+    const s = +sI.value / 100, main = 20 * (1 - s), t20 = 1 - Math.exp(-20 / 6);
+    const tech = (1 - Math.exp(-main / 6)) / t20 * 100, ear = 30 + 70 * (1 - Math.exp(-s / .2)), voc = 20 + 80 * (1 - Math.exp(-s / .3));
+    const all = .5 * tech + .25 * ear + .25 * voc;
+    out('muShare', Math.round(s * 100) + '%');
+    const nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 200, bw = W - L - 50, rows = [['Technique on the main instrument', tech, 'cool'], ['Ear and improvising', ear, 'cool'], ['Musical ideas and styles', voc, 'cool'], ['Overall musicianship', all, 'glow']];
+    const rh = nw ? 46 : 38, H = rows.length * rh + 10; vb(el, W, H); let g = '';
+    rows.forEach(([lab, v, c], k) => { const y = 6 + k * rh, by = nw ? y + 14 : y;
+      g += TX(0, nw ? y + 9 : y + 17, lab, k === 3 ? 'text' : 'muted', 12.5, 'start', k === 3 ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="22" rx="6" ${F('panel-2')}/><rect x="${L}" y="${by}" width="${(bw * v / 100).toFixed(1)}" height="22" rx="6" ${F(c, k === 3 ? .9 : .55)}/>`;
+      g += TX(L + bw + 8, by + 16, Math.round(v), k === 3 ? 'glow' : 'muted', 12.5); });
+    el.innerHTML = g;
+    $('#muMain').textContent = main.toFixed(0) + ' h a week'; $('#muAll').textContent = Math.round(all);
+    $('#muSay').textContent = s === 0 ? 'Polished on one instrument, lost when the music changes.' : s <= .4 ? 'Almost all the technique, and a much bigger musical vocabulary.' : 'Lots of range, but the main instrument is starting to suffer.';
+  });
+  sI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 4: blocked or mixed ---------- */
+{ const el = $('#bl5'), bB = $('#blB'), bM = $('#blM'); let mode = 'b', tested = false;
+  const SEQ = { b: 'AAAABBBBCCCC', m: 'ABCBCACBACBA' }, SC = { b: [89, 20], m: [60, 63] }, COL = { A: 'glow', B: 'cool', C: 'good' };
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, sq = nw ? 24 : 32, gap = 4, H = nw ? 200 : 170; vb(el, W, H); let g = TX(0, 14, 'The practice session, problem by problem', 'muted', 12);
+    [...SEQ[mode]].forEach((c, i) => { const x = i * (sq + gap); g += `<rect x="${x}" y="24" width="${sq}" height="${sq}" rx="5" ${F(COL[c], .75)}/>` + TX(x + sq / 2, 24 + sq / 2 + 5, c, 'on-glow', 13, 'middle', 'font-weight="600"'); });
+    const [p, t] = SC[mode], y0 = 24 + sq + 26, L = nw ? 0 : 150, bw = W - L - 50;
+    [['During practice', p, 'cool', true], ['Test a week later', t, 'glow', tested]].forEach(([lab, v, c, on], k) => { const y = y0 + k * (nw ? 48 : 38), by = nw ? y + 12 : y;
+      g += TX(0, nw ? y + 6 : y + 17, lab, 'muted', 12.5);
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="22" rx="6" ${F('panel-2')}/>` + (on ? `<rect x="${L}" y="${by}" width="${(bw * v / 100).toFixed(1)}" height="22" rx="6" ${F(c, .85)}/>` + TX(L + bw + 8, by + 16, v + '%', c, 13) : TX(L + 10, by + 16, 'not yet', 'faint', 12)); });
+    el.innerHTML = g;
+    $('#blP').textContent = p + '%'; $('#blT').textContent = tested ? t + '%' : '?';
+    $('#blSay').textContent = !tested ? (mode === 'b' ? 'Smooth. Once you\'ve done one A, the next three are easy.' : 'Frustrating. Every problem means first working out which kind it is.') : (mode === 'b' ? 'Practice felt great and the learning didn\'t last.' : 'Practice felt worse and the learning lasted, about three times as well.');
+  });
+  bB.addEventListener('click', () => { mode = 'b'; tested = false; press([bB, bM], bB); draw(); });
+  bM.addEventListener('click', () => { mode = 'm'; tested = false; press([bB, bM], bM); draw(); });
+  $('#blTest').addEventListener('click', () => { tested = true; draw(); });
+  draw();
+}
+
+/* ---------- 5: the tumour and the fortress ---------- */
+{ const el = $('#rx6'), nI = $('#rxN'), sb = $('#rxStory'), tale = $('#rxTale');
+  sb.addEventListener('click', () => { const o = tale.hidden; tale.hidden = !o; sb.setAttribute('aria-expanded', o); sb.textContent = o ? 'Hide the fortress story' : 'Read the fortress story first'; });
+  function draw(){
+    const n = +nI.value, dose = 100 / n, burn = dose > 30, kill = true;
+    out('rxN', n); vb(el, 400, 260);
+    const cx = 200, cy = 130, R = 112; let g = `<circle cx="${cx}" cy="${cy}" r="${R}" ${FS('cool', 'cool', 1.5, .08)}/>` + TX(cx, cy - R + 18, 'healthy tissue', 'cool', 11, 'middle');
+    for (let k = 0; k < n; k++){ const a = -Math.PI / 2 - Math.PI / 2 + k * (2 * Math.PI / n) + .3, x0 = cx + (R + 18) * Math.cos(a), y0 = cy + (R + 18) * Math.sin(a);
+      const w = 2 + dose / 8;
+      g += `<line x1="${x0.toFixed(1)}" y1="${y0.toFixed(1)}" x2="${cx}" y2="${cy}" style="stroke:var(--${burn ? 'bad' : 'glow'});stroke-width:${w.toFixed(1)};stroke-opacity:.75;stroke-linecap:round"/>`;
+      if (burn){ const mx = cx + R * .55 * Math.cos(a), my = cy + R * .55 * Math.sin(a); g += `<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="${(4 + dose / 10).toFixed(1)}" ${F('bad', .5)}/>`; }
+      g += `<circle cx="${x0.toFixed(1)}" cy="${y0.toFixed(1)}" r="6" ${F('text')}/>`; }
+    g += `<circle cx="${cx}" cy="${cy}" r="16" ${FS(kill ? 'glow' : 'bad', 'ink', 2, .95)}/>` + TX(cx, cy + 34, 'tumour', 'text', 11, 'middle');
+    el.innerHTML = g;
+    $('#rxT').textContent = '100'; $('#rxH').textContent = Math.round(dose) + (burn ? ' (burned)' : ' (safe)');
+    $('#rxSay').innerHTML = n === 1 ? 'One strong ray kills the tumour and everything on its path.' : burn ? 'Better, but each beam is still strong enough to burn. Split it further.' : `<b style="color:var(--good)">Solved.</b> ${n} weak beams pass safely and add up at the tumour, like the general's small groups converging on the fortress.`;
+  }
+  nI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 6: sample, then commit ---------- */
+{ const el = $('#bd7'), nI = $('#bdN'), NP = 8, YEARS = 40, NMAX = 12;
+  function life(N, r){ const fit = Array.from({length: NP}, () => gauss(r)), seen = Array(NP).fill(0), cnt = Array(NP).fill(0); let tot = 0;
+    for (let y = 0; y < N; y++){ const p = y < NP ? y : Math.floor(r() * NP); seen[p] += fit[p] + gauss(r) * 1.1; cnt[p]++; tot += fit[p] * .4 - .45; }
+    let ch = 0; if (N){ let best = -1e9; for (let p = 0; p < NP; p++) if (cnt[p]){ const m = seen[p] / cnt[p]; if (m > best){ best = m; ch = p; } } }
+    tot += (YEARS - N) * fit[ch];
+    const top = fit.indexOf(Math.max(...fit));
+    return { avg: tot / YEARS, best: ch === top, fit, ch, tried: Math.min(N, NP) }; }
+  const sc = v => 50 + 15 * v;
+  const R = rng(42), CURVE = [];
+  for (let N = 0; N <= NMAX; N++){ let a = 0, b = 0; for (let k = 0; k < 3000; k++){ const l = life(N, R); a += l.avg; b += l.best; } CURVE.push([sc(a / 3000), b / 3000]); }
+  const draw = onLayout(() => {
+    const N = +nI.value; out('bdN', N === 0 ? 'none' : N);
+    const nw = NARROW(), W = nw ? 360 : 640, H = 220, L = 40, Rr = 14, T = 16, B = 32;
+    const lo = Math.floor(Math.min(...CURVE.map(c => c[0])) - 2), hi = Math.ceil(Math.max(...CURVE.map(c => c[0])) + 2);
+    const x = n => L + n / NMAX * (W - L - Rr), y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+    vb(el, W, H); let g = '';
+    [lo, Math.round((lo + hi) / 2), hi].forEach(v => g += `<line x1="${L}" x2="${W - Rr}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', 10, 'end'));
+    CURVE.forEach((c, n) => g += TX(x(n), H - 14, n, n === N ? 'text' : 'faint', 10, 'middle'));
+    g += TX((L + W) / 2, H - 1, 'years spent sampling', 'faint', 10, 'middle') + TX(L, T - 4, 'average fit, 0 to 100', 'faint', 10);
+    g += `<path d="M${CURVE.map((c, n) => `${x(n).toFixed(1)} ${y(c[0]).toFixed(1)}`).join('L')}" ${S('glow', 2.5)}/>`;
+    CURVE.forEach((c, n) => g += `<circle cx="${x(n).toFixed(1)}" cy="${y(c[0]).toFixed(1)}" r="${n === N ? 7 : 3.5}" ${n === N ? FS('glow', 'ink', 2) : F('glow', .7)}/>`);
+    el.innerHTML = g;
+    $('#bdAvg').textContent = CURVE[N][0].toFixed(1); $('#bdBest').textContent = pct(CURVE[N][1]);
+  });
+  nI.addEventListener('input', () => { $('#bdLife').textContent = 'Press the button to live one.'; draw(); });
+  $('#bdOne').addEventListener('click', () => { const N = +nI.value, l = life(N, Math.random), rank = [...l.fit].sort((a, b) => b - a).indexOf(l.fit[l.ch]) + 1;
+    $('#bdLife').innerHTML = (N ? `Tried ${l.tried} path${l.tried > 1 ? 's' : ''}, ` : 'Committed to the first path, ') + `ended in the <b>${rank === 1 ? 'best-fitting' : rank === 2 ? 'second-best' : rank === 3 ? 'third-best' : rank + 'th-best'}</b> of ${NP}. Fit over the career: ${sc(l.avg).toFixed(0)}.`; });
+  draw();
+}
+
+/* ---------- 7: end of history ---------- */
+{ const el = $('#eh8'), aI = $('#ehAge'), gI = $('#ehGuess');
+  const rep = a => 2.4 + 5.6 * Math.exp(-(a - 18) / 28), pred = a => rep(a) * .55;
+  const draw = onLayout(() => {
+    const a = +aI.value, gs = +gI.value; out('ehAge', a); out('ehGuess', gs + ' / 10');
+    const nw = NARROW(), W = nw ? 360 : 640, H = 220, L = 34, R = nw ? 12 : 110, T = 14, B = 30, x = v => L + (v - 18) / 50 * (W - L - R), y = v => T + (10 - v) / 10 * (H - T - B);
+    vb(el, W, H); let g = '';
+    [0, 5, 10].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', 10, 'end'));
+    [18, 30, 40, 50, 60, 68].forEach(v => g += TX(x(v), H - 10, v, 'faint', 10, 'middle'));
+    const P = f => { let d = ''; for (let v = 18; v <= 68; v++) d += (d ? 'L' : 'M') + x(v).toFixed(1) + ' ' + y(f(v)).toFixed(1); return d; };
+    g += `<path d="${P(rep)}" ${S('glow', 2.5)}/><path d="${P(pred)}" ${S('cool', 2, ';stroke-dasharray:6 4')}/>`;
+    if (nw) g += TX(L + 4, T + 8, '— change people report', 'glow', 11) + TX(L + 4, T + 22, '- - change people predict', 'cool', 11);
+    else g += TX(x(68) + 6, y(rep(68)) + 4, 'reported', 'glow', 12) + TX(x(68) + 6, y(pred(68)) + 8, 'predicted', 'cool', 12);
+    g += `<line x1="${x(a)}" x2="${x(a)}" y1="${T}" y2="${H - B}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>`;
+    g += `<circle cx="${x(a)}" cy="${y(rep(a))}" r="5" ${F('glow')}/><circle cx="${x(a)}" cy="${y(pred(a))}" r="5" ${F('cool')}/><rect x="${x(a) - 6}" y="${y(gs) - 6}" width="12" height="12" transform="rotate(45 ${x(a)} ${y(gs)})" ${FS('text', 'ink', 1.5)}/>`;
+    g += TX(x(a) + (a > 55 ? -10 : 10), y(gs) + 4, 'you', 'text', 12, a > 55 ? 'end' : 'start', 'font-weight="600"');
+    el.innerHTML = g;
+    $('#ehPred').textContent = pred(a).toFixed(1); $('#ehRep').textContent = rep(a).toFixed(1);
+    $('#ehSay').textContent = gs < rep(a) - .5 ? `You expect less change than people ten years older report. Like almost everyone, you probably think you're more finished than you are.` : gs > rep(a) + 1.5 ? 'You expect more change than most. Rare, and probably closer to the truth than the usual guess.' : 'Your guess matches what people actually report. Most of us guess lower.';
+  });
+  [aI, gI].forEach(i => i.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 8: who solves the frozen oil ---------- */
+{ const opts = $('#oiOpts'), ans = $('#oiAns'), el = $('#oi9');
+  const O = [['A petroleum engineer', 0], ['A marine biologist', 0], ['A chemist who worked with concrete', 1], ['An Arctic shipping specialist', 0]];
+  opts.innerHTML = O.map(([t], i) => `<button class="btn" type="button" data-o="${i}" aria-pressed="false">${t}</button>`).join('');
+  opts.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.o; press([...opts.querySelectorAll('[data-o]')], b);
+    ans.innerHTML = (O[i][1] ? '<b style="color:var(--good)">Yes.</b> ' : '<b style="color:var(--bad)">Not this time.</b> ') + 'It was John Davis, a chemist who knew from building sites that concrete is kept liquid by vibrating it. A vibrating tool, adapted for the barges, kept the oil flowing. The oil industry\'s own experts had been stuck for years.'; }));
+  const D = [['Same field', 8], ['Next door', 12], ['Related', 17], ['Distant', 24], ['Far away', 30]];
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 200, L = 30, B = 30, T = 22, bw = (W - L) / D.length;
+    vb(el, W, H); let g = TX(L, 12, 'Chance of a winning solution, by how far the solver\'s field is from the problem', 'muted', nw ? 10.5 : 12);
+    D.forEach(([lab, v], i) => { const h = v / 34 * (H - T - B), x = L + i * bw + bw * .18, w = bw * .64;
+      g += `<rect x="${x.toFixed(1)}" y="${(H - B - h).toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="5" ${F(i === 4 ? 'glow' : 'cool', i === 4 ? .9 : .5)}/>` + TX(x + w / 2, H - B - h - 6, v + '%', i === 4 ? 'glow' : 'muted', 12, 'middle') + TX(x + w / 2, H - 10, lab, 'muted', nw ? 10 : 12, 'middle'); });
+    el.innerHTML = g; });
+  draw();
+}
+
+/* ---------- 9: build a handheld ---------- */
+{ const el = $('#hh10'), sB = $('#hhScr'), cB = $('#hhChip'); let scr = 'mono', chip = 'old';
+  sB.innerHTML = [['mono', 'Monochrome LCD (withered)'], ['col', 'Backlit colour (cutting edge)']].map(([k, l]) => `<button class="btn" type="button" data-s="${k}" aria-pressed="${k === scr}">${l}</button>`).join('');
+  cB.innerHTML = [['old', 'Proven, cheap (withered)'], ['new', 'Fast and new']].map(([k, l]) => `<button class="btn" type="button" data-c="${k}" aria-pressed="${k === chip}">${l}</button>`).join('');
+  const REAL = [['Game Boy (1989)', 10, 30, 90, 'good'], ['Atari Lynx (1989)', 4, 5, 180, 'bad'], ['Sega Game Gear (1991)', 3, 5, 150, 'bad']];
+  const mine = () => { const h = (scr === 'mono' ? 20 : 4.5) * (chip === 'old' ? 1 : .8), p = 80 + (scr === 'col' ? 70 : 0) + (chip === 'new' ? 30 : 0); return { h, p }; };
+  const draw = onLayout(() => { const m = mine(), nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 170, bw = W - L - (nw ? 70 : 80), rh = nw ? 44 : 34, rows = [['Your handheld', m.h, m.h, m.p, 'glow'], ...REAL], H = rows.length * rh + 30, x = v => L + v / 32 * bw;
+    vb(el, W, H); let g = TX(L, 12, 'Hours of play on a set of batteries', 'faint', 11);
+    rows.forEach(([lab, a, b, p, c], i) => { const y = 22 + i * rh, by = nw ? y + 14 : y;
+      g += TX(0, nw ? y + 8 : y + 15, lab, i ? 'muted' : 'text', 12.5, 'start', i ? '' : 'font-weight="600"');
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="20" rx="5" ${F('panel-2')}/><rect x="${x(a).toFixed(1)}" y="${by}" width="${Math.max(6, x(b) - x(a)).toFixed(1)}" height="20" rx="5" ${F(c, .8)}/>`;
+      g += TX(L + bw + 8, by + 15, (a === b ? Math.round(a) : a + '–' + b) + ' h', i ? 'muted' : 'glow', 12) ; });
+    el.innerHTML = g;
+    $('#hhHrs').textContent = Math.round(m.h) + ' h'; $('#hhPrice').textContent = '$' + m.p;
+    $('#hhSay').textContent = scr === 'mono' && chip === 'old' ? 'Yokoi\'s choice: looks dated, costs half as much and lasts all day. It sold over a hundred million.' : scr === 'col' && chip === 'new' ? 'Gorgeous, pricey and dead by lunchtime. Like the Lynx.' : 'A compromise: some of the cost, some of the battery drain.';
+  });
+  sB.querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { scr = b.dataset.s; press([...sB.querySelectorAll('[data-s]')], b); draw(); }));
+  cB.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { chip = b.dataset.c; press([...cB.querySelectorAll('[data-c]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- 10: hedgehog and fox ---------- */
+{ const el = $('#hf11'), qI = $('#hfIdea'); let res = null;
+  function run(){ const q = +qI.value / 100, r = Math.random, H = [], Fx = []; let sh = 0, sf = 0;
+    for (let k = 0; k < 40; k++){ const B = r() < .5 ? 1 : 0, big = r() < q;
+      const pt = big ? (B ? .95 : .05) : clamp(.5 + (r() - .5) * .8, .05, .95);
+      const o = r() < pt ? 1 : 0, fh = B ? .95 : .05, ff = clamp(.5 + (pt - .5) * .8 + gauss(r) * .07, .05, .95);
+      sh += 1 - (fh - o) ** 2; sf += 1 - (ff - o) ** 2; H.push(sh / (k + 1) * 100); Fx.push(sf / (k + 1) * 100); }
+    res = { H, Fx }; draw(); }
+  const draw = onLayout(() => { out('hfIdea', qI.value + '%');
+    const nw = NARROW(), W = nw ? 360 : 640, Hh = 210, L = 34, R = nw ? 12 : 80, T = 14, B = 26, x = i => L + i / 39 * (W - L - R), y = v => T + (100 - v) / 60 * (Hh - T - B);
+    vb(el, W, Hh); let g = '';
+    [40, 60, 75, 100].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1, v === 75 ? ';stroke-dasharray:4 4' : '')}/>` + TX(L - 6, y(v) + 4, v, 'faint', 10, 'end'));
+    g += TX(L, Hh - 6, 'forecast 1', 'faint', 10) + TX(W - R, Hh - 6, '40', 'faint', 10, 'end');
+    if (!res){ g += TX((L + W - R) / 2, Hh / 2, 'Run the forecasts to see the scores', 'muted', 13, 'middle'); el.innerHTML = g; ['#hfH', '#hfF'].forEach(s => $(s).textContent = '–'); $('#hfSay').textContent = 'Not run yet.'; return; }
+    const line = (a, c, w, ex) => `<path d="M${a.map((v, i) => `${x(i).toFixed(1)} ${y(clamp(v, 40, 100)).toFixed(1)}`).join('L')}" ${S(c, w, ex)}/>`;
+    g += line(res.H, 'muted', 2.2) + line(res.Fx, 'glow', 2.6);
+    if (nw) g += TX(L + 4, T + 10, '— fox', 'glow', 11) + TX(L + 50, T + 10, '— hedgehog', 'muted', 11);
+    else g += TX(x(39) + 6, y(clamp(res.Fx[39], 40, 100)) + 4, 'fox', 'glow', 12) + TX(x(39) + 6, y(clamp(res.H[39], 40, 100)) + 14, 'hedgehog', 'muted', 12);
+    el.innerHTML = g;
+    const h = res.H[39], f = res.Fx[39]; $('#hfH').textContent = h.toFixed(0); $('#hfF').textContent = f.toFixed(0);
+    $('#hfSay').textContent = h > f ? 'The hedgehog won this round: the world really was mostly about the big idea.' : h < 75 ? 'The hedgehog did worse than someone who always says fifty-fifty. Certainty is expensive when you\'re wrong.' : 'The fox won. Hedging costs little when the big idea is right and saves a lot when it isn\'t.';
+  });
+  qI.addEventListener('input', () => { res = null; draw(); });
+  $('#hfGo').addEventListener('click', run); draw();
+}
+
+/* ---------- 11: the missing data ---------- */
+{ const el = $('#or12'), bF = $('#orFail'), bA = $('#orAll'), bC = $('#orFc'); let all = false, fc = false;
+  const T = [66,70,69,68,67,72,73,70,57,63,70,78,67,53,67,75,70,81,76,79,75,76,58], D = [0,1,0,0,0,0,0,0,1,1,1,0,0,2,0,0,0,0,0,0,2,0,1];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230, L = 30, R = 12, Tp = 18, B = 34, x = t => L + (t - 25) / 60 * (W - L - R), y = v => Tp + (3 - v) / 3.4 * (H - Tp - B);
+    vb(el, W, H); let g = '';
+    [0, 1, 2, 3].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', 10, 'end'));
+    [30, 40, 50, 60, 70, 80].forEach(t => g += TX(x(t), H - 18, t + '°', 'faint', 10, 'middle'));
+    g += TX((L + W) / 2, H - 2, 'launch temperature, °F', 'faint', 10, 'middle') + TX(L, 10, 'O-rings with heat damage', 'faint', 10);
+    if (all) g += `<rect x="${x(25)}" y="${Tp}" width="${x(65) - x(25)}" height="${H - Tp - B}" ${F('bad', .07)}/>` + TX(x(45), Tp + 14, 'below 65°F', 'bad', 11, 'middle');
+    const seen = {};
+    T.forEach((t, i) => { if (!all && !D[i]) return; const k = t + ':' + D[i], s = seen[k] = (seen[k] || 0) + 1, dy = (s - 1) * 9;
+      g += `<circle cx="${x(t).toFixed(1)}" cy="${(y(D[i]) - dy).toFixed(1)}" r="5.5" ${D[i] ? FS('glow', 'ink', 1.5) : FS('cool', 'ink', 1.5, .7)}/>`; });
+    if (fc) g += `<line x1="${x(31)}" x2="${x(31)}" y1="${Tp}" y2="${H - B}" ${S('bad', 2, ';stroke-dasharray:5 4')}/>` + TX(x(31) + 6, Tp + 30, 'launch morning,', 'bad', 11) + TX(x(31) + 6, Tp + 44, 'about 31°F', 'bad', 11);
+    el.innerHTML = g;
+    $('#orN').textContent = all ? 23 : 7; $('#orCold').textContent = '4 of 4';
+    $('#orSay').textContent = !all ? 'Problems at 53° and at 75°. No obvious link to the cold, which is how it looked that night.' : fc ? 'Launch morning was more than 20 degrees colder than any flight on the chart.' : 'Every flight below 65° had damage; only 3 of 19 warmer flights did. The pattern was there all along.';
+  });
+  bF.addEventListener('click', () => { all = false; press([bF, bA], bF); draw(); });
+  bA.addEventListener('click', () => { all = true; press([bF, bA], bA); draw(); });
+  bC.addEventListener('click', () => { fc = !fc; bC.setAttribute('aria-pressed', fc); draw(); });
+  draw();
+}
+
+/* ---------- 12: Nobel hobbies ---------- */
+{ const el = $('#nb13'), hb = $('#nbH');
+  const HB = [['Music', 2, 'Playing an instrument or composing: the most common hobby, and the smallest gap.'], ['Arts', 7, 'Drawing, painting or sculpting: practice in seeing, the root of much science.'], ['Crafts', 7.5, 'Woodwork, glass-blowing, mechanics: hands-on skills that often feed back into the lab.'], ['Writing', 12, 'Poetry, plays, novels: practice in finding new ways to say things.'], ['Performing', 22, 'Acting, dancing or magic: the biggest gap of all in the study.']];
+  let cur = 4;
+  hb.innerHTML = HB.map(([l], i) => `<button class="btn" type="button" data-h="${i}" aria-pressed="${i === cur}">${l}</button>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, L = nw ? 76 : 100, bw = W - L - 50, rh = 34, H = HB.length * rh + 8; vb(el, W, H); let g = '';
+    HB.forEach(([l, v], i) => { const y = 4 + i * rh, on = i === cur;
+      g += TX(0, y + 17, l, on ? 'text' : 'muted', 12.5, 'start', on ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${y}" width="${(bw * v / 22).toFixed(1)}" height="22" rx="5" ${F(on ? 'glow' : 'cool', on ? .9 : .4)}/>` + TX(L + bw * v / 22 + 8, y + 16, '×' + v, on ? 'glow' : 'muted', 12.5); });
+    el.innerHTML = g; $('#nbX').textContent = 'about ' + HB[cur][1] + '×'; $('#nbSay').textContent = HB[cur][2]; });
+  hb.querySelectorAll('[data-h]').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.h; press([...hb.querySelectorAll('[data-h]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- conclusion: late starters ---------- */
+{ const el = $('#ls14'), aI = $('#lsAge');
+  const P = [['Vincent van Gogh', 27, 'began to draw seriously'], ['Frances Hesselbein', 34, 'led her first Girl Scout troop'], ['Toni Morrison', 39, 'published her first novel'], ['Julia Child', 49, 'published her first cookbook'], ['Ray Kroc', 52, 'began franchising McDonald\'s'], ['Frances Hesselbein', 54, 'became CEO of the Girl Scouts'], ['Harland Sanders', 62, 'started franchising KFC'], ['Laura Ingalls Wilder', 65, 'published her first Little House book']];
+  const draw = onLayout(() => { const a = +aI.value; out('lsAge', a);
+    const nw = NARROW(), W = nw ? 360 : 640, rh = nw ? 26 : 24, H = P.length * rh + 40, L = nw ? 0 : 0, x = v => 10 + (v - 15) / 55 * (W - 20);
+    vb(el, W, H); let g = '';
+    [20, 30, 40, 50, 60, 70].forEach(v => g += `<line x1="${x(v)}" x2="${x(v)}" y1="4" y2="${H - 22}" ${S('line', 1)}/>` + TX(x(v), H - 6, v, 'faint', 10, 'middle'));
+    g += `<rect x="${x(15)}" y="4" width="${x(a) - x(15)}" height="${H - 26}" ${F('cool', .08)}/><line x1="${x(a)}" x2="${x(a)}" y1="4" y2="${H - 22}" ${S('cool', 2)}/>`;
+    P.forEach(([n, v, w], i) => { const y = 16 + i * rh, ahead = v > a, cx = x(v), right = cx < W * .55;
+      g += `<circle cx="${cx}" cy="${y}" r="6" ${F(ahead ? 'glow' : 'faint', ahead ? .95 : .6)}/>`;
+      g += TX(right ? cx + 11 : cx - 11, y + 4, nw ? `${n}, ${v}` : `${n}, ${v}: ${w}`, ahead ? 'text' : 'faint', nw ? 11 : 12, right ? 'start' : 'end'); });
+    el.innerHTML = g;
+    const later = P.filter(p => p[1] > a); $('#lsN').textContent = later.length + ' of ' + P.length;
+    $('#lsSay').textContent = later.length ? `At ${a}, ${later[0][0]} still hadn't ${later[0][2].replace(/^(began|led|published|became|started)/, m => ({began: 'begun', led: 'led', published: 'published', became: 'become', started: 'started'})[m])}.` : 'You\'re past all of them, and Epstein would say it\'s still not too late for a new experiment.';
+  });
+  aI.addEventListener('input', draw); draw();
+}
+
+/* ---------- afterword: range plan ---------- */
+{ const K = 'rg-plan', list = $('#rpList'); let plan = store.get(K, []);
+  function render(){
+    list.innerHTML = plan.length ? `<span class="k">My experiments</span>` + plan.map((p, i) => `<div class="plan-item${p.done ? ' done' : ''}"><div class="h"><b>${esc(p.self)}</b><span class="mono">${esc(p.kind)}${p.when ? ' · by ' + esc(p.when) : ''}</span><button class="rm" type="button" data-rm="${i}" aria-label="Remove">×</button></div><p>${esc(p.tr)}</p><label class="done-toggle"><input type="checkbox" data-dn="${i}" ${p.done ? 'checked' : ''}> Tried it</label></div>`).join('') : '<span class="k">My experiments</span><p class="tip">Nothing yet. Add a possible self and one small way to test it.</p>';
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { plan.splice(+b.dataset.rm, 1); store.set(K, plan); render(); }));
+    list.querySelectorAll('[data-dn]').forEach(c => c.addEventListener('change', () => { plan[+c.dataset.dn].done = c.checked; store.set(K, plan); render(); }));
+  }
+  $('#rpAdd').addEventListener('click', () => { const self = $('#rpSelf').value.trim(), tr = $('#rpTry').value.trim();
+    if (!self || !tr){ $('#rpMsg').textContent = 'Add a possible self and an experiment.'; return; }
+    plan.unshift({ self, tr, kind: $('#rpKind').value, when: $('#rpWhen').value, done: false }); store.set(K, plan);
+    $('#rpSelf').value = ''; $('#rpTry').value = ''; $('#rpMsg').textContent = 'Added.'; render(); });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
