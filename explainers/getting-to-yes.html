@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Getting to Yes, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a negotiating table. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, plain words, quick check), grouped into the problem, the method, "yes, but" and in conclusion.
+   Dark-first: deep slate with an amber accent for "you" and a sky-blue second series for "the other side"; light mode is a paper table. */
+:root{
+  color-scheme: dark;
+  --ink:#0F1620;--panel:#151F2B;--panel-2:#1D2937;--line:#2D3B4C;--text:#F1F3F5;--muted:#AAB6C3;--faint:#7C8A99;
+  --glow:#F4B860;--glow-soft:rgba(244,184,96,.11);--hl:rgba(244,184,96,.26);--cool:#7FC8E8;--cool-soft:rgba(127,200,232,.1);
+  --good:#8FD97A;--good-soft:rgba(143,217,122,.1);--bad:#FF7F6E;--bad-soft:rgba(255,127,110,.12);
+  --soft:#D5DCE3;--deep:#0A1018;--toc-bg:rgba(21,31,43,.74);--glow-line:rgba(244,184,96,.36);--cool-line:rgba(127,200,232,.3);--on-glow:#2A1A00;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F4F1EA;--panel:#FFFDF8;--panel-2:#EAE5DA;--line:#D6CFC0;--text:#15202B;--muted:#52606D;--faint:#808A93;
+  --glow:#9A5B00;--glow-soft:rgba(154,91,0,.06);--hl:#F6E0B3;--cool:#1F6690;--cool-soft:rgba(31,102,144,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#27323D;--deep:#FBF9F4;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(154,91,0,.28);--cool-line:rgba(31,102,144,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F4F1EA;--panel:#FFFDF8;--panel-2:#EAE5DA;--line:#D6CFC0;--text:#15202B;--muted:#52606D;--faint:#808A93;
+  --glow:#9A5B00;--glow-soft:rgba(154,91,0,.06);--hl:#F6E0B3;--cool:#1F6690;--cool-soft:rgba(31,102,144,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#27323D;--deep:#FBF9F4;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(154,91,0,.28);--cool-line:rgba(31,102,144,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Getting to Yes additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.orange{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.orange-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.orange-top .moves{gap:6px}
+.orange-top .btn{padding:5px 11px}
+.orange-stage{padding:10px 10px 4px}
+.orange-stage svg{display:block;width:100%;height:auto}
+.orange .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.orange .cap b{color:var(--glow);font-weight:600}
+.cool{display:grid;gap:14px;padding:18px}
+.cool-top{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:16px;align-items:center}
+.cool-g svg{display:block;width:100%;height:auto}
+.cool-s{display:grid;grid-template-columns:auto auto;gap:4px 12px;align-items:baseline;font-size:13px}
+.cool-s .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.cool-s b{font-family:var(--f-display);font-weight:400;font-size:24px}
+.cool-log{display:grid;gap:8px}
+.cool-log:empty{display:none}
+.cool p.them,.cool p.me{max-width:86%;padding:10px 14px;border-radius:14px;font-size:14.5px;line-height:1.45}
+.cool p.them{background:var(--cool-soft);border:1px solid var(--cool-line);justify-self:start;border-bottom-left-radius:4px}
+.cool p.me{background:var(--glow-soft);border:1px solid var(--glow-line);justify-self:end;border-bottom-right-radius:4px}
+.cool p.them.now{font-size:16px}
+.cool p.fb{font-size:13px;color:var(--muted);justify-self:end;max-width:86%;text-align:right}
+.cool .bin b{font-weight:500;font-size:14.5px}
+.bet{display:grid;gap:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.bet-h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.bet-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15}
+.bet-h .mono{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.bet p{font-size:14.5px;color:var(--soft)}
+.bet .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.bet .rm:hover{color:var(--bad)}
+#prep .fields textarea{width:100%;resize:vertical;min-height:72px}
+@media (max-width: 760px){ .cool-top{grid-template-columns:minmax(0,1fr)} }
+@media (max-width: 560px){ .fq{padding:14px 16px} .cool{padding:14px} .cool p.them,.cool p.me,.cool p.fb{max-width:100%} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Roger Fisher and William Ury's book</div>
+    <h1><em>Getting to Yes</em>,<br>Explained</h1>
+    <p class="lede">Roger Fisher and William Ury ran the Harvard Negotiation Project, and <b>Getting to Yes</b> is their answer to a choice most people think they're stuck with: be soft and get taken advantage of, or be hard and wreck the relationship. They offer a third way, <b>principled negotiation</b>, built on four points: separate the people from the problem, focus on interests rather than positions, invent options for mutual gain, and insist on objective criteria. Then they tackle the "yes, but" cases: a stronger opponent, one who won't play, and one who plays dirty. This guide takes the introduction, all eight chapters, the conclusion and the ten questions readers ask, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Be <em>soft on the people</em> and <em>hard on the problem</em>: look past what people demand to why they want it, and settle on what's fair, not on who pushes hardest.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you up against?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="orange" style="margin:0" aria-label="Two people want one orange: three ways to settle it">
+        <div class="orange-top"><span>Two people, one orange</span><div class="moves" id="orWays"></div></div>
+        <div class="orange-stage"><svg id="orSvg" viewBox="0 0 400 230" role="img" aria-label="An orange and how much of what each person wanted they end up with"></svg></div>
+        <div class="cap" id="orCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapter 1</span><span class="q">The Problem</span><span class="d">Why haggling over positions goes wrong</span></a>
+      <a href="#part2"><span class="n">Chapters 2 to 5</span><span class="q">The Method</span><span class="d">People, interests, options and criteria</span></a>
+      <a href="#part3"><span class="n">Chapters 6 to 8</span><span class="q">Yes, But</span><span class="d">More power, no interest, dirty tricks</span></a>
+      <a href="#part4"><span class="n">Conclusion and ten questions</span><span class="q">In Conclusion</span><span class="d">Practise it, and the questions readers ask</span></a>
+    </nav>
+    <div class="about">
+      <span><b>First published</b> in 1981; revised in 1991 and 2011 with Bruce Patton</span>
+      <span><b>Authors</b> Roger Fisher and William Ury, founders of the Harvard Negotiation Project</span>
+      <span><b>Full title</b> Getting to Yes: Negotiating Agreement Without Giving In</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 11 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE PROBLEM ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the problem</span>
+      <h2>The Problem</h2>
+      <p>Everyone negotiates, many times a day, and most of us know only two ways to do it: give ground to keep the peace, or dig in to win. Both are versions of the same thing, bargaining over positions, and the book opens by showing why that habit produces worse deals, wastes time and strains relationships.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The trouble isn't whether you play soft or hard. It's that you're playing the positional game at all.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Everyone negotiates</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>You negotiate all the time, with family, colleagues, landlords and shops. The usual choice between soft and hard leaves you either giving in or fighting. The book offers a third way, judged by three tests: a wise agreement, reached efficiently, that leaves the relationship intact.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Negotiation is everyday life.</b> Agreeing a price, splitting chores, setting a deadline, deciding where to eat: any back-and-forth between people who want different things and need each other is a negotiation, whether or not anyone calls it one.</span></li>
+          <li><span><b>Soft or hard, and both hurt.</b> The soft negotiator wants to avoid conflict and makes concessions to reach agreement, then feels exploited. The hard negotiator sees every situation as a contest of wills, wins some battles, and wears out themselves and the relationship.</span></li>
+          <li><span><b>Three tests for any method.</b> A good method should produce a wise agreement if one is possible, be efficient, and improve or at least not damage the relationship between the parties. A wise agreement meets each side's legitimate interests as far as possible, resolves conflicts fairly, lasts, and takes the wider community into account.</span></li>
+          <li><span><b>Principled negotiation.</b> The authors' method, developed at the Harvard Negotiation Project, is to decide issues on their merits rather than by haggling. Look for mutual gains where you can, and where interests conflict, insist that the result rest on fair standards independent of either side's will.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book grew out of the Harvard Negotiation Project, where the authors and their colleagues studied negotiations of every kind: family quarrels, business deals, labour disputes and talks between countries. They kept seeing the same pattern. People thought their only choices were to be nice or to be tough, and either way the result was worse than it needed to be. What made the difference in the best negotiations wasn't toughness or charm. It was a set of habits anyone could learn, and the book sets out to teach them in plain language, with no tricks and no posturing.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: three tests for a negotiation</div><div class="hint">Pick a way of negotiating and see how it scores</div></div>
+        <div class="stage"><svg id="ys1" role="img" aria-label="How each way of negotiating scores on a wise agreement, efficiency and the relationship"></svg></div><div class="lab-ctl"><div class="row" id="ysWays"></div></div><div class="stats"><div class="stat"><span class="k">Wise agreement</span><span class="v" id="ysA"></span></div><div class="stat"><span class="k">Efficient</span><span class="v" id="ysB"></span></div><div class="stat"><span class="k">Relationship</span><span class="v" id="ysC"></span></div></div><p class="callout" id="ysSay"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before choosing how to negotiate, ask what you want at the end: a deal that actually works for you, without wasting weeks, with a relationship you can still use tomorrow. Being nice doesn't guarantee that, and nor does being tough.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Don't bargain over positions →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The haggling trap</div>
+        <h2>Don't Bargain Over Positions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most negotiations are a series of positions: I'll pay this, you want that, and we inch toward each other. It feels natural, but it locks people into their stated positions, wastes time and tests wills rather than finding a good deal.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Positions lock you in.</b> The more clearly you state a position and defend it, the more your pride depends on it. Saving face starts to matter more than the actual deal, and agreements end up reflecting the split between final positions rather than what either side really needed.</span></li>
+          <li><span><b>Positional bargaining is slow.</b> Each side starts extreme, holds on stubbornly and gives as little as possible each round. Every small concession is a fight, and there's every reason to drag things out.</span></li>
+          <li><span><b>It endangers the relationship.</b> When the negotiation becomes a contest of wills, one side ends up feeling it has given in to the other. Anger and resentment follow, and with many parties it gets worse: coalitions, blocking and a lowest-common-denominator deal.</span></li>
+          <li><span><b>Being nice is no answer.</b> Playing soft, trusting the other side and conceding to keep the peace, makes you vulnerable to anyone who plays hard, and the agreement you get may not be wise. The alternative is to change the game: negotiate on the merits.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The authors use two pictures of positional bargaining. One is small: a customer and the owner of a second-hand shop haggle over a brass dish, starting far apart and edging toward the middle, each arguing about the price rather than about what the dish is worth to either of them. The other is enormous. In the early 1960s, the United States and the Soviet Union came close to a comprehensive ban on nuclear tests, then deadlocked over how many on-site inspections a year to allow. The Soviets would accept three; the Americans insisted on at least ten. Talks broke down over the numbers, and no one had worked out what an inspection would actually be: one person looking around for a day, or a hundred people searching for a month.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: haggle over the brass dish</div><div class="hint">Set how you bargain, then haggle round by round</div></div>
+        <div class="stage"><svg id="hg2" role="img" aria-label="The buyer's and seller's offers converging round by round"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="hgOpen">Your opening offer <output id="ohgOpen"></output></label><input type="range" id="hgOpen" min="5" max="45" step="5" value="15"></div><div class="ctl"><label for="hgStep">How much you give each round <output id="ohgStep"></output></label><input type="range" id="hgStep" min="1" max="10" value="4"></div></div><div class="row"><button class="btn primary" id="hgGo" type="button">Next round</button><button class="btn" id="hgAll" type="button">Haggle to the end</button><button class="btn" id="hgReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Rounds so far</span><span class="v" id="hgN"></span></div><div class="stat"><span class="k">Gap left</span><span class="v glow" id="hgGap"></span></div><div class="stat"><span class="k">What's happening</span><span class="s" id="hgSay">The shop owner asks $75. Make your first offer.</span></div></div><p class="callout">An illustrative model: the shop owner opens at $75 and concedes a little less each round. <b>Notice that the final price is decided by where you both started and how stubborn you were, and nobody ever discussed what the dish is worth.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you're trading numbers back and forth, you're bargaining over positions. Stop and ask a different question: what would a good deal look like for both of us, and how would we know it was fair?</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Separate the people →</a></div>
+    </section>
+    <!-- ===================== THE METHOD ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · the method</span>
+      <h2>The Method</h2>
+      <p>Principled negotiation, or negotiation on the merits, rests on four points, one per chapter. Each answers a different part of the problem: the people, what they actually want, the range of possible deals, and how to choose among them without a battle of wills.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>People, interests, options, criteria: four points that work with almost anyone, in almost any negotiation.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Negotiators are people first</div>
+        <h2>Separate the People from the Problem</h2>
+        <div class="short"><span class="lbl">In short</span><p>Negotiators are people, with emotions, values and different ways of seeing things. Deal with the people problem directly, through perception, emotion and communication, and keep it apart from the substance.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two kinds of interest.</b> Every negotiator wants a good deal and also a working relationship. The danger is that the two get tangled, so a comment on the problem is heard as an attack on the person, and people give up substance to protect the relationship or the other way round.</span></li>
+          <li><span><b>Perception.</b> Conflict lies less in objective reality than in people's heads. Put yourself in their shoes; don't assume their intentions from your fears; don't blame them for your problem; talk about each side's perceptions; give them a stake by involving them early; and let them save face by framing a deal that fits their principles.</span></li>
+          <li><span><b>Emotion.</b> Recognise and understand emotions, theirs and yours, and make them explicit. Let the other side let off steam without reacting to it, and use symbolic gestures: an apology, a note of sympathy, a shared meal can defuse a lot at little cost.</span></li>
+          <li><span><b>Communication.</b> Listen actively and acknowledge what's being said, even if you disagree. Speak to be understood, not to score points. Talk about yourself, not them: "I feel let down" rather than "You broke your word". And speak for a purpose: know what you want to get across before you say it.</span></li>
+          <li><span><b>Prevention works best.</b> Build a working relationship before you need it, and think of yourselves as partners side by side, attacking the problem rather than each other. Be soft on the people and hard on the problem.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Words can carry meanings you never intended. The book tells how, in 1980, the United Nations Secretary-General Kurt Waldheim flew to Iran to seek the release of the American hostages. On arrival he said he had come as a mediator to work out a compromise. In Persian, the authors explain, compromise lacks its English sense of a middle ground both sides can accept and carries the sense of compromising one's integrity, and a mediator is someone who meddles uninvited. Iranian broadcasts carried his words, and within an hour his car was stoned by angry Iranians. A small misunderstanding about perception set back his efforts badly.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: cool the room</div><div class="hint">The other side is upset. Choose how you answer</div></div>
+        <div class="cool" id="cr3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When things get heated, don't fight the person. Let them speak, show you heard them, say how things look from your side without blaming, and steer back to the shared problem. You're on the same side of the table, facing the issue together.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Interests, not positions →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Ask why</div>
+        <h2>Focus on Interests, Not Positions</h2>
+        <div class="short"><span class="lbl">In short</span><p>A position is what someone says they want. Interests are why they want it: their needs, worries, hopes and fears. Behind opposed positions there are usually interests that are shared or compatible, and there's more than one way to satisfy them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Interests define the problem.</b> The real conflict isn't between positions but between each side's needs and concerns. Reconcile the interests, not the positions, because for every interest there are usually several possible positions that would satisfy it.</span></li>
+          <li><span><b>Ask why, and why not.</b> Find interests by asking why they take their position, and why they don't take the one you'd like. Remember each side has many interests, and the most powerful are basic human needs: security, economic well-being, a sense of belonging, recognition, and control over one's own life.</span></li>
+          <li><span><b>Write them down.</b> Make a list of each side's interests as they emerge. It helps you remember them, improve your understanding and think of better ways to meet them.</span></li>
+          <li><span><b>Talk about interests.</b> Be specific about yours and explain them vividly. Acknowledge theirs as part of the problem. Put the problem before your answer, look forward to what you want rather than back at what went wrong, and be concrete but flexible.</span></li>
+          <li><span><b>Hard on the problem.</b> You can push hard for your interests and still be supportive of the people. Attacking the problem rather than the person means you can be firm without being hostile.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Two men are arguing in a library. One wants the window open, the other wants it shut, and they bicker about how far to open it: a crack, halfway, three quarters. Nothing satisfies either. The librarian walks in and asks one of them why he wants it open: to get some fresh air. She asks the other why he wants it closed: to avoid the draught. After thinking a moment, she opens a window in the next room, bringing in fresh air without a draught. The book sets this beside the Egypt-Israel talks at Camp David in 1978, where the two positions over the Sinai looked impossible to reconcile until the interests underneath, security for Israel and sovereignty for Egypt, pointed to a deal: return the Sinai to Egypt, but keep large parts of it demilitarised.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: ask why</div><div class="hint">Look behind each position, then try the options</div></div>
+        <div class="lab-ctl" style="border-top:0"><div class="row" id="awCase"></div></div><div class="stage"><svg id="aw4" role="img" aria-label="Each side's position, the interests behind it, and how well each option meets them"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="awWhy" type="button">Ask why</button><span class="tip">Then try an option:</span></div><div class="row" id="awOpts"></div></div><p class="callout" id="awSay"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone says what they want, ask yourself, and often them, "Why?" Then ask "Why not what I'm proposing?" The answers are their interests, and interests leave far more room for a deal than positions ever do.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Options for mutual gain →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Make the pie bigger</div>
+        <h2>Invent Options for Mutual Gain</h2>
+        <div class="short"><span class="lbl">In short</span><p>People rarely see many options in a negotiation. They judge ideas too early, search for the single right answer, assume a fixed pie, and treat the other side's problem as theirs alone. The cure is to invent first, decide later, and look for deals that give both sides more.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Four obstacles.</b> Premature judgement kills ideas before they form; searching for one answer narrows the field; assuming a fixed pie turns every gain into someone's loss; and thinking "solving their problem is their problem" stops you from helping them say yes.</span></li>
+          <li><span><b>Separate inventing from deciding.</b> Hold a brainstorm with no criticism allowed, ideally sitting side by side and facing the problem. Invite wild ideas. Only afterwards pick the most promising and improve them.</span></li>
+          <li><span><b>Broaden the options.</b> Move between the specific and the general with the Circle Chart. Look through the eyes of different experts. Invent agreements of different strengths, such as provisional, partial or in principle, and change the scope by breaking the problem into smaller pieces or making it bigger.</span></li>
+          <li><span><b>Dovetail differences.</b> Many good deals come from differences, not similarities. If you care most about one thing and they care most about another, each can give what matters less to them and get what matters more. Differences in interests, beliefs, value placed on time, forecasts and attitude to risk can all be traded.</span></li>
+          <li><span><b>Make their decision easy.</b> Put yourself in their shoes: whose decision is it, and what would make yes easy for them to say and defend? Draft options they could accept as is, a yesable proposition, and favour offers over threats.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book's best-known story is about two sisters who quarrel over an orange. They agree to cut it in half. One eats her half and throws the peel away; the other throws away the fruit and uses the peel to bake a cake. Each could have had the whole of what she wanted, if either had asked why the other wanted it. To help people find options like that, the authors offer a tool they call the Circle Chart. Start with what's wrong, the problem. Step back to analysis: what's causing it, what's missing? Then to approaches: what general strategies might help? Finally to action ideas: what specific steps could we take? Moving round the circle turns one good idea into many.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: dovetail the differences</div><div class="hint">Trade what matters less for what matters more</div></div>
+        <div class="stage"><svg id="dv5" role="img" aria-label="Each possible package plotted by how much it is worth to you and to the other side, with your current package highlighted"></svg></div><div class="lab-ctl"><div class="row" id="dvCtl"></div><div class="row"><button class="btn" id="dvSplit" type="button">Split every issue down the middle</button><button class="btn" id="dvBest" type="button">Show me a dovetailed deal</button></div></div><div class="stats"><div class="stat"><span class="k">Worth to you</span><span class="v glow" id="dvY"></span></div><div class="stat"><span class="k">Worth to them</span><span class="v" id="dvT"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="dvSay"></span></div></div><p class="callout">A job offer with four issues. The points are invented for the lab: you care most about remote days, then salary; the employer cares most about salary and an early start. <b>Splitting each issue down the middle is fair-looking but wasteful. Trading lets both of you end up higher.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you argue about which option to pick, make more of them. Find out what the other side values that costs you little, and what you value that costs them little, and trade.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Objective criteria →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Settle it on the merits</div>
+        <h2>Insist on Using Objective Criteria</h2>
+        <div class="short"><span class="lbl">In short</span><p>However good you are at inventing options, some interests will still conflict. Instead of settling it by who's more stubborn, agree on a fair standard or a fair procedure, independent of either side's will, and decide on that basis.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A battle of wills is costly.</b> Deciding by who pushes harder strains the relationship and rewards stubbornness. Basing the result on standards both sides can respect makes it more likely to be wise and fair, and easier to accept without losing face.</span></li>
+          <li><span><b>Fair standards.</b> Market value, precedent, scientific judgement, professional standards, efficiency, costs, what a court would decide, moral standards, equal treatment, tradition, reciprocity. The best standards are independent of either side's will, legitimate and practical, and would apply to both sides.</span></li>
+          <li><span><b>Fair procedures.</b> When there's no obvious standard, use a fair procedure: one cuts and the other chooses; take turns; draw lots; or let a third party decide.</span></li>
+          <li><span><b>Negotiate with criteria.</b> Frame each issue as a joint search for objective criteria: "How did you arrive at that figure?" Reason and be open to reason about which standards apply. And never yield to pressure, only to principle.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At the international Law of the Sea conference, India, speaking for many developing countries, proposed an initial fee of $60 million per site for companies mining the deep seabed. The United States proposed no fee at all. The positions were deadlocked, until someone discovered that the Massachusetts Institute of Technology had built a model of the economics of deep-seabed mining. The model showed that a fee of that size would make mining unprofitable for years to come. Faced with an objective measure rather than an American demand, India reconsidered its figure, and the US delegation in turn accepted that some initial fee was reasonable. The standard did what pressure couldn't.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: one cuts, the other chooses</div><div class="hint">You cut the cake; they pick their piece first</div></div>
+        <div class="stage"><svg id="cc6" role="img" aria-label="A cake with your cut, and the piece left for you after the other side chooses"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="ccCut">Where you cut <output id="occCut"></output></label><input type="range" id="ccCut" min="20" max="80" value="65"></div></div><div class="row"><button class="btn primary" id="ccGo" type="button">Let them choose</button><button class="btn" id="ccReset" type="button">Cut again</button></div></div><div class="stats"><div class="stat"><span class="k">Your piece</span><span class="v glow" id="ccYou"></span></div><div class="stat"><span class="k">Their piece</span><span class="v" id="ccThem"></span></div><div class="stat"><span class="k">Lesson</span><span class="s" id="ccSay">Cut, then let them pick.</span></div></div><p class="callout">The book's example of a fair procedure: two children dividing a cake. <b>Neither side can trust the other, and neither has to. The procedure makes an even cut the selfish choice.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you hit a real conflict, don't ask "who wins?" Ask "what's the fair way to decide this?" Find a standard you'd both accept, such as market price or what the law says, or a procedure, like one cuts and the other chooses. Then stick to the principle, not the pressure.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Develop your BATNA →</a></div>
+    </section>
+    <!-- ===================== YES, BUT ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · yes, but</span>
+      <h2>Yes, But</h2>
+      <p>Fine in theory, readers say, but what if the other side holds all the cards, refuses to do anything but bargain, or plays dirty? These three chapters are the book's answers, and they turn on the same idea: you can change the game even if the other side doesn't want to.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Know your best alternative, deflect attacks onto the problem, and negotiate about the rules when they cheat.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Develop your BATNA</div>
+        <h2>What If They Are More Powerful?</h2>
+        <div class="short"><span class="lbl">In short</span><p>If the other side holds the stronger cards, no method can guarantee a good deal. What you can do is protect yourself from a bad one and make the most of what you have. Both depend on your BATNA, your best alternative to a negotiated agreement.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The trouble with a bottom line.</b> Many people protect themselves with a bottom line, the worst deal they'll accept. It stops you being talked into disaster, but it's rigid, usually set too high or too low, and it discourages you from inventing better options.</span></li>
+          <li><span><b>Know your BATNA.</b> The real measure is what you'll do if you walk away. Any offer better than your BATNA is worth considering; any offer worse should be refused. If you haven't thought about it, you're negotiating with your eyes closed.</span></li>
+          <li><span><b>Develop it.</b> Make a list of actions you might take if there's no agreement, improve the most promising ones into practical alternatives, and pick the best. A trip wire, a figure short of your BATNA that makes you stop and think, can warn you before you agree too fast.</span></li>
+          <li><span><b>Your BATNA is your power.</b> The better your alternative, the stronger you are. Resources the other side has matter less than whether you can walk away. Also think about their BATNA: if it's weaker than they believe, tell them; if it's strong, you may need to change the game.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book takes the example of selling a house. A seller with a bottom line says, "I won't take less than this." A seller who has thought about a BATNA asks a more useful question: what will I do if I haven't sold by a certain date? Keep it on the market indefinitely? Rent it out? Tear it down and turn the lot into a car park? Let someone live in it rent-free in return for painting it? Once you've looked at those alternatives and picked the best, you know exactly which offers to accept, and you can negotiate calmly, because walking away is a real choice rather than a disaster.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: know your walk-away</div><div class="hint">Build your alternatives, then judge the offer</div></div>
+        <div class="stage"><svg id="bt7" role="img" aria-label="Your alternatives, your BATNA, and the offer on the table"></svg></div><div class="lab-ctl"><div class="row" id="btCtl"></div><div class="row"><div class="ctl"><label for="btOffer">The offer on the table <output id="obtOffer"></output></label><input type="range" id="btOffer" min="40" max="80" value="56"></div></div></div><div class="stats"><div class="stat"><span class="k">Your BATNA</span><span class="v glow" id="btB"></span></div><div class="stat"><span class="k">Offer minus BATNA</span><span class="v" id="btD"></span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="btSay"></span></div></div><p class="callout">A job-offer example with invented figures in thousands a year. The other offer is weighed by its chance: its pay if it comes through, your current job if it doesn't. <b>Improving your best alternative does more for your bargaining power than any clever tactic at the table.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before any important negotiation, ask: if this falls apart, what will I actually do? Work that out, make it as good as you can, and compare every offer to it. That's your protection and your strength.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Negotiation jujitsu →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Use negotiation jujitsu</div>
+        <h2>What If They Won't Play?</h2>
+        <div class="short"><span class="lbl">In short</span><p>Sometimes the other side insists on positional bargaining and attacks you. Don't push back. Like a jujitsu fighter, step aside and turn their force toward the problem: look behind their position, invite criticism, and use questions and silence.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three ways to change the game.</b> Concentrate on the merits yourself, which can be contagious. If that doesn't work, use negotiation jujitsu. And if that fails, bring in a third party to run a one-text procedure.</span></li>
+          <li><span><b>Don't attack their position, look behind it.</b> Treat their position as one option and look for the interests it reflects. Ask what's behind it, and how it might be improved.</span></li>
+          <li><span><b>Don't defend your ideas, invite criticism.</b> Ask what's wrong with your proposal and what they'd do in your place. Turn criticism of your idea into advice for improving it.</span></li>
+          <li><span><b>Recast attacks on you as attacks on the problem.</b> When they blame you, let them finish, then treat it as a statement about the problem. Ask questions instead of making statements, and use silence: an unreasonable proposal often sounds weaker after a pause.</span></li>
+          <li><span><b>The one-text procedure.</b> At Camp David in 1978, the United States drafted a single text, asked Egypt and Israel for criticism rather than concessions, and revised it again and again, through more than twenty drafts in thirteen days, until there was nothing left to improve. Then it asked each side for a yes.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The book ends this chapter with a long case. Frank Turnbull rented a flat and later discovered it was under rent control and he'd been paying well above the legal maximum. He went to see Mrs Jones of the property company, who refused to budge. Rather than accusing her, he asked to be corrected if he had his facts wrong, thanked her for what she'd done for the tenants, said the issue for them was fairness, not trust, and asked what principle lay behind the rent. When she pushed, he asked questions and let the silences sit. When she offered a figure, he asked how it was worked out. He proposed a fair standard, offered to fit the timing to her convenience, and closed by saying how much he'd enjoyed dealing with her. The result was a settlement based on what the law and the facts supported.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: don't push back</div><div class="tally" id="tally8" aria-label="Score"></div></div>
+        <div class="sorter" id="sort8"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone attacks your idea or you, don't hit back and don't defend. Ask a question, invite their advice, say "help me understand", or just pause. You're redirecting their energy onto the problem.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Taming dirty tricks →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Taming the hard bargainer</div>
+        <h2>What If They Use Dirty Tricks?</h2>
+        <div class="short"><span class="lbl">In short</span><p>Some people lie, intimidate or squeeze. Don't reply in kind and don't just put up with it. Recognise the tactic, raise it openly, and negotiate about the rules of the game, applying the same principles you'd use for the substance.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Negotiate the rules.</b> There are three steps: recognise the tactic, raise the issue explicitly, and question whether the tactic is legitimate and desirable. Then negotiate over it like any other issue, with the four points.</span></li>
+          <li><span><b>Deliberate deception.</b> Phoney facts, ambiguous authority (letting you believe they can decide, then saying the boss must approve) and doubtful intentions. Separate the people from the problem: verify claims without accusing anyone of lying. Not telling you everything is not the same as deceiving you.</span></li>
+          <li><span><b>Psychological warfare.</b> Stressful surroundings, personal attacks, the good-cop bad-cop routine, and threats. Name them: "Is this a good guy, bad guy routine?" Suggest a break, a change of room, or that you'll only respond to reasons, not to threats.</span></li>
+          <li><span><b>Positional pressure.</b> Refusing to negotiate, extreme demands, escalating demands, lock-in tactics, a "hardhearted partner" offstage, calculated delay, and "take it or leave it". Don't be rushed or bluffed: ask the principle behind each move, and think about your BATNA.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>One trick the book describes is the escalating demand. The other side agrees a point, then reopens it, or raises a fresh demand every time you make a concession, hoping you'll agree to the rest quickly just to stop the slide. Another is the hardhearted partner: "I'd love to agree, but my partner will never accept it." The authors' advice is the same in every case. Point out what seems to be happening, without accusing anyone of bad faith, and ask whether it's a good way to reach agreement. Then propose a fairer rule, such as settling on a list of all outstanding issues, or talking with the partner directly, and if necessary take a break to reconsider whether you want to continue.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: name the trick</div><div class="tally" id="tally9" aria-label="Score"></div></div>
+        <div class="sorter" id="sort9"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you think you're being played, say so calmly: "I may be mistaken, but it looks as though..." Then ask whether that's how both of you want to negotiate. Most tricks only work when nobody points them out.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Winning without losing →</a></div>
+    </section>
+    <!-- ===================== IN CONCLUSION ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · in conclusion</span>
+      <h2>In Conclusion</h2>
+      <p>The book ends briefly: most of this you knew already, the way to get good at it is to practise, and winning means getting a good result without paying for it in the relationship. In later editions the authors added answers to the ten questions readers ask them most.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Principled negotiation is a skill, not a trick. It gets better each time you try it.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Conclusion</span> · You knew it all the time</div>
+        <h2>In Conclusion</h2>
+        <div class="short"><span class="lbl">In short</span><p>The authors end with three points. Most of this matches what you already knew from experience. You only learn it by doing it, so practise, and review afterwards. And winning should mean getting a good result while keeping the relationship, not beating the other side.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You knew it all the time.</b> Little in the book is new. It organises common sense and shared experience into a framework you can think with and act on, and you may well recognise times you've done it already.</span></li>
+          <li><span><b>Learn from doing.</b> Reading about negotiation won't make you good at it any more than reading about tennis will. Try it, review what happened, and try again. Each attempt makes the next one easier.</span></li>
+          <li><span><b>Winning.</b> Negotiation isn't a contest you win by defeating the other side. It's a joint search for an outcome that serves you both. Being principled lets you get what you're entitled to and still be decent.</span></li>
+          <li><span><b>Soft, hard or principled.</b> Chapter 1's famous table sets three columns side by side. The soft negotiator sees friends and wants agreement; the hard one sees adversaries and wants victory; the principled one sees problem-solvers and wants a wise outcome reached efficiently and amicably.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Throughout the book the authors sum up the method with a table of three columns. Soft negotiators trust the other side, change position easily, make offers, disclose their bottom line and yield to pressure. Hard negotiators distrust the other side, dig in, make threats, mislead about their bottom line and apply pressure. Principled negotiators do something different on every row: they proceed independent of trust, focus on interests, explore interests, avoid having a bottom line, invent options for mutual gain and insist on objective criteria. The conclusion's message is that the third column isn't a halfway point between the other two. It's a different game.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: soft, hard or principled?</div><div class="tally" id="tally10" aria-label="Score"></div></div>
+        <div class="sorter" id="sort10"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you negotiate, try one principle on purpose: ask why, or name a fair standard, or work out your walk-away. Afterwards, spend two minutes on what worked. That's how the book becomes a habit.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Ten questions people ask →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Ten questions</span> · The answers readers wanted</div>
+        <h2>Ten Questions People Ask About Getting to Yes</h2>
+        <div class="short"><span class="lbl">In short</span><p>Added in the second edition, these answers deal with fairness, people, tactics and power: when positional bargaining makes sense, what to do when the people are the problem, how to handle culture and personality, and how to negotiate from a weaker position.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Does positional bargaining ever make sense?</b> Sometimes, for a one-off deal over a single issue with little at stake and low costs to haggling. But even then, principled negotiation usually does better, and it's a better habit to build.</span></li>
+          <li><span><b>Fairness and the people.</b> If the other side has a different idea of what's fair, explore both standards and look for the most persuasive or a fair way to choose. If the people are the problem, build a working relationship that can handle disagreement: be unconditionally constructive, whatever they do.</span></li>
+          <li><span><b>Personality, gender and culture.</b> Adapt to the people in front of you, their pace, formality and way of speaking, but don't stereotype. The principles stay the same; how you apply them changes.</span></li>
+          <li><span><b>Tactics.</b> On where to meet, who makes the first offer and how high to start: let principle guide even those small calls. Make a first offer only once you understand interests, base it on criteria, and don't start so extreme that you lose credibility. Move from options to commitment by drafting a framework agreement early.</span></li>
+          <li><span><b>Power.</b> The way you negotiate can make a big difference even against a stronger side. The book names six sources of negotiating power: skill and knowledge, a good relationship, a good alternative, an elegant solution, legitimacy, and commitment, a well-crafted offer you can make.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Readers kept asking the authors the same thing: does any of this work when the other side is far more powerful? Their answer is that power isn't just money, size or rank. Much of it comes from things any negotiator can build before and during a negotiation: knowing the people and the issue, having a relationship that lets you talk honestly, developing a strong alternative, finding an elegant option that meets both sides' interests, appealing to standards that make your case legitimate, and making a clear, well-crafted commitment. The other side may have the money, the authors argue, but you can still have most of the power that matters.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: six sources of power</div><div class="hint">Rate where you stand, then build</div></div>
+        <div class="stage"><svg id="pw11" role="img" aria-label="Your negotiating power and theirs across six sources"></svg></div><div class="lab-ctl"><div class="row" id="pwCtl"></div><div class="row"><button class="btn" id="pwRich" type="button">Make them richer and bigger</button><button class="btn" id="pwReset" type="button">Reset</button></div></div><div class="stats"><div class="stat"><span class="k">Your total</span><span class="v glow" id="pwY"></span></div><div class="stat"><span class="k">Their total</span><span class="v" id="pwT"></span></div><div class="stat"><span class="k">Weakest spot to build</span><span class="s" id="pwSay"></span></div></div><p class="callout">An illustrative model: each source scored 0 to 10. <b>Notice that money and size aren't on the list. The other side's resources show up only through their alternative and their commitments.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you feel weaker, don't give up and don't bluff. Work on the power you can build: learn more, improve the relationship, strengthen your alternative, find a better option, ground your case in fair standards, and make a clear offer.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#after">Next: your prep sheet →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your negotiation prep sheet</h2>
+      <p class="big">The whole book fits on one page you fill in before you sit down: who the people are, what each side really needs, a few options, the standards you'll appeal to, and what you'll do if there's no deal.</p>
+      <figure class="lab" id="prep">
+        <div class="lab-top"><div class="t">Prepare a negotiation</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="ppWhat">What I'm negotiating, and with whom</label><input id="ppWhat" maxlength="120" placeholder="e.g. A pay rise with my manager, Priya"></div>
+          <div class="field"><label for="ppPeople">People: how they see it, how they might feel</label><textarea id="ppPeople" rows="3" maxlength="400" placeholder="e.g. She's under budget pressure and may feel put on the spot"></textarea></div>
+          <div class="field"><label for="ppMine">My interests (why I want what I want)</label><textarea id="ppMine" rows="3" maxlength="400" placeholder="e.g. Feel fairly paid; save for a flat; more say in projects"></textarea></div>
+          <div class="field"><label for="ppTheirs">Their interests</label><textarea id="ppTheirs" rows="3" maxlength="400" placeholder="e.g. Keep good people; stay within budget; look fair to the team"></textarea></div>
+          <div class="field"><label for="ppOpts">Options that could serve both</label><textarea id="ppOpts" rows="3" maxlength="400" placeholder="e.g. Rise in two steps; a title change; training budget; review in six months"></textarea></div>
+          <div class="field"><label for="ppCrit">Fair standards we could use</label><textarea id="ppCrit" rows="3" maxlength="400" placeholder="e.g. Market salary surveys; what others in the role earn; the company's pay bands"></textarea></div>
+          <div class="field"><label for="ppBatna">My BATNA: what I'll do if there's no agreement</label><textarea id="ppBatna" rows="3" maxlength="400" placeholder="e.g. Accept the offer from the agency I interviewed with"></textarea></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="ppSave" type="button">Save this sheet</button><button class="btn" id="ppNew" type="button">Start a new one</button><span class="tip" id="ppMsg"></span></div>
+        </div>
+        <div class="out" id="ppList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">People</span><b>Separate them from the problem</b><span>Deal with perceptions, emotions and communication directly. Sit side by side against the problem.</span></div>
+        <div><span class="n">Interests</span><b>Not positions</b><span>Ask why. Behind opposed positions there are often shared and compatible interests.</span></div>
+        <div><span class="n">Options</span><b>For mutual gain</b><span>Invent before you decide. Dovetail differences so both sides get more.</span></div>
+        <div><span class="n">Criteria</span><b>Objective standards</b><span>Agree on what's fair first. Yield to principle, never to pressure.</span></div>
+        <div><span class="n">BATNA</span><b>Know your walk-away</b><span>Your best alternative to a negotiated agreement is your real source of strength.</span></div>
+        <div><span class="n">Jujitsu</span><b>Don't push back</b><span>When they attack, turn it toward the problem with questions and silence.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Getting to Yes: Negotiating Agreement Without Giving In</i> by Roger Fisher and William Ury, with Bruce Patton in later editions (first published 1981; third edition 2011). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The problem", "The method", "Yes, but", "In conclusion"];
+const CH = [["Introduction", "Everyone negotiates", 0, "Introduction"], ["Don't Bargain Over Positions", "Don't bargain over positions", 0, "Chapter 1"], ["Separate the People from the Problem", "Separate the people", 1, "Chapter 2"], ["Focus on Interests, Not Positions", "Interests, not positions", 1, "Chapter 3"], ["Invent Options for Mutual Gain", "Options for mutual gain", 1, "Chapter 4"], ["Insist on Using Objective Criteria", "Objective criteria", 1, "Chapter 5"], ["What If They Are More Powerful?", "Develop your BATNA", 2, "Chapter 6"], ["What If They Won't Play?", "Negotiation jujitsu", 2, "Chapter 7"], ["What If They Use Dirty Tricks?", "Taming dirty tricks", 2, "Chapter 8"], ["In Conclusion", "Winning without losing", 3, "Conclusion"], ["Ten Questions People Ask About Getting to Yes", "Ten questions people ask", 3, "Ten questions"]];
+const QUIZ = {
+"1": {
+"q": "Which of these is not one of the book's three tests for a negotiation method?",
+"o": [
+"It produces a wise agreement if one is possible",
+"It is efficient",
+"It gets you more than the other side",
+"It improves, or at least doesn't damage, the relationship"
+],
+"a": 2,
+"w": "Beating the other side isn't a test. The book asks for a wise agreement, efficiently reached, that leaves the relationship intact or better."
+},
+"2": {
+"q": "Why did the test-ban talks deadlock, according to the book?",
+"o": [
+"The two sides hated each other too much to talk",
+"Both sides fixed on a number of inspections without defining what an inspection was",
+"Neither side wanted a ban at all"
+],
+"a": 1,
+"w": "Both sides argued over three versus ten, positions, without exploring what an inspection would involve and what each side actually needed from one."
+},
+"3": {
+"q": "Which sentence best follows the book's advice to speak about yourself, not them?",
+"o": [
+"\"You never listen to anything I say.\"",
+"\"I feel ignored when decisions are made without me.\"",
+"\"Anyone could see you were being unfair.\""
+],
+"a": 1,
+"w": "A statement about how you feel is hard to dispute and doesn't put the other person on the defensive. Statements about their character start an argument."
+},
+"4": {
+"q": "At Camp David, what made a Sinai deal possible?",
+"o": [
+"Splitting the territory down the middle",
+"Seeing that Israel's interest was security and Egypt's was sovereignty, and meeting both",
+"Israel giving up its demand for security"
+],
+"a": 1,
+"w": "The positions, who owns the land, clashed. The interests did not: Egypt got the Sinai back, and demilitarised zones gave Israel the security it needed."
+},
+"5": {
+"q": "The sisters each wanted a different part of the orange. What does the story show?",
+"o": [
+"Splitting evenly is always fair",
+"Knowing why each side wants something can reveal a deal where both get more",
+"You should always take the bigger half"
+],
+"a": 1,
+"w": "Cutting it in half gave each sister half of what she wanted. Asking why would have given both of them all of it."
+},
+"6": {
+"q": "The other side says, \"That's my final offer, take it or leave it.\" What does the book suggest?",
+"o": [
+"Give in, since they won't move",
+"Make a counter-threat",
+"Ask what principle or standard the figure is based on, and yield only to a principle"
+],
+"a": 2,
+"w": "Turn the pressure into a search for criteria. If there's no principle behind the figure, say what standard you think is fair, and stay open to theirs."
+},
+"7": {
+"q": "What does BATNA stand for, and why does it matter?",
+"o": [
+"Bottom And Top Negotiating Amounts; it fixes your range",
+"Best Alternative To a Negotiated Agreement; it tells you when to accept or walk away",
+"Bargain At The Next Appointment; it buys time"
+],
+"a": 1,
+"w": "Your best alternative to a negotiated agreement is the yardstick for every offer, and the better it is, the more power you have."
+},
+"8": {
+"q": "The other side says, \"That's a ridiculous proposal.\" What's the jujitsu response?",
+"o": [
+"\"No, yours is ridiculous.\"",
+"\"Let me explain again why I'm right.\"",
+"\"What's wrong with it, from your point of view? How would you improve it?\""
+],
+"a": 2,
+"w": "Inviting criticism turns their attack into advice, and keeps the focus on the problem rather than on whose idea it was."
+},
+"9": {
+"q": "After agreeing a price, the other side says their manager has to sign off and will probably want 10 percent more. Which tactic is this?",
+"o": [
+"Ambiguous authority",
+"Personal attack",
+"Fair procedure"
+],
+"a": 0,
+"w": "They let you think they could decide, then revealed a higher authority after you'd conceded. Clarify early who can agree, and reserve your own right to reconsider."
+},
+"10": {
+"q": "Which describes principled negotiation's approach to trust?",
+"o": [
+"Trust the other side completely",
+"Distrust the other side",
+"Proceed independent of trust"
+],
+"a": 2,
+"w": "The principled negotiator doesn't need to trust or distrust; the result rests on interests and fair standards, which can be checked."
+},
+"11": {
+"q": "Which is one of the six sources of negotiating power the book names?",
+"o": [
+"Having more money",
+"Being the louder voice",
+"A good alternative (your BATNA)",
+"Refusing to move"
+],
+"a": 2,
+"w": "The six are skill and knowledge, a good relationship, a good alternative, an elegant solution, legitimacy and commitment. Wealth and volume aren't on the list."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0f1620';
+try { const t = localStorage.getItem('gy-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('gy-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('gy-done', []));
+const save = () => store.set('gy-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const usd = n => '$' + (Math.round(n * 2) / 2).toFixed(n % 1 ? 2 : 0).replace(/\.00$/, '');
+const kpay = n => '$' + Math.round(n) + 'k';
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['We keep trading numbers and getting nowhere', 2, 'Don\'t bargain over positions', 'Haggling locks both of you into positions. Step back and ask what a good deal would look like for both, and how you\'d know it was fair.'],
+    ['It\'s getting personal and heated', 3, 'Separate the people from the problem', 'Deal with feelings and perceptions directly: listen, acknowledge, speak about yourself, and sit side by side against the problem.'],
+    ['Our demands look impossible to reconcile', 4, 'Focus on interests, not positions', 'Ask why each side wants what it wants. Opposed positions often hide interests that fit together.'],
+    ['There seems to be only one way to split this', 5, 'Invent options for mutual gain', 'Brainstorm before you decide, and trade what matters less to you for what matters more.'],
+    ['They\'re pushing me with ultimatums', 6, 'Insist on objective criteria', 'Ask what principle lies behind their figure, propose a fair standard, and yield only to principle, never to pressure.'],
+    ['I don\'t know when to walk away', 7, 'Develop your BATNA', 'Work out your best alternative if there\'s no deal. Accept offers that beat it; refuse ones that don\'t.'],
+    ['They attack me and my ideas', 8, 'Negotiation jujitsu', 'Don\'t push back. Invite their criticism, ask questions, and let silence do some of the work.'],
+    ['I think they\'re playing dirty', 9, 'Taming the hard bargainer', 'Recognise the trick, raise it calmly, and negotiate over the rules of the game.'],
+    ['I give in too easily', 10, 'Soft, hard or principled', 'You don\'t have to choose between nice and tough. Be soft on the people and hard on the problem.'],
+    ['I feel weaker than the other side', 11, 'Six sources of power', 'Skill, relationship, a good alternative, an elegant solution, legitimacy and commitment are all power you can build.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: two people, one orange ---------- */
+{ const svg = $('#orSvg'), cap = $('#orCap'), box = $('#orWays');
+  const WAYS = [
+    ['half', 'Cut it in half', 50, 50, 'Each gets half the orange, so each gets <b>half of what she wanted</b>. One eats her fruit and bins her peel; the other bins her fruit and grates her peel into a cake.'],
+    ['one', 'Give it to one', 100, 0, 'One gets everything, the other <b>gets nothing</b> and remembers it next time. Winner-takes-all leaves value, and goodwill, on the table.'],
+    ['why', 'Ask why', 100, 100, 'One wants the fruit to eat; the other wants the peel for a cake. Ask why, and <b>both get all of what they wanted</b>. Same orange, nothing split.'] ];
+  let w = 0;
+  box.innerHTML = WAYS.map((x, i) => `<button class="btn" type="button" data-w="${i}" aria-pressed="${i === w}">${x[1]}</button>`).join('');
+  function orange(cx, cy, r, part){ // part: whole | left | right | peel | fruit
+    let g = '';
+    const seg = (cx, cy, rr) => { let s = ''; for (let k = 0; k < 8; k++){ const a = k * Math.PI / 4; s += `<line x1="${cx}" y1="${cy}" x2="${(cx + rr * Math.cos(a)).toFixed(1)}" y2="${(cy + rr * Math.sin(a)).toFixed(1)}" ${S('glow', 1.2, ';stroke-opacity:.55')}/>`; } return s; };
+    if (part === 'whole') g += `<circle cx="${cx}" cy="${cy}" r="${r}" ${FS('glow', 'glow', 2, .85)}/><path d="M${cx} ${cy - r}q4 -10 14 -12" ${S('good', 2.5)}/><ellipse cx="${cx + 14}" cy="${cy - r - 12}" rx="8" ry="4" ${F('good', .8)}/>`;
+    if (part === 'left' || part === 'right'){ const sgn = part === 'left' ? -1 : 1;
+      g += `<path d="M${cx} ${cy - r}A${r} ${r} 0 0 ${part === 'left' ? 0 : 1} ${cx} ${cy + r}Z" ${FS('glow', 'glow', 2, .85)}/>`;
+      g += `<path d="M${cx} ${cy - r + 6}A${r - 6} ${r - 6} 0 0 ${part === 'left' ? 0 : 1} ${cx} ${cy + r - 6}Z" ${F('hl')}/>`;
+      for (let k = 1; k < 4; k++){ const a = Math.PI / 2 - k * Math.PI / 4; g += `<line x1="${cx}" y1="${cy}" x2="${(cx + sgn * (r - 6) * Math.cos(a)).toFixed(1)}" y2="${(cy - (r - 6) * Math.sin(a)).toFixed(1)}" ${S('glow', 1.2)}/>`; } }
+    if (part === 'peel') g += `<circle cx="${cx}" cy="${cy}" r="${r - 4}" ${S('glow', 8)}/><circle cx="${cx}" cy="${cy}" r="${r - 4}" ${S('ink', 1.5, ';stroke-dasharray:3 9')}/>`;
+    if (part === 'fruit') g += `<circle cx="${cx}" cy="${cy}" r="${r - 9}" ${F('hl')}/>` + seg(cx, cy, r - 9) + `<circle cx="${cx}" cy="${cy}" r="${r - 9}" ${S('glow', 1.5)}/>`;
+    return g; }
+  function draw(){ const [k, , a, b, say] = WAYS[w]; let g = '';
+    if (k === 'half'){ g += orange(62, 112, 52, 'left') + orange(88, 112, 52, 'right'); }
+    else if (k === 'one'){ g += orange(75, 112, 52, 'whole'); }
+    else { g += orange(38, 112, 40, 'fruit') + orange(124, 112, 40, 'peel'); }
+    g += TX(k === 'why' ? 81 : 75, 200, k === 'why' ? 'fruit · peel' : k === 'half' ? 'two halves' : 'one whole orange', 'muted', 12, 'middle');
+    const x0 = 180, bw = 200;
+    [['She wants the fruit, to eat', a, 'glow'], ['She wants the peel, for a cake', b, 'cool']].forEach(([l, v, c], i) => { const y = 52 + i * 78;
+      g += TX(x0, y, l, 'text', 13);
+      g += `<rect x="${x0}" y="${y + 10}" width="${bw}" height="22" rx="6" ${F('panel-2')}/><rect x="${x0}" y="${y + 10}" width="${(bw * v / 100).toFixed(1)}" height="22" rx="6" ${F(c, .85)}/>`;
+      g += TX(x0, y + 50, `gets ${v}% of what she wanted`, v === 100 ? 'good' : v === 0 ? 'bad' : 'muted', 12); });
+    svg.innerHTML = g; cap.innerHTML = say; }
+  box.querySelectorAll('[data-w]').forEach(btn => btn.addEventListener('click', () => { w = +btn.dataset.w; press([...box.querySelectorAll('[data-w]')], btn); draw(); }));
+  draw();
+}
+
+/* ---------- intro: three tests ---------- */
+{ const el = $('#ys1'), box = $('#ysWays');
+  const M = [
+    ['Give in to keep the peace', [3, 8, 5], 'Quick, and pleasant at the table. But you may sign a poor deal, and resentment builds later, so the relationship isn\'t as safe as it looks.'],
+    ['Dig in and hold out', [4, 2, 2], 'You may win this round, but it takes for ever, the deal reflects stubbornness rather than needs, and the other side remembers.'],
+    ['Split the difference', [5, 6, 6], 'Feels fair and gets it over with. But the midpoint depends on where you both started, so the most extreme opener wins.'],
+    ['Negotiate on the merits', [9, 7, 8], 'Interests, options and fair standards produce a deal that works for both, without a contest of wills. It takes some preparation, then saves time.'] ];
+  const T = ['Wise agreement', 'Efficient', 'Relationship'];
+  let m = 3;
+  box.innerHTML = M.map((x, i) => `<button class="btn" type="button" data-m="${i}" aria-pressed="${i === m}">${x[0]}</button>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 140, bw = W - L - 40, rowH = nw ? 62 : 50, H = T.length * rowH + 24; vb(el, W, H); let g = '';
+    T.forEach((t, r) => { const y = 10 + r * rowH, by = nw ? y + 14 : y;
+      g += TX(0, nw ? y + 6 : y + 19, t, 'text', 13);
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="26" rx="6" ${F('panel-2')}/>`;
+      M.forEach((x, i) => { if (i === m) return; const xx = L + bw * x[1][r] / 10; g += `<line x1="${xx}" y1="${by + 3}" x2="${xx}" y2="${by + 23}" ${S('faint', 2)}/>`; });
+      g += `<rect x="${L}" y="${by}" width="${(bw * M[m][1][r] / 10).toFixed(1)}" height="26" rx="6" ${F('glow', .88)}/>`;
+      g += TX(L + bw + 8, by + 18, M[m][1][r], 'glow', 13); });
+    g += TX(0, H - 4, 'gold = the way you picked · grey ticks = the other three · illustrative scores out of 10', 'faint', 11);
+    el.innerHTML = g;
+    ['ysA', 'ysB', 'ysC'].forEach((id, i) => $('#' + id).textContent = M[m][1][i] + '/10');
+    $('#ysSay').innerHTML = `<b>${M[m][0]}.</b> ${M[m][2]}`; });
+  box.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => { m = +b.dataset.m; press([...box.querySelectorAll('[data-m]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- 1: haggle over the brass dish ---------- */
+{ const el = $('#hg2'), oI = $('#hgOpen'), sI = $('#hgStep'), say = $('#hgSay');
+  let B, Sl, hist, end, lastGive;
+  const FLOOR = 30, START = 75, PATIENCE = 16;
+  function reset(){ B = +oI.value; Sl = START; hist = [[B, Sl]]; end = null; lastGive = 0; say.textContent = `The shop owner asks ${usd(START)}. You offer ${usd(B)}.`; draw(); }
+  function round(){ if (end) return;
+    const step = +sI.value; const nb = Math.min(B + step, Sl); lastGive = nb - B; B = nb;
+    if (B >= Sl){ end = { p: Sl }; hist.push([B, Sl]); return; }
+    const give = Math.max(.5, lastGive * .6 + (Sl - B) * .05), ns = Math.max(FLOOR, Sl - give); Sl = Math.round(ns * 2) / 2;
+    if (Sl <= B){ Sl = B; end = { p: B }; }
+    hist.push([B, Sl]);
+    if (!end && hist.length - 1 >= PATIENCE) end = { p: null }; }
+  function talk(){ const n = hist.length - 1;
+    if (end && end.p != null){ const mid = (START + +oI.value) / 2;
+      say.innerHTML = `<b>Sold for ${usd(end.p)}</b> after ${n} round${n === 1 ? '' : 's'}. The midpoint of the two openings was ${usd(mid)}. Nobody discussed what the dish is actually worth.`; return; }
+    if (end){ say.innerHTML = `<b>No deal.</b> After ${n} rounds the owner loses patience and puts the dish back on the shelf. Small concessions are slow, and slow bargaining often fails.`; return; }
+    const lines = ['"It\'s an antique! Make me a serious offer."', '"You drive a hard bargain."', '"It cost me more than that."', '"Next year this will be worth twice as much."', '"I have to make a living, you know."'];
+    say.textContent = `Owner: ${usd(Sl)}. ` + lines[n % lines.length]; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 230 : 220, L = 40, R = W - 14, T = 14, Bt = H - 30; vb(el, W, H);
+    const xs = i => L + (R - L) * i / PATIENCE, ys = v => Bt - (Bt - T) * (v - 0) / 80; let g = '';
+    [0, 20, 40, 60, 80].forEach(v => { g += `<line x1="${L}" y1="${ys(v)}" x2="${R}" y2="${ys(v)}" ${S('line', 1)}/>` + TX(L - 6, ys(v) + 4, '$' + v, 'faint', 11, 'end'); });
+    g += TX(L, H - 8, 'round →', 'faint', 11);
+    const line = (k, c) => `<polyline points="${hist.map((h, i) => xs(i).toFixed(1) + ',' + ys(h[k]).toFixed(1)).join(' ')}" ${S(c, 2.5)}/>` + hist.map((h, i) => `<circle cx="${xs(i).toFixed(1)}" cy="${ys(h[k]).toFixed(1)}" r="3.5" ${F(c)}/>`).join('');
+    g += line(1, 'cool') + line(0, 'glow');
+    const last = hist[hist.length - 1], lx = xs(hist.length - 1);
+    g += TX(Math.min(lx + 8, R - 60), ys(last[1]) - 8, 'owner', 'cool', 12) + TX(Math.min(lx + 8, R - 60), ys(last[0]) + 18, 'you', 'glow', 12);
+    if (end && end.p != null) g += `<circle cx="${lx}" cy="${ys(end.p)}" r="9" ${S('good', 2.5)}/>`;
+    el.innerHTML = g;
+    out('hgOpen', usd(+oI.value)); out('hgStep', usd(+sI.value));
+    $('#hgN').textContent = hist.length - 1; $('#hgGap').textContent = end && end.p != null ? 'Deal' : usd(last[1] - last[0]);
+    $('#hgGo').disabled = !!end; $('#hgAll').disabled = !!end; });
+  $('#hgGo').addEventListener('click', () => { round(); talk(); draw(); });
+  $('#hgAll').addEventListener('click', () => { while (!end) round(); talk(); draw(); });
+  $('#hgReset').addEventListener('click', reset);
+  [oI, sI].forEach(x => x.addEventListener('input', reset));
+  reset();
+}
+
+/* ---------- 2: cool the room ---------- */
+{ const box = $('#cr3');
+  const TURNS = [
+    ['"This is the third deadline your team has missed. Frankly, I don\'t think you care."', [
+      ['"That\'s not fair. Your team sends us the specs late every single time."', 20, 0, 'Blaming them, even with a point, makes them defend rather than listen.'],
+      ['"It sounds as if these delays have caused you real trouble. What happened on your side?"', -20, 1, 'Active listening: you acknowledge their experience before arguing about anything.'],
+      ['"Fine. We\'ll do whatever you want."', -5, 0, 'The heat drops a little, but you\'ve given in without solving anything. Soft, not principled.'],
+      ['"I\'m disappointed about the missed dates too, and I\'d like to understand why they keep slipping."', -15, 1, 'Speaking about yourself, not them: hard to dispute, and it invites a joint look at the problem.'] ]],
+    ['"What happened is my boss tore into me in front of the whole board."', [
+      ['"Well, that\'s hardly our problem."', 25, 0, 'Dismissing their feelings is the fastest way to make them louder.'],
+      ['"That sounds humiliating. No wonder you\'re angry."', -20, 1, 'Recognising and naming the emotion lets them let off steam without you reacting to it.'],
+      ['"Let\'s keep emotions out of this and stick to the facts."', 10, 0, 'Feelings don\'t go away when you rule them out of order. They come back as positions.'] ]],
+    ['"So what exactly are you going to do about it?"', [
+      ['"Could we look at the schedule together and find where it breaks down?"', -15, 1, 'Side by side against the problem, not face to face against each other.'],
+      ['"Nothing, until you apologise for what you said."', 25, 0, 'Making the relationship a bargaining chip mixes the people with the problem.'],
+      ['"I\'ll make my team work weekends."', -5, 0, 'A one-sided concession. It calms things for now but fixes nothing, and your team pays.'] ]],
+    ['"...All right. And, to be fair, maybe our specs could arrive earlier."', [
+      ['"Thank you. Let\'s write down both: specs two weeks earlier, and a check-in a week before each deadline."', -15, 1, 'A forward-looking plan that gives both sides a stake, and lets them save face.'],
+      ['"Finally! So you admit it was your fault."', 30, 0, 'Scoring a point costs you the progress you just made. Let them save face.'],
+      ['"Great, then it\'s settled that this was on you."', 20, 0, 'Looking back to assign blame, instead of forward to what you both want.'] ]] ];
+  let t, temp, prog, log;
+  function reset(){ t = 0; temp = 70; prog = 0; log = []; draw(); }
+  function gauge(){ const W = 360, H = 46, x0 = 0, bw = W; let g = '';
+    g += `<defs><linearGradient id="crGr" x1="0" x2="1"><stop offset="0" style="stop-color:var(--cool)"/><stop offset=".55" style="stop-color:var(--glow)"/><stop offset="1" style="stop-color:var(--bad)"/></linearGradient></defs>`;
+    g += `<rect x="${x0}" y="8" width="${bw}" height="14" rx="7" fill="url(#crGr)" style="opacity:.75"/>`;
+    const x = x0 + bw * temp / 100; g += `<path d="M${x} 26l-7 12h14z" ${F('text')}/>`;
+    g += TX(0, 44, 'calm', 'faint', 11) + TX(W, 44, 'boiling over', 'faint', 11, 'end');
+    return `<svg viewBox="0 0 ${W} ${H + 4}" role="img" aria-label="Temperature of the conversation: ${temp} out of 100">${g}</svg>`; }
+  function draw(){
+    const done = t >= TURNS.length;
+    let h = `<div class="cool-top"><div class="cool-g">${gauge()}</div><div class="cool-s"><span class="k">Temperature</span><b>${temp}</b><span class="k">Progress on the problem</span><b>${prog} of 4</b></div></div>`;
+    h += `<div class="cool-log">${log.map(([them, me, fb, good]) => `<p class="them">${them}</p><p class="me">${me}</p><p class="fb"><b style="color:var(--${good ? 'good' : 'bad'})">${good ? 'Principled.' : 'Careful.'}</b> ${fb}</p>`).join('')}</div>`;
+    if (!done){ const [line, opts] = TURNS[t];
+      h += `<p class="them now">${line}</p><div class="bins stack">${opts.map((o, i) => `<button class="bin" type="button" data-i="${i}"><b>${o[0]}</b></button>`).join('')}</div>`; }
+    else { h += `<div class="sort-card"><span class="k">How it went</span><span class="item">${temp <= 25 ? 'The room cooled and you solved the real problem.' : temp <= 55 ? 'You got through it, with some heat left over.' : 'It boiled over. Try again and separate the people from the problem.'}</span><span class="fb">Temperature ${temp}, progress ${prog} of 4.</span></div><div class="row"><button class="btn primary" id="crAgain" type="button">Try again</button></div>`; }
+    box.innerHTML = h;
+    box.querySelectorAll('[data-i]').forEach(b => b.addEventListener('click', () => { const o = TURNS[t][1][+b.dataset.i];
+      temp = clamp(temp + o[1], 0, 100); prog += o[2]; log.push([TURNS[t][0], o[0], o[3], o[2] > 0]); t++; draw();
+      const nb = box.querySelector('.bin, #crAgain'); if (nb) nb.focus({ preventScroll: true }); }));
+    const again = $('#crAgain'); if (again) again.addEventListener('click', reset); }
+  reset();
+}
+
+/* ---------- 3: ask why ---------- */
+{ const el = $('#aw4'), cb = $('#awCase'), ob = $('#awOpts'), say = $('#awSay');
+  const C = [
+    { n: 'The library window', a: ['Reader 1', 'Window open', 'Fresh air'], b: ['Reader 2', 'Window shut', 'No draught'],
+      o: [['Open it a crack', 35, 55], ['Open it halfway', 55, 35], ['Keep it shut', 0, 100], ['Open a window in the next room', 95, 95]] },
+    { n: 'The Sinai, 1978', a: ['Israel', 'Keep part of the Sinai', 'Security: no Egyptian tanks poised on its border'], b: ['Egypt', 'Every inch of the Sinai back', 'Sovereignty over land that has been Egyptian since the Pharaohs'],
+      o: [['Draw a line down the middle', 50, 25], ['Israel keeps it all', 80, 0], ['Return it all, no conditions', 15, 100], ['Return it all, with large areas demilitarised', 90, 95]] },
+    { n: 'A pay rise', a: ['You', 'A 15 percent rise', 'Feel valued, save for a deposit, keep growing'], b: ['Your manager', 'No more than 3 percent', 'Stay within this year\'s budget, keep pay fair across the team'],
+      o: [['Meet in the middle at 9 percent', 50, 35], ['3 percent and nothing else', 15, 90], ['5 percent now, a market-data review in six months, and a training budget', 85, 80]] } ];
+  let c = 0, why = false, pick = null;
+  cb.innerHTML = C.map((x, i) => `<button class="btn" type="button" data-c="${i}" aria-pressed="${i === c}">${x.n}</button>`).join('');
+  function opts(){ const x = C[c]; ob.innerHTML = x.o.map((o, i) => `<button class="btn" type="button" data-o="${i}" aria-pressed="${i === pick}"${why ? '' : ' disabled'}>${o[0]}</button>`).join('');
+    ob.querySelectorAll('[data-o]').forEach(b => b.addEventListener('click', () => { pick = +b.dataset.o; press([...ob.querySelectorAll('[data-o]')], b); draw(); })); }
+  const draw = onLayout(() => { const x = C[c], nw = NARROW(), W = nw ? 360 : 640, H = nw ? 186 : 236; vb(el, W, H); let g = '';
+    const col = (side, cx, cw, color, y0, v) => { let s = '';
+      s += TX(cx + cw / 2, y0 + 14, side[0], color, 13, 'middle', 'font-weight="600"');
+      s += `<rect x="${cx}" y="${y0 + 24}" width="${cw}" height="40" rx="10" ${FS('panel-2', color, 1.5)}/>` + TX(cx + 12, y0 + 38, 'Position', 'faint', 10.5) + wrap(cx + cw / 2, y0 + 54, side[1], nw ? 26 : 34, 14, 'text', 12.5);
+      s += `<rect x="${cx}" y="${y0 + 74}" width="${cw}" height="52" rx="10" ${why ? FS(color, color, 1.5, .12) : `style="fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:5 5"`}/>` + TX(cx + 12, y0 + 88, 'Interest', 'faint', 10.5);
+      s += why ? wrap(cx + cw / 2, y0 + 108, side[2], nw ? 26 : 36, 14, 'text', 12.5) : TX(cx + cw / 2, y0 + 110, '?', 'faint', 20, 'middle');
+      if (v != null){ const bw = cw - 0; s += `<rect x="${cx}" y="${y0 + 136}" width="${bw}" height="12" rx="6" ${F('panel-2')}/><rect x="${cx}" y="${y0 + 136}" width="${(bw * v / 100).toFixed(1)}" height="12" rx="6" ${F(color, .85)}/>` + TX(cx, y0 + 164, `interest met: ${v}%`, v >= 80 ? 'good' : 'muted', 11.5); }
+      return s; };
+    const o = pick != null ? x.o[pick] : null;
+    if (nw){ g += col(x.a, 0, 170, 'glow', 0, o && o[1]) + col(x.b, 190, 170, 'cool', 0, o && o[2]); }
+    else { g += col(x.a, 0, 270, 'glow', 10, o && o[1]) + col(x.b, 370, 270, 'cool', 10, o && o[2]);
+      g += TX(320, 58, 'vs', 'faint', 13, 'middle'); }
+    el.innerHTML = g;
+    say.innerHTML = !why ? 'Two positions that look impossible to reconcile. Press <b>Ask why</b> to see the interests behind them.' :
+      !o ? 'Now the interests are on the table. Try the options and watch how well each one meets them.' :
+      (o[1] >= 80 && o[2] >= 80 ? `<b>Both interests met.</b> This option only appears once you stop arguing over positions.` : o[1] + o[2] <= 110 ? `A compromise on positions: each side gets part of what it asked for and less of what it needs.` : `One side wins, the other loses. Expect resentment, or a deal that doesn't last.`); });
+  cb.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { c = +b.dataset.c; why = false; pick = null; press([...cb.querySelectorAll('[data-c]')], b); $('#awWhy').disabled = false; opts(); draw(); }));
+  $('#awWhy').addEventListener('click', () => { why = true; $('#awWhy').disabled = true; opts(); draw(); });
+  opts(); draw();
+}
+
+/* ---------- 4: dovetail the differences ---------- */
+{ const el = $('#dv5'), ctl = $('#dvCtl');
+  // value to you and to them, out of 10 in all; level 0 = all their way, 4 = all your way
+  const I = [['Salary', 3, 4, ['their offer', '', 'halfway', '', 'your ask']], ['Start date', 1, 3, ['in 2 weeks', '', 'in 5 weeks', '', 'in 8 weeks']], ['Remote days a week', 4, 2, ['0', '1', '2', '3', '4']], ['Training budget', 2, 1, ['none', '', 'half', '', 'full']]];
+  let lv = [2, 2, 2, 2];
+  const score = l => [l.reduce((s, v, i) => s + I[i][1] * v / 4, 0) * 10, l.reduce((s, v, i) => s + I[i][2] * (4 - v) / 4, 0) * 10];
+  const ALL = []; for (let a = 0; a < 5; a++) for (let b = 0; b < 5; b++) for (let c = 0; c < 5; c++) for (let d = 0; d < 5; d++) ALL.push(score([a, b, c, d]));
+  ctl.innerHTML = I.map(([n], i) => `<div class="ctl"><label for="dvI${i}"><span>${n}</span><output id="odvI${i}"></output></label><input type="range" id="dvI${i}" min="0" max="4" value="${lv[i]}"></div>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 300 : 280, L = 46, R = W - 14, T = 14, B = H - 38; vb(el, W, H);
+    const xs = v => L + (R - L) * v / 100, ys = v => B - (B - T) * v / 100; let g = '';
+    [0, 25, 50, 75, 100].forEach(v => { g += `<line x1="${xs(v)}" y1="${T}" x2="${xs(v)}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${ys(v)}" x2="${R}" y2="${ys(v)}" ${S('line', 1)}/>` + TX(xs(v), B + 16, v, 'faint', 11, 'middle') + TX(L - 6, ys(v) + 4, v, 'faint', 11, 'end'); });
+    g += TX((L + R) / 2, H - 4, 'worth to you →', 'glow', 12, 'middle') + `<text x="12" y="${(T + B) / 2}" font-size="12" text-anchor="middle" transform="rotate(-90 12 ${(T + B) / 2})" ${F('cool')}>worth to them →</text>`;
+    g += ALL.map(([a, b]) => `<circle cx="${xs(a).toFixed(1)}" cy="${ys(b).toFixed(1)}" r="2" ${F('faint', .35)}/>`).join('');
+    const sp = score([2, 2, 2, 2]); g += `<circle cx="${xs(sp[0])}" cy="${ys(sp[1])}" r="6" ${S('muted', 2)}/>` + TX(xs(sp[0]) + 10, ys(sp[1]) + 16, 'split everything', 'muted', 11.5);
+    const [y, t] = score(lv); g += `<circle cx="${xs(y)}" cy="${ys(t)}" r="8" ${FS('glow', 'ink', 2)}/>` + TX(xs(y) + (y > 70 ? -12 : 12), ys(t) - 10, 'your package', 'glow', 12, y > 70 ? 'end' : 'start', 'font-weight="600"');
+    el.innerHTML = g;
+    I.forEach((x, i) => out('dvI' + i, x[3][lv[i]] || (lv[i] < 2 ? 'mostly theirs' : 'mostly yours')));
+    $('#dvY').textContent = Math.round(y); $('#dvT').textContent = Math.round(t);
+    const better = ALL.some(([a, b]) => a >= y + 1 && b >= t + 1);
+    $('#dvSay').textContent = y + t >= 125 && !better ? 'Dovetailed: hard to make one side better off without the other losing.' : better ? 'There are packages up and to the right: better for both of you.' : 'Efficient, but lopsided. Is it fair?'; });
+  I.forEach((_, i) => $('#dvI' + i).addEventListener('input', e => { lv[i] = +e.target.value; draw(); }));
+  const set = l => { lv = l; l.forEach((v, i) => $('#dvI' + i).value = v); draw(); };
+  $('#dvSplit').addEventListener('click', () => set([2, 2, 2, 2]));
+  $('#dvBest').addEventListener('click', () => set([1, 0, 4, 4]));
+  draw();
+}
+
+/* ---------- 5: one cuts, the other chooses ---------- */
+{ const el = $('#cc6'), cI = $('#ccCut'); let chosen = false;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 190, c = +cI.value, cw = nw ? 320 : 460, x0 = (W - cw) / 2, y0 = 40, ch = 90; vb(el, W, H);
+    const cx = x0 + cw * c / 100, theirs = c >= 50 ? 'L' : 'R'; let g = '';
+    const piece = (x, w, side) => { const isT = chosen && side === theirs, dy = isT ? -22 : 0, dx = isT ? (side === 'L' ? -10 : 10) : 0;
+      return `<g transform="translate(${dx} ${dy})"><rect x="${x}" y="${y0}" width="${w}" height="${ch}" rx="10" ${FS(isT ? 'cool' : 'glow', 'ink', 2, isT ? .55 : .8)}/><rect x="${x}" y="${y0}" width="${w}" height="18" rx="9" ${F('text', .25)}/>` +
+        TX(x + w / 2, y0 + ch / 2 + 14, Math.round(side === 'L' ? c : 100 - c) + '%', isT ? 'text' : 'on-glow', 18, 'middle', 'font-weight="600"') +
+        (chosen ? TX(x + w / 2, y0 + ch + 22 - dy, isT ? 'they take this' : 'left for you', isT ? 'cool' : 'glow', 12, 'middle') : '') + '</g>'; };
+    g += piece(x0, cx - x0, 'L') + piece(cx, x0 + cw - cx, 'R');
+    if (!chosen) g += `<line x1="${cx}" y1="${y0 - 14}" x2="${cx}" y2="${y0 + ch + 14}" ${S('text', 2, ';stroke-dasharray:5 4')}/>` + TX(cx, y0 - 20, 'your cut', 'text', 12, 'middle');
+    el.innerHTML = g; out('ccCut', c + ' / ' + (100 - c));
+    const mine = Math.min(c, 100 - c);
+    $('#ccYou').textContent = chosen ? mine + '%' : '?'; $('#ccThem').textContent = chosen ? (100 - mine) + '%' : '?';
+    $('#ccSay').textContent = !chosen ? 'Cut, then let them pick.' : mine >= 49 ? 'An even cut: the best you could do. Fairness was in your own interest.' : `They took the bigger piece. Any uneven cut only hurts the cutter.`; });
+  $('#ccGo').addEventListener('click', () => { chosen = true; draw(); });
+  $('#ccReset').addEventListener('click', () => { chosen = false; draw(); });
+  cI.addEventListener('input', () => { chosen = false; draw(); });
+  draw();
+}
+
+/* ---------- 6: know your walk-away ---------- */
+{ const el = $('#bt7'), ctl = $('#btCtl'), oI = $('#btOffer');
+  const A = [['btCur', 'Stay in your current job', 40, 60, 48], ['btOth', 'Another offer (may fall through)', 50, 75, 62], ['btP', 'Chance that offer comes through', 0, 100, 40], ['btFr', 'Go freelance', 30, 60, 44]];
+  ctl.innerHTML = A.map(([id, n, a, b, v]) => `<div class="ctl"><label for="${id}"><span>${n}</span><output id="o${id}"></output></label><input type="range" id="${id}" min="${a}" max="${b}" value="${v}"></div>`).join('');
+  const val = id => +$('#' + id).value;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 240, R = W - 50, rowH = nw ? 46 : 38, lo = 30, hi = 80; const cur = val('btCur'), p = val('btP') / 100, oth = p * val('btOth') + (1 - p) * cur, fr = val('btFr');
+    const alts = [['Stay where you are', cur], ['Other offer, weighed by its chance', oth], ['Go freelance', fr]], best = Math.max(...alts.map(a => a[1])), bi = alts.findIndex(a => a[1] === best), offer = +oI.value;
+    const H = alts.length * rowH + 70; vb(el, W, H); const xs = v => L + (R - L) * (v - lo) / (hi - lo); let g = '';
+    [30, 40, 50, 60, 70, 80].forEach(v => { g += `<line x1="${xs(v)}" y1="4" x2="${xs(v)}" y2="${H - 44}" ${S('line', 1)}/>` + TX(xs(v), H - 30, kpay(v), 'faint', 11, 'middle'); });
+    alts.forEach(([n, v], i) => { const y = 8 + i * rowH, by = nw ? y + 14 : y + 4, on = i === bi;
+      g += TX(0, nw ? y + 8 : y + 19, n, on ? 'glow' : 'muted', 12.5, 'start', on ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${by}" width="${Math.max(2, xs(v) - L).toFixed(1)}" height="18" rx="4" ${F(on ? 'glow' : 'faint', on ? .85 : .4)}/>` + TX(xs(v) + 6, by + 14, kpay(v) + (on ? ' · BATNA' : ''), on ? 'glow' : 'muted', 12, 'start', on ? 'font-weight="600"' : ''); });
+    const ox = xs(offer), tw = xs(best + 3);
+    g += `<rect x="${xs(best)}" y="4" width="${(tw - xs(best)).toFixed(1)}" height="${H - 48}" ${F('glow', .08)}/>`;
+    g += `<line x1="${ox}" y1="0" x2="${ox}" y2="${H - 44}" ${S('cool', 3)}/>` + TX(ox, H - 10, 'offer ' + kpay(offer), 'cool', 12.5, 'middle', 'font-weight="600"');
+    el.innerHTML = g;
+    out('btCur', kpay(cur)); out('btOth', kpay(val('btOth'))); out('btP', val('btP') + '%'); out('btFr', kpay(fr)); out('btOffer', kpay(offer));
+    $('#btB').textContent = kpay(best); const d = offer - best; $('#btD').textContent = (d >= 0 ? '+' : '') + kpay(d).replace('$-', '-$');
+    $('#btSay').innerHTML = d < 0 ? `<b style="color:var(--bad)">Walk away</b> unless it improves. Your alternative is better.` : d < 3 ? `<b>Trip wire.</b> Only just better than your BATNA. Pause and think before saying yes.` : `<b style="color:var(--good)">Worth taking seriously.</b> It beats what you'd do without a deal.`; });
+  [...A.map(a => a[0]), 'btOffer'].forEach(id => $('#' + id).addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- 7: don't push back (jujitsu) ---------- */
+sorter('#sort8', '#tally8', null, [
+  { t: '"That proposal is ridiculous."', q: true, bins: [{ id: 'j', label: '"What\'s wrong with it, from where you sit? How would you change it?"' }, { id: 'p', label: '"It\'s a lot less ridiculous than yours."' }, { id: 'd', label: '"Let me explain once more why it\'s right."' }], stack: true, a: 'j', w: 'Inviting criticism turns their attack into advice you can use.' },
+  { t: '"We want a 40 percent discount, and that\'s that."', q: true, bins: [{ id: 'p', label: '"Out of the question."' }, { id: 'j', label: '"Help me understand what makes 40 percent the right figure for you."' }, { id: 'd', label: '"Fine, 40 percent."' }], stack: true, a: 'j', w: 'Don\'t attack their position; look behind it for the interests it serves.' },
+  { t: '"This mess is entirely your fault."', q: true, bins: [{ id: 'd', label: '"It certainly isn\'t."' }, { id: 'p', label: '"Look who\'s talking."' }, { id: 'j', label: '"Something clearly went wrong. Let\'s work out what, so it doesn\'t happen again."' }], stack: true, a: 'j', w: 'Recast an attack on you as an attack on the problem, and look forward.' },
+  { t: 'They name a price far above anything you\'ve seen in the market.', q: true, bins: [{ id: 'j', label: 'Say nothing for a few seconds, then ask how they reached it.' }, { id: 'p', label: 'Counter with something just as extreme.' }, { id: 'd', label: 'Split the difference straight away.' }], stack: true, a: 'j', w: 'Silence and questions: an unreasonable figure sounds weaker after a pause, and a question asks for a principle.' },
+  { t: '"I don\'t care what you think. Take it or leave it."', q: true, bins: [{ id: 'p', label: '"Then I\'ll leave it, and you\'ll regret it."' }, { id: 'j', label: '"I\'d like to understand your concern. If we can\'t agree, what would you do instead?"' }, { id: 'd', label: '"OK, I\'ll take it."' }], stack: true, a: 'j', w: 'Neither defy nor give in. Ask about their interests and their alternative.' },
+  { t: '"Your figures are wrong."', q: true, bins: [{ id: 'j', label: '"Please correct me if I\'m wrong. Which ones, and what do yours show?"' }, { id: 'd', label: '"I checked them three times."' }, { id: 'p', label: '"Yours are the ones that are wrong."' }], stack: true, a: 'j', w: 'Frank Turnbull\'s opening line: please correct me if I\'m wrong. Asking to be corrected makes it a shared search for the facts.' },
+]);
+
+/* ---------- 8: name the trick ---------- */
+sorter('#sort9', '#tally9', [{ id: 'dec', label: 'Deliberate deception', d: 'Phoney facts, unclear authority, dubious intentions' }, { id: 'psy', label: 'Psychological warfare', d: 'Stress, personal attacks, good cop bad cop, threats' }, { id: 'pos', label: 'Positional pressure', d: 'Refusals, extreme or escalating demands, lock-ins, delay' }], [
+  { t: 'After you agree a price, they say their manager must approve it and will want 10 percent more.', q: true, a: 'dec', w: 'Ambiguous authority. Ask at the start who can decide, and reserve the right to reconsider too.' },
+  { t: 'The meeting room is overheated, your chair faces the sun and the door keeps opening.', q: true, a: 'psy', w: 'A stressful situation. Name it and suggest a change of room, a break or a different time.' },
+  { t: 'One of them shouts and storms out; the other smiles and says, "I can probably calm him down if you meet me halfway."', q: true, a: 'psy', w: 'Good guy, bad guy. Ask, without accusing, whether that\'s what\'s happening, and treat the "nice" offer on its merits.' },
+  { t: 'Each time you concede a point, they reopen one you thought was settled.', q: true, a: 'pos', w: 'Escalating demands. Point it out, list all the open issues together, and consider a break.' },
+  { t: 'The seller assures you the car has never been in an accident. The history report says otherwise.', q: true, a: 'dec', w: 'Phoney facts. Verify claims independently, without calling anyone a liar.' },
+  { t: '"I\'ve told the press I won\'t accept a penny less, so my hands are tied."', q: true, a: 'pos', w: 'A lock-in tactic: making a public commitment so they can\'t move. Don\'t reward it; ask about the principle behind the figure.' },
+  { t: 'They comment on your age and imply you\'re out of your depth.', q: true, a: 'psy', w: 'A personal attack meant to unsettle you. Recognise it, and it loses most of its force.' },
+  { t: 'They delay replying for weeks until your deadline is only days away.', q: true, a: 'pos', w: 'Calculated delay. Make the delay explicit, and consider making your offer time-limited for a fair reason.' },
+]);
+
+/* ---------- 9: soft, hard or principled ---------- */
+sorter('#sort10', '#tally10', [{ id: 's', label: 'Soft' }, { id: 'h', label: 'Hard' }, { id: 'p', label: 'Principled' }], [
+  { t: 'The participants are problem-solvers.', q: true, a: 'p', w: 'Soft sees friends, hard sees adversaries, principled sees problem-solvers.' },
+  { t: 'Demand concessions as a condition of the relationship.', q: true, a: 'h', w: 'The hard negotiator makes the relationship a bargaining chip.' },
+  { t: 'Trust the other side.', q: true, a: 's', w: 'Soft trusts, hard distrusts, principled proceeds independent of trust.' },
+  { t: 'Focus on interests, not positions.', q: true, a: 'p', w: 'Soft changes position easily and hard digs in; principled looks behind positions.' },
+  { t: 'Mislead as to your bottom line.', q: true, a: 'h', w: 'Soft discloses its bottom line; principled avoids having one and relies on a BATNA.' },
+  { t: 'Make offers.', q: true, a: 's', w: 'Soft makes offers, hard makes threats, principled explores interests.' },
+  { t: 'Invent options for mutual gain.', q: true, a: 'p', w: 'Soft accepts one-sided losses, hard demands one-sided gains.' },
+  { t: 'Yield to pressure.', q: true, a: 's', w: 'Soft yields to pressure, hard applies it, principled yields to principle, not pressure.' },
+  { t: 'Try to win a contest of will.', q: true, a: 'h', w: 'Principled tries to reach a result based on standards independent of will.' },
+]);
+
+/* ---------- 10: six sources of power ---------- */
+{ const el = $('#pw11'), ctl = $('#pwCtl');
+  const P = ['Skill and knowledge', 'Relationship', 'Good alternative', 'Elegant solution', 'Legitimacy', 'Commitment'];
+  const TIP = ['Prepare: learn about the people, the issues and how to negotiate.', 'Invest in a working relationship before you need it.', 'Develop your BATNA so walking away is a real choice.', 'Invent an option that meets both sides\' interests better than anything else on the table.', 'Ground your case in fair standards that are hard to dismiss.', 'Make a clear, well-crafted offer, saying what you will do, not only what you won\'t.'];
+  const T0 = [5, 4, 7, 3, 4, 6]; let T = [...T0], Y = [4, 5, 3, 3, 5, 3];
+  ctl.innerHTML = P.map((n, i) => `<div class="ctl"><label for="pw${i}"><span>${n}</span><output id="opw${i}"></output></label><input type="range" id="pw${i}" min="0" max="10" value="${Y[i]}"></div>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 330 : 320, cx = W / 2, cy = H / 2 + 4, R = nw ? 92 : 118; vb(el, W, H); let g = '';
+    const pt = (i, v) => { const a = -Math.PI / 2 + i * Math.PI / 3; return [cx + R * v / 10 * Math.cos(a), cy + R * v / 10 * Math.sin(a)]; };
+    [2.5, 5, 7.5, 10].forEach(v => { g += `<polygon points="${P.map((_, i) => pt(i, v).map(n => n.toFixed(1)).join(',')).join(' ')}" ${S('line', 1)}/>`; });
+    P.forEach((n, i) => { const [x, y] = pt(i, 10), [lx, ly] = pt(i, nw ? 12.6 : 12.2); g += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" ${S('line', 1)}/>`;
+      const anc = Math.abs(lx - cx) < 4 ? 'middle' : lx > cx ? 'start' : 'end'; g += nw ? wrap(lx, ly + 4, n, 12, 13, 'muted', 11.5, anc) : TX(lx, ly + 4, n, 'muted', 12.5, anc); });
+    const poly = (v, c, o) => `<polygon points="${v.map((x, i) => pt(i, x).map(n => n.toFixed(1)).join(',')).join(' ')}" ${FS(c, c, 2, o)}/>`;
+    g += poly(T, 'cool', .14) + poly(Y, 'glow', .22);
+    g += TX(nw ? 0 : 10, 16, '■ you', 'glow', 12.5) + TX(nw ? 60 : 70, 16, '■ them', 'cool', 12.5);
+    el.innerHTML = g; P.forEach((_, i) => out('pw' + i, Y[i]));
+    const ys = Y.reduce((a, b) => a + b, 0), ts = T.reduce((a, b) => a + b, 0); $('#pwY').textContent = ys + ' / 60'; $('#pwT').textContent = ts + ' / 60';
+    const lo = Y.indexOf(Math.min(...Y)); $('#pwSay').textContent = `${P[lo]}: ${TIP[lo]}`; });
+  P.forEach((_, i) => $('#pw' + i).addEventListener('input', e => { Y[i] = +e.target.value; draw(); }));
+  $('#pwRich').addEventListener('click', () => { T = T0.map((v, i) => i === 2 ? Math.min(10, v + 2) : i === 5 ? Math.min(10, v + 1) : v); $('#pwRich').disabled = true; draw(); });
+  $('#pwReset').addEventListener('click', () => { T = [...T0]; Y = [4, 5, 3, 3, 5, 3]; Y.forEach((v, i) => $('#pw' + i).value = v); $('#pwRich').disabled = false; draw(); });
+  draw();
+}
+
+/* ---------- afterword: prep sheet ---------- */
+{ const F6 = ['ppWhat', 'ppPeople', 'ppMine', 'ppTheirs', 'ppOpts', 'ppCrit', 'ppBatna'], LBL = { ppPeople: 'People', ppMine: 'My interests', ppTheirs: 'Their interests', ppOpts: 'Options', ppCrit: 'Fair standards', ppBatna: 'My BATNA' };
+  let sheets = store.get('gy-prep', []), cur = null; const list = $('#ppList'), msg = $('#ppMsg');
+  const save = () => store.set('gy-prep', sheets);
+  const clear = () => { F6.forEach(id => $('#' + id).value = ''); cur = null; };
+  function draw(){
+    if (!sheets.length){ list.innerHTML = '<span class="k">Your sheets</span><p class="tip">Nothing saved yet. Fill in what you can before your next negotiation, even a small one, and save it here.</p>'; return; }
+    list.innerHTML = `<span class="k">Your sheets · ${sheets.length}</span>` + sheets.map(s => { const filled = F6.slice(1).filter(id => s[id]).length;
+      return `<div class="bet"><div class="bet-h"><b>${esc(s.ppWhat || 'Untitled')}</b><span class="mono">${filled} of 6 filled · ${s.date}</span><button class="rm" type="button" data-rm="${s.id}" aria-label="Delete this sheet">×</button></div>${s.ppBatna ? `<p><b>BATNA:</b> ${esc(s.ppBatna)}</p>` : '<p class="tip">No BATNA yet. Work out what you\'ll do if there\'s no deal.</p>'}<div class="row"><button class="btn" type="button" data-ld="${s.id}">Open</button></div></div>`; }).join('');
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { sheets = sheets.filter(x => x.id !== b.dataset.rm); if (cur === b.dataset.rm) cur = null; save(); draw(); }));
+    list.querySelectorAll('[data-ld]').forEach(b => b.addEventListener('click', () => { const s = sheets.find(x => x.id === b.dataset.ld); F6.forEach(id => $('#' + id).value = s[id] || ''); cur = s.id; msg.textContent = 'Opened. Edit and save again.'; $('#ppWhat').focus(); }));
+  }
+  $('#ppSave').addEventListener('click', () => { const s = {}; F6.forEach(id => s[id] = $('#' + id).value.trim());
+    if (!s.ppWhat){ msg.textContent = 'Say what you\'re negotiating first.'; $('#ppWhat').focus(); return; }
+    s.date = new Date().toISOString().slice(0, 10);
+    if (cur){ const i = sheets.findIndex(x => x.id === cur); if (i >= 0){ s.id = cur; sheets[i] = s; } else { s.id = Date.now().toString(36); sheets.unshift(s); cur = s.id; } }
+    else { s.id = Date.now().toString(36); sheets.unshift(s); cur = s.id; }
+    save(); msg.textContent = s.ppBatna ? 'Saved.' : 'Saved. Don\'t forget your BATNA.'; draw(); });
+  $('#ppNew').addEventListener('click', () => { clear(); msg.textContent = 'Blank sheet.'; $('#ppWhat').focus(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>

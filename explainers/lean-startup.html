@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Lean Startup, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a whiteboard in a startup office. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, try it this week, plain words, quick check), grouped into the book's three parts, vision, steer and accelerate, plus the epilogue.
+   Dark-first: night-shift navy with a mint "go" accent and a cool blue second series; light mode is a white whiteboard. */
+:root{
+  color-scheme: dark;
+  --ink:#0F1218;--panel:#161B24;--panel-2:#1F2633;--line:#2D3646;--text:#EEF1F6;--muted:#A9B2C2;--faint:#7A8496;
+  --glow:#4FD1A5;--glow-soft:rgba(79,209,165,.1);--hl:rgba(79,209,165,.24);--cool:#8AB4FF;--cool-soft:rgba(138,180,255,.1);
+  --good:#9BE07A;--good-soft:rgba(155,224,122,.1);--bad:#FF7A70;--bad-soft:rgba(255,122,112,.12);
+  --soft:#D3D9E4;--deep:#0A0D12;--toc-bg:rgba(22,27,36,.74);--glow-line:rgba(79,209,165,.36);--cool-line:rgba(138,180,255,.3);--on-glow:#04281C;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F3F5F8;--panel:#FFFFFF;--panel-2:#E8ECF2;--line:#D3D9E2;--text:#141A24;--muted:#535D6C;--faint:#808A99;
+  --glow:#0B7A57;--glow-soft:rgba(11,122,87,.06);--hl:#C9F0E0;--cool:#2858B0;--cool-soft:rgba(40,88,176,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8362A;--bad-soft:rgba(184,54,42,.07);
+  --soft:#27303D;--deep:#FAFBFC;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(11,122,87,.28);--cool-line:rgba(40,88,176,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F3F5F8;--panel:#FFFFFF;--panel-2:#E8ECF2;--line:#D3D9E2;--text:#141A24;--muted:#535D6C;--faint:#808A99;
+  --glow:#0B7A57;--glow-soft:rgba(11,122,87,.06);--hl:#C9F0E0;--cool:#2858B0;--cool-soft:rgba(40,88,176,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B8362A;--bad-soft:rgba(184,54,42,.07);
+  --soft:#27303D;--deep:#FAFBFC;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(11,122,87,.28);--cool-line:rgba(40,88,176,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Lean Startup additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:italic;color:var(--glow)}
+.loop{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.loop-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.loop-top .moves{gap:6px}
+.loop-top .btn{padding:5px 11px}
+.loop-stage{padding:10px 10px 4px}
+.loop-stage svg{display:block;width:100%;height:auto}
+.loop .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.loop .cap b{color:var(--glow);font-weight:600}
+.fw{display:grid;gap:10px;padding:18px}
+.fw-step{display:grid;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.fw-step .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.fw-step p{font-size:15px;color:var(--text)}
+.fw-step.root{border-color:var(--glow-line);background:var(--glow-soft)}
+.fw-step .fix{font-size:14px;color:var(--soft)}
+.fw-step .fix b{color:var(--glow);font-weight:600}
+.fw-sum{font-size:14px;color:var(--muted)}
+.xb{display:grid;gap:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.xb-h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.xb-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15}
+.xb p{font-size:14.5px;color:var(--soft)}
+.xb p span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-right:6px}
+.xb .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 6px;border-radius:6px}
+.xb .rm:hover{color:var(--bad)}
+.tag{font-family:var(--f-mono);font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--good);border-color:var(--good)}
+.tag.no{color:var(--cool);border-color:var(--cool)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .fw{padding:14px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Eric Ries's book</div>
+    <h1><em>The Lean Startup</em>,<br>Explained</h1>
+    <p class="lede">Eric Ries co-founded the virtual-world company IMVU and learned, the expensive way, that most new products fail not because they're built badly but because nobody wants them. <b>The Lean Startup</b> borrows ideas from Toyota's factories to offer a different method: treat every plan as a set of guesses, test the riskiest ones with a minimum viable product, measure honestly, and decide on purpose whether to pivot or persevere. This guide covers the introduction, all twelve chapters across the book's three parts and the epilogue, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Don't ask whether it <em>can</em> be built. Find out, as cheaply and quickly as you can, whether it <em>should</em> be.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you stuck on?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="loop" style="margin:0" aria-label="The Build-Measure-Learn loop and how many turns your runway buys">
+        <div class="loop-top"><span>Weeks per turn of the loop</span><div class="moves" id="lpWk"></div></div>
+        <div class="loop-stage"><svg id="lpSvg" viewBox="0 0 400 250" role="img" aria-label="Ideas become a product, the product produces data, data becomes learning"></svg></div>
+        <div class="row" style="padding:0 16px 12px"><button class="btn primary" id="lpGo" type="button">Run a year</button><button class="btn" id="lpReset" type="button">Reset</button></div>
+        <div class="cap" id="lpCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapters 1 to 4</span><span class="q">Vision</span><span class="d">What a startup is, and why learning is its unit of progress</span></a>
+      <a href="#part2"><span class="n">Chapters 5 to 8</span><span class="q">Steer</span><span class="d">Leaps of faith, the MVP, innovation accounting and the pivot</span></a>
+      <a href="#part3"><span class="n">Chapters 9 to 12</span><span class="q">Accelerate</span><span class="d">Small batches, engines of growth, five whys and the sandbox</span></a>
+      <a href="#part4"><span class="n">Chapters 13 and 14</span><span class="q">Waste Not</span><span class="d">From scientific management to building only what's wanted</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2011</span>
+      <span><b>Author</b> Eric Ries, entrepreneur and co-founder of IMVU</span>
+      <span><b>Full title</b> The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 14 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== VISION ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · vision</span>
+      <h2>Vision</h2>
+      <p>Ries opens by redefining what a startup is and what counts as progress inside one. A startup is not a smaller version of a big company, and it is not a free-for-all either. It is an experiment, and it needs a kind of management built for not knowing the answer.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The point of a startup is to learn what customers really want, as fast and as cheaply as possible, and to prove that learning with real data.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why most startups fail, and what to do about it</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most startups don't fail because the product is badly built. They fail because they build something nobody wants. Ries offers a method for finding out early, built on five principles.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two bad stories.</b> Startups tend to fall into one of two traps. Some write a detailed plan and follow it faithfully, as if the future were known. Others reject planning altogether and just do it, trusting instinct. Neither works when nobody yet knows who the customer is or what they will pay for.</span></li>
+          <li><span><b>Entrepreneurs are everywhere.</b> You don't need a garage. Anyone building something new under real uncertainty is an entrepreneur, whether in a two-person company, a corporate department, a charity or a government agency.</span></li>
+          <li><span><b>Entrepreneurship is management.</b> A startup is an institution, not just a product, so it needs management. But it needs a kind suited to extreme uncertainty, not the kind built for running a known business.</span></li>
+          <li><span><b>Validated learning.</b> Startups exist to learn how to build a sustainable business. That learning can be tested by running experiments, so progress can be measured.</span></li>
+          <li><span><b>Build, measure, learn.</b> The core activity is turning ideas into products, measuring how customers respond, and learning whether to change course or carry on. All the processes in the book exist to speed up that loop.</span></li>
+          <li><span><b>Innovation accounting.</b> To hold innovators to account, you need a new kind of accounting: how to measure progress, set milestones and decide what to work on next when the usual numbers like revenue are still tiny.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries had been through failure before IMVU. As a young programmer he co-founded a dot-com company that ran out of road, and he later worked at a startup that spent years building a virtual world in secret before launch. At IMVU, which he co-founded in 2004 and where he was chief technology officer, the team tried the opposite: ship early, watch customers, change quickly. The lessons from that company, and from applying ideas from Toyota's factories to software, became the method in this book.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: plan or experiment?</div><div class="hint">Slide from a known business to a brand-new one</div></div>
+        <div class="stage"><svg id="pu1" role="img" aria-label="How useful a detailed plan and fast experiments are as uncertainty grows"></svg></div><div class="lab-ctl"><div class="ctl"><label for="puU"><span>How uncertain is it?</span><output id="opuU"></output></label><input type="range" id="puU" min="0" max="100" value="20"></div><div class="row" id="puEx"></div></div><div class="stats"><div class="stat"><span class="k">A detailed plan</span><span class="s" id="puPlan"></span></div><div class="stat"><span class="k">Fast experiments</span><span class="s" id="puExp"></span></div></div><p class="callout">The curves are a picture of the argument, not measured data. <b>Planning works when you can forecast. When you can't, the plan is only a list of guesses.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Name one project you're on where nobody yet knows who the customer is. Write down how you'd find out in two weeks instead of six months.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>If the problem and the solution are both known, plan it and run it well. If either is unknown, your real job is to learn which guesses are wrong, and you should organise everything around learning that quickly.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Start →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · A startup needs a steering wheel</div>
+        <h2>Start</h2>
+        <div class="short"><span class="lbl">In short</span><p>Ries named the method after lean manufacturing at Toyota. Instead of a rocket launch plan that has to be right from the start, a startup should steer like a car: adjusting all the time based on what it sees.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Lean manufacturing.</b> Toyota's production system, built up by Taiichi Ohno and Shigeo Shingo, changed how things are made: small batches, just-in-time stock, using the knowledge of every worker, and treating anything that doesn't add value for the customer as waste.</span></li>
+          <li><span><b>A new kind of progress.</b> In a factory, progress means making high-quality physical goods. In a startup, the unit of progress is learning: finding out what is true about customers and the business.</span></li>
+          <li><span><b>Rocket or car.</b> Many startups plan like a rocket launch. Every assumption is set in advance, so a small error at the start becomes a huge miss later. A car has a steering wheel instead: the driver keeps a destination in mind and corrects all the time.</span></li>
+          <li><span><b>Vision, strategy, product.</b> The vision is where you want to go and rarely changes. The strategy, meaning the business model and the route, can change; when it does, that's a pivot. The product changes all the time as you optimise it.</span></li>
+          <li><span><b>Why plans fail here.</b> General management grew up in a world of stable markets and long track records where forecasting works. A startup has no history to forecast from, so forecasts look precise and are mostly guesswork.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries describes walking into many companies that had followed the textbook: a solid plan, a good team, a launch on schedule, and then silence. Customers didn't come, and the plan had no instructions for what to do next. The car analogy is his answer. A driver heading somewhere new doesn't calculate the whole trip at the start; she looks out of the windscreen and turns the wheel every few seconds. For a startup, the windscreen is customer data and the wheel is the Build-Measure-Learn loop.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: rocket or car</div><div class="hint">Launch both and watch the target move</div></div>
+        <div class="stage"><svg id="rc2" role="img" aria-label="A rocket on a fixed course and a car that steers toward a drifting target"></svg></div><div class="lab-ctl"><div class="ctl"><label for="rcD"><span>How much the market shifts</span><output id="orcD"></output></label><input type="range" id="rcD" min="0" max="100" value="50"></div><div class="row"><button class="btn primary" id="rcGo" type="button">Launch both</button><button class="btn" id="rcNew" type="button">New market</button></div></div><div class="stats"><div class="stat"><span class="k">Rocket misses by</span><span class="v" id="rcR">–</span></div><div class="stat"><span class="k">Car misses by</span><span class="v glow" id="rcC">–</span></div></div><p class="callout">The rocket aims at where customers seemed to be on day one. The car checks every month and turns a little. <b>Neither knows where the target will end up; only one looks.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>For one plan you're following, list the three assumptions it depends on most. Put a date in the diary to check each one against reality.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Keep the destination fixed and the route flexible. Check where you really are often, and correct a little each time, rather than betting everything on a plan drawn up before you knew anything.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Define →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Who, exactly, is an entrepreneur?</div>
+        <h2>Define</h2>
+        <div class="short"><span class="lbl">In short</span><p>Ries defines a startup as a human institution designed to create a new product or service under conditions of extreme uncertainty. Nothing in that definition says how big, how old or what sector.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Human institution.</b> A startup is more than a product or an idea. It is people, processes and culture: hiring, coordinating, building a team that can do something new.</span></li>
+          <li><span><b>New product or service.</b> The word is used broadly: any source of value for customers, including a new business model, a new way of reaching people or a new use for an old technology.</span></li>
+          <li><span><b>Extreme uncertainty.</b> This is the key part. A new restaurant that copies a proven model is a small business, not a startup in this sense. If you can forecast the market, you're not in startup territory.</span></li>
+          <li><span><b>Startups inside big companies.</b> Many of the book's entrepreneurs work at large companies. They need the same methods as founders, plus protection from the parent organisation's usual rules.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries tells the story of SnapTax, a small team inside Intuit, the large company behind TurboTax and QuickBooks. The idea was to let people photograph their tax form on a phone and file a simple return in minutes. The team was set up to work like a startup: a small group with the freedom to experiment directly with customers, rather than going through Intuit's usual long planning cycle. Ries also describes how Intuit's founder, Scott Cook, pushed the whole company toward rapid experiments, to the point where the TurboTax team was running hundreds of tests in a single tax season.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: is this a startup?</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Check whether your own work is "extreme uncertainty" or a known model. If it's known, borrow a proven playbook. If it isn't, plan for experiments.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Being a startup is about uncertainty, not size or age. A team in a giant firm, a charity or a government office can be one. A new branch of a known chain is not.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Learn →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Validated learning</div>
+        <h2>Learn</h2>
+        <div class="short"><span class="lbl">In short</span><p>At IMVU, Ries spent months building features customers turned out not to want. The work that mattered was what the team learned. Validated learning means proving what you've learned with real customer behaviour.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The add-on nobody wanted.</b> IMVU began as a 3D avatar add-on for existing instant messaging networks, so people could bring their current friends. The team spent months making it work across several networks.</span></li>
+          <li><span><b>Customers had other ideas.</b> In sessions with real users, people didn't want to invite their friends into something unproven. They were happy to use it with strangers. And they were happy to download a new, standalone messenger. The plan's central assumption was backwards.</span></li>
+          <li><span><b>"At least we learned something" isn't enough.</b> Every failed project claims lessons. Validated learning is different: it is backed by data, shown in improved numbers on the things that matter, rather than in a story told afterwards.</span></li>
+          <li><span><b>Which work is waste?</b> Ries asks a hard question of his own team: if the goal was to learn what customers wanted, could they have learned it with far less effort? Mostly, yes. The rest of the work, however well done, didn't create value.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries tells the story against himself. He had written much of the code that let IMVU's avatars talk across other messaging networks, and he was proud of it. When customers made it clear that this was not what they wanted, the team switched to a standalone product, and most of that code was thrown away. What bothered him was not the lost code but the realisation that a few cheap experiments early on would have revealed the same thing. After the switch, IMVU's numbers began to improve, and that improvement was the evidence the learning was real.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: when would you have found out?</div><div class="hint">Move the first customer test earlier</div></div>
+        <div class="stage"><svg id="lw4" role="img" aria-label="Six months of work split into what was kept and what was thrown away"></svg></div><div class="lab-ctl"><div class="ctl"><label for="lwW"><span>First real customer test in week</span><output id="olwW"></output></label><input type="range" id="lwW" min="1" max="26" value="26"></div></div><div class="stats"><div class="stat"><span class="k">Work done before the test</span><span class="v" id="lwB"></span></div><div class="stat"><span class="k">Thrown away</span><span class="v" id="lwT"></span></div><div class="stat"><span class="k">Weeks left to build the right thing</span><span class="v glow" id="lwL"></span></div></div><p class="callout">An illustrative model: a team builds for six months, and most of what it builds before the first customer test rests on the wrong assumption. <b>The learning was the same in week 2 and week 26. Only the cost changed.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Ask what the cheapest way would be to learn the main thing you're trying to learn right now. Could you do it this week?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Progress in a startup is learning, and learning only counts when customers' behaviour proves it. Build the least you need to find out, find out early, and treat anything that doesn't teach you something as waste.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Experiment →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Value and growth hypotheses</div>
+        <h2>Experiment</h2>
+        <div class="short"><span class="lbl">In short</span><p>Treat your strategy as a set of hypotheses and test them. The two most important are the value hypothesis (does this deliver value once people use it?) and the growth hypothesis (how will new customers find it?).</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start with the riskiest part.</b> Instead of building the whole thing, ask which assumption, if wrong, would sink everything. Design the smallest experiment that tests it with real customers.</span></li>
+          <li><span><b>The value hypothesis.</b> Will people actually get value from the product? Ask them to do something, not just say something: pay, sign up, come back.</span></li>
+          <li><span><b>The growth hypothesis.</b> How will the product spread from early users to many? Word of mouth, repeat use, paid advertising? Test that too, early.</span></li>
+          <li><span><b>Experiments are products.</b> A good experiment is also the first version of the product. If it works, you've started; if it fails, you've learned cheaply.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries retells how Zappos began. Its founder, Nick Swinmurn, wanted to test whether people would buy shoes online at a time when most people assumed they wouldn't. Instead of building warehouses and stock, he went to local shoe shops, photographed their shoes and put the pictures on a simple website. When someone ordered a pair, he went back to the shop, bought them at full price and posted them. It lost money on each sale, but it answered the key question with real customers paying real money. Zappos was later bought by Amazon for over a billion dollars.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: value or growth?</div><div class="tally" id="tally5" aria-label="Score"></div></div>
+        <div class="sorter" id="sort5"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write your value hypothesis and your growth hypothesis in one sentence each. Then name the cheapest test that would prove the first one wrong.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't argue about whether an idea is good; test it. First check that people really value it, by what they do rather than what they say. Then check how it will spread.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Leap →</a></div>
+    </section>
+    <!-- ===================== STEER ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · steer</span>
+      <h2>Steer</h2>
+      <p>Once a startup has a vision, it has to steer toward it. These four chapters walk around the Build-Measure-Learn loop: name the riskiest assumptions, build the smallest thing that tests them, measure honestly, and then decide whether to change course or keep going.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Every product is an experiment. Find the leap-of-faith assumptions, test them with a minimum viable product, and let the numbers decide whether you pivot or persevere.</p></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Leap-of-faith assumptions</div>
+        <h2>Leap</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every business plan rests on a few assumptions that must be true for it to work. Find these leap-of-faith assumptions, test the riskiest first, and go and see customers for yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Not every assumption is equal.</b> Most parts of a plan have plenty of precedent. A few don't, and if they're wrong the whole plan collapses. These are the leaps of faith, and they deserve almost all of your early attention.</span></li>
+          <li><span><b>Analogs and antilogs.</b> Look for past examples that support your assumption and ones that argue against it. Ries borrows this from Randy Komisar: the Sony Walkman showed people would carry music around, and Napster showed they'd download it; neither showed they'd pay for downloads. That was the iPod's leap of faith.</span></li>
+          <li><span><b>Go and see.</b> The Toyota principle genchi gembutsu means going to the place where the problem is, rather than reading reports about it. Steve Blank calls it getting out of the building.</span></li>
+          <li><span><b>Customer archetypes.</b> Early contact with customers should produce a clear picture of who you're serving, a working sketch that guides design and changes as you learn.</span></li>
+          <li><span><b>Beware analysis paralysis.</b> Research can turn into another way to avoid testing. At some point you have to build something and put it in front of people.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>For the 2004 redesign of the Sienna minivan, aimed at North America, Toyota put Yuji Yokoya in charge, an engineer with little experience of that market. Rather than study reports, he drove existing models through all fifty US states, all of Canada's provinces and territories and much of Mexico. He noticed things like how roads, winds and parking differed, and that in America it was children, not parents, who spent most of the time in the back. That understanding shaped a far more successful van. Ries also notes that when Facebook raised early money, the striking number was not size but engagement: more than half its users came back every day, evidence for its leap of faith about value.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the leap-of-faith stack</div><div class="hint">Set how sure you are of each assumption</div></div>
+        <div class="stage"><svg id="lf6" role="img" aria-label="A stack of assumptions and the chance the whole plan holds"></svg></div><div class="lab-ctl"><div class="row" id="lfCtl"></div></div><div class="stats"><div class="stat"><span class="k">Chance every assumption holds</span><span class="v glow" id="lfP"></span></div><div class="stat"><span class="k">Test this one first</span><span class="s" id="lfT"></span></div></div><p class="callout">A made-up meal-kit plan. Each assumption feels likely on its own, but the plan needs them all. <b>The riskiest leap is the one where you're least sure and the plan depends on it most.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>List the assumptions in your plan and circle the two with the least evidence. Arrange to watch three real customers this week, in their setting.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>A plan is a stack of guesses, and a few of them carry all the weight. Find those, look for evidence on both sides, and go and see customers in person before you build much.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Test →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · The minimum viable product</div>
+        <h2>Test</h2>
+        <div class="short"><span class="lbl">In short</span><p>A minimum viable product is the version that lets you complete a full turn of the Build-Measure-Learn loop with the least effort. It is often far smaller, and rougher, than founders are comfortable with.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Minimum for learning.</b> An MVP is not the smallest product you could sell. It is the quickest way to start learning: anything extra that doesn't help you test the leap of faith is waste, however useful it looks.</span></li>
+          <li><span><b>The video MVP.</b> Before building a tricky product, show what it would do and measure whether people want it.</span></li>
+          <li><span><b>The concierge MVP.</b> Serve a handful of customers personally, by hand, to learn exactly what they need before you automate anything.</span></li>
+          <li><span><b>The Wizard of Oz MVP.</b> Customers think they're using a working product, but people behind the curtain are doing the work. You learn whether it's wanted before building the technology.</span></li>
+          <li><span><b>Quality is a guess too.</b> If you don't yet know who the customer is, you don't know what they'll count as quality. Early adopters forgive rough edges if the core is right. Be careful about legal and safety limits, and about your brand; you can launch under a different name.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Dropbox's founder Drew Houston had a hard product to demonstrate: file syncing that worked seamlessly across computers, which needed a lot of engineering before a prototype could be shown. So he made a short video of it working, full of in-jokes for the early-adopter tech community he was aiming at. The beta waiting list jumped from about five thousand people to seventy-five thousand almost overnight. In Austin, Manuel Rosso's Food on the Table started with one customer, whom he served in person each week, building her shopping list and meal plan by hand. And Aardvark, a question-answering service later bought by Google, ran early versions in which people answered the questions behind the scenes.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: pick the MVP</div><div class="tally" id="tally7" aria-label="Score"></div></div>
+        <div class="sorter" id="sort7"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Strip your next release down to the one assumption it tests. Ask what you'd build if you had to learn the answer in a week.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Build the least you need to learn whether your big assumption is true. A video, a hand-run service or a product with humans behind it is often enough, and much faster than the real thing.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Measure →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Innovation accounting</div>
+        <h2>Measure</h2>
+        <div class="short"><span class="lbl">In short</span><p>To know if you're making progress, you need innovation accounting: set a baseline with your MVP, tune the product toward an ideal, then decide whether to pivot or persevere. And measure with actionable metrics, not vanity ones.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three steps.</b> First, use an MVP to measure where you really are. Second, run experiments to move the numbers toward where the business needs them. Third, if they won't move enough, pivot.</span></li>
+          <li><span><b>Vanity metrics.</b> Totals like registered users or page views tend to go up and to the right whatever you do. They make a team feel good and tell it nothing about whether its work made a difference.</span></li>
+          <li><span><b>Cohorts.</b> Look instead at each new group of customers on its own: of the people who joined this month, how many signed up, used it, paid, came back? If those rates don't change, your work isn't working.</span></li>
+          <li><span><b>Split tests.</b> Show two versions to different customers at the same time and compare their behaviour. It's the most direct way to see cause and effect.</span></li>
+          <li><span><b>The three A's.</b> Good metrics are actionable (they show cause and effect), accessible (everyone can understand them) and auditable (anyone can check them against real customers).</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At IMVU, the overall charts looked encouraging for a long time: more registered users, more revenue each month. But when the team broke the numbers into monthly cohorts, the rates at which new customers moved through the funnel barely changed, despite months of new features. The team had been busy, not effective. Ries describes a similar moment at Grockit, an online learning company that followed agile development by the book. When it switched to cohort metrics and split tests, it found that many features it had been sure of made no difference to how students behaved.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: vanity or cohort?</div><div class="hint">Ship features and watch both charts</div></div>
+        <div class="stage"><svg id="vm8" role="img" aria-label="Total users rising while the cohort conversion rate stays flat"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="vmShip" type="button">Ship a feature (one month)</button><button class="btn" id="vmTest" type="button">Ship it as a split test</button><button class="btn" id="vmReset" type="button">Start over</button></div></div><div class="stats"><div class="stat"><span class="k">Total users</span><span class="v" id="vmTot"></span></div><div class="stat"><span class="k">This month's conversion</span><span class="v glow" id="vmCon"></span></div><div class="stat"><span class="k">What we learned</span><span class="s" id="vmSay">Nothing yet.</span></div></div><p class="callout">An illustrative model: most features do nothing, a few help. <b>The total always climbs because new people keep arriving. Only the cohort line shows whether the feature mattered.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Take your headline number and ask: if we'd done nothing last month, would it still have gone up? If yes, find a cohort or split-test number instead.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Totals going up can hide a product that isn't improving. Measure each new group of customers separately, test changes against a control, and use numbers everyone can understand and check.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Pivot (or persevere) →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Changing course without losing the vision</div>
+        <h2>Pivot (or Persevere)</h2>
+        <div class="short"><span class="lbl">In short</span><p>A pivot is a structured change of course designed to test a new hypothesis about the product, strategy or engine of growth. Your runway is best measured not in months but in how many pivots you have left.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Hold regular meetings to decide.</b> Ries recommends a scheduled pivot-or-persevere meeting, every few weeks or months, where the team looks at the data and decides deliberately, rather than drifting.</span></li>
+          <li><span><b>The land of the living dead.</b> The worst outcome is not failure but limbo: a product that gets just enough traction to keep going and never enough to succeed. Teams stay there because pivoting feels like admitting defeat.</span></li>
+          <li><span><b>Runway is pivots.</b> Cash divided by burn gives months. What matters more is how many chances to change course that buys. Getting to each decision faster gives you more chances with the same money.</span></li>
+          <li><span><b>A catalogue of pivots.</b> Ries lists kinds of pivot: zoom in (one feature becomes the product), zoom out, customer segment, customer need, platform, business architecture, value capture, engine of growth, channel and technology.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries follows David Binetti, who started Votizen to help verified voters connect with each other about politics. Each version taught him something, and the numbers kept falling short. Rather than drift, he pivoted several times, changing which customers he served and what the product did, until he arrived at a simple service that let people send messages to their representatives in Congress. Each pivot kept the vision, helping citizens take part in politics, and changed the strategy. Ries also notes that IMVU's move from an add-on to a standalone messenger was itself a pivot.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: runway in pivots</div><div class="hint">Change the speed of each loop</div></div>
+        <div class="stage"><svg id="rw9" role="img" aria-label="A runway divided into the pivots it can pay for"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="rwC"><span>Cash in the bank</span><output id="orwC"></output></label><input type="range" id="rwC" min="100" max="3000" step="50" value="1200"></div><div class="ctl"><label for="rwB"><span>Monthly burn</span><output id="orwB"></output></label><input type="range" id="rwB" min="20" max="300" step="5" value="100"></div><div class="ctl"><label for="rwM"><span>Months to reach each pivot-or-persevere decision</span><output id="orwM"></output></label><input type="range" id="rwM" min="1" max="12" value="6"></div></div></div><div class="stats"><div class="stat"><span class="k">Runway</span><span class="v" id="rwR"></span></div><div class="stat"><span class="k">Chances to change course</span><span class="v glow" id="rwP"></span></div></div><p class="callout">Cash and burn are in thousands. <b>Halving the time to each decision doubles your chances, without raising a penny more.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Put a date in the calendar for a pivot-or-persevere meeting. Decide now which numbers you'll look at, and what result would make you change course.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide on purpose, on a schedule, whether your strategy is working. If it isn't, change one part of it and test again. The faster you can get to each decision, the more chances your money buys.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Batch →</a></div>
+    </section>
+    <!-- ===================== ACCELERATE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · accelerate</span>
+      <h2>Accelerate</h2>
+      <p>The faster a team gets around the loop, the faster it learns. Ries borrows from lean manufacturing to show how small batches, the right engine of growth, a habit of asking why, and protected space for experiments let a company speed up without losing its way.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Speed comes from small batches and fast feedback, and it lasts only if the organisation learns from its mistakes and protects its experiments.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Small batches</div>
+        <h2>Batch</h2>
+        <div class="short"><span class="lbl">In short</span><p>Doing work in small batches feels slower and is usually faster. It finds problems sooner, wastes less when you're wrong and lets you learn from customers continuously.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Envelope stuffing.</b> Fold all the letters, then stuff them all, then seal them all, and it feels efficient. Doing one complete letter at a time is often faster overall, and you discover at once if the letters don't fit the envelopes.</span></li>
+          <li><span><b>Problems show up immediately.</b> In big batches a mistake hides until late, by which time it's been repeated hundreds of times. In small batches it shows up on the first one.</span></li>
+          <li><span><b>Continuous deployment.</b> IMVU shipped changes to its live product as many as fifty times a day, with automated tests and a system that stopped and rolled back if anything broke. Each change was small, so each problem was easy to find.</span></li>
+          <li><span><b>Stop the line.</b> Toyota's andon cord lets any worker stop production to fix a problem at its source. In software, a broken test or a fall in key numbers should do the same.</span></li>
+          <li><span><b>The large-batch death spiral.</b> When batches grow, problems get worse, so teams make them bigger still to be safe, and releases slow to a crawl. Pull work from customer demand instead of pushing out a big plan.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries borrows a story from James Womack and Daniel Jones's book Lean Thinking. Asked to help stuff newsletters into envelopes, two children wanted to do it the obvious way: fold every newsletter first, then stuff them all, then seal and stamp them. Doing them one at a time from start to finish turned out to be faster, even though each step had to be switched more often, because nothing piled up waiting and any problem showed up on the first envelope rather than the last. For a startup, the same logic means getting each small change to customers quickly so it can be measured.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the envelope race</div><div class="hint">Race big batches against one at a time</div></div>
+        <div class="stage"><svg id="bt10" role="img" aria-label="Envelopes moving through fold, stuff, seal and stamp in two ways"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" id="btGo" type="button">Start the race</button><label class="tg"><input type="checkbox" id="btBad"><span>The letters are too big for the envelopes</span></label></div></div><div class="stats"><div class="stat"><span class="k">Big batches</span><span class="s" id="btA">Ready.</span></div><div class="stat"><span class="k">One at a time</span><span class="s" id="btB">Ready.</span></div></div><p class="callout">A simple model of 20 letters and four steps, each taking the same time. <b>Watch when the first finished envelope appears, and when each team finds out the letters don't fit.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Take the biggest piece of work on your list and cut it into a slice that a customer could see within a week.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Do work in small pieces and get each piece to the customer quickly. You'll find mistakes earlier, waste less when you're wrong and learn faster, even if it feels less efficient.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Grow →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Engines of growth</div>
+        <h2>Grow</h2>
+        <div class="short"><span class="lbl">In short</span><p>Sustainable growth means new customers come from the actions of past ones. Ries describes three engines that can drive it, sticky, viral and paid, and suggests focusing on one at a time.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Where new customers come from.</b> Word of mouth, a side effect of use (others see you using it), paid advertising funded by revenue, and repeat purchase. Growth from one-off stunts doesn't count.</span></li>
+          <li><span><b>The sticky engine.</b> Products that keep customers for a long time grow when they gain new customers faster than they lose existing ones. Watch the churn rate.</span></li>
+          <li><span><b>The viral engine.</b> Products that spread through use grow when each customer brings in, on average, more than one new customer. That number is the viral coefficient, and above one it compounds.</span></li>
+          <li><span><b>The paid engine.</b> Products that buy customers grow when what a customer is worth over their lifetime is more than it costs to acquire them. The gap pays for the next customers.</span></li>
+          <li><span><b>Product/market fit, and running out.</b> Every engine eventually runs out of fuel as a market saturates. Ries borrows Marc Andreessen's idea of product/market fit, and warns that a startup may need to switch engines later.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries retells how Hotmail grew. Its founders added a single line to the bottom of every email sent from the service, a postscript saying, in effect, "Get your free email at Hotmail", with a link. Each message was an advertisement, so every user who sent email recruited more users without trying. Hotmail grew to millions of accounts quickly and was bought by Microsoft. It's the textbook viral engine: the product spreads as a side effect of being used.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: three engines</div><div class="hint">Pick an engine and tune its one number</div></div>
+        <div class="stage"><svg id="eg11" role="img" aria-label="Customer growth over two years for the chosen engine"></svg></div><div class="lab-ctl"><div class="row" id="egTabs"></div><div class="row" id="egCtl"></div></div><div class="stats"><div class="stat"><span class="k">Customers after 24 months</span><span class="v glow" id="egN"></span></div><div class="stat"><span class="k">Is the engine running?</span><span class="s" id="egSay"></span></div></div><p class="callout">Illustrative numbers, starting from 1,000 customers. <b>Each engine turns on one ratio. Move it across its tipping point and the curve changes shape.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Decide which engine your product is really meant to run on. Find the one number that tells you whether it's running, and check it this month.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Know which engine you're running and watch its key number: churn against new customers for a sticky product, the viral coefficient for a viral one, lifetime value against acquisition cost for a paid one.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Adapt →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · The Five Whys</div>
+        <h2>Adapt</h2>
+        <div class="short"><span class="lbl">In short</span><p>To go fast without breaking things, a company needs to adapt its processes to what's actually going wrong. The Five Whys find the human root of a problem, and you invest in a fix in proportion to how much it hurts.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Ask why five times.</b> Taiichi Ohno's technique: when something goes wrong, keep asking why until you reach the cause behind the cause. Technical problems usually lead back to a human or process problem.</span></li>
+          <li><span><b>A proportional investment.</b> At each level of the chain, make a fix in proportion to the harm. Small problems get small fixes. If the problem keeps coming back, the investment grows.</span></li>
+          <li><span><b>The curse of the five blames.</b> Asked badly, the Five Whys turn into finding someone to blame. Ries's rules: everyone affected should be in the room, and if a mistake happens, the system made it easy, so fix the system.</span></li>
+          <li><span><b>First time, any mistake; never the same one twice.</b> Be tolerant of mistakes the first time, and use the process to make sure the same one doesn't happen again.</span></li>
+          <li><span><b>Start small.</b> Use it for a narrow class of problems at first, with one person running it, so it builds trust before it's used everywhere.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries walks through an example from IMVU. A new release disabled a feature for customers. Why? A particular server failed. Why? An obscure subsystem had been used the wrong way. Why? The engineer who used it didn't know how to use it properly. Why? He had never been trained. Why? His manager didn't believe in training new engineers, because the team was too busy. What started as a technical fault ended with a management habit, and the fix included both a repair to the server and a change to how new engineers were brought up to speed.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: five whys</div><div class="hint">Ask why until you reach the root</div></div>
+        <div class="fw" id="fw12"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Next time something goes wrong at work, ask why five times with everyone involved, and make one small fix at every level.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something breaks, keep asking why until you find the human cause. Fix each level a little, more if it keeps happening, and blame the system, not the person.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Innovate →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Startups inside big companies</div>
+        <h2>Innovate</h2>
+        <div class="short"><span class="lbl">In short</span><p>Established companies can innovate if they give internal startups three things: scarce but secure resources, independent authority to build, and a personal stake in the result. A sandbox lets them experiment without putting the core business at risk.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Scarce but secure resources.</b> A startup team needs a small budget that can't be raided by the rest of the company. Too much money can be as harmful as too little.</span></li>
+          <li><span><b>Independent authority.</b> The team must be able to build, ship and test without asking permission at every step. Handing off to other departments slows the loop to a stop.</span></li>
+          <li><span><b>A personal stake.</b> Something has to tie the team to the outcome: equity, a bonus, or at the very least public credit as the people behind it.</span></li>
+          <li><span><b>The innovation sandbox.</b> Rules that let any team run a real split test on a limited part of the product, for a limited time and a limited number of customers, judged on a standard set of metrics, and stopped if something goes badly wrong.</span></li>
+          <li><span><b>Entrepreneur as a job title.</b> Ries argues that companies should treat entrepreneurship as a career track, with its own accountability, rather than a side project for whoever has spare time.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries describes the problem from the parent company's side. A healthy organisation has something like an immune system: managers who rightly protect the brand, the customers and the revenue. Put a startup inside it with no boundaries and that immune system attacks every unfamiliar experiment. Hide the startup away completely and it learns nothing the company can use. The sandbox is his middle path: the experiments are real and reach real customers, but they're contained, timed and measured on terms everyone has agreed in advance.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: design a sandbox</div><div class="hint">Set the limits and watch both sides</div></div>
+        <div class="stage"><svg id="sb13" role="img" aria-label="Two gauges for the parent company's risk and the team's learning"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="sbC"><span>Customers who see the test</span><output id="osbC"></output></label><input type="range" id="sbC" min="0" max="100" value="10"></div><div class="ctl"><label for="sbD"><span>How long it runs</span><output id="osbD"></output></label><input type="range" id="sbD" min="1" max="26" value="4"></div></div><div class="toggles" id="sbT"></div></div><div class="stats"><div class="stat"><span class="k">Risk to the core business</span><span class="s" id="sbR"></span></div><div class="stat"><span class="k">What the team can learn</span><span class="s" id="sbL"></span></div></div><p class="callout">An illustrative model of Ries's sandbox rules. <b>A good sandbox keeps the risk small without making the learning small too.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>If you're innovating inside an organisation, write down your sandbox: which customers, how long, which metrics, and what would make you stop.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Give internal startups a small, protected budget, the freedom to ship on their own and a stake in the outcome. Agree on the boundaries of their experiments so the rest of the company can relax.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: Waste not →</a></div>
+    </section>
+    <!-- ===================== WASTE NOT ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Epilogue</span>
+      <h2>Waste Not</h2>
+      <p>Ries ends by stepping back. A century ago, scientific management changed how work was done by measuring it. The new challenge, he argues, is not doing work efficiently but knowing which work is worth doing at all.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The biggest waste is building something nobody wants. Lean thinking is a way of finding that out before you've spent everything.</p></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapters 13–14</span> · Epilogue</div>
+        <h2>Waste Not, and Join the Movement</h2>
+        <div class="short"><span class="lbl">In short</span><p>A century ago, Frederick Winslow Taylor's scientific management made work efficient by measuring it. Ries argues the next step is to apply the same rigour to deciding what work is worth doing, and he invites readers to join a movement doing just that.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Taylor's revolution.</b> In 1911 Taylor's The Principles of Scientific Management argued that work could be studied and improved systematically. It made the twentieth century's productivity boom possible, and also its rigid, top-down workplaces.</span></li>
+          <li><span><b>Efficiency in the wrong place.</b> We have become very good at building things efficiently. Ries's worry is that much of that efficiency goes into products nobody wants, which is the biggest waste of all.</span></li>
+          <li><span><b>Not pseudo-science.</b> Lean Startup is not about running a few tests to justify what you already wanted to do. Its experiments have to be able to prove you wrong.</span></li>
+          <li><span><b>Join the movement.</b> Ries points readers to the community of practitioners, meetups and resources that grew up around the ideas, and asks them to treat their own work as an experiment too.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Ries closes with a question he hopes readers will take with them: what if, instead of asking whether something can be built, we asked whether it should be built, and whether we can build a sustainable business around it? Taylor asked how to do a task most efficiently. The Lean Startup asks how to avoid doing tasks that don't need doing at all. Answering it, he argues, is the job of every entrepreneur, manager and team working under uncertainty.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: waste or learning?</div><div class="tally" id="tally14" aria-label="Score"></div></div>
+        <div class="sorter" id="sort14"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Look at last week's work and mark anything that neither delivered value to a customer nor taught you something you can prove. That's the waste to cut first.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Being efficient at building the wrong thing is still waste. Before you ask how to build something faster, ask whether you've proved it should be built at all.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#after">Next: your experiment board →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your experiment board</h2>
+      <p class="big">The whole book as one habit: write down your riskiest assumption, the smallest test that could prove it wrong, the number that will decide, and then, when the result is in, whether you pivot or persevere.</p>
+      <figure class="lab" id="board">
+        <div class="lab-top"><div class="t">Add an experiment</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="xbLeap">Leap-of-faith assumption</label><input id="xbLeap" maxlength="140" placeholder="e.g. Busy parents will pay for a weekly meal plan"></div>
+          <div class="field"><label for="xbMvp">Minimum viable product</label><input id="xbMvp" maxlength="120" placeholder="e.g. Hand-made plans for five families"></div>
+          <div class="field"><label for="xbMet">The number that decides</label><input id="xbMet" maxlength="120" placeholder="e.g. 3 of 5 still paying in week 4"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="xbAdd" type="button">Add to my board</button><span class="tip" id="xbMsg"></span></div>
+        </div>
+        <div class="out" id="xbList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Vision</span><b>Startups are experiments</b><span>Any team building something new under extreme uncertainty is one, and its progress is validated learning.</span></div>
+        <div><span class="n">Leap</span><b>Find the leaps of faith</b><span>Test the value and growth hypotheses first, and go and see customers yourself.</span></div>
+        <div><span class="n">Test</span><b>Build the minimum</b><span>A video, a concierge or a wizard behind the curtain can answer the question.</span></div>
+        <div><span class="n">Measure</span><b>Count what's actionable</b><span>Cohorts and split tests, not totals that only go up.</span></div>
+        <div><span class="n">Pivot</span><b>Decide on purpose</b><span>Change the strategy, keep the vision, and count your runway in pivots.</span></div>
+        <div><span class="n">Accelerate</span><b>Small batches, fast loops</b><span>Pick one engine of growth, ask five whys, and give experiments a sandbox.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses</i> by Eric Ries (2011). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Vision", "Steer", "Accelerate", "Waste not"];
+const CH = [["Introduction", "Five principles", 0, "Introduction"], ["Start", "Start", 0, "Chapter 1"], ["Define", "Define", 0, "Chapter 2"], ["Learn", "Learn", 0, "Chapter 3"], ["Experiment", "Experiment", 0, "Chapter 4"], ["Leap", "Leap", 1, "Chapter 5"], ["Test", "Test", 1, "Chapter 6"], ["Measure", "Measure", 1, "Chapter 7"], ["Pivot (or Persevere)", "Pivot (or persevere)", 1, "Chapter 8"], ["Batch", "Batch", 2, "Chapter 9"], ["Grow", "Grow", 2, "Chapter 10"], ["Adapt", "Adapt", 2, "Chapter 11"], ["Innovate", "Innovate", 2, "Chapter 12"], ["Waste Not, and Join the Movement", "Waste not", 3, "Chapters 13–14"]];
+const QUIZ = {
+"1": {
+"q": "Which of these is one of Ries's five principles?",
+"o": [
+"Plan every detail before you build",
+"Entrepreneurship is a kind of management",
+"Avoid measuring until you have revenue"
+],
+"a": 1,
+"w": "Ries argues startups need management, just a kind designed for extreme uncertainty. The other two are the habits he argues against."
+},
+"2": {
+"q": "In Ries's terms, what is a pivot?",
+"o": [
+"Giving up on the vision",
+"Changing the strategy while keeping the vision",
+"Tweaking a button colour"
+],
+"a": 1,
+"w": "The vision stays put. A pivot changes the strategy, the route to the vision. Small product changes are optimisation."
+},
+"3": {
+"q": "Which part of Ries's definition separates a startup from an ordinary small business?",
+"o": [
+"Being a human institution",
+"Extreme uncertainty",
+"Having investors"
+],
+"a": 1,
+"w": "A small business copying a proven model faces ordinary risk. A startup doesn't yet know whether its customers or business model even exist."
+},
+"4": {
+"q": "What makes learning \"validated\" in Ries's sense?",
+"o": [
+"The team agrees it learned something",
+"It shows up as real change in customer behaviour and data",
+"An investor accepts the explanation"
+],
+"a": 1,
+"w": "Validated learning is demonstrated with empirical data from real customers, not with a story about what went wrong."
+},
+"5": {
+"q": "What did Swinmurn's early Zappos experiment test?",
+"o": [
+"Whether a warehouse system could scale",
+"Whether customers would actually buy shoes online",
+"How cheap shoes could be made"
+],
+"a": 1,
+"w": "Photographing shop stock and buying it at full price tested the value hypothesis directly: would people pay for shoes they couldn't try on?"
+},
+"6": {
+"q": "What does genchi gembutsu ask you to do?",
+"o": [
+"Trust the market report",
+"Go and see the problem for yourself",
+"Copy a competitor"
+],
+"a": 1,
+"w": "It's Toyota's principle of going to where the work or customer is, which Yokoya took literally on the road."
+},
+"7": {
+"q": "What's the defining feature of a concierge MVP?",
+"o": [
+"It hides the humans doing the work",
+"It serves a few customers personally and openly",
+"It's only a video of the product"
+],
+"a": 1,
+"w": "In a concierge MVP the customer knows a person is helping them. In a Wizard of Oz MVP, the people behind the scenes are hidden."
+},
+"8": {
+"q": "Why is \"total registered users\" usually a vanity metric?",
+"o": [
+"It's too hard to calculate",
+"It rises over time whether or not your changes work",
+"It ignores revenue"
+],
+"a": 1,
+"w": "A cumulative total almost always grows. It can't tell you whether last month's work caused anything."
+},
+"9": {
+"q": "How does Ries suggest thinking about a startup's runway?",
+"o": [
+"Months of cash left",
+"The number of pivots it can still make",
+"The size of its team"
+],
+"a": 1,
+"w": "What runs out isn't time as such but chances to learn and change direction. Faster loops mean more pivots from the same cash."
+},
+"10": {
+"q": "Why do small batches reveal problems sooner?",
+"o": [
+"Each person works harder",
+"The first item goes through every step right away",
+"There are fewer steps"
+],
+"a": 1,
+"w": "With one-piece flow, the first item reaches the end almost at once, so a problem at any step shows up immediately instead of after the whole batch."
+},
+"11": {
+"q": "When does a viral engine grow on its own?",
+"o": [
+"When churn is zero",
+"When each customer brings in more than one new customer on average",
+"When advertising is cheap"
+],
+"a": 1,
+"w": "A viral coefficient above one means every group of customers brings in a bigger group, so growth compounds."
+},
+"12": {
+"q": "What does a \"proportional investment\" mean in the Five Whys?",
+"o": [
+"Fix only the deepest cause",
+"Spend on each fix in proportion to how much the problem hurt",
+"Rebuild the whole system"
+],
+"a": 1,
+"w": "Small problems get small fixes at every level. Repeat problems earn bigger investment over time."
+},
+"13": {
+"q": "Which is one of Ries's three structural needs for an internal startup?",
+"o": [
+"A large, flexible budget",
+"Scarce but secure resources",
+"Approval from every department"
+],
+"a": 1,
+"w": "A modest budget that can't be taken away. Ries warns that too much money can do as much damage as too little."
+},
+"14": {
+"q": "What does Ries see as the biggest waste?",
+"o": [
+"Slow programmers",
+"Building something nobody wants",
+"Too many meetings"
+],
+"a": 1,
+"w": "The book's whole method is aimed at finding out early whether a product is wanted, because building the wrong thing efficiently is still waste."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0f1218';
+try { const t = localStorage.getItem('ls-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('ls-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('ls-done', []));
+const save = () => store.set('ls-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const big = n => n >= 1e9 ? (n / 1e9).toFixed(1) + ' billion' : n >= 1e6 ? (n / 1e6).toFixed(1) + ' million' : fmtN(n);
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I have an idea but no customers yet', 5, 'Value and growth hypotheses', 'Write down what must be true for people to value it and for it to spread, then test the value part first with real behaviour.'],
+    ['I\'m not sure what to build first', 6, 'Leap-of-faith assumptions', 'Find the assumption the whole plan leans on and you\'re least sure of. Test that one before anything else.'],
+    ['Building the full product will take months', 7, 'The minimum viable product', 'Try a video, a hand-run concierge service or humans behind the curtain. Learn first, automate later.'],
+    ['Our numbers go up but nothing changes', 8, 'Innovation accounting', 'Totals rise on their own. Look at each month\'s cohort and run split tests to see whether your work moved anything.'],
+    ['We\'re stuck, neither failing nor working', 9, 'Pivot or persevere', 'Schedule a decision. Change one part of the strategy, keep the vision, and count your runway in pivots.'],
+    ['Releases are slow and scary', 10, 'Small batches', 'Ship smaller pieces more often. Problems show up on the first item, not the last.'],
+    ['I don\'t know how we\'ll grow', 11, 'Engines of growth', 'Pick one engine, sticky, viral or paid, and watch the single ratio that makes it run.'],
+    ['The same problems keep coming back', 12, 'The Five Whys', 'Ask why five times, find the human cause, and make a fix in proportion at every level.'],
+    ['I\'m trying to innovate inside a big company', 13, 'The innovation sandbox', 'Ask for a small secure budget, the authority to ship, a stake in the result, and agreed limits for experiments.'],
+    ['Our plan is perfect but nobody\'s buying', 2, 'Rocket or car', 'Stop flying the plan like a rocket. Steer: check where customers really are, often, and adjust.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the Build-Measure-Learn loop ---------- */
+{ const WK = [26, 12, 4, 1], svg = $('#lpSvg'), cap = $('#lpCap'), wb = $('#lpWk');
+  let w = 12, turns = 0, ang = 0, busy = false;
+  const CX = 110, CY = 128, R = 82;
+  wb.innerHTML = WK.map(k => `<button class="btn" type="button" data-w="${k}" aria-pressed="${k === w}">${k}</button>`).join('');
+  const pt = (a, r = R) => [CX + r * Math.sin(a), CY - r * Math.cos(a)];
+  const NODES = [['Build', 0], ['Measure', 2 * Math.PI / 3], ['Learn', 4 * Math.PI / 3]];
+  const ARCS = [['Product', Math.PI / 3], ['Data', Math.PI], ['Ideas', 5 * Math.PI / 3]];
+  function draw(){
+    let g = `<circle cx="${CX}" cy="${CY}" r="${R}" ${S('line', 2)}/>`;
+    ARCS.forEach(([t, a]) => { const [x, y] = pt(a, R + 2), [lx, ly] = pt(a, R + 22); g += arrowHead(x, y, a + Math.PI, 'faint', 8); g += TX(lx, ly + 4, t, 'muted', 12, 'middle'); });
+    const [dx, dy] = pt(ang);
+    g += `<circle id="lpDot" cx="${dx.toFixed(1)}" cy="${dy.toFixed(1)}" r="7" ${F('glow')}/>`;
+    NODES.forEach(([t, a]) => { const [x, y] = pt(a), near = Math.abs(((ang - a) % (2 * Math.PI) + 3 * Math.PI) % (2 * Math.PI) - Math.PI) < .35; g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="27" ${FS(near ? 'hl' : 'panel-2', 'glow', near ? 2.5 : 1.5)}/>` + TX(x, y + 4, t, 'text', 12, 'middle', 'font-weight="600"'); });
+    g += TX(CX, CY - 4, String(turns), 'glow', 30, 'middle', 'id="lpN" style="font-family:var(--f-display)"') + TX(CX, CY + 16, turns === 1 ? 'turn' : 'turns', 'faint', 11.5, 'middle');
+    const x0 = 236, max = 52; g += TX(x0, 26, 'Chances to learn in a year', 'muted', 12);
+    for (let i = 0; i < max; i++){ const x = x0 + (i % 8) * 19, y = 38 + Math.floor(i / 8) * 19, on = i < turns;
+      g += `<rect x="${x}" y="${y}" width="14" height="14" rx="3" ${on ? F('glow', .9) : S('line', 1)}/>`; }
+    g += TX(x0, 182, `${Math.floor(52 / w)} possible at ${w} week${w === 1 ? '' : 's'} a turn`, 'text', 12.5);
+    svg.innerHTML = g;
+  }
+  function say(){
+    const n = Math.floor(52 / w);
+    if (!turns){ cap.innerHTML = `Every turn of the loop is one chance to find out you were wrong. At <b>${w} week${w === 1 ? '' : 's'}</b> a turn, press Run a year.`; return; }
+    cap.innerHTML = w >= 12 ? `<b>${turns} turn${turns === 1 ? '' : 's'} in a year.</b> If your first guess was wrong, you get very few chances to fix it before the money runs out.`
+      : `<b>${turns} turns in a year.</b> Ries's point is to minimise the total time through the loop: the team that learns fastest wins, not the one that builds most.`;
+  }
+  $('#lpGo').addEventListener('click', () => {
+    if (busy) return; turns = 0; const n = Math.floor(52 / w), dur = RM ? 0 : Math.min(3200, 900 + n * 60), t0 = performance.now(); busy = true;
+    const step = now => { const t = dur ? Math.min(1, (now - t0) / dur) : 1, total = t * n; turns = Math.floor(total + 1e-9); ang = (total % 1) * 2 * Math.PI; draw(); say();
+      if (t < 1) requestAnimationFrame(step); else { ang = 0; busy = false; draw(); say(); } };
+    requestAnimationFrame(step); });
+  $('#lpReset').addEventListener('click', () => { if (busy) return; turns = 0; ang = 0; draw(); say(); });
+  wb.querySelectorAll('[data-w]').forEach(b => b.addEventListener('click', () => { if (busy) return; w = +b.dataset.w; press([...wb.querySelectorAll('[data-w]')], b); turns = 0; ang = 0; draw(); say(); }));
+  draw(); say();
+}
+
+/* ---------- intro: plan or experiment ---------- */
+{ const el = $('#pu1'), sl = $('#puU'), ex = $('#puEx');
+  const EX = [['A new branch of a coffee chain', 8], ['A new size of an existing product', 30], ['A new service for existing customers', 55], ['A government service nobody has tried', 75], ['An app for a market that doesn\'t exist yet', 94]];
+  ex.innerHTML = EX.map(([t, u], i) => `<button class="btn" type="button" data-u="${u}">${t}</button>`).join('');
+  const plan = u => 95 * Math.pow(1 - u / 100, 1.6) + 4, expv = u => 28 + 62 * Math.pow(u / 100, .9);
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 260 : 250, L = 34, B = H - 40, T = 20, Rr = W - 14, u = +sl.value; vb(el, W, H);
+    const X = v => L + (Rr - L) * v / 100, Y = v => B - (B - T) * v / 100; let g = '';
+    g += `<line x1="${L}" y1="${B}" x2="${Rr}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${T}" x2="${L}" y2="${B}" ${S('line', 1)}/>`;
+    g += TX(L, B + 18, 'known business', 'faint', 11.5) + TX(Rr, B + 18, 'extreme uncertainty', 'faint', 11.5, 'end');
+    g += `<text x="12" y="${(T + B) / 2}" font-size="11.5" text-anchor="middle" ${F('faint')} transform="rotate(-90 12 ${(T + B) / 2})">how useful</text>`;
+    let p1 = '', p2 = ''; for (let v = 0; v <= 100; v += 2){ p1 += (v ? 'L' : 'M') + X(v).toFixed(1) + ' ' + Y(plan(v)).toFixed(1); p2 += (v ? 'L' : 'M') + X(v).toFixed(1) + ' ' + Y(expv(v)).toFixed(1); }
+    g += `<path d="${p1}" ${S('cool', 2.5)}/><path d="${p2}" ${S('glow', 2.5)}/>`;
+    g += TX(X(4), Y(plan(4)) - 8, 'a detailed plan', 'cool', 12) + TX(X(98), Y(expv(98)) - 8, 'fast experiments', 'glow', 12, 'end');
+    g += `<line x1="${X(u)}" y1="${T}" x2="${X(u)}" y2="${B}" ${S('text', 1, ';stroke-dasharray:4 4')}/><circle cx="${X(u)}" cy="${Y(plan(u))}" r="5" ${F('cool')}/><circle cx="${X(u)}" cy="${Y(expv(u))}" r="5" ${F('glow')}/>`;
+    el.innerHTML = g; out('puU', u + '%');
+    $('#puPlan').textContent = u < 30 ? 'Works well. You can forecast, so plan and execute.' : u < 60 ? 'Useful for the known parts, risky for the rest.' : 'Mostly guesses written down as facts.';
+    $('#puExp').textContent = u < 30 ? 'Still handy for tuning, but not essential.' : u < 60 ? 'Worth running on the parts nobody knows yet.' : 'The main way to make progress: learn what\'s true.';
+  });
+  sl.addEventListener('input', draw);
+  ex.querySelectorAll('[data-u]').forEach(b => b.addEventListener('click', () => { sl.value = b.dataset.u; press([...ex.querySelectorAll('[data-u]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- 1 Start: rocket or car ---------- */
+{ const el = $('#rc2'), dI = $('#rcD'); let seed = 7, run = null, timer = null;
+  function make(){ const r = rng(seed), D = +dI.value / 100, tg = [140 + (r() - .5) * 120]; for (let m = 1; m <= 12; m++) tg.push(clamp(tg[m - 1] + gauss(r) * 34 * D, 30, 250));
+    const car = [140]; for (let m = 1; m <= 12; m++){ const seen = tg[m] + gauss(r) * 4; car.push(car[m - 1] + (seen - car[m - 1]) * .75); }
+    const rocket = []; for (let m = 0; m <= 12; m++) rocket.push(140 + (tg[0] - 140) * m / 12);
+    return { tg, car, rocket }; }
+  let shown = 0;
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 280, L = 26, Rr = W - 30; vb(el, W, H);
+    const X = m => L + (Rr - L) * m / 12, d = run || make(); let g = '';
+    for (let m = 0; m <= 12; m += 3) g += `<line x1="${X(m)}" y1="20" x2="${X(m)}" y2="262" ${S('line', 1, ';stroke-dasharray:2 5')}/>` + TX(X(m), 276, m ? 'month ' + m : 'launch', 'faint', 11, 'middle');
+    const path = (arr, k) => arr.slice(0, k + 1).map((y, m) => (m ? 'L' : 'M') + X(m).toFixed(1) + ' ' + y.toFixed(1)).join('');
+    const k = run ? shown : 0;
+    g += `<path d="${path(d.tg, run ? k : 0)}" ${S('bad', 1.5, ';stroke-dasharray:5 4')}/>`;
+    g += `<circle cx="${X(run ? k : 0)}" cy="${d.tg[run ? k : 0]}" r="9" ${FS('bad-soft', 'bad', 2)}/>` + TX(X(run ? k : 0) + (nw ? -12 : 14), d.tg[run ? k : 0] + (nw ? -14 : 4), 'customers', 'bad', 11.5, nw ? 'end' : 'start');
+    if (run){ g += `<path d="${path(d.rocket, k)}" ${S('cool', 2.5)}/><path d="${path(d.car, k)}" ${S('glow', 2.5)}/>`;
+      g += `<circle cx="${X(k)}" cy="${d.rocket[k]}" r="5" ${F('cool')}/><circle cx="${X(k)}" cy="${d.car[k]}" r="5" ${F('glow')}/>`; }
+    g += TX(L, 16, 'rocket: aims once', 'cool', 12) + TX(L + 130, 16, 'car: steers monthly', 'glow', 12);
+    el.innerHTML = g; out('rcD', dI.value < 25 ? 'barely' : dI.value < 60 ? 'some' : 'a lot');
+  });
+  function go(){ clearInterval(timer); run = make(); shown = 0; $('#rcR').textContent = '–'; $('#rcC').textContent = '–'; draw();
+    timer = setInterval(() => { shown++; draw(); if (shown >= 12){ clearInterval(timer); const r = Math.abs(run.rocket[12] - run.tg[12]), c = Math.abs(run.car[12] - run.tg[12]);
+      $('#rcR').textContent = Math.round(r) + ' units'; $('#rcC').textContent = Math.round(c) + ' units'; } }, RM ? 0 : 160); }
+  $('#rcGo').addEventListener('click', go);
+  $('#rcNew').addEventListener('click', () => { seed++; run = null; clearInterval(timer); $('#rcR').textContent = '–'; $('#rcC').textContent = '–'; draw(); });
+  dI.addEventListener('input', () => { run = null; clearInterval(timer); $('#rcR').textContent = '–'; $('#rcC').textContent = '–'; draw(); });
+  draw();
+}
+
+/* ---------- 2 Define: is this a startup? ---------- */
+sorter('#sort3', '#tally3', [{ id: 'yes', label: 'A startup', d: 'Something new under extreme uncertainty' }, { id: 'no', label: 'Not in Ries\'s sense', d: 'A known model, ordinary risk' }], [
+  { t: 'Two friends open a pizza place using a franchise\'s proven recipe and layout.', q: true, a: 'no', w: 'Hard work and real risk, but the model is known. You can forecast it, which is what makes it a small business rather than a startup.' },
+  { t: 'A small team at Intuit tries letting people file taxes by photographing a form on their phone.', q: true, a: 'yes', w: 'That was SnapTax. Size of the parent company doesn\'t matter; the uncertainty does.' },
+  { t: 'A city council tries a text-message service to remind people of court dates.', q: true, a: 'yes', w: 'Nobody knows yet whether people will use it or how. Ries counts government teams as entrepreneurs too.' },
+  { t: 'A supermarket chain opens its 300th store in a new town.', q: true, a: 'no', w: 'It has 299 stores of data to forecast from. Not extreme uncertainty.' },
+  { t: 'A charity tests whether a monthly video call will keep volunteers involved.', q: true, a: 'yes', w: 'A new service, an unknown response. Any institution can be a startup.' },
+  { t: 'A shoe company launches next year\'s version of its best-selling trainer.', q: true, a: 'no', w: 'Customers, channels and price are all known. That\'s optimisation, not a startup.' },
+  { t: 'A solo developer builds an app for a hobby that has no apps yet.', q: true, a: 'yes', w: 'Whether people want it, and who they are, are open questions. Classic startup territory.' } ]);
+
+/* ---------- 3 Learn: when would you have found out ---------- */
+{ const el = $('#lw4'), sl = $('#lwW');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 200 : 170, w = +sl.value, cols = nw ? 13 : 26, cw = (W - 20) / cols, rows = nw ? 2 : 1; vb(el, W, H);
+    let g = ''; const before = w - 1, waste = Math.round(before * .8);
+    for (let i = 0; i < 26; i++){ const r = Math.floor(i / cols), c = i % cols, x = 10 + c * cw, y = 30 + r * 64;
+      const col = i < waste ? 'bad' : i < before ? 'faint' : 'glow', op = i < waste ? .6 : i < before ? .45 : .85;
+      g += `<rect x="${(x + 2).toFixed(1)}" y="${y}" width="${(cw - 4).toFixed(1)}" height="40" rx="4" ${F(col, op)}/>`;
+      if (i === before) g += `<line x1="${(x).toFixed(1)}" y1="${y - 10}" x2="${(x).toFixed(1)}" y2="${y + 50}" ${S('text', 2)}/>` + TX(x + 3, y - 14, 'customer test', 'text', 11.5); }
+    const ly = H - 14; g += `<rect x="10" y="${ly - 10}" width="12" height="12" rx="2" ${F('bad', .6)}/>` + TX(28, ly, 'built, then thrown away', 'muted', 11.5);
+    g += `<rect x="${nw ? 170 : 200}" y="${ly - 10}" width="12" height="12" rx="2" ${F('faint', .45)}/>` + TX(nw ? 188 : 218, ly, 'kept', 'muted', 11.5);
+    g += `<rect x="${nw ? 230 : 280}" y="${ly - 10}" width="12" height="12" rx="2" ${F('glow', .85)}/>` + TX(nw ? 248 : 298, ly, 'the right thing', 'muted', 11.5);
+    el.innerHTML = g; out('lwW', w);
+    $('#lwB').textContent = before + ' week' + (before === 1 ? '' : 's'); $('#lwT').textContent = waste + ' week' + (waste === 1 ? '' : 's'); $('#lwL').textContent = 26 - before;
+  });
+  sl.addEventListener('input', draw); draw();
+}
+
+/* ---------- 4 Experiment: value or growth ---------- */
+sorter('#sort5', '#tally5', [{ id: 'val', label: 'Value hypothesis', d: 'Do people get value once they use it?' }, { id: 'gro', label: 'Growth hypothesis', d: 'How will new customers find it?' }], [
+  { t: 'Photograph shoes in local shops, list them online and see if anyone buys.', q: true, a: 'val', w: 'Zappos\'s first test: would people pay for shoes they couldn\'t try on? That\'s value.' },
+  { t: 'Count how many users invite a friend in their first week.', q: true, a: 'gro', w: 'Invitations are how a product spreads from one customer to the next.' },
+  { t: 'Check how many people who tried the app are still using it a month later.', q: true, a: 'val', w: 'Coming back is the clearest sign people get real value from it.' },
+  { t: 'Spend a small budget on ads and work out what each new customer cost.', q: true, a: 'gro', w: 'That tests a paid route to growth: can you buy customers for less than they\'re worth?' },
+  { t: 'Ask ten people to pay a deposit before the product exists.', q: true, a: 'val', w: 'Paying is behaviour, not opinion. It tests whether the offer is worth something to them.' },
+  { t: 'See whether people who use the service tell their neighbours about it.', q: true, a: 'gro', w: 'Word of mouth is one of the main engines Ries describes for growth.' } ]);
+
+/* ---------- 5 Leap: the leap-of-faith stack ---------- */
+{ const el = $('#lf6'), A = [['Busy parents find planning dinners a chore', 90], ['They\'ll let us choose their meals', 60], ['They\'ll pay £8 a week for it', 45], ['They\'ll still use it after a month', 40], ['We can deliver for less than they pay', 70], ['They\'ll recommend it to friends', 55]];
+  let v = A.map(a => a[1]);
+  $('#lfCtl').innerHTML = A.map(([t], i) => `<div class="ctl"><label for="lfC${i}"><span>${t}</span><output id="olfC${i}"></output></label><input type="range" id="lfC${i}" min="5" max="99" value="${v[i]}"></div>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, rowH = nw ? 40 : 30, H = A.length * rowH + (nw ? 80 : 60), L = nw ? 0 : 280, bw = W - L - 50; vb(el, W, H);
+    let g = '', p = 1; const low = v.indexOf(Math.min(...v));
+    A.forEach(([t], i) => { p *= v[i] / 100; const y = 8 + i * rowH, by = nw ? y + 14 : y + 2, hot = i === low;
+      g += TX(0, nw ? y + 10 : y + 16, t, hot ? 'bad' : 'text', 12, 'start', hot ? 'font-weight="600"' : '');
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="18" rx="4" ${FS('panel-2', 'line', 1)}/><rect x="${L}" y="${by}" width="${(bw * v[i] / 100).toFixed(1)}" height="18" rx="4" ${F(hot ? 'bad' : 'cool', hot ? .75 : .6)}/>` + TX(L + bw + 6, by + 14, v[i] + '%', 'muted', 12); });
+    const y = 16 + A.length * rowH; g += `<line x1="0" y1="${y - 6}" x2="${W}" y2="${y - 6}" ${S('line', 1)}/>`;
+    const ay = nw ? y + 14 : y + 4; g += TX(0, nw ? y + 6 : y + 16, 'All of them true', 'glow', 13, 'start', 'font-weight="600"') + `<rect x="${L}" y="${ay}" width="${bw}" height="18" rx="4" ${FS('panel-2', 'line', 1)}/><rect x="${L}" y="${ay}" width="${Math.max(2, bw * p).toFixed(1)}" height="18" rx="4" ${F('glow', .9)}/>` + TX(L + bw + 6, ay + 14, Math.round(p * 100) + '%', 'glow', 12);
+    el.innerHTML = g; A.forEach((_, i) => out('lfC' + i, v[i] + '%'));
+    $('#lfP').textContent = pct(p); $('#lfT').textContent = A[low][0] + ` (${v[low]}% sure)`;
+  });
+  A.forEach((_, i) => $('#lfC' + i).addEventListener('input', e => { v[i] = +e.target.value; draw(); }));
+  draw();
+}
+
+/* ---------- 6 Test: pick the MVP ---------- */
+sorter('#sort7', '#tally7', [{ id: 'vid', label: 'Video MVP', d: 'Show it working, measure interest' }, { id: 'con', label: 'Concierge MVP', d: 'Serve a few people by hand, openly' }, { id: 'woz', label: 'Wizard of Oz MVP', d: 'Looks automatic, people behind the curtain' }], [
+  { t: 'File syncing that needs months of engineering before anyone could try it. Will tech fans want it?', q: true, a: 'vid', w: 'Dropbox\'s answer: a short demo video. The beta waiting list jumped from about 5,000 to 75,000 almost overnight.' },
+  { t: 'A weekly meal-planning service. You want to learn exactly what one family needs before writing software.', q: true, a: 'con', w: 'Food on the Table started with one customer whom the founder served in person each week.' },
+  { t: 'A service where people ask questions and get answers from someone in their network. Will they use it before the matching software exists?', q: true, a: 'woz', w: 'Aardvark ran early versions with people behind the scenes doing the work the software would later do.' },
+  { t: 'A personal-shopping app. You\'ll message each of five early users yourself, and they know it\'s you.', q: true, a: 'con', w: 'The customer knows a human is helping. That\'s concierge, and you learn from every conversation.' },
+  { t: 'An "instant" translation service where, at first, staff quietly translate each request by hand.', q: true, a: 'woz', w: 'To the customer it looks automatic. Behind the curtain it\'s people, which tests demand before the technology.' },
+  { t: 'A gadget that\'s expensive to prototype. You want to know if a crowd will sign up before you build it.', q: true, a: 'vid', w: 'A video showing what it would do lets you measure real sign-ups without building it.' } ]);
+
+/* ---------- 7 Measure: vanity or cohort ---------- */
+{ const el = $('#vm8'); let st;
+  const FEAT = ['a new avatar shop', 'faster loading', 'a redesigned home page', 'a friends list', 'a welcome tour', 'badges', 'a new pricing page', 'dark mode', 'group chat', 'a tutorial video'];
+  function reset(){ st = { m: [{ n: 1000, c: 5.0 }], c: 5.0, fi: 0, say: 'Nothing yet.' }; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 420 : 250; vb(el, W, H);
+    const M = st.m, tot = []; let s = 0; M.forEach(x => { s += x.n; tot.push(s); });
+    const pw = nw ? W - 20 : (W - 40) / 2, ph = nw ? 160 : 180, p1 = [10, 30], p2 = nw ? [10, 240] : [W / 2 + 10, 30], n = Math.max(12, M.length), bw = pw / n;
+    let g = TX(p1[0], p1[1] - 10, 'Total users (the vanity chart)', 'cool', 12.5, 'start', 'font-weight="600"') + TX(p2[0], p2[1] - 10, 'Conversion of each month\'s new users', 'glow', 12.5, 'start', 'font-weight="600"');
+    const mx = Math.max(...tot) * 1.1;
+    tot.forEach((v, i) => { const h = ph * v / mx; g += `<rect x="${(p1[0] + i * bw + 1).toFixed(1)}" y="${(p1[1] + ph - h).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${h.toFixed(1)}" rx="2" ${F('cool', .6)}/>`; });
+    g += `<line x1="${p1[0]}" y1="${p1[1] + ph}" x2="${p1[0] + pw}" y2="${p1[1] + ph}" ${S('line', 1)}/>`;
+    const Y = c => p2[1] + ph - ph * c / 12; g += `<line x1="${p2[0]}" y1="${p2[1] + ph}" x2="${p2[0] + pw}" y2="${p2[1] + ph}" ${S('line', 1)}/>`;
+    [0, 4, 8, 12].forEach(c => g += TX(p2[0] + pw, Y(c) - 3, c + '%', 'faint', 10.5, 'end'));
+    g += `<path d="${M.map((x, i) => (i ? 'L' : 'M') + (p2[0] + i * bw + bw / 2).toFixed(1) + ' ' + Y(x.c).toFixed(1)).join('')}" ${S('glow', 2.5)}/>`;
+    M.forEach((x, i) => g += `<circle cx="${(p2[0] + i * bw + bw / 2).toFixed(1)}" cy="${Y(x.c).toFixed(1)}" r="3.5" ${F(x.t ? 'good' : 'glow')}/>`);
+    g += TX(p1[0], p1[1] + ph + 18, 'month 1 → ' + M.length, 'faint', 11) + TX(p2[0], p2[1] + ph + 18, 'each dot is one cohort', 'faint', 11);
+    el.innerHTML = g; $('#vmTot').textContent = fmtN(s); $('#vmCon').textContent = st.c.toFixed(1) + '%'; $('#vmSay').innerHTML = st.say;
+  });
+  function ship(test){ if (st.m.length >= 24){ st.say = 'Two years of charts. Start over to try again.'; draw(); return; }
+    const f = FEAT[st.fi++ % FEAT.length], works = Math.random() < .3, lift = works ? .5 + Math.random() * .6 : (Math.random() - .5) * .3, last = st.m[st.m.length - 1];
+    st.c = clamp(st.c + lift, 1, 12); st.m.push({ n: last.n * 1.13, c: st.c + (Math.random() - .5) * .25, t: test });
+    st.say = test ? (works ? `Split test: <b>${f}</b> lifted conversion by about ${lift.toFixed(1)} points against the control. Keep it.` : `Split test: <b>${f}</b> made no real difference against the control. That's validated learning: stop investing in it.`)
+      : `Shipped <b>${f}</b>. Total users are up ${pct(st.m[st.m.length - 1].n / (st.m.reduce((s, x) => s + x.n, 0) - st.m[st.m.length - 1].n))}! But did ${f} cause anything? Check the cohort line.`;
+    draw(); }
+  $('#vmShip').addEventListener('click', () => ship(false)); $('#vmTest').addEventListener('click', () => ship(true));
+  $('#vmReset').addEventListener('click', () => { reset(); draw(); });
+  reset(); draw();
+}
+
+/* ---------- 8 Pivot: runway in pivots ---------- */
+{ const el = $('#rw9'), C = $('#rwC'), B = $('#rwB'), M = $('#rwM');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 130, c = +C.value, b = +B.value, m = +M.value, run = c / b, p = Math.floor(run / m), maxM = 60; vb(el, W, H);
+    const L = 10, Rr = W - 10, X = v => L + (Rr - L) * Math.min(v, maxM) / maxM; let g = '';
+    g += `<rect x="${L}" y="40" width="${Rr - L}" height="34" rx="6" ${FS('panel-2', 'line', 1)}/><rect x="${L}" y="40" width="${(X(run) - L).toFixed(1)}" height="34" rx="6" ${F('cool', .35)}/>`;
+    for (let i = 1; i <= p; i++){ const x = X(i * m); if (i * m > maxM) break; g += `<line x1="${x.toFixed(1)}" y1="34" x2="${x.toFixed(1)}" y2="80" ${S('glow', 2.5)}/><circle cx="${x.toFixed(1)}" cy="30" r="4" ${F('glow')}/>`; }
+    g += TX(X(Math.min(run, maxM)), 96, run > maxM ? 'cash lasts beyond 5 years' : 'cash runs out', 'bad', 11.5, run > maxM * .8 ? 'end' : 'middle');
+    [0, 12, 24, 36, 48, 60].forEach(v => g += TX(X(v), 120, v ? v + ' mo' : '0', 'faint', 10.5, v === 0 ? 'start' : v === 60 ? 'end' : 'middle'));
+    g += TX(L, 16, 'each green mark is one pivot-or-persevere decision', 'glow', 11.5);
+    el.innerHTML = g; out('rwC', '$' + fmtN(c) + 'k'); out('rwB', '$' + b + 'k'); out('rwM', m + ' mo');
+    $('#rwR').textContent = run.toFixed(1) + ' months'; $('#rwP').textContent = p;
+  });
+  [C, B, M].forEach(x => x.addEventListener('input', draw)); draw();
+}
+
+/* ---------- 9 Batch: the envelope race ---------- */
+{ const el = $('#bt10'), N = 20, H0 = 3, STEPS = ['fold', 'stuff', 'seal', 'stamp']; let timer = null, tNow = 0, sims = null;
+  function simBatch(bad){ const t = []; let off = 0, found = null;
+    for (let s = 0; s < 4; s++){ if (bad && s === 1){ found = off + 1; off += 1 + N; }
+      t.push([...Array(N)].map((_, i) => off + i + 1)); off += N + H0; }
+    return { t, found, redo: bad ? N : 0, end: t[3][N - 1] }; }
+  function simFlow(bad){ const t = [[], [], [], []]; let clk = 0, found = null;
+    for (let i = 0; i < N; i++) for (let s = 0; s < 4; s++){ if (bad && i === 0 && s === 1){ found = clk + 1; clk += 2; } clk++; t[s].push(clk); }
+    return { t, found, redo: bad ? 1 : 0, end: t[3][N - 1] }; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, Hh = 250; vb(el, W, Hh);
+    let g = ''; const lanes = [['Big batches', 'cool'], ['One at a time', 'glow']], L = nw ? 0 : 110, bw = (W - L - 60) / 4;
+    lanes.forEach(([name, col], li) => { const y0 = nw ? 22 + li * 116 : 30 + li * 110, sim = sims && sims[li];
+      g += TX(0, nw ? y0 - 6 : y0 + 30, name, col, 13, 'start', 'font-weight="600"');
+      const by = nw ? y0 + 4 : y0;
+      STEPS.forEach((s, k) => { const x = L + k * bw, n = sim ? sim.t[k].filter(v => v <= tNow).length : 0, wip = sim ? (k === 0 ? N : sim.t[k - 1].filter(v => v <= tNow).length) - n : 0;
+        g += `<rect x="${(x + 3).toFixed(1)}" y="${by}" width="${(bw - 6).toFixed(1)}" height="58" rx="8" ${FS('panel-2', 'line', 1)}/>`;
+        g += TX(x + bw / 2, by + 16, s, 'muted', 11.5, 'middle') + TX(x + bw / 2, by + 44, String(n), n ? col : 'faint', 22, 'middle', 'style="font-family:var(--f-display)"');
+        if (k > 0 && wip > 0) g += TX(x + bw / 2, by + 72, wip + ' waiting', 'faint', 10.5, 'middle'); });
+      const fin = sim ? sim.t[3].filter(v => v <= tNow).length : 0; g += TX(W - 4, by + 26, '✉ ' + fin, fin ? col : 'faint', 15, 'end') + TX(W - 4, by + 44, 'done', 'faint', 10.5, 'end');
+      if (sim && sim.found && tNow >= sim.found) g += TX(L, by + 88, `Found the misfit at tick ${sim.found}: ${sim.redo} letter${sim.redo === 1 ? '' : 's'} to refold`, 'bad', 11.5); });
+    g += TX(0, Hh - 4, 'tick ' + tNow, 'faint', 11);
+    el.innerHTML = g; });
+  function say(){ if (!sims) return; sims.forEach((s, i) => { const id = i ? '#btB' : '#btA', first = s.t[3][0], done = tNow >= s.end;
+    $(id).innerHTML = `First envelope ready at tick <b>${tNow >= first ? first : '…'}</b>. ` + (done ? `All ${N} done at tick <b>${s.end}</b>.` : 'Still going.') + (s.found ? ` Problem found at tick ${s.found}, after ${s.redo === 1 ? 'one letter' : 'all ' + s.redo + ' letters'} were folded.` : ''); }); }
+  $('#btGo').addEventListener('click', () => { clearInterval(timer); const bad = $('#btBad').checked; sims = [simBatch(bad), simFlow(bad)]; tNow = 0; const end = Math.max(sims[0].end, sims[1].end);
+    if (RM){ tNow = end; draw(); say(); return; }
+    timer = setInterval(() => { tNow++; draw(); say(); if (tNow >= end) clearInterval(timer); }, 45); });
+  draw();
+}
+
+/* ---------- 10 Grow: three engines ---------- */
+{ const el = $('#eg11'), tabs = $('#egTabs'), ctl = $('#egCtl');
+  const ENG = { sticky: { name: 'Sticky', ctl: [['egA', 'New customers a month (as % of current)', 0, 15, 6, '%'], ['egB', 'Churn a month', 0, 15, 4, '%']] },
+    viral: { name: 'Viral', ctl: [['egK', 'Viral coefficient (new users each user brings)', 50, 150, 90, '']] },
+    paid: { name: 'Paid', ctl: [['egL', 'Lifetime value of a customer', 10, 200, 60, '$'], ['egC', 'Cost to acquire a customer', 10, 200, 80, '$']] } };
+  let cur = 'sticky', val = {}; Object.values(ENG).forEach(e => e.ctl.forEach(c => val[c[0]] = c[4]));
+  tabs.innerHTML = Object.entries(ENG).map(([k, e]) => `<button class="btn" type="button" data-e="${k}" aria-pressed="${k === cur}">${e.name} engine</button>`).join('');
+  function series(){ const s = [1000];
+    if (cur === 'sticky'){ const r = 1 + (val.egA - val.egB) / 100; for (let m = 1; m <= 24; m++) s.push(s[m - 1] * r); }
+    if (cur === 'viral'){ const k = val.egK / 100; let nu = 1000; for (let m = 1; m <= 24; m++){ nu *= k; s.push(s[m - 1] + nu); } }
+    if (cur === 'paid'){ const g = Math.pow(val.egL / val.egC, .35); let spend = 20; for (let m = 1; m <= 24; m++){ s.push(s[m - 1] + spend * 1000 / val.egC); spend *= g; } }
+    return s; }
+  function ctlHTML(){ ctl.innerHTML = ENG[cur].ctl.map(([id, l, a, b]) => `<div class="ctl"><label for="${id}"><span>${l}</span><output id="o${id}"></output></label><input type="range" id="${id}" min="${a}" max="${b}" value="${val[id]}"></div>`).join('');
+    ENG[cur].ctl.forEach(([id]) => $('#' + id).addEventListener('input', e => { val[id] = +e.target.value; draw(); })); }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 240, L = 10, B = 210, T = 20, Rr = W - 10, s = series(), mx = Math.max(...s, 2000) * 1.08; vb(el, W, H);
+    const X = m => L + (Rr - L) * m / 24, Y = v => B - (B - T) * v / mx; let g = '';
+    g += `<line x1="${L}" y1="${B}" x2="${Rr}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${Y(1000)}" x2="${Rr}" y2="${Y(1000)}" ${S('faint', 1, ';stroke-dasharray:3 4')}/>` + TX(Rr, Y(1000) - 4, 'start: 1,000', 'faint', 10.5, 'end');
+    g += `<path d="${s.map((v, m) => (m ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(v).toFixed(1)).join('')}L${X(24)} ${B}L${L} ${B}Z" ${F('glow', .14)}/><path d="${s.map((v, m) => (m ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(v).toFixed(1)).join('')}" ${S('glow', 2.5)}/>`;
+    [0, 6, 12, 18, 24].forEach(m => g += TX(X(m), B + 18, m ? m + ' mo' : '0', 'faint', 10.5, m === 0 ? 'start' : m === 24 ? 'end' : 'middle'));
+    g += TX(L + 4, T + 4, 'customers, largest ' + big(Math.max(...s)), 'muted', 11.5);
+    el.innerHTML = g;
+    ENG[cur].ctl.forEach(([id, , , , , u]) => out(id, id === 'egK' ? (val[id] / 100).toFixed(2) : u === '$' ? '$' + val[id] : val[id] + u));
+    $('#egN').textContent = big(s[24]);
+    let say = '';
+    if (cur === 'sticky') say = val.egA > val.egB ? 'Yes: you gain customers faster than you lose them.' : val.egA === val.egB ? 'Stalled: new customers only replace the ones who leave.' : 'No: churn beats acquisition, so you\'re shrinking.';
+    if (cur === 'viral') say = val.egK > 100 ? 'Yes: each customer brings more than one more, so it compounds.' : val.egK === 100 ? 'Just: each customer replaces themselves.' : 'No: below one, every wave of invites is smaller than the last and growth levels off.';
+    if (cur === 'paid') say = val.egL > val.egC ? 'Yes: each customer is worth more than they cost, so the profit buys the next ones.' : val.egL === val.egC ? 'Break-even: you can buy customers but not grow the budget.' : 'No: each customer costs more than they\'re worth, so the budget shrinks.';
+    $('#egSay').textContent = say;
+  });
+  tabs.querySelectorAll('[data-e]').forEach(b => b.addEventListener('click', () => { cur = b.dataset.e; press([...tabs.querySelectorAll('[data-e]')], b); ctlHTML(); draw(); }));
+  ctlHTML(); draw();
+}
+
+/* ---------- 11 Adapt: five whys ---------- */
+{ const box = $('#fw12');
+  const W = [['The problem', 'A new release switched off a feature that customers relied on.', 'Roll back and restore the feature.', 'Roll back, and add an automatic check for this feature before every release.'],
+    ['Why?', 'A particular server failed.', 'Bring the server back and add an alert for that failure.', 'Add monitoring that would have flagged the failure before customers did.'],
+    ['Why?', 'An obscure subsystem had been used the wrong way.', 'Fix the call that misused it.', 'Add a safeguard so the subsystem can\'t be used that way again.'],
+    ['Why?', 'The engineer who used it didn\'t know how to use it properly.', 'Show this engineer how it works.', 'Write a short guide to the subsystem for everyone who touches it.'],
+    ['Why?', 'He had never been trained.', 'Add the subsystem to the training for new engineers.', 'Set up proper onboarding with a mentor for every new engineer.'],
+    ['Why?', 'His manager didn\'t believe in training new engineers, because the team was "too busy".', 'Talk with the manager about what skipping training just cost.', 'Make training part of every team\'s plan, with time set aside for it.']];
+  let k = 0, rep = false, blamed = false;
+  function draw(){
+    let h = `<div class="row"><span class="tip">This has happened:</span><button class="btn" type="button" data-r="0" aria-pressed="${!rep}">for the first time</button><button class="btn" type="button" data-r="1" aria-pressed="${rep}">before, more than once</button></div>`;
+    for (let i = 0; i <= k; i++){ const [lab, a, f1, f2] = W[i]; h += `<div class="fw-step${i === W.length - 1 ? ' root' : ''}"><span class="k">${i ? 'Why number ' + i : lab}</span><p>${a}</p><span class="fix"><b>Proportional fix:</b> ${rep ? f2 : f1}</span></div>`; }
+    h += `<div class="row">${k < W.length - 1 ? '<button class="btn primary" type="button" data-why>Ask why</button>' : ''}<button class="btn" type="button" data-blame>Blame the engineer</button><button class="btn" type="button" data-restart>Start over</button></div>`;
+    h += `<p class="fw-sum" aria-live="polite">${blamed ? '<b style="color:var(--bad)">That\'s the curse of the five blames.</b> Ries\'s rule: if a mistake happened, the system made it easy. Blame stops the questions before they reach the cause, and next time people hide problems.' : k === W.length - 1 ? '<b style="color:var(--glow)">Root reached.</b> A technical fault ended at a management habit. Fixing only the server would have left the cause in place for the next release.' : 'Each answer gets a small fix of its own, not just the last one.'}</p>`;
+    box.innerHTML = h;
+    box.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => { rep = b.dataset.r === '1'; draw(); }));
+    const w = box.querySelector('[data-why]'); if (w) w.addEventListener('click', () => { k++; blamed = false; draw(); });
+    box.querySelector('[data-blame]').addEventListener('click', () => { blamed = true; draw(); });
+    box.querySelector('[data-restart]').addEventListener('click', () => { k = 0; blamed = false; draw(); });
+  }
+  draw();
+}
+
+/* ---------- 12 Innovate: design a sandbox ---------- */
+{ const el = $('#sb13'), cI = $('#sbC'), dI = $('#sbD'), tg = $('#sbT');
+  const T = [['team', 'One team sees it through, end to end', true], ['met', 'Judged on the standard metrics everyone uses', true], ['kill', 'Stopped at once if the numbers crash', true]];
+  let on = Object.fromEntries(T.map(t => [t[0], t[2]]));
+  tg.innerHTML = T.map(([id, l]) => `<label class="tg"><input type="checkbox" data-t="${id}" ${on[id] ? 'checked' : ''}><span>${l}</span></label>`).join('');
+  const gauge = (cx, cy, r, v, col, label, sub) => { const a0 = Math.PI, a1 = Math.PI + Math.PI * clamp(v, 0, 1), p = a => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    const [x0, y0] = p(a0), [xe, ye] = p(2 * Math.PI), [x1, y1] = p(a1);
+    return `<path d="M${x0} ${y0}A${r} ${r} 0 0 1 ${xe} ${ye}" ${S('line', 14, ';stroke-linecap:round')}/>` + (v > .01 ? `<path d="M${x0} ${y0}A${r} ${r} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}" ${S(col, 14, ';stroke-linecap:round')}/>` : '') +
+      TX(cx, cy - 10, Math.round(v * 100), col, 30, 'middle', 'style="font-family:var(--f-display)"') + TX(cx, cy + 20, label, 'text', 12.5, 'middle', 'font-weight="600"') + TX(cx, cy + 36, sub, 'faint', 11, 'middle'); };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 360 : 640, H = 190, c = +cI.value, d = +dI.value; vb(el, W, H);
+    const risk = clamp((c / 100) * (.35 + .65 * d / 26) * (on.kill ? .35 : 1) * 1.3, 0, 1);
+    const sample = c === 0 ? 0 : clamp(Math.log10(1 + c * 3) / Math.log10(301), 0, 1), time = clamp(d / 6, 0, 1);
+    const learn = clamp(sample * (.4 + .6 * time) * (on.met ? 1 : .45) * (on.team ? 1 : .6), 0, 1);
+    const r = nw ? 62 : 78; el.innerHTML = gauge(W * .27, 120, r, risk, 'bad', 'Risk to the core', 'out of 100') + gauge(W * .73, 120, r, learn, 'glow', 'Learning', 'out of 100');
+    out('sbC', c + '%'); out('sbD', d + ' week' + (d === 1 ? '' : 's'));
+    $('#sbR').textContent = risk < .15 ? 'Small. The parent company can relax.' : risk < .45 ? 'Noticeable. Expect nervous questions.' : 'High. The company\'s immune system will shut this down.';
+    $('#sbL').textContent = c === 0 ? 'Nothing: no customers see it.' : learn > .7 ? 'Plenty: enough customers, time and clear metrics to get an answer.' : !on.met ? 'Muddy: without shared metrics, nobody will agree what it showed.' : learn > .4 ? 'Some: a longer run or more customers would make it clearer.' : 'Little: too few customers or too short to tell.';
+  });
+  [cI, dI].forEach(x => x.addEventListener('input', draw));
+  tg.querySelectorAll('[data-t]').forEach(x => x.addEventListener('change', () => { on[x.dataset.t] = x.checked; draw(); }));
+  draw();
+}
+
+/* ---------- 13 Waste not: waste or learning ---------- */
+sorter('#sort14', '#tally14', [{ id: 'waste', label: 'Waste', d: 'No value, no proven learning' }, { id: 'learn', label: 'Value or validated learning', d: 'It helps customers or proves something' }], [
+  { t: 'Spending three months polishing a feature no customer has asked for or tried.', q: true, a: 'waste', w: 'Efficient building of something unproven is exactly the waste Ries warns about.' },
+  { t: 'Running a split test that shows a planned feature makes no difference.', q: true, a: 'learn', w: 'A "failed" test is still validated learning: you just saved yourself from building more of it.' },
+  { t: 'Writing a 60-page business plan full of five-year forecasts for a brand-new market.', q: true, a: 'waste', w: 'With no history to forecast from, the numbers are guesses dressed up as facts.' },
+  { t: 'Watching five customers try the rough first version in their own homes.', q: true, a: 'learn', w: 'Going and seeing for yourself is how you find out what is true.' },
+  { t: 'Celebrating a jump in page views after a press mention.', q: true, a: 'waste', w: 'A vanity metric. It feels like progress and tells you nothing about whether the product works.' },
+  { t: 'Holding a pivot-or-persevere meeting with the cohort numbers on the table.', q: true, a: 'learn', w: 'A deliberate decision based on actionable data is the point of innovation accounting.' } ]);
+
+/* ---------- afterword: the experiment board ---------- */
+{ const list = $('#xbList'); let log = store.get('ls-board', []);
+  const save = () => store.set('ls-board', log);
+  function draw(){
+    if (!log.length){ list.innerHTML = '<span class="k">Your board</span><p class="tip">Nothing here yet. Add your riskiest assumption, the smallest test for it and the number that will decide. When the result is in, mark whether you pivot or persevere.</p>'; return; }
+    const piv = log.filter(e => e.res === 'pivot').length, per = log.filter(e => e.res === 'persevere').length;
+    list.innerHTML = `<span class="k">Your board · ${log.length} experiment${log.length === 1 ? '' : 's'}</span>` + (piv + per ? `<p class="tip">Decided so far: <b>${per}</b> persevere, <b>${piv}</b> pivot.</p>` : '') +
+      log.map(e => `<div class="xb"><div class="xb-h"><b>${esc(e.leap)}</b><button class="rm" type="button" data-rm="${e.id}" aria-label="Remove this experiment">×</button></div>${e.mvp ? `<p><span>MVP</span>${esc(e.mvp)}</p>` : ''}${e.met ? `<p><span>Decides</span>${esc(e.met)}</p>` : ''}
+        <div class="row">${e.res ? `<span class="tag ${e.res === 'persevere' ? 'ok' : 'no'}">${e.res === 'persevere' ? 'Persevere' : 'Pivot'}</span><button class="btn" type="button" data-undo="${e.id}">Undo</button>` : `<button class="btn" type="button" data-res="persevere" data-id="${e.id}">Persevere</button><button class="btn" type="button" data-res="pivot" data-id="${e.id}">Pivot</button>`}</div></div>`).join('');
+    list.querySelectorAll('[data-res]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.id); e.res = b.dataset.res; save(); draw(); }));
+    list.querySelectorAll('[data-undo]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.undo); e.res = null; save(); draw(); }));
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { log = log.filter(x => x.id !== b.dataset.rm); save(); draw(); }));
+  }
+  $('#xbAdd').addEventListener('click', () => { const leap = $('#xbLeap').value.trim(), msg = $('#xbMsg');
+    if (!leap){ msg.textContent = 'Write the assumption first.'; $('#xbLeap').focus(); return; }
+    log.unshift({ id: Date.now().toString(36), leap, mvp: $('#xbMvp').value.trim(), met: $('#xbMet').value.trim(), res: null }); save();
+    ['#xbLeap', '#xbMvp', '#xbMet'].forEach(s => $(s).value = ''); msg.textContent = 'Added. Run the test, then come back and decide.'; draw(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
