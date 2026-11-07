@@ -1,0 +1,1707 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The 7 Habits, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a brass compass on an old map. Same shell as the other guides (chapter rail; per section: short answer, big ideas,
+   a story from the book, a lab, plain words, quick check), grouped by the book's four parts.
+   Dark-first: deep pine green with a brass accent and a terracotta second series for other people; light mode is map paper with pine and rust. */
+:root{
+  color-scheme: dark;
+  --ink:#0E1A16;--panel:#13231E;--panel-2:#1A2F28;--line:#2B4439;--text:#F1F2EA;--muted:#B0BCAF;--faint:#7C8E82;
+  --glow:#E3B85C;--glow-soft:rgba(227,184,92,.1);--hl:rgba(227,184,92,.24);--cool:#F0906E;--cool-soft:rgba(240,144,110,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B7A;--bad-soft:rgba(255,139,122,.12);
+  --soft:#D8DED3;--deep:#0A1411;--toc-bg:rgba(19,35,30,.74);--glow-line:rgba(227,184,92,.36);--cool-line:rgba(240,144,110,.32);--on-glow:#2A1D02;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F5F1E6;--panel:#FFFDF7;--panel-2:#ECE6D6;--line:#D8D0BC;--text:#14231D;--muted:#4F5A52;--faint:#857F70;
+  --glow:#8A5A06;--glow-soft:rgba(138,90,6,.06);--hl:#F1E0B4;--cool:#A8431F;--cool-soft:rgba(168,67,31,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#27352E;--deep:#FBF8F0;--toc-bg:rgba(255,253,247,.84);--glow-line:rgba(138,90,6,.3);--cool-line:rgba(168,67,31,.28);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F5F1E6;--panel:#FFFDF7;--panel-2:#ECE6D6;--line:#D8D0BC;--text:#14231D;--muted:#4F5A52;--faint:#857F70;
+  --glow:#8A5A06;--glow-soft:rgba(138,90,6,.06);--hl:#F1E0B4;--cool:#A8431F;--cool-soft:rgba(168,67,31,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#27352E;--deep:#FBF8F0;--toc-bg:rgba(255,253,247,.84);--glow-line:rgba(138,90,6,.3);--cool-line:rgba(168,67,31,.28);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- 7 Habits additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.env{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0;align-content:start}
+.env-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.env-top output{font-family:var(--f-display);font-size:26px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.env-body{padding:12px 16px 4px}
+.env-body svg{display:block;width:100%;max-width:340px;height:auto;margin:0 auto}
+.env-ctl{display:grid;gap:8px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.card3.right{border-color:var(--good);background:var(--good-soft)}
+.card3.mid{border-color:var(--cool);background:var(--cool-soft)}
+.card3.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.card3 .tr{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.04em;color:var(--faint)}
+.card1{display:grid;gap:12px;padding:20px 22px;border-radius:16px;border:1px solid var(--glow-line);background:radial-gradient(120% 120% at 100% 0%, var(--glow-soft), transparent 60%), var(--deep);max-width:760px}
+.card1 .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.card1 .empty{color:var(--muted);font-size:15px}
+.card1 .big1{font-family:var(--f-display);font-size:clamp(22px,2.8vw,28px);line-height:1.25}
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.plan div{display:grid;gap:2px;padding:10px 12px;border-radius:10px;background:var(--panel);border:1px solid var(--line);font-size:14px;color:var(--soft)}
+.plan div span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.field textarea{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;min-height:64px}
+.field textarea:focus{border-color:var(--glow);outline:none}
+.mission{font-family:var(--f-display);font-size:clamp(20px,2.6vw,26px);line-height:1.3;color:var(--text);white-space:pre-wrap}
+.mission .empty{font-family:var(--f-body);font-size:15px;color:var(--muted)}
+.hab7{display:grid;gap:10px;max-width:860px}
+.hab7 .wk{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.hab7 .grid{display:grid;grid-template-columns:minmax(120px,1.6fr) repeat(7,minmax(26px,1fr));gap:4px;align-items:center}
+.hab7 .grid .h{font-size:13.5px;color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hab7 .grid .d{font-family:var(--f-mono);font-size:10.5px;color:var(--faint);text-align:center}
+.hab7 .grid button{appearance:none;border:1px solid var(--line);background:var(--panel);border-radius:7px;height:28px;cursor:pointer;padding:0}
+.hab7 .grid button[aria-pressed=true]{background:var(--glow);border-color:var(--glow)}
+.hab7 .grid button:focus-visible{outline:2px solid var(--glow);outline-offset:2px}
+.qlist{display:grid;gap:6px}
+.qlist .t{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--soft)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .env-body{padding:10px 12px 2px} .hab7 .grid{grid-template-columns:minmax(92px,1.4fr) repeat(7,minmax(22px,1fr));gap:3px} .hab7 .grid .h{font-size:12px} }
+.env-say{font-size:14px;color:var(--soft);min-height:2.6em}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A habit-by-habit guide to the book by Stephen R. Covey</div>
+    <h1><em>The 7 Habits of Highly Effective People</em>,<br>Explained</h1>
+    <p class="lede">Stephen Covey spent years reading two hundred years of American writing on success, and noticed a shift. The older books were about <i>character</i>: integrity, patience, fairness, hard work. The newer ones were about <i>personality</i>: techniques, image and quick fixes. <b>The 7 Habits</b> is his argument for going back to character, and his plan for doing it in seven habits that take you from depending on others, to standing on your own, to working well with other people. This guide takes the book section by section, with a lab in each where you can try the idea.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Change starts <em>inside out</em>: master yourself first, then you can work well with others, and keep renewing both.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's getting in your way?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="env" style="margin:0" aria-label="The maturity continuum">
+        <div class="env-top"><span>The maturity continuum</span><output id="mcV"></output></div>
+        <div class="env-body"><svg id="mcSvg" viewBox="0 0 320 220" role="img" aria-label="The seven habits arranged from dependence to independence to interdependence"></svg></div>
+        <div class="env-ctl"><span class="tip">Tap a habit to see where it fits:</span><div class="row" id="mcT"></div><p class="env-say" id="mcSay" aria-live="polite"></p></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Part One · sections 1 to 4</span><span class="q">Paradigms and Principles</span><span class="d">Inside-out, the character ethic, and the goose that lays golden eggs</span></a>
+      <a href="#part2"><span class="n">Part Two · sections 5 to 11</span><span class="q">Private Victory</span><span class="d">Habits 1 to 3: be proactive, begin with the end, put first things first</span></a>
+      <a href="#part3"><span class="n">Part Three · sections 12 to 15</span><span class="q">Public Victory</span><span class="d">Habits 4 to 6: think win-win, seek first to understand, synergize</span></a>
+      <a href="#part4"><span class="n">Part Four · sections 16 and 17</span><span class="q">Renewal</span><span class="d">Habit 7: sharpen the saw, and the upward spiral</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 1989</span>
+      <span><b>Author</b> Stephen R. Covey, a leadership teacher and consultant</span>
+      <span><b>Read time</b> about 4 minutes per section here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Section navigation">
+    <div class="prog"><span id="progTxt">0 of 17 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Sections"></nav>
+
+    <!-- ===================== PARADIGMS AND PRINCIPLES ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part One · Paradigms and principles</span>
+      <h2>Paradigms and Principles</h2>
+      <p>Before any habit, Covey asks you to look at the lens you look through. How you see a situation decides what you do about it, so lasting change has to start with how you see, and with who you are, not with a new technique.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Work from the inside out. Fix the way you see and the person you are, and the behaviour follows.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 1</span> · Paradigms: the maps in our heads</div>
+        <h2>Inside-Out</h2>
+        <div class="short"><span class="lbl">In short</span><p>Each of us looks at the world through paradigms: mental maps of how things are and how they should be. We rarely notice them, but they shape every judgement we make. Change the map and your behaviour changes with it, often in an instant.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The map is not the territory.</b> A paradigm is a map of reality, not reality itself. If you're using a map of the wrong city, trying harder or thinking positively won't get you there.</span></li>
+          <li><span><b>We see the world as we are.</b> We think we see things objectively, but we describe the world through our own conditioning. Two people can look at the same thing and both be right about what they see.</span></li>
+          <li><span><b>A paradigm shift changes everything at once.</b> When you see a situation differently, you don't need a technique to act differently. The new behaviour comes on its own.</span></li>
+          <li><span><b>Inside-out, not outside-in.</b> Covey's approach starts with yourself: your paradigms, your character and your motives, before you try to change other people or circumstances.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>One Sunday morning on a New York subway, Covey sat in a quiet carriage until a man got on with his children. The kids ran around, shouted and grabbed people's papers, while their father sat with his eyes closed and did nothing. Irritated, Covey finally asked him whether he could control his children a bit more. The man looked up, as if noticing for the first time, and said quietly that they had just come from the hospital where the children's mother had died about an hour before. He didn't know what to think, and he supposed they didn't know how to handle it either. In that moment, Covey writes, his irritation vanished and he felt only sympathy. Nothing in the carriage had changed except how he saw it.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: the subway ride</div><div class="hint">Step through the ride and watch your irritation</div></div>
+        <div class="stage"><svg id="swSvg" role="img" aria-label="A subway carriage with a father and his noisy children"></svg></div><div class="lab-ctl"><div class="row" id="swB"></div></div><div class="stats"><div class="stat"><span class="k">Your irritation</span><span class="v glow" id="swIr"></span></div><div class="stat"><span class="k">What you see</span><span class="s" id="swSay"></span></div></div><p class="callout">The children are just as noisy at the end as at the start. <b>The only thing that changed was the paradigm, and the feeling and the behaviour changed with it.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick someone who annoyed you this week. Write down two other explanations for what they did that would make you see it differently.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>How you see a situation decides how you feel and act. Before you try to change what you do, check the map you're using.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this section</label><a class="next" href="#ch2">Next: Character over technique →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 2</span> · Primary greatness and the law of the farm</div>
+        <h2>The Character Ethic</h2>
+        <div class="short"><span class="lbl">In short</span><p>Covey read two centuries of writing on success and found that for the first 150 years it focused on character: integrity, humility, courage, patience. After the First World War it shifted to the personality ethic: image, attitude and techniques for getting your way. Techniques work for a while, he argues, but lasting success rests on character.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two kinds of greatness.</b> Secondary greatness is talent, status and social skill. Primary greatness is goodness of character. Without the second, the first eventually shows through.</span></li>
+          <li><span><b>Principles are like lighthouses.</b> Fairness, honesty, service and growth are natural laws that don't move. You can break yourself against them, but you can't break them.</span></li>
+          <li><span><b>You can't cram on a farm.</b> In school you can cram the night before an exam. On a farm you can't forget to plant in spring and cram in autumn. Relationships and character work like the farm.</span></li>
+          <li><span><b>What you are speaks louder.</b> If people sense you are using a technique on them, it backfires. What builds trust is who you are, shown over time.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey and his wife Sandra were worried about one of their sons, who was struggling at school, socially awkward and small for his age. They tried everything the personality ethic suggested: encouragement, positive talk, coaching him on how to do better. Nothing worked, and he seemed to lose confidence. Then they realised that underneath all the encouragement, the message their son was getting was that his parents thought he wasn't good enough and needed protecting. So they worked on themselves instead, on seeing him as capable and letting him grow at his own pace. Over time, and without being pushed, he began to flourish.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: personality or character?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Notice one moment this week when you reach for a technique to get someone to do something. Ask what the character answer would be instead.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Tricks for getting your way can work in the short run. Real, lasting success comes from being trustworthy, and that takes time, like growing a crop.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this section</label><a class="next" href="#ch3">Next: What a habit is →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 3</span> · Knowledge, skill and desire</div>
+        <h2>The Seven Habits: An Overview</h2>
+        <div class="short"><span class="lbl">In short</span><p>Covey defines a habit as the place where three things meet: knowledge (what to do and why), skill (how to do it) and desire (wanting to do it). The seven habits move you along a maturity continuum, from dependence to independence to interdependence.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three circles make a habit.</b> Know what to do but not how, and nothing happens. Know how but don't want to, and nothing happens. A habit needs all three.</span></li>
+          <li><span><b>Dependence: you take care of me.</b> The dependent person blames others and relies on them for results.</span></li>
+          <li><span><b>Independence: I can do it.</b> The independent person takes responsibility and relies on themselves. It's a big step, but it isn't the top.</span></li>
+          <li><span><b>Interdependence: we can do it better.</b> The interdependent person combines their efforts with others' to achieve more than either could alone. Only an independent person can choose it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey compares breaking a deep habit to the flight of Apollo 11. Leaving Earth took more energy in the first few minutes of lift-off than the astronauts would use in the days of travel that followed. Habits have that kind of gravity, he says: breaking free of procrastination, impatience or selfishness takes a huge effort at the start. But once you're out of the pull, you have a new kind of freedom.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: how a habit forms</div><div class="hint">Switch on each circle</div></div>
+        <div class="stage"><svg id="hbSvg" role="img" aria-label="Three overlapping circles: knowledge, skill and desire"></svg></div><div class="lab-ctl"><div class="row" id="hbE"></div><div class="toggles" id="hbT"></div></div><div class="stats"><div class="stat"><span class="k">Is it a habit yet?</span><span class="v glow" id="hbV"></span></div><div class="stat"><span class="k">What's missing</span><span class="s" id="hbSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick a habit you keep failing to build. Which circle is missing: knowing what and why, knowing how, or really wanting to?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>A habit needs three things together: knowing what to do, knowing how, and wanting to. The seven habits take you from leaning on others, to standing on your own, to working well with others.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this section</label><a class="next" href="#ch4">Next: The golden goose →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 4</span> · The P/PC balance</div>
+        <h2>Production and Capability</h2>
+        <div class="short"><span class="lbl">In short</span><p>Effectiveness, Covey says, is a balance between P, production of the results you want, and PC, production capability: looking after whatever produces them. Neglect the capability and the results dry up. He takes the idea from Aesop's fable of the goose that laid golden eggs.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Eggs and goose.</b> The eggs are the results: money, output, a clean house. The goose is what makes them: your health, your machine, your relationships, your team.</span></li>
+          <li><span><b>Too much P kills the goose.</b> Push for output and skip maintenance and you get more eggs for a while, then none.</span></li>
+          <li><span><b>Too much PC starves you.</b> Spend all your time looking after the goose and you never collect any eggs. The answer is balance, not one or the other.</span></li>
+          <li><span><b>It applies to people.</b> Treat employees, children or a spouse as producers of results only, and the relationship that produces those results wears out.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In the fable, a poor farmer finds a golden egg in the nest of his goose, then another each day. He grows rich, and then greedy and impatient. Wanting all the gold at once, he kills the goose to get at the eggs inside, and finds nothing. Covey adds an example of his own: he once bought a power lawn mower and used it hard without ever servicing it. It worked well for two seasons and then broke down, and it had cost him far more than the maintenance would have.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: feed the goose</div><div class="hint">Choose how much time goes to the goose</div></div>
+        <div class="stage"><svg id="pcSvg" role="img" aria-label="A chart of golden eggs per week over a year"></svg></div><div class="lab-ctl"><div class="ctl"><label>Time spent looking after the goose <output id="opc"></output></label><input type="range" id="pcR" min="0" max="70" step="5" value="0"></div></div><div class="stats"><div class="stat"><span class="k">Eggs in a year</span><span class="v glow" id="pcE"></span></div><div class="stat"><span class="k">The goose</span><span class="s" id="pcSay"></span></div></div><p class="callout">This is an illustrative model, not data from the book. <b>The most eggs over a year come from a balance, not from all-out production.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Name one golden goose in your life that you've been running without maintenance: your sleep, a key relationship, a tool. Book an hour for it this week.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Results come from something that produces them. Look after that thing, whether it's your health, your team or your relationships, or the results will stop.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this section</label><a class="next" href="#ch5">Next: Choose your response →</a></div>
+    </section>
+    <!-- ===================== PRIVATE VICTORY ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part Two · Private victory</span>
+      <h2>Private Victory</h2>
+      <p>The first three habits are about mastering yourself. They take you from dependence, where other people and events run your life, to independence, where you choose your response, decide what you stand for and organise your week around it.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You can't win with other people until you've won with yourself. Private victories come before public ones.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 1</span> · The space between stimulus and response</div>
+        <h2>Be Proactive</h2>
+        <div class="short"><span class="lbl">In short</span><p>The first habit is to take responsibility for your own life. Between what happens to you and how you respond there is a space, and in that space is your freedom to choose. Reactive people let their feelings and circumstances decide. Proactive people decide based on their values.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Responsibility is response-ability.</b> Covey splits the word: the ability to choose your response. Proactive people don't blame circumstances, conditions or upbringing for their behaviour.</span></li>
+          <li><span><b>Four human gifts.</b> Self-awareness, imagination, conscience and independent will. Together they let you step back from your conditioning and choose.</span></li>
+          <li><span><b>Weather inside, not outside.</b> Reactive people feel good when the weather is good and the people around them are nice. Proactive people carry their own weather.</span></li>
+          <li><span><b>Nobody can hurt you without your consent.</b> What hurts us most is not what happens, but our response to it. That gives back a lot of control.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey retells the story of Viktor Frankl, a psychiatrist imprisoned in Nazi death camps, whose parents, brother and wife died there. Stripped of everything, Frankl realised there was one thing his captors could never take: his freedom to decide how all of this would affect him. In that space between what was done to him and his response, he used his imagination and conscience to picture himself one day lecturing about what he had learned. He helped other prisoners find meaning in their suffering, and became, in Covey's words, freer than his guards.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: widen the gap</div><div class="hint">Pick a moment, then switch on your four gifts</div></div>
+        <div class="stage"><svg id="prSvg" role="img" aria-label="A stimulus, a gap, and a response"></svg></div><div class="lab-ctl"><div class="row" id="prS"></div><div class="toggles" id="prT"></div></div><div class="stats"><div class="stat"><span class="k">The gap</span><span class="v glow" id="prV"></span></div><div class="stat"><span class="k">Your response</span><span class="s" id="prSay"></span></div></div><p class="callout">The stimulus never changes. <b>Each gift you use widens the space in which you get to choose.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Next time something sets you off, count to five before you answer and ask: what response would I be proud of tomorrow?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Things happen that you can't control. How you respond is always yours to choose, and choosing on purpose is the first habit.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this section</label><a class="next" href="#ch6">Next: Proactive language →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 1</span> · "I can't" or "I choose"</div>
+        <h2>Listen to Your Language</h2>
+        <div class="short"><span class="lbl">In short</span><p>The words you use show whether you're acting reactively or proactively, and they also feed back into how you see yourself. Reactive language hands power to circumstances: "I have to", "there's nothing I can do", "he makes me so mad". Proactive language takes it back.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Reactive language is self-fulfilling.</b> Say "that's just the way I am" often enough and you'll believe you have no choice, and then act as if you don't.</span></li>
+          <li><span><b>Swap "I must" for "I choose".</b> "I have to go to work" becomes "I choose to go because I want to keep my job". The task stays the same; the ownership changes.</span></li>
+          <li><span><b>Love is a verb.</b> Covey says that in the proactive sense love is something you do: sacrifices, listening, appreciating. The feeling follows the action.</span></li>
+          <li><span><b>Make and keep small commitments.</b> The quickest way to build proactivity is to make a small promise to yourself and keep it. Each kept promise adds to your sense of control.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>At one of Covey's seminars, a man came up to him and said his marriage was in trouble. He and his wife didn't have the feelings for each other they used to, and he thought he just didn't love her anymore. What should he do? "Love her," said Covey. The man repeated that the feeling wasn't there. "Then love her," Covey said again. "If the feeling isn't there, that's a good reason to love her." Love the feeling, he explained, is a fruit of love the verb: serve her, sacrifice for her, listen to her, appreciate her. Hollywood taught us that we aren't responsible for our feelings. Proactive people make love a choice.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: reactive or proactive?</div><div class="tally" id="tally6" aria-label="Score"></div></div>
+        <div class="sorter" id="sort6"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>For one day, catch yourself every time you say "I have to". Restate it, out loud or in your head, as "I choose to, because..."</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Watch your words. "I can't" and "they made me" give your power away; "I choose" and "I will" take it back.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this section</label><a class="next" href="#ch7">Next: Circle of influence →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 1</span> · Work on what you can change</div>
+        <h2>The Circle of Influence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Picture two circles. The Circle of Concern holds everything you care about: the economy, your health, your boss's mood, the news. Inside it is a smaller Circle of Influence: the things you can actually do something about. Reactive people pour energy into the outer ring and their influence shrinks. Proactive people work inside the smaller circle, and it grows.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Energy follows focus.</b> Worry about the weather or a colleague's flaws and you feel helpless, and your influence shrinks. Work on what you can affect and it expands.</span></li>
+          <li><span><b>Have and be.</b> The outer ring is full of "haves": if only I had a better boss. The inner ring is full of "bes": I can be more patient, more skilled.</span></li>
+          <li><span><b>Direct, indirect, none.</b> Some problems you control directly (your behaviour), some indirectly (other people's, by influencing them), and some not at all (the past). For the last kind, the proactive move is to accept it calmly.</span></li>
+          <li><span><b>Mistakes are in the circle too.</b> You can't undo a mistake, but you can acknowledge it, correct it and learn from it right away. That is inside your circle.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey describes an executive who worked under a talented but domineering company president. The other executives spent their meetings complaining about the boss. This man didn't. He worked on what he could control: he anticipated the president's needs, did his own job brilliantly, and brought him analysis and recommendations as well as data. Over time the president came to rely on him. He was consulted on decisions the others were simply told about, and the circle of influence of a man with the same boss as everyone else grew far larger than theirs.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: where does your energy go?</div><div class="hint">Pick where you'll spend your energy this week</div></div>
+        <div class="stage"><svg id="ciSvg" role="img" aria-label="A circle of influence inside a circle of concern"></svg></div><div class="lab-ctl"><div class="toggles" id="ciT"></div></div><div class="stats"><div class="stat"><span class="k">Circle of Influence</span><span class="v glow" id="ciV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="ciSay"></span></div></div><p class="callout">This is an illustrative model. <b>Energy spent in the outer ring makes the inner circle shrink; energy spent inside it makes it grow.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down your three biggest worries. For each, find one thing inside your Circle of Influence that you can do this week, and do it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Spend your energy on the things you can do something about. The more you act there, the more you'll be able to change.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this section</label><a class="next" href="#ch8">Next: Your own funeral →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 2</span> · Write your personal mission statement</div>
+        <h2>Begin With the End in Mind</h2>
+        <div class="short"><span class="lbl">In short</span><p>The second habit is to start every big effort, including your life, with a clear picture of where you want to end up. All things are created twice: first in the mind, then in reality. If you don't write your own first creation, other people and circumstances will write it for you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>All things are created twice.</b> A house is designed on paper before a single brick is laid. Your life works the same way: decide what it's for, then build it.</span></li>
+          <li><span><b>Leadership comes before management.</b> Management is climbing the ladder efficiently. Leadership is making sure it's leaning against the right wall.</span></li>
+          <li><span><b>A personal constitution.</b> A personal mission statement says what you want to be (character), what you want to do (contributions) and the values behind both. Covey suggests writing it over weeks, not in one sitting.</span></li>
+          <li><span><b>Roles and goals.</b> Break your mission into the roles you play, such as parent, partner, manager or friend, and set a goal or two for each.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey asks readers to picture driving to a funeral, walking into the room and seeing friends and family gathered. As you walk to the front and look in the casket, you see your own face. This is your funeral, three years from now. There are four speakers: someone from your family, a friend, a colleague from work, and someone from your church or community. What would you want each of them to say about you? What character would you want them to have seen in you, and what difference would you want to have made? If you think hard about it, Covey says, you have found your deepest values.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the four speakers</div><div class="hint">Write what you'd want each one to say</div></div>
+        <div class="builder"><div class="fields"><div class="field"><label for="fuF">Someone from your family</label><textarea id="fuF" placeholder="She was always there when it mattered..."></textarea></div><div class="field"><label for="fuR">A close friend</label><textarea id="fuR" placeholder="He told me the truth when nobody else would..."></textarea></div><div class="field"><label for="fuW">A colleague from work</label><textarea id="fuW" placeholder="They made everyone around them better..."></textarea></div><div class="field"><label for="fuC">Someone from your community</label><textarea id="fuC" placeholder="She gave her Saturdays to..."></textarea></div><div class="field" style="grid-column:1/-1"><label for="fuM">Now draft your mission: who you want to be, what you want to do, and why</label><textarea id="fuM" style="min-height:90px" placeholder="I want to be... I will... because..."></textarea></div></div><div class="out"><span class="k">Your first creation</span><div class="mission" id="fuOut"></div><div class="row"><button class="btn" type="button" id="fuClear">Clear</button><span class="tip" id="fuTip">Saved in this browser as you type. It shows up in the afterword.</span></div></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Spend twenty minutes on the funeral exercise for real. Keep what you write and come back to it next week to turn it into a first draft of your mission.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Decide what you want your life to stand for before you get busy living it. Picture the end, write it down, and use it to steer.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this section</label><a class="next" href="#ch9">Next: What's at your centre →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 2</span> · What sits at the middle of your life</div>
+        <h2>Your Centre</h2>
+        <div class="short"><span class="lbl">In short</span><p>Whatever sits at the centre of your life becomes your source of four things: security (your sense of worth), guidance (your sense of direction), wisdom (your perspective) and power (your ability to act). Put a person, money, work or pleasure there and your life wobbles whenever it does. Covey argues for putting principles at the centre.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone has a centre.</b> Spouse, family, money, work, possessions, pleasure, a friend, even an enemy can become the thing everything revolves around. Most of us have a mix.</span></li>
+          <li><span><b>Each centre has a weakness.</b> Money-centred people feel worthless when money is short. Work-centred people are lost when they retire. Enemy-centred people let someone they dislike run their lives.</span></li>
+          <li><span><b>Principles don't move.</b> Fairness, honesty, service and growth don't change with circumstances, so a principle-centred life gives steady security, guidance, wisdom and power.</span></li>
+          <li><span><b>Principles help you weigh everything else.</b> A principle-centred person still cares about family, work and money. They just see each in balance, rather than through one of them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey sets a test. You've promised to take your spouse to a concert tonight; you have the tickets and they're looking forward to it. At four o'clock, your boss asks you to stay late to help with an important meeting the next morning. A spouse-centred person goes to the concert to please their spouse, or stays at work and feels guilty. A work-centred person stays because it's good for their career. A money-centred person thinks of the overtime or a raise. A principle-centred person steps back, weighs all the needs, considers the alternatives and makes the choice they believe is best. They might go or stay, but either way the decision is theirs, and they can be at peace with it.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: change your centre</div><div class="hint">Pick a centre and see what it gives you</div></div>
+        <div class="stage"><svg id="ceSvg" role="img" aria-label="Four bars showing security, guidance, wisdom and power for the chosen centre"></svg></div><div class="lab-ctl"><div class="row" id="ceB"></div></div><div class="stats"><div class="stat"><span class="k">Tonight, the concert or the office?</span><span class="s" id="ceDo"></span></div><div class="stat"><span class="k">When the centre wobbles</span><span class="s" id="ceSay"></span></div></div><p class="callout">These scores are an illustrative reading of the book, not Covey's own numbers. <b>Only a centre that doesn't move gives you steady footing.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Look back over last week's big decisions. What were you really protecting each time: someone's approval, money, work, pleasure, or a principle?</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Whatever you put at the centre of your life will steer it. Put things that never change there, like honesty and fairness, and you'll stay steady when everything else shifts.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this section</label><a class="next" href="#ch10">Next: Important, not urgent →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 3</span> · The time management matrix</div>
+        <h2>Put First Things First</h2>
+        <div class="short"><span class="lbl">In short</span><p>Habit 3 is about acting on Habit 2: managing your time around what matters. Covey sorts every activity by two questions, is it urgent and is it important, into four quadrants. Effective people live in Quadrant II: important but not urgent. That's where planning, relationships, prevention and growth live.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Quadrant I: urgent and important.</b> Crises, deadlines and pressing problems. Necessary, but live here and you burn out.</span></li>
+          <li><span><b>Quadrant II: important, not urgent.</b> Planning, prevention, relationships, learning, exercise. Nothing forces you to do them, which is why they get skipped, and why doing them pays off so much.</span></li>
+          <li><span><b>Quadrants III and IV: not important.</b> Interruptions, some calls and meetings, busywork and time-wasters. They feel productive or relaxing, but they don't serve your mission.</span></li>
+          <li><span><b>Plan the week, not the day.</b> Covey's method: each week, review your roles, set one or two Quadrant II goals for each, and schedule them first. Then fit everything else around them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey opens the chapter by asking readers two questions. What is one thing you could do regularly, that you aren't doing now, that would make a big positive difference in your personal life? And the same question for your work. Most people know the answer straight away: exercise, a weekly date with their partner, planning, a skill they keep meaning to learn. Covey points out that these answers are almost always Quadrant II. They're important, and nothing about them is urgent, so they never happen unless you put them first.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: sort your week</div><div class="hint">Put each activity in its quadrant</div></div>
+        <div class="stage"><svg id="tmSvg" role="img" aria-label="The four quadrants of urgent and important"></svg></div><div class="lab-ctl"><div class="tally" id="tmTally" aria-label="Score"></div><div class="sorter" id="tmSort"></div></div><p class="callout">Each activity you sort lands in the matrix. <b>Quadrant II is where the activities you'd regret skipping live.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>On Sunday, list your roles and write one Quadrant II goal for each. Put those in your calendar before anything else goes in.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't let what's loud crowd out what's important. Schedule the important-but-not-urgent things first, and you'll have fewer emergencies.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this section</label><a class="next" href="#ch11">Next: Green and clean →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 3</span> · Gofer delegation or stewardship</div>
+        <h2>Delegate for Results</h2>
+        <div class="short"><span class="lbl">In short</span><p>To put first things first you have to let go of some things, and that means delegating to people. Gofer delegation means telling someone each step: "go for this, go for that". Stewardship delegation means agreeing on the result and letting them choose how. It takes more time up front and saves far more later.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Five parts of a stewardship agreement.</b> Desired results, guidelines, resources, accountability and consequences. Be clear on all five and then step back.</span></li>
+          <li><span><b>Focus on results, not methods.</b> Say what you want done and by when, not how to do it. That's what makes it theirs.</span></li>
+          <li><span><b>Let them judge themselves.</b> In a trust-based agreement, the person reports and evaluates their own results against the standard you agreed.</span></li>
+          <li><span><b>Delegation is how you get time for Quadrant II.</b> Doing everything yourself keeps you in Quadrant I. Delegating well frees time for what only you can do.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Covey's son Stephen was seven, Covey handed him the yard. He took him next door and showed him the neighbour's lawn: that's "green". Then he showed him a yard with no rubbish: that's "clean". Stephen could use the sprinklers, a hose or buckets; the method was up to him. Twice a week they'd walk round together and Stephen would say how it was going. Covey would help, if he had time, whenever Stephen asked. For days Stephen did nothing. The lawn turned yellow and rubbish piled up after a barbecue. Covey bit his tongue. On the walk-round he asked how the yard was going. Stephen burst into tears: "It's so hard!" Covey asked what he wanted help with. Stephen remembered: "You said you'd help if you had time." They went round together, Stephen in charge, and from then on he kept the yard green and clean.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: green and clean</div><div class="hint">Build the agreement, part by part</div></div>
+        <div class="stage"><svg id="gcSvg" role="img" aria-label="A garden that turns greener as the agreement is completed"></svg></div><div class="lab-ctl"><div class="row" id="gcM"></div><div class="toggles" id="gcT"></div></div><div class="stats"><div class="stat"><span class="k">Ownership</span><span class="v glow" id="gcV"></span></div><div class="stat"><span class="k">How it goes</span><span class="s" id="gcSay"></span></div></div><p class="callout">This is an illustrative model of the story. <b>Gofer delegation needs you there for every step; stewardship needs you only at the start and at check-ins.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick one task you keep doing yourself. Hand it over this week with all five parts of a stewardship agreement written down.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Agree on the result, the rules and the resources, then let the other person decide how. Check in, don't hover.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this section</label><a class="next" href="#ch12">Next: The emotional bank account →</a></div>
+    </section>
+    <!-- ===================== PUBLIC VICTORY ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part Three · Public victory</span>
+      <h2>Public Victory</h2>
+      <p>Habits four to six are about working with other people. Covey's claim is that trust, not technique, is what makes them work, so this part opens with how trust is built and spent before it gets to win-win, listening and synergy.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Interdependence is a choice only independent people can make. Build trust, then look for answers that are good for everyone.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 12</span> · Deposits and withdrawals of trust</div>
+        <h2>Paradigms of Interdependence</h2>
+        <div class="short"><span class="lbl">In short</span><p>Before the public victory habits, Covey introduces a metaphor: the Emotional Bank Account. It's the amount of trust in a relationship. Courtesy, honesty and kept promises are deposits; rudeness, broken promises and disrespect are withdrawals. With a high balance, communication is easy and mistakes are forgiven. With an overdrawn one, every word is treated with suspicion.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Six major deposits.</b> Understanding the individual, attending to the little things, keeping commitments, clarifying expectations, showing personal integrity, and apologising sincerely when you make a withdrawal.</span></li>
+          <li><span><b>Deposits are what the other person values.</b> What counts as a deposit is up to them. To make one, you first have to understand what matters to them.</span></li>
+          <li><span><b>Little things are big things.</b> Small kindnesses and small discourtesies add up. In relationships, the little things often matter most.</span></li>
+          <li><span><b>Integrity includes the absent.</b> Loyalty to people who aren't in the room is a deposit with everyone who is: they know you'll speak about them the same way.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey tells of a friend whose son was obsessed with baseball. The friend had no interest in the game at all. But one summer he took his son to see every major league team play, a trip of six weeks or more that cost a lot of money. When he got back, someone asked whether he liked baseball that much. "No," he said, "but I like my son that much." That trip, Covey writes, did more for the relationship than years of talk could have, because it was a deposit in the currency the son valued.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the emotional bank account</div><div class="hint">Make deposits and withdrawals, then try a hard conversation</div></div>
+        <div class="stage"><svg id="ebSvg" role="img" aria-label="A chart of the trust balance over time"></svg></div><div class="lab-ctl"><div class="row" id="ebD"></div><div class="row" id="ebW"></div><div class="row"><button class="btn primary" type="button" id="ebHard">Give some hard feedback</button><button class="btn" type="button" id="ebReset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Balance</span><span class="v glow" id="ebV"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="ebSay"></span></div></div><p class="callout">This is an illustrative model; the amounts are made up. <b>Hard feedback is a big withdrawal, and it only lands when there is enough trust in the account.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick one relationship that feels strained and make three small deposits this week that the other person, not you, would value.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Every relationship has a trust balance. Keep promises, be kind, apologise when you get it wrong, and you'll have trust to draw on when it's needed.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this section</label><a class="next" href="#ch13">Next: Win-win →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 4</span> · Courage and consideration</div>
+        <h2>Think Win-Win</h2>
+        <div class="short"><span class="lbl">In short</span><p>Habit 4 is a frame of mind that looks for mutual benefit in every interaction. Covey lists six paradigms: win-win, win-lose, lose-win, lose-lose, win, and win-win or no deal. Win-win isn't being nice; it takes both the courage to say what you need and the consideration to care about what the other side needs.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Win-lose is the default.</b> Many of us are trained by school grades, sports and forced rankings to think that for me to win, you have to lose.</span></li>
+          <li><span><b>Lose-win is not kindness.</b> Giving in to keep the peace looks generous, but the buried resentment comes out later.</span></li>
+          <li><span><b>Win-win or no deal.</b> If you can't find a solution that works for both, agree not to make a deal. It frees you from having to push, and from having to give in.</span></li>
+          <li><span><b>Character, relationships, agreements, systems.</b> Win-win needs integrity, maturity and an abundance mentality, a trusting relationship, clear agreements, and systems that reward cooperation rather than competition.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey was called in by a company president who complained that his managers wouldn't cooperate. They were selfish, he said, and wouldn't work together. Covey noticed a chart on the president's wall: a horse race, with each manager's face on a horse, and at the finish line a travel poster of Bermuda. Every few weeks the president would remind his managers how much they could achieve by working together, and then point out which of them was ahead in the race for the trip. He wanted cooperation, but he'd built a system in which only one of them could win.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: courage and consideration</div><div class="hint">Set both dials and see where you land</div></div>
+        <div class="stage"><svg id="wwSvg" role="img" aria-label="A grid of courage against consideration"></svg></div><div class="lab-ctl"><div class="row" id="wwS"></div><div class="row"><div class="ctl"><label>Courage: how firmly you state what you need <output id="oww1"></output></label><input type="range" id="wwC" min="0" max="10" value="8"></div><div class="ctl"><label>Consideration: how much you care about their needs <output id="oww2"></output></label><input type="range" id="wwK" min="0" max="10" value="2"></div></div></div><div class="stats"><div class="stat"><span class="k">Paradigm</span><span class="v glow" id="wwV"></span></div><div class="stat"><span class="k">How it plays out</span><span class="s" id="wwSay"></span></div></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Before your next negotiation, write down what a win looks like for the other side as well as for you. Start the conversation from there.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Look for the answer that's good for both of you. If there isn't one, it's fine to walk away. Be firm about what you need and genuinely care about what they need.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this section</label><a class="next" href="#ch14">Next: Listen to understand →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 5</span> · Empathic listening</div>
+        <h2>Seek First to Understand, Then to Be Understood</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most people listen with the intent to reply, not to understand. They filter everything through their own experience and jump in with advice. Habit 5 is to listen empathically first, until you truly understand the other person's view, and only then to make your own case.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Five levels of listening.</b> Ignoring, pretending, selective listening, attentive listening, and empathic listening. Only the last gets inside the other person's frame of reference.</span></li>
+          <li><span><b>Four autobiographical responses.</b> We evaluate (agree or disagree), probe (ask questions from our own frame), advise (give counsel from our experience) and interpret (explain them to themselves). Each pulls the conversation back to us.</span></li>
+          <li><span><b>Diagnose before you prescribe.</b> No good doctor writes a prescription before examining you. Advice without understanding is malpractice in relationships too.</span></li>
+          <li><span><b>Then be understood.</b> The second half takes courage: present your ideas clearly and in the context of the other person's concerns. Covey uses the Greek ethos, pathos and logos: credibility, feeling, then logic.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey describes going to an optometrist with blurry eyesight. After listening briefly, the optometrist takes off his own glasses and hands them over. "Put these on. I've worn this pair for ten years and they've really helped me. I have an extra pair at home; you can wear these." You put them on and everything is worse. "Well, they work great for me," he says. "Try harder." Nobody would go back to that optometrist, Covey says, yet that's exactly what we do when we listen just long enough to hand someone our own solution.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: the five ways to reply</div><div class="hint">Your teenager says: "School is so stupid. I'm done with it." Pick a reply</div></div>
+        <div class="stage"><svg id="lsSvg" role="img" aria-label="A ladder of listening levels and how open the other person stays"></svg></div><div class="lab-ctl"><p class="tm-ask" id="lsAsk"></p><div class="cards3" id="lsR"></div></div><div class="stats"><div class="stat"><span class="k">Kind of reply</span><span class="v glow" id="lsV"></span></div><div class="stat"><span class="k">What they say next</span><span class="s" id="lsSay"></span></div></div><p class="callout">Empathic listening reflects back both the content and the feeling. <b>It isn't agreeing; it's understanding first.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>In your next important conversation, before you give your view, summarise theirs until they say "Yes, that's it." Then speak.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you argue, advise or explain, listen until you really understand the other person. They'll be far more ready to hear you afterwards.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this section</label><a class="next" href="#ch15">Next: The third alternative →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 6</span> · Creative cooperation</div>
+        <h2>Synergize</h2>
+        <div class="short"><span class="lbl">In short</span><p>Synergy is when the whole is greater than the sum of its parts. Habit 6 is what the earlier habits prepare you for: people who trust each other, think win-win and truly understand each other can treat their differences as raw material and find a third alternative that is better than either side's starting position.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Value the differences.</b> If two people agree on everything, one of them is unnecessary. Differences are where new answers come from.</span></li>
+          <li><span><b>Three levels of communication.</b> With low trust, communication is defensive and protective. With middling trust, it's respectful, and ends in compromise. With high trust and cooperation, it's synergistic, and the answer is better than anyone's opening idea.</span></li>
+          <li><span><b>Compromise is 1 + 1 = 1½.</b> In a compromise both sides give something up. Synergy aims for 1 + 1 = 3 or more.</span></li>
+          <li><span><b>Work with the forces.</b> When change is blocked, adding more driving force often just meets more resistance. Synergy works on the restraining forces, by understanding and involving the people behind them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey tells of a man who had planned a family holiday at a lake: the trip was booked, the kids were excited. His wife wanted to use the time to visit her mother, who was seriously ill and lived far away. Each felt strongly. They could have argued it out, with one of them winning, or split the time and both felt short-changed. Instead they kept talking until each understood what the other really cared about, and found an option neither had started with, one that let her be with her mother while the family still had real time together. It worked better for everyone than either of the original plans.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: find the third alternative</div><div class="hint">Pick an option and see who wins</div></div>
+        <div class="stage"><svg id="syS" role="img" aria-label="A chart of how well each option meets each partner's real needs"></svg></div><div class="lab-ctl"><div class="cards3" id="syB"></div></div><div class="stats"><div class="stat"><span class="k">Level of communication</span><span class="v glow" id="syV"></span></div><div class="stat"><span class="k">How it feels</span><span class="s" id="sySay"></span></div></div><p class="callout">This is an illustrative model of the story. <b>Compromise lands in the middle. Synergy lands in the far corner, where both people get more than they asked for.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Next disagreement, ask: "Would you be willing to look for a solution that's better than what either of us has in mind?" Then keep going until you find it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>When two people disagree, don't settle for one winning or both half-losing. Keep talking until you find a third option that's better for both.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this section</label><a class="next" href="#ch16">Next: Sharpen the saw →</a></div>
+    </section>
+    <!-- ===================== RENEWAL ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part Four · Renewal</span>
+      <h2>Renewal</h2>
+      <p>The last habit keeps the other six alive. Covey ends where he began, with the inside-out approach, now as a spiral: learn, commit and do, then do it again at a higher level.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Take time to renew yourself in body, mind, heart and spirit. It is the habit that makes all the others possible.</p></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Habit 7</span> · Balanced self-renewal</div>
+        <h2>Sharpen the Saw</h2>
+        <div class="short"><span class="lbl">In short</span><p>Habit 7 is taking time to renew the greatest asset you have: yourself. Covey names four dimensions to look after regularly: physical, mental, social and emotional, and spiritual. It's the ultimate Quadrant II activity, and the P/PC balance applied to you.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Physical.</b> Exercise, good food, rest and managing stress. Covey suggests a few hours a week of exercise covering endurance, flexibility and strength.</span></li>
+          <li><span><b>Mental.</b> Reading good books, writing, planning, learning. Most of us stop deliberately educating ourselves when formal schooling ends.</span></li>
+          <li><span><b>Social and emotional.</b> Service, empathy, synergy, a sense of security from within. This dimension is renewed mainly through your relationships, in daily life.</span></li>
+          <li><span><b>Spiritual.</b> Your core and your commitment to your values: meditation, prayer, nature, great literature or music. Whatever reconnects you with what you care about most.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey describes coming across someone in the woods sawing frantically at a tree. They've been at it for over five hours, they say, and they're exhausted. The saw is blunt and the work is slow. Why not stop for a few minutes and sharpen it? "I don't have time to sharpen the saw," comes the answer. "I'm too busy sawing."</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: the woodcutter's day</div><div class="hint">Choose how long to sharpen each hour</div></div>
+        <div class="stage"><svg id="saSvg" role="img" aria-label="A chart of logs cut over an eight-hour day"></svg></div><div class="lab-ctl"><div class="ctl"><label>Minutes spent sharpening each hour <output id="osa"></output></label><input type="range" id="saR" min="0" max="30" step="2" value="0"></div></div><div class="stats"><div class="stat"><span class="k">Logs cut in eight hours</span><span class="v glow" id="saV"></span></div><div class="stat"><span class="k">How the day goes</span><span class="s" id="saSay"></span></div></div><p class="callout">This is an illustrative model, not data from the book. <b>A little time sharpening beats a whole day of blunt sawing, though spending all your time sharpening cuts nothing.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Schedule one hour this week for each of the four dimensions. Treat those hours as appointments you can't move.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Look after yourself, body, mind, heart and spirit, a little every day. You'll get more done, not less.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this section</label><a class="next" href="#ch17">Next: Inside-out again →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 17</span> · The upward spiral and the transition person</div>
+        <h2>Inside-Out Again</h2>
+        <div class="short"><span class="lbl">In short</span><p>Covey closes where he started. Growth moves in an upward spiral: learn, commit, do, and then learn, commit and do again at a higher level. Along the way, any of us can become a transition person: someone who stops a harmful pattern handed down through a family or an organisation, and passes something better on.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Learn, commit, do.</b> Educating your conscience is not enough. Each turn of the spiral needs you to commit to what you've learned and then act on it.</span></li>
+          <li><span><b>Scripts get handed down.</b> Much of how we react was learned from parents and others around us. Many of those scripts are good; some, like anger, neglect or criticism, do harm.</span></li>
+          <li><span><b>You can be a transition person.</b> Instead of passing a harmful script on, you can absorb it and transmit something better. It changes the lives of people who will never know your name.</span></li>
+          <li><span><b>Principles are the anchor.</b> Covey ends with his own belief that correct principles are natural laws, and that living by them is the source of lasting effectiveness.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Covey writes about a sabbatical his family took in Hawaii. Each afternoon he and Sandra rode out together on a small motorbike, found somewhere quiet and talked for hours. One day they began talking about their childhoods, and Covey found himself exploring a pattern in his own family that he had never looked at before: he understood for the first time where some of his reactions came from. The conversations went deeper than they ever had, and he describes it as one of the richest times of their marriage. It was an example of the book's whole method: becoming aware of your scripts is where rewriting them starts.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: become a transition person</div><div class="hint">Choose where the pattern stops</div></div>
+        <div class="stage"><svg id="trSvg" role="img" aria-label="Five generations passing a pattern down"></svg></div><div class="lab-ctl"><div class="row" id="trP"></div><div class="row" id="trG"></div></div><div class="stats"><div class="stat"><span class="k">Generations who inherit it</span><span class="v glow" id="trV"></span></div><div class="stat"><span class="k">What changes</span><span class="s" id="traSay"></span></div></div><p class="callout">One person, deciding inside-out, changes everyone downstream. <b>That is the book's whole method on a family scale.</b></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Name one script you inherited that you don't want to pass on. Write down what you'll do instead, and tell one person who'll notice.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Personal change moves in a spiral of learning, committing and doing. And you can be the one who stops a bad pattern from being passed on.</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this section</label><a class="next" href="#after">Next: your seven habits →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your seven habits</h2>
+      <p class="big">Covey's point is that none of this works as a technique you bolt on. It works as a habit you build, one week at a time, from the inside out. Here is what you wrote along the way, a weekly check on all seven habits, and the whole book on one page.</p>
+      <div class="card1" id="myCard" aria-live="polite"></div>
+      <div class="hab7" id="hab7"></div>
+      <div class="recap">
+        <div><span class="n">Habit 1</span><b>Be proactive</b><span>Between what happens and what you do is a space. You choose your response.</span></div>
+        <div><span class="n">Habit 2</span><b>Begin with the end in mind</b><span>Know what you want your life to stand for, and write it down.</span></div>
+        <div><span class="n">Habit 3</span><b>Put first things first</b><span>Spend your week on what's important, not just what's urgent.</span></div>
+        <div><span class="n">Habit 4</span><b>Think win-win</b><span>Look for the deal that's good for both sides, or agree there's no deal.</span></div>
+        <div><span class="n">Habit 5</span><b>Seek first to understand</b><span>Listen until you can say their view better than they can. Then be understood.</span></div>
+        <div><span class="n">Habit 6</span><b>Synergize</b><span>Treat differences as raw material for a third answer better than either.</span></div>
+        <div><span class="n">Habit 7</span><b>Sharpen the saw</b><span>Renew body, mind, heart and spirit, so you can keep doing the other six.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change</i> by Stephen R. Covey (1989). The explanations, retold stories and labs are written in our own words, and the section headings are ours, grouped under the book's four parts. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["1 \u00b7 Paradigms and principles", "2 \u00b7 Private victory", "3 \u00b7 Public victory", "4 \u00b7 Renewal"];
+const CH = [["Inside-Out", "The way we see", 0, "Section 1"], ["The Character Ethic", "Character over technique", 0, "Section 2"], ["The Seven Habits: An Overview", "What a habit is", 0, "Section 3"], ["Production and Capability", "The golden goose", 0, "Section 4"], ["Be Proactive", "Choose your response", 1, "Habit 1"], ["Listen to Your Language", "Proactive language", 1, "Habit 1"], ["The Circle of Influence", "Circle of influence", 1, "Habit 1"], ["Begin With the End in Mind", "Your own funeral", 1, "Habit 2"], ["Your Centre", "What's at your centre", 1, "Habit 2"], ["Put First Things First", "Important, not urgent", 1, "Habit 3"], ["Delegate for Results", "Green and clean", 1, "Habit 3"], ["Paradigms of Interdependence", "The emotional bank account", 2, "Section 12"], ["Think Win-Win", "Win-win", 2, "Habit 4"], ["Seek First to Understand, Then to Be Understood", "Listen to understand", 2, "Habit 5"], ["Synergize", "The third alternative", 2, "Habit 6"], ["Sharpen the Saw", "Sharpen the saw", 3, "Habit 7"], ["Inside-Out Again", "Inside-out again", 3, "Section 17"]];
+const QUIZ = {
+"1": {
+"q": "In the subway story, what changed Covey's reaction to the noisy children?",
+"o": [
+"The children calmed down",
+"He learned why the family was upset, and saw the scene differently",
+"He moved to another carriage"
+],
+"a": 1,
+"w": "Nothing in the carriage changed. His paradigm did, and his feelings and behaviour followed at once."
+},
+"2": {
+"q": "What does Covey mean by \"the law of the farm\"?",
+"o": [
+"Hard physical work builds character",
+"Some things, like trust and character, can't be crammed: they grow only through steady effort over time",
+"You should move to the country to reduce stress"
+],
+"a": 1,
+"w": "You can cram for an exam, but not for a harvest. Character and relationships grow the slow way."
+},
+"3": {
+"q": "Which order does Covey's maturity continuum run in?",
+"o": [
+"Independence, dependence, interdependence",
+"Dependence, independence, interdependence",
+"Interdependence, independence, dependence"
+],
+"a": 1,
+"w": "You move from dependence to independence (the private victory) and then to interdependence (the public victory)."
+},
+"4": {
+"q": "What does \"PC\" stand for in Covey's P/PC balance?",
+"o": [
+"Personal confidence",
+"Production capability",
+"Planned consistency"
+],
+"a": 1,
+"w": "P is production, the golden eggs. PC is production capability, the goose. Effectiveness keeps both in balance."
+},
+"5": {
+"q": "What lies between stimulus and response, according to Covey?",
+"o": [
+"Our upbringing, which decides for us",
+"The freedom to choose",
+"Our emotions, which we can't control"
+],
+"a": 1,
+"w": "There is a space between stimulus and response, and in it is our freedom to choose. That is the heart of being proactive."
+},
+"6": {
+"q": "A man tells Covey he no longer loves his wife. What does Covey advise?",
+"o": [
+"Wait for the feeling to come back",
+"Love her: treat love as something you do, and the feeling will follow",
+"Separate until he's sure"
+],
+"a": 1,
+"w": "Covey's point is that love is a verb. Proactive people act on their values and let the feeling follow."
+},
+"7": {
+"q": "What happens to the Circle of Influence of a person who focuses on the Circle of Concern?",
+"o": [
+"It grows",
+"It shrinks",
+"It stays the same"
+],
+"a": 1,
+"w": "Blaming and worrying about things you can't affect drains the energy you'd use on what you can, so your influence shrinks."
+},
+"8": {
+"q": "What does Covey mean when he says \"all things are created twice\"?",
+"o": [
+"You should do every task two times to get it right",
+"There is a mental creation (the plan or vision) before the physical one",
+"Habits take twice as long to build as to break"
+],
+"a": 1,
+"w": "First you create something in your mind, then in reality. Habit 2 is about taking charge of the first creation."
+},
+"9": {
+"q": "Why does Covey recommend a principle-centred life?",
+"o": [
+"Because principles make you more money",
+"Because principles don't change with circumstances, so they give steady security and direction",
+"Because it means you can ignore your family and work"
+],
+"a": 1,
+"w": "People, money and work can all change or disappear. Principles don't, so they make a stable centre from which to weigh everything else."
+},
+"10": {
+"q": "Which quadrant does Covey say is the heart of effective personal management?",
+"o": [
+"Quadrant I: urgent and important",
+"Quadrant II: important but not urgent",
+"Quadrant III: urgent but not important"
+],
+"a": 1,
+"w": "Quadrant II, the important but not urgent work of planning, prevention, relationships and growth, is where effectiveness comes from."
+},
+"11": {
+"q": "In stewardship delegation, what do you focus on?",
+"o": [
+"The exact method, step by step",
+"The results you both agree on, leaving the method to them",
+"Nothing: you hand it over and never check"
+],
+"a": 1,
+"w": "Stewardship is about results. You agree on what, the guidelines, resources, accountability and consequences, and they choose how."
+},
+"12": {
+"q": "Who decides what counts as a deposit in someone's emotional bank account?",
+"o": [
+"You, based on what you would value",
+"The other person, based on what matters to them",
+"Nobody: all kind acts count the same"
+],
+"a": 1,
+"w": "A deposit has to be something the other person values, which is why understanding the individual is the first deposit."
+},
+"13": {
+"q": "Win-win, in Covey's sense, needs which two qualities in balance?",
+"o": [
+"Speed and efficiency",
+"Courage and consideration",
+"Charm and confidence"
+],
+"a": 1,
+"w": "Courage to express your own needs and consideration for the other person's. Too much of one gives win-lose or lose-win."
+},
+"14": {
+"q": "Which of these is an \"autobiographical\" response that Covey warns against?",
+"o": [
+"\"It sounds like you're really frustrated with school.\"",
+"\"When I was your age I felt the same, here's what I did...\"",
+"Staying quiet and attentive while they talk"
+],
+"a": 1,
+"w": "Advising from your own experience pulls the conversation into your frame. Reflecting their feeling keeps it in theirs."
+},
+"15": {
+"q": "How does Covey's synergy differ from compromise?",
+"o": [
+"It's faster",
+"In compromise both give something up; in synergy you find an answer better than either starting point",
+"It means one person persuades the other"
+],
+"a": 1,
+"w": "Compromise is 1 + 1 = 1½. Synergy aims for 1 + 1 = 3, a third alternative neither side had at the start."
+},
+"16": {
+"q": "What are the four dimensions of renewal in Habit 7?",
+"o": [
+"Work, family, money and fun",
+"Physical, mental, social and emotional, and spiritual",
+"Morning, afternoon, evening and night"
+],
+"a": 1,
+"w": "Covey asks for balanced renewal in all four: body, mind, heart and spirit."
+},
+"17": {
+"q": "What is a \"transition person\"?",
+"o": [
+"Someone who changes jobs often",
+"Someone who stops a harmful pattern from being passed on, and passes on something better",
+"A coach who helps teams through change"
+],
+"a": 1,
+"w": "A transition person absorbs a harmful script rather than transmitting it, and changes the lives of those who come after."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0e1a16';
+try { const t = localStorage.getItem('seh-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('seh-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('seh-done', []));
+const save = () => store.set('seh-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const HABITS7 = ['Be proactive', 'Begin with the end in mind', 'Put first things first', 'Think win-win', 'Seek first to understand', 'Synergize', 'Sharpen the saw'];
+const HSHORT = ['Proactive', 'End in mind', 'First things', 'Win-win', 'Understand', 'Synergize', 'Sharpen'];
+
+/* ---------- afterword: card from the funeral lab + weekly habit check ---------- */
+function renderCard(){
+  const el = $('#myCard'); if (!el) return;
+  const F0 = store.get('seh-funeral', {});
+  const sp = [['f', 'Family'], ['r', 'Friend'], ['w', 'Work'], ['c', 'Community']].filter(([k]) => (F0[k] || '').trim());
+  if (!(F0.m || '').trim() && !sp.length){ el.innerHTML = '<span class="k">Your mission statement is still blank</span><p class="empty">Write what you\'d want the four speakers to say, and a first draft of your mission, in <a href="#ch8">Begin with the end in mind</a>. It shows up here, saved in this browser only.</p>'; return; }
+  el.innerHTML = `<span class="k">Your first creation</span>${(F0.m || '').trim() ? `<p class="big1">${esc(F0.m.trim())}</p>` : '<p class="empty">No mission drafted yet. The speakers below are your raw material.</p>'}${sp.length ? `<div class="plan">${sp.map(([k, l]) => `<div><span>${l}</span>${esc(F0[k].trim())}</div>`).join('')}</div>` : ''}<p class="empty">Covey's advice: rewrite it over several weeks, and reread it every time you plan your week.</p>`;
+}
+renderCard();
+{ const box = $('#hab7'); let G = store.get('seh-week', null);
+  if (!Array.isArray(G) || G.length !== 7) G = HABITS7.map(() => Array(7).fill(false));
+  const D = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const draw = () => {
+    const n = G.flat().filter(Boolean).length;
+    box.innerHTML = `<div class="wk"><span>This week, habit by habit · ${n} of 49</span><button class="btn" type="button" id="h7c">Start a new week</button></div><div class="grid" role="grid"><span></span>${D.map(d => `<span class="d">${d}</span>`).join('')}${HABITS7.map((h, i) => `<span class="h">${i + 1}. ${h}</span>${D.map((d, j) => `<button type="button" data-h="${i}" data-d="${j}" aria-pressed="${G[i][j]}" aria-label="${h}, day ${j + 1}"></button>`).join('')}`).join('')}</div>`;
+    box.querySelectorAll('[data-h]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.h, j = +b.dataset.d; G[i][j] = !G[i][j]; store.set('seh-week', G); draw(); box.querySelector(`[data-h="${i}"][data-d="${j}"]`).focus(); }));
+    $('#h7c').addEventListener('click', () => { G = HABITS7.map(() => Array(7).fill(false)); store.set('seh-week', G); draw(); });
+  };
+  draw();
+}
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I keep blaming other people', 5, 'Be proactive', 'Between what happens and what you do there is a space. Use it to choose your response.'],
+    ['I worry about things I can\'t change', 7, 'Work your Circle of Influence', 'Put your energy into what you can affect, and watch that circle grow.'],
+    ['I\'m busy but going nowhere', 8, 'Begin with the end in mind', 'Picture what you want your life to stand for, then write a personal mission statement.'],
+    ['I\'m always fighting fires', 10, 'Live in Quadrant II', 'Schedule the important, not urgent work first: planning, prevention, relationships.'],
+    ['I end up doing everything myself', 11, 'Stewardship delegation', 'Agree on results, guidelines and resources, then let people choose how.'],
+    ['A relationship has gone cold', 12, 'Make deposits', 'Keep promises, attend to little things and apologise when you get it wrong.'],
+    ['Every negotiation feels like a fight', 13, 'Think win-win', 'Pair the courage to say what you need with real care for what they need.'],
+    ['People don\'t listen to me', 14, 'Seek first to understand', 'Listen until you can say their view better than they can. Then make your case.'],
+    ['I\'m running on empty', 16, 'Sharpen the saw', 'Renew body, mind, heart and spirit. It\'s how you keep doing everything else.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the section →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the maturity continuum ---------- */
+{ const el = $('#mcSvg'); let sel = 0;
+  const SAY = ['Private victory. Take responsibility for your choices instead of blaming circumstances.', 'Private victory. Decide what your life is for before you get busy living it.', 'Private victory. Organise your week around what matters most.',
+    'Public victory. Look for answers that are good for everyone, or agree there\'s no deal.', 'Public victory. Listen to understand before you try to be understood.', 'Public victory. Combine differences into a third answer better than either.',
+    'Renewal. It surrounds the other six, because it keeps you able to do them.'];
+  const TAG = ['Independence', 'Independence', 'Independence', 'Interdependence', 'Interdependence', 'Interdependence', 'Renewal'];
+  $('#mcT').innerHTML = HABITS7.map((h, i) => `<button class="btn" type="button" data-m="${i}" aria-pressed="${i === 0}">${i + 1}</button>`).join('');
+  function draw(){
+    let g = `<rect x="10" y="6" width="300" height="186" rx="16" ${FS(sel === 6 ? 'glow-soft' : 'panel', sel === 6 ? 'glow' : 'line', sel === 6 ? 2 : 1.2, 1)} style="fill:var(--${sel === 6 ? 'glow-soft' : 'panel'});stroke:var(--${sel === 6 ? 'glow' : 'line'});stroke-width:${sel === 6 ? 2 : 1.2};stroke-dasharray:5 4"/>`;
+    g += TX(298, 184, '7 · SHARPEN THE SAW', sel === 6 ? 'glow' : 'faint', 9.5, 'end', 'letter-spacing="1"');
+    g += TX(160, 210, 'DEPENDENCE', 'faint', 10, 'middle', 'letter-spacing="1.6"');
+    g += `<line x1="160" y1="196" x2="160" y2="200" ${S('faint', 1)}/>`;
+    const blk = (i, x, y) => { const on = sel === i; return `<g class="svgbtn" data-m="${i}" tabindex="0" role="button" aria-label="Habit ${i + 1}: ${HABITS7[i]}" style="cursor:pointer"><rect x="${x}" y="${y}" width="128" height="26" rx="7" ${FS(on ? 'glow' : 'panel-2', on ? 'glow' : 'line', 1.2)}/>` + TX(x + 10, y + 17, `${i + 1}  ${HSHORT[i]}`, on ? 'on-glow' : 'text', 12, 'start', on ? 'font-weight="600"' : '') + '</g>'; };
+    [0, 1, 2].forEach(i => g += blk(i, 24, 152 - i * 30));
+    [3, 4, 5].forEach(i => g += blk(i + 0, 168, 96 - (i - 3) * 30));
+    g += TX(88, 62, 'INDEPENDENCE', sel < 3 ? 'glow' : 'muted', 10, 'middle', 'letter-spacing="1.4"') + TX(88, 77, 'private victory', 'faint', 10, 'middle');
+    g += TX(232, 24, 'INTERDEPENDENCE', sel > 2 && sel < 6 ? 'glow' : 'muted', 10, 'middle', 'letter-spacing="1.4"');
+    g += TX(232, 140, 'public victory', 'faint', 10, 'middle');
+    el.innerHTML = g;
+    el.querySelectorAll('[data-m]').forEach(b => { const f = () => pick(+b.dataset.m); b.addEventListener('click', f); b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); f(); } }); });
+    $('#mcV').textContent = TAG[sel];
+    $('#mcSay').innerHTML = `<b>${sel + 1}. ${HABITS7[sel]}.</b> ${SAY[sel]}`;
+    press($$('#mcT [data-m]'), $$('#mcT [data-m]')[sel]);
+  }
+  const pick = i => { sel = i; draw(); };
+  $$('#mcT [data-m]').forEach(b => b.addEventListener('click', () => pick(+b.dataset.m)));
+  draw();
+}
+
+/* ---------- 1: the subway ride ---------- */
+{ const el = $('#swSvg'); let st = 0;
+  const STEPS = [['A quiet Sunday', 1, 'People reading or resting. A calm, peaceful carriage.'], ['The kids get on', 7, 'Children shouting, running and grabbing papers. Their father just sits there with his eyes closed.'],
+    ['You ask him', 9, 'You ask, politely but pointedly, whether he could control his children a little more.'], ['His answer', 1, 'Their mother died an hour ago. You feel only sympathy, and want to help.']];
+  $('#swB').innerHTML = STEPS.map(([l], i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${i + 1}. ${l}</button>`).join('');
+  $$('#swB [data-s]').forEach(b => b.addEventListener('click', () => { st = +b.dataset.s; press($$('#swB [data-s]'), b); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 300 : 240; vb(el, W, H);
+    const cx0 = 12, cw = W - 24, cy0 = nw ? 70 : 40, ch = nw ? 170 : 150;
+    let g = `<rect x="${cx0}" y="${cy0}" width="${cw}" height="${ch}" rx="22" ${FS('panel-2', 'line', 1.5)}/>`;
+    const nwin = nw ? 4 : 6, ww = (cw - 40) / nwin;
+    for (let k = 0; k < nwin; k++) g += `<rect x="${cx0 + 20 + k * ww + 6}" y="${cy0 + 14}" width="${ww - 12}" height="34" rx="6" ${F('deep')}/>`;
+    g += `<rect x="${cx0 + 14}" y="${cy0 + ch - 44}" width="${cw - 28}" height="18" rx="5" ${F('line', .8)}/>`;
+    /* seated passengers */
+    const seats = nw ? [36, 80, 124, 320] : [50, 110, 170, 300, 520, 600];
+    const fx = nw ? 250 : 400, sy = cy0 + ch - 56;
+    seats.forEach((x, k) => { const irk = st === 1 || st === 2; g += `<circle cx="${x}" cy="${sy - 4}" r="10" ${F('faint', .9)}/><rect x="${x - 11}" y="${sy + 6}" width="22" height="20" rx="6" ${F('faint', .6)}/>`; if (irk && k % 2 === 0) g += TX(x, sy - 20, '!', 'bad', 13, 'middle', 'font-weight="700"'); });
+    /* father */
+    g += `<circle cx="${fx}" cy="${sy - 6}" r="12" ${F(st === 3 ? 'cool' : 'soft')}/><rect x="${fx - 13}" y="${sy + 6}" width="26" height="22" rx="6" ${F(st === 3 ? 'cool' : 'soft', .8)}/>`;
+    g += `<path d="M${fx - 6} ${sy - 7}h4M${fx + 2} ${sy - 7}h4" ${S('deep', 1.6)}/>`;
+    /* children */
+    const R = rng(7), kids = st === 0 ? [] : [0, 1, 2].map(k => st >= 1 ? [cx0 + 60 + R() * (cw - 120), cy0 + 66 + R() * 30] : [0, 0]);
+    kids.forEach(([x, y], k) => { const calm = st === 3; const kx = calm ? fx - 28 - k * 18 : x, ky = calm ? sy + 4 : y;
+      g += `<circle cx="${kx.toFixed(1)}" cy="${ky.toFixed(1)}" r="7" ${F('glow')}/><rect x="${(kx - 6).toFixed(1)}" y="${(ky + 7).toFixed(1)}" width="12" height="12" rx="4" ${F('glow', .7)}/>`;
+      if (!calm) g += `<path d="M${(kx + 9).toFixed(1)} ${(ky - 6).toFixed(1)}l6 -6M${(kx + 11).toFixed(1)} ${(ky).toFixed(1)}l8 -2" ${S('glow', 1.4)}/>`; });
+    /* speech */
+    const bub = (x, y, w, t, c) => `<rect x="${x}" y="${y}" width="${w}" height="${nw ? 50 : 30}" rx="10" ${FS('panel', c, 1.2)}/>` + wrap(x + w / 2, y + (nw ? 25 : 15) + 4, t, nw ? 44 : 80, 14, 'text', 12);
+    if (st === 2) g += bub(nw ? 16 : 120, nw ? 10 : 2, nw ? 328 : 420, 'Sir, your children are really disturbing people. Could you control them a little more?', 'bad');
+    if (st === 3) g += bub(nw ? 16 : 120, nw ? 10 : 2, nw ? 328 : 420, 'We just came from the hospital. Their mother died about an hour ago. I don\'t know what to think.', 'cool');
+    /* irritation meter */
+    const ir = STEPS[st][1], mx = W - (nw ? 130 : 170), my = H - 22, mw = nw ? 110 : 150;
+    g += TX(cx0, my + 9, 'Your irritation', 'muted', 11);
+    g += `<rect x="${mx}" y="${my}" width="${mw}" height="10" rx="5" ${F('line')}/><rect x="${mx}" y="${my}" width="${(mw * ir / 10).toFixed(1)}" height="10" rx="5" ${F(ir > 5 ? 'bad' : 'good')}/>`;
+    el.innerHTML = g;
+    $('#swIr').textContent = ir + ' / 10';
+    $('#swSay').textContent = STEPS[st][2];
+  });
+  draw();
+}
+
+/* ---------- 2: personality or character? ---------- */
+sorter('#sort2', '#tally2', [{ id: 'p', label: 'Personality ethic', d: 'Image, technique, quick fix' }, { id: 'c', label: 'Character ethic', d: 'Integrity, principle, slow growth' }], [
+  { t: 'Learn five power poses to look confident in meetings', a: 'p', w: 'A technique for the surface. It may help, but it isn\'t who you are.' },
+  { t: 'Keep a promise even when it costs you', a: 'c', w: 'Integrity: the kind of thing that builds trust over years.' },
+  { t: 'Memorise lines that make people like you fast', a: 'p', w: 'If people sense they\'re being worked on, it backfires.' },
+  { t: 'Admit a mistake to your team before anyone finds out', a: 'c', w: 'Humility and honesty: primary greatness.' },
+  { t: 'Cram for a promotion review with a burst of visible work', a: 'p', w: 'You can cram for an exam, not for a harvest. People notice the pattern.' },
+  { t: 'Practise patience with a slow colleague, week after week', a: 'c', w: 'Patience is a character trait that grows only with practice.' },
+  { t: 'Use flattery to win over a difficult client', a: 'p', w: 'Influence through image, not substance.' },
+  { t: 'Treat the cleaner with the same respect as the CEO', a: 'c', w: 'Character shows most when nobody important is watching.' } ]);
+
+/* ---------- 3: how a habit forms ---------- */
+{ const el = $('#hbSvg'); let ex = 0; const on = [true, false, false];
+  const EX = [['Listening', ['I know listening builds trust', 'I can reflect feelings back', 'I want to understand people']],
+    ['Exercise', ['I know why it matters', 'I know a routine that works', 'I actually want to go']],
+    ['Weekly planning', ['I know Quadrant II matters', 'I know how to plan by roles', 'I want to take charge of my week']]];
+  const NAMES = [['Knowledge', 'what to do and why'], ['Skill', 'how to do it'], ['Desire', 'wanting to do it']];
+  const MISS = ['You don\'t know what to do or why it matters. Learn the principle first.', 'You know it matters but don\'t know how. Practise the skill.', 'You know what and how, but don\'t really want to. Connect it to something you care about.'];
+  $('#hbE').innerHTML = EX.map(([l], i) => `<button class="btn" type="button" data-e="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $('#hbT').innerHTML = NAMES.map(([l, d], i) => `<label class="tg"><input type="checkbox" data-h="${i}" ${on[i] ? 'checked' : ''}><span>${l}<em> · ${d}</em></span></label>`).join('');
+  $$('#hbE [data-e]').forEach(b => b.addEventListener('click', () => { ex = +b.dataset.e; press($$('#hbE [data-e]'), b); draw(); }));
+  $$('#hbT input').forEach(c => c.addEventListener('change', () => { on[+c.dataset.h] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 340 : 280; vb(el, W, H);
+    const r = nw ? 82 : 92, cx = W / 2, cy = nw ? 175 : 150, d = nw ? 54 : 60;
+    const C = [[cx, cy - d], [cx - d * .95, cy + d * .6], [cx + d * .95, cy + d * .6]];
+    let g = '';
+    C.forEach(([x, y], i) => g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" ${FS(on[i] ? 'glow' : 'panel-2', on[i] ? 'glow' : 'line', 1.5, on[i] ? .16 : .6)}/>`);
+    const LP = [[cx, cy - d - r * .5], [cx - d * .95 - r * .38, cy + d * .6 + r * .3], [cx + d * .95 + r * .38, cy + d * .6 + r * .3]];
+    LP.forEach(([x, y], i) => { g += TX(x, y - 8, NAMES[i][0].toUpperCase(), on[i] ? 'glow' : 'faint', 11, 'middle', 'letter-spacing="1.4"'); g += wrap(x, y + 12, EX[ex][1][i], nw ? 16 : 20, 13, on[i] ? 'text' : 'faint', 11.5); });
+    const all = on.every(Boolean);
+    g += `<circle cx="${cx}" cy="${(cy + 6).toFixed(1)}" r="${all ? 26 : 18}" ${FS(all ? 'glow' : 'panel', all ? 'glow' : 'line', 1.5)}/>` + TX(cx, cy + 10, all ? 'HABIT' : '?', all ? 'on-glow' : 'faint', all ? 11 : 14, 'middle', 'font-weight="700" letter-spacing="1"');
+    el.innerHTML = g;
+    const n = on.filter(Boolean).length;
+    $('#hbV').textContent = all ? 'Yes: ' + EX[ex][0].toLowerCase() : `Not yet (${n} of 3)`;
+    $('#hbSay').textContent = all ? 'All three overlap. This is where a habit lives, and where it gets easier every time.' : MISS[on.findIndex(v => !v)];
+  });
+  draw();
+}
+
+/* ---------- 4: feed the goose ---------- */
+{ const el = $('#pcSvg');
+  const sim = s => { let h = 1; const E = [], Hh = []; for (let t = 0; t < 52; t++){ const T = Math.min(1, s / .25); h += .08 * (T - h); if (h < .08) h = 0; const e = h ? 12 * (1 - s) * h : 0; E.push(e); Hh.push(h); } return [E, Hh]; };
+  const draw = onLayout(() => {
+    const s = +$('#pcR').value / 100, [E, Hh] = sim(s), nw = NARROW(), W = nw ? 360 : 660, H = nw ? 250 : 240; vb(el, W, H);
+    const x0 = nw ? 34 : 44, x1 = W - 14, y0 = 20, y1 = H - 34, bw = (x1 - x0) / 52;
+    let g = `<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" ${S('line', 1)}/>`;
+    [0, 4, 8, 12].forEach(v => { const y = y1 - (y1 - y0) * v / 12; g += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" ${S('line', .6, ';stroke-dasharray:2 4')}/>` + TX(x0 - 6, y + 4, v, 'faint', 10, 'end'); });
+    E.forEach((e, t) => { const hh = (y1 - y0) * e / 12; g += `<rect x="${(x0 + t * bw + 1).toFixed(1)}" y="${(y1 - hh).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${hh.toFixed(1)}" rx="1.5" ${F('glow', .85)}/>`; });
+    g += `<path d="${Hh.map((h, t) => `${t ? 'L' : 'M'}${(x0 + t * bw + bw / 2).toFixed(1)} ${(y1 - (y1 - y0) * h).toFixed(1)}`).join('')}" ${S('cool', 2)}/>`;
+    g += TX(x0, y1 + 20, 'Week 1', 'faint', 10.5) + TX(x1, y1 + 20, 'Week 52', 'faint', 10.5, 'end');
+    g += `<rect x="${x1 - (nw ? 150 : 210)}" y="${y0 - 6}" width="10" height="10" rx="2" ${F('glow')}/>` + TX(x1 - (nw ? 136 : 196), y0 + 3, 'eggs per week', 'muted', 10.5);
+    g += `<rect x="${x1 - (nw ? 60 : 96)}" y="${y0 - 2}" width="12" height="2.5" ${F('cool')}/>` + TX(x1 - (nw ? 44 : 80), y0 + 3, 'goose health', 'muted', 10.5);
+    el.innerHTML = g;
+    const tot = Math.round(E.reduce((a, b) => a + b, 0)), dead = Hh[51] === 0;
+    out('pc', Math.round(s * 100) + '%'); $('#pcE').textContent = tot;
+    $('#pcSay').textContent = dead ? 'Run into the ground. Lots of eggs early on, then the goose gives out and production stops for good.' : s < .15 ? 'Overworked. Output falls every week as the goose weakens.' : s <= .35 ? 'In balance. The goose stays healthy and keeps laying, week after week.' : 'Pampered. The goose is healthy, but so much time goes on it that few eggs get collected.';
+  });
+  $('#pcR').addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: widen the gap ---------- */
+{ const el = $('#prSvg'); let si = 0; const on = [false, false, false, false];
+  const ST = [['A driver cuts you off', 'Lean on the horn, tailgate them and stew for the rest of the drive.', 'Notice the flash of anger, let them go and get on with your day.'],
+    ['Your boss criticises your work in a meeting', 'Snap back, or sulk and complain to colleagues all afternoon.', 'Take a breath, ask what they\'d like to see changed, and talk it through privately later.'],
+    ['It rains on your day off', 'Grumble that the day is ruined and waste it in a bad mood.', 'Choose an indoor plan you\'ll actually enjoy. The weather is outside you.']];
+  const G = [['Self-awareness', 'Notice: "I\'m getting angry."'], ['Imagination', 'Picture a better response.'], ['Conscience', 'Ask what\'s right here.'], ['Independent will', 'Act on it.']];
+  $('#prS').innerHTML = ST.map(([l], i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $('#prT').innerHTML = G.map(([l, d], i) => `<label class="tg"><input type="checkbox" data-g="${i}"><span>${l}<em> · ${d}</em></span></label>`).join('');
+  $$('#prS [data-s]').forEach(b => b.addEventListener('click', () => { si = +b.dataset.s; press($$('#prS [data-s]'), b); draw(); }));
+  $$('#prT input').forEach(c => c.addEventListener('change', () => { on[+c.dataset.g] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 300 : 210, n = on.filter(Boolean).length; vb(el, W, H);
+    let g = '';
+    if (!nw){
+      const gap = 40 + n * 50, bw = (W - 40 - gap) / 2, y = 40, h = 120;
+      g += `<rect x="20" y="${y}" width="${bw}" height="${h}" rx="14" ${FS('panel-2', 'line', 1.2)}/>` + TX(36, y + 24, 'STIMULUS', 'faint', 10.5, 'start', 'letter-spacing="1.4"') + wrap(20 + bw / 2, y + 70, ST[si][0], 22, 18, 'text', 15);
+      const rx = 20 + bw + gap;
+      g += `<rect x="${rx}" y="${y}" width="${bw}" height="${h}" rx="14" ${FS(n === 4 ? 'good-soft' : n ? 'panel-2' : 'bad-soft', n === 4 ? 'good' : n ? 'line' : 'bad', 1.2)}/>` + TX(rx + 16, y + 24, 'RESPONSE', 'faint', 10.5, 'start', 'letter-spacing="1.4"') + wrap(rx + bw / 2, y + 72, n >= 3 ? ST[si][2] : ST[si][1], 30, 16, 'text', 12.5);
+      const gx = 20 + bw;
+      if (!n) g += `<line x1="${gx}" y1="${y + h / 2}" x2="${rx - 6}" y2="${y + h / 2}" ${S('bad', 2)}/>` + arrowHead(rx - 2, y + h / 2, 0, 'bad', 8) + TX(gx + gap / 2, y + h / 2 - 10, 'reflex', 'bad', 10, 'middle');
+      else { g += `<rect x="${gx + 6}" y="${y - 10}" width="${gap - 12}" height="${h + 20}" rx="10" ${FS('glow-soft', 'glow-line', 1)}/>` + TX(gx + gap / 2, y + h + 32, 'THE SPACE: FREEDOM TO CHOOSE', 'glow', 10, 'middle', 'letter-spacing="1.2"');
+        G.forEach(([l], i) => { if (!on[i]) return; const k = on.slice(0, i).filter(Boolean).length; const px = gx + 31 + k * 50; g += `<rect x="${px - 18}" y="${y + 6}" width="36" height="${h - 12}" rx="8" ${F('glow', .22)}/><text x="${px + 4}" y="${y + h / 2}" font-size="11" text-anchor="middle" transform="rotate(-90 ${px + 4} ${y + h / 2})" ${F('text')}>${l}</text>`; }); }
+    } else {
+      const gap = 30 + n * 26, x = 20, w = W - 40, h = 74, y0 = 14;
+      g += `<rect x="${x}" y="${y0}" width="${w}" height="${h}" rx="14" ${FS('panel-2', 'line', 1.2)}/>` + TX(x + 14, y0 + 20, 'STIMULUS', 'faint', 10, 'start', 'letter-spacing="1.4"') + wrap(x + w / 2, y0 + 46, ST[si][0], 36, 16, 'text', 14);
+      const ry = y0 + h + gap;
+      if (!n) g += `<line x1="${W / 2}" y1="${y0 + h}" x2="${W / 2}" y2="${ry - 6}" ${S('bad', 2)}/>` + arrowHead(W / 2, ry - 2, Math.PI / 2, 'bad', 8);
+      else { g += `<rect x="${x + 10}" y="${y0 + h + 4}" width="${w - 20}" height="${gap - 8}" rx="8" ${FS('glow-soft', 'glow-line', 1)}/>`;
+        G.forEach(([l], i) => { if (!on[i]) return; const k = on.slice(0, i).filter(Boolean).length; g += TX(W / 2, y0 + h + 22 + k * 26, l, 'text', 12, 'middle'); }); }
+      g += `<rect x="${x}" y="${ry}" width="${w}" height="${H - ry - 10}" rx="14" ${FS(n === 4 ? 'good-soft' : n ? 'panel-2' : 'bad-soft', n === 4 ? 'good' : n ? 'line' : 'bad', 1.2)}/>` + TX(x + 14, ry + 20, 'RESPONSE', 'faint', 10, 'start', 'letter-spacing="1.4"') + wrap(x + w / 2, ry + (H - ry - 10) / 2 + 8, n >= 3 ? ST[si][2] : ST[si][1], 44, 15, 'text', 12);
+    }
+    el.innerHTML = g;
+    $('#prV').textContent = ['No gap', 'A crack', 'A pause', 'A real space', 'Wide open'][n];
+    $('#prSay').textContent = n === 0 ? 'Reactive: the stimulus decides for you, straight from feeling to action.' : n < 3 ? 'You notice what\'s happening, but the old reaction still mostly wins.' : n < 4 ? 'You pause and choose. Use your independent will to follow through.' : 'Proactive: you choose a response that fits your values, not your mood.';
+  });
+  draw();
+}
+
+/* ---------- 6: reactive or proactive language ---------- */
+sorter('#sort6', '#tally6', [{ id: 'r', label: 'Reactive', d: 'Power goes to circumstances' }, { id: 'p', label: 'Proactive', d: 'Power stays with you' }], [
+  { t: '"There\'s nothing I can do."', q: 1, a: 'r', w: 'Proactive version: "Let\'s look at our alternatives."' },
+  { t: '"I\'ll choose a better approach."', q: 1, a: 'p', w: 'It names a choice and takes ownership of it.' },
+  { t: '"He makes me so mad."', q: 1, a: 'r', w: 'Proactive version: "I control my own feelings."' },
+  { t: '"That\'s just the way I am."', q: 1, a: 'r', w: 'Proactive version: "I can choose a different way."' },
+  { t: '"I prefer to keep weekends for family."', q: 1, a: 'p', w: '"Prefer" states a value instead of a rule imposed from outside.' },
+  { t: '"I have to go to this meeting."', q: 1, a: 'r', w: 'Proactive version: "I choose to go, because it matters for the project."' },
+  { t: '"I can create an effective presentation."', q: 1, a: 'p', w: 'It focuses on what\'s within your power.' },
+  { t: '"If only my boss were more patient."', q: 1, a: 'r', w: 'A "have" from the Circle of Concern. Proactive version: "I can be more patient myself."' } ]);
+
+/* ---------- 7: the circle of influence ---------- */
+{ const el = $('#ciSvg');
+  const IT = [['The economy', 0, 'Economy'], ['The weather', 0, 'Weather'], ['My boss\'s moods', 0, 'Boss\'s mood'], ['What the news says', 0, 'The news'], ['A colleague\'s attitude', 0, 'Colleague'],
+    ['How I prepare for meetings', 1, 'Preparation'], ['How I listen to my kids', 1, 'Listening'], ['My own sleep and exercise', 1, 'Health'], ['A skill I\'m learning', 1, 'New skill'], ['How I respond to criticism', 1, 'My response']];
+  const on = IT.map((_, i) => i < 3);
+  $('#ciT').innerHTML = IT.map(([l], i) => `<label class="tg"><input type="checkbox" data-c="${i}" ${on[i] ? 'checked' : ''}><span>${l}</span></label>`).join('');
+  $$('#ciT input').forEach(c => c.addEventListener('change', () => { on[+c.dataset.c] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 330 : 300, cx = W / 2, cy = H / 2 + 6, R = nw ? 150 : 138; vb(el, W, H);
+    const nin = IT.filter((x, i) => on[i] && x[1]).length, nout = IT.filter((x, i) => on[i] && !x[1]).length;
+    const r = clamp(62 + nin * 12 - nout * 9, 26, R - 22);
+    let g = `<circle cx="${cx}" cy="${cy}" r="${R}" ${FS('panel-2', 'line', 1.5)}/>` + TX(cx, cy - R + 18, 'CIRCLE OF CONCERN', 'faint', 10, 'middle', 'letter-spacing="1.4"');
+    g += `<circle cx="${cx}" cy="${cy}" r="${r}" ${FS('glow', 'glow', 1.5, .18)}/>` + TX(cx, cy - r + 16, r > 70 ? 'CIRCLE OF INFLUENCE' : 'INFLUENCE', 'glow', 9.5, 'middle', 'letter-spacing="1.2"');
+    let ko = 0, ki = 0;
+    IT.forEach(([, inside, s], i) => { if (!on[i]) return;
+      if (inside){ const a = Math.PI * (.12 + (ki % 5) * .19) + (ki > 4 ? .1 : 0), rr = Math.max(r * .5, 10); ki++; const px = cx + rr * Math.cos(a) * 1.3, py = cy - 10 + rr * Math.sin(a); g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="5" ${F('glow')}/>` + TX(px, py + 16, s, 'text', 10.5, 'middle'); }
+      else { const a = -Math.PI * .85 + ko * (nw ? .55 : .5) + (ko > 2 ? 1.5 : 0), rr = (R + r) / 2 + 8; ko++; const px = cx + rr * Math.cos(a), py = cy + rr * Math.sin(a); g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="5" ${F('cool')}/>` + TX(px, py + 16, s, 'muted', 10.5, 'middle'); } });
+    el.innerHTML = g;
+    $('#ciV').textContent = r > 90 ? 'Growing' : r > 55 ? 'Holding steady' : 'Shrinking';
+    $('#ciSay').textContent = nin + nout === 0 ? 'Tick where your energy goes this week.' : nout > nin ? 'Most of your energy goes on things you can\'t change. You feel more helpless, and your influence shrinks.' : nout === 0 ? 'All your energy goes where you can act. People notice, and your influence keeps widening.' : 'A mix. Every item you move from worry to action makes the inner circle bigger.';
+  });
+  draw();
+}
+
+/* ---------- 8: the four speakers ---------- */
+{ const K = { fuF: 'f', fuR: 'r', fuW: 'w', fuC: 'c', fuM: 'm' }; let D = store.get('seh-funeral', {});
+  const render = () => { const sp = ['f', 'r', 'w', 'c'].filter(k => (D[k] || '').trim());
+    $('#fuOut').innerHTML = (D.m || '').trim() ? esc(D.m.trim()) : sp.length ? `<span class="empty">You've written ${sp.length} of 4 tributes. Look for what they have in common: those are your values. Now draft the mission below them.</span>` : '<span class="empty">Start with any of the four speakers. There are no wrong answers, only honest ones.</span>'; };
+  Object.entries(K).forEach(([id, k]) => { const t = $('#' + id); t.value = D[k] || ''; t.addEventListener('input', () => { D[k] = t.value; store.set('seh-funeral', D); render(); renderCard(); }); });
+  $('#fuClear').addEventListener('click', () => { D = {}; store.set('seh-funeral', D); Object.keys(K).forEach(id => $('#' + id).value = ''); render(); renderCard(); });
+  render();
+}
+
+/* ---------- 9: your centre ---------- */
+{ const el = $('#ceSvg'); let ci = 9;
+  const CE = [
+    ['Spouse', [3, 4, 4, 3], 'Whatever keeps your partner happy, or you stay late and feel guilty all evening.', 'Your sense of worth rises and falls with your partner\'s moods and approval.'],
+    ['Family', [4, 4, 3, 3], 'You go if your family expects it, but resent the boss, or stay and feel you\'ve let them down.', 'Every family upset feels like a threat to who you are.'],
+    ['Money', [2, 3, 2, 3], 'You stay for the overtime, or the raise it might lead to.', 'A market drop or a lost bonus shakes your whole identity.'],
+    ['Work', [3, 4, 2, 4], 'You stay. The job comes first, and your partner will understand.', 'Lose the job, or retire, and you don\'t know who you are.'],
+    ['Possessions', [2, 2, 2, 2], 'You choose whatever protects your status and the things you own.', 'Your worth is only as safe as your things.'],
+    ['Pleasure', [2, 2, 1, 2], 'You skip both and do whatever is most fun tonight.', 'Each high needs a bigger one, and real responsibilities pile up.'],
+    ['Friends', [3, 3, 3, 2], 'You do whatever your social circle would think best.', 'You feel lost whenever you fall out of favour with the group.'],
+    ['Enemy', [1, 2, 1, 1], 'You decide based on how it\'ll look to the person you resent.', 'Someone you dislike ends up running your life.'],
+    ['Self', [3, 3, 2, 3], 'You do what you feel like, without much thought for anyone else.', 'A narrow, selfish view gives you little to stand on when things go wrong.'],
+    ['Principles', [9, 9, 9, 9], 'You weigh both needs, think about alternatives and decide. Go or stay, you\'re at peace with it.', 'Principles don\'t move, so the wobble stays outside you.'] ];
+  const DIM = [['Security', 'your sense of worth'], ['Guidance', 'your sense of direction'], ['Wisdom', 'your perspective on life'], ['Power', 'your capacity to act']];
+  $('#ceB').innerHTML = CE.map(([l], i) => `<button class="btn" type="button" data-c="${i}" aria-pressed="${i === ci}">${l}</button>`).join('');
+  $$('#ceB [data-c]').forEach(b => b.addEventListener('click', () => { ci = +b.dataset.c; press($$('#ceB [data-c]'), b); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 260 : 220; vb(el, W, H);
+    const x0 = nw ? 16 : 190, x1 = W - 30, rowH = nw ? 58 : 46, y0 = 22, v = CE[ci][1];
+    let g = '';
+    if (!nw) g += `<circle cx="90" cy="${H / 2}" r="58" ${FS(ci === 9 ? 'glow' : 'cool', ci === 9 ? 'glow' : 'cool', 1.5, .2)}/>` + TX(90, H / 2 - 6, 'CENTRE', 'faint', 10, 'middle', 'letter-spacing="1.4"') + TX(90, H / 2 + 16, CE[ci][0], 'text', 18, 'middle', 'font-family="Instrument Serif, serif"');
+    DIM.forEach(([l, d], i) => { const y = y0 + i * rowH, bw = x1 - x0, ly = nw ? y : y;
+      g += TX(x0, ly, l, 'text', 13, 'start', 'font-weight="500"') + TX(x0 + (nw ? 70 : 78), ly, d, 'faint', 11);
+      g += `<rect x="${x0}" y="${ly + 8}" width="${bw}" height="12" rx="6" ${F('line')}/><rect x="${x0}" y="${ly + 8}" width="${(bw * v[i] / 10).toFixed(1)}" height="12" rx="6" ${F(ci === 9 ? 'glow' : 'cool')}/>` + TX(x1 + 6, ly + 18, v[i], 'muted', 11); });
+    el.innerHTML = g;
+    $('#ceDo').textContent = CE[ci][2]; $('#ceSay').textContent = CE[ci][3];
+  });
+  draw();
+}
+
+/* ---------- 10: the time management matrix ---------- */
+{ const el = $('#tmSvg'), placed = [];
+  const Q = [['I', 'Urgent and important', 'Crises, deadlines'], ['II', 'Important, not urgent', 'Planning, prevention, relationships'], ['III', 'Urgent, not important', 'Interruptions, some meetings'], ['IV', 'Neither', 'Trivia, time-wasters']];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 300 : 250, x0 = nw ? 26 : 90, y0 = 26, x1 = W - 8, y1 = H - 8, mx = (x0 + x1) / 2, my = (y0 + y1) / 2; vb(el, W, H);
+    let g = TX((x0 + mx) / 2, 16, 'URGENT', 'muted', 10, 'middle', 'letter-spacing="1.4"') + TX((mx + x1) / 2, 16, 'NOT URGENT', 'muted', 10, 'middle', 'letter-spacing="1.4"');
+    const lab = (y, t) => nw ? `<text x="14" y="${y}" font-size="10" text-anchor="middle" letter-spacing="1.2" transform="rotate(-90 14 ${y})" ${F('muted')}>${t}</text>` : TX(x0 - 10, y, t, 'muted', 10, 'end', 'letter-spacing="1.2"');
+    g += lab((y0 + my) / 2, 'IMPORTANT') + lab((my + y1) / 2, nw ? 'NOT IMPORTANT' : 'NOT IMP.');
+    const box = [[x0, y0], [mx, y0], [x0, my], [mx, my]];
+    box.forEach(([x, y], i) => { g += `<rect x="${x + 2}" y="${y + 2}" width="${mx - x0 - 4}" height="${my - y0 - 4}" rx="10" ${FS(i === 1 ? 'glow-soft' : 'panel-2', i === 1 ? 'glow' : 'line', i === 1 ? 1.6 : 1)}/>` + TX(x + 12, y + 22, Q[i][0], i === 1 ? 'glow' : 'faint', 16, 'start', 'font-family="Instrument Serif, serif"') + TX(x + 34, y + 21, nw ? '' : Q[i][2], 'faint', 10.5); });
+    const cnt = [0, 0, 0, 0];
+    placed.forEach(([qi, t, ok]) => { const k = cnt[qi]++, [x, y] = box[qi], cols = nw ? 1 : 2, cw = (mx - x0 - 24) / cols, px = x + 14 + (k % cols) * cw, py = y + 40 + Math.floor(k / cols) * 17;
+      if (py < y + (my - y0) - 8) g += `<circle cx="${px + 3}" cy="${py - 4}" r="3.5" ${F(ok ? 'good' : 'bad')}/>` + TX(px + 12, py, t.length > (nw ? 20 : 30) ? t.slice(0, nw ? 19 : 29) + '…' : t, 'soft', 10.5); });
+    el.innerHTML = g;
+  });
+  const S4 = [{ id: 'q1', label: 'I · Urgent, important' }, { id: 'q2', label: 'II · Important, not urgent' }, { id: 'q3', label: 'III · Urgent, not important' }, { id: 'q4', label: 'IV · Neither' }];
+  sorter('#tmSort', '#tmTally', S4, [
+    { t: 'A client crisis that must be fixed today', s: 'Client crisis', a: 'q1', w: 'Pressing and important. Deal with it, then ask how Quadrant II planning could have prevented it.' },
+    { t: 'Planning next week by your roles', s: 'Weekly planning', a: 'q2', w: 'Nothing forces you to do it, and it\'s what keeps Quadrant I small.' },
+    { t: 'Exercising three times this week', s: 'Exercise', a: 'q2', w: 'Classic Quadrant II: important for years, urgent on no particular day.' },
+    { t: 'Most of the emails that pop up', s: 'Pop-up emails', a: 'q3', w: 'They feel urgent because they\'re in front of you, but most serve someone else\'s priorities.' },
+    { t: 'Scrolling social media', s: 'Scrolling', a: 'q4', w: 'Not urgent and not important. Rest is Quadrant II; mindless scrolling usually isn\'t.' },
+    { t: 'Getting to know a new colleague', s: 'New colleague', a: 'q2', w: 'Relationship building is the heart of Quadrant II.' },
+    { t: 'A "quick question" that interrupts your focus', s: 'Interruption', a: 'q3', w: 'Urgent to them, not important to your goals. Batch these or say not now.' },
+    { t: 'A tax return due tomorrow', s: 'Tax deadline', a: 'q1', w: 'Urgent and important now, often because it sat in Quadrant II too long.' },
+    { t: 'Learning a skill for your next role', s: 'New skill', a: 'q2', w: 'Growth that pays off later: textbook Quadrant II.' } ], true,
+    (it, ok) => { if (it === null){ placed.length = 0; } else placed.push([+it.a[1] - 1, it.s, ok]); draw(); });
+  draw();
+}
+
+/* ---------- 11: green and clean ---------- */
+{ const el = $('#gcSvg'); let mode = 1; const on = [false, false, false, false, false];
+  const E5 = [['Desired results', '"Green and clean", shown with the neighbour\'s yard'], ['Guidelines', 'No paint on the lawn; any watering method is fine'], ['Resources', 'Sprinklers, hose, bags, and Dad\'s help if he has time'], ['Accountability', 'Walk round together twice a week; he judges how it\'s going'], ['Consequences', 'A yard he\'s proud of, and the trust to take on more']];
+  $('#gcM').innerHTML = ['Gofer delegation', 'Stewardship delegation'].map((l, i) => `<button class="btn" type="button" data-m="${i}" aria-pressed="${i === mode}">${l}</button>`).join('');
+  $('#gcT').innerHTML = E5.map(([l, d], i) => `<label class="tg"><input type="checkbox" data-e="${i}"><span>${l}<em> · ${d}</em></span></label>`).join('');
+  $$('#gcM [data-m]').forEach(b => b.addEventListener('click', () => { mode = +b.dataset.m; press($$('#gcM [data-m]'), b); $('#gcT').style.display = mode ? '' : 'none'; draw(); }));
+  $$('#gcT input').forEach(c => c.addEventListener('change', () => { on[+c.dataset.e] = c.checked; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 220 : 220; vb(el, W, H);
+    const n = on.filter(Boolean).length, green = mode ? n / 5 : .55, litter = mode ? 5 - n : 2;
+    const hx = nw ? 20 : 40, hw = nw ? 90 : 130, gy = 130;
+    let g = `<rect x="0" y="${gy}" width="${W}" height="${H - gy}" ${F('glow', .35)}/><rect x="0" y="${gy}" width="${W}" height="${H - gy}" ${F('good', (green * .6).toFixed(2))}/>`;
+    g += `<path d="M${hx} ${gy}V${gy - 60}L${hx + hw / 2} ${gy - 100}L${hx + hw} ${gy - 60}V${gy}Z" ${FS('panel-2', 'line', 1.5)}/><rect x="${hx + hw / 2 - 12}" y="${gy - 36}" width="24" height="36" ${F('line')}/>`;
+    const R = rng(11); for (let k = 0; k < 6; k++){ const lx = hx + hw + 30 + R() * (W - hx - hw - 60), ly = gy + 16 + R() * 60; if (k < litter) g += `<rect x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" width="12" height="8" rx="2" transform="rotate(${(R() * 40 - 20).toFixed(0)} ${lx.toFixed(1)} ${ly.toFixed(1)})" ${F('cool')}/>`; }
+    const kx = W - (nw ? 70 : 150), ky = gy + 20;
+    g += `<circle cx="${kx}" cy="${ky}" r="9" ${F('text')}/><rect x="${kx - 8}" y="${ky + 9}" width="16" height="20" rx="5" ${F('text', .8)}/>` + TX(kx, ky + 46, 'Stephen, 7', 'deep', 10.5, 'middle', 'font-weight="600"');
+    if (!mode){ g += `<circle cx="${kx - 40}" cy="${ky - 8}" r="11" ${F('cool')}/><rect x="${kx - 50}" y="${ky + 3}" width="20" height="26" rx="6" ${F('cool', .8)}/>`;
+      g += `<rect x="${kx - (nw ? 190 : 260)}" y="${ky - 70}" width="${nw ? 170 : 230}" height="36" rx="10" ${FS('panel', 'cool', 1.2)}/>` + wrap(kx - (nw ? 105 : 145), ky - 48, 'Now water here. Now pick that up. Now...', nw ? 26 : 40, 13, 'text', 11.5); }
+    el.innerHTML = g;
+    $('#gcV').textContent = mode ? (n * 20) + '%' : '10%';
+    $('#gcSay').textContent = !mode ? 'The yard looks fine only while you stand over him giving orders. Your time: every day. His ownership: almost none.' : n === 0 ? 'He doesn\'t know what you want or how it\'ll be judged. The lawn yellows and rubbish piles up.' : n < 5 ? 'Better. Every part you make clear gives him more to own, but gaps leave room for confusion.' : 'Green and clean. He knows the result, the rules, the help on offer and how he\'ll be judged, and he runs it himself.';
+  });
+  draw();
+}
+
+/* ---------- 12: the emotional bank account ---------- */
+{ const el = $('#ebSvg'); let hist = [[20, '']], last = '';
+  const DEP = [['Keep a promise', 15], ['Remember a little thing', 10], ['Listen to understand', 15], ['Clarify expectations', 10], ['Apologise sincerely', 12], ['Be loyal to someone absent', 10]];
+  const WIT = [['Break a promise', -25], ['Interrupt and lecture', -15], ['Gossip about a friend', -15], ['Forget what matters to them', -10]];
+  $('#ebD').innerHTML = DEP.map(([l, v], i) => `<button class="btn" type="button" data-d="${i}">+ ${l}</button>`).join('');
+  $('#ebW').innerHTML = WIT.map(([l, v], i) => `<button class="btn" type="button" data-w="${i}">− ${l}</button>`).join('');
+  const add = (v, t, say) => { const b = clamp(hist[hist.length - 1][0] + v, -100, 160); hist.push([b, t]); if (hist.length > 24) hist.shift(); last = say || ''; draw(); };
+  $$('#ebD [data-d]').forEach(b => b.addEventListener('click', () => { const [l, v] = DEP[+b.dataset.d]; add(v, '+', `${l}: a deposit of ${v}.`); }));
+  $$('#ebW [data-w]').forEach(b => b.addEventListener('click', () => { const [l, v] = WIT[+b.dataset.w]; add(v, '−', `${l}: a withdrawal of ${-v}.`); }));
+  $('#ebHard').addEventListener('click', () => { const b = hist[hist.length - 1][0];
+    if (b >= 60) add(-10, 'F', 'The feedback lands. They trust your intent, take it seriously and even thank you.');
+    else if (b >= 25) add(-25, 'F', 'They get defensive. Some of it lands, but it costs a lot of trust.');
+    else add(-40, 'F', 'It blows up. With so little trust in the account, every word sounds like an attack.'); });
+  $('#ebReset').addEventListener('click', () => { hist = [[20, '']]; last = ''; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = 220, x0 = nw ? 34 : 44, x1 = W - 14, y0 = 14, y1 = H - 24; vb(el, W, H);
+    const Y = v => y1 - (y1 - y0) * (v + 100) / 260, n = 24, dx = (x1 - x0) / (n - 1);
+    let g = `<rect x="${x0}" y="${Y(160)}" width="${x1 - x0}" height="${Y(60) - Y(160)}" ${F('good', .07)}/><rect x="${x0}" y="${Y(0)}" width="${x1 - x0}" height="${Y(-100) - Y(0)}" ${F('bad', .07)}/>`;
+    [-100, 0, 60, 160].forEach(v => g += `<line x1="${x0}" y1="${Y(v)}" x2="${x1}" y2="${Y(v)}" ${S('line', v === 0 ? 1.2 : .6, v === 0 ? '' : ';stroke-dasharray:2 4')}/>` + TX(x0 - 6, Y(v) + 4, v, 'faint', 10, 'end'));
+    g += TX(x1 - 4, Y(60) - 6, 'enough trust for hard truths', 'good', 10, 'end') + TX(x1 - 4, Y(-100) - 6, 'overdrawn', 'bad', 10, 'end');
+    g += `<path d="${hist.map(([v], i) => `${i ? 'L' : 'M'}${(x0 + i * dx).toFixed(1)} ${Y(v).toFixed(1)}`).join('')}" ${S('glow', 2.2)}/>`;
+    hist.forEach(([v, t], i) => { if (!t) return; g += `<circle cx="${(x0 + i * dx).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="${t === 'F' ? 6 : 4}" ${F(t === '+' ? 'good' : t === 'F' ? 'cool' : 'bad')}/>`; });
+    el.innerHTML = g;
+    const b = hist[hist.length - 1][0];
+    $('#ebV').textContent = b;
+    $('#ebSay').textContent = last || (b >= 60 ? 'Plenty of trust. Communication is easy, and mistakes are forgiven.' : b >= 0 ? 'A thin balance. Make a few deposits, then try giving some hard feedback.' : 'Overdrawn. Every word is heard with suspicion.');
+  });
+  draw();
+}
+
+/* ---------- 13: courage and consideration ---------- */
+{ const el = $('#wwSvg'); let si = 0;
+  const SC = ['Asking for a raise', 'Sharing the chores', 'A supplier contract'];
+  const TXT = {
+    ww: ['Win-win', ['You make a clear case for your value and ask what your manager needs to make it work. You agree a plan you both can back.', 'You both say what matters most, and split the work so neither of you feels taken for granted.', 'You state your price and hear their constraints, and find terms that keep you both in business together.']],
+    wl: ['Win-lose', ['You threaten to leave unless you get the raise. You might get it, and lose your manager\'s goodwill.', 'You lay down the law. The chores get done, and resentment builds.', 'You squeeze them on price. They agree, then cut corners on quality.']],
+    lw: ['Lose-win', ['You don\'t ask, or drop it at the first objection. You smile and resent it for a year.', 'You quietly do it all to keep the peace, until you snap.', 'You accept their terms to be nice, and lose money on every order.']],
+    ll: ['Lose-lose', ['You stew in silence and start job-hunting without saying why.', 'Nobody does anything and the place falls apart.', 'Neither side will move. No deal, and both of you are worse off.']] };
+  $('#wwS').innerHTML = SC.map((l, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $$('#wwS [data-s]').forEach(b => b.addEventListener('click', () => { si = +b.dataset.s; press($$('#wwS [data-s]'), b); draw(); }));
+  const draw = onLayout(() => {
+    const c = +$('#wwC').value, k = +$('#wwK').value, nw = NARROW(), W = nw ? 360 : 660, H = nw ? 300 : 250; vb(el, W, H);
+    out('ww1', c); out('ww2', k);
+    const x0 = nw ? 34 : 150, x1 = W - (nw ? 12 : 150), y0 = 12, y1 = H - 34, mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
+    const key = c >= 5 && k >= 5 ? 'ww' : c >= 5 ? 'wl' : k >= 5 ? 'lw' : 'll';
+    const Qd = [['wl', x0, y0], ['ww', mx, y0], ['ll', x0, my], ['lw', mx, my]];
+    let g = '';
+    Qd.forEach(([q, x, y]) => { const on = q === key; g += `<rect x="${x + 2}" y="${y + 2}" width="${mx - x0 - 4}" height="${my - y0 - 4}" rx="10" ${FS(on ? (q === 'ww' ? 'good-soft' : 'cool-soft') : 'panel-2', on ? (q === 'ww' ? 'good' : 'cool') : 'line', on ? 1.6 : 1)}/>` + TX(x + (mx - x0) / 2, y + (my - y0) / 2 + 6, TXT[q][0], on ? 'text' : 'faint', nw ? 18 : 22, 'middle', 'font-family="Instrument Serif, serif"'); });
+    g += TX((x0 + x1) / 2, y1 + 24, 'Consideration →', 'muted', 11.5, 'middle') + `<text x="${x0 - 14}" y="${my}" font-size="11.5" text-anchor="middle" transform="rotate(-90 ${x0 - 14} ${my})" ${F('muted')}>Courage →</text>`;
+    const px = x0 + (x1 - x0) * (k / 10), py = y1 - (y1 - y0) * (c / 10);
+    g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="14" ${F('glow', .25)}/><circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="7" ${F('glow')}/>`;
+    el.innerHTML = g;
+    $('#wwV').textContent = TXT[key][0]; $('#wwSay').textContent = TXT[key][1][si];
+  });
+  ['#wwC', '#wwK'].forEach(s => $(s).addEventListener('input', draw)); draw();
+}
+
+/* ---------- 14: the five ways to reply ---------- */
+{ const el = $('#lsSvg'); let round = 0, pick = -1;
+  const LV = ['Ignoring', 'Pretending', 'Selective', 'Attentive', 'Empathic'];
+  const R = [
+    ['"School is so stupid. I\'m done with it."', [
+      ['"Mm-hm." (eyes still on your phone)', 'Pretending', 1, 1, '"...Forget it." They leave the room.'],
+      ['"That\'s a ridiculous thing to say. You need an education."', 'Evaluating', 2, 1, '"See? You never listen." The door slams.'],
+      ['"Is it a teacher? Have you been doing your homework?"', 'Probing', 3, 2, '"It\'s not that. Never mind." The shutters come down.'],
+      ['"I felt the same at your age. You just need to knuckle down."', 'Advising', 3, 2, '"Okay. Can I go now?"'],
+      ['"You\'re only saying that because of that maths test."', 'Interpreting', 3, 2, '"That\'s not it at all!" Now they\'re defending themselves.'],
+      ['"Sounds like you\'re really fed up with school right now."', 'Empathic', 4, 7, '"Yeah. I don\'t see the point. Half the time I can\'t even follow the reading, and everyone else seems fine."']]],
+    ['"Half the time I can\'t even follow the reading, and everyone else seems fine."', [
+      ['"Don\'t be silly, you\'re as smart as anyone."', 'Evaluating', 2, 4, '"You don\'t get it." The moment passes.'],
+      ['"Then read for an hour every night. That\'s what I did."', 'Advising', 3, 4, '"Fine." They look away.'],
+      ['"So it\'s not school as such. The reading feels hard, and you feel like you\'re the only one."', 'Empathic', 4, 10, '"...Yeah. Exactly. I\'ve been scared to say it. Could you help me work out what to do?"']]] ];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 220 : 200; vb(el, W, H);
+    const r = pick >= 0 ? R[round][1][pick] : null, lvl = r ? r[2] : -1, open = r ? r[3] : (round ? 7 : 3);
+    const lx = nw ? 16 : 40, lw = nw ? 170 : 260, rh = 30, y0 = 18;
+    let g = TX(lx, 12, 'LEVEL OF LISTENING', 'faint', 10, 'start', 'letter-spacing="1.4"');
+    LV.slice().reverse().forEach((l, k) => { const i = 4 - k, y = y0 + k * (rh + 4), on = i === lvl;
+      g += `<rect x="${lx}" y="${y}" width="${lw * (0.55 + i * .11)}" height="${rh}" rx="8" ${FS(on ? (i === 4 ? 'glow' : 'cool') : 'panel-2', on ? (i === 4 ? 'glow' : 'cool') : 'line', 1, on ? (i === 4 ? 1 : .35) : 1)}/>` + TX(lx + 12, y + 19, `${i + 1}. ${l}`, on && i === 4 ? 'on-glow' : 'text', 12, 'start', on ? 'font-weight="600"' : ''); });
+    const bx = nw ? 230 : 400, bw = nw ? 40 : 60, bh = 5 * (rh + 4) - 4, oh = bh * open / 10;
+    g += TX(bx + bw / 2, 12, nw ? 'OPEN' : 'HOW OPEN THEY ARE', 'faint', 10, 'middle', 'letter-spacing="1.2"');
+    g += `<rect x="${bx}" y="${y0}" width="${bw}" height="${bh}" rx="10" ${F('line')}/><rect x="${bx}" y="${(y0 + bh - oh).toFixed(1)}" width="${bw}" height="${oh.toFixed(1)}" rx="10" ${F(open >= 7 ? 'good' : open >= 4 ? 'glow' : 'bad')}/>` + TX(bx + bw / 2, y0 + bh - oh - 6, open + '/10', 'muted', 11, 'middle');
+    if (!nw) g += wrap(bx + bw + 110, y0 + bh / 2, r ? (r[1] === 'Empathic' ? 'Their frame of reference. They feel understood and keep talking.' : 'Your frame of reference. The talk turns to you, and they close up.') : 'Pick a reply to see how far they open up.', 22, 16, r ? (r[1] === 'Empathic' ? 'good' : 'cool') : 'faint', 12.5);
+    el.innerHTML = g;
+  });
+  const cards = () => {
+    $('#lsAsk').innerHTML = `<b>Round ${round + 1}.</b> They say: ${R[round][0]}`;
+    $('#lsR').innerHTML = R[round][1].map((r, i) => `<button class="card3${i === pick ? (r[1] === 'Empathic' ? ' right' : ' wrong') : ''}" type="button" data-r="${i}" aria-pressed="${i === pick}"><span style="color:var(--text);font-size:13.5px">${r[0]}</span>${i === pick ? `<span class="tr">${r[1].toUpperCase()}</span>` : ''}</button>`).join('') + (pick >= 0 && R[round][1][pick][1] === 'Empathic' && round === 0 ? '<button class="btn primary" type="button" id="lsNext">Keep listening →</button>' : pick >= 0 && round === 1 ? '<button class="btn" type="button" id="lsAgain">Start again</button>' : '');
+    $$('#lsR [data-r]').forEach(b => b.addEventListener('click', () => { pick = +b.dataset.r; cards(); draw(); }));
+    const nx = $('#lsNext'); if (nx) nx.addEventListener('click', () => { round = 1; pick = -1; cards(); draw(); });
+    const ag = $('#lsAgain'); if (ag) ag.addEventListener('click', () => { round = 0; pick = -1; cards(); draw(); });
+    const r = pick >= 0 ? R[round][1][pick] : null;
+    $('#lsV').textContent = r ? r[1] : '—'; $('#lsSay').textContent = r ? r[4] : 'Pick a reply.';
+  };
+  cards(); draw();
+}
+
+/* ---------- 15: the third alternative ---------- */
+{ const el = $('#syS'); let pick = -1;
+  const OP = [['His plan: the lake', 9, 2, 'Defensive', 'He wins, she loses. She spends the holiday worrying about her mother, and he feels it.'],
+    ['Her plan: visit her mother', 2, 8, 'Defensive', 'She wins, he loses. The kids are disappointed and he quietly resents it.'],
+    ['Split the time: half and half', 5, 5, 'Respectful', 'A compromise. Nobody fights, but both feel short-changed: 1 + 1 = 1½.'],
+    ['Cancel the holiday altogether', 1, 2, 'Defensive', 'Lose-lose. Nobody gets a break, and the argument goes on.'],
+    ['Keep talking until a third option appears', 9, 9, 'Synergistic', 'An option neither started with: time with her mother and a real family break. 1 + 1 = 3.']];
+  $('#syB').innerHTML = OP.map(([l], i) => `<button class="card3" type="button" data-o="${i}" aria-pressed="false"><b>${l}</b></button>`).join('');
+  $$('#syB [data-o]').forEach(b => b.addEventListener('click', () => { pick = +b.dataset.o; $$('#syB [data-o]').forEach((x, i) => { x.setAttribute('aria-pressed', i === pick); x.classList.toggle('right', i === pick && i === 4); x.classList.toggle('mid', i === pick && i === 2); x.classList.toggle('wrong', i === pick && i !== 4 && i !== 2); }); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 300 : 260, x0 = nw ? 40 : 170, x1 = W - (nw ? 16 : 170), y0 = 14, y1 = H - 38; vb(el, W, H);
+    const P = (a, b) => [x0 + (x1 - x0) * a / 10, y1 - (y1 - y0) * b / 10];
+    let g = `<rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" rx="8" ${FS('panel-2', 'line', 1.2)}/>`;
+    const [ax, ay] = P(9, 2), [bx, by] = P(2, 8);
+    g += `<line x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" ${S('faint', 1.2, ';stroke-dasharray:4 4')}/>`;
+    const [sx, sy] = P(9, 9); g += `<rect x="${(x0 + x1) / 2}" y="${y0}" width="${(x1 - x0) / 2}" height="${(y1 - y0) / 2}" rx="8" ${F('good', .07)}/>` + TX(x1 - 8, y0 + (y1 - y0) / 2 - 8, 'both get more', 'good', 10.5, 'end');
+    g += TX((x0 + x1) / 2, y1 + 26, 'His real needs met →', 'muted', 11.5, 'middle') + `<text x="${x0 - 16}" y="${(y0 + y1) / 2}" font-size="11.5" text-anchor="middle" transform="rotate(-90 ${x0 - 16} ${(y0 + y1) / 2})" ${F('muted')}>Her real needs met →</text>`;
+    OP.forEach(([l, a, b], i) => { const [px, py] = P(a, b), on = i === pick, c = i === 4 ? 'good' : i === 2 ? 'glow' : 'cool';
+      g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${on ? 10 : 6}" ${FS(on ? c : 'panel', c, 1.6)}/>`;
+      if (on || !nw) g += TX(px + (a > 6 ? -14 : 14), py + 4, ['Lake', 'Mother', 'Split', 'Cancel', 'Third option'][i], on ? 'text' : 'muted', 11.5, a > 6 ? 'end' : 'start'); });
+    el.innerHTML = g;
+    $('#syV').textContent = pick < 0 ? '—' : OP[pick][3]; $('#sySay').textContent = pick < 0 ? 'Pick an option to see how it serves both partners.' : OP[pick][4];
+  });
+  draw();
+}
+
+/* ---------- 16: the woodcutter's day ---------- */
+{ const el = $('#saSvg');
+  const sim = m => { let s = 1, tot = 0; const C = []; for (let t = 0; t < 480; t++){ if (t % 60 < m) s = Math.min(1, s + .1); else { tot += .25 * s; s *= Math.exp(-.0153); } C.push(tot); } return C; };
+  const base = sim(0);
+  const draw = onLayout(() => {
+    const m = +$('#saR').value, C = sim(m), nw = NARROW(), W = nw ? 360 : 660, H = 230, x0 = nw ? 34 : 44, x1 = W - 14, y0 = 16, y1 = H - 30, top = 90; vb(el, W, H);
+    const X = t => x0 + (x1 - x0) * t / 479, Y = v => y1 - (y1 - y0) * v / top;
+    let g = '';
+    [0, 30, 60, 90].forEach(v => g += `<line x1="${x0}" y1="${Y(v)}" x2="${x1}" y2="${Y(v)}" ${S('line', .6, ';stroke-dasharray:2 4')}/>` + TX(x0 - 6, Y(v) + 4, v, 'faint', 10, 'end'));
+    for (let h = 0; h <= 8; h++) g += TX(X(Math.min(479, h * 60)), y1 + 18, h + 'h', 'faint', 10, 'middle');
+    if (m) for (let h = 0; h < 8; h++) g += `<rect x="${X(h * 60).toFixed(1)}" y="${y0}" width="${(X(h * 60 + m) - X(h * 60)).toFixed(1)}" height="${y1 - y0}" ${F('glow', .1)}/>`;
+    const path = A => A.map((v, t) => t % 4 ? '' : `${t ? 'L' : 'M'}${X(t).toFixed(1)} ${Y(v).toFixed(1)}`).join('');
+    g += `<path d="${path(base)}" ${S('cool', 1.6, ';stroke-dasharray:4 4')}/><path d="${path(C)}" ${S('glow', 2.4)}/>`;
+    g += TX(X(479) - 4, Y(base[479]) - 8, 'never sharpening', 'cool', 10.5, 'end');
+    el.innerHTML = g;
+    const tot = Math.round(C[479]); out('sa', m + ' min'); $('#saV').textContent = tot;
+    $('#saSay').textContent = m === 0 ? 'Too busy sawing to sharpen. The blade dulls by the hour and the work crawls.' : m <= 12 ? 'A few minutes each hour keeps the blade keen. Far more wood, for less effort.' : m <= 20 ? 'Still well ahead of blunt sawing, but you\'re spending more time sharpening than you need.' : 'A sharp saw that hardly gets used. Renewal is meant to serve the work, not replace it.';
+  });
+  $('#saR').addEventListener('input', draw); draw();
+}
+
+/* ---------- 17: become a transition person ---------- */
+{ const el = $('#trSvg'); let pi = 0, at = -1;
+  const PAT = [['Explosive anger', 'Calm repair'], ['Constant criticism', 'Encouragement'], ['Silence about feelings', 'Talking it through']];
+  const GEN = ['Grandparent', 'Parent', 'You', 'Your child', 'Grandchild'];
+  $('#trP').innerHTML = PAT.map(([l], i) => `<button class="btn" type="button" data-p="${i}" aria-pressed="${i === 0}">${l}</button>`).join('');
+  $('#trG').innerHTML = [['Nobody stops it', -1], ['Your parent stops it', 1], ['You stop it', 2], ['Your child stops it', 3]].map(([l, v]) => `<button class="btn" type="button" data-g="${v}" aria-pressed="${v === -1}">${l}</button>`).join('');
+  $$('#trP [data-p]').forEach(b => b.addEventListener('click', () => { pi = +b.dataset.p; press($$('#trP [data-p]'), b); draw(); }));
+  $$('#trG [data-g]').forEach(b => b.addEventListener('click', () => { at = +b.dataset.g; press($$('#trG [data-g]'), b); draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 660, H = nw ? 380 : 200; vb(el, W, H);
+    let g = '';
+    const pos = i => nw ? [W / 2 - 60, 36 + i * 72] : [60 + i * ((W - 120) / 4), 80];
+    GEN.forEach((n, i) => { if (i < 4){ const [ax, ay] = pos(i), [bx, by] = pos(i + 1), bad = at < 0 || i + 1 <= at;
+      g += nw ? `<line x1="${ax}" y1="${ay + 24}" x2="${bx}" y2="${by - 24}" ${S(bad ? 'bad' : 'good', 2.5)}/>` + arrowHead(bx, by - 22, Math.PI / 2, bad ? 'bad' : 'good', 7) : `<line x1="${ax + 26}" y1="${ay}" x2="${bx - 26}" y2="${by}" ${S(bad ? 'bad' : 'good', 2.5)}/>` + arrowHead(bx - 24, by, 0, bad ? 'bad' : 'good', 7); } });
+    GEN.forEach((n, i) => { const [x, y] = pos(i), bad = at < 0 || i < at, tp = i === at;
+      if (tp) g += `<circle cx="${x}" cy="${y}" r="30" ${S('glow', 2.5, ';stroke-dasharray:4 3')}/>`;
+      g += `<circle cx="${x}" cy="${y}" r="20" ${FS(bad ? 'bad-soft' : 'good-soft', bad ? 'bad' : 'good', 2)}/>` + TX(x, y + 5, i === 2 ? 'You' : String(i + 1), 'text', 12, 'middle', 'font-weight="600"');
+      if (nw) g += TX(x + 40, y - 2, n, 'text', 12.5) + TX(x + 40, y + 14, tp ? 'Transition person' : bad ? PAT[pi][0] : PAT[pi][1], tp ? 'glow' : bad ? 'bad' : 'good', 11);
+      else g += TX(x, y + 44, n, 'text', 12, 'middle') + TX(x, y + 62, tp ? 'Transition person' : bad ? PAT[pi][0] : PAT[pi][1], tp ? 'glow' : bad ? 'bad' : 'good', 11, 'middle'); });
+    el.innerHTML = g;
+    const inh = at < 0 ? 5 : at; $('#trV').textContent = inh + ' of 5';
+    $('#traSay').textContent = at < 0 ? `${PAT[pi][0]} is handed down, generation after generation. Each person learned it from the one before.` : `${at === 2 ? 'You absorb' : GEN[at] + ' absorbs'} the pattern instead of passing it on. ${5 - at - 1 === 1 ? 'One generation' : (5 - at - 1) + ' generations'} downstream grow up with ${PAT[pi][1].toLowerCase()} instead.`;
+  });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
