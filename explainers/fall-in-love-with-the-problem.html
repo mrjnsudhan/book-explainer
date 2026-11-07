@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fall in Love with the Problem, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a night drive. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a story from the book,
+   a lab, try it this week, plain words, quick check), grouped into four stretches of the startup journey.
+   Dark-first: road-at-night plum with a rose-pink accent and a cyan second series; light mode is a warm paper page.
+   In every lab, --glow is the problem and the user who has it (pain, retention, the people you're for);
+   --cool is your solution, your product and your company's effort. */
+:root{
+  color-scheme: dark;
+  --ink:#13121A;--panel:#1B1A24;--panel-2:#252330;--line:#353243;--text:#F3EFF4;--muted:#B3ADBD;--faint:#857F92;
+  --glow:#FF7BAC;--glow-soft:rgba(255,123,172,.1);--hl:rgba(255,123,172,.24);--cool:#5CC8E6;--cool-soft:rgba(92,200,230,.1);
+  --good:#93DC8A;--good-soft:rgba(147,220,138,.1);--bad:#FF9161;--bad-soft:rgba(255,145,97,.12);
+  --soft:#DAD4E0;--deep:#0D0C12;--toc-bg:rgba(27,26,36,.74);--glow-line:rgba(255,123,172,.36);--cool-line:rgba(92,200,230,.3);--on-glow:#3A0A1E;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F8F4F1;--panel:#FFFFFF;--panel-2:#EFE8E4;--line:#DDD3CE;--text:#1C1820;--muted:#5A5260;--faint:#82798A;
+  --glow:#B8285F;--glow-soft:rgba(184,40,95,.06);--hl:#F9D3E2;--cool:#0E6F8C;--cool-soft:rgba(14,111,140,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B4471A;--bad-soft:rgba(180,71,26,.07);
+  --soft:#2C2630;--deep:#FCFAF8;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(184,40,95,.28);--cool-line:rgba(14,111,140,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F8F4F1;--panel:#FFFFFF;--panel-2:#EFE8E4;--line:#DDD3CE;--text:#1C1820;--muted:#5A5260;--faint:#82798A;
+  --glow:#B8285F;--glow-soft:rgba(184,40,95,.06);--hl:#F9D3E2;--cool:#0E6F8C;--cool-soft:rgba(14,111,140,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B4471A;--bad-soft:rgba(180,71,26,.07);
+  --soft:#2C2630;--deep:#FCFAF8;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(184,40,95,.28);--cool-line:rgba(14,111,140,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Fall in Love with the Problem additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:italic;color:var(--glow)}
+.loop{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.loop-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.loop-top .moves{gap:6px}
+.loop-top .btn{padding:5px 11px}
+.loop-stage{padding:10px 10px 4px}
+.loop-stage svg{display:block;width:100%;height:auto}
+.loop .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.loop .cap b{color:var(--glow);font-weight:600}
+.pj{display:grid;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.pj.ok{border-color:var(--glow-line);background:var(--glow-soft)}
+.pj-h{display:flex;gap:6px 12px;align-items:flex-start}
+.pj-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15;flex:1;min-width:0;overflow-wrap:anywhere}
+.pj p{font-size:14.5px;color:var(--soft);overflow-wrap:anywhere}
+.pj p span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-right:6px}
+.pj .rm{font:inherit;font-size:20px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:6px 10px;border-radius:6px;min-height:40px}
+.pj .rm:hover{color:var(--bad)}
+.pj-bar{height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden}
+.pj-bar i{display:block;height:100%;background:var(--glow);border-radius:99px}
+.pj .meta{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tag{font-family:var(--f-mono);font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--glow);border-color:var(--glow)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .pj-h b{font-size:20px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Uri Levine's book</div>
+    <h1><em>Fall in Love with the Problem</em>,<br>Explained</h1>
+    <p class="lede">Uri Levine co-founded Waze, the crowd-sourced traffic app Google bought in 2013, and has since started or backed a string of companies that each began with a single annoyance. <b>Fall in Love with the Problem, Not the Solution</b> is his handbook for founders: start from a painful problem that many people share, expect to fail many times on the way, find product-market fit before anything else, and only then work out the money, the growth, the move abroad and, maybe, the exit. This guide covers the introduction, all twelve chapters (the fundraising chapter comes in two halves, 5a and 5b) and the closing "Happylogue", with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Your first solution will probably be wrong. If you love the <em>problem</em>, you'll keep going until you find the one that isn't.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="loop" style="margin:0" aria-label="The startup journey as a drive: a long desert of no traction, then product-market fit, money, growth and going global">
+        <div class="loop-top"><span>A new version every</span><div class="moves" id="jrMode"></div></div>
+        <div class="loop-stage"><svg id="jrSvg" viewBox="0 0 400 250" role="img" aria-label="A road through the phases of a startup, with a fuel line for the money you have"></svg></div>
+        <div class="row" style="padding:0 16px 12px"><button class="btn primary" id="jrGo" type="button">Drive it</button><button class="btn" id="jrReset" type="button">Reset</button></div>
+        <div class="cap" id="jrCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Introduction and chapters 1 to 3</span><span class="q">The problem</span><span class="d">Start from a pain, expect failure, and change how a market behaves</span></a>
+      <a href="#part2"><span class="n">Chapters 4 to 6</span><span class="q">The company</span><span class="d">Phases, fundraising, investors, and hiring and firing</span></a>
+      <a href="#part3"><span class="n">Chapters 7 to 9</span><span class="q">The product</span><span class="d">Users who aren't you, product-market fit, and making money</span></a>
+      <a href="#part4"><span class="n">Chapters 10 to 12 and the Happylogue</span><span class="q">Scale and exit</span><span class="d">Growth, going global, selling, and why it's worth it</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 2023, with a foreword by Steve Wozniak</span>
+      <span><b>Author</b> Uri Levine, co-founder of Waze and serial entrepreneur</span>
+      <span><b>Full title</b> Fall in Love with the Problem, Not the Solution: A Handbook for Entrepreneurs</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 15 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE PROBLEM ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the problem</span>
+      <h2>The problem</h2>
+      <p>The book has no formal parts, so this guide groups its chapters into four stretches of a founder's journey. The first is about where a company should begin: not with a clever idea, but with a pain that many people feel. Levine then warns that the road from that pain to a working answer is mostly failure, and that real disruption means changing how people behave, which the people who profit from the old way will fight.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A startup is only as good as the problem it chooses. Pick a big, shared pain, stay loyal to it, and treat every failed solution as a step toward the right one.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Introduction</span> · Why this book starts with a problem</div>
+        <h2>Introduction</h2>
+        <div class="short"><span class="lbl">In short</span><p>Levine has built companies around traffic jams, airfares, hidden fees and public transport. Each began with something that annoyed him and many other people. He wrote the book to give founders the lessons he learned the hard way, so they can raise their odds of success.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start with an annoyance.</b> Every company Levine describes started with a frustration he felt himself: sitting in traffic, paying more for a flight than the price a week later, finding fees buried in savings. The question is always whether lots of other people feel it too.</span></li>
+          <li><span><b>A problem worth solving.</b> A good problem is big (many people have it), frequent (they hit it often) and painful (they'd change their habits to be rid of it). If you can't explain it in a sentence that makes people nod, it may not be worth a company.</span></li>
+          <li><span><b>A handbook, not a memoir.</b> Waze is the book's main example, but Levine draws on many startups he founded, invested in or mentored. He gives practical rules of thumb: the 30-day test for hires, a hundred noes when raising money, one priority per phase.</span></li>
+          <li><span><b>Odds, not certainties.</b> Most startups fail. Levine doesn't promise a recipe for success, only ways to fail faster and cheaper, so you get more chances to find what works.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze grew out of a community mapping project that Ehud Shabtai had started in Israel, which turned GPS phones into map makers. Levine, Shabtai and Amir Shinar founded the company around a simple, shared pain: being stuck in traffic and wishing someone had warned you. Drivers' phones reported their speed, so each driver helped the ones behind. Google bought Waze in 2013 for a reported figure of about 1.1 billion dollars. Levine went on to found or back other companies built the same way, including Moovit for public transport, FairFly for airfares that drop after you've booked, and Pontera (first called FeeX) for hidden fees in retirement savings. The book opens with a foreword by Apple co-founder Steve Wozniak.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: size up a problem</div><div class="hint">Move the sliders, or try a real problem</div></div>
+        <div class="stage"><svg id="ps1" role="img" aria-label="A chart of how many people have a problem against how often they hit it, with a bubble for how much it hurts"></svg></div><div class="lab-ctl"><div class="ctl"><label for="psP"><span>How many people have it</span><output id="opsP"></output></label><input type="range" id="psP" min="0" max="100" value="85" step="1"></div><div class="ctl"><label for="psF"><span>How often they hit it</span><output id="opsF"></output></label><input type="range" id="psF" min="0" max="4" value="3" step="1"></div><div class="ctl"><label for="psH"><span>How much it hurts</span><output id="opsH"></output></label><input type="range" id="psH" min="1" max="10" value="7" step="1"></div><div class="row" id="psEx"></div></div><div class="stats"><div class="stat"><span class="k">Reach</span><span class="v" id="psR">–</span></div><div class="stat"><span class="k">Pain-moments a year</span><span class="v glow" id="psN">–</span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="psV">–</span></div></div><p class="callout" id="ps1Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down three things that annoyed you this week. For each one, ask two people whether it happens to them too, and how often.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Don't start from a gadget you want to build. Start from something that bugs lots of people, often, and badly. If that's true, there's room for a company; if not, there isn't, however clever the idea.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: Love the problem →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · The problem is your north star</div>
+        <h2>Fall in Love with the Problem, Not the Solution</h2>
+        <div class="short"><span class="lbl">In short</span><p>Founders who fall in love with their solution defend it even when users ignore it. Founders who fall in love with the problem keep changing the solution until users stay. The problem gives you direction; the solution is just your current guess.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The problem is the story.</b> When you tell people about your company, start with the problem. If they recognise it straight away and tell you their own version, you have something. If you start with the solution, they'll judge your features instead.</span></li>
+          <li><span><b>Talk to people, a lot.</b> Levine urges founders to describe the problem to many potential users before building, and to listen for emotion: do they say "yes, that happens to me all the time"? Surveys miss that; conversations catch it.</span></li>
+          <li><span><b>You're not the market.</b> Feeling the pain yourself is a great start, but it proves only that one person has it. You need evidence that many others do.</span></li>
+          <li><span><b>Solutions are disposable.</b> Because your loyalty is to the problem, you can drop a solution that isn't working without losing your purpose. Ego stays out of it, so feedback hurts less.</span></li>
+          <li><span><b>Simple wins.</b> The products people keep using tend to do one important thing simply. Levine points out that the basics of Google search or Waze barely changed once they worked.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine's description of Waze has stayed the same since its first day: help drivers avoid traffic jams, using the drivers ahead of them. The way Waze did it changed many times. Early on, its maps were thin in many places, so the app even turned driving on unmapped roads into a small game, rewarding users for filling in the map. FairFly shows the same habit of mind. Levine noticed that air fares often fell after he had booked, so the money was simply lost. The company's answer was to watch the price after booking and rebook when it dropped, but the starting point was the annoyance, not the software.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: loyal to the problem or to the solution</div><div class="hint">Run ten tries each way and compare</div></div>
+        <div class="stage"><svg id="lv2" role="img" aria-label="Two rows of ten attempts: one founder keeps polishing the first solution, the other keeps trying new ones, against a bar where users stay"></svg></div><div class="lab-ctl"><div class="ctl"><label for="lvQ"><span>How good your first idea is</span><output id="olvQ"></output></label><input type="range" id="lvQ" min="10" max="80" value="35" step="1"></div><div class="row"><button class="btn primary" id="lvRun" type="button">Run ten tries</button><button class="btn" id="lvNew" type="button">New problem</button></div></div><div class="stats"><div class="stat"><span class="k">Solution-lover reaches fit</span><span class="v" id="lvA">–</span></div><div class="stat"><span class="k">Problem-lover reaches fit</span><span class="v glow" id="lvB">–</span></div></div><p class="callout" id="lv2Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write your product's problem in one sentence with no mention of your solution. Say it to three people and note whether they tell you a story of their own.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Your first idea is probably not the answer. If you're married to the idea, you'll polish something people don't want. If you're married to the problem, you'll keep trying things until one works.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Journey of failures →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Fail fast to get more tries</div>
+        <h2>A Startup Is a Journey of Failures</h2>
+        <div class="short"><span class="lbl">In short</span><p>Building something new means trying things that haven't been done, so most of them won't work. The founders who win aren't the ones who avoid failure but the ones who fail quickly, learn, and still have money and energy for the next try.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Failure is the normal path.</b> Levine describes the startup journey as one failure after another until something clicks. If you're afraid to fail, you've already failed, because you won't try.</span></li>
+          <li><span><b>The desert of no traction.</b> The longest and loneliest stretch is when you've launched and almost nothing happens. Users trickle in and leave. Many companies die here, not from a single disaster but from running out of time.</span></li>
+          <li><span><b>Speed buys attempts.</b> If each try takes a year, you may get two before the money runs out. If each takes a couple of months, you get many. More attempts means better odds, like taking ten shots from half court instead of one.</span></li>
+          <li><span><b>Good enough, then ship.</b> A slightly embarrassing first version that reaches real users teaches more than a polished one still on the whiteboard.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze did not take off at launch. It worked reasonably well in Israel, where the community had already built much of the map, but in many other countries new users found a sparse map and too few other drivers to make the traffic data useful. Levine describes years of releasing version after version, fixing whatever was stopping people from staying, before the product reached fit. He uses that long stretch to make his point: the company survived because it kept trying quickly and kept enough money to try again, not because its first version was right.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: how many shots do you get?</div><div class="hint">Change how long each try takes</div></div>
+        <div class="stage"><svg id="fs3" role="img" aria-label="A row of attempts your money buys and the chance that at least one of them works"></svg></div><div class="lab-ctl"><div class="ctl"><label for="fsR"><span>Months of money left</span><output id="ofsR"></output></label><input type="range" id="fsR" min="6" max="48" value="24" step="1"></div><div class="ctl"><label for="fsT"><span>Months per try</span><output id="ofsT"></output></label><input type="range" id="fsT" min="1" max="12" value="6" step="1"></div><div class="ctl"><label for="fsP"><span>Chance any one try works</span><output id="ofsP"></output></label><input type="range" id="fsP" min="5" max="40" value="15" step="1"></div><div class="row" id="fsEx"></div></div><div class="stats"><div class="stat"><span class="k">Tries you can afford</span><span class="v" id="fsN">–</span></div><div class="stat"><span class="k">Chance at least one works</span><span class="v glow" id="fsC">–</span></div></div><p class="callout" id="fs3Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick the thing you're polishing right now. Decide the smallest version that could reach a real user this week, and ship that instead.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Most tries won't work, so the real game is how many tries you get before the money runs out. Make each one small and fast, learn from it, and go again.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Disruption →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Change the market's behaviour</div>
+        <h2>Embrace Disruption</h2>
+        <div class="short"><span class="lbl">In short</span><p>Disruption isn't a new technology; it's a change in how people behave and in who holds power in a market. Inefficient markets with unhappy customers are where disruption happens, and the people who profit from the old way will resist it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Behaviour, not gadgets.</b> What made Netflix, Uber or Airbnb disruptive wasn't the code. It was that people started renting films, getting around or booking rooms in a different way, and the old balance of the market broke.</span></li>
+          <li><span><b>Look for inefficient markets.</b> Markets where customers are overcharged, kept in the dark or forced to wait are ripe. Transparency is often the weapon: show people prices, times or fees they couldn't see before.</span></li>
+          <li><span><b>Incumbents don't see it.</b> The leaders of a market usually dismiss the newcomer. Levine recalls Microsoft's then chief executive Steve Ballmer laughing off the first iPhone in 2007, and the long list of companies like Blockbuster and Kodak that saw change coming and didn't move.</span></li>
+          <li><span><b>Expect resistance.</b> Disrupting a market means taking money or power from someone. Expect lawsuits, regulators and partners who won't talk to you. Plan for it rather than hoping it won't happen.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine recounts how established players treated Waze as a small curiosity. Early on, the company tried to work with an existing Israeli navigation business, Telmap, and got little more than polite dismissal: a small crowd-sourced map couldn't matter to a company with professional maps. Within a few years, crowd-sourced, real-time traffic had become what drivers expected, and the old way of selling navigation through expensive devices and map licences was in trouble. His wider point is that incumbents almost always judge a disruptor by today's product, while the disruptor is betting on how people will behave tomorrow.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: watch a market tip</div><div class="hint">Change how much better it is for users, and how hard the old guard fights</div></div>
+        <div class="stage"><svg id="dz4" role="img" aria-label="Over twelve years, the newcomer's share of the market rises along an S-curve while the incumbent's falls"></svg></div><div class="lab-ctl"><div class="ctl"><label for="dzB"><span>How much better for users</span><output id="odzB"></output></label><input type="range" id="dzB" min="0" max="100" value="75" step="1"></div><div class="ctl"><label for="dzR"><span>How hard incumbents and rules push back</span><output id="odzR"></output></label><input type="range" id="dzR" min="0" max="100" value="40" step="1"></div><div class="row" id="dzEx"></div></div><div class="stats"><div class="stat"><span class="k">Newcomer passes half</span><span class="v glow" id="dzY">–</span></div><div class="stat"><span class="k">Newcomer's share in year 12</span><span class="v" id="dzS">–</span></div></div><p class="callout" id="dz4Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Name one market you deal with that annoys you. Write down what is hidden from you as a customer there: a price, a wait, a fee. That's where a disruptor would start.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>A disruptor changes what people do, not just what they use. It usually starts in a market where customers are poorly served, and the people who benefit from the old way will fight it, so be ready.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Phases →</a></div>
+    </section>
+    <!-- ===================== THE COMPANY ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · the company</span>
+      <h2>The company</h2>
+      <p>Once you're committed to a problem, you have to build something that can survive long enough to solve it. These chapters cover how to organise the work into phases with one priority each, how to raise money from investors who mostly say no, how to keep those investors on side, and how to build a team by hiring carefully and letting go quickly.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A company is a vehicle for the problem. Focus it on one thing at a time, fund it patiently, and protect it from the wrong people.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · One most important thing at a time</div>
+        <h2>Operate in Phases</h2>
+        <div class="short"><span class="lbl">In short</span><p>A startup goes through phases: find product-market fit, then a business model, then growth, then going global. In each phase there is one most important thing, and doing everything at once means doing none of it well.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Product-market fit comes first.</b> Until users come back, nothing else matters. Revenue, partnerships and expansion all rest on a product people already keep using.</span></li>
+          <li><span><b>The MIT.</b> Levine's shorthand is the most important thing. Each phase has one, and the team's job is to push it forward and say no to the rest, even good ideas.</span></li>
+          <li><span><b>Focus means saying no.</b> Small teams can only do a few things. Every partnership, feature or market you take on early steals effort from the one thing that decides whether you survive.</span></li>
+          <li><span><b>Phases overlap only a little.</b> You can think ahead, but serious effort should go to the next phase only once the current one is done. Building a business model on a product nobody uses is building on sand.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine describes Waze's path as a series of phases. For a long time, the only question was whether drivers would keep using it, and the team put almost everything into that. Money from advertising, which became the company's business model, came later, once there were enough loyal users for local businesses to want to reach. Going global properly came after that. He contrasts this with startups he has seen try to sign big partners, plan revenue and launch in several countries before anyone loved the product, and run out of time doing all of it halfway.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: one most important thing at a time</div><div class="hint">Run three years with focus, then with effort spread</div></div>
+        <div class="stage"><svg id="ph5" role="img" aria-label="Four bars for the phases, product-market fit, business model, growth and going global, filling month by month"></svg></div><div class="lab-ctl"><div class="row" id="phMode"></div><div class="ctl"><label for="phD"><span>Effort lost to distractions</span><output id="ophD"></output></label><input type="range" id="phD" min="0" max="50" value="15" step="1"></div><div class="row"><button class="btn primary" id="phGo" type="button">Run three years</button></div></div><div class="stats"><div class="stat"><span class="k">Product-market fit in</span><span class="v glow" id="phA">–</span></div><div class="stat"><span class="k">All four phases done in</span><span class="v" id="phB">–</span></div></div><p class="callout" id="ph5Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write your team's one most important thing for this month on a sticky note. Then list three things you'll say no to because of it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Do things in order. First make something people keep using, then work out how it makes money, then grow it, then take it abroad. Trying to do all four at once mostly means redoing work later.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Fundraising →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5a</span> · A roller coaster in the dark</div>
+        <h2>Ride the Fundraising Roller Coaster</h2>
+        <div class="short"><span class="lbl">In short</span><p>Raising money is a long series of ups and downs where you can't see what's coming. Expect to hear no again and again, lead with the problem, and know that investors move slowly until they fear missing out.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A roller coaster in the dark.</b> One meeting goes brilliantly, the next investor goes quiet, a term sheet appears and then falls apart. You can't see the next drop, so you need the stamina to keep going.</span></li>
+          <li><span><b>The dance of the hundred noes.</b> Levine tells founders to expect something like a hundred rejections. Each no is normal and teaches you something about the pitch; it's not a verdict on the company.</span></li>
+          <li><span><b>Lead with your strongest point.</b> Investors form a view in the first minutes. Open with the problem and with your best evidence, such as traction or a striking number, not with background slides.</span></li>
+          <li><span><b>Slow until they're not.</b> Investors take their time, until another firm shows interest. Then they move fast. Momentum and competition for the deal matter as much as the slides.</span></li>
+          <li><span><b>Know the term sheet.</b> The amount and valuation matter, but so do the rights and preferences investors get and who will sit on your board. Read all of it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine writes from both sides of the table, as a founder raising money and as an investor hearing pitches. Waze needed several rounds; its first sizeable one, in 2008, was reported at about 12 million dollars, and each later round meant going back out to investors. He describes the same pattern each time: weeks of meetings, a long run of polite rejections, then one firm commits and others who had hesitated suddenly want in. His advice is to treat the noes as part of the process, tighten the story after each one, and keep going until the first yes, because the first yes is what makes the others easier.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the dance of the hundred noes</div><div class="hint">Pitch a hundred investors and watch the first yes change the room</div></div>
+        <div class="stage"><svg id="fr6" role="img" aria-label="A grid of one hundred investor meetings, each turning into a no or a yes"></svg></div><div class="lab-ctl"><div class="ctl"><label for="frP"><span>Chance a meeting becomes a yes</span><output id="ofrP"></output></label><input type="range" id="frP" min="1" max="10" value="3" step="1"></div><div class="row" id="frEx"></div><div class="row"><button class="btn primary" id="frGo" type="button">Run the round</button></div></div><div class="stats"><div class="stat"><span class="k">Meetings before the first yes</span><span class="v" id="frA">–</span></div><div class="stat"><span class="k">Yeses out of 100</span><span class="v glow" id="frB">–</span></div><div class="stat"><span class="k">Round closes?</span><span class="s" id="frC">–</span></div></div><p class="callout" id="fr6Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Count how many investors, customers or partners you've actually asked this month. If it's under twenty, the number of noes isn't your problem yet.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Expect lots of rejection when you raise money. Start with the problem and your best evidence, keep pitching, and remember that the first yes makes the next ones come faster.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Your investors →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5b</span> · No surprises, ever</div>
+        <h2>Manage Your Investors</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once investors are on board, you have to manage the relationship. Keep them informed, never surprise the board, and remember that your job is to build the company, not to keep every investor happy.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Never surprise the board.</b> Bad news delivered early, with a plan, builds trust. Bad news that turns up at a board meeting destroys it.</span></li>
+          <li><span><b>Update them regularly.</b> A short, honest update every month or two keeps investors close and makes them more useful when you need help or more money.</span></li>
+          <li><span><b>Interests can split.</b> Investors, founders and employees want the same thing most of the time, but not always: on when to sell, at what price, or how to raise the next round. Know where the tensions are.</span></li>
+          <li><span><b>Results, not approval.</b> Your job is to deliver results for the company. Making investors comfortable at the cost of the right decision is a mistake.</span></li>
+          <li><span><b>Look after founders and early staff.</b> Selling a few shares in later rounds can let founders and key people stay calm about the long run instead of pushing for an early exit.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine's experience of boards is that trouble rarely comes from bad news itself; it comes from bad news investors didn't see coming. He describes the habit of calling board members before a meeting when something has gone wrong, so the meeting is about what to do, not about who knew what. He also discusses the moments when interests split most sharply, such as when an offer to buy the company arrives or when later investors want terms that hurt earlier ones, and argues that founders should negotiate fairly for themselves and for the employees who built the company.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: trust or trouble?</div><div class="tally" id="tally7" aria-label="Score"></div></div>
+        <div class="sorter" id="sort7"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Draft a five-line investor update: the one most important thing, the number that shows progress, the biggest problem, what you're doing about it, and where you need help.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Treat investors as partners you keep well informed. Share bad news early and with a plan, and don't let keeping them happy replace doing what the company needs.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Firing and hiring →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · The 30-day test</div>
+        <h2>Firing and Hiring</h2>
+        <div class="short"><span class="lbl">In short</span><p>Levine puts firing before hiring on purpose. Hiring the right people is important, but letting the wrong ones go quickly matters even more, because one wrong hire can drag down a small team for months.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The 30-day test.</b> About a month after someone joins, ask yourself: knowing what I know now, would I hire this person again? If the answer is no, act now. If it's a clear yes, tell them, and think about giving them more.</span></li>
+          <li><span><b>Hiring is easy, firing is hard.</b> Founders hire quickly and fire slowly because firing is painful. The cost of waiting falls on everyone else on the team.</span></li>
+          <li><span><b>Define your DNA.</b> Decide early what kind of people fit: how they work, how they treat others. Levine's version includes a firm rule against people who make others miserable, however talented.</span></li>
+          <li><span><b>Generalists first.</b> Early on you need people who can do many things. Specialists matter later, when the company knows exactly what it needs.</span></li>
+          <li><span><b>Ask the team.</b> Peer feedback, even a simple anonymous ranking of who people would want to keep working with, can show problems a manager misses.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine admits that, like most founders, he has kept people too long, hoping they would improve. His conclusion is that the first month nearly always tells you enough. A person who doesn't fit a fast, uncertain startup is usually visible within weeks, and keeping them lowers the bar for everyone else. The best people notice when a weak colleague stays, and some leave. So he recommends the 30-day question for every new hire, a quick and humane exit when the answer is no, and real recognition, sometimes extra equity, when the answer is a strong yes.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the 30-day test</div><div class="hint">Pick a hire and choose how long you wait to decide</div></div>
+        <div class="stage"><svg id="hf8" role="img" aria-label="Cost and value of a new hire week by week, with a marker where you decide"></svg></div><div class="lab-ctl"><div class="row" id="hfType"></div><div class="ctl"><label for="hfW"><span>Weeks before you act</span><output id="ohfW"></output></label><input type="range" id="hfW" min="4" max="52" value="26" step="1"></div></div><div class="stats"><div class="stat"><span class="k">Cost of waiting</span><span class="v" id="hfA">–</span></div><div class="stat"><span class="k">Effect on the team</span><span class="s" id="hfB">–</span></div></div><p class="callout" id="hf8Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>For each person who joined in the last few months, answer the 30-day question honestly in one word. Then do something about every answer.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>After about a month you know whether a hire works. If it doesn't, act quickly and kindly, because your team pays for every week you wait. If it clearly does, tell them.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Your user →</a></div>
+    </section>
+    <!-- ===================== THE PRODUCT ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · the product</span>
+      <h2>The product</h2>
+      <p>This is the heart of the handbook. Levine argues that founders badly misjudge how ordinary users will meet their product, that product-market fit is the only thing that matters until you have it, and that making money only comes after users already keep coming back.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>If new users don't get the value quickly and come back for more, nothing else you do will matter. Find fit first, then charge for it.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · You are not your user</div>
+        <h2>Understand the User: You Are Only a Sample of One</h2>
+        <div class="short"><span class="lbl">In short</span><p>Founders know their product far too well to see it the way a new user does. Most users aren't early adopters; they need the value to be obvious, quick and free of hurdles, or they leave and never come back.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A sample of one.</b> Your own reactions tell you about one person who already understands the product. Real users arrive with no context and little patience.</span></li>
+          <li><span><b>Different kinds of users.</b> Levine uses the familiar split of innovators, early adopters, an early majority and a late majority. Innovators will forgive a lot; the majority, where the big numbers are, will forgive almost nothing.</span></li>
+          <li><span><b>The first time matters most.</b> People decide in the first use whether a product is worth their time. A confusing sign-up, unclear instructions or value that shows up only later loses most of them.</span></li>
+          <li><span><b>Watch, don't ask.</b> Sit beside new users and watch them try it. Ask why they did what they did. Where they hesitate is where the product is failing.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine describes how often founders are amazed when they watch strangers use their product. Steps that seem obvious to the team stop newcomers cold: a sign-up form before any value, a button whose meaning only an insider would guess, a screen that assumes you know what to do next. In Waze's case, a new driver in a place with few other users opened an app whose map and traffic information were thin, so the first experience didn't show what Waze could do. The fix in every case is the same: find the barrier, remove it, and watch again.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: you are a sample of one</div><div class="hint">Turn barriers on and off and see who gets through</div></div>
+        <div class="stage"><svg id="su9" role="img" aria-label="A bell curve of innovators, early adopters, early majority, late majority and laggards, shaded by how many get through your first-use experience"></svg></div><div class="lab-ctl"><div class="toggles" id="suTg"></div><div class="row" id="suEx"></div></div><div class="stats"><div class="stat"><span class="k">Of the whole market who get the value</span><span class="v glow" id="suA">–</span></div><div class="stat"><span class="k">Biggest group you're losing</span><span class="s" id="suB">–</span></div></div><p class="callout" id="su9Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Hand your product, website or form to someone who has never seen it. Say nothing, watch them for five minutes, and write down every place they hesitate.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You're the worst judge of your own product because you already know how it works. Watch real newcomers, find where they get stuck, and take those obstacles away.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: PMF or die →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Conversion and retention</div>
+        <h2>Figure Out Product-Market Fit or Die</h2>
+        <div class="short"><span class="lbl">In short</span><p>Product-market fit means you've made something that creates real value for users, and the proof is that they keep coming back. Levine measures it with two numbers, conversion and retention, and says that until you have it, nothing else matters.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Retention is the test.</b> Downloads, sign-ups, press and even early paying customers can all happen without fit. If users don't come back, the product isn't solving their problem well enough.</span></li>
+          <li><span><b>Two numbers.</b> Conversion is the share of new users who get to the value on their first try. Retention is the share who keep using it over time. Work on conversion first, then retention.</span></li>
+          <li><span><b>Map the funnel.</b> Draw every step from hearing about the product to using it regularly, and measure how many people drop at each step. Fix the worst drop first.</span></li>
+          <li><span><b>Hype isn't fit.</b> Levine mentions Bump, an app for swapping contact details by bumping phones together, which was downloaded by huge numbers of people but used too rarely to last. Popularity at launch isn't the same as a habit.</span></li>
+          <li><span><b>Fit takes time.</b> For many companies, including Waze, finding fit took years of versions. That's normal; running out of money before you get there is the danger.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine's own account of Waze's search for fit is a long list of small changes, each aimed at a specific drop in the funnel. If new drivers didn't see useful traffic on their first trip, the team looked for ways to show value sooner; if they used it once and didn't return, the team asked why. Bump is his counter-example: a clever trick that went viral and was downloaded by many millions, but most people only needed it now and then, so it never became a habit, and it was shut down after Google bought the team in 2013. Big numbers at the top of the funnel, he warns, can hide the fact that almost nobody stays.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Levine gives rough retention numbers for different kinds of products. The bar in this lab is illustrative; what counts as good depends on how often people naturally need what you make.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the funnel from download to habit</div><div class="hint">Change conversion and retention, or try a preset</div></div>
+        <div class="stage"><svg id="pf10" role="img" aria-label="A funnel from 1,000 downloads down to the users still active after three months, with a retention curve"></svg></div><div class="lab-ctl"><div class="ctl"><label for="pfC"><span>Conversion: get the value on first use</span><output id="opfC"></output></label><input type="range" id="pfC" min="5" max="90" value="30" step="1"></div><div class="ctl"><label for="pfR"><span>Retention: still using after three months</span><output id="opfR"></output></label><input type="range" id="pfR" min="2" max="70" value="12" step="1"></div><div class="row" id="pfEx"></div></div><div class="stats"><div class="stat"><span class="k">Still active at three months</span><span class="v glow" id="pfA">–</span></div><div class="stat"><span class="k">Verdict</span><span class="s" id="pfB">–</span></div></div><p class="callout" id="pf10Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write your product's funnel as five steps and put a real or estimated number on each. Circle the biggest drop; that's next week's work.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>If people don't keep using your product, you haven't found fit, however many downloaded it. Measure how many reach the value and how many come back, and fix the biggest leak first.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Making money →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · The business model comes after fit</div>
+        <h2>Making Money</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once users stay, the next phase is working out how the company makes money. A business model works when the value of a customer over time is clearly more than the cost of winning them, and finding the right price and payer takes experiments.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The user isn't always the customer.</b> The person who uses the product and the one who pays can be different. Waze's drivers paid nothing; businesses paid to reach them.</span></li>
+          <li><span><b>Lifetime value against acquisition cost.</b> Add up what an average customer brings in over the time they stay, and compare it with what it costs to win one. If winning a customer costs more than they're worth, growth only loses money faster.</span></li>
+          <li><span><b>Value proposition, market, price.</b> Be clear about the value you create, how many people or companies will pay for it, and how: subscription, one-off payment, ads or a share of savings.</span></li>
+          <li><span><b>Test prices.</b> You won't guess the right price. Try several, measure what happens, and change them.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze shows the split between user and customer. Drivers used it for free, which was essential for gathering the traffic data that made it work. The business model, which came only after users stayed, was location-based advertising: a coffee shop or petrol station along your route could pay to appear on the map. Levine describes his other companies working through the same questions in different ways. Pontera, for example, deals with fees hidden in retirement savings, and had to find who would pay for revealing and reducing them. In every case, he says, the model only became clear after real customers had been tried at real prices.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: does the money work?</div><div class="hint">Set the price, how long customers stay and what they cost to win</div></div>
+        <div class="stage"><svg id="mm11" role="img" aria-label="Two bars comparing what a customer is worth over their lifetime with what it costs to win one"></svg></div><div class="lab-ctl"><div class="ctl"><label for="mmP"><span>Revenue per customer per month ($)</span><output id="ommP"></output></label><input type="range" id="mmP" min="1" max="50" value="8" step="1"></div><div class="ctl"><label for="mmM"><span>Months a customer stays</span><output id="ommM"></output></label><input type="range" id="mmM" min="1" max="48" value="10" step="1"></div><div class="ctl"><label for="mmC"><span>Cost to win a customer ($)</span><output id="ommC"></output></label><input type="range" id="mmC" min="5" max="400" value="60" step="5"></div><div class="row" id="mmEx"></div></div><div class="stats"><div class="stat"><span class="k">Lifetime value</span><span class="v glow" id="mmL">–</span></div><div class="stat"><span class="k">Cost to win</span><span class="v" id="mmA">–</span></div><div class="stat"><span class="k">Value per dollar spent</span><span class="v" id="mmR">–</span></div></div><p class="callout" id="mm11Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write down who uses your product and who pays for it. If they're different people, write one sentence on why the payer gets value.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>A business works when a customer brings in more over time than it cost to win them. Figure out who pays, how much and how, by trying real prices, and do it after people already love the product.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: A billion users →</a></div>
+    </section>
+    <!-- ===================== SCALE AND EXIT ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · scale and exit</span>
+      <h2>Scale and exit</h2>
+      <p>With fit and a business model, the questions change: how to reach a very large number of users without paying for each one, how and when to go abroad, and whether to sell. Levine closes with a short, personal Happylogue on why the whole bumpy ride is worth taking.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Grow by word of mouth, go global one well-chosen market at a time, and judge an exit by what's best for the problem, the team and you.</p></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Growth that pays for itself</div>
+        <h2>How to Get to a Billion Users</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once you have fit and a business model, growth is the next phase. The best growth comes from users telling other users; paid marketing helps, but only if each new user is worth more than they cost. Above all, growth only works if the users you get actually stay.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Word of mouth first.</b> A product that solves a real problem gets talked about. That's the cheapest and most trusted kind of marketing, and it's what grew Waze.</span></li>
+          <li><span><b>Paid growth needs the numbers.</b> Buying users works only when a user's lifetime value is higher than their cost. Otherwise you're buying losses.</span></li>
+          <li><span><b>Fix the leaks first.</b> Pouring users into a product with poor retention fills a leaking bucket. Growth multiplies whatever you already have, good or bad.</span></li>
+          <li><span><b>Make sharing natural.</b> Products that are better when your friends use them, or that give users a reason to mention them, spread themselves.</span></li>
+          <li><span><b>Think in phases still.</b> Growth is its own phase with its own most important thing. Don't start it before fit and a working model.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze spent very little on traditional marketing. Its growth came from drivers who arrived somewhere early, saved twenty minutes, and told someone. Each new driver also made the traffic picture better for everyone else, so the product improved as it spread. By the time Google bought it, Waze had tens of millions of users. Levine contrasts this with companies that try to buy growth before people stay, and with products like Bump that went viral without lasting value: lots of new users, but the bucket emptied as fast as it filled.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: word of mouth or paid growth</div><div class="hint">Change how much users spread it, your ad budget and how fast people leave</div></div>
+        <div class="stage"><svg id="gw12" role="img" aria-label="Active users over five years from word of mouth and from paid marketing, on a log scale"></svg></div><div class="lab-ctl"><div class="ctl"><label for="gwK"><span>New users each user brings per month</span><output id="ogwK"></output></label><input type="range" id="gwK" min="0" max="30" value="12" step="1"></div><div class="ctl"><label for="gwB"><span>Users bought with ads per month</span><output id="ogwB"></output></label><input type="range" id="gwB" min="0" max="20" value="5" step="1"></div><div class="ctl"><label for="gwX"><span>Users who leave each month</span><output id="ogwX"></output></label><input type="range" id="gwX" min="2" max="40" value="8" step="1"></div><div class="row" id="gwEx"></div></div><div class="stats"><div class="stat"><span class="k">Active users after five years</span><span class="v glow" id="gwA">–</span></div><div class="stat"><span class="k">From word of mouth</span><span class="v" id="gwB2">–</span></div></div><p class="callout" id="gw12Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Ask your last five happy users how they first heard about you. If none heard from a friend, work on why people don't mention it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Grow mostly by being worth talking about. Pay for users only when the maths works, and stop the leaks before you pour more people in.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: Go global →</a></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · One well-chosen market at a time</div>
+        <h2>Go Global</h2>
+        <div class="short"><span class="lbl">In short</span><p>Most big problems are global, and a small home market won't support a large company. But going abroad is expensive and every market is different, so choose markets carefully, localise properly, find local partners and avoid spreading the team too thin.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Think global early.</b> For founders in a small country, like Levine's Israel, the home market is a test bed, not the destination. Plan for the big markets from the start.</span></li>
+          <li><span><b>Pick markets on purpose.</b> Size, how hard the market is, local competitors and regulation all matter. The US is huge and hard; a smaller market can be a better next step.</span></li>
+          <li><span><b>Localise for real.</b> Language is the start. Habits, payment, laws and what people expect all differ. Treat each new country almost like a new launch, with its own small first version.</span></li>
+          <li><span><b>Use local people.</b> Partners and communities on the ground do what a head office far away can't. Moovit grew city by city with local partners and volunteer editors who mapped transit lines.</span></li>
+          <li><span><b>Don't spread too thin.</b> Launching in ten countries at once with the effort for two leaves all ten weak. Products that depend on many local users, like Waze, need enough density in each place to work at all.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze and Moovit both had to solve a local problem in many places at once. A traffic app is useless in a city where too few people use it, because there's no one ahead of you to report the jam. Waze leaned on local communities of volunteer map editors to build and fix maps in each country. Moovit, which Levine backed as an early investor and board member, combined data from transit agencies with a community of local users who added and corrected routes, growing into thousands of cities. Intel bought Moovit in 2020 for a reported figure of about 900 million dollars. The lesson Levine draws is to concentrate enough effort in each market to cross the point where it starts to grow by itself.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: one country or ten?</div><div class="hint">Split the same effort across more markets and see which ones tip</div></div>
+        <div class="stage"><svg id="gg13" role="img" aria-label="Bars for each market showing how close it gets to critical mass in the first year"></svg></div><div class="lab-ctl"><div class="ctl"><label for="ggN"><span>Markets launched at once</span><output id="oggN"></output></label><input type="range" id="ggN" min="1" max="10" value="6" step="1"></div><div class="toggles" id="ggTg"></div><div class="row" id="ggEx"></div></div><div class="stats"><div class="stat"><span class="k">Markets that tip</span><span class="v glow" id="ggA">–</span></div><div class="stat"><span class="k">Effort wasted below critical mass</span><span class="v" id="ggB">–</span></div></div><p class="callout" id="gg13Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>List the next three markets you could enter. For each, write one local partner or community that could help you there. If you can't name one, that market isn't next.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Big companies solve problems for the world, but you get there market by market. Pick carefully, adapt properly, find local help, and put enough into each place for it to take off.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: The exit →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Selling, and what it really means</div>
+        <h2>The Exit</h2>
+        <div class="short"><span class="lbl">In short</span><p>Selling a company is a decision about the future of the product, the team and the founders, not just a price. Levine explains how exits happen, why offers come and go, and how to think about whether to take one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Companies are bought, not sold.</b> You can't easily put a startup up for sale. Buyers come when they see that your company does something they need, often because you've become a threat or an opportunity.</span></li>
+          <li><span><b>Compare the offer with the risk.</b> A future worth more on paper isn't worth more today if it may not happen. Weigh the offer against the chance of reaching that future and how long it would take.</span></li>
+          <li><span><b>Look after the people who built it.</b> Levine cares about how employees share in a sale. Equity, retention bonuses and fair terms decide whether an exit feels like a win for everyone.</span></li>
+          <li><span><b>An exit is a beginning.</b> For the product it may mean far more users; for founders it often means the start of the next company.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Waze's sale to Google in June 2013 was one of the biggest exits in Israeli tech at the time, at a reported price of about 1.1 billion dollars. It came after talks with other suitors; reports at the time said Facebook's talks broke down partly over whether the team would stay in Israel, which Waze insisted on. Levine describes how the board weighed the offer against the risk of carrying on alone, and he takes pride in how widely the proceeds were shared with Waze's employees. Waze kept operating as its own app inside Google, and its team stayed in Israel.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>This lab is a simple illustrative model with a fixed 15% yearly discount. It isn't Waze's real numbers or how the board decided, and real exits also weigh the team, the mission and the founders' own lives.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: sell now or keep going?</div><div class="hint">Weigh an offer against a bigger but uncertain future</div></div>
+        <div class="stage"><svg id="ex14" role="img" aria-label="Bars comparing an offer today with the risk-adjusted value of carrying on"></svg></div><div class="lab-ctl"><div class="ctl"><label for="exO"><span>The offer today</span><output id="oexO"></output></label><input type="range" id="exO" min="50" max="2000" value="1100" step="50"></div><div class="ctl"><label for="exV"><span>Value if it all works</span><output id="oexV"></output></label><input type="range" id="exV" min="500" max="10000" value="5000" step="250"></div><div class="ctl"><label for="exP"><span>Chance it all works</span><output id="oexP"></output></label><input type="range" id="exP" min="5" max="90" value="30" step="1"></div><div class="ctl"><label for="exY"><span>Years until then</span><output id="oexY"></output></label><input type="range" id="exY" min="1" max="10" value="5" step="1"></div><div class="row" id="exEx"></div></div><div class="stats"><div class="stat"><span class="k">Offer today</span><span class="v" id="exA">–</span></div><div class="stat"><span class="k">Risk-adjusted future, in today's money</span><span class="v glow" id="exB">–</span></div><div class="stat"><span class="k">Leans towards</span><span class="s" id="exC">–</span></div></div><p class="callout" id="ex14Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>If someone offered to buy your project or your role tomorrow, write the one number and the one condition that would make you say yes. Knowing them in advance makes the real conversation easier.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Selling is a bet against your own future. Compare the offer with the chance your bigger dream actually happens, and think about your team and the product, not only the price.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: Happylogue →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Happylogue</span> · Why the ride is worth it</div>
+        <h2>Happylogue</h2>
+        <div class="short"><span class="lbl">In short</span><p>Levine closes with a happy ending instead of an epilogue. The startup journey is hard and mostly made of failures, but solving a real problem for many people is deeply satisfying, and loving the problem is what keeps you going.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Impact over exits.</b> The real reward is changing how many people live with a problem: fewer hours in traffic, fairer prices, less hidden fees. The money is a side effect.</span></li>
+          <li><span><b>Love keeps you going.</b> A founder who loves the problem doesn't want to do anything else, which is exactly the stamina the long desert of failures demands.</span></li>
+          <li><span><b>Pass it on.</b> Levine spends much of his time mentoring other founders, and he wrote the book to raise their odds.</span></li>
+          <li><span><b>Start now.</b> His closing message is practical: find a problem you care about, talk to people who have it, and begin, knowing you'll fail along the way.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Levine looks back on the companies he has started and backed and says the best part was never the sale. It was hearing that a driver got home in time for dinner, or that someone got money back they didn't know they'd lost. He describes the thrill of the moment users first start coming back on their own, and the friendships built through the hard years. His message to readers is that being an entrepreneur is a choice to keep solving problems, and that if you pick one you truly care about, the hard parts are easier to bear.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: problem-lover or solution-lover?</div><div class="tally" id="tally15" aria-label="Score"></div></div>
+        <div class="sorter" id="sort15"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Finish this sentence and put it where you'll see it: "The problem I want to make smaller is ...".</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Building something is hard and you'll fail a lot. Choose a problem you care about enough that you'd rather work on it than anything else, and the rest becomes worth it.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#after">Next: your problem journal →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your problem journal</h2>
+      <p class="big">The whole book as one habit: before you build anything, write the problem down, say who has it, and tell it to real people until you know whether they say "yes, that happens to me".</p>
+      <figure class="lab" id="journal">
+        <div class="lab-top"><div class="t">Add a problem</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="pjProb">The problem, in one sentence</label><input id="pjProb" maxlength="140" placeholder="e.g. Parents waste an hour a week chasing school forms"></div>
+          <div class="field"><label for="pjWho">Who has it</label><input id="pjWho" maxlength="100" placeholder="e.g. Working parents of primary-school kids"></div>
+          <div class="field"><label for="pjOft">How often it hurts</label><input id="pjOft" maxlength="80" placeholder="e.g. Every week, term time"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="pjAdd" type="button">Add to my journal</button><span class="tip" id="pjMsg"></span></div>
+        </div>
+        <div class="out" id="pjList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Problem</span><b>Love the problem</b><span>Start from a pain many people share, and stay loyal to it while solutions come and go.</span></div>
+        <div><span class="n">Failure</span><b>Fail fast</b><span>Every try that doesn't work is a lesson; the faster you fail, the more tries your money buys.</span></div>
+        <div><span class="n">Focus</span><b>One thing per phase</b><span>Product-market fit first, then the business model, then growth, then the world.</span></div>
+        <div><span class="n">Users</span><b>You're a sample of one</b><span>Watch new users stumble and remove every barrier between them and the value.</span></div>
+        <div><span class="n">Fit</span><b>PMF or die</b><span>Conversion and retention tell you whether you've built something people keep using.</span></div>
+        <div><span class="n">People</span><b>Fire fast, raise patiently</b><span>Use the 30-day test on every hire, and expect a hundred noes before the money arrives.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Fall in Love with the Problem, Not the Solution: A Handbook for Entrepreneurs</i> by Uri Levine (2023). The explanations, retold stories and labs are written in our own words; chapter titles are the book's. Labs that show numbers are illustrative models unless they say the figures come from the book or a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The problem", "The company", "The product", "Scale and exit"];
+const CH = [["Introduction", "Why problems", 0, "Introduction"], ["Fall in Love with the Problem, Not the Solution", "Love the problem", 0, "Chapter 1"], ["A Startup Is a Journey of Failures", "Journey of failures", 0, "Chapter 2"], ["Embrace Disruption", "Disruption", 0, "Chapter 3"], ["Operate in Phases", "Phases", 1, "Chapter 4"], ["Ride the Fundraising Roller Coaster", "Fundraising", 1, "Chapter 5a"], ["Manage Your Investors", "Your investors", 1, "Chapter 5b"], ["Firing and Hiring", "Firing and hiring", 1, "Chapter 6"], ["Understand the User: You Are Only a Sample of One", "Your user", 2, "Chapter 7"], ["Figure Out Product-Market Fit or Die", "PMF or die", 2, "Chapter 8"], ["Making Money", "Making money", 2, "Chapter 9"], ["How to Get to a Billion Users", "A billion users", 3, "Chapter 10"], ["Go Global", "Go global", 3, "Chapter 11"], ["The Exit", "The exit", 3, "Chapter 12"], ["Happylogue", "Happylogue", 3, "Happylogue"]];
+const QUIZ = {
+"1": {
+"q": "Which problem fits Levine's idea of a big problem best?",
+"o": [
+"A rare annoyance that one hobby group feels once a year",
+"A daily frustration that millions of people feel and would pay to escape",
+"A clever technology that no one has used yet"
+],
+"a": 1,
+"w": "Levine looks for pain that is shared, frequent and strong. A technology without a problem is a solution looking for a reason to exist."
+},
+"2": {
+"q": "Why does loving the problem make pivoting easier?",
+"o": [
+"Because the problem changes every few months",
+"Because your purpose stays the same when you drop a solution that isn't working",
+"Because investors prefer founders who pivot"
+],
+"a": 1,
+"w": "The problem is the fixed point. A failed solution is just a failed guess, not a failed mission, so it's easier to let it go."
+},
+"3": {
+"q": "In this chapter, what does failing fast give you?",
+"o": [
+"More attempts with the same time and money",
+"A guarantee that the next try will work",
+"A reason to stop and start a different company"
+],
+"a": 0,
+"w": "Failure is expected. Making it quick and cheap means you can afford many tries, and your odds come from the number of tries."
+},
+"4": {
+"q": "According to Levine, what makes something disruptive?",
+"o": [
+"It uses the newest technology",
+"It changes how people behave and breaks the market's old balance",
+"It is cheaper to build than what came before"
+],
+"a": 1,
+"w": "Technology can help, but disruption is about behaviour and power in a market shifting for good."
+},
+"5": {
+"q": "What is the first phase Levine says a startup must complete?",
+"o": [
+"Raising a big round",
+"Product-market fit",
+"Launching in several countries"
+],
+"a": 1,
+"w": "Everything else rests on users who keep coming back. Without that, money and growth just speed up the end."
+},
+"6": {
+"q": "What does Levine mean by the dance of the hundred noes?",
+"o": [
+"You should give up after a hundred rejections",
+"Many rejections are a normal part of raising money",
+"Investors say no a hundred times before reading the deck"
+],
+"a": 1,
+"w": "Rejection is the norm, not a sign you should stop. Each no is a chance to improve the pitch."
+},
+"7": {
+"q": "What is Levine's rule for the board?",
+"o": [
+"Only share good news so they stay confident",
+"Never let them be surprised",
+"Let investors make the hard calls"
+],
+"a": 1,
+"w": "Early, honest news, especially bad news, keeps trust. Surprises cost it."
+},
+"8": {
+"q": "What question is at the heart of Levine's 30-day test?",
+"o": [
+"Has this person learned all our tools?",
+"Knowing what I know now, would I hire this person again?",
+"Has this person made any mistakes?"
+],
+"a": 1,
+"w": "The test is about fit, judged with a month of real evidence. A no means act now; a yes means say so."
+},
+"9": {
+"q": "Why does Levine say you are only a sample of one?",
+"o": [
+"Because founders should only build for themselves",
+"Because your own experience doesn't show how ordinary new users will react",
+"Because one test user is enough"
+],
+"a": 1,
+"w": "You know the product inside out. Most users don't, and their first experience decides whether they stay."
+},
+"10": {
+"q": "Which is the clearest sign of product-market fit?",
+"o": [
+"A big spike of downloads after launch",
+"Users who keep coming back over months",
+"A well-known investor joining the board"
+],
+"a": 1,
+"w": "Retention shows the product is solving a real problem. Spikes and big names can happen without it."
+},
+"11": {
+"q": "What does comparing lifetime value with acquisition cost tell you?",
+"o": [
+"Whether growth makes or loses money",
+"How fast your product loads",
+"Whether users like the design"
+],
+"a": 0,
+"w": "If a customer is worth less than they cost to win, every new customer deepens the loss."
+},
+"12": {
+"q": "Why does Levine prefer word-of-mouth growth?",
+"o": [
+"It is cheap, trusted and shows the product really solves a problem",
+"It is faster to set up than any advertising",
+"Investors don't allow paid marketing"
+],
+"a": 0,
+"w": "People recommend things that work. That makes word of mouth both a cheap channel and a signal of real value."
+},
+"13": {
+"q": "Why can launching in many countries at once backfire?",
+"o": [
+"Because regulators forbid it",
+"Because effort spread thin can leave every market below the point where it grows by itself",
+"Because users in other countries don't have the problem"
+],
+"a": 1,
+"w": "Many products need a minimum of users or effort in each place to work. Spread too thin, none of them gets there."
+},
+"14": {
+"q": "Why might a founder take an offer smaller than the company's best-case future?",
+"o": [
+"Because the best case is uncertain and far away",
+"Because offers are always bigger than the future",
+"Because investors require it"
+],
+"a": 0,
+"w": "A larger future that may not happen, years from now, can be worth less today than a solid offer."
+},
+"15": {
+"q": "What does Levine see as the real reward of building a startup?",
+"o": [
+"The size of the exit",
+"Making a real problem smaller for many people",
+"Being on the cover of a magazine"
+],
+"a": 1,
+"w": "Impact on people's lives is the point; money tends to follow it, not the other way round."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#13121a';
+try { const t = localStorage.getItem('flp-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('flp-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('flp-done', []));
+const save = () => store.set('flp-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const fmtN = n => Math.round(n).toLocaleString('en-US');
+const big = n => n >= 1e9 ? (n / 1e9).toFixed(n >= 1e10 ? 0 : 1) + ' billion' : n >= 1e6 ? (n / 1e6).toFixed(n >= 1e7 ? 0 : 1) + ' million' : n >= 1e4 ? fmtN(Math.round(n / 1000)) + ',000' : fmtN(n);
+const money = m => m >= 1000 ? '$' + (m / 1000).toFixed(m % 1000 ? 2 : 0).replace(/0$/, '') + ' billion' : '$' + fmtN(m) + ' million';
+/* preset buttons: [label, {sliderId: value}] */
+function presets(rowSel, list, apply){
+  const box = $(rowSel); box.innerHTML = list.map((p, i) => `<button class="btn" type="button" data-i="${i}" aria-pressed="false">${p[0]}</button>`).join('');
+  const bs = [...box.querySelectorAll('button')];
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); const v = list[+b.dataset.i][1]; Object.keys(v).forEach(k => { const el = $('#' + k); if (el && el.type === 'range') el.value = v[k]; }); apply(v); }));
+  return bs;
+}
+const unpress = bs => bs.forEach(b => b.setAttribute('aria-pressed', 'false'));
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I have an idea but I\'m not sure it matters', 1, 'Size up the problem', 'Check that the pain is shared, frequent and strong. Ask people whether it happens to them before you build anything.'],
+    ['I love what I\'m building but nobody uses it', 2, 'Love the problem, not the solution', 'Your loyalty belongs to the problem. Drop the solution that isn\'t working and try a different one.'],
+    ['We keep failing and I\'m losing heart', 3, 'A journey of failures', 'Failure is the normal path. Make each try smaller and faster so your money buys more of them.'],
+    ['The big players in my market ignore us', 4, 'Embrace disruption', 'They judge today\'s product. Change how customers behave, and expect resistance once they notice.'],
+    ['We\'re trying to do everything at once', 5, 'Operate in phases', 'Pick the one most important thing for this phase, usually product-market fit, and say no to the rest.'],
+    ['Investors keep saying no', 6, 'The hundred noes', 'Rejection is normal. Lead with the problem and your best evidence, and keep going until the first yes.'],
+    ['I\'m not sure about someone I just hired', 8, 'The 30-day test', 'Knowing what you know now, would you hire them again? If not, act now; the team pays for every week you wait.'],
+    ['People download it, then disappear', 10, 'Product-market fit or die', 'Measure conversion and retention. Find the biggest drop in the funnel and fix that first.'],
+    ['I can\'t make the money side work', 11, 'Making money', 'Compare what a customer is worth over time with what they cost to win. Test prices for real.'],
+    ['We want to grow but ads are expensive', 12, 'A billion users', 'Grow by being worth talking about, and stop the leaks before pouring users in.'],
+    ['Someone wants to buy us', 14, 'The exit', 'Compare the offer with the chance your bigger future really happens, and think about the team.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3] === CH[n - 1][0] ? CH[n - 1][3] : CH[n - 1][3] + ' · ' + CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the startup journey ---------- */
+{ const MODES = [['2 weeks', .5], ['2 months', 2], ['6 months', 6]], VERS = 12, RUN = 36, AX = 84;
+  const svg = $('#jrSvg'), cap = $('#jrCap'), mb = $('#jrMode');
+  let cyc = 2, t = 0, busy = false, ran = false;
+  mb.innerHTML = MODES.map(([l, c]) => `<button class="btn" type="button" data-c="${c}" aria-pressed="${c === cyc}">${l}</button>`).join('');
+  const plan = () => { const d = VERS * cyc, ok = d <= RUN, segs = [['desert of no traction', 0, Math.min(d, ok ? d : RUN), 'faint']];
+    if (ok) segs.push(['money', d, d + 9, 'cool'], ['growth', d + 9, d + 21, 'glow'], ['global', d + 21, d + 33, 'good']);
+    return { d, ok, segs, end: ok ? d + 33 : RUN }; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 400, H = nw ? 290 : 250, L = 16, R = W - 16, P = plan(); vb(svg, W, H);
+    const X = m => L + (R - L) * Math.min(m, AX) / AX, roadY = nw ? 196 : 168, fs = nw ? 12.5 : 11.5;
+    const mor = m => { if (m < P.d) return .28 + .045 * Math.sin(m / cyc * Math.PI * 2) - .1 * Math.min(1, m / Math.max(P.d, 1)); return Math.min(.95, .3 + (m - P.d) / 40); };
+    const Y = v => roadY - 18 - v * (roadY - 70);
+    let g = TX(L, 22, 'how it feels', 'faint', fs) + TX(L, roadY + 46, 'months', 'faint', fs);
+    let pth = '', pth2 = ''; const end = P.ok ? Math.min(AX, P.end) : RUN;
+    for (let m = 0; m <= end; m += .25){ const xy = X(m).toFixed(1) + ' ' + Y(P.ok || m < RUN ? mor(m) : .05).toFixed(1); pth += (m ? 'L' : 'M') + xy; if (m <= t) pth2 += (m ? 'L' : 'M') + xy; }
+    g += `<path d="${pth}" ${S('line', 2)}/>` + (pth2 ? `<path d="${pth2}" ${S('glow', 2.5)}/>` : '');
+    P.segs.forEach(([lb, a, b, c], i) => { g += `<rect x="${X(a).toFixed(1)}" y="${roadY}" width="${Math.max(2, X(b) - X(a)).toFixed(1)}" height="12" rx="3" ${F(c, c === 'faint' ? .45 : .85)}/>`;
+      const mid = (X(a) + X(b)) / 2; if (i === 0) g += TX(Math.max(L, X(a)), lb.length * fs * .56 > X(b) - X(a) - 6 ? roadY - 8 : roadY + 28, lb, 'muted', fs); else if (!nw || i !== 2) g += TX(mid, roadY + 28 + (i % 2 ? 0 : 0), lb, c, fs, 'middle'); });
+    for (let v = 1; v <= VERS && v * cyc <= (P.ok ? P.d : RUN); v++) g += `<line x1="${X(v * cyc).toFixed(1)}" y1="${roadY - 4}" x2="${X(v * cyc).toFixed(1)}" y2="${roadY}" ${S('muted', 1)}/>`;
+    g += `<line x1="${X(RUN)}" y1="34" x2="${X(RUN)}" y2="${roadY + 14}" ${S('bad', 1.5, ';stroke-dasharray:4 4')}/>` + TX(X(RUN) + 4, 46, 'money runs out', 'bad', fs);
+    if (P.ok) g += `<circle cx="${X(P.d)}" cy="${Y(mor(P.d))}" r="5" ${F('glow')}/>` + TX(X(P.d), Y(mor(P.d)) - 12, 'fit!', 'glow', fs + 1, 'middle', 'font-weight="600"');
+    for (let m = 0; m <= AX; m += 24) g += TX(X(m), roadY + 46, m ? String(m) : '', 'faint', fs, 'middle');
+    const ct = Math.min(t, end), cx = X(ct);
+    g += `<rect x="${(cx - 9).toFixed(1)}" y="${roadY - 10}" width="18" height="9" rx="3" ${F('text')}/><circle cx="${(cx - 5).toFixed(1)}" cy="${roadY - 1}" r="2.5" ${F('ink')}/><circle cx="${(cx + 5).toFixed(1)}" cy="${roadY - 1}" r="2.5" ${F('ink')}/>`;
+    svg.innerHTML = g; });
+  function say(){ const P = plan(), lbl = MODES.find(m => m[1] === cyc)[0];
+    if (!ran){ cap.innerHTML = `Say you need about <b>${VERS} versions</b> to find product-market fit and have <b>${RUN} months</b> of money. With a new version every ${lbl}, press Drive it.`; return; }
+    cap.innerHTML = P.ok ? `<b>Fit after ${P.d} months</b>, with ${RUN - P.d} months of money to spare. Then money, growth and global come in turn, each with its own most important thing. An illustrative model of the book's phases.`
+      : `<b>Out of money at month ${RUN}</b>, still in the desert after ${Math.floor(RUN / cyc)} of the ${VERS} versions you needed. Same idea, same team: only the speed of trying changed.`; }
+  $('#jrGo').addEventListener('click', () => { if (busy) return; const P = plan(), dur = RM ? 0 : 2600, t0 = performance.now(); busy = true; ran = false; say();
+    const step = now => { const k = dur ? Math.min(1, (now - t0) / dur) : 1; t = k * P.end; draw(); if (k < 1) requestAnimationFrame(step); else { busy = false; ran = true; say(); } }; requestAnimationFrame(step); });
+  $('#jrReset').addEventListener('click', () => { if (busy) return; t = 0; ran = false; draw(); say(); });
+  mb.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { if (busy) return; cyc = +b.dataset.c; press([...mb.querySelectorAll('[data-c]')], b); t = 0; ran = false; draw(); say(); }));
+  draw(); say();
+}
+
+/* ---------- intro: size up a problem ---------- */
+{ const el = $('#ps1'), P = $('#psP'), Fq = $('#psF'), Hh = $('#psH'), cap = $('#ps1Cap');
+  const FREQ = [['once a year', 1], ['monthly', 12], ['weekly', 52], ['daily', 250], ['many times a day', 1000]];
+  const people = v => Math.pow(10, 2 + 7 * v / 100);
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 320 : 280, L = nw ? 20 : 108, B = H - 40, T = 16, R = W - 16, v = +P.value, f = +Fq.value, h = +Hh.value; vb(el, W, H);
+    const X = x => L + (R - L) * x / 100, Y = k => B - (B - T) * (k + .5) / 5; let g = '';
+    g += `<rect x="${X(60)}" y="${T}" width="${R - X(60)}" height="${Y(2.5) - T}" rx="10" ${F('glow', .08)}/>` + TX(R - 8, T + 18, 'big problems live here', 'glow', nw ? 12 : 12, 'end');
+    for (let k = 0; k < 5; k++){ g += `<line x1="${L}" y1="${Y(k)}" x2="${R}" y2="${Y(k)}" ${S('line', 1, ';stroke-dasharray:2 5')}/>`; if (!nw) g += TX(L - 8, Y(k) + 4, FREQ[k][0], k === f ? 'text' : 'faint', 11.5, 'end'); }
+    g += `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" ${S('line', 1)}/>`;
+    [[0, 'hundreds'], [43, 'millions'], [86, 'billion']].forEach(([x, t]) => g += TX(X(x), B + 18, t, 'faint', nw ? 12 : 11.5, x ? (x > 80 ? 'end' : 'middle') : 'start'));
+    g += TX((L + R) / 2, B + 34, 'how many people have it', 'muted', nw ? 12 : 11.5, 'middle');
+    if (nw) g += TX(L + 4, T + 14, 'how often ↑', 'muted', 12);
+    const r = 6 + h * (nw ? 3.2 : 3.8), cx = clamp(X(v), L + r * .4, R - r * .4), cy = Y(f);
+    g += `<circle cx="${cx}" cy="${cy}" r="${r}" ${FS('glow', 'glow', 2, .28)}/>` + TX(cx, cy + 4, String(h), 'text', 13, 'middle', 'font-weight="600"');
+    if (nw) g += TX(cx, cy - r - 6 < T + 20 ? cy + r + 16 : cy - r - 6, FREQ[f][0], 'text', 12, 'middle');
+    el.innerHTML = g;
+    const n = people(v), moments = n * FREQ[f][1], s = v / 100 * .45 + f / 4 * .3 + (h - 1) / 9 * .25;
+    out('psP', big(n)); out('psF', FREQ[f][0]); out('psH', h + ' of 10');
+    $('#psR').textContent = big(n) + ' people'; $('#psN').textContent = big(moments);
+    $('#psV').textContent = s > .68 ? 'A big problem. Worth a company.' : s > .45 ? 'Promising. Go and ask people.' : 'Probably too small, too rare or too mild.';
+    cap.innerHTML = s > .68 ? `Shared, frequent and painful: <b>${big(moments)} moments of pain a year</b>. That's the kind of problem Levine looks for, and the kind people will change habits to escape.`
+      : h <= 3 ? `<b>It doesn't hurt enough.</b> Even if many people hit it, a mild annoyance is something they'll happily live with, and people who can live with a problem won't switch.`
+      : v < 40 ? `<b>Too few people.</b> It may hurt, but the group is small. Check whether there's a bigger group with the same pain.`
+      : `<b>Worth testing.</b> Describe it to people who might have it and listen for "yes, that happens to me". The scoring here is an illustrative model, not the book's.`; });
+  const bs = presets('#psEx', [['Traffic on the commute', { psP: 90, psF: 3, psH: 7 }], ['Fares that drop after you book', { psP: 66, psF: 1, psH: 6 }], ['Hidden fees in your pension', { psP: 78, psF: 1, psH: 8 }], ['A wobbly café table', { psP: 60, psF: 1, psH: 2 }]], draw);
+  [P, Fq, Hh].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 1: loyal to the problem or to the solution ---------- */
+{ const el = $('#lv2'), Q = $('#lvQ'), cap = $('#lv2Cap'), BAR = .7; let seed = 11, shown = 10, timer = null;
+  function make(){ const r = rng(seed), q0 = +Q.value / 100, a = [], b = [];
+    for (let k = 0; k < 10; k++){ a.push(clamp(Math.min(q0 + .03 * k, q0 + .14) + (r() - .5) * .04, .03, .98));
+      b.push(k === 0 ? q0 : clamp(.22 + .035 * k + r() * .48, .03, .98)); }
+    return { a, b, fa: a.findIndex(x => x >= BAR), fb: b.findIndex(x => x >= BAR) }; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 370 : 270, d = make(); vb(el, W, H);
+    const L = nw ? 14 : 150, R = W - 12, bw = (R - L) / 10; let g = '';
+    const row = (arr, fit, y0, hgt, c, name, note) => { let s = nw ? TX(L, y0 - hgt - 10, name, c, 13, 'start', 'font-weight="600"') : wrap(L - 14, y0 - hgt / 2 - 6, name, 18, 15, c, 13, 'end', 'font-weight="600"') + TX(L - 14, y0 - hgt / 2 + 26, note, 'faint', 11.5, 'end');
+      const by = y0 - hgt * BAR; s += `<line x1="${L}" y1="${by}" x2="${R}" y2="${by}" ${S('text', 1, ';stroke-dasharray:4 4')}/>`;
+      arr.forEach((q, k) => { if (k >= shown) return; const x = L + k * bw + 3, hh = hgt * q, hit = k === fit;
+        s += `<rect x="${x.toFixed(1)}" y="${(y0 - hh).toFixed(1)}" width="${(bw - 6).toFixed(1)}" height="${hh.toFixed(1)}" rx="3" ${F(c, fit >= 0 && k > fit ? .3 : .85)}/>`;
+        if (hit) s += `<rect x="${(x - 2).toFixed(1)}" y="${(y0 - hh - 2).toFixed(1)}" width="${(bw - 2).toFixed(1)}" height="${(hh + 4).toFixed(1)}" rx="4" ${S('good', 2)}/>` + TX(x + (bw - 6) / 2, y0 - hh - 8, 'fit', 'good', 12, 'middle', 'font-weight="600"');
+        s += TX(x + (bw - 6) / 2, y0 + 15, String(k + 1), 'faint', 11, 'middle'); });
+      return s; };
+    if (nw){ g += row(d.a, d.fa, 160, 110, 'cool', 'In love with the solution', '') + row(d.b, d.fb, 335, 110, 'glow', 'In love with the problem', ''); }
+    else { g += row(d.a, d.fa, 118, 90, 'cool', 'In love with the solution', 'polishes the first idea') + row(d.b, d.fb, 245, 90, 'glow', 'In love with the problem', 'tries new solutions'); }
+    g += TX(R, nw ? 22 : 14, 'dashed line: users stay', 'muted', nw ? 12 : 11.5, 'end');
+    el.innerHTML = g; out('lvQ', Q.value < 30 ? 'weak' : Q.value < 55 ? 'decent' : Q.value < 70 ? 'good' : 'great');
+    const done = shown >= 10, tx = i => i < 0 ? 'Not in 10 tries' : 'Try ' + (i + 1);
+    $('#lvA').textContent = done ? tx(d.fa) : '…'; $('#lvB').textContent = done ? tx(d.fb) : '…';
+    if (!done){ cap.textContent = 'Running…'; return; }
+    cap.innerHTML = d.fa === 0 ? `Your first idea was already good enough, so both reach fit at once. <b>That's rare.</b> Lower the slider to see the usual case.`
+      : d.fa < 0 && d.fb >= 0 ? `Polishing a weak idea makes it a little better each time and then stalls below the line. <b>Trying new solutions to the same problem found fit on try ${d.fb + 1}.</b> An illustrative model: each new idea is a fresh draw, slightly improved by what the failures taught.`
+      : d.fb < 0 ? `This time neither got there in ten tries. That happens. <b>The problem-lover still has a reason to try an eleventh; the solution-lover has only a polished idea that doesn't work.</b>`
+      : `Both got there, the problem-lover on try ${d.fb + 1} and the solution-lover on try ${d.fa + 1}. Press New problem a few times: <b>polishing usually stalls below the line.</b>`; });
+  function run(){ clearInterval(timer); shown = 0; draw(); timer = setInterval(() => { shown++; draw(); if (shown >= 10) clearInterval(timer); }, RM ? 0 : 140); }
+  $('#lvRun').addEventListener('click', run);
+  $('#lvNew').addEventListener('click', () => { seed++; run(); });
+  Q.addEventListener('input', () => { clearInterval(timer); shown = 10; draw(); });
+  draw();
+}
+
+/* ---------- 2: how many shots do you get ---------- */
+{ const el = $('#fs3'), Rr = $('#fsR'), Tt = $('#fsT'), Pp = $('#fsP'), cap = $('#fs3Cap');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 380 : 280, R = +Rr.value, T = +Tt.value, p = +Pp.value / 100, n = Math.floor(R / T); vb(el, W, H);
+    let g = ''; const r = rng(R * 100 + T * 7 + Pp.value * 3); let first = -1;
+    const cols = nw ? 12 : 24, cs = nw ? 26 : 25, x0 = nw ? 14 : 16, y0 = 28;
+    g += TX(x0, 18, `${n} ${n === 1 ? 'try' : 'tries'} with ${R} months of money (one possible run)`, 'muted', nw ? 12 : 12);
+    for (let i = 0; i < n; i++){ const hit = r() < p; if (hit && first < 0) first = i; const x = x0 + (i % cols) * cs + cs / 2, y = y0 + Math.floor(i / cols) * cs + cs / 2;
+      g += hit ? `<circle cx="${x}" cy="${y}" r="${cs / 2 - 3}" ${F(i === first ? 'glow' : 'glow', i === first ? .95 : .45)}/>` : `<circle cx="${x}" cy="${y}" r="${cs / 2 - 4}" ${S('faint', 1.5)}/>`; }
+    const rowsUsed = nw ? 4 : 2, cy0 = y0 + rowsUsed * cs + 26, L = 34, Rx = W - 14, B = H - 30;
+    const X = k => L + (Rx - L) * k / 48, Y = v => B - (B - cy0) * v;
+    g += `<line x1="${L}" y1="${B}" x2="${Rx}" y2="${B}" ${S('line', 1)}/><line x1="${L}" y1="${cy0}" x2="${L}" y2="${B}" ${S('line', 1)}/>`;
+    g += TX(L - 6, cy0 + 4, '100%', 'faint', 11, 'end') + TX(L - 6, B + 4, '0', 'faint', 11, 'end') + TX((L + Rx) / 2, B + 22, 'number of tries', 'faint', nw ? 12 : 11.5, 'middle');
+    let pth = ''; for (let k = 0; k <= 48; k++) pth += (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(1 - Math.pow(1 - p, k)).toFixed(1);
+    const c = 1 - Math.pow(1 - p, n);
+    g += `<path d="${pth}" ${S('cool', 2.5)}/><line x1="${X(n)}" y1="${cy0}" x2="${X(n)}" y2="${B}" ${S('text', 1, ';stroke-dasharray:4 4')}/><circle cx="${X(n)}" cy="${Y(c)}" r="6" ${F('glow')}/>`;
+    g += TX(X(n) + (n > 36 ? -10 : 10), Y(c) + (c > .85 ? 18 : -8), Math.round(c * 100) + '% chance', 'glow', 13, n > 36 ? 'end' : 'start', 'font-weight="600"');
+    el.innerHTML = g; out('fsR', R + ' months'); out('fsT', T + (T === 1 ? ' month' : ' months')); out('fsP', Math.round(p * 100) + '%');
+    $('#fsN').textContent = n; $('#fsC').textContent = Math.round(c * 100) + '%';
+    cap.innerHTML = n <= 2 ? `<b>Only ${n} ${n === 1 ? 'shot' : 'shots'}.</b> Even a decent idea will probably miss, and then the money's gone. Shorten the time per try and watch the chance climb.`
+      : c > .85 ? `<b>${n} tries make success likely (${Math.round(c * 100)}%)</b>, even though any single try usually fails. That's Levine's case for failing fast: each try is a cheap shot from half court.`
+      : `<b>${n} tries give you a ${Math.round(c * 100)}% chance.</b> The chance of each try is what it is; the number of tries is what you control. The curve is simple probability, assuming tries are independent.`; });
+  const bs = presets('#fsEx', [['Perfectionist: a try every 9 months', { fsT: 9 }], ['Fast and scrappy: every 2 months', { fsT: 2 }], ['Half-court shots: 5% each, monthly', { fsP: 5, fsT: 1 }]], draw);
+  [Rr, Tt, Pp].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 3: watch a market tip ---------- */
+{ const el = $('#dz4'), Bb = $('#dzB'), Rr = $('#dzR'), cap = $('#dz4Cap');
+  const model = () => { const B = +Bb.value / 100, R = +Rr.value / 100, capS = .06 + .89 * B, r = .35 + 1.3 * B * (1 - .5 * R), t0 = 2 + 6 * (1 - B) + 5 * R;
+    const s = t => capS / (1 + Math.exp(-r * (t - t0))); const half = capS > .5 ? t0 - Math.log(capS / .5 - 1) / r : null; return { s, half, capS }; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 260, L = 34, Rx = W - 14, T = 16, B = H - 36, m = model(); vb(el, W, H);
+    const X = t => L + (Rx - L) * t / 12, Y = v => B - (B - T) * v; let up = '', area = `M${L} ${T}`;
+    for (let t = 0; t <= 12; t += .1){ up += (t ? 'L' : 'M') + X(t).toFixed(1) + ' ' + Y(m.s(t)).toFixed(1); area += 'L' + X(t).toFixed(1) + ' ' + Y(m.s(t)).toFixed(1); }
+    area += `L${Rx} ${T}Z`; let g = `<path d="${area}" ${F('faint', .14)}/>` + `<path d="${up}L${Rx} ${B}L${L} ${B}Z" ${F('glow', .18)}/><path d="${up}" ${S('glow', 2.5)}/>`;
+    g += `<line x1="${L}" y1="${Y(.5)}" x2="${Rx}" y2="${Y(.5)}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    for (let t = 0; t <= 12; t += 3) g += TX(X(t), B + 18, t ? 'year ' + t : 'start', 'faint', nw ? 12 : 11.5, t === 12 ? 'end' : t ? 'middle' : 'start');
+    g += TX(L + 8, T + 18, 'the old way', 'muted', 12.5) + TX(Rx - 8, B - 10, 'the newcomer', 'glow', 12.5, 'end', 'font-weight="600"');
+    if (m.half != null && m.half <= 12) g += `<circle cx="${X(m.half)}" cy="${Y(.5)}" r="5" ${F('glow')}/>` + TX(X(m.half) + (m.half > 9 ? -8 : 8), Y(.5) - 10, 'tipping point', 'text', 12, m.half > 9 ? 'end' : 'start');
+    el.innerHTML = g; out('dzB', Bb.value < 25 ? 'a little' : Bb.value < 60 ? 'clearly' : 'hugely'); out('dzR', Rr.value < 30 ? 'mild' : Rr.value < 65 ? 'stiff' : 'fierce');
+    const s12 = m.s(12); $('#dzY').textContent = m.half != null && m.half <= 12 ? 'Year ' + Math.max(1, Math.round(m.half)) : 'Not in 12 years'; $('#dzS').textContent = Math.round(s12 * 100) + '%';
+    cap.innerHTML = +Bb.value < 25 ? `<b>Slightly better isn't disruption.</b> People don't change habits for a small improvement, so the newcomer stays a niche. The curves are an illustrative model.`
+      : m.half != null && m.half <= 12 ? `<b>The market tips in about year ${Math.max(1, Math.round(m.half))}.</b> For years the newcomer looks small, which is exactly when incumbents laugh it off. ${+Rr.value > 60 ? 'Fierce resistance delays the tip but doesn\'t stop it.' : 'Then behaviour changes, and it changes for good.'}`
+      : `<b>Better, but the old guard holds on for now.</b> Strong pushback from incumbents or rules slows the shift. Levine's advice: expect it and plan for it.`; });
+  const bs = presets('#dzEx', [['Streaming vs rental shops', { dzB: 85, dzR: 25 }], ['Ride apps vs taxis', { dzB: 75, dzR: 75 }], ['A slightly nicer taxi firm', { dzB: 15, dzR: 40 }]], draw);
+  [Bb, Rr].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 4: one most important thing at a time ---------- */
+{ const el = $('#ph5'), D = $('#phD'), cap = $('#ph5Cap'), mb = $('#phMode');
+  const PH = [['Product-market fit', 90, 'glow'], ['Business model', 50, 'cool'], ['Growth', 60, 'cool'], ['Going global', 60, 'cool']];
+  let mode = 'focus', shown = 36, timer = null;
+  mb.innerHTML = [['focus', 'Focus: one phase at a time'], ['spread', 'Spread: all four at once']].map(([k, l]) => `<button class="btn" type="button" data-m="${k}" aria-pressed="${k === mode}">${l}</button>`).join('');
+  function sim(){ const capM = 10 * (1 - +D.value / 100), done = [0, 0, 0, 0], fin = [null, null, null, null], hist = [];
+    for (let m = 1; m <= 36; m++){ const open = PH.map((_, i) => fin[i] == null);
+      if (mode === 'focus'){ const i = open.indexOf(true); if (i >= 0) done[i] += capM; }
+      else { const n = open.filter(Boolean).length; PH.forEach((_, i) => { if (!open[i]) return; const prevOpen = open.slice(0, i).some(Boolean); done[i] += capM / n * (prevOpen ? .3 : 1); }); }
+      PH.forEach((p, i) => { if (fin[i] == null && done[i] >= p[1]){ done[i] = p[1]; fin[i] = m; } }); hist.push(done.slice()); }
+    return { hist, fin }; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 330 : 230, s = sim(), cur = s.hist[Math.max(0, shown - 1)]; vb(el, W, H);
+    let g = TX(nw ? 14 : 16, 20, `month ${shown} of 36`, 'muted', 12.5);
+    PH.forEach(([name, need, c], i) => { const y = nw ? 44 + i * 70 : 40 + i * 46, L = nw ? 14 : 170, Rx = W - (nw ? 14 : 70), w = (Rx - L) * cur[i] / need, f = s.fin[i];
+      g += nw ? TX(L, y + 2, name, 'text', 13) : TX(L - 12, y + 18, name, 'text', 13, 'end');
+      const by = nw ? y + 10 : y + 4; g += `<rect x="${L}" y="${by}" width="${Rx - L}" height="22" rx="6" ${F('panel-2')}/><rect x="${L}" y="${by}" width="${w.toFixed(1)}" height="22" rx="6" ${F(c, .85)}/>`;
+      const lbl = f != null && f <= shown ? 'done, month ' + f : Math.round(cur[i] / need * 100) + '%';
+      g += nw ? TX(Rx, y + 2, lbl, f != null && f <= shown ? 'good' : 'faint', 12.5, 'end') : TX(Rx + 8, by + 16, f != null && f <= shown ? 'month ' + f : Math.round(cur[i] / need * 100) + '%', f != null && f <= shown ? 'good' : 'faint', 12); });
+    el.innerHTML = g; out('phD', D.value + '%');
+    const fin = s.fin; $('#phA').textContent = shown < 36 ? '…' : fin[0] ? 'Month ' + fin[0] : 'Not in 3 years'; $('#phB').textContent = shown < 36 ? '…' : fin[3] ? 'Month ' + fin[3] : 'Not in 3 years';
+    if (shown < 36){ cap.textContent = 'Running…'; return; }
+    cap.innerHTML = mode === 'focus' ? (fin[0] ? `<b>Fit in month ${fin[0]}</b>, then each phase in turn. All effort goes to the one most important thing, and each phase builds on a finished one. ${fin[3] ? '' : 'More distractions push the last phase past three years.'}` : `Even with focus, distractions ate too much effort. <b>Cutting them is part of focusing.</b>`)
+      : `<b>${fin[0] ? 'Fit only in month ' + fin[0] : 'No product-market fit in three years'}.</b> Work on the money, growth and abroad before fit mostly has to be redone, so it counts for little (this model counts it at 30%). An illustrative model of Levine's point.`; });
+  function run(){ clearInterval(timer); shown = 1; draw(); timer = setInterval(() => { shown++; draw(); if (shown >= 36) clearInterval(timer); }, RM ? 0 : 60); }
+  $('#phGo').addEventListener('click', run);
+  mb.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => { mode = b.dataset.m; press([...mb.querySelectorAll('[data-m]')], b); clearInterval(timer); shown = 36; draw(); }));
+  D.addEventListener('input', () => { clearInterval(timer); shown = 36; draw(); });
+  draw();
+}
+
+/* ---------- 5a: the dance of the hundred noes ---------- */
+{ const el = $('#fr6'), Pp = $('#frP'), cap = $('#fr6Cap'); let seed = 5, shown = 100, timer = null;
+  function sim(){ const r = rng(seed * 31 + +Pp.value), p = +Pp.value / 100, res = []; let first = -1;
+    for (let i = 0; i < 100; i++){ const q = first < 0 ? p : Math.min(.5, p * 4 + .04); const y = r() < q; res.push(y); if (y && first < 0) first = i; } return { res, first }; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 380 : 250, s = sim(); vb(el, W, H);
+    const cs = nw ? 30 : 22, x0 = nw ? 20 : 16, y0 = nw ? 34 : 30; let g = TX(x0, nw ? 20 : 18, '100 investor meetings', 'muted', 12.5);
+    s.res.forEach((y, i) => { if (i >= shown) return; const x = x0 + (i % 10) * cs + cs / 2, yy = y0 + Math.floor(i / 10) * cs + cs / 2, after = s.first >= 0 && i > s.first;
+      g += y ? `<circle cx="${x}" cy="${yy}" r="${cs / 2 - 3}" ${F('glow', .95)}/>` : `<circle cx="${x}" cy="${yy}" r="${cs / 2 - 4}" ${after ? FS('cool-soft', 'cool', 1.2) : S('faint', 1.2)}/>`; });
+    if (!nw){ const lx = x0 + 10 * cs + 30; g += `<circle cx="${lx}" cy="44" r="7" ${S('faint', 1.2)}/>` + TX(lx + 14, 48, 'a no', 'muted', 12.5) + `<circle cx="${lx}" cy="70" r="8" ${F('glow', .95)}/>` + TX(lx + 14, 74, 'a yes', 'muted', 12.5) + `<circle cx="${lx}" cy="96" r="7" ${FS('cool-soft', 'cool', 1.2)}/>` + TX(lx + 14, 100, 'a no after someone said yes', 'muted', 12.5);
+      g += wrap(lx - 8, 160, 'Once one investor is in, the others fear missing out, so the odds jump.', 40, 17, 'soft', 12.5, 'start'); }
+    else { g += TX(x0, H - 30, '● yes   ○ no   blue ○ no, after a yes', 'muted', 12) + TX(x0, H - 12, 'After the first yes, the odds jump.', 'soft', 12); }
+    el.innerHTML = g; out('frP', Pp.value + '%');
+    const yes = s.res.filter(Boolean).length, done = shown >= 100;
+    $('#frA').textContent = done ? (s.first < 0 ? 'No yes at all' : s.first) : '…'; $('#frB').textContent = done ? yes : '…'; $('#frC').textContent = done ? (yes >= 3 ? 'Yes: a lead and followers' : yes ? 'Barely: one or two backers' : 'No, rework the story') : '…';
+    if (!done){ cap.textContent = 'Pitching…'; return; }
+    cap.innerHTML = s.first < 0 ? `<b>A hundred noes and no yes.</b> At these odds the story or the traction needs work, not just more meetings.` : `<b>${s.first} noes before the first yes</b>, then ${yes - 1} more yeses as others stopped hesitating. The jump after the first yes is an illustrative model of Levine's point that investors are slow until they fear losing the deal.`; });
+  function run(){ clearInterval(timer); seed++; shown = 0; draw(); timer = setInterval(() => { shown += 2; draw(); if (shown >= 100) clearInterval(timer); }, RM ? 0 : 30); }
+  $('#frGo').addEventListener('click', run);
+  const bs = presets('#frEx', [['Hot problem, real traction', { frP: 8 }], ['Good story, no traction yet', { frP: 3 }], ['Cold market', { frP: 1 }]], () => { clearInterval(timer); shown = 100; draw(); });
+  Pp.addEventListener('input', () => { unpress(bs); clearInterval(timer); shown = 100; draw(); });
+  draw();
+}
+
+/* ---------- 5b: trust or trouble ---------- */
+sorter('#sort7', '#tally7', [{ id: 'trust', label: 'Builds trust', d: 'Keeps investors close and useful' }, { id: 'trouble', label: 'Breeds trouble', d: 'A surprise or a split waiting to happen' }], [
+  { t: 'You call each board member the day the big customer cancels, with a plan, before the meeting.', q: true, a: 'trust', w: 'Bad news early, with a plan, is exactly Levine\'s rule. The meeting becomes about what to do next.' },
+  { t: 'You wait to mention the missed quarter until the board meeting, so you can present it properly.', q: true, a: 'trouble', w: 'The board learns it at the table. That\'s the surprise Levine says never to allow.' },
+  { t: 'A short monthly update: the main goal, the key number, the biggest problem, and where you need help.', q: true, a: 'trust', w: 'Regular, honest updates keep investors informed and make them more useful when you ask for help.' },
+  { t: 'You drop a product change you believe in because one investor dislikes it, without discussing the evidence.', q: true, a: 'trouble', w: 'Your job is to deliver results for the company, not to keep each investor comfortable.' },
+  { t: 'Before an acquisition offer arrives, you talk through with the board how each group would view a sale.', q: true, a: 'trust', w: 'Interests can split at an exit. Knowing where the tensions are in advance makes the real decision calmer.' },
+  { t: 'You sign a new round with terms that quietly hurt early employees\' shares, to close faster.', q: true, a: 'trouble', w: 'Levine wants founders to negotiate fairly for the people who built the company.' },
+  { t: 'You arrange a small sale of founder shares in a later round so the founders can stay focused on the long run.', q: true, a: 'trust', w: 'A little liquidity can stop founders pushing for an early exit just to secure their families.' } ]);
+
+/* ---------- 6: the 30-day test ---------- */
+{ const el = $('#hf8'), Wk = $('#hfW'), cap = $('#hf8Cap'), tb = $('#hfType');
+  const TY = [['bad', 'Wrong fit', .9, -.2], ['stage', 'Nice person, wrong for this stage', .45, .2], ['great', 'Great fit', 0, 1.6]];
+  let ty = 'bad';
+  tb.innerHTML = TY.map(([k, l]) => `<button class="btn" type="button" data-t="${k}" aria-pressed="${k === ty}">${l}</button>`).join('');
+  const net = (t, w) => { const [, , drag, val] = TY.find(x => x[0] === ty); let v = 0; const out2 = [];
+    for (let k = 0; k <= 52; k++){ if (k > 0){ if (k <= w || ty === 'great') v += val - 1 - drag * k / 12; else v += 0; if (k === w + 1 && ty !== 'great') v -= 2; } out2.push(v); } return out2; };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 260, w = +Wk.value, L = 40, Rx = W - 14, T = 18, B = H - 36; vb(el, W, H);
+    const a = net(0, w), b = net(0, 4), all = a.concat(b), mx = Math.max(4, ...all), mn = Math.min(-4, ...all);
+    const X = k => L + (Rx - L) * k / 52, Y = v => T + (B - T) * (mx - v) / (mx - mn); let g = '';
+    g += `<line x1="${L}" y1="${Y(0)}" x2="${Rx}" y2="${Y(0)}" ${S('line', 1)}/>` + TX(L - 6, Y(0) + 4, '0', 'faint', 11, 'end');
+    g += TX(L + 4, T + 12, 'value to the company', 'faint', nw ? 12 : 11.5) + TX(L + 4, B - 6, 'cost', 'faint', nw ? 12 : 11.5);
+    for (let k = 0; k <= 52; k += 13) g += TX(X(k), B + 18, k ? 'week ' + k : 'start', 'faint', nw ? 12 : 11.5, k === 52 ? 'end' : k ? 'middle' : 'start');
+    const path = arr => arr.map((v, k) => (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(v).toFixed(1)).join('');
+    if (ty !== 'great') g += `<path d="${path(b)}" ${S('good', 2, ';stroke-dasharray:5 4')}/>` + TX(X(52) - 4, Y(b[52]) - 8, 'acted at day 30', 'good', 12, 'end');
+    g += `<path d="${path(a)}" ${S(ty === 'great' ? 'glow' : 'bad', 2.5)}/>`;
+    g += `<line x1="${X(4)}" y1="${T}" x2="${X(4)}" y2="${B}" ${S('glow', 1.5, ';stroke-dasharray:3 4')}/>` + TX(X(4) + 4, T + 30, 'day 30', 'glow', 12);
+    if (ty !== 'great') g += `<circle cx="${X(w)}" cy="${Y(a[w])}" r="6" ${F('bad')}/>` + TX(X(w) + (w > 40 ? -10 : 10), Y(a[w]) - 10, 'you act', 'bad', 12, w > 40 ? 'end' : 'start');
+    el.innerHTML = g; out('hfW', w + ' weeks');
+    const cost = Math.max(0, b[52] - a[52]), team = ty === 'bad' ? Math.min(8, Math.round(w / 6)) : ty === 'stage' ? Math.min(6, Math.round(w / 10)) : 0;
+    $('#hfA').textContent = ty === 'great' ? 'None' : '≈ ' + Math.round(cost) + ' weeks of pay'; $('#hfB').textContent = ty === 'great' ? 'A lift: people see good work rewarded' : team ? `${team} of 10 teammates frustrated` : 'Little so far';
+    cap.innerHTML = ty === 'great' ? `<b>A clear yes at day 30.</b> Tell them now, and think about more responsibility or equity. Levine treats the 30-day test as a chance to recognise great hires early, not only to catch mistakes.`
+      : w <= 6 ? `<b>Acting at about a month keeps the damage small.</b> It's hard, but the person also gets to move on to a job that suits them sooner.`
+      : `<b>Waiting ${w} weeks costs about ${Math.round(cost)} weeks of pay</b>, and the drag on the team grows the longer it lasts. In this illustrative model the cost is salary plus a slowly rising toll on everyone else.`; });
+  tb.querySelectorAll('[data-t]').forEach(b => b.addEventListener('click', () => { ty = b.dataset.t; press([...tb.querySelectorAll('[data-t]')], b); draw(); }));
+  Wk.addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 7: you are a sample of one ---------- */
+{ const el = $('#su9'), tg = $('#suTg'), cap = $('#su9Cap');
+  const SEG = [['Innovators', 2.5, -3, -2, .08], ['Early adopters', 13.5, -2, -1, .3], ['Early majority', 34, -1, 0, .65], ['Late majority', 34, 0, 1, .85], ['Laggards', 16, 1, 3, .95]];
+  const BAR = [['sign', 'Sign up before seeing any value', .5], ['inst', 'Needs instructions to use', .45], ['slow', 'Value shows up after days, not minutes', .5], ['geek', 'Assumes you think like the founder', .4]];
+  const on = { sign: true, inst: true, slow: true, geek: true };
+  tg.innerHTML = BAR.map(([k, l]) => `<label class="tg" for="su_${k}"><input type="checkbox" id="su_${k}" data-k="${k}" checked><span>${l}</span></label>`).join('');
+  const pass = j => BAR.reduce((p, [k, , s]) => on[k] ? p * (1 - s * SEG[j][4] * 1.05) : p, 1);
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 360 : 250, L = 14, Rx = W - 14, T = 20, B = nw ? 176 : 190; vb(el, W, H);
+    const X = z => L + (Rx - L) * (z + 3) / 6, pdf = z => Math.exp(-z * z / 2), Y = (v, k = 1) => B - (B - T) * v * k; let g = '';
+    SEG.forEach(([name, pc, a, b2], j) => { let full = `M${X(a).toFixed(1)} ${B}`, part = full; const k = pass(j);
+      for (let z = a; z <= b2 + 1e-9; z += .05){ full += `L${X(z).toFixed(1)} ${Y(pdf(z)).toFixed(1)}`; part += `L${X(z).toFixed(1)} ${Y(pdf(z), k).toFixed(1)}`; }
+      full += `L${X(b2).toFixed(1)} ${B}Z`; part += `L${X(b2).toFixed(1)} ${B}Z`;
+      g += `<path d="${full}" ${FS('panel-2', 'line', 1)}/><path d="${part}" ${F('glow', .75)}/>`;
+      if (!nw){ const cx = X((Math.max(a, -2.6) + Math.min(b2, 2.6)) / 2); g += wrap(cx, B + 20, name, 10, 14, 'text', 12, 'middle') + TX(cx, B + 50, Math.round(k * 100) + '% get it', 'glow', 12, 'middle'); } });
+    if (nw) SEG.forEach(([name, pc], j) => { const y = B + 30 + j * 30; g += `<rect x="${L}" y="${y - 12}" width="${(Rx - L - 120) * pass(j)}" height="16" rx="4" ${F('glow', .75)}/><rect x="${L}" y="${y - 12}" width="${Rx - L - 120}" height="16" rx="4" ${S('line', 1)}/>` + TX(Rx - 112, y + 1, `${name} ${Math.round(pass(j) * 100)}%`, 'text', 12); });
+    el.innerHTML = g;
+    const tot = SEG.reduce((s, x, j) => s + x[1] * pass(j), 0), lost = SEG.map((x, j) => [x[0], x[1] * (1 - pass(j))]).sort((p, q) => q[1] - p[1])[0];
+    $('#suA').textContent = Math.round(tot) + '%'; $('#suB').textContent = tot > 90 ? 'Hardly anyone' : lost[0] + ' (' + Math.round(lost[1]) + '% of the market)';
+    const n = Object.values(on).filter(Boolean).length;
+    cap.innerHTML = n === 0 ? `<b>Most of the market gets the value now.</b> Nothing in the way, so even the late majority reaches the point where the product helps them.`
+      : n >= 3 ? `<b>Innovators and early adopters push through; the majority doesn't.</b> The founder, an innovator, finds it all obvious, which is exactly why they can't see the problem. Group sizes follow Everett Rogers's diffusion model; how much each barrier costs is illustrative.`
+      : `Each barrier you remove helps the big middle groups most. <b>Clear the rest and watch the early and late majority fill in.</b>`; });
+  tg.querySelectorAll('[data-k]').forEach(x => x.addEventListener('change', () => { on[x.dataset.k] = x.checked; unpress(bs); draw(); }));
+  const setAll = ks => { BAR.forEach(([k]) => { on[k] = ks.includes(k); $('#su_' + k).checked = on[k]; }); draw(); };
+  const bs = presets('#suEx', [['The founder\'s first version', { ks: ['sign', 'inst', 'slow', 'geek'] }], ['Just the sign-up fixed', { ks: ['inst', 'slow', 'geek'] }], ['After watching ten newcomers', { ks: [] }]], v => setAll(v.ks));
+  draw();
+}
+
+/* ---------- 8: the PMF funnel ---------- */
+{ const el = $('#pf10'), C = $('#pfC'), Rr = $('#pfR'), cap = $('#pf10Cap');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 400 : 260, c = +C.value / 100, R = +Rr.value / 100; vb(el, W, H);
+    const ret = w => R + (1 - R) * Math.exp(-w / 1.6), conv = 1000 * c;
+    const steps = [['Downloaded', 1000], ['Got the value first time', conv], ['Still active, week 1', conv * ret(1)], ['Still active, month 1', conv * ret(4)], ['Still active, month 3', conv * ret(13)]];
+    let g = ''; const fw = nw ? W - 28 : 360, fx = 14;
+    steps.forEach(([n, v], i) => { const y = 16 + i * 40, w = Math.max(3, fw * v / 1000);
+      g += `<rect x="${fx}" y="${y + 14}" width="${w.toFixed(1)}" height="16" rx="4" ${F(i ? 'glow' : 'cool', i ? .5 + i * .1 : .8)}/>` + TX(fx, y + 9, n, 'text', 12.5) + TX(fx + fw, y + 9, fmtN(v), i === 4 ? 'glow' : 'muted', 12.5, 'end', i === 4 ? 'font-weight="600"' : ''); });
+    const gx = nw ? 30 : 420, gy = nw ? 230 : 30, gw = nw ? W - 50 : W - 440, gh = nw ? 130 : 180, X = w => gx + gw * w / 13, Y = v => gy + gh - gh * v;
+    g += `<line x1="${gx}" y1="${gy + gh}" x2="${gx + gw}" y2="${gy + gh}" ${S('line', 1)}/><line x1="${gx}" y1="${gy}" x2="${gx}" y2="${gy + gh}" ${S('line', 1)}/>`;
+    g += TX(gx, gy - 8, 'share of users still active', 'faint', 12) + TX(gx + gw, gy + gh + 16, '3 months', 'faint', 12, 'end') + TX(gx, gy + gh + 16, 'first use', 'faint', 12);
+    g += `<line x1="${gx}" y1="${Y(.3)}" x2="${gx + gw}" y2="${Y(.3)}" ${S('good', 1, ';stroke-dasharray:4 4')}/>` + TX(gx + gw - 2, Y(.3) - 5, 'illustrative bar', 'good', 11.5, 'end');
+    let p = ''; for (let w = 0; w <= 13; w += .25) p += (w ? 'L' : 'M') + X(w).toFixed(1) + ' ' + Y(ret(w)).toFixed(1);
+    g += `<path d="${p}" ${S('glow', 2.5)}/>`;
+    el.innerHTML = g; out('pfC', C.value + '%'); out('pfR', Rr.value + '%');
+    const kept = Math.round(conv * ret(13)); $('#pfA').textContent = fmtN(kept) + ' of 1,000';
+    $('#pfB').textContent = R >= .3 && c >= .4 ? 'Fit: the curve flattens' : R >= .3 ? 'Retention is fine; fix conversion' : c >= .4 ? 'They get it, then leave' : 'No fit yet';
+    cap.innerHTML = R < .08 && c > .5 ? `<b>A big launch where almost nobody stays</b>, like the Bump story: people try it, enjoy the trick, and don't need it again. Downloads hid the missing habit.`
+      : R >= .3 && c >= .4 ? `<b>The curve flattens:</b> a solid share of users keeps coming back. That's what product-market fit looks like. Now the business model is worth working on.`
+      : R >= .3 ? `<b>The people who get it, stay.</b> The leak is the first use. Levine would say fix conversion: remove the barriers before the value.`
+      : `<b>The curve slides towards zero.</b> Users aren't getting enough value to come back. Find the biggest drop in the funnel and fix that first. Numbers here are illustrative.`; });
+  const bs = presets('#pfEx', [['Viral toy: big launch, used rarely', { pfC: 75, pfR: 3 }], ['Useful but confusing', { pfC: 15, pfR: 38 }], ['Fit', { pfC: 60, pfR: 40 }]], draw);
+  [C, Rr].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 9: does the money work ---------- */
+{ const el = $('#mm11'), Pp = $('#mmP'), Mm = $('#mmM'), Cc = $('#mmC'), cap = $('#mm11Cap');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 240, P = +Pp.value, M = +Mm.value, C = +Cc.value, L = P * M, ratio = L / C; vb(el, W, H);
+    const mx = Math.max(L, C, 50), x0 = nw ? 14 : 150, Rx = W - (nw ? 14 : 30), bh = nw ? 34 : 38; let g = '';
+    const bar = (y, v, c, name) => (nw ? TX(x0, y - 8, name, 'text', 13) : TX(x0 - 12, y + bh / 2 + 5, name, 'text', 13, 'end')) + `<rect x="${x0}" y="${y}" width="${Math.max(3, (Rx - x0 - 70) * v / mx).toFixed(1)}" height="${bh}" rx="6" ${F(c, .85)}/>` + TX(x0 + Math.max(3, (Rx - x0 - 70) * v / mx) + 8, y + bh / 2 + 5, '$' + fmtN(v), 'text', 13, 'start', 'font-weight="600"');
+    g += bar(nw ? 40 : 30, L, 'glow', 'A customer is worth') + bar(nw ? 120 : 90, C, 'cool', 'Winning one costs');
+    const y3 = nw ? 200 : 160; g += TX(nw ? 14 : x0, y3, `Each $1 spent winning customers brings back $${ratio.toFixed(ratio < 10 ? 1 : 0)}`, ratio >= 3 ? 'good' : ratio >= 1 ? 'text' : 'bad', nw ? 13 : 14, 'start', 'font-weight="600"');
+    g += nw ? wrap(14, y3 + 34, 'Many founders aim for about 3 dollars back for every 1 spent; that rule of thumb is common practice, not the book\'s.', 46, 16, 'faint', 12, 'start') : TX(x0, y3 + 24, 'Rule of thumb, not from the book: aim for about $3 back per $1.', 'faint', 12);
+    el.innerHTML = g; out('mmP', '$' + P); out('mmM', M + (M === 1 ? ' month' : ' months')); out('mmC', '$' + C);
+    $('#mmL').textContent = '$' + fmtN(L); $('#mmA').textContent = '$' + fmtN(C); $('#mmR').textContent = '$' + ratio.toFixed(1);
+    cap.innerHTML = ratio < 1 ? `<b>Every new customer loses money.</b> Growing faster would only lose it faster. Raise the price, keep customers longer, or find a cheaper way to win them, usually word of mouth.`
+      : ratio < 3 ? `<b>It works, just.</b> There's not much room for the costs of running the company. Try a higher price or better retention, and test both for real.`
+      : `<b>The model works:</b> customers bring back several times what they cost. Now growth can pay for itself.`; });
+  const bs = presets('#mmEx', [['Consumer app paying for ads', { mmP: 4, mmM: 6, mmC: 60 }], ['Business tool', { mmP: 40, mmM: 30, mmC: 300 }], ['Free for users, advertisers pay', { mmP: 1, mmM: 36, mmC: 5 }]], draw);
+  [Pp, Mm, Cc].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 10: word of mouth or paid ---------- */
+{ const el = $('#gw12'), K = $('#gwK'), Bd = $('#gwB'), Xc = $('#gwX'), cap = $('#gw12Cap'), MK = 2e9, MO = 60;
+  function sim(){ const k = +K.value / 100, b = +Bd.value * 1000, x = +Xc.value / 100; let w = 1e4, p = 0; const h = [[w, p]];
+    for (let m = 1; m <= MO; m++){ const U = w + p, room = Math.max(0, 1 - U / MK), nw2 = U * k * room, np = b * room; w = w * (1 - x) + nw2; p = p * (1 - x) + np; h.push([w, p]); } return h; }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 260, L = nw ? 48 : 60, Rx = W - 14, T = 16, B = H - 36, h = sim(); vb(el, W, H);
+    const lo = 3, hi = 9.5, X = m => L + (Rx - L) * m / MO, Y = v => B - (B - T) * (Math.log10(Math.max(v, 1e3)) - lo) / (hi - lo); let g = '';
+    [[1e3, '1,000'], [1e6, '1 million'], [1e9, '1 billion']].forEach(([v, t]) => g += `<line x1="${L}" y1="${Y(v)}" x2="${Rx}" y2="${Y(v)}" ${S('line', 1, ';stroke-dasharray:2 5')}/>` + TX(L - 6, Y(v) + 4, nw ? t.replace(' million', 'm').replace(' billion', 'bn') : t, 'faint', 11.5, 'end'));
+    for (let m = 0; m <= MO; m += 12) g += TX(X(m), B + 18, m ? 'year ' + m / 12 : 'start', 'faint', nw ? 12 : 11.5, m === MO ? 'end' : m ? 'middle' : 'start');
+    const path = f => h.map((v, m) => (m ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(f(v)).toFixed(1)).join('');
+    g += `<path d="${path(v => v[1])}" ${S('cool', 2)}/><path d="${path(v => v[0])}" ${S('glow', 2, ';stroke-dasharray:5 4')}/><path d="${path(v => v[0] + v[1])}" ${S('text', 2.5)}/>`;
+    g += TX(L + 8, T + 14, 'all active users', 'text', 12.5, 'start', 'font-weight="600"') + TX(L + 8, T + 30, 'from word of mouth', 'glow', 12.5) + TX(L + 8, T + 46, 'from ads', 'cool', 12.5);
+    el.innerHTML = g; out('gwK', (+K.value / 100).toFixed(2)); out('gwB', fmtN(+Bd.value * 1000)); out('gwX', Xc.value + '%');
+    const [w, p] = h[MO], U = w + p, k = +K.value / 100, x = +Xc.value / 100;
+    $('#gwA').textContent = big(U); $('#gwB2').textContent = U ? Math.round(w / U * 100) + '%' : '–';
+    cap.innerHTML = k > x ? `<b>Word of mouth outruns churn</b>, so growth compounds without paying for each user${U > 5e8 ? ', and heads towards a billion' : ''}. That's how Waze grew: each driver brought others and made the map better for them.`
+      : +Bd.value > 0 ? `<b>Ads keep filling a leaking bucket.</b> When people leave faster than they bring friends, users settle at a level set by the ad budget and fall the day it stops. Fix retention first.`
+      : `<b>Users fade away.</b> More leave each month than arrive. Without word of mouth, nothing else here brings people in. An illustrative model.`; });
+  const bs = presets('#gwEx', [['Worth talking about', { gwK: 22, gwB: 0, gwX: 6 }], ['Bought growth, leaky product', { gwK: 3, gwB: 20, gwX: 30 }], ['Both, with low churn', { gwK: 14, gwB: 10, gwX: 4 }]], draw);
+  [K, Bd, Xc].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 11: one country or ten ---------- */
+{ const el = $('#gg13'), N = $('#ggN'), tg = $('#ggTg'), cap = $('#gg13Cap');
+  const DIF = [1, 1.3, .9, 1.6, 1.1, 1.4, .8, 1.8, 1.2, 1.5], TOT = 120, NEED = 30;
+  const on = { part: false, comm: false };
+  tg.innerHTML = [['part', 'Local partners in each market'], ['comm', 'A community of local volunteers']].map(([k, l]) => `<label class="tg" for="gg_${k}"><input type="checkbox" id="gg_${k}" data-k="${k}"><span>${l}</span></label>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 250, n = +N.value, L = 34, Rx = W - 14, T = 20, B = H - 40; vb(el, W, H);
+    const eff = TOT / n * (on.part ? 1.4 : 1), need = i => NEED * DIF[i] * (on.comm ? .7 : 1), mx = 1.6, bw = (Rx - L) / 10; let g = '', tip = 0, waste = 0;
+    const Y = v => B - (B - T) * Math.min(v, mx) / mx;
+    g += `<line x1="${L}" y1="${Y(1)}" x2="${Rx}" y2="${Y(1)}" ${S('good', 1.5, ';stroke-dasharray:5 4')}/>` + TX(Rx, Y(1) - 6, 'critical mass', 'good', 12, 'end');
+    for (let i = 0; i < 10; i++){ const x = L + i * bw + 4, active = i < n, pr = active ? eff / need(i) : 0, ok = pr >= 1;
+      if (active){ if (ok) tip++; else waste += eff; }
+      g += active ? `<rect x="${x.toFixed(1)}" y="${Y(pr).toFixed(1)}" width="${(bw - 8).toFixed(1)}" height="${(B - Y(pr)).toFixed(1)}" rx="4" ${F(ok ? 'glow' : 'cool', ok ? .9 : .5)}/>` : `<rect x="${x.toFixed(1)}" y="${B - 4}" width="${(bw - 8).toFixed(1)}" height="4" rx="2" ${F('line')}/>`;
+      if (ok && pr > mx - .01) g += TX(x + (bw - 8) / 2, T + 14, '↑', 'glow', 13, 'middle');
+      g += TX(x + (bw - 8) / 2, B + 16, String(i + 1), active ? 'text' : 'faint', 12, 'middle'); }
+    g += TX((L + Rx) / 2, B + 34, 'markets, in the order you\'d pick them', 'faint', nw ? 12 : 11.5, 'middle');
+    el.innerHTML = g; out('ggN', n);
+    $('#ggA').textContent = tip + ' of ' + n; $('#ggB').textContent = Math.round(waste / (eff * n) * 100) + '%';
+    cap.innerHTML = tip === n ? `<b>Every market you entered tips</b> and starts growing by itself. Concentrated effort, or local help, gets each one over the line.`
+      : tip === 0 ? `<b>Not one market tips.</b> The same effort spread over ${n} places leaves all of them below the point where a product like Waze becomes useful. Fewer markets, or local partners and communities, fix it.`
+      : `<b>${tip} of ${n} markets tip</b>; the effort in the rest is mostly wasted until they get more. Each bar is effort over what that market needs; the numbers are illustrative.`; });
+  tg.querySelectorAll('[data-k]').forEach(x => x.addEventListener('change', () => { on[x.dataset.k] = x.checked; unpress(bs); draw(); }));
+  const bs = presets('#ggEx', [['Home plus two', { ggN: 3, part: false, comm: false }], ['Ten at once', { ggN: 10, part: false, comm: false }], ['Five, with partners and a community', { ggN: 5, part: true, comm: true }]], v => { on.part = v.part; on.comm = v.comm; $('#gg_part').checked = v.part; $('#gg_comm').checked = v.comm; draw(); });
+  N.addEventListener('input', () => { unpress(bs); draw(); });
+  draw();
+}
+
+/* ---------- 12: sell now or keep going ---------- */
+{ const el = $('#ex14'), O = $('#exO'), V = $('#exV'), Pp = $('#exP'), Yy = $('#exY'), cap = $('#ex14Cap');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 290 : 220, o = +O.value, v = +V.value, p = +Pp.value / 100, y = +Yy.value, fut = p * v / Math.pow(1.15, y); vb(el, W, H);
+    const mx = Math.max(o, fut, v * p, 100) * 1.08, x0 = nw ? 14 : 190, Rx = W - (nw ? 14 : 20), bh = 32; let g = '';
+    const bar = (yy, val, c, name, fo = .85) => { const w = Math.max(3, (Rx - x0 - 110) * val / mx); return (nw ? TX(x0, yy - 8, name, 'text', 13) : TX(x0 - 12, yy + bh / 2 + 5, name, 'text', 13, 'end')) + `<rect x="${x0}" y="${yy}" width="${w.toFixed(1)}" height="${bh}" rx="6" ${F(c, fo)}/>` + TX(x0 + w + 8, yy + bh / 2 + 5, money(Math.round(val)), 'text', 13, 'start', 'font-weight="600"'); };
+    g += bar(nw ? 30 : 20, o, 'cool', 'The offer today') + bar(nw ? 100 : 80, v * p, 'glow', 'Future × chance', .4) + bar(nw ? 170 : 140, fut, 'glow', 'Same, in today\'s money');
+    g += nw ? wrap(14, H - 40, 'Future value × chance it works, then discounted 15% a year for the wait.', 46, 16, 'faint', 12, 'start') : TX(x0, H - 14, 'Future value × chance it works, then discounted 15% a year for the wait.', 'faint', 12);
+    el.innerHTML = g; out('exO', money(o)); out('exV', money(v)); out('exP', Math.round(p * 100) + '%'); out('exY', y + (y === 1 ? ' year' : ' years'));
+    $('#exA').textContent = money(o); $('#exB').textContent = money(Math.round(fut));
+    const r = fut / o; $('#exC').textContent = r > 1.3 ? 'Keep going' : r < .77 ? 'Take the offer' : 'Too close to call';
+    cap.innerHTML = r > 1.3 ? `<b>Carrying on is worth more on these numbers</b>, even after the risk and the wait. But check the chance honestly: founders tend to rate their own odds high.`
+      : r < .77 ? `<b>The offer beats the risk-adjusted future.</b> A bigger dream that may not happen, years away, is worth less today. Numbers are illustrative, not Waze's.`
+      : `<b>Too close for the numbers to decide.</b> This is where the things this model leaves out decide it: the team, the product's future inside the buyer, and what the founders want next.`; });
+  const bs = presets('#exEx', [['A strong offer, a hard road', { exO: 1100, exV: 5000, exP: 25, exY: 5 }], ['Early, with momentum', { exO: 200, exV: 3000, exP: 40, exY: 4 }], ['A small offer for a near-sure thing', { exO: 300, exV: 1000, exP: 80, exY: 2 }]], draw);
+  [O, V, Pp, Yy].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- happylogue: problem-lover or solution-lover ---------- */
+sorter('#sort15', '#tally15', [{ id: 'prob', label: 'Loves the problem', d: 'Loyal to the pain, flexible on the fix' }, { id: 'sol', label: 'Loves the solution', d: 'Loyal to the idea, whatever users do' }], [
+  { t: '"Users keep skipping our clever feature. Let\'s make it more prominent until they get it."', q: true, a: 'sol', w: 'Pushing the feature harder protects the idea. A problem-lover would ask why users don\'t need it.' },
+  { t: '"Retention is poor. Let\'s watch ten new users and find where the value gets lost."', q: true, a: 'prob', w: 'Starting from the users\' experience of the problem is exactly the habit Levine recommends.' },
+  { t: '"Our pitch opens with the architecture, because that\'s what makes us special."', q: true, a: 'sol', w: 'Levine says to open with the problem. If listeners recognise it, they\'ll care about how you solve it.' },
+  { t: '"The app isn\'t working, but commuters still waste an hour a day. Let\'s try a different approach."', q: true, a: 'prob', w: 'The problem stays; the solution changes. That\'s the whole book in one sentence.' },
+  { t: '"We\'ve built it; now we just need marketing to tell people why they want it."', q: true, a: 'sol', w: 'If people need to be told they have the problem, they may not have it badly enough.' },
+  { t: '"Before we build anything, let\'s describe the problem to a hundred people and listen."', q: true, a: 'prob', w: 'Many conversations before building is Levine\'s advice for testing whether a problem is big and shared.' },
+  { t: '"We\'ll keep version one exactly as designed; users will come round to it."', q: true, a: 'sol', w: 'Attachment to the first design is the trap the title warns about.' } ]);
+
+/* ---------- afterword: the problem journal ---------- */
+{ const list = $('#pjList'); let log = store.get('flp-journal', []);
+  const save = () => store.set('flp-journal', log);
+  function draw(){
+    if (!log.length){ list.innerHTML = '<span class="k">Your journal</span><p class="tip">Nothing here yet. Add a problem you\'ve noticed, then each time you describe it to someone, log it, and log whether they said "yes, that happens to me".</p>'; return; }
+    const ok = log.filter(e => e.ok).length;
+    list.innerHTML = `<span class="k">Your journal · ${log.length} problem${log.length === 1 ? '' : 's'}${ok ? ' · ' + ok + ' validated' : ''}</span>` +
+      log.map(e => { const pc = e.asked ? Math.round(e.yes / e.asked * 100) : 0; return `<div class="pj${e.ok ? ' ok' : ''}"><div class="pj-h"><b>${esc(e.prob)}</b><button class="rm" type="button" data-rm="${e.id}" aria-label="Remove this problem">×</button></div>${e.who ? `<p><span>Who</span>${esc(e.who)}</p>` : ''}${e.oft ? `<p><span>How often</span>${esc(e.oft)}</p>` : ''}
+        <div class="pj-bar" aria-hidden="true"><i style="width:${pc}%"></i></div><span class="meta">Asked ${e.asked} · said "that's me" ${e.yes}${e.asked ? ' · ' + pc + '%' : ''}</span>
+        <div class="row"><button class="btn" type="button" data-ask="${e.id}">+ Told someone</button><button class="btn" type="button" data-yes="${e.id}">+ They said "that's me"</button>${e.ok ? `<span class="tag ok">Validated</span><button class="btn" type="button" data-ok="${e.id}">Undo</button>` : `<button class="btn" type="button" data-ok="${e.id}">Mark validated</button>`}</div></div>`; }).join('');
+    const find = id => log.find(x => x.id === id);
+    list.querySelectorAll('[data-ask]').forEach(b => b.addEventListener('click', () => { find(b.dataset.ask).asked++; save(); draw(); }));
+    list.querySelectorAll('[data-yes]').forEach(b => b.addEventListener('click', () => { const e = find(b.dataset.yes); e.yes++; if (e.yes > e.asked) e.asked = e.yes; save(); draw(); }));
+    list.querySelectorAll('[data-ok]').forEach(b => b.addEventListener('click', () => { const e = find(b.dataset.ok); e.ok = !e.ok; save(); draw(); }));
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { log = log.filter(x => x.id !== b.dataset.rm); save(); draw(); }));
+  }
+  $('#pjAdd').addEventListener('click', () => { const prob = $('#pjProb').value.trim(), msg = $('#pjMsg');
+    if (!prob){ msg.textContent = 'Write the problem first.'; $('#pjProb').focus(); return; }
+    log.unshift({ id: Date.now().toString(36), prob, who: $('#pjWho').value.trim(), oft: $('#pjOft').value.trim(), asked: 0, yes: 0, ok: false }); save();
+    ['#pjProb', '#pjWho', '#pjOft'].forEach(s => $(s).value = ''); msg.textContent = 'Added. Now go and describe it to people.'; draw(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
