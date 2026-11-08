@@ -1,0 +1,1392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Siddhartha, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a river at dusk. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, from the book,
+   a lab, plain words, quick check), grouped into the seeker, the world and the river.
+   Dark-first: deep river teal with a saffron-robe accent and a pale water-blue second series; light mode is warm paper with burnt saffron. */
+:root{
+  color-scheme: dark;
+  --ink:#0B1A1D;--panel:#11252A;--panel-2:#183139;--line:#28474F;--text:#EEF4F1;--muted:#A9BDB9;--faint:#7A948F;
+  --glow:#F2A93B;--glow-soft:rgba(242,169,59,.11);--hl:rgba(242,169,59,.26);--cool:#86CFE0;--cool-soft:rgba(134,207,224,.1);
+  --good:#9BDE9A;--good-soft:rgba(155,222,154,.1);--bad:#FF8E80;--bad-soft:rgba(255,142,128,.12);
+  --soft:#D3E0DD;--deep:#081316;--toc-bg:rgba(17,37,42,.74);--glow-line:rgba(242,169,59,.36);--cool-line:rgba(134,207,224,.3);--on-glow:#241300;
+  --leaf:#6FBF73;--earth:#9B7B55;--sky:#3E6E8C;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F6F1E6;--panel:#FFFFFF;--panel-2:#EEE7D9;--line:#DCD2C0;--text:#13262A;--muted:#4F6265;--faint:#829093;
+  --glow:#A4560A;--glow-soft:rgba(164,86,10,.06);--hl:#F6DDBE;--cool:#1F6F82;--cool-soft:rgba(31,111,130,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#22393E;--deep:#FBF8F1;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(164,86,10,.3);--cool-line:rgba(31,111,130,.26);--on-glow:#FFFFFF;
+  --leaf:#3F8A45;--earth:#8A6A44;--sky:#9CC3D8;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F6F1E6;--panel:#FFFFFF;--panel-2:#EEE7D9;--line:#DCD2C0;--text:#13262A;--muted:#4F6265;--faint:#829093;
+  --glow:#A4560A;--glow-soft:rgba(164,86,10,.06);--hl:#F6DDBE;--cool:#1F6F82;--cool-soft:rgba(31,111,130,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#22393E;--deep:#FBF8F1;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(164,86,10,.3);--cool-line:rgba(31,111,130,.26);--on-glow:#FFFFFF;
+  --leaf:#3F8A45;--earth:#8A6A44;--sky:#9CC3D8;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Siddhartha additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.path{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.path-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.path-top output{font-family:var(--f-display);font-size:22px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1;text-align:right}
+.path svg{display:block;width:100%;height:auto}
+.path-ctl{display:grid;gap:6px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.path-ctl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.path-ctl p{font-size:14px;color:var(--soft);min-height:42px}
+.path-ctl a{font-size:13.5px}
+.after .big{max-width:56ch;font-size:clamp(20px,2.6vw,25px)}
+.lg-item{display:grid;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.lg-item .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.lg-item .k.s{color:var(--cool)}
+.lg-item .k.w{color:var(--glow)}
+.lg-item .k.r{color:var(--good)}
+.lg-item p{font-size:14.5px}
+.lg-item p.told{color:var(--muted)}
+.lg-item p.told::before{content:"Told: ";color:var(--faint)}
+.lg-item p.lived::before{content:"Lived: ";color:var(--glow)}
+.lg-item button{justify-self:start;font:inherit;font-size:12px;color:var(--faint);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+@media (max-width: 560px){ .fq{padding:14px 16px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to Hermann Hesse's novel</div>
+    <h1><em>Siddhartha</em>,<br>Explained</h1>
+    <p class="lede">A brilliant young Brahmin in ancient India walks away from his father, the forest ascetics and even the Buddha, because he believes peace is something no one can teach. Hermann Hesse's short novel <b>Siddhartha</b> follows him through the whole arc of a life: the hunger of the seeker, twenty years of love, money and gambling in the city, despair at the edge of a river, and the slow, quiet wisdom he learns from a ferryman and the water itself. This guide takes each of its twelve chapters in turn, with a lab in every one where you can try the idea.</p>
+    <blockquote class="fq" aria-label="The book in one line"><p>Knowledge can be passed on. <em>Wisdom has to be lived</em>, and the river is patient enough to wait for you.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you searching for?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="path" style="margin:0" aria-label="The river of his life">
+        <div class="path-top"><span>The river of his life</span><output id="pathV"></output></div>
+        <svg id="pathSvg" role="img" aria-label="A winding river with the twelve chapters of Siddhartha's life along it"></svg>
+        <div class="path-ctl"><label for="pathR">Boyhood <span>Old age</span></label><input type="range" id="pathR" min="1" max="12" value="1"><p id="pathTxt" aria-live="polite"></p></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Part one · chapters 1 to 4</span><span class="q">The Seeker</span><span class="d">Leaving home, the ascetics, the Buddha and an awakening</span></a>
+      <a href="#part2"><span class="n">Part two · chapters 5 to 8</span><span class="q">The World</span><span class="d">Kamala, the merchant's life, the slow slide and the river's edge</span></a>
+      <a href="#part3"><span class="n">Part two · chapters 9 to 12</span><span class="q">The River</span><span class="d">The ferryman, the son, Om and a last meeting with Govinda</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> in 1922, in German</span>
+      <span><b>Author</b> Hermann Hesse, German-Swiss novelist and poet, winner of the 1946 Nobel Prize in Literature</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 12 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE SEEKER ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · chapters 1 to 4</span>
+      <h2>The Seeker</h2>
+      <p>Siddhartha has everything a young man in his world could want: a wise father, a devoted friend, a gift for learning and the love of everyone around him. None of it settles the restlessness inside him. Part one follows him out of his father's house, into the forest with the ascetics, to the feet of the Buddha himself, and out the other side with one decision: he will stop looking for answers in teachers.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Nobody can hand you peace. Teachings can point the way, but the way itself has to be walked by you.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Everyone's favourite, and still thirsty</div>
+        <h2>The Brahmin's Son</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha is the gifted son of a Brahmin priest. He studies, meditates and debates brilliantly, and everyone expects him to become a great teacher. But he notices that his father and the other wise men, for all their learning, don't seem to have found peace. He decides to leave and join the wandering ascetics, and he stands all night until his father lets him go.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A full cup that still feels empty.</b> He has the scriptures, the rituals and the love of his parents. They fill his head, but they don't reach the restlessness underneath.</span></li>
+          <li><span><b>Second-hand wisdom.</b> The holy books talk beautifully about the self inside every person. Siddhartha wants to know where anyone has actually found it, not just described it.</span></li>
+          <li><span><b>The admirer and the seeker.</b> His friend Govinda loves him and wants to follow wherever he goes. That difference between following and seeking runs through the whole book.</span></li>
+          <li><span><b>Quiet, total resolve.</b> He doesn't argue with his father. He simply stands, arms folded, from evening to dawn, until it is clear that his body is still at home but his spirit has already left.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Siddhartha tells his father he wants to join the Samanas, the old man is displeased and refuses. Siddhartha says nothing more. He stays standing in the room. His father goes to bed but can't sleep, and every hour he gets up and looks through the window: Siddhartha is still standing there, as the moon rises and the stars move. At dawn the father sees his son's knees trembling but his face unchanged, and understands that he has already lost him. He gives his blessing and asks only that Siddhartha come back and teach him if he finds bliss.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: the vessel that won't fill</div><div class="hint">Pour in everything his world offers</div></div>
+        <div class="stage"><svg id="vsSvg" role="img" aria-label="A vessel filling with knowledge while a second gauge for peace stays low"></svg></div><div class="lab-ctl"><div class="row" id="vsPick"></div><div class="row"><button class="btn" type="button" id="vsReset">Empty it again</button></div></div><div class="stats"><div class="stat"><span class="k">Knowledge</span><span class="v" id="vsK">0%</span></div><div class="stat"><span class="k">Peace</span><span class="v glow" id="vsP">0%</span></div><div class="stat"><span class="k">What he notices</span><span class="s" id="vsS"></span></div></div><p class="callout">Every gift raises one gauge and barely touches the other. <b>Siddhartha's discovery is that learning about peace and having it are two different containers.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of something you have read a lot about but never actually done. Notice the difference between knowing the description and knowing the thing.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: With the Samanas →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Running from the self</div>
+        <h2>With the Samanas</h2>
+        <div class="short"><span class="lbl">In short</span><p>For three years Siddhartha lives with the Samanas, wandering ascetics who fast, go without sleep and train themselves to feel no pain. He becomes skilled at leaving his self behind: he imagines himself into a heron, a dead jackal, a stone. But every time, he wakes up as Siddhartha again. He realises that self-denial is just a slower way of escaping, and that the oldest Samana, after sixty years, still hasn't arrived.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Discipline is not arrival.</b> He learns to fast for weeks and ignore pain. These are real skills, but none of them changes the one who keeps coming back.</span></li>
+          <li><span><b>Every escape is temporary.</b> He loses himself in meditation, in breath, in imagined animals. Each journey ends at the same starting point: himself.</span></li>
+          <li><span><b>The drinker does the same.</b> Siddhartha tells Govinda that a drunk in a tavern also escapes his self for a few hours. The Samanas just do it with more effort and less fun.</span></li>
+          <li><span><b>A path can become a circle.</b> If the oldest teacher hasn't reached the goal in sixty years, maybe this road doesn't go there at all.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Siddhartha and Govinda hear a rumour about a man called Gotama, the Buddha, who is said to have overcome suffering. When they tell the oldest Samana they are leaving to hear him, the old man is furious. Siddhartha steps close, catches his eye and holds his gaze until the old man goes silent, bows and gives them his blessing. Govinda is amazed. Siddhartha shrugs it off: it is the kind of trick he learnt here, and it is exactly the kind of thing that doesn't lead anywhere.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: escape and return</div><div class="hint">Pick a practice and send the self away</div></div>
+        <div class="stage"><svg id="erSvg" role="img" aria-label="A path leaving the self and looping back to it"></svg></div><div class="lab-ctl"><div class="row" id="erPick"></div><div class="row"><button class="btn primary" type="button" id="erGo">Leave the self →</button></div></div><div class="stats"><div class="stat"><span class="k">Journeys made</span><span class="v" id="erN">0</span></div><div class="stat"><span class="k">Times he came back as Siddhartha</span><span class="v glow" id="erB">0</span></div><div class="stat"><span class="k">Where he went</span><span class="s" id="erS"></span></div></div><p class="callout">Hard practice or a jug of wine: the loop has the same shape. <b>Escaping the self for an hour isn't the same as understanding it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Notice the ways you take a break from yourself: scrolling, a drink, even a hard workout. They can be fine, but ask whether you come back any wiser, or just come back.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Gotama →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · The perfect teaching, and the gap in it</div>
+        <h2>Gotama</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha and Govinda find the Buddha in a grove near the city and hear him teach. Govinda joins his monks at once. Siddhartha is moved by Gotama's calm and agrees the teaching is flawless, but he leaves anyway. He tells the Buddha that what Gotama found came from his own experience, and no teaching can pass that on. Gotama warns him gently against being too clever, and Siddhartha walks away alone.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>He believes the teacher.</b> Siddhartha never doubts that Gotama has found peace. You can see it in the way he walks, sits and smiles.</span></li>
+          <li><span><b>A teaching is not the experience.</b> Gotama reached enlightenment by his own search, not by hearing a sermon. Siddhartha concludes that he has to do the same.</span></li>
+          <li><span><b>Losing a friend, gaining himself.</b> Govinda finally steps out of Siddhartha's shadow and chooses his own path. Siddhartha feels the loss, and feels that the Buddha has given him himself in exchange.</span></li>
+          <li><span><b>The danger of cleverness.</b> Gotama's warning is fair. Siddhartha's sharp mind is both what drives him on and what gets in his way.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>In their conversation, Siddhartha praises the teaching as a perfect, unbroken chain of cause and effect that explains the whole world. There is just one place where the chain breaks, he says: the step where you leave the world behind and are released. That step can't be explained. It can only be lived. Gotama listens without anger and answers that his teaching isn't meant to explain the world to people who are curious, but to release them from suffering. As Siddhartha leaves, he thinks that he has never seen anyone look and smile like that, and that he too wants to become someone who can.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: the follower and the seeker</div><div class="hint">Choose a path out of the grove</div></div>
+        <div class="stage"><svg id="fsSvg" role="img" aria-label="Two paths leaving a grove, one with the monks and one alone"></svg></div><div class="lab-ctl"><div class="row" id="fsPick"></div></div><div class="detail" aria-live="polite"><span class="k" id="fsK"></span><span class="h" id="fsH"></span><p id="fsP"></p></div><p class="callout">Neither path is wrong. <b>Govinda gets a teacher and a home. Siddhartha gets nothing but his own experience, which is the one thing he can't be given.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Respect your teachers, but don't confuse their insight with your own. The test is whether something is true for you, not whether it was well said.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Awakening →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · The world comes back into colour</div>
+        <h2>Awakening</h2>
+        <div class="short"><span class="lbl">In short</span><p>Walking away from the grove, Siddhartha has a realisation. All this time he tried to find his true self by escaping his ordinary self, and he ended up knowing nothing about either. He decides to stop running and learn from himself. At that moment the world, which his teachers had called an illusion, suddenly looks real and beautiful: the river, the sky, the forest, the birds. He also feels completely alone.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>He was studying an empty room.</b> To reach the deep self, he had been tearing the surface self away. What he wanted to know about was the very thing he kept discarding.</span></li>
+          <li><span><b>Stop looking past the world.</b> For his teachers, colours and shapes were a veil to see through. Now he sees that the surface is where meaning lives too.</span></li>
+          <li><span><b>No going back.</b> He realises he can't return home to his father either. The young Brahmin is gone, like a snake's old skin.</span></li>
+          <li><span><b>Loneliness, then a step.</b> For a moment he feels icy and alone, with no caste, no teacher and no friend. Then he starts walking, faster, into his new life.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Hesse describes Siddhartha looking around as if seeing the world for the first time: blue and yellow and green, the river flowing, the forest standing. It is all beautiful and strange, and it is no longer something to explain away. He had been so busy reading the hidden meaning in things that he hadn't noticed the letters themselves. Then the cold comes. Everyone else belongs somewhere: a Brahmin to the priests, a monk to the order. He belongs to nothing. He shivers, and then he moves on.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: lifting the veil</div><div class="hint">Drag from looking through the world to looking at it</div></div>
+        <div class="stage"><svg id="awSvg" role="img" aria-label="A riverside scene that fills with colour"></svg></div><div class="lab-ctl"><div class="ctl"><label for="awR">How he sees it <output id="awO"></output></label><input type="range" id="awR" min="0" max="10" value="0"></div></div><div class="stats"><div class="stat"><span class="k">Things he notices</span><span class="v glow" id="awN"></span></div><div class="stat"><span class="k">What he thinks</span><span class="s" id="awS"></span></div></div><p class="callout">The scene doesn't change. <b>What changes is whether he treats it as a disguise to see through or a world to see.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Take five minutes today to look at something ordinary without trying to make it mean anything. Just look at it.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Kamala →</a></div>
+    </section>
+    <!-- ===================== THE WORLD ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · chapters 5 to 8</span>
+      <h2>The World</h2>
+      <p>Having turned away from teachers, Siddhartha turns towards life. He learns love from Kamala, trade from the merchant Kamaswami, and slowly, without noticing, he learns greed, gambling and boredom too. Twenty years later he walks out of the city sick of himself and ends up at the edge of a river, ready to die.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>You can't think your way past the world. Sometimes you have to sink into it fully before you can see what it was teaching you.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · I can think, I can wait, I can fast</div>
+        <h2>Kamala</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha crosses a river with a kind ferryman, who takes him for free and says the river has taught him that everything comes back. In the next town he sees Kamala, a famous courtesan, and decides she will be his teacher in love. She laughs at the dusty ascetic: he needs clothes, shoes and money first. What can he offer? He says he can think, wait and fast. She sends him to a rich merchant.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A new kind of teacher.</b> After priests and monks, he chooses a woman who knows the art of love. He is as serious about learning from her as he was about the Vedas.</span></li>
+          <li><span><b>Three plain skills.</b> Thinking, waiting and fasting sound useless in a city. Kamala soon sees they are what make him free: he never has to act out of panic or hunger.</span></li>
+          <li><span><b>The ferryman's hint.</b> Without fuss, the ferryman says the river has taught him that everything returns. Siddhartha promises to come back. He will, decades later.</span></li>
+          <li><span><b>A fair trade.</b> He writes Kamala a poem and gets a kiss. She agrees to teach him once he can come to her dressed well and bearing gifts.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Kamala asks the question every city asks: what can you do? Siddhartha's answer is the heart of the chapter. A person who can't fast has to take any job offered because hunger forces him to. A person who can't wait has to accept the first price. A person who can't think gets pushed around by others. He can do all three, so he can afford to choose. Kamala is charmed. She tells him the merchant Kamaswami needs someone clever, and that he should go and see him the next day.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the one who can wait</div><div class="hint">Set how long you can hold out, then go to market</div></div>
+        <div class="stage"><svg id="twSvg" role="img" aria-label="A chart of offers over the days, and where you accept"></svg></div><div class="lab-ctl"><div class="ctl"><label for="twR">How many days you can wait and fast <output id="twO"></output></label><input type="range" id="twR" min="0" max="10" value="0"></div><div class="row"><button class="btn" type="button" id="twNew">A new market</button></div></div><div class="stats"><div class="stat"><span class="k">Offer you accept</span><span class="v glow" id="twA"></span></div><div class="stat"><span class="k">Best offer that came</span><span class="v" id="twB"></span></div><div class="stat"><span class="k">Why you said yes</span><span class="s" id="twS"></span></div></div><p class="callout">An illustrative model, not numbers from the book. <b>The one who must eat today takes today's price. The one who can wait gets to choose.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Being able to go without, for a while, is a kind of power. Fewer needs means fewer bad deals made out of fear.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Amongst the people →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Playing the game of the world</div>
+        <h2>Amongst the People</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha goes to work for Kamaswami and becomes good at trade, but he treats it as a game. When a deal falls through, he shrugs. When he travels to buy a rice harvest that has already been sold, he stays on to enjoy the villagers' company. He sees the townspeople as children, wrapped up in money, worry and small pleasures. Kamala tells him he is like her: neither of them can truly love.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Playing, not living.</b> Business is a game to him. He enjoys it, he is good at it, and none of it touches him.</span></li>
+          <li><span><b>Calm, because nothing matters.</b> Kamaswami frets over every loss. Siddhartha stays calm, but partly because he doesn't care. Detachment and indifference look alike from the outside.</span></li>
+          <li><span><b>The childlike people.</b> He looks down, kindly, on people who suffer over money and status. He envies them one thing: they feel things fully.</span></li>
+          <li><span><b>A wall around the heart.</b> Kamala sees it first. They are both skilled lovers, but neither gives themselves away. Their love is an art, not a surrender.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Kamaswami sends Siddhartha to a village to buy a big rice harvest. By the time he arrives it has been sold to another trader. Siddhartha doesn't mind. He stays for days, giving the children coins, talking with the farmers, joining a wedding. Back in town, Kamaswami scolds him for wasting time and money. Siddhartha answers cheerfully that he had a good trip, made friends and learnt things, and that if Kamaswami thinks he does harm, he can say so and Siddhartha will go. Kamaswami, who needs him, says nothing.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: two merchants, one bad week</div><div class="hint">Send each event through and compare the reactions</div></div>
+        <div class="stage"><svg id="tmSvg" role="img" aria-label="Two worry gauges, Kamaswami's and Siddhartha's"></svg></div><div class="lab-ctl"><div class="row" id="tmPick"></div></div><div class="detail" aria-live="polite"><span class="k" id="tmK"></span><span class="h" id="tmH"></span><p id="tmP"></p></div><p class="callout">Siddhartha's calm looks like wisdom. <b>Look closer and it is also distance: he can't be hurt because he hasn't really joined in.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Not caring can look a lot like being at peace. One way to tell them apart is to ask whether you are still connected to the people and things around you.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Samsara →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · The slow slide</div>
+        <h2>Samsara</h2>
+        <div class="short"><span class="lbl">In short</span><p>Years pass. Little by little Siddhartha takes on the habits of the people he once looked down on: rich food, wine, dancing girls, and above all gambling, where he bets huge sums to feel anything at all. The inner voice that once guided him grows faint. One night he dreams that Kamala's rare songbird lies dead in its golden cage. He wakes up disgusted with himself, walks out of his garden and never comes back.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Nobody falls all at once.</b> No single day ruins him. The world seeps in slowly, a habit and a pleasure at a time, until the person he was is barely there.</span></li>
+          <li><span><b>He becomes what he mocked.</b> He catches the townspeople's greed, worry and fear of losing what they own, only without their real joy.</span></li>
+          <li><span><b>The voice goes quiet.</b> The inner voice that had once told him to leave home and leave the Buddha now rarely speaks. He has stopped listening.</span></li>
+          <li><span><b>The caged bird.</b> Kamala keeps a singing bird in a golden cage. When he dreams it is dead, he knows the dead bird is the part of him that sang.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Kamala, now older, talks to Siddhartha about Gotama and says that one day she may give her garden to the Buddha's monks. She asks him to tell her about the Buddha again and again. That evening Siddhartha sees grey hairs in her hair and lines around her mouth, and feels his own age and fatigue. That night comes the dream of the silent bird. He throws it into the street in the dream and feels as if he has thrown away everything good. In the morning he simply leaves. Hesse adds that Kamala, when she hears, is not surprised. She opens the cage and lets her bird fly. Soon after, she finds she is carrying his child.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: twenty years in the town</div><div class="hint">Drag the years and watch what rises and what fades</div></div>
+        <div class="stage"><svg id="ssSvg" role="img" aria-label="Lines for wealth, stakes and the inner voice over twenty years"></svg></div><div class="lab-ctl"><div class="ctl"><label for="ssR">Years in the town <output id="ssO"></output></label><input type="range" id="ssR" min="0" max="20" value="0"></div></div><div class="stats"><div class="stat"><span class="k">Inner voice</span><span class="v glow" id="ssV"></span></div><div class="stat"><span class="k">The songbird</span><span class="v" id="ssB"></span></div><div class="stat"><span class="k">That year</span><span class="s" id="ssS"></span></div></div><p class="callout">An illustrative model of the chapter, not figures from the book. <b>The slide is so slow he can't see it until a dream shows him where he has ended up.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask what habit or pleasure has quietly grown in your life over the last few years. Was it chosen, or did it just seep in?</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: By the river →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Om, and a second birth</div>
+        <h2>By the River</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha wanders until he reaches a river and leans over the water, ready to let himself fall in. From deep inside comes the sacred word Om, and he stops. He falls asleep under a tree and wakes up feeling newborn. Sitting beside him, guarding his sleep, is a monk: Govinda, who doesn't recognise him. After they part, Siddhartha laughs at the long, crooked road that brought him back here, and decides to stay by the river.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Rock bottom.</b> His disgust with himself becomes so total that dying seems easier than living as that man.</span></li>
+          <li><span><b>One word from the depths.</b> Om, the word he chanted as a boy, comes back on its own. It reminds him of the whole of life and makes the plan absurd.</span></li>
+          <li><span><b>He had to go through it.</b> He sees that the proud young Brahmin and the clever Samana had to die, and that only the world, with all its pleasure and nausea, could kill them.</span></li>
+          <li><span><b>Becoming a child again.</b> He has lost his money, his learning and his pride. What's left is a man who can laugh and start over.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>When Siddhartha wakes under the coconut tree, a monk in a yellow robe is sitting nearby. It is Govinda, who saw a man sleeping in a dangerous place and stayed to watch over him. Govinda doesn't recognise the rich man's clothes or the tired face. When Siddhartha says his name, Govinda is overjoyed, but he has to go on with his pilgrimage. Siddhartha watches him leave with love, and then sits by the water thinking. All his learning didn't help him. He had to become a fool, a lover, a merchant and a gambler, so that the proud priest in him could die. He laughs at himself, and the river seems to laugh with him.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: the selves that had to die</div><div class="hint">Let each old self go and see who is left</div></div>
+        <div class="stage"><svg id="sdSvg" role="img" aria-label="A figure carrying a stack of old selves"></svg></div><div class="lab-ctl"><div class="row" id="sdPick"></div><div class="row"><button class="btn" type="button" id="sdReset">Pick them all up again</button></div></div><div class="stats"><div class="stat"><span class="k">Selves let go</span><span class="v" id="sdN">0 of 5</span></div><div class="stat"><span class="k">What's left</span><span class="s" id="sdS"></span></div></div><p class="callout">Each one was a role he once took for himself. <b>Only when the last is gone does he feel like a child again, light enough to laugh.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Some versions of you may have needed to fall apart for you to grow. You can look back at them without shame: they were the road.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: The ferryman →</a></div>
+    </section>
+    <!-- ===================== THE RIVER ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part two · chapters 9 to 12</span>
+      <h2>The River</h2>
+      <p>At the river he finds the ferryman he met long ago and stays to work beside him. Vasudeva teaches him almost nothing in words. The river does the teaching: that there is no time, that every voice belongs to one song, and that love asks you to let go. The book ends with his old friend Govinda, still searching, finally seeing what Siddhartha found.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Wisdom isn't a doctrine you collect. It is a way of seeing, and it arrives when you stop grasping for it.</p></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · The river has no time</div>
+        <h2>The Ferryman</h2>
+        <div class="short"><span class="lbl">In short</span><p>Siddhartha goes back to the ferryman who once took him across: Vasudeva. He asks to stay and learn, and becomes his helper. Vasudeva is no teacher in the usual sense. He is a great listener, and he says only that the river taught him. Over the years Siddhartha learns from the water itself, above all that the river is everywhere at once, at its source, its mouth and the sea, and that the same is true of a life.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The art of listening.</b> Vasudeva listens without judging, waiting or wanting anything. Siddhartha tells him his whole story and feels it being received like water into the river.</span></li>
+          <li><span><b>Simple work.</b> Rowing, mending the boat, growing rice and gathering wood. The ordinary rhythm of days becomes its own practice.</span></li>
+          <li><span><b>The river is everywhere at once.</b> From the river's point of view there is no past and no future. All its water is present now.</span></li>
+          <li><span><b>A life without time.</b> The boy Siddhartha, the man and the old man aren't separated by years but only by shadows. Suffering, which lives in time, loosens its hold.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Siddhartha asks Vasudeva whether he too has learnt the secret that the river has no time. A bright smile spreads over the old man's face. Yes, he says. The river is everywhere at the same moment. Siddhartha goes on: his own life was a river too. The boy, the man and the old man were not separated by anything real, only by shadows. His earlier lives were not in the past, and his death and return to the source are not in the future. Everything is, and has presence now.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: one river, all at once</div><div class="hint">Switch between seeing a life in time and seeing it as the river does</div></div>
+        <div class="stage"><svg id="rvSvg" role="img" aria-label="A river from the mountains to the sea, with three moments of a life"></svg></div><div class="lab-ctl"><div class="row" id="rvMode"></div><div class="ctl" id="rvCtl"><label for="rvR">Where you are in the life <output id="rvO"></output></label><input type="range" id="rvR" min="0" max="100" value="10"></div></div><div class="stats"><div class="stat"><span class="k">Moments visible</span><span class="v glow" id="rvN"></span></div><div class="stat"><span class="k">What it feels like</span><span class="s" id="rvS"></span></div></div><p class="callout">Seen in time, you are only ever at one point, and the rest is gone or not yet here. <b>Seen as the river, every part is present at once.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time you're with someone, try listening the way Vasudeva does: no planning your reply, no advice. Just take in what they say.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The son →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · The love that won't let go</div>
+        <h2>The Son</h2>
+        <div class="short"><span class="lbl">In short</span><p>Kamala, travelling with her young son to see the dying Buddha, is bitten by a snake near the ferry. Vasudeva carries her to the hut, and she dies in Siddhartha's arms, recognising the peace in his eyes. The boy, eleven years old, is Siddhartha's son. He is spoiled, grieving and furious at being kept in a hut by two old men. Siddhartha loves him desperately and can't let him go. At last the boy runs off to the city.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A love he can't control.</b> For the first time Siddhartha loves someone completely and foolishly, like the childlike people he once looked down on.</span></li>
+          <li><span><b>Patience isn't enough.</b> He is gentle and patient, hoping to win the boy over. The boy reads it as weakness and hates him for it.</span></li>
+          <li><span><b>Vasudeva's question.</b> Do you think your love and your lessons will spare him the path you took? The ferryman reminds him that nobody's life can be lived for them.</span></li>
+          <li><span><b>A wound that teaches.</b> When the boy runs away, Siddhartha follows him to the city gate and sits outside Kamala's old garden for hours. Vasudeva comes and brings him home.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Kamala dies looking into Siddhartha's face. She sees how he has changed, older and calmer, and says she can see that he has found peace. The son stays. He breaks things, refuses work and insults his father. Vasudeva tells Siddhartha the truth he doesn't want: the boy belongs in the city, among people like his mother. Siddhartha answers, painfully, that he can't bear to let the boy go into the world and suffer. Vasudeva laughs softly: and did your father protect you, did your teachers? Didn't you have to go into the world and live it yourself? One morning the boy is gone, with the ferry money, and the boat is on the far bank.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: how tightly to hold</div><div class="hint">Set how hard Siddhartha holds on and watch the boy pull</div></div>
+        <div class="stage"><svg id="snSvg" role="img" aria-label="A father and son joined by a thread under tension"></svg></div><div class="lab-ctl"><div class="ctl"><label for="snR">How tightly he holds <output id="snO"></output></label><input type="range" id="snR" min="0" max="10" value="8"></div></div><div class="stats"><div class="stat"><span class="k">The boy pulls away</span><span class="v glow" id="snP"></span></div><div class="stat"><span class="k">What happens</span><span class="s" id="snS"></span></div></div><p class="callout">An illustrative picture of the chapter. <b>The tighter Siddhartha holds, the harder the boy pulls. Letting go hurts, but it is the only thing that leaves him free.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you love someone who needs to make their own mistakes, ask whether your protecting is for them or for you.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Om →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · A thousand voices, one word</div>
+        <h2>Om</h2>
+        <div class="short"><span class="lbl">In short</span><p>The wound of losing his son keeps burning. One day Siddhartha sets off to look for the boy, and on the crossing he sees his own reflection in the water: it looks like his father. He realises he left his father in the same way. He goes back and tells Vasudeva everything, and the old man listens until the wound is spoken. Then Vasudeva asks him to listen to the river. Siddhartha hears every voice in it at once, and they all form one word: Om.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The circle closes.</b> His father suffered over him the way he suffers over his son. The same story repeats, and seeing it loosens his pain.</span></li>
+          <li><span><b>Telling it all.</b> In front of Vasudeva's listening, he confesses even the parts he is ashamed of. Speaking the wound starts to heal it.</span></li>
+          <li><span><b>Every voice at once.</b> Grief, longing, laughter, lust, the cry of the dying, the shout of the newborn. Heard separately they are separate. Heard together they are one song.</span></li>
+          <li><span><b>Vasudeva's farewell.</b> With his work done, the ferryman goes into the forest, into the unity of all things. Siddhartha becomes the ferryman.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Siddhartha listens, and the river speaks with many voices: his father's, his own, his son's, Kamala's, Govinda's. They mix together, longing and pain and joy, a hundred voices and all of them part of the same flowing water. When he stops picking out any single voice and hears the whole, the great song of the river turns into one word, Om. In that moment Siddhartha stops fighting his fate. His face has the same bright smile as Vasudeva's. The ferryman stands up, says that he has waited for this hour, and walks into the forest, glowing with peace.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: listen to the river</div><div class="hint">Bring in each voice and hear them merge</div></div>
+        <div class="stage"><svg id="omSvg" role="img" aria-label="Separate waves of voices adding up to one combined wave"></svg></div><div class="lab-ctl"><div class="row" id="omPick"></div><div class="row" id="omMode"></div></div><div class="stats"><div class="stat"><span class="k">Voices in the river</span><span class="v" id="omN"></span></div><div class="stat"><span class="k">What he hears</span><span class="s" id="omS"></span></div></div><p class="callout">Each voice on its own is a story with a want in it. <b>All of them at once, without picking one out, is what Hesse calls Om: the unity of everything.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something hurts, try telling the whole story to someone who will only listen. Then try hearing your story as one voice among many, not the only one.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Govinda →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Seeking and finding</div>
+        <h2>Govinda</h2>
+        <div class="short"><span class="lbl">In short</span><p>Govinda, now old and still searching after a lifetime as a monk, hears of a wise ferryman and comes to see him. It is Siddhartha. Govinda asks for his teaching. Siddhartha says he has none: knowledge can be passed on, but wisdom can't. Seeking means having a goal; finding means being open. He tells Govinda to kiss his forehead, and Govinda sees in his friend's face a stream of thousands of faces, all changing and all one, held together by a smile like the Buddha's.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Seeking can block finding.</b> Someone who seeks sees only what fits the goal. Govinda has looked so hard for so long that he can't see what is in front of him.</span></li>
+          <li><span><b>Wisdom can't be told.</b> Words cut the world into halves. Every truth spoken is only half true, and its opposite is true as well.</span></li>
+          <li><span><b>Love the world.</b> Siddhartha says the most important thing is not to explain or despise the world, but to love it and look at it with wonder.</span></li>
+          <li><span><b>The smile.</b> What Govinda sees in the end is not an idea but a face. He bows deeply to his oldest friend.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Siddhartha picks up a stone and tells Govinda that he loves it. It is stone, but it is also animal and god and Buddha, not because it will become them someday, but because it already is everything. Govinda finds this strange, and too close to talking about things instead of teachings. He asks once more for something to help him on his way. Siddhartha asks him to come closer and kiss his forehead. When Govinda does, he no longer sees his friend's face but a river of faces: a dying fish, a newborn baby, a murderer and his executioner, lovers, gods, all being born and passing away, and over all of them the same calm smile. Tears run down his face, and he bows to the ground.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the seeker's beam</div><div class="hint">Turn down how hard you're searching and see what appears</div></div>
+        <div class="stage"><svg id="gvSvg" role="img" aria-label="A field of things lit by a narrow or wide beam"></svg></div><div class="lab-ctl"><div class="ctl"><label for="gvR">How hard you're searching for one thing <output id="gvO"></output></label><input type="range" id="gvR" min="0" max="10" value="10"></div></div><div class="stats"><div class="stat"><span class="k">Things you notice</span><span class="v glow" id="gvN"></span></div><div class="stat"><span class="k">What it's like</span><span class="s" id="gvS"></span></div></div><p class="callout">The goal is still in the field. <b>Searching hard for it narrows the beam until it's all you can see, and often you miss it anyway.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one thing you are chasing hard right now. Try loosening your grip for a day and notice what you see that you'd been walking past.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#after">Next: learned by living →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Learned by living</h2>
+      <p class="big">Siddhartha's whole life is a test of one claim: what other people tell you is knowledge, and what you go through yourself becomes wisdom. Keep a small list of both. Write something you were told, and what you only understood once you lived it. What you write stays in this browser only.</p>
+      <figure class="lab" id="logLab">
+        <div class="lab-top"><div class="t">Told, then lived</div><div class="hint">One lesson per line</div></div>
+        <div class="fields"><div class="field"><label for="lgT">What you were told</label><input id="lgT" type="text" maxlength="140" placeholder="e.g. money won't make you happy"></div>
+          <div class="field"><label for="lgL">What you learned by living it</label><input id="lgL" type="text" maxlength="160" placeholder="e.g. it bought comfort, then the restlessness came back"></div>
+          <div class="field"><label for="lgW">Where you are with it</label><select id="lgW"><option value="s">Still seeking</option><option value="w">In the world, finding out</option><option value="r">By the river, I see it now</option></select></div>
+          <div class="field" style="align-content:end"><div class="row"><button class="btn primary" type="button" id="lgAdd">Add it</button><button class="btn" type="button" id="lgClr">Clear all</button></div></div></div>
+        <div class="pad" style="padding-top:14px"><div class="mine" id="lgList"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Lessons kept</span><span class="v" id="lgN">0</span></div><div class="stat"><span class="k">By the river</span><span class="v glow" id="lgR">0</span></div><div class="stat"><span class="k">Still seeking</span><span class="v" id="lgS">0</span></div></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Seeker</span><b>Peace can't be handed over</b><span>Scriptures, ascetics and even the Buddha can point the way. Each person has to walk it.</span></div>
+        <div><span class="n">Awakening</span><b>Learn from yourself</b><span>Stop escaping the ordinary self and stop treating the world as a veil. Look at it.</span></div>
+        <div><span class="n">World</span><b>Think, wait, fast</b><span>Needing little keeps you free. Forgetting that is how the slow slide begins.</span></div>
+        <div><span class="n">Samsara</span><b>The caged bird</b><span>Nobody falls all at once. Habits seep in until the inner voice goes quiet.</span></div>
+        <div><span class="n">River</span><b>Listen, and let go</b><span>There is no time in the river, and love includes letting the people you love find their own way.</span></div>
+        <div><span class="n">Om</span><b>Seeking blocks finding</b><span>Hear every voice at once, love the world as it is, and the goal you were straining for is already here.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Siddhartha</i> by Hermann Hesse (1922). The explanations, retold scenes and labs are written in our own words; chapter titles follow the common English translation. Labs that show numbers are illustrative models, not figures from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Part one \u00b7 the seeker", "Part two \u00b7 the world", "Part two \u00b7 the river"];
+const CH = [["The Brahmin's Son", "The Brahmin's son", 0, "Chapter 1"], ["With the Samanas", "With the Samanas", 0, "Chapter 2"], ["Gotama", "Gotama", 0, "Chapter 3"], ["Awakening", "Awakening", 0, "Chapter 4"], ["Kamala", "Kamala", 1, "Chapter 5"], ["Amongst the People", "Amongst the people", 1, "Chapter 6"], ["Samsara", "Samsara", 1, "Chapter 7"], ["By the River", "By the river", 1, "Chapter 8"], ["The Ferryman", "The ferryman", 2, "Chapter 9"], ["The Son", "The son", 2, "Chapter 10"], ["Om", "Om", 2, "Chapter 11"], ["Govinda", "Govinda", 2, "Chapter 12"]];
+const QUIZ = {
+"1": {
+"q": "Why does Siddhartha leave his father's house?",
+"o": [
+"He has quarrelled with Govinda",
+"The learning and rituals of his world haven't given him, or his teachers, real inner peace",
+"His father sends him away to study"
+],
+"a": 1,
+"w": "He loves his home, but he can see that the wise men around him still haven't found what they talk about. He wants to find it for himself."
+},
+"2": {
+"q": "What does Siddhartha conclude about the Samanas' practices?",
+"o": [
+"They are the only way to enlightenment",
+"They let you escape the self for a while, but you always return to it unchanged",
+"They are dangerous and should be banned"
+],
+"a": 1,
+"w": "He compares them to a drinker's escape: a temporary flight from the self, not a way to understand it."
+},
+"3": {
+"q": "Why does Siddhartha refuse to follow the Buddha?",
+"o": [
+"He thinks the teaching is false",
+"He believes Gotama's enlightenment came from his own experience, which no teaching can hand on",
+"He dislikes the other monks"
+],
+"a": 1,
+"w": "He agrees the teaching is perfect. His point is that Gotama didn't become enlightened by listening to a teacher, so neither can he."
+},
+"4": {
+"q": "What is the awakening in this chapter?",
+"o": [
+"He sees the Buddha's face in a vision",
+"He decides to learn from himself, and suddenly sees the ordinary world as real and beautiful",
+"He decides to go back to his father"
+],
+"a": 1,
+"w": "He stops trying to escape himself and stops treating the world as an illusion. Both happen together."
+},
+"5": {
+"q": "Why are thinking, waiting and fasting valuable, according to Siddhartha?",
+"o": [
+"They impress rich people",
+"They mean he never has to act out of hunger, impatience or other people's pressure",
+"They are required to become a merchant"
+],
+"a": 1,
+"w": "Someone who can fast and wait isn't forced to accept whatever comes. That freedom is his real wealth."
+},
+"6": {
+"q": "What does Kamala notice about herself and Siddhartha?",
+"o": [
+"They are both bad at business",
+"Neither of them can truly love; they practise love as an art",
+"They should get married"
+],
+"a": 1,
+"w": "Kamala says they are alike: both skilled, both self-contained, neither able to give themselves completely to another person."
+},
+"7": {
+"q": "What does the dead songbird in Siddhartha's dream stand for?",
+"o": [
+"Kamala's illness",
+"The living, singing part of himself that his years of pleasure and greed have killed",
+"A bad omen for his business"
+],
+"a": 1,
+"w": "The bird in its golden cage is his own inner voice, trapped and finally silenced by the life he has been living."
+},
+"8": {
+"q": "What stops Siddhartha from drowning himself?",
+"o": [
+"Govinda pulls him out",
+"The word Om rises from inside him and he remembers the whole of life",
+"The ferryman calls to him"
+],
+"a": 1,
+"w": "The sacred syllable he chanted as a boy wells up and wakes him to how foolish his despair is."
+},
+"9": {
+"q": "What is the main secret Siddhartha learns from the river?",
+"o": [
+"How to catch fish",
+"That there is no time: the river, like a life, is present everywhere at once",
+"That he should return to the city"
+],
+"a": 1,
+"w": "The river is at its source and the sea at the same moment. Seeing his life that way loosens the grip of past and future."
+},
+"10": {
+"q": "What does Vasudeva point out to Siddhartha about his son?",
+"o": [
+"The boy should become a ferryman",
+"No love or teaching can spare the boy his own path, just as nothing spared Siddhartha his",
+"The boy is not really his son"
+],
+"a": 1,
+"w": "Siddhartha's father and teachers couldn't protect him from life. He can't protect his son from it either."
+},
+"11": {
+"q": "What does Siddhartha see in his reflection, and why does it matter?",
+"o": [
+"A stranger, so he knows he has changed",
+"His father's face, showing him he is reliving the pain he once caused his father",
+"Kamala, so he knows she forgives him"
+],
+"a": 1,
+"w": "He recognises his father in his own face and sees the cycle: he is suffering over his son just as his father suffered over him."
+},
+"12": {
+"q": "What is the difference between seeking and finding, as Siddhartha explains it?",
+"o": [
+"Seeking is for young people and finding is for old people",
+"Seeking means fixing on a goal and seeing only that; finding means being free and open to what is there",
+"There is no difference"
+],
+"a": 1,
+"w": "Govinda's long search narrowed his vision. Siddhartha found by letting go of the goal and opening his eyes."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0b1a1d';
+try { const t = localStorage.getItem('sid-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('sid-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('sid-done', []));
+const save = () => store.set('sid-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- shared: run a frame loop only while the element is on screen ---------- */
+function anim(el, fn){
+  if (RM){ fn(0); return { kick(){ fn(0); } }; }
+  let on = false, raf = 0;
+  const loop = t => { raf = 0; if (!on) return; fn(t); raf = requestAnimationFrame(loop); };
+  new IntersectionObserver(es => { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(loop); }).observe(el);
+  return { kick(){ if (!on) fn(performance.now()); } };
+}
+/* a simple standing figure: head and shoulders */
+const person = (x, y, s, fill = 'panel-2', stroke = 'faint', w = 1.5) =>
+  `<circle cx="${x}" cy="${y - 34 * s}" r="${13 * s}" ${FS(fill, stroke, w)}/><path d="M${x - 24 * s} ${y + 18 * s}c0-26 ${10 * s}-38 ${24 * s}-38s${24 * s} 12 ${24 * s} 38Z" ${FS(fill, stroke, w)}/>`;
+const btnRow = (sel, items, key, first = 0) => { const box = $(sel);
+  box.innerHTML = items.map((t, i) => `<button class="btn" type="button" data-${key}="${i}" aria-pressed="${i === first}">${t}</button>`).join('');
+  return [...box.querySelectorAll(`[data-${key}]`)]; };
+/* river path used by the hero and chapter 9 */
+const riverPts = (W, H, n = 60) => { const p = []; for (let k = 0; k <= n; k++){ const t = k / n;
+  p.push([lerp(24, W - 24, t), lerp(H * .22, H * .78, t) + Math.sin(t * Math.PI * 3.2) * H * .16]); } return p; };
+const ptsD = p => 'M' + p.map(q => q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join('L');
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['Answers that don\'t satisfy', 1, 'A full cup can still be empty', 'Siddhartha had all the learning his world could give, and none of it touched his restlessness. Notice the gap between knowing about peace and having it.'],
+    ['A way to escape myself', 2, 'Every escape loops back', 'Fasting or wine, meditation or distraction: you always wake up as yourself again. Escaping isn\'t understanding.'],
+    ['The right teacher', 3, 'A teaching isn\'t the experience', 'Even the Buddha found his way by walking it. Respect teachers, but nobody can live your insight for you.'],
+    ['Meaning in ordinary life', 4, 'Look at the world, not through it', 'When Siddhartha stops treating the world as an illusion, the river and the sky come back into colour.'],
+    ['Success and comfort', 7, 'Watch for the slow slide', 'Nobody falls all at once. Wealth and pleasure seep in a habit at a time until the inner voice goes quiet.'],
+    ['A fresh start', 8, 'Let the old selves die', 'Rock bottom by the river is where Siddhartha feels like a child again, light enough to laugh and start over.'],
+    ['How to love without clinging', 10, 'Love lets go', 'Siddhartha can\'t protect his son from life, any more than his own father could protect him.'],
+    ['The goal itself', 12, 'Seeking can block finding', 'Govinda searched so hard he saw only his goal. Finding means loosening the grip and opening your eyes.'] ];
+  const bs = btnRow('#find', FIND.map(f => f[0]), 'f'), ans = $('#findA');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the river of his life ---------- */
+{ const R = $('#pathR'), el = $('#pathSvg');
+  const STOP = [
+    ['A boy among the priests', 'Loved by everyone and quietly unsatisfied, he stands all night until his father lets him go.'],
+    ['In the forest', 'Three years of fasting and self-denial with the Samanas. He gets good at escaping himself, and always comes back.'],
+    ['At the Buddha\'s feet', 'He believes the teacher and leaves the teaching. Govinda stays behind.'],
+    ['Alone, and awake', 'He decides to learn from himself, and the world turns bright and real.'],
+    ['Crossing the river', 'A free ferry ride, then the courtesan Kamala and his three skills: think, wait, fast.'],
+    ['The merchant\'s game', 'He plays at trade and love, calm because nothing really touches him.'],
+    ['The slow slide', 'Twenty years of wine, dice and boredom, until a dream of a dead songbird.'],
+    ['At the water\'s edge', 'Ready to drown, he hears Om, sleeps and wakes up newborn.'],
+    ['The ferryman\'s helper', 'Vasudeva listens, and the river teaches him that there is no time.'],
+    ['A son', 'Kamala dies at the ferry. He loves the boy he can\'t hold on to.'],
+    ['The river\'s one word', 'He hears every voice at once, and they sing Om. Vasudeva walks into the forest.'],
+    ['An old friend\'s kiss', 'Govinda, still seeking, sees a thousand faces in Siddhartha\'s smile.'] ];
+  const COL = n => n <= 4 ? 'cool' : n <= 8 ? 'glow' : 'good';
+  function draw(){
+    const n = +R.value, W = 360, H = 230; vb(el, W, H);
+    const P = riverPts(W, H), idx = k => Math.round(lerp(3, P.length - 4, (k - 1) / 11));
+    let g = `<path d="${ptsD(P)}" ${S('sky', 18, ';stroke-linecap:round;stroke-opacity:.55')}/><path d="${ptsD(P)}" ${S('cool', 1.4, ';stroke-dasharray:2 6;stroke-opacity:.8')}/>`;
+    g += TX(24, 20, 'source', 'faint', 10.5) + TX(W - 24, H - 8, 'the sea', 'faint', 10.5, 'end');
+    for (let k = 1; k <= 12; k++){ const [x, y] = P[idx(k)], on = k === n, past = k < n;
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${on ? 9 : 5.5}" ${FS(on ? COL(k) : past ? 'panel-2' : 'panel', on ? COL(k) : past ? COL(k) : 'line', on ? 2 : 1.4)}/>`;
+      if (on) g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="16" ${F(COL(k), .18)}/>` + TX(x, y + (y > H * .55 ? -22 : 30), String(k), COL(k), 13, 'middle', 'font-weight="600"'); }
+    el.innerHTML = g;
+    $('#pathV').textContent = STOP[n - 1][0];
+    $('#pathTxt').innerHTML = `${STOP[n - 1][1]} <a href="#ch${n}">Chapter ${n} →</a>`;
+  }
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 1: the vessel that won't fill ---------- */
+{ const SRC = [
+    ['The Vedas', 18, 2, 'He can recite the holy books. They describe the self inside everything, but never show him where to find it.'],
+    ['Rituals and sacrifices', 14, 1, 'He performs them perfectly. He begins to wonder whether the gods they honour are any happier than he is.'],
+    ['His father\'s wisdom', 18, 2, 'His father is good and learned. Yet he still washes away his sins every day, as if peace never quite holds.'],
+    ['Govinda\'s admiration', 10, 1, 'Being loved and followed feels good. It doesn\'t quiet the question at all.'],
+    ['Meditating on Om', 14, 5, 'This comes closest. For a moment he touches something real, and then he is back in his thinking.'],
+    ['Debates with the wise', 18, 1, 'He wins arguments with the cleverest men around. Winning teaches him how little they know.'] ];
+  let used = new Set(); const el = $('#vsSvg');
+  const bs = btnRow('#vsPick', SRC.map(s => s[0]), 's', -1);
+  bs.forEach(b => b.addEventListener('click', () => { used.add(+b.dataset.s); b.disabled = true; draw(+b.dataset.s); }));
+  $('#vsReset').addEventListener('click', () => { used = new Set(); bs.forEach(b => b.disabled = false); draw(-1); });
+  let last = -1;
+  const draw = onLayout((i = last) => { last = i;
+    const nw = NARROW(), W = nw ? 360 : 620, H = 260; vb(el, W, H);
+    const k = [...used].reduce((a, j) => a + SRC[j][1], 0), p = [...used].reduce((a, j) => a + SRC[j][2], 0);
+    const jar = (cx, lab, v, c) => { const w = nw ? 96 : 120, h = 170, x = cx - w / 2, y = 34, fh = h * v / 100;
+      return `<path d="M${x} ${y}h${w}v${h - 16}q0 16 -16 16h${-(w - 32)}q-16 0 -16 -16Z" ${FS('panel-2', 'line', 1.5)}/>` +
+        `<clipPath id="vsC${c}"><path d="M${x} ${y}h${w}v${h - 16}q0 16 -16 16h${-(w - 32)}q-16 0 -16 -16Z"/></clipPath>` +
+        `<rect x="${x}" y="${(y + h - fh).toFixed(1)}" width="${w}" height="${fh.toFixed(1)}" clip-path="url(#vsC${c})" ${F(c, .55)}/>` +
+        TX(cx, y + h + 26, lab, 'muted', 12.5, 'middle') + TX(cx, y - 10, Math.round(v) + '%', c, 15, 'middle', 'font-weight="600"'); };
+    let g = jar(W * .3, 'What he knows', Math.min(100, k), 'cool') + jar(W * .7, 'How at peace he is', Math.min(100, p), 'glow');
+    const dropX = W * .3; if (i >= 0) for (let d = 0; d < 3; d++) g += `<circle cx="${dropX + (d - 1) * 14}" cy="${18 + d * 5}" r="3" ${F('cool', .7)}/>`;
+    el.innerHTML = g;
+    $('#vsK').textContent = Math.min(100, k) + '%'; $('#vsP').textContent = p + '%';
+    $('#vsS').textContent = i >= 0 ? SRC[i][3] : used.size ? 'Pick another gift.' : 'Pour in any of the gifts his world offers him.';
+    if (used.size === SRC.length) $('#vsS').textContent = 'Everything his world can give, and the peace gauge has barely moved. So he decides to leave.';
+  });
+  draw(-1);
+}
+
+/* ---------- 2: escape and return ---------- */
+{ const PR = [
+    ['Fasting', 'Weeks without food', 'The hunger goes quiet, the body thins, and then he eats and is Siddhartha again.'],
+    ['Holding the breath', 'Slowing the heart', 'His heartbeat slows almost to nothing. Then breath returns and so does he.'],
+    ['Becoming a heron', 'Over the bamboo forest', 'He imagines himself into the bird, eats fish, feels its hunger. Then wakes as himself.'],
+    ['A dead jackal', 'Lying on the sand', 'He becomes the carcass, picked clean by vultures, dust in the wind. And comes back.'],
+    ['Stone and water', 'Becoming nothing', 'He dissolves into stone, wood and water. Each time the sun or moon brings him back.'],
+    ['A jug of wine', 'The drinker in the tavern', 'Siddhartha\'s own comparison: the drunk escapes himself for a few hours too, with far less effort.'] ];
+  let sel = 0, n = 0, back = 0, t0 = -1; const el = $('#erSvg');
+  const bs = btnRow('#erPick', PR.map(p => p[0]), 'p'); bs.forEach(b => b.addEventListener('click', () => { press(bs, b); sel = +b.dataset.p; a.kick(); }));
+  $('#erGo').addEventListener('click', () => { if (t0 >= 0) return; n++; t0 = RM ? -1 : performance.now(); if (RM){ back++; } a.kick(); upd(); });
+  const upd = () => { $('#erN').textContent = n; $('#erB').textContent = back; $('#erS').textContent = n ? PR[sel][2] : 'Pick a practice and press the button.'; };
+  const a = anim(el, now => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 330 : 280; vb(el, W, H);
+    const cx = W / 2, cy = H / 2 + 6, rx = nw ? 128 : 230, ry = nw ? 120 : 100;
+    let g = `<circle cx="${cx}" cy="${cy}" r="34" ${FS('panel-2', 'glow', 1.6)}/>` + TX(cx, cy + 4, 'self', 'glow', 12.5, 'middle', 'font-weight="600"');
+    let prog = -1; if (t0 >= 0){ prog = (now - t0) / 2200; if (prog >= 1){ prog = -1; t0 = -1; back++; upd(); } }
+    PR.forEach(([lab, sub], k) => { const ang = -Math.PI / 2 + k * Math.PI / 3, x = cx + rx * Math.cos(ang), y = cy + ry * Math.sin(ang), on = k === sel;
+      const mx = cx + rx * .55 * Math.cos(ang + .45), my = cy + ry * .55 * Math.sin(ang + .45), mx2 = cx + rx * .55 * Math.cos(ang - .45), my2 = cy + ry * .55 * Math.sin(ang - .45);
+      const d = `M${cx} ${cy}Q${mx.toFixed(1)} ${my.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}Q${mx2.toFixed(1)} ${my2.toFixed(1)} ${cx} ${cy}`;
+      g += `<path d="${d}" ${S(on ? 'glow' : 'line', on ? 1.6 : 1, on ? '' : ';stroke-dasharray:3 5')}/>`;
+      const bw = nw ? 92 : 128;
+      g += `<rect x="${(x - bw / 2).toFixed(1)}" y="${(y - 15).toFixed(1)}" width="${bw}" height="30" rx="15" ${FS('panel', on ? 'glow' : 'line', 1.3)}/>` + TX(x, y + 4.5, lab, on ? 'text' : 'muted', nw ? 11 : 12, 'middle');
+      if (on && prog >= 0){ const t = prog < .5 ? prog * 2 : (1 - prog) * 2, qx = prog < .5 ? mx : mx2, qy = prog < .5 ? my : my2, u = t;
+        const px = (1 - u) * (1 - u) * cx + 2 * (1 - u) * u * qx + u * u * x, py = (1 - u) * (1 - u) * cy + 2 * (1 - u) * u * qy + u * u * y;
+        g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="7" ${F('glow')}/>`; } });
+    if (prog < 0 && n) g += TX(cx, cy + 52, 'back again', 'faint', 11, 'middle', 'letter-spacing="1"');
+    el.innerHTML = g;
+  });
+  upd();
+}
+
+/* ---------- 3: the follower and the seeker ---------- */
+{ const OPT = [
+    ['Stay with the monks', 'Govinda\'s path', 'A teacher, a rule and a home', 'Govinda takes the robe the same day. For the first time he chooses for himself instead of following Siddhartha. He will spend his life as a devoted, decent monk, and still be searching when he is old.'],
+    ['Walk on alone', 'Siddhartha\'s path', 'No teacher, no friend, only experience', 'Siddhartha tells Gotama the teaching is perfect but can\'t contain what Gotama himself lived through. He leaves without a teacher or a friend. He feels the Buddha has taken Govinda and given him himself.'] ];
+  let sel = 0; const el = $('#fsSvg');
+  const bs = btnRow('#fsPick', OPT.map(o => o[0]), 'o'); bs.forEach(b => b.addEventListener('click', () => { press(bs, b); sel = +b.dataset.o; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 260 : 240; vb(el, W, H);
+    const gx = nw ? 70 : 120, gy = H / 2, ex = W - (nw ? 60 : 110);
+    let g = '';
+    [[-30, -40, 30], [12, -52, 34], [-6, 30, 28], [36, 18, 26]].forEach(([dx, dy, r]) => g += `<circle cx="${gx + dx}" cy="${gy + dy}" r="${r}" ${F('leaf', .22)}/>`);
+    g += TX(gx, gy + 76, 'the grove', 'faint', 11, 'middle');
+    g += `<circle cx="${gx}" cy="${gy}" r="9" ${F('glow', .9)}/>` + TX(gx, gy - 16, 'Gotama', 'glow', 11, 'middle');
+    const up = `M${gx + 20} ${gy}C${W * .45} ${gy}, ${W * .5} ${gy - 70}, ${ex} ${gy - 70}`, dn = `M${gx + 20} ${gy}C${W * .45} ${gy}, ${W * .5} ${gy + 70}, ${ex} ${gy + 70}`;
+    g += `<path d="${up}" ${S(sel === 0 ? 'cool' : 'line', sel === 0 ? 3 : 1.4, sel === 0 ? '' : ';stroke-dasharray:4 5')}/><path d="${dn}" ${S(sel === 1 ? 'glow' : 'line', sel === 1 ? 3 : 1.4, sel === 1 ? '' : ';stroke-dasharray:4 5')}/>`;
+    for (let k = 0; k < 5; k++) g += person(ex - 34 + k * 17, gy - 64, .42, 'panel-2', sel === 0 ? 'cool' : 'faint', 1.2);
+    g += TX(ex, gy - 104, 'the order', sel === 0 ? 'cool' : 'faint', 11.5, 'middle');
+    g += person(ex, gy + 78, .62, 'panel-2', sel === 1 ? 'glow' : 'faint', 1.4) + TX(ex, gy + 112, 'alone', sel === 1 ? 'glow' : 'faint', 11.5, 'middle');
+    el.innerHTML = g;
+    const o = OPT[sel]; $('#fsK').textContent = o[1]; $('#fsH').textContent = o[2]; $('#fsP').textContent = o[3];
+  });
+  draw();
+}
+
+/* ---------- 4: lifting the veil ---------- */
+{ const R = $('#awR'), el = $('#awSvg');
+  const THINGS = ['the river', 'the forest', 'the blue sky', 'birds over the water', 'yellow flowers on the bank', 'fish in the shallows', 'the moon rising', 'his own feet on the path', 'a butterfly'];
+  const BANDS = [[2, 'Maya, a veil', 'All this is illusion, his teachers said. Look through it to what is real.'], [5, 'Glimpses', 'Colours start to get through. He keeps catching himself enjoying them.'],
+    [8, 'Seeing', 'The world isn\'t hiding the meaning. The meaning is right here, in the shapes and colours.'], [10, 'Awake', 'Everything is new and beautiful, and he is alone in it. He shivers, then walks on.']];
+  const draw = onLayout(() => {
+    const v = +R.value, t = v / 10, nw = NARROW(), W = nw ? 360 : 620, H = 260; vb(el, W, H);
+    el.style.filter = `grayscale(${(1 - t).toFixed(2)})`;
+    const seen = Math.round(t * THINGS.length);
+    let g = `<rect x="0" y="0" width="${W}" height="${H * .55}" ${F('sky', .25 + .4 * t)}/>`;
+    g += `<circle cx="${W * .8}" cy="${H * .2}" r="16" ${F('glow', .3 + .6 * t)}/>`;
+    g += `<path d="M0 ${H * .55}Q${W * .3} ${H * .5} ${W * .5} ${H * .62}T${W} ${H * .6}V${H}H0Z" ${F('leaf', .25 + .3 * t)}/>`;
+    g += `<path d="M0 ${H * .74}Q${W * .25} ${H * .66} ${W * .5} ${H * .76}T${W} ${H * .74}V${H * .9}Q${W * .6} ${H * .84} 0 ${H * .92}Z" ${F('cool', .35 + .4 * t)}/>`;
+    for (let k = 0; k < 7; k++){ const x = 30 + k * (W - 60) / 6, h = 40 + (k * 37 % 30);
+      g += `<rect x="${x - 2}" y="${H * .55 - h + 20}" width="4" height="${h - 10}" ${F('earth', .8)}/><circle cx="${x}" cy="${H * .55 - h + 14}" r="${18 + (k % 3) * 4}" ${F('leaf', .4 + .5 * t)}/>`; }
+    if (seen > 3) for (let k = 0; k < 3; k++){ const x = W * (.3 + k * .08), y = H * (.18 + (k % 2) * .05); g += `<path d="M${x - 8} ${y}q4 -5 8 0q4 -5 8 0" ${S('text', 1.4)}/>`; }
+    if (seen > 4) for (let k = 0; k < 6; k++) g += `<circle cx="${W * .1 + k * 26}" cy="${H * .68 + (k % 2) * 6}" r="4" ${F('glow')}/>`;
+    if (seen > 5) for (let k = 0; k < 3; k++) g += `<ellipse cx="${W * .55 + k * 40}" cy="${H * .8 + (k % 2) * 5}" rx="7" ry="3" ${F('glow', .8)}/>`;
+    if (seen > 6) g += `<circle cx="${W * .14}" cy="${H * .16}" r="11" ${F('soft', .9)}/>`;
+    if (seen > 8) g += `<path d="M${W * .62} ${H * .45}l-7 -6v12Zm0 0l7 -6v12Z" ${F('bad')}/>`;
+    g += `<rect x="0" y="0" width="${W}" height="${H}" ${F('ink', ((1 - t) * .45).toFixed(2))}/>`;
+    el.innerHTML = g;
+    const b = BANDS.find(x => v <= x[0]); $('#awO').textContent = b[1];
+    $('#awN').textContent = seen + ' of ' + THINGS.length; $('#awS').textContent = b[2] + (seen ? ' He notices ' + THINGS.slice(0, seen).slice(-2).join(' and ') + '.' : '');
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 5: the one who can wait ---------- */
+{ const R = $('#twR'), el = $('#twSvg'); let seed = 7, offers = [];
+  const make = () => { const r = rng(seed); offers = Array.from({length: 11}, (_, d) => Math.round(clamp(30 + d * 5 + gauss(r) * 9, 15, 98))); };
+  $('#twNew').addEventListener('click', () => { seed++; make(); draw(); });
+  make();
+  const draw = onLayout(() => {
+    const w = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = 250; vb(el, W, H);
+    const x0 = 36, x1 = W - 12, y0 = 20, y1 = H - 40, bw = (x1 - x0) / 11;
+    let best = 0; for (let d = 0; d <= w; d++) if (offers[d] > offers[best]) best = d;
+    let g = `<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}" ${S('line', 1)}/>`;
+    [0, 50, 100].forEach(v => { const y = lerp(y1, y0, v / 100); g += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" ${S('line', .6, ';stroke-dasharray:2 4')}/>` + TX(x0 - 6, y + 4, v, 'faint', 10, 'end'); });
+    offers.forEach((o, d) => { const x = x0 + d * bw + 3, h = (y1 - y0) * o / 100, out = d > w, pick = d === best;
+      g += `<rect x="${x.toFixed(1)}" y="${(y1 - h).toFixed(1)}" width="${(bw - 6).toFixed(1)}" height="${h.toFixed(1)}" rx="3" ${F(pick ? 'glow' : out ? 'line' : 'cool', pick ? 1 : out ? .45 : .55)}/>`;
+      if (pick) g += TX(x + (bw - 6) / 2, y1 - h - 6, o, 'glow', 12, 'middle', 'font-weight="600"');
+      g += TX(x + (bw - 6) / 2, y1 + 15, d, 'faint', 10, 'middle'); });
+    g += TX(x0, y1 + 32, 'day of the market · offer for your goods', 'faint', 10.5);
+    if (w < 10){ const xs = x0 + (w + 1) * bw; g += `<line x1="${xs}" y1="${y0}" x2="${xs}" y2="${y1}" ${S('bad', 1.2, ';stroke-dasharray:4 4')}/>` + TX(xs + 5, y0 + 10, nw ? 'too hungry' : 'too hungry to wait longer', 'bad', 10.5); }
+    el.innerHTML = g;
+    $('#twO').textContent = w ? w + ' day' + (w > 1 ? 's' : '') : 'not at all';
+    $('#twA').textContent = offers[best]; $('#twB').textContent = Math.max(...offers);
+    $('#twS').textContent = w === 0 ? 'You were hungry, so you took the first offer, whatever it was.' : best === 0 ? 'You could wait, and still chose the first offer because it was the best you saw.' : `You could wait ${w} days, so you picked the best offer you saw, on day ${best}.`;
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 6: two merchants, one bad week ---------- */
+{ const EV = [
+    ['A deal falls through', 85, 10, 'Kamaswami loses sleep, blames the clerk and rewrites the contract twice.', 'Siddhartha shrugs. He says losses are part of the game and goes to see Kamala that evening.'],
+    ['The rice harvest is sold', 90, 5, 'Kamaswami is furious about the wasted trip, the time and the money.', 'Siddhartha stays in the village anyway, plays with the children and goes to a wedding. He calls it a good trip.'],
+    ['A debtor can\'t pay', 75, 15, 'Kamaswami wants to press him hard and take what he owns.', 'Siddhartha listens to the man\'s troubles, gives him more time and a little money besides.'],
+    ['A big profit', 40, 20, 'Kamaswami is pleased for a day and then worries about how to keep it.', 'Siddhartha is mildly pleased. It is a good move in a game, nothing more.'],
+    ['Kamala asks if he loves her', 0, 60, 'Kamaswami isn\'t part of this one.', 'The only event that unsettles him. She says they are alike: neither of them can really love anyone.'] ];
+  let sel = 0, cur = [EV[0][1], EV[0][2]]; const el = $('#tmSvg');
+  const bs = btnRow('#tmPick', EV.map(e => e[0]), 'e'); bs.forEach(b => b.addEventListener('click', () => { press(bs, b); sel = +b.dataset.e; draw(); }));
+  const draw = onLayout(() => {
+    const e = EV[sel], nw = NARROW(), W = nw ? 360 : 620, H = 240; vb(el, W, H);
+    const cols = [[W * .3, 'Kamaswami', e[1], 'bad'], [W * .7, 'Siddhartha', e[2], 'cool']];
+    let g = '';
+    cols.forEach(([x, lab, v, c]) => { const gx = x + (nw ? 40 : 60), gy0 = 30, gh = 150;
+      g += person(x - (nw ? 10 : 20), 168, .9, 'panel-2', v > 50 ? c : 'faint') + TX(x - (nw ? 10 : 20), 210, lab, 'muted', 12, 'middle');
+      g += `<rect x="${gx - 9}" y="${gy0}" width="18" height="${gh}" rx="9" ${FS('panel-2', 'line', 1.2)}/><rect x="${gx - 9}" y="${gy0 + gh * (1 - v / 100)}" width="18" height="${gh * v / 100}" rx="9" ${F(c, .75)}/>`;
+      g += TX(gx, gy0 - 8, v + '%', c, 12, 'middle', 'font-weight="600"') + TX(gx, gy0 + gh + 18, 'worry', 'faint', 10.5, 'middle'); });
+    el.innerHTML = g;
+    $('#tmK').textContent = e[0]; $('#tmH').textContent = sel === 4 ? 'The one thing he can\'t play' : 'Same news, two reactions';
+    $('#tmP').innerHTML = `<b>Kamaswami:</b> ${e[3]} <b>Siddhartha:</b> ${e[4]}`;
+  });
+  draw();
+}
+
+/* ---------- 7: twenty years in the town ---------- */
+{ const R = $('#ssR'), el = $('#ssSvg');
+  const wealth = y => 100 * (1 - Math.exp(-y / 5)), stakes = y => y < 6 ? y * 2 : 12 + Math.pow(y - 6, 1.75) * 2.6, voice = y => 100 * Math.exp(-y / 7);
+  const NOTE = [[0, 'He arrives with nothing but three skills and a poem.'], [3, 'Business is a game and he plays it well. He still feels above it all.'], [7, 'Fine clothes, servants, a garden. He starts to enjoy rich food and wine.'],
+    [11, 'He gambles for higher and higher stakes, to feel anything at all.'], [15, 'He is as greedy and anxious as the people he once smiled at. Sleep is hard.'], [19, 'Grey in Kamala\'s hair, lines on his face. He feels tired and old.'], [20, 'The dream: the songbird lies dead in its golden cage. In the morning he walks away.']];
+  const draw = onLayout(() => {
+    const y = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = nw ? 300 : 260; vb(el, W, H);
+    const cw = nw ? W - 44 : W - 170, x0 = 34, y0 = 20, y1 = H - 40, X = v => x0 + cw * v / 20, Y = v => lerp(y1, y0, clamp(v, 0, 100) / 100);
+    let g = `<line x1="${x0}" y1="${y1}" x2="${x0 + cw}" y2="${y1}" ${S('line', 1)}/>`;
+    [0, 5, 10, 15, 20].forEach(v => g += TX(X(v), y1 + 15, v, 'faint', 10, 'middle'));
+    g += TX(x0, y1 + 32, 'years in the town', 'faint', 10.5);
+    const line = (f, c, lab) => { let d = ''; for (let k = 0; k <= 20; k += .5) d += (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(f(k)).toFixed(1);
+      return `<path d="${d}" ${S(c, 1.2, ';stroke-opacity:.35')}/>` + (() => { let e = ''; for (let k = 0; k <= y; k += .5) e += (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(f(k)).toFixed(1); return y ? `<path d="${e}" ${S(c, 2.6)}/>` : ''; })() +
+        `<circle cx="${X(y)}" cy="${Y(f(y))}" r="4.5" ${F(c)}/>` + TX(X(20) + 6, Y(f(20)) + 4, nw ? '' : lab, c, 11.5); };
+    g += line(wealth, 'cool', 'wealth') + line(stakes, 'bad', 'gambling stakes') + line(voice, 'glow', 'inner voice');
+    if (nw) g += TX(x0, 12, 'wealth', 'cool', 11) + TX(x0 + 70, 12, 'stakes', 'bad', 11) + TX(x0 + 130, 12, 'inner voice', 'glow', 11);
+    if (!nw){ const bx = W - 58, by = 70;
+      g += `<path d="M${bx - 30} ${by + 60}V${by}q30 -34 60 0V${by + 60}Z" ${FS('panel-2', 'glow', 1.3)}/>`;
+      for (let k = 1; k < 6; k++) g += `<line x1="${bx - 30 + k * 10}" y1="${by - 8}" x2="${bx - 30 + k * 10}" y2="${by + 60}" ${S('glow', .8, ';stroke-opacity:.6')}/>`;
+      const dead = y >= 20; g += `<ellipse cx="${bx}" cy="${dead ? by + 54 : by + 30}" rx="11" ry="${dead ? 5 : 8}" ${F(dead ? 'faint' : 'good')}/>`;
+      if (voice(y) > 25) for (let k = 0; k < 3; k++) g += TX(bx + 18 + k * 8, by - 4 - k * 9, '♪', 'good', 12, 'middle', `style="fill-opacity:${(voice(y) / 100).toFixed(2)}"`);
+      g += TX(bx, by + 82, 'the songbird', 'faint', 10.5, 'middle'); }
+    el.innerHTML = g;
+    const n = NOTE.filter(x => y >= x[0]).pop();
+    $('#ssO').textContent = y + (y === 1 ? ' year' : ' years'); $('#ssV').textContent = Math.round(voice(y)) + '%';
+    $('#ssB').textContent = y >= 20 ? 'Silent' : voice(y) > 25 ? 'Singing' : 'Barely singing'; $('#ssS').textContent = n[1];
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 8: the selves that had to die ---------- */
+{ const SELF = [
+    ['The clever Brahmin', 'The boy who won every debate. His learning was real, and it had become a fence.'],
+    ['The proud Samana', 'The one who could fast and hold his breath, and quietly looked down on everyone who couldn\'t.'],
+    ['The one who knew better than the Buddha', 'He was right that no teaching would do. He was also a little too pleased with himself for seeing it.'],
+    ['The rich merchant', 'The man with servants and a garden, who thought he was only playing at it.'],
+    ['The gambler', 'The tired man who needed bigger stakes just to feel something. This one he is glad to see go.'] ];
+  let gone = new Set(), last = -1; const el = $('#sdSvg');
+  const bs = btnRow('#sdPick', SELF.map(s => 'Let go of ' + s[0].replace(/^The /, 'the ')), 's', -1);
+  bs.forEach(b => b.addEventListener('click', () => { gone.add(+b.dataset.s); last = +b.dataset.s; b.disabled = true; draw(); }));
+  $('#sdReset').addEventListener('click', () => { gone = new Set(); last = -1; bs.forEach(b => b.disabled = false); draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 320 : 280; vb(el, W, H);
+    const left = SELF.length - gone.size, x = nw ? W / 2 : W * .32, base = H - 30, s = lerp(1.25, .85, gone.size / 5), lean = left * 4;
+    let g = `<path d="M0 ${base + 8}Q${W * .5} ${base - 4} ${W} ${base + 10}V${H}H0Z" ${F('cool', .3)}/>`;
+    if (!left) g += `<circle cx="${x}" cy="${base - 50}" r="70" ${F('glow', .14)}/>` + TX(x, base - 132, 'Om', 'glow', 26, 'middle', 'font-family="Instrument Serif, serif"');
+    g += `<g transform="rotate(${lean} ${x} ${base})">` + person(x, base - 20, s, 'panel-2', left ? 'faint' : 'glow', 1.6);
+    let yy = base - 20 - 50 * s;
+    SELF.forEach(([lab], k) => { if (gone.has(k)) return; const bw = nw ? 168 : 230;
+      yy -= 28; g += `<rect x="${x - bw / 2}" y="${yy}" width="${bw}" height="24" rx="6" ${FS('panel', 'line', 1.2)}/>` + TX(x, yy + 16, lab, 'muted', nw ? 10.5 : 11.5, 'middle'); });
+    g += '</g>';
+    if (!nw){ const gx = W * .72; g += TX(gx, 34, 'Let go', 'faint', 11, 'middle', 'letter-spacing="1.5"');
+      [...gone].forEach((k, j) => g += `<g style="opacity:.55">` + `<rect x="${gx - 115}" y="${48 + j * 34}" width="230" height="26" rx="6" ${S('line', 1, ';stroke-dasharray:3 4')}/>` + TX(gx, 65 + j * 34, SELF[k][0], 'faint', 11.5, 'middle') + '</g>'); }
+    el.innerHTML = g;
+    $('#sdN').textContent = gone.size + ' of 5';
+    $('#sdS').textContent = !left ? 'A man with nothing, by a river, laughing. He feels like a child again, and the river seems to laugh with him.' : last >= 0 ? SELF[last][1] : 'He is carrying every role he ever played. Let them go one at a time.';
+  });
+  draw();
+}
+
+/* ---------- 9: one river, all at once ---------- */
+{ const R = $('#rvR'), el = $('#rvSvg'); let whole = false;
+  const bs = btnRow('#rvMode', ['See it in time', 'See it as the river does'], 'm');
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); whole = b.dataset.m === '1'; $('#rvCtl').style.opacity = whole ? .4 : 1; R.disabled = whole; a.kick(); }));
+  R.addEventListener('input', () => a.kick());
+  const LIFE = [[.15, 'the boy', .55], [.5, 'the man', .8], [.85, 'the old man', .7]];
+  const a = anim(el, now => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 260 : 240; vb(el, W, H);
+    const P = riverPts(W, H), pos = +R.value / 100, ph = (now / 60) % 16;
+    let g = `<path d="M8 ${H * .3}l40 -50l28 30l26 -40l40 60Z" ${F('earth', .35)}/>` + TX(W - 20, H - 10, 'the sea', 'faint', 10.5, 'end');
+    g += `<path d="M${W - 90} ${H}Q${W - 40} ${H * .78} ${W} ${H * .74}V${H}Z" ${F('cool', .3)}/>`;
+    g += `<path d="${ptsD(P)}" ${S('sky', 20, ';stroke-linecap:round;stroke-opacity:.6')}/><path d="${ptsD(P)}" ${S('cool', 1.5, `;stroke-dasharray:6 10;stroke-dashoffset:${-ph * 1}`)}/>`;
+    let vis = 0;
+    LIFE.forEach(([t, lab, s]) => { const [x, y] = P[Math.round(t * (P.length - 1))], near = Math.abs(pos - t) < .18, on = whole || near; if (on) vis++;
+      const op = whole ? 1 : near ? 1 : .18;
+      g += `<g style="opacity:${op}">` + person(x, y - 18, s * .7, 'panel', on ? 'glow' : 'faint', 1.5) + TX(x, y + 26, lab, on ? 'glow' : 'faint', 11.5, 'middle') + '</g>';
+      if (!whole && !near) g += TX(x, y - 58 * s, pos > t ? 'gone' : 'not yet', 'faint', 10, 'middle'); });
+    if (!whole){ const [x, y] = P[Math.round(pos * (P.length - 1))]; g += `<circle cx="${x}" cy="${y}" r="6" ${F('glow')}/>`; }
+    el.innerHTML = g;
+    $('#rvO').textContent = Math.round(lerp(8, 80, pos)) + ' years old';
+    $('#rvN').textContent = vis + ' of 3';
+    $('#rvS').textContent = whole ? 'Boy, man and old man are all here at once, separated only by shadows. Nothing is past, nothing is still to come.' : vis ? 'Only this moment of the life is real. The rest is memory or worry.' : 'Between moments: what was is gone and what will be isn\'t here yet.';
+  });
+}
+
+/* ---------- 10: how tightly to hold ---------- */
+{ const R = $('#snR'), el = $('#snSvg');
+  const BANDS = [[1, 'Open hands', 'He lets the boy go to the city. It tears at him, but the boy is free to live his own life, as Siddhartha once did.'],
+    [4, 'A loose hand', 'He offers the boy a home without demands. The boy still sulks, but there is room between them.'],
+    [7, 'Patient, and clinging', 'Siddhartha is kind and patient, and waits to be loved. The boy reads the patience as weakness and pushes harder.'],
+    [10, 'Holding tight', 'The more he holds on, the more the boy hates the hut and the two old men. One morning he is gone with the ferry money.']];
+  const draw = onLayout(() => {
+    const v = +R.value, t = v / 10, nw = NARROW(), W = nw ? 360 : 620, H = 230; vb(el, W, H);
+    const fx = nw ? 70 : 140, bx = W - (nw ? 70 : 140) + (1 - t) * (nw ? 40 : 80) * 0 , base = H - 50, lean = t * 14;
+    let g = `<line x1="0" y1="${base + 22}" x2="${W}" y2="${base + 22}" ${S('line', 1)}/>`;
+    g += person(fx, base, 1, 'panel-2', 'glow', 1.5) + TX(fx, base + 40, 'Siddhartha', 'muted', 11.5, 'middle');
+    g += `<g transform="rotate(${lean} ${bx} ${base + 18})">` + person(bx, base + 6, .72, 'panel-2', t > .6 ? 'bad' : 'cool', 1.5) + '</g>' + TX(bx, base + 40, 'his son', 'muted', 11.5, 'middle');
+    if (v > 0){ const sag = (1 - t) * 40, mx = (fx + bx) / 2; g += `<path d="M${fx + 22} ${base - 18}Q${mx} ${base - 18 + sag} ${bx - 16} ${base - 18}" ${S(t > .6 ? 'bad' : 'glow', 1 + t * 3)}/>`; }
+    else g += TX((fx + bx) / 2, base - 24, 'nothing holding', 'faint', 11, 'middle') + `<path d="M${bx + 20} ${base - 30}l${nw ? 40 : 70} -24" ${S('cool', 1.2, ';stroke-dasharray:3 4')}/>` + TX(W - 20, base - 62, 'the city', 'cool', 11, 'end');
+    el.innerHTML = g;
+    const b = BANDS.find(x => v <= x[0]); $('#snO').textContent = b[1]; $('#snP').textContent = Math.round(t * t * 100) + '%'; $('#snS').textContent = b[2];
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 11: listen to the river ---------- */
+{ const V = [['His father\'s grief', 'cool', 1.0, 0], ['His son\'s anger', 'bad', 1.7, 1], ['Kamala\'s longing', 'glow', 1.3, 2], ['Govinda\'s searching', 'cool', 2.1, 3],
+    ['Laughter', 'good', 2.6, 4], ['The dying', 'faint', .8, 5], ['A newborn\'s cry', 'good', 3.1, 6]];
+  let on = new Set([0, 1]), together = false; const el = $('#omSvg');
+  const vb1 = $('#omPick'); vb1.innerHTML = V.map((x, i) => `<button class="btn" type="button" data-v="${i}" aria-pressed="${on.has(i)}">${x[0]}</button>`).join('');
+  vb1.querySelectorAll('[data-v]').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.v; on.has(i) ? on.delete(i) : on.add(i); b.setAttribute('aria-pressed', on.has(i)); upd(); a.kick(); }));
+  const ms = btnRow('#omMode', ['Pick out each voice', 'Hear them all at once'], 'm');
+  ms.forEach(b => b.addEventListener('click', () => { press(ms, b); together = b.dataset.m === '1'; upd(); a.kick(); }));
+  const upd = () => { const n = on.size; $('#omN').textContent = n + ' of 7';
+    $('#omS').textContent = !n ? 'Silence. Bring in a voice.' : !together ? 'Separate voices, each wanting something: to be comforted, to win, to be loved.' : n < 7 ? 'They start to blend into one flowing sound. Some voices are still missing.' : 'Every voice at once, none picked out. The whole song is one word: Om.'; };
+  const a = anim(el, now => {
+    const nw = NARROW(), W = nw ? 360 : 620, H = nw ? 300 : 260; vb(el, W, H);
+    const ph = now / 900, act = V.map((x, i) => i).filter(i => on.has(i)), wave = (i, x) => Math.sin(x * V[i][2] / 40 + ph * V[i][2] + V[i][3]);
+    let g = '';
+    if (!together){ const rows = Math.max(act.length, 1), rh = (H - 20) / rows;
+      act.forEach((i, r) => { const cy = 10 + rh * (r + .5); let d = ''; for (let x = 0; x <= W - 10; x += 4) d += (x ? 'L' : 'M') + (x + 5) + ' ' + (cy + wave(i, x) * rh * .3).toFixed(1);
+        g += `<path d="${d}" ${S(V[i][1], 1.8)}/>` + TX(10, cy - rh * .32, V[i][0], V[i][1], 11); }); }
+    else if (act.length){ const cy = H / 2; let d = ''; for (let x = 0; x <= W - 10; x += 3){ let s = 0; act.forEach(i => s += wave(i, x)); d += (x ? 'L' : 'M') + (x + 5) + ' ' + (cy + s / Math.sqrt(act.length) * 34).toFixed(1); }
+      const full = act.length === 7;
+      if (full) g += `<rect x="0" y="${cy - 80}" width="${W}" height="160" ${F('glow', .07)}/>`;
+      g += `<path d="${d}" ${S(full ? 'glow' : 'cool', full ? 3.4 : 2.4)}/>`;
+      if (full) g += TX(W / 2, 46, 'Om', 'glow', 34, 'middle', 'font-family="Instrument Serif, serif"'); }
+    el.innerHTML = g;
+  });
+  upd();
+}
+
+/* ---------- 12: the seeker's beam ---------- */
+{ const R = $('#gvR'), el = $('#gvSvg');
+  const ITEMS = ['a stone', 'the river', 'a fish', 'a child', 'the ferry', 'a heron', 'a beggar', 'reeds', 'a lover', 'the moon', 'an old man', 'a flower', 'rain', 'a bird', 'a monk', 'a smile'];
+  const BANDS = [[2, 'Open', 'Nothing to find, so everything is here: the stone, the river, the old friend, and the smile.'], [5, 'Looking around', 'You have a goal in mind, but you still see what is near it.'],
+    [8, 'Searching', 'You see what might lead to the goal. The rest fades into background.'], [10, 'Driven', 'Govinda\'s whole life: eyes fixed on what he expects to find, missing what is right beside it.']];
+  const draw = onLayout(() => {
+    const v = +R.value, nw = NARROW(), W = nw ? 360 : 620, H = nw ? 320 : 280; vb(el, W, H);
+    const ex = 30, ey = H - 24, aim = Math.atan2(H * .3 - ey, W * .62 - ex), half = lerp(Math.PI * .42, .05, v / 10), r0 = Math.hypot(W, H);
+    const r = rng(11); let pts = ITEMS.map((t, k) => [lerp(90, W - 40, r()), lerp(28, H - 50, r()), t]);
+    pts[pts.length - 1] = [W * .66, H * .48, 'a smile'];
+    let g = `<path d="M${ex} ${ey}L${(ex + r0 * Math.cos(aim - half)).toFixed(1)} ${(ey + r0 * Math.sin(aim - half)).toFixed(1)}L${(ex + r0 * Math.cos(aim + half)).toFixed(1)} ${(ey + r0 * Math.sin(aim + half)).toFixed(1)}Z" ${F('glow', .1)}/>`;
+    g += `<circle cx="${W * .62}" cy="${H * .3}" r="7" ${S('glow', 1.4, ';stroke-dasharray:2 3')}/>` + TX(W * .62 + 12, H * .3 - 8, 'what you expect', 'glow', 10.5);
+    let seen = 0, smile = false;
+    pts.forEach(([x, y, t]) => { let d = Math.atan2(y - ey, x - ex) - aim; d = Math.atan2(Math.sin(d), Math.cos(d)); const inb = Math.abs(d) <= half; if (inb){ seen++; if (t === 'a smile') smile = true; }
+      const isS = t === 'a smile'; g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${isS ? 6 : 4}" ${F(inb ? (isS ? 'good' : 'text') : 'faint', inb ? 1 : .25)}/>` + (inb ? TX(x + 8, y + 4, t, isS ? 'good' : 'soft', 11) : ''); });
+    g += `<circle cx="${ex}" cy="${ey}" r="8" ${F('glow')}/>` + TX(ex + 14, ey + 4, 'you', 'glow', 11);
+    el.innerHTML = g;
+    const b = BANDS.find(x => v <= x[0]); $('#gvO').textContent = b[1];
+    $('#gvN').textContent = seen + ' of ' + ITEMS.length; $('#gvS').textContent = b[2] + (smile ? '' : ' (The smile is outside the beam.)');
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- afterword: told, then lived ---------- */
+{ let log = store.get('sid-log', []);
+  const W = { s: 'Still seeking', w: 'In the world, finding out', r: 'By the river, I see it now' };
+  function render(){
+    const list = $('#lgList');
+    list.innerHTML = log.length ? log.slice().reverse().slice(0, 12).map((e, k) => `<div class="lg-item"><span class="k ${e.w}">${new Date(e.d).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})} · ${W[e.w]}</span><p class="told">${esc(e.t)}</p>${e.l ? `<p class="lived">${esc(e.l)}</p>` : ''}<button type="button" data-del="${log.length - 1 - k}">Remove</button></div>`).join('')
+      : '<p class="empty">Nothing here yet. Think of one piece of advice you heard many times before you really understood it.</p>';
+    list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { log.splice(+b.dataset.del, 1); store.set('sid-log', log); render(); }));
+    $('#lgN').textContent = log.length; $('#lgR').textContent = log.filter(e => e.w === 'r').length; $('#lgS').textContent = log.filter(e => e.w === 's').length;
+  }
+  $('#lgAdd').addEventListener('click', () => { const t = $('#lgT').value.trim(); if (!t){ $('#lgT').focus(); return; } log.push({ t, l: $('#lgL').value.trim(), w: $('#lgW').value, d: Date.now() }); store.set('sid-log', log); $('#lgT').value = ''; $('#lgL').value = ''; render(); });
+  ['#lgT', '#lgL'].forEach(s => $(s).addEventListener('keydown', e => { if (e.key === 'Enter') $('#lgAdd').click(); }));
+  $('#lgClr').addEventListener('click', () => { if (log.length && confirm('Clear everything you have written here?')){ log = []; store.set('sid-log', log); render(); } });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
