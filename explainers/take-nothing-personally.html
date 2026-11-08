@@ -1,0 +1,1391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Take Nothing Personally, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: still water at night. Same shell as the other guides (section rail; per section: short answer, big ideas, a scene,
+   a lab, try it this week, plain words, quick check), grouped into the book's two parts.
+   Dark-first: deep blue-green ink with a soft gold accent and a lavender second series; light mode is a warm paper page.
+   In every lab, --glow is you: your calm centre, your own energy, the choices that are yours;
+   --cool is everything that comes from other people: their words, moods, opinions and requests.
+   --bad is reactive heat (the sting, the replay, the reply you regret). */
+:root{
+  color-scheme: dark;
+  --ink:#101A22;--panel:#16222C;--panel-2:#1F2D38;--line:#2E3F4C;--text:#EEF2F1;--muted:#A9B8BE;--faint:#7C8E97;
+  --glow:#F2C46D;--glow-soft:rgba(242,196,109,.1);--hl:rgba(242,196,109,.22);--cool:#A9A3FF;--cool-soft:rgba(169,163,255,.1);
+  --good:#8FDDB0;--good-soft:rgba(143,221,176,.1);--bad:#FF8A7A;--bad-soft:rgba(255,138,122,.12);
+  --soft:#D3DEDF;--deep:#0B131A;--toc-bg:rgba(22,34,44,.74);--glow-line:rgba(242,196,109,.36);--cool-line:rgba(169,163,255,.3);--on-glow:#2A1E05;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F3EC;--panel:#FFFFFF;--panel-2:#EEE8DE;--line:#DCD3C6;--text:#18212A;--muted:#4E5A63;--faint:#78838B;
+  --glow:#9A6A06;--glow-soft:rgba(154,106,6,.07);--hl:#F6E3B8;--cool:#5249C9;--cool-soft:rgba(82,73,201,.06);--good:#1F7A4A;--good-soft:rgba(31,122,74,.08);--bad:#B33A2A;--bad-soft:rgba(179,58,42,.07);
+  --soft:#25303A;--deep:#FCFAF6;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(154,106,6,.3);--cool-line:rgba(82,73,201,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F3EC;--panel:#FFFFFF;--panel-2:#EEE8DE;--line:#DCD3C6;--text:#18212A;--muted:#4E5A63;--faint:#78838B;
+  --glow:#9A6A06;--glow-soft:rgba(154,106,6,.07);--hl:#F6E3B8;--cool:#5249C9;--cool-soft:rgba(82,73,201,.06);--good:#1F7A4A;--good-soft:rgba(31,122,74,.08);--bad:#B33A2A;--bad-soft:rgba(179,58,42,.07);
+  --soft:#25303A;--deep:#FCFAF6;--toc-bg:rgba(255,255,255,.86);--glow-line:rgba(154,106,6,.3);--cool-line:rgba(82,73,201,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Take Nothing Personally additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:italic;color:var(--glow)}
+.loop{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.loop-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.loop-top .moves{gap:6px}
+.loop-top .btn{padding:5px 11px}
+.loop-stage{padding:10px 10px 4px}
+.loop-stage svg{display:block;width:100%;height:auto}
+.loop .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.lg{display:grid;gap:8px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.lg.ok{border-color:var(--glow-line);background:var(--glow-soft)}
+.lg-h{display:flex;gap:6px 12px;align-items:flex-start}
+.lg-h b{font-family:var(--f-display);font-weight:400;font-size:22px;line-height:1.15;flex:1;min-width:0;overflow-wrap:anywhere}
+.lg p{font-size:14.5px;color:var(--soft);overflow-wrap:anywhere}
+.lg p span{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-right:6px}
+.lg .rm{font:inherit;font-size:20px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:6px 10px;border-radius:6px;min-height:40px}
+.lg .rm:hover{color:var(--bad)}
+.lg .meta{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tag{font-family:var(--f-mono);font-size:11.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tag.ok{color:var(--glow);border-color:var(--glow)}
+.reqs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.reqs .tg{min-height:44px}
+.reqs .tg em{white-space:nowrap}
+.reqs .tg.on{border-color:var(--glow-line);background:var(--glow-soft)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .lg-h b{font-size:20px} .reqs{grid-template-columns:1fr} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A section-by-section guide to Shubham Kumar Singh's book</div>
+    <h1><em>Take Nothing Personally</em>,<br>Explained</h1>
+    <p class="lede">Most of what stings you, a short reply, a cold look, a "no", was shaped by the other person's day long before it reached you. <b>Take Nothing Personally</b> is Shubham Kumar Singh's short, gentle guide to noticing that, so you stop spending your energy on reactions and spend it on your own life instead. The book comes in two parts: <b>Take Nothing Personally</b> steps you out of the emotional noise (overreacting, needing approval, rejection, overthinking, boundaries), and <b>Focus on Yourself</b> turns the energy you win back toward a calm, intentional life. This guide covers twelve themes across those two parts, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>What people say tells you about <em>their</em> world; what you do next is the only part that belongs to yours.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="loop" style="margin:0" aria-label="One remark, two ways to take it, and the energy each costs you over a day">
+        <div class="loop-top"><span>The remark</span><div class="moves" id="hrPick"></div></div>
+        <div class="loop-stage"><svg id="hrSvg" viewBox="0 0 400 250" role="img" aria-label="A remark travels from another person toward you; the more personally you take it, the deeper it gets in and the more of your day it takes"></svg></div>
+        <div class="lab-ctl" style="padding:0 16px 10px"><div class="ctl"><label for="hrK"><span>How personally you take it</span><output id="ohrK"></output></label><input type="range" id="hrK" min="0" max="100" value="80"></div></div>
+        <div class="cap" id="hrCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Part I · sections 1 to 7</span><span class="q">Take Nothing Personally</span><span class="d">Step out of the noise: their weather, the pause, the spotlight, approval, criticism, replaying and boundaries</span></a>
+      <a href="#part2"><span class="n">Part II · sections 8 to 12</span><span class="q">Focus on Yourself</span><span class="d">Spend the energy you win back: your inner voice, your circle, self-respect, intention and ease</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> February 2026, about 130 pages, self-published</span>
+      <span><b>Author</b> Shubham Kumar Singh, self-help writer (You Become What You Think)</span>
+      <span><b>Full title</b> Take Nothing Personally: How to Stop Reacting, Focus on Yourself, and Live With Ease</span>
+    </div>
+    <p class="tip" style="max-width:780px">About this guide: the book's two parts and its themes come from the publisher's description; its full chapter list isn't published online, so the twelve section titles, scenes and labs here are ours. Where a section leans on psychology research, the study is named and labelled.</p>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Section navigation">
+    <div class="prog"><span id="progTxt">0 of 12 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Sections"></nav>
+
+    <!-- ===================== TAKE NOTHING PERSONALLY ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part I · take nothing personally</span>
+      <h2>Take Nothing Personally</h2>
+      <p>The first half of the book is about stepping out of the emotional noise. Most of the hurt we carry around doesn't come from what happened, but from what we decided it meant about us. These seven sections look at where that habit comes from and how to loosen it: other people's moods, the gap before you react, the spotlight you imagine on yourself, the hunger for approval, criticism and rejection, the replay loop in your head, and the boundaries that keep your peace intact.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Other people's words and moods are information about them. You can notice them, learn from them and still decline to carry them.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 1</span> · Other people speak from their own day</div>
+        <h2>It Was Never About You</h2>
+        <div class="short"><span class="lbl">In short</span><p>When someone is short with you, it's natural to ask what you did. Far more often the answer is: nothing. People's words come out of their own mood, stress, history and assumptions, and you happen to be standing where those words land.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Everyone carries weather.</b> A tired parent, a manager behind on a deadline, a friend who just got bad news: each of them speaks through that state. Their tone is a report on their inside, not a verdict on yours.</span></li>
+          <li><span><b>We blame character, not circumstances.</b> When others behave badly we assume it's who they are; when we do, we know it was the day we had. Turning that same generosity outward shrinks most stings.</span></li>
+          <li><span><b>Personal is a choice of story.</b> The event is "she didn't reply". The personal part is the story you add: "she's annoyed with me". You can't always stop the first thought, but you can ask for a second one.</span></li>
+          <li><span><b>Not personal doesn't mean not important.</b> Taking nothing personally isn't pretending you don't care. You can still address a problem; you just don't have to treat it as proof of your worth.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>In a classic 1967 study, Edward Jones and Victor Harris asked students to read essays about Fidel Castro, some for him and some against. The readers were told plainly that each writer had been assigned which side to argue. Even so, they judged that the writers of pro-Castro essays really did like Castro. Psychologist Lee Ross later named this habit the fundamental attribution error: we read people's behaviour as a window into who they are and underweight the situation that produced it. The same error runs in reverse when a curt message lands on you. You read it as being about you, when the situation behind it, the deadline or the bad night, is doing most of the work.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>Later research found the attribution error is weaker in some cultures and situations than first claimed, but the basic tilt (explaining others by character and ourselves by circumstance) shows up reliably.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: whose weather is it?</div><div class="hint">Reveal what was going on for them and watch how much of the remark is left for you</div></div>
+        <div class="stage"><svg id="wx1" role="img" aria-label="A pie showing how much of a curt remark is about you versus about the other person's day"></svg></div><div class="lab-ctl"><div class="toggles" id="wxTg"></div><div class="row" id="wxEx"></div></div><div class="stats"><div class="stat"><span class="k">About you</span><span class="v glow" id="wxA">–</span></div><div class="stat"><span class="k">About their day</span><span class="v" id="wxB">–</span></div></div><p class="callout" id="wx1Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>The next time a message stings, write down three things that might be going on for the sender that have nothing to do with you. Only then decide whether to reply.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>People talk from inside their own day. When someone is sharp with you, most of it is about what they're carrying. Ask what else might be going on before you take it as a judgement on you.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this section</label><a class="next" href="#ch2">Next: The pause →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 2</span> · Overreacting and the gap that fixes it</div>
+        <h2>The Space Before You React</h2>
+        <div class="short"><span class="lbl">In short</span><p>A sting arrives as a wave of feeling that rises quickly and, left alone, settles. Overreacting usually means acting at the top of the wave. The single most useful skill in the book is a pause: let the wave pass, name what you feel, then choose what to do.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Feelings are waves.</b> A rush of anger or hurt peaks and then fades if you don't keep feeding it. The trouble starts when you reply, post or decide right at the peak.</span></li>
+          <li><span><b>Replaying refuels the wave.</b> Every time you rehearse the insult in your head, you set the wave off again. A short sting becomes an afternoon.</span></li>
+          <li><span><b>Name it to tame it.</b> Putting a word on the feeling, "I'm embarrassed", "I feel dismissed", moves you from being the feeling to noticing it.</span></li>
+          <li><span><b>Respond, don't react.</b> A reaction is automatic; a response is chosen. The difference is a few breaths, a walk, or a draft you don't send yet.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>In 2007 Matthew Lieberman and colleagues at UCLA showed people photos of angry and frightened faces while scanning their brains. When people simply looked, the amygdala, a region involved in threat responses, lit up. When they chose a word to describe the emotion on the face, such as "angry", that response was lower, and a region linked to self-control in the prefrontal cortex became more active. Choosing a matching name, like a person's gender, didn't have the same effect. Labelling a feeling is a small act, but it seems to put a little distance between you and the wave.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>You'll often see a "90-second rule" for emotions, from neuroanatomist Jill Bolte Taylor's book My Stroke of Insight. It's a useful picture of a wave that passes, not a measured law; how long a feeling lasts varies a lot and depends heavily on whether you keep thinking about its cause.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: reply at the peak or after it</div><div class="hint">Choose when you reply and how often you replay it</div></div>
+        <div class="stage"><svg id="pz2" role="img" aria-label="A line showing the strength of a feeling over the hour after a sting, with a marker where you reply"></svg></div><div class="lab-ctl"><div class="ctl"><label for="pzT"><span>Minutes before you reply</span><output id="opzT"></output></label><input type="range" id="pzT" min="0" max="60" value="2" step="1"></div><div class="ctl"><label for="pzR"><span>Times you replay it in your head</span><output id="opzR"></output></label><input type="range" id="pzR" min="0" max="5" value="3" step="1"></div><div class="toggles" id="pzTg"></div><div class="row" id="pzEx"></div></div><div class="stats"><div class="stat"><span class="k">Feeling when you reply</span><span class="v glow" id="pzA">–</span></div><div class="stat"><span class="k">Minutes it stays hot</span><span class="v" id="pzB">–</span></div></div><p class="callout" id="pz2Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Pick a rule for this week: no replies to anything that stung until twenty minutes have passed. Write the reply if you want, but don't send it until then.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>The feeling that comes with a sting is a wave. If you wait for it to pass, and don't keep replaying the cause, it settles. Then you can answer as the person you want to be.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this section</label><a class="next" href="#ch3">Next: The spotlight →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 3</span> · Overthinking what other people think</div>
+        <h2>Nobody Is Watching as Closely as You Think</h2>
+        <div class="short"><span class="lbl">In short</span><p>We feel as if our mistakes, outfits and awkward moments are on a stage. In reality, other people are busy starring in their own lives and notice far less of ours than we fear. Much of what we take personally is a reaction to an audience that isn't paying attention.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You are the centre of your own view.</b> Because you experience every moment of your own life, your slip feels huge. To everyone else, it's a blip in their busy day.</span></li>
+          <li><span><b>Other people are anxious too.</b> The people you imagine judging you are mostly wondering how they're coming across.</span></li>
+          <li><span><b>Small mistakes fade fast.</b> The stumble in your talk or the typo in your email is often forgotten by others within minutes, while you replay it for days.</span></li>
+          <li><span><b>Lower the stakes, act more freely.</b> Once you know the spotlight is dimmer than it feels, you can speak up, try things and be a beginner without as much fear.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>In 2000 Thomas Gilovich, Victoria Medvec and Kenneth Savitsky asked Cornell students to put on a T-shirt with a large picture of the singer Barry Manilow, a choice most of them found embarrassing, and walk into a room where other students were filling in questionnaires. Afterwards the shirt-wearers guessed how many people in the room had noticed the shirt. They guessed about half. When the researchers asked the people in the room, fewer than a quarter (around 23 percent) could name who was on it. The researchers called this the spotlight effect: we overestimate how much others notice about us, because we can't stop noticing ourselves.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: walk into the room</div><div class="hint">Guess how many people will notice your shirt, then walk in</div></div>
+        <div class="stage"><svg id="sp3" role="img" aria-label="A room of people; the ones who noticed your embarrassing T-shirt light up"></svg></div><div class="lab-ctl"><div class="ctl"><label for="spG"><span>Your guess: people who'll notice</span><output id="ospG"></output></label><input type="range" id="spG" min="0" max="100" value="50" step="1"></div><div class="row"><button class="btn primary" id="spGo" type="button">Walk into the room</button></div><div class="row" id="spEx"></div></div><div class="stats"><div class="stat"><span class="k">Your guess</span><span class="v" id="spA">–</span></div><div class="stat"><span class="k">Who actually noticed (study)</span><span class="v glow" id="spB">–</span></div></div><p class="callout" id="sp3Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>After your next awkward moment, ask one person who was there whether they noticed. Write down what you expected them to say and what they actually said.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>People notice much less about you than you think, because they're busy thinking about themselves. The spotlight you feel is mostly your own.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this section</label><a class="next" href="#ch4">Next: Approval →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 4</span> · Letting go of the need for approval</div>
+        <h2>You Can't Please Everyone</h2>
+        <div class="short"><span class="lbl">In short</span><p>Wanting to be liked is human. Needing everyone's approval is a trap, because people want different and often opposite things. The more you bend to please everyone, the less of you is left, and you still won't reach everyone.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Tastes conflict.</b> One person wants you louder, another quieter; one loves your jokes, another finds them too much. No single version of you wins every vote.</span></li>
+          <li><span><b>Pleasing costs you yourself.</b> Each adjustment is small, but they add up until you're performing a person you don't recognise, and resenting the people you're performing for.</span></li>
+          <li><span><b>Your people find the real you.</b> When you're recognisably yourself, the people who like that version can find you. Those friendships don't need constant upkeep.</span></li>
+          <li><span><b>Approval is a nice bonus, not fuel.</b> Enjoy it when it comes. Just don't make it the thing that keeps you running.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>Picture a new team member who spends her first month trying to fit everyone. In the morning meeting she's cautious because the lead likes quiet; at lunch she's loud because the sales team likes energy; in reviews she softens every opinion. By the end of the month she's exhausted, and nobody can say what she actually thinks. In the second month she starts saying what she thinks, kindly. Two people cool on her. Four others start bringing her into decisions, because now they know what they're getting. She's liked by fewer people in total than she imagined at the start, but by the right ones, and it takes far less effort.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>This lab is an illustrative model: 24 people with tastes spread along one line. Real people judge on many lines at once, which makes pleasing everyone even harder.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: bend to the crowd</div><div class="hint">Move away from who you are and count who approves</div></div>
+        <div class="stage"><svg id="ap4" role="img" aria-label="A line of people with different tastes; you are a marker on the line and the people near you approve"></svg></div><div class="lab-ctl"><div class="ctl"><label for="apP"><span>Where you stand</span><output id="oapP"></output></label><input type="range" id="apP" min="0" max="100" value="22" step="1"></div><div class="row" id="apEx"></div></div><div class="stats"><div class="stat"><span class="k">People who approve</span><span class="v glow" id="apA">–</span></div><div class="stat"><span class="k">Distance from the real you</span><span class="v" id="apB">–</span></div></div><p class="callout" id="ap4Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Notice one moment this week when you're about to soften an opinion only to be liked. Say it plainly and kindly instead, and see what actually happens.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>People want different things from you, so you'll never please all of them. Trying wears you out and hides who you are. Be yourself and let the right people find you.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this section</label><a class="next" href="#ch5">Next: Criticism →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 5</span> · Handling rejection and feedback</div>
+        <h2>Criticism Is Information, Not a Verdict</h2>
+        <div class="short"><span class="lbl">In short</span><p>Rejection and criticism hurt because they feel like a judgement on who you are. Most of the time they're narrower than that: a comment on one piece of work, mixed with the critic's own mood and style. Pull those apart, keep the useful part, and let the rest go.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three things arrive at once.</b> A piece of criticism usually carries some information, some tone or mood from the person giving it, and an implied verdict on you. Only the first is worth keeping.</span></li>
+          <li><span><b>The work is not the worker.</b> "This draft is unclear" is about a draft. Hearing it as "you are not good enough" is a translation you added.</span></li>
+          <li><span><b>No is usually about fit.</b> A rejected application, a declined invitation or an unanswered pitch reflects their needs, timing and taste far more than your value.</span></li>
+          <li><span><b>Ask a question instead of defending.</b> "What would make it clearer?" turns a sting into something useful and keeps you out of a fight you don't need.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>In 2003 Naomi Eisenberger, Matthew Lieberman and Kipling Williams had people play Cyberball, a simple computer game of catch with two other players, inside a brain scanner. Partway through, the other two stopped throwing the ball to them. Being left out of a trivial game made people feel rejected, and it was accompanied by activity in brain regions that are also involved in the distress of physical pain. Rejection really does hurt, which is exactly why it helps to look at what was actually said, and not only at how it felt.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>How closely social pain and physical pain share brain circuits is still debated; later work suggests the overlap is partly about salience and alarm in general. The finding that exclusion stings quickly and strongly, even from strangers in a game, has held up well.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: keep it or let it go?</div><div class="tally" id="tally5" aria-label="Score"></div></div>
+        <div class="sorter" id="sort5"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Take the last piece of criticism that stuck with you. Write out only the useful information in it, in neutral words, and throw the rest away.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Criticism mixes useful information with the other person's tone and an imagined judgement of you. Keep the information, let the rest go, and ask a question if you need more.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this section</label><a class="next" href="#ch6">Next: Replaying →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 6</span> · Overthinking and the rumination loop</div>
+        <h2>Stop Replaying the Scene</h2>
+        <div class="short"><span class="lbl">In short</span><p>Thinking a problem through can help. Going round and round the same hurtful moment doesn't. Rumination feels like working on it, but it mostly keeps the feeling alive and pulls you away from the day you're actually in.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Replaying isn't solving.</b> Problem-solving moves toward a decision. Rumination circles the same scene, the same words, the same "why", and ends where it started.</span></li>
+          <li><span><b>Name the loop.</b> Noticing "I'm replaying again" is the first step out. You don't need to win the argument in your head to stop having it.</span></li>
+          <li><span><b>Absorb your attention elsewhere.</b> A walk, a task that needs your hands, a conversation about something else: anything absorbing gives the loop nothing to feed on.</span></li>
+          <li><span><b>Write it once.</b> Putting the whole thing on paper, one time, gives your mind permission to stop rehearsing it.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>Psychologist Susan Nolen-Hoeksema spent much of her career at Michigan, Stanford and Yale studying rumination. In a series of experiments with colleagues, people who were already feeling low were asked to spend about eight minutes either thinking about their feelings and what they meant, or picturing neutral scenes, such as clouds forming in the sky. Those who ruminated stayed low or felt worse, and later found it harder to solve everyday problems; those who were distracted for a few minutes felt better. Her broader research linked a habit of rumination to longer and deeper low moods.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>The shape of the curve in this lab is an illustrative model, not data from the studies.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: one sting, a whole day</div><div class="hint">Change how often you replay it and what you do afterwards</div></div>
+        <div class="stage"><svg id="rp6" role="img" aria-label="A line of your mood across the day after one hurtful moment in the morning"></svg></div><div class="lab-ctl"><div class="ctl"><label for="rpN"><span>Times you replay it today</span><output id="orpN"></output></label><input type="range" id="rpN" min="0" max="12" value="7" step="1"></div><div class="toggles" id="rpTg"></div><div class="row" id="rpEx"></div></div><div class="stats"><div class="stat"><span class="k">Hours under the cloud</span><span class="v glow" id="rpA">–</span></div><div class="stat"><span class="k">Mood by evening</span><span class="v" id="rpB">–</span></div></div><p class="callout" id="rp6Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>When you catch yourself replaying a scene, set a timer for ten minutes and do something that needs your hands or your full attention. Notice how much of the feeling is left afterwards.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Going over and over a hurtful moment doesn't solve anything; it just keeps it alive. Notice the loop, write it down once, and give your attention something else to do.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this section</label><a class="next" href="#ch7">Next: Boundaries →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 7</span> · Saying no without guilt</div>
+        <h2>Boundaries Protect Your Peace</h2>
+        <div class="short"><span class="lbl">In short</span><p>If you can't say no, your time and energy belong to whoever asks first. A boundary is a decision about what you will and won't do, said kindly and kept. It isn't an attack on anyone, and other people's disappointment isn't proof that it was wrong.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A boundary is about you.</b> "I don't answer work messages after eight" is a boundary. "You must stop messaging me" is a demand. You can only enforce the first.</span></li>
+          <li><span><b>Every yes spends something.</b> Your energy is limited. Saying yes to everything means saying no, quietly, to rest, to your own projects and to the people who matter most.</span></li>
+          <li><span><b>Disappointment is allowed.</b> Someone feeling let down by your no is their feeling to have. It doesn't mean you were unkind.</span></li>
+          <li><span><b>Short and kind beats long and guilty.</b> "I can't take that on this week" works better than a long justification, which invites a negotiation.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>A teacher we'll call Ravi was the person everyone asked: cover a class, mark an extra set of papers, run the weekend club, lend an ear at nine at night. He said yes to all of it and started to dread his phone. When he finally sat down and decided what he would do, he kept two of the extras he enjoyed and dropped the rest, with a short, friendly message for each. One colleague was put out for a week. Most simply asked someone else. He found he had the evenings back, and that he was kinder to the people he still said yes to, because he wasn't quietly resenting them.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: your energy for the week</div><div class="hint">Say yes or no to each request and see what's left for you</div></div>
+        <div class="stage"><svg id="bd7" role="img" aria-label="An energy bar for your week showing how much goes to other people's requests and how much is left for you"></svg></div><div class="lab-ctl"><div class="reqs" id="bdList"></div><div class="row" id="bdEx"></div></div><div class="stats"><div class="stat"><span class="k">Left for you</span><span class="v glow" id="bdA">–</span></div><div class="stat"><span class="k">Yeses you'd resent</span><span class="v" id="bdB">–</span></div></div><p class="callout" id="bd7Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write one boundary as a sentence that starts with "I", such as "I don't take calls during dinner". Tell one person about it this week and keep it.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>A boundary is a decision about what you'll do, not a rule for others. Say it kindly and briefly, keep it, and let people be disappointed if they are.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this section</label><a class="next" href="#ch8">Next: Inner voice →</a></div>
+    </section>
+    <!-- ===================== FOCUS ON YOURSELF ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part II · focus on yourself</span>
+      <h2>Focus on Yourself</h2>
+      <p>Taking things less personally frees up a surprising amount of time and energy. The second half asks what you'll do with it. These five sections turn inward: hearing your own voice under the borrowed ones, putting your effort where you have control, keeping promises to yourself, choosing on purpose what your days are for, and building the kind of steadiness that lets life be easier without needing it to be perfect.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The energy you stop spending on reactions is yours to invest. Put it into the few things you can actually shape: your choices, your promises and your days.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 8</span> · Trusting yourself over borrowed opinions</div>
+        <h2>Hear Your Own Voice</h2>
+        <div class="short"><span class="lbl">In short</span><p>Once you stop reacting to every outside opinion, it gets quieter, and you can hear your own judgement. Many of the voices in our heads were borrowed: from parents, teachers, critics or social media. Learning which ones are actually yours is the first step in focusing on yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Not every thought is yours.</b> "You're not the creative type" may be a teacher's line from years ago. Ask where a thought came from before you obey it.</span></li>
+          <li><span><b>Your voice sounds like values.</b> Your own judgement tends to point toward something you care about. Borrowed voices tend to warn you about what others will think.</span></li>
+          <li><span><b>Quiet helps.</b> Time without input (a walk without headphones, a page of writing) is when your own voice gets loud enough to hear.</span></li>
+          <li><span><b>Trust grows by testing.</b> Follow your judgement on small things and notice how it turns out. Self-trust is built from evidence, not declared.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>Picture someone choosing between two jobs. One is prestigious and her family would be proud. The other is smaller but the work is exactly what she lights up talking about. When she lists her reasons, every reason for the first job starts with what someone else would think: her parents, her old classmates, a recruiter. Every reason for the second starts with "I". She doesn't have to choose the smaller job, but now she knows which voice is which, and whichever she picks, it will be her decision rather than a vote she held on behalf of other people.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: whose voice is it?</div><div class="tally" id="tally8" aria-label="Score"></div></div>
+        <div class="sorter" id="sort8"></div>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Spend ten minutes this week writing, without stopping, about one decision you're facing. Then underline every sentence that is really about what someone else will think.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Some of the voices in your head belong to other people. Learn to hear the one that speaks for what you value, and practise trusting it on small things first.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this section</label><a class="next" href="#ch9">Next: Your circle →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 9</span> · The circle of what's yours</div>
+        <h2>Spend Energy Where You Have Control</h2>
+        <div class="short"><span class="lbl">In short</span><p>Other people's opinions, moods and choices sit outside your control. Your own effort, words and habits sit inside it. A lot of wasted energy comes from pushing on the outside circle while neglecting the inside one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three rings.</b> Some things you control (your actions, your effort), some you can influence (a team's plans, a friend's mood), and much you can't touch (the weather, other people's opinions).</span></li>
+          <li><span><b>Worry outside the circle is a leak.</b> Energy spent wishing people thought differently changes nothing. The same energy spent on your own work changes something.</span></li>
+          <li><span><b>Influence through the inner circle.</b> You can't make someone respect you, but you can do work that earns it and treat them well. Influence comes from the middle out.</span></li>
+          <li><span><b>Old wisdom, new language.</b> The Stoic Epictetus taught that some things are up to us and some are not, nearly two thousand years ago; Stephen Covey's circles of concern and influence say the same thing for a modern reader.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>Imagine a small business owner after a harsh online review. For two days her energy goes to the reviewer: rereading the post, drafting replies, checking whether anyone else agreed. On the third day she draws three circles on a page. In the outer one she writes the reviewer's opinion and what strangers might think. In the middle, her public reply. In the centre, the two things the review fairly pointed out about her service. She writes one calm reply, fixes the two things, and stops reading the post. The review is still there, but most of her attention is back where it can actually do some good.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: where does your energy go?</div><div class="hint">Tick what you spend energy on and see how much of it lands inside your circle</div></div>
+        <div class="stage"><svg id="cc9" role="img" aria-label="Three rings: things you control, things you can influence and things outside your control, with dots for where your energy goes"></svg></div><div class="lab-ctl"><div class="reqs" id="ccList"></div><div class="row" id="ccEx"></div></div><div class="stats"><div class="stat"><span class="k">Energy inside your control</span><span class="v glow" id="ccA">–</span></div><div class="stat"><span class="k">Energy spent outside</span><span class="v" id="ccB">–</span></div></div><p class="callout" id="cc9Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>List what's worrying you this week and put each item in one of three columns: control, influence, neither. Pick one item from the first column and act on it today.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You control your own actions, you can influence some things, and much is out of your hands. Put your energy into the first two and let the rest be.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this section</label><a class="next" href="#ch10">Next: Self-respect →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 10</span> · Self-respect and self-trust</div>
+        <h2>Keep the Promises You Make to Yourself</h2>
+        <div class="short"><span class="lbl">In short</span><p>We work hard to keep promises to other people and break the ones we make to ourselves without a second thought. Each broken one teaches you that your own word doesn't count. Self-respect comes back the same way it left: one kept promise at a time, starting small.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You're keeping score.</b> Every time you say "tomorrow I'll start" and don't, part of you notices. Over time you stop believing yourself.</span></li>
+          <li><span><b>Make promises you can keep.</b> A promise to walk for ten minutes that you keep does more for self-trust than a promise to run five miles that you break.</span></li>
+          <li><span><b>Self-respect makes criticism smaller.</b> When you trust yourself, other people's opinions have less to grab on to. You know what you're doing because you have the evidence.</span></li>
+          <li><span><b>Respect includes rest.</b> Keeping promises to yourself also means keeping the ones about sleep, breaks and limits, not only the ones about productivity.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>Think of someone who has promised himself, every Monday for a year, that this is the week he'll get up early and write. Most weeks it lasts a day. Eventually he notices that the failures have started to colour everything: why would anyone take him seriously when he doesn't take himself seriously? He changes one thing. Instead of two hours at five in the morning, he promises fifteen minutes after breakfast, and he does it every day for a month. The writing is modest. The bigger change is that he starts to trust his own word again, and with that, other people's doubts carry less weight.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>An illustrative model: each kept promise adds a little trust, and each broken one takes away a bit more than a kept one adds.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: the self-trust ledger</div><div class="hint">Set how many promises you make and how many you keep over a month</div></div>
+        <div class="stage"><svg id="st10" role="img" aria-label="A line of your self-trust over 30 days with a bar for each day's kept and broken promises"></svg></div><div class="lab-ctl"><div class="ctl"><label for="stP"><span>Promises to yourself each day</span><output id="ostP"></output></label><input type="range" id="stP" min="1" max="6" value="4" step="1"></div><div class="ctl"><label for="stK"><span>Share you keep</span><output id="ostK"></output></label><input type="range" id="stK" min="0" max="100" value="45" step="5"></div><div class="toggles" id="stTg"></div><div class="row" id="stEx"></div></div><div class="stats"><div class="stat"><span class="k">Promises kept this month</span><span class="v" id="stA">–</span></div><div class="stat"><span class="k">Self-trust after 30 days</span><span class="v glow" id="stB">–</span></div></div><p class="callout" id="st10Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Make one promise to yourself that is almost too small to fail, and keep it every day this week. Tick it off somewhere you'll see.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Breaking small promises to yourself slowly teaches you not to trust yourself. Make promises you can keep, keep them, and your self-respect grows back.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this section</label><a class="next" href="#ch11">Next: Intention →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 11</span> · Turning reclaimed energy into a life</div>
+        <h2>Live on Purpose</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every hour you no longer spend replaying, defending or checking what others think is an hour you get back. The second half of the book asks you to decide on purpose what that time is for, so it doesn't simply drain into the next distraction.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Reactions are expensive.</b> Ten minutes rereading a message, twenty replaying an argument, fifteen checking reactions online: across a year that's hundreds of hours.</span></li>
+          <li><span><b>Decide what matters.</b> Clarity is knowing the few things you want your days to be about. Without that, freed time fills back up with noise.</span></li>
+          <li><span><b>Plan the when and where.</b> "After dinner, at the kitchen table, I'll study for thirty minutes" is far more likely to happen than "I'll study more".</span></li>
+          <li><span><b>Ease comes from direction.</b> When you know what you're building, small slights matter less. You're busy with something that's yours.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>Psychologist Peter Gollwitzer spent years studying the gap between intending to do something and doing it. His answer was the implementation intention, a plan in the form "if situation X happens, then I will do Y". In study after study, people who wrote such plans were more likely to follow through than people who only set the goal, whether the goal was exercise, studying or screening appointments. A 2006 review by Gollwitzer and Paschal Sheeran of 94 studies found a medium-to-large effect on reaching goals. Deciding the when and where in advance turns good intentions into actual hours.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the hours you get back</div><div class="hint">Set the minutes a day you spend on reactions and see what a year of them could become</div></div>
+        <div class="stage"><svg id="en11" role="img" aria-label="Bars converting daily minutes spent on reactions into hours per year and what they could become"></svg></div><div class="lab-ctl"><div class="ctl"><label for="enR"><span>Replaying conversations (min/day)</span><output id="oenR"></output></label><input type="range" id="enR" min="0" max="90" value="25" step="5"></div><div class="ctl"><label for="enS"><span>Checking what others think (min/day)</span><output id="oenS"></output></label><input type="range" id="enS" min="0" max="120" value="30" step="5"></div><div class="ctl"><label for="enA"><span>Arguing or defending yourself (min/day)</span><output id="oenA"></output></label><input type="range" id="enA" min="0" max="60" value="10" step="5"></div><div class="row" id="enEx"></div></div><div class="stats"><div class="stat"><span class="k">Hours a year</span><span class="v glow" id="enA2">–</span></div><div class="stat"><span class="k">Full working weeks</span><span class="v" id="enB">–</span></div></div><p class="callout" id="en11Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>Write one if-then plan for the time you'd normally spend replaying: "If I notice I'm replaying a conversation, then I'll open my notebook and work on X for ten minutes."</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>Reacting to other people eats far more time than it feels like. Decide what you want that time for and plan exactly when you'll spend it.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this section</label><a class="next" href="#ch12">Next: Ease →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Section 12</span> · Living with ease</div>
+        <h2>Steady, Not Perfect</h2>
+        <div class="short"><span class="lbl">In short</span><p>The book doesn't promise you'll never feel hurt again. It promises steadiness: things will still sting, but they'll tip you less and you'll come back faster. Ease is what life feels like when you aren't fighting every wave.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Steadiness is a keel, not a wall.</b> You can't stop the waves. You can build something below the waterline (habits, self-trust, perspective) that rights you after each one.</span></li>
+          <li><span><b>Practice is what deepens it.</b> Every pause, every boundary kept, every time you choose not to replay, adds a little depth. It compounds.</span></li>
+          <li><span><b>Be kind to yourself when you slip.</b> You'll take things personally again. Treating that with understanding rather than more criticism gets you back to calm faster.</span></li>
+          <li><span><b>Ease isn't indifference.</b> You still care about people and outcomes. You just stop handing your peace to whoever speaks loudest.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">A scene</span><p>Picture two people who get the same blunt message from a client on a Friday afternoon. The first spends the weekend on it: rereading it, drafting replies, telling the story to friends, sleeping badly. The second feels the same jolt, says to herself "that stung", jots down the one fair point in it for Monday and goes for a walk. Nothing about the message was different. The difference was a year of small practice, which had given her a keel: the wave still tipped her, but she came back upright within the hour.</p></div>
+      <div class="note"><span class="lbl">Worth knowing</span><p>An illustrative model of the book's idea of steadiness, not a measurement of anything.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: a keel for the waves</div><div class="hint">Choose the size of the wave and how deep your keel is, then send it</div></div>
+        <div class="stage"><svg id="kl12" role="img" aria-label="A small boat on the water; a wave tips it and the keel rights it again"></svg></div><div class="lab-ctl"><div class="ctl"><label for="klW"><span>Size of the wave</span><output id="oklW"></output></label><input type="range" id="klW" min="1" max="10" value="7" step="1"></div><div class="ctl"><label for="klK"><span>Depth of your keel (practice)</span><output id="oklK"></output></label><input type="range" id="klK" min="0" max="10" value="3" step="1"></div><div class="row"><button class="btn primary" id="klGo" type="button">Send the wave</button></div><div class="row" id="klEx"></div></div><div class="stats"><div class="stat"><span class="k">Furthest it tips</span><span class="v" id="klA">–</span></div><div class="stat"><span class="k">Back upright after</span><span class="v glow" id="klB">–</span></div></div><p class="callout" id="kl12Cap" aria-live="polite"></p>
+      </figure>
+      <div class="try"><span class="lbl">Try it this week</span><p>The next time you slip and take something personally, say to yourself what you'd say to a friend in the same spot. Then do one small thing that brings you back to your day.</p></div>
+      <div class="plain"><span class="lbl">In plain words</span><p>You won't stop feeling the waves, and that's fine. With practice you tip less and come back faster, and that steadiness is what makes life feel easier.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this section</label><a class="next" href="#after">Next: your let-it-go log →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your let-it-go log</h2>
+      <p class="big">The whole book as one habit: when something stings, pause, name the story you're telling yourself, find one other thing that might be true, and decide where your energy goes instead.</p>
+      <figure class="lab" id="journal">
+        <div class="lab-top"><div class="t">Log a moment that stung</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="lgWhat">What happened</label><input id="lgWhat" maxlength="140" placeholder="e.g. My manager replied &quot;fine.&quot; to my long update"></div>
+          <div class="field"><label for="lgStory">The story I told myself</label><input id="lgStory" maxlength="140" placeholder="e.g. She thinks my work is poor"></div>
+          <div class="field"><label for="lgElse">What else might be true</label><input id="lgElse" maxlength="140" placeholder="e.g. She was between two meetings"></div>
+          <div class="field" style="grid-column:1/-1"><label for="lgNext">Where my energy goes instead</label><input id="lgNext" maxlength="140" placeholder="e.g. Finish the draft I care about"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="lgAdd" type="button">Add to my log</button><span class="tip" id="lgMsg"></span></div>
+        </div>
+        <div class="out" id="lgList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Their weather</span><b>It's mostly about them</b><span>People speak from their own mood, stress and history; your part in it is usually small.</span></div>
+        <div><span class="n">The gap</span><b>Pause before you answer</b><span>Feelings rise and fall; reply after the peak and you'll say what you mean.</span></div>
+        <div><span class="n">Approval</span><b>You can't please everyone</b><span>Tastes conflict, so chasing all of them leaves less of you and still not everyone.</span></div>
+        <div><span class="n">Criticism</span><b>Keep the useful part</b><span>Separate the information from the tone and from your worth, then keep only the information.</span></div>
+        <div><span class="n">Boundaries</span><b>Protect your peace</b><span>A boundary is what you will do, said kindly and kept, not a rule for other people.</span></div>
+        <div><span class="n">Focus</span><b>Spend energy on your circle</b><span>Put the energy you win back into what you control: your choices, promises and days.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Take Nothing Personally: How to Stop Reacting, Focus on Yourself, and Live With Ease</i> by Shubham Kumar Singh (2026). The explanations, scenes and labs are written in our own words; the part titles are the book's and the section titles are ours. Labs that show numbers are illustrative models unless they say the figures come from a study.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["Take Nothing Personally", "Focus on Yourself"];
+const CH = [["It Was Never About You", "Their weather", 0, "Section 1"], ["The Space Before You React", "The pause", 0, "Section 2"], ["Nobody Is Watching as Closely as You Think", "The spotlight", 0, "Section 3"], ["You Can't Please Everyone", "Approval", 0, "Section 4"], ["Criticism Is Information, Not a Verdict", "Criticism", 0, "Section 5"], ["Stop Replaying the Scene", "Replaying", 0, "Section 6"], ["Boundaries Protect Your Peace", "Boundaries", 0, "Section 7"], ["Hear Your Own Voice", "Inner voice", 1, "Section 8"], ["Spend Energy Where You Have Control", "Your circle", 1, "Section 9"], ["Keep the Promises You Make to Yourself", "Self-respect", 1, "Section 10"], ["Live on Purpose", "Intention", 1, "Section 11"], ["Steady, Not Perfect", "Ease", 1, "Section 12"]];
+const QUIZ = {
+"1": {
+"q": "Your colleague answers your question with a single word. What does this section suggest first?",
+"o": [
+"Ask yourself what you did wrong",
+"Consider what's going on in their day before deciding it's about you",
+"Reply with one word too, so they notice"
+],
+"a": 1,
+"w": "Their reply mostly reflects their state. Looking at the situation first stops you from turning a moment into a verdict."
+},
+"2": {
+"q": "Why does replaying an insult make it last longer?",
+"o": [
+"Because each replay sets the feeling off again",
+"Because it helps you find the perfect comeback",
+"Because feelings never fade on their own"
+],
+"a": 0,
+"w": "A feeling left alone fades. Replaying the cause keeps restarting it, which is why a moment can stretch into a whole day."
+},
+"3": {
+"q": "In the T-shirt study, how did the wearers' guesses compare with reality?",
+"o": [
+"They guessed about right",
+"They guessed about half would notice; under a quarter did",
+"They guessed few would notice; almost everyone did"
+],
+"a": 1,
+"w": "The wearers roughly doubled the real figure. That gap is the spotlight effect."
+},
+"4": {
+"q": "Why can't you win everyone's approval by adjusting yourself enough?",
+"o": [
+"Because people want different, often opposite things",
+"Because nobody gives approval to adults",
+"Because you haven't tried hard enough yet"
+],
+"a": 0,
+"w": "When tastes conflict, moving toward one group moves you away from another. There's no position that wins every vote."
+},
+"5": {
+"q": "Your manager says, \"This report is a mess, I expected better.\" What's the useful information?",
+"o": [
+"That you are bad at your job",
+"That the report needs restructuring, and you can ask what would help",
+"That your manager dislikes you"
+],
+"a": 1,
+"w": "The usable part is about the report. \"I expected better\" is their disappointment, and \"bad at your job\" is a verdict you'd be adding yourself."
+},
+"6": {
+"q": "What's the difference between rumination and problem-solving?",
+"o": [
+"Rumination is faster",
+"Problem-solving moves toward a decision; rumination circles the same scene",
+"There is no difference"
+],
+"a": 1,
+"w": "Problem-solving ends somewhere. Rumination loops, and every loop restarts the feeling."
+},
+"7": {
+"q": "Which of these is a boundary in the book's sense?",
+"o": [
+"\"You need to stop asking me for favours.\"",
+"\"I can't take on extra work this month.\"",
+"\"Everyone should respect my time.\""
+],
+"a": 1,
+"w": "A boundary describes what you will or won't do. The others try to control other people's behaviour, which you can't enforce."
+},
+"8": {
+"q": "Which thought is most likely to be your own voice?",
+"o": [
+"\"People will think I'm odd if I take that class.\"",
+"\"I'd really enjoy learning to paint, and I want more of that in my week.\"",
+"\"My parents never thought I was artistic.\""
+],
+"a": 1,
+"w": "Your own voice tends to speak about what you value and want. The others are about other people's opinions."
+},
+"9": {
+"q": "Someone you work with seems not to like you. What's inside your circle of control?",
+"o": [
+"Their opinion of you",
+"How you treat them and the quality of your own work",
+"What other colleagues say about it"
+],
+"a": 1,
+"w": "You can't set someone's opinion, but your own behaviour and work are entirely yours, and they're also the best way to influence the rest."
+},
+"10": {
+"q": "What does the book suggest for rebuilding self-trust?",
+"o": [
+"Make one big, ambitious promise",
+"Make small promises you can keep, and keep them",
+"Stop making promises to yourself at all"
+],
+"a": 1,
+"w": "Self-trust is built from evidence. Small promises kept give you that evidence quickly."
+},
+"11": {
+"q": "Which plan is most likely to work?",
+"o": [
+"\"I'll read more this year.\"",
+"\"After dinner on weekdays, on the sofa, I'll read for 20 minutes.\"",
+"\"I'll read whenever I feel inspired.\""
+],
+"a": 1,
+"w": "A plan that names the when and where is an implementation intention, and those are reliably more likely to happen."
+},
+"12": {
+"q": "What does \"living with ease\" mean in this book?",
+"o": [
+"Never feeling hurt again",
+"Still feeling things, but tipping less and recovering faster",
+"Not caring about other people"
+],
+"a": 1,
+"w": "The book promises steadiness, not perfection. Waves still come; you learn to come back upright."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#101a22';
+try { const t = localStorage.getItem('tnp-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('tnp-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('tnp-done', []));
+const save = () => store.set('tnp-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* preset buttons: [label, {sliderId: value, ...other keys}] */
+function presets(rowSel, list, apply){
+  const box = $(rowSel); box.innerHTML = '<span class="tip" style="align-self:center">Try:</span>' + list.map((p, i) => `<button class="btn" type="button" data-i="${i}" aria-pressed="false">${p[0]}</button>`).join('');
+  const bs = [...box.querySelectorAll('button')];
+  bs.forEach(b => b.addEventListener('click', () => { press(bs, b); const v = list[+b.dataset.i][1]; Object.keys(v).forEach(k => { const el = $('#' + k); if (el && el.type === 'range') el.value = v[k]; }); apply(v); }));
+  return bs;
+}
+const unpress = bs => bs.forEach(b => b.setAttribute('aria-pressed', 'false'));
+/* checkbox toggles: [key, label, checked] -> state object */
+function toggles(sel, pre, list, onChange){
+  const st = {}; const box = $(sel);
+  box.innerHTML = list.map(([k, l, on]) => { st[k] = !!on; return `<label class="tg" for="${pre}_${k}"><input type="checkbox" id="${pre}_${k}" data-k="${k}"${on ? ' checked' : ''}><span>${l}</span></label>`; }).join('');
+  box.querySelectorAll('input').forEach(x => x.addEventListener('change', () => { st[x.dataset.k] = x.checked; onChange(); }));
+  st.set = v => Object.keys(v).forEach(k => { if (k in st && k !== 'set'){ st[k] = !!v[k]; const el = $('#' + pre + '_' + k); if (el) el.checked = !!v[k]; } });
+  return st;
+}
+const arc = (cx, cy, r, a0, a1) => { const p = a => [cx + r * Math.cos(a), cy + r * Math.sin(a)]; const [x0, y0] = p(a0), [x1, y1] = p(a1);
+  return `M${cx} ${cy}L${x0.toFixed(1)} ${y0.toFixed(1)}A${r} ${r} 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}Z`; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['A short reply ruined my afternoon', 1, 'Their weather', 'Their tone is mostly about their day. Look for what else might be going on before deciding it\'s about you.'],
+    ['I say things I regret when I\'m upset', 2, 'The pause', 'Feelings peak and then fade. Wait out the wave, name what you feel, then answer.'],
+    ['I keep thinking people are judging me', 3, 'The spotlight', 'People notice far less about you than you think; in one study, about half as much.'],
+    ['I bend myself to be liked', 4, 'You can\'t please everyone', 'Tastes conflict, so no version of you wins every vote. Be yourself and let the right people find you.'],
+    ['Criticism crushes me', 5, 'Information, not a verdict', 'Separate the useful information from the tone and from your worth. Keep only the information.'],
+    ['I replay conversations for days', 6, 'Stop replaying', 'Replaying isn\'t solving. Name the loop, write it down once, and give your attention something absorbing.'],
+    ['I can\'t say no', 7, 'Boundaries', 'A boundary is what you will do, said kindly and kept. Other people\'s disappointment isn\'t proof it was wrong.'],
+    ['I don\'t know what I actually want', 8, 'Your inner voice', 'Sort your own voice from borrowed ones: yours talks about values, borrowed ones about what others think.'],
+    ['I worry about things I can\'t change', 9, 'Your circle', 'Spend energy on what you control and can influence, and let the rest be.'],
+    ['I never stick to what I promise myself', 10, 'Self-respect', 'Make promises small enough to keep, and keep them. Self-trust is built from evidence.'],
+    ['I have no time for what matters', 11, 'Live on purpose', 'Reactions cost hundreds of hours a year. Decide what that time is for and plan when.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the section →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: one remark, two ways to take it ---------- */
+{ const R = [['"Fine."', 'two deadlines today', 200], ['"Can we talk later?"', 'just got bad news', 260], ['Left on read', 'phone on silent at work', 150]];
+  const svg = $('#hrSvg'), K = $('#hrK'), cap = $('#hrCap'), pk = $('#hrPick'); let ri = 0;
+  pk.innerHTML = R.map((r, i) => `<button class="btn" type="button" data-r="${i}" aria-pressed="${i === 0}">${r[0]}</button>`).join('');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 400, H = nw ? 300 : 250, k = +K.value / 100, [txt, why, base] = R[ri]; vb(svg, W, H);
+    const fs = nw ? 12.5 : 11.5, tx = nw ? 60 : 64, ty = nw ? 104 : 96, yx = nw ? 244 : 300, yy = ty, rings = [54, 38, 22, 9];
+    let g = '';
+    /* them, with their weather */
+    g += `<ellipse cx="${tx}" cy="${ty - 50}" rx="${nw ? 50 : 54}" ry="17" ${F('cool', .16)}/>` + wrap(tx, ty - 50, why, 16, 13, 'cool', fs);
+    g += `<circle cx="${tx}" cy="${ty}" r="20" ${FS('panel-2', 'cool', 1.5)}/>` + TX(tx, ty + 40, 'them', 'muted', fs, 'middle');
+    /* you, with rings */
+    rings.forEach((r, i) => g += `<circle cx="${yx}" cy="${yy}" r="${r}" ${i === 3 ? F('glow', .9) : FS('glow', 'glow', 1, .05 + i * .03)}/>`);
+    g += TX(yx, yy + 72, 'you', 'muted', fs, 'middle');
+    /* the remark: how far it gets in */
+    const edge = yx - rings[0], tip = lerp(edge - 4, yx - 6, k), hot = k > .45;
+    g += `<line x1="${tx + 24}" y1="${ty}" x2="${tip.toFixed(1)}" y2="${yy}" ${S(hot ? 'bad' : 'cool', 2.2)}/>` + arrowHead(tip, yy, 0, hot ? 'bad' : 'cool', 9);
+    g += TX((tx + 24 + tip) / 2, ty - 10, txt, 'text', fs + 1, 'middle', 'font-weight="600"');
+    if (k < .35) g += `<path d="M${edge - 6} ${yy}q-26 26 -66 34" ${S('cool', 1.5, ';stroke-dasharray:3 4')}/>` + TX(edge - 76, yy + 50, 'back to their day', 'cool', fs, 'middle');
+    for (let i = 0; i < Math.round(k * 4); i++) g += `<circle cx="${yx}" cy="${yy}" r="${rings[0] + 8 + i * 9}" ${S('bad', 1, ';stroke-opacity:' + (.5 - i * .1))}/>`;
+    /* the day bar */
+    const mins = Math.round(base * Math.pow(k, 1.6)), L = 16, Rr = W - 16, by = nw ? 230 : 196, dayMin = 900;
+    g += TX(L, by - 10, 'your day, 8 am to 11 pm', 'faint', fs);
+    g += `<rect x="${L}" y="${by}" width="${Rr - L}" height="14" rx="5" ${F('glow', .22)}/>`;
+    const hw = (Rr - L) * mins / dayMin; if (hw > 0) g += `<rect x="${L + (Rr - L) * 120 / dayMin}" y="${by}" width="${hw.toFixed(1)}" height="14" rx="5" ${F('bad', .85)}/>`;
+    g += TX(L, by + 32, mins ? `${mins} min replaying it` : 'no time lost to it', mins > 60 ? 'bad' : 'muted', fs) + TX(Rr, by + 32, 'the rest is yours', 'glow', fs, 'end');
+    svg.innerHTML = g; out('hrK', Math.round(k * 100) + '%');
+    cap.innerHTML = k > .6 ? `Taken to heart, ${txt} goes straight to the centre and costs you about <b>${mins} minutes</b> of replaying today. Nothing about the remark changed; only how far you let it in. Slide it down.`
+      : k > .3 ? `Half in: it stings, you wonder about it, and it takes about <b>${mins} minutes</b>. Remember they have ${why}.`
+      : `<b>Not personal.</b> You notice it, guess it's about their day (${why}), and maybe ask later. The day stays yours. These minutes are an illustrative model.`; });
+  pk.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => { ri = +b.dataset.r; press([...pk.querySelectorAll('[data-r]')], b); draw(); }));
+  K.addEventListener('input', draw);
+  draw();
+}
+
+/* ---------- 1: whose weather is it ---------- */
+{ const el = $('#wx1'), cap = $('#wx1Cap');
+  const FACT = [['sleep', 'They slept four hours', .6], ['dead', 'They have two deadlines today', .65], ['news', 'They just had bad news', .55], ['all', 'They write like this to everyone', .5], ['miss', 'You did forget something they asked for']];
+  const st = toggles('#wxTg', 'wx', FACT.map(f => [f[0], f[1], false]), () => { unpress(bs); draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 262 + Math.max(1, FACT.filter(f => st[f[0]]).length) * 24 : 250; vb(el, W, H);
+    let you = 70; FACT.slice(0, 4).forEach(f => { if (st[f[0]]) you *= f[2]; }); if (st.miss) you = Math.min(70, you + 22); you = Math.round(you);
+    const cx = nw ? W / 2 : 140, cy = nw ? 120 : 125, r = nw ? 92 : 100, a0 = -Math.PI / 2, a1 = a0 + Math.PI * 2 * you / 100;
+    let g = `<circle cx="${cx}" cy="${cy}" r="${r}" ${F('cool', .3)}/>`;
+    if (you > 0) g += `<path d="${arc(cx, cy, r, a0, Math.min(a1, a0 + Math.PI * 2 - .001))}" ${F('glow', .9)}/>`;
+    g += `<circle cx="${cx}" cy="${cy}" r="${r * .48}" ${F('panel')}/>` + TX(cx, cy + 2, you + '%', 'text', 26, 'middle', 'font-weight="600"') + TX(cx, cy + 22, 'about you', 'muted', 12, 'middle');
+    const lx = nw ? 20 : 290, ly = nw ? 248 : 40, lh = nw ? 24 : 34;
+    g += TX(lx, ly, 'What you know about their day', 'muted', nw ? 12.5 : 13, 'start', 'font-weight="600"');
+    const shown = FACT.filter(f => st[f[0]]);
+    if (!shown.length) g += TX(lx, ly + lh, 'Nothing yet. It feels like it\'s all about you.', 'faint', nw ? 12.5 : 13);
+    shown.forEach((f, i) => { const y = ly + lh * (i + 1); g += `<circle cx="${lx + 6}" cy="${y - 4}" r="5" ${F(f[0] === 'miss' ? 'glow' : 'cool')}/>` + TX(lx + 18, y, f[1], 'text', nw ? 12.5 : 13); });
+    el.innerHTML = g;
+    $('#wxA').textContent = you + '%'; $('#wxB').textContent = (100 - you) + '%';
+    cap.innerHTML = !shown.length ? `With nothing to go on, a curt "Fine." feels <b>${you}% about you</b>. Reveal what was going on for them.`
+      : st.miss && shown.length > 1 ? `Some of it is fair: you did miss something, so <b>${you}% is about you</b>, and that part is worth fixing. The rest is still their weather. Not taking it personally doesn't mean ignoring the fair part.`
+      : st.miss ? `You missed something they asked for, so part of this really is about you. Fix that part. Their tone is still theirs.`
+      : `With ${shown.length} thing${shown.length > 1 ? 's' : ''} you now know about their day, only <b>${you}%</b> is left for you. The weights are illustrative; the habit of looking for them is the point.`; });
+  const bs = presets('#wxEx', [['How it feels at first', { sleep: 0, dead: 0, news: 0, all: 0, miss: 0 }], ['The full picture', { sleep: 1, dead: 1, news: 1, all: 1, miss: 0 }], ['Partly fair', { sleep: 0, dead: 1, news: 0, all: 0, miss: 1 }]], v => { st.set(v); draw(); });
+  draw();
+}
+
+/* ---------- 2: reply at the peak or after it ---------- */
+{ const el = $('#pz2'), T = $('#pzT'), Rp = $('#pzR'), cap = $('#pz2Cap');
+  const st = toggles('#pzTg', 'pz', [['name', 'Name the feeling ("I feel dismissed")', false]], () => { unpress(bs); draw(); });
+  const wave = (x, amp) => x < 0 ? 0 : amp * (x / 2.5) * Math.exp(1 - x / 2.5);
+  const RT = [7, 15, 24, 33, 44];
+  const feel = (t, n, nm) => { let v = wave(t, nm ? 7 : 9.5); for (let i = 0; i < n; i++) v += wave(t - RT[i], nm ? 3.5 : 6); return Math.min(10, v); };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 290 : 250, t = +T.value, n = +Rp.value, nm = st.name; vb(el, W, H);
+    const L = nw ? 30 : 40, R = W - 14, Tp = 22, B = H - 42, X = m => L + (R - L) * m / 60, Y = v => B - (B - Tp) * v / 10; let g = '';
+    g += `<rect x="${L}" y="${Y(10)}" width="${R - L}" height="${Y(6) - Y(10)}" ${F('bad', .08)}/>` + TX(R - 4, Y(10) + 14, 'hot: you\'ll say things you regret', 'bad', nw ? 11.5 : 11.5, 'end');
+    g += `<line x1="${L}" y1="${Y(4)}" x2="${R}" y2="${Y(4)}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    let p = '', hot = 0; for (let m = 0; m <= 60; m += .25){ const v = feel(m, n, nm); if (v > 4 && m < 60) hot += .25; p += (m ? 'L' : 'M') + X(m).toFixed(1) + ' ' + Y(v).toFixed(1); }
+    g += `<path d="${p}L${X(60)} ${B}L${X(0)} ${B}Z" ${F('bad', .14)}/><path d="${p}" ${S('bad', 2.4)}/>`;
+    for (let i = 0; i < n; i++) g += `<line x1="${X(RT[i])}" y1="${B}" x2="${X(RT[i])}" y2="${B - 8}" ${S('muted', 1.5)}/>`;
+    if (n) g += TX(X(RT[0]), B - 12, nw ? 'replays' : 'replays ↓', 'muted', 11.5, 'middle');
+    const v = feel(t, n, nm);
+    g += `<line x1="${X(t)}" y1="${Tp - 6}" x2="${X(t)}" y2="${B}" ${S('glow', 2)}/><circle cx="${X(t)}" cy="${Y(v)}" r="6" ${F('glow')}/>` + TX(clamp(X(t), L + 30, R - 30), Tp - 8 + 6, 'you reply', 'glow', 12, 'middle', 'font-weight="600"');
+    g += `<line x1="${L}" y1="${B}" x2="${R}" y2="${B}" ${S('line', 1)}/>`;
+    [0, 15, 30, 45, 60].forEach(m => g += TX(X(m), B + 16, String(m), 'faint', 11.5, 'middle'));
+    g += TX((L + R) / 2, B + 32, 'minutes after the sting', 'faint', 11.5, 'middle');
+    g += TX(L - 6, Y(10) + 4, '10', 'faint', 11.5, 'end') + TX(L - 6, Y(0) + 4, '0', 'faint', 11.5, 'end');
+    el.innerHTML = g; out('pzT', t + ' min'); out('pzR', n);
+    $('#pzA').textContent = v.toFixed(1) + ' / 10'; $('#pzB').textContent = Math.round(hot) + ' min';
+    cap.innerHTML = v > 6 ? `You reply at <b>${v.toFixed(1)} out of 10</b>, right in the hot zone. That's the message you'll want to unsend. Wait a little longer${n ? ', and stop replaying it' : ''}.`
+      : n >= 3 && hot > 25 ? `You waited, but ${n} replays kept the feeling hot for <b>${Math.round(hot)} minutes</b>. The wave would have settled in about ten if you'd let it.`
+      : `You reply at <b>${v.toFixed(1)} out of 10</b>, after the peak. Now you can say what you mean.${nm ? ' Naming the feeling took some of the height off every wave.' : ' Try naming the feeling too.'} An illustrative model of a feeling as a wave.`; });
+  const bs = presets('#pzEx', [['Fire back at once', { pzT: 0, pzR: 3, name: 0 }], ['Wait but stew', { pzT: 30, pzR: 5, name: 0 }], ['Name it and wait', { pzT: 20, pzR: 0, name: 1 }]], v => { st.set(v); draw(); });
+  [T, Rp].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 3: the spotlight ---------- */
+{ const el = $('#sp3'), G = $('#spG'), cap = $('#sp3Cap'), N = 30, REAL = 7; let walked = false, lit = 0, timer = null;
+  const order = (() => { const r = rng(23), a = [...Array(N).keys()]; for (let i = N - 1; i > 0; i--){ const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; })();
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 356 : 240, cols = nw ? 5 : 10, rows = N / cols, gs = Math.round(N * G.value / 100); vb(el, W, H);
+    const cw = nw ? 56 : 52, ch = nw ? 46 : 52, x0 = (W - cw * cols) / 2 + cw / 2, y0 = nw ? 40 : 38; let g = '';
+    g += TX(W / 2, 18, walked ? 'Who noticed the shirt' : 'The room before you walk in: dashed rings show your guess', 'muted', nw ? 12 : 12.5, 'middle');
+    order.forEach((p, i) => { const c = p % cols, rr = Math.floor(p / cols), x = x0 + c * cw, y = y0 + rr * ch + 10, on = walked && i < lit, guessed = i < gs;
+      g += `<circle cx="${x}" cy="${y - 7}" r="7" ${F(on ? 'glow' : 'faint', on ? 1 : .55)}/><path d="M${x - 11} ${y + 14}q11 -18 22 0Z" ${F(on ? 'glow' : 'faint', on ? 1 : .55)}/>`;
+      if (guessed) g += `<circle cx="${x}" cy="${y}" r="${nw ? 19 : 21}" ${S('cool', 1.4, ';stroke-dasharray:3 3')}/>`; });
+    const yb = y0 + rows * ch + (nw ? 18 : 8);
+    g += `<circle cx="${W / 2 - (nw ? 128 : 150)}" cy="${yb}" r="5" ${S('cool', 1.4, ';stroke-dasharray:2 2')}/>` + TX(W / 2 - (nw ? 118 : 140), yb + 4, 'your guess', 'cool', 12);
+    g += `<circle cx="${W / 2 + (nw ? 20 : 40)}" cy="${yb}" r="5" ${F('glow')}/>` + TX(W / 2 + (nw ? 30 : 50), yb + 4, 'noticed', 'glow', 12);
+    el.innerHTML = g; out('spG', G.value + '%');
+    $('#spA').textContent = G.value + '%'; $('#spB').textContent = walked && lit >= REAL ? 'about 23%' : '?';
+    cap.innerHTML = !walked ? `You guess <b>${gs} of ${N}</b> people will notice. Walk in and see.`
+      : lit < REAL ? 'Walking in…'
+      : +G.value > 35 ? `<b>${REAL} of ${N} noticed</b>, against your guess of ${gs}. In Gilovich's 2000 study the wearers guessed about half; fewer than a quarter could say who was on the shirt. The rest were busy with themselves.`
+      : `<b>${REAL} of ${N} noticed.</b> Your guess was close, which puts you ahead of the students in the study, who guessed about twice the real number.`; });
+  $('#spGo').addEventListener('click', () => { clearInterval(timer); walked = true; lit = 0; draw(); if (RM){ lit = REAL; draw(); return; } timer = setInterval(() => { lit++; draw(); if (lit >= REAL) clearInterval(timer); }, 220); });
+  const reset = () => { clearInterval(timer); walked = false; lit = 0; draw(); };
+  const bs = presets('#spEx', [['Guess like the wearers did', { spG: 50 }], ['Guess almost no one', { spG: 10 }], ['Guess everyone', { spG: 90 }]], reset);
+  G.addEventListener('input', () => { unpress(bs); reset(); });
+  draw();
+}
+
+/* ---------- 4: bend to the crowd ---------- */
+{ const el = $('#ap4'), P = $('#apP'), cap = $('#ap4Cap'), ME = 22, WIN = 16;
+  const ppl = (() => { const r = rng(5), a = []; [[8, 20], [10, 60], [6, 88]].forEach(([n, m]) => { for (let i = 0; i < n; i++) a.push(clamp(Math.round(m + gauss(r) * 7), 2, 98)); }); return a.sort((x, y) => x - y); })();
+  const count = p => ppl.filter(t => Math.abs(t - p) <= WIN).length;
+  let best = 0, bestP = 0; for (let p = 0; p <= 100; p++){ const c = count(p); if (c > best){ best = c; bestP = p; } }
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 236 : 220, p = +P.value, c = count(p), d = Math.abs(p - ME); vb(el, W, H);
+    const L = 20, R = W - 20, X = v => L + (R - L) * v / 100, base = nw ? 150 : 140; let g = '';
+    g += `<rect x="${X(p - WIN)}" y="${base - 112}" width="${X(p + WIN) - X(p - WIN)}" height="112" rx="8" ${F('glow', .08)}/>`;
+    const stack = {}; ppl.forEach(t => { const b = Math.round(t / 4); stack[b] = (stack[b] || 0) + 1; const k = stack[b], x = X(b * 4), y = base - 10 - (k - 1) * 17, on = Math.abs(t - p) <= WIN;
+      g += `<circle cx="${x}" cy="${y}" r="7" ${on ? F('glow', .95) : F('cool', .35)}/>`; });
+    g += `<line x1="${L}" y1="${base}" x2="${R}" y2="${base}" ${S('line', 1.5)}/>`;
+    g += TX(L, base + (nw ? 76 : 18), 'quiet, careful', 'faint', 12) + TX(R, base + (nw ? 76 : 18), 'loud, bold', 'faint', 12, 'end');
+    g += `<path d="M${X(ME)} ${base + 26}l-6 10h12Z" ${S('glow', 1.5, ';stroke-dasharray:2 2')}/>` + TX(X(ME), base + 52, 'the real you', 'muted', 12, 'middle');
+    g += `<path d="M${X(p)} ${base + 4}l-8 14h16Z" ${F('glow')}/>`;
+    if (d > 6) g += `<line x1="${X(ME)}" y1="${base + 30}" x2="${X(p)}" y2="${base + 30}" ${S('bad', 1.5, ';stroke-dasharray:4 3')}/>`;
+    g += TX(L, 16, 'Each dot is a person; the lit ones like how you are being', 'muted', nw ? 12 : 12.5);
+    el.innerHTML = g; out('apP', p < 35 ? 'quiet side' : p > 70 ? 'loud side' : 'middle');
+    $('#apA').textContent = c + ' of ' + ppl.length; $('#apB').textContent = d ? d + ' steps' : 'none';
+    cap.innerHTML = d <= 4 ? `As yourself, <b>${c} people</b> like what they see, and it costs you nothing to keep it up.`
+      : c >= best - 1 ? `This is about as popular as it gets: <b>${c} of ${ppl.length}</b>, still not everyone, and you're ${d} steps from yourself. Every day you'd have to perform it.`
+      : `You've moved ${d} steps from yourself and won <b>${c}</b>. The people who liked the real you have dimmed. No spot on the line lights everyone, because their tastes pull in different directions.`; });
+  const bs = presets('#apEx', [['Be yourself', { apP: ME }], ['Chase the biggest crowd', { apP: bestP }], ['Stand in the middle', { apP: 45 }]], draw);
+  P.addEventListener('input', () => { unpress(bs); draw(); });
+  draw();
+}
+
+/* ---------- 5: keep it or let it go ---------- */
+sorter('#sort5', '#tally5', [{ id: 'keep', label: 'Keep it', d: 'Useful information about the work' }, { id: 'tone', label: 'Their tone', d: 'Their mood, style or frustration' }, { id: 'verdict', label: 'A verdict on you', d: 'Not about the work; let it go' }], [
+  { t: '"The second half of the report repeats the first."', q: true, a: 'keep', w: 'That\'s specific and checkable. You can act on it.' },
+  { t: '"Honestly, I\'m so tired of fixing everyone\'s work this week."', q: true, a: 'tone', w: 'That\'s about their week and their workload, not about your report.' },
+  { t: '"You\'re just not detail-minded."', q: true, a: 'verdict', w: 'A sweeping label about who you are. Look for the specific behind it, if there is one, and drop the label.' },
+  { t: '"The chart on page 4 has the wrong year."', q: true, a: 'keep', w: 'A concrete fix. Keep it and thank them.' },
+  { t: 'A reply written in all capital letters.', q: true, a: 'tone', w: 'The shouting tells you about their state. The content may still have something useful in it.' },
+  { t: '"People like you never last long here."', q: true, a: 'verdict', w: 'That\'s a judgement about you as a person, not information about the work.' },
+  { t: '"Clients want the price on the first page."', q: true, a: 'keep', w: 'Useful information about what the audience needs.' },
+  { t: '"Ugh. Fine. Whatever."', q: true, a: 'tone', w: 'Frustration with no information in it. Let it pass.' } ]);
+
+/* ---------- 6: one sting, a whole day ---------- */
+{ const el = $('#rp6'), N = $('#rpN'), cap = $('#rp6Cap');
+  const st = toggles('#rpTg', 'rp', [['write', 'Write it down once', false], ['abs', 'Do something absorbing after', false]], () => { unpress(bs); draw(); });
+  const D0 = 9, D1 = 23, S0 = 9.5;
+  const mood = (t, n) => { const tau = st.abs ? .3 : .7, amp = st.write ? 2.5 : 5; let v = 1.5;
+    if (t >= S0) v -= 8 * Math.exp(-(t - S0) / tau);
+    for (let i = 0; i < n; i++){ const ti = S0 + .6 + i * (12.5 / Math.max(n, 1)); if (t >= ti) v -= amp * Math.exp(-(t - ti) / tau); }
+    return Math.max(-10, v - (n > 0 ? Math.min(2, n * .18) * (t > S0 ? 1 : 0) * (st.write ? .4 : 1) : 0)); };
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 280 : 240, n = +N.value; vb(el, W, H);
+    const L = nw ? 32 : 42, R = W - 12, Tp = 20, B = H - 44, X = t => L + (R - L) * (t - D0) / (D1 - D0), Y = v => Tp + (B - Tp) * (5 - v) / 15; let g = '';
+    g += `<line x1="${L}" y1="${Y(0)}" x2="${R}" y2="${Y(0)}" ${S('line', 1)}/>` + TX(L - 6, Y(4) + 4, 'good', 'faint', 11.5, 'end') + TX(L - 6, Y(-8) + 4, 'low', 'faint', 11.5, 'end');
+    g += `<line x1="${L}" y1="${Y(-2)}" x2="${R}" y2="${Y(-2)}" ${S('bad', 1, ';stroke-dasharray:3 5;stroke-opacity:.6')}/>`;
+    let p = '', under = 0; for (let t = D0; t <= D1; t += .05){ const v = mood(t, n); if (v < -2) under += .05; p += (t === D0 ? 'M' : 'L') + X(t).toFixed(1) + ' ' + Y(v).toFixed(1); }
+    g += `<path d="${p}L${X(D1)} ${Y(0)}L${X(D0)} ${Y(0)}Z" ${F('bad', .12)}/><path d="${p}" ${S('glow', 2.4)}/>`;
+    g += `<circle cx="${X(S0)}" cy="${Y(mood(S0, n))}" r="5" ${F('bad')}/>` + TX(X(S0) + 10, Y(mood(S0, n)) + 4, 'the sting', 'bad', 12);
+    for (let i = 0; i < n; i++){ const ti = S0 + .6 + i * (12.5 / Math.max(n, 1)); g += `<line x1="${X(ti)}" y1="${B + 2}" x2="${X(ti)}" y2="${B - 6}" ${S('muted', 1.5)}/>`; }
+    [9, 12, 15, 18, 21].forEach(h => g += TX(X(h), B + 18, (h > 12 ? h - 12 : h) + (h >= 12 ? ' pm' : ' am'), 'faint', 11.5, 'middle'));
+    if (n) g += TX(R, B - 10, 'ticks: replays', 'muted', 11.5, 'end');
+    el.innerHTML = g; out('rpN', n);
+    const ev = mood(21, n);
+    $('#rpA').textContent = under.toFixed(1) + ' h'; $('#rpB').textContent = ev > 0 ? 'Back to normal' : ev > -2 ? 'A bit flat' : 'Still low';
+    cap.innerHTML = n === 0 ? `Left alone, one sting is over by mid-morning: <b>${under.toFixed(1)} hours</b> below the line. The rest of the day was never touched.`
+      : under > 4 ? `${n} replays turned a moment at 9:30 into <b>${under.toFixed(1)} hours</b> under the cloud. Nothing new happened after the morning; every dip was a rerun.`
+      : `<b>${under.toFixed(1)} hours</b> under the cloud.${st.write ? ' Writing it down once took the edge off each replay.' : ''}${st.abs ? ' Something absorbing let each dip recover fast.' : ''} An illustrative model.`; });
+  const bs = presets('#rpEx', [['Replay it all day', { rpN: 12, write: 0, abs: 0 }], ['Write it, then get busy', { rpN: 2, write: 1, abs: 1 }], ['Leave it alone', { rpN: 0, write: 0, abs: 0 }]], v => { st.set(v); draw(); });
+  N.addEventListener('input', () => { unpress(bs); draw(); });
+  draw();
+}
+
+/* ---------- 7: your energy for the week ---------- */
+{ const el = $('#bd7'), list = $('#bdList'), cap = $('#bd7Cap'), TOT = 40, NEED = 14;
+  const REQ = [['Cover a colleague\'s shift again', 6, 0], ['Help a close friend move flat', 5, 1], ['Answer work chats after 9 pm', 6, 0], ['Join a committee you don\'t care about', 5, 0], ['Long lunch with your sister', 2, 1], ['Lend money to someone who never repays', 4, 0], ['Run the weekend club you love', 4, 1], ['Review a stranger\'s CV tonight', 3, 0]];
+  let yes = REQ.map(() => true);
+  list.innerHTML = REQ.map((r, i) => `<label class="tg" for="bd_${i}"><input type="checkbox" id="bd_${i}" data-i="${i}" checked><span>Yes to: ${r[0]}</span><em>${r[1]} pts</em></label>`).join('');
+  const sync = () => list.querySelectorAll('input').forEach(x => { x.checked = yes[+x.dataset.i]; x.parentElement.classList.toggle('on', x.checked); });
+  list.querySelectorAll('input').forEach(x => x.addEventListener('change', () => { yes[+x.dataset.i] = x.checked; unpress(bs); sync(); draw(); }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 170 : 140; vb(el, W, H);
+    const L = 14, R = W - 14, Y0 = nw ? 46 : 42, bh = 34, X = v => L + (R - L) * Math.min(v, TOT) / TOT; let g = '', x = 0, used = 0, res = 0;
+    REQ.forEach((r, i) => { if (!yes[i]) return; used += r[1]; if (!r[2]) res++; });
+    g += TX(L, 22, `Your week: ${TOT} points of energy`, 'muted', 12.5);
+    g += `<rect x="${L}" y="${Y0}" width="${R - L}" height="${bh}" rx="8" ${F('panel-2')}/>`;
+    REQ.forEach((r, i) => { if (!yes[i] || x >= TOT) return; const w = Math.min(r[1], TOT - x); g += `<rect x="${X(x) + 1}" y="${Y0}" width="${Math.max(0, X(x + w) - X(x) - 2)}" height="${bh}" rx="5" ${F(r[2] ? 'cool' : 'bad', r[2] ? .7 : .75)}/>`; x += w; });
+    const left = Math.max(0, TOT - used);
+    if (left > 0) g += `<rect x="${X(x) + 1}" y="${Y0}" width="${X(TOT) - X(x) - 2}" height="${bh}" rx="5" ${F('glow', .9)}/>` + (X(TOT) - X(x) > 60 ? TX((X(x) + X(TOT)) / 2, Y0 + 22, 'yours', 'on-glow', 13, 'middle', 'font-weight="600"') : '');
+    g += `<line x1="${X(TOT - NEED)}" y1="${Y0 - 8}" x2="${X(TOT - NEED)}" y2="${Y0 + bh + 8}" ${S('text', 1.5, ';stroke-dasharray:4 3')}/>` + TX(X(TOT - NEED), Y0 + bh + 24, `you need ${NEED} for rest and your own life`, 'text', 12, X(TOT - NEED) > W - 120 ? 'end' : 'middle');
+    const ly = Y0 + bh + (nw ? 52 : 48);
+    [['bad', 'yes, but resented'], ['cool', 'yes, and glad'], ['glow', 'left for you']].forEach(([c, t], i) => { const lx = L + i * (nw ? 110 : 160); g += `<rect x="${lx}" y="${ly - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(lx + 15, ly, t, 'muted', nw ? 11.5 : 12); });
+    if (used > TOT) g += TX(R, 22, `over by ${used - TOT}`, 'bad', 12.5, 'end', 'font-weight="600"');
+    el.innerHTML = g;
+    $('#bdA').textContent = left + ' of ' + TOT; $('#bdB').textContent = res;
+    cap.innerHTML = used > TOT ? `Saying yes to everything costs <b>${used} points</b> from a ${TOT}-point week. The overdraft comes out of sleep and temper, and ${res} of those yeses were ones you didn't want to give.`
+      : left < NEED ? `<b>${left} points</b> left for you, under the ${NEED} you need. Look at the red ones: each was a yes you'd resent.`
+      : res ? `<b>${left} points</b> left for you. You could still drop ${res} yes${res > 1 ? 'es' : ''} you'd resent.`
+      : `<b>${left} points</b> left for you, and every yes you gave is one you're glad about. That's what a boundary buys: not less kindness, better-chosen kindness. Points are illustrative.`; });
+  const bs = presets('#bdEx', [['Yes to everyone', { all: 1 }], ['No to everyone', { all: 0 }], ['Clear boundaries', { glad: 1 }]], v => { yes = REQ.map(r => v.glad ? !!r[2] : !!v.all); sync(); draw(); });
+  sync(); draw();
+}
+
+/* ---------- 8: whose voice is it ---------- */
+sorter('#sort8', '#tally8', [{ id: 'own', label: 'Your own voice', d: 'Speaks about what you value' }, { id: 'bor', label: 'A borrowed voice', d: 'Speaks about what others think' }], [
+  { t: '"I want work where I make things with my hands."', q: true, a: 'own', w: 'It names something you value and want. That\'s the sound of your own voice.' },
+  { t: '"A real adult would have bought a house by now."', q: true, a: 'bor', w: '"A real adult" is someone else\'s yardstick. Ask whose.' },
+  { t: '"I feel better on weeks when I see friends."', q: true, a: 'own', w: 'That\'s your own evidence about your life.' },
+  { t: '"Everyone will think I gave up if I change course."', q: true, a: 'bor', w: 'It\'s entirely about other people\'s opinions, most of whom aren\'t watching that closely.' },
+  { t: '"You were never the clever one in the family."', q: true, a: 'bor', w: 'An old line from someone else, still playing years later.' },
+  { t: '"I\'d rather earn a bit less and have my evenings."', q: true, a: 'own', w: 'A clear statement of your own priorities.' },
+  { t: '"Don\'t share your idea, they\'ll laugh."', q: true, a: 'bor', w: 'Fear of an imagined audience. Remember the spotlight effect.' },
+  { t: '"This matters to me, even if no one else gets it."', q: true, a: 'own', w: 'Your values, owned without needing approval.' } ]);
+
+/* ---------- 9: where does your energy go ---------- */
+{ const el = $('#cc9'), list = $('#ccList'), cap = $('#cc9Cap');
+  const IT = [['What my manager thinks of me', 2, 1], ['Whether a friend replies tonight', 2, 1], ['A stranger\'s comment online', 2, 1], ['How I prepare for Monday', 0, 0], ['How I speak to my partner', 0, 1], ['My sleep this week', 0, 0], ['Whether my team adopts my idea', 1, 1], ['My sister\'s mood', 1, 0], ['Which tasks I say yes to', 0, 0], ['The news', 2, 1]];
+  let on = IT.map(x => !!x[2]);
+  const RING = ['you control', 'you can influence', 'out of your hands'];
+  list.innerHTML = IT.map((r, i) => `<label class="tg" for="cc_${i}"><input type="checkbox" id="cc_${i}" data-i="${i}"><span>${i + 1}. ${r[0]}</span><em>${['control', 'influence', 'outside'][r[1]]}</em></label>`).join('');
+  const sync = () => list.querySelectorAll('input').forEach(x => { x.checked = on[+x.dataset.i]; x.parentElement.classList.toggle('on', x.checked); });
+  list.querySelectorAll('input').forEach(x => x.addEventListener('change', () => { on[+x.dataset.i] = x.checked; unpress(bs); sync(); draw(); }));
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 340 : 300; vb(el, W, H);
+    const cx = nw ? W / 2 : 200, cy = nw ? 170 : 150, rs = nw ? [56, 102, 150] : [52, 96, 140]; let g = '';
+    [2, 1, 0].forEach(k => g += `<circle cx="${cx}" cy="${cy}" r="${rs[k]}" ${FS(k === 0 ? 'glow' : 'panel-2', k === 0 ? 'glow' : 'line', 1.2, k === 0 ? .14 : 1)}/>`);
+    const cnt = [0, 0, 0]; IT.forEach((r, i) => { const k = r[1], idx = IT.slice(0, i).filter(q => q[1] === k).length, n = IT.filter(q => q[1] === k).length;
+      const rad = k === 0 ? rs[0] * .55 : (rs[k] + rs[k - 1]) / 2, a = -Math.PI / 2 + (idx + .5) / n * Math.PI * 2 + (k === 0 ? .4 : k === 1 ? .9 : .3), x = cx + rad * Math.cos(a), y = cy + rad * Math.sin(a);
+      if (on[i]) cnt[k]++;
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="12" ${on[i] ? F(k === 0 ? 'glow' : k === 1 ? 'cool' : 'bad', .9) : S('faint', 1.2)}/>` + TX(x.toFixed(1), (y + 4).toFixed(1), String(i + 1), on[i] ? (k === 0 ? 'on-glow' : 'ink') : 'faint', 12, 'middle', 'font-weight="600"'); });
+    if (!nw){ const lx = 380; g += TX(lx, 24, 'Rings, from the centre: you control,', 'muted', 12) + TX(lx, 40, 'you can influence, out of your hands', 'muted', 12) + TX(lx, 74, 'Where your energy goes', 'muted', 13, 'start', 'font-weight="600"');
+      [['glow', 'Inside your control', cnt[0]], ['cool', 'Things you can influence', cnt[1]], ['bad', 'Out of your hands', cnt[2]]].forEach(([c, t, v], i) => { const y = 106 + i * 46; g += `<rect x="${lx}" y="${y - 12}" width="${Math.max(2, v * 40)}" height="16" rx="4" ${F(c, .85)}/>` + TX(lx, y + 22, t + ': ' + v, 'text', 12.5); }); }
+    else g += TX(cx, 14, 'centre: you control · middle: influence · outer: out of your hands', 'muted', 11.5, 'middle');
+    el.innerHTML = g;
+    const tot = cnt[0] + cnt[1] + cnt[2], pin = tot ? Math.round(cnt[0] / tot * 100) : 0, pout = tot ? Math.round(cnt[2] / tot * 100) : 0;
+    $('#ccA').textContent = pin + '%'; $('#ccB').textContent = pout + '%';
+    cap.innerHTML = !tot ? 'Tick what you spend energy on.' : pout >= 50 ? `<b>${pout}% of your energy</b> goes to things you can't change. That's energy that leaves and doesn't come back. Swap one outer worry for one inner action.`
+      : pin >= 50 ? `<b>${pin}%</b> of your energy is going where it can do something. This is the shift the second half of the book is about.`
+      : `A mix: <b>${pin}%</b> inside your circle, ${pout}% outside. Influence is worth some energy; the outer ring mostly isn't.`; });
+  const bs = presets('#ccEx', [['A typical worried week', { mode: 0 }], ['Only my circle', { mode: 1 }], ['Circle plus influence', { mode: 2 }]], v => { on = IT.map(r => v.mode === 0 ? !!r[2] : v.mode === 1 ? r[1] === 0 : r[1] < 2); sync(); draw(); });
+  sync(); draw();
+}
+
+/* ---------- 10: the self-trust ledger ---------- */
+{ const el = $('#st10'), Pp = $('#stP'), Kk = $('#stK'), cap = $('#st10Cap');
+  const st = toggles('#stTg', 'st', [['small', 'Make each promise smaller', false]], () => { unpress(bs); draw(); });
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 280 : 240, P = +Pp.value, k0 = +Kk.value / 100, k = st.small ? Math.min(1, k0 + .3) : k0; vb(el, W, H);
+    const r = rng(P * 31 + Math.round(k * 100)), L = nw ? 46 : 52, R = W - 12, Tp = 18, mid = nw ? 168 : 140, B = H - 30, X = d => L + (R - L) * (d + .5) / 30, bw = (R - L) / 30 - 2;
+    let trust = 50, line = '', kept = 0, g = '';
+    g += `<line x1="${L}" y1="${mid}" x2="${R}" y2="${mid}" ${S('line', 1)}/>`;
+    for (let d = 0; d < 30; d++){ let kd = 0; for (let i = 0; i < P; i++) if (r() < k) kd++; const bd = P - kd; kept += kd;
+      trust = clamp(trust + (kd - 1.6 * bd) / P * 5, 0, 100);
+      const s = (B - mid) / 7; if (kd) g += `<rect x="${(X(d) - bw / 2).toFixed(1)}" y="${(mid - kd * s).toFixed(1)}" width="${bw.toFixed(1)}" height="${(kd * s).toFixed(1)}" rx="1.5" ${F('glow', .55)}/>`;
+      if (bd) g += `<rect x="${(X(d) - bw / 2).toFixed(1)}" y="${mid}" width="${bw.toFixed(1)}" height="${(bd * s).toFixed(1)}" rx="1.5" ${F('bad', .5)}/>`;
+      line += (d ? 'L' : 'M') + X(d).toFixed(1) + ' ' + (Tp + (mid - 30 - Tp) * (1 - trust / 100)).toFixed(1); }
+    g += `<path d="${line}" ${S('glow', 2.6)}/>` + TX(L, Tp - 4 + 6, 'self-trust', 'glow', 12);
+    g += TX(L - 6, mid - 6, 'kept', 'faint', 11, 'end') + TX(L - 6, mid + 14, 'broken', 'faint', 11, 'end');
+    g += TX(X(0), H - 8, 'day 1', 'faint', 11.5, 'middle') + TX(R, H - 8, 'day 30', 'faint', 11.5, 'end');
+    el.innerHTML = g; out('stP', P); out('stK', Math.round(k0 * 100) + '%');
+    const t = Math.round(trust);
+    $('#stA').textContent = kept + ' of ' + P * 30; $('#stB').textContent = t + ' / 100';
+    cap.innerHTML = t < 30 ? `Keeping ${Math.round(k * 100)}% of ${P} promises a day, your self-trust sinks to <b>${t}</b>. Each broken promise teaches you your word doesn't count. Make fewer, smaller ones.`
+      : t > 75 ? `<b>Self-trust ${t}</b>. ${st.small ? 'Smaller promises you actually keep' : 'Promises you keep'} add up to evidence that your word means something, and other people's doubts have less to hold on to.`
+      : `Self-trust ends at <b>${t}</b>. Try fewer promises a day, or tick "make each promise smaller", and watch which helps more. An illustrative model.`; });
+  const bs = presets('#stEx', [['Big New Year plans', { stP: 6, stK: 35, small: 0 }], ['Three small promises', { stP: 3, stK: 70, small: 1 }], ['One promise, always kept', { stP: 1, stK: 95, small: 0 }]], v => { st.set(v); draw(); });
+  [Pp, Kk].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 11: the hours you get back ---------- */
+{ const el = $('#en11'), Rr = $('#enR'), Ss = $('#enS'), Aa = $('#enA'), cap = $('#en11Cap');
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 300 : 230, r = +Rr.value, s = +Ss.value, a = +Aa.value, tot = r + s + a, hrs = tot * 365 / 60; vb(el, W, H);
+    const L = 14, R = W - 14, MAXH = 1650, X = h => L + (R - L) * h / MAXH; let g = '', x = 0;
+    g += TX(L, 20, 'Hours a year spent reacting', 'muted', 12.5);
+    g += `<rect x="${L}" y="30" width="${R - L}" height="30" rx="7" ${F('panel-2')}/>`;
+    [[r, 'bad', 'replaying'], [s, 'cool', 'checking'], [a, 'faint', 'arguing']].forEach(([m, c]) => { const h = m * 365 / 60; if (h > 0) g += `<rect x="${X(x) + 1}" y="30" width="${Math.max(0, X(x + h) - X(x) - 2)}" height="30" rx="5" ${F(c, .85)}/>`; x += h; });
+    g += TX(Math.min(X(x) + 6, R - 4), 80, Math.round(hrs) + ' h', 'text', 13, X(x) + 6 > R - 60 ? 'end' : 'start', 'font-weight="600"');
+    const ly = 96; [['bad', 'replaying'], ['cool', 'checking what others think'], ['faint', 'arguing']].forEach(([c, t], i) => { const lx = nw ? L : L + i * 170, yy = nw ? ly + i * 18 : ly; g += `<rect x="${lx}" y="${yy - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(lx + 15, yy, t, 'muted', 12); });
+    const y2 = nw ? 170 : 140; g += TX(L, y2, 'The same hours, spent on purpose', 'glow', 12.5, 'start', 'font-weight="600"');
+    const EQ = [['books read', 6], ['hour-long lessons', 1], ['45-minute walks', .75]];
+    EQ.forEach(([t, per], i) => { const n = Math.floor(hrs / per), cx = nw ? L : L + i * ((R - L) / 3), cy = nw ? y2 + 30 + i * 36 : y2 + 40;
+      g += TX(cx, cy, n.toLocaleString('en-US'), 'glow', nw ? 22 : 26, 'start', 'style="font-family:var(--f-display)"') + TX(cx + (String(n).length + 1) * (nw ? 11 : 13), cy, t, 'text', 12.5); });
+    el.innerHTML = g; out('enR', r + ' min'); out('enS', s + ' min'); out('enA', a + ' min');
+    $('#enA2').textContent = Math.round(hrs).toLocaleString('en-US'); $('#enB').textContent = (hrs / 40).toFixed(1);
+    cap.innerHTML = tot === 0 ? 'No time lost to reactions. Rare, and well done.' : `${tot} minutes a day doesn't feel like much. Over a year it's <b>${Math.round(hrs)} hours</b>, about ${(hrs / 40).toFixed(0)} full working weeks. Decide what you'd rather they were for, and write an if-then plan for when.`; });
+  const bs = presets('#enEx', [['A rough week, every week', { enR: 60, enS: 90, enA: 30 }], ['Typical', { enR: 25, enS: 30, enA: 10 }], ['After practising the book', { enR: 5, enS: 10, enA: 0 }]], draw);
+  [Rr, Ss, Aa].forEach(x => x.addEventListener('input', () => { unpress(bs); draw(); }));
+  draw();
+}
+
+/* ---------- 12: a keel for the waves ---------- */
+{ const el = $('#kl12'), Wv = $('#klW'), Kl = $('#klK'), cap = $('#kl12Cap'); let t = -1, raf = 0;
+  const amp = () => Math.min(65, +Wv.value * 7.5 * (1 - +Kl.value * .07));
+  const tau = () => 3.2 - +Kl.value * .24;
+  const rec = () => { const A = amp(); return A <= 3 ? 0 : tau() * Math.log(A / 3); };
+  const ang = tt => tt < 0 ? 0 : amp() * Math.exp(-tt / tau()) * Math.sin(tt * 2.4) * (tt < .6 ? tt / .6 : 1);
+  const draw = onLayout(() => { const nw = NARROW(), W = nw ? 340 : 640, H = nw ? 280 : 240, k = +Kl.value; vb(el, W, H);
+    const cx = W / 2, wl = nw ? 130 : 120, a = ang(t), kd = 14 + k * 7; let g = '';
+    let wave = ''; const ph = t < 0 ? 0 : t * 3, hgt = t < 0 ? 3 : 3 + +Wv.value * 2.2 * Math.exp(-t / 2);
+    for (let x = 0; x <= W; x += 6) wave += (x ? 'L' : 'M') + x + ' ' + (wl + Math.sin(x / 38 - ph) * hgt).toFixed(1);
+    g += `<path d="${wave}L${W} ${H}L0 ${H}Z" ${F('cool', .18)}/><path d="${wave}" ${S('cool', 1.6)}/>`;
+    g += `<g transform="rotate(${a.toFixed(1)} ${cx} ${wl})">`;
+    g += `<line x1="${cx}" y1="${wl}" x2="${cx}" y2="${wl + kd}" ${S('glow', 4, ';stroke-linecap:round')}/><circle cx="${cx}" cy="${wl + kd}" r="${5 + k * .5}" ${F('glow')}/>`;
+    g += `<path d="M${cx - 60} ${wl - 14}L${cx + 60} ${wl - 14}L${cx + 44} ${wl + 8}L${cx - 44} ${wl + 8}Z" ${FS('panel-2', 'text', 1.5)}/>`;
+    g += `<line x1="${cx}" y1="${wl - 14}" x2="${cx}" y2="${wl - 80}" ${S('text', 2)}/><path d="M${cx + 3} ${wl - 76}L${cx + 46} ${wl - 22}L${cx + 3} ${wl - 22}Z" ${F('glow', .75)}/></g>`;
+    g += TX(cx + 74, wl + kd * .6 + 6, 'keel: practice', 'glow', 12) + TX(14, 20, 'tilt ' + Math.abs(a).toFixed(0) + '°', Math.abs(a) > 30 ? 'bad' : 'muted', 12.5);
+    el.innerHTML = g; out('klW', Wv.value); out('klK', k);
+    $('#klA').textContent = Math.round(amp()) + '°'; $('#klB').textContent = rec().toFixed(1) + ' h';
+    if (t < 0 || t > rec() + 1) cap.innerHTML = amp() > 40 ? `A wave this size tips a shallow keel to about <b>${Math.round(amp())}°</b> and takes ${rec().toFixed(1)} hours (in this model) to settle. Deepen the keel and send it again.`
+      : `With a deeper keel the same wave tips you only <b>${Math.round(amp())}°</b>, and you're upright in <b>${rec().toFixed(1)} hours</b>. The waves didn't get smaller; you got steadier. An illustrative model.`; });
+  $('#klGo').addEventListener('click', () => { cancelAnimationFrame(raf); if (RM){ t = 999; draw(); return; } const t0 = performance.now(), end = rec() + 1.2;
+    cap.innerHTML = 'Here it comes…';
+    const step = now => { t = (now - t0) / 1000 * 1.6; draw(); if (t < end) raf = requestAnimationFrame(step); else { t = 999; draw(); } }; raf = requestAnimationFrame(step); });
+  const bs = presets('#klEx', [['Big wave, no practice', { klW: 9, klK: 0 }], ['Big wave, deep keel', { klW: 9, klK: 9 }], ['An everyday wave', { klW: 4, klK: 5 }]], () => { t = -1; draw(); });
+  [Wv, Kl].forEach(x => x.addEventListener('input', () => { unpress(bs); t = -1; cancelAnimationFrame(raf); draw(); }));
+  draw();
+}
+
+/* ---------- afterword: the let-it-go log ---------- */
+{ const list = $('#lgList'); let log = store.get('tnp-log', []);
+  const save = () => store.set('tnp-log', log);
+  function draw(){
+    if (!log.length){ list.innerHTML = '<span class="k">Your log</span><p class="tip">Nothing here yet. Next time something stings, add it here, then come back later and mark it let go.</p>'; return; }
+    const ok = log.filter(e => e.ok).length;
+    list.innerHTML = `<span class="k">Your log · ${log.length} moment${log.length === 1 ? '' : 's'}${ok ? ' · ' + ok + ' let go' : ''}</span>` +
+      log.map(e => `<div class="lg${e.ok ? ' ok' : ''}"><div class="lg-h"><b>${esc(e.what)}</b><button class="rm" type="button" data-rm="${e.id}" aria-label="Remove this moment">×</button></div>${e.story ? `<p><span>My story</span>${esc(e.story)}</p>` : ''}${e.alt ? `<p><span>Also true</span>${esc(e.alt)}</p>` : ''}${e.next ? `<p><span>My energy</span>${esc(e.next)}</p>` : ''}
+        <div class="row"><span class="meta">${new Date(e.at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>${e.ok ? `<span class="tag ok">Let go</span><button class="btn" type="button" data-ok="${e.id}">Undo</button>` : `<button class="btn" type="button" data-ok="${e.id}">Mark as let go</button>`}</div></div>`).join('');
+    list.querySelectorAll('[data-ok]').forEach(b => b.addEventListener('click', () => { const e = log.find(x => x.id === b.dataset.ok); e.ok = !e.ok; save(); draw(); }));
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { log = log.filter(x => x.id !== b.dataset.rm); save(); draw(); }));
+  }
+  $('#lgAdd').addEventListener('click', () => { const what = $('#lgWhat').value.trim(), msg = $('#lgMsg');
+    if (!what){ msg.textContent = 'Write what happened first.'; $('#lgWhat').focus(); return; }
+    log.unshift({ id: Date.now().toString(36), at: Date.now(), what, story: $('#lgStory').value.trim(), alt: $('#lgElse').value.trim(), next: $('#lgNext').value.trim(), ok: false }); save();
+    ['#lgWhat', '#lgStory', '#lgElse', '#lgNext'].forEach(s => $(s).value = ''); msg.textContent = 'Added. Come back and mark it let go when it no longer stings.'; draw(); });
+  draw();
+}
+
+})();
+</script>
+</body>
+</html>
