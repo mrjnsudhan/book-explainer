@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Crucial Conversations, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two speech bubbles over a shared pool. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas,
+   a story or example, a lab, plain words, quick check), grouped into the book's opening and its three parts: before you open your mouth,
+   how to open your mouth, how to finish. Dark-first: deep ink with a warm orange for you and a teal for the other person;
+   light mode is warm paper. */
+:root{
+  color-scheme: dark;
+  --ink:#12141C;--panel:#191C27;--panel-2:#222636;--line:#33384A;--text:#F3F1EC;--muted:#B0B3BF;--faint:#81859A;
+  --glow:#FF9248;--glow-soft:rgba(255,146,72,.11);--hl:rgba(255,146,72,.26);--cool:#5FC8C0;--cool-soft:rgba(95,200,192,.1);
+  --good:#8FD97A;--good-soft:rgba(143,217,122,.1);--bad:#FF6F6F;--bad-soft:rgba(255,111,111,.12);
+  --soft:#D8D8DE;--deep:#0C0E14;--toc-bg:rgba(25,28,39,.74);--glow-line:rgba(255,146,72,.36);--cool-line:rgba(95,200,192,.3);--on-glow:#2A1200;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F7F2EA;--panel:#FFFDF8;--panel-2:#EFE7DA;--line:#DDD3C3;--text:#1A1C24;--muted:#575A66;--faint:#858894;
+  --glow:#B4500C;--glow-soft:rgba(180,80,12,.06);--hl:#F8DCC4;--cool:#12756E;--cool-soft:rgba(18,117,110,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2B2D35;--deep:#FBF8F2;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,80,12,.28);--cool-line:rgba(18,117,110,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F7F2EA;--panel:#FFFDF8;--panel-2:#EFE7DA;--line:#DDD3C3;--text:#1A1C24;--muted:#575A66;--faint:#858894;
+  --glow:#B4500C;--glow-soft:rgba(180,80,12,.06);--hl:#F8DCC4;--cool:#12756E;--cool-soft:rgba(18,117,110,.06);--good:#2F7A1C;--good-soft:rgba(47,122,28,.08);--bad:#B83A26;--bad-soft:rgba(184,58,38,.07);
+  --soft:#2B2D35;--deep:#FBF8F2;--toc-bg:rgba(255,253,248,.84);--glow-line:rgba(180,80,12,.28);--cool-line:rgba(18,117,110,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Crucial Conversations additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.pool{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.pool-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.pool-top .btn{padding:5px 11px}
+.pool-stage{padding:10px 10px 4px}
+.pool-stage svg{display:block;width:100%;height:auto}
+.pool .row .btn{padding:7px 12px;font-size:13.5px}
+.pool .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.pool .cap b{color:var(--glow);font-weight:600}
+.story .lbl.ex{color:var(--faint)}
+.pad2{display:grid;gap:14px;padding:18px}
+.say{display:grid;gap:4px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2)}
+.say .who{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.say.them{border-color:var(--cool-line);background:var(--cool-soft)}
+.say.them .who{color:var(--cool)}
+.say.me{border-color:var(--glow-line);background:var(--glow-soft)}
+.say.me .who{color:var(--glow)}
+.say p{font-size:15.5px}
+.choices{display:grid;gap:8px}
+.choice{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;font-size:14.5px;line-height:1.45;transition:border-color .15s}
+.choice:hover:not(:disabled){border-color:var(--glow)}
+.choice[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.choice:disabled{cursor:default;opacity:.7}
+.choice.ok{border-color:var(--good);background:var(--good-soft);opacity:1}
+.choice.no{border-color:var(--bad);background:var(--bad-soft);opacity:1}
+.choice small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.fb2{font-size:14.5px;color:var(--soft);padding:12px 14px;border-radius:12px;background:var(--deep);border:1px solid var(--line)}
+.fb2 b{font-weight:600}
+.msg{font-family:var(--f-display);font-size:clamp(21px,2.8vw,27px);line-height:1.3}
+.msg span{transition:color .2s}
+.msg .gap{color:var(--faint)}
+.steps5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.steps5 .btn{border-radius:10px;padding:8px 4px;text-align:center;font-size:13px}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
+.chk input{margin-top:3px;accent-color:var(--glow)}
+.chks{display:grid;gap:6px}
+.plan-card{display:grid;gap:10px;padding:16px 18px;border:1px solid var(--glow-line);border-radius:14px;background:var(--panel)}
+.plan-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.plan-card p{font-size:15px;color:var(--soft)}
+.plan-card p b{color:var(--text);font-weight:500}
+.plan-card .say-out{color:var(--text)}
+@media (max-width: 760px){ .grid2{grid-template-columns:minmax(0,1fr)} }
+@media (max-width: 560px){ .fq{padding:14px 16px} .pad2{padding:14px} .steps5{grid-template-columns:repeat(3,minmax(0,1fr))} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to the book by Joseph Grenny, Kerry Patterson, Ron McMillan, Al Switzler and Emily Gregory</div>
+    <h1><em>Crucial Conversations</em>,<br>Explained</h1>
+    <p class="lede">Some conversations matter more than others: the ones where <b>opinions differ, the stakes are high and emotions run strong</b>. Most of us handle them worst exactly when they matter most, by going quiet or by pushing too hard. <b>Crucial Conversations</b> lays out the skills of people who do neither: they keep talking honestly while keeping the other person feeling safe, so that everyone's view gets into the open and better decisions come out. This guide follows the third edition's twelve chapters, with a lab in each where you can try the skill.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>You don't have to choose between <em>being honest</em> and <em>being kind</em>. Get all the meaning into the pool, and keep it safe enough that everyone adds to it.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What conversation are you facing?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="pool" style="margin:0" aria-label="The pool of shared meaning: what each of you says fills it, silence and attacks drain it">
+        <div class="pool-top"><span>The pool of shared meaning</span><button class="btn" id="plReset" type="button">Start over</button></div>
+        <div class="pool-stage"><svg id="plSvg" viewBox="0 0 400 240" role="img" aria-label="Two people and the pool of meaning between them"></svg></div>
+        <div class="row" style="padding:0 16px 12px" id="plMoves"></div>
+        <div class="cap" id="plCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 and 2</span><span class="q">The Idea</span><span class="d">What makes a conversation crucial, and why dialogue wins</span></a>
+      <a href="#part2"><span class="n">Part I · chapters 3 to 5</span><span class="q">Before You Open Your Mouth</span><span class="d">Choose the topic, start with heart, master your stories</span></a>
+      <a href="#part3"><span class="n">Part II · chapters 6 to 9</span><span class="q">How to Open Your Mouth</span><span class="d">Look, make it safe, STATE your path, explore theirs</span></a>
+      <a href="#part4"><span class="n">Part III · chapters 10 to 12</span><span class="q">How to Finish</span><span class="d">Move to action, the hard cases and the whole model</span></a>
+    </nav>
+    <div class="about">
+      <span><b>First published</b> in 2002; third edition 2021</span>
+      <span><b>Authors</b> Joseph Grenny, Kerry Patterson, Ron McMillan, Al Switzler and Emily Gregory</span>
+      <span><b>Full title</b> Crucial Conversations: Tools for Talking When Stakes Are High</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 12 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE IDEA ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Opening · chapters 1 and 2</span>
+      <h2>The Idea</h2>
+      <p>The book opens with a simple observation. The people who get the most done, at work and at home, aren't the ones who avoid hard conversations or win them. They're the ones who can talk openly about almost anything, with almost anyone, without the conversation blowing up. The first two chapters name the kind of conversation that matters and describe what those people do differently.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>When opinions differ, stakes are high and emotions run strong, the free flow of meaning between people is what produces good decisions and strong relationships.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Opinions vary, stakes are high, emotions run strong</div>
+        <h2>What's a Crucial Conversation? And Who Cares?</h2>
+        <div class="short"><span class="lbl">In short</span><p>A crucial conversation is one where opinions differ, the stakes are high and emotions run strong. These are the moments that shape careers, organisations and relationships, and they're exactly when most of us are at our worst.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Three ingredients.</b> A conversation turns crucial when people see things differently, something important depends on the outcome, and feelings are running hot. Asking for a raise, telling a friend they've hurt you or questioning a doctor's plan all qualify. They don't have to be dramatic; many happen in a corridor or over the dinner table.</span></li>
+          <li><span><b>We handle them badly for good reasons.</b> When we feel threatened, our bodies get ready to fight or flee. Blood goes to our arms and legs and away from the parts of the brain we need for careful thought. We're asked to be at our most thoughtful at the moment our biology makes that hardest.</span></li>
+          <li><span><b>Three ways it goes.</b> We can avoid the conversation, face it and handle it poorly, or face it and handle it well. The first two are far more common. The authors argue the third can be learned, and that the skills are surprisingly teachable.</span></li>
+          <li><span><b>Why it pays.</b> Across their research the authors found the same pattern: in teams, hospitals, companies and families, the places that do best are the ones where people can raise risky, emotional issues quickly and honestly. Many problems that look like they're about money, safety or quality turn out to be a conversation nobody was willing to hold.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the research</span><p>The authors' studies of hospitals are a good example of what silence costs. They found that most nurses and doctors had seen colleagues cut corners, make mistakes or show poor judgement in ways that could hurt patients, and that only a small minority, fewer than one in ten, had spoken up fully about it. The problem wasn't that people didn't care or didn't know. It was that the conversation felt too risky to hold. Their point is that the gap between knowing something is wrong and saying so is where a lot of harm happens.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: is this conversation crucial?</div><div class="hint">Set the three ingredients, or try an example</div></div>
+        <div class="stage"><svg id="cr1" role="img" aria-label="A triangle with one corner for each ingredient: opinions differ, stakes are high, emotions are strong"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">Try:</span><div class="moves" id="crPre"></div></div><div class="row"><div class="ctl"><label for="crO">Opinions differ <output id="ocrO"></output></label><input type="range" id="crO" min="0" max="10" value="7"></div><div class="ctl"><label for="crS">Stakes are high <output id="ocrS"></output></label><input type="range" id="crS" min="0" max="10" value="8"></div><div class="ctl"><label for="crE">Emotions run strong <output id="ocrE"></output></label><input type="range" id="crE" min="0" max="10" value="6"></div></div></div><div class="stats"><div class="stat"><span class="k">What kind of conversation</span><span class="v glow" id="crKind"></span></div><div class="stat"><span class="k">What usually happens</span><span class="s" id="crSay"></span></div></div><p class="callout">An illustrative model, not a scale from the book. <b>All three ingredients have to be present. A conversation with high stakes and no disagreement is just important, and a heated argument about nothing much is just a row.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If you notice that you disagree, that it matters and that you're getting worked up, you're in a crucial conversation. That's the moment to slow down and use the skills, rather than the moment to go quiet or push harder.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The power of dialogue →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · The pool of shared meaning</div>
+        <h2>Mastering Crucial Conversations: The Power of Dialogue</h2>
+        <div class="short"><span class="lbl">In short</span><p>Dialogue is the free flow of meaning between two or more people. Each of us brings our own facts, opinions and feelings; skilled people get all of it into a shared pool, because a fuller pool leads to better decisions that people actually act on.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The pool of shared meaning.</b> Everyone walks into a conversation with their own pool of opinions, theories and experiences. When people speak openly, those pools combine. The more meaning in the shared pool, the smarter the decision, and the more committed people are to it because they helped fill it.</span></li>
+          <li><span><b>Silence and violence.</b> When we don't feel safe, we stop adding to the pool in one of two ways. We hold meaning back (silence) or try to force it into the pool (violence). Both starve the decision of information.</span></li>
+          <li><span><b>The Fool's Choice.</b> Most of us believe we must choose between telling the truth and keeping a friend, or between speaking up and keeping our job. People who are good at crucial conversations reject that choice. They look for a way to be completely honest and completely respectful at once.</span></li>
+          <li><span><b>Dialogue can be learned.</b> The rest of the book breaks the skill into parts you can practise: what to do before you speak, how to open your mouth, and how to finish.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Early in their research the authors watched a team of executives discuss a plan their chief executive was keen on: moving the company into a new building. Most of the managers had serious doubts but stayed quiet or offered vague support. One of them, a vice-president the authors call Kevin, did something different. He said he wasn't sure he agreed and explained why, without attacking anyone, and asked the boss what he was seeing that Kevin might be missing. The conversation opened up, the real concerns came out, and the decision got better. Kevin wasn't the most senior or the cleverest person in the room. He was the one who could say the risky thing and keep everyone safe.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the Fool's Choice</div><div class="hint">Pick a situation, then pick a reply</div></div>
+        <div class="stage"><svg id="fc2" role="img" aria-label="Two meters, honesty and respect, and how much meaning reached the pool"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">The situation:</span><div class="moves" id="fcSc"></div></div><div class="say them" id="fcLine"></div><div class="choices" id="fcR"></div></div><div class="stats"><div class="stat"><span class="k">What you chose</span><span class="v glow" id="fcKind">Pick a reply</span></div><div class="stat"><span class="k">What happens next</span><span class="s" id="fcSay">Each reply sits somewhere between silence and violence. One of them refuses the choice.</span></div></div><p class="callout">An illustrative model. <b>Silence protects the relationship at the cost of the truth; violence gets the truth out at the cost of the relationship. Dialogue doesn't trade one for the other.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something important needs saying, you don't have to pick between honest and nice. Aim to get every view into the open, yours included, in a way that keeps the other person willing to keep talking.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Choose your topic →</a></div>
+    </section>
+    <!-- ===================== BEFORE YOU OPEN YOUR MOUTH ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part I · before you open your mouth</span>
+      <h2>Before You Open Your Mouth</h2>
+      <p>Most conversations go wrong before anyone says a word. We walk in with the wrong topic, with motives that have quietly shifted from solving the problem to winning, and with a story about the other person that we've mistaken for the facts. These three chapters are about getting yourself right first.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Work on me first, us second: pick the real issue, know what you really want, and question the story behind your feelings.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Unbundle the issue and hold the right conversation</div>
+        <h2>Choose Your Topic</h2>
+        <div class="short"><span class="lbl">In short</span><p>Many crucial conversations fail because we talk about the wrong thing. Unbundle the issue, choose the one that really matters, put it in a sentence and stick to it.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Unbundle with CPR.</b> Most problems come in layers. Content is the single instance: you were late today. Pattern is what keeps happening: this is the third time this month. Relationship is what it's doing to us: I'm starting to feel I can't rely on what you tell me. Talking about content when the real problem is a pattern is why the same conversation keeps coming back.</span></li>
+          <li><span><b>Choose.</b> Once you've separated the strands, ask which one you really want to address. Often it isn't the most recent incident but the pattern or the trust behind it.</span></li>
+          <li><span><b>Simplify.</b> If you can't say what the problem is in a sentence or two, you're not ready. Boiling it down forces you to find the real issue instead of a list of grievances.</span></li>
+          <li><span><b>Stay focused.</b> In the moment, the conversation will drift: a defensive reply, an old complaint, a side issue. Notice the switch, decide whether to follow it on purpose, and if not, say you'll come back to it and return to the topic you chose.</span></li>
+          <li><span><b>Know whether to speak up.</b> The authors give a few signs you're avoiding a conversation you should hold: you're acting out your feelings instead of talking them out, your conscience keeps nagging, you're telling yourself it's hopeless, or you're choosing the safe-feeling risk of silence over the uncertain risk of speaking.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A manager has spoken to a colleague twice about missing a deadline, and each time the colleague apologised and promised to do better. Both conversations were about the latest missed date, so each one ended well and changed nothing. The third time, the manager talks about the pattern: this has now happened three times, and each time it's been followed by an apology and a promise. That conversation is harder, and it finally gets to the real problem.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: content, pattern or relationship?</div><div class="tally" id="tally3" aria-label="Score"></div></div>
+        <div class="sorter" id="sort3"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you raise something, ask whether the problem is this one time, the fact that it keeps happening, or what it's doing to how you trust each other. Name that one, say it simply, and gently bring the conversation back when it wanders.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Start with heart →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · What do I really want?</div>
+        <h2>Start with Heart</h2>
+        <div class="short"><span class="lbl">In short</span><p>The first problem to fix is your own motive. Under pressure, our goals drift towards winning, punishing or keeping the peace. Ask what you really want for yourself, for the other person and for the relationship, and refuse the Fool's Choice.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Work on me first, us second.</b> You can't control the other person, and you're the one you have the most influence over. The authors begin with your own heart, meaning your motives, because everything you say flows from them.</span></li>
+          <li><span><b>Notice your motive drift.</b> As a conversation heats up, we start wanting different things without noticing: to win, to be right, to make the other person pay, or to get out of the room. Watching for the moment your purpose changes is the first skill.</span></li>
+          <li><span><b>Ask what you really want.</b> Ask three questions. What do I really want for myself? For the other person? For the relationship? Then ask how you would behave right now if you really wanted those results.</span></li>
+          <li><span><b>Refuse the Fool's Choice.</b> Add one more question: what do I not want? Then put both together. How can I tell my colleague the truth and keep their trust? How can I raise my concern and not damage the project? Searching for an "and" usually turns up options the Fool's Choice hid.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The authors describe a chief executive holding a question-and-answer session with her staff. She had been asking everyone to tighten their belts. Then an employee stood up and asked, in front of everyone, how she could justify the money being spent on her new office. In that moment her goal quietly shifted from understanding the concern to defending herself and putting the questioner in his place. The authors use it to show how fast motives drift. The fix starts with catching yourself and asking what you really want here: to win this exchange, or for people to trust what you're telling them about costs.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: what do I really want?</div><div class="hint">Notice the drift, then write your "and" question</div></div>
+        <div class="grid2 pad2"><div><div class="stage" style="padding:0"><svg id="sh4" role="img" aria-label="A compass whose needle drifts away from what you really want as more drift signs are ticked"></svg></div><p class="tip" style="margin-top:8px">In the middle of a tense talk, I notice that I want to&hellip;</p><div class="chks" id="shChk"></div></div><div class="fields" style="padding:0;border:0"><div class="field"><label for="shMe">What I really want for me</label><input id="shMe" maxlength="100" placeholder="e.g. to get the project back on track"></div><div class="field"><label for="shThem">For them</label><input id="shThem" maxlength="100" placeholder="e.g. to feel supported, not cornered"></div><div class="field"><label for="shUs">For the relationship</label><input id="shUs" maxlength="100" placeholder="e.g. to keep working well together"></div><div class="field"><label for="shNot">What I don't want</label><input id="shNot" maxlength="100" placeholder="e.g. a blow-up in front of the team"></div></div></div><div class="out" id="shOut" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before and during a hard talk, check your motive. If you catch yourself wanting to win or wanting to escape, ask what you really want for you, them and the relationship, and look for a way to get all of it.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Master my stories →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · The path to action</div>
+        <h2>Master My Stories</h2>
+        <div class="short"><span class="lbl">In short</span><p>Other people don't make us angry. Between what they do and how we feel, we tell ourselves a story, and that story is what produces the feeling. Retrace your path, separate the facts from the story and tell a more complete one.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The path to action.</b> We see and hear something, we tell ourselves a story about what it means, the story creates a feeling, and the feeling drives what we do. The story step happens so fast that it feels as if the event caused the emotion directly.</span></li>
+          <li><span><b>Retrace your path.</b> When you notice yourself acting out, work backwards. What am I doing? What am I feeling? What story is creating that feeling? What did I actually see or hear that supports it? Separating the facts from the story is the heart of the skill.</span></li>
+          <li><span><b>Three clever stories.</b> Some stories are especially good at excusing us. Victim stories say it isn't my fault. Villain stories say it's all their fault, and they're doing it on purpose. Helpless stories say there's nothing I can do. They are clever because they're partly true and very convenient.</span></li>
+          <li><span><b>Tell the rest of the story.</b> Turn victims into actors by asking: am I pretending not to notice my own part? Turn villains into humans by asking: why would a reasonable, decent person do this? Turn the helpless into the able by asking: what do I really want, and what would I do now if I did?</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The authors tell of Maria, who had worked on a project with a colleague, Louis. She then found out that Louis had gone to their boss without her and presented the work, apparently as his own. Within moments Maria had a story: he was taking the credit and pushing her aside. The story made her furious, and she started acting on it, cutting Louis out and complaining to others. Retracing her path, she realised that the facts were narrower than the story: Louis had met the boss alone and talked about their project. Why he did it, she didn't actually know. Separating the two gave her something she could raise calmly.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: the path to action</div><div class="hint">Same facts. Change the story and watch what follows</div></div>
+        <div class="stage"><svg id="pa5" role="img" aria-label="The path to action: see and hear, tell a story, feel, act"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">The story I tell myself:</span><div class="moves" id="paStory"></div></div></div><div class="stats"><div class="stat"><span class="k">How strong the feeling</span><span class="v glow" id="paHeat"></span></div><div class="stat"><span class="k">The question that changes it</span><span class="s" id="paQ"></span></div></div><p class="callout">Based loosely on the book's Maria and Louis story; the lines are ours. <b>The facts on the left never change. Everything to the right of them does.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you're upset, ask what story you're telling yourself and what you actually saw or heard. Then ask why a reasonable person might have done it, and what your own part was. Your feelings will often cool on their own.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: Learn to look →</a></div>
+    </section>
+    <!-- ===================== HOW TO OPEN YOUR MOUTH ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part II · how to open your mouth</span>
+      <h2>How to Open Your Mouth</h2>
+      <p>Once you're talking, two things have to happen at the same time. You have to watch the conversation for the moment it stops feeling safe, and repair that when it happens. And you have to say what you mean, and draw out what the other person means, in a way that keeps it safe.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Watch for silence and violence, step out to restore safety, then share your path tentatively and explore theirs with real curiosity.</p></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Notice when safety is at risk</div>
+        <h2>Learn to Look</h2>
+        <div class="short"><span class="lbl">In short</span><p>Watch two things at once: what's being said, and how people are feeling. The moment someone stops feeling safe, they move towards silence or violence. Learn the signs in others, and in yourself.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Content and conditions.</b> Most of us are so caught up in what is being discussed that we miss how it's being discussed. Skilled people keep half an eye on the conditions: is this still a conversation, or has it become a fight or a retreat?</span></li>
+          <li><span><b>Spot the moment it turns crucial.</b> Your body often notices first: a tight stomach, a hot face. So do your emotions and your behaviour, such as raising your voice or going quiet. Treat these as signals to step back and pay attention.</span></li>
+          <li><span><b>Three forms of silence.</b> Masking means understating or disguising what you really think, often with sarcasm or sugar-coating. Avoiding means steering away from the sensitive subject entirely. Withdrawing means pulling out of the conversation, or the room, altogether.</span></li>
+          <li><span><b>Three forms of violence.</b> Controlling means forcing your view by talking over people, overstating facts or using absolutes. Labelling means sticking a stereotype on someone so you can dismiss them. Attacking means trying to make the other person suffer, through belittling or threats.</span></li>
+          <li><span><b>Your Style Under Stress.</b> Most of us lean towards one side. The book includes a self-test to find yours. Knowing whether you tend to go quiet or come on strong helps you catch it sooner.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A couple are planning a holiday. One suggests visiting her parents again this year. The other says "Fine, whatever you want" and starts looking at his phone. On the surface there's no fight. Underneath, he's masking and then withdrawing, and she can feel it. If she only listens to the words she'll book the trip, and they'll both pay for it later. If she notices the conditions, she can stop and ask what's going on before the decision gets made.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: silence, violence or dialogue?</div><div class="tally" id="tally6" aria-label="Score"></div></div>
+        <div class="stage"><svg id="sv6" role="img" aria-label="A line from silence to violence, with dialogue in the middle"></svg></div><div class="sorter" id="sort6"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When a conversation gets tense, keep listening to the words but also watch the people, yourself included. Going quiet, sarcasm, changing the subject, talking over someone or name-calling are all signs that safety has gone.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Make it safe →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Mutual purpose and mutual respect</div>
+        <h2>Make It Safe</h2>
+        <div class="short"><span class="lbl">In short</span><p>When people go silent or get heated, the problem is rarely the content. It's that they don't feel safe. Step out of the content, restore mutual purpose and mutual respect, then step back in.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Step out, make it safe, step back in.</b> When safety is at risk, don't push harder on the topic. Pause the content, deal with what's making the conversation feel dangerous, and return to the topic once people relax.</span></li>
+          <li><span><b>Mutual purpose: the entrance condition.</b> People need to believe you care about their goals and interests, not only yours. Without that belief, there's no reason for them to enter the conversation. Ask yourself whether they think you're after something they won't get.</span></li>
+          <li><span><b>Mutual respect: the continuance condition.</b> People need to feel that you respect them as people. The moment respect goes, the conversation becomes about defending dignity, and the original topic is lost.</span></li>
+          <li><span><b>Apologise, contrast, CRIB.</b> When you've genuinely made a mistake, apologise. When someone has misread your purpose or your respect, use contrasting: say what you don't intend, then what you do. When your purposes truly differ, CRIB your way back: Commit to seek mutual purpose, Recognise the purpose behind each person's strategy, Invent a mutual purpose, and Brainstorm new strategies.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A team leader opens a review meeting with "We need to talk about the problems with your report." The colleague hears an attack and gets defensive before any detail is discussed. Rewound, the leader uses contrasting instead: "I don't want you to think I'm unhappy with your work overall; the analysis is strong. I do want to go through two figures that I think are wrong before this goes to the board, because I want it to land well for you." The content is the same. The safety is completely different.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: open the conversation safely</div><div class="hint">Pick an opening and watch the two conditions</div></div>
+        <div class="grid2 pad2"><div class="stage" style="padding:0"><svg id="ms7" role="img" aria-label="Two gauges for mutual purpose and mutual respect"></svg></div><div style="display:grid;gap:10px"><div class="say me"><span class="who">The situation</span><p>Your colleague's report has two errors in it, and it goes to the board on Friday.</p></div><div class="choices" id="msR"></div></div></div><div class="fb2" id="msFb" style="margin:0 18px 16px" aria-live="polite">Pick an opening line.</div><div class="fields" style="border-top:1px solid var(--line)"><div class="field"><label for="msDont">I don't want you to think&hellip;</label><input id="msDont" maxlength="100" placeholder="e.g. I'm unhappy with your work"></div><div class="field"><label for="msDo">I do want&hellip;</label><input id="msDo" maxlength="120" placeholder="e.g. to make sure this lands well for you on Friday"></div></div><div class="out" id="msOut" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>If the other person bristles or goes quiet, stop talking about the topic for a moment. Make sure they know you want something good for them too, and that you respect them, then go back to the issue.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: STATE my path →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Speak persuasively, not abrasively</div>
+        <h2>STATE My Path</h2>
+        <div class="short"><span class="lbl">In short</span><p>When you have something hard to say, lead with the facts, then share the story you're telling yourself, then genuinely ask for the other person's view. Speak tentatively, and make it safe for them to disagree.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Share your facts.</b> Facts are the least controversial and most persuasive part of your path. Start there: what you saw and heard, without the conclusions.</span></li>
+          <li><span><b>Tell your story.</b> Then say what you're beginning to conclude. Facts alone can sound like an accusation hanging in the air. Your story explains why you're raising it.</span></li>
+          <li><span><b>Ask for others' paths.</b> Invite their facts and stories. You're not trying to prove your story but to test it.</span></li>
+          <li><span><b>Talk tentatively.</b> Say "I'm starting to wonder" or "It seems to me" rather than "The fact is". Tentative isn't the same as wimpy: you still say clearly what you think, but as a view rather than a verdict.</span></li>
+          <li><span><b>Encourage testing.</b> Make it safe for people to disagree, and mean it. If you think they're holding back, try playing devil's advocate against your own view.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The authors tell of Carole, who opens a credit card statement and finds a charge from a cheap motel just down the road. Her husband Bob hasn't mentioned staying anywhere. Her mind races to the worst story. She could open with an accusation, or say nothing and stew. Instead the book walks her through STATE: start with the fact, the charge on the statement; share the worry it's prompting; and ask Bob what he knows. Said that way, there's room for the real explanation to come out, and it turns out to be innocent. Opening with the accusation would have done lasting damage, whatever the truth.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: build a STATE message</div><div class="hint">Pick one line for each step</div></div>
+        <div class="stage"><svg id="st8" role="img" aria-label="A dial from too timid to too forceful"></svg></div><div class="lab-ctl"><div class="steps5" id="stSteps" role="tablist"></div><div class="choices" id="stOpts"></div></div><div class="out"><span class="k">Your message so far</span><p class="msg" id="stMsg"></p></div><p class="callout">Based on the book's Carole and Bob example; the lines are ours. <b>The order matters as much as the words: facts first, story second, then ask, and mean it.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Start with what you saw, say what you're beginning to think, and then ask how they see it. Use soft openers like "I'm starting to wonder" so that disagreement feels welcome, and be open to finding out you were wrong.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Explore others' paths →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Ask, mirror, paraphrase, prime</div>
+        <h2>Explore Others' Paths</h2>
+        <div class="short"><span class="lbl">In short</span><p>When the other person goes silent or turns aggressive, get curious instead of furious. Help them retrace their path to action with four listening tools, and when it's your turn, agree where you can, build on it and compare differences.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Start with curiosity.</b> When someone is defensive or angry, their behaviour is the end of their path to action. Behind it are feelings, a story and some facts. Your job is to help them get back to those, so you can see what's really going on.</span></li>
+          <li><span><b>AMPP.</b> Ask to get things going: "What's going on?" Mirror to confirm feelings: "You say you're fine, but you sound upset." Paraphrase to acknowledge the story: "So you felt you were left out of the decision?" Prime when you're getting nowhere: offer your best guess at what they might be thinking, to show it's safe to say.</span></li>
+          <li><span><b>Listening isn't agreeing.</b> Exploring someone's path doesn't mean you accept it. It means you understand it well enough to respond to what they actually think.</span></li>
+          <li><span><b>ABC when it's your turn.</b> Agree where you genuinely agree. Build when they've left something out: "Absolutely, and I'd add..." Compare when you really differ: "I see it differently; let me explain how." Most arguments are about the small part people disagree on, while the large part they agree on goes unspoken.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A team member storms into a manager's office and says the new rota is a joke and that nobody asked her. The manager's instinct is to defend the rota. Instead he asks what's going on, mirrors that she seems really frustrated, and paraphrases: "So it feels as if decisions about your hours were made without you?" Only then does the real fact come out: the new schedule clashes with her childcare, and she found out from a colleague. That's a problem he can actually do something about.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: help them retrace their path</div><div class="hint">Choose how to respond, and watch their path appear</div></div>
+        <div class="stage"><svg id="ex9" role="img" aria-label="The other person's path to action, revealed from their action back to the facts"></svg></div><div class="pad2" style="padding-top:6px"><div class="say them" id="exLine"></div><div class="choices" id="exR"></div><div class="fb2" id="exFb" aria-live="polite">Pick a reply.</div><div class="row"><button class="btn" id="exReset" type="button">Start again</button></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When someone is upset, ask what's going on, name the emotion you're seeing, sum up what they've told you, and if they're stuck, offer a guess. Once you understand them, agree where you can before pointing out where you differ.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Move to action →</a></div>
+    </section>
+    <!-- ===================== HOW TO FINISH ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part III · how to finish</span>
+      <h2>How to Finish</h2>
+      <p>A great conversation that ends with no decision and no follow-up can leave things worse than before, because everyone walks away with different ideas of what was agreed. The last chapters turn dialogue into action, take on the cases people say are too hard, and put the whole model on one page.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Decide how you'll decide, agree who does what by when, and use the tools even when the situation looks like an exception.</p></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Decide how to decide, then who does what by when</div>
+        <h2>Move to Action</h2>
+        <div class="short"><span class="lbl">In short</span><p>Dialogue isn't decision-making. Before you finish, agree how the decision will be made, and then be clear about who will do what by when, and how you'll follow up.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two risky moments.</b> Conversations go wrong at the end in two ways: people leave with different ideas of how the decision is being made, or a decision is made and nobody acts on it. Both can undo a great discussion.</span></li>
+          <li><span><b>Four ways to decide.</b> Command: the decision is made by someone else, or handed over to one person. Consult: a decision-maker gathers views, then decides. Vote: the group picks among clear options and agrees to back the result. Consensus: everyone honestly agrees with the final decision. Each has its place; trouble comes when people assume different ones.</span></li>
+          <li><span><b>Pick the method.</b> Ask who cares about the outcome, who knows the most, who must agree for it to work, and how many people are worth involving. Consensus is for high-stakes, complex issues where everyone's support is essential; it is slow and shouldn't be the default.</span></li>
+          <li><span><b>WWWF.</b> Finish with Who does What by When, and how you'll Follow up. Write it down, name a person rather than a group, and set a date and a way to check in.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A family spends an evening talking through whether to move to a new city for a parent's job. Everyone gets a say and the conversation is warm and honest. Then everyone goes to bed, and the children think there was a vote, one parent thinks it was a consultation, and the other thinks it was a consensus that hasn't been reached yet. The next morning's argument is about how the decision was being made, not the decision itself. A single sentence at the start would have prevented it.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: how should we decide?</div><div class="hint">Describe the decision and see which method fits</div></div>
+        <div class="stage"><svg id="mv10" role="img" aria-label="Four bars showing how well command, consult, vote and consensus fit this decision"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">Try:</span><div class="moves" id="mvPre"></div></div><div class="toggles" id="mvQ"></div></div><div class="stats"><div class="stat"><span class="k">Best fit</span><span class="v glow" id="mvBest"></span></div><div class="stat"><span class="k">Why</span><span class="s" id="mvWhy"></span></div></div><div class="fields" style="border-top:1px solid var(--line)"><div class="field"><label for="mvWho">Who</label><input id="mvWho" maxlength="40" placeholder="e.g. Priya"></div><div class="field"><label for="mvWhat">Does what</label><input id="mvWhat" maxlength="80" placeholder="e.g. books the venue"></div><div class="field"><label for="mvWhen">By when</label><input id="mvWhen" maxlength="40" placeholder="e.g. Friday noon"></div><div class="field"><label for="mvF">Follow-up</label><input id="mvF" maxlength="80" placeholder="e.g. a message to the group when it's done"></div></div><div class="out" id="mvOut" aria-live="polite"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you wrap up, say out loud how the decision is being made. Then write down who will do what, by when, and how everyone will know it's done.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: Yeah, but →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · The cases that seem too hard</div>
+        <h2>Yeah, But</h2>
+        <div class="short"><span class="lbl">In short</span><p>Every reader has a case where the tools surely can't work: the touchy colleague, the boss who won't listen, the problem that's too embarrassing to raise. The authors take on these objections and show that the same principles still apply, sometimes with a little extra care.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Every case feels like the exception.</b> Hard conversations always feel unique. The authors take readers' most common "yeah, but" situations, such as harassment, a partner who's oversensitive, a team that won't follow through, or someone who repeatedly breaks promises, and walk through which skill unlocks each one.</span></li>
+          <li><span><b>Touchy people.</b> With someone who reacts strongly to any feedback, safety is the issue. Contrast your purpose, start small, and raise the pattern of touchiness itself if needed.</span></li>
+          <li><span><b>Broken promises and bad habits.</b> For repeated problems, hold the pattern conversation, not another content one, and agree specific next steps you can both check on.</span></li>
+          <li><span><b>When you're the one who's been hurt.</b> Start with heart: decide what you really want, then share facts before stories. Being calm doesn't mean staying silent.</span></li>
+          <li><span><b>You can't make it safe for someone else alone.</b> Sometimes the other person won't engage. You can still be honest and respectful, and decide what you will do next.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A manager says the tools sound nice but won't work with one employee who takes any comment as a personal attack. Looked at closely, the employee's reaction is a sign that safety goes the moment feedback starts. So the manager begins differently: with mutual purpose ("I want you to do well here and I think you can"), contrasts what she's not saying, keeps to one specific, factual issue, and asks for his view. When the defensiveness shows up anyway, she names it gently as a pattern they can talk about. It takes longer than a quick comment in passing, but it gets somewhere.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: which skill unlocks it?</div><div class="tally" id="tally11" aria-label="Score"></div></div>
+        <div class="sorter" id="sort11"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When you think "yeah, but my situation is different", ask which part of the model is actually missing: safety, your motive, your story, how you're stating it or how the conversation ends. That's usually where the fix is.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: Putting it all together →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Tools for preparing and learning</div>
+        <h2>Putting It All Together</h2>
+        <div class="short"><span class="lbl">In short</span><p>The whole model fits on one page, and you don't need all of it at once. Pick one or two skills, use them in your next hard conversation, and come back for more. Small improvements in how you handle these moments compound.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two principles above all.</b> If you remember nothing else, remember to learn to look, noticing when a conversation turns crucial and when safety slips, and to make it safe. Those two alone change most conversations.</span></li>
+          <li><span><b>A coaching tool.</b> The authors summarise the book as a set of questions to prepare with: What do I really want? What story am I telling myself? Is it safe? How do I share my path? How do I explore theirs? How will we decide and follow up?</span></li>
+          <li><span><b>Start with yourself, and start small.</b> Pick one relationship and one skill, and practise. Each successful conversation makes the next one feel less risky.</span></li>
+          <li><span><b>It's never too late.</b> Conversations you've already botched can be reopened. You can go back and say: I don't think I handled that well, and I'd like to try again.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl ex">An example</span><p>A doctor is about to discharge a patient, and the nurse thinks it's too early: the patient's numbers have been drifting in the wrong direction. She can stay quiet, because he's senior and in a hurry. Or she can use the whole model in under a minute: notice that this is crucial, check her motive (she wants the patient safe, not to win), make it safe ("I know you've got a full list and I trust your judgement"), share the facts, say what she's beginning to think, and ask what he's seeing. It doesn't need a meeting. It needs thirty seconds of the right words.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: the whole conversation</div><div class="hint">Five moments. Keep the pool filling and the conversation safe</div></div>
+        <div class="stage"><svg id="pt12" role="img" aria-label="Two meters: how safe the conversation feels and how much meaning has reached the pool"></svg></div><div class="pad2"><div class="say them" id="ptLine"></div><div class="choices" id="ptR"></div><div class="fb2" id="ptFb" aria-live="polite"></div><div class="row"><button class="btn primary" id="ptNext" type="button" hidden>Next moment →</button><button class="btn" id="ptReset" type="button">Start again</button></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't need to master every tool. Next time a conversation turns crucial, notice it, make it safe and share the facts first. Then add another skill next time.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#after">Next: prepare your conversation →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Prepare your next crucial conversation</h2>
+      <p class="big">The whole book as one page of preparation. Fill it in before the talk you've been putting off. It's saved in this browser, so you can come back to it afterwards and see how it went.</p>
+      <figure class="lab" id="prep">
+        <div class="lab-top"><div class="t">My conversation plan</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field" style="grid-column:1/-1"><label for="ppWho">Who it's with, and the topic in one sentence</label><input id="ppWho" maxlength="140" placeholder="e.g. Sam, about missing the last three deadlines"></div>
+          <div class="field"><label for="ppCpr">Which level is it really?</label><select id="ppCpr"><option value="Content">Content: this one time</option><option value="Pattern" selected>Pattern: it keeps happening</option><option value="Relationship">Relationship: how we are with each other</option></select></div>
+          <div class="field"><label for="ppMe">What I really want, for me</label><input id="ppMe" maxlength="120" placeholder="e.g. To be able to plan around Sam's dates"></div>
+          <div class="field"><label for="ppThem">For them</label><input id="ppThem" maxlength="120" placeholder="e.g. To get the help they need"></div>
+          <div class="field"><label for="ppUs">For the relationship</label><input id="ppUs" maxlength="120" placeholder="e.g. To trust each other again"></div>
+          <div class="field" style="grid-column:1/-1"><label for="ppFacts">The facts, as a camera would record them</label><input id="ppFacts" maxlength="180" placeholder="e.g. The last three reports came in two, four and five days late"></div>
+          <div class="field" style="grid-column:1/-1"><label for="ppStory">My tentative story</label><input id="ppStory" maxlength="160" placeholder="e.g. I'm starting to wonder if you've got too much on"></div>
+          <div class="field" style="grid-column:1/-1"><label for="ppDont">Contrast: I don't want them to think&hellip;</label><input id="ppDont" maxlength="140" placeholder="e.g. that I don't value their work"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="ppSave" type="button">Save my plan</button><button class="btn" id="ppClear" type="button">Clear</button><span class="tip" id="ppMsg"></span></div>
+        </div>
+        <div class="out" id="ppOut" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Dialogue</span><b>Fill the pool</b><span>Get everyone's facts, stories and feelings into the open. Better decisions come from a fuller pool.</span></div>
+        <div><span class="n">Heart</span><b>Work on me first</b><span>Ask what you really want for you, them and the relationship, and refuse the Fool's Choice.</span></div>
+        <div><span class="n">Stories</span><b>Separate facts from stories</b><span>Your feelings come from the story you tell, not from what happened. Tell a more useful one.</span></div>
+        <div><span class="n">Safety</span><b>Step out and make it safe</b><span>When people go silent or get heated, restore mutual purpose and mutual respect, then step back in.</span></div>
+        <div><span class="n">STATE</span><b>Speak honestly and tentatively</b><span>Facts first, then your story, then ask for theirs, and mean it.</span></div>
+        <div><span class="n">Action</span><b>Finish with WWWF</b><span>Decide how you'll decide, then agree who does what by when, and how you'll follow up.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Crucial Conversations: Tools for Talking When Stakes Are High</i> by Joseph Grenny, Kerry Patterson, Ron McMillan, Al Switzler and Emily Gregory (third edition, 2021). The explanations, retold stories, examples and labs are written in our own words; chapter titles and the names of the book's tools are the authors'. Labs that show numbers are illustrative models, not data from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The idea", "Before you open your mouth", "How to open your mouth", "How to finish"];
+const CH = [["What's a Crucial Conversation? And Who Cares?", "What makes it crucial", 0, "Chapter 1"], ["Mastering Crucial Conversations: The Power of Dialogue", "The power of dialogue", 0, "Chapter 2"], ["Choose Your Topic", "Choose your topic", 1, "Chapter 3"], ["Start with Heart", "Start with heart", 1, "Chapter 4"], ["Master My Stories", "Master my stories", 1, "Chapter 5"], ["Learn to Look", "Learn to look", 2, "Chapter 6"], ["Make It Safe", "Make it safe", 2, "Chapter 7"], ["STATE My Path", "STATE my path", 2, "Chapter 8"], ["Explore Others' Paths", "Explore others' paths", 2, "Chapter 9"], ["Move to Action", "Move to action", 3, "Chapter 10"], ["Yeah, But", "Yeah, but", 3, "Chapter 11"], ["Putting It All Together", "Putting it all together", 3, "Chapter 12"]];
+const QUIZ = {
+"1": {
+"q": "Which three things together make a conversation crucial?",
+"o": [
+"A boss, a deadline and a disagreement",
+"Differing opinions, high stakes and strong emotions",
+"Anger, blame and a raised voice"
+],
+"a": 1,
+"w": "The book's definition: opinions vary, the stakes are high and emotions run strong. Any conversation, at work or at home, can have all three."
+},
+"2": {
+"q": "What is the Fool's Choice?",
+"o": [
+"Deciding whether to hold a meeting or send an email",
+"Believing you must choose between honesty and keeping the relationship",
+"Choosing to agree with the most senior person"
+],
+"a": 1,
+"w": "It's the assumption that we have to pick between telling the truth and keeping the peace. Skilled people look for a third way that does both."
+},
+"3": {
+"q": "Your teenager has broken curfew for the fourth time and you've discussed it each time. Which level should the next conversation be about?",
+"o": [
+"Content: what happened tonight",
+"Pattern: that agreements keep being broken",
+"Nothing: avoid it to keep the peace"
+],
+"a": 1,
+"w": "When the same content conversation keeps repeating, the real issue is the pattern, and if it continues, what it's doing to trust in the relationship."
+},
+"4": {
+"q": "Which question best helps you refuse the Fool's Choice?",
+"o": [
+"How do I make sure I win this?",
+"How can I say what I need to say and keep the relationship strong?",
+"Should I speak up or stay quiet?"
+],
+"a": 1,
+"w": "Joining what you want with what you don't want using \"and\" pushes your brain past the either-or and towards options that serve both."
+},
+"5": {
+"q": "According to the path to action, what creates our feelings?",
+"o": [
+"What the other person did",
+"The story we tell ourselves about what they did",
+"Our personality"
+],
+"a": 1,
+"w": "Between the facts and the feeling there's always a story. Change the story, and the feeling and the action change with it."
+},
+"6": {
+"q": "Someone says \"Oh, great idea, that'll definitely work\" in a sarcastic tone. Which behaviour is this?",
+"o": [
+"Masking, a form of silence",
+"Attacking, a form of violence",
+"Dialogue"
+],
+"a": 0,
+"w": "Sarcasm hides what the person really thinks behind the opposite words. That's masking, one of the three forms of silence."
+},
+"7": {
+"q": "What is contrasting?",
+"o": [
+"Comparing two options side by side",
+"A don't/do statement that clears up a misunderstanding of your purpose or respect",
+"Disagreeing politely"
+],
+"a": 1,
+"w": "Contrasting says what you don't mean, which addresses the misunderstanding, and then what you do mean, which confirms your real purpose."
+},
+"8": {
+"q": "Why do the authors recommend starting with facts rather than your story?",
+"o": [
+"Facts are less controversial and more persuasive than conclusions",
+"Stories are always wrong",
+"It saves time"
+],
+"a": 0,
+"w": "Facts are hard to argue with and don't insult anyone. Leading with your conclusion invites the other person to defend themselves before they've heard why."
+},
+"9": {
+"q": "What does \"priming\" mean in AMPP?",
+"o": [
+"Getting your own point in first",
+"Offering your best guess at what the other person might be thinking, to help them open up",
+"Preparing a script before the conversation"
+],
+"a": 1,
+"w": "When asking, mirroring and paraphrasing haven't worked, priming takes a risk: you suggest what they might be thinking, to show it's safe to say it."
+},
+"10": {
+"q": "In a consultation, who makes the final decision?",
+"o": [
+"Everyone, together",
+"A decision-maker, after gathering input",
+"The majority"
+],
+"a": 1,
+"w": "Consulting means inviting views from others and then one person or a small group deciding. It's efficient and still uses everyone's knowledge."
+},
+"11": {
+"q": "Your partner keeps forgetting things they promised to do, and you've talked about each one. What does the book suggest?",
+"o": [
+"Keep pointing out each instance as it happens",
+"Raise the pattern, not just the latest instance",
+"Stop asking them to do things"
+],
+"a": 1,
+"w": "Talking about each instance never touches the real issue. Raising the pattern, and agreeing who does what by when, does."
+},
+"12": {
+"q": "If you only remember two skills from the book, which do the authors suggest?",
+"o": [
+"Learn to look, and make it safe",
+"STATE my path, and vote",
+"Choose your topic, and WWWF"
+],
+"a": 0,
+"w": "Noticing when safety is slipping, and stepping out to restore it, fixes most conversations even before the other tools come in."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#12141c';
+try { const t = localStorage.getItem('cc-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('cc-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('cc-done', []));
+const save = () => store.set('cc-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const shuffled = a => { const b = [...a]; for (let k = b.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [b[k], b[j]] = [b[j], b[k]]; } return b; };
+/* a simple person: head + shoulders, coloured by role */
+const person = (x, y, c, s = 1) => `<circle cx="${x}" cy="${y}" r="${13 * s}" ${FS(c, c, 1.5, .25)}/><path d="M${x - 22 * s} ${y + 44 * s}a${22 * s} ${24 * s} 0 0 1 ${44 * s} 0Z" ${FS(c, c, 1.5, .25)}/>`;
+/* a horizontal meter */
+const hbar = (x, y, w, v, c, label, val) => `${TX(x, y - 7, label, 'muted', 12.5)}${TX(x + w, y - 7, val, 'text', 12.5, 'end', 'font-family="var(--f-mono)"')}<rect x="${x}" y="${y}" width="${w}" height="12" rx="6" ${F('line')}/><rect x="${x}" y="${y}" width="${(w * clamp(v, 0, 1)).toFixed(1)}" height="12" rx="6" ${F(c)}/>`;
+const choiceList = (box, opts, onPick) => {
+  box.innerHTML = opts.map((o, i) => `<button class="choice" type="button" data-i="${i}">${o.t}${o.sub ? `<small>${o.sub}</small>` : ''}</button>`).join('');
+  box.querySelectorAll('.choice').forEach(b => b.addEventListener('click', () => onPick(+b.dataset.i, b)));
+};
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I keep putting off a hard talk', 3, 'Choose your topic', 'Ask whether your silence is costing more than speaking would. Then name the real issue in one sentence: is it this time, the pattern, or the relationship?'],
+    ['I get angry and say things I regret', 5, 'Master my stories', 'The anger comes from the story you tell about what happened. Retrace your path, separate the facts, and ask why a reasonable person might have done it.'],
+    ['I want to win the argument', 4, 'Start with heart', 'Ask what you really want for you, for them and for the relationship. Winning is rarely on that list.'],
+    ['I can\'t be honest without hurting them', 2, 'The Fool\'s Choice', 'You don\'t have to pick between honesty and kindness. Look for the way to say it that does both.'],
+    ['They get defensive as soon as I start', 7, 'Make it safe', 'They don\'t feel safe. Step out of the topic, use a contrasting statement to show your purpose and respect, then step back in.'],
+    ['I don\'t know how to start', 8, 'STATE my path', 'Open with the facts, then share what you\'re starting to think, and ask how they see it.'],
+    ['They\'re shouting, or they\'ve gone silent', 9, 'Explore others\' paths', 'Get curious. Ask, mirror their feelings, paraphrase their story, and if they\'re stuck, offer a guess.'],
+    ['We talk, then nothing changes', 10, 'Move to action', 'Agree how you\'re deciding, then who does what by when, and how you\'ll follow up.'],
+    ['My situation is the exception', 11, 'Yeah, but', 'Find the missing piece: safety, your motive, your story, how you\'re stating it, or how it ends.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][1]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the pool of shared meaning ---------- */
+{ const svg = $('#plSvg'), cap = $('#plCap'), mv = $('#plMoves'), N = 6;
+  let st;
+  const MOVES = [
+    ['share', 'Share a fact'], ['ask', 'Ask for their view'], ['safe', 'Make it safe'], ['quiet', 'Go quiet'], ['push', 'Push hard'] ];
+  mv.innerHTML = MOVES.map(([k, l]) => `<button class="btn${k === 'share' ? ' primary' : ''}" type="button" data-m="${k}">${l}</button>`).join('');
+  function reset(){ st = { you: 0, them: 0, safety: 3, last: null, pushed: 0 }; draw(); say(); }
+  function draw(){
+    let g = '';
+    // people and their private bubbles
+    g += person(52, 120, 'glow') + person(348, 120, 'cool');
+    g += TX(52, 196, 'You', 'glow', 13, 'middle', 'font-weight="600"') + TX(348, 196, 'Them', 'cool', 13, 'middle', 'font-weight="600"');
+    const bub = (cx, c, left) => { let s = `<ellipse cx="${cx}" cy="54" rx="44" ry="30" ${FS('panel-2', c, 1.2)}/><circle cx="${cx + (left ? 16 : -16)}" cy="92" r="4" ${FS('panel-2', c, 1)}/>`;
+      for (let i = 0; i < left; i++) s += `<circle cx="${cx - 24 + (i % 3) * 24}" cy="${44 + Math.floor(i / 3) * 20}" r="7" ${F(c, .9)}/>`; return s; };
+    g += bub(52, 'glow', N - st.you) + bub(348, 'cool', N - st.them);
+    // pool
+    const PX = 120, PW = 160, PY = 150, PH = 70, fill = (st.you + st.them) / (2 * N);
+    g += `<path d="M${PX} ${PY}L${PX + 12} ${PY + PH}H${PX + PW - 12}L${PX + PW} ${PY}" ${S('faint', 1.5)}/>`;
+    if (fill > 0){ const h = PH * fill, top = PY + PH - h, inset = 12 * (h / PH);
+      g += `<path d="M${PX + 12 - inset} ${top}L${PX + 12} ${PY + PH}H${PX + PW - 12}L${PX + PW - 12 + inset} ${top}Z" ${F('cool', .18)}/>`; }
+    const dots = [...Array(st.you).fill('glow'), ...Array(st.them).fill('cool')];
+    dots.forEach((c, i) => { const x = PX + 26 + (i % 6) * 22, y = PY + PH - 12 - Math.floor(i / 6) * 18; g += `<circle cx="${x}" cy="${y}" r="7" ${F(c, .9)}/>`; });
+    g += TX(200, PY - 8, 'the shared pool', 'faint', 12, 'middle');
+    // safety meter
+    g += TX(200, 26, 'How safe it feels', 'muted', 12, 'middle');
+    for (let i = 0; i < 5; i++) g += `<rect x="${150 + i * 21}" y="36" width="17" height="10" rx="3" ${F(i < st.safety ? (st.safety <= 1 ? 'bad' : 'good') : 'line', i < st.safety ? .85 : 1)}/>`;
+    if (st.last === 'push' || st.last === 'quiet'){ const dir = st.last === 'push' ? 'Violence' : 'Silence'; g += TX(200, 76, dir, 'bad', 14, 'middle', 'font-weight="600"'); }
+    svg.innerHTML = g;
+  }
+  function say(msg){
+    const tot = st.you + st.them;
+    if (msg){ cap.innerHTML = msg; return; }
+    cap.innerHTML = `Each of you starts with ideas the other hasn't heard. <b>Dialogue gets them all into the shared pool.</b> Try sharing, asking, going quiet and pushing.`;
+  }
+  function act(k){
+    st.last = k; let m = '';
+    if (k === 'share'){ if (st.you < N){ st.you++; m = st.safety >= 2 ? `<b>Your meaning goes into the pool.</b> Facts are the least risky thing to share.` : `You share, but it doesn't feel safe to them. <b>Try making it safe</b> before you go on.`; } else m = 'Everything you know is in the pool. Now draw out theirs.'; }
+    if (k === 'ask'){ if (st.safety >= 2 && st.them < N){ st.them++; m = `<b>They add their view.</b> The pool now holds something you didn't know.`; } else if (st.them >= N) m = 'They\'ve shared all they have.'; else { m = `They hesitate: it doesn't feel safe enough to answer honestly. <b>Make it safe first.</b>`; } }
+    if (k === 'safe'){ st.safety = Math.min(5, st.safety + 2); m = `You step out of the content and show you care about their goals and respect them. <b>Safety goes up</b>, and people start talking again.`; }
+    if (k === 'quiet'){ m = `You hold back what you think. <b>Silence keeps your meaning out of the pool</b>, and the decision gets made without it.`; }
+    if (k === 'push'){ if (st.you < N) st.you++; st.safety = Math.max(0, st.safety - 2); m = st.safety <= 1 ? `You force your view in, and they stop feeling safe. <b>They'll go quiet or fight back</b>: the pool stops filling from their side.` : `Your view goes in, but at a price: <b>safety drops</b>. Push again and they'll shut down.`; }
+    draw();
+    if (st.you + st.them === 2 * N) m = `<b>The pool is full.</b> Everything both of you know is in the open. That's what dialogue is for: decisions made from the whole picture, that both of you helped make.`;
+    say(m);
+  }
+  mv.querySelectorAll('[data-m]').forEach(b => b.addEventListener('click', () => act(b.dataset.m)));
+  $('#plReset').addEventListener('click', reset);
+  reset();
+}
+
+/* ---------- ch1: is this conversation crucial? ---------- */
+{ const svg = $('#cr1'), PRE = [['Asking for a raise', 6, 8, 6], ['Picking a restaurant', 4, 1, 1], ['Ending a relationship', 8, 10, 10], ['Questioning a doctor\'s plan', 7, 10, 7], ['Arguing about a film', 8, 1, 5]];
+  const ids = ['crO', 'crS', 'crE'];
+  $('#crPre').innerHTML = PRE.map((p, i) => `<button class="btn" type="button" data-p="${i}">${p[0]}</button>`).join('');
+  function draw(){
+    const v = ids.map(id => +$('#' + id).value); ids.forEach((id, i) => out(id, v[i] + ' / 10'));
+    vb(svg, 400, 270);
+    const C = [200, 160], V = [[200, 34], [58, 236], [342, 236]], L = ['Opinions differ', 'Stakes are high', 'Emotions run strong'];
+    let g = `<polygon points="${V.map(p => p.join(',')).join(' ')}" ${FS('panel-2', 'line', 1.5)}/>`;
+    [.6].forEach(t => g += `<polygon points="${V.map(p => [C[0] + (p[0] - C[0]) * t, C[1] + (p[1] - C[1]) * t].map(n => n.toFixed(1)).join(',')).join(' ')}" ${S('glow', 1, ';stroke-dasharray:4 4;stroke-opacity:.6')}/>`);
+    V.forEach(p => g += `<line x1="${C[0]}" y1="${C[1]}" x2="${p[0]}" y2="${p[1]}" ${S('line', 1)}/>`);
+    const P = V.map((p, i) => [C[0] + (p[0] - C[0]) * v[i] / 10, C[1] + (p[1] - C[1]) * v[i] / 10]);
+    const crucial = Math.min(...v) >= 6;
+    g += `<polygon points="${P.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ')}" ${FS(crucial ? 'glow' : 'cool', crucial ? 'glow' : 'cool', 2, .3)}/>`;
+    P.forEach(p => g += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5" ${F(crucial ? 'glow' : 'cool')}/>`);
+    g += TX(200, 20, L[0], 'text', 13, 'middle') + TX(58, 258, L[1], 'text', 13, 'middle') + TX(342, 258, L[2], 'text', 13, 'middle');
+    g += TX(278, 120, 'crucial zone', 'glow', 11, 'start', 'font-family="var(--f-mono)"');
+    svg.innerHTML = g;
+    const [o, s, e] = v; let k, d;
+    if (crucial){ k = 'Crucial'; d = 'All three ingredients are there. This is when most of us go quiet or push too hard, and when the skills matter most.'; }
+    else if (Math.max(...v) < 4){ k = 'Casual'; d = 'Low on all three. Just talk; no special skill needed.'; }
+    else if (s >= 6 && o < 6 && e < 6){ k = 'Important'; d = 'High stakes, but you mostly agree and you\'re calm. Important, not crucial.'; }
+    else if (e >= 6 && s < 6){ k = 'A row'; d = 'Feelings are hot but little rides on it. Unpleasant, and easy to let go.'; }
+    else if (o >= 6 && s < 6){ k = 'A debate'; d = 'You disagree, but nothing big depends on it. A good-natured argument.'; }
+    else { k = 'Getting there'; d = 'Two ingredients are present. One more push, a raised voice or a bigger consequence, and it turns crucial.'; }
+    $('#crKind').textContent = k; $('#crSay').textContent = d;
+  }
+  ids.forEach(id => $('#' + id).addEventListener('input', draw));
+  $('#crPre').querySelectorAll('[data-p]').forEach(b => b.addEventListener('click', () => { const p = PRE[+b.dataset.p]; ids.forEach((id, i) => $('#' + id).value = p[i + 1]); press([...$('#crPre').querySelectorAll('[data-p]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- ch2: the Fool's Choice ---------- */
+{ const svg = $('#fc2'), SC = [
+    { n: 'The boss\'s plan', who: 'Your boss', line: '"I\'m sure about this one. We launch the new product in March. Everyone on board?"', r: [
+      ['Nod along. "Sounds great."', 'Silence', 1, 9, 'Nobody is offended, and the boss launches without hearing the risk you can see. The relationship is fine; the decision is worse.'],
+      ['"Sure, if you want to miss every deadline we\'ve got."', 'Violence (sarcasm and attack)', 6, 2, 'Your concern is in there somewhere, but it arrives as a jab. The boss defends the plan instead of examining it.'],
+      ['"This plan is unrealistic and everyone knows it."', 'Violence (controlling)', 8, 2, 'Honest, and it lands as an attack on the boss\'s judgement in front of the team. People dig in.'],
+      ['"I want this launch to succeed, and I\'ve got a concern about March. Can I walk you through the numbers that worry me?"', 'Dialogue', 9, 9, 'Your purpose is clear, the concern is out in the open, and the boss has a reason to listen. That\'s refusing the Fool\'s Choice.'] ] },
+    { n: 'A friend\'s drinking', who: 'Your friend', line: '"Another round? Come on, it\'s only Tuesday!"', r: [
+      ['Laugh it off and order another.', 'Silence', 0, 8, 'The evening stays pleasant. The thing you\'ve been worried about for months stays unsaid.'],
+      ['"You\'ve got a problem, you know that?"', 'Violence (labelling)', 7, 2, 'A label instead of a fact. Your friend hears an accusation and gets defensive.'],
+      ['"Not for me. Maybe slow down for once in your life."', 'Violence (a dig)', 5, 3, 'Half-said and half-joking, it stings without opening anything up.'],
+      ['"I care about you, so can I say something awkward? I\'ve noticed we end up out most nights, and I\'ve been a bit worried. How are things?"', 'Dialogue', 9, 9, 'You say the true thing, frame it in care, and ask. Your friend can hear it without losing face.'] ] },
+    { n: 'Splitting chores', who: 'Your partner', line: '"Why are you in such a mood tonight?"', r: [
+      ['"I\'m not. I\'m fine."', 'Silence (masking)', 1, 7, 'The resentment about doing most of the chores stays put, and it will leak out later.'],
+      ['"Because I do everything around here and you never notice."', 'Violence (always and never)', 7, 2, 'Absolutes make it easy to argue the details instead of the problem.'],
+      ['Walk out of the room.', 'Silence (withdrawing)', 0, 4, 'Nothing is said, and the distance does its own damage.'],
+      ['"I\'ve been feeling stretched. I did the shopping, cooking and washing this week, and I\'d like us to find a fairer split. Can we talk about it?"', 'Dialogue', 9, 9, 'Facts, feelings and a request, without blame. Your partner can join in rather than defend.'] ] } ];
+  let s = 0, pick = null;
+  $('#fcSc').innerHTML = SC.map((c, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}">${c.n}</button>`).join('');
+  function draw(){
+    const r = pick == null ? null : SC[s].r[pick], h = r ? r[2] / 10 : 0, rs = r ? r[3] / 10 : 0, pool = r ? Math.min(h, rs) : 0;
+    vb(svg, 400, 150);
+    let g = hbar(20, 34, 230, h, 'glow', 'Honesty: the truth gets said', r ? r[2] + ' / 10' : '–') + hbar(20, 84, 230, rs, 'cool', 'Respect: they still feel safe', r ? r[3] + ' / 10' : '–');
+    g += `<path d="M285 40L295 128H365L375 40" ${S('faint', 1.5)}/>`;
+    if (pool > 0){ const t = 128 - 88 * pool; g += `<path d="M${285 + 10 * (1 - pool) + 0} ${t}L295 128H365L${375 - 10 * (1 - pool)} ${t}Z" ${F(pool > .7 ? 'good' : 'cool', .5)}/>`; }
+    g += TX(330, 22, 'Into the pool', 'muted', 12, 'middle') + TX(330, 146, pool ? Math.round(pool * 100) + '%' : '', 'text', 12, 'middle', 'font-family="var(--f-mono)"');
+    svg.innerHTML = g;
+  }
+  function load(){
+    const c = SC[s]; pick = null;
+    $('#fcLine').innerHTML = `<span class="who">${c.who}</span><p>${c.line}</p>`;
+    choiceList($('#fcR'), shuffled(c.r.map((r, i) => ({ t: r[0], i }))).map(o => o), () => {});
+    $$('#fcR .choice').forEach((b, k) => { const idx = shuffledIdx[k]; b.dataset.r = idx; });
+    $('#fcKind').textContent = 'Pick a reply'; $('#fcSay').textContent = 'Each reply sits somewhere between silence and violence. One of them refuses the choice.';
+    draw();
+  }
+  let shuffledIdx = [];
+  function loadAll(){
+    const c = SC[s]; pick = null; shuffledIdx = shuffled([0, 1, 2, 3]);
+    $('#fcLine').innerHTML = `<span class="who">${c.who}</span><p>${c.line}</p>`;
+    choiceList($('#fcR'), shuffledIdx.map(i => ({ t: c.r[i][0] })), (k, b) => {
+      pick = shuffledIdx[k]; press($$('#fcR .choice'), b); const r = c.r[pick];
+      $('#fcKind').textContent = r[1]; $('#fcSay').textContent = r[4]; draw(); });
+    $('#fcKind').textContent = 'Pick a reply'; $('#fcSay').textContent = 'Each reply sits somewhere between silence and violence. One of them refuses the choice.';
+    draw();
+  }
+  $('#fcSc').querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { s = +b.dataset.s; press([...$('#fcSc').querySelectorAll('[data-s]')], b); loadAll(); }));
+  loadAll();
+}
+
+/* ---------- ch3: content, pattern or relationship ---------- */
+sorter('#sort3', '#tally3', [{ id: 'c', label: 'Content', d: 'This one time' }, { id: 'p', label: 'Pattern', d: 'It keeps happening' }, { id: 'r', label: 'Relationship', d: 'What it does to us' }], [
+  { t: '"You were twenty minutes late to the meeting this morning."', a: 'c', w: 'A single incident. Fine for a first time; if it keeps happening, move up a level.' },
+  { t: '"This is the fourth time this month you\'ve missed the start of the meeting."', a: 'p', w: 'It names a repeated behaviour, not one instance.' },
+  { t: '"I\'m starting to feel I can\'t count on what you tell me."', a: 'r', w: 'It\'s about trust and how the two of you work together.' },
+  { t: '"The report you sent has the wrong totals in table 3."', a: 'c', w: 'One specific problem with one piece of work.' },
+  { t: '"Each time we agree a deadline, it slips and then you apologise."', a: 'p', w: 'The pattern includes the apology cycle itself, which is why another content talk won\'t fix it.' },
+  { t: '"When you correct me in front of the team, I feel you don\'t respect me."', a: 'r', w: 'It\'s about respect between you, not one specific comment.' },
+  { t: '"You didn\'t call to say you\'d be late tonight."', a: 'c', w: 'One evening, one missed call.' },
+  { t: '"I\'ve noticed I\'m usually the one who has to bring up money."', a: 'p', w: 'A recurring dynamic. If it\'s affecting how you feel about each other, it may become a relationship conversation.' } ]);
+
+/* ---------- ch4: start with heart ---------- */
+{ const svg = $('#sh4'), DRIFT = ['win the argument', 'prove I\'m right', 'make them pay for it', 'get out of the room', 'keep the peace at any price'];
+  $('#shChk').innerHTML = DRIFT.map((d, i) => `<label class="chk"><input type="checkbox" data-d="${i}"><span>${d}</span></label>`).join('');
+  const ids = ['shMe', 'shThem', 'shUs', 'shNot'];
+  function draw(){
+    const n = $$('#shChk input:checked').length, ang = n * 30 * (n % 2 ? 1 : -1) * (n ? 1 : 0) + (n ? (n % 2 ? 0 : 0) : 0);
+    const a = (n === 0 ? 0 : (n * 32) * (n % 2 ? 1 : -1)) * Math.PI / 180;
+    vb(svg, 300, 200);
+    const C = [150, 116], R = 74;
+    let g = `<circle cx="${C[0]}" cy="${C[1]}" r="${R}" ${FS('panel-2', 'line', 1.5)}/>`;
+    for (let i = 0; i < 12; i++){ const t = i * Math.PI / 6; g += `<line x1="${(C[0] + Math.sin(t) * (R - 8)).toFixed(1)}" y1="${(C[1] - Math.cos(t) * (R - 8)).toFixed(1)}" x2="${(C[0] + Math.sin(t) * R).toFixed(1)}" y2="${(C[1] - Math.cos(t) * R).toFixed(1)}" ${S('faint', 1)}/>`; }
+    g += TX(C[0], C[1] - R - 12, 'What I really want', 'good', 12.5, 'middle', 'font-weight="600"');
+    g += TX(C[0] - R - 6, C[1] + 4, 'Win', 'bad', 12, 'end') + TX(C[0] + R + 6, C[1] + 4, 'Escape', 'bad', 12, 'start') + TX(C[0], C[1] + R + 18, 'Punish', 'bad', 12, 'middle');
+    const tip = [C[0] + Math.sin(a) * (R - 14), C[1] - Math.cos(a) * (R - 14)], tail = [C[0] - Math.sin(a) * 22, C[1] + Math.cos(a) * 22];
+    const px = Math.cos(a) * 6, py = Math.sin(a) * 6;
+    g += `<path d="M${tip[0].toFixed(1)} ${tip[1].toFixed(1)}L${(C[0] + px).toFixed(1)} ${(C[1] + py).toFixed(1)}L${tail[0].toFixed(1)} ${tail[1].toFixed(1)}L${(C[0] - px).toFixed(1)} ${(C[1] - py).toFixed(1)}Z" ${F(n ? 'bad' : 'good')} style="transition:all .3s"/><circle cx="${C[0]}" cy="${C[1]}" r="5" ${F('text')}/>`;
+    svg.innerHTML = g;
+    const v = ids.map(id => $('#' + id).value.trim());
+    const wants = v.slice(0, 3).filter(Boolean), out = $('#shOut');
+    let h = '';
+    if (n) h += `<div class="fb2"><b style="color:var(--bad)">Your motive has drifted.</b> Wanting to ${$$('#shChk input:checked').map(c => DRIFT[+c.dataset.d]).join(', and to ')} isn't what you came for. Untick them by asking what you really want, below.</div>`;
+    if (wants.length){
+      const and = wants.join(', and ').replace(/\.$/, '');
+      h += `<div class="strong"><span class="k">Your question</span><p class="say-out">How can I ${and}${v[3] ? `, without ${v[3].replace(/^to /, '')}` : ''}?</p></div><p class="tip">Asking it this way forces you to look past silence and violence for a third option. If you'd act differently right now with these goals in mind, that's your next move.</p>`;
+    } else h += `<p class="tip">Fill in what you really want, and the lab turns it into the question that refuses the Fool's Choice.</p>`;
+    out.innerHTML = h;
+  }
+  $$('#shChk input').forEach(c => c.addEventListener('change', draw)); ids.forEach(id => $('#' + id).addEventListener('input', draw));
+  draw();
+}
+
+/* ---------- ch5: the path to action ---------- */
+{ const svg = $('#pa5'), FACT = 'Louis met the boss without me and presented our project.';
+  const ST = [
+    ['villain', 'Villain story', 'He\'s stealing the credit. He\'s been planning this all along.', 'Furious, betrayed', 'Cut him out, complain to colleagues, say something cutting in the next meeting', 9, 'Why would a reasonable, rational, decent person do what Louis did?'],
+    ['victim', 'Victim story', 'I always do the work and someone else gets the credit. Nobody notices me.', 'Hurt, resentful', 'Sulk, go quiet, quietly stop putting in extra effort', 7, 'Am I pretending not to notice my own part in this? Did I ever tell the boss what I did?'],
+    ['helpless', 'Helpless story', 'There\'s nothing I can do. If I raise it I\'ll look petty.', 'Resigned, stuck', 'Say nothing and let it happen again next time', 6, 'What do I really want, and what would I do right now if I really wanted it?'],
+    ['useful', 'The rest of the story', 'I don\'t know why he went alone. Maybe the boss called him in, or he thought I knew.', 'Curious, a bit concerned', 'Ask Louis about it calmly, starting with the facts', 3, 'What do I actually know? Just the facts on the left. Everything else is a guess.'] ];
+  let k = 0;
+  $('#paStory').innerHTML = ST.map((s, i) => `<button class="btn" type="button" data-k="${i}" aria-pressed="${i === 0}">${s[1]}</button>`).join('');
+  const draw = onLayout(() => {
+    const s = ST[k], nar = NARROW(), heat = s[5] / 10, col = k === 3 ? 'good' : 'bad';
+    const B = [['See and hear', FACT, 'cool'], ['Tell a story', s[2], 'glow'], ['Feel', s[3], col], ['Act', s[4], col]];
+    let g = '';
+    if (!nar){
+      vb(svg, 680, 200);
+      B.forEach((b, i) => { const x = 8 + i * 170, w = 150;
+        g += `<rect x="${x}" y="30" width="${w}" height="130" rx="12" ${FS('panel-2', b[2], i === 0 ? 1.5 : 2)}/>`;
+        g += TX(x + 12, 52, b[0].toUpperCase(), b[2], 11, 'start', 'font-family="var(--f-mono)" letter-spacing="1"');
+        g += wrap(x + w / 2, 104, b[1], 22, 17, 'text', 13);
+        if (i < 3) g += `<line x1="${x + w + 2}" y1="95" x2="${x + w + 14}" y2="95" ${S('faint', 1.5)}/>` + arrowHead(x + w + 18, 95, 0, 'faint');
+      });
+      g += TX(8, 18, 'The facts stay the same', 'faint', 12) + TX(672, 18, '← retrace your path from here', 'faint', 12, 'end');
+      g += `<rect x="348" y="176" width="320" height="10" rx="5" ${F('line')}/><rect x="348" y="176" width="${(320 * heat).toFixed(1)}" height="10" rx="5" ${F(col)}/>` + TX(340, 185, 'Heat', 'muted', 12, 'end');
+    } else {
+      vb(svg, 340, 470);
+      B.forEach((b, i) => { const y = 8 + i * 112, h = 92;
+        g += `<rect x="10" y="${y}" width="320" height="${h}" rx="12" ${FS('panel-2', b[2], i === 0 ? 1.5 : 2)}/>`;
+        g += TX(24, y + 22, b[0].toUpperCase(), b[2], 11, 'start', 'font-family="var(--f-mono)" letter-spacing="1"');
+        g += wrap(170, y + 56, b[1], 40, 17, 'text', 13.5);
+        if (i < 3) g += `<line x1="170" y1="${y + h + 2}" x2="170" y2="${y + h + 12}" ${S('faint', 1.5)}/>` + arrowHead(170, y + h + 17, Math.PI / 2, 'faint');
+      });
+      g += `<rect x="60" y="456" width="270" height="10" rx="5" ${F('line')}/><rect x="60" y="456" width="${(270 * heat).toFixed(1)}" height="10" rx="5" ${F(col)}/>` + TX(52, 465, 'Heat', 'muted', 12, 'end');
+    }
+    svg.innerHTML = g;
+    $('#paHeat').textContent = s[5] + ' / 10'; $('#paQ').textContent = s[6];
+  });
+  $('#paStory').querySelectorAll('[data-k]').forEach(b => b.addEventListener('click', () => { k = +b.dataset.k; press([...$('#paStory').querySelectorAll('[data-k]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- ch6: silence, violence or dialogue ---------- */
+{ const svg = $('#sv6'), FORMS = [['masking', 's'], ['avoiding', 's'], ['withdrawing', 's'], ['dialogue', 'd'], ['controlling', 'v'], ['labelling', 'v'], ['attacking', 'v']];
+  let hi = null, ok = null;
+  const draw = onLayout(() => {
+    const nar = NARROW(), W = nar ? 340 : 640, H = nar ? 120 : 104; vb(svg, W, H);
+    const x0 = 24, x1 = W - 24, y = nar ? 62 : 54, step = (x1 - x0) / 6;
+    let g = `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" ${S('line', 2)}/>`;
+    g += TX(x0, 16, '← Silence', 'cool', 12.5, 'start', 'font-weight="600"') + TX(x1, 16, 'Violence →', 'bad', 12.5, 'end', 'font-weight="600"');
+    FORMS.forEach(([f, t], i) => { const x = x0 + i * step, on = hi === f, c = t === 'd' ? 'good' : t === 's' ? 'cool' : 'bad';
+      g += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${on ? 10 : 6}" ${on ? FS(c, 'text', 2) : F(c, .75)}/>`;
+      const above = nar ? i % 2 === 0 : false, ty = above ? y - 16 : y + (nar ? 28 : 26);
+      g += TX(x.toFixed(1), ty, f, on ? 'text' : 'muted', nar ? 11.5 : 13, i === 0 ? 'start' : i === 6 ? 'end' : 'middle', on ? 'font-weight="600"' : '');
+    });
+    if (hi && ok != null){ const i = FORMS.findIndex(f => f[0] === hi), x = x0 + i * step; g += TX(x.toFixed(1), H - 4, '', 'text', 1); }
+    svg.innerHTML = g;
+  });
+  draw();
+  const bins = [{ id: 's', label: 'Silence', d: 'Holding meaning back' }, { id: 'd', label: 'Dialogue', d: 'Meaning flows freely' }, { id: 'v', label: 'Violence', d: 'Forcing meaning in' }];
+  sorter('#sort6', '#tally6', bins, [
+    { t: '"Oh, that\'s a brilliant idea. What could possibly go wrong?"', a: 's', f: 'masking', w: 'Sarcasm says the opposite of what you mean. That\'s masking.' },
+    { t: '"Anyway, did you see the match last night?" (right after the budget comes up)', a: 's', f: 'avoiding', w: 'Steering away from the sensitive subject is avoiding.' },
+    { t: 'Leaves the meeting early and doesn\'t reply to messages.', a: 's', f: 'withdrawing', w: 'Pulling out of the conversation altogether is withdrawing.' },
+    { t: '"Everyone knows this is the only option. Let\'s move on."', a: 'v', f: 'controlling', w: 'Overstating and shutting others out is controlling.' },
+    { t: '"Typical finance person. You only care about numbers."', a: 'v', f: 'labelling', w: 'A stereotype so you don\'t have to deal with the argument: labelling.' },
+    { t: '"If you bring this up again, you can find another team."', a: 'v', f: 'attacking', w: 'A threat aimed at making the person suffer is attacking.' },
+    { t: '"I see it differently. Can I explain why, and then hear what I\'m missing?"', a: 'd', f: 'dialogue', w: 'Honest about disagreeing, and open to the other view.' },
+    { t: '"It\'s fine. Really. Do whatever you want."', a: 's', f: 'masking', w: 'Saying it\'s fine when it isn\'t is masking.' } ], true,
+    (it, good) => { hi = it ? it.f : null; ok = it ? good : null; draw(); });
+}
+
+/* ---------- ch7: make it safe ---------- */
+{ const svg = $('#ms7'), OP = [
+    ['"We need to talk about the problems with your report."', 4, 5, 'Purpose unclear', 'They don\'t know what you\'re after, and "problems" sounds like a verdict. Expect defensiveness.'],
+    ['"Honestly, I can\'t believe you sent this with errors in it."', 3, 1, 'Respect lost', 'An attack on their competence. The conversation will now be about defending their dignity, not fixing the figures.'],
+    ['"It\'s nothing really, just a tiny thing, don\'t worry about it..."', 6, 7, 'Safe but empty', 'Very safe and not honest. The errors might not get fixed, and if they do, the colleague won\'t know it mattered.'],
+    ['"I want this to land really well for you on Friday. I don\'t want you to think I\'m unhappy with the work; the analysis is strong. I found two figures I think are off. Can we look at them together?"', 9, 9, 'Mutual purpose and respect', 'A shared goal first, a contrasting statement, then the facts and an invitation. Safe and completely honest.'] ];
+  let pick = null; const order = shuffled([0, 1, 2, 3]);
+  function gauge(cx, v, label, c){
+    const R = 54, cy = 96, a0 = Math.PI, a = Math.PI * (1 - v / 10);
+    let g = `<path d="M${cx - R} ${cy}A${R} ${R} 0 0 1 ${cx + R} ${cy}" ${S('line', 10, ';stroke-linecap:round')}/>`;
+    if (v > 0) g += `<path d="M${cx - R} ${cy}A${R} ${R} 0 0 1 ${(cx + R * Math.cos(a)).toFixed(1)} ${(cy - R * Math.sin(a)).toFixed(1)}" ${S(c, 10, ';stroke-linecap:round')}/>`;
+    g += TX(cx, cy - 8, pick == null ? '–' : v + '', 'text', 22, 'middle', 'font-family="var(--f-display)"') + wrap(cx, cy + 26, label, 16, 15, 'muted', 12.5);
+    return g;
+  }
+  function draw(){
+    vb(svg, 300, 150);
+    const o = pick == null ? [0, 0, 0] : OP[pick];
+    svg.innerHTML = gauge(80, o[1], 'Mutual purpose', o[1] >= 7 ? 'good' : o[1] >= 5 ? 'glow' : 'bad') + gauge(220, o[2], 'Mutual respect', o[2] >= 7 ? 'good' : o[2] >= 5 ? 'glow' : 'bad');
+  }
+  choiceList($('#msR'), order.map(i => ({ t: OP[i][0] })), (k, b) => {
+    pick = order[k]; press($$('#msR .choice'), b); const o = OP[pick];
+    $('#msFb').innerHTML = `<b style="color:var(--${pick === 3 ? 'good' : pick === 2 ? 'glow' : 'bad'})">${o[3]}.</b> ${o[4]}`; draw(); });
+  draw();
+  const cb = () => { const d = $('#msDont').value.trim(), w = $('#msDo').value.trim();
+    $('#msOut').innerHTML = d || w ? `<div class="strong"><span class="k">Your contrasting statement</span><p class="say-out">"I don't want you to think ${esc(d || '…')}. What I do want is ${esc(w || '…')}."</p></div><p class="tip">The "don't" fixes the misunderstanding; the "do" confirms your real purpose. It's not an apology, and it doesn't water down the message that follows.</p>` : `<p class="tip">Write your own contrasting statement above.</p>`; };
+  ['msDont', 'msDo'].forEach(id => $('#' + id).addEventListener('input', cb)); cb();
+}
+
+/* ---------- ch8: STATE my path ---------- */
+{ const svg = $('#st8'), STEPS = [
+    ['S', 'Share your facts', [['"When I opened the card statement, there was a charge from the motel on Main Street, dated last Thursday."', 0], ['"I know exactly what you were up to last Thursday."', 2], ['"Um, it\'s probably nothing, never mind."', -2]]],
+    ['T', 'Tell your story', [['"I don\'t know what it is, and I\'ll be honest, my mind went to some worrying places."', 0], ['"Clearly you\'ve been lying to me."', 2], ['"I\'m sure it\'s fine. Forget I said anything."', -2]]],
+    ['A', 'Ask for their path', [['"Can you help me understand what it\'s for?"', 0], ['"And don\'t bother making something up."', 2], ['(Leave the statement on the table and walk off.)', -1]]],
+    ['T', 'Talk tentatively', [['"I might be reading far too much into it."', 0], ['"There\'s only one explanation for a motel bill."', 2], ['"I\'m probably just being crazy and paranoid, as usual."', -2]]],
+    ['E', 'Encourage testing', [['"If I\'ve got this wrong, I really want to know."', 0], ['"Don\'t tell me I\'ve got this wrong."', 2], ['"You don\'t have to say anything if you don\'t want to."', -1]]] ];
+  let cur = 0; const pick = Array(5).fill(null);
+  $('#stSteps').innerHTML = STEPS.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === 0}"><b>${s[0]}</b> ${s[1].split(' ').slice(0, 2).join(' ')}</button>`).join('');
+  function draw(){
+    const ch = pick.map((p, i) => p == null ? null : STEPS[i][2][p][1]).filter(x => x != null);
+    const avg = ch.length ? ch.reduce((a, b) => a + b, 0) / ch.length : 0;
+    vb(svg, 400, 150);
+    const C = [200, 128], R = 100;
+    let g = '';
+    [['bad', Math.PI, Math.PI * .72], ['glow', Math.PI * .72, Math.PI * .58], ['good', Math.PI * .58, Math.PI * .42], ['glow', Math.PI * .42, Math.PI * .28], ['bad', Math.PI * .28, 0]].forEach(([c, a0, a1]) => {
+      g += `<path d="M${(C[0] + R * Math.cos(a0)).toFixed(1)} ${(C[1] - R * Math.sin(a0)).toFixed(1)}A${R} ${R} 0 0 1 ${(C[0] + R * Math.cos(a1)).toFixed(1)} ${(C[1] - R * Math.sin(a1)).toFixed(1)}" ${S(c, 14, ';stroke-opacity:.55')}/>`; });
+    g += TX(C[0] - R, C[1] + 20, 'Too timid', 'muted', 12.5, 'middle') + TX(C[0] + R, C[1] + 20, 'Too forceful', 'muted', 12.5, 'middle') + TX(C[0], 14, 'Dialogue', 'good', 12.5, 'middle', 'font-weight="600"');
+    const a = Math.PI / 2 - (avg / 2) * (Math.PI / 2) * .95;
+    g += `<line x1="${C[0]}" y1="${C[1]}" x2="${(C[0] + (R - 20) * Math.cos(a)).toFixed(1)}" y2="${(C[1] - (R - 20) * Math.sin(a)).toFixed(1)}" ${S('text', 3, ';stroke-linecap:round')}/><circle cx="${C[0]}" cy="${C[1]}" r="6" ${F('text')}/>`;
+    svg.innerHTML = g;
+    $('#stMsg').innerHTML = STEPS.map((s, i) => pick[i] == null ? `<span class="gap">[${s[1].toLowerCase()}]</span>` : `<span style="color:var(--${s[2][pick[i]][1] === 0 ? 'text' : 'bad'})">${s[2][pick[i]][0]}</span>`).join(' ');
+  }
+  function load(){
+    $$('#stSteps [data-s]').forEach(b => { b.setAttribute('aria-pressed', +b.dataset.s === cur); b.style.borderColor = pick[+b.dataset.s] == null ? '' : STEPS[+b.dataset.s][2][pick[+b.dataset.s]][1] === 0 ? 'var(--good)' : 'var(--bad)'; });
+    const s = STEPS[cur], ord = shuffled([0, 1, 2]);
+    choiceList($('#stOpts'), ord.map(i => ({ t: s[2][i][0] })), (k, b) => { pick[cur] = ord[k]; press($$('#stOpts .choice'), b); draw(); if (cur < 4){ cur++; setTimeout(load, RM ? 0 : 350); } else load(); });
+    $$('#stOpts .choice').forEach((b, k) => b.setAttribute('aria-pressed', pick[cur] === ord[k]));
+  }
+  $$('#stSteps [data-s]').forEach(b => b.addEventListener('click', () => { cur = +b.dataset.s; load(); }));
+  load(); draw();
+}
+
+/* ---------- ch9: explore others' paths ---------- */
+{ const svg = $('#ex9'), PATH = [['Facts', 'The new shifts start at 3 on Tuesdays and Thursdays. My son finishes school at 3.15. I heard about it from Jo.'], ['Story', 'Decisions about my life get made without me, and nobody cares what it does to my family.'], ['Feel', 'Frustrated, ignored, worried'], ['Act', 'Storms in: "This rota is a joke. Nobody asked me."']];
+  const R = [
+    { line: '"This rota is a joke. Nobody asked me."', o: [
+      ['"The rota\'s fair. Everyone gets the same number of late shifts."', 0, 'Defending', 'You\'ve answered the surface complaint and told her she\'s wrong. She digs in.'],
+      ['"Calm down, it\'s only a rota."', 0, 'Dismissing', 'Telling someone to calm down tells them their feelings don\'t count. Safety drops.'],
+      ['"Something about this has really got to you. What\'s going on?"', 1, 'Ask', 'A genuine question invites her to keep talking, and you\'ve named the feeling you can see.'] ] },
+    { line: '"It\'s always the same. Decisions get made and we hear about them last."', o: [
+      ['"That\'s not true. We sent an email round."', 0, 'Arguing', 'You\'re debating her story before you understand it. She\'ll defend it harder.'],
+      ['"So it feels as if decisions about your hours get made without you?"', 1, 'Paraphrase', 'You\'ve put her story in your words. You\'re not agreeing with it, just showing you understand it.'],
+      ['"Well, that\'s just how it works here."', 0, 'Shutting down', 'A helpless story on your side. Nothing more will come out.'] ] },
+    { line: '"Yes! And I found out from Jo, not from you."', o: [
+      ['"I\'m wondering if the new times clash with something at home. Is that part of it?"', 1, 'Prime', 'Your best guess, offered gently, makes it safe for her to say the real fact.'],
+      ['"Jo shouldn\'t have said anything."', 0, 'Blaming', 'Now it\'s about Jo. The real problem is still hidden.'],
+      ['"Look, I\'m very busy. Put it in an email."', 0, 'Withdrawing', 'You\'ve left the conversation just before it got useful.'] ] } ];
+  let round = 0, shown = 1, misses = 0, order;
+  const draw = onLayout(() => {
+    const nar = NARROW(); let g = '';
+    const boxes = PATH.map((p, i) => ({ p, vis: i >= 4 - shown }));
+    if (!nar){ vb(svg, 680, 170);
+      boxes.forEach((b, i) => { const x = 8 + i * 170, w = 150, c = i === 0 ? 'good' : i === 3 ? 'bad' : 'cool';
+        g += `<rect x="${x}" y="26" width="${w}" height="120" rx="12" ${b.vis ? FS('panel-2', c, 2) : FS('panel', 'line', 1.5) + ' stroke-dasharray="5 5"'}/>`;
+        g += TX(x + 12, 46, b.p[0].toUpperCase(), b.vis ? c : 'faint', 11, 'start', 'font-family="var(--f-mono)" letter-spacing="1"');
+        g += b.vis ? wrap(x + w / 2, 96, b.p[1], 22, 16, 'text', 12.5) : TX(x + w / 2, 100, '?', 'faint', 30, 'middle', 'font-family="var(--f-display)"');
+        if (i < 3) g += `<line x1="${x + w + 2}" y1="86" x2="${x + w + 14}" y2="86" ${S('faint', 1.5)}/>` + arrowHead(x + w + 18, 86, 0, 'faint'); });
+      g += TX(8, 16, 'Their path to action', 'muted', 12) + TX(672, 16, `Revealed: ${shown} of 4`, 'muted', 12, 'end');
+    } else { vb(svg, 340, 420);
+      boxes.forEach((b, i) => { const y = 24 + i * 100, h = 84, c = i === 0 ? 'good' : i === 3 ? 'bad' : 'cool';
+        g += `<rect x="10" y="${y}" width="320" height="${h}" rx="12" ${b.vis ? FS('panel-2', c, 2) : FS('panel', 'line', 1.5) + ' stroke-dasharray="5 5"'}/>`;
+        g += TX(24, y + 20, b.p[0].toUpperCase(), b.vis ? c : 'faint', 11, 'start', 'font-family="var(--f-mono)" letter-spacing="1"');
+        g += b.vis ? wrap(170, y + 50, b.p[1], 40, 16, 'text', 13) : TX(170, y + 56, '?', 'faint', 28, 'middle', 'font-family="var(--f-display)"');
+        if (i < 3) g += `<line x1="170" y1="${y + h + 1}" x2="170" y2="${y + h + 9}" ${S('faint', 1.5)}/>` + arrowHead(170, y + h + 14, Math.PI / 2, 'faint'); });
+      g += TX(10, 14, `Their path to action · revealed ${shown} of 4`, 'muted', 12);
+    }
+    svg.innerHTML = g;
+  });
+  function load(){
+    if (round >= R.length){ $('#exLine').innerHTML = `<span class="who">Her</span><p>"The new shifts start at 3 on Tuesdays and Thursdays. My son finishes school at 3.15."</p>`; $('#exR').innerHTML = '';
+      $('#exFb').innerHTML = `<b style="color:var(--good)">Now you know the real problem</b>, and it's one you can solve together: a childcare clash, plus finding out second-hand. ${misses ? `You took ${misses} wrong turn${misses > 1 ? 's' : ''} on the way; each one made her more guarded.` : 'You got there without a single wrong turn.'} Now it\'s your turn to talk: agree where you can, build, then compare.`; return; }
+    const r = R[round]; order = shuffled([0, 1, 2]);
+    $('#exLine').innerHTML = `<span class="who">Her</span><p>${r.line}</p>`;
+    choiceList($('#exR'), order.map(i => ({ t: r.o[i][0] })), (k, b) => {
+      const o = r.o[order[k]];
+      if (o[1]){ shown++; round++; draw(); $('#exFb').innerHTML = `<b style="color:var(--good)">${o[2]}.</b> ${o[3]}`; setTimeout(load, RM ? 0 : 500); }
+      else { misses++; b.classList.add('no'); b.disabled = true; $('#exFb').innerHTML = `<b style="color:var(--bad)">${o[2]}.</b> ${o[3]} Try another reply.`; }
+    });
+  }
+  $('#exReset').addEventListener('click', () => { round = 0; shown = 1; misses = 0; $('#exFb').textContent = 'Pick a reply.'; draw(); load(); });
+  draw(); load();
+}
+
+/* ---------- ch10: move to action ---------- */
+{ const svg = $('#mv10'), Q = [
+    ['many', 'Lots of people are affected'], ['buyin', 'It only works if everyone is truly behind it'], ['owner', 'One person clearly knows best or owns it'],
+    ['fast', 'Time is short'], ['clear', 'There are a few clear options and people will back the result'], ['complex', 'It\'s high-stakes and complicated'] ];
+  const M = [['Command', { owner: 2, fast: 2, buyin: -2, complex: -1, many: -1 }, 'Someone with the authority or expertise decides, or the decision is handed to them. Fast, and fine when the others don\'t need to shape it.'],
+    ['Consult', { many: 1, owner: 2, complex: 1, fast: 0, buyin: -1 }, 'A decision-maker gathers views from the people affected, then decides. Uses everyone\'s knowledge without needing everyone\'s agreement.'],
+    ['Vote', { clear: 3, many: 1, fast: 1, buyin: -1, owner: -1 }, 'Good when there are clear options and people agree in advance to support whatever wins. Watch for a disappointed minority.'],
+    ['Consensus', { buyin: 3, complex: 2, many: 1, fast: -3, owner: -1 }, 'Everyone talks until they honestly agree. Slow and demanding, so save it for high-stakes, complicated decisions that need total support.']];
+  const PRE = [['Where the team has lunch', ['many', 'clear', 'fast']], ['A surgeon mid-operation', ['owner', 'fast']], ['A new company strategy', ['many', 'owner', 'complex']], ['Whether the family moves city', ['many', 'buyin', 'complex']]];
+  $('#mvQ').innerHTML = Q.map(([id, l]) => `<label class="tg"><input type="checkbox" data-q="${id}"><span>${l}</span></label>`).join('');
+  $('#mvPre').innerHTML = PRE.map((p, i) => `<button class="btn" type="button" data-p="${i}">${p[0]}</button>`).join('');
+  function draw(){
+    const on = new Set($$('#mvQ input:checked').map(c => c.dataset.q));
+    const sc = M.map(([, w]) => 2 + Object.entries(w).reduce((s, [k, v]) => s + (on.has(k) ? v : 0), 0));
+    const best = sc.indexOf(Math.max(...sc));
+    vb(svg, 400, 170);
+    let g = '';
+    M.forEach((m, i) => { const y = 18 + i * 38, v = clamp(sc[i], 0, 8) / 8;
+      g += TX(16, y + 15, m[0], i === best ? 'glow' : 'text', 14, 'start', i === best ? 'font-weight="600"' : '');
+      g += `<rect x="110" y="${y + 4}" width="270" height="14" rx="7" ${F('line')}/><rect x="110" y="${y + 4}" width="${(270 * v).toFixed(1)}" height="14" rx="7" ${F(i === best ? 'glow' : 'cool', i === best ? 1 : .55)}/>`; });
+    svg.innerHTML = g;
+    $('#mvBest').textContent = on.size ? M[best][0] : '–'; $('#mvWhy').textContent = on.size ? M[best][2] : 'Tick what\'s true of the decision, or try an example.';
+  }
+  $$('#mvQ input').forEach(c => c.addEventListener('change', () => { press($$('#mvPre [data-p]'), null); draw(); }));
+  $$('#mvPre [data-p]').forEach(b => b.addEventListener('click', () => { const s = new Set(PRE[+b.dataset.p][1]); $$('#mvQ input').forEach(c => c.checked = s.has(c.dataset.q)); press($$('#mvPre [data-p]'), b); draw(); }));
+  draw();
+  const ids = ['mvWho', 'mvWhat', 'mvWhen', 'mvF'];
+  const wf = () => { const [w, a, d, f] = ids.map(id => esc($('#' + id).value.trim()));
+    const miss = [!w && 'who', !a && 'what', !d && 'when', !f && 'follow-up'].filter(Boolean);
+    $('#mvOut').innerHTML = `<div class="strong"><span class="k">The agreement</span><p class="say-out">${w || '<span style="color:var(--faint)">Who</span>'} ${a || '<span style="color:var(--faint)">does what</span>'} by ${d || '<span style="color:var(--faint)">when</span>'}${f ? `, and we'll know because of ${f}` : ''}.</p></div><p class="tip">${miss.length ? `Still missing: ${miss.join(', ')}. Agreements without these tend to quietly evaporate.` : 'Complete. Write it down where everyone can see it.'}</p>`; };
+  ids.forEach(id => $('#' + id).addEventListener('input', wf)); wf();
+}
+
+/* ---------- ch11: which skill unlocks it ---------- */
+sorter('#sort11', '#tally11', [{ id: 'heart', label: 'Start with heart', d: 'Fix your motive' }, { id: 'story', label: 'Master my stories', d: 'Question your story' }, { id: 'safe', label: 'Make it safe', d: 'Purpose and respect' }, { id: 'act', label: 'Move to action', d: 'Who, what, when, follow-up' }], [
+  { t: '"Every time I give him feedback he gets defensive."', a: 'safe', w: 'Defensiveness is a sign he doesn\'t feel safe. Lead with mutual purpose and use contrasting before the content.' },
+  { t: '"She keeps saying yes and then not doing it."', a: 'act', w: 'Raise the pattern, then end with a clear who-does-what-by-when and a follow-up, so the next yes means something.' },
+  { t: '"I\'m so angry with my brother I can\'t even think about talking to him."', a: 'story', w: 'The anger comes from your story. Retrace your path and separate what he actually did from what you\'ve concluded.' },
+  { t: '"Honestly, I just want my boss to admit she was wrong."', a: 'heart', w: 'That\'s motive drift towards winning. Ask what you really want for you, her and the relationship.' },
+  { t: '"Our meetings end with great energy and then nothing happens."', a: 'act', w: 'Decide how decisions are made and finish every meeting with WWWF.' },
+  { t: '"He\'s obviously doing it on purpose to undermine me."', a: 'story', w: 'A villain story. Ask why a reasonable, decent person might do what he did.' },
+  { t: '"It\'s such an embarrassing topic I don\'t know how to start without offending her."', a: 'safe', w: 'Make your purpose and respect clear first: "I want to tell you something because I care about how you\'re seen here."' } ], true);
+
+/* ---------- ch12: the whole conversation ---------- */
+{ const svg = $('#pt12'), M = [
+    { line: 'Dr Reyes, signing the discharge form: "Right, Mr Ali can go home this afternoon."', o: [
+      ['Say nothing. He\'s senior, and it\'s probably fine.', 0, 0, 'Silence. Your concern never reaches the pool, and Mr Ali goes home.', 'b'],
+      ['"Are you serious? He\'s nowhere near ready."', -3, 1, 'Violence. The concern is out, but as an attack on his judgement.', 'b'],
+      ['"Before you sign, could I have thirty seconds about Mr Ali? I think it matters."', 1, 1, 'Learn to look: you\'ve spotted a crucial moment and flagged it without drama.', 'g'] ] },
+    { line: '"Go on, but I\'ve got a full list."', o: [
+      ['"I know you\'re stretched, and I\'m not questioning your judgement. I just want to be sure we\'ve both seen the latest numbers."', 2, 1, 'Make it safe: a contrasting statement and a shared purpose, the patient.', 'g'],
+      ['"It\'ll only take a second. It\'s just that you\'ve missed something."', -2, 1, 'Telling him he\'s missed something before giving any facts puts him on the defensive.', 'b'],
+      ['"Never mind, it\'s probably nothing."', 0, -1, 'Back into silence, just when he was ready to listen.', 'b'] ] },
+    { line: '"Which numbers?"', o: [
+      ['"His oxygen has dropped from 96 to 92 over six hours, and his temperature\'s up to 38.1."', 1, 3, 'Share your facts: specific, observable and hard to argue with.', 'g'],
+      ['"I think he\'s going downhill and you\'re rushing him out."', -2, 1, 'Story first, plus an accusation. He\'ll argue with the story and never hear the facts.', 'b'],
+      ['"He just doesn\'t look right to me."', 0, 1, 'A feeling without facts is easy to dismiss.', 'm'] ] },
+    { line: '"Hmm. Those could just be noise."', o: [
+      ['"Maybe. I\'m starting to wonder if he\'s brewing an infection. What are you seeing that I might be missing?"', 1, 3, 'Tell your story tentatively, then ask for his path. Now his knowledge goes into the pool too.', 'g'],
+      ['"It\'s not noise. He\'ll be back in A&E tonight."', -2, 1, 'Controlling: overstated certainty that invites a fight.', 'b'],
+      ['"You\'re probably right. Sorry."', 0, -1, 'Caving. Being tentative doesn\'t mean giving up your view.', 'b'] ] },
+    { line: '"Fair point. Let\'s hold off."', o: [
+      ['"Great. I\'ll repeat his observations at 4 and page you with them, and you\'ll make the call on discharge then?"', 1, 1, 'Move to action: who does what by when, and how you\'ll follow up.', 'g'],
+      ['"Great."', 0, 0, 'Agreed, but nobody knows what happens next. These are the decisions that slip.', 'm'],
+      ['"Told you so."', -3, 0, 'You won the point and spent the trust you\'ll need next time.', 'b'] ] } ];
+  let i, safety, pool, picked, score;
+  function draw(){
+    vb(svg, 400, 96);
+    svg.innerHTML = hbar(20, 30, 360, safety / 10, safety <= 3 ? 'bad' : 'good', 'How safe it feels', safety + ' / 10') + hbar(20, 74, 360, pool / 10, 'glow', 'Meaning in the pool', pool + ' / 10');
+  }
+  function load(){
+    picked = false; $('#ptNext').hidden = true;
+    if (i >= M.length){
+      $('#ptLine').innerHTML = `<span class="who">How it went</span><p>${score === 5 ? 'Every move kept the conversation safe and filled the pool. Mr Ali stays in, and Dr Reyes will listen next time too.' : score >= 3 ? `You made ${score} of 5 strong moves. Look back at the others: each one cost either safety or meaning.` : `${score} of 5 strong moves. Try again, and watch the two meters as you go.`}</p>`;
+      $('#ptR').innerHTML = ''; $('#ptFb').innerHTML = '<b>The model in five moves:</b> notice it\'s crucial, make it safe, share facts, tell your story tentatively and ask, then agree who does what by when.'; return; }
+    const m = M[i], ord = shuffled([0, 1, 2]);
+    $('#ptLine').innerHTML = `<span class="who">Moment ${i + 1} of ${M.length}</span><p>${m.line}</p>`;
+    $('#ptFb').textContent = 'What do you say?';
+    choiceList($('#ptR'), ord.map(k => ({ t: m.o[k][0] })), (k, b) => {
+      if (picked) return; picked = true; const o = m.o[ord[k]];
+      safety = clamp(safety + o[1], 0, 10); pool = clamp(pool + o[2], 0, 10); if (o[4] === 'g') score++;
+      $$('#ptR .choice').forEach(x => x.disabled = true); b.classList.add(o[4] === 'g' ? 'ok' : 'no');
+      $('#ptFb').innerHTML = `<b style="color:var(--${o[4] === 'g' ? 'good' : o[4] === 'm' ? 'glow' : 'bad'})">${o[4] === 'g' ? 'Good move.' : o[4] === 'm' ? 'Not quite.' : 'Costly.'}</b> ${o[3]}`;
+      draw(); i++; $('#ptNext').hidden = false; $('#ptNext').textContent = i >= M.length ? 'See how it went →' : 'Next moment →'; $('#ptNext').focus({ preventScroll: true });
+    });
+  }
+  function reset(){ i = 0; safety = 5; pool = 0; score = 0; draw(); load(); }
+  $('#ptNext').addEventListener('click', load); $('#ptReset').addEventListener('click', reset);
+  reset();
+}
+
+/* ---------- afterword: conversation plan ---------- */
+{ const F2 = ['ppWho', 'ppCpr', 'ppMe', 'ppThem', 'ppUs', 'ppFacts', 'ppStory', 'ppDont'];
+  const saved = store.get('cc-plan', null);
+  if (saved) F2.forEach(id => { if (saved[id] != null) $('#' + id).value = saved[id]; });
+  function render(){
+    const v = Object.fromEntries(F2.map(id => [id, $('#' + id).value.trim()]));
+    const e = k => esc(v[k]);
+    if (!v.ppWho && !v.ppFacts && !v.ppMe){ $('#ppOut').innerHTML = '<p class="tip">Fill in the plan and your opening lines will appear here.</p>'; return; }
+    const wants = [v.ppMe, v.ppThem, v.ppUs].filter(Boolean).map(esc);
+    $('#ppOut').innerHTML = `<div class="plan-card"><span class="k">The conversation · ${esc(v.ppCpr)} level</span><p><b>Topic:</b> ${e('ppWho') || '…'}</p>${wants.length ? `<p><b>What I really want:</b> ${wants.join('; ')}</p>` : ''}<span class="k">How I might open</span><p class="say-out">${v.ppDont ? `"I don't want you to think ${e('ppDont')}. ` : '"'}${v.ppFacts ? `Here's what I've noticed: ${e('ppFacts').replace(/\.$/, '')}. ` : ''}${v.ppStory ? `${e('ppStory').replace(/\.$/, '')}. ` : ''}How do you see it?"</p><p class="tip">Then listen: ask, mirror, paraphrase, prime. And before you finish, agree who does what by when.</p></div>`;
+  }
+  F2.forEach(id => $('#' + id).addEventListener('input', render));
+  $('#ppSave').addEventListener('click', () => { store.set('cc-plan', Object.fromEntries(F2.map(id => [id, $('#' + id).value]))); $('#ppMsg').textContent = 'Saved in this browser.'; render(); });
+  $('#ppClear').addEventListener('click', () => { F2.forEach(id => { const el = $('#' + id); el.value = el.tagName === 'SELECT' ? 'Pattern' : ''; }); store.set('cc-plan', null); $('#ppMsg').textContent = 'Cleared.'; render(); });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>

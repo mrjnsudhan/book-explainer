@@ -1,0 +1,1705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Bhagavad Gita, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a battlefield at first light. Same shell as the other guides (chapter rail; per chapter: short answer, big ideas, from the text,
+   a lab, plain words, quick check), grouped into the three traditional sets of six chapters.
+   Dark-first: deep Krishna-blue night with a saffron accent and a peacock-teal second series; light mode is palm-leaf paper with deep saffron. */
+:root{
+  color-scheme: dark;
+  --ink:#0C1230;--panel:#131B40;--panel-2:#1C2550;--line:#2E3A6E;--text:#F1F0FA;--muted:#ADB2D2;--faint:#7E84AA;
+  --glow:#FFAE45;--glow-soft:rgba(255,174,69,.11);--hl:rgba(255,174,69,.26);--cool:#5FD6C8;--cool-soft:rgba(95,214,200,.1);
+  --good:#8FE0A0;--good-soft:rgba(143,224,160,.1);--bad:#FF8B8B;--bad-soft:rgba(255,139,139,.12);
+  --soft:#D7D9EE;--deep:#080D24;--toc-bg:rgba(19,27,64,.74);--glow-line:rgba(255,174,69,.36);--cool-line:rgba(95,214,200,.3);--on-glow:#2A1600;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F8F2E4;--panel:#FFFFFF;--panel-2:#F0E7D3;--line:#DFD2B8;--text:#17193A;--muted:#535774;--faint:#868A9F;
+  --glow:#B0500A;--glow-soft:rgba(176,80,10,.06);--hl:#F9DDBF;--cool:#11706A;--cool-soft:rgba(17,112,106,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#262A4C;--deep:#FCF8EE;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(176,80,10,.3);--cool-line:rgba(17,112,106,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F8F2E4;--panel:#FFFFFF;--panel-2:#F0E7D3;--line:#DFD2B8;--text:#17193A;--muted:#535774;--faint:#868A9F;
+  --glow:#B0500A;--glow-soft:rgba(176,80,10,.06);--hl:#F9DDBF;--cool:#11706A;--cool-soft:rgba(17,112,106,.06);--good:#2F7A3A;--good-soft:rgba(47,122,58,.08);--bad:#B8392A;--bad-soft:rgba(184,57,42,.07);
+  --soft:#262A4C;--deep:#FCF8EE;--toc-bg:rgba(255,255,255,.84);--glow-line:rgba(176,80,10,.3);--cool-line:rgba(17,112,106,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+
+/* ---------- Bhagavad Gita additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.verses{display:grid;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.seat-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.seat-top output{font-family:var(--f-display);font-size:22px;letter-spacing:0;text-transform:none;color:var(--glow);line-height:1}
+.verses svg{display:block;width:100%;height:auto}
+.seat-ctl{display:grid;gap:6px;padding:12px 16px 14px;border-top:1px solid var(--line);background:var(--deep)}
+.seat-ctl label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.seat-ctl p{font-size:14px;color:var(--soft);min-height:42px}
+.tm-ask{font-size:14.5px;color:var(--soft)}
+.tm-ask b{color:var(--text);font-weight:500}
+.after .big{max-width:52ch;font-size:clamp(20px,2.6vw,25px)}
+.lg-item{display:grid;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.lg-item .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.lg-item .k.r{color:var(--good)}
+.lg-item .k.l{color:var(--glow)}
+.lg-item .k.h{color:var(--bad)}
+.lg-item p{font-size:14.5px}
+.lg-item button{justify-self:start;font:inherit;font-size:12px;color:var(--faint);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+@keyframes bg-float{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@media (max-width: 560px){ .fq{padding:14px 16px} }
+.seat-ctl .row{gap:6px}
+.seat-ctl .row .btn{font-size:12.5px;padding:6px 10px}
+.verse{margin:0;padding:12px 16px;border-left:3px solid var(--glow);background:var(--glow-soft);border-radius:0 12px 12px 0;font-family:var(--f-display);font-size:21px;line-height:1.28;color:var(--text)}
+.verse .ref{display:block;margin-top:6px;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--glow)}
+.worth{display:grid;gap:6px;padding:14px 18px;border:1px dashed var(--line);border-radius:14px}
+.worth .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.worth p{font-size:14.5px;color:var(--soft)}
+.vb rect{cursor:pointer}
+.vb:focus{outline:none}
+.vb:focus-visible rect.hit{stroke:var(--glow);stroke-width:2}
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to the song at the heart of the Mahabharata</div>
+    <h1><em>The Bhagavad Gita</em>,<br>Explained</h1>
+    <p class="lede">Two armies face each other on the field of Kurukshetra. The archer Arjuna asks his charioteer, Krishna, to drive him into the gap between them, takes one look at the cousins, teachers and friends he is about to fight, and puts down his bow. The <b>Bhagavad Gita</b>, "the Song of the Lord", is the conversation that follows: 700 verses in 18 chapters on how to act when every choice hurts, who you really are, and how to live without being ruled by what you want or fear. This guide takes each chapter in turn, with a lab in every one where you can try the idea.</p>
+    <blockquote class="fq" aria-label="The Gita in one line"><p>Do the work in front of you as well as you can, <em>and let go of what you get for it.</em></p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What are you facing?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="verses" style="margin:0" aria-label="The 700 verses">
+        <div class="seat-top"><span>The 700 verses</span><output id="vmV"></output></div>
+        <svg id="vmSvg" role="img" aria-label="A bar for each of the 18 chapters showing how many verses it has"></svg>
+        <div class="seat-ctl"><div class="row" id="vmMode"></div><p id="vmTxt" aria-live="polite"></p></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The three sets of six">
+      <a href="#part1"><span class="n">Chapters 1 to 6</span><span class="q">The path of action</span><span class="d">Despair, the deathless self, and work done without clinging</span></a>
+      <a href="#part2"><span class="n">Chapters 7 to 12</span><span class="q">The path of devotion</span><span class="d">Who Krishna is, the cosmic form, and the love that holds it together</span></a>
+      <a href="#part3"><span class="n">Chapters 13 to 18</span><span class="q">The path of knowledge</span><span class="d">The field and its knower, the three gunas, and the final teaching</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Composed</b> roughly between the 5th and 2nd centuries BC; most scholars lean towards the later end</span>
+      <span><b>Author</b> traditionally Veda Vyasa, the sage credited with the whole Mahabharata; it sits in its sixth book, the Bhishma Parva</span>
+      <span><b>Read time</b> about 4 minutes per chapter here</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 18 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+
+    <!-- ===================== THE PATH OF ACTION ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Chapters 1 to 6 · karma yoga</span>
+      <h2>The Path of Action</h2>
+      <p>Commentators have long split the Gita into three sets of six chapters. The first six start with a man who can't act and end with a mind that can sit still. On the way Krishna gives the two ideas the Gita is best known for: you are not the body that dies, and you can act fully without clinging to what the action brings.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Running away from your duty doesn't free you. Doing it, with your attention on the work and not on the reward, does.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Arjuna Vishada Yoga</div>
+        <h2>Arjuna's Despair</h2>
+        <div class="short"><span class="lbl">In short</span><p>The blind king Dhritarashtra asks his minister Sanjaya, who has been given far sight, to tell him what is happening on the battlefield. Conches sound, the armies are ready, and Arjuna asks Krishna to drive his chariot into the middle. He sees his own family and teachers on the other side, his body gives way, and he refuses to fight.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The setting is a crisis.</b> The Gita doesn't open in a temple or a forest. It opens a few minutes before a war, with the best archer of his age shaking in his chariot.</span></li>
+          <li><span><b>Arjuna's reasons sound good.</b> He doesn't want a kingdom bought with his family's blood. Killing kin is wrong, families will collapse, and nothing good can come of it. He would rather be killed unarmed.</span></li>
+          <li><span><b>It is grief dressed as virtue.</b> His body tells the real story: dry mouth, trembling limbs, a mind that won't hold still. The rest of the Gita asks whether his refusal is wisdom or panic.</span></li>
+          <li><span><b>The question is everyone's.</b> What should I do when every option hurts someone I love? That is why a battle scene from an epic became a book people read for their own lives.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>I don't want victory, Krishna, or a kingdom, or pleasures. What use would a kingdom be to us, or even life itself?</p><span class="ref">Verse 1.32 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna says to Krishna: drive the chariot between the two armies so I can see who I have to fight. Krishna sets it down in front of Bhishma and Drona, the great-uncle who raised him and the teacher who taught him archery. Arjuna looks across and sees fathers, grandfathers, uncles, brothers, sons, grandsons and friends on both sides. His limbs go weak, his skin burns, his great bow Gandiva slides out of his hand. He lists his arguments, then sits down in the chariot, drops his bow and arrows, and stops. That is where the chapter ends: the hero has quit before the first arrow.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>Some readers, Gandhi among them, take the battle as an allegory for the war inside each person between better and worse impulses. Others read it as a real war and a real question about duty and violence. The text supports both readings, and this guide doesn't pick one.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: between the two armies</div><div class="hint">Drive into the gap, then step through what happens to Arjuna</div></div>
+        <div class="stage"><svg id="k1Svg" role="img" aria-label="Two armies with a chariot between them"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="k1Next">Look closer →</button><button class="btn" type="button" id="k1Reset">Back to the edge of the field</button></div></div><div class="detail" aria-live="polite"><span class="k" id="k1K"></span><span class="h" id="k1H"></span><p id="k1P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Before you decide anything important, notice whether your reasons are coming from a clear head or a shaking body. Arjuna's arguments were real, but they arrived after the panic, not before it.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The deathless self →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Sankhya Yoga</div>
+        <h2>The Yoga of Knowledge</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks Krishna to teach him, and the real Gita begins. Krishna's first answer is that Arjuna is grieving for the wrong thing: the self in every person is never born and never dies, only bodies do. His second is practical: do your duty, keep your mind level in success and failure, and you will reach a steadiness nothing can shake.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The self doesn't die.</b> There was never a time when you, I or these kings did not exist, and there never will be. Weapons can't cut it and fire can't burn it. It moves on from a body the way you take off worn-out clothes.</span></li>
+          <li><span><b>Feelings come and go.</b> Heat and cold, pleasure and pain arrive when the senses meet the world, and they pass. Bear them without being thrown.</span></li>
+          <li><span><b>Work, not wages.</b> You have a right to your work, never to its fruits. Don't make the reward your motive, and don't let that push you into doing nothing.</span></li>
+          <li><span><b>The steady mind.</b> Krishna describes the person of steady wisdom: like a tortoise pulling in its limbs, they can withdraw their senses, and like the ocean taking in rivers, they stay full and still.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Your right is to the work alone, never to what it brings. Don't let the result be your reason for acting, and don't fall in love with doing nothing.</p><span class="ref">Verse 2.47 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna admits he is lost: "I am your student, I have come to you for help, tell me what is right." Krishna smiles and starts from the very top. You are mourning people who are not lost, he says. A body goes from childhood to youth to old age, and then to another body, and the wise aren't confused by that. Later in the chapter he traces how a person falls apart: keep thinking about something you want and you grow attached; attachment turns into desire, desire blocked turns into anger, anger clouds judgement, clouded judgement forgets what it learned, and once reason is gone, so are you.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: the slide from thinking to ruin</div><div class="hint">Drag to dwell on something you want, and see where it leads</div></div>
+        <div class="stage"><svg id="k2Svg" role="img" aria-label="A staircase of eight steps going down from thinking about something to ruin"></svg></div><div class="lab-ctl"><label class="ctl" for="k2R"><span>How long you dwell on it</span><input type="range" id="k2R" min="0" max="7" value="0"></label><div class="row"><button class="btn" type="button" id="k2Catch">Catch it here</button></div></div><div class="detail" aria-live="polite"><span class="k" id="k2K"></span><span class="h" id="k2H"></span><p id="k2P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Do the work as well as you can, and treat the result as something you hand over rather than something you are owed. If you notice your mind circling something you want, that's the first step of the slide. Catch it there.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: Action without clinging →</a></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Karma Yoga</div>
+        <h2>The Yoga of Action</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna is confused: if a calm, knowing mind is the goal, why push him into a bloody battle? Krishna's answer is that nobody can stop acting, even for a moment. The choice is not between action and rest but between action that binds you and action done as an offering, for the good of the world.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You can't not act.</b> Breathing, eating, keeping a body alive are all actions. Nature drives everyone. Sitting still while your mind races after things isn't renunciation, it's pretending.</span></li>
+          <li><span><b>Act as an offering.</b> Work done as a sacrifice, for something bigger than yourself, doesn't bind you. Work done only for yourself does.</span></li>
+          <li><span><b>Others copy you.</b> Whatever a respected person does, others follow. Even if you need nothing, act to keep the world together, as King Janaka did.</span></li>
+          <li><span><b>Desire is the enemy.</b> What pushes people to do wrong against their will? Desire, which turns into anger when blocked. It covers wisdom like smoke covers a fire or dust a mirror.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Better your own duty done imperfectly than someone else's done perfectly.</p><span class="ref">Verse 3.35 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna points to himself. There is nothing in the three worlds I need to do and nothing I don't already have, he says, and still I keep working. If I stopped, everyone would copy me and the world would fall apart. He describes a cycle that holds life together: creatures live on food, food comes from rain, rain comes from sacrifice, and sacrifice is made of action. Taking from the cycle without giving back, he says, is stealing. Then he names the thing that makes even a good person act badly: desire, born of restless energy, never satisfied, hiding in the senses, the mind and the intellect.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: the wheel that keeps turning</div><div class="hint">Click a link to stop doing your part, and watch the wheel</div></div>
+        <div class="stage"><svg id="k3Svg" role="img" aria-label="A wheel of action, sacrifice, rain, food and living beings"></svg></div><div class="lab-ctl"><div class="row" id="k3Pick"></div></div><div class="detail" aria-live="polite"><span class="k" id="k3K"></span><span class="h" id="k3H"></span><p id="k3P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You will act today whether you mean to or not. Pick one task and do it for the people it helps, not for the credit. Notice that it feels lighter.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: Action in inaction →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Jnana Karma Sannyasa Yoga</div>
+        <h2>Knowledge and the Renunciation of Action</h2>
+        <div class="short"><span class="lbl">In short</span><p>Krishna reveals that he taught this yoga long ago to the Sun, who passed it down a line of kings until it was lost. Arjuna objects that Krishna was born recently. Krishna explains that he has been born many times, whenever goodness declines, and goes on to the chapter's riddle: the wise see inaction in action and action in inaction.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>He comes back when needed.</b> Whenever right order collapses and wrong rises, Krishna says, I take form, to protect the good, end the wicked and set dharma on its feet again.</span></li>
+          <li><span><b>Same act, different weight.</b> Two people can do the same thing. One is bound by it because they want something; the other is free because they don't. What counts is the state of the doer.</span></li>
+          <li><span><b>Knowledge burns karma.</b> As a fire turns wood to ash, knowledge turns all actions to ash. Nothing purifies like it.</span></li>
+          <li><span><b>Learn by asking.</b> Find someone who knows, approach them humbly, ask questions and serve. And cut your doubt with the sword of knowledge, because a mind full of doubt finds no peace.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Whenever goodness fades and wrong is on the rise, I bring myself into being, age after age.</p><span class="ref">Verse 4.7–8 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna takes Krishna literally: you were born long after the Sun, so how could you have taught it? Krishna says they have both been born many times; the difference is that he remembers all of his births and Arjuna remembers none. He is unborn and unchanging, yet he takes form through his own power. Then he turns to the kinds of offering people make: some offer food into fire, some offer their senses into restraint, some offer their breath, some offer study. All of these are good, he says, but the best offering is knowledge, because every action ends in it.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>This chapter also says Krishna created the four social orders (varna) according to people's qualities and work. Many modern readers, including reformers who rejected caste by birth, point to that wording to argue the Gita ties varna to nature and conduct, not birth. Others read it more traditionally. The verse is one of the most argued over in the text.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: binds or frees?</div><div class="tally" id="tally4" aria-label="Score"></div></div>
+        <div class="sorter" id="sort4"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Ask of anything you're about to do: would I still do this if nobody noticed and nothing came of it? If yes, it won't weigh on you. If no, you've found where the hook is.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: The lotus leaf →</a></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · Karma Sannyasa Yoga</div>
+        <h2>The Yoga of Renunciation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks for a straight answer: is it better to give up action or to act without attachment? Both lead to freedom, Krishna says, but acting without attachment is better, and in the end they are the same path. The free person still sees, hears, eats and sleeps, but knows that the senses are just moving among their objects.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two paths, one place.</b> Only children, Krishna says, think renunciation and action are different. Whoever really practises one reaches the goal of both.</span></li>
+          <li><span><b>The senses act, not you.</b> Seeing, hearing, touching, breathing, talking, letting go, even opening and closing the eyes: the wise person sees the senses at work and thinks, "I'm not doing anything."</span></li>
+          <li><span><b>Untouched, like a lotus leaf.</b> A lotus leaf sits in water and stays dry. Act while offering the work to something higher and wrongdoing doesn't stick to you.</span></li>
+          <li><span><b>Same eyes for all.</b> The wise see the same thing in a learned priest, a cow, an elephant, a dog and an outcast. Pleasure born of contact has a beginning and an end, so they don't rest their happiness on it.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Whoever acts, laying their work before the highest and letting go of attachment, is not stained by wrong, as a lotus leaf is not wet by water.</p><span class="ref">Verse 5.10 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna describes someone who has found peace. They are not happy because something nice happened, so they are not crushed when it goes. They hold off the push of desire and anger before the body falls, and that is happiness. Their delight is inside, their joy is inside, their light is inside. He ends the chapter with a short sketch of meditation, shutting out outside contact, fixing the gaze between the brows, evening out the breath, that the next chapter opens up.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: lotus leaf or sponge?</div><div class="hint">Pick how you hold your work, then let the rain fall</div></div>
+        <div class="stage"><svg id="k5Svg" role="img" aria-label="A leaf on water with raindrops falling on it"></svg></div><div class="lab-ctl"><div class="row" id="k5Mode"></div><div class="row"><button class="btn primary" type="button" id="k5Rain">Let it rain</button></div></div><div class="stats"><div class="stat"><span class="k">Drops (events of the day)</span><span class="v" id="k5D">0</span></div><div class="stat"><span class="k">How much soaked in</span><span class="v glow" id="k5S">0%</span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Things will land on you all day: praise, blame, good news, bad news. You can't stop the rain. You can stop soaking it up.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The steady flame →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Dhyana Yoga</div>
+        <h2>The Yoga of Meditation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Krishna teaches how to sit and still the mind: a clean, quiet place, a seat neither too high nor too low, body and head straight, mind turned inward. Arjuna protests that the mind is as restless as the wind. Krishna agrees, and gives the two-part answer that every meditation teacher since has repeated: practice and letting go.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You are your own friend and enemy.</b> Lift yourself up by yourself, and don't drag yourself down. To someone who has mastered their mind, it is a friend. To someone who hasn't, it behaves like an enemy.</span></li>
+          <li><span><b>Nothing in excess.</b> Yoga isn't for someone who eats too much or too little, or sleeps too much or too little. Moderation in food, play, work and sleep is what makes it work.</span></li>
+          <li><span><b>Bring it back.</b> Whenever the restless mind wanders, gently bring it back. And again. That is the practice.</span></li>
+          <li><span><b>No effort is wasted.</b> What happens to someone who tries and fails? Krishna says nobody who does good ever comes to a bad end. They pick up next time where they left off.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>As a lamp in a place with no wind does not flicker: that is the picture of a yogi's mind held steady in meditation.</p><span class="ref">Verse 6.19 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna is honest: I don't see how this steadiness can last, Krishna, the mind is restless, strong, stubborn, as hard to hold as the wind. Krishna doesn't argue. Yes, he says, it is hard to control and always moving. But it can be held by practice and by dispassion. Arjuna then asks what becomes of someone who has faith but slips before reaching the goal: do they fall between two worlds, like a cloud torn apart? Krishna's reply is one of the kindest in the Gita: they are reborn into a good home, or a family of yogis, and the progress they made comes back to them.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: the lamp and the wind</div><div class="hint">Turn up the distractions, then keep bringing the mind back</div></div>
+        <div class="stage"><svg id="k6Svg" role="img" aria-label="A lamp flame and a wandering point that stands for the mind"></svg></div><div class="lab-ctl"><label class="ctl" for="k6R"><span>Wind of distraction</span><input type="range" id="k6R" min="0" max="10" value="4"></label><div class="row"><button class="btn primary" type="button" id="k6Back">Bring it back</button><button class="btn" type="button" id="k6Reset">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">Times you brought it back</span><span class="v glow" id="k6N">0</span></div><div class="stat"><span class="k">Flame</span><span class="v" id="k6T">steady</span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Sit for five minutes and count how often your mind wanders. Each time you notice and come back isn't a failure, it's one repetition. That's how the flame steadies.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: Pearls on a thread →</a></div>
+    </section>
+    <!-- ===================== THE PATH OF DEVOTION ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Chapters 7 to 12 · bhakti yoga</span>
+      <h2>The Path of Devotion</h2>
+      <p>The middle six turn from what you do to who you are doing it for. Krishna describes himself: the thread through every pearl, the taste in water, the best of every kind of thing, and finally a vision too vast to look at. Then he brings it back to something anyone can do: love, and offer what you have.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Behind everything there is one source, and the simplest way to it is devotion, not cleverness or ritual.</p></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Jnana Vijnana Yoga</div>
+        <h2>Knowledge and Realisation</h2>
+        <div class="short"><span class="lbl">In short</span><p>Now Krishna talks about himself. Everything in the world, earth, water, fire, air, space, mind, intellect and the sense of "I", is his lower nature. His higher nature is the life in all beings. Everything is strung on him like pearls on a thread, though most people only see the pearls.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two natures.</b> An eightfold material nature that changes, and a higher one, the life principle, that holds the whole universe up.</span></li>
+          <li><span><b>He is the essence.</b> I am the taste in water, the light in the sun and moon, the sound in space, the strength of the strong, the intelligence of the intelligent.</span></li>
+          <li><span><b>The veil of the three strands.</b> The world is bewitched by the play of nature's three qualities and doesn't see what is behind them. It is hard to get through, but those who turn to him do.</span></li>
+          <li><span><b>Four kinds of seekers.</b> People turn to the divine when they are in trouble, when they want to know, when they want something, or because they understand. All are good; the one who understands is dearest.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>There is nothing higher than me, Arjuna. All this is strung on me like pearls on a thread.</p><span class="ref">Verse 7.7 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna says that among thousands of people, maybe one sets out to reach perfection, and among those who strive, maybe one really knows him. He isn't scornful about others' worship. Whatever form someone worships with faith, he says, I make their faith steady, and they get what they ask for, though it is limited, because they asked for something limited. What they miss is the thread itself: unborn, unchanging, hidden behind its own magic.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: see the thread</div><div class="hint">Click a pearl, then show the thread that holds them</div></div>
+        <div class="stage"><svg id="k7Svg" role="img" aria-label="A necklace of nine pearls, each one an element of nature"></svg></div><div class="lab-ctl"><div class="row"><button class="btn primary" type="button" id="k7Mode" aria-pressed="false">Show the thread</button></div></div><div class="detail" aria-live="polite"><span class="k" id="k7K"></span><span class="h" id="k7H"></span><p id="k7P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick something ordinary today, water, sunlight, someone's skill, and look for what makes it what it is. The Gita says that essence is the divine hiding in plain sight.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: Days of Brahma →</a></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Akshara Brahma Yoga</div>
+        <h2>The Imperishable</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks a string of questions about the ultimate, the self and karma, and how a person can know Krishna at the moment of death. Krishna says whatever you remember at the end is where you go, so remember him at all times, and fight. Then he zooms out to cosmic time: whole universes appear at the dawn of a day of Brahma and dissolve at its night.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The last thought matters.</b> Whatever state of being you remember when you leave the body, you go to. And what you think of at the end is what you thought of most in life.</span></li>
+          <li><span><b>So remember all the time.</b> Remember me always, and fight. The point isn't a deathbed trick; it's a life spent aimed at one thing.</span></li>
+          <li><span><b>Time on a vast scale.</b> A day of Brahma lasts a thousand ages, and so does his night. Beings come out at dawn and dissolve at nightfall, again and again.</span></li>
+          <li><span><b>Beyond the cycle.</b> Behind the unmanifest that worlds come out of is another, eternal unmanifest that doesn't perish when everything else does. Reaching it, nobody returns.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Remember me at all times, and fight. With mind and understanding set on me, you will come to me without doubt.</p><span class="ref">Verse 8.7 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna describes the moment of leaving the body for someone who has practised: the senses closed, the mind held in the heart, the breath drawn up to the head, chanting the single syllable Om. Then he describes the two paths the departing are said to take, one of fire, light and the bright half of the year, from which there is no return, and one of smoke, night and the dark half, which leads back to birth. A yogi who knows both paths, he says, is never confused by either.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>The Gita gives only the ratio: a day of Brahma is a thousand yugas. The year counts in this lab, 4.32 million years for one great age and 4.32 billion for a day of Brahma, come from the later Puranas, which worked the figures out in detail. They are traditional numbers, not measurements.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: a day of Brahma</div><div class="hint">Drag up the scale of time, from a human year to the life of the creator</div></div>
+        <div class="stage"><svg id="k8Svg" role="img" aria-label="A log-scale ladder of cosmic time units"></svg></div><div class="lab-ctl"><label class="ctl" for="k8R"><span>Scale</span><input type="range" id="k8R" min="0" max="5" value="0"></label></div><div class="detail" aria-live="polite"><span class="k" id="k8K"></span><span class="h" id="k8H"></span><p id="k8P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>What you think about most is where your life is headed, and at the end it's what you'll be left with. Notice what your mind returns to when it's idle.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: A leaf, a flower →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · Raja Vidya Raja Guhya Yoga</div>
+        <h2>The Royal Secret</h2>
+        <div class="short"><span class="lbl">In short</span><p>Krishna calls this the king of knowledge and the king of secrets, and it turns out to be simple. Everything rests in him, yet he isn't caught in any of it. He is the same to everyone. And whoever offers him even a leaf, a flower, a fruit or a little water with love, he accepts.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>In everything, bound by nothing.</b> All beings rest in me as the wind rests in space, but I am not in them, and they are not limited to me. It is a puzzle meant to be held, not solved.</span></li>
+          <li><span><b>Love is the offering.</b> The value of the offering isn't its price. A leaf given with devotion counts for more than gold given without it.</span></li>
+          <li><span><b>Make everything an offering.</b> Whatever you do, eat, give, offer or endure, do it as an offering. Then there is no line between sacred and ordinary.</span></li>
+          <li><span><b>No one is shut out.</b> Even someone who has done great wrong, if they turn to him with their whole heart, should be counted as good. Women, merchants and labourers, often shut out of ritual in the Gita's world, reach the highest too.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>A leaf, a flower, a fruit or water: whatever is offered to me with love, I take, because it is offered from the heart.</p><span class="ref">Verse 9.26 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna says he is the ritual and the offering, the herb and the chant, the butter and the fire. He is father, mother and grandfather of the world, its goal, support, witness, home and friend. He is immortality and death, being and non-being. People who perform rituals for heaven go there, enjoy it, and come back when their merit runs out, like spending a fortune. But people who simply think of him, with nothing else on their minds, he looks after himself: he brings what they lack and keeps what they have.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: what is the offering worth?</div><div class="hint">Choose what you bring, then how you bring it</div></div>
+        <div class="stage"><svg id="k9Svg" role="img" aria-label="An offering bowl that glows with the devotion behind it"></svg></div><div class="lab-ctl"><div class="row" id="k9Pick"></div><label class="ctl" for="k9R"><span>The heart behind it</span><input type="range" id="k9R" min="0" max="10" value="3"></label><p id="k9Txt" aria-live="polite" style="font-size:14.5px;color:var(--soft)"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one ordinary act today, cooking a meal, finishing a report, and do it as if you were giving it to someone you love. The act doesn't change. You do.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: The best of every kind →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · Vibhuti Yoga</div>
+        <h2>Divine Glories</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks how he can think of Krishna in daily life. Krishna answers with a long list: among lights I am the sun, among mountains Meru, among rivers the Ganga, among seasons spring, among letters the first one. The point isn't the list. It's that wherever something is at its best, you are seeing a spark of him.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Look for the peak.</b> In every category, Krishna names the finest example as himself. Excellence is where the divine shows through most clearly.</span></li>
+          <li><span><b>Even the uncomfortable ones.</b> Among deceivers, he says, I am gambling. Among things that cut down, I am death. The list doesn't only include pleasant things.</span></li>
+          <li><span><b>He is in the list too.</b> Among the Vrishni clan I am Vasudeva, among the Pandavas Arjuna, among sages Vyasa. The speaker, the listener and the author all make the list.</span></li>
+          <li><span><b>A fraction is enough.</b> There is no end to my glories, he says. I hold up this whole universe with a single fragment of myself.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Whatever is glorious, beautiful or powerful, know it comes from a spark of my splendour.</p><span class="ref">Verse 10.41 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna has just heard Krishna's teaching and is moved. He says: I believe everything you've said, but even the gods don't know your full nature. Tell me in what forms I should think of you. Krishna begins: I am the self seated in the heart of all beings, their beginning, middle and end. Then the list rolls on for twenty verses, from the sun to the ocean, from the lion among beasts to Garuda among birds, from the thunderbolt to silence, which he says he is among secrets.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: among all things, I am</div><div class="hint">Pick a category to see what Krishna names as its best</div></div>
+        <div class="pad" style="padding-top:16px"><div class="row" id="k10Grid" style="gap:6px"></div></div><div class="detail" aria-live="polite"><span class="k" id="k10K"></span><span class="h" id="k10H"></span><p id="k10P"></p></div><div class="stats"><div class="stat"><span class="k">Glories seen</span><span class="v glow" id="k10N">0 of 16</span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Today, when you see something done superbly, a perfect sentence, a kind act, a sunset, pause on it. The Gita says that's the closest look at the divine most of us get.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: The cosmic form →</a></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 11</span> · Vishvarupa Darshana Yoga</div>
+        <h2>The Vision of the Cosmic Form</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks to see Krishna as he really is. Krishna gives him a divine eye, and Arjuna sees a form with countless arms, faces and eyes, brighter than a thousand suns, holding every god and world inside it. Then he sees the warriors of both armies rushing into its mouths. The vision terrifies him, and he begs Krishna to come back as his friend.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Ordinary eyes can't see it.</b> Arjuna needs a gift of sight. The Gita is saying the whole truth is too large for normal perception.</span></li>
+          <li><span><b>Brighter than a thousand suns.</b> If a thousand suns rose in the sky at once, that would hint at the brilliance of the form.</span></li>
+          <li><span><b>Time, the destroyer.</b> Krishna names himself as time, grown vast, here to wind up the worlds. The warriors are already gone; Arjuna is only the instrument.</span></li>
+          <li><span><b>Love over awe.</b> After the vision, Arjuna apologises for having joked with Krishna as a friend. Krishna returns to his human shape, and says only devotion lets anyone see what Arjuna saw.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>I am time, grown mighty, the destroyer of worlds, come to sweep them away. Even without you, none of these warriors will survive.</p><span class="ref">Verse 11.32 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Sanjaya, narrating for the blind king, describes what Arjuna saw: the whole universe gathered in one place, in the body of the god of gods. Arjuna, hair on end, folds his hands and calls out what he sees: the gods, the sages, serpents, Brahma on his lotus; no beginning, middle or end anywhere. Then the vision turns dreadful. Bhishma, Drona and the enemy's champions, along with Arjuna's own side, pour into the gaping mouths like rivers into the sea, like moths into a flame. Arjuna begs to know who this is. The answer is: time. Be only the instrument, Krishna says. They are already slain.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>J. Robert Oppenheimer, who read the Gita in Sanskrit, said that after the first atomic test in 1945 he thought of verse 11.32 in the form "Now I am become Death, the destroyer of worlds." Most translators render the word (kala) as time rather than death.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: the divine eye</div><div class="hint">Open the eye slowly, from the friend in the chariot to the form of everything</div></div>
+        <div class="stage"><svg id="k11Svg" role="img" aria-label="A figure that expands into a radiant cosmic form"></svg></div><div class="lab-ctl"><label class="ctl" for="k11R"><span>Ordinary eyes <span style="float:right">Divine eye</span></span><input type="range" id="k11R" min="0" max="100" value="0"></label><p id="k11Txt" aria-live="polite" style="font-size:14.5px;color:var(--soft);min-height:42px"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When something feels overwhelming, it helps to remember you are one instrument in a much bigger process. That isn't an excuse to stop caring. It's permission to stop carrying the whole thing.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#ch12">Next: The ladder of devotion →</a></div>
+    </section>
+    <!-- ===================== 12 ===================== -->
+    <section class="ch" id="ch12" data-n="12">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 12</span> · Bhakti Yoga</div>
+        <h2>The Yoga of Devotion</h2>
+        <div class="short"><span class="lbl">In short</span><p>The shortest chapter, and one of the most loved. Arjuna asks which is better: worshipping Krishna in a form, or the formless absolute. Both get there, Krishna says, but the formless is much harder for people with bodies. Then he gives a ladder that meets you wherever you are, and a portrait of the devotee he holds dear.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Form is easier.</b> Loving a person is something people know how to do. Fixing the mind on something with no qualities at all is a steep road.</span></li>
+          <li><span><b>A ladder for everyone.</b> Fix your mind on me. If you can't, practise. If you can't practise, do your work for me. If you can't even do that, just let go of the results of what you do.</span></li>
+          <li><span><b>Letting go of results brings peace.</b> Krishna ranks giving up the fruits of action above even meditation, because peace follows it at once.</span></li>
+          <li><span><b>Who he loves.</b> Someone who hates no one, is friendly and kind, free of "I" and "mine", the same in pleasure and pain, forgiving, content, steady, not troubled by the world and not troubling it.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>The one by whom the world is not troubled, and who is not troubled by the world, free of excitement, envy, fear and anxiety, is dear to me.</p><span class="ref">Verse 12.15 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna's ladder is unusual because it goes down rather than up: every rung is an easier option for someone who can't manage the one before. It ends with the most ordinary thing in the book. If you can't do anything else, give up the fruits of your actions. Then the chapter turns into a list of qualities, verse after verse ending with the same refrain, "that one is dear to me": the same to friend and enemy, to honour and insult, to heat and cold, quiet, content with whatever comes, at home anywhere.</p></div>
+      <figure class="lab" id="lab12">
+        <div class="lab-top"><div class="t">Lab: find your rung</div><div class="hint">Tell the ladder what you can manage, and it shows you where to start</div></div>
+        <div class="stage"><svg id="k12Svg" role="img" aria-label="A ladder of four rungs of devotion"></svg></div><div class="lab-ctl"><div class="row" id="k12Pick"></div></div><div class="detail" aria-live="polite"><span class="k" id="k12K"></span><span class="h" id="k12H"></span><p id="k12P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>You don't have to start at the top. If meditation doesn't work for you, practise something smaller. If that's too much, do your job as service. If that's too much, just loosen your grip on how things turn out.</p></div>
+      <div class="quiz" data-q="12"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="12"> I understand this chapter</label><a class="next" href="#ch13">Next: The field and its knower →</a></div>
+    </section>
+    <!-- ===================== THE PATH OF KNOWLEDGE ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Chapters 13 to 18 · jnana yoga</span>
+      <h2>The Path of Knowledge</h2>
+      <p>The last six get analytical. They separate the body from the one who knows it, sort every thought, food, gift and kind of happiness into three strands of nature, and end with the whole teaching pulled together. Then Krishna steps back and tells Arjuna to think it over and choose.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>See clearly what is you and what is nature moving around you, and the fear of acting goes away.</p></div>
+    </section>
+    <!-- ===================== 13 ===================== -->
+    <section class="ch" id="ch13" data-n="13">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 13</span> · Kshetra Kshetrajna Vibhaga Yoga</div>
+        <h2>The Field and Its Knower</h2>
+        <div class="short"><span class="lbl">In short</span><p>The body, Krishna says, is a field, and the one who knows it is the knower of the field. Everything you can observe, including your thoughts, desires, pain and pleasure, belongs to the field. The knower is what observes. Seeing the difference clearly is what Krishna calls knowledge.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The field is everything you can watch.</b> The elements, the senses, the mind, desire and aversion, pleasure and pain, even the sense of "I": all of it is field.</span></li>
+          <li><span><b>The knower is what watches.</b> In every field there is a knower, and Krishna says he is the knower in all fields.</span></li>
+          <li><span><b>Knowledge is a way of living.</b> He defines knowledge not as facts but as humility, harmlessness, patience, honesty, service, steadiness, self-control and detachment.</span></li>
+          <li><span><b>Like space, like the sun.</b> Space is in everything but nothing stains it. The one sun lights the whole world. So the knower lights up the whole field and isn't touched by it.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>As the one sun lights up this whole world, so the knower of the field lights up the whole field.</p><span class="ref">Verse 13.33 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna lays out two things that have both existed from the beginning: nature, which does all the acting and changing, and the conscious spirit, which experiences it. Nature is the cause of the body and the senses; the spirit is the cause of experiencing pleasure and pain. Trouble starts when the spirit, sitting inside nature, takes nature's qualities as its own. Someone who sees that all actions are done by nature alone, and that the self isn't the doer, he says, really sees.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>Some editions add a question from Arjuna at the start of this chapter, which brings the count to 701 verses. Most count 700 and leave it out, as this guide does.</p></div>
+      <figure class="lab" id="lab13">
+        <div class="lab-top"><div class="t">Lab: field or knower?</div><div class="tally" id="tally13" aria-label="Score"></div></div>
+        <div class="sorter" id="sort13"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Next time a strong feeling comes up, try saying "this is in the field". Pain, a craving, a worried thought: they are things you are aware of. You are the one aware.</p></div>
+      <div class="quiz" data-q="13"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="13"> I understand this chapter</label><a class="next" href="#ch14">Next: The three strands →</a></div>
+    </section>
+    <!-- ===================== 14 ===================== -->
+    <section class="ch" id="ch14" data-n="14">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 14</span> · Gunatraya Vibhaga Yoga</div>
+        <h2>The Three Gunas</h2>
+        <div class="short"><span class="lbl">In short</span><p>All of nature is woven from three strands, or gunas: sattva, which is clear and bright; rajas, which is restless and driven; and tamas, which is heavy and dull. They are always mixed, and one is always on top. Each one binds you in its own way, even the good one. Freedom is stepping behind all three.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Sattva: clarity.</b> Light, calm, wanting to understand. It binds you through attachment to happiness and knowledge.</span></li>
+          <li><span><b>Rajas: drive.</b> Desire, activity, restlessness, greed. It binds you through attachment to action.</span></li>
+          <li><span><b>Tamas: inertia.</b> Dullness, confusion, laziness, too much sleep. It binds you through carelessness.</span></li>
+          <li><span><b>One always wins.</b> Sattva rises by overpowering the other two, and so does each of the others. Notice which is in charge right now, and you understand a lot about your mood.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>When someone sees that only the gunas act, and knows what is beyond them, they come to my being.</p><span class="ref">Verse 14.19 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Arjuna asks the obvious practical question: how do you recognise someone who has gone beyond the three gunas? How do they behave? Krishna's answer is a portrait. They don't resent light, activity or confusion when those appear, and don't long for them when they fade. They sit like someone unconcerned, unshaken, thinking "it's just the gunas moving". To them a lump of earth, a stone and gold are the same, praise and blame are the same, friend and foe are the same.</p></div>
+      <figure class="lab" id="lab14">
+        <div class="lab-top"><div class="t">Lab: mix the three strands</div><div class="hint">Move the sliders and watch where you land in the triangle</div></div>
+        <div class="stage"><svg id="k14Svg" role="img" aria-label="A triangle with sattva, rajas and tamas at its corners and a point showing the current mix"></svg></div><div class="lab-ctl"><label class="ctl" for="k14A"><span>Sattva · clarity</span><input type="range" id="k14A" min="0" max="10" value="3"></label><label class="ctl" for="k14B"><span>Rajas · drive</span><input type="range" id="k14B" min="0" max="10" value="6"></label><label class="ctl" for="k14C"><span>Tamas · inertia</span><input type="range" id="k14C" min="0" max="10" value="2"></label><div class="row" id="k14Pre"></div></div><div class="detail" aria-live="polite"><span class="k" id="k14K"></span><span class="h" id="k14H"></span><p id="k14P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A few times today, ask which strand is running you right now: clear, driven or heavy? Just naming it creates a little space between you and it.</p></div>
+      <div class="quiz" data-q="14"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="14"> I understand this chapter</label><a class="next" href="#ch15">Next: The upside-down tree →</a></div>
+    </section>
+    <!-- ===================== 15 ===================== -->
+    <section class="ch" id="ch15" data-n="15">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 15</span> · Purushottama Yoga</div>
+        <h2>The Supreme Person</h2>
+        <div class="short"><span class="lbl">In short</span><p>Krishna describes the world as an ashvattha, a sacred fig tree, with its roots above and its branches below. Its leaves are the sacred hymns, its branches are fed by the three gunas, and its new shoots are the things of the senses. You can't see where it begins or ends. Cut it down, he says, with the strong axe of detachment.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Roots in the sky.</b> The tree grows down from its source. The world we live in is the branches, far from where it starts.</span></li>
+          <li><span><b>It keeps sprouting.</b> Every sense object is a bud that turns into a new branch of wanting. The more you feed it, the more it spreads.</span></li>
+          <li><span><b>The axe is detachment.</b> You can't climb out of the tree by grabbing more branches. You cut through with non-attachment and then look for the place from which there is no return.</span></li>
+          <li><span><b>The highest person.</b> There are two kinds of being: the perishable, which is all creatures, and the imperishable, which is unchanging. Beyond both is the supreme self, Purushottama.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>A fragment of me becomes the living soul in the world of the living, and draws to itself the senses and the mind.</p><span class="ref">Verse 15.7 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna explains how the soul travels: as the wind carries scent from flowers, the self carries the mind and senses when it leaves one body and enters another. The confused don't see it come or go; those with the eye of wisdom do. Then he lists where he can be found: in the light of the sun, the moon and fire; in the earth holding beings up; in the plants, through the juice of the moon; as the fire of digestion inside every body; and in every heart, as memory and knowledge and their loss.</p></div>
+      <figure class="lab" id="lab15">
+        <div class="lab-top"><div class="t">Lab: the axe of detachment</div><div class="hint">Click a branch to cut it, and see what it was feeding</div></div>
+        <div class="stage"><svg id="k15Svg" role="img" aria-label="An upside-down tree with roots at the top and branches of attachment below"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" type="button" id="k15Reset">Let it grow back</button></div></div><div class="stats"><div class="stat"><span class="k">Branches cut</span><span class="v glow" id="k15N">0 of 6</span></div><div class="stat"><span class="k">Last cut</span><span class="s" id="k15L">None yet</span></div></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Think of one thing you want that keeps sprouting new wants: the next upgrade, the next approval. You don't need to fight every new shoot. Cut the branch they grow from.</p></div>
+      <div class="quiz" data-q="15"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="15"> I understand this chapter</label><a class="next" href="#ch16">Next: Two natures →</a></div>
+    </section>
+    <!-- ===================== 16 ===================== -->
+    <section class="ch" id="ch16" data-n="16">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 16</span> · Daivasura Sampad Vibhaga Yoga</div>
+        <h2>Divine and Demonic Natures</h2>
+        <div class="short"><span class="lbl">In short</span><p>Krishna sorts human qualities into two sets. The divine: fearlessness, purity, generosity, self-control, truthfulness, non-violence, compassion, forgiveness. The demonic: hypocrisy, arrogance, conceit, anger, harshness. The first set frees you; the second binds you. And he names the three gates that lead to ruin: desire, anger and greed.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Qualities, not people.</b> The chapter describes tendencies anyone can have. Arjuna is told not to worry: he was born with the divine ones.</span></li>
+          <li><span><b>The demonic worldview.</b> Krishna sketches someone who thinks the world has no truth and no order, nothing but desire, and lives to pile up more: I got this today, I'll get that tomorrow, I beat that rival and I'll beat the next.</span></li>
+          <li><span><b>Three gates to ruin.</b> Desire, anger and greed destroy the self. Leave all three, and you start to do what is good for you.</span></li>
+          <li><span><b>A guide, not a whim.</b> Someone who throws out guidance and follows their cravings reaches neither happiness nor perfection.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Desire, anger and greed: these three are the gates to a self-destroying hell. So give up all three.</p><span class="ref">Verse 16.21 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>Krishna's portrait of the demonic mind is uncomfortably modern. Such people don't know what to start and what to stop. They are full of insatiable desire and hypocrisy and pride. Caught in worry that only ends at death, they treat enjoying things as the highest goal, convinced that's all there is. Bound by hundreds of hopes, they try to pile up wealth by any means. "I'm the master, I enjoy, I'm successful, strong and happy. I'm rich and well-born. Who else is like me?"</p></div>
+      <figure class="lab" id="lab16">
+        <div class="lab-top"><div class="t">Lab: divine or demonic?</div><div class="tally" id="tally16" aria-label="Score"></div></div>
+        <div class="sorter" id="sort16"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Pick one of the divine qualities you'd like more of, fearlessness, generosity, patience, and one of the three gates you know you walk through most often. Watch both this week.</p></div>
+      <div class="quiz" data-q="16"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="16"> I understand this chapter</label><a class="next" href="#ch17">Next: Three kinds of faith →</a></div>
+    </section>
+    <!-- ===================== 17 ===================== -->
+    <section class="ch" id="ch17" data-n="17">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 17</span> · Shraddhatraya Vibhaga Yoga</div>
+        <h2>The Three Kinds of Faith</h2>
+        <div class="short"><span class="lbl">In short</span><p>Arjuna asks about people who don't follow the rules of scripture but still act with faith. Krishna says everyone's faith takes the shape of their nature: a person is made of their faith. Then he runs food, sacrifice, self-discipline and giving through the three gunas, so you can see which strand is driving each of them.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>You are your faith.</b> Whatever someone's faith is, that's what they are. Faith isn't just belief; it's the direction of a whole life.</span></li>
+          <li><span><b>Food in three strands.</b> Sattvic food is fresh, nourishing and pleasant. Rajasic food is too hot, sour, salty or sharp, and brings pain. Tamasic food is stale, spoilt or left over.</span></li>
+          <li><span><b>Discipline of body, speech and mind.</b> Speech that doesn't upset, that is true, kind and useful, is discipline. So is a calm, gentle, quiet mind.</span></li>
+          <li><span><b>Giving in three strands.</b> A gift given because it's right, at the right time to someone who needs it, expecting nothing back, is sattvic. One given for return or grudgingly is rajasic. One given with contempt is tamasic.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Everyone's faith fits their nature. A person is made of their faith: whatever their faith is, so are they.</p><span class="ref">Verse 17.3 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>The chapter ends with three words used at the start of every offering: Om Tat Sat. Om is the sound of the absolute. Tat, "that", is said by those who act without wanting a reward. Sat means both "what is real" and "what is good", and is used for good deeds and steady practice. Anything done without faith, Krishna adds, whether a sacrifice, a gift or a hardship, is called asat, "unreal", and is worth nothing here or after.</p></div>
+      <figure class="lab" id="lab17">
+        <div class="lab-top"><div class="t">Lab: which strand?</div><div class="tally" id="tally17" aria-label="Score"></div></div>
+        <div class="sorter" id="sort17"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Run one ordinary choice through the three strands today: what you eat, how you speak to someone, a gift you give. Is it clear, driven or dull?</p></div>
+      <div class="quiz" data-q="17"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="17"> I understand this chapter</label><a class="next" href="#ch18">Next: Freedom and the final word →</a></div>
+    </section>
+    <!-- ===================== 18 ===================== -->
+    <section class="ch" id="ch18" data-n="18">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 18</span> · Moksha Sannyasa Yoga</div>
+        <h2>Liberation through Renunciation</h2>
+        <div class="short"><span class="lbl">In short</span><p>The longest chapter pulls everything together. Real renunciation isn't giving up action, it's giving up attachment to its fruit. Krishna lists five factors behind every action, and "I" is only one of them. He sorts knowledge, action, doers, understanding, resolve and happiness by the three strands. Then he says: I've told you everything; think it over and do as you choose. Arjuna picks up his bow.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Give up the clinging, not the work.</b> Duties like sacrifice, giving and discipline shouldn't be dropped. Do them, and drop the attachment.</span></li>
+          <li><span><b>You are not the only doer.</b> Every action has five causes: the body, the doer, the instruments, the many efforts, and the unseen hand of fate. Anyone who thinks "I alone did this" doesn't see.</span></li>
+          <li><span><b>Poison first, nectar later.</b> Happiness that starts like poison and ends like nectar is sattvic. Happiness that starts like nectar and ends like poison is rajasic.</span></li>
+          <li><span><b>Your own nature will move you.</b> If out of pride you decide not to fight, Krishna says, it won't last: your own nature will make you. Better your own path done imperfectly than someone else's done well.</span></li>
+        </ul>
+      </div>
+      <blockquote class="verse"><p>Let go of every duty and take refuge in me alone. I will free you from every wrong. Do not grieve.</p><span class="ref">Verse 18.66 · in our words</span></blockquote>
+      <div class="story"><span class="lbl">From the text</span><p>After 700 verses, Krishna doesn't order Arjuna to fight. He says: I've given you knowledge more secret than any secret. Reflect on it fully, then do what you wish. He asks: have you heard this with full attention, Arjuna? Has your confusion gone? Arjuna answers: my delusion is gone. Through your grace I remember who I am. I stand firm, my doubts are cleared, I will do as you say. Back in the palace, Sanjaya tells the blind king: wherever Krishna and Arjuna stand together, there is fortune, victory, wealth and what is right.</p></div>
+      <div class="worth"><span class="lbl">Worth knowing</span><p>Verse 18.66 is called the "last word" (charama shloka) by some traditions and is read very differently by different schools: as a call to total surrender, as the end of ritual duty, or as giving up the sense of being the doer. It is probably the single most commented-on verse in the Gita.</p></div>
+      <figure class="lab" id="lab18">
+        <div class="lab-top"><div class="t">Lab: the five causes of an action</div><div class="hint">Pick an action, then see how much of it was really "you"</div></div>
+        <div class="stage"><svg id="k18Svg" role="img" aria-label="A ring split into the five causes of an action"></svg></div><div class="lab-ctl"><div class="row" id="k18Pick"></div><div class="row"><button class="btn" type="button" id="k18Mode" aria-pressed="false">Think "I alone did this"</button></div></div><div class="detail" aria-live="polite"><span class="k" id="k18K"></span><span class="h" id="k18H"></span><p id="k18P"></p></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Do the work that is yours. When it goes well, remember you were one of five causes. When it goes badly, the same. Then pick up your bow again.</p></div>
+      <div class="quiz" data-q="18"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="18"> I understand this chapter</label><a class="next" href="#after">Next: act, offer, let go →</a></div>
+    </section>
+
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Act, offer, let go</h2>
+      <p class="big">At the end of the eighteenth chapter Arjuna picks up his bow. Nothing about the battle has changed; what changed is how he sees it. The Gita's practice fits into an ordinary day: do the next right thing, do it well, and hand over the result. Keep a small log of what you did and how tightly you held the outcome. What you write stays in this browser only.</p>
+      <figure class="lab" id="logLab">
+        <div class="lab-top"><div class="t">Your karma yoga log</div><div class="hint">One line per piece of work</div></div>
+        <div class="fields"><div class="field" style="grid-column:1/-1"><label for="lgT">What did you do?</label><input id="lgT" type="text" maxlength="140" placeholder="e.g. sent the proposal, even though I can't control the answer"></div>
+          <div class="field"><label for="lgW">How did you hold the result?</label><select id="lgW"><option value="r">Did my best and let it go</option><option value="l">Worried, then let it go</option><option value="h">Clung to the outcome</option></select></div>
+          <div class="field" style="align-content:end"><div class="row"><button class="btn primary" type="button" id="lgAdd">Add to my log</button><button class="btn" type="button" id="lgClr">Clear log</button></div></div></div>
+        <div class="pad" style="padding-top:14px"><div class="mine" id="lgList"></div></div>
+        <div class="stats"><div class="stat"><span class="k">Actions logged</span><span class="v" id="lgN">0</span></div><div class="stat"><span class="k">Offered without clinging</span><span class="v glow" id="lgR">0</span></div><div class="stat"><span class="k">Last seven days</span><span class="v" id="lg7">0</span></div></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">Self</span><b>You are not the body</b><span>The self is never born and never dies. Bodies change like clothes; the one wearing them doesn't.</span></div>
+        <div><span class="n">Duty</span><b>Do your own work</b><span>Better your own path done imperfectly than someone else's done well. Don't run from the field.</span></div>
+        <div><span class="n">Karma yoga</span><b>Act without clinging</b><span>You have a right to the work, never to its fruits. Act anyway, and offer the result.</span></div>
+        <div><span class="n">Steadiness</span><b>Same in gain and loss</b><span>Heat and cold, praise and blame come and go. Train the mind to stay level through them.</span></div>
+        <div><span class="n">Bhakti</span><b>Offer it with love</b><span>A leaf, a flower, a sip of water: what matters is the heart it is given with.</span></div>
+        <div><span class="n">Gunas</span><b>Watch the three strands</b><span>Clarity, drive and dullness run everything. Notice which one is steering, and step behind all three.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to the <i>Bhagavad Gita</i>, traditionally attributed to Veda Vyasa (Mahabharata, Bhishma Parva). The explanations, retellings and labs are written in our own words; verse numbers follow the common 700-verse text, and the chapter names are the traditional Sanskrit titles with plain English glosses. Translations differ widely, and many schools (Advaita, Vishishtadvaita, Dvaita, Gandhi's reading and others) read the same verses differently; where that matters, we say so. Labs that show numbers are illustrative models.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The path of action", "The path of devotion", "The path of knowledge"];
+const CH = [["Arjuna's Despair", "Arjuna's despair", 0, "Chapter 1"], ["The Yoga of Knowledge", "The deathless self", 0, "Chapter 2"], ["The Yoga of Action", "Action without clinging", 0, "Chapter 3"], ["Knowledge and the Renunciation of Action", "Action in inaction", 0, "Chapter 4"], ["The Yoga of Renunciation", "The lotus leaf", 0, "Chapter 5"], ["The Yoga of Meditation", "The steady flame", 0, "Chapter 6"], ["Knowledge and Realisation", "Pearls on a thread", 1, "Chapter 7"], ["The Imperishable", "Days of Brahma", 1, "Chapter 8"], ["The Royal Secret", "A leaf, a flower", 1, "Chapter 9"], ["Divine Glories", "The best of every kind", 1, "Chapter 10"], ["The Vision of the Cosmic Form", "The cosmic form", 1, "Chapter 11"], ["The Yoga of Devotion", "The ladder of devotion", 1, "Chapter 12"], ["The Field and Its Knower", "The field and its knower", 2, "Chapter 13"], ["The Three Gunas", "The three strands", 2, "Chapter 14"], ["The Supreme Person", "The upside-down tree", 2, "Chapter 15"], ["Divine and Demonic Natures", "Two natures", 2, "Chapter 16"], ["The Three Kinds of Faith", "Three kinds of faith", 2, "Chapter 17"], ["Liberation through Renunciation", "Freedom and the final word", 2, "Chapter 18"]];
+const QUIZ = {
+"1": {
+"q": "Why does Arjuna put down his bow?",
+"o": [
+"He thinks the other army is too strong to beat",
+"He sees his own family and teachers on the other side and is overwhelmed by grief",
+"Krishna tells him not to fight"
+],
+"a": 1,
+"w": "He has no doubt he could win. What breaks him is seeing the people he loves lined up against him."
+},
+"2": {
+"q": "What does Krishna say you have a right to?",
+"o": [
+"The fruits of your work, if you work hard",
+"The work itself, but never its results",
+"Neither work nor results, so it is best to do nothing"
+],
+"a": 1,
+"w": "Verse 2.47: the work is yours to do, the result isn't yours to claim. And doing nothing isn't the answer either."
+},
+"3": {
+"q": "Why does Krishna say renouncing action isn't the answer?",
+"o": [
+"Because nobody can stop acting, so the real question is how you act",
+"Because action is always better than knowledge",
+"Because Arjuna will be punished if he doesn't fight"
+],
+"a": 0,
+"w": "Even sitting still is action. The point is to act without being bound: as an offering, without clinging to the result."
+},
+"4": {
+"q": "What decides whether an action binds you?",
+"o": [
+"How big or small the action is",
+"Whether it was done in a temple",
+"Whether you did it clinging to a result or let go of the result"
+],
+"a": 2,
+"w": "The same act can bind one person and free another. The difference is attachment to its fruit."
+},
+"5": {
+"q": "What does the lotus leaf stand for?",
+"o": [
+"Someone who acts but isn't stained by attachment to the result",
+"Someone who hides from the world",
+"Someone who never does any work"
+],
+"a": 0,
+"w": "The lotus leaf is in the water but stays dry. The free person is fully in the world and acting, but nothing clings."
+},
+"6": {
+"q": "How does Krishna say the restless mind can be controlled?",
+"o": [
+"By force of will alone",
+"It can't, so don't try",
+"By steady practice and by letting go of attachment"
+],
+"a": 2,
+"w": "Verse 6.35: practice (abhyasa) and dispassion (vairagya). He admits it is hard, but says it can be done."
+},
+"7": {
+"q": "What does the image of pearls on a thread mean?",
+"o": [
+"Everything is held together by one hidden reality running through it",
+"Life is a series of separate, unconnected moments",
+"Wealth is the thread that holds a life together"
+],
+"a": 0,
+"w": "We see the pearls, the many things, and miss the one thread they are all strung on."
+},
+"8": {
+"q": "Why does Krishna tell Arjuna to remember him at all times?",
+"o": [
+"Because the thoughts you live with shape where you end up, including at death",
+"Because it guarantees victory in battle",
+"Because a day of Brahma is about to end"
+],
+"a": 0,
+"w": "Whatever you remember at the end is what you go to, and that is whatever you thought of most while alive."
+},
+"9": {
+"q": "According to 9.26, what makes an offering acceptable?",
+"o": [
+"Its cost",
+"The love it is offered with",
+"Whether a priest presents it"
+],
+"a": 1,
+"w": "A leaf, a flower, fruit or water, given with devotion. The heart behind it is what counts."
+},
+"10": {
+"q": "What is the point of Krishna's long list of glories?",
+"o": [
+"To show which rivers and mountains are sacred",
+"That wherever something is at its finest, you are glimpsing the divine",
+"To rank the gods in order of power"
+],
+"a": 1,
+"w": "The list is a way of seeing. Excellence anywhere is a spark of the one source."
+},
+"11": {
+"q": "What does Krishna call himself during the vision?",
+"o": [
+"Time, the destroyer of worlds",
+"The king of the gods",
+"Arjuna's chariot driver"
+],
+"a": 0,
+"w": "Verse 11.32. He is time that winds everything up, and he tells Arjuna to be only the instrument."
+},
+"12": {
+"q": "What is the last, easiest rung of Krishna's ladder?",
+"o": [
+"Memorise the scriptures",
+"Give up the fruits of your actions",
+"Retire to a forest"
+],
+"a": 1,
+"w": "Verse 12.11. If you can't do anything else, let go of the results of what you do, and peace follows."
+},
+"13": {
+"q": "In this chapter, which of these is part of the field?",
+"o": [
+"The one who is aware of your thoughts",
+"Your thoughts, feelings and sense of \"I\"",
+"Neither, because the field means the battlefield"
+],
+"a": 1,
+"w": "Everything that can be observed, even the mind and ego, is the field. The knower is what observes it."
+},
+"14": {
+"q": "Why is even sattva a kind of bondage?",
+"o": [
+"It isn't; sattva is always freedom",
+"Because you can get attached to the calm and knowledge it brings",
+"Because sattva causes laziness"
+],
+"a": 1,
+"w": "Verse 14.6. Sattva binds through attachment to happiness and knowledge. It's the best of the three, but still one of the three."
+},
+"15": {
+"q": "Why is the tree upside down?",
+"o": [
+"Because its source is above, in the eternal, and its branches spread down into the world",
+"Because the world is a mistake",
+"Because ashvattha trees always grow that way"
+],
+"a": 0,
+"w": "The root is in the highest; the world of senses and actions is the branches spreading downward."
+},
+"16": {
+"q": "Which three does Krishna call the gates to ruin?",
+"o": [
+"Fear, doubt and sorrow",
+"Desire, anger and greed",
+"Wealth, fame and power"
+],
+"a": 1,
+"w": "Verse 16.21. Desire, anger and greed. Leaving them is the start of real good."
+},
+"17": {
+"q": "What makes a gift sattvic?",
+"o": [
+"It is expensive",
+"It is given because it's right, at the right time, expecting nothing back",
+"It is given publicly so others can learn"
+],
+"a": 1,
+"w": "Verse 17.20. Given as duty, to someone worthy, at the right place and time, with no thought of return."
+},
+"18": {
+"q": "How does Krishna end his teaching?",
+"o": [
+"He orders Arjuna to fight or be cursed",
+"He tells Arjuna to reflect on it fully and then choose",
+"He takes over the chariot and fights himself"
+],
+"a": 1,
+"w": "Verse 18.63. \"Think it over and do as you wish.\" Arjuna chooses to act, with his confusion gone."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#0c1230';
+try { const t = localStorage.getItem('bg-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('bg-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('bg-done', []));
+const save = () => store.set('bg-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+/* ---------- shared: run a frame loop only while the element is on screen ---------- */
+function anim(el, fn){
+  if (RM){ fn(0); return { kick(){ fn(0); } }; }
+  let on = false, raf = 0;
+  const loop = t => { raf = 0; if (!on) return; fn(t); raf = requestAnimationFrame(loop); };
+  new IntersectionObserver(es => { on = es[0].isIntersecting; if (on && !raf) raf = requestAnimationFrame(loop); }).observe(el);
+  return { kick(){ if (!on) fn(performance.now()); } };
+}
+const person = (x, y, s, fill = 'panel-2', stroke = 'faint', w = 1.5) =>
+  `<circle cx="${x}" cy="${y - 34 * s}" r="${13 * s}" ${FS(fill, stroke, w)}/><path d="M${x - 24 * s} ${y + 18 * s}c0-26 ${10 * s}-38 ${24 * s}-38s${24 * s} 12 ${24 * s} 38Z" ${FS(fill, stroke, w)}/>`;
+const detail = (p, k, h, d) => { $('#' + p + 'K').textContent = k; $('#' + p + 'H').textContent = h; $('#' + p + 'P').innerHTML = d; };
+const btnRow = (sel, labels, on = 0, attr = 'data-i') => { const box = $(sel); box.innerHTML = labels.map((l, i) => `<button class="btn" type="button" ${attr}="${i}" aria-pressed="${i === on}">${l}</button>`).join(''); return [...box.querySelectorAll('button')]; };
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['I have to do something that hurts people I love', 1, 'Start where Arjuna started', 'The Gita opens with exactly this. Notice how much of the refusal is grief speaking, then read on.'],
+    ['I\'m terrified of losing someone', 2, 'What doesn\'t die', 'Krishna\'s first teaching: the self in each person is never born and never dies. Bodies change like clothes.'],
+    ['I keep obsessing over results', 2, 'The work, not the wages', 'You have a right to the work, never to its fruits. Do it well and hand over the outcome.'],
+    ['I want to quit and do nothing', 3, 'You can\'t not act', 'Nobody stops acting, even for a moment. The question is whether your action binds you or frees you.'],
+    ['My mind won\'t sit still', 6, 'Practice and letting go', 'Krishna agrees the mind is as hard to hold as the wind, and says it can be done with practice and dispassion.'],
+    ['I don\'t feel I\'m good enough to be spiritual', 9, 'A leaf, a flower, water', 'Whatever is offered with love is accepted. Nobody is shut out.'],
+    ['I feel overwhelmed by how big everything is', 11, 'Be the instrument', 'Arjuna sees the whole cosmos and is terrified. He is told he is only one instrument in it.'],
+    ['I don\'t know which way of life is mine', 18, 'Your own path, imperfectly', 'Better your own duty done badly than someone else\'s done well. Your nature will move you anyway.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the 700 verses ---------- */
+{ const V = [47, 72, 43, 42, 29, 47, 30, 28, 34, 42, 55, 20, 34, 27, 20, 24, 28, 78];
+  const SP = [['Krishna', 574, 'glow', 'The teacher. Almost everything after chapter 1 is his.'], ['Arjuna', 84, 'cool', 'The student: his despair in chapter 1, then questions, doubts and, at the end, his answer.'],
+    ['Sanjaya', 41, 'soft', 'The narrator, telling the blind king what he sees from far away.'], ['Dhritarashtra', 1, 'bad', 'The blind king, who speaks only the very first verse.']];
+  const el = $('#vmSvg'); let mode = 0, sel = -1;
+  const btns = btnRow('#vmMode', ['Verses per chapter', 'Who speaks'], 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); mode = i; sel = -1; draw(); }));
+  const draw = onLayout(() => {
+    const W = 360, H = 236; vb(el, W, H); let g = '';
+    if (mode === 0){
+      const x0 = 14, bw = (W - 28) / 18, max = 80, base = H - 34;
+      V.forEach((v, i) => { const h = v / max * (H - 70), x = x0 + i * bw, grp = Math.floor(i / 6), c = ['glow', 'cool', 'soft'][grp];
+        g += `<g class="vb" tabindex="0" role="button" data-i="${i}" aria-label="Chapter ${i + 1}, ${v} verses"><rect class="hit" x="${(x + 1.5).toFixed(1)}" y="${(base - h).toFixed(1)}" width="${(bw - 3).toFixed(1)}" height="${h.toFixed(1)}" rx="2" style="fill:var(--${c});fill-opacity:${sel === -1 || sel === i ? .85 : .3}"/>`
+          + TX(x + bw / 2, base + 14, i + 1, sel === i ? 'text' : 'faint', 10, 'middle') + `</g>`; });
+      ['Action', 'Devotion', 'Knowledge'].forEach((t, k) => g += TX(x0 + (k * 6 + 3) * bw, H - 6, t, ['glow', 'cool', 'soft'][k], 10.5, 'middle', 'letter-spacing="1"'));
+      el.innerHTML = g;
+      el.querySelectorAll('.vb').forEach(n => { const f = () => { sel = +n.dataset.i; draw(); };
+        n.addEventListener('click', f); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); f(); } }); });
+      if (sel < 0){ $('#vmV').textContent = '18 chapters'; $('#vmTxt').innerHTML = 'From 20 verses in chapters 12 and 15 to 78 in the last. Tap a bar for that chapter.'; }
+      else { $('#vmV').textContent = V[sel] + ' verses'; $('#vmTxt').innerHTML = `<b>${CH[sel][3]}: ${CH[sel][0]}.</b> <a href="#ch${sel + 1}">Go to it →</a>`; }
+    } else {
+      let x = 14; const w = W - 28, y = 70;
+      SP.forEach(([n, v, c], i) => { const bw = v / 700 * w; g += `<rect x="${x.toFixed(1)}" y="${y}" width="${Math.max(bw - 1.5, 2).toFixed(1)}" height="52" rx="3" style="fill:var(--${c});fill-opacity:.85"/>`;
+        if (bw > 40) g += TX(x + 8, y + 31, n, 'on-glow', 12); x += bw; });
+      SP.forEach(([n, v, c], i) => { const yy = 150 + i * 20; g += `<rect x="14" y="${yy - 9}" width="10" height="10" rx="2" ${F(c)}/>` + TX(30, yy, `${n}`, 'text', 12) + TX(W - 14, yy, `${v} verse${v > 1 ? 's' : ''}`, 'muted', 12, 'end'); });
+      g += TX(14, 46, 'Share of the 700 verses', 'faint', 11, 'start', 'letter-spacing="1"');
+      el.innerHTML = g;
+      $('#vmV').textContent = '4 speakers'; $('#vmTxt').textContent = 'Krishna speaks about 82% of the verses. ' + SP[1][3];
+    }
+  });
+  draw();
+}
+
+/* ---------- 1: between the two armies ---------- */
+{ const STEPS = [
+    ['Verse 1.21', 'Drive into the middle', 'Arjuna asks Krishna to set the chariot between the two armies so he can see who he has to fight.'],
+    ['Verse 1.26', 'He sees their faces', 'Fathers, grandfathers, teachers, uncles, brothers, sons, grandsons, friends. On both sides.'],
+    ['Verse 1.28–29', 'His body gives way', 'His limbs weaken, his mouth dries, he trembles and his hair stands on end.'],
+    ['Verse 1.29–30', 'Gandiva slips', 'The great bow slides from his hand. His skin burns. He can\'t stand. His mind is spinning.'],
+    ['Verse 1.32–38', 'The arguments arrive', 'No kingdom is worth this. Killing kin is wrong, even if they are greedy. Families will fall apart.'],
+    ['Verse 1.46–47', 'He sits down', '"Better they kill me unarmed." He drops his bow and arrows and sinks down in the chariot, overwhelmed with grief.'] ];
+  let i = 0; const el = $('#k1Svg');
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 260 : 240; vb(el, W, H);
+    const t = i / (STEPS.length - 1), cx = lerp(nw ? 40 : 60, W / 2, Math.min(1, i / 1)), gy = H - 40;
+    let g = `<line x1="0" y1="${gy}" x2="${W}" y2="${gy}" ${S('line', 1)}/>`;
+    const army = (x0, dir, c) => { let s = ''; for (let r = 0; r < 3; r++) for (let k = 0; k < (nw ? 4 : 6); k++){ const x = x0 + dir * (k * (nw ? 16 : 22) + r * 6), y = gy - 8 - r * 18;
+      s += `<circle cx="${x}" cy="${y - 10}" r="4.5" ${F(c, .8 - r * .15)}/><line x1="${x}" y1="${y - 5}" x2="${x}" y2="${y + 6}" ${S(c, 2, ';stroke-opacity:' + (.8 - r * .15))}/><line x1="${x + dir * 4}" y1="${y - 22}" x2="${x + dir * 4}" y2="${y + 4}" ${S('faint', 1)}/>`; } return s; };
+    g += army(14, 1, 'cool') + army(W - 14, -1, 'bad');
+    g += TX(14, 20, 'Pandavas', 'cool', 11, 'start', 'letter-spacing="1"') + TX(W - 14, 20, 'Kauravas', 'bad', 11, 'end', 'letter-spacing="1"');
+    // chariot
+    const ch = i === 0 ? (nw ? 110 : 170) : W / 2;
+    g += `<rect x="${ch - 34}" y="${gy - 34}" width="68" height="22" rx="4" ${FS('panel-2', 'glow', 1.4)}/><circle cx="${ch - 18}" cy="${gy - 8}" r="9" ${S('glow', 1.6)}/><circle cx="${ch + 18}" cy="${gy - 8}" r="9" ${S('glow', 1.6)}/>`;
+    g += `<line x1="${ch + 26}" y1="${gy - 34}" x2="${ch + 26}" y2="${gy - 92}" ${S('glow', 1.4)}/><path d="M${ch + 26} ${gy - 92}l22 7-22 7Z" ${F('glow', .8)}/>`;
+    // Krishna (driver, front) and Arjuna (behind)
+    g += `<circle cx="${ch + 12}" cy="${gy - 50}" r="7" ${F('cool')}/><line x1="${ch + 12}" y1="${gy - 43}" x2="${ch + 12}" y2="${gy - 34}" ${S('cool', 3)}/>`;
+    const sink = i >= 5 ? 14 : i >= 3 ? 4 : 0, shake = i >= 2 && i < 5 ? 1.5 : 0;
+    g += `<g transform="translate(${shake ? '1,0' : '0,0'})"><circle cx="${ch - 14}" cy="${gy - 54 + sink}" r="7" ${F(i >= 2 ? 'bad' : 'text', i >= 2 ? .85 : .9)}/><line x1="${ch - 14}" y1="${gy - 47 + sink}" x2="${ch - 14}" y2="${gy - 34}" ${S(i >= 2 ? 'bad' : 'text', 3)}/></g>`;
+    // the bow
+    if (i < 3) g += `<path d="M${ch - 26} ${gy - 70}q-10 16 0 32" ${S('text', 1.6)}/><line x1="${ch - 26}" y1="${gy - 70}" x2="${ch - 26}" y2="${gy - 38}" ${S('faint', .8)}/>`;
+    else g += `<path d="M${ch - 46} ${gy - 2}q16 -10 32 0" ${S('text', 1.6)}/>`;
+    // despair meter
+    const mw = nw ? 140 : 200, mx = W / 2 - mw / 2, my = 36;
+    g += TX(W / 2, my - 8, 'Arjuna\'s grief', 'faint', 11, 'middle', 'letter-spacing="1"') + `<rect x="${mx}" y="${my}" width="${mw}" height="8" rx="4" ${F('panel-2')}/><rect x="${mx}" y="${my}" width="${(mw * t).toFixed(1)}" height="8" rx="4" ${F('bad')}/>`;
+    el.innerHTML = g;
+    detail('k1', STEPS[i][0] + ' · step ' + (i + 1) + ' of ' + STEPS.length, STEPS[i][1], STEPS[i][2] + (i === STEPS.length - 1 ? ' <b style="color:var(--cool)">This is where Krishna begins to speak.</b> <a href="#ch2">Chapter 2 →</a>' : ''));
+    $('#k1Next').disabled = i >= STEPS.length - 1;
+  });
+  $('#k1Next').addEventListener('click', () => { if (i < STEPS.length - 1){ i++; draw(); } });
+  $('#k1Reset').addEventListener('click', () => { i = 0; draw(); });
+  draw();
+}
+
+/* ---------- 2: the slide from thinking to ruin (2.62–63) ---------- */
+{ const ST = [
+    ['Dwelling', 'You keep thinking about it', 'It starts small: a thing you want keeps coming back to mind. Nothing has happened yet. This is the easiest place to stop.'],
+    ['Attachment', 'You start to care about it', 'Thinking about it often makes it feel like yours, or like it should be.'],
+    ['Desire', 'You want it', 'Attachment turns into wanting. Now it pulls.'],
+    ['Anger', 'Something gets in the way', 'Blocked desire turns into anger, at people, at circumstances, at yourself.'],
+    ['Delusion', 'You can\'t see straight', 'Anger clouds judgement. You stop seeing the situation as it is.'],
+    ['Lost memory', 'You forget what you know', 'Clouded, you forget the lessons you learned and the person you meant to be.'],
+    ['Lost reason', 'Your judgement goes', 'Without memory, discrimination fails. You can\'t tell good choices from bad.'],
+    ['Ruin', 'You are lost', 'When reason is gone, Krishna says, a person perishes. All from a thought you let circle.']];
+  const R = $('#k2R'), el = $('#k2Svg'); let caught = -1;
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 300 : 250; vb(el, W, H);
+    const v = +R.value, n = ST.length, sw = (W - 30) / n, sh = (H - 60) / n;
+    let g = '';
+    ST.forEach(([lab], k) => { const x = 15 + k * sw, y = 22 + k * sh, on = k <= v, c = caught >= 0 && k > caught ? 'line' : k < 3 ? 'glow' : 'bad';
+      g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(sw - 2).toFixed(1)}" height="${(H - 20 - y).toFixed(1)}" rx="3" style="fill:var(--${on ? c : 'panel-2'});fill-opacity:${on ? (caught >= 0 && k > caught ? .3 : .35 + k * .06) : 1};stroke:var(--line)"/>`;
+      if (nw) g += `<text transform="translate(${(x + sw / 2 + 4).toFixed(1)},${(y + 10).toFixed(1)}) rotate(90)" font-size="11" ${F(on ? 'text' : 'faint')}>${lab}</text>`;
+      else g += wrap(x + sw / 2, y - 8, lab, 12, 12, on ? 'text' : 'faint', 11.5); });
+    const px = 15 + v * sw + sw / 2, py = 22 + v * sh;
+    g += `<circle cx="${px.toFixed(1)}" cy="${(py - (nw ? 10 : 24)).toFixed(1)}" r="6" ${F(caught >= 0 ? 'cool' : 'text')}/>`;
+    if (caught >= 0) g += TX(15 + caught * sw + sw / 2, H - 6, 'caught', 'cool', 11, 'middle');
+    el.innerHTML = g;
+    const s = ST[v];
+    if (caught >= 0 && v > caught) detail('k2', 'Caught at step ' + (caught + 1), 'You stopped the slide', `You caught it at <b>${ST[caught][0].toLowerCase()}</b>, so the steps below don't follow. The earlier you catch it, the less it costs. Drag back to try again.`);
+    else detail('k2', 'Step ' + (v + 1) + ' of 8 · ' + s[0], s[1], s[2]);
+  });
+  R.addEventListener('input', () => { if (+R.value <= caught) caught = -1; draw(); });
+  $('#k2Catch').addEventListener('click', () => { caught = +R.value; R.value = 7; draw(); });
+  draw();
+}
+
+/* ---------- 3: the wheel of action (3.14) ---------- */
+{ const N = [['Action', 'Work done, by people and by nature.'], ['Offering', 'Work done as a sacrifice, for more than yourself.'], ['Rain', 'In the Gita\'s picture, offerings please the gods, who send rain.'], ['Food', 'Rain grows grain.'], ['Beings', 'Creatures live on food, and act.']];
+  const el = $('#k3Svg'); let broken = -1, ang = 0;
+  const btns = btnRow('#k3Pick', ['Keep the wheel turning', ...N.map(n => 'Stop: ' + n[0].toLowerCase())], 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); broken = i - 1; show(); a.kick(); }));
+  function show(){
+    if (broken < 0) detail('k3', 'Verse 3.14–16', 'Everything feeds everything', 'Beings live on food, food comes from rain, rain from offering, and offering is made of action. Whoever takes from this wheel without turning it, Krishna says, lives in vain.');
+    else detail('k3', 'Stopped at ' + N[broken][0].toLowerCase(), 'The wheel jams', `${N[broken][1]} Take that away and every link after it starves. That is Krishna's case against Arjuna walking off the field: your part is in the wheel whether you like it or not.`);
+  }
+  const a = anim(el, t => {
+    const W = 360, H = 250, cx = 180, cy = 125, r = 82; vb(el, W, H);
+    if (broken < 0 && !RM) ang = t / 4000;
+    let g = `<circle cx="${cx}" cy="${cy}" r="${r}" ${S('line', 10, ';stroke-opacity:.6')}/>`;
+    N.forEach(([lab], k) => { const a0 = -Math.PI / 2 + k * 2 * Math.PI / N.length + ang, a1 = a0 + 2 * Math.PI / N.length;
+      const off = broken >= 0 && (k === broken);
+      g += `<path d="M${cx + r * Math.cos(a0 + .22)} ${cy + r * Math.sin(a0 + .22)}A${r} ${r} 0 0 1 ${cx + r * Math.cos(a1 - .22)} ${cy + r * Math.sin(a1 - .22)}" ${S(off ? 'bad' : broken >= 0 ? 'faint' : 'glow', 3, off ? ';stroke-dasharray:4 5' : '')}/>`;
+      const ax = cx + r * Math.cos(a1 - .22), ay = cy + r * Math.sin(a1 - .22); g += arrowHead(ax, ay, a1 - .22 + Math.PI / 2, off ? 'bad' : broken >= 0 ? 'faint' : 'glow');
+      const nx = cx + r * Math.cos(a0), ny = cy + r * Math.sin(a0);
+      g += `<circle cx="${nx.toFixed(1)}" cy="${ny.toFixed(1)}" r="26" ${FS('panel', k === broken ? 'bad' : 'cool', 1.4)}/>` + TX(nx, ny + 4, lab, k === broken ? 'bad' : 'text', 11.5, 'middle'); });
+    g += TX(cx, cy + 4, broken < 0 ? 'turning' : 'stopped', broken < 0 ? 'glow' : 'bad', 12, 'middle', 'letter-spacing="1.5"');
+    el.innerHTML = g;
+  });
+  show();
+}
+
+/* ---------- 4: binds or frees? ---------- */
+sorter('#sort4', '#tally4', [{ id: 'b', label: 'Binds', d: 'Done clinging to the result' }, { id: 'f', label: 'Frees', d: 'Done without clinging' }], [
+  { t: 'A doctor treats a patient mainly so the hospital will name a wing after her', a: 'b', w: 'Good work, but the motive is the reward. If the honour doesn\'t come, the work turns bitter.' },
+  { t: 'A doctor treats a patient because that\'s what the patient needs, and goes home', a: 'f', w: 'Same act. Nothing to collect, so nothing to cling to.' },
+  { t: 'You help a friend move, keeping a mental note of the favour they now owe you', a: 'b', w: 'The ledger is the hook. The help is real, but it ties you to a debt.' },
+  { t: 'You donate quietly and forget about it', a: 'f', w: 'No credit wanted, so none missed. It fits 17.20\'s gift given with nothing expected back.' },
+  { t: 'You sit perfectly still all day, mentally craving everything you gave up', a: 'b', w: 'Verse 3.6: holding the body still while the mind dwells on objects is pretending. Inaction can bind too.' },
+  { t: 'You fight hard in a fair cause you didn\'t choose, without hatred, accepting win or loss', a: 'f', w: 'This is what Krishna asks of Arjuna: action in the middle of the battle, with no grip on the outcome.' },
+  { t: 'You refuse to do your share of a task because the credit will go to someone else', a: 'b', w: 'Doing nothing because of the reward is still about the reward. That\'s 2.47\'s second half: don\'t fall for inaction.' },
+  { t: 'You finish a piece of work as well as you can and send it, unsure how it will be received', a: 'f', w: 'Effort fully given, result handed over. That is the whole of karma yoga.' } ]);
+
+/* ---------- 5: lotus leaf or sponge? ---------- */
+{ const el = $('#k5Svg'); let lotus = false, drops = [], count = 0, stain = 0;
+  const btns = btnRow('#k5Mode', ['Hold on to it all (sponge)', 'Offer it up (lotus leaf)'], 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); lotus = i === 1; a.kick(); }));
+  const EV = ['praise', 'blame', 'a win', 'a loss', 'gossip', 'a deadline', 'a compliment', 'bad news'];
+  $('#k5Rain').addEventListener('click', () => { for (let k = 0; k < 6; k++) drops.push({ x: 110 + Math.random() * 140, y: -10 - k * 26, vy: 0, vx: 0, t: EV[(count + k) % EV.length], land: false });
+    count += 6; $('#k5D').textContent = count; a.kick(); if (RM){ drops.forEach(d => { if (!lotus) stain = Math.min(100, stain + 4); }); drops = []; a.kick(); } });
+  let last = 0;
+  const a = anim(el, t => {
+    const W = 360, H = 240; vb(el, W, H); const dt = Math.min(40, t - last || 16) / 16; last = t;
+    const ly = 168;
+    drops.forEach(d => { if (!d.land){ d.vy += .25 * dt; d.y += d.vy * dt; if (d.y >= ly - 10 - Math.abs(d.x - 180) * .08){ d.land = true; if (!lotus) stain = Math.min(100, stain + 3.2); d.vx = (d.x < 180 ? -1 : 1) * 1.6; } }
+      else if (lotus){ d.x += d.vx * dt; d.y += .5 * dt; } else d.fade = (d.fade || 1) - .04 * dt; });
+    drops = drops.filter(d => d.x > 40 && d.x < 320 && d.y < 230 && (d.fade == null || d.fade > 0));
+    let g = `<rect x="0" y="${ly + 6}" width="${W}" height="${H - ly}" ${F('cool', .12)}/>`;
+    for (let k = 0; k < 4; k++) g += `<path d="M${20 + k * 90} ${ly + 22 + k % 2 * 10}q20 -6 40 0" ${S('cool', 1, ';stroke-opacity:.35')}/>`;
+    if (lotus) g += `<ellipse cx="180" cy="${ly}" rx="120" ry="16" ${FS('good', 'good', 1.4, .35)}/><path d="M180 ${ly}l0 -14" ${S('good', 1)}/>` + TX(180, ly + 38, 'lotus leaf', 'good', 11, 'middle', 'letter-spacing="1"');
+    else g += `<ellipse cx="180" cy="${ly}" rx="120" ry="16" style="fill:var(--glow);fill-opacity:${(.15 + stain / 140).toFixed(2)};stroke:var(--glow);stroke-width:1.4"/>` + TX(180, ly + 38, 'sponge', 'glow', 11, 'middle', 'letter-spacing="1"');
+    drops.forEach(d => { const o = d.fade == null ? 1 : Math.max(0, d.fade); g += `<g style="opacity:${o.toFixed(2)}"><path d="M${d.x.toFixed(1)} ${(d.y - 8).toFixed(1)}q5 7 0 10q-5 -3 0 -10Z" ${F('cool')}/>` + TX(d.x + 7, d.y, d.t, 'muted', 10) + `</g>`; });
+    if (!drops.length && !count) g += TX(180, 80, 'Press "Let it rain"', 'faint', 13, 'middle');
+    el.innerHTML = g; $('#k5S').textContent = Math.round(stain) + '%';
+  });
+}
+
+/* ---------- 6: the lamp and the wind ---------- */
+{ const el = $('#k6Svg'), R = $('#k6R'); let off = 0, vel = 0, n = 0, steady = 0, last = 0;
+  const r = rng(7);
+  $('#k6Back').addEventListener('click', () => { if (Math.abs(off) > 6) n++; off = 0; vel = 0; $('#k6N').textContent = n; a.kick(); });
+  $('#k6Reset').addEventListener('click', () => { n = 0; off = 0; vel = 0; $('#k6N').textContent = 0; a.kick(); });
+  R.addEventListener('input', () => a.kick());
+  const a = anim(el, t => {
+    const W = 360, H = 240; vb(el, W, H); const dt = Math.min(40, t - last || 16) / 16; last = t;
+    const wind = +R.value / 10;
+    if (!RM){ vel += (r() - .5) * wind * .9 * dt; vel *= .98; off += vel * dt; off = clamp(off, -150, 150); }
+    const dist = Math.abs(off), calm = clamp(1 - dist / 90, 0, 1);
+    const fx = 180, fy = 150, flick = RM ? 0 : Math.sin(t / 90) * (1 - calm) * 6 + Math.sin(t / 37) * (1 - calm) * 3;
+    let g = `<path d="M150 ${fy + 16}h60l-8 14h-44Z" ${FS('panel-2', 'glow', 1.2)}/><line x1="${fx}" y1="${fy + 2}" x2="${fx}" y2="${fy + 14}" ${S('text', 1.5)}/>`;
+    g += `<circle cx="${fx}" cy="${fy - 18}" r="${30 + calm * 14}" ${F('glow', (.06 + calm * .1).toFixed(2))}/>`;
+    g += `<path d="M${fx} ${fy + 2}c-10 -10 -10 -24 ${flick.toFixed(1)} ${(-44 - calm * 6).toFixed(1)}c10 20 10 34 ${(-flick).toFixed(1)} 44Z" ${F('glow', .9)}/>`;
+    // wind streaks
+    for (let k = 0; k < Math.round(wind * 6); k++){ const y = 40 + k * 26, x = ((t / 6 + k * 70) % 420) - 60; g += `<path d="M${x.toFixed(0)} ${y}q20 -6 40 0" ${S('faint', 1, ';stroke-opacity:.5')}/>`; }
+    // the mind
+    const mx = fx + off, my = 60 + Math.sin(off / 30) * 10;
+    g += `<line x1="${fx}" y1="70" x2="${mx.toFixed(1)}" y2="${my.toFixed(1)}" ${S('cool', 1, ';stroke-dasharray:2 4')}/><circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="8" ${F('cool')}/>` + TX(mx, my - 14, 'mind', 'cool', 10.5, 'middle');
+    if (dist > 70) g += TX(180, 222, 'It has wandered. Bring it back.', 'bad', 12, 'middle');
+    el.innerHTML = g;
+    $('#k6T').textContent = calm > .8 ? 'steady' : calm > .4 ? 'flickering' : 'blowing about';
+  });
+}
+
+/* ---------- 7: pearls on a thread ---------- */
+{ const P = [['Earth', 'I am the sweet scent of the earth.', '7.9'], ['Water', 'I am the taste in water.', '7.8'], ['Fire', 'I am the brilliance in fire.', '7.9'], ['Air', 'Air is one of the eight strands of my lower nature.', '7.4'],
+    ['Space', 'I am the sound in space.', '7.8'], ['Mind', 'Mind belongs to my lower nature too.', '7.4'], ['Intellect', 'I am the intelligence of the intelligent.', '7.10'], ['Ego', 'Even the sense of "I" is part of my eightfold nature.', '7.4'],
+    ['Life', 'Beyond these eight is my higher nature, the life that holds up the world.', '7.5'] ];
+  const el = $('#k7Svg'), btn = $('#k7Mode'); let thread = false, sel = -1;
+  btn.addEventListener('click', () => { thread = !thread; btn.setAttribute('aria-pressed', thread); btn.textContent = thread ? 'Hide the thread' : 'Show the thread'; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 220 : 200; vb(el, W, H);
+    const pts = P.map((_, k) => { const u = k / (P.length - 1); return [30 + u * (W - 60), 60 + Math.sin(u * Math.PI) * (H - 120)]; });
+    let g = '';
+    if (thread){ g += `<path d="M10 40${pts.map(p => 'L' + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('')}L${W - 10} 40" ${S('glow', 2.4)}/>`; }
+    pts.forEach(([x, y], k) => { const r = nw ? 16 : 22, on = k === sel;
+      g += `<g class="vb" tabindex="0" role="button" data-i="${k}" aria-label="${P[k][0]}"><circle class="hit" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" style="fill:var(--${k === 8 ? 'cool' : 'panel-2'});fill-opacity:${k === 8 ? .5 : 1};stroke:var(--${on ? 'glow' : 'line'});stroke-width:${on ? 2 : 1.2}"/>`
+        + `<circle cx="${(x - r * .35).toFixed(1)}" cy="${(y - r * .35).toFixed(1)}" r="${r * .22}" ${F('text', .25)}/>` + TX(x, y + r + 15, P[k][0], on ? 'text' : 'muted', nw ? 10 : 11.5, 'middle') + '</g>'; });
+    el.innerHTML = g;
+    el.querySelectorAll('.vb').forEach(n => { const f = () => { sel = +n.dataset.i; draw(); }; n.addEventListener('click', f); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); f(); } }); });
+    if (sel < 0) detail('k7', thread ? 'Verse 7.7' : 'Nine pearls', thread ? 'Strung on one thread' : 'What you usually see', thread ? 'All of this is strung on me like pearls on a thread. The pearls are different; the thread through them is one.' : 'Eight strands of nature and the life that animates them. Tap a pearl, then show the thread.');
+    else detail('k7', 'Verse ' + P[sel][2], P[sel][0], P[sel][1] + (thread ? ' <b style="color:var(--glow)">And the same thread runs through it.</b>' : ''));
+  });
+  draw();
+}
+
+/* ---------- 8: a day of Brahma ---------- */
+{ const L = [['A human year', 1, 'One trip of the earth around the sun.'], ['A year of the gods', 360, 'Tradition counts one human year as a single day and night for the gods, so a divine year is 360 human years.'],
+    ['Kali Yuga', 432000, 'The last and darkest of the four ages, 1,200 divine years. Tradition says we live in it now.'], ['A great age (mahayuga)', 4.32e6, 'All four ages together: 12,000 divine years.'],
+    ['A day of Brahma', 4.32e9, 'A thousand great ages (8.17). Worlds appear at its dawn and dissolve at its night, which is just as long.'], ['The life of Brahma', 3.11e14, 'A hundred of Brahma\'s years, each of 360 days and nights. Then even the creator dissolves.']];
+  const R = $('#k8R'), el = $('#k8Svg');
+  const fmt = v => v >= 1e12 ? (v / 1e12).toFixed(0) + ' trillion' : v >= 1e9 ? (v / 1e9).toFixed(2) + ' billion' : v >= 1e6 ? (v / 1e6).toFixed(2) + ' million' : v.toLocaleString();
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230; vb(el, W, H);
+    const v = +R.value, lx = 20, rx = W - 20, lg = x => lx + (Math.log10(x) / 15) * (rx - lx), ay = 150;
+    let g = `<line x1="${lx}" y1="${ay}" x2="${rx}" y2="${ay}" ${S('line', 1.5)}/>`;
+    for (let e = 0; e <= 15; e += 3) g += `<line x1="${lg(10 ** e)}" y1="${ay - 4}" x2="${lg(10 ** e)}" y2="${ay + 4}" ${S('faint', 1)}/>` + TX(lg(10 ** e), ay + 18, '10' + (e ? `<tspan baseline-shift="super" font-size="8">${e}</tspan>` : '⁰'), 'faint', 10, 'middle');
+    // universe age for scale
+    const uni = lg(13.8e9); g += `<line x1="${uni}" y1="${ay - 40}" x2="${uni}" y2="${ay}" ${S('cool', 1, ';stroke-dasharray:3 3')}/>` + TX(uni, ay + 34, nw ? 'universe' : 'age of the universe (science)', 'cool', 10, 'middle');
+    L.forEach(([lab, yrs], k) => { const x = lg(yrs), on = k === v, up = k <= v;
+      g += `<circle cx="${x.toFixed(1)}" cy="${ay}" r="${on ? 8 : 5}" ${F(up ? 'glow' : 'panel-2')} />`;
+      if (on) g += `<line x1="${x}" y1="${ay - 10}" x2="${x}" y2="70" ${S('glow', 1)}/>` + TX(clamp(x, 70, W - 70), 60, lab, 'glow', 13, 'middle'); });
+    g += `<rect x="${lx}" y="${ay - 3}" width="${(lg(L[v][1]) - lx).toFixed(1)}" height="6" rx="3" ${F('glow', .5)}/>`;
+    el.innerHTML = g;
+    detail('k8', fmt(L[v][1]) + ' human year' + (L[v][1] > 1 ? 's' : ''), L[v][0], L[v][2] + (v >= 4 ? ' For comparison, physicists put the age of the universe at about 13.8 billion years.' : ''));
+  });
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 9: what is the offering worth? ---------- */
+{ const O = [['A leaf', 'leaf'], ['A flower', 'flower'], ['A fruit', 'fruit'], ['Water', 'water'], ['A bar of gold', 'gold']];
+  const el = $('#k9Svg'), R = $('#k9R'); let o = 0;
+  const btns = btnRow('#k9Pick', O.map(x => x[0]), 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); o = i; draw(); }));
+  const icon = (k, x, y) => ({ leaf: `<path d="M${x - 18} ${y + 8}q18 -34 36 -8q-18 26 -36 8Z" ${FS('good', 'good', 1.2, .6)}/>`, flower: [0, 1, 2, 3, 4].map(p => { const a = p * 1.2566; return `<circle cx="${(x + 11 * Math.cos(a)).toFixed(1)}" cy="${(y + 11 * Math.sin(a)).toFixed(1)}" r="8" ${F('bad', .7)}/>`; }).join('') + `<circle cx="${x}" cy="${y}" r="6" ${F('glow')}/>`,
+    fruit: `<circle cx="${x}" cy="${y + 2}" r="15" ${F('glow', .85)}/><path d="M${x} ${y - 13}q4 -8 10 -8" ${S('good', 2)}/>`, water: `<path d="M${x} ${y - 18}q14 18 0 30q-14 -12 0 -30Z" ${F('cool', .8)}/>`,
+    gold: `<path d="M${x - 22} ${y + 10}l8 -18h28l8 18Z" ${FS('glow', 'glow', 1, .9)}/>` })[k];
+  const draw = () => {
+    const W = 360, H = 220; vb(el, W, H); const h = +R.value / 10, cx = 180, cy = 130;
+    let g = `<circle cx="${cx}" cy="${cy - 20}" r="${(20 + h * 70).toFixed(1)}" ${F('glow', (h * .18).toFixed(2))}/>`;
+    for (let k = 0; k < Math.round(h * 12); k++){ const a = k / 12 * 2 * Math.PI; g += `<line x1="${(cx + 50 * Math.cos(a)).toFixed(1)}" y1="${(cy - 20 + 50 * Math.sin(a)).toFixed(1)}" x2="${(cx + (60 + h * 26) * Math.cos(a)).toFixed(1)}" y2="${(cy - 20 + (60 + h * 26) * Math.sin(a)).toFixed(1)}" ${S('glow', 1.5, ';stroke-opacity:' + (.3 + h * .5).toFixed(2))}/>`; }
+    g += `<path d="M${cx - 46} ${cy}q46 40 92 0Z" ${FS('panel-2', 'glow', 1.4)}/>` + icon(O[o][1], cx, cy - 18);
+    g += TX(20, 30, 'price', 'faint', 11) + `<rect x="60" y="22" width="${o === 4 ? 100 : 8}" height="8" rx="4" ${F('faint', .6)}/>`;
+    g += TX(20, 50, 'love', 'glow', 11) + `<rect x="60" y="42" width="${(h * 100).toFixed(0)}" height="8" rx="4" ${F('glow')}/>`;
+    el.innerHTML = g;
+    const msg = h >= .8 ? 'Accepted with joy.' : h >= .5 ? 'Accepted.' : h >= .2 ? 'Given out of habit. It counts for little.' : 'Given with no heart in it. The price doesn\'t make up for that.';
+    $('#k9Txt').innerHTML = `<b>${O[o][0]}, ${['given grudgingly', 'given grudgingly', 'given out of duty', 'given out of duty', 'given out of duty', 'given sincerely', 'given sincerely', 'given sincerely', 'given with love', 'given with love', 'given with all your heart'][+R.value]}:</b> ${msg}${o === 4 && h < .5 ? ' Gold doesn\'t buy what a leaf given with love gets.' : ''}`;
+  };
+  R.addEventListener('input', draw); draw();
+}
+
+/* ---------- 10: among all things, I am ---------- */
+{ const G = [['lights', 'the radiant sun', '10.21'], ['bodies of water', 'the ocean', '10.24'], ['mountains', 'Meru', '10.23'], ['immovable things', 'the Himalaya', '10.25'], ['trees', 'the sacred fig (ashvattha)', '10.26'], ['animals', 'the lion', '10.30'],
+    ['birds', 'Garuda', '10.30'], ['rivers', 'the Ganga', '10.31'], ['weapons', 'the thunderbolt', '10.28'], ['letters', 'the letter A', '10.33'], ['seasons', 'spring, the season of flowers', '10.35'], ['sciences', 'knowledge of the self', '10.32'],
+    ['deceivers', 'gambling', '10.36'], ['secrets', 'silence', '10.38'], ['the Pandavas', 'Arjuna himself', '10.37'], ['sages', 'Vyasa, who tells this story', '10.37']];
+  const seen = new Set();
+  const btns = btnRow('#k10Grid', G.map(x => 'Among ' + x[0]), -1);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); seen.add(i); const [c, w, ref] = G[i];
+    detail('k10', 'Verse ' + ref, 'Among ' + c + ', I am ' + w + '.', i === 12 ? 'Even here. The list isn\'t a list of nice things; it names whatever is most fully itself, and gambling is the most complete form of deceit.' : i === 13 ? 'The deepest secret is the one never spoken.' : i === 14 ? 'The listener is on the list. Arjuna is told the best of his family is a spark of the one he is talking to.' : i === 15 ? 'And so is the author. The Gita writes its own narrator into the glories.' : 'Wherever a thing is at its finest, Krishna says, that excellence is a spark of him.');
+    $('#k10N').textContent = seen.size + ' of ' + G.length; }));
+  detail('k10', 'Verses 10.19–42', 'Pick a category', 'Krishna names the best in each kind as himself. Guess before you tap.');
+}
+
+/* ---------- 11: the divine eye ---------- */
+{ const R = $('#k11R'), el = $('#k11Svg');
+  const TXT = [[15, 'A friend driving a chariot. This is the Krishna Arjuna has known all his life.'], [40, 'Something opens. The figure grows, with more arms and faces than you can count.'],
+    [70, 'Brighter than a thousand suns rising at once (11.12). Every god and world is inside it.'], [101, 'Now the warriors of both armies are pouring into its mouths. "I am time," it says (11.32). Arjuna is terrified and begs for the friend back.']];
+  const a = anim(el, t => {
+    const W = 360, H = 260; vb(el, W, H); const v = +R.value / 100, cx = 180, cy = 140;
+    let g = '';
+    if (v > .3){ const n = Math.round(v * 40); for (let k = 0; k < n; k++){ const ang = k / n * 2 * Math.PI + (RM ? 0 : t / 9000); const r0 = 30 + v * 40, r1 = r0 + v * 120;
+      g += `<line x1="${(cx + r0 * Math.cos(ang)).toFixed(1)}" y1="${(cy + r0 * Math.sin(ang)).toFixed(1)}" x2="${(cx + r1 * Math.cos(ang)).toFixed(1)}" y2="${(cy + r1 * Math.sin(ang)).toFixed(1)}" ${S('glow', 1.2, ';stroke-opacity:' + (.15 + v * .4).toFixed(2))}/>`; } }
+    g += `<circle cx="${cx}" cy="${cy}" r="${(20 + v * 110).toFixed(1)}" ${F('glow', (v * .25).toFixed(2))}/>`;
+    // arms
+    const arms = 2 + Math.round(v * 22);
+    for (let k = 0; k < arms; k++){ const ang = Math.PI * (1.08 + k / Math.max(1, arms - 1) * .84), len = 34 + v * 70; g += `<line x1="${cx}" y1="${cy - 10}" x2="${(cx + len * Math.cos(ang)).toFixed(1)}" y2="${(cy - 10 - len * Math.sin(ang) * -1).toFixed(1)}" ${S('cool', 3, ';stroke-linecap:round;stroke-opacity:.75')}/>`; }
+    // faces
+    const faces = 1 + Math.round(v * 10);
+    for (let k = 0; k < faces; k++){ const off = (k - (faces - 1) / 2) * 20, y = cy - 40 - Math.abs(off) * .25 - (k % 2) * v * 10;
+      g += `<circle cx="${cx + off}" cy="${y}" r="${faces > 1 ? 9 : 13}" ${FS('cool', 'glow', v > .5 ? 1.2 : .6, .85)}/>`; }
+    g += `<path d="M${cx - 18} ${cy + 50}c0-30 8-58 18-58s18 28 18 58Z" ${F('cool', .9)}/>`;
+    // warriors drawn in
+    if (v > .85){ for (let k = 0; k < 14; k++){ const p = ((t / 2500 + k / 14) % 1), x = k % 2 ? lerp(10, cx - 20, p) : lerp(W - 10, cx + 20, p), y = lerp(H - 20, cy - 40, p);
+      g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(4 - p * 2.5).toFixed(1)}" ${F(k % 2 ? 'text' : 'bad', (1 - p).toFixed(2))}/>`; } }
+    el.innerHTML = g;
+    $('#k11Txt').textContent = TXT.find(x => +R.value < x[0])[1];
+  });
+  R.addEventListener('input', () => a.kick());
+}
+
+/* ---------- 12: find your rung ---------- */
+{ const RG = [['Fix your mind on me', 'If you can keep your mind and understanding on me, you will live in me from then on.', '12.8'], ['Practise', 'If you can\'t hold your mind steady, try to reach me by repeated practice.', '12.9'],
+    ['Work for me', 'If you can\'t practise, make your work an offering. Doing things for my sake, you will still reach perfection.', '12.10'], ['Give up the fruits', 'If even that is too much, take refuge in me and let go of the results of everything you do. Peace follows at once.', '12.11–12']];
+  const Q = ['I can keep my mind on it all day', 'I can\'t, but I can sit and practise', 'I can\'t practise, but I can work', 'I can barely manage anything'];
+  const el = $('#k12Svg'); let sel = 0;
+  const btns = btnRow('#k12Pick', Q, 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); sel = i; draw(); }));
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 230; vb(el, W, H);
+    const lx = nw ? 40 : 160, rx = nw ? 100 : 230;
+    let g = `<line x1="${lx}" y1="14" x2="${lx}" y2="${H - 10}" ${S('faint', 3)}/><line x1="${rx}" y1="14" x2="${rx}" y2="${H - 10}" ${S('faint', 3)}/>`;
+    RG.forEach(([lab], k) => { const y = 34 + k * 52, on = k === sel;
+      g += `<line x1="${lx}" y1="${y}" x2="${rx}" y2="${y}" ${S(on ? 'glow' : 'muted', on ? 5 : 3, ';stroke-linecap:round')}/>` + TX(rx + 16, y + 5, lab, on ? 'glow' : 'muted', nw ? 13 : 15);
+      if (on) g += `<circle cx="${(lx + rx) / 2}" cy="${y - 14}" r="7" ${F('cool')}/>`; });
+    g += TX(lx - 10, 20, nw ? '' : 'harder', 'faint', 10.5, 'end') + TX(lx - 10, H - 12, nw ? '' : 'easier', 'faint', 10.5, 'end');
+    el.innerHTML = g;
+    detail('k12', 'Verse ' + RG[sel][2], 'Start here: ' + RG[sel][0].toLowerCase(), RG[sel][1] + ' <b style="color:var(--cool)">Every rung reaches the same place.</b>');
+  });
+  draw();
+}
+
+/* ---------- 13: field or knower? ---------- */
+sorter('#sort13', '#tally13', [{ id: 'f', label: 'The field', d: 'Something that can be observed' }, { id: 'k', label: 'The knower', d: 'What observes it' }], [
+  { t: 'Your body', a: 'f', w: 'The body is the field itself, Krishna\'s first example (13.1).' },
+  { t: 'A headache', a: 'f', w: 'Pain is listed in the field (13.6). You notice it, so it\'s not you.' },
+  { t: 'The thought "I\'m not good enough"', a: 'f', w: 'Thoughts belong to the mind, and the mind is part of the field.' },
+  { t: 'That which is aware of the thought', a: 'k', w: 'Whatever notices the thought is the knower. You can\'t observe it as an object, only be it.' },
+  { t: 'Your sense of "I, me, mine"', a: 'f', w: 'Even the ego (ahamkara) is in the list of the field\'s parts (13.5). That\'s the surprising one.' },
+  { t: 'Craving for something sweet', a: 'f', w: 'Desire and aversion are part of the field (13.6).' },
+  { t: 'The light by which you see all of these', a: 'k', w: 'Like the sun lighting the world (13.33), the knower lights up the field without being part of it.' },
+  { t: 'Your intellect working out a problem', a: 'f', w: 'The intellect (buddhi) is listed among the field\'s parts too.' } ]);
+
+/* ---------- 14: mix the three strands ---------- */
+{ const A = $('#k14A'), B = $('#k14B'), C = $('#k14C'), el = $('#k14Svg');
+  const PRE = [['A morning after good sleep', 8, 2, 1], ['A day of deadlines', 2, 9, 2], ['After a heavy lunch', 1, 2, 9], ['An argument', 1, 8, 4], ['Deep in study', 7, 4, 1]];
+  const pb = btnRow('#k14Pre', PRE.map(p => p[0]), -1);
+  pb.forEach((b, i) => b.addEventListener('click', () => { press(pb, b); [A.value, B.value, C.value] = PRE[i].slice(1); draw(); }));
+  const DESC = { s: ['Sattva is on top', 'Clear, calm and curious. Light shines through every gate of the body (14.11). It binds through attachment to that happy, knowing feeling.'],
+    r: ['Rajas is on top', 'Driven, restless, wanting more. Greed and endless projects (14.12). It binds through attachment to action, and its fruit is pain (14.16).'],
+    t: ['Tamas is on top', 'Heavy, dull, confused, sleepy (14.13). It binds through carelessness and inertia, and its fruit is ignorance.'],
+    m: ['Evenly mixed', 'No strand is winning. In practice this is rare and doesn\'t last; one always rises by pushing down the other two (14.10).'] };
+  const draw = onLayout(() => {
+    const W = 360, H = 250; vb(el, W, H);
+    const s = +A.value, r = +B.value, t = +C.value, sum = s + r + t || 1;
+    const P = [[180, 26], [44, 222], [316, 222]]; // sattva top, rajas left, tamas right
+    const x = (s * P[0][0] + r * P[1][0] + t * P[2][0]) / sum, y = (s * P[0][1] + r * P[1][1] + t * P[2][1]) / sum;
+    let g = `<path d="M${P[0]}L${P[1]}L${P[2]}Z" ${FS('panel-2', 'line', 1.4)}/>`;
+    [['sattva', 'glow'], ['rajas', 'bad'], ['tamas', 'cool']].forEach(([n, c], k) => { g += `<circle cx="${P[k][0]}" cy="${P[k][1]}" r="7" ${F(c)}/>` + TX(P[k][0] + (k === 0 ? 0 : k === 1 ? 4 : -4), P[k][1] + (k === 0 ? -10 : 22), n, c, 12, k === 0 ? 'middle' : k === 1 ? 'start' : 'end', 'letter-spacing="1"'); });
+    g += `<line x1="${x}" y1="${y}" x2="${P[0][0]}" y2="${P[0][1]}" ${S('glow', 1, ';stroke-opacity:' + (s / sum).toFixed(2))}/><line x1="${x}" y1="${y}" x2="${P[1][0]}" y2="${P[1][1]}" ${S('bad', 1, ';stroke-opacity:' + (r / sum).toFixed(2))}/><line x1="${x}" y1="${y}" x2="${P[2][0]}" y2="${P[2][1]}" ${S('cool', 1, ';stroke-opacity:' + (t / sum).toFixed(2))}/>`;
+    g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="10" ${FS('text', 'ink', 2)}/>`;
+    el.innerHTML = g;
+    const mx = Math.max(s, r, t), k = (mx - Math.min(s, r, t) < 2) ? 'm' : s === mx ? 's' : r === mx ? 'r' : 't';
+    detail('k14', `Sattva ${Math.round(s / sum * 100)}% · rajas ${Math.round(r / sum * 100)}% · tamas ${Math.round(t / sum * 100)}%`, DESC[k][0], DESC[k][1]);
+  });
+  [A, B, C].forEach(x => x.addEventListener('input', () => { press(pb, null); draw(); })); draw();
+}
+
+/* ---------- 15: the axe of detachment ---------- */
+{ const BR = ['praise', 'possessions', 'status', 'comfort', 'being right', 'pleasure'];
+  const el = $('#k15Svg'); let cut = new Set(), last = 'None yet';
+  $('#k15Reset').addEventListener('click', () => { cut.clear(); last = 'None yet'; draw(); });
+  const draw = onLayout(() => {
+    const W = 360, H = 270; vb(el, W, H); const cx = 180;
+    let g = `<rect x="0" y="0" width="${W}" height="40" ${F('glow', .08)}/>` + TX(12, 26, 'source', 'glow', 11, 'start', 'letter-spacing="1.5"');
+    for (let k = -3; k <= 3; k++) g += `<path d="M${cx} 54q${k * 10} -20 ${k * 26} -46" ${S('glow', 1.6, ';stroke-opacity:.7')}/>`;
+    g += `<line x1="${cx}" y1="54" x2="${cx}" y2="120" ${S('soft', 7, ';stroke-linecap:round')}/>`;
+    BR.forEach((b, k) => { const side = k % 2 ? 1 : -1, row = Math.floor(k / 2), y0 = 90 + row * 34, ex = cx + side * (70 + row * 22), ey = y0 + 60, done = cut.has(k);
+      g += `<g class="vb" tabindex="0" role="button" data-i="${k}" aria-label="Cut the branch of ${b}" style="cursor:pointer">`;
+      g += `<path class="hit" d="M${cx} ${y0}Q${(cx + ex) / 2} ${y0 + 4} ${ex} ${ey}" style="fill:none;stroke:var(--${done ? 'line' : 'soft'});stroke-width:${done ? 1.5 : 4};stroke-linecap:round${done ? ';stroke-dasharray:3 4' : ''}"/>`;
+      g += `<path d="M${cx} ${y0}Q${(cx + ex) / 2} ${y0 + 4} ${ex} ${ey}" style="fill:none;stroke:transparent;stroke-width:22"/>`;
+      if (!done) for (let l = 0; l < 3; l++) g += `<ellipse cx="${ex + side * (l - 1) * 10}" cy="${ey + 8 + l * 4}" rx="7" ry="4" ${F('good', .7)}/>`;
+      g += TX(ex, ey + 30, b, done ? 'faint' : 'text', 11.5, 'middle', done ? 'text-decoration="line-through"' : '') + '</g>'; });
+    el.innerHTML = g;
+    el.querySelectorAll('.vb').forEach(n => { const f = () => { const i = +n.dataset.i; if (!cut.has(i)){ cut.add(i); last = 'Attachment to ' + BR[i]; } draw(); };
+      n.addEventListener('click', f); n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); f(); } }); });
+    $('#k15N').textContent = cut.size + ' of ' + BR.length; $('#k15L').textContent = cut.size === BR.length ? 'All cut. What\'s left is the root, in the source (15.4).' : last;
+  });
+  draw();
+}
+
+/* ---------- 16: divine or demonic? ---------- */
+sorter('#sort16', '#tally16', [{ id: 'd', label: 'Divine', d: 'Leads to freedom' }, { id: 'a', label: 'Demonic', d: 'Leads to bondage' }], [
+  { t: 'Fearlessness', a: 'd', w: 'The very first divine quality in 16.1.' },
+  { t: 'Hypocrisy', a: 'a', w: 'First in the demonic list (16.4): showing one face and having another.' },
+  { t: 'Forgiveness', a: 'd', w: 'Listed in 16.3, alongside fortitude and purity.' },
+  { t: '"I beat that rival, and I\'ll beat the next one too."', a: 'a', w: 'Close to Krishna\'s portrait of the demonic mind in 16.14.' },
+  { t: 'Compassion for all beings', a: 'd', w: 'In 16.2, with freedom from greed and gentleness.' },
+  { t: 'Harshness', a: 'a', w: 'Named in 16.4, with arrogance, pride and anger.' },
+  { t: 'Not speaking ill of others', a: 'd', w: 'Freedom from slander is in 16.2.' },
+  { t: '"The world has no truth or order; it\'s all just desire."', a: 'a', w: 'The demonic worldview of 16.8.' },
+  { t: 'Charity and self-control', a: 'd', w: 'Both in 16.1.' } ]);
+
+/* ---------- 17: which strand? ---------- */
+sorter('#sort17', '#tally17', [{ id: 's', label: 'Sattvic', d: 'Clear' }, { id: 'r', label: 'Rajasic', d: 'Driven' }, { id: 't', label: 'Tamasic', d: 'Dull' }], [
+  { t: 'Fresh, nourishing food that is pleasant to eat', k: 'Food', a: 's', w: 'Food that adds to life, strength, health and joy (17.8).' },
+  { t: 'Food that is very hot, sour, salty and sharp', k: 'Food', a: 'r', w: 'It brings pain, grief and sickness (17.9).' },
+  { t: 'Stale leftovers that have lost their taste', k: 'Food', a: 't', w: 'Stale, tasteless, spoilt or left over (17.10).' },
+  { t: 'A ritual performed carefully, expecting nothing in return', k: 'Offering', a: 's', w: 'Done because it should be done, without wanting the fruit (17.11).' },
+  { t: 'A lavish ceremony held mainly to impress the neighbours', k: 'Offering', a: 'r', w: 'Offered for show or for a reward (17.12).' },
+  { t: 'Fasting harshly to torture yourself or to harm someone', k: 'Discipline', a: 't', w: 'Austerity from foolish stubbornness, through self-torture or to hurt others (17.19).' },
+  { t: 'Speaking words that are true, kind and helpful', k: 'Discipline', a: 's', w: 'The discipline of speech (17.15).' },
+  { t: 'A gift given hoping for a favour back', k: 'Giving', a: 'r', w: 'Given for a return, or reluctantly (17.21).' },
+  { t: 'A gift tossed contemptuously to someone at the wrong time', k: 'Giving', a: 't', w: 'Wrong place, wrong time, with disrespect (17.22).' } ]);
+
+/* ---------- 18: the five causes of an action ---------- */
+{ const F5 = [['The body', 'the seat', 'Where the action happens.'], ['The doer', 'the agent', 'The "I" that thinks it is acting.'], ['The instruments', 'the senses', 'Eyes, hands, voice: the tools.'], ['The efforts', 'the many motions', 'All the separate movements that go into it.'], ['Providence', 'the fifth, unseen', 'Fate, the gods, everything you didn\'t control (daiva).']];
+  const ACT = [['Winning a race', 'You trained for months, and you won.'], ['Writing a book', 'Years of work, and it was published.'], ['A failed exam', 'You studied, and still failed.'], ['Arjuna\'s battle', 'The war Arjuna is about to fight.']];
+  const el = $('#k18Svg'), mb = $('#k18Mode'); let act = 0, ego = false;
+  const btns = btnRow('#k18Pick', ACT.map(a => a[0]), 0);
+  btns.forEach((b, i) => b.addEventListener('click', () => { press(btns, b); act = i; draw(); }));
+  mb.addEventListener('click', () => { ego = !ego; mb.setAttribute('aria-pressed', ego); mb.textContent = ego ? 'See all five causes' : 'Think "I alone did this"'; draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = 240; vb(el, W, H);
+    const cx = nw ? 180 : 200, cy = 120, r = 86, ri = 50;
+    let g = '', a0 = -Math.PI / 2;
+    F5.forEach(([n], k) => { const share = ego ? (k === 1 ? 1 : 0) : 1 / 5, a1 = a0 + share * 2 * Math.PI;
+      if (share > 0){ const big = share > .5 ? 1 : 0, p = (a, rr) => `${(cx + rr * Math.cos(a)).toFixed(1)} ${(cy + rr * Math.sin(a)).toFixed(1)}`;
+        const end = share >= 1 ? a1 - .0001 : a1;
+        g += `<path d="M${p(a0, r)}A${r} ${r} 0 ${big} 1 ${p(end, r)}L${p(end, ri)}A${ri} ${ri} 0 ${big} 0 ${p(a0, ri)}Z" style="fill:var(--${k === 1 ? 'glow' : 'cool'});fill-opacity:${k === 1 ? .85 : .25 + k * .1};stroke:var(--ink);stroke-width:2"/>`;
+        if (!nw){ const am = (a0 + a1) / 2, lx = cx + (r + 18) * Math.cos(am), ly = cy + (r + 18) * Math.sin(am); g += TX(lx, ly + 4, n, k === 1 ? 'glow' : 'muted', 12, Math.cos(am) > .1 ? 'start' : Math.cos(am) < -.1 ? 'end' : 'middle'); } }
+      a0 = a1; });
+    g += TX(cx, cy - 2, ego ? '100%' : '1 in 5', 'text', 18, 'middle') + TX(cx, cy + 16, '"you"', 'glow', 11, 'middle');
+    if (!nw){ const tx = 400; g += wrap(tx + 100, 60, ACT[act][1], 26, 17, 'soft', 13.5); g += TX(tx + 100, 200, ego ? 'Verse 18.16' : 'Verse 18.14', 'faint', 11, 'middle', 'letter-spacing="1"'); }
+    else { g += TX(cx, H - 6, 'body · doer · senses · efforts · providence', 'faint', 10.5, 'middle'); }
+    el.innerHTML = g;
+    if (ego) detail('k18', 'Verse 18.16', 'Seeing with half an eye', `Whoever looks at ${ACT[act][0].toLowerCase()} and sees only themselves as the doer, Krishna says, doesn't really see. ${act === 2 ? 'Taking all the blame is the same mistake as taking all the credit.' : act === 3 ? 'This is why Arjuna doesn\'t have to carry the war alone.' : 'The credit is real, but it is shared.'}`);
+    else detail('k18', 'Verse 18.14', 'Five causes, one of them you', `Body, doer, instruments, efforts and providence. ${act === 2 ? 'You were one cause of the failure, not all of it. Fix your part; let go of the rest.' : act === 3 ? 'Arjuna is one cause of the war among five. He has a part to do, not the whole thing to answer for.' : 'Your part was real, and so were the other four.'}`);
+  });
+  draw();
+}
+
+/* ---------- afterword: karma yoga log ---------- */
+{ let log = store.get('bg-log', []);
+  const W = { r: 'Did my best and let it go', l: 'Worried, then let it go', h: 'Clung to the outcome' };
+  function render(){
+    const list = $('#lgList');
+    list.innerHTML = log.length ? log.slice().reverse().slice(0, 12).map((e, k) => `<div class="lg-item"><span class="k ${e.w}">${new Date(e.d).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})} · ${W[e.w]}</span><p>${esc(e.t)}</p><button type="button" data-del="${log.length - 1 - k}">Remove</button></div>`).join('')
+      : '<p class="empty">Nothing logged yet. After your next piece of real work, write one line here and say how tightly you held the result.</p>';
+    list.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => { log.splice(+b.dataset.del, 1); store.set('bg-log', log); render(); }));
+    const wk = Date.now() - 7 * 864e5;
+    $('#lgN').textContent = log.length; $('#lgR').textContent = log.filter(e => e.w !== 'h').length; $('#lg7').textContent = log.filter(e => e.d > wk).length;
+  }
+  $('#lgAdd').addEventListener('click', () => { const t = $('#lgT').value.trim(); if (!t){ $('#lgT').focus(); return; } log.push({ t, w: $('#lgW').value, d: Date.now() }); store.set('bg-log', log); $('#lgT').value = ''; render(); });
+  $('#lgT').addEventListener('keydown', e => { if (e.key === 'Enter') $('#lgAdd').click(); });
+  $('#lgClr').addEventListener('click', () => { if (log.length && confirm('Clear your whole log?')){ log = []; store.set('bg-log', log); render(); } });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
