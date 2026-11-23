@@ -6,7 +6,7 @@ Interactive, chapter-by-chapter explainers for books, podcasts and topics, plus 
 
 | Page | What it covers |
 | --- | --- |
-| `index.html` | The Explainer Shelf: the home page, a multi-level bookcase with one labelled level per category and every explainer as a spine |
+| `index.html` | The Explainer Shelf: the home page, a multi-level bookcase with one labelled level per category and every explainer as a spine, plus a reading status per book (Not started, Reading, Finished) that you set by hand and can filter by |
 | `explainers/brief-answers.html` | *Brief Answers to the Big Questions*, Stephen Hawking (10 chapters) |
 | `explainers/the-mountain-is-you.html` | *The Mountain Is You*, Brianna Wiest (7 chapters) |
 | `explainers/naval-harsh-truths.html` | Naval Ravikant on Modern Wisdom with Chris Williamson, episode #922 (10 chapters, golden nuggets, timestamp links) |
@@ -68,6 +68,10 @@ python3 -m http.server 8000
 ```
 
 To host it, turn on GitHub Pages for this repository (Settings → Pages → deploy from the `main` branch, root folder).
+
+## Reading status
+
+Every book on the shelf has a reading status: Not started, Reading or Finished. Set it from the buttons on the reading card (hover a spine) or tap the status pill on a book in the list below the shelf to cycle through the three. Reading books get an amber ribbon on their spine and finished ones a green tick. The chips above the bookcase filter the shelf and the list by status. Statuses are saved in the browser (`localStorage` key `shelf-status`, keyed by the explainer's file name), so a new book needs nothing extra and starts as Not started.
 
 ## Adding a new explainer
 
