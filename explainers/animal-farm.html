@@ -1,0 +1,1449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Animal Farm, Explained</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: the same shell as the other guides (chapter rail; per chapter: short answer, big ideas, a scene from the book,
+   the history behind it, a lab, plain words, quick check), grouped into the dream and the Rebellion, the young republic,
+   Napoleon takes over, some are more equal, and Orwell's prefaces.
+   Dark-first: a barn-dark, earthy field. --glow (pig pink) is the pigs and their power in every lab;
+   --cool (meadow green, the colour of the farm's flag) is the other animals and the Rebellion's original ideals.
+   Light mode is a warm paper page. */
+:root{
+  color-scheme: dark;
+  --ink:#16120E;--panel:#1E1914;--panel-2:#2A231C;--line:#3B3228;--text:#F4EEE4;--muted:#B6AB99;--faint:#877C6C;
+  --glow:#F59CAB;--glow-soft:rgba(245,156,171,.11);--hl:rgba(245,156,171,.26);--cool:#A9D27C;--cool-soft:rgba(169,210,124,.1);
+  --good:#7ED6B6;--good-soft:rgba(126,214,182,.1);--bad:#FF7A4D;--bad-soft:rgba(255,122,77,.12);
+  --soft:#DED6C9;--deep:#0F0C09;--toc-bg:rgba(30,25,20,.74);--glow-line:rgba(245,156,171,.36);--cool-line:rgba(169,210,124,.3);--on-glow:#2E0A12;
+  --f-display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --f-body:"Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){ --ink:#F5EFE4;--panel:#FFFCF6;--panel-2:#ECE4D5;--line:#D9CEBB;--text:#1E1914;--muted:#5A5045;--faint:#887D6E;
+  --glow:#A2385A;--glow-soft:rgba(162,56,90,.06);--hl:#F5D5DE;--cool:#406F1F;--cool-soft:rgba(64,111,31,.07);--good:#1C7454;--good-soft:rgba(28,116,84,.08);--bad:#B5401A;--bad-soft:rgba(181,64,26,.07);
+  --soft:#2D261F;--deep:#FBF7F0;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(162,56,90,.28);--cool-line:rgba(64,111,31,.26);--on-glow:#FFFFFF;color-scheme:light } }
+:root[data-theme="light"]{ --ink:#F5EFE4;--panel:#FFFCF6;--panel-2:#ECE4D5;--line:#D9CEBB;--text:#1E1914;--muted:#5A5045;--faint:#887D6E;
+  --glow:#A2385A;--glow-soft:rgba(162,56,90,.06);--hl:#F5D5DE;--cool:#406F1F;--cool-soft:rgba(64,111,31,.07);--good:#1C7454;--good-soft:rgba(28,116,84,.08);--bad:#B5401A;--bad-soft:rgba(181,64,26,.07);
+  --soft:#2D261F;--deep:#FBF7F0;--toc-bg:rgba(255,252,246,.84);--glow-line:rgba(162,56,90,.28);--cool-line:rgba(64,111,31,.26);--on-glow:#FFFFFF;color-scheme:light }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));
+  -webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:30;background:var(--ink)}
+a{color:var(--glow)}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+svg text{font-family:var(--f-body)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1180px;margin:0 auto;padding-block:56px 40px}
+.hero-inner{position:relative;display:grid;gap:22px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.hero h1{font-family:var(--f-display);font-weight:400;font-size:clamp(52px,10vw,116px);line-height:.92;letter-spacing:-.01em}
+.hero h1 em{color:var(--glow)}
+.hero .lede{max-width:62ch;color:var(--muted);font-size:18px}
+.hero .lede b{color:var(--text);font-weight:500}
+.about{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:13px;color:var(--faint);margin-top:6px}
+.about span b{color:var(--muted);font-weight:500}
+.shelf-link{justify-self:start;display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);text-decoration:none;
+  padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .15s,color .15s}
+.shelf-link:hover{color:var(--text);border-color:var(--glow)}
+.shelf-link svg{width:16px;height:16px}
+
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.parts a{display:grid;gap:4px;text-decoration:none;color:var(--text);padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--toc-bg);backdrop-filter:blur(4px);transition:border-color .2s, transform .2s}
+.parts a:hover{border-color:var(--glow);transform:translateY(-2px)}
+.parts .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.parts .q{font-family:var(--f-display);font-size:24px;line-height:1.1}
+.parts .d{font-size:13px;color:var(--muted)}
+
+/* ---------- shell ---------- */
+.shell{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding-block:20px 80px}
+.rail{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 20px);align-self:start;display:grid;gap:4px;max-height:calc(100vh - 40px);overflow-y:auto;scrollbar-width:thin;padding-right:4px}
+.rail .prog{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-bottom:8px;display:grid;gap:8px}
+.bar{height:4px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--glow);transition:width .4s}
+.rail .grp{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);padding:12px 10px 4px}
+.rail a{display:grid;grid-template-columns:22px 1fr 12px;gap:8px;align-items:center;padding:5px 10px;border-radius:9px;
+  color:var(--muted);text-decoration:none;font-size:13.5px;line-height:1.25;transition:background .15s,color .15s}
+.rail a .n{font-family:var(--f-mono);font-size:11px;color:var(--faint)}
+.rail a:hover{color:var(--text);background:var(--panel)}
+.rail a.on{color:var(--text);background:var(--panel-2)}
+.rail a.on .n{color:var(--glow)}
+.rail a .tick{width:12px;height:12px;border-radius:50%;border:1px solid var(--line)}
+.rail a.done .tick{background:var(--good);border-color:var(--good)}
+.chips{display:none}
+
+/* ---------- part dividers ---------- */
+.part{display:grid;gap:16px;padding:40px 28px;margin-top:40px;border-radius:20px;border:1px solid var(--glow-line);
+  background:radial-gradient(120% 120% at 0% 0%, var(--glow-soft), transparent 60%), var(--panel)}
+.part:first-child{margin-top:0}
+.part .eyebrow{color:var(--glow)}
+.part h2{font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,72px);line-height:.95}
+.part p{max-width:66ch;color:var(--soft);font-size:17px}
+.part .claim{display:grid;gap:4px;padding:14px 16px;border-left:3px solid var(--glow);background:var(--deep);border-radius:0 10px 10px 0;max-width:66ch}
+.part .claim .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.part .claim p{font-size:16px;color:var(--text)}
+
+/* ---------- chapter ---------- */
+.ch{display:grid;gap:28px;padding-block:56px;border-top:1px solid var(--line)}
+.part + .ch{border-top:0;padding-top:40px}
+.ch-head{display:grid;gap:14px}
+.ch-head .eyebrow span{color:var(--glow)}
+.ch h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(38px,6vw,64px);line-height:1}
+.short{display:grid;gap:6px;max-width:68ch;padding:18px 20px;border-radius:var(--r);background:var(--glow-soft);border:1px solid var(--glow-line)}
+.short .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.short p{font-size:18px;line-height:1.5}
+.ideas{display:grid;gap:16px;max-width:70ch}
+.ideas h3, .sub{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.ideas ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.ideas li{display:grid;grid-template-columns:10px 1fr;gap:14px}
+.ideas li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cool);margin-top:9px}
+.ideas li b{font-weight:600;color:var(--text)}
+.ideas li span{color:var(--soft)}
+.plain{max-width:68ch;display:grid;gap:8px;padding-left:18px;border-left:2px solid var(--cool)}
+.plain p{color:var(--soft)}
+.plain .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.debate{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.debate .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.debate b{color:var(--text);font-weight:500}
+
+/* ---------- labs ---------- */
+.lab{margin:0;border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,var(--panel),var(--deep));overflow:hidden}
+.lab-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.lab-top .t{display:flex;gap:10px;align-items:center;font-weight:500}
+.lab-top .t::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.lab-top .hint{font-size:13px;color:var(--faint)}
+.stage{position:relative;padding:8px 6px 0}
+.stage svg{display:block;width:100%;height:auto;max-width:100%}
+.lab-ctl{display:grid;gap:16px;padding:16px 18px 18px;border-top:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl{display:grid;gap:6px;flex:1 1 220px;min-width:0}
+.ctl label{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--muted)}
+.ctl label output{font-family:var(--f-mono);color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+input[type=range]{width:100%;accent-color:var(--glow);height:24px;background:transparent}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.btn:hover{border-color:var(--glow)}
+.btn[aria-pressed=true]{background:var(--glow);color:var(--on-glow);border-color:var(--glow)}
+.btn.primary{background:var(--glow);color:var(--on-glow);border-color:var(--glow);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border-top:1px solid var(--line)}
+.stat{background:var(--panel);padding:12px 18px;display:grid;gap:2px;min-width:0}
+.stat .k{font-size:12px;color:var(--faint)}
+.stat .v{font-family:var(--f-mono);font-size:17px;color:var(--text);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.stat .v.glow{color:var(--glow)}
+.stat .s{font-size:14px;color:var(--text)}
+.callout{padding:12px 18px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);background:var(--deep)}
+.callout b{color:var(--text);font-weight:500}
+
+/* sorter and trials (shared) */
+.sorter{display:grid;gap:14px;padding:18px}
+.sort-card{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel-2);min-height:92px}
+.sort-card .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.sort-card .item{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.sort-card .fb{font-size:14px;color:var(--muted)}
+.sort-card .fb b{font-weight:600}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.bin{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:2px;transition:border-color .15s}
+.bin:hover:not(:disabled){border-color:var(--glow)}
+.bin b{font-weight:600;font-size:14px}
+.bin span{font-size:12px;color:var(--muted)}
+.bin:disabled{cursor:default;opacity:.7}
+.tally{display:flex;flex-wrap:wrap;gap:6px}
+.tally i{width:14px;height:14px;border-radius:4px;background:var(--line)}
+.tally i.ok{background:var(--good)}
+.tally i.no{background:var(--bad)}
+
+/* toggles list */
+.toggles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.tg{display:flex;gap:10px;align-items:center;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:13px;cursor:pointer}
+.tg input{accent-color:var(--glow);width:16px;height:16px;flex:0 0 auto}
+.tg span{flex:1}
+.tg em{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+
+/* quiz */
+.quiz{display:grid;gap:12px;max-width:70ch;padding:20px;border:1px dashed var(--line);border-radius:var(--r)}
+.quiz .qq{font-size:17px;font-weight:500}
+.opts{display:grid;gap:8px}
+.opt{font:inherit;text-align:left;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;transition:border-color .15s}
+.opt:hover:not(:disabled){border-color:var(--cool)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.quiz .why{color:var(--muted);font-size:14px}
+.ch-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.done-toggle{display:inline-flex;gap:10px;align-items:center;cursor:pointer;font-size:14px;color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px}
+.done-toggle input{accent-color:var(--good);width:16px;height:16px}
+.next{font-size:14px;color:var(--muted);text-decoration:none}
+.next:hover{color:var(--glow)}
+
+/* afterword */
+.after{display:grid;gap:18px;padding:40px 28px;margin-top:56px;border-radius:20px;border:1px solid var(--line);background:var(--panel)}
+.after h2{font-family:var(--f-display);font-weight:400;font-style:italic;font-size:clamp(36px,6vw,58px);line-height:1}
+.after p{max-width:66ch;color:var(--soft)}
+.after .big{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2;color:var(--text);max-width:34ch}
+.recap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.recap div{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2);display:grid;gap:4px}
+.recap .n{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.recap b{font-weight:600}
+.recap span{font-size:14px;color:var(--muted)}
+
+#theme{position:fixed;z-index:25;right:max(16px, env(safe-area-inset-right, 0px));bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);background:var(--panel);padding:9px 14px}
+#theme svg{width:16px;height:16px}
+footer{max-width:1180px;margin:0 auto;padding-block:30px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px;display:grid;gap:6px}
+footer p{max-width:80ch}
+
+@media (max-width: 960px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0;padding-top:0}
+  .rail{display:none}
+  .chips{display:flex;gap:6px;overflow-x:auto;position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;background:var(--ink);
+    padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));padding-inline:max(16px, env(safe-area-inset-left, 0px));
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chips a{flex:0 0 auto;font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}
+  .chips a.on{color:var(--on-glow);background:var(--glow);border-color:var(--glow)}
+  .chips a.done:not(.on){border-color:var(--good);color:var(--good)}
+  .part{margin-top:32px}
+}
+@media (max-width: 560px){
+  .short p{font-size:16px}
+  .hero{padding-top:36px}
+  .part{padding:28px 18px}
+  .after{padding:28px 18px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:last-child:nth-child(odd){grid-column:1/-1}
+}
+
+mark{background:linear-gradient(transparent 12%, var(--hl) 12%, var(--hl) 88%, transparent 88%);color:inherit;padding:0 .12em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.ch h2{font-style:normal}
+
+.ch > *{min-width:0}
+
+/* trials: a sequence of questions, each with its own options (shares the sorter look) */
+.bins.stack{grid-template-columns:minmax(0,1fr)}
+.sort-card .item.q{font-size:22px;line-height:1.25}
+.sort-card .ctx{font-size:14px;color:var(--muted)}
+
+.note{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border:1px dashed var(--line);border-radius:12px;font-size:14px;color:var(--muted)}
+.note .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.book .empty{grid-column:1/-1}
+
+
+/* story from the book */
+.story{max-width:70ch;display:grid;gap:8px;padding:16px 18px;border-radius:12px;background:var(--cool-soft);border:1px solid var(--cool-line)}
+.story .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cool)}
+.story p{color:var(--soft);font-size:15.5px}
+textarea{font:inherit;font-size:15px;width:100%;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text);resize:vertical;line-height:1.5}
+textarea:focus{border-color:var(--glow);outline:none}
+.fields .row{margin-top:2px}
+/* builder */
+.builder{display:grid}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;padding:18px;border-bottom:1px solid var(--line)}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.field input:focus{border-color:var(--glow);outline:none}
+.out{display:grid;gap:14px;padding:18px;background:var(--deep)}
+.out .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.weak p{color:var(--faint);text-decoration:line-through;text-decoration-color:var(--bad);font-size:15px}
+.strong{display:grid;gap:6px}
+.strong .k{color:var(--glow)}
+.say-out{font-family:var(--f-display);font-size:clamp(24px,3.4vw,32px);line-height:1.2}
+.tip{font-size:14px;color:var(--muted)}
+.meter{display:inline-block;vertical-align:middle;width:120px;height:8px;border-radius:8px;background:var(--line);overflow:hidden;margin-right:6px}
+.meter i{display:block;height:100%;background:var(--glow)}
+
+
+/* ---------- hero, finder and lab extras ---------- */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:22px;align-items:stretch}
+.spiral{border:1px solid var(--line);border-radius:18px;background:radial-gradient(90% 80% at 50% 100%, var(--glow-soft), transparent 70%), var(--toc-bg);display:grid;align-content:space-between;overflow:hidden}
+.spiral svg{display:block;width:100%;height:auto}
+.spiral .cap{padding:12px 18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:var(--deep)}
+.spiral .cap b{color:var(--text);font-weight:500}
+.eq{font-family:var(--f-display);font-size:clamp(26px,3.6vw,38px);line-height:1.1;display:flex;flex-wrap:wrap;gap:.2em .35em;align-items:baseline}
+.eq em{font-style:normal;color:var(--glow)}
+.eq i{font-style:normal;color:var(--faint)}
+.finder{border:1px solid var(--line);border-radius:18px;background:var(--toc-bg);backdrop-filter:blur(4px);display:grid;align-content:start;overflow:hidden}
+.finder .top{padding:14px 18px;border-bottom:1px solid var(--line);font-weight:500;display:flex;gap:10px;align-items:center}
+.finder .top::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow)}
+.finder .opts2{display:flex;flex-wrap:wrap;gap:6px;padding:14px 18px}
+.finder .ans{display:grid;gap:6px;padding:16px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:132px}
+.finder .ans .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.finder .ans .p{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.finder .ans .d{font-size:14.5px;color:var(--soft)}
+.finder .ans a{font-size:14px}
+.figure-note{font-size:13px;color:var(--faint);padding:0 18px 12px}
+.detail{display:grid;gap:6px;padding:14px 18px;border-top:1px solid var(--line);background:var(--deep);min-height:118px}
+.detail .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.detail .h{font-family:var(--f-display);font-size:26px;line-height:1.15}
+.detail p{font-size:14.5px;color:var(--soft);max-width:72ch}
+.detail .lesson{color:var(--text)}
+.detail .lesson b{color:var(--cool);font-weight:500}
+.try{max-width:68ch;display:grid;gap:6px;padding:14px 16px;border-radius:12px;border:1px solid var(--glow-line);background:var(--glow-soft)}
+.try .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.try p{color:var(--soft);font-size:15px}
+.svgbtn{cursor:pointer}
+.svgbtn:focus-visible{outline:none}
+.svgbtn:focus-visible circle, .svgbtn:focus-visible rect{stroke:var(--glow);stroke-width:2.5}
+.moves{display:flex;flex-wrap:wrap;gap:8px}
+.log{display:grid;gap:4px;font-size:13.5px;color:var(--muted);max-height:120px;overflow:auto}
+.log b{color:var(--text);font-weight:500}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.card3{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;cursor:pointer;display:grid;gap:4px;transition:border-color .15s}
+.card3:hover{border-color:var(--glow)}
+.card3[aria-pressed=true]{border-color:var(--glow);background:var(--glow-soft)}
+.card3 b{font-weight:600;font-size:14.5px}
+.card3 span{font-size:12.5px;color:var(--muted)}
+.people6{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px;padding:0 18px 14px}
+.voter{font:inherit;text-align:left;color:var(--text);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center}
+.voter b{font-weight:600;font-size:14px}
+.voter span{font-size:12.5px;color:var(--muted);grid-column:1}
+.voter .vote{grid-row:1/3;grid-column:2;font-family:var(--f-mono);font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line)}
+.voter[data-v="yes"] .vote{color:var(--good);border-color:var(--good);background:var(--good-soft)}
+.voter[data-v="no"] .vote{color:var(--bad);border-color:var(--bad);background:var(--bad-soft)}
+.mine{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.mine .empty{grid-column:1/-1;color:var(--muted);font-size:15px;max-width:60ch}
+.issue{display:grid;gap:6px;align-content:start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.issue .k{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.issue p{font-size:14.5px}
+.issue .m{font-size:12.5px;color:var(--muted)}
+.field select{min-width:0;font:inherit;font-size:15px;width:100%;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--text)}
+.pad{padding:0 18px 16px}
+.ch-head .eyebrow .pt{color:var(--faint)}
+@media (max-width: 860px){ .hero-grid{grid-template-columns:minmax(0,1fr)} .spiral{max-width:520px} }
+@media (max-width: 560px){ .finder .ans .p{font-size:23px} .detail .h{font-size:23px} .people6{padding:0 14px 12px} .pad{padding:0 14px 14px} .finder .opts2{padding:12px 14px} }
+/* ---------- Animal Farm additions ---------- */
+/* ---------- Range additions ---------- */
+.fq{margin:0;max-width:780px;display:grid;gap:8px;padding:18px 22px;border-left:4px solid var(--glow);background:var(--toc-bg);border-radius:0 14px 14px 0}
+.fq .lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--glow)}
+.fq p{font-family:var(--f-display);font-size:clamp(23px,3.2vw,32px);line-height:1.18}
+.fq em{font-style:normal;color:var(--glow)}
+.race{display:grid;align-content:start;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;min-width:0}
+.race-top{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}
+.race-top .moves{gap:6px}
+.race-top .btn{padding:5px 11px}
+.race-stage{padding:10px 10px 4px}
+.race-stage svg{display:block;width:100%;height:auto}
+.race-ctl{display:grid;gap:6px;padding:4px 16px 12px;font-size:13px;color:var(--muted)}
+.race-ctl output{font-family:var(--f-mono);color:var(--text);float:right}
+.race .cap{padding:12px 16px;border-top:1px solid var(--line);background:var(--deep);font-size:14px;color:var(--soft);min-height:66px}
+.race .cap b{color:var(--glow);font-weight:600}
+.race .cap{min-height:88px}
+/* the barn wall: white paint on tarred planks */
+.wall{margin:12px 12px 4px;padding:14px 16px 16px;border-radius:10px;border:1px solid var(--line);background:repeating-linear-gradient(0deg,var(--deep) 0 30px,var(--panel-2) 30px 31px);display:grid;gap:6px;min-height:288px;align-content:start}
+.wall .wt{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);text-align:center;margin-bottom:2px}
+.wall ol{margin:0;padding:0;list-style:none;display:grid;gap:5px;counter-reset:cm}
+.wall li{counter-increment:cm;display:grid;grid-template-columns:22px minmax(0,1fr);gap:6px;font-family:var(--f-display);font-size:18px;line-height:1.2;color:var(--text);transition:opacity .3s}
+.wall li::before{content:counter(cm) ".";font-family:var(--f-mono);font-size:11px;color:var(--faint);padding-top:4px}
+.wall ins{text-decoration:none;color:var(--glow);background:var(--hl);border-radius:4px;padding:0 3px}
+.wall .br{display:inline-block;margin-left:6px;font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--bad);border:1px solid var(--bad);border-radius:999px;padding:1px 6px;vertical-align:2px}
+.wall.gone li{opacity:.28;text-decoration:line-through;text-decoration-color:var(--faint)}
+.wall .one{margin-top:8px;padding:10px 12px;border:1px solid var(--glow-line);border-radius:8px;background:var(--glow-soft);font-family:var(--f-display);font-size:21px;line-height:1.2;color:var(--text);text-align:center}
+.wall .one em{font-style:normal;color:var(--glow)}
+.traits{display:flex;flex-wrap:wrap;gap:6px}
+.traits span{font-size:12.5px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--faint)}
+.traits span.on{border-color:var(--glow-line);background:var(--glow-soft);color:var(--text)}
+.bw-item{display:grid;gap:6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.bw-item .h{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline}
+.bw-item b{font-family:var(--f-display);font-weight:400;font-size:21px;line-height:1.2}
+.bw-item .mono{font-family:var(--f-mono);font-size:11.5px;color:var(--faint)}
+.bw-item .said{font-size:15px;color:var(--soft)}
+.bw-item .now{font-size:14.5px;color:var(--glow)}
+.bw-item .rm{margin-left:auto;font:inherit;font-size:18px;line-height:1;background:none;border:0;color:var(--faint);cursor:pointer;padding:2px 8px;border-radius:6px;min-height:32px}
+.bw-item .rm:hover{color:var(--bad)}
+.bw-item .edit{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bw-item .edit input{flex:1 1 200px;min-width:0;font:inherit;font-size:14px;padding:7px 10px;border-radius:8px;border:1px solid var(--line);background:var(--deep);color:var(--text)}
+.bw-item.broken{border-color:var(--glow-line)}
+@media (max-width: 560px){ .fq{padding:14px 16px} .wall{margin:10px 8px 4px;padding:12px} .wall li{font-size:17px} .wall .one{font-size:19px} }
+
+</style>
+</head>
+<body>
+
+<button class="btn" id="theme" type="button" aria-label="Switch colour theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span id="themeTxt">Light</span></button>
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <a class="shelf-link" href="../index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 20h18M5 20V6h3v14M10 20V4h3v16M15.5 20l-1.8-12.6 2.9-.5L18.6 19.4"/></svg>Back to the bookshelf</a>
+    <div class="eyebrow">A chapter-by-chapter guide to George Orwell's book</div>
+    <h1><em>Animal Farm</em>,<br>Explained</h1>
+    <p class="lede">In 1945 George Orwell published a short fable about farm animals who drive out their drunken farmer to run the farm for themselves, only to watch the pigs slowly become the masters they replaced. A child can follow the story, and it is also a close allegory of the Russian Revolution and Stalin's rise. Orwell, a democratic socialist who had seen Soviet-backed communists turn on their own allies in Spain, wanted to show how a revolution for equality can be <b>betrayed one small edit at a time</b>. This guide covers all ten chapters and Orwell's preface on the freedom of the press, with a lab in each where you can try the idea for yourself.</p>
+    <blockquote class="fq" aria-label="The book in one line"><span class="lbl">The book in one line</span><p>Power rarely overthrows a revolution. It <em>edits</em> it, a few words at a time, until the new masters look just like the old ones.</p></blockquote>
+    <div class="hero-grid">
+      <div class="finder">
+        <div class="top">What's on your mind?</div>
+        <div class="opts2" id="find"></div>
+        <div class="ans" id="findA" aria-live="polite"></div>
+      </div>
+      <figure class="race" style="margin:0" aria-label="The Seven Commandments on the barn wall, chapter by chapter">
+        <div class="race-top"><span>The barn wall</span><div class="moves" id="hwJump"></div></div>
+        <div class="wall" id="hwWall"></div>
+        <div class="race-ctl"><label for="hwCh">The wall in chapter <output id="ohwCh"></output></label><input type="range" id="hwCh" min="2" max="10" value="8"></div>
+        <div class="cap" id="hwCap" aria-live="polite"></div>
+      </figure>
+    </div>
+    <nav class="parts" aria-label="The parts">
+      <a href="#part1"><span class="n">Chapters 1 and 2</span><span class="q">The Dream and the Rebellion</span><span class="d">Old Major's speech, the uprising and the Seven Commandments</span></a>
+      <a href="#part2"><span class="n">Chapters 3 and 4</span><span class="q">The Young Republic</span><span class="d">The first harvest, the stolen milk and the Battle of the Cowshed</span></a>
+      <a href="#part3"><span class="n">Chapters 5 to 7</span><span class="q">Napoleon Takes Over</span><span class="d">The dogs, the windmill, a scapegoat and the purge</span></a>
+      <a href="#part4"><span class="n">Chapters 8 to 10</span><span class="q">Some Are More Equal</span><span class="d">Rewritten rules, Boxer's fate and the last dinner</span></a>
+      <a href="#part5"><span class="n">Appendix</span><span class="q">Behind the Book</span><span class="d">Orwell's prefaces on free speech and the cart-horse</span></a>
+    </nav>
+    <div class="about">
+      <span><b>Published</b> 17 August 1945</span>
+      <span><b>Author</b> George Orwell (Eric Arthur Blair, 1903 to 1950), essayist, journalist and author of Nineteen Eighty-Four</span>
+      <span><b>Full title</b> Animal Farm: A Fairy Story</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail" aria-label="Chapter navigation">
+    <div class="prog"><span id="progTxt">0 of 11 understood</span><div class="bar"><i id="progBar"></i></div></div>
+    <div id="railLinks" style="display:grid;gap:1px"></div>
+  </aside>
+  <main>
+    <nav class="chips" id="chips" aria-label="Chapters"></nav>
+    <!-- ===================== THE DREAM AND THE REBELLION ===================== -->
+    <section class="part" id="part1">
+      <span class="eyebrow">Part one · the dream and the rebellion</span>
+      <h2>The Dream and the Rebellion</h2>
+      <p>Orwell's fable opens on a run-down English farm, where an old boar tells the animals that their misery is not natural but man-made. Within months they have driven the farmer out, renamed the farm and painted their new rules on the barn wall. Almost everything that goes wrong later is already there in seed: the pigs who do the thinking, and the milk that disappears.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>A revolution starts with a true complaint about injustice. Whether it stays true depends on who holds the paintbrush afterwards.</p></div>
+    </section>
+    <!-- ===================== 1 ===================== -->
+    <section class="ch" id="ch1" data-n="1">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 1</span> · Why the animals are miserable</div>
+        <h2>Old Major's Dream</h2>
+        <div class="short"><span class="lbl">In short</span><p>On Manor Farm, once the drunken Mr Jones has gone to bed, the animals gather in the big barn to hear Old Major, a prize boar near the end of his life. He tells them their lives are short, hungry and full of work not because nature made them so, but because Man takes almost everything they produce. One day, he says, there will be a Rebellion.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>A diagnosis, not a plan.</b> Major says no animal in England is free: they are worked until their strength runs out and then slaughtered. He blames a single creature, Man, the only animal that consumes without producing. He gives no date or method for the Rebellion, only a direction.</span></li>
+          <li><span><b>Never become like Man.</b> Major warns that in fighting Man the animals must never copy him: no living in a house, sleeping in a bed, wearing clothes, drinking alcohol, smoking, trading or touching money. All animals are equal, and no animal must ever rule over another. Every one of these warnings is broken by the end of the book.</span></li>
+          <li><span><b>The rats vote.</b> Mid-speech, the dogs spot some rats and give chase. Major calls a vote on whether wild creatures like rats are comrades. A large majority say yes; only the three dogs and the cat vote against, and the cat, it turns out, has voted on both sides. Equality is already harder in practice than in a speech.</span></li>
+          <li><span><b>A song to carry the dream.</b> Major remembers a song from his piglet days, Beasts of England, about a golden future without Man. The animals learn it at once and sing it so loudly that they wake Jones, who fires his gun into the dark. The song becomes the Rebellion's anthem.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Major is twelve years old, a Middle White boar who was shown at fairs under the name Willingdon Beauty. He has had a strange dream and wants to pass on what he has learned before he dies. He describes the farm as a place where every animal knows hunger and exhaustion: the cows' milk goes to Jones's table, the hens' eggs are sold at market, and the mare Clover's foals are sold off before they are grown. Boxer, the huge, gentle cart-horse, will be sold to the knacker the day his great muscles give out. Even Major, for all his prizes, will one day meet the butcher's knife. Three nights later he dies peacefully in his sleep, and is buried at the foot of the orchard.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>Orwell said the book was about the Russian Revolution and what became of it. Old Major mixes Karl Marx, whose ideas inspired the revolution, with Lenin, who led it and died soon after. Mr Jones, careless and drunk, stands for the last Tsar, Nicholas II. Beasts of England plays the part of the Internationale, the socialist anthem.</p></div>
+      <figure class="lab" id="lab1">
+        <div class="lab-top"><div class="t">Lab: where does the farm's work go?</div><div class="hint">Change how much the master takes and watch what is left</div></div>
+        <div class="stage"><svg id="mj1" role="img" aria-label="Bars showing how much of the farm's produce the animals keep and how much is taken"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="mjTake">How much the master takes <output id="omjTake"></output></label><input type="range" id="mjTake" min="0" max="100" value="85"></div></div><div class="row"><span class="tip">Try a farm:</span><button class="btn" id="mjJones" type="button" aria-pressed="true">Jones's farm</button><button class="btn" id="mjDream" type="button" aria-pressed="false">Major's dream</button><button class="btn" id="mjLater" type="button" aria-pressed="false">Ten years later</button></div></div><div class="stats"><div class="stat"><span class="k">Kept by the animals</span><span class="v" id="mjKept"></span></div><div class="stat"><span class="k">Taken by</span><span class="v glow" id="mjTaker"></span></div><div class="stat"><span class="k">Major's verdict</span><span class="s" id="mjSay" aria-live="polite"></span></div></div><p class="callout">An illustrative model of Major's argument, not figures from the book. <b>Press Ten years later: the bars look just like Jones's farm. Only the name of the taker has changed.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Major is right about the farm: the animals do all the work and get very little. His speech is the hope every revolution starts with. Keep an eye on his list of things never to do, because the rest of the book is the story of each one being done.</p></div>
+      <div class="quiz" data-q="1"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="1"> I understand this chapter</label><a class="next" href="#ch2">Next: The Rebellion →</a></div>
+    </section>
+    <!-- ===================== 2 ===================== -->
+    <section class="ch" id="ch2" data-n="2">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 2</span> · Animalism and the Seven Commandments</div>
+        <h2>The Rebellion</h2>
+        <div class="short"><span class="lbl">In short</span><p>The cleverest animals, the pigs, turn Major's speech into a system called Animalism. When Jones forgets to feed the animals one Midsummer's Eve, they break into the store-shed and drive him and his men off the farm. They rename it Animal Farm and paint seven rules on the barn wall.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The pigs take the lead.</b> Teaching falls to the pigs, generally agreed to be the cleverest animals. Snowball is lively and inventive. Napoleon, a large, fierce-looking boar, talks little but has a reputation for getting his own way. Squealer is a brilliant talker who, the others say, could turn black into white.</span></li>
+          <li><span><b>Distractions from the cause.</b> Mollie, the vain white mare, wants to know whether there will still be sugar and ribbons. Moses, Jones's tame raven, tells of Sugarcandy Mountain, a paradise animals go to when they die. Boxer and Clover, slow to think things out for themselves, become the pigs' most faithful disciples.</span></li>
+          <li><span><b>An accidental revolution.</b> The Rebellion comes sooner and more easily than anyone expected. Jones, drunk in Willingdon, leaves the animals unfed. When they break into the store-shed and his men set about them with whips, they fight back, and within minutes the men are running down the road.</span></li>
+          <li><span><b>Rules on the wall.</b> Snowball paints the Seven Commandments on the end wall of the big barn, in white letters on tarred wood, as an unalterable law: two legs bad, four legs or wings good, no clothes, no beds, no alcohol, no killing other animals, and all animals are equal.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The morning after the Rebellion the animals race to the top of the knoll to gaze at the farm that is now theirs. They throw the knives, nose-rings, whips and reins into the fire, and burn the ribbons too, since ribbons count as clothes. They tiptoe through the farmhouse in awe and agree to keep it as a museum that no animal will ever live in. Snowball, who has taught himself to read from an old spelling book of the Jones children's, paints out MANOR FARM on the gate and paints in ANIMAL FARM. Then the cows, unmilked all day, begin to low in pain. The pigs milk them, and five buckets of frothing milk stand in the yard. Napoleon tells everyone to go and start the harvest and not to worry about the milk. When they come back in the evening, it has gone.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>Snowball stands for Leon Trotsky, the brilliant organiser of the Red Army, and Napoleon for Joseph Stalin. Squealer is the Soviet propaganda machine, especially the official newspaper Pravda. Moses the raven, who preaches of heaven and is later welcomed back by the pigs, is usually read as the Russian Orthodox Church.</p></div>
+      <figure class="lab" id="lab2">
+        <div class="lab-top"><div class="t">Lab: is it Animalism?</div><div class="tally" id="tally2" aria-label="Score"></div></div>
+        <div class="sorter" id="sort2"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The animals win their freedom almost by accident, and they set it down in seven short rules anyone can learn. The question is who did the writing. The very same evening, the first thing goes missing: the milk.</p></div>
+      <div class="quiz" data-q="2"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="2"> I understand this chapter</label><a class="next" href="#ch3">Next: The harvest and the apples →</a></div>
+    </section>
+    <!-- ===================== THE YOUNG REPUBLIC ===================== -->
+    <section class="part" id="part2">
+      <span class="eyebrow">Part two · the young republic</span>
+      <h2>The Young Republic</h2>
+      <p>For a while Animal Farm works. The harvest is the best the farm has known, everyone learns what they can, and the animals beat off the farmer's attempt to take it back. Underneath, the pigs quietly take the milk and the apples, and a slogan replaces the rules for those who can't read.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Early success hides early privilege. The first small exception is the one that makes all the later ones possible.</p></div>
+    </section>
+    <!-- ===================== 3 ===================== -->
+    <section class="ch" id="ch3" data-n="3">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 3</span> · Who gets to read, and who gets the milk</div>
+        <h2>The Harvest and the Apples</h2>
+        <div class="short"><span class="lbl">In short</span><p>The first harvest under the animals is the best the farm has known. Everyone works, Boxer hardest of all. Snowball sets up committees and reading classes, but most animals barely learn the alphabet, so he boils the Commandments down to one slogan. Meanwhile the pigs keep the milk and the windfall apples for themselves.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Boxer's answer.</b> Boxer has a cockerel wake him half an hour before everyone else, and answers every problem with the same words: I will work harder. Benjamin the donkey, the oldest animal on the farm, works as slowly and steadily as before and, asked whether things are better now, says only that donkeys live a long time.</span></li>
+          <li><span><b>A ladder of reading.</b> The pigs learn to read and write perfectly. The dogs read fairly well but care only for the Commandments; Muriel the goat reads scraps of newspaper; Benjamin reads as well as any pig and chooses not to. Clover learns the alphabet but can't put words together, Boxer never gets past D, and Mollie learns only the letters of her own name.</span></li>
+          <li><span><b>Four legs good, two legs bad.</b> For the animals who can't read, Snowball reduces the seven rules to a single maxim that, he says, holds the essence of Animalism. The sheep love it and bleat it for hours. A slogan is easier to learn than a law, and much easier to bend.</span></li>
+          <li><span><b>Brainworkers need apples.</b> When the animals find that the milk and windfall apples go to the pigs, Squealer explains it isn't selfishness: pigs are brainworkers, science shows they need these foods, and if the pigs failed in their duty, Jones would come back. Nobody wants that, so nobody argues.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Napoleon takes little interest in Snowball's committees, such as the Egg Production Committee for the hens, the Clean Tails League for the cows and the Whiter Wool Movement for the sheep. He says the education of the young matters more than anything that can be done for the grown animals. When the dogs Jessie and Bluebell give birth to nine puppies, he takes them away as soon as they are weaned, saying he will see to their education himself. He keeps them in a loft reached only by a ladder from the harness-room, and the rest of the farm soon forgets they exist. The chapter ends with Squealer's speech about the milk and apples, which every pig, Snowball included, has agreed to. Two quiet decisions, about puppies and about food, will decide the farm's future.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>The pigs' privileges mirror the rise of a new Party elite in the Soviet Union, with better food, housing and shops than the workers it ruled in their name. Boxer echoes the cult of the tireless worker, later celebrated in the Stakhanovite movement of the 1930s.</p></div>
+      <figure class="lab" id="lab3">
+        <div class="lab-top"><div class="t">Lab: who can check the wall?</div><div class="hint">Make the message longer or shorter and see who can still check it</div></div>
+        <div class="stage"><svg id="rd3" role="img" aria-label="Which animals can recite a message and which can check it in writing"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="rdLen">Length of the message <output id="ordLen"></output></label><input type="range" id="rdLen" min="0" max="100" value="53"></div></div><div class="row"><span class="tip">Try a message:</span><button class="btn" id="rdSlogan" type="button" aria-pressed="false">Four legs good, two legs bad</button><button class="btn" id="rdCmd" type="button" aria-pressed="true">The Seven Commandments</button><button class="btn" id="rdRep" type="button" aria-pressed="false">One of Squealer's reports</button></div></div><div class="stats"><div class="stat"><span class="k">Can recite it</span><span class="v" id="rdRec"></span></div><div class="stat"><span class="k">Can check the written words</span><span class="v glow" id="rdChk"></span></div><div class="stat"><span class="k">What that means</span><span class="s" id="rdSay" aria-live="polite"></span></div></div><p class="callout">Reading levels follow the book; how much each animal can hold in memory is an illustrative guess. <b>Everyone can chant a slogan. Only the readers can notice when the writing changes.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The farm works because everyone pulls together, but knowledge doesn't spread evenly. The pigs can read, write and argue; most animals can only remember a slogan. That gap is where the pigs' first privileges come from, and every later one.</p></div>
+      <div class="quiz" data-q="3"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="3"> I understand this chapter</label><a class="next" href="#ch4">Next: The Battle of the Cowshed →</a></div>
+    </section>
+    <!-- ===================== 4 ===================== -->
+    <section class="ch" id="ch4" data-n="4">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 4</span> · Defending the farm, and who gets the credit</div>
+        <h2>The Battle of the Cowshed</h2>
+        <div class="short"><span class="lbl">In short</span><p>News of the Rebellion spreads, and neighbouring farmers fear their own animals will catch the idea. In October Jones and his men come back with sticks and a gun. Snowball, who has studied Julius Caesar's campaigns, springs an ambush and the men are routed. Snowball and Boxer are decorated as heroes.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Two nervous neighbours.</b> Pilkington of Foxwood is an easy-going gentleman farmer whose land is overgrown and neglected. Frederick of Pinchfield is tough and shrewd, and always in a lawsuit. They dislike each other too much to agree on anything, but both spread stories that the animals on Animal Farm are starving and fighting among themselves.</span></li>
+          <li><span><b>Snowball's plan.</b> Snowball sends the pigeons and geese first to harass the men, then the sheep and goats, then fakes a retreat that draws the men into the yard. There the horses, cows and pigs burst out of the cowshed behind them. Within minutes the men are fleeing down the road.</span></li>
+          <li><span><b>The cost of victory.</b> Snowball is wounded by Jones's gun and a sheep is killed. Boxer strikes a stable-lad who lies still in the mud, and Boxer is grief-stricken: he never wanted to take a life, even a human one. The lad, it turns out, was only stunned, and he slips away.</span></li>
+          <li><span><b>Medals and a gun.</b> The animals create a military decoration, Animal Hero, First Class, for Snowball and Boxer, and Second Class for the dead sheep. Jones's gun is set at the foot of the flagstaff, to be fired twice a year: on the anniversary of the battle and on Midsummer Day, the anniversary of the Rebellion.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Mollie is missing during the battle and is found hiding in her stall with her head buried in the hay. The fight is named the Battle of the Cowshed, since that is where the ambush was sprung. Notice where Napoleon is during the fighting: the chapter doesn't mention him at all. Snowball leads the final charge himself and is hit, with stripes of blood along his back where the pellets struck. Hold on to this scene, because in later chapters Squealer will tell it very differently.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>The battle stands for the Russian Civil War (1918 to 1921), when the White armies, helped by foreign powers, tried to overturn the revolution and were beaten by the Red Army that Trotsky built. Pilkington and Frederick stand for the capitalist powers, roughly Britain and Nazi Germany.</p></div>
+      <figure class="lab" id="lab4">
+        <div class="lab-top"><div class="t">Lab: replay the battle, then retell it</div><div class="hint">Step through the ambush, then switch to the later versions</div></div>
+        <div class="stage"><svg id="bt4" role="img" aria-label="A map of the farmyard showing the Battle of the Cowshed step by step"></svg></div><div class="lab-ctl"><div class="row"><span class="tip">Step:</span><span class="moves" id="btStep"></span></div><div class="row"><span class="tip">Version:</span><span class="moves" id="btVer"></span></div></div><div class="stats"><div class="stat"><span class="k">Snowball's part</span><span class="s" id="btSnow"></span></div><div class="stat"><span class="k">Napoleon's part</span><span class="s" id="btNap"></span></div><div class="stat"><span class="k">Snowball's medal</span><span class="s" id="btMedal"></span></div></div><p class="callout" id="btCap" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>The animals defend their farm bravely, and the plan that wins is Snowball's. Napoleon isn't in the story. Remember that, because the history of this battle is about to be rewritten, twice.</p></div>
+      <div class="quiz" data-q="4"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="4"> I understand this chapter</label><a class="next" href="#ch5">Next: Snowball and the windmill →</a></div>
+    </section>
+    <!-- ===================== NAPOLEON TAKES OVER ===================== -->
+    <section class="part" id="part3">
+      <span class="eyebrow">Part three · napoleon takes over</span>
+      <h2>Napoleon Takes Over</h2>
+      <p>Two pigs argue about everything, above all about a windmill. When Napoleon cannot win the argument he ends it, with nine dogs he has raised in secret. Then come the long working weeks, trade with humans, a fallen windmill blamed on an absent enemy and, at last, confessions and executions in the farmyard.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Power that can't win an argument abolishes the argument, and then needs an enemy to explain every failure.</p></div>
+    </section>
+    <!-- ===================== 5 ===================== -->
+    <section class="ch" id="ch5" data-n="5">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 5</span> · The debate that ended debate</div>
+        <h2>Snowball and the Windmill</h2>
+        <div class="short"><span class="lbl">In short</span><p>Snowball and Napoleon disagree about everything, above all about Snowball's plan for a windmill to bring electricity and a three-day week. On the day of the vote, Napoleon lets out nine huge dogs he has raised in secret, and they chase Snowball off the farm. Napoleon abolishes the Sunday debates, and soon announces that the windmill was his idea all along.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Mollie leaves.</b> Mollie is seen letting a man from Foxwood stroke her nose, and Clover finds sugar and ribbons hidden under the straw in her stall. Soon she vanishes, and is later seen between the shafts of a smart little cart outside a pub, with a ribbon in her forelock, looking contented. No one mentions her again.</span></li>
+          <li><span><b>Two campaigns.</b> Snowball, with plans chalked over the floor of an old shed, promises electric light, heating and a three-day week. Napoleon says the farm needs food now, and one day urinates over the plans. The farm splits into two slogans: vote for Snowball and the three-day week, or vote for Napoleon and the full manger.</span></li>
+          <li><span><b>Agreeing with the last speaker.</b> The pigs split on defence too. Napoleon says the animals must get guns and learn to use them; Snowball wants to send out pigeons to stir up rebellion on other farms. The animals listen to one and then the other, and find themselves agreeing with whichever one spoke last.</span></li>
+          <li><span><b>The dogs.</b> Just as Snowball's speech is winning the room, Napoleon gives a high-pitched whimper and nine enormous dogs in brass-studded collars rush in and chase Snowball out through a hole in the hedge. They are Jessie's and Bluebell's puppies, now grown, and they wag their tails at Napoleon as the old dogs once did at Jones.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Napoleon then announces that the Sunday morning meetings are over. From now on a special committee of pigs, with him in the chair, will settle all questions in private and hand down its decisions. Four young pigs start to protest, the dogs growl, and the sheep break into Four legs good, two legs bad for a quarter of an hour, until the chance to talk has passed. Boxer, troubled, takes on a second maxim: Napoleon is always right. Three weeks later Napoleon announces that the windmill will be built after all. Squealer explains that Napoleon never really opposed it; Snowball had stolen the plans from Napoleon's own papers. Pretending to oppose it was a clever move to get rid of a dangerous character. Tactics, comrades, tactics.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>This is Stalin's victory over Trotsky in the 1920s. Trotsky argued for spreading revolution abroad, Stalin for socialism in one country; Trotsky was expelled from the Party, exiled in 1929 and murdered in Mexico by a Soviet agent in 1940. The dogs are the secret police, and the windmill echoes the Five-Year Plans for rapid industrialisation, which Stalin adopted after defeating the rivals who had argued for them.</p></div>
+      <figure class="lab" id="lab5">
+        <div class="lab-top"><div class="t">Lab: win the debate, or end it</div><div class="hint">Let the pigs speak, then see what the dogs do</div></div>
+        <div class="stage"><svg id="db5" role="img" aria-label="Animals in the barn leaning towards Napoleon or Snowball"></svg></div><div class="lab-ctl"><div class="row"><button class="btn" id="dbSnow" type="button">Snowball speaks</button><button class="btn" id="dbNap" type="button">Napoleon speaks</button><button class="btn" id="dbSheep" type="button">The sheep bleat</button><button class="btn primary" id="dbDogs" type="button">Napoleon whimpers</button><button class="btn" id="dbReset" type="button">Start again</button></div></div><div class="stats"><div class="stat"><span class="k">For Snowball</span><span class="v" id="dbS"></span></div><div class="stat"><span class="k">For Napoleon</span><span class="v glow" id="dbN"></span></div><div class="stat"><span class="k">Undecided</span><span class="v" id="dbU"></span></div></div><p class="callout" id="dbSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Napoleon can't out-argue Snowball, so he removes Snowball and the arguing. Then he takes Snowball's best idea as his own. Once the people who disagree are gone, a leader can claim anything, including their work.</p></div>
+      <div class="quiz" data-q="5"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="5"> I understand this chapter</label><a class="next" href="#ch6">Next: The fallen windmill →</a></div>
+    </section>
+    <!-- ===================== 6 ===================== -->
+    <section class="ch" id="ch6" data-n="6">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 6</span> · Work, trade, beds and a scapegoat</div>
+        <h2>The Fallen Windmill</h2>
+        <div class="short"><span class="lbl">In short</span><p>All year the animals work like slaves on the windmill: a sixty-hour week, plus Sunday afternoons that are strictly voluntary. Napoleon starts trading with humans through a solicitor, Mr Whymper, and the pigs move into the farmhouse and sleep in the beds. When a November gale knocks the half-built windmill down, Napoleon blames Snowball.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Voluntary work.</b> Napoleon announces Sunday afternoon work, entirely voluntary, but any animal that stays away will have its rations cut by half. Boxer, as strong as three horses, drags boulders up the quarry slope and adds a little extra work, alone, before the others are up and after they have gone to bed.</span></li>
+          <li><span><b>Trade with the enemy.</b> Napoleon decides to sell hay, wheat and, later, the hens' eggs, to pay for things the farm can't make. The animals have a vague memory of resolutions against trade and money; Squealer assures them no such resolution was ever written down. Whymper, a sly little solicitor, visits every Monday.</span></li>
+          <li><span><b>With sheets.</b> The pigs move into the farmhouse and sleep in the beds. Clover asks Muriel to read her the fourth commandment, which now says no animal shall sleep in a bed with sheets. Squealer explains: a bed is just a place to sleep; the rule was against sheets, a human invention, and the pigs have taken them off.</span></li>
+          <li><span><b>Snowball did it.</b> After the storm, Napoleon sniffs the ground, declares that Snowball crept in by night and wrecked the windmill out of spite, and sentences him to death. He offers a medal and apples to any animal who brings Snowball to justice. Pig footprints are found leading from a gap in the hedge.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>The windmill is far harder to build than anyone imagined. There is plenty of stone in the quarry, but no way to break it without picks and crowbars, which animals can't hold. They solve it by dragging huge boulders to the top of the quarry with ropes and toppling them over the edge to shatter below. Boxer does more than anyone, and is once nearly dragged back down the slope by a falling boulder. By late summer the windmill is half built. Then, on a stormy November night, the wind shakes the farm buildings, and in the morning the windmill lies in ruins. Napoleon paces in silence, and then, in a terrible voice, names the culprit: Snowball.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>Stalin blamed the failures of the 1930s on wreckers and saboteurs, often said to be working with the exiled Trotsky. The trade through Whymper mirrors the Soviet Union's dealings with capitalist countries in the 1920s and 1930s.</p></div>
+      <figure class="lab" id="lab6">
+        <div class="lab-top"><div class="t">Lab: who knocked down the windmill?</div><div class="hint">Change the storm and the walls, then hear the verdict</div></div>
+        <div class="stage"><svg id="wm6" role="img" aria-label="The half-built windmill in a storm"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="wmStorm">Strength of the storm <output id="owmStorm"></output></label><input type="range" id="wmStorm" min="0" max="10" value="8"></div><div class="ctl"><label for="wmWall">Thickness of the walls <output id="owmWall"></output></label><input type="range" id="wmWall" min="18" max="36" step="2" value="18"></div></div><div class="row"><span class="tip">Try a night:</span><button class="btn" id="wmGale" type="button" aria-pressed="true">The November gale</button><button class="btn" id="wmCalm" type="button" aria-pressed="false">A calm night</button><button class="btn" id="wmThick" type="button" aria-pressed="false">Walls three feet thick</button></div></div><div class="stats"><div class="stat"><span class="k">In the morning</span><span class="v" id="wmState"></span></div><div class="stat"><span class="k">The likely cause</span><span class="s" id="wmCause"></span></div><div class="stat"><span class="k">Napoleon's verdict</span><span class="s" id="wmVerdict" style="color:var(--glow)"></span></div></div><p class="callout" id="wmSay" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Napoleon now does several things the animals once swore against, and each is explained away. When something goes wrong he blames someone who isn't there to answer. A scapegoat turns every failure into proof that the leader is needed.</p></div>
+      <div class="quiz" data-q="6"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="6"> I understand this chapter</label><a class="next" href="#ch7">Next: The confessions →</a></div>
+    </section>
+    <!-- ===================== 7 ===================== -->
+    <section class="ch" id="ch7" data-n="7">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 7</span> · Hunger, a hens' strike and the purge</div>
+        <h2>The Confessions</h2>
+        <div class="short"><span class="lbl">In short</span><p>Through a bitter winter the half-starved animals rebuild the windmill with thicker walls, while Napoleon hides the hunger from the outside world. He orders the hens to give up their eggs for sale, and when they rebel he starves them into surrender. Then Snowball is blamed for everything, animals confess to plotting with him, and the dogs kill them in front of the whole farm.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Fooling Whymper.</b> To stop word getting out that the farm is short of food, Napoleon has the nearly empty bins in the store-shed filled almost to the brim with sand, topped with the last of the grain and meal, and lets Whymper walk past them. The trick works: the outside world hears that Animal Farm has no food shortage.</span></li>
+          <li><span><b>The hens' rebellion.</b> Told to give up four hundred eggs a week, the hens fly up to the rafters and lay their eggs there, so they smash on the floor. Napoleon stops their rations and orders that any animal who gives them so much as a grain of corn will be punished by death. After five days and nine dead hens, they give in.</span></li>
+          <li><span><b>Snowball everywhere.</b> Every broken window and blocked drain is now Snowball's work. Squealer announces that Snowball was Jones's secret agent from the start and tried to lose the Battle of the Cowshed. Boxer says he doesn't believe it; when told that Napoleon himself has said so, he accepts it. A few days later, dogs go for Boxer at a meeting.</span></li>
+          <li><span><b>The executions.</b> Napoleon calls the animals together. Four pigs, the ones who protested when the debates were abolished, confess to plotting with Snowball, and the dogs tear their throats out. Then hens, a goose and sheep confess to crimes of their own, and are killed too, until there is a pile of bodies at Napoleon's feet.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Afterwards the shaken animals huddle on the knoll that looks out over the farm. Clover gazes down at the fields in the spring evening light and thinks this is not what they hoped for on the night Major spoke. She had pictured a society where the strong protected the weak, as she once sheltered a brood of lost ducklings with her foreleg. Instead, nobody dares to say what they think, and fierce dogs roam everywhere. She has no thought of rebelling; things are still better than under Jones. The animals begin to sing Beasts of England, slowly and sadly. Squealer arrives to say the song is now banned. The Rebellion is complete, he explains, so a song about a better future is no longer needed. A new song by the poet pig Minimus takes its place.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>The confessions and executions recall the Moscow show trials of 1936 to 1938, where leading Bolsheviks confessed to absurd crimes, often to plotting with Trotsky, before being shot. The hens' revolt echoes the peasants who resisted the forced collectivisation of farms, which helped cause the famines of 1932 and 1933, including the Holodomor in Ukraine.</p></div>
+      <figure class="lab" id="lab7">
+        <div class="lab-top"><div class="t">Lab: the spiral of silence</div><div class="hint">Raise the fear and watch who still speaks up</div></div>
+        <div class="stage"><svg id="sp7" role="img" aria-label="Sixty animals, showing which still speak up as fear rises"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="spFear">Fear on the farm <output id="ospFear"></output></label><input type="range" id="spFear" min="0" max="10" step="0.5" value="6.5"></div></div><div class="row"><span class="tip">Try a moment:</span><button class="btn" id="spA" type="button" aria-pressed="false">Sunday meetings (Ch 3)</button><button class="btn" id="spB" type="button" aria-pressed="false">After the dogs (Ch 5)</button><button class="btn" id="spC" type="button" aria-pressed="false">After the confessions (Ch 7)</button></div></div><div class="stats"><div class="stat"><span class="k">Still willing to speak</span><span class="v" id="spOn"></span></div><div class="stat"><span class="k">Gone quiet</span><span class="v glow" id="spOff"></span></div><div class="stat"><span class="k">What's happening</span><span class="s" id="spSay" aria-live="polite"></span></div></div><p class="callout">An illustrative model: each animal has its own courage, and speaks up if its courage plus the comfort of seeing others speak beats the fear. <b>Silence feeds on itself, so a little more fear can make a whole farm go quiet at once.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Fear spreads silence faster than force does. Once a few animals die for speaking, everyone else learns to keep quiet, and banning the old song removes even the memory of what they hoped for.</p></div>
+      <div class="quiz" data-q="7"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="7"> I understand this chapter</label><a class="next" href="#ch8">Next: The Battle of the Windmill →</a></div>
+    </section>
+    <!-- ===================== SOME ARE MORE EQUAL ===================== -->
+    <section class="part" id="part4">
+      <span class="eyebrow">Part four · some are more equal</span>
+      <h2>Some Are More Equal</h2>
+      <p>The rules on the barn wall shift a few words at a time, the figures keep improving while the troughs stay empty, the most loyal worker is sold to the knacker, and finally the pigs stand up on two legs. The last scene, pigs and men at one table, is one of the best-known endings in English fiction.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>Betrayal rarely arrives all at once. It is edited in a word at a time, and accepted because each step looks small.</p></div>
+    </section>
+    <!-- ===================== 8 ===================== -->
+    <section class="ch" id="ch8" data-n="8">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 8</span> · Figures, forged notes and whisky</div>
+        <h2>The Battle of the Windmill</h2>
+        <div class="short"><span class="lbl">In short</span><p>After the executions, Clover thinks the sixth commandment forbade all killing, and finds it now says without cause. Squealer reads out figures showing production soaring while the animals stay hungry. Napoleon sells timber to Frederick for banknotes that turn out to be forged; Frederick's men attack and blow the windmill up. The pigs celebrate the victory with whisky, and another commandment changes.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Figures in place of food.</b> Squealer reads out long lists showing that production of every kind of food has gone up by two hundred, three hundred or five hundred per cent. The animals see no reason to doubt him, especially as they can no longer clearly remember what things were like before the Rebellion.</span></li>
+          <li><span><b>Napoleon, far away.</b> Napoleon rarely appears in public now, and when he does it is with his dogs and a black cockerel who trumpets before he speaks. He is given grand titles such as Father of All Animals and Terror of Mankind. Minimus writes a poem in his praise, which is painted on the barn wall beside his portrait.</span></li>
+          <li><span><b>Two buyers, one deal.</b> Napoleon plays Pilkington and Frederick off against each other over a pile of timber, finally selling it to Frederick, who must pay in banknotes rather than a cheque. The notes turn out to be forged. Days later Frederick's men attack and blow the windmill to pieces with blasting powder.</span></li>
+          <li><span><b>A victory, of sorts.</b> The animals drive the men off at a terrible cost: a cow, three sheep and two geese are killed and nearly everyone is wounded. Squealer calls it the Battle of the Windmill and a great victory. The animals aren't sure what they have won, but the gun is fired and Napoleon awards himself a new decoration.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>A few days after the battle, the pigs find a case of whisky in the farmhouse cellar. That night loud singing comes from the house, and Napoleon is seen galloping round the garden in Jones's old bowler hat. Next morning Squealer announces gravely that Napoleon is dying; his last order, it is said, is that drinking alcohol shall be punished by death. By evening he is better, and the following day he asks Whymper for books on brewing and distilling. A few nights later there is a loud crash in the yard. The animals find Squealer sprawled beside a broken ladder at the end wall of the barn, with a lantern, a paintbrush and an overturned pot of white paint. Only Benjamin seems to understand, and he says nothing. Some days later Muriel reads the fifth commandment: no animal shall drink alcohol to excess.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>The timber deal with Frederick is the 1939 pact between Stalin and Hitler, which Germany broke when it invaded the Soviet Union in 1941. The ruined windmill stands for the devastation of that war, and the costly victory for the enormous Soviet losses in winning it.</p></div>
+      <figure class="lab" id="lab8">
+        <div class="lab-top"><div class="t">Lab: Squealer's figures</div><div class="hint">Read the report, then look in the trough</div></div>
+        <div class="stage"><svg id="sq8" role="img" aria-label="Production in Squealer's reports compared with what reached the animals' troughs"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="sqYr">Years since the Rebellion <output id="osqYr"></output></label><input type="range" id="sqYr" min="1" max="6" value="5"></div></div><div class="row"><span class="tip">Show:</span><button class="btn" id="sqRep" type="button" aria-pressed="false">The report only</button><button class="btn" id="sqBoth" type="button" aria-pressed="true">The report and the trough</button></div></div><div class="stats"><div class="stat"><span class="k">The report says, against Jones's day</span><span class="v glow" id="sqSays"></span></div><div class="stat"><span class="k">In the trough, against Jones's day</span><span class="v" id="sqTr"></span></div><div class="stat"><span class="k">Memory of Jones's day</span><span class="s" id="sqMem"></span></div></div><p class="callout" id="sqCap" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>When the facts are bad, Napoleon changes the facts the animals see: the figures, the titles, the history and the words on the wall. Each step is small. Together they leave the animals unable to trust their own memory.</p></div>
+      <div class="quiz" data-q="8"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="8"> I understand this chapter</label><a class="next" href="#ch9">Next: Boxer's last load →</a></div>
+    </section>
+    <!-- ===================== 9 ===================== -->
+    <section class="ch" id="ch9" data-n="9">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 9</span> · The faithful worker and the knacker's van</div>
+        <h2>Boxer's Last Load</h2>
+        <div class="short"><span class="lbl">In short</span><p>Boxer's split hoof is slow to heal, but he works on, hoping to see the windmill finished before he retires. Rations are cut for everyone except the pigs and dogs, while the farm is declared a Republic with Napoleon its only candidate. When Boxer collapses, a van comes to take him, the pigs say, to hospital. Benjamin reads what is painted on its side.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Readjusted, not reduced.</b> Squealer explains that rations aren't being cut, only readjusted, and proves with figures that the animals have more oats, hay and turnips than in Jones's day, work shorter hours, drink better water and live longer. The animals believe him.</span></li>
+          <li><span><b>Spontaneous Demonstrations.</b> Napoleon orders weekly processions to celebrate the farm's struggles and triumphs. The animals march in formation and listen to songs, speeches and more of Squealer's figures. Many find it comforting to be reminded that, whatever else, they are now their own masters.</span></li>
+          <li><span><b>The Republic and the raven.</b> In April the farm is proclaimed a Republic and Napoleon is elected President, the only candidate, unanimously. Moses the raven returns after years away, talking of Sugarcandy Mountain again. The pigs call his stories lies, yet let him stay and give him a daily allowance of beer.</span></li>
+          <li><span><b>The pension that never came.</b> The animals had agreed retirement ages, twelve for a horse, with a pension of grain and talk of a corner of the pasture for retired animals. So far, no animal has actually retired. Boxer, close to twelve, plans to spend his retirement learning the rest of the alphabet.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>One summer evening Boxer falls while hauling stone for the windmill and cannot get up. Squealer announces that Napoleon has arranged for him to be treated at the hospital in Willingdon. Two days later a closed van arrives while the animals are at work. Benjamin, who has never been seen to gallop, gallops into the yard braying for everyone to come, and reads out the lettering on the van: it belongs to a horse slaughterer and glue boiler. The animals run after it shouting to Boxer to get out. His face appears at the small window, and they hear his hooves drumming on the inside of the van, but his strength is gone. Three days later Squealer tearfully reports that Boxer died in hospital, praising Napoleon to the end. The van, he says, had been bought from the knacker by the vet, who had not yet painted out the old name. Soon afterwards a crate of whisky is delivered to the farmhouse.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>Boxer stands for the loyal working class, whose labour built the new state and whose trust it betrayed. Orwell's first readers might also have seen Moses' return in Stalin's decision in 1943, in the middle of the war, to let the Orthodox Church reopen when religion became useful to the regime.</p></div>
+      <figure class="lab" id="lab9">
+        <div class="lab-top"><div class="t">Lab: I will work harder</div><div class="hint">Change how hard Boxer works and how he's fed, then follow his strength</div></div>
+        <div class="stage"><svg id="bx9" role="img" aria-label="Boxer's strength and his workload by age"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="bxEff">Extra work he takes on <output id="obxEff"></output></label><input type="range" id="bxEff" min="0" max="50" step="5" value="40"></div><div class="ctl"><label for="bxFood">Rations <output id="obxFood"></output></label><input type="range" id="bxFood" min="60" max="100" step="5" value="75"></div></div><div class="row"><span class="tip">Try a life:</span><button class="btn" id="bxA" type="button" aria-pressed="true">Boxer as he is</button><button class="btn" id="bxB" type="button" aria-pressed="false">A steady pace</button><button class="btn" id="bxC" type="button" aria-pressed="false">Fed and rested</button><button class="btn" id="bxVan" type="button" aria-pressed="false">Read the side of the van</button></div></div><div class="stats"><div class="stat"><span class="k">Collapses at about</span><span class="v glow" id="bxAge"></span></div><div class="stat"><span class="k">Reaches retirement at 12?</span><span class="v" id="bxRet"></span></div><div class="stat"><span class="k">Pension actually paid</span><span class="v" id="bxPen"></span></div></div><p class="callout" id="bxCap" aria-live="polite"></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>Boxer gives everything and believes what he is told, and the regime uses up his trust and sells what is left. His answer to every problem, to work harder, makes him the perfect servant of whoever is in charge.</p></div>
+      <div class="quiz" data-q="9"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="9"> I understand this chapter</label><a class="next" href="#ch10">Next: Some are more equal →</a></div>
+    </section>
+    <!-- ===================== 10 ===================== -->
+    <section class="ch" id="ch10" data-n="10">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Chapter 10</span> · From pig to man</div>
+        <h2>Some Animals Are More Equal</h2>
+        <div class="short"><span class="lbl">In short</span><p>Years pass. Most animals who remember the Rebellion are dead, and so is Jones. The farm is richer, but only the pigs and dogs are better off. Then the pigs come out walking on their hind legs, and the wall holds a single commandment: all animals are equal, but some are more equal than others. At a dinner with the neighbouring farmers, the animals look from pig to man and can't tell them apart.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>The windmill, at last.</b> The windmill is finished, but it is used to mill corn for profit, not for the electric light and short working week Snowball promised. Napoleon now says the truest happiness lies in working hard and living frugally.</span></li>
+          <li><span><b>Paperwork.</b> Squealer explains that the pigs work very hard at things called files, reports, minutes and memoranda: big sheets of paper covered in writing which are then burnt in the furnace. The animals can't say whether life is better than under Jones. Only Benjamin claims to remember everything, and says things never were, and never will be, much better or worse.</span></li>
+          <li><span><b>Four legs good, two legs better.</b> Squealer spends a week alone with the sheep, teaching them a new song. When Napoleon walks out of the farmhouse on his hind legs, a whip in his trotter, and the animals are about to protest, the sheep burst into Four legs good, two legs better, and drown out any chance of objection.</span></li>
+          <li><span><b>One commandment.</b> Clover asks Benjamin to read the wall to her. Only one commandment is left: all animals are equal, but some animals are more equal than others. After that, nothing seems strange: the pigs buy a wireless and a telephone, take out newspaper subscriptions and wear Jones's clothes.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Pilkington and other farmers are invited to tour the farm, and that evening they drink and play cards with the pigs in the farmhouse. Pilkington makes a toast: he once feared Animal Farm, but now sees that its animals work harder and eat less than any in the county, a lesson for every farmer. The pigs, he jokes, have their lower animals to deal with, just as the farmers have their lower classes. Napoleon replies that the farm will go back to its old name, the Manor Farm, that animals will no longer call each other comrade, that the hoof and horn will be taken off the flag, and that Major's skull, once set up for the animals to file past, has been buried. Outside, the animals creep up to the window to watch. Then a furious quarrel breaks out: Napoleon and Pilkington have each played an ace of spades at the same moment. The animals look from the pigs to the men and back again, and can no longer tell which is which.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>The closing dinner recalls the Tehran Conference of 1943, where Stalin met Churchill and Roosevelt. Orwell later explained that he meant the ending to strike a note of discord, not harmony, because he expected the wartime friendship to break down, as it did in the Cold War. The two aces of spades suggest both sides are cheating.</p></div>
+      <figure class="lab" id="lab10">
+        <div class="lab-top"><div class="t">Lab: from pig to man</div><div class="hint">Move through the years and watch the two faces meet</div></div>
+        <div class="stage"><svg id="pm10" role="img" aria-label="A pig's face and a man's face that become more alike over the years"></svg></div><div class="lab-ctl"><div class="row"><div class="ctl"><label for="pmT">How far into the story <output id="opmT"></output></label><input type="range" id="pmT" min="0" max="100" value="62"></div></div><div class="row"><span class="tip">Try a moment:</span><button class="btn" id="pmA" type="button" aria-pressed="false">The Rebellion</button><button class="btn" id="pmB" type="button" aria-pressed="false">The pigs move in</button><button class="btn" id="pmC" type="button" aria-pressed="false">The last dinner</button></div><div class="traits" id="pmList"></div></div><div class="stats"><div class="stat"><span class="k">Major's warnings broken</span><span class="v glow" id="pmN"></span></div><div class="stat"><span class="k">Can you tell them apart?</span><span class="s" id="pmSay" aria-live="polite"></span></div></div><p class="callout">Each habit lights up at the chapter where the pigs take it on. <b>No single step turns a pig into a man. Together they do.</b></p>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>By the end the pigs have become everything Major warned against, and the farm is run much as it was under Jones, by a different species. The revolution didn't fail in one moment; it was traded away rule by rule, until the new rulers looked just like the old ones.</p></div>
+      <div class="quiz" data-q="10"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="10"> I understand this chapter</label><a class="next" href="#ch11">Next: The freedom of the press →</a></div>
+    </section>
+    <!-- ===================== BEHIND THE BOOK ===================== -->
+    <section class="part" id="part5">
+      <span class="eyebrow">Appendix · behind the book</span>
+      <h2>Behind the Book</h2>
+      <p>Animal Farm nearly wasn't published. Orwell wrote a preface about why, which went missing for a quarter of a century, and a second preface for Ukrainian readers explaining where the story came from.</p>
+      <div class="claim"><span class="lbl">The idea behind this part</span><p>The greatest danger to free speech, Orwell argued, is not the censor's pen but our own fear of saying the unfashionable thing.</p></div>
+    </section>
+    <!-- ===================== 11 ===================== -->
+    <section class="ch" id="ch11" data-n="11">
+      <div class="ch-head">
+        <div class="eyebrow"><span>Appendix</span> · Orwell's two prefaces</div>
+        <h2>The Freedom of the Press</h2>
+        <div class="short"><span class="lbl">In short</span><p>Orwell wrote a preface for Animal Farm about the trouble he had getting it published, but it was left out and only found and printed in 1972. In it he argues that in wartime Britain the threat to free speech came less from the government than from writers and publishers who would not criticise the Soviet Union, then a popular ally. A second preface, for Ukrainian readers in 1947, explains where the story came from.</p></div>
+      </div>
+      <div class="ideas">
+        <h3>The big ideas</h3>
+        <ul>
+          <li><span><b>Turned down.</b> Orwell finished the book in early 1944. Victor Gollancz, his usual publisher, refused it. Jonathan Cape accepted it, then backed out after an official at the Ministry of Information advised against it. Faber and Faber, where T. S. Eliot read it, turned it down too. Secker and Warburg finally published it in August 1945.</span></li>
+          <li><span><b>Fear, not law.</b> Orwell's point is that nobody banned the book. The pressure was quieter: an unwritten agreement among respectable people that certain things were not said, at a time when the Soviet Union was fighting Hitler alongside Britain. Unpopular ideas, he wrote, can be silenced without any need for force.</span></li>
+          <li><span><b>Liberty means the unwelcome.</b> The preface's best-known line says, in effect, that if liberty means anything at all, it means the right to tell people what they don't want to hear. Defending free speech only for views you already share, he argues, is not defending it at all.</span></li>
+          <li><span><b>A boy and a cart-horse.</b> In the Ukrainian preface, Orwell says the idea came to him after watching a small boy whip a huge cart-horse along a narrow path. If animals ever became aware of their strength, he thought, we would have no power over them; and men exploit animals much as the rich exploit the poor.</span></li>
+        </ul>
+      </div>
+      <div class="story"><span class="lbl">From the book</span><p>Orwell had seen the problem first-hand. In 1937 he fought in the Spanish Civil War with a small left-wing militia, the POUM, which the Soviet-backed communists then hunted down as traitors; he and his wife only just escaped from Spain. Back in England, he found that much of the left-wing press would not print what he had seen. That, he said, showed him how easily propaganda in a free country could shape what people believed about the Soviet Union. Animal Farm was his attempt to break that myth in a story anyone could follow and that would translate easily into other languages. When it finally appeared, in August 1945, the war in Europe was over and the mood was turning. The first printing sold out within weeks, and the book made Orwell famous.</p></div>
+      <div class="note"><span class="lbl">The history behind it</span><p>Orwell remained a democratic socialist all his life. Animal Farm attacks a dictatorship that called itself socialist, not the idea of equality. The Ministry of Information official who advised Cape, Peter Smollett, was later revealed to have been a Soviet agent. Orwell followed Animal Farm with Nineteen Eighty-Four in 1949, and died of tuberculosis in January 1950, aged 46.</p></div>
+      <figure class="lab" id="lab11">
+        <div class="lab-top"><div class="t">Lab: banned, or just not said?</div><div class="tally" id="tally11" aria-label="Score"></div></div>
+        <div class="sorter" id="sort11"></div>
+      </figure>
+      <div class="plain"><span class="lbl">In plain words</span><p>A book can be silenced without anyone banning it. Orwell's warning is about all of us: about the subjects we quietly avoid because raising them would cost us friends, readers or standing.</p></div>
+      <div class="quiz" data-q="11"></div>
+      <div class="ch-foot"><label class="done-toggle"><input type="checkbox" data-done="11"> I understand this chapter</label><a class="next" href="#after">Next: your barn wall →</a></div>
+    </section>
+    <section class="after" id="after">
+      <span class="eyebrow">Afterword</span>
+      <h2>Your barn wall</h2>
+      <p class="big">The book's lesson as a habit: write down the promises that people with power make to you, word for word, and read them again later. Betrayal is rarely announced. It is painted in at night, a few words at a time.</p>
+      <figure class="lab" id="wallTool">
+        <div class="lab-top"><div class="t">Paint a promise on the wall</div><div class="hint">Saved in this browser only</div></div>
+        <div class="fields">
+          <div class="field"><label for="bwWho">Who made the promise</label><input id="bwWho" maxlength="80" placeholder="e.g. My company's leadership"></div>
+          <div class="field"><label for="bwWhen">When</label><input type="date" id="bwWhen"></div>
+          <div class="field" style="grid-column:1/-1"><label for="bwSaid">The promise, as first made</label><input id="bwSaid" maxlength="200" placeholder="e.g. Nobody will lose their job in the merger"></div>
+          <div class="row" style="grid-column:1/-1"><button class="btn primary" id="bwAdd" type="button">Paint it on the wall</button><span class="tip" id="bwMsg"></span></div>
+        </div>
+        <div class="out" id="bwList" aria-live="polite"></div>
+      </figure>
+      <div class="recap">
+        <div><span class="n">The dream</span><b>Start from a true complaint</b><span>Major was right about the farm. Revolutions begin with real injustice, which is why their betrayal hurts.</span></div>
+        <div><span class="n">Knowledge</span><b>Whoever reads, rules</b><span>The pigs could read and write; most animals could only remember. Power gathered in that gap.</span></div>
+        <div><span class="n">Language</span><b>Slogans replace thinking</b><span>Four legs good, two legs bad, and later better, drowned out every argument at the moment it mattered.</span></div>
+        <div><span class="n">Enemies</span><b>Blame the absent</b><span>Snowball, gone and unable to reply, explained every failure and justified every purge.</span></div>
+        <div><span class="n">Memory</span><b>Edit the past</b><span>The battle, the figures and the wall were rewritten a little at a time, until no one could trust what they remembered.</span></div>
+        <div><span class="n">Trust</span><b>Loyalty gets used up</b><span>Boxer worked harder and believed what he was told, and the farm sold him when his strength ran out.</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <p>An independent study guide to <i>Animal Farm: A Fairy Story</i> by George Orwell (1945), including his prefaces "The Freedom of the Press" and the 1947 preface to the Ukrainian edition. The explanations, retold scenes and labs are written in our own words; the book's chapters are untitled, so the chapter names here are ours, and the Seven Commandments are quoted as they appear on the barn wall. Labs that show numbers are illustrative models unless they say the figures come from the book.</p>
+  <p><a href="../index.html">Back to the bookshelf</a></p>
+</footer>
+
+<script>
+(() => {
+const PARTS = ["The dream and the Rebellion", "The young republic", "Napoleon takes over", "Some are more equal", "Behind the book"];
+const CH = [["Old Major's Dream", "Old Major's dream", 0, "Chapter 1"], ["The Rebellion", "The Rebellion", 0, "Chapter 2"], ["The Harvest and the Apples", "The harvest and the apples", 1, "Chapter 3"], ["The Battle of the Cowshed", "The Battle of the Cowshed", 1, "Chapter 4"], ["Snowball and the Windmill", "Snowball and the windmill", 2, "Chapter 5"], ["The Fallen Windmill", "The fallen windmill", 2, "Chapter 6"], ["The Confessions", "The confessions", 2, "Chapter 7"], ["The Battle of the Windmill", "The Battle of the Windmill", 3, "Chapter 8"], ["Boxer's Last Load", "Boxer's last load", 3, "Chapter 9"], ["Some Animals Are More Equal", "Some are more equal", 3, "Chapter 10"], ["The Freedom of the Press", "The freedom of the press", 4, "Appendix"]];
+const QUIZ = {
+"1": {
+"q": "According to Old Major, what is the root cause of the animals' misery?",
+"o": [
+"Bad weather and poor soil",
+"Man, who takes what they produce and gives back the bare minimum",
+"The laziness of some of the animals"
+],
+"a": 1,
+"w": "Major says the land could feed many more animals in comfort; nearly all of it is taken by Man, the only creature that consumes without producing."
+},
+"2": {
+"q": "What happens to the milk on the evening after the Rebellion?",
+"o": [
+"It disappears, and nobody says where it went",
+"It is shared equally among all the animals",
+"It is sold in Willingdon to buy seed"
+],
+"a": 0,
+"w": "Napoleon steers everyone off to the harvest, and the milk is gone when they return. In the next chapter we learn it goes into the pigs' mash."
+},
+"3": {
+"q": "How does Squealer justify the pigs keeping the milk and apples?",
+"o": [
+"The pigs worked hardest at the harvest",
+"The other animals don't like milk",
+"Pigs are brainworkers who need them, and if they fail, Jones will come back"
+],
+"a": 2,
+"w": "Squealer wraps a privilege in science and fear: the pigs' health protects everyone from Jones, so objecting sounds like wanting Jones back."
+},
+"4": {
+"q": "What does Chapter 4 say Napoleon did in the Battle of the Cowshed?",
+"o": [
+"He led the final charge",
+"He was wounded by Jones's gun",
+"Nothing: it doesn't mention him"
+],
+"a": 2,
+"w": "Snowball plans and leads the ambush and is wounded. Napoleon's heroic part is invented later, when the past is rewritten."
+},
+"5": {
+"q": "Why does Squealer say Napoleon only pretended to oppose the windmill?",
+"o": [
+"It was tactics, to get rid of Snowball",
+"He had changed his mind after reading the plans",
+"The windmill was too expensive at first"
+],
+"a": 0,
+"w": "Squealer turns a U-turn into genius: the opposition was a manoeuvre. Nobody can check, so the story stands."
+},
+"6": {
+"q": "How does the fourth commandment read after the pigs move into the farmhouse?",
+"o": [
+"No animal shall sleep in a bed",
+"No animal shall sleep in a bed with sheets",
+"No animal shall sleep in the farmhouse"
+],
+"a": 1,
+"w": "Two words appear on the wall, and Squealer insists that's what it always said. Clover remembered it differently, but can't read well enough to be sure."
+},
+"7": {
+"q": "Why does Squealer say Beasts of England must no longer be sung?",
+"o": [
+"The Rebellion is complete, so a song about a better future is no longer needed",
+"It was written by Snowball",
+"The tune was too hard to learn"
+],
+"a": 0,
+"w": "Banning the anthem takes away the yardstick the animals could use to measure the present against the promise."
+},
+"8": {
+"q": "What does the fifth commandment say after the pigs find the whisky?",
+"o": [
+"No animal shall drink alcohol",
+"No animal shall drink alcohol on Sundays",
+"No animal shall drink alcohol to excess"
+],
+"a": 2,
+"w": "Two words are added in the night, and Squealer is found beside a ladder and a pot of paint. Benjamin understands, and keeps quiet."
+},
+"9": {
+"q": "How does Squealer explain the lettering on the van that took Boxer?",
+"o": [
+"Benjamin had misread it",
+"The vet had bought the van from the knacker and not yet painted out the old name",
+"It was a cruel joke by the humans"
+],
+"a": 1,
+"w": "A plausible-sounding detail covers an unbearable truth, and the animals, wanting to believe Boxer died well cared for, accept it."
+},
+"10": {
+"q": "What single commandment is left on the barn wall at the end?",
+"o": [
+"All animals are equal, but some animals are more equal than others",
+"All animals are equal",
+"Four legs good, two legs better"
+],
+"a": 0,
+"w": "The new line keeps the old words and adds a clause that cancels them: the book's whole method of betrayal in one sentence."
+},
+"11": {
+"q": "In his preface, what did Orwell see as the main threat to free expression in wartime Britain?",
+"o": [
+"Strict government censorship laws",
+"A shortage of paper for printing",
+"Writers and publishers keeping quiet to avoid unpopular truths"
+],
+"a": 2,
+"w": "He noted that official censorship was light. The real pressure was an unspoken orthodoxy that made people avoid criticising the Soviet Union."
+}
+};
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DE = document.documentElement;
+const clamp = (x,a,b) => Math.max(a, Math.min(b, x));
+const lerp = (a,b,t) => a + (b-a)*t;
+/* SVG paint helpers: colours come from CSS variables so both themes work without redrawing */
+const F = (c, o) => `style="fill:var(--${c})${o != null ? ';fill-opacity:' + o : ''}"`;
+const FS = (f, s, w = 1, fo) => `style="fill:var(--${f});${fo != null ? 'fill-opacity:' + fo + ';' : ''}stroke:var(--${s});stroke-width:${w}"`;
+const S = (c, w = 1, extra = '') => `style="stroke:var(--${c});stroke-width:${w};fill:none${extra}"`;
+const TX = (x, y, t, c = 'muted', size = 13, anchor = 'start', extra = '') => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${t}</text>`;
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const gauss = r => { let u = 0, v = 0; while (!u) u = r(); while (!v) v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+const press = (btns, on) => btns.forEach(b => b.setAttribute('aria-pressed', b === on));
+/* narrow screens get their own SVG layouts so text stays readable instead of shrinking */
+const NARROW = () => DE.clientWidth < 620;
+const vb = (el, w, h) => el.setAttribute('viewBox', `0 0 ${w} ${h}`);
+const redraws = []; let wasNarrow = NARROW();
+const onLayout = f => { redraws.push(f); return f; };
+addEventListener('resize', () => { const n = NARROW(); if (n !== wasNarrow){ wasNarrow = n; redraws.forEach(f => f()); } });
+const out = (id, v) => { const o = $('#o' + id); if (o) o.textContent = v; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store = { get(k, d){ try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch(e){ return d; } }, set(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} } };
+const arrowHead = (x, y, ang, c = 'faint', s = 7) => { const a1 = ang + 2.6, a2 = ang - 2.6; return `<path d="M${x} ${y}L${(x + s * Math.cos(a1)).toFixed(1)} ${(y + s * Math.sin(a1)).toFixed(1)}L${(x + s * Math.cos(a2)).toFixed(1)} ${(y + s * Math.sin(a2)).toFixed(1)}Z" ${F(c)}/>`; };
+/* wrap text into tspans of at most n characters */
+const wrap = (x, y, t, n, lh, c = 'text', size = 13, anchor = 'middle', extra = '') => { const words = t.split(' '), lines = []; let cur = '';
+  words.forEach(w => { if ((cur + ' ' + w).trim().length > n && cur){ lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }); if (cur) lines.push(cur);
+  const y0 = y - (lines.length - 1) * lh / 2;
+  return `<text x="${x}" font-size="${size}" text-anchor="${anchor}" ${F(c)} ${extra}>${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(1)}">${l}</tspan>`).join('')}</text>`; };
+
+/* ---------- theme ---------- */
+const isLight = () => getComputedStyle(DE).getPropertyValue('--ink').trim().toLowerCase() !== '#16120e';
+try { const t = localStorage.getItem('af-theme'); if (t === 'light' || t === 'dark') DE.setAttribute('data-theme', t); } catch(e){}
+const themeTxt = () => { const l = isLight(); $('#themeTxt').textContent = l ? 'Dark' : 'Light'; $('#theme').setAttribute('aria-label', l ? 'Switch to dark theme' : 'Switch to light theme'); };
+themeTxt();
+$('#theme').addEventListener('click', () => { const next = isLight() ? 'dark' : 'light'; DE.setAttribute('data-theme', next); try { localStorage.setItem('af-theme', next); } catch(e){} themeTxt(); });
+matchMedia('(prefers-color-scheme: light)').addEventListener('change', themeTxt);
+
+/* ---------- chapters, nav, progress ---------- */
+const NCH = CH.length;
+let railHTML = '', lastPart = -1;
+CH.forEach(([t,,p], i) => {
+  if (p !== lastPart){ railHTML += `<div class="grp">${PARTS[p]}</div>`; lastPart = p; }
+  railHTML += `<a href="#ch${i+1}" data-n="${i+1}"><span class="n">${String(i+1).padStart(2,'0')}</span><span>${t}</span><span class="tick" aria-hidden="true"></span></a>`;
+});
+$('#railLinks').innerHTML = railHTML;
+$('#chips').innerHTML = CH.map(([,s],i) => `<a href="#ch${i+1}" data-n="${i+1}">${i+1}. ${s}</a>`).join('');
+let done = new Set(store.get('af-done', []));
+const save = () => store.set('af-done', [...done]);
+function renderProgress(){
+  $$('[data-done]').forEach(cb => cb.checked = done.has(cb.dataset.done));
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('done', done.has(a.dataset.n)));
+  $('#progTxt').textContent = `${done.size} of ${NCH} understood`;
+  $('#progBar').style.width = (done.size / NCH * 100) + '%';
+}
+$$('[data-done]').forEach(cb => cb.addEventListener('change', () => { cb.checked ? done.add(cb.dataset.done) : done.delete(cb.dataset.done); save(); renderProgress(); }));
+renderProgress();
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return; const n = e.target.dataset.n;
+  $$('#railLinks a, #chips a').forEach(a => a.classList.toggle('on', a.dataset.n === n));
+  const chip = $(`#chips a[data-n="${n}"]`);
+  if (chip && getComputedStyle($('#chips')).display !== 'none') $('#chips').scrollTo({left: chip.offsetLeft - 16, behavior: RM ? 'auto' : 'smooth'});
+  const link = $(`#railLinks a[data-n="${n}"]`), rail = $('.rail');
+  if (link && rail.scrollHeight > rail.clientHeight){ const r = link.offsetTop - rail.clientHeight / 2; rail.scrollTo({top: r, behavior: RM ? 'auto' : 'smooth'}); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+$$('.ch').forEach(s => secIO.observe(s));
+
+/* ---------- quizzes ---------- */
+$$('.quiz').forEach(box => {
+  const d = QUIZ[box.dataset.q];
+  box.innerHTML = `<span class="sub">Quick check</span><p class="qq">${d.q}</p><div class="opts">${d.o.map((o,i) => `<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><p class="why" hidden></p>`;
+  box.querySelectorAll('.opt').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, why = box.querySelector('.why');
+    box.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.i === d.a) x.classList.add('right'); });
+    if (i !== d.a) b.classList.add('wrong');
+    why.textContent = (i === d.a ? 'Correct. ' : 'Not quite. ') + d.w; why.hidden = false;
+    if (i === d.a){ done.add(box.dataset.q); save(); renderProgress(); }
+  }));
+});
+
+/* ---------- shared: sorter game ---------- */
+function sorter(boxSel, tallySel, bins, items, shuffleItems = true, onAns){
+  const box = $(boxSel), tally = $(tallySel); let i = 0, score = [];
+  const order = items.map((_, k) => k);
+  function shuffle(){ if (!shuffleItems) return; for (let k = order.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [order[k], order[j]] = [order[j], order[k]]; } }
+  function drawTally(){ tally.innerHTML = items.map((_, k) => `<i class="${score[k] === true ? 'ok' : score[k] === false ? 'no' : ''}"></i>`).join(''); }
+  function show(){
+    drawTally();
+    if (i >= items.length){ const n = score.filter(Boolean).length;
+      box.innerHTML = `<div class="sort-card"><span class="k">Done</span><span class="item">${n} of ${items.length} right</span><span class="fb">${n === items.length ? 'Perfect. You\'ve got the idea.' : 'The ones you missed are exactly the habits the chapter is about.'}</span></div><div class="row"><button class="btn primary" data-again>Play again</button></div>`;
+      box.querySelector('[data-again]').addEventListener('click', () => { i = 0; score = []; shuffle(); if (onAns) onAns(null); show(); }); return; }
+    const it = items[order[i]];
+    let bs = it.bins || bins;
+    if (it.bins && it.shuffle !== false){ bs = [...bs]; for (let k = bs.length - 1; k > 0; k--){ const j = Math.floor(Math.random() * (k + 1)); [bs[k], bs[j]] = [bs[j], bs[k]]; } }
+    box.innerHTML = `<div class="sort-card" aria-live="polite"><span class="k">${it.k || 'Item ' + (i + 1) + ' of ' + items.length}</span><span class="item${it.q ? ' q' : ''}">${it.t}</span>${it.ctx ? `<span class="ctx">${it.ctx}</span>` : ''}<span class="fb" hidden></span></div>
+      <div class="bins${it.stack ? ' stack' : ''}">${bs.map(b => `<button class="bin" data-b="${b.id}"><b>${b.label}</b>${b.d ? `<span>${b.d}</span>` : ''}</button>`).join('')}</div>
+      <div class="row"><button class="btn primary" data-next hidden>Next →</button></div>`;
+    box.querySelectorAll('.bin').forEach(btn => btn.addEventListener('click', () => {
+      const ok = btn.dataset.b === it.a; score[order[i]] = ok; if (onAns) onAns(it, ok);
+      box.querySelectorAll('.bin').forEach(x => { x.disabled = true; if (x.dataset.b === it.a) x.style.borderColor = 'var(--good)'; });
+      if (!ok) btn.style.borderColor = 'var(--bad)';
+      const fb = box.querySelector('.fb'); fb.hidden = false;
+      fb.innerHTML = `<b style="color:var(--${ok ? 'good' : 'bad'})">${ok ? (it.yes || 'Yes.') : (it.no || 'Not quite.')}</b> ${it.w}`;
+      drawTally(); const nx = box.querySelector('[data-next]'); nx.hidden = false; nx.focus({preventScroll:true});
+      nx.addEventListener('click', () => { i++; show(); });
+    }));
+  }
+  shuffle(); show();
+}
+
+const pct = (x, d = 0) => (x * 100).toFixed(d) + '%';
+
+/* ---------- hero: finder ---------- */
+{ const FIND = [
+    ['Why do revolutions turn sour?', 5, 'The debate that ended debate', 'When a leader can\'t win the argument, he ends it. Once there is no one left to disagree, nothing stops the slide.'],
+    ['Who were the pigs meant to be?', 2, 'The Rebellion', 'Napoleon is Stalin, Snowball is Trotsky, Squealer is the propaganda machine and Old Major mixes Marx and Lenin.'],
+    ['How do slogans replace thinking?', 3, 'Four legs good, two legs bad', 'A slogan anyone can chant is also one nobody can check, and it can be bleated over any argument.'],
+    ['How do leaders rewrite history?', 4, 'The Battle of the Cowshed', 'Watch Snowball go from war hero to coward to traitor in three tellings of the same battle.'],
+    ['Why is a scapegoat so useful?', 6, 'The fallen windmill', 'An enemy who isn\'t there to answer can be blamed for every failure, and makes the leader look necessary.'],
+    ['How does fear silence a group?', 7, 'The spiral of silence', 'After the executions, each animal that goes quiet makes it harder for the next one to speak.'],
+    ['Why do people believe obvious lies?', 8, 'Squealer\'s figures', 'When memory fades and only one voice reads the numbers, a report can say anything.'],
+    ['Why do loyal workers get used up?', 9, 'Boxer\'s last load', 'Boxer answered every problem with "I will work harder", and the farm took everything he had.'],
+    ['What does "more equal" mean?', 10, 'Some are more equal', 'Keep the old words and add a clause that cancels them. It\'s the book\'s method of betrayal in one line.'],
+    ['Why was this book hard to publish?', 11, 'The freedom of the press', 'No one banned it. Publishers simply didn\'t want to criticise a wartime ally, which Orwell thought was the real danger.'] ];
+  const box = $('#find'), ans = $('#findA');
+  box.innerHTML = FIND.map((f, i) => `<button class="btn" type="button" data-f="${i}" aria-pressed="${i === 0}">${f[0]}</button>`).join('');
+  const show = i => { const [, n, p, d] = FIND[i]; ans.innerHTML = `<span class="k">${CH[n - 1][3]} · ${CH[n - 1][0]}</span><span class="p">${p}</span><span class="d">${d}</span><a href="#ch${n}">Go to the chapter →</a>`; };
+  box.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => { press([...box.querySelectorAll('[data-f]')], b); show(+b.dataset.f); }));
+  show(0);
+}
+
+/* ---------- hero: the barn wall ---------- */
+{ const wall = $('#hwWall'), cap = $('#hwCap'), sl = $('#hwCh'), jb = $('#hwJump');
+  const CMD = ['Whatever goes upon two legs is an enemy.', 'Whatever goes upon four legs, or has wings, is a friend.', 'No animal shall wear clothes.', 'No animal shall sleep in a bed', 'No animal shall drink alcohol', 'No animal shall kill any other animal', 'All animals are equal.'];
+  const ADD = { 3: [6, 'with sheets'], 4: [8, 'to excess'], 5: [8, 'without cause'] };
+  const BROKEN = { 0: 6, 1: 7, 2: 10, 3: 6, 4: 8, 5: 7, 6: 3 };
+  const CAP = {
+    2: 'Freshly painted by Snowball, <b>seven rules everyone agrees are unalterable</b>. That same evening the milk disappears.',
+    3: 'The words haven\'t changed, but <b>the pigs already eat better</b>: the milk and windfall apples are theirs, because brainworkers need them.',
+    4: 'The wall is untouched and the farm is proud of its victory. <b>Not one word has moved yet.</b>',
+    5: 'Snowball, who painted the wall, is chased off the farm. <b>Nobody who wrote the rules is left to defend them.</b>',
+    6: 'The pigs move into the farmhouse beds, and <b>two words appear: with sheets</b>. They also start trading with humans through Whymper.',
+    7: 'The dogs kill the animals who confess, <b>breaking the sixth rule</b> in front of everyone. The wall still says no killing, for now.',
+    8: 'Two more edits in the night: <b>without cause</b> and <b>to excess</b>. Squealer is found beside a broken ladder and a pot of paint.',
+    9: 'Boxer is sold to the knacker and the pigs buy whisky. <b>The wall now permits what the farm does.</b>',
+    10: 'The pigs walk on two legs in Jones\'s clothes. <b>Seven rules become one</b>, keeping the old words and cancelling them.' };
+  jb.innerHTML = [[2, 'Ch 2'], [6, 'Ch 6'], [8, 'Ch 8'], [10, 'Ch 10']].map(([c, l]) => `<button class="btn" type="button" data-c="${c}" aria-pressed="${c === +sl.value}">${l}</button>`).join('');
+  const jbs = [...jb.querySelectorAll('[data-c]')];
+  function draw(){
+    const c = +sl.value; out('hwCh', c);
+    const li = CMD.map((t, k) => { const a = ADD[k]; let s = t;
+      if (a) s = t + (c >= a[0] ? ` <ins>${a[1]}</ins>.` : '.');
+      const br = BROKEN[k] <= c && c < 10 ? `<span class="br">broken in ch ${BROKEN[k]}</span>` : '';
+      return `<li><span>${s}${br}</span></li>`; }).join('');
+    wall.className = 'wall' + (c >= 10 ? ' gone' : '');
+    wall.innerHTML = `<div class="wt">The Seven Commandments</div><ol>${li}</ol>` + (c >= 10 ? `<div class="one">All animals are equal <em>but some animals are more equal than others</em></div>` : '');
+    cap.innerHTML = CAP[c];
+    press(jbs, jbs.find(b => +b.dataset.c === c) || null);
+  }
+  jbs.forEach(b => b.addEventListener('click', () => { sl.value = b.dataset.c; draw(); }));
+  sl.addEventListener('input', draw); draw();
+}
+
+/* ---------- 1: where does the farm's work go? ---------- */
+{ const el = $('#mj1'), tI = $('#mjTake'), bs = [$('#mjJones'), $('#mjDream'), $('#mjLater')];
+  let taker = 'Jones';
+  const PRE = [[85, 'Jones'], [5, 'Jones'], [82, 'the pigs']];
+  const PROD = [['Milk', 1], ['Eggs', .95], ['Grain and hay', .82], ['Foals, calves, piglets', .9], ['Work and strength', .86]];
+  bs.forEach((b, i) => b.addEventListener('click', () => { tI.value = PRE[i][0]; taker = PRE[i][1]; press(bs, b); draw(); }));
+  const draw = onLayout(() => {
+    const t = +tI.value / 100; out('mjTake', Math.round(t * 100) + '%');
+    const nw = NARROW(), W = nw ? 360 : 640, L = nw ? 0 : 180, bw = W - L - (nw ? 4 : 10), rh = nw ? 50 : 38, top = 26, H = top + PROD.length * rh + 6;
+    vb(el, W, H); let g = '';
+    const who = t < .08 ? 'nobody' : taker === 'Jones' ? 'Man' : 'the pigs';
+    g += `<rect x="${L}" y="4" width="12" height="12" rx="3" ${F('cool', .75)}/>` + TX(L + 18, 14, 'kept by the animals', 'muted', nw ? 12 : 11.5);
+    g += `<rect x="${L + (nw ? 170 : 190)}" y="4" width="12" height="12" rx="3" ${F('glow', .85)}/>` + TX(L + (nw ? 188 : 208), 14, 'taken by ' + who, 'muted', nw ? 12 : 11.5);
+    let kept = 0;
+    PROD.forEach(([lab, w], k) => { const y = top + k * rh, by = nw ? y + 16 : y + 4, take = clamp(t * w, 0, 1); kept += 1 - take;
+      g += TX(0, nw ? y + 11 : y + 19, lab, 'soft', nw ? 12.5 : 12.5);
+      g += `<rect x="${L}" y="${by}" width="${bw}" height="22" rx="6" ${F('panel-2')}/>`;
+      g += `<rect x="${L}" y="${by}" width="${(bw * (1 - take)).toFixed(1)}" height="22" rx="6" ${F('cool', .7)}/>`;
+      if (take > .005) g += `<rect x="${(L + bw * (1 - take)).toFixed(1)}" y="${by}" width="${(bw * take).toFixed(1)}" height="22" rx="6" ${F('glow', .85)}/>`;
+      const kp = Math.round((1 - take) * 100);
+      if (1 - take > .14) g += TX(L + 8, by + 15.5, kp + '%', 'ink', nw ? 12.5 : 11.5, 'start', 'font-weight="600"');
+    });
+    el.innerHTML = g;
+    kept /= PROD.length;
+    $('#mjKept').textContent = Math.round(kept * 100) + '%';
+    $('#mjTaker').textContent = who === 'nobody' ? 'Nobody' : who === 'Man' ? 'Jones' : 'The pigs';
+    $('#mjSay').textContent = t > .6 ? (taker === 'Jones' ? 'Misery, hard work and an early death. Major\'s case exactly.' : 'The animals work harder and eat less than under Jones. Only the taker has changed.')
+      : t > .2 ? 'Better, but someone still lives off the animals\' work.' : 'The dream: what the animals produce belongs to the animals.';
+  });
+  tI.addEventListener('input', () => { press(bs, null); draw(); });
+  draw();
+}
+
+/* ---------- 2: is it Animalism? ---------- */
+sorter('#sort2', '#tally2', [{ id: 'y', label: 'Allowed', d: 'Fits the Seven Commandments' }, { id: 'n', label: 'Forbidden', d: 'Breaks one of the seven' }], [
+  { t: 'Mollie ties a ribbon in her mane.', q: true, a: 'n', w: 'The animals decided ribbons count as clothes, and burned them the morning after the Rebellion.' },
+  { t: 'Boxer wears his little straw hat to keep the flies off.', q: true, a: 'n', w: 'Boxer threw his own hat on the fire that morning: no animal shall wear clothes.' },
+  { t: 'A hen and a sheep share the shade under a hedge.', q: true, a: 'y', w: 'Four legs or wings: both are friends, and all animals are equal.' },
+  { t: 'A pig takes a nap in Jones\'s old bed.', q: true, a: 'n', w: 'As first painted, the fourth rule bans beds outright. The pigs will add two words later.' },
+  { t: 'The animals finish the beer left in Jones\'s cellar.', q: true, a: 'n', w: 'No animal shall drink alcohol. The animals even agree to keep the farmhouse as a museum.' },
+  { t: 'The dogs kill a rat that wanders into the barn.', q: true, a: 'n', w: 'The animals voted that rats are comrades, and no animal shall kill any other animal.' },
+  { t: 'Every animal gets the same ration at the end of the day.', q: true, a: 'y', w: 'All animals are equal. This is exactly what the pigs will quietly stop doing.' },
+  { t: 'An animal shakes hands on a deal with a man from Willingdon.', q: true, a: 'n', w: 'Whatever goes upon two legs is an enemy, and Major warned against trade of any kind.' },
+  { t: 'The pigeons fly messages to the animals on other farms.', q: true, a: 'y', w: 'Wings make them friends, and spreading the news of the Rebellion is the whole idea.' },
+]);
+
+/* ---------- 3: who can check the wall? ---------- */
+{ const el = $('#rd3'), lI = $('#rdLen'), bs = [$('#rdSlogan'), $('#rdCmd'), $('#rdRep')];
+  const A = [['Pigs', 1e5, 1e5], ['Benjamin', 1e5, 1e5], ['Muriel', 400, 400], ['The dogs', 70, 70], ['Clover', 0, 30], ['Boxer', 0, 10], ['Mollie', 0, 6], ['The sheep', 0, 6], ['Hens and ducks', 0, 6]];
+  const words = v => Math.round(3 * Math.pow(10, v / 100 * 2.3));
+  const toV = w => Math.round(Math.log10(w / 3) / 2.3 * 100);
+  const PRE = [6, 50, 450];
+  bs.forEach((b, i) => b.addEventListener('click', () => { lI.value = toV(PRE[i]); press(bs, b); draw(); }));
+  const draw = onLayout(() => {
+    const w = words(+lI.value); out('rdLen', w + ' words');
+    const nw = NARROW(), W = nw ? 360 : 640, rh = nw ? 30 : 26, top = 34, H = top + A.length * rh + 6, cR = nw ? 220 : 400, cC = nw ? 312 : 540;
+    vb(el, W, H); let g = '', rec = 0, chk = 0;
+    g += TX(cR, 16, 'can recite it', 'cool', nw ? 12.5 : 12, 'middle') + TX(cC, 16, nw ? 'can check it' : 'can check the writing', 'glow', nw ? 12.5 : 12, 'middle');
+    g += `<line x1="0" x2="${W}" y1="${top - 8}" y2="${top - 8}" ${S('line', 1)}/>`;
+    A.forEach(([n, rd, mem], k) => { const y = top + k * rh + rh / 2, r = mem >= w, c = rd >= w; rec += r; chk += c;
+      g += TX(0, y + 4.5, n, k < 2 ? 'text' : 'soft', nw ? 13 : 13);
+      g += r ? `<circle cx="${cR}" cy="${y}" r="8" ${F('cool', .85)}/>` : `<circle cx="${cR}" cy="${y}" r="7.5" ${S('faint', 1.2)}/>`;
+      g += c ? `<circle cx="${cC}" cy="${y}" r="8" ${F('glow', .9)}/>` : `<circle cx="${cC}" cy="${y}" r="7.5" ${S('faint', 1.2)}/>`;
+      if (k < A.length - 1) g += `<line x1="0" x2="${W}" y1="${y + rh / 2}" y2="${y + rh / 2}" ${S('line', 1, ';stroke-opacity:.5')}/>`;
+    });
+    el.innerHTML = g;
+    $('#rdRec').textContent = rec + ' of ' + A.length; $('#rdChk').textContent = chk + ' of ' + A.length;
+    $('#rdSay').textContent = w <= 8 ? 'Everyone can chant it, but a slogan has no small print. Only the readers would notice if the written rule changed.'
+      : w <= 70 ? 'Clover, Boxer and most of the farm must take someone\'s word for what the wall says.'
+      : w <= 400 ? 'Only the pigs, Benjamin and Muriel can follow it. Everyone else has to trust the reader.'
+      : 'Only the pigs and Benjamin can check it, and Benjamin won\'t say. The rest of the farm must trust Squealer.';
+  });
+  lI.addEventListener('input', () => { press(bs, null); draw(); });
+  draw();
+}
+
+/* ---------- 4: replay the battle, then retell it ---------- */
+{ const el = $('#bt4'), sb = $('#btStep'), vbx = $('#btVer');
+  let step = 3, ver = 0;
+  const STEPS = ['1. The air attack', '2. The first charge', '3. The false retreat', '4. The ambush'];
+  const VERS = ['As it happened (ch 4)', 'Squealer\'s story (ch 7)', 'The final story (ch 8 and 9)'];
+  sb.innerHTML = STEPS.map((s, i) => `<button class="btn" type="button" data-s="${i}" aria-pressed="${i === step}">${s}</button>`).join('');
+  vbx.innerHTML = VERS.map((s, i) => `<button class="btn" type="button" data-v="${i}" aria-pressed="${i === ver}">${s}</button>`).join('');
+  /* positions in a 0..100 x 0..100 yard: gate on the left, cowshed bottom right */
+  const MEN = [[12, 50], [30, 50], [55, 46], [14, 52]];
+  const SHEEP = [[70, 40], [38, 44], [78, 34], [72, 32]];
+  const HID = [[80, 82], [80, 82], [80, 82], [48, 60]];
+  const SNOW = [[70, 30], [40, 40], [78, 30], [40, 52]];
+  const NAP = [[90, 14], [90, 14], [90, 14], [46, 56]];
+  const CAPS = [
+    ['The pigeons fly over the men and mess on them from above, and the geese peck at their legs. A skirmish to unsettle them.', 'Squealer doesn\'t dispute this part. The trouble starts with Snowball.', 'Nobody remembers the pigeons any more.'],
+    ['Snowball leads the sheep and goats in a charge, with Benjamin kicking out at the men. The men beat them back with sticks and boots.', 'Squealer says Snowball\'s charge was meant to fail: he was Jones\'s agent from the start.', 'By now Snowball is said to have fought openly on the human side.'],
+    ['Snowball squeals and the animals turn and run into the yard. The men whoop and chase after them. It is a trick.', 'In Squealer\'s story the retreat was real: Snowball was trying to lead the animals to defeat.', 'The retreat is remembered as Snowball\'s treachery.'],
+    ['The horses, cows and pigs burst from the cowshed behind the men. Snowball, wounded by Jones\'s shot, leads the charge. In five minutes the men are fleeing.', 'Now Napoleon leads the charge, crying death to humanity and biting Jones in the leg. Snowball, Squealer says, was running away.', 'Napoleon alone saved the farm, and the wounds on Snowball\'s back came from Napoleon\'s teeth.'] ];
+  const ROLE = [
+    ['Planned the ambush, led the charge, was wounded by Jones', 'Not mentioned at all', 'Animal Hero, First Class'],
+    ['Secretly tried to lose the battle, then fled', 'Led the decisive charge and bit Jones in the leg', 'A mistake, says Squealer: he fooled us'],
+    ['Fought on Jones\'s side, shouting for humanity', 'The hero of the battle', 'Never awarded: he was censured for cowardice'] ];
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 400 : 300, P = 14;
+    const X = x => P + x / 100 * (W - 2 * P), Y = y => P + 18 + y / 100 * (H - 2 * P - 22);
+    const fs = nw ? 13.5 : 12;
+    vb(el, W, H); let g = '';
+    /* yard */
+    g += `<rect x="${X(18)}" y="${Y(14)}" width="${X(96) - X(18)}" height="${Y(96) - Y(14)}" rx="10" ${FS('panel-2', 'line', 1, .6)}/>`;
+    g += `<rect x="${X(68)}" y="${Y(72)}" width="${X(94) - X(68)}" height="${Y(94) - Y(72)}" rx="6" ${FS('panel', 'line', 1.2)}/>` + TX((X(68) + X(94)) / 2, Y(70) - 4, 'cowshed', 'faint', fs, 'middle');
+    g += `<rect x="${X(72)}" y="${Y(4)}" width="${X(96) - X(72)}" height="${Y(14) - Y(4) + 4}" rx="4" ${FS('panel', 'line', 1)}/>` + TX((X(72) + X(96)) / 2, Y(10) + 3, 'farmhouse', 'faint', fs - 1, 'middle');
+    g += `<line x1="${X(18)}" x2="${X(18)}" y1="${Y(40)}" y2="${Y(62)}" ${S('ink', 6)}/>` + TX(X(18) + 4, Y(66) + 6, 'gate', 'faint', fs - 1);
+    g += `<line x1="${X(0)}" x2="${X(18)}" y1="${Y(51)}" y2="${Y(51)}" ${S('line', 10, ';stroke-linecap:round;stroke-opacity:.6')}/>` + TX(X(0), Y(51) + (nw ? 24 : -12), 'road', 'faint', fs - 1);
+    /* men */
+    const [mx, my] = MEN[step];
+    for (let i = 0; i < 6; i++){ const ox = (i % 3) * 9 - 9, oy = Math.floor(i / 3) * 10 - 5; g += `<rect x="${(X(mx) + ox - 3.5).toFixed(1)}" y="${(Y(my) + oy - 3.5).toFixed(1)}" width="7" height="7" rx="1.5" ${F('muted')}/>`; }
+    g += TX(X(mx), Y(my) - 16, step === 3 ? 'men flee' : 'Jones and men', 'muted', fs, 'middle');
+    /* air attack */
+    if (step === 0) for (let i = 0; i < 7; i++) g += `<path d="M${(X(mx) - 18 + i * 6).toFixed(1)} ${(Y(my) - 30 - (i % 2) * 6).toFixed(1)}l3 -3l3 3" ${S('cool', 1.4)}/>`;
+    /* sheep and goats */
+    const [sx, sy] = SHEEP[step];
+    for (let i = 0; i < 8; i++){ g += `<circle cx="${(X(sx) + (i % 4) * 8 - 12).toFixed(1)}" cy="${(Y(sy) + Math.floor(i / 4) * 8).toFixed(1)}" r="3.4" ${F('cool', .55)}/>`; }
+    /* hidden group */
+    const [hx, hy] = HID[step];
+    for (let i = 0; i < 9; i++){ g += `<circle cx="${(X(hx) + (i % 3) * 10 - 10).toFixed(1)}" cy="${(Y(hy) + Math.floor(i / 3) * 9 - 8).toFixed(1)}" r="4.2" ${F('cool', step === 3 ? .85 : .3)}/>`; }
+    if (step < 3) g += TX(X(hx), Y(hy) + 22, 'hidden', 'faint', fs - 1, 'middle');
+    if (step === 3) g += `<path d="M${X(70)} ${Y(76)}Q${X(58)} ${Y(70)} ${X(52)} ${Y(62)}" ${S('cool', 1.6, ';stroke-dasharray:4 4')}/>`;
+    /* Snowball */
+    let [snx, sny] = SNOW[step];
+    if (ver === 1 && step >= 2){ snx = step === 3 ? 88 : 82; sny = step === 3 ? 30 : 28; }
+    if (ver === 2){ [snx, sny] = [MEN[step][0] + 6, MEN[step][1] + 14]; }
+    g += `<circle cx="${X(snx)}" cy="${Y(sny)}" r="7.5" ${FS('cool', 'text', 1.5)}/>` + TX(X(snx), Y(sny) - 13, 'Snowball', 'cool', fs, 'middle', 'font-weight="600"');
+    if (ver === 0 && step === 3) g += TX(X(snx) - 11, Y(sny) + 5, 'wounded', 'bad', fs - 1, 'end');
+    /* Napoleon */
+    if (ver === 0){ g += TX(W - P, H - 6, 'Napoleon: not in the chapter', 'faint', fs - 1, 'end'); }
+    else { const [nx, ny] = NAP[step]; g += `<circle cx="${X(nx)}" cy="${Y(ny)}" r="7.5" ${FS('glow', 'text', 1.5)}/>` + TX(X(nx), Y(ny) - 12, 'Napoleon', 'glow', fs, 'middle', 'font-weight="600"'); }
+    el.innerHTML = g;
+    $('#btSnow').textContent = ROLE[ver][0]; $('#btNap').textContent = ROLE[ver][1]; $('#btMedal').textContent = ROLE[ver][2];
+    $('#btCap').innerHTML = ver === 0 ? CAPS[step][0] : `<b>${VERS[ver]}:</b> ${CAPS[step][ver]}`;
+  });
+  sb.querySelectorAll('[data-s]').forEach(b => b.addEventListener('click', () => { step = +b.dataset.s; press([...sb.querySelectorAll('[data-s]')], b); draw(); }));
+  vbx.querySelectorAll('[data-v]').forEach(b => b.addEventListener('click', () => { ver = +b.dataset.v; press([...vbx.querySelectorAll('[data-v]')], b); draw(); }));
+  draw();
+}
+
+/* ---------- 5: win the debate, or end it ---------- */
+{ const el = $('#db5'), N = 40;
+  let lean, dogs, last, said;
+  const reset = () => { const r = rng(5); lean = Array.from({ length: N }, (_, i) => clamp(gauss(r) * .45 + (i < 6 ? -.7 : i < 12 ? .7 : 0), -1, 1)); dogs = false; last = ''; said = 'The barn is split. Snowball has his windmill plans; Napoleon has the full manger. Let someone speak.'; };
+  const POS = Array.from({ length: N }, (_, i) => { const r = rng(100 + i); return [r(), r()]; });
+  const speak = (dir, k) => { lean = lean.map(v => Math.abs(v) > .85 && Math.sign(v) !== dir ? v : clamp(v + dir * k * (1 - Math.abs(v) * .5), -1, 1)); };
+  const btns = ['#dbSnow', '#dbNap', '#dbSheep', '#dbDogs'].map(s => $(s));
+  $('#dbSnow').addEventListener('click', () => { speak(1, .45); last = 's'; said = 'Snowball describes electric light, warm stalls and a three-day week. The undecided swing his way: the animals tend to agree with whoever spoke last.'; draw(); });
+  $('#dbNap').addEventListener('click', () => { speak(-1, .3); last = 'n'; said = 'Napoleon speaks briefly: the windmill is nonsense, the farm needs food now. Some drift back to him, but his speech is short and dull.'; draw(); });
+  $('#dbSheep').addEventListener('click', () => { lean = lean.map(v => v * .55); last = 'b'; said = 'The sheep break into Four legs good, two legs bad at the crucial moment. Nobody can hear the argument, and everyone drifts back to undecided.'; draw(); });
+  $('#dbDogs').addEventListener('click', () => { dogs = true; said = 'Nine huge dogs burst in and chase Snowball out through the hedge. Napoleon announces that the debates are over: a committee of pigs will decide. The vote you were watching no longer exists.'; draw(); });
+  $('#dbReset').addEventListener('click', () => { reset(); draw(); });
+  const draw = onLayout(() => {
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 320 : 250, top = nw ? 64 : 48, bot = H - 18, mid = W / 2, half = W / 2 - 26;
+    vb(el, W, H); let g = '';
+    g += `<rect x="6" y="${top - 10}" width="${W - 12}" height="${bot - top + 16}" rx="12" ${FS('panel-2', 'line', 1, .5)}/>`;
+    g += `<line x1="${mid}" x2="${mid}" y1="${top - 4}" y2="${bot}" ${S('line', 1, ';stroke-dasharray:3 5')}/>`;
+    if (nw){ g += wrap(W * .25, 20, 'Napoleon and the full manger', 20, 15, 'glow', 12.5, 'middle', 'font-weight="600"') + wrap(W * .75, 20, 'Snowball and the three-day week', 20, 15, 'cool', 12.5, 'middle', 'font-weight="600"'); }
+    else { g += TX(W * .22, 22, 'Napoleon and the full manger', 'glow', 13, 'middle', 'font-weight="600"') + TX(W * .78, 22, 'Snowball and the three-day week', 'cool', 13, 'middle', 'font-weight="600"'); }
+    let s = 0, n = 0, u = 0;
+    lean.forEach((v, i) => { const [px, py] = POS[i];
+      const x = dogs ? 26 + px * (W - 52) : mid + v * half * .92 + (px - .5) * 22, y = top + 6 + py * (bot - top - 12);
+      const c = dogs ? 'faint' : v > .2 ? 'cool' : v < -.2 ? 'glow' : 'muted';
+      if (!dogs){ v > .2 ? s++ : v < -.2 ? n++ : u++; }
+      g += dogs ? `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" ${S('faint', 1.2)}/>` : `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5.5" ${F(c, .85)}/>`; });
+    if (last === 'b' && !dogs) for (let i = 0; i < 5; i++) g += TX(30 + i * (W - 60) / 4, bot - 4, 'baa', 'faint', 11, 'middle', 'font-style="italic"');
+    if (dogs){
+      for (let i = 0; i < 9; i++){ const x = mid - 70 + (i % 5) * 34 + (i > 4 ? 17 : 0), y = (top + bot) / 2 + (i > 4 ? 18 : -14); g += `<circle cx="${x}" cy="${y}" r="7" ${FS('bad', 'text', 1, .9)}/>`; }
+      g += TX(mid, (top + bot) / 2 + 48, 'nine dogs', 'bad', 12.5, 'middle', 'font-weight="600"');
+      g += TX(W - 14, top + 4, 'Snowball, gone →', 'cool', 12.5, 'end');
+    }
+    el.innerHTML = g;
+    $('#dbS').textContent = dogs ? '—' : s; $('#dbN').textContent = dogs ? '—' : n; $('#dbU').textContent = dogs ? 'No vote' : u;
+    $('#dbSay').innerHTML = said;
+    btns.forEach(b => b.disabled = dogs);
+  });
+  reset(); speak(1, .25); draw();
+}
+
+/* ---------- 6: who knocked down the windmill? ---------- */
+{ const el = $('#wm6'), sI = $('#wmStorm'), tI = $('#wmWall'), bs = [$('#wmGale'), $('#wmCalm'), $('#wmThick')];
+  const PRE = [[8, 18], [1, 18], [8, 36]];
+  bs.forEach((b, i) => b.addEventListener('click', () => { sI.value = PRE[i][0]; tI.value = PRE[i][1]; press(bs, b); draw(); }));
+  const draw = onLayout(() => {
+    const st = +sI.value, th = +tI.value, limit = 4 + (th - 18) / 18 * 7.5, down = st > limit;
+    out('wmStorm', st === 0 ? 'still' : st + ' / 10'); out('wmWall', th + ' inches');
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 300 : 260, gy = H - 40, cx = nw ? W / 2 : W * .46;
+    vb(el, W, H); let g = '';
+    g += `<path d="M0 ${gy}Q${W * .3} ${gy - 18} ${W * .55} ${gy - 6}T${W} ${gy - 4}V${H}H0Z" ${F('panel-2')}/>`;
+    for (let i = 0; i < st; i++){ const y = 24 + (i * 37) % (gy - 80), x = 10 + (i * 71) % (W * .5); g += `<path d="M${x} ${y}q22 -8 44 0t44 0" ${S('faint', 1.4, ';stroke-linecap:round')}/>`; }
+    const tw = 70 + (th - 18) * 1.2, rows = 7, bh = 15;
+    if (!down){
+      for (let r = 0; r < rows; r++){ const w = tw - r * 4, y = gy - (r + 1) * bh, n = 4;
+        for (let k = 0; k < n; k++){ const bw = w / n; g += `<rect x="${(cx - w / 2 + k * bw + (r % 2 ? bw / 2 : 0) - (r % 2 && k === n - 1 ? bw / 2 : 0)).toFixed(1)}" y="${y}" width="${(bw - 2).toFixed(1)}" height="${bh - 2}" rx="2" ${FS('cool', 'line', 1, .45)}/>`; } }
+      g += `<path d="M${cx - (tw - rows * 4) / 2} ${gy - rows * bh - 2}l${(tw - rows * 4) / 2} -26l${(tw - rows * 4) / 2} 26" ${S('faint', 1.4, ';stroke-dasharray:4 4')}/>` + TX(cx, gy - rows * bh - 34, 'half built', 'faint', 12, 'middle');
+    } else {
+      const r = rng(st * 10 + th);
+      for (let i = 0; i < 24; i++){ const x = cx + gauss(r) * (tw * .8), y = gy - 4 - r() * 18, a = (r() * 60 - 30).toFixed(0); g += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="16" height="11" rx="2" transform="rotate(${a} ${(x + 8).toFixed(1)} ${(y + 5).toFixed(1)})" ${FS('cool', 'line', 1, .35)}/>`; }
+      g += TX(cx, gy - 44, 'in ruins', 'bad', 13, 'middle', 'font-weight="600"');
+    }
+    /* the hedge and the footprints */
+    const hx = nw ? W - 50 : W - 90;
+    g += `<rect x="${hx}" y="${gy - 34}" width="${nw ? 44 : 80}" height="34" rx="14" ${F('cool', .25)}/>` + TX(hx + (nw ? 22 : 40), gy - 40, 'hedge', 'faint', 12, 'middle');
+    for (let i = 0; i < 5; i++){ const x = hx - 14 - i * (nw ? 16 : 26), y = gy + 12 + (i % 2) * 7; g += `<ellipse cx="${x}" cy="${y}" rx="3" ry="2" ${F('glow', .7)}/><ellipse cx="${x + 5}" cy="${y}" rx="3" ry="2" ${F('glow', .7)}/>`; }
+    g += TX(hx - (nw ? 40 : 66), gy + 34, 'pig footprints', 'glow', 12, 'middle');
+    el.innerHTML = g;
+    $('#wmState').textContent = down ? 'In ruins' : 'Standing';
+    $('#wmCause').textContent = down ? (th <= 20 ? 'A gale against walls only eighteen inches thick' : 'A gale too strong even for these walls') : 'Nothing: the walls held';
+    $('#wmVerdict').textContent = down ? 'Snowball did it, out of spite' : 'Snowball tried, and failed. Stay vigilant.';
+    $('#wmSay').innerHTML = down ? `The likely culprit is the weather and the thin walls. <b>Napoleon's verdict doesn't depend on any of that.</b> Some pig footprints by a hedge are proof enough, and they could belong to any pig on the farm.`
+      : `The windmill stands, and <b>Snowball still gets the blame</b>, this time for trying. A scapegoat is useful precisely because the evidence never matters. The animals rebuild with walls three feet thick, which hold until Frederick's blasting powder in chapter 8.`;
+  });
+  [sI, tI].forEach(i => i.addEventListener('input', () => { press(bs, null); draw(); }));
+  draw();
+}
+
+/* ---------- 7: the spiral of silence ---------- */
+{ const el = $('#sp7'), fI = $('#spFear'), bs = [$('#spA'), $('#spB'), $('#spC')], N = 60;
+  const r = rng(77), COUR = Array.from({ length: N }, () => r() * 8);
+  const PRE = [2, 5, 8.5];
+  bs.forEach((b, i) => b.addEventListener('click', () => { fI.value = PRE[i]; press(bs, b); draw(); }));
+  const settle = fear => { let p = 1; for (let k = 0; k < 80; k++){ const q = COUR.filter(c => c + 4 * p >= fear * 1.1).length / N; if (Math.abs(q - p) < 1e-4){ p = q; break; } p = q; } return p; };
+  const draw = onLayout(() => {
+    const fear = +fI.value, p = settle(fear), th = fear * 1.1 - 4 * p;
+    out('spFear', fear.toFixed(1) + ' / 10');
+    const nw = NARROW(), cols = nw ? 10 : 15, rows = N / cols, W = nw ? 360 : 640, cell = nw ? 32 : 38, gx = (W - cols * cell) / 2, top = 16, H = top + rows * cell + 46;
+    vb(el, W, H); let g = '', on = 0;
+    COUR.forEach((c, i) => { const x = gx + (i % cols) * cell + cell / 2, y = top + Math.floor(i / cols) * cell + cell / 2, sp = c >= th;
+      if (sp){ on++; g += `<circle cx="${x}" cy="${y}" r="${cell * .3}" ${F('cool', .8)}/><path d="M${x + cell * .22} ${y - cell * .3}q6 -6 12 -2" ${S('cool', 1.4)}/>`; }
+      else g += `<circle cx="${x}" cy="${y}" r="${cell * .3}" ${S('faint', 1.2)}/>`; });
+    const dn = Math.round(fear);
+    for (let i = 0; i < dn; i++) g += `<circle cx="${gx + 10 + i * 18}" cy="${H - 18}" r="6" ${F('bad', .85)}/>`;
+    g += TX(gx + 10 + Math.max(dn, 1) * 18 + 4, H - 14, dn ? 'the dogs' : 'no dogs in sight', 'faint', 12);
+    el.innerHTML = g;
+    $('#spOn').textContent = on + ' of ' + N; $('#spOff').textContent = N - on;
+    $('#spSay').textContent = on > 50 ? 'Most animals still speak up at the Sunday meetings, and each voice makes it easier for the next.'
+      : on > 15 ? 'The bravest still speak. Every animal that falls silent makes the rest feel more alone.'
+      : 'The farm has gone quiet. Even animals with plenty of courage stay silent, because nobody else is speaking.';
+  });
+  fI.addEventListener('input', () => { press(bs, null); draw(); });
+  draw();
+}
+
+/* ---------- 8: Squealer's figures ---------- */
+{ const el = $('#sq8'), yI = $('#sqYr'), bR = $('#sqRep'), bB = $('#sqBoth');
+  let both = true;
+  const REP = [130, 200, 300, 400, 500, 600], TR = [115, 104, 92, 82, 76, 72];
+  bR.addEventListener('click', () => { both = false; press([bR, bB], bR); draw(); });
+  bB.addEventListener('click', () => { both = true; press([bR, bB], bB); draw(); });
+  const draw = onLayout(() => {
+    const yr = +yI.value; out('sqYr', yr);
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 290 : 260, L = nw ? 34 : 44, R = 10, T = 18, B = 34, max = 650;
+    const y = v => T + (1 - v / max) * (H - T - B), slot = (W - L - R) / 6, bw = both ? slot * .3 : slot * .5;
+    vb(el, W, H); let g = '';
+    [0, 200, 400, 600].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', nw ? 12.5 : 11, 'end'));
+    g += TX(L, 12, 'index: Jones\'s last year = 100', 'faint', nw ? 12.5 : 11);
+    const mem = clamp(1 - yr / 6.5, .06, 1);
+    g += `<line x1="${L}" x2="${W - R}" y1="${y(100)}" y2="${y(100)}" ${S('soft', 1.6, ';stroke-dasharray:6 4;stroke-opacity:' + mem.toFixed(2))}/>`;
+    const lx = L + (nw ? 4 : 330), ly = nw ? 56 : 24;
+    g += `<line x1="${lx}" x2="${lx + 10}" y1="${ly + 5}" y2="${ly + 5}" ${S('soft', 1.6, ';stroke-dasharray:3 2;stroke-opacity:' + Math.max(mem, .3).toFixed(2))}/>` + TX(lx + 15, ly + 9, 'Jones\'s day, as remembered', 'muted', nw ? 12.5 : 11.5);
+    for (let i = 0; i < 6; i++){ const x0 = L + i * slot + slot / 2, on = i < yr;
+      g += TX(x0, H - 14, (nw ? 'Y' : 'Year ') + (i + 1), on ? 'muted' : 'faint', nw ? 12.5 : 11, 'middle');
+      if (!on) continue;
+      const xr = both ? x0 - bw - 1 : x0 - bw / 2;
+      g += `<rect x="${xr.toFixed(1)}" y="${y(REP[i]).toFixed(1)}" width="${bw.toFixed(1)}" height="${(y(0) - y(REP[i])).toFixed(1)}" rx="3" ${F('glow', .85)}/>`;
+      if (both) g += `<rect x="${(x0 + 1).toFixed(1)}" y="${y(TR[i]).toFixed(1)}" width="${bw.toFixed(1)}" height="${(y(0) - y(TR[i])).toFixed(1)}" rx="3" ${F('cool', .8)}/>`;
+    }
+    g += `<rect x="${L + 4}" y="24" width="10" height="10" rx="2" ${F('glow', .85)}/>` + TX(L + 19, 33, 'Squealer\'s report', 'muted', nw ? 12.5 : 11.5);
+    if (both) g += `<rect x="${L + (nw ? 4 : 140)}" y="${nw ? 40 : 24}" width="10" height="10" rx="2" ${F('cool', .8)}/>` + TX(L + (nw ? 19 : 155), nw ? 49 : 33, 'what reached the trough', 'muted', nw ? 12.5 : 11.5);
+    el.innerHTML = g;
+    const r = REP[yr - 1], t = TR[yr - 1];
+    $('#sqSays').textContent = '+' + (r - 100) + '%';
+    $('#sqTr').textContent = both ? (t >= 100 ? '+' : '') + (t - 100) + '%' : 'Not shown';
+    $('#sqMem').textContent = mem > .7 ? 'Clear: they can compare' : mem > .35 ? 'Fading' : 'Almost gone: only Benjamin remembers';
+    $('#sqCap').innerHTML = !both ? `This is all the animals ever see: <b>a report that rises every year</b>. With nothing to compare it with, why doubt it?`
+      : yr <= 1 ? `In the first year the report and the trough roughly agree: <b>the harvest really was better</b> than under Jones.`
+      : `By year ${yr} the report claims ${r - 100}% more than in Jones's day, while the trough holds ${t >= 100 ? 'about the same' : Math.abs(t - 100) + '% less'}. <b>The dashed line is the only check, and memory is fading.</b> Illustrative shape; the 200, 300 and 500 per cent claims come from the book.`;
+  });
+  yI.addEventListener('input', draw); draw();
+}
+
+/* ---------- 9: I will work harder ---------- */
+{ const el = $('#bx9'), eI = $('#bxEff'), fI = $('#bxFood'), bs = [$('#bxA'), $('#bxB'), $('#bxC')], van = $('#bxVan');
+  let showVan = false;
+  const PRE = [[40, 75], [0, 75], [0, 100]];
+  bs.forEach((b, i) => b.addEventListener('click', () => { eI.value = PRE[i][0]; fI.value = PRE[i][1]; press(bs, b); draw(); }));
+  van.addEventListener('click', () => { showVan = !showVan; van.setAttribute('aria-pressed', showVan); draw(); });
+  const model = () => { const e = +eI.value / 100, f = +fI.value / 100, wear = .24 * (1 + e * 1.2) * (1 + (1 - f) * 1.5), D = 55 * (1 + e);
+    const S = a => 100 - wear * Math.pow(Math.max(0, a - 6), 2) - (a >= 10.5 ? 8 : 0);
+    let col = null; for (let a = 6; a <= 15; a += .05) if (S(a) < D){ col = a; break; }
+    return { S, D, col }; };
+  const draw = onLayout(() => {
+    const { S: Sf, D, col } = model(); out('bxEff', '+' + eI.value + '%'); out('bxFood', fI.value + '%');
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 260 : 240, L = 36, R = nw ? 12 : 100, T = 16, B = 30;
+    const x = a => L + (a - 6) / 9 * (W - L - R), y = v => T + (1 - v / 110) * (H - T - B);
+    vb(el, W, H); let g = '';
+    [0, 50, 100].forEach(v => g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" ${S('line', 1)}/>` + TX(L - 6, y(v) + 4, v, 'faint', nw ? 12.5 : 11, 'end'));
+    [6, 8, 10, 12, 14].forEach(a => g += TX(x(a), H - 10, a, 'faint', nw ? 12.5 : 11, 'middle'));
+    g += TX(W - R, H - 10, 'age', 'faint', nw ? 12.5 : 11, 'end');
+    g += `<line x1="${x(12)}" x2="${x(12)}" y1="${T}" y2="${H - B}" ${S('good', 1.4, ';stroke-dasharray:4 4')}/>` + TX(x(12) + 4, T + 10, nw ? 'retire' : 'promised retirement', 'good', nw ? 12.5 : 11);
+    const end = col || 15; let d = '';
+    for (let a = 6; a <= end; a += .1) d += (d ? 'L' : 'M') + x(a).toFixed(1) + ' ' + y(Sf(a)).toFixed(1);
+    g += `<path d="${d}" ${S('cool', 3)}/>`;
+    g += `<line x1="${x(6)}" x2="${x(end)}" y1="${y(D)}" y2="${y(D)}" ${S('glow', 2, ';stroke-dasharray:7 4')}/>`;
+    g += TX(L + 4, y(D) - 7, nw ? 'workload' : 'his workload', 'glow', nw ? 12.5 : 12) + TX(L + 4, y(Sf(6)) - 7, nw ? 'strength' : 'his strength', 'cool', nw ? 12.5 : 12);
+    if (col){ const cx = x(col), cy = y(D);
+      g += `<path d="M${cx - 7} ${cy - 7}l14 14M${cx + 7} ${cy - 7}l-14 14" ${S('bad', 2.5)}/>`;
+      g += TX(cx, cy + 24, 'collapses', 'bad', nw ? 12.5 : 12, 'middle', 'font-weight="600"');
+      const vx = Math.min(cx + 6, W - R - 70), vy = H - B - 34;
+      g += `<rect x="${vx}" y="${vy}" width="58" height="24" rx="4" ${FS('panel-2', 'faint', 1.2)}/><circle cx="${vx + 12}" cy="${vy + 26}" r="4" ${F('faint')}/><circle cx="${vx + 46}" cy="${vy + 26}" r="4" ${F('faint')}/>` + TX(vx + 29, vy + 16, 'the van', 'muted', nw ? 12.5 : 10.5, 'middle'); }
+    el.innerHTML = g;
+    $('#bxAge').textContent = col ? 'age ' + col.toFixed(1) : 'Holds out';
+    $('#bxRet').textContent = col && col < 12 ? 'No' : 'Yes';
+    $('#bxPen').textContent = 'None';
+    let c = col && col < 12 ? `Working ${eI.value}% harder on ${fI.value}% rations, <b>his strength crosses his workload at about ${col.toFixed(1)}</b>, short of the retirement he was promised at twelve.`
+      : `At this pace <b>Boxer would reach twelve</b>. But in the book no animal ever retires, so the pension is still zero.`;
+    if (showVan) c += ` <b>On the van, Benjamin reads:</b> horse slaughterer and glue boiler. <b>Squealer's version:</b> the vet bought the van and hadn't repainted it.`;
+    $('#bxCap').innerHTML = c + ' An illustrative model.';
+  });
+  [eI, fI].forEach(i => i.addEventListener('input', () => { press(bs, null); draw(); }));
+  draw();
+}
+
+/* ---------- 10: from pig to man ---------- */
+{ const el = $('#pm10'), tI = $('#pmT'), bs = [$('#pmA'), $('#pmB'), $('#pmC')], list = $('#pmList');
+  const TR = [['Lives in the farmhouse', 30, 6], ['Sleeps in a bed', 32, 6], ['Trades with humans', 36, 6], ['Kills other animals', 46, 7], ['Drinks alcohol', 60, 8], ['Walks on two legs', 84, 10], ['Wears clothes', 90, 10], ['Plays cards with men', 97, 10]];
+  const PRE = [0, 35, 100];
+  bs.forEach((b, i) => b.addEventListener('click', () => { tI.value = PRE[i]; press(bs, b); draw(); }));
+  const face = (cx, cy, m, s) => { const L = (a, b) => lerp(a, b, m); let g = '';
+    const rx = L(66, 50) * s, ry = L(54, 64) * s;
+    g += `<path d="M${cx - rx * .62} ${cy - ry * .62}l${-14 * s} ${-34 * s}l${30 * s} ${16 * s}Z" style="fill:var(--panel-2);stroke:var(--text);stroke-width:1.6;opacity:${(1 - m).toFixed(2)}"/>`;
+    g += `<path d="M${cx + rx * .62} ${cy - ry * .62}l${14 * s} ${-34 * s}l${-30 * s} ${16 * s}Z" style="fill:var(--panel-2);stroke:var(--text);stroke-width:1.6;opacity:${(1 - m).toFixed(2)}"/>`;
+    g += `<ellipse cx="${cx - rx}" cy="${cy}" rx="${8 * s}" ry="${13 * s}" style="fill:var(--panel-2);stroke:var(--text);stroke-width:1.6;opacity:${m.toFixed(2)}"/><ellipse cx="${cx + rx}" cy="${cy}" rx="${8 * s}" ry="${13 * s}" style="fill:var(--panel-2);stroke:var(--text);stroke-width:1.6;opacity:${m.toFixed(2)}"/>`;
+    g += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" ${FS('panel-2', 'text', 1.8)}/>`;
+    g += `<path d="M${cx - rx * .92} ${cy - ry * .35}Q${cx} ${cy - ry * 1.5} ${cx + rx * .92} ${cy - ry * .35}Q${cx} ${cy - ry * .85} ${cx - rx * .92} ${cy - ry * .35}Z" style="fill:var(--faint);opacity:${(m * .9).toFixed(2)}"/>`;
+    const ex = L(24, 19) * s, ey = cy - L(12, 8) * s;
+    g += `<circle cx="${cx - ex}" cy="${ey}" r="${L(4, 5) * s}" ${F('text')}/><circle cx="${cx + ex}" cy="${ey}" r="${L(4, 5) * s}" ${F('text')}/>`;
+    const ny = cy + L(14, 10) * s;
+    g += `<ellipse cx="${cx}" cy="${ny}" rx="${L(24, 7) * s}" ry="${L(17, 13) * s}" ${FS('panel', 'text', 1.5)}/>`;
+    g += `<ellipse cx="${cx - L(8, 3) * s}" cy="${ny + L(1, 7) * s}" rx="${L(3.6, 1.6) * s}" ry="${L(5, 1.6) * s}" ${F('text')}/><ellipse cx="${cx + L(8, 3) * s}" cy="${ny + L(1, 7) * s}" rx="${L(3.6, 1.6) * s}" ry="${L(5, 1.6) * s}" ${F('text')}/>`;
+    const my = cy + L(40, 40) * s, mw = L(16, 14) * s;
+    g += `<path d="M${cx - mw} ${my}Q${cx} ${my + L(7, 4) * s} ${cx + mw} ${my}" ${S('text', 1.6)}/>`;
+    return g; };
+  const draw = onLayout(() => {
+    const t = +tI.value / 100, ch = [[.82, 10], [.72, 9], [.58, 8], [.45, 7], [.3, 6], [.2, 5], [.1, 3], [0, 2]].find(([v]) => t >= v)[1];
+    out('pmT', 'chapter ' + ch);
+    const nw = NARROW(), W = nw ? 360 : 640, H = nw ? 250 : 240, s = nw ? .78 : 1, x1 = nw ? 92 : 190, x2 = nw ? 268 : 450, cy = nw ? 112 : 112;
+    vb(el, W, H); let g = '';
+    g += face(x1, cy, t * .5, s) + face(x2, cy, 1 - t * .5, s);
+    const same = t >= .97;
+    g += TX(x1, H - 18, same ? '?' : 'Napoleon', same ? 'muted' : 'glow', 14, 'middle', 'font-weight="600"') + TX(x2, H - 18, same ? '?' : 'Pilkington', 'muted', 14, 'middle', 'font-weight="600"');
+    if (!nw) g += TX(W / 2, cy + 6, same ? 'which is which?' : 'pig → ← man', 'faint', 12, 'middle');
+    el.innerHTML = g;
+    const n = TR.filter(r => t * 100 >= r[1]).length;
+    list.innerHTML = TR.map(([l, v, c]) => `<span class="${t * 100 >= v ? 'on' : ''}">${l} · ch ${c}</span>`).join('');
+    $('#pmN').textContent = n + ' of ' + TR.length;
+    $('#pmSay').textContent = t < .05 ? 'Easily: a pig in a barn and a man in a farmhouse.' : t < .5 ? 'Yes, but the pigs live in the house and sleep in the beds.' : t < .97 ? 'Harder every chapter. The habits are the same; only the shapes differ.' : 'No. From pig to man and back again, it is impossible to say which is which.';
+  });
+  tI.addEventListener('input', () => { press(bs, null); draw(); });
+  draw();
+}
+
+/* ---------- appendix: banned, or just not said? ---------- */
+sorter('#sort11', '#tally11', [{ id: 's', label: 'The state forbids it', d: 'Laws, police, official censors' }, { id: 'v', label: 'Nobody dares', d: 'Fear, fashion, keeping friends' }], [
+  { t: 'A publisher drops a book after a quiet word of advice from a government official.', q: true, a: 'v', w: 'No law was used. The publisher chose to take the hint, which is exactly what happened to Animal Farm at Jonathan Cape.' },
+  { t: 'Police close a newspaper for criticising the leader.', q: true, a: 's', w: 'Open, official censorship, the kind most people picture when they think of a free press under threat.' },
+  { t: 'A critic quietly drops a review that would annoy his friends.', q: true, a: 'v', w: 'Orwell\'s main worry: intellectuals censoring themselves to stay in good company.' },
+  { t: 'Napoleon abolishes the Sunday debates by decree.', q: true, a: 's', w: 'An order backed by the dogs. On the farm, the state silences the debate directly.' },
+  { t: 'Animals stop asking questions after seeing what happened to the four pigs.', q: true, a: 'v', w: 'Nobody orders them to stop. Fear does the work, which is what makes it so effective.' },
+  { t: 'An author is jailed for a poem about the government.', q: true, a: 's', w: 'Censorship by force, the kind Orwell said wartime Britain mostly didn\'t need.' },
+  { t: 'Editors agree, without ever discussing it, that a wartime ally must not be criticised.', q: true, a: 'v', w: 'The unwritten orthodoxy Orwell described in his preface: everybody simply knows it isn\'t done.' },
+  { t: 'A ministry orders a book removed from every library.', q: true, a: 's', w: 'An official act, easy to see and easy to protest.' },
+  { t: 'A writer softens a true story because it isn\'t the fashionable view.', q: true, a: 'v', w: 'Orwell\'s point: if liberty means anything, it means telling people what they don\'t want to hear.' },
+]);
+
+/* ---------- afterword: your barn wall ---------- */
+{ const K = 'af-wall', list = $('#bwList'); let wall = store.get(K, []);
+  if (!Array.isArray(wall)) wall = [];
+  function render(){
+    list.innerHTML = '<span class="k">My barn wall</span>' + (wall.length ? wall.map((p, i) => {
+      const edited = p.now && p.now.trim() && p.now.trim() !== p.said.trim();
+      return `<div class="bw-item${p.broken ? ' broken' : ''}"><div class="h"><b>${esc(p.who)}</b><span class="mono">${p.when ? esc(p.when) : 'no date'}${edited ? ' · edited since' : ''}</span><button class="rm" type="button" data-rm="${i}" aria-label="Remove this promise">×</button></div><p class="said">As first painted: ${esc(p.said)}</p>${edited ? `<p class="now">What it says now: ${esc(p.now)}</p>` : ''}<div class="edit"><label class="tip" for="bwNow${i}">What it says now</label><input id="bwNow${i}" data-now="${i}" maxlength="200" value="${esc(p.now || '')}" placeholder="Leave empty if unchanged"></div><label class="done-toggle"><input type="checkbox" data-br="${i}" ${p.broken ? 'checked' : ''}> This promise has been broken</label></div>`; }).join('')
+      : '<p class="tip">Nothing painted yet. Add a promise someone with power over you has made, in their exact words.</p>');
+    list.querySelectorAll('[data-rm]').forEach(b => b.addEventListener('click', () => { wall.splice(+b.dataset.rm, 1); store.set(K, wall); render(); }));
+    list.querySelectorAll('[data-br]').forEach(c => c.addEventListener('change', () => { wall[+c.dataset.br].broken = c.checked; store.set(K, wall); render(); }));
+    list.querySelectorAll('[data-now]').forEach(inp => inp.addEventListener('change', () => { wall[+inp.dataset.now].now = inp.value.trim(); store.set(K, wall); render(); }));
+  }
+  $('#bwAdd').addEventListener('click', () => { const who = $('#bwWho').value.trim(), said = $('#bwSaid').value.trim();
+    if (!who || !said){ $('#bwMsg').textContent = 'Add who made the promise and what they said.'; return; }
+    wall.unshift({ who, said, when: $('#bwWhen').value, now: '', broken: false }); store.set(K, wall);
+    $('#bwWho').value = ''; $('#bwSaid').value = ''; $('#bwMsg').textContent = 'Painted on the wall.'; render(); });
+  render();
+}
+
+})();
+</script>
+</body>
+</html>
