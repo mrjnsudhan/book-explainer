@@ -161,6 +161,39 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
 .rowitem[data-st=done] .stbtn{color:var(--done)}
 .empty{color:var(--faint);font-size:14px}
 
+/* ---------- search ---------- */
+.search{display:grid;gap:14px}
+.sbox{position:relative;display:flex;align-items:center;max-width:720px}
+.sbox svg{position:absolute;left:16px;width:18px;height:18px;color:var(--faint);pointer-events:none}
+.sbox input{width:100%;font:inherit;font-size:16px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:12px 52px 12px 44px;outline:none;-webkit-appearance:none;appearance:none}
+.sbox input::placeholder{color:var(--faint)}
+.sbox input:focus{border-color:var(--glow);box-shadow:0 0 0 3px var(--glow-soft)}
+.sbox input::-webkit-search-cancel-button{display:none}
+.sbox kbd,.sbox .clear{position:absolute;right:14px;font-family:var(--f-mono);font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:1px 7px;background:var(--panel-2)}
+.sbox .clear{cursor:pointer;font-size:12px;padding:3px 9px;border-radius:999px}
+.sbox .clear:hover{color:var(--text);border-color:var(--glow)}
+.ssum{font-family:var(--f-mono);font-size:12px;color:var(--faint)}
+.ssum b{color:var(--text);font-weight:500}
+.sres{display:grid;gap:12px}
+.hit{display:grid;gap:10px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);border-left:6px solid var(--c)}
+.hit-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.hit-h a{font-family:var(--f-display);font-size:24px;line-height:1.1;color:var(--text);text-decoration:none}
+.hit-h a:hover{color:var(--glow)}
+.hit-h .a{font-size:13px;color:var(--muted)}
+.hit-h .why{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--faint);margin-left:auto}
+.hit-h .dot{margin-right:0}
+.chs{display:grid;gap:4px;margin:0;padding:0;list-style:none}
+.chs a{display:grid;gap:2px;padding:8px 10px;margin-inline:-10px;border-radius:8px;text-decoration:none;color:var(--text)}
+.chs a:hover,.chs a:focus-visible{background:var(--panel-2)}
+.chs .ct{font-size:15px;font-weight:500}
+.chs .ct span{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--glow);margin-right:8px;font-weight:400}
+.chs .sn{font-size:13.5px;color:var(--muted);line-height:1.5}
+.hit mark{background:var(--glow-soft);color:var(--text);border-radius:3px;padding:0 2px;box-shadow:inset 0 -2px 0 var(--glow)}
+.more{justify-self:start;font:inherit;font-size:13px;color:var(--glow);background:none;border:0;padding:0;cursor:pointer}
+.more:hover{text-decoration:underline}
+.snote{font-size:13px;color:var(--faint)}
+.spine.miss{opacity:.15;filter:saturate(.2)}
+
 @media (max-width: 900px){
   .stage{grid-template-columns:minmax(0,1fr)}
   .card{position:static;grid-template-columns:auto minmax(0,1fr);gap:28px}
@@ -188,6 +221,13 @@ footer{color:var(--faint);font-size:13px;border-top:1px solid var(--line);paddin
     <p class="lede">Pick a book (or podcast) off the shelf. Each explainer walks through it chapter by chapter in plain language, with something to play with in every chapter and a quick check at the end.</p>
     <div class="counts" id="counts"></div>
   </header>
+
+  <section class="search" role="search" aria-label="Search the shelf">
+    <div class="sbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Search every book and chapter: a title, an author, an idea" autocomplete="off" spellcheck="false" aria-label="Search every book and chapter" aria-describedby="ssum"><kbd id="qk" aria-hidden="true">/</kbd><button class="clear" id="qx" type="button" hidden>Clear</button></div>
+    <div class="ssum" id="ssum" aria-live="polite" hidden></div>
+    <div class="sres" id="sres" hidden></div>
+  </section>
 
   <div class="stage">
   <section aria-label="Bookshelf">
@@ -517,7 +557,7 @@ $('#case').innerHTML = levels.map((L,n) => `<div class="level" role="group" aria
 const ST = [['none','Not started'],['reading','Reading'],['done','Finished']];
 const LBL = Object.fromEntries(ST);
 const slug = b => b.url.replace(/^.*\//,'').replace(/\.html$/,'');
-let status = {}, filt = 'all', cur = BOOKS.length - 1;
+let status = {}, filt = 'all', cur = BOOKS.length - 1, hits = null;
 try { status = JSON.parse(localStorage.getItem('shelf-status')) || {}; } catch(e){}
 try { const f = localStorage.getItem('shelf-filter'); if (f === 'all' || LBL[f]) filt = f; } catch(e){}
 const stOf = i => LBL[status[slug(BOOKS[i])]] ? status[slug(BOOKS[i])] : 'none';
@@ -528,7 +568,7 @@ function paintSt(){
   BOOKS.forEach((b,i) => n[stOf(i)]++);
   const on = i => filt === 'all' || stOf(i) === filt;
   document.querySelectorAll('.spine').forEach(s => { const i = +s.dataset.i, b = BOOKS[i], st = stOf(i);
-    s.dataset.st = st; s.classList.toggle('dim', !on(i));
+    s.dataset.st = st; s.classList.toggle('dim', !on(i)); s.classList.toggle('miss', !!hits && !hits.has(i));
     s.setAttribute('aria-label', `${b.title} by ${b.author}, ${LBL[st].toLowerCase()}, open the explainer`); });
   document.querySelectorAll('.rowitem').forEach(r => { const i = +r.dataset.i, st = stOf(i);
     r.dataset.st = st; r.hidden = !on(i);
@@ -564,6 +604,83 @@ $('#cStatus').addEventListener('click', e => { const c = e.target.closest('butto
 $('#groups').addEventListener('click', e => { const c = e.target.closest('.stbtn'); if (!c) return; const i = +c.closest('.rowitem').dataset.i;
   const nx = ST[(ST.findIndex(([k]) => k === stOf(i)) + 1) % ST.length][0]; setSt(i, nx); if (!c.closest('.rowitem').hidden) c.focus(); });
 paintSt();
+
+/* search: book details are searched straight away; the text of every chapter (search-index.js, made by
+   tools/build-search-index.js and keyed by book title) loads the first time the box is used. */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase();
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const META = BOOKS.map(b => ({ title: norm(b.title + ' ' + b.spine), author: norm(b.author + ' ' + (b.by || '') + ' ' + (b.au || '')), tag: norm(b.tag), blurb: norm(b.blurb + ' ' + b.extras) }));
+let CH = null, idxState = 'idle';
+function loadIndex(){
+  if (idxState !== 'idle') return; idxState = 'loading';
+  const s = document.createElement('script'); s.src = 'search-index.js'; s.async = true;
+  s.onload = () => { const X = window.SEARCH_INDEX || {};
+    CH = BOOKS.map(b => (X[b.title] || []).map(([id, label, t, txt]) => ({ id, label, t, txt, nt: norm(t), nx: norm(txt) })));
+    idxState = 'ready'; run(); };
+  s.onerror = () => { idxState = 'failed'; run(); };
+  document.head.appendChild(s);
+}
+const STOP = new Set('a an and are as at be by do for from how i in is it of on or so that the to was what when who why with you your'.split(' '));
+const count = (re, s) => { re.lastIndex = 0; let n = 0; while (re.exec(s) && n < 20) n++; return n; };
+function snippet(c, res){
+  let at = -1;
+  for (const re of res) { re.lastIndex = 0; const m = re.exec(c.nx); if (m) { at = m.index; break; } }
+  if (at < 0) return esc(c.txt.slice(0, 180)) + '…';
+  let a = Math.max(0, at - 80), z = Math.min(c.txt.length, at + 170);
+  if (a > 0) a = c.txt.indexOf(' ', a) + 1; if (z < c.txt.length) z = c.txt.lastIndexOf(' ', z);
+  const piece = c.txt.slice(a, z), np = norm(piece); const marks = [];
+  for (const re of res) { re.lastIndex = 0; let m; while ((m = re.exec(np))) { marks.push([m.index, m.index + m[0].length]); if (!m[0].length) re.lastIndex++; } }
+  marks.sort((x, y) => x[0] - y[0]); let o = '', k = 0;
+  for (const [s, e] of marks) { if (s < k) continue; o += esc(piece.slice(k, s)) + '<mark>' + esc(piece.slice(s, e)) + '</mark>'; k = e; }
+  return (a > 0 ? '…' : '') + o + esc(piece.slice(k)) + (z < c.txt.length ? '…' : '');
+}
+const open = {}, TGT = /^https?:/.test(BOOKS[0].url) ? ' target="_blank" rel="noopener"' : '';  // the claude.ai copy opens books in a new tab
+function run(){
+  const raw = $('#q').value.trim(), q = norm(raw);
+  $('#qx').hidden = !raw; $('#qk').hidden = !!raw;
+  if (!q) { hits = null; $('#sres').hidden = $('#ssum').hidden = true; paintSt(); return; }
+  let terms = q.match(/"[^"]+"|[^\s"]+/g).map(t => t.replace(/"/g, '').trim()).filter(Boolean);
+  const kept = terms.filter(t => !STOP.has(t)); if (kept.length) terms = kept;  // "law of reciprocity" -> law, reciprocity
+  terms.sort((x, y) => y.length - x.length);  // longest (usually rarest) word first: the snippet centres on it
+  const res = terms.map(t => new RegExp('(?:^|(?<=[^a-z0-9]))' + reEsc(t), 'g'));
+  const all = s => res.every(re => { re.lastIndex = 0; return re.test(s); });
+  const out = [];
+  BOOKS.forEach((b, i) => {
+    const M = META[i], whole = M.title + ' ' + M.author + ' ' + M.tag + ' ' + M.blurb;
+    let score = 0, why = '';
+    if (all(whole)) {
+      if (all(M.title)) { score += 100; why = 'title'; } else if (all(M.author)) { score += 60; why = 'author'; }
+      else if (all(M.tag)) { score += 30; why = 'topic'; } else { score += 12; why = 'description'; }
+    }
+    const chs = [];
+    if (CH) for (const c of CH[i]) if (all(c.nt + ' ' + c.nx)) {
+      const inT = all(c.nt); chs.push({ c, s: (inT ? 40 : 0) + res.reduce((s, re) => s + count(re, c.nx), 0) });
+    }
+    chs.sort((x, y) => y.s - x.s);
+    if (!score && !chs.length) return;
+    score += chs.slice(0, 5).reduce((s, x) => s + x.s, 0) + chs.length;
+    out.push({ i, score, why, chs });
+  });
+  out.sort((x, y) => y.score - x.score);
+  hits = new Set(out.map(o => o.i)); paintSt();
+  const nch = out.reduce((s, o) => s + o.chs.length, 0);
+  const note = idxState === 'loading' ? ' · searching inside chapters…' : idxState === 'failed' ? ' · chapter text could not be loaded, so only book details were searched' : '';
+  $('#ssum').hidden = false;
+  $('#ssum').innerHTML = out.length ? `<b>${out.length}</b> ${out.length === 1 ? 'book' : 'books'}${CH ? ` · <b>${nch}</b> ${nch === 1 ? 'chapter' : 'chapters'}` : ''} for “${esc(raw)}”${note}` : `Nothing on the shelf matches “${esc(raw)}”${note}. Try fewer or shorter words.`;
+  $('#sres').hidden = !out.length;
+  $('#sres').innerHTML = out.slice(0, 40).map(({ i, why, chs }) => { const b = BOOKS[i], st = stOf(i), k = b.title, shown = open[k] ? chs : chs.slice(0, 3);
+    return `<article class="hit" style="--c:${b.c}"><div class="hit-h"><a href="${b.url}"${TGT}>${esc(b.title)}</a><span class="a">${esc(b.author)} · ${b.when || b.year}</span><span class="why"><i class="dot ${st}" title="${LBL[st]}"></i> ${why ? 'Matches the ' + why : ''}${why && chs.length ? ' · ' : ''}${chs.length ? chs.length + (chs.length === 1 ? ' chapter' : ' chapters') : ''}</span></div>
+      ${shown.length ? `<ul class="chs">${shown.map(({ c }) => `<li><a href="${b.url}#${c.id}"${TGT}><span class="ct">${c.label ? `<span>${esc(c.label)}</span>` : ''}${esc(c.t)}</span><span class="sn">${snippet(c, res)}</span></a></li>`).join('')}</ul>` : ''}
+      ${chs.length > 3 ? `<button class="more" type="button" data-k="${esc(k)}">${open[k] ? 'Show fewer' : `Show all ${chs.length} chapters`}</button>` : ''}</article>`; }).join('');
+}
+let tmr;
+$('#q').addEventListener('input', () => { loadIndex(); clearTimeout(tmr); tmr = setTimeout(run, 120); });
+$('#q').addEventListener('focus', loadIndex);
+$('#q').addEventListener('keydown', e => { if (e.key === 'Escape') { $('#q').value = ''; run(); } });
+$('#qx').addEventListener('click', () => { $('#q').value = ''; run(); $('#q').focus(); });
+$('#sres').addEventListener('click', e => { const m = e.target.closest('.more'); if (!m) return; open[m.dataset.k] = !open[m.dataset.k]; run(); });
+document.addEventListener('keydown', e => { if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement.tagName)) { e.preventDefault(); $('#q').focus(); } });
 })();
 </script>
 </body></html>

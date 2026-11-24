@@ -70,6 +70,18 @@ python3 -m http.server 8000
 
 To host it, turn on GitHub Pages for this repository (Settings → Pages → deploy from the `main` branch, root folder).
 
+## Search
+
+The search box at the top of the shelf finds books by title, author, topic and description, and also searches inside every chapter of every explainer. Results are grouped by book, with the matching chapters, a snippet around the match and a link straight to that chapter. Words are matched at the start (`habit` also finds `habits`), every word has to appear, small words like "of" and "the" are ignored, and "quotes" keep a phrase together. Press `/` to jump to the box and `Esc` to clear it. While a search is active, books that don't match fade on the shelf.
+
+The chapter text lives in `search-index.js` (about 2 MB, loaded only when you first use the box). It is generated, so rebuild it whenever an explainer is added or changed:
+
+```sh
+node tools/build-search-index.js   # needs Playwright and Chromium
+```
+
+The script reads the `BOOKS` list in `index.html`, opens each explainer in a headless browser and records every chapter section (`section.ch`, `section.law`, `section.ws`) with its id, heading and text, keyed by book title.
+
 ## Reading status
 
 Every book on the shelf has a reading status: Not started, Reading or Finished. Set it from the buttons on the reading card (hover a spine) or tap the status pill on a book in the list below the shelf to cycle through the three. Reading books get an amber ribbon on their spine and finished ones a green tick. The chips above the bookcase filter the shelf and the list by status. Statuses are saved in the browser (`localStorage` key `shelf-status`, keyed by the explainer's file name), so a new book needs nothing extra and starts as Not started.
@@ -78,5 +90,6 @@ Every book on the shelf has a reading status: Not started, Reading or Finished. 
 
 1. Add the page as `explainers/<slug>.html`, using the same shell as the others (Instrument Serif, Geist and Geist Mono; chapter rail; light/dark toggle; a "Back to the bookshelf" link to `../index.html`).
 2. Add one entry to the `BOOKS` array at the top of the script in `index.html` (`shelf`: the level it sits on, one of `mind`, `people`, `focus`, `power`, `science` or `talks` as defined in `SHELVES`; a book without one goes on a "New arrivals" level; then title, spine, author, optional `by` line, year, optional display date `when` such as "c. 5th century BC", chapters, tag, url, blurb, extras, spine colours `c`/`k`, size `h`/`w`, an optional short spine name `au`, and a `mark` icon: `star`, `peak`, `mic`, `windmill`, `crown`, `sword`, `nodes`, `layers`, `hand`, `pencil`, `speech`, `magnet`, `smile`, `bolt`, `gear`, `shield`, `domino`, `nib`, `cloud`, `check`, `ring`, `server`, `eye`, `wand`, `balloon`, `atom`, `feather`, `dawn`, `hourglass`, `chip`, `lattice`, `whistle` or `handshake`).
+3. Rebuild `search-index.js` (see Search above) so the new book's chapters can be searched.
 
 All explanations are written in original wording. They summarise the source material and are not affiliated with its authors.
